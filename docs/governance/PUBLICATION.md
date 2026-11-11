@@ -1,5 +1,14 @@
 # 文档治理与 GitHub 公开准备
 
+## 本轮既有仓库增量同步（2026-11-11，旧停止点保留为历史）
+
+负责人本轮明确要求将ERP调查及MVP修订完成后同步到既有远端。实际origin为 `https://github.com/yujie-213/cross-border-ecommerce-ai-platform.git`；连接器登录与本机Git Credential Manager账号均为yujie-213，目标Public仓库有写权限。只读ls-remote实测远端main为 `895167c7c1b76db2e46209fa4480e4819e65a06f`，是本地接手HEAD的祖先；未创建新仓库、未修改origin、不重写历史。
+
+本次只按普通fast-forward同步已审查的自有文档、文档工具及原图源派生SVG阅读版与脱敏调查证据。相对上述远端祖先没有新增/修改Mermaid运行时、Archify HTML、字体或其他既有第三方包；原冻结基线/原型也未改。原始 `docs/ERP-openapi.yaml`为本地调查输入，保持未跟踪、不上传；认证信息和原始敏感响应未落库。本轮增量安全与来源检查不等于宣布历史第三方许可缺口闭合，不扩展为发布那些未审材料。
+
+推送前重新核对目标、暂存内容/历史增量和祖先关系，禁止force；推送后以远端main与本地提交相等验证。实际命令/结果、最终SHA和停止点见本轮TASKS/HANDOFF及最终Git查询，不以此前“空仓库/无remote/未推送”描述当前状态。连接器只核对身份/元数据，真实本地历史同步使用Git传输，不用逐文件API重建提交。
+
+
 ## 最新核查（2026-11-11，覆盖下文历史停止点）
 
 用户已自行创建仓库，明确禁止再次创建。当前连接器账号 yujie-213，既有 Public 目标为 [cross-border-ecommerce-ai-platform](https://github.com/yujie-213/cross-border-ecommerce-ai-platform)，有写权限；heads 查询返回409空仓库。未推送、未配置 origin、无远端 SHA。当前连接器不支持本地 Git push 或原始提交导入；未以 Git Data 重建提交或逐文件上传代替。许可核查已细化，但仍有主许可/依赖材料及图标条款缺口，未通过发布门槛，详见 [许可核查](LICENSE_REVIEW.md) 和 [原始记录](connector-publication-check.json)。下文“尚未创建仓库”和账号未验证等是此前事实，不能作为当前结论。

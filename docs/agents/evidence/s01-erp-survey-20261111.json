@@ -1,0 +1,4750 @@
+{
+  "scope": "DOCUMENTATION_AND_AUTHORIZED_READONLY_SURVEY_ONLY",
+  "date": "2026-11-11",
+  "observedHead": "8f79f4b56689d04fb4b0de7560b05f60b86278c5",
+  "source": {
+    "localPath": "docs/ERP-openapi.yaml",
+    "sha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+    "bytes": 1681341,
+    "openapi": "3.0.3",
+    "title": "模拟ERP接口文档",
+    "version": "5.1.0",
+    "pathCount": 178,
+    "operationCount": 252,
+    "declaredServers": [
+      {
+        "url": "https://47.107.76.124/lingxing-erp"
+      },
+      {
+        "url": "http://127.0.0.1:19282",
+        "description": "服务器本机"
+      }
+    ],
+    "provenance": "independent_teaching_simulator_not_official_lingxing",
+    "sourceUnmodified": true,
+    "sourceNotStaged": true
+  },
+  "staticReviewedOperationCount": 24,
+  "operations": [
+    {
+      "id": "R01",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "sourcePointer": "/paths/~1api~1v1~1products/get",
+      "sourceLine": 4552,
+      "summary": "查询 products",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sku",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "model",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "product_type",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "identifier",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "unit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "material",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "brand",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "tag",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "developer",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "description",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "supplier_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "moq",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "procurement_lead_days",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "default_carton_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "carton_length",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "carton_width",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "carton_height",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "carton_weight",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "hs_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "customs_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "customs_price",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "origin_country",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "qc_method",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "qc_standard",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "image_url",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_products"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V04"
+      ]
+    },
+    {
+      "id": "R02",
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "sourcePointer": "/paths/~1api~1v1~1warehouses/get",
+      "sourceLine": 16631,
+      "summary": "查询 warehouses",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "warehouse_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "warehouse_type",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "country",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "manager",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_warehouses"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V02"
+      ]
+    },
+    {
+      "id": "R03",
+      "method": "GET",
+      "path": "/api/v1/store-authorizations",
+      "sourcePointer": "/paths/~1api~1v1~1store-authorizations/get",
+      "sourceLine": 14036,
+      "summary": "查询 store-authorizations",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "platform",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "site",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fee_rate",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "last_checked_at",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_store_authorizations"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V00S",
+        "R2-V03"
+      ]
+    },
+    {
+      "id": "R04",
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "sourcePointer": "/paths/~1api~1v1~1listings/get",
+      "sourceLine": 9392,
+      "summary": "查询 listings",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sku",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "platform",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "listing_id",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "title",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_listings"
+      ],
+      "verification": "OBSERVED_EMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V07"
+      ]
+    },
+    {
+      "id": "R05",
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "sourcePointer": "/paths/~1api~1v1~1inventory/get",
+      "sourceLine": 5438,
+      "summary": "查询 inventory",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000,
+            "default": 50
+          },
+          "description": "full 模式最多200；仅 view=report 模式最多2000，超过上限按上限取值。"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "batch_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "wid",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "warehouse_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "product_id",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sku",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fnsku",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_id",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "source_batch_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "view",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "full",
+              "report"
+            ],
+            "default": "full"
+          },
+          "description": "report 为报表精简字段视图；沿用原接口资源权限、成本脱敏及店铺仓库行级范围，不用于 ODS 采集。"
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        },
+        {
+          "name": "inventory_scope",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "fba",
+              "overseas",
+              "local"
+            ]
+          },
+          "description": "按仓库主数据的仓库类型筛选；FBA=平台仓，overseas=海外仓，local=本地仓。仓库ID优先，仅缺失ID时按精确名称匹配。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_inventory",
+        "#/components/schemas/Resource_inventory_Report"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R1-V01",
+        "R2-V01",
+        "R2-V05",
+        "R2-V06"
+      ]
+    },
+    {
+      "id": "R06",
+      "method": "GET",
+      "path": "/api/v1/sales-orders",
+      "sourcePointer": "/paths/~1api~1v1~1sales-orders/get",
+      "sourceLine": 7061,
+      "summary": "查询 sales-orders",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000,
+            "default": 50
+          },
+          "description": "full 模式最多200；仅 view=report 模式最多2000，超过上限按上限取值。"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "platform_order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "platform",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "site",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "country",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "buyer",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "phone",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "shipping_address",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fulfillment_status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "payment_status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_time",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "currency",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "shipping_warehouse",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "delivery_method",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "tracking_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "carrier",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "refund_status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "remark",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "view",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "full",
+              "report"
+            ],
+            "default": "full"
+          },
+          "description": "report 为报表精简字段视图；沿用原接口资源权限、成本脱敏及店铺仓库行级范围，不用于 ODS 采集。"
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_sales_orders",
+        "#/components/schemas/Resource_sales_orders_Report"
+      ],
+      "verification": "OBSERVED_FAILURE",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V08"
+      ]
+    },
+    {
+      "id": "R07",
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "sourcePointer": "/paths/~1api~1v1~1purchase-orders/get",
+      "sourceLine": 6215,
+      "summary": "查询 purchase-orders",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "custom_order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "supplier_id",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "supplier_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "warehouse_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_time",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_currency",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_user",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "planned_arrival",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "payment_status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "tax_rate",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "freight",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "other_fee",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "allocation_method",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "logistics_provider",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "tracking_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "qc_type",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "received_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "pending_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "payment_plan",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "source_plan_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "remark",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_purchase_orders"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V09"
+      ]
+    },
+    {
+      "id": "R08",
+      "method": "GET",
+      "path": "/api/v1/supplier-deliveries",
+      "sourcePointer": "/paths/~1api~1v1~1supplier-deliveries/get",
+      "sourceLine": 13254,
+      "summary": "查询 supplier-deliveries",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "delivery_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "supplier_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "warehouse_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "logistics_provider",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "tracking_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "freight",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "other_fee",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "total_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "received_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "qc_status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "creator",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "inspection_type",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "remark",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_supplier_deliveries"
+      ],
+      "verification": "OBSERVED_EMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V11"
+      ]
+    },
+    {
+      "id": "R09",
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "sourcePointer": "/paths/~1api~1v1~1inbound-orders/get",
+      "sourceLine": 7884,
+      "summary": "查询 inbound-orders",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "warehouse_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "supplier_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "create_time",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_unit_price",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "freight",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "other_fee",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "allocation_method",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "inspected_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "available_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "defective_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "qc_status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "logistics_provider",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "tracking_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "remark",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_inbound_orders"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V10"
+      ]
+    },
+    {
+      "id": "R10",
+      "method": "GET",
+      "path": "/api/v1/suppliers",
+      "sourcePointer": "/paths/~1api~1v1~1suppliers/get",
+      "sourceLine": 15913,
+      "summary": "查询 suppliers",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "supplier_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "level",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "contact",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "phone",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_user",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_suppliers"
+      ],
+      "verification": "STATIC_ONLY",
+      "businessWrite": false,
+      "called": false
+    },
+    {
+      "id": "R11",
+      "method": "GET",
+      "path": "/api/v1/supplier-quotes",
+      "sourcePointer": "/paths/~1api~1v1~1supplier-quotes/get",
+      "sourceLine": 1476,
+      "summary": "供应商报价及版本历史",
+      "description": "需要costs:read、suppliers:read、products:read，店仓受限账号403。默认每报价单只返回最新版本；history=1必须指定quote_no。不以历史采购成交价替代报价。",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "quote_no",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        {
+          "name": "supplier_code",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        {
+          "name": "sku",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        {
+          "name": "history",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "0"
+          }
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9223372036854775807,
+            "default": 0
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "503"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/SupplierQuotePage"
+      ],
+      "verification": "OBSERVED_EMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V13"
+      ]
+    },
+    {
+      "id": "R12",
+      "method": "GET",
+      "path": "/api/v1/customer-tickets",
+      "sourcePointer": "/paths/~1api~1v1~1customer-tickets/get",
+      "sourceLine": 18806,
+      "summary": "查询 customer-tickets",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ticket_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "platform",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "buyer",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "subject",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "created_time",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "order_sn",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_customer_tickets"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V14"
+      ]
+    },
+    {
+      "id": "R13",
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "sourcePointer": "/paths/~1api~1v1~1customer-voice/get",
+      "sourceLine": 1069,
+      "summary": "商品评论、卖家反馈与处理历史",
+      "description": "customer-tickets:read；店仓受限账号403。reviews来自product_reviews，feedback来自seller_feedback；不从客服工单推断。统计不含deleted；列表visibility=all可包含deleted。",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "kind",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "reviews",
+              "feedback"
+            ],
+            "default": "reviews"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "store_id",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          }
+        },
+        {
+          "name": "record_id",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          }
+        },
+        {
+          "name": "rating",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        {
+          "name": "visibility",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "active",
+              "visible",
+              "hidden",
+              "deleted",
+              "all"
+            ],
+            "default": "active"
+          }
+        },
+        {
+          "name": "history",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "0"
+          },
+          "description": "1须指定record_id；历史version倒序，否则business_date/id倒序"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9223372036854775807,
+            "default": 0
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "404",
+        "503"
+      ],
+      "responseSchemaRefs": [],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V16"
+      ]
+    },
+    {
+      "id": "R14",
+      "method": "GET",
+      "path": "/api/v1/sales-returns",
+      "sourcePointer": "/paths/~1api~1v1~1sales-returns/get",
+      "sourceLine": 27277,
+      "summary": "退货单查询（只读）",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "order_id",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "state",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "403",
+        "409"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/BoundedWorkflowEnvelopeError",
+        "#/components/schemas/SalesReturnRecord"
+      ],
+      "verification": "STATIC_ONLY",
+      "businessWrite": false,
+      "called": false
+    },
+    {
+      "id": "R15",
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "sourcePointer": "/paths/~1api~1v1~1replenishment/get",
+      "sourceLine": 11634,
+      "summary": "查询 replenishment",
+      "description": null,
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "field",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "date_to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "recommendation_no",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sku",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fnsku",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "store_name",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "urgency",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "daily_sales",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "local_available",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fba_available",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "inbound",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "overseas_available",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "overseas_inbound",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "pending_inspection",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "local_inbound",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fba_inbound",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "lead_days",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "safety_days",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "moq",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "suggested_qty",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "suggested_purchase_date",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "stockout_date",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "purchase_frequency",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "replenishment_mode",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status_text",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "generated_at",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "match",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "contains",
+              "exact"
+            ],
+            "default": "contains"
+          },
+          "description": "exact要求field为该资源有效字段，按完整业务键等值匹配；省略时保持包含搜索。"
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_replenishment"
+      ],
+      "verification": "OBSERVED_EMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V20"
+      ]
+    },
+    {
+      "id": "R16",
+      "method": "POST",
+      "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+      "sourcePointer": "/paths/~1erp~1sc~1routing~1data~1local_inventory~1inventoryDetails/post",
+      "sourceLine": 3782,
+      "summary": "查询仓库库存明细",
+      "description": "模拟领星风格只读查询；不验证官方签名。仅实现服务代码中的筛选字段；未实现字段可接收但不生效。分页模式：offset\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "app_key",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "timestamp",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sign",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [
+        "#/components/schemas/LingxingRequest9"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/LingxingResponse9",
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "OBSERVED_EMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V17"
+      ]
+    },
+    {
+      "id": "R17",
+      "method": "POST",
+      "path": "/erp/sc/data/mws/orders",
+      "sourcePointer": "/paths/~1erp~1sc~1data~1mws~1orders/post",
+      "sourceLine": 3442,
+      "summary": "查询亚马逊订单列表",
+      "description": "模拟领星风格只读查询；不验证官方签名。仅实现服务代码中的筛选字段；未实现字段可接收但不生效。分页模式：offset\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "app_key",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "timestamp",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sign",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [
+        "#/components/schemas/LingxingRequest6"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/LingxingResponse6",
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V19"
+      ]
+    },
+    {
+      "id": "R18",
+      "method": "POST",
+      "path": "/erp/sc/routing/data/local_inventory/purchaseOrderList",
+      "sourcePointer": "/paths/~1erp~1sc~1routing~1data~1local_inventory~1purchaseOrderList/post",
+      "sourceLine": 3222,
+      "summary": "查询采购单列表",
+      "description": "模拟领星风格只读查询；不验证官方签名。仅实现服务代码中的筛选字段；未实现字段可接收但不生效。分页模式：offset\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "app_key",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "timestamp",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sign",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [
+        "#/components/schemas/LingxingRequest4"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/LingxingResponse4",
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "OBSERVED_NONEMPTY_200",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "R2-V18"
+      ]
+    },
+    {
+      "id": "R19",
+      "method": "POST",
+      "path": "/erp/sc/routing/restocking/analysis/getSummaryList",
+      "sourcePointer": "/paths/~1erp~1sc~1routing~1restocking~1analysis~1getSummaryList/post",
+      "sourceLine": 3112,
+      "summary": "查询补货列表",
+      "description": "模拟领星风格只读查询；不验证官方签名。仅实现服务代码中的筛选字段；未实现字段可接收但不生效。分页模式：offset\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。\n结构化字段试查；平台投影只读；unsupported字段请求400。非领星官方全量兼容。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "app_key",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "timestamp",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sign",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [
+        "#/components/schemas/LingxingRequest3"
+      ],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/LingxingResponse3",
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "STATIC_ONLY",
+      "businessWrite": false,
+      "called": false
+    },
+    {
+      "id": "AUTH01",
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "sourcePointer": "/paths/~1api~1auth-server~1oauth~1access-token/post",
+      "sourceLine": 2721,
+      "summary": "本地认证 access-token",
+      "description": null,
+      "security": [],
+      "parameters": [],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "OBSERVED_TOKEN_RECEIVED_METADATA_ONLY",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "AUTH-RUN1",
+        "AUTH-RUN2"
+      ]
+    },
+    {
+      "id": "H01",
+      "method": "GET",
+      "path": "/healthz",
+      "sourcePointer": "/paths/~1healthz/get",
+      "sourceLine": 2635,
+      "summary": "健康检查",
+      "description": null,
+      "security": [],
+      "parameters": [],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "OBSERVED_200_WITH_EXPLICIT_TLS_EXCEPTION",
+      "businessWrite": false,
+      "called": true,
+      "liveObservationIds": [
+        "P01",
+        "P02",
+        "P06"
+      ]
+    },
+    {
+      "id": "W01",
+      "method": "POST",
+      "path": "/api/v1/purchase-orders",
+      "sourcePointer": "/paths/~1api~1v1~1purchase-orders/post",
+      "sourceLine": 6215,
+      "summary": "创建 purchase-orders",
+      "description": "仅写入明确列出的字段；未知或只读字段返回400（不会部分写入）。不执行外部平台操作。业务单据CRUD不自动过账库存或结算；用户自行维护关联，现有模拟数据已离线校准。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [],
+      "requestBodySchemaRefs": [
+        "#/components/schemas/Resource_purchase_orders_Write"
+      ],
+      "responseCodes": [
+        "201",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_purchase_orders"
+      ],
+      "verification": "STATIC_ONLY",
+      "businessWrite": true,
+      "called": false
+    },
+    {
+      "id": "W02",
+      "method": "POST",
+      "path": "/api/v1/workflows/replenishment/{id}/create-purchase",
+      "sourcePointer": "/paths/~1api~1v1~1workflows~1replenishment~1{id}~1create-purchase/post",
+      "sourceLine": 20778,
+      "summary": "replenishment / create-purchase",
+      "description": "重复提交复用已生成单据或决定；审批决定不可反转。供应商预检收货409；普通收货生成待入库单，不自动过账库存。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "400",
+        "401",
+        "404",
+        "405",
+        "409",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope"
+      ],
+      "verification": "STATIC_ONLY",
+      "businessWrite": true,
+      "called": false
+    },
+    {
+      "id": "W03",
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/{id}/submit",
+      "sourcePointer": "/paths/~1api~1v1~1workflows~1purchase-orders~1{id}~1submit/post",
+      "sourceLine": 22487,
+      "summary": "提交采购审批（驳回可重提）",
+      "description": "本地状态动作，原子提交并保留审计；同一状态重复动作幂等。不会触发库存、付款或外部平台。409表示状态/关联校验失败。",
+      "security": [
+        {
+          "bearerAuth": []
+        },
+        {
+          "queryAccessToken": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBodySchemaRefs": [],
+      "responseCodes": [
+        "200",
+        "409",
+        "401",
+        "403"
+      ],
+      "responseSchemaRefs": [
+        "#/components/schemas/ObservedLocalErrorEnvelope",
+        "#/components/schemas/Resource_purchase_orders"
+      ],
+      "verification": "STATIC_ONLY",
+      "businessWrite": true,
+      "called": false
+    }
+  ],
+  "liveVerification": {
+    "status": "BOUNDED_READS_WITH_FIELD_AND_IDENTITY_LIMITATIONS",
+    "businessEndpointsSuccessfullyValidated": 15,
+    "authenticatedBusinessCalls": 20,
+    "authenticationCalls": 2,
+    "businessWriteCalls": 0,
+    "rawBusinessResponsesSaved": 0,
+    "secretValuesSaved": false,
+    "observations": [
+      {
+        "id": "P01",
+        "method": "GET",
+        "url": "https://47.107.76.124/lingxing-erp/healthz",
+        "result": "FAIL",
+        "failure": "SSLCertVerificationError:self-signed certificate",
+        "tlsVerificationEnabled": true,
+        "credentialsSent": false
+      },
+      {
+        "id": "P02",
+        "method": "GET",
+        "url": "http://47.107.76.124/lingxing-erp/healthz",
+        "result": "FAIL",
+        "httpStatus": 404,
+        "credentialsSent": false
+      },
+      {
+        "id": "P03",
+        "method": "GET",
+        "url": "http://47.107.76.124/lingxing-erp",
+        "result": "FAIL",
+        "httpStatus": 404,
+        "credentialsSent": false
+      },
+      {
+        "id": "P04",
+        "method": "GET",
+        "url": "http://47.107.76.124/lingxing-erp/",
+        "result": "FAIL",
+        "httpStatus": 404,
+        "credentialsSent": false
+      },
+      {
+        "id": "P05",
+        "method": "GET",
+        "url": "http://47.107.76.124/healthz",
+        "result": "FAIL",
+        "httpStatus": 404,
+        "credentialsSent": false
+      },
+      {
+        "id": "P06",
+        "method": "GET",
+        "url": "https://47.107.76.124/lingxing-erp/healthz",
+        "result": "PASS",
+        "httpStatus": 200,
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "credentialsSent": false,
+        "healthMetadata": {
+          "status": "ok",
+          "service": "模拟ERP",
+          "version": "5.1.0",
+          "schema_version": 5,
+          "demo_mode": false
+        }
+      }
+    ],
+    "businessFieldTypesStatusesPaginationCoverage": "field types and limited pagination observed; full date/history coverage and all per-SKU links NOT_PROVEN",
+    "authenticationObservations": [
+      {
+        "id": "AUTH-RUN1",
+        "result": "TOKEN_RECEIVED_NO_SECRET_OUTPUT",
+        "secretValuesSaved": false
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth-server/oauth/access-token",
+        "requestParameterNames": [
+          "appId",
+          "appSecret"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 489,
+        "topLevelTypes": {
+          "code": "int",
+          "message": "str",
+          "data": "dict"
+        },
+        "businessCode": 0,
+        "result": "PASS",
+        "tokenPresent": true,
+        "secretValuesSaved": false,
+        "id": "AUTH-RUN2"
+      }
+    ],
+    "businessObservations": [
+      {
+        "id": "R1-V01",
+        "method": "GET",
+        "path": "/api/v1/inventory",
+        "httpStatus": 200,
+        "result": "PASS",
+        "rowsObserved": 1,
+        "limitations": "scope identifier completeness check failed; no identity inference made",
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/inventory",
+        "requestParameterNames": [
+          "limit",
+          "offset",
+          "view"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 455,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V01",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "batch_no": "str",
+          "wid": "int",
+          "warehouse_name": "str",
+          "product_id": "int",
+          "sku": "str",
+          "fnsku": "NoneType",
+          "store_id": "int",
+          "store_name": "str",
+          "quantity": "int",
+          "available": "int",
+          "source_batch_no": "NoneType",
+          "order_sn": "NoneType",
+          "created_at": "str",
+          "updated_at": "str",
+          "synthetic": "bool",
+          "dataset": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/store-authorizations",
+        "requestParameterNames": [
+          "limit",
+          "offset"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 313,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V00S",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "platform": "str",
+          "store_name": "str",
+          "site": "str",
+          "status_text": "str",
+          "fee_rate": "float",
+          "last_checked_at": "str",
+          "created_at": "str",
+          "updated_at": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/warehouses",
+        "requestParameterNames": [
+          "ids",
+          "limit",
+          "offset"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 309,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V02",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "warehouse_code": "str",
+          "name": "str",
+          "warehouse_type": "str",
+          "country": "str",
+          "manager": "str",
+          "status_text": "str",
+          "created_at": "str",
+          "updated_at": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/store-authorizations",
+        "requestParameterNames": [
+          "ids",
+          "limit",
+          "offset"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 313,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V03",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "platform": "str",
+          "store_name": "str",
+          "site": "str",
+          "status_text": "str",
+          "fee_rate": "float",
+          "last_checked_at": "str",
+          "created_at": "str",
+          "updated_at": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/products",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 1026,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V04",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "sku": "str",
+          "name": "str",
+          "model": "str",
+          "category": "str",
+          "status": "str",
+          "price": "float",
+          "cost": "float",
+          "created_at": "str",
+          "updated_at": "str",
+          "product_type": "str",
+          "identifier": "NoneType",
+          "unit": "str",
+          "material": "NoneType",
+          "brand": "str",
+          "tag": "NoneType",
+          "developer": "NoneType",
+          "owner": "str",
+          "description": "str",
+          "supplier_name": "str",
+          "moq": "int",
+          "procurement_lead_days": "int",
+          "default_carton_qty": "int",
+          "carton_length": "float",
+          "carton_width": "float",
+          "carton_height": "float",
+          "carton_weight": "float",
+          "hs_code": "NoneType",
+          "customs_name": "NoneType",
+          "customs_price": "float",
+          "origin_country": "NoneType",
+          "qc_method": "NoneType",
+          "qc_standard": "NoneType",
+          "image_url": "NoneType",
+          "official_attributes": "dict",
+          "official_attributes.picture_list": "list",
+          "official_attributes.picture_list[].pic_url": "str",
+          "synthetic": "bool",
+          "dataset": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/inventory",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q",
+          "store_id",
+          "view",
+          "wid"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 62,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V05",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/inventory",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q",
+          "store_id",
+          "view",
+          "wid"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 62,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V06",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/listings",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q",
+          "store_name"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 62,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V07",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/sales-orders",
+        "requestParameterNames": [
+          "limit",
+          "offset",
+          "shipping_warehouse",
+          "store_name",
+          "view"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 503,
+        "bytesReceived": 112,
+        "topLevelTypes": {
+          "code": "int",
+          "error": "str",
+          "message": "str",
+          "data": "NoneType"
+        },
+        "businessCode": 503,
+        "result": "HTTP_OR_BUSINESS_FAILURE",
+        "id": "R2-V08",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {},
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/purchase-orders",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 881,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V09",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "order_sn": "str",
+          "custom_order_sn": "NoneType",
+          "supplier_id": "NoneType",
+          "supplier_name": "str",
+          "warehouse_name": "str",
+          "status_text": "str",
+          "order_time": "NoneType",
+          "purchase_currency": "str",
+          "amount": "float",
+          "item_list": "list",
+          "item_list[].sku": "str",
+          "item_list[].quantity": "int",
+          "item_list[].unit_price": "float",
+          "created_at": "str",
+          "updated_at": "str",
+          "purchase_user": "NoneType",
+          "planned_arrival": "NoneType",
+          "payment_status": "str",
+          "tax_rate": "float",
+          "remark": "str",
+          "freight": "float",
+          "other_fee": "float",
+          "allocation_method": "NoneType",
+          "logistics_provider": "NoneType",
+          "tracking_no": "NoneType",
+          "qc_type": "NoneType",
+          "received_qty": "int",
+          "pending_qty": "int",
+          "payment_plan": "NoneType",
+          "source_plan_no": "NoneType"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/inbound-orders",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 666,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V10",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "order_sn": "str",
+          "type": "int",
+          "warehouse_name": "str",
+          "purchase_order_sn": "NoneType",
+          "supplier_name": "NoneType",
+          "status_text": "str",
+          "create_time": "str",
+          "quantity": "int",
+          "item_list": "list",
+          "item_list[].sku": "str",
+          "item_list[].quantity": "int",
+          "item_list[].defective_qty": "int",
+          "created_at": "str",
+          "updated_at": "str",
+          "purchase_unit_price": "float",
+          "freight": "float",
+          "other_fee": "float",
+          "allocation_method": "NoneType",
+          "inspected_qty": "int",
+          "available_qty": "int",
+          "defective_qty": "int",
+          "qc_status": "str",
+          "logistics_provider": "NoneType",
+          "tracking_no": "NoneType",
+          "remark": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/supplier-deliveries",
+        "requestParameterNames": [
+          "limit",
+          "offset",
+          "purchase_order_sn",
+          "warehouse_name"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 62,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V11",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/supplier-quotes",
+        "requestParameterNames": [
+          "limit",
+          "offset",
+          "sku"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 43,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V13",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/customer-tickets",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 434,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V14",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "tenant_id": "int",
+          "ticket_no": "str",
+          "platform": "str",
+          "store_name": "str",
+          "buyer": "str",
+          "subject": "str",
+          "status_text": "str",
+          "owner": "str",
+          "created_time": "str",
+          "created_at": "str",
+          "updated_at": "str",
+          "order_sn": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": true
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/customer-voice",
+        "requestParameterNames": [
+          "kind",
+          "limit",
+          "offset",
+          "store_id"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 710,
+        "topLevelTypes": {
+          "kind": "str",
+          "view": "str",
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "summary": "dict"
+        },
+        "result": "PASS",
+        "id": "R2-V16",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "id": "int",
+          "source_record_key": "str",
+          "platform": "str",
+          "store_id": "int",
+          "listing_id": "int",
+          "rating": "int",
+          "title": "str",
+          "body": "str",
+          "business_date": "str",
+          "visibility": "str",
+          "created_at": "str",
+          "store_name": "str",
+          "related_no": "str",
+          "sku": "str",
+          "related_id": "int",
+          "handling_version": "int",
+          "handling_status": "str",
+          "handling_note": "str"
+        },
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+        "requestParameterNames": [
+          "length",
+          "offset",
+          "sku",
+          "wid"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 159,
+        "topLevelTypes": {
+          "code": "int",
+          "message": "str",
+          "error_details": "list",
+          "request_id": "str",
+          "response_time": "str",
+          "data": "list",
+          "total": "int"
+        },
+        "businessCode": 0,
+        "result": "PASS",
+        "id": "R2-V17",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      },
+      {
+        "method": "POST",
+        "path": "/erp/sc/routing/data/local_inventory/purchaseOrderList",
+        "requestParameterNames": [
+          "length",
+          "offset",
+          "order_sn"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 2173,
+        "topLevelTypes": {
+          "code": "int",
+          "message": "str",
+          "error_details": "list",
+          "request_id": "str",
+          "response_time": "str",
+          "data": "list",
+          "total": "int"
+        },
+        "businessCode": 0,
+        "result": "PASS",
+        "id": "R2-V18",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "order_sn": "str",
+          "custom_order_sn": "NoneType",
+          "supplier_id": "NoneType",
+          "supplier_name": "str",
+          "opt_uid": "NoneType",
+          "principal_uids": "list",
+          "auditor_realname": "NoneType",
+          "opt_realname": "NoneType",
+          "last_realname": "NoneType",
+          "create_time": "NoneType",
+          "order_time": "NoneType",
+          "payment": "NoneType",
+          "auditor_uid": "NoneType",
+          "auditor_time": "NoneType",
+          "last_uid": "NoneType",
+          "last_time": "NoneType",
+          "reason": "NoneType",
+          "is_tax": "NoneType",
+          "status": "NoneType",
+          "status_text": "str",
+          "pay_status_text": "NoneType",
+          "status_shipped": "NoneType",
+          "status_shipped_text": "NoneType",
+          "amount_total": "int",
+          "total_price": "int",
+          "icon": "NoneType",
+          "pay_status": "NoneType",
+          "remark": "str",
+          "other_fee": "int",
+          "other_currency": "NoneType",
+          "fee_part_type": "NoneType",
+          "shipping_price": "int",
+          "shipping_currency": "NoneType",
+          "purchase_currency": "str",
+          "purchase_rate": "NoneType",
+          "quantity_total": "int",
+          "wid": "NoneType",
+          "ware_house_name": "str",
+          "ware_house_bak_name": "NoneType",
+          "quantity_entry": "int",
+          "quantity_real": "NoneType",
+          "quantity_receive": "int",
+          "update_time": "str",
+          "purchaser_id": "NoneType",
+          "contact_person": "NoneType",
+          "contact_number": "NoneType",
+          "settlement_method": "NoneType",
+          "settlement_description": "NoneType",
+          "purchase_type": "NoneType",
+          "purchase_type_text": "NoneType",
+          "alibaba_order_sn": "NoneType",
+          "sub_status": "NoneType",
+          "sub_status_text": "NoneType",
+          "custom_fields": "list",
+          "payment_method": "NoneType",
+          "item_list": "list",
+          "item_list[].purchase_order_id": "int",
+          "item_list[].source_item_id": "NoneType",
+          "item_list[].line_key": "str",
+          "item_list[].wid": "NoneType",
+          "item_list[].ware_house_name": "NoneType",
+          "item_list[].relation_purchase_plan": "list",
+          "item_list[].plan_sn": "NoneType",
+          "item_list[].product_id": "NoneType",
+          "item_list[].product_name": "NoneType",
+          "item_list[].sku": "str",
+          "item_list[].fnsku": "NoneType",
+          "item_list[].sid": "NoneType",
+          "item_list[].model": "NoneType",
+          "item_list[].price": "float",
+          "item_list[].amount": "NoneType",
+          "item_list[].quantity_plan": "int",
+          "item_list[].quantity_real": "int",
+          "item_list[].quantity_entry": "NoneType",
+          "item_list[].quantity_receive": "NoneType",
+          "item_list[].quantity_return": "NoneType",
+          "item_list[].quantity_exchange": "NoneType",
+          "item_list[].quantity_qc": "NoneType",
+          "item_list[].quantity_qc_prepare": "NoneType",
+          "item_list[].expect_arrive_time": "NoneType",
+          "item_list[].remark": "NoneType",
+          "item_list[].cases_num": "NoneType",
+          "item_list[].quantity_per_case": "NoneType",
+          "item_list[].is_delete": "NoneType",
+          "item_list[].msku": "list",
+          "item_list[].attribute": "list",
+          "item_list[].tax_rate": "NoneType",
+          "item_list[].spu": "NoneType",
+          "item_list[].spu_name": "NoneType",
+          "item_list[].custom_fields": "list",
+          "item_list[].source_updated_at": "NoneType",
+          "item_list[].quantity": "int",
+          "item_list[].unit_price": "float",
+          "logistics_info": "list"
+        },
+        "paginationTypes": {
+          "total": "int"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/erp/sc/data/mws/orders",
+        "requestParameterNames": [
+          "length",
+          "offset",
+          "sid"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 1390,
+        "topLevelTypes": {
+          "code": "int",
+          "message": "str",
+          "error_details": "list",
+          "request_id": "str",
+          "response_time": "str",
+          "data": "list",
+          "total": "int"
+        },
+        "businessCode": 0,
+        "result": "PASS",
+        "id": "R2-V19",
+        "rowsObserved": 1,
+        "itemFieldTypes": {
+          "sid": "int",
+          "seller_name": "str",
+          "amazon_order_id": "str",
+          "order_status": "str",
+          "order_total_amount": "float",
+          "fulfillment_channel": "str",
+          "postal_code": "NoneType",
+          "is_return": "int",
+          "is_mcf_order": "int",
+          "is_assessed": "int",
+          "is_replaced_order": "int",
+          "is_replacement_order": "int",
+          "is_return_order": "int",
+          "order_total_currency_code": "str",
+          "sales_channel": "NoneType",
+          "tracking_number": "str",
+          "refund_amount": "NoneType",
+          "item_list": "list",
+          "item_list[].sales_order_id": "int",
+          "item_list[].line_key": "str",
+          "item_list[].asin": "str",
+          "item_list[].quantity_ordered": "int",
+          "item_list[].seller_sku": "str",
+          "item_list[].local_sku": "str",
+          "item_list[].local_name": "str",
+          "item_list[].source_updated_at": "NoneType",
+          "item_list[].product_id": "int",
+          "item_list[].sku": "str",
+          "item_list[].msku": "str",
+          "item_list[].fnsku": "str",
+          "item_list[].product_name": "str",
+          "item_list[].quantity": "int",
+          "item_list[].price": "float",
+          "item_list[].unit_price": "float",
+          "purchase_date_local": "str",
+          "purchase_date_local_utc": "NoneType",
+          "shipment_date": "NoneType",
+          "shipment_date_utc": "NoneType",
+          "shipment_date_local": "NoneType",
+          "last_update_date": "NoneType",
+          "last_update_date_utc": "NoneType",
+          "posted_date": "NoneType",
+          "posted_date_utc": "NoneType",
+          "purchase_date": "NoneType",
+          "purchase_date_utc": "NoneType",
+          "estimated_arrival_date": "NoneType",
+          "earliest_ship_date": "NoneType",
+          "earliest_ship_date_utc": "NoneType",
+          "gmt_modified": "str",
+          "gmt_modified_utc": "NoneType"
+        },
+        "paginationTypes": {
+          "total": "int"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/replenishment",
+        "requestParameterNames": [
+          "field",
+          "limit",
+          "match",
+          "offset",
+          "q",
+          "store_name"
+        ],
+        "tlsVerificationEnabled": false,
+        "explicitUserTlsException": true,
+        "httpStatus": 200,
+        "bytesReceived": 62,
+        "topLevelTypes": {
+          "items": "list",
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "result": "PASS",
+        "id": "R2-V20",
+        "rowsObserved": 0,
+        "itemFieldTypes": {},
+        "paginationTypes": {
+          "total": "int",
+          "limit": "int",
+          "offset": "int",
+          "page": "int",
+          "pages": "int"
+        },
+        "selectedScopeCheck": "NO_ROWS_NOT_PROOF"
+      }
+    ],
+    "localHarnessFailures": [
+      "First pipe-only input process ended before authentication; no request sent"
+    ],
+    "storeSelectedSeparatelyBecauseInventoryHasNoStoreBinding": true,
+    "inventoryStoreOwnershipProven": false,
+    "scopeSummary": {
+      "inventoryDiscoveryRowsPerRun": 1,
+      "selectedStores": 1,
+      "selectedWarehouses": 1,
+      "selectedSkus": 1,
+      "maxRowsPerBusinessRequest": 1,
+      "rawIdentifiersSaved": false
+    },
+    "limitations": [
+      "TLS verification disabled by explicit user instruction only for this survey",
+      "Empty related queries do not prove absence or quality safety",
+      "Master IDs/names and stock-to-store ownership are not established by selecting one store; controlled mapping still required"
+    ],
+    "distinctBusinessOperationsAttempted": 16,
+    "businessOperationsWithNonEmptySamples": 10,
+    "successfulBusinessQueryCalls": 19,
+    "failedBusinessObservations": [
+      "R2-V08"
+    ],
+    "limitedPaginationObservation": {
+      "resource": "GET /api/v1/inventory",
+      "limit": 1,
+      "offsets": [
+        0,
+        1
+      ],
+      "selectedScopeRows": [
+        0,
+        0
+      ],
+      "fullPaginationCoverageProven": false
+    },
+    "confirmedGaps": [
+      "Inventory discovery store key did not satisfy positive binding; selecting another store did not prove ownership; scoped inventory/listing returned empty",
+      "GET /api/v1/sales-orders returned HTTP503 for the sampled shop/warehouse",
+      "Purchase header received/pending typed integer but per-line quantity_receive/expect_arrive_time and source_updated_at null",
+      "Product MOQ/lead/default carton typed integer; ordering multiple and saleable date semantics not proven",
+      "Compatibility order quantity exists but UTC date fields null; historical window completeness not proven",
+      "Quality records exist but selected-SKU mature cohort denominator and required quality gate not proven"
+    ]
+  },
+  "mvpRealLlmExecution": "NOT_RUN_THIS_DOCUMENTATION_PHASE",
+  "independentDesignReview": "NOT_RUN",
+  "limitations": [
+    "OpenAPI declaration is not live observation",
+    "Nullable/anyOf/additionalProperties schemas do not guarantee field population or business semantics",
+    "No draft/create/update/delete/approval endpoint was called",
+    "No official Lingxing or enterprise production validation is claimed"
+  ]
+}
