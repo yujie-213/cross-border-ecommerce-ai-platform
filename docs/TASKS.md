@@ -1063,27 +1063,32 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
 }
 ```
 
-## D-S01-01 S01补货专项设计（下一项）
+## D-S01-01 S01补货专项详细设计（第一阶段）
 
 ```json
 {
   "id": "D-S01-01",
   "stage": "D",
-  "title": "S01补货专项设计（下一项）",
+  "title": "S01补货专项详细设计（第一阶段）",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "收到下一条S01专项设计指令；当前计划/基线/本地Git可定位；本轮不执行",
-  "ownerRole": "按任务领取时指定模块负责人/集成人",
-  "assignee": null,
+  "entryCondition": "2026-11-11 用户明确授权第一阶段专项设计；只交设计主文档及必要索引/台账，不调查ERP、不拆开发TODO、不编码",
+  "ownerRole": "S01专项设计文档集成人；负责人独立评审待签认",
+  "assignee": "Codex（本轮唯一文档执行者与台账集成人）",
   "allowedPaths": [
-    "docs/scenarios/s01-design.md（获指令后才创建）",
-    "docs/TASKS.md（按设计追加切片）",
-    "docs/DECISIONS.md"
+    "docs/agents/S01_补货Agent专项详细设计.md",
+    "docs/agents/index.md",
+    "docs/README.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
-    "字段/输入模式/业务流程/约束/质量依赖/公共子集与自有S01-AC",
-    "专项设计后才拆实现/测试/复盘任务"
+    "一份S01专项详细设计主文档：定位、设计思想、架构/意图/时序及逐图讲稿、逻辑伪代码、边界、待确认项",
+    "本轮不追加实现切片、MVP计划或开发TODO；评审后另行授权"
   ],
   "acceptance": [
     {
@@ -1100,7 +1105,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "plannedTests": [
-    "授权样例的桌面推演、字段/单位/日期/缺项/权限/质量反例审查"
+    "本轮文档结构/相对链接/图与讲稿对应/冻结基线及Mermaid离线parse+render；不执行ERP、模型或业务工程测试",
+    "负责人独立专项设计评审；业务口径不足保持待确认，不冻结生产字段或阈值"
   ],
   "risks": [
     "输入不足可先形成有缺口的设计，不补造企业事实"
@@ -1108,17 +1114,102 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "DESIGN_REVIEW"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "858af84b8527adee98a26a2e87ed8fdf10d81e90"
+  ],
+  "testedCommit": "858af84b8527adee98a26a2e87ed8fdf10d81e90",
+  "evidence": [
+    {
+      "kind": "DESIGN_SELF_CHECK",
+      "acceptanceIds": [
+        "D-S01-01/AC1",
+        "D-S01-01/AC2",
+        "D-S01-01/AC3"
+      ],
+      "command": "作者逐项对照需求/概要/AI详设/PLAN/DECISIONS/UI/视觉与协作规范；PowerShell here-string | python -（图/讲稿/链接/范围检查）",
+      "environment": "Windows / Python；作者自检，不是负责人独立签认",
+      "sample": "主文档第一阶段v0.1；9张图与9份紧随讲稿、6块伪代码、14处相对链接；未知公式/阈值/真实ERP字段集中列Q01—Q11，不补造企业事实",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/S01_补货Agent专项详细设计.md"
+    },
+    {
+      "kind": "MERMAID_RENDER",
+      "acceptanceIds": [
+        "D-S01-01/AC1",
+        "D-S01-01/AC3"
+      ],
+      "command": "PowerShell单引号here-string | node -；Playwright提取本文9个Mermaid块，依次mermaid.parse与mermaid.render，检查SVG/viewBox/错误/网络",
+      "environment": "Windows / 已有Playwright / 本地headless Edge / Mermaid 11.4.1；内存页面、阻止HTTP，无展示副本",
+      "sample": "设计提交858af84b8527adee98a26a2e87ed8fdf10d81e90图源；9/9成功，pageerror=0、网络=0；图源集合SHA256=53a5e74f127c28eadcb512b9c2194c624655eacd091d2690206ef1ba0290e568",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/S01_补货Agent专项详细设计.md"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-01/AC1",
+        "D-S01-01/AC3"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / 本地Python与Git；仅文档与台账检查",
+      "sample": "19项既有任务；18项检查PASS；五份冻结基线/原型实现未改。首次tracked-whitelist失败为基点已存在的两份授权治理文件漏列，定向补路径后PASS；普通CRLF空白误报保留换行后重验",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-01/AC1",
+        "D-S01-01/AC3"
+      ],
+      "command": "PowerShell here-string | python -B -（对照Git基点/设计提交，检查图源/伪代码、其余任务JSON、14个保全文件、精确变更范围与秘密模式）；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / 本地Python与Git；只读Git对象对照，不访问ERP/模型",
+      "sample": "基点895167c7c1b76db2e46209fa4480e4819e65a06f；图源与伪代码不变、其余18项任务不变、任务数仍19；14指定基线/原型/旧治理文件字节保全；本轮9份精确文档变更、秘密0发现、未跟踪0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "DESIGN_REVIEW",
+      "acceptanceIds": [
+        "D-S01-01/AC1",
+        "D-S01-01/AC2",
+        "D-S01-01/AC3"
+      ],
+      "command": "NOT_RUN：等待负责人独立专项设计评审与口径签认",
+      "environment": "无负责人独立评审",
+      "sample": "第一阶段专项设计评审稿；Q01—Q11及X04等未签认，不代表开发/业务验收完成",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/agents/S01_补货Agent专项详细设计.md"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
+  "branch": "main",
+  "observedHead": "858af84b8527adee98a26a2e87ed8fdf10d81e90",
   "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
-  "history": []
+  "history": [
+    {
+      "date": "2026-11-11",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "用户明确授权S01第一阶段专项设计，采用指定agents路径替代旧建议scenarios路径；保留冻结需求与总体架构，不进入后续阶段",
+      "observedHead": "895167c7c1b76db2e46209fa4480e4819e65a06f"
+    },
+    {
+      "date": "2026-11-11",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "只交第一阶段专项设计；1架构/3意图/5时序及9份讲稿，逻辑伪代码/降级/人工/待决项齐全。图表离线渲染和文档自检通过，负责人独立评审NOT_RUN；未拆MVP/TODO、未调查ERP、未开发，停止等待评审。",
+      "observedHead": "858af84b8527adee98a26a2e87ed8fdf10d81e90"
+    }
+  ]
 }
 ```
 
