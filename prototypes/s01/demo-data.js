@@ -15,6 +15,7 @@ window.DEMO = {
   daily: {
     base:[45,35,25,35,25,15,5,-5,-15],
     normal:[45,35,25,35,25,35,25,15,5],
+    lateBase:[45,35,25,15,5,-5,-15,-5,-15],
     late:[45,35,25,15,5,-5,-15,15,5]
   },
   states:{ready:['候选可复核','success'],quality:['质量阻断','danger'],stale:['数据阻断','warning'],missing:['数据阻断','warning'],duplicate:['数据阻断','warning']},
