@@ -2,7 +2,7 @@
   "kind": "DESIGN_ALIGNMENT",
   "reviewType": "AUTHOR_SELF_CHECK_NOT_INDEPENDENT_ACCEPTANCE",
   "command": "python docs/ui/check_design.py",
-  "implementationCommit": "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4",
+  "implementationCommit": "4df78d585b73fbffb2066c813a9ef087e5e1466c",
   "businessTests": "NOT_RUN",
   "baselinesUnchanged": true,
   "baselineMismatches": [],
@@ -92,11 +92,11 @@
     },
     {
       "path": "docs/ui/PRODUCT_SPEC.md",
-      "sha256": "bdf475d43f7c428d5fd7bc31e9ce4260aa531731054e60c3b890dacf8fab0dcd"
+      "sha256": "28af18037d44c43266ee03d0722e27b8af22d88185d9a31a7f3d6f45f3f78e16"
     },
     {
       "path": "docs/ui/ALIGNMENT.md",
-      "sha256": "728f2a2798910e4f5fac505d10a67f11af7d38d8786376e19b1356ffdf6bd264"
+      "sha256": "ffe407e01f0627778a1925f150bcdac14948e01458bd373f4cd1185308015000"
     },
     {
       "path": "docs/ui/DESIGN_NOTE.md",

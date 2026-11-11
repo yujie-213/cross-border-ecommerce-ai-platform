@@ -3,7 +3,7 @@
   "businessAcceptance": "NOT_RUN",
   "environment": "Windows / existing Playwright / local headless Edge / file URL",
   "command": "node prototypes/s01/check.cjs",
-  "observedHead": "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4",
+  "observedHead": "4df78d585b73fbffb2066c813a9ef087e5e1466c",
   "exitCode": 0,
   "status": "PASS",
   "checks": [
@@ -52,6 +52,26 @@
       "result": "PASS"
     },
     {
+      "name": "scenario-invalidation-cross-page-draft",
+      "result": "PASS"
+    },
+    {
+      "name": "scenario-invalidation-cross-page-confirmed",
+      "result": "PASS"
+    },
+    {
+      "name": "scenario-invalidation-cross-page-pending",
+      "result": "PASS"
+    },
+    {
+      "name": "scenario-invalidation-cross-page-approved",
+      "result": "PASS"
+    },
+    {
+      "name": "scenario-scoping-and-daily-wording-cross-page",
+      "result": "PASS"
+    },
+    {
       "name": "simulation-run-cancel-and-nonpublication",
       "result": "PASS"
     },
@@ -81,7 +101,7 @@
     },
     {
       "file": "app.js",
-      "sha256": "93b3fd7f43fcec96e1f6d8ad8971b04fd638952272e1c93644ee0ae5e677b72c"
+      "sha256": "96dec181c3700dbf772957016fb88e627ec394a7fa60e8d3bf2c89d37eab575f"
     },
     {
       "file": "demo-data.js",
@@ -89,7 +109,7 @@
     },
     {
       "file": "check.cjs",
-      "sha256": "d8119200955409021e55f03a5c79a97aee0cba0ef16e06dbc11eaecd300109af"
+      "sha256": "60797beb8c208724ae12f6271502d11798034fcbad8f5b0e40df844358f89c02"
     }
   ],
   "visualReview": "Screenshots require separate visual inspection; see docs/ui/DELIVERY.md."

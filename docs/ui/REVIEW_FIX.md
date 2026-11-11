@@ -21,4 +21,10 @@
 
 ## 验证记录
 
-待本轮实跑后补充具体被测提交、结果与截图引用。负责人尚未签认。
+修复提交/最终被测SHA：`4df78d585b73fbffb2066c813a9ef087e5e1466c`。`node prototypes/s01/check.cjs`退出0，20组全部PASS；四宽度×五页20个基础布局组合通过，另含四种失效建议审批页及暂停工作台390px不溢出检查。页面错误/HTTP请求均0。源文件SHA-256见prototypes/s01/evidence/browser-check.json，已与Git被测版本及工作区核对一致。
+
+新增覆盖DRAFT/CONFIRMED/PENDING/APPROVED→延期→工作台/列表/审批→源报告→回切→新版本确认提交，失效入口和过期动作不生效；非CB-1001不泄漏延期；延期两行逐日数据逐值断言；模拟任务运行中/取消/成功/解释降级/B02不可用/阻断/YIELD跨页后发布ID和入口准确。未扩展业务功能。
+
+作者复核04-delayed、10-scenario-invalidated、11-paused-with-history、12-mobile-invalidated截图，未发现溢出或原供给/候选混用。`python docs/ui/check_design.py` PASS：5份基线、85个未知文件不变，9组颜色及462字说明通过。文档生成及17项检查PASS。浏览器测试只验证模拟交互，不能代替真实S01/MC/审批业务验收。
+
+原15组结果保留为browser-check-before-review-fix.json。过程失败保留review-launch-fail（沙箱Edge EPERM）、review-navigation-fail（测试未等待hash页面渲染）、review-assertion-fail（测试期待“质量信号异常”而原文为“投诉信号触发调查”）；均如实记录，不作为当前通过证据。当前结论仅取匹配上述被测SHA/文件指纹的最终browser-check.json。负责人尚未签认。

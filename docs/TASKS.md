@@ -1174,12 +1174,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_FRONTEND",
     "DESIGN_ALIGNMENT"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "8140d40439517f957044537fdffa11f2c5a6463e",
-    "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4"
+    "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4",
+    "4df78d585b73fbffb2066c813a9ef087e5e1466c"
   ],
-  "testedCommit": "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4",
+  "testedCommit": "4df78d585b73fbffb2066c813a9ef087e5e1466c",
   "evidence": [
     {
       "kind": "SIMULATED_FRONTEND",
@@ -1193,7 +1194,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "simulated CB-1001 AC-02/03产物、4类阻断和会话审批；4宽度×5页面；无真实ERP/模型",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": "prototypes/s01/evidence/browser-check.json"
+      "artifactRef": "prototypes/s01/evidence/browser-check-before-review-fix.json"
     },
     {
       "kind": "DESIGN_ALIGNMENT",
@@ -1207,7 +1208,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "三份来源、五份冻结基线、85个未知文件指纹、462字设计说明、9组颜色对比",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": "docs/ui/design-review.json"
+      "artifactRef": "docs/ui/design-review-before-review-fix.json"
     },
     {
       "kind": "DOCUMENT_CHECK",
@@ -1220,11 +1221,39 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "SIMULATED_FRONTEND",
+      "acceptanceIds": [
+        "UX-S01-01/AC2",
+        "UX-S01-01/AC3",
+        "UX-S01-01/AC4"
+      ],
+      "command": "node prototypes/s01/check.cjs",
+      "environment": "Windows / existing Playwright / headless Edge / local file URL；被测提交 4df78d585b73fbffb2066c813a9ef087e5e1466c",
+      "sample": "20组检查：原15组增强，新4种阶段跨页失效及SKU隔离/逐日文案；4宽度×5页面20布局组合，另失效审批/暂停任务390px；全simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "prototypes/s01/evidence/browser-check.json"
+    },
+    {
+      "kind": "DESIGN_ALIGNMENT",
+      "acceptanceIds": [
+        "UX-S01-01/AC1",
+        "UX-S01-01/AC3",
+        "UX-S01-01/AC4"
+      ],
+      "command": "python docs/ui/check_design.py；作者查看延期详情、失效审批/暂停任务及390px失效审批截图",
+      "environment": "Windows / Python；作者自检，负责人最终验收尚未完成",
+      "sample": "5份冻结基线/85既有未知文件不变；462字说明与9组颜色；DESIGN.md/styles/index/fixture未改",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/ui/design-review.json"
     }
   ],
   "review": null,
   "branch": "main",
-  "observedHead": "0e4aec39d6e5529278d4f047c75382630667c7be",
+  "observedHead": "4df78d585b73fbffb2066c813a9ef087e5e1466c",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -1249,6 +1278,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "用户授权小范围原型评审修复：情景/版本/审批失效、跨页来源一致性、模拟任务发布区分、逐日文案及自动化交互回归；保留布局配色fixture，不进入正式前端。",
       "observedHead": "0e4aec39d6e5529278d4f047c75382630667c7be",
       "from": "REVIEW"
+    },
+    {
+      "date": "2026-11-11",
+      "to": "REVIEW",
+      "reason": "局部评审修复已独立提交；20组浏览器交互/20基础布局及新增失效窄屏检查PASS，源文件指纹匹配被测SHA。冻结口径不改、真实服务NOT_RUN；停止等待负责人最终验收。",
+      "observedHead": "4df78d585b73fbffb2066c813a9ef087e5e1466c",
+      "from": "IN_PROGRESS"
     }
   ]
 }
