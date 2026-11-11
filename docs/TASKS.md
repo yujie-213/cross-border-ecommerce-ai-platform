@@ -1,6 +1,6 @@
 # 唯一任务与验收台账 v0.2
 
-本台账只有18项近期工作；SETUP是本轮整理/建仓，A/B为S01必要子集，C按需，D只登记下一项S01专项设计。旧96项完整原稿/状态见archive/plan96-v0.1，旧ID映射见TASK_MAPPING.md。未来场景不预建空任务。
+本台账登记18项近期工作及1项本轮获准的独立产品/视觉原型；SETUP是本轮整理/建仓，A/B为S01必要子集，C按需，D只登记下一项S01专项设计。旧96项完整原稿/状态见archive/plan96-v0.1，旧ID映射见TASK_MAPPING.md。未来场景不预建空任务。
 
 ## 唯一状态与验收规则
 
@@ -1113,5 +1113,93 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "latestHandoffRef": null,
   "blocker": null,
   "history": []
+}
+```
+
+## UX-S01-01 S01独立产品原型与视觉规范（本轮授权）
+
+```json
+{
+  "id": "UX-S01-01",
+  "stage": "D",
+  "title": "S01采购补货交互原型与项目视觉规范",
+  "kind": "design",
+  "dependsOn": [],
+  "entryCondition": "2026-11-11 用户明确授权参考研究、DESIGN.md、独立浏览器原型与一致性检查；未经确认不得正式前端开发",
+  "ownerRole": "本轮原型/文档集成人",
+  "assignee": "Codex（本轮AI执行者，实际同文件唯一写入者）",
+  "allowedPaths": [
+    "DESIGN.md",
+    "prototypes/s01/",
+    "docs/ui/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
+  ],
+  "parallelCondition": "本轮单一执行者，无并行写入；保留既有未知文件与五份冻结基线",
+  "deliverables": [
+    "独立离线四页交互原型；与正式业务代码隔离",
+    "项目专属DESIGN.md与独立PRODUCT_SPEC.md",
+    "三份来源研究、需求对照/占位/未实现清单、800字内设计说明、真实浏览器证据"
+  ],
+  "acceptance": [
+    {
+      "id": "UX-S01-01/AC1",
+      "text": "SAP/Airtable/Shopify来源可定位；视觉规范独立综合，产品功能规格单独维护"
+    },
+    {
+      "id": "UX-S01-01/AC2",
+      "text": "工作台/建议列表/详情/人工审批可预览，筛选/异常/人工终点演示可复查"
+    },
+    {
+      "id": "UX-S01-01/AC3",
+      "text": "只读首期、质量阻断、版本/角色/UNKNOWN边界对照；占位与未实现明确，不冒充MC/ERP验收"
+    },
+    {
+      "id": "UX-S01-01/AC4",
+      "text": "有真实浏览器/文档校验与制品指纹；设计说明不超过800字；负责人评审后才考虑正式开发"
+    }
+  ],
+  "plannedTests": [
+    "node prototypes/s01/check.cjs：离线交互、四宽度、异常/角色/版本；人工截图检查",
+    "python docs/planning/build_docs.py；python docs/planning/check_plan.py；源基线/未知文件保全检查"
+  ],
+  "risks": [
+    "原型不冻结企业字段/质量矩阵或真实审批策略",
+    "D-S01-01完整专项仍待后续：本任务不是其全部设计或业务实现验收"
+  ],
+  "requiredEvidenceKinds": [
+    "SIMULATED_FRONTEND",
+    "DESIGN_ALIGNMENT"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "main",
+  "observedHead": "482e83d4f0af2f64b9eaad1bc0279b76938d6b70",
+  "dirtyPaths": [
+    "DESIGN.md",
+    "prototypes/s01/",
+    "docs/ui/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-11",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "本轮明确设计授权，只领取独立产品/视觉原型，不扩大到D-S01-01全部后端专项或A/B/C开发",
+      "observedHead": "482e83d4f0af2f64b9eaad1bc0279b76938d6b70"
+    }
+  ]
 }
 ```

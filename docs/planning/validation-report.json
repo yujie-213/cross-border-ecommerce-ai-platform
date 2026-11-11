@@ -34,13 +34,13 @@
       "check": "unique-task-ids",
       "result": "PASS",
       "detail": {
-        "tasks": 18,
+        "tasks": 19,
         "stages": {
           "SETUP": 1,
           "A": 6,
           "B": 5,
           "C": 5,
-          "D": 1
+          "D": 2
         }
       }
     },

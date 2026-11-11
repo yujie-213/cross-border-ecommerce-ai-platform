@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>序衡 · 采购补货工作台</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="demo-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳至主要内容</a>
+  <aside class="sidebar">
+    <a class="brand" href="#workbench"><span class="brand-symbol">序</span><span>序衡<span class="brand-en">COMMERCE OPERATIONS</span></span></a>
+    <div class="workspace"><span class="workspace-icon">跨</span><div>跨境电商智慧中台<small>采购运营空间</small></div><span class="muted">⌄</span></div>
+    <div class="nav-label">运营中心</div>
+    <nav aria-label="主要导航">
+      <a href="#workbench" data-nav="workbench"><span class="nav-icon">▦</span>工作台</a>
+      <a href="#suggestions" data-nav="suggestions"><span class="nav-icon">≡</span>补货建议<span class="nav-count">8</span></a>
+      <a href="#approvals" data-nav="approvals"><span class="nav-icon">☑</span>人工审批<span class="future">演示</span></a>
+    </nav>
+    <div class="sidebar-note"><span class="tiny-dot"></span> S01 · 供需与库存分析<small>确定性工作流 / 只读切片</small></div>
+    <div class="sidebar-bottom"><button data-action="about" class="nav-bottom">ⓘ　原型范围与待确认</button><div class="version">DESIGN PREVIEW <span>v0.1</span></div></div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar"><div class="breadcrumb">运营中心 <span>/</span> <span id="crumb">工作台</span></div><div class="top-actions"><span class="tenant">演示租户 · 跨境一部</span><label class="sr-only" for="role">演示身份</label><select id="role"><option value="buyer">采购 · 林予（演示）</option><option value="reviewer">审批 · 周宁（演示）</option></select><span class="avatar" id="avatar">林</span></div></header>
+    <div class="prototype-bar"><span><b>交互原型</b><span class="bar-divider">/</span><span id="mode-text">S01 只读 · 全部为模拟数据</span></span><div><button data-action="toggle-mode" id="mode-button">预览审批流程 ↗</button><button data-action="reset" title="恢复所有演示状态">重置演示</button></div></div>
+    <main id="main" tabindex="-1"></main>
+    <footer class="page-footer"><span>序衡 / 采购补货 Agent</span><span>分析时点 2026-11-11 08:00 UTC+08:00 · simulated</span></footer>
+  </div>
+  <dialog id="modal" aria-labelledby="dialog-title"><div id="modal-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

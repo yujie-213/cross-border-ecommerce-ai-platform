@@ -1,6 +1,14 @@
-# 当前增量交接 v0.2
+# 当前增量交接 v0.3
 
-本轮任务：SETUP-001；状态只读TASKS或generated/STATUS，不在本文件重复维护。范围是精简计划、旧稿归档、当前目录本地Git初始化及提交；不执行S01专项设计或任何A/B/C开发。
+本轮任务：UX-S01-01；状态只读TASKS或generated/STATUS。本次用户已明确授权S01产品/视觉设计及独立浏览器原型；未授权正式前端、A/B/C业务实现、部署、远端或push。下列SETUP信息保留为历史事实，不能覆盖本次新授权。
+
+## 本轮原型增量与停止点
+
+根目录DESIGN.md定义视觉；docs/ui/PRODUCT_SPEC.md定义页面功能和人工流程，两者分离。独立原型在prototypes/s01/index.html，直接离线打开；工作台、建议列表、详情与人工审批均有会话演示。全部simulated，默认只读，显式开启后才演示C01/C02；执行始终禁用。证据与来源见docs/ui/RESEARCH.md、ALIGNMENT.md及DELIVERY.md。完整D-S01-01专项尚未完成，不将本次UX交付冒充其全部验收。
+
+开始时实测main / HEAD `482e83d4f0af2f64b9eaad1bc0279b76938d6b70`，已跟踪diff为空；85个既有未知文件保留，路径/指纹见docs/ui/workspace-observation.json。新增/改动范围仅TASKS指定原型与文档。实际提交与测试结果在本轮结束后写DELIVERY与TASKS，未产生SHA前不填实现提交。
+
+正式ERP/模型/B01/B02/审批/MC/生产验收均NOT_RUN。负责人需确认试点口径、质量/时效矩阵、审批角色/金额/期限与只读范围；确认并另行授权前不进入正式前端开发。本轮交付后停止。
 
 ## 已完成和停止点
 
