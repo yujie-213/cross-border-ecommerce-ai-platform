@@ -2,7 +2,7 @@
   "kind": "DESIGN_ALIGNMENT",
   "reviewType": "AUTHOR_SELF_CHECK_NOT_INDEPENDENT_ACCEPTANCE",
   "command": "python docs/ui/check_design.py",
-  "implementationCommit": "f113229fa6eefc271b811e290858d596174ea52e",
+  "implementationCommit": "3dbbed25afeb9d4c0624687d94924388da35d213",
   "businessTests": "NOT_RUN",
   "baselinesUnchanged": true,
   "frozenRuleMismatches": [],

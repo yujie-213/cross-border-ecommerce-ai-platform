@@ -1,9 +1,9 @@
 {
   "scope": "DOCUMENT_GOVERNANCE_AND_PUBLICATION_PREPARATION_ONLY",
-  "observedHead": "f113229fa6eefc271b811e290858d596174ea52e",
+  "observedHead": "3dbbed25afeb9d4c0624687d94924388da35d213",
   "inventory": {
-    "files": 370,
-    "totalBytes": 22163831,
+    "files": 374,
+    "totalBytes": 22667628,
     "byExtension": {
       "<none>": 2,
       ".md": 63,
@@ -13,7 +13,7 @@
       ".json": 106,
       ".mmd": 59,
       ".svg": 38,
-      ".png": 40,
+      ".png": 44,
       ".cjs": 6,
       ".py": 19,
       ".zip": 2,
@@ -64,10 +64,10 @@
     "docs/governance/__pycache__/paths.cpython-313.pyc"
   ],
   "history": {
-    "reachableObjects": 459,
-    "unreachableObjectsScanned": 86,
-    "uniqueBlobs": 453,
-    "commits": 7,
+    "reachableObjects": 570,
+    "unreachableObjectsScanned": 10,
+    "uniqueBlobs": 456,
+    "commits": 8,
     "largestBlobBytes": 3312967,
     "findings": [],
     "scope": "All reachable refs plus every locally stored unreachable Git object; blob ZIP contents and commit/tag messages included; no history rewritten",

@@ -2477,6 +2477,22 @@
     {
       "path": "docs/archive/plan96-v0.1/docs/TASKS.md",
       "sha256": "b915b2d381b35f4a4387f4f6687841216dcd42adbd2252bba510416d452222a1"
+    },
+    {
+      "path": "docs/archive/governance-20261111/prototypes/s01/evidence/07-approved.png",
+      "sha256": "4c7b0ee4aaa6ba985c3e23c047a11f46309cc5b1b373563caa047cd8e1ecdb7c"
+    },
+    {
+      "path": "docs/archive/governance-20261111/prototypes/s01/evidence/10-scenario-invalidated.png",
+      "sha256": "aa56ae93bfb1c58ac06fbf1ab1906709563701544ff6862c361633bc149258ba"
+    },
+    {
+      "path": "docs/archive/governance-20261111/prototypes/s01/evidence/12-mobile-invalidated.png",
+      "sha256": "d0bd78ae92c06b4229f6913563918a61b57ea18ee16301b8e6d92f9ab8d724c9"
+    },
+    {
+      "path": "docs/archive/governance-20261111/ai-design/review/s03-workflow.png",
+      "sha256": "4efb5f380924a30486edf9cd16060591ce191af7b4ed759aa32c1459fa1dc80f"
     }
   ],
   "screenshotsReviewed": {
