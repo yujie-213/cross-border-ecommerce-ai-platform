@@ -1432,3 +1432,146 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ]
 }
 ```
+
+## D-S01-MVP-PLAN S01 MVP实施文档（仅文档）
+
+```json
+{
+  "id": "D-S01-MVP-PLAN",
+  "stage": "D",
+  "title": "S01 MVP实施文档与最小底座范围（仅文档）",
+  "kind": "design",
+  "dependsOn": [],
+  "entryCondition": "2026-11-11 用户明确授权MVP实施文档，并澄清：本轮不编码/不生成TODO/不调查ERP；下一阶段调查现有YAML后修订方案，核心满足则正式开发优先真实ERP只读",
+  "ownerRole": "MVP实施文档集成人；实施/契约/业务评审待负责人",
+  "assignee": "Codex（本轮单人文档执行者）",
+  "allowedPaths": [
+    "docs/agents/S01_MVP实施文档.md",
+    "docs/agents/index.md",
+    "docs/README.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
+  ],
+  "parallelCondition": "本轮不并行代理、不并写文件；保留未知未跟踪docs/ERP-openapi.yaml，不读取/修改/暂存",
+  "deliverables": [
+    "一份可供AI阅读的MVP实施规范：最小公共能力、接入调查决策门禁、契约/数据/实现顺序/原型对接/验收与完整项目演进",
+    "不新增开发TODO或未来开发任务台账，不创建业务代码或模拟系统，不改原型或冻结设计"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-MVP-PLAN/AC1",
+      "text": "最小底座子集、必须保留与按需延期边界及模块所有者明确，不等全部公共能力/S02"
+    },
+    {
+      "id": "D-S01-MVP-PLAN/AC2",
+      "text": "数据适配可替换；下一阶段先调查YAML再修订，满足核心需求时真实ERP只读优先；模拟仅测试/异常/离线备用"
+    },
+    {
+      "id": "D-S01-MVP-PLAN/AC3",
+      "text": "实施顺序/输入输出/契约/失败处理/验收及扩展规则可供AI参考，现有前端直接复用，不新设计"
+    },
+    {
+      "id": "D-S01-MVP-PLAN/AC4",
+      "text": "本轮只文档，无业务编码/TODO/ERP调查，不篡改冻结规则、既有任务状态或原型，证据与待决项如实"
+    }
+  ],
+  "plannedTests": [
+    "本轮：正文结构/引用链接/权威边界/不生成代码与TODO/保全范围检查；build_docs.py与check_plan.py",
+    "后续实施与ERP/模型/业务/独立设计评审本轮NOT_RUN"
+  ],
+  "risks": [
+    "YAML本轮不读取，核心字段与接口能力仍待下一阶段调查；企业规则仍待签认，不以示例补造生产口径"
+  ],
+  "requiredEvidenceKinds": [
+    "DESIGN_REVIEW"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "f3b7551f8096c07c5e3b3bc3ce8d76d9ab19b34e"
+  ],
+  "testedCommit": "f3b7551f8096c07c5e3b3bc3ce8d76d9ab19b34e",
+  "evidence": [
+    {
+      "kind": "DESIGN_SELF_CHECK",
+      "acceptanceIds": [
+        "D-S01-MVP-PLAN/AC1",
+        "D-S01-MVP-PLAN/AC2",
+        "D-S01-MVP-PLAN/AC3",
+        "D-S01-MVP-PLAN/AC4"
+      ],
+      "command": "作者对照本轮用户澄清及PLAN/概要/AI/S01专项/UI既有规范；PowerShell here-string | python -（正文结构/链接/无TODO/Markdown解析检查）",
+      "environment": "Windows / Python markdown；仅文档作者自检，不代替负责人独立评审",
+      "sample": "16章/27表/13处相对链接无断链；明确下一阶段先调查YAML再修订、满足核心需求则正式开发优先ERP；适配器可替换，模拟仅测试/异常/离线备用；最小底座/阶段出口/原型数据对接/验收与扩展齐全；无开发任务清单或代码块；主文档SHA256=aeb150234dc4a0deae1a286d2a6c1a58e2d5c879e0318d357e8a823e6194b2ee",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/S01_MVP实施文档.md"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-MVP-PLAN/AC4"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / existing Python/Git；文档和台账验证",
+      "sample": "新增仅1项design文档工作，既有19项任务保持不变；20项台账、18项既有文档规则PASS；不创建业务代码/完整模拟系统/开发TODO，不读取ERP YAML",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-MVP-PLAN/AC4"
+      ],
+      "command": "PowerShell here-string | python -B -（Git对象对照、既有任务JSON、指定文件保全、边界/秘密启发式检查）",
+      "environment": "Windows / 本地Python/Git；不读取docs/ERP-openapi.yaml",
+      "sample": "原S01详设/HTML/文档构建器、五份冻结基线、PLAN/DECISIONS、视觉/UI/原型等18文件相对基点字节不变；无应用初始化；未知未跟踪YAML保持原样不暂存。定向秘密模式0发现，检查仅覆盖本轮获准文档",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "DESIGN_REVIEW",
+      "acceptanceIds": [
+        "D-S01-MVP-PLAN/AC1",
+        "D-S01-MVP-PLAN/AC2",
+        "D-S01-MVP-PLAN/AC3",
+        "D-S01-MVP-PLAN/AC4"
+      ],
+      "command": "NOT_RUN：负责人独立实施文档评审；下一阶段ERP调查与方案修订尚未开始",
+      "environment": "无独立评审/ERP调用/业务实现环境",
+      "sample": "v0.1实施建议；非生产冻结规格，真实ERP/模型/工程/业务/MC验收全部NOT_RUN",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/agents/S01_MVP实施文档.md"
+    }
+  ],
+  "review": null,
+  "branch": "main",
+  "observedHead": "f3b7551f8096c07c5e3b3bc3ce8d76d9ab19b34e",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-11",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "用户授权实施文档，并明确真实ERP优先条件/接口调查顺序/可替换适配层；仅领取文档，不生成开发TODO或执行后续阶段",
+      "observedHead": "3a470082052efcd29a61d238d61eb902c6ac85d5"
+    },
+    {
+      "date": "2026-11-11",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "MVP实施文档与必要导航已本地提交；文档结构/链接/保全及18项文档检查PASS。用户澄清的调查后ERP优先、可替换适配层、模拟备用与复用前端均写明；未生成开发TODO/业务代码/模拟系统、未读取或调查ERP。停止等负责人评审与下一阶段指令。",
+      "observedHead": "f3b7551f8096c07c5e3b3bc3ce8d76d9ab19b34e"
+    }
+  ]
+}
+```

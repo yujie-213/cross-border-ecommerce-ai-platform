@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`a0fbc13c72e4905b2054fd25e27696b380c879dbee9e18484bda1fa4aa2ce861`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`e2949f01e95561ec1bad42447153f6e00173b90b3b0faf484ea682940065e92e`。不要手工编辑；候选不是执行授权。
 
-任务 19 项；TODO 16；IN_PROGRESS 0；BLOCKED 0；REVIEW 3；ACCEPTED 0。
+任务 20 项；TODO 16；IN_PROGRESS 0；BLOCKED 0；REVIEW 4；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,13 +10,14 @@
 | A | 6 | 6 | 0 | 0 | 0 | 0 |
 | B | 5 | 5 | 0 | 0 | 0 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
-| D | 2 | 0 | 0 | 0 | 2 | 0 |
+| D | 3 | 0 | 0 | 0 | 3 | 0 |
 
 ## 当前活动记录
 
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
 - D-S01-01 S01补货专项详细设计（第一阶段）：REVIEW；实际执行者=Codex（本轮唯一文档执行者与台账集成人）。
 - UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
+- D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）：REVIEW；实际执行者=Codex（本轮单人文档执行者）。
 
 ## 全部近期记录
 
@@ -41,5 +42,6 @@
 | C-05 | Runtime/Harness/Loop启用评审（按需） | TODO | 无；仍核对入口指令 |
 | D-S01-01 | S01补货专项详细设计（第一阶段） | REVIEW | 无；仍核对入口指令 |
 | UX-S01-01 | S01采购补货交互原型与项目视觉规范 | REVIEW | 无；仍核对入口指令 |
+| D-S01-MVP-PLAN | S01 MVP实施文档与最小底座范围（仅文档） | REVIEW | 无；仍核对入口指令 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。
