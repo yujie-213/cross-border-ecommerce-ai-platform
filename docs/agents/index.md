@@ -6,6 +6,7 @@
 - [Markdown正文](AI_DETAILED_DESIGN.md)
 - [S01 补货Agent专项详细设计（第一阶段，独立专项正文）](S01_补货Agent专项详细设计.md) / [HTML 阅读版](S01_补货Agent专项详细设计.html)
 - [S01 MVP 实施文档 v0.2（A01解释必做，教学ERP+受控补充）](S01_MVP实施文档.md)
+- [单SKU最小开发准入核对与建议（基于42a9417，待评审）](S01_单SKU开发准入核对.md)
 - [教学ERP接口调查与字段映射](S01_ERP接口调查与字段映射.md) / [脱敏验证证据](evidence/s01-erp-survey-20261111.json)
 - [交互职责图](../architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.html)
 - [技术与范式选型决策表](技术与范式选型决策表.md) / [CSV](技术与范式选型决策表.csv)
