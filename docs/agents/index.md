@@ -4,6 +4,7 @@
 
 - [HTML阅读版](AI_DETAILED_DESIGN.html)
 - [Markdown正文](AI_DETAILED_DESIGN.md)
+- [S01 补货Agent专项详细设计（第一阶段，独立专项正文）](S01_补货Agent专项详细设计.md)
 - [交互职责图](../architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.html)
 - [技术与范式选型决策表](技术与范式选型决策表.md) / [CSV](技术与范式选型决策表.csv)
 - [AI网关缓存准入与隔离矩阵](AI网关缓存准入与隔离矩阵.md) / [CSV](AI网关缓存准入与隔离矩阵.csv)
