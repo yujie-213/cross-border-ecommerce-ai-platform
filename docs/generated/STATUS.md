@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`a1c29bd89e17df89b4cc0d38136d45961613dab08d3cd4fa39a49f2b94f73971`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`c1846a423071b8e49b2e8b7fe1c78c4ea23d479ae6a16db2e6a93e1b0ec4dbbd`。不要手工编辑；候选不是执行授权。
 
-任务 19 项；TODO 17；IN_PROGRESS 1；BLOCKED 0；REVIEW 1；ACCEPTED 0。
+任务 19 项；TODO 17；IN_PROGRESS 0；BLOCKED 0；REVIEW 2；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,12 +10,12 @@
 | A | 6 | 6 | 0 | 0 | 0 | 0 |
 | B | 5 | 5 | 0 | 0 | 0 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
-| D | 2 | 1 | 1 | 0 | 0 | 0 |
+| D | 2 | 1 | 0 | 0 | 1 | 0 |
 
 ## 当前活动记录
 
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
-- UX-S01-01 S01采购补货交互原型与项目视觉规范：IN_PROGRESS；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
+- UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
 
 ## 全部近期记录
 
@@ -39,6 +39,6 @@
 | C-04 | 已选模型用途最小评测与Golden Dataset | TODO | C-01 |
 | C-05 | Runtime/Harness/Loop启用评审（按需） | TODO | 无；仍核对入口指令 |
 | D-S01-01 | S01补货专项设计（下一项） | TODO | 无；仍核对入口指令 |
-| UX-S01-01 | S01采购补货交互原型与项目视觉规范 | IN_PROGRESS | 无；仍核对入口指令 |
+| UX-S01-01 | S01采购补货交互原型与项目视觉规范 | REVIEW | 无；仍核对入口指令 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

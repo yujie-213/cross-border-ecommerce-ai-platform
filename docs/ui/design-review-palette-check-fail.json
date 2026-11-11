@@ -1,0 +1,111 @@
+{
+  "kind": "DESIGN_ALIGNMENT",
+  "reviewType": "AUTHOR_SELF_CHECK_NOT_INDEPENDENT_ACCEPTANCE",
+  "command": "python docs/ui/check_design.py",
+  "implementationCommit": "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4",
+  "businessTests": "NOT_RUN",
+  "baselinesUnchanged": true,
+  "baselineMismatches": [],
+  "protectedUnknownFiles": 85,
+  "protectedMismatches": [],
+  "designNoteNonWhitespaceCharacters": 462,
+  "designNoteWithin800": true,
+  "paletteTokensPresentInCSS": false,
+  "contrastChecks": [
+    {
+      "token": "ink",
+      "foreground": "#202d3a",
+      "background": "#ffffff",
+      "ratio": 14.02,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "muted",
+      "foreground": "#5c6b79",
+      "background": "#f4f6f8",
+      "ratio": 5.06,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "primary",
+      "foreground": "#ffffff",
+      "background": "#126b65",
+      "ratio": 6.33,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "success",
+      "foreground": "#24664b",
+      "background": "#edf6ef",
+      "ratio": 6.18,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "warning",
+      "foreground": "#8a510b",
+      "background": "#fff4e2",
+      "ratio": 5.91,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "danger",
+      "foreground": "#ad3733",
+      "background": "#fcefee",
+      "ratio": 5.55,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "info",
+      "foreground": "#315e8f",
+      "background": "#eef4fb",
+      "ratio": 6.06,
+      "minimum": 4.5,
+      "result": "PASS"
+    },
+    {
+      "token": "control",
+      "foreground": "#8996a3",
+      "background": "#ffffff",
+      "ratio": 3.02,
+      "minimum": 3,
+      "result": "PASS"
+    },
+    {
+      "token": "focus",
+      "foreground": "#276aaf",
+      "background": "#ffffff",
+      "ratio": 5.57,
+      "minimum": 3,
+      "result": "PASS"
+    }
+  ],
+  "sources": [
+    {
+      "path": "DESIGN.md",
+      "sha256": "8700cd6353acabc9e6fe6a7f37a09daeb2151efb6a292f1eaf10da1692453d3f"
+    },
+    {
+      "path": "docs/ui/PRODUCT_SPEC.md",
+      "sha256": "bdf475d43f7c428d5fd7bc31e9ce4260aa531731054e60c3b890dacf8fab0dcd"
+    },
+    {
+      "path": "docs/ui/ALIGNMENT.md",
+      "sha256": "728f2a2798910e4f5fac505d10a67f11af7d38d8786376e19b1356ffdf6bd264"
+    },
+    {
+      "path": "docs/ui/DESIGN_NOTE.md",
+      "sha256": "090cdcfd904ec40db343732d8f968fc2d89911400ac16e4f9a59c3046c8e8f12"
+    },
+    {
+      "path": "docs/ui/RESEARCH.md",
+      "sha256": "102e1d8280f9d1ab3b9b3543543de539f69306c0f4634ae0380f27de6acbe29c"
+    }
+  ],
+  "status": "FAIL"
+}

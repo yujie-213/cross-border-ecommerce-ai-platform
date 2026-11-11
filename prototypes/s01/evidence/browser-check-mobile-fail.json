@@ -1,0 +1,93 @@
+{
+  "scope": "SIMULATED_FRONTEND_ONLY",
+  "businessAcceptance": "NOT_RUN",
+  "environment": "Windows / existing Playwright / local headless Edge / file URL",
+  "command": "node prototypes/s01/check.cjs",
+  "observedHead": "482e83d4f0af2f64b9eaad1bc0279b76938d6b70",
+  "exitCode": 1,
+  "status": "FAIL",
+  "checks": [
+    {
+      "name": "default-readonly-and-no-business-writes",
+      "result": "PASS"
+    },
+    {
+      "name": "search-filter-sort-empty-and-restore",
+      "result": "PASS"
+    },
+    {
+      "name": "simulated-export-current-filter",
+      "result": "PASS"
+    },
+    {
+      "name": "baseline55-target90-gap15-candidate20-and-delayed-D6",
+      "result": "PASS"
+    },
+    {
+      "name": "all-four-blockers-have-no-purchase-transition",
+      "result": "PASS"
+    },
+    {
+      "name": "evidence-locator-access-denied-and-keyboard-dismiss",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit-opt-in-creation-confirmation-and-submission",
+      "result": "PASS"
+    },
+    {
+      "name": "independent-approval-rejection-reason-and-safe-text",
+      "result": "PASS"
+    },
+    {
+      "name": "approval-does-not-execute-and-unknown-keeps-original-key",
+      "result": "PASS"
+    },
+    {
+      "name": "parameter-revision-invalidates-approval-and-blocks-unevaluated-qty",
+      "result": "PASS"
+    },
+    {
+      "name": "revocation-and-expiry-remove-active-approval",
+      "result": "PASS"
+    },
+    {
+      "name": "simulation-run-cancel-and-nonpublication",
+      "result": "PASS"
+    },
+    {
+      "name": "reset-and-refresh-clear-all-session-state",
+      "result": "PASS"
+    },
+    {
+      "name": "responsive-containment-all-key-pages",
+      "result": "FAIL",
+      "detail": "AssertionError [ERR_ASSERTION]: #workbench at 390: 462"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "sources": [
+    {
+      "file": "index.html",
+      "sha256": "7d8f56599a4b18689f7844c2402149561e8fcd41781bfb66a5bc4ab9346d0443"
+    },
+    {
+      "file": "styles.css",
+      "sha256": "9376d0fa4cc5180ad2efee6be9bb8e5a84aade26933c4f4b6b0a2456a391da55"
+    },
+    {
+      "file": "app.js",
+      "sha256": "2cc608c4e1c156261b5ecdad8a5503272f31d5e8bf70be546ba60b8dd6671693"
+    },
+    {
+      "file": "demo-data.js",
+      "sha256": "45a84af12e5f85ae2f578380931b9904bb11a25b2099f78cdc8d81e2ad3cf070"
+    },
+    {
+      "file": "check.cjs",
+      "sha256": "65d20e26b8fe8c66e04086458ce353aed8bbad5826fda2b5ecedb88bf61ba21f"
+    }
+  ],
+  "visualReview": "Screenshots require separate visual inspection; see docs/ui/DELIVERY.md."
+}

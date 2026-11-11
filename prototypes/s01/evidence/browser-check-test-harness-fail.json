@@ -1,0 +1,41 @@
+{
+  "scope": "SIMULATED_FRONTEND_ONLY",
+  "businessAcceptance": "NOT_RUN",
+  "environment": "Windows / existing Playwright / local headless Edge / file URL",
+  "command": "node prototypes/s01/check.cjs",
+  "observedHead": "482e83d4f0af2f64b9eaad1bc0279b76938d6b70",
+  "exitCode": 1,
+  "status": "FAIL",
+  "checks": [
+    {
+      "name": "default-readonly-and-no-business-writes",
+      "result": "FAIL",
+      "detail": "ReferenceError: h is not defined"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "sources": [
+    {
+      "file": "index.html",
+      "sha256": "7d8f56599a4b18689f7844c2402149561e8fcd41781bfb66a5bc4ab9346d0443"
+    },
+    {
+      "file": "styles.css",
+      "sha256": "9376d0fa4cc5180ad2efee6be9bb8e5a84aade26933c4f4b6b0a2456a391da55"
+    },
+    {
+      "file": "app.js",
+      "sha256": "2cc608c4e1c156261b5ecdad8a5503272f31d5e8bf70be546ba60b8dd6671693"
+    },
+    {
+      "file": "demo-data.js",
+      "sha256": "45a84af12e5f85ae2f578380931b9904bb11a25b2099f78cdc8d81e2ad3cf070"
+    },
+    {
+      "file": "check.cjs",
+      "sha256": "f66a291bf4f5cea471e082889297e53a2c9281686029322195e936b30db87225"
+    }
+  ],
+  "visualReview": "Screenshots require separate visual inspection; see docs/ui/DELIVERY.md."
+}

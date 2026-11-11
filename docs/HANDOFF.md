@@ -6,7 +6,7 @@
 
 根目录DESIGN.md定义视觉；docs/ui/PRODUCT_SPEC.md定义页面功能和人工流程，两者分离。独立原型在prototypes/s01/index.html，直接离线打开；工作台、建议列表、详情与人工审批均有会话演示。全部simulated，默认只读，显式开启后才演示C01/C02；执行始终禁用。证据与来源见docs/ui/RESEARCH.md、ALIGNMENT.md及DELIVERY.md。完整D-S01-01专项尚未完成，不将本次UX交付冒充其全部验收。
 
-开始时实测main / HEAD `482e83d4f0af2f64b9eaad1bc0279b76938d6b70`，已跟踪diff为空；85个既有未知文件保留，路径/指纹见docs/ui/workspace-observation.json。新增/改动范围仅TASKS指定原型与文档。实际提交与测试结果在本轮结束后写DELIVERY与TASKS，未产生SHA前不填实现提交。
+开始时实测main / HEAD `482e83d4f0af2f64b9eaad1bc0279b76938d6b70`，已跟踪diff为空；85个既有未知文件保留，路径/指纹见docs/ui/workspace-observation.json。新增/改动范围仅TASKS指定原型与文档。实际原型实现提交 `8140d40439517f957044537fdffa11f2c5a6463e`；截图复核延期基线混用问题后，修正提交 `9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4`。针对后者重跑浏览器：15组交互/20布局组合PASS，无页面错误/网络请求；9组颜色、462字说明、85个未知文件和五份基线保全检查PASS。文档17项检查PASS。完整证据随本地交接提交固定，见TASKS和docs/ui/DELIVERY.md。
 
 正式ERP/模型/B01/B02/审批/MC/生产验收均NOT_RUN。负责人需确认试点口径、质量/时效矩阵、审批角色/金额/期限与只读范围；确认并另行授权前不进入正式前端开发。本轮交付后停止。
 
