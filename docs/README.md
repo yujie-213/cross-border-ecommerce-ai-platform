@@ -23,7 +23,7 @@
 | 架构 | [总体逻辑架构](architecture/ARCHITECTURE.md) / [HTML](architecture/ARCHITECTURE.html)；[概要开发设计](architecture/DEVELOPMENT_DESIGN.md) / [HTML](architecture/DEVELOPMENT_DESIGN.html)；[最小基座清单](architecture/MINIMUM_BASE_CHECKLIST.md) |
 | 架构图与修订 | [逻辑图源](architecture/logical/mermaid/)；[工程图源](architecture/engineering/mermaid/)；[交互职责图](architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.html)；[R01—R09](architecture/REVISION_R01_R09.md)；[H01—H07](architecture/REVISION_H01_H07.md) |
 | 计划 | [PLAN](PLAN.md)；[旧96项映射](TASK_MAPPING.md)；[文档构建与检查脚本](planning/) |
-| Agent 设计 | [S01 补货专项详细设计（第一阶段）](agents/S01_补货Agent专项详细设计.md)； [AI 模块详设](agents/AI_DETAILED_DESIGN.md) / [HTML](agents/AI_DETAILED_DESIGN.html)；[设计索引](agents/index.md)；[S01—S10 设计](agents/S01—S10_Agent与Workflow设计.md)；[模拟契约示例](agents/examples/s03-voc/) |
+| Agent 设计 | [S01 补货专项详细设计（第一阶段）](agents/S01_补货Agent专项详细设计.md) / [HTML 阅读版](agents/S01_补货Agent专项详细设计.html)； [AI 模块详设](agents/AI_DETAILED_DESIGN.md) / [HTML](agents/AI_DETAILED_DESIGN.html)；[设计索引](agents/index.md)；[S01—S10 设计](agents/S01—S10_Agent与Workflow设计.md)；[模拟契约示例](agents/examples/s03-voc/) |
 | UI 设计 | [产品功能规格](ui/PRODUCT_SPEC.md)；[视觉规范](../DESIGN.md)；[参考研究](ui/RESEARCH.md)；[一致性与缺口](ui/ALIGNMENT.md)；[评审修复记录](ui/REVIEW_FIX.md)；[独立原型](../prototypes/s01/index.html) |
 | 报告 | [可行性分析](reports/FEASIBILITY.md) / [HTML](reports/FEASIBILITY.html)；[示例测算](reports/feasibility/illustrative-financial-model.json)（非真实企业收益） |
 | 历史归档 | [归档说明与旧链接定位](archive/README.md)；[旧96项计划](archive/plan96-v0.1/README.md)；[本次路径迁移表](governance/migration.json) |
