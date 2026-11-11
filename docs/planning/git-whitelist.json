@@ -210,6 +210,7 @@
     "docs/ui/DESIGN_NOTE.md",
     "docs/ui/PRODUCT_SPEC.md",
     "docs/ui/RESEARCH.md",
+    "docs/ui/REVIEW_FIX.md",
     "docs/ui/check_design.py",
     "docs/ui/design-review-palette-check-fail.json",
     "docs/ui/design-review.json",

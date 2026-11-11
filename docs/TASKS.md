@@ -1174,7 +1174,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_FRONTEND",
     "DESIGN_ALIGNMENT"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "8140d40439517f957044537fdffa11f2c5a6463e",
     "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4"
@@ -1224,7 +1224,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "main",
-  "observedHead": "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4",
+  "observedHead": "0e4aec39d6e5529278d4f047c75382630667c7be",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -1242,6 +1242,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "独立原型/视觉/产品规格及真实浏览器证据交付；15组交互与20布局组合通过。负责人尚未签认；不是D-S01-01完整专项/业务验收。",
       "observedHead": "9a7c9a34bd4079fbdb8bef65b80c7dcdea224df4"
+    },
+    {
+      "date": "2026-11-11",
+      "to": "IN_PROGRESS",
+      "reason": "用户授权小范围原型评审修复：情景/版本/审批失效、跨页来源一致性、模拟任务发布区分、逐日文案及自动化交互回归；保留布局配色fixture，不进入正式前端。",
+      "observedHead": "0e4aec39d6e5529278d4f047c75382630667c7be",
+      "from": "REVIEW"
     }
   ]
 }
