@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="light" name="color-scheme"/><meta content="01f97cbe093cdf643b6758417109cea5944ca2a07744b0c4790bc6a17674994b" name="source-sha256"/><title>需求文档草案 · 跨境电商智慧中台 AI 应用项目</title><style>
+:root{--paper:#fbfaf6;--ink:#173342;--muted:#63757e;--teal:#087e78;--line:#d9e2df;--nav:#102d3e;--soft:#edf5f1;--side:258px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.9 'Microsoft YaHei','PingFang SC',sans-serif}a{color:var(--teal);text-underline-offset:4px}button{font:inherit;cursor:pointer}a:focus-visible,button:focus-visible,.table-scroll:focus-visible{outline:3px solid #bf873c;outline-offset:3px}
+.skip{position:fixed;left:20px;top:-70px;z-index:20;background:white;padding:8px 16px}.skip:focus{top:12px}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);background:var(--nav);color:white;display:flex;flex-direction:column}.brand{padding:30px 24px 22px;border-bottom:1px solid #365360}.kicker{font-size:10px;letter-spacing:.15em;color:#9edacb}.brand h2{font-size:23px;line-height:1.55;margin:10px 0}.brand p{font-size:11px;color:#b4c5cc;margin:0}.toc{padding:18px 15px;overflow:auto}.toc a{display:block;padding:8px 11px;margin:3px 0;color:#c6d7dd;text-decoration:none;font-size:12px;line-height:1.65;border-left:2px solid transparent}.toc a:hover,.toc a.active{background:#1c4253;color:white;border-left-color:#94d3be}.side-foot{margin-top:auto;padding:16px 24px;font-size:10px;color:#a3b9c2;border-top:1px solid #365360}
+.workspace{margin-left:var(--side);min-width:0}.topbar{position:sticky;top:0;z-index:5;background:#f4f3ed;border-bottom:1px solid var(--line);padding:14px 34px;display:flex;justify-content:space-between;align-items:center;gap:12px}.edition{font-size:11px;color:var(--muted)}.toolbar{display:flex;gap:8px}.button{display:inline-block;background:transparent;border:1px solid #b9cac3;border-radius:4px;padding:6px 12px;text-decoration:none;color:var(--ink);font-size:11px}.button:hover{background:white;color:var(--teal);border-color:var(--teal)}.mobile-toc{display:none}.reading-shell{max-width:1320px;margin:auto;padding:38px 42px 70px}.eyebrow{color:var(--teal);font-size:11px;letter-spacing:.12em;font-weight:700;margin-bottom:14px}.document h1{font-family:'STSong','SimSun',serif;font-size:36px;line-height:1.5;letter-spacing:.02em;margin:0 0 22px;text-wrap:balance}.document h2{font-family:'STSong','SimSun',serif;font-size:27px;line-height:1.5;margin:50px 0 24px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:88px}.document h3{font-size:18px;color:#195d57;margin:28px 0 12px}.document p{margin:14px 0}.document strong{color:#102e40}.document blockquote{margin:22px 0;padding:14px 20px;background:var(--soft);border-left:3px solid var(--teal);font-size:13px}.document blockquote p{margin:4px 0}.document ul,.document ol{padding-left:24px}.document li{margin:7px 0}.document li::marker{color:var(--teal)}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}.summary div{background:white;border:1px solid var(--line);border-top:3px solid var(--teal);padding:16px 18px}.summary b{display:block;font-family:Georgia,serif;font-size:29px;line-height:1.25}.summary span{display:block;color:var(--muted);font-size:11px;margin-top:7px}.intro{font-size:13px;color:var(--muted);line-height:1.8}.table-scroll{overflow-x:auto;border:1px solid var(--line);margin:22px 0;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.8}th{background:#eaf0ec;text-align:left;font-size:11px;color:#315347}td,th{padding:12px 13px;vertical-align:top;min-width:110px}td{border-top:1px solid var(--line)}td+td,th+th{border-left:1px solid #e2e8e4}tbody tr:nth-child(even){background:#f5f7f2}td:first-child{min-width:140px}pre{padding:20px;background:#132e3d;color:#e0eee9;border-radius:4px;overflow:auto;font:12px/1.8 Consolas,monospace}code{font-family:Consolas,monospace}p code,li code{background:#e9f0e9;padding:2px 4px;font-size:.9em}.architecture-panel{border:1px solid var(--line);border-radius:5px;margin:20px 0;background:white;overflow:hidden}.architecture-panel iframe{display:block;width:100%;border:0}footer{padding:25px 0 0;margin-top:36px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between}
+@media(min-width:1680px){:root{--side:280px}.reading-shell{padding-left:60px;padding-right:60px}}
+@media(max-width:1000px){:root{--side:220px}.reading-shell{padding:26px 25px 50px}.topbar{padding:12px 24px}.document h1{font-size:31px}.summary{gap:8px}.summary div{padding:12px}.summary span{font-size:10px}}
+@media(max-width:760px){.sidebar{display:none}.workspace{margin:0}.edition{display:none}.topbar{position:static;padding:14px 18px;flex-wrap:wrap}.mobile-toc{display:block;max-width:100%;padding:7px;background:white;border:1px solid var(--line);font:12px 'Microsoft YaHei',sans-serif}.reading-shell{padding:24px 18px 40px}.document h1{font-size:28px}.document h2{font-size:24px}.summary{grid-template-columns:repeat(2,1fr)}td,th{min-width:130px}.architecture-panel iframe{height:1100px}html{scroll-padding-top:20px}}
+@media print{@page{size:A4;margin:17mm 15mm}.sidebar,.topbar,.summary,.architecture-panel,.skip{display:none}.workspace{margin:0}.reading-shell{padding:0;max-width:none}body{font-size:10pt;line-height:1.8;background:white}.document h1{font-size:24pt}.document h2{font-size:18pt;margin-top:25pt}.document h3{font-size:12pt}h1,h2,h3{break-after:avoid}.table-scroll{overflow:visible}table{font-size:8pt;table-layout:fixed}td,th{padding:6pt;min-width:0;overflow-wrap:anywhere}thead{display:table-header-group}tr{break-inside:avoid}pre{white-space:pre-wrap;color:#111;background:#f1f4ef}footer{font-size:8pt}a{color:#17594d}}
+</style></head>
+<body><a class="skip" href="#document">跳至正文</a><aside class="sidebar"><div class="brand"><span class="kicker">COMMERCE AI HUB / PRD</span><h2>智慧中台<br/>需求与架构草案</h2><p>场景聚焦 · 能力复用 · 受控扩展</p></div><nav aria-label="文档目录" class="toc"><a href="#section-01">01 文档目的与依据</a><a href="#section-02">02 业务目标、用户与成功标准</a><a href="#section-03">03 范围与系统责任</a><a href="#section-04">04 自上而下的逻辑架构</a><a href="#section-05">05 需求去重与唯一归属</a><a href="#section-06">06 通用能力目录与职责边界</a><a href="#section-07">07 首期场景功能需求</a><a href="#section-08">08 稳定接口与扩展点</a><a href="#section-09">09 数据与指标要求</a><a href="#section-10">10 端到端分析与动作流程</a><a href="#section-11">11 典型扩展示例</a><a href="#section-12">12 研发拆分与防重复开发约束</a><a href="#section-13">13 非功能需求与降级</a><a href="#section-14">14 首期验收场景</a><a href="#section-15">15 实施阶段与交付门槛</a><a href="#section-16">16 待评审决策与责任</a></nav><div class="side-foot">V0.2 · 2026-11-11 · R01—R09待独立复核</div></aside>
+<div class="workspace"><div class="topbar"><span class="edition">AIH-PRD-DRAFT-001 / 需求评审稿</span><select aria-label="跳转章节" class="mobile-toc" id="jump"><option value="#section-01">01 文档目的与依据</option><option value="#section-02">02 业务目标、用户与成功标准</option><option value="#section-03">03 范围与系统责任</option><option value="#section-04">04 自上而下的逻辑架构</option><option value="#section-05">05 需求去重与唯一归属</option><option value="#section-06">06 通用能力目录与职责边界</option><option value="#section-07">07 首期场景功能需求</option><option value="#section-08">08 稳定接口与扩展点</option><option value="#section-09">09 数据与指标要求</option><option value="#section-10">10 端到端分析与动作流程</option><option value="#section-11">11 典型扩展示例</option><option value="#section-12">12 研发拆分与防重复开发约束</option><option value="#section-13">13 非功能需求与降级</option><option value="#section-14">14 首期验收场景</option><option value="#section-15">15 实施阶段与交付门槛</option><option value="#section-16">16 待评审决策与责任</option></select><div class="toolbar"><a class="button" href="REQUIREMENTS.md">Markdown 源文档</a><a class="button" href="../architecture/ARCHITECTURE.html" rel="noopener" target="_blank">打开架构图</a><button class="button" id="print" type="button">打印 / 保存 PDF</button></div></div>
+<div class="reading-shell"><div class="eyebrow">从业务问题到可复用架构</div><div class="summary"><div><b>4</b><span>首期联合分析场景</span></div><div><b>22</b><span>候选需求逐项归并</span></div><div><b>17</b><span>通用与平台模块</span></div><div><b>2</b><span>首期受控外部动作</span></div></div><p class="intro">阅读建议：先看第 03—06 节明确范围、分层与唯一归属，再用第 07—10 节拆分交付，按第 14—16 节组织验收与评审。架构图可交互查看；打印版保留全部正文及表格。</p><main class="document" id="document"><h1>跨境电商智慧中台 AI 应用项目需求文档草案</h1>
+<blockquote>
+<p>文档编号：AIH-PRD-DRAFT-001 ｜ 版本：0.2 ｜ 日期：2026-11-11 ｜ 状态：R01—R09 修订稿，待独立复核</p>
+<p>核心设计：面向 S01—S10 完整业务规划，分阶段实施；O01 负责统一任务编排，场景负责领域业务步骤与判断，通用能力负责可复用实现；指标、事实、证据、审批和执行分别只有一个权威归属。</p>
+</blockquote>
+<h2 id="section-01">01 文档目的与依据</h2>
+<p>本草案用于项目立项、范围评审和研发拆分，明确业务目标、逻辑架构、模块职责、扩展契约、首期功能和验收原则。它是建议方案，不代表企业系统已接通、需求已批准或生产能力已验证。</p>
+<p>业务依据为<a href="BUSINESS_GUIDE.html">《跨境电商业务流程与术语指南》</a>第 01—03、07—17、19—20 节，以及本次讨论形成的 22 项候选场景。原指南链接的其他需求、接口和验收文档未在当前工作区提供，因此本草案不复用其 HUB、API、UAT 编号，也不声称已核对这些文档。</p>
+<p>本草案中的 P0/P1/P2 表示拟议建设阶段。阈值、供应商、模型、预算和上线规模需在评审后冻结；未经批准的拓展场景不自动进入首期范围。</p>
+<h2 id="section-02">02 业务目标、用户与成功标准</h2>
+<h3>2.1 目标</h3>
+<ol>
+<li>让运营、采购、仓库、客服和财务基于同一对象、同一时间窗口和明确口径讨论问题。</li>
+<li>支持补货、履约、客户之声（VOC）和经营贡献的联合分析，给出事实、候选原因、方案和不确定性。</li>
+<li>将可执行建议交由业务人员确认和审批，经受控执行器回到原系统创建有限动作，并追踪业务结果。</li>
+<li>建立可复用能力，新增场景通过组合服务和注册策略实现，避免重新开发取数、计算、检索及审批。</li>
+</ol>
+<h3>2.2 用户与责任</h3>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>核心诉求</th>
+<th>项目内责任</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运营、采购</td>
+<td>缺货何时发生、补多少、有哪些备选方案</td>
+<td>确认业务范围、假设和建议参数</td>
+</tr>
+<tr>
+<td>仓库、物流负责人</td>
+<td>哪些异常影响订单、哪个节点需核实</td>
+<td>核实库存、质检和履约事实，在原系统办理业务</td>
+</tr>
+<tr>
+<td>客服、商品负责人</td>
+<td>客户反复反馈什么、是否需调查</td>
+<td>复核主题和证据，跟踪内部调查</td>
+</tr>
+<tr>
+<td>财务</td>
+<td>贡献变化是否真实、缺哪些费用</td>
+<td>确认费用、币种、成本及核算口径</td>
+</tr>
+<tr>
+<td>经理、授权审批人</td>
+<td>方案依据、风险及资源影响</td>
+<td>独立审批具体动作及其有效期</td>
+</tr>
+<tr>
+<td>集成、数据及运维人员</td>
+<td>来源是否完整、任务能否恢复</td>
+<td>维护映射、数据质量、连接器和运行状态</td>
+</tr>
+<tr>
+<td>审计人员</td>
+<td>结论和动作如何形成</td>
+<td>按权限回溯输入、版本、审批和回执</td>
+</tr>
+</tbody>
+</table></div>
+<h3>2.3 成功标准</h3>
+<p>业务指标包括分析耗时、异常发现到责任交接时长、建议采纳后完成率，以及经可比观察验证的缺货、延迟、退款和贡献变化。质量指标包括数据映射准确性、证据可追溯性、模型结论人工通过率及权限隔离结果。</p>
+<p>立项后先采集基线，再冻结目标值和观察窗。创建采购草稿不计为采购到货；创建工单不计为问题解决。库存资金占用、利润和销售额分别评价，收益不重复计算，不将同期增长直接归因于 AI。</p>
+<h2 id="section-03">03 范围与系统责任</h2>
+<h3>3.1 首期范围</h3>
+<ul>
+<li>接入试点所需的授权 ERP、OMS、WMS、CRM、财务和渠道数据；按实际场景最小集合实施，不以“全部系统全量接入”为前置目标。</li>
+<li>建立身份映射、数据质量、统一指标、证据快照、权限与审计。</li>
+<li>实现 S01—S04 四类分析及跨领域综合；实现统一工作台、预警、建议、审批和结果跟踪。</li>
+<li>经审批，仅允许创建 ERP 采购草稿、CRM 内部工单；接口未验证前只提供分析及可导出的建议。</li>
+</ul>
+<h3>3.2 首期排除</h3>
+<p>原 ERP/OMS/WMS/CRM/财务系统继续承担商品主账、采购审批、库存记账、分仓出库、退款退货办理、客户沟通和会计核算。首期不新增自动支付、自动退款、库存调整、自动投放、自动调价、自动发布页面或对客发送消息。</p>
+<p>第三方仓、独立物流系统、外部市场数据、图关系数据库、视觉质检和自动执行优化动作均按单独需求评审，不能因为流程图包含该业务就纳入交付。</p>
+<h3>3.3 权威事实</h3>
+<p>ERP、OMS、WMS、CRM、财务和渠道按数据域确认权威来源。实际一个软件可承担多个逻辑角色。中台保存带来源和时间的分析投影，不成为第二套订单、库存或财务主账。ERP 和 WMS 展示同一仓的库存镜像时不得相加；自营仓与平台履约仓分开核算。</p>
+<h2 id="section-04">04 自上而下的逻辑架构</h2>
+<p>本草案采用五层逻辑分层，并设置贯穿各层的治理能力。分层用于定义依赖与职责，不等同于五个独立部署系统。首期采用模块化单体加异步任务执行器；出现独立扩缩容或隔离需求后再拆服务。</p>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>组成</th>
+<th>职责与依赖边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 体验与接入层</td>
+<td>W01 统一工作台、API 入口</td>
+<td>统一查询、分析报告、建议及审批入口；不在页面重复计算业务指标</td>
+</tr>
+<tr>
+<td>L2 场景与任务编排层</td>
+<td>S01—S10 场景插件、O01 任务编排</td>
+<td>O01 选择、调度场景并综合结果；场景声明领域需求、执行业务步骤并调用公共能力</td>
+</tr>
+<tr>
+<td>L3 通用能力层</td>
+<td>B01/B02 领域计算；A01—A03 通用智能；C01—C03 协同控制</td>
+<td>提供唯一的计算、模型、理解、检索、建议、审批与执行实现；通用智能与协同写入互相隔离</td>
+</tr>
+<tr>
+<td>L4 数据与集成层</td>
+<td>D01—D04</td>
+<td>接入、映射、投影、质量、快照和证据；以标准数据契约隔离厂商差异</td>
+</tr>
+<tr>
+<td>L5 运行基础层</td>
+<td>I01 持久化、任务恢复、凭据引用与必要运行承载</td>
+<td>依据实际需求选择技术实现；文件、检索与队列能力按需使用，不先建通用接口体系</td>
+</tr>
+<tr>
+<td>横向治理</td>
+<td>G01 权限策略；G02 审计、观测与评测</td>
+<td>在 API、检索、工具、缓存和执行边界强制生效；不能只写在模型提示词中</td>
+</tr>
+</tbody>
+</table></div>
+<p>总体逻辑图见<a href="../architecture/logical/mermaid/01-logical-architecture.svg">总体逻辑架构图（SVG）</a>及<a href="../architecture/ARCHITECTURE.md">总体逻辑架构与流程设计</a>。图展示应用逻辑和读写边界，运行基础及横向治理细项以本表和第 06、13 节为准。</p>
+<h3>4.1 允许的依赖</h3>
+<p>体验入口 → 场景应用 → 通用能力接口 → 标准数据端口/基础设施适配器。业务规则依赖抽象，不直接依赖模型品牌、ERP 厂商 SDK、数据库驱动或工作流产品。</p>
+<p>统一场景任务路径为 W01 → O01 → 所选 ScenarioHandler → B01/B02/A01—A03 等公共能力 → 场景领域结果 → O01 综合报告。O01 不绕过场景重新执行领域计算、分类或领域检索；场景不反向调用 O01 调度其他场景。跨领域参与者由 O01 依据依赖和权限选择，通过同一固定数据输入及结构化结果综合，不互调私有实现或互写数据。</p>
+<p>O01 可调用 D03 协调输入快照、D04 校验证据引用，以及 A01/A03 完成明确标为“联合报告”的解释或补证，不重复场景已完成的领域步骤。统一查数入口 W01 → A03 是独立受控查询；需要场景分析时仍进入上述任务路径。A03 可调用 B01 的受控指标查询，不复制公式。C03 独占外部业务写端口，模型工具集合不包含这些端口。</p>
+<p>模块实现可同进程部署，但禁止跨模块直接读写私有表；通过公开服务契约、只读投影或版本化事件交换数据。</p>
+<h3>4.2 开闭原则的具体落实</h3>
+<p>稳定内核包含权限、快照、指标执行、任务状态、审批和幂等执行。不将具体场景名写成核心服务中的连续条件分支。变化部分通过已审核的接口实现与注册清单接入。</p>
+<p>每项扩展需声明标识、版本、输入输出模式、所需数据域、工具白名单、权限、预算和支持的动作类型，并经过契约与回归验证。首期采用代码注册、依赖注入或受控配置，不提供任意用户上传代码的插件市场。</p>
+<p>开闭原则不意味着核心永不修改：出现新的业务不变量或权限模型时，允许评审并演进核心契约；不得用任意 JSON 字段和通用执行脚本绕过必要设计。</p>
+<h2 id="section-05">05 需求去重与唯一归属</h2>
+<h3>5.1 去重规则</h3>
+<ol>
+<li>一个业务事实或指标只有一个权威定义；各场景按版本引用。</li>
+<li>一个可复用能力只有一个模块负责人、公开接口和持久化写入归属。</li>
+<li>场景保留独有的业务目标、约束、证据清单和方案模板，不复制通用引擎。</li>
+<li>预测结果、投诉标签和知识片段是派生信息，不能替代原系统事实。</li>
+<li>公共接口、前端组件、物理数据库可共享；聚合统计口径和写入权限不能因共享而混淆。</li>
+</ol>
+<h3>5.2 22 项候选需求的归并结果</h3>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>原候选编号与需求</th>
+<th>唯一主归属</th>
+<th>复用能力与消重说明</th>
+<th>阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 补货与缺货预警</td>
+<td>S01 供需与库存分析</td>
+<td>复用 B01 供需计算、B02 预测优化及 C01—C03；不另建采购主流程</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>2 履约异常分析</td>
+<td>S02 履约风险分析</td>
+<td>一个事件关联模型覆盖订单、包裹和催单</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>3 VOC 与商品问题</td>
+<td>S03 客户体验分析</td>
+<td>复用 A02 主题提取，B01 负责去重分母</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>4 经营贡献分析</td>
+<td>S04 贡献与费用分析</td>
+<td>贡献口径集中在 B01，不由模型计算</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>5 商品映射与质量诊断</td>
+<td>D02、D03</td>
+<td>D02 唯一维护映射；D03 负责质量判定；不是独立业务 Agent</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>6 销量预测</td>
+<td>S01</td>
+<td>通用预测引擎归 B02，S01 维护需求特征与业务解释</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>7 滞销库存治理</td>
+<td>S01</td>
+<td>复用库存、需求和贡献指标，不另建库存台账</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>8 供应商风险</td>
+<td>S01</td>
+<td>交付、质检指标复用；供应商档案仍由 ERP 维护</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>9 运输到货风险</td>
+<td>S02</td>
+<td>与订单履约共用事件链及 B02 预测能力</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>10 多语言客服辅助</td>
+<td>S05 客服辅助</td>
+<td>复用 A02 理解、A03 检索；回复草稿与发送动作分离</td>
+<td>P1 拓展</td>
+</tr>
+<tr>
+<td>11 售后处理辅助</td>
+<td>S05</td>
+<td>复用 S03 已发布主题结果及标准证据；不重复聚类或办理退款</td>
+<td>P1 拓展</td>
+</tr>
+<tr>
+<td>12 页面本地化</td>
+<td>S06 内容与增长辅助</td>
+<td>事实资料、术语及生成能力复用；页面发布仍在渠道系统</td>
+<td>P1 拓展</td>
+</tr>
+<tr>
+<td>13 广告诊断与素材</td>
+<td>S06</td>
+<td>复用 S04 贡献结果；投放诊断归本场景，预算写入单独审批</td>
+<td>P1 拓展</td>
+</tr>
+<tr>
+<td>14 费用账单核查</td>
+<td>S04</td>
+<td>与贡献分析共用费用分类、币种及账单版本</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>15 单证核对</td>
+<td>S07 单证辅助</td>
+<td>A02 统一抽取；S07 只实现跨单据业务校验规则</td>
+<td>P1 拓展</td>
+</tr>
+<tr>
+<td>16 自然语言查询与知识助手</td>
+<td>W01 + A03</td>
+<td>统一入口与查询能力；不得再建独立指标计算系统</td>
+<td>P1；首期提供必要查询子集</td>
+</tr>
+<tr>
+<td>17 跨部门异常协同</td>
+<td>C01—C03</td>
+<td>所有场景共用建议、预警、审批及执行记录</td>
+<td>P0 提供首期所需子集</td>
+</tr>
+<tr>
+<td>18 市场与选品</td>
+<td>S08 经营规划</td>
+<td>授权市场资料、S03 问题主题和 S04 贡献结果作为输入</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>19 定价与促销模拟</td>
+<td>S08</td>
+<td>B02 统一提供优化与模拟；S06 负责内容，不负责价格决策</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>20 多仓布局优化</td>
+<td>S08</td>
+<td>复用 S01 发布的需求预测和 B02 优化，不重复预测</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>21 图片辅助质检</td>
+<td>S09 视觉质检辅助</td>
+<td>扩展 A02 的图像理解提供方，人工确认缺陷</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>22 政策风险检查</td>
+<td>S10 政策核查辅助</td>
+<td>复用 A03 有效版本检索；专业人员判断适用性</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table></div>
+<p>“唯一主归属”表示需求交付和维护责任；依赖能力的实现责任仍属于提供模块。第 5 项按两项明确子职责拆分，不允许双方同时维护映射或质量规则。</p>
+<h2 id="section-06">06 通用能力目录与职责边界</h2>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>编号 / 模块</th>
+<th>唯一职责与主要产物</th>
+<th>明确边界</th>
+<th>首期内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W01 统一工作台</td>
+<td>查询入口、报告视图、证据侧栏、统一建议和审批组件</td>
+<td>不自算指标，不按场景复制审批页</td>
+<td>四场景工作台及角色视图</td>
+</tr>
+<tr>
+<td>O01 任务编排</td>
+<td>参与者选择、计划与预算、领域调度、跨领域业务降级、综合审校及报告</td>
+<td>不执行业务场景内部步骤或重复指标计算，不绕过 C02/C03</td>
+<td>固定模板起步；领域并行度默认2、任务重规划默认1，均按第8.3节配置</td>
+</tr>
+<tr>
+<td>D01 连接器与同步</td>
+<td>授权读取、增量游标、重试、去重、来源覆盖和适配台账</td>
+<td>负责来源传输；不猜测业务映射，不直接执行业务写入</td>
+<td>按首期数据域实施连接器</td>
+</tr>
+<tr>
+<td>D02 标准身份与投影</td>
+<td>canonicalId、审核映射、单位状态转换、权威来源选择及版本化投影</td>
+<td>不重建商品主账；映射推荐必须人工确认</td>
+<td>SKU/Listing/仓库/订单/包裹映射</td>
+</tr>
+<tr>
+<td>D03 数据质量与快照</td>
+<td>质量判定、输入数据版本清单、快照及有效性复核</td>
+<td>唯一维护 snapshotId 对应清单，不维护 O01 计划/报告版本，不复制源事实</td>
+<td>分域门槛、隔离区、快照生成</td>
+</tr>
+<tr>
+<td>D04 证据登记与血缘</td>
+<td>证据编号、资产版本定位、派生关系、权限标签和引用解析</td>
+<td>只维护证据定位及血缘，不复制快照清单、指标结果或报告正文</td>
+<td>原记录、指标结果和受控知识引用</td>
+</tr>
+<tr>
+<td>B01 指标语义与计算</td>
+<td>统一指标目录和确定性计算，包含给定输入下的逐日供需评价</td>
+<td>逐日余额、首次缺货日、缓冲及缺口只有此处实现；不生成预测或搜索候选方案</td>
+<td>可售、逐日供需、投诉占比、贡献及差异</td>
+</tr>
+<tr>
+<td>B02 预测与优化</td>
+<td>预测需求/交期、构造未来情景与候选方案、按约束比较和优化</td>
+<td>每个情景的逐日指标调用 B01，不另写供需公式；不改变审批策略</td>
+<td>基线预测与候选方案组织，复用 B01 评价；学习型提供方后续接入</td>
+</tr>
+<tr>
+<td>A01 模型网关</td>
+<td>模型适配、结构化输出校验、超时、限额、成本及技术错误状态</td>
+<td>只报告模型调用结果，不决定 RULES_ONLY、部分报告或业务阻断，不持有审批权</td>
+<td>可替换模型提供方、技术失败信息及成本跟踪</td>
+</tr>
+<tr>
+<td>A02 内容理解与抽取</td>
+<td>分类、聚类、翻译、结构化字段抽取及置信度</td>
+<td>不负责投诉分母、财务公式或权威实体合并</td>
+<td>VOC 文本理解；OCR/图像按阶段扩展</td>
+</tr>
+<tr>
+<td>A03 检索与受控查询</td>
+<td>知识检索、指标查询、必要关系查询及证据引用</td>
+<td>先过滤权限再检索；结构化查询经语义计划与只读校验</td>
+<td>文本与指标查询；图查询端口预留但不要求首期建图</td>
+</tr>
+<tr>
+<td>C01 建议与预警</td>
+<td>统一建议模型、风险去重、责任交接、确认及效果关联</td>
+<td>不替场景生成业务算法，不拥有批准权</td>
+<td>规则预警、建议参数及证据绑定</td>
+</tr>
+<tr>
+<td>C02 审批与授权</td>
+<td>独立审批、权限和有效期核查、不可变批准版本</td>
+<td>不创建采购单，不用模型审校替代人工批准</td>
+<td>发起人与审批人分离；变更参数使旧批准失效</td>
+</tr>
+<tr>
+<td>C03 受控执行与结果跟踪</td>
+<td>独占外部写入调用、幂等键、回执核对及业务结果关联</td>
+<td>仅消费有效批准；执行成功与业务完成分开存储</td>
+<td>ERP 草稿、CRM 内部工单两类动作</td>
+</tr>
+<tr>
+<td>G01 权限与策略</td>
+<td>身份、角色、企业/店铺/仓库范围和工具策略</td>
+<td>在服务端独立执行；缓存与索引同样受控</td>
+<td>默认拒绝、最小权限、敏感字段保护</td>
+</tr>
+<tr>
+<td>G02 审计、观测与评测</td>
+<td>操作链路、模型/规则版本、质量样本、运行指标及评测结果</td>
+<td>运行日志不等于业务主账；不无差别记录敏感内容</td>
+<td>全链路追踪、规则基线和模型评测集</td>
+</tr>
+<tr>
+<td>I01 运行基础</td>
+<td>实际需要的数据持久化、任务领取/恢复、凭据及日志备份承载</td>
+<td>不实现业务判断；不预先定义万能 Repository、Index、Queue、Blob 等接口族</td>
+<td>模块化应用与 Worker，复用现有存储/运维；文件和检索按实际需求选择实现</td>
+</tr>
+</tbody>
+</table></div>
+<h3>6.1 O01 内部分工与业务降级</h3>
+<p>O01 内部承担五项职责：接收任务并选择参与场景；维护计划、依赖与预算；协调 D03 输入快照及受影响重跑；综合领域结果并按必需/可选依赖决定整体业务状态；审校引用并发布报告版本。这些是同一逻辑模块内的分工，不新增模块编号、独立服务或通用引擎。</p>
+<p>场景负责领域内的步骤依赖、业务规则和失败影响判断，并把可用产物引用、缺失能力及被阻断的业务结论返回 O01。A01 仅返回模型调用成功或 TIMEOUT、RATE_LIMITED、UNAVAILABLE、INVALID_OUTPUT 等技术错误信息；这些是示例技术类别，不是业务终态。A02/A03 保留能力结果或失败原因，不替场景决定采购、售后等业务可否继续。</p>
+<p>场景先确定本领域可用结果及业务限制，O01 再依据请求目标和必需/可选参与者形成完整、部分、RULES_ONLY 或阻断的报告状态。规则结果可用不代表缺失的质量信号为安全；依赖该信号的业务结论与后续建议必须阻断。业务降级规则归场景及 O01 的相应编排职责，不能由模型提供方错误码直接推出。</p>
+<h3>6.2 B01/B02 计算边界</h3>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>计算内容</th>
+<th>唯一责任</th>
+<th>调用约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>历史需求口径、当前可售、已确认供给、给定曲线下的逐日余额/首次缺货日/缓冲和缺口</td>
+<td>B01</td>
+<td>输入可为已确认事实或明确标记的情景参数；计算结果保留对应输入和指标版本</td>
+</tr>
+<tr>
+<td>未来需求/交期估计、情景参数、采购数量及到货安排候选、MOQ/倍数等约束下的方案搜索</td>
+<td>B02</td>
+<td>使用 B01 指标与场景约束；逐日评价及派生缺口均调用 B01，不另实现公式</td>
+</tr>
+<tr>
+<td>补货与质量是否冲突、业务上选何种调查或协调路径</td>
+<td>领域场景；跨领域由 O01 综合</td>
+<td>组合 B01/B02 的结果和 S03 质量信号，不在编排层重算指标</td>
+</tr>
+</tbody>
+</table></div>
+<p>本边界同样适用于履约预测、贡献比较、定价及多仓规划：B01 评价给定输入，B02 预测/组织/求解候选方案；不能因换场景而复制同名指标。情景指标须标明所用假设及其B02版本引用，不能把情景余额当作已发生的库存事实。</p>
+<h2 id="section-07">07 首期场景功能需求</h2>
+<h3>7.1 S01 供需与库存分析</h3>
+<ul>
+<li><strong>S01-01 范围与证据：</strong>用户选店铺、仓库、SKU、分析时点及窗口，获取 OMS 需求、WMS 可售、ERP 未收供给、供应约束及 CRM 质量信号。缺映射、供给重复或关键库存过旧时阻断可执行补货建议。</li>
+<li><strong>S01-02 计算与推演：</strong>S01 调用 B01 计算给定输入下的逐日余额、首次缺货日、目标缓冲和缺口；调用 B02 形成预测/候选数量及到货安排，B02 对各候选复用 B01 评价。分别处理 MOQ、订购倍数及预计可售日，避免重复扣减已预留需求或将到港当可售。</li>
+<li><strong>S01-03 联合判断：</strong>S01 返回供需领域结果及所需质量依赖，O01 按任务计划调度 S03 并综合两域结果，比较常规采购、加急协调、先调查等路径；S01 不反向调度 O01。超出业务依据时展示待确认事项，不编造交期或供应商承诺。</li>
+<li><strong>S01-04 输出：</strong>提供数量、日期、逐日曲线、关键假设、证据和替代方案。质量达到调查阈值或关键数据未满足条件时，禁止转采购草稿，可形成调查建议。</li>
+<li><strong>S01-05 动作：</strong>只读报告先输出采购候选方案；用户选择后经 W01 生成 C01 采购草稿建议，后续确认、审批和执行分别使用 C01/C02/C03。</li>
+</ul>
+<h3>7.2 S02 履约风险分析</h3>
+<ul>
+<li><strong>S02-01 关联：</strong>关联订单、承诺发货/交付时间、仓库作业、多个包裹及客户催单；保持订单与包裹粒度差异。</li>
+<li><strong>S02-02 识别：</strong>确定性规则识别超承诺、未出库、物流停滞等情况；迟到事件不能覆盖更新状态。</li>
+<li><strong>S02-03 解释：</strong>结合库存、仓内状态和物流事件列出已证实事实、候选原因、责任线索和待调查差异。相关性不能表述为已证明原因。</li>
+<li><strong>S02-04 输出与动作：</strong>按影响和紧急度排序，复用 C01 去重及 C02/C03 创建内部履约工单；不分仓、取消订单、改地址或补发。</li>
+</ul>
+<h3>7.3 S03 客户体验与 VOC 分析</h3>
+<ul>
+<li><strong>S03-01 理解：</strong>A02 对授权脱敏反馈进行主题提取，保留原文证据、语言、置信度和 UNKNOWN 分类；人工修正形成有版本的标签记录。</li>
+<li><strong>S03-02 统计：</strong>B01 按店铺、SKU、成熟签收群组和观察窗计算去重投诉订单占比，分别显示工单数、订单数及样本量。</li>
+<li><strong>S03-03 关联：</strong>关联页面描述、履约、退款及已有质检记录；区分商品、物流、描述及服务主题，不从投诉直接认定缺陷。</li>
+<li><strong>S03-04 输出与动作：</strong>输出主题趋势、重复问题、证据及调查候选方案；质量信号通过 O01 领域结果或已发布结果引用供其他场景使用，不直接调用 S01；用户选择生成业务建议后，复用 C01—C03 的确认、审批及内部调查工单流程。</li>
+</ul>
+<h3>7.4 S04 贡献与费用分析</h3>
+<ul>
+<li><strong>S04-01 取数：</strong>统一订单实收、成功退款、费用、商品成本、财务确认成本转回和币种，区分估算、实际及数据覆盖状态。</li>
+<li><strong>S04-02 计算：</strong>B01 按适用且已确认的口径计算贡献；累计账单取最新有效版本，增量事件按唯一记录汇总，适配转换规则留痕。</li>
+<li><strong>S04-03 解释：</strong>分解销量结构、退款、平台费、履约费等变化；广告未归因到订单时只做有依据的期间分析。</li>
+<li><strong>S04-04 输出与动作：</strong>缺少必要费用时输出部分结果及缺项，不填零；贡献不标为净利润。可建议内部财务核查，不修改账目。</li>
+</ul>
+<h3>7.5 统一分析输出</h3>
+<p>四类场景均通过同一结果协议输出：分析范围、数据事实时点及覆盖情况、指标及版本、已确认事实、候选原因、备选方案、风险、不确定性、证据引用、建议动作及追踪标识。模型推断、程序计算和原始事实使用不同类型标识。</p>
+<h2 id="section-08">08 稳定接口与扩展点</h2>
+<p>以下是逻辑契约，不是已冻结的生产 API。实现采用强类型请求/响应及模式校验，不以厂商特有字段作为核心接口。</p>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>接口 / 扩展点</th>
+<th>所属模块</th>
+<th>最小契约内容</th>
+<th>新增实现的触发条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ScenarioHandler</td>
+<td>O01 注册，场景实现</td>
+<td>scenarioId、版本、数据/业务依赖、参与者范围与参数、analyze(参与者上下文)、领域结果与允许建议类型</td>
+<td>新业务问题无法由现有场景配置表达</td>
+</tr>
+<tr>
+<td>SourceConnector</td>
+<td>D01</td>
+<td>sourceId、domain、read(cursor, scope)、同步模式、事实时点、覆盖水位、错误类别</td>
+<td>新厂商或新来源协议</td>
+</tr>
+<tr>
+<td>MetricDefinition</td>
+<td>B01</td>
+<td>metricId、版本、维度、单位、分母、给定事实/情景输入、计算计划、缺失策略、权威域、示例</td>
+<td>新指标；B02 情景评价也调用同一版本定义</td>
+</tr>
+<tr>
+<td>Forecast/OptimizerProvider</td>
+<td>B02</td>
+<td>特征与窗口、截止时点、约束、候选参数、B01 评价结果引用、预测/算法版本、回测结果</td>
+<td>基线不足且新增方法验证有收益；不重写逐日指标</td>
+</tr>
+<tr>
+<td>ModelProvider</td>
+<td>A01</td>
+<td>能力、输入输出模式、超时、token/费用预算、模型调用结果与技术错误类别</td>
+<td>更换模型供应商或部署方式；不返回业务降级结论</td>
+</tr>
+<tr>
+<td>UnderstandingProvider</td>
+<td>A02</td>
+<td>taskType、内容引用、输出模式、字段证据位置、置信度、模型版本</td>
+<td>新语言、单证或视觉理解任务</td>
+</tr>
+<tr>
+<td>Retrieval/QueryProvider</td>
+<td>A03</td>
+<td>queryPlan、scope、snapshotId、权限上下文、证据列表及覆盖限制</td>
+<td>新索引或关系查询实现</td>
+</tr>
+<tr>
+<td>ActionAdapter</td>
+<td>C03</td>
+<td>actionType、参数模式、前置条件、execute(executionKey)、queryReceipt(executionKey)、业务状态引用</td>
+<td>新动作经权限、业务和恢复评审后接入</td>
+</tr>
+</tbody>
+</table></div>
+<h3>8.1 上下文与结果样例</h3>
+<pre><code class="language-json">{
+  "schemaVersion": "0.2",
+  "taskId": "task-example",
+  "analysisMode": "JOINT",
+  "participants": [
+    {"participantId": "supply", "scenarioId": "S01", "scenarioVersion": "0.1", "required": true, "businessParameters": {"horizonDays": 7}},
+    {"participantId": "experience", "scenarioId": "S03", "scenarioVersion": "0.1", "required": true, "businessParameters": {"qualityWindowPolicyRef": "quality-window-example"}}
+  ],
+  "scope": {"tenantId": "tenant-example", "storeIds": ["store-1"], "warehouseIds": ["wh-1"], "canonicalSkuIds": ["sku-1"]},
+  "window": {"asOf": "2026-11-11T00:00:00Z"},
+  "planVersion": null,
+  "snapshotId": null,
+  "policyContextRef": "server-created-policy-context",
+  "budgetPolicyVersion": "budget-policy-example",
+  "budget": {"maxDomainParallelism": 2, "maxReplans": 1}
+}
+</code></pre>
+<p>该 JSON 是受理后的逻辑契约样例，不是新增接口实现；不含真实业务数据。SINGLE 使用完全相同的结构，participants 恰有一个参与者；JOINT 至少两个，可按预算分批调度，不限制总参与者必须等于并行度。每个 participantId 唯一，场景版本、必需/可选属性和参数依据获准模板由 O01 校验；用户不能把强制的质量依赖改成可选。版本为示例，并不表示所有场景已经部署。</p>
+<p>SINGLE/JOINT按实际执行的场景参与者数区分，不按来源系统数量区分。单场景可引用满足时效和口径的已发布领域结果；若必须新增另一个场景执行分析，O01须显式纳入participants并记录为JOINT，不允许隐藏参与者。规划后发生此类变化按计划版本和有效重规划预算处理。</p>
+<p>scope 是可信授权范围的共同边界；参与者仅能在其子集取数。window.asOf 是共同观察锚点，业务观察窗口分别由参与者参数/模板定义，例如 S03 成熟群组窗口不能被 S01 的7天需求窗口替代。D03 根据全部已选参与者的数据需求形成统一输入清单。</p>
+<p>planVersion 受理时可空，由 O01 形成计划后赋值；snapshotId 冻结前可空，由 D03 赋值。实际分析前两者必须确定。O01 向每个场景下发该计划中的参与者视图，包含 taskId、planVersion、participantId、场景版本、获准范围/参数、snapshotId、策略引用及分配预算；这不是第二套独立任务上下文。DomainResult 必须带参与者、计划和快照引用，报告不能混合不兼容的输入版本。</p>
+<p>tenantId、policyContextRef 和有效预算由服务端生成或校验，不能因用户提交字段而扩大权限。任务冻结所用场景、指标、理解/模型及策略版本引用；各版本定义仍由原归属模块维护。报告证据必须能在当前访问者权限下解析。旧的根级 scenarioId/scenarioVersion 仅适合单场景的假设不再作为本版 AnalysisContext 使用。</p>
+<h3>8.2 扩展兼容规则</h3>
+<p>接口包含 schemaVersion；允许经过验证的可选字段扩展，删除字段或改变语义必须发布新主版本。任务保留旧版本依赖。注册清单声明兼容范围，升级经过固定样本回归、灰度和回滚验证。</p>
+<p>工具仅为受控能力包装，MCP 等协议是接入形式，不创建第二套业务逻辑或授权体系。Skills 是版本化方法和模板，不允许携带绕过控制的任意代码。Memory 只保存经确认可撤销的偏好，不把过期库存、费用或审批结果长期当成事实。</p>
+<h3>8.3 可配置任务预算</h3>
+<p>maxDomainParallelism 为同时运行的领域场景数，默认2，正整数；maxReplans 为单任务整体重规划次数，默认1，非负整数。默认值用于初始试点，不是固定产品上限或所有任务必须耗尽的额度。单场景实际并行度为1，多于两个参与者时可分批运行。</p>
+<p>有效参数由 O01 依据获准任务配置、G01 策略约束及运行预算校验，按 budgetPolicyVersion 随任务冻结。工具次数、时长、费用等仍须有界，其具体限额待容量和质量评估确认，不在本文新增无依据数值。普通用户及模型不能自行放宽限额。</p>
+<p>改变参与者/任务依赖或纳入原快照以外的数据并重跑计入重规划；原计划/快照内的检索按工具和时长预算控制，不另算一次重规划。补证和审校引发的重规划共用 maxReplans，不各自获得新额度。调整依据包括来源/模型限流、任务时延、费用、资源、失败率及评测质量；配置变更用于后续任务，不静默改变历史任务的有效预算。</p>
+<h2 id="section-09">09 数据与指标要求</h2>
+<h3>9.1 数据资产与写入归属</h3>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>资产</th>
+<th>唯一写入归属</th>
+<th>必须保留的信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>来源台账、游标及同步记录</td>
+<td>D01</td>
+<td>来源、数据域、授权范围、同步模式、覆盖水位及失败原因</td>
+</tr>
+<tr>
+<td>统一身份、映射及标准投影</td>
+<td>D02</td>
+<td>来源 ID、canonicalId、租户、单位/状态转换及映射版本</td>
+</tr>
+<tr>
+<td>质量结果与分析快照</td>
+<td>D03</td>
+<td>snapshotId、固定数据版本/映射版本及范围清单、事实时点、覆盖及质量规则引用；不保存 O01 计划或报告正文</td>
+</tr>
+<tr>
+<td>证据与派生血缘</td>
+<td>D04</td>
+<td>evidenceId、生产模块资产/版本/位置引用、父证据、权限及指纹；仅引用 snapshotId，不复制其清单或生产资产</td>
+</tr>
+<tr>
+<td>指标定义与计算结果</td>
+<td>B01</td>
+<td>指标版本、范围、窗口、单位、分母、缺项、snapshotId及适用的B02情景参数版本引用</td>
+</tr>
+<tr>
+<td>预测与模拟产物</td>
+<td>B02</td>
+<td>输入快照引用、截止时点、算法版本、情景参数、预测/优化结论及 B01 指标结果引用；不重复保存权威逐日指标</td>
+</tr>
+<tr>
+<td>内容标签和抽取结果</td>
+<td>A02</td>
+<td>原文/图片引用、标签模式、置信度、位置和人工修订版本</td>
+</tr>
+<tr>
+<td>分析任务、领域结果与综合报告</td>
+<td>O01</td>
+<td>taskId、planVersion、参与者和领域结论、reportVersion、有效预算、snapshotId、指标/证据引用和任务状态；不复制输入清单、完整标签或指标结果资产</td>
+</tr>
+<tr>
+<td>建议、预警及责任交接</td>
+<td>C01</td>
+<td>对象、窗口、风险键、参数版本、来源分析和责任人</td>
+</tr>
+<tr>
+<td>批准与拒绝记录</td>
+<td>C02</td>
+<td>发起人、审批人、批准参数指纹、证据、有效期及撤销状态</td>
+</tr>
+<tr>
+<td>执行与业务结果关联</td>
+<td>C03</td>
+<td>执行键、批准版本、请求指纹、回执、外部 ID、后续业务状态</td>
+</tr>
+<tr>
+<td>策略、审计和评测结果</td>
+<td>G01/G02 各按自身职责</td>
+<td>权限策略版本、操作主体、追踪 ID、质量与运行证据</td>
+</tr>
+</tbody>
+</table></div>
+<p>多个模块可共用物理数据库，但各资产只有一个写入模块。只读分析投影可重建；审批和执行事实采用追加或受控状态迁移，不能通过重算覆盖。</p>
+<p>D03 固定“用了哪些版本的数据”，D04 维护“如何定位并追溯这些证据”，O01 记录“如何组织任务及发布何版报告”。同一资产在其他模块中仅保留引用；报告正文可以保留已发布解释，但不成为第二份可修改的指标、快照或证据台账。指标、预测和标签版本由 B01、B02、A02 各自维护。补证改变数据输入则创建新 snapshotId；仅改变任务组织则形成新 planVersion；重新发布报告形成新 reportVersion，不能用其中一个版本号代替其他归属。</p>
+<h3>9.2 关键口径</h3>
+<ul>
+<li><strong>可售：</strong>在来源分桶可可靠转换且互斥的前提下，available = onHand − reserved − frozen − unusable。原始字段、转换规则和差异均保留。</li>
+<li><strong>未来供给：</strong>只计所选范围内符合条件的未收供给，按预计可售日进入模拟；已收部分不得继续作为未收供给。</li>
+<li><strong>投诉占比：</strong>分子为匹配范围内去重投诉订单数，分母为同一成熟签收群组的订单数；不能与工单数或已证实缺陷率混用。</li>
+<li><strong>贡献：</strong>按确认口径将实收、退款、费用、商品成本及财务成本转回组合；缺项显式标记，不能替代净利润或银行到账。</li>
+<li><strong>时间：</strong>分别保存 sourceUpdatedAt、asOf、observedAt、coverageThrough；按数据域配置可接受时效，不统一套用一个阈值。</li>
+</ul>
+<h2 id="section-10">10 端到端分析与动作流程</h2>
+<h3>10.1 只读分析链</h3>
+<p>用户选定问题及范围 → G01 鉴权 → O01 形成参与者与任务计划并协调 D03 固定输入 → O01 调度各 ScenarioHandler → 场景按业务依赖调用 B01/B02/A01—A03（B02 情景评价复用 B01）→ 场景返回领域结果引用与业务限制 → O01 完成联合补证、业务状态判定、综合与审校 → W01 展示已发布报告及候选方案。D01/D02 在公共数据链提供授权事实；O01 不另跑一套领域步骤。</p>
+<p>步骤按可配置预算和业务依赖调度，不能跳过质量或权限检查。补证超出原快照时，由 D03 创建新输入版本，O01 在允许额度内组织受影响场景重跑或验证可复用结果兼容性，不混合不兼容版本。模型失败由 A01 返回技术错误；场景和 O01 分别决定领域限制与整体报告业务状态。</p>
+<p>只读分析终点是 O01 发布报告（含完整、部分、RULES_ONLY 或阻断说明）。报告中的候选方案不自动生成 C01 建议、不进入审批或执行。用户明确选择生成业务建议后，W01 使用报告/候选方案引用进入 C01 流程。</p>
+<h3>10.2 经人工批准的写入链</h3>
+<p>建议、审批及执行分别启动并有独立终点：用户生成并确认建议 → C01 保存 DRAFT/CONFIRMED；用户明确提交审批 → C02 由另一授权人员决策并保存 APPROVED/REJECTED 等结果；授权人员另行触发执行 → C03 复核权限、版本、证据和来源条件 → 经 ActionAdapter 创建原系统草稿/工单并记录执行结果。后续业务结果关联是跟踪，不是上述流程自动连通或已完成业务的证明。</p>
+<p>AI 的审校通过只表明内部检查完成，不是业务批准。执行器不接受模型直接提交的批准结果。</p>
+<h3>10.3 状态与幂等</h3>
+<ul>
+<li>建议状态只由 C01 维护：DRAFT、CONFIRMED、SUBMITTED、SUPERSEDED、CANCELLED；审批状态只由 C02 维护：PENDING、APPROVED、REJECTED、EXPIRED、REVOKED。两者通过 suggestionId 和 suggestionVersion 关联，不共用一个可被双方写入的状态字段。变更关键参数、证据或范围必须生成新建议版本，旧批准不得用于新版本。</li>
+<li>执行状态由 C03 管理：READY、SENDING、SUCCEEDED、FAILED、UNKNOWN。一次逻辑动作使用同一 executionKey；请求指纹变化不能复用旧批准。</li>
+<li>超时或回执丢失进入 UNKNOWN，先以原键查询。只有适配器提供权威未创建结论且声明可安全重试，才允许以原键重试；禁止换新键绕过未知状态。</li>
+<li>Worker 租约过期不证明外部动作未发生；SENDING 恢复时先核对回执。原系统不支持可靠幂等或查回执时，该写入适配器不得进入首期上线范围。</li>
+<li>SUCCEEDED 表示草稿或工单已创建。原系统后续驳回、到货和问题解决分别作为业务结果，不篡改曾成功创建的执行事实。</li>
+</ul>
+<h2 id="section-11">11 典型扩展示例</h2>
+<h3>11.1 新增物流到货预测</h3>
+<p>在 D01 注册已授权物流连接器；D02 增补标准事件映射；B02 注册到货预测提供方；S02 增加预计到仓/可售风险模板与特征；复用 W01、D03/D04、C01—C03。若只增加分析，无须修改审批执行内核或另建通知系统。</p>
+<h3>11.2 新增单证核对</h3>
+<p>在 A02 注册文档抽取提供方，D04 保存字段证据位置；S07 定义发票、装箱单等业务交叉校验；复用现有来源存储、权限、人工复核组件及内部工单。OCR 不直接写 ERP，不把抽取内容自动确认为主数据。</p>
+<h3>11.3 更换模型提供方</h3>
+<p>实现 A01 的 ModelProvider 并注册能力和预算，运行固定评测集，通过后灰度启用；S01—S04 不应修改厂商 SDK 调用代码。结构化模式或输出能力不兼容时明确降级，不静默伪装同等能力。</p>
+<h3>11.4 新增外部动作</h3>
+<p>新增自动退款或调价不是添加一个工具即可开放。需独立评审业务规则、权限、审批、幂等及恢复契约，在 C03 注册新动作类型并补充验证；首期两类动作的白名单保持明确。</p>
+<h2 id="section-12">12 研发拆分与防重复开发约束</h2>
+<p>建议按逻辑包组织，而非按 22 个候选场景分别建设系统：</p>
+<pre><code class="language-text">apps/              # W01 页面、API 入口及后台任务宿主
+scenarios/         # S01—S04 首期；后续 S05—S10 插件
+orchestration/     # O01 任务、综合、审校、预算
+capabilities/      # B01/B02、A01—A03，各有公开端口
+collaboration/     # C01—C03 建议、审批、执行
+data/              # D01—D04 标准事实、质量和证据
+governance/        # G01/G02 权限、审计、评测
+adapters/          # 外部系统、模型、索引和存储实现
+contracts/         # 版本化模式、端口和事件；不放业务大杂烩
+</code></pre>
+<p>此结构是建议，不限定语言或框架。实体类型靠近归属模块，contracts 只放公开数据契约，避免形成被所有模块随意修改的“公共工具包”。</p>
+<p>需求评审时新增条目必须填写：主归属模块、所复用能力、确实新增部分、输入输出、动作边界、验收样例和阶段。发现相同输入、输出及规则时合并为同一能力；仅页面文案不同不能立新服务。</p>
+<p>提交代码或设计评审至少检查：场景无厂商 SDK 直连；无跨模块私表写入；无重复指标公式；无独立场景审批/执行表；结构化查询只读且带服务端范围；公共契约变更有兼容策略。G02 用代表性样例验证新扩展不破坏已有四类场景。</p>
+<h2 id="section-13">13 非功能需求与降级</h2>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>要求</th>
+<th>验收方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-01 权限隔离</td>
+<td>企业、角色、店铺、仓库及字段范围在查询、检索、缓存、导出和执行均生效；撤权后结果不可继续通过旧缓存访问</td>
+<td>正反向权限样例、越权及撤权验证</td>
+</tr>
+<tr>
+<td>NFR-02 证据可靠性</td>
+<td>报告引用存在、可解析且有权限；缺失引用不能支持确定结论；原始内容变更保留版本策略</td>
+<td>抽样解析、断链和来源变更验证</td>
+</tr>
+<tr>
+<td>NFR-03 外部内容隔离</td>
+<td>客服文本、网页及单证属于数据，不得改变工具白名单、授权或审批；敏感字段按需脱敏</td>
+<td>提示注入、恶意文档及工具越权样例</td>
+</tr>
+<tr>
+<td>NFR-04 可恢复执行</td>
+<td>去重、幂等键、回执和租约恢复保证外部动作不因重试重复创建</td>
+<td>故障注入及源系统实际结果核对</td>
+</tr>
+<tr>
+<td>NFR-05 有界运行</td>
+<td>每任务冻结有效预算及配置版本；领域并行度默认2、重规划默认1且可按第8.3节调整，工具/时长/费用仍有界</td>
+<td>默认值、不同参与者数、配置变更、超预算和循环调用样例</td>
+</tr>
+<tr>
+<td>NFR-06 可解释降级</td>
+<td>A01仅返回技术错误；场景按领域依赖决定限制，O01综合决定部分、RULES_ONLY或阻断等业务状态；关键证据缺失不得当作安全</td>
+<td>同一技术错误在必需/可选依赖下的不同业务结果，及来源过旧验证</td>
+</tr>
+<tr>
+<td>NFR-07 性能与容量</td>
+<td>分别度量交互查询和异步分析的时延分位数、队列等待、吞吐与成本</td>
+<td>冻结数据规模和并发画像后压测；目标值由项目评审确认</td>
+</tr>
+<tr>
+<td>NFR-08 运维恢复</td>
+<td>监控来源延迟、质量异常、模型失败、执行未知和积压；可备份、恢复及回滚</td>
+<td>恢复演练；RPO/RTO 按业务影响评审冻结</td>
+</tr>
+<tr>
+<td>NFR-09 评测治理</td>
+<td>规则计算用确定样例，模型用业务金标准与人工复核；版本升级需回归</td>
+<td>场景正确性、引用、未知处理和成本联合评测</td>
+</tr>
+</tbody>
+</table></div>
+<p>性能、可用率和存储周期不在缺少规模依据时给出承诺值。企业需在详细设计前确定容量、数据留存、部署位置和外部模型数据使用条件。</p>
+<h2 id="section-14">14 首期验收场景</h2>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>输入或故障</th>
+<th>预期结果</th>
+<th>主验收归属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AC-01 映射隔离</td>
+<td>两个租户存在同名 SKU；另有未映射记录</td>
+<td>不跨租户合并；未映射记录隔离且不能产生可执行补货建议</td>
+<td>D02/G01</td>
+</tr>
+<tr>
+<td>AC-02 库存与补货</td>
+<td>现货100、预留30、冻结10、不可售5；日新增需求10、7天窗口、2天缓冲；原供给20于D4可售；MOQ10、倍数10、候选D6可售</td>
+<td>B01得可售55、目标90、缺口15；B02形成20件候选并调用B01评价逐日余额，不另算一套余额</td>
+<td>B01/B02/S01</td>
+</tr>
+<tr>
+<td>AC-03 日期变化</td>
+<td>将上例原供给与候选采购均延至D8</td>
+<td>D6首次短缺；旧建议失效，不能继续声称原计划有效</td>
+<td>S01/C01/C02</td>
+</tr>
+<tr>
+<td>AC-04 质量联动</td>
+<td>指南演示群组100单中12单投诉，超过试点确认的调查阈值</td>
+<td>S03给出投诉占比和主题；S01暂停转采购，提出调查；不称12%缺陷率</td>
+<td>S03/S01</td>
+</tr>
+<tr>
+<td>AC-05 履约分流</td>
+<td>10张超时订单中6张未出库、4张已出库但物流停滞</td>
+<td>分为两个待核队列；同单多包裹状态分别保留</td>
+<td>S02</td>
+</tr>
+<tr>
+<td>AC-06 投诉去重</td>
+<td>同一订单包含咨询、投诉、催退款三条工单</td>
+<td>展示工单数与去重订单数；仅符合口径的投诉订单进入分子</td>
+<td>A02/B01/S03</td>
+</tr>
+<tr>
+<td>AC-07 贡献计算</td>
+<td>实收43.80，费6.57、履约8、成本10；退款19.90；后续财务确认成本转回5</td>
+<td>贡献依次19.23、−0.67、4.33 USD；无财务转回证据时不加5</td>
+<td>B01/S04</td>
+</tr>
+<tr>
+<td>AC-08 累计账单</td>
+<td>同一订单累计结算快照从20变37.23</td>
+<td>取最新37.23，不相加；缺费用时显示部分结果</td>
+<td>D01/D02/B01</td>
+</tr>
+<tr>
+<td>AC-09 证据和权限</td>
+<td>无权知识片段包含诱导调用写工具的文本</td>
+<td>不进入回答证据；授权不受文本影响；模型无写工具</td>
+<td>G01/A03/O01</td>
+</tr>
+<tr>
+<td>AC-10 审批变化</td>
+<td>经理批准后用户修改数量或库存证据过期</td>
+<td>原批准不可执行，要求刷新分析或重新审批</td>
+<td>C02/C03</td>
+</tr>
+<tr>
+<td>AC-11 执行未知</td>
+<td>ERP已创建草稿但响应丢失，Worker重启</td>
+<td>查询原executionKey取得同一外部单号，不重复创建；业务采购状态另列</td>
+<td>C03</td>
+</tr>
+<tr>
+<td>AC-12 降级与扩展</td>
+<td>模型不可用；再替换一个模型或连接器实现</td>
+<td>A01返回技术错误；场景/O01依据必需依赖分别限制领域/整体结果，可用规则结果不等于质量安全；提供方替换不改指标口径</td>
+<td>A01/O01/相应场景/D01/G02</td>
+</tr>
+</tbody>
+</table></div>
+<p>以上数字来自指南的演示口径或其直接组合，不是企业实测结果。补货推演按D0后7天、新增需求和所列可售日期执行。模型主题、解释和方案采用业务金标准人工评估，评分阈值在试点前冻结，不以单一模型自评分代替验收。</p>
+<p>R01—R09复核还应检查：SINGLE与JOINT使用同一上下文结构；3个以上参与者在有效并行度内分批运行；O01没有旁路领域计算；只读任务不生成建议/审批/执行记录；改变快照、计划或报告只更新相应拥有者；I01不因接口预留而要求新增技术组件。这是文档一致性验收补充，不是本次启动代码开发或新增测试工程。</p>
+<h2 id="section-15">15 实施阶段与交付门槛</h2>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>主要交付</th>
+<th>进入下一阶段的条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0 调研与契约冻结</td>
+<td>场景样本、权威来源表、权限矩阵、指标目录、规模和接口清单</td>
+<td>来源授权、口径及首期范围得到负责人确认</td>
+</tr>
+<tr>
+<td>M1 数据与能力基础</td>
+<td>D01—D04、B01、必要B02、A01—A03、G01/G02，模块契约和基础页面</td>
+<td>标准样例、权限隔离、质量与证据检查通过</td>
+</tr>
+<tr>
+<td>M2 四类只读试点</td>
+<td>S01—S04、O01、报告和统一建议</td>
+<td>人工复核通过率、耗时和成本达到冻结目标；关键错误可阻断</td>
+</tr>
+<tr>
+<td>M3 有限动作闭环</td>
+<td>C02/C03、两类写入适配器、回执及业务结果跟踪</td>
+<td>审批隔离、前置条件复核、幂等及恢复验收通过</td>
+</tr>
+<tr>
+<td>M4 分批扩展</td>
+<td>P1/P2按价值逐项立项，扩展契约与回归样例</td>
+<td>不破坏既有能力，并有可验证的新增业务价值</td>
+</tr>
+</tbody>
+</table></div>
+<p>阶段允许并行准备，但不在数据与只读质量未经验证时开放外部写入。当前不承诺工期和预算；需根据实际接口、数据量、团队与评审结果估算。</p>
+<h2 id="section-16">16 待评审决策与责任</h2>
+<div aria-label="需求表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>决策事项</th>
+<th>需确认内容</th>
+<th>建议责任方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>试点范围</td>
+<td>店铺、仓库、SKU、用户数、历史窗口及主要痛点</td>
+<td>业务负责人、产品</td>
+</tr>
+<tr>
+<td>权威来源与接口</td>
+<td>厂商版本、数据域、授权、增量方式、限流、幂等及回执能力</td>
+<td>IT、集成、系统负责人</td>
+</tr>
+<tr>
+<td>指标与阈值</td>
+<td>需求基线、安全缓冲、投诉观察窗及阈值、贡献费用项与汇率来源</td>
+<td>采购、客服、财务</td>
+</tr>
+<tr>
+<td>数据与部署</td>
+<td>敏感字段、外部模型使用条件、数据留存、部署位置与访问范围</td>
+<td>IT、数据及相关管理负责人</td>
+</tr>
+<tr>
+<td>性能和质量目标</td>
+<td>数据规模、并发画像、时延、模型复核通过率、预算上限、RPO/RTO</td>
+<td>技术、运维、业务</td>
+</tr>
+<tr>
+<td>领域依赖与业务降级</td>
+<td>各场景/联合请求的必需与可选依赖；何时允许部分或RULES_ONLY报告，何时阻断业务结论及建议</td>
+<td>业务负责人、产品、风险/质量相关负责人</td>
+</tr>
+<tr>
+<td>预算与证据留存</td>
+<td>是否接受并行度2/重规划1的初始默认值及调整条件；原始资产和引用的留存、删除及历史报告可解析要求</td>
+<td>项目、技术、数据及业务负责人</td>
+</tr>
+<tr>
+<td>动作授权</td>
+<td>谁可发起、谁可独立批准、批准有效期、哪些动作允许上线</td>
+<td>业务管理、系统负责人</td>
+</tr>
+<tr>
+<td>推广和收益</td>
+<td>基线采集、观察窗、可比条件和收益核算方式</td>
+<td>项目负责人、财务、业务</td>
+</tr>
+</tbody>
+</table></div>
+<p>评审通过后，将各模块公开契约、指标目录、场景模板和验收样例作为统一开发基线；后续变更先判断是否可复用已有能力，再批准新增模块。</p></main><footer><span>正文唯一维护来源：智慧中台AI应用项目_需求文档草案.md</span><span>版本0.2 · 源文件指纹：fcb62c1f3dfa · R01—R09待独立复核</span></footer></div></div><script>
+document.getElementById('print').addEventListener('click',()=>window.print());
+document.getElementById('jump').addEventListener('change',e=>{const el=document.querySelector(e.target.value);if(el)el.scrollIntoView()});
+const navs=[...document.querySelectorAll('.toc a')];
+const observer=new IntersectionObserver(entries=>{const active=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];if(active)navs.forEach(a=>a.classList.toggle('active',a.hash==='#'+active.target.id));},{rootMargin:'-90px 0px -65% 0px'});
+document.querySelectorAll('.document h2').forEach(h=>observer.observe(h));
+</script></body></html>

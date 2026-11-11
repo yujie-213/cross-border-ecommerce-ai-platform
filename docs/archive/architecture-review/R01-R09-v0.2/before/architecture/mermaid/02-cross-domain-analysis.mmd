@@ -1,0 +1,80 @@
+sequenceDiagram
+  %% diagram: 02-cross-domain-analysis
+  autonumber
+  actor U as 业务人员
+  participant W as W01 工作台
+  participant G as G01 权限策略
+  participant O as O01 任务编排
+  participant Q as D03 质量与快照
+  participant S1 as S01 供需与库存分析
+  participant S3 as S03 客户体验分析
+  participant B as B01 指标计算
+  participant F as B02 预测与优化
+  participant T as A02 内容理解
+  participant R as A03 检索查询
+  participant M as A01 模型网关
+  participant E as D04 证据血缘
+
+  U->>W: 提出问题，选择店铺、仓库、SKU及窗口
+  W->>G: 校验身份与对象范围，生成可信策略上下文
+  G-->>W: 授权范围或拒绝
+  break 权限拒绝
+    W-->>U: 拒绝请求，不创建越权分析
+  end
+  W->>O: AnalysisContext + policyContextRef
+  O->>Q: 检查场景所需数据域并创建快照
+  Note over Q,E: D03经D02公开端口校验投影版本，并读取D01覆盖水位<br/>D04登记可追溯证据引用，不复制业务主账
+  alt 关键数据不达标
+    Q-->>O: 缺映射、过旧、覆盖缺失或供给矛盾
+    O-->>W: 阻断相关结论和可执行建议，列待补事项
+    W-->>U: 展示已确认的有限信息
+  else 数据满足分析条件
+    Q->>E: 登记冻结输入与快照血缘
+    Q-->>O: snapshotId + manifest + 版本与覆盖信息
+    par 同一快照，领域并行一
+      O->>S1: analyze(context, snapshotId)
+      S1->>B: 需求、可售、未收供给、采购约束
+      B->>E: 登记指标结果及来源链
+      B-->>S1: 带版本的确定性指标
+      S1->>F: 逐日余额与候选方案模拟
+      F-->>S1: 缺货日、补货量、交期及约束结果
+      S1-->>O: 供需领域结果与证据
+    and 同一快照，领域并行二
+      O->>S3: analyze(context, snapshotId)
+      S3->>T: 对授权脱敏反馈分类与提取主题
+      opt 使用语言模型提供方
+        T->>M: 受结构化模式与预算约束的理解请求
+        M-->>T: 标签、置信度或明确失败状态
+      end
+      T-->>S3: 主题结果、原文引用、UNKNOWN项
+      S3->>B: 按成熟签收群组去重计算投诉占比
+      B-->>S3: 分子、分母、窗口、指标版本
+      S3-->>O: 体验领域结果与调查信号
+    end
+    O->>R: 检查证据缺口并执行允许的补查
+    R->>G: 再校验知识、字段和对象范围
+    R->>E: 按当前权限检索并解析引用
+    E-->>R: 证据或缺项，不返回越权内容
+    R-->>O: 有权限的补证结果与范围限制
+    opt 补证超出原快照且尚有一次重规划额度
+      O->>Q: 创建新的固定输入版本
+      Q-->>O: 新snapshotId，不修改旧快照
+      O->>S1: 用新快照重跑受影响的供需分析
+      S1-->>O: 同版本领域结果
+      O->>S3: 用新快照重跑受影响的体验分析
+      S3-->>O: 同版本领域结果
+    end
+    O->>M: 综合证据、比较方案、说明不确定性
+    alt 模型可用且结果通过审校
+      M-->>O: 结构化解释与候选建议
+    else 模型失败或输出无法验证
+      M-->>O: RULES_ONLY或明确失败状态
+      Note over O,M: 仅返回已确认的规则结果；缺失质量信号不可当作无风险<br/>依赖该信号的采购建议必须阻断
+    end
+    O->>E: 校验报告引用存在、版本匹配及访问范围
+    E-->>O: 引用校验结果
+    O->>O: 保存领域结果、综合报告、版本和预算用量
+    O-->>W: 报告、证据、限制和未批准候选建议
+    W-->>U: 展示分析，不改变原系统事实
+  end
+  Note over W,E: G02贯穿记录任务、模型、规则、证据、费用与降级；任一模型调用均有超时及失败处理

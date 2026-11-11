@@ -3,7 +3,7 @@
   "businessAcceptance": "NOT_RUN",
   "environment": "Windows / existing Playwright / local headless Edge / file URL",
   "command": "node prototypes/s01/check.cjs",
-  "observedHead": "4df78d585b73fbffb2066c813a9ef087e5e1466c",
+  "observedHead": "f113229fa6eefc271b811e290858d596174ea52e",
   "exitCode": 0,
   "status": "PASS",
   "checks": [

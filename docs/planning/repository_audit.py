@@ -12,14 +12,14 @@ def git(*args):
     r=subprocess.run(['git',*args],cwd=ROOT,capture_output=True)
     return r.returncode,r.stdout.decode('utf-8',errors='replace').strip()
 def managed():
-    files=[ROOT/'AGENTS.md',ROOT/'.gitignore']+list((ROOT/'docs').rglob('*'))
+    files=[ROOT/x for x in ['AGENTS.md','README.md','DESIGN.md','THIRD_PARTY_NOTICES.md','.gitignore','.gitattributes']]+list((ROOT/'docs').rglob('*'))
     return sorted(p for p in files if p.is_file() and 'local' not in p.relative_to(ROOT).parts and '__pycache__' not in p.parts and p.suffix!='.pyc')
 def whitelist():
     baseline=[ROOT/x['path'] for x in load('baseline-manifest.json')]
-    extra=[ROOT/'智慧中台AI应用项目_概要开发设计文档.html',ROOT/'智慧中台AI应用项目_AI模块详细开发设计文档.html',ROOT/'智慧中台AI应用项目_概要设计审查修订说明_H01-H07.md',ROOT/'智慧中台AI应用项目_最小代码基座交付与验收清单.md']
-    attachments=[p for folder in ['design','ai-design'] for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc']
+    extra=[ROOT/'docs/architecture/DEVELOPMENT_DESIGN.html',ROOT/'docs/agents/AI_DETAILED_DESIGN.html',ROOT/'docs/architecture/REVISION_H01_H07.md',ROOT/'docs/architecture/MINIMUM_BASE_CHECKLIST.md']
+    attachments=[p for folder in ['docs/architecture','docs/agents','prototypes','tools'] for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc']
     paths=sorted({p.relative_to(ROOT).as_posix() for p in baseline+extra+attachments+managed()})
-    put('git-whitelist.json',{'authorization':'当前用户：仅本地Git；五份设计基线、两份直接工程设计附件/修订史、计划/管理/归档；无业务工程或其他历史项目','policy':'Exact paths; no git add .; non-whitelisted files remain untouched/untracked','paths':paths})
+    put('git-whitelist.json',{'authorization':'当前用户：文档治理与新Public仓库发布；实际发布须安全/许可/认证/目标检查通过；不开发业务工程','policy':'Exact paths; no git add .; non-whitelisted files remain untouched/untracked','paths':paths})
     return paths
 def inventory():
     archive=json.loads((ROOT/'docs/archive/plan96-v0.1/archive-manifest.json').read_text(encoding='utf-8'))['files'];before={x['originalPath']:x['sha256'] for x in archive};rows=[]

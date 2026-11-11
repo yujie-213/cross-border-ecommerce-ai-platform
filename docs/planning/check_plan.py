@@ -6,6 +6,8 @@ import re,json,hashlib,subprocess,xml.etree.ElementTree as ET
 from collections import Counter
 from task_io import ROOT,STATUSES,read_tasks,cycles
 from render_status import expected
+sys.path.insert(0,str(ROOT/'docs/governance'))
+from paths import frozen_content_matches
 checks=[]
 def h(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def j(p):return json.loads((ROOT/p).read_text(encoding='utf-8'))
@@ -15,6 +17,7 @@ def main():
     check('required-files',all((ROOT/p).is_file() for p in required),required)
     bs=j('docs/planning/baseline-manifest.json')
     check('immutable-design-baselines',all(h(ROOT/x['path'])==x['sha256'] for x in bs),[x['path'] for x in bs])
+    check('frozen-rules-only-navigation-migrated',not frozen_content_matches(),frozen_content_matches())
     ts=read_tasks();ix={t['id']:t for t in ts}
     check('unique-task-ids',len(ix)==len(ts),{'tasks':len(ts),'stages':dict(Counter(t['stage'] for t in ts))})
     bad=[(t['id'],d) for t in ts for d in t['dependsOn'] if d not in ix or d==t['id']]

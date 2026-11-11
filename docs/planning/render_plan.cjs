@@ -1,14 +1,14 @@
 // Documentation-only renderer. MERMAID_RENDER_JS may override the existing pinned local documentation bundle.
 const fs=require('fs'),path=require('path'),crypto=require('crypto'),{createRequire}=require('module'),{pathToFileURL}=require('url');
 const root=path.resolve(__dirname,'../..');
-const req=createRequire(process.env.PLAYWRIGHT_MODULE||'C:/Users/Windows/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/package.json');
+const req=createRequire(process.env.PLAYWRIGHT_MODULE||require.resolve('playwright/package.json'));
 const {chromium}=req('playwright');const executablePath=process.env.BROWSER_EXECUTABLE||'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 (async()=>{
  const d=path.join(__dirname,'diagrams'),source=fs.readFileSync(path.join(d,'plan-flow.mmd'),'utf8');
  if(!process.argv.includes('--browser-only')){
  const b=await chromium.launch({headless:true,executablePath});const p=await b.newPage();
  await p.setContent('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><body></body></html>');
- await p.addScriptTag({path:process.env.MERMAID_RENDER_JS||path.join(root,'ai-design/assets/mermaid-11.4.1.min.js')});
+ await p.addScriptTag({path:process.env.MERMAID_RENDER_JS||path.join(root,'docs/agents/assets/mermaid-11.4.1.min.js')});
  await p.evaluate(()=>mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'base',fontFamily:'Microsoft YaHei, sans-serif',themeVariables:{fontSize:'17px',primaryColor:'#edf6f3',primaryTextColor:'#172a3b',primaryBorderColor:'#278b7c',lineColor:'#526e80'},flowchart:{htmlLabels:false,useMaxWidth:false,curve:'linear',rankSpacing:55,nodeSpacing:45}}));
  const svg=await p.evaluate(async source=>(await mermaid.render('plan_flow_v2',source)).svg,source);if(svg.includes('Syntax error'))throw Error('Mermaid rendering error');
  fs.writeFileSync(path.join(d,'plan-flow.svg'),svg,'utf8');fs.writeFileSync(path.join(d,'render-receipt.json'),JSON.stringify({renderer:'Mermaid 11.4.1 / local headless Edge',sourceSha256:hash(Buffer.from(source)),svgSha256:hash(Buffer.from(svg)),status:'pass'},null,2));

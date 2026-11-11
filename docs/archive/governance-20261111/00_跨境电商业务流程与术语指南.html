@@ -1,0 +1,1698 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="source-file" content="00_跨境电商业务流程与术语指南.md">
+  <meta name="source-sha256" content="e7bb8cbae74984c8176fea4e2406b819d35ae777fef3ee60a0aec1631945b74b">
+  <meta name="generator" content="build_docs.py / Markdown single source">
+  <title>远帆跨境 · 跨境电商业务流程与智慧 AI 协同指南 · 跨境电商智慧AI平台</title>
+  <style>
+:root {
+  --paper: #fcfaf5;
+  --paper-soft: #f3f0e8;
+  --ink: #172d3a;
+  --muted: #647078;
+  --navy: #102a3a;
+  --navy-soft: #193b4d;
+  --teal: #087f7a;
+  --teal-soft: #e8f3ee;
+  --line: #d6ded9;
+  --sidebar-width: 284px;
+  --sans: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --serif: "Source Han Serif SC", "Noto Serif CJK SC", "STSong", "SimSun", serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.85; }
+button, input { font: inherit; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+a:hover { color: #075e5a; }
+:focus-visible { outline: 3px solid #c88533; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.skip-link { position: fixed; z-index: 50; top: 8px; left: 16px; transform: translateY(-160%); padding: 8px 16px; background: #fff; color: var(--navy); }
+.skip-link:focus { transform: none; }
+.sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sidebar-width); z-index: 30; display: flex; flex-direction: column; background: var(--navy); color: #dce7e8; }
+.brand { padding: 29px 25px 23px; border-bottom: 1px solid #36505d; }
+.brand-kicker { display: block; color: #8bc8bc; font-size: 10px; font-weight: 700; letter-spacing: .22em; }
+.brand-title { margin: 8px 0 0; color: #fff; font-family: var(--serif); font-weight: 700; font-size: 25px; letter-spacing: .06em; line-height: 1.5; }
+.brand-subtitle { margin: 7px 0 0; font-size: 11px; color: #b1c0c7; letter-spacing: .08em; }
+.sidebar-scroll { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #5b747f transparent; padding: 19px 17px 28px; }
+.nav-label { margin: 6px 10px 9px; color: #91a9b3; font-size: 10px; letter-spacing: .18em; }
+.page-nav { display: grid; gap: 5px; margin: 0 0 26px; }
+.page-nav a { display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; color: #dbe6e7; text-decoration: none; font-size: 12px; border: 1px solid transparent; border-radius: 3px; }
+.page-nav a:hover { background: var(--navy-soft); }
+.page-nav a[aria-current="page"] { color: #fff; border-color: #4a6b71; background: #204553; }
+.page-index { color: #9bcbbb; font-size: 10px; font-variant-numeric: tabular-nums; }
+.toc { list-style: none; padding: 0; margin: 0; }
+.toc-entry { margin: 2px 0; }
+.toc-entry a { display: block; padding: 7px 11px; border-left: 2px solid transparent; text-decoration: none; color: #c9d7db; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.toc-entry.depth-3 a { padding-left: 24px; color: #aabdc5; font-size: 11px; }
+.toc-entry.depth-4 a { padding-left: 34px; color: #aabdc5; font-size: 11px; }
+.toc-entry a:hover, .toc-entry a.active { background: #193c4c; color: #fff; border-left-color: #88ccba; }
+.sidebar-foot { margin-top: auto; padding: 13px 25px; font-size: 10px; color: #8ea6b0; border-top: 1px solid #36505d; letter-spacing: .05em; }
+.sidebar-close, .mobile-toggle, .scrim { display: none; }
+.workspace { min-width: 0; margin-left: var(--sidebar-width); }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 46px; border-bottom: 1px solid var(--line); background: var(--paper-soft); }
+.edition { flex-shrink: 0; font-size: 10px; font-weight: 700; letter-spacing: .16em; color: var(--muted); }
+.toolbar { display: flex; align-items: center; justify-content: flex-end; gap: 9px; min-width: 0; }
+.action-button, .source-link { padding: 7px 11px; border: 1px solid #bdcbc7; border-radius: 3px; background: transparent; color: var(--ink); font-size: 11px; font-weight: 700; line-height: 1.5; white-space: nowrap; text-decoration: none; }
+.action-button:hover, .source-link:hover { border-color: var(--teal); color: var(--teal); background: #fff; }
+.reading-shell { max-width: 1160px; margin: 0 auto; padding: 41px 46px 70px; }
+.document-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .13em; }
+.document-eyebrow::before { content: ""; width: 30px; height: 2px; background: var(--teal); }
+.search-panel { margin: 0 0 32px; padding: 16px 18px 12px; border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 2px; background: #fffefb; }
+.search-label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.search-row { display: flex; align-items: center; gap: 10px; }
+.search-input { min-width: 0; width: 100%; border: 0; border-bottom: 1px solid #d2ddd7; background: transparent; padding: 5px 0; border-radius: 0; font-size: 14px; color: var(--ink); }
+.search-input::placeholder { color: #7f8b8f; }
+.search-status { min-height: 20px; margin: 7px 0 0; font-size: 11px; color: var(--muted); }
+.document { min-width: 0; overflow-wrap: anywhere; }
+.doc-section { min-width: 0; padding: 0 0 28px; margin: 0 0 31px; border-bottom: 1px solid var(--line); scroll-margin-top: 24px; }
+.doc-section:last-child { margin-bottom: 12px; }
+.document h1 { margin: 0 0 26px; font-family: var(--serif); font-weight: 700; font-size: clamp(29px, 3.1vw, 44px); line-height: 1.45; letter-spacing: .015em; color: var(--navy); text-wrap: balance; }
+.document h2 { margin: 4px 0 24px; font-family: var(--serif); font-size: 27px; font-weight: 700; line-height: 1.5; color: var(--navy); }
+.document h3 { margin: 30px 0 13px; font-size: 18px; line-height: 1.6; color: #1b514e; }
+.document h4 { margin: 25px 0 10px; font-size: 15px; }
+.document h5, .document h6 { font-size: 14px; }
+.document :is(h1,h2,h3,h4,h5,h6)[id] { scroll-margin-top: 24px; }
+.document p { margin: 13px 0; }
+.document ul, .document ol { padding-left: 25px; margin: 13px 0; }
+.document li { margin: 5px 0; }
+.document li::marker { color: var(--teal); }
+.document strong { font-weight: 700; color: #102f40; }
+.document blockquote { margin: 23px 0; padding: 12px 20px; border-left: 3px solid var(--teal); background: var(--teal-soft); color: #274a49; }
+.document blockquote p { margin: 4px 0; }
+.document hr { margin: 28px 0; border: 0; border-top: 1px solid var(--line); }
+.table-scroll { width: 100%; max-width: 100%; overflow-x: auto; margin: 20px 0; border: 1px solid var(--line); border-radius: 3px; scrollbar-width: thin; scrollbar-color: #8fae9f #edf2eb; }
+.table-scroll:focus-visible { outline-offset: 2px; }
+.document table { width: 100%; border-collapse: collapse; font-size: 12px; line-height: 1.75; }
+.document th { padding: 12px 14px; text-align: left; vertical-align: top; background: #e9eeea; color: #29463f; font-size: 11px; font-weight: 700; }
+.document td { padding: 12px 14px; vertical-align: top; border-top: 1px solid var(--line); min-width: 90px; }
+.document th + th, .document td + td { border-left: 1px solid #e0e5df; }
+.document tbody tr:nth-child(even) { background: #f7f7f0; }
+.document td code { overflow-wrap: anywhere; white-space: normal; }
+.document pre { position: relative; margin: 20px 0; padding: 45px 20px 19px; max-width: 100%; overflow: auto; background: #132d3b; color: #e2eeeb; border: 1px solid #264554; border-radius: 3px; font-size: 12px; line-height: 1.8; tab-size: 4; }
+.document code { font-family: "Cascadia Code", "Consolas", monospace; font-size: .9em; }
+.document :not(pre) > code { padding: 2px 5px; border-radius: 2px; background: #eaf0e9; color: #215b50; }
+.document pre code { font-size: inherit; white-space: pre; overflow-wrap: normal; }
+.copy-button { position: absolute; top: 9px; right: 11px; padding: 3px 9px; border: 1px solid #617d85; border-radius: 2px; color: #d5eae3; background: #234553; font-size: 10px; }
+.copy-button:hover { background: #355f69; }
+.document img { display: block; width: auto; max-width: 100%; height: auto; margin: 20px auto; border: 1px solid var(--line); background: #fff; }
+.document details { padding: 12px 16px; margin: 18px 0; border: 1px solid var(--line); }
+.document summary { color: var(--teal); cursor: pointer; font-weight: 700; }
+.empty-state { padding: 38px 25px; text-align: center; border: 1px dashed #a9beb3; color: var(--muted); }
+.document-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 30px; color: var(--muted); font-size: 10px; letter-spacing: .03em; }
+.document-footer code { font-family: "Consolas", monospace; }
+.live-message { position: fixed; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (min-width: 1600px) { :root { --sidebar-width: 310px; } .reading-shell { padding-top: 50px; } }
+@media (max-width: 1100px) { :root { --sidebar-width: 250px; } .topbar { padding: 19px 30px; } .reading-shell { padding: 31px 30px 55px; } .edition { font-size: 9px; } }
+@media (max-width: 800px) {
+  html { scroll-padding-top: 78px; }
+  body { font-size: 14px; }
+  .workspace { margin-left: 0; }
+  .sidebar { width: min(310px, 88vw); transform: translateX(-100%); visibility: hidden; transition: transform .2s ease, visibility .2s; }
+  body.menu-open .sidebar { transform: none; visibility: visible; }
+  .sidebar-close { display: block; position: absolute; right: 14px; top: 18px; width: 32px; height: 32px; border: 1px solid #5d7782; color: #fff; background: transparent; font-size: 20px; }
+  .mobile-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; background: transparent; border: 1px solid #b5c6be; border-radius: 2px; color: var(--ink); font-size: 12px; }
+  body.menu-open .scrim { display: block; position: fixed; inset: 0; z-index: 29; background: rgb(8 27 34 / 52%); }
+  body.menu-open { overflow: hidden; }
+  .topbar { position: sticky; top: 0; z-index: 20; padding: 12px 20px; gap: 10px; }
+  .edition { display: none; }
+  .reading-shell { padding: 27px 23px 45px; }
+  .document-eyebrow { margin-bottom: 18px; font-size: 10px; }
+  .document h1 { font-size: 32px; }
+  .document h2 { font-size: 25px; }
+  .document h3 { font-size: 17px; }
+  .document :is(h1,h2,h3,h4,h5,h6)[id], .doc-section { scroll-margin-top: 82px; }
+  .document table { min-width: 600px; }
+  .document th, .document td { padding: 10px 12px; }
+}
+@media (max-width: 420px) {
+  .reading-shell { padding: 22px 17px 40px; }
+  .topbar { padding: 11px 15px; }
+  .toolbar { gap: 6px; }
+  .action-button, .source-link { padding: 7px 8px; font-size: 10px; }
+  .search-panel { padding: 13px 12px 10px; }
+  .document h1 { font-size: 29px; }
+  .document h2 { font-size: 23px; }
+  .document blockquote { padding: 11px 14px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+@media print {
+  @page { size: A4; margin: 17mm 16mm; }
+  html { scroll-behavior: auto; }
+  body { font-size: 10pt; color: #111; background: #fff; }
+  .sidebar, .topbar, .search-panel, .skip-link, .scrim, .empty-state, .copy-button, .live-message { display: none !important; }
+  .workspace { margin: 0; }
+  .reading-shell { max-width: none; padding: 0; }
+  .document .doc-section[hidden] { display: block !important; }
+  .doc-section { margin: 0 0 16pt; padding: 0 0 14pt; }
+  .document h1 { font-size: 25pt; }
+  .document h2 { font-size: 18pt; }
+  .document h3 { font-size: 13pt; }
+  .document h4 { font-size: 11pt; }
+  .document :is(h1,h2,h3,h4,h5,h6) { break-after: avoid; }
+  .document pre, .document blockquote { break-inside: avoid; }
+  .document img { max-width: 100%; max-height: 230mm; width: auto; height: auto; object-fit: contain; break-inside: avoid; margin: 10pt auto; }
+  .document pre { padding: 12pt; background: #f3f5f2; color: #111; border-color: #bbc9c1; overflow: visible; white-space: pre-wrap; }
+  .document pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .table-scroll { overflow: visible; border-radius: 0; }
+  .document table { min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .document th, .document td { min-width: 0; padding: 6pt; overflow-wrap: anywhere; }
+  .document thead { display: table-header-group; }
+  .document tr { break-inside: avoid; }
+  .document a { color: #174e46; }
+  .document-footer { font-size: 8pt; }
+}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#document">跳至正文</a>
+  <aside class="sidebar" id="sidebar" aria-label="文档导航">
+    <div class="brand">
+      <span class="brand-kicker">COMMERCE AI HUB</span>
+      <p class="brand-title">跨境电商<br>智慧 AI 平台</p>
+      <p class="brand-subtitle">业务协同 / 智能分析 / 研发交付</p>
+      <button class="sidebar-close" id="menu-close" type="button" aria-label="关闭目录">×</button>
+    </div>
+    <div class="sidebar-scroll">
+      <p class="nav-label" id="pages-label">文档集 DOCUMENTS</p>
+      <nav class="page-nav" aria-labelledby="pages-label"><a href="00_%E8%B7%A8%E5%A2%83%E7%94%B5%E5%95%86%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E4%B8%8E%E6%9C%AF%E8%AF%AD%E6%8C%87%E5%8D%97.html" aria-current="page"><span class="page-index">00</span><span>跨境电商业务流程与术语指南</span></a><a href="01_%E9%98%85%E8%AF%BB%E5%AF%BC%E8%88%AA.html"><span class="page-index">01</span><span>阅读导航</span></a><a href="02_%E9%9C%80%E6%B1%82%E8%A7%84%E6%A0%BC%E8%AF%B4%E6%98%8E%E4%B9%A6.html"><span class="page-index">02</span><span>需求规格说明书</span></a><a href="03_%E5%BC%80%E5%8F%91%E5%AE%9E%E6%96%BD%E6%96%87%E6%A1%A3.html"><span class="page-index">03</span><span>开发实施文档</span></a><a href="04_%E6%96%87%E6%A1%A3%E5%90%8C%E6%AD%A5%E8%A7%84%E5%88%99.html"><span class="page-index">04</span><span>文档同步规则</span></a><a href="05_%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%A5%91%E7%BA%A6.html"><span class="page-index">05</span><span>数据与接口契约</span></a><a href="06_AI%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html"><span class="page-index">06</span><span>AI协作开发指南</span></a><a href="07_Agent%E6%A0%B8%E5%BF%83%E5%BC%95%E6%93%8E%E4%B8%8E%E8%A7%92%E8%89%B2%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3.html"><span class="page-index">07</span><span>Agent核心引擎与角色开发文档</span></a></nav>
+      <p class="nav-label" id="toc-label">本页目录 CONTENTS</p>
+      <nav aria-labelledby="toc-label"><ol class="toc"><li class="toc-entry depth-2" data-section="doc-section-001"><a href="#stage-01">01 总流程：生意怎样运行，AI怎样参与</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-001"><a href="#11-%E6%80%BB%E5%88%86%E9%98%85%E8%AF%BB%E5%9C%B0%E5%9B%BE">1.1 总分阅读地图</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-001"><a href="#12-%E5%9B%9B%E6%9D%A1%E6%B5%81%E5%BF%85%E9%A1%BB%E5%AF%B9%E9%BD%90">1.2 四条流必须对齐</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-002"><a href="#stage-02">02 渠道、履约模式与系统责任</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-003"><a href="#stage-03">03 岗位、编号、时间与交接</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-003"><a href="#31-%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E5%A4%9A%E4%B8%AA%E7%BC%96%E5%8F%B7">3.1 一个对象为什么有多个编号</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-003"><a href="#32-%E4%B8%89%E7%A7%8D%E6%97%B6%E9%97%B4%E5%90%84%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8">3.2 三种时间各有什么作用</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-004"><a href="#stage-04">04 市场与选品：先判断生意是否值得做</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-004"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-004"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-004"><a href="#%E4%BA%A4%E6%8E%A5%E4%B8%8E%E5%BC%82%E5%B8%B8">交接与异常</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-004"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-005"><a href="#stage-05">05 商品准备：让不同系统认出同一个对象</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-005"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_1">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-005"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_1">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-005"><a href="#%E4%BA%A4%E6%8E%A5%E4%B8%8E%E5%BC%82%E5%B8%B8_1">交接与异常</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-005"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_1">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-006"><a href="#stage-06">06 刊登与获客：把销售承诺和交付能力放在一起</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-006"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_2">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-006"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_2">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-006"><a href="#%E4%BA%A4%E6%8E%A5%E5%BC%82%E5%B8%B8%E4%B8%8Eai%E5%8D%8F%E5%90%8C">交接、异常与AI协同</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-007"><a href="#stage-07">07 采购备货：批准计划与实际到货是两件事</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-007"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_3">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-007"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_3">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-007"><a href="#%E4%BA%A4%E6%8E%A5%E4%B8%8E%E5%BC%82%E5%B8%B8_2">交接与异常</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-007"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_2">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-008"><a href="#stage-08">08 运输与单证：预计到港不等于可售</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-008"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_4">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-008"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_4">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-008"><a href="#%E5%8D%95%E8%AF%81%E4%B8%8E%E8%BE%B9%E7%95%8C">单证与边界</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-008"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_3">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-009"><a href="#stage-09">09 到仓、质检与入库：以实收证明库存变化</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-009"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_5">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-009"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_5">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-009"><a href="#%E5%BC%82%E5%B8%B8%E4%B8%8Eai%E5%8D%8F%E5%90%8C">异常与AI协同</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-010"><a href="#stage-10">10 库存：有货为什么还不能卖</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-010"><a href="#%E4%B8%9A%E5%8A%A1%E6%95%B0%E9%87%8F%E7%9A%84%E5%90%AB%E4%B9%89">业务数量的含义</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-010"><a href="#%E6%97%A5%E5%B8%B8%E7%AE%A1%E7%90%86%E5%88%86%E6%B5%81%E7%A8%8B">日常管理分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-010"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_4">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-011"><a href="#stage-11">11 订单履约：一张订单可能跨多个执行环节</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-011"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_6">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-011"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_6">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-011"><a href="#%E4%BA%A4%E6%8E%A5%E4%B8%8E%E5%BC%82%E5%B8%B8_3">交接与异常</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-011"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_5">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-012"><a href="#stage-12">12 配送交付：事件记录与客户感受结合看</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-012"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_7">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-012"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_7">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-012"><a href="#%E5%BC%82%E5%B8%B8%E4%B8%8Eai%E5%8D%8F%E5%90%8C_1">异常与AI协同</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-012"><a href="#%E6%A1%88%E4%BE%8B">案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-013"><a href="#stage-13">13 客户与售后：退款、退货、投诉各有证据</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-013"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_8">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-013"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_8">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-013"><a href="#%E9%92%B1%E5%92%8C%E8%B4%A7%E7%9A%84%E4%B8%A4%E6%9D%A1%E7%BA%BF">钱和货的两条线</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-013"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_6">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-014"><a href="#stage-14">14 结算与贡献：把销售、费用、现金分开理解</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-014"><a href="#%E5%9B%9B%E4%B8%AA%E6%97%B6%E7%82%B9">四个时点</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-014"><a href="#%E5%88%86%E6%B5%81%E7%A8%8B_9">分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-014"><a href="#ai%E5%8D%8F%E5%90%8C%E4%B8%8E%E6%A1%88%E4%BE%8B_7">AI协同与案例</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-015"><a href="#stage-15">15 补货与改进：让分析回到原有业务体系</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-015"><a href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%92%E8%89%B2_9">输入与角色</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-015"><a href="#%E5%AE%8C%E6%95%B4%E5%8D%8F%E5%90%8C%E5%88%86%E6%B5%81%E7%A8%8B">完整协同分流程</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-015"><a href="#%E8%B4%A8%E9%87%8F%E4%B8%8E%E6%95%B0%E9%87%8F%E4%B8%8D%E8%83%BD%E5%88%86%E5%BC%80">质量与数量不能分开</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-016"><a href="#stage-16">16 四类联合分析怎样分工</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-016"><a href="#%E4%BB%8E%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E8%AF%86%E5%88%ABai%E5%BB%BA%E8%AE%BE%E9%87%8D%E7%82%B9">从业务流程识别AI建设重点</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-016"><a href="#%E5%A4%9Aagent%E5%A6%82%E4%BD%95%E5%8D%8F%E5%90%8C%E5%88%86%E6%9E%90%E5%90%8C%E4%B8%80%E4%B8%9A%E5%8A%A1%E9%97%AE%E9%A2%98">多Agent如何协同分析同一业务问题</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-017"><a href="#stage-17">17 贯穿案例：BOX-A从发现问题到原系统执行</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-017"><a href="#171-%E6%AD%A3%E5%B8%B8%E8%A1%A5%E8%B4%A7%E9%93%BE">17.1 正常补货链</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-017"><a href="#172-%E5%90%8C%E6%A0%B7%E6%95%B0%E9%87%8F%E4%BA%A4%E6%9C%9F%E5%8F%98%E5%8C%96%E4%BC%9A%E6%94%B9%E5%8F%98%E7%BB%93%E8%AE%BA">17.2 同样数量，交期变化会改变结论</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-017"><a href="#173-%E5%AE%A2%E8%AF%89%E4%B8%8E%E8%B4%A1%E7%8C%AE%E4%BD%BF%E6%96%B9%E6%A1%88%E6%9B%B4%E5%AE%8C%E6%95%B4">17.3 客诉与贡献使方案更完整</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-017"><a href="#174-%E8%B6%85%E6%97%B6%E4%B8%8E%E4%B8%9A%E5%8A%A1%E7%BB%93%E6%9E%9C">17.4 超时与业务结果</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-018"><a href="#stage-18">18 术语速查</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#181-%E5%95%86%E5%93%81%E6%B8%A0%E9%81%93">18.1 商品渠道</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#182-%E9%87%87%E8%B4%AD%E5%BA%93%E5%AD%98">18.2 采购库存</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#183-%E7%89%A9%E6%B5%81%E8%B4%B8%E6%98%93">18.3 物流贸易</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#184-%E8%B4%A2%E5%8A%A1%E7%BB%8F%E8%90%A5">18.4 财务经营</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#185-%E7%B3%BB%E7%BB%9F%E5%8D%8F%E5%90%8C">18.5 系统协同</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#186-ai%E6%9E%A2%E7%BA%BD%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8D%8F%E5%90%8C">18.6 AI枢纽与数据协同</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-018"><a href="#ai%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">AI架构相关术语</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-019"><a href="#stage-19">19 最容易混淆的边界</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-020"><a href="#stage-20">20 场景判断与核对</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-020"><a href="#%E5%9C%BA%E6%99%AF%E4%B8%80erp%E5%92%8Cwms%E9%83%BD%E6%98%BE%E7%A4%BA100%E4%BB%B6%E8%83%BD%E4%B8%8D%E8%83%BD%E8%AF%B4%E6%9C%89200%E4%BB%B6">场景一：ERP和WMS都显示100件，能不能说有200件</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-020"><a href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%E5%B9%B3%E5%8F%B0%E4%B8%80%E5%88%86%E9%92%9F%E5%89%8D%E5%90%8C%E6%AD%A5%E6%88%90%E5%8A%9F%E8%A1%A5%E8%B4%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E8%A2%AB%E9%98%BB%E6%96%AD">场景二：平台一分钟前同步成功，补货为什么仍被阻断</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-020"><a href="#%E5%9C%BA%E6%99%AF%E4%B8%89%E5%AE%A2%E6%88%B7%E4%B8%89%E6%AC%A1%E5%82%AC%E5%8D%95%E6%98%AF%E5%90%A6%E8%AE%A1%E4%B8%89%E5%8D%95%E6%8A%95%E8%AF%89">场景三：客户三次催单，是否计三单投诉</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-020"><a href="#%E5%9C%BA%E6%99%AF%E5%9B%9B%E6%A8%A1%E5%9E%8B%E8%AF%B4%E6%89%B9%E5%87%86%E9%87%87%E8%B4%AD%E8%83%BD%E5%90%A6%E7%9B%B4%E6%8E%A5%E6%89%A7%E8%A1%8C">场景四：模型说批准采购，能否直接执行</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-020"><a href="#%E5%9C%BA%E6%99%AF%E4%BA%94erp%E5%88%9B%E5%BB%BA%E8%B6%85%E6%97%B6%E6%98%AF%E5%90%A6%E5%86%8D%E6%AC%A1%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84executionkey">场景五：ERP创建超时，是否再次生成新的executionKey</a></li>
+<li class="toc-entry depth-3" data-section="doc-section-020"><a href="#%E5%9C%BA%E6%99%AF%E5%85%ADai%E5%BB%BA%E8%AE%AE%E9%87%87%E7%BA%B3%E5%90%8E%E9%94%80%E5%94%AE%E5%A2%9E%E9%95%BF%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%86%99ai%E6%8F%90%E5%8D%87%E9%94%80%E5%94%AE20">场景六：AI建议采纳后销售增长，是否可以写“AI提升销售20%”</a></li>
+<li class="toc-entry depth-2" data-section="doc-section-021"><a href="#stage-21">21 阅读下一份文档与范围依据</a></li></ol></nav>
+    </div>
+    <div class="sidebar-foot">本地离线阅读 · Markdown 同源生成</div>
+  </aside>
+  <div class="scrim" id="menu-scrim" aria-hidden="true"></div>
+  <div class="workspace">
+    <header class="topbar">
+      <button class="mobile-toggle" id="menu-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">☰</span>目录</button>
+      <span class="edition">PROJECT ENGINEERING / VOL. 00</span>
+      <div class="toolbar">
+        <button class="action-button" id="print-all" type="button">打印全部</button>
+      </div>
+    </header>
+    <div class="reading-shell">
+      <div class="document-eyebrow">工程文档 00 / PROJECT DOCUMENT</div>
+      <div class="search-panel" role="search" aria-label="全文章节检索">
+        <label class="search-label" for="document-search">检索本页正文</label>
+        <div class="search-row">
+          <input class="search-input" id="document-search" type="search" placeholder="输入模块、字段、接口或关键词…" autocomplete="off" aria-controls="document" aria-describedby="search-status">
+          <button class="action-button" id="search-clear" type="button" disabled>清空</button>
+        </div>
+        <p class="search-status" id="search-status" role="status" aria-live="polite">全文共 22 个章节 · 输入关键词筛选，按 / 快速搜索。</p>
+      </div>
+      <main class="document" id="document" tabindex="-1" aria-label="远帆跨境 · 跨境电商业务流程与智慧 AI 协同指南">
+<section class="doc-section" id="doc-section-000"><h1 id="远帆跨境-跨境电商业务流程与智慧-ai-协同指南">远帆跨境 · 跨境电商业务流程与智慧 AI 协同指南</h1>
+<blockquote>
+<p>文档编号：YF-BIZ-002｜版本：2.6｜日期：2025-11-03｜适用角色：业务、产品、研发、测试及项目协作人员。先理解业务，再理解系统分工，最后理解AI怎样辅助判断和协同。</p>
+</blockquote>
+</section><section class="doc-section" id="doc-section-001"><h2 id="stage-01">01 总流程：生意怎样运行，AI怎样参与</h2>
+<p>跨境电商通过线上渠道连接不同国家或地区的买卖双方。本指南以卖家采购商品并面向境外消费者销售为主线。完整经营过程包括市场判断、商品准备、刊登获客、采购备货、跨境运输、到仓质检、库存管理、订单履约、配送、售后、结算以及下一轮经营计划。采购与销售通常并行，售后与结算发生在不同时间，不能把它们理解为所有订单都按同一个按钮顺序办理。</p>
+<p>企业已有 ERP、OMS、WMS、CRM、财务及渠道系统。本项目建设的智慧 AI 平台从这些系统读取授权数据，关联同一商品、订单、客户和时间窗口，帮助团队看见跨部门原因、比较方案、安排协同并追踪结果。原系统办理业务，AI平台形成可查证的综合判断；审批后的有限动作回到原系统创建草稿或内部工单。</p>
+<p><img alt="既有ERP、OMS、WMS、CRM、财务与渠道系统接入AI枢纽，支撑补货、履约、客户体验及经营分析" src="../images/18-ai-hub-overview.png"/></p>
+<p>图示的价值链是：多系统提供事实，平台对齐身份和口径，计算指标并检索证据，AI归纳风险和可选方案，业务人员决策，原系统承接后续动作。ERP采购草稿创建成功不能说明采购已经批准，CRM工单创建成功不能说明客户问题已经解决。</p>
+<p><img alt="既有跨境业务从需求选品、采购入库、刊登获客、订单履约到售后结算，再反馈经营计划" src="../images/04-commerce-lifecycle.png"/></p>
+<p>总业务链中，采购与获客并行，库存支持订单履约，售后按实际情况发生，结算和经营复盘为下一轮计划提供依据。图中编号是业务节点，不是平台功能编号；这些作业仍由原业务系统办理，AI的介入点见下表。</p>
+<h3 id="11-总分阅读地图">1.1 总分阅读地图</h3>
+<div aria-label="表格 1，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>正常业务产物</th>
+<th>主要既有系统</th>
+<th>AI平台怎样辅助</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#stage-04">04 市场与选品</a></td>
+<td>经营假设、商品方向、风险清单</td>
+<td>渠道、CRM、财务</td>
+<td>联合需求、反馈与贡献找机会，不代替选品批准</td>
+</tr>
+<tr>
+<td><a href="#stage-05">05 商品准备</a></td>
+<td>商品、Listing、供货资料</td>
+<td>ERP、渠道</td>
+<td>对齐标识，发现缺字段和错误映射</td>
+</tr>
+<tr>
+<td><a href="#stage-06">06 刊登与获客</a></td>
+<td>页面承诺、曝光访问、成交</td>
+<td>渠道、OMS、CRM</td>
+<td>联合转化、供给、售后观察问题</td>
+</tr>
+<tr>
+<td><a href="#stage-07">07 采购备货</a></td>
+<td>采购单、预计可售日</td>
+<td>ERP</td>
+<td>需求与供给推演，批准后创建ERP草稿</td>
+</tr>
+<tr>
+<td><a href="#stage-08">08 运输与单证</a></td>
+<td>运输节点、交接材料</td>
+<td>ERP、WMS及其物流接口</td>
+<td>观察预计到货变化及对订单的影响</td>
+</tr>
+<tr>
+<td><a href="#stage-09">09 到仓与质检</a></td>
+<td>实收、差异、可售状态</td>
+<td>WMS、ERP</td>
+<td>区分已到、已收、可售，发现源数据矛盾</td>
+</tr>
+<tr>
+<td><a href="#stage-10">10 库存管理</a></td>
+<td>余额、占用、冻结、调拨</td>
+<td>WMS</td>
+<td>解释库存结构，不执行扣库或调整</td>
+</tr>
+<tr>
+<td><a href="#stage-11">11 订单履约</a></td>
+<td>订单、分配、包裹、出库</td>
+<td>OMS、WMS</td>
+<td>识别承诺与实际差距，给出协调线索</td>
+</tr>
+<tr>
+<td><a href="#stage-12">12 配送交付</a></td>
+<td>物流事件、签收、异常</td>
+<td>WMS、CRM</td>
+<td>关联停滞与催单，建议内部工单</td>
+</tr>
+<tr>
+<td><a href="#stage-13">13 客户与售后</a></td>
+<td>客诉、退款、退货结果</td>
+<td>CRM、OMS、WMS</td>
+<td>VOC聚类、证据核对与产品问题观察</td>
+</tr>
+<tr>
+<td><a href="#stage-14">14 结算复盘</a></td>
+<td>费用、结算、成本、差异</td>
+<td>财务、OMS、渠道</td>
+<td>贡献与费用解释，区分估算/实际</td>
+</tr>
+<tr>
+<td><a href="#stage-15">15 补货改进</a></td>
+<td>改进方案、责任人、效果</td>
+<td>ERP、CRM及全系统</td>
+<td>多源方案比较、审批、受控动作与效果跟踪</td>
+</tr>
+</tbody>
+</table></div>
+<p>每个分流程都按“输入与角色 → 正常步骤 → 交接证据 → 异常 → AI协同 → 小案例”阅读。业务阶段不是平台模块的一一对应表：同一个AI分析可能同时使用四个系统的数据，一个原系统操作也可能由多名人员线下核实后完成。</p>
+<h3 id="12-四条流必须对齐">1.2 四条流必须对齐</h3>
+<p><img alt="商品流、资金流、单据流和信息流分别推进，再通过业务编号核对" src="../images/11-four-business-flows.png"/></p>
+<p>商品流回答货在哪里、多少、是否可售；资金流回答谁已支付、谁待结算、是否真正到账；单据流记录采购、订单、收货、退款和结算的依据；信息流把事实传到各系统和AI平台。四条流完成时间不同。平台最重要的能力之一，是发现四条流之间需要解释的差异，而不是把所有差异直接改成一致。</p>
+<div aria-label="表格 2，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>看到的现象</th>
+<th>正确解释</th>
+<th>不应推断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OMS显示买家已付</td>
+<td>买家支付事实成立</td>
+<td>企业银行已收到账款</td>
+</tr>
+<tr>
+<td>ERP采购已批准</td>
+<td>企业授权采购计划</td>
+<td>WMS现货已经增加</td>
+</tr>
+<tr>
+<td>WMS签收到仓</td>
+<td>物流交接已发生</td>
+<td>质检已完成、全部可售</td>
+</tr>
+<tr>
+<td>平台执行SUCCEEDED</td>
+<td>原系统确认创建草稿/内部工单</td>
+<td>采购到货或客户问题已解决</td>
+</tr>
+<tr>
+<td>AI报告“风险较高”</td>
+<td>有证据支持的风险判断</td>
+<td>相关业务事实已被AI改变</td>
+</tr>
+</tbody>
+</table></div>
+</section><section class="doc-section" id="doc-section-002"><h2 id="stage-02">02 渠道、履约模式与系统责任</h2>
+<p><img alt="国内备货经头程与目的地交接进入海外仓，再由当地出库及尾程配送交付订单" src="../images/06-crossborder-logistics.png"/></p>
+<p>读图顺序：上方是备货到海外仓的链路，下方是客户订单的出库与尾程。图示为海外仓模式，直邮等模式按本节对照表理解；仓储、运输与渠道各司其职，图中节点不表示本平台已接通独立物流系统。</p>
+<p>销售渠道回答“买家在哪里下单”，履约方式回答“谁保管、谁拣配、谁交付”。同一渠道可以使用平台仓，也可以使用卖家自营仓或第三方仓。不能把渠道名称当成仓库类型，也不能因为两个页面都显示同一SKU就把它们的库存相加。</p>
+<div aria-label="表格 3，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>典型业务路径</th>
+<th>需要特别核对</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>卖家自营仓</td>
+<td>卖家备货→自营仓→拣配出库→物流→买家</td>
+<td>可售、占用、承诺发货时间和实际出库</td>
+</tr>
+<tr>
+<td>第三方仓3PL</td>
+<td>卖家备货→受托仓→按委托履约</td>
+<td>仓内状态与OMS同步延迟、责任交接</td>
+</tr>
+<tr>
+<td>平台履约仓FBA等</td>
+<td>备货→平台仓→平台组织履约</td>
+<td>平台库存为独立来源，不能用于自营仓分配</td>
+</tr>
+<tr>
+<td>供应商直发</td>
+<td>订单→供应商准备→物流→买家</td>
+<td>可用供给、交期、服务承诺及售后归属</td>
+</tr>
+</tbody>
+</table></div>
+<p>P0读取已授权的SELF_OPERATED与PLATFORM_FBA库存，分别展示；补货计算以选定仓库范围和权威来源为准。第三方仓如以统一WMS标准接入，仍须在接入台账写明运营责任。平台不建设仓库操作台，也不替代原系统已有的拆单、换货或其他功能。</p>
+<p>ERP负责商品、供应及采购，OMS负责订单与售后事实，WMS负责库存及履约，CRM负责客户与工单，财务负责费用结算，渠道负责刊登和营销数据。这是本项目的逻辑分工；一个实际软件可以承担多个角色，权威来源必须逐数据域确认。需要回原系统处理时，平台提供有权限的来源链接和证据，源系统再次鉴权。</p>
+</section><section class="doc-section" id="doc-section-003"><h2 id="stage-03">03 岗位、编号、时间与交接</h2>
+<p><img alt="原系统记录经身份映射、标准投影和分析快照形成可追溯证据" src="../images/19-data-evidence-lineage.png"/></p>
+<p>交接时既要交业务对象，也要交来源编号、时间和版本。平台以已审核映射串联同一对象；数据从来源记录到报告引用的路径必须保留，不能只凭商品名称或一张截图认定同一笔业务。</p>
+<div aria-label="表格 4，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>岗位</th>
+<th>在原业务体系中做什么</th>
+<th>在AI平台中做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运营</td>
+<td>商品页面、销售计划、订单跟进</td>
+<td>分析转化、缺货和履约风险，发起建议</td>
+</tr>
+<tr>
+<td>采购</td>
+<td>供应商沟通、ERP采购与催交</td>
+<td>检查需求和供给推演，补全采购草稿参数</td>
+</tr>
+<tr>
+<td>仓库</td>
+<td>WMS收货、质检、盘点、拣配和出库</td>
+<td>查看风险证据，核实源库存口径</td>
+</tr>
+<tr>
+<td>客服</td>
+<td>CRM接待、内部协调、OMS售后办理</td>
+<td>复核主题与客户问题，创建内部工单建议</td>
+</tr>
+<tr>
+<td>财务</td>
+<td>费用、账单与资金事实核验</td>
+<td>复核贡献、费用差异和账单覆盖</td>
+</tr>
+<tr>
+<td>经理</td>
+<td>原系统业务审批、资源决策</td>
+<td>审批平台建议，审视替代方案及效果</td>
+</tr>
+<tr>
+<td>集成人员</td>
+<td>接入授权、字段与状态映射</td>
+<td>管理来源、同步、质量与恢复</td>
+</tr>
+<tr>
+<td>审计人员</td>
+<td>核查业务与操作依据</td>
+<td>沿分析、审批、执行和回执追踪</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="31-一个对象为什么有多个编号">3.1 一个对象为什么有多个编号</h3>
+<p>一件商品可能有ERP商品ID、内部SKU编码、店铺Listing ID、渠道ASIN/商品编号及WMS货品ID；这些标识用途不同。平台canonicalId把确认属于同一业务对象的记录关联起来，但不会替换原系统编号。同名BOX-A在两个租户中仍是不同对象；不同颜色或规格不能按近似名称合并。</p>
+<p>订单同样有渠道订单号、OMS ID、WMS包裹ID和CRM工单ID。一个订单可有多个包裹、多次退款和多个工单。按订单关联不表示所有记录一一对应；统计投诉时要先确定按工单数还是去重订单数计量。</p>
+<h3 id="32-三种时间各有什么作用">3.2 三种时间各有什么作用</h3>
+<p>sourceUpdatedAt说明源记录何时变更；asOf说明事实或快照对应哪个时点；observedAt说明平台何时接收。coverageThrough说明该数据域已完整同步到何时。今天刚抓到昨天的库存，不能标为“今天实时库存”；供应商资料半年未变，也不意味着六个月没有同步，须看完整覆盖时间。</p>
+<p>业务交接最少包含：对象及来源编号、已确认事实、未确定事项、当前责任岗位、下一步及期限、可查证据。AI建议必须额外说明分析范围、数据时间、关键假设和不确定性。业务人员纠正来源资料后，平台重新同步和分析，不在报告里手工把原始数值涂改成期待结果。</p>
+</section><section class="doc-section" id="doc-section-004"><h2 id="stage-04">04 市场与选品：先判断生意是否值得做</h2>
+<h3 id="输入与角色">输入与角色</h3>
+<p>运营提出商品机会，采购确认供货可行性，财务检查成本，客服提供真实使用反馈。输入包括渠道需求线索、已有商品表现、客户问题、候选规格、供应商报价和交期。热度是线索，不能单独证明可盈利或能交付。</p>
+<p><img alt="选品判断依次检查需求证据、规格供给、成本交付和进入条件" src="../images/12-product-decision.png"/></p>
+<p>图示从需求证据出发，确认规格与供给，再估算成本与交付；条件不足就补证或调整。它描述选品业务判断，不表示AI平台拥有自动批准商品立项的权限。</p>
+<h3 id="分流程">分流程</h3>
+<ol>
+<li>说明目标人群和问题，把“市场大”变成可验证假设。</li>
+<li>看同类商品销售、评价与投诉，分清短期促销和稳定需求。</li>
+<li>核对规格、包装、供货稳定性及运输限制；待核事项交对应负责人。</li>
+<li>将售价、商品成本、平台费用、履约与售后情景放在同一货币口径下比较。</li>
+<li>决定继续打样、补充证据或暂缓；保留判断条件和责任人。</li>
+</ol>
+<h3 id="交接与异常">交接与异常</h3>
+<p>交给商品准备环节的是已确认规格、供货线索、成本假设与待决问题，不是“AI说值得做”的一句话。样品与页面承诺不符时先回到规格验证；成本资料不完整时报告必须显示缺项，不把未拿到的费用当零。</p>
+<h3 id="ai协同与案例">AI协同与案例</h3>
+<p>P0可以从既有商品的CHANNEL表现、CRM反馈与FINANCE贡献找线索，但不建设外部全网选品爬虫或合规审批系统。比如销量增长但“尺寸与描述不符”投诉增加，应同时检查页面描述、供货规格与退货费用，提出调查假设；不能只根据热销就建议扩大采购。没有竞品授权数据时不生成竞品销量数字。</p>
+</section><section class="doc-section" id="doc-section-005"><h2 id="stage-05">05 商品准备：让不同系统认出同一个对象</h2>
+<p><img alt="不同店铺Listing映射到同一内部SKU，SKU关联分仓库存与各供应商的供货条件" src="../images/05-sku-mapping.png"/></p>
+<p>图中先识别Listing与SKU，再核对仓库和供货关系，最后由负责人确认映射。一个SKU可以对应多个店铺Listing与供应商，但各仓库存、各供应商MOQ和交期分别保留。图中的内部SKU指企业已有主数据及平台规范标识，不表示平台重建商品或库存账本。</p>
+<h3 id="输入与角色_1">输入与角色</h3>
+<p>ERP商品负责人确认商品编码、单位、规格、启停状态及供应关系；渠道运营维护Listing；WMS维护仓储识别；集成人员在平台登记对应关系。输入是原系统已存在的正式主数据，而不是要求本项目重新开发商品档案管理。</p>
+<h3 id="分流程_1">分流程</h3>
+<ol>
+<li>确认一个最小库存单位代表什么，颜色、尺码、套装不能混淆。</li>
+<li>核对ERP商品与供货关系，明确MOQ、packSize和交期。</li>
+<li>为不同店铺Listing关联正确商品；同一Listing不能同时指向两个有效SKU。</li>
+<li>核对WMS货品与仓库映射，确认数量单位一致。</li>
+<li>平台保存已审核映射及版本，通过订单和库存样本验证关联正确。</li>
+<li>发现错误时先定位影响范围，再由原系统或映射负责人纠正，重放并生成新投影。</li>
+</ol>
+<h3 id="交接与异常_1">交接与异常</h3>
+<p>交付的是可追溯的身份关系和映射版本。缺映射的记录进入隔离区，不能临时按商品名称猜测。外部编码改变时保留旧码历史关系；历史订单不能因为今天修改映射就悄悄变成另一个商品。</p>
+<h3 id="ai协同与案例_1">AI协同与案例</h3>
+<p>AI可以描述映射冲突和受影响范围，但正式关联必须确认。店铺A的白色收纳盒与店铺B的蓝色收纳盒名称很接近，只有白色对应BOX-A时，蓝色不能并入BOX-A需求。若误合并，会同时扭曲销量、库存、退款主题和补货建议；因此映射错误是跨场景问题，不只是资料页小错误。</p>
+</section><section class="doc-section" id="doc-section-006"><h2 id="stage-06">06 刊登与获客：把销售承诺和交付能力放在一起</h2>
+<h3 id="输入与角色_2">输入与角色</h3>
+<p>运营在渠道系统维护页面、价格与广告，客服提供用户疑问，采购和仓库提供可交付能力。平台读取授权的日曝光、访问、成交与广告消耗，不写入刊登或广告配置。</p>
+<p><img alt="页面资料核对、发布、曝光访问购买观察，再将履约和售后反馈用于复盘" src="../images/13-listing-conversion.png"/></p>
+<p>图中曝光、访问与购买是不同层次的事实；履约和售后反馈可以反过来改善内容、价格或供给计划。页面承诺需要与商品及实际交付能力一致。</p>
+<h3 id="分流程_2">分流程</h3>
+<ol>
+<li>核对页面规格、图片、数量单位和服务承诺。</li>
+<li>在原渠道流程内发布或调整，记录变更时间和负责人。</li>
+<li>观察曝光→访问→已付订单，同时记录促销和广告变化。</li>
+<li>结合WMS可售和ERP预计到货，判断销售增长是否带来断货风险。</li>
+<li>结合CRM问题和OMS退款，检查成交质量及承诺偏差。</li>
+<li>在原系统调整经营动作，下一观察窗比较结果。</li>
+</ol>
+<h3 id="交接异常与ai协同">交接、异常与AI协同</h3>
+<p>访问上升但订单没有同比例增加，可能涉及页面吸引力、价格、交付承诺或数据窗口，不应直接归因一个原因。销量增长而贡献下降，还要看广告、退款、费用和SKU结构。P0对这些关联给证据和假设，不自动调价、停广告或改页面。广告未归因至单订单时仅做店铺期间分析，不能伪造精确单订单广告成本。</p>
+</section><section class="doc-section" id="doc-section-007"><h2 id="stage-07">07 采购备货：批准计划与实际到货是两件事</h2>
+<h3 id="输入与角色_3">输入与角色</h3>
+<p>采购接收需求、库存和供货条件，经理审批采购计划，供应商确认交付，仓库记录实收。ERP保留采购草稿、审批与采购状态，WMS保留收货事实；平台联查这些数据辅助判断数量及时间。</p>
+<p><img alt="采购从需求、供货条件与审批进入交付跟进，分次收货后核对剩余量" src="../images/14-procurement-lifecycle.png"/></p>
+<p>图示为ERP/WMS既有业务流程示意，实际厂商审批职责按接入清单确认；其中部分收货对应标准只读状态PARTIALLY_RECEIVED。AI平台位于需求分析和跟进解释环节；只有经平台审批的草稿创建动作可回写ERP，后续采购审批和收货仍在原系统办理。</p>
+<h3 id="分流程_3">分流程</h3>
+<ol>
+<li>从已确认需求和库存占用中确定补货目标，区分存量未交订单与未来新增需求。</li>
+<li>核对供应商启停、报价、MOQ、订购倍数、交期和预计可售日。</li>
+<li>创建ERP草稿，提交原ERP采购审批；批准不等于付款或库存增加。</li>
+<li>跟进供货变化，更新ERP预计到货，不用旧交期维持表面正常。</li>
+<li>WMS按真实到货分次收货，ERP关联已收数量与未收余量。</li>
+<li>对长期不再等待的余量按原流程关闭并说明，不能抹掉已收事实。</li>
+</ol>
+<h3 id="交接与异常_2">交接与异常</h3>
+<p>订10件先收6件，剩余供给最多4件；若已收中有1件破损，已收仍是6件，不能把破损再当未收数量计入计划。MOQ和packSize分别是最低起订量与倍数：MOQ15、pack10时应至少20件，不能简单把两个字段当成同一个值。交期由7天变14天时，即使采购数量没变，也可能使原补货方案失效。</p>
+<h3 id="ai协同与案例_2">AI协同与案例</h3>
+<p>平台将OMS新增需求、WMS可售、ERP未收计划和CRM质量信号组合，比较“常规补货”“加急协调”“先质量调查”等方案。若投诉涉及产品质量，盲目补货可能扩大问题，建议应先形成调查工单。审批后外部草稿编号是执行证据，供应商承诺交期和最终入库是之后的业务证据。</p>
+</section><section class="doc-section" id="doc-section-008"><h2 id="stage-08">08 运输与单证：预计到港不等于可售</h2>
+<p><img alt="国内备货、提货集货、跨境干线、目的地交接与海外仓接收构成头程和入仓链路" src="../images/06-crossborder-logistics.png"/></p>
+<p>沿上方箭头检查货物与单据在各岗位间的交接；海外仓接收之后才按实际质检和上架结果确认可售。下方为后续客户订单的尾程，不能把预计到港、到仓和买家签收三个时间混为一谈。</p>
+<h3 id="输入与角色_4">输入与角色</h3>
+<p>物流负责人、供应商、承运商和仓库共同完成运输交接。头程把货送往目标仓所在地区，尾程把订单货物送到买家。运输安排、交接材料及贸易责任继续使用企业既有工具与流程，本平台读取与分析相关的到货和履约信息。</p>
+<h3 id="分流程_4">分流程</h3>
+<ol>
+<li>核对发运商品、数量、包装和对应采购/调拨单据。</li>
+<li>确认运输节点及各节点的责任人、时间和所需材料。</li>
+<li>发运后跟踪提货、运输、目的地交接与到仓安排。</li>
+<li>节点延期时评估对预计可售日和客户承诺的影响。</li>
+<li>到仓后将运输交接转交WMS收货，不能直接变成可售库存。</li>
+</ol>
+<h3 id="单证与边界">单证与边界</h3>
+<p>商业发票说明交易商品与金额，装箱单说明包装数量与重量，运输单据记录承运与交接关系；材料要相互核对。所需清单取决于货物、路线和目的地，由相应业务负责人确认。HS用于商品归类，Incoterms用于约定交付与相关责任，它们都不是软件订单状态。本平台不执行报关、税款计算或合同责任判断。</p>
+<h3 id="ai协同与案例_3">AI协同与案例</h3>
+<p>P0从ERP预计可售日期和WMS履约状态观察风险，不承诺已接入独立TMS。某批货预计周一到港，但还要完成目的地手续、送仓与检验，不能将周一直接当可售日。平台应引用日期口径与来源，缺少后续处理时间时提示待确认，并说明哪些订单或补货计划受影响。</p>
+</section><section class="doc-section" id="doc-section-009"><h2 id="stage-09">09 到仓、质检与入库：以实收证明库存变化</h2>
+<h3 id="输入与角色_5">输入与角色</h3>
+<p>仓库收到实物与采购/退货/调拨依据，在WMS核对数量、状态并记录差异。司机到门、物流签收、仓库接收、质检完成和可售可能是不同节点。平台只能按已接入的明确事实解释，不能替仓库确认。</p>
+<p><img alt="到货核对、点数与质检决定合格、待处理和不可售，实际结果才进入库存" src="../images/15-inbound-quality.png"/></p>
+<p>图中为独立收货案例：订10件、收到合格5件与破损1件，共实收6件，未收4件。图中的同一事务指原WMS内部收货与库存记账，不包含ERP更新或本平台同步。数量和质检变化发生在原WMS。平台读取相应库存快照，核对可售与已收计划是否一致，不通过自己的数据库增加库存。</p>
+<h3 id="分流程_5">分流程</h3>
+<ol>
+<li>核对货物与收货依据，错误商品或错误仓库先隔离。</li>
+<li>按实际数量清点，与送货单和采购余量比较。</li>
+<li>区分合格、损坏与待检，遵守仓库原有质检与上架流程。</li>
+<li>在WMS记录实收及处置；ERP更新采购已收/未收关系。</li>
+<li>供应差异、破损和短收交给采购/物流跟进，保留照片或原始凭据的受控链接。</li>
+<li>平台同步后重新计算供给与可售，观察是否仍有数据延迟。</li>
+</ol>
+<h3 id="异常与ai协同">异常与AI协同</h3>
+<p>物流说收到10件而WMS只记8件时，平台应报告“节点与实收不一致”，不能自动把库存补成10件。已入库但仍待检的数量不能作为马上可发的新订单可售。若ERP采购仍显示未收10件而WMS已收到8件，继续把10件全计未来供给会重复计算；需要核实来源更新及收货关联，必要时阻断补货分析。</p>
+</section><section class="doc-section" id="doc-section-010"><h2 id="stage-10">10 库存：有货为什么还不能卖</h2>
+<h3 id="业务数量的含义">业务数量的含义</h3>
+<div aria-label="表格 5，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>标准投影字段</th>
+<th>本项目含义</th>
+<th>谁确认</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onHand</td>
+<td>已在库的物理总量</td>
+<td>WMS</td>
+</tr>
+<tr>
+<td>reserved</td>
+<td>已为存量订单占用</td>
+<td>WMS与OMS履约关系</td>
+</tr>
+<tr>
+<td>frozen</td>
+<td>暂不能销售的待处理量</td>
+<td>WMS</td>
+</tr>
+<tr>
+<td>unusable</td>
+<td>已判不可作为正常商品销售的量</td>
+<td>WMS</td>
+</tr>
+<tr>
+<td>available</td>
+<td>onHand−reserved−frozen−unusable</td>
+<td>平台按已确认互斥分桶复算核对</td>
+</tr>
+<tr>
+<td>计划供给</td>
+<td>已批准采购未收、预计未来可售的数量</td>
+<td>ERP；未实际接收前不是onHand</td>
+</tr>
+</tbody>
+</table></div>
+<p><img alt="库存总量按预留、冻结、不可售和可售拆分，不能用总量代替可售" src="../images/21-inventory-read-model.png"/></p>
+<p>图示要求桶互不重叠。外部系统有不同含义时，适配器先转换再进入标准投影，并保留来源字段和转换规则。若无法可靠转换，报告数据质量问题，不用公式强行覆盖来源值。</p>
+<h3 id="日常管理分流程">日常管理分流程</h3>
+<ol>
+<li>仓库核对余额、订单占用与未处理异常。</li>
+<li>原OMS/WMS办理分配、出库、取消和释放占用。</li>
+<li>盘点出现差异时调查，再按原WMS权限和审批办理调整。</li>
+<li>调拨由源仓发运、目的仓实收；途中数量不提前加到目的可售。</li>
+<li>平台同步变更，按仓库与时间重新解释风险。</li>
+</ol>
+<h3 id="ai协同与案例_4">AI协同与案例</h3>
+<p>100件现货，预留30、冻结10、不可售5，可售是55；新需求预测应从55出发。30件预留已服务于存量订单，不能在未来需求里再扣一遍。ERP中的库存镜像与WMS同一仓100件只是两个展示来源，不是200件。平台可以识别这些差异及潜在影响，但真正减少预留或调整余额必须回原系统处理。</p>
+</section><section class="doc-section" id="doc-section-011"><h2 id="stage-11">11 订单履约：一张订单可能跨多个执行环节</h2>
+<p><img alt="渠道成交进入OMS核对，按原有策略分仓占用后由WMS拣配出库，包裹回传并关联订单" src="../images/26-order-fulfillment.png"/></p>
+<p>主线展示成交、订单核对、分仓占用、拣配出库、包裹回传五个交接点。缺货或地址异常转原岗位核查；订单可以拆成A、B两个包裹。AI只读取授权事实、识别延期并给出证据和协调建议，分仓、取消与出库仍在原系统办理。</p>
+<h3 id="输入与角色_6">输入与角色</h3>
+<p>渠道接收交易，OMS组织订单，WMS组织仓内作业。运营关注服务承诺，仓库关注可发与拣配，客服处理买家问题。平台读取订单、承诺时间、仓库状态和CRM信息，将履约链放在同一视图。</p>
+<h3 id="分流程_6">分流程</h3>
+<ol>
+<li>渠道交易进入OMS，核对商品、支付、数量与客户必要信息。</li>
+<li>OMS/WMS按现有策略分仓、占用库存，处理缺货和地址问题。</li>
+<li>仓库按任务拣配复核、包装并确认出库。</li>
+<li>包裹与物流服务关联，状态回传到OMS及渠道。</li>
+<li>履约异常交给对应岗位，取消和退款分别遵守原流程。</li>
+</ol>
+<h3 id="交接与异常_3">交接与异常</h3>
+<p>已付款不等于已预留，已预留不等于已出库。一个订单可拆成多个包裹，包裹A签收不能证明包裹B也签收。取消已预留订单需要原系统处理释放占用和退款事项；取消本身不证明钱已退回。平台保留原状态及映射，不能把不同源系统的“已完成”硬译成同一个含义。</p>
+<h3 id="ai协同与案例_5">AI协同与案例</h3>
+<p>已过承诺发货时间、OMS仍待发而WMS无出库证据的订单应列为风险。结合库存和CRM催单，可说明“源数据表明缺货”或“库存可售但仓内任务待核实”。不充分的证据要列候选原因，而不是认定某部门失职。可建议CRM内部工单安排协调，但平台不替代原系统分仓、取消、改地址或出库。</p>
+</section><section class="doc-section" id="doc-section-012"><h2 id="stage-12">12 配送交付：事件记录与客户感受结合看</h2>
+<p><img alt="包裹关联订单、运输派送、核对全部包裹后确认交付，AI结合WMS物流事件、OMS承诺及CRM反馈识别异常" src="../images/27-delivery-handover.png"/></p>
+<p>上方是实物流转，下方是证据和责任交接。停滞、拒收或签收争议交责任岗位调查，再由原系统记录结果。旧事件不得覆盖新状态；单个包裹签收不能代替整单确认；客户反馈与物流记录冲突时保留差异，不自动退款或补发。</p>
+<h3 id="输入与角色_7">输入与角色</h3>
+<p>物流事件提供包裹位置和状态，OMS提供承诺，CRM记录催单与反馈。承运商可能多次发送同一事件，也可能迟到或乱序。原WMS/物流系统负责运输事实，平台负责识别跨系统风险。</p>
+<h3 id="分流程_7">分流程</h3>
+<ol>
+<li>将每个包裹与订单关联，核实是否还有其他有效包裹。</li>
+<li>接收出库、揽收、运输、派送、签收或异常信息。</li>
+<li>对停滞、地址待确认、拒收、丢失调查分别明确负责人。</li>
+<li>结合客户承诺和CRM沟通记录安排处理优先级。</li>
+<li>结束配送异常时保留来源结果与客户后续问题，不只关闭预警。</li>
+</ol>
+<h3 id="异常与ai协同_1">异常与AI协同</h3>
+<p>平台收到昨天的在途事件，不能让今天已签收的投影倒退。包裹一度长时间无更新但已确认签收，应同时保留曾发生的停滞线索及当前完成事实。某客户说未收到而系统签收，只能形成待调查差异，不能直接判定客户或物流一方错误。</p>
+<h3 id="案例">案例</h3>
+<p>10张超时订单中，6张WMS未出库，4张已出库但物流停滞。把它们统一标“仓库发货慢”会找错责任人。AI应分别引用订单、包裹和CRM证据，提出两个协调队列；内部工单可以承接跟进，退款、赔付或重新发货仍由原业务流程决定。</p>
+</section><section class="doc-section" id="doc-section-013"><h2 id="stage-13">13 客户与售后：退款、退货、投诉各有证据</h2>
+<p><img alt="CRM核对诉求和证据后，资金、退货实物、客户问题三条线分别办理并记录结果" src="../images/28-after-sales-evidence.png"/></p>
+<p>按实际处理方案选择资金线、实物线和问题线，不要求所有诉求都走退货。退款以支付侧结果核对，实物以WMS收货质检确认，客户问题由CRM跟进；成本转回以财务来源为准。AI仅归纳脱敏主题、关联订单履约和观察重复问题，候选原因需要业务核实。</p>
+<h3 id="输入与角色_8">输入与角色</h3>
+<p>CRM承接咨询与投诉，OMS保留退款/退货业务事实，WMS处理实物回仓和质检，财务确认资金与成本结果。客户体验是跨系统过程，不只是客服工单状态。</p>
+<h3 id="分流程_8">分流程</h3>
+<ol>
+<li>客服确认问题、原订单和诉求，敏感信息留在原授权系统。</li>
+<li>核对商品描述、履约记录、历史沟通与售后范围。</li>
+<li>按原OMS/CRM流程决定退款、退货、调查或其他处理。</li>
+<li>退款依据支付侧结果确认；实物依据WMS收货与检验确认。</li>
+<li>CRM跟进客户问题并结案，财务按实际费用/成本处理。</li>
+<li>平台把匿名反馈主题与商品、订单、履约和贡献关联，观察重复问题。</li>
+</ol>
+<h3 id="钱和货的两条线">钱和货的两条线</h3>
+<p>只退款不退货、退回待检、退回合格、退回破损是不同组合。退款成功不会让库存自动增加，退货入仓也不会证明退款完成。商品成本转回必须有财务来源；仅凭“退货已收”不能给贡献加回成本。</p>
+<h3 id="ai协同与案例_6">AI协同与案例</h3>
+<p>同一订单可能先咨询、再投诉、再催退款，三条工单不是三位受影响买家。平台按成熟签收订单群组计算投诉订单占比，再展示主题分布。100张符合观察窗的订单中12张有投诉，比例12%；这不是“12%的商品已被鉴定有缺陷”。若12张中8张关联物流延迟，应调查履约环节，不能把它们全算商品质量问题。没有批次信息时不能声称某个生产批次有缺陷。</p>
+<p>平台可以创建内部质量调查工单，归纳脱敏证据；不会自动发道歉邮件、承诺赔付或退款。模型主题分类不确定时标UNKNOWN，留给业务复核。</p>
+</section><section class="doc-section" id="doc-section-014"><h2 id="stage-14">14 结算与贡献：把销售、费用、现金分开理解</h2>
+<h3 id="四个时点">四个时点</h3>
+<p>买家付款、商品出库、平台结算、企业银行到账可能分属不同日期。OMS实收金额说明交易事实；FINANCE账单说明费用和应结算结果；银行到账还需要实际账户凭据。本平台不建设资金账户或法定总账，经营贡献不能标成会计净利润。</p>
+<p><img alt="43.80销售实收减6.57平台费得到37.23预期净结算，再减8.00履约和10.00成本得到19.23贡献" src="../images/17-settlement-contribution.png"/></p>
+<p>图为税外USD样例，不代表真实平台费率或物流报价。37.23为同口径预期净结算，不等于银行已到账；19.23未扣企业全部期间费用。</p>
+<h3 id="分流程_9">分流程</h3>
+<ol>
+<li>确认订单实收、成功退款与币种，使用来源快照。</li>
+<li>获取对应订单平台费、履约费、商品成本及确认状态。</li>
+<li>核对账单是累计快照还是增量明细；适配器统一到本项目累计语义。</li>
+<li>按相同窗口与口径计算贡献，列出缺失记录与差异。</li>
+<li>财务在原系统调查、调整或补充资料，平台同步后生成新报告。</li>
+<li>联合渠道广告消耗观察期间经营结果，列明归因限制。</li>
+</ol>
+<h3 id="ai协同与案例_7">AI协同与案例</h3>
+<p>43.80−6.57−8.00−10.00=19.23 USD；退款19.90后贡献−0.67；财务确认成本转回5.00后贡献4.33。若仅有实物退回而没有财务转回记录，仍保持−0.67并提示证据待补。相同订单累计结算从20变37.23时取最新37.23，不能把两次抓取相加成57.23。</p>
+<p>AI可以把“销量增长、广告消耗增长、退款增加、费用变化”联系起来解释趋势，并给内部核查建议。缺少费用时显示partialValue和缺项，不能填0后得出高利润结论；没有对照实验不能声称某次AI建议直接带来全部增长。</p>
+</section><section class="doc-section" id="doc-section-015"><h2 id="stage-15">15 补货与改进：让分析回到原有业务体系</h2>
+<h3 id="输入与角色_9">输入与角色</h3>
+<p>运营、采购、客服和财务把跨系统问题提交到分析工作台。平台用规则保证数字一致，用AI提炼证据、候选原因与方案。经理对具体参数、范围和证据审批；执行人员触发已批准动作，原系统继续完成业务。</p>
+<h3 id="完整协同分流程">完整协同分流程</h3>
+<ol>
+<li>选定对象、时间窗口与问题，不用“全公司所有数据随便分析”的模糊范围。</li>
+<li>检查来源完整性和数据时间，缺数据先补齐。</li>
+<li>固定快照，计算需求、可售、供给、投诉与费用。</li>
+<li>形成方案及限制，区分确定事实、假设和待核事项。</li>
+<li>用户确认动作参数，提交另一授权人员审批。</li>
+<li>执行前核实当前权限、原系统条件及批准是否过期。</li>
+<li>原ERP创建采购草稿或原CRM创建内部工单，保存回执。</li>
+<li>原系统按既有流程继续办理，平台跟进业务状态与效果。</li>
+</ol>
+<p><img alt="建议通过审批和复核后创建原系统草稿，未知结果先查回执，后续业务仍在原系统办理" src="../images/20-approved-execution.png"/></p>
+<p>图示说明“建议批准”“外部创建成功”“业务最终完成”是三层结果。超时只说明没有得到确定响应；创建可能已经发生，应按原执行键查询。换一个键重新创建会产生重复采购草稿或重复工单。</p>
+<h3 id="质量与数量不能分开">质量与数量不能分开</h3>
+<p>如果供需模型算出应买20件，但同商品投诉比例达到调查阈值，平台先提出质量调查。若补货到D8才可售而D6就会断货，应说明常规补货无法避免中间缺货，需要加急协商或其他原业务处理；“窗口总量够”不等于每天都有货。</p>
+</section><section class="doc-section" id="doc-section-016"><h2 id="stage-16">16 四类联合分析怎样分工</h2>
+<p><img alt="总控与证据角色组织共同快照，补货、履约、VOC和贡献按需分析，综合审校后进入人工建议与审批" src="../images/25-multi-agent-collaboration.png"/></p>
+<p>图中四个领域分别对应上表四类联合分析，按问题选择参与者而非每次全跑。最多两个领域并行，所有角色复用同一证据快照与预算；补证与审校共用一次重规划额度。图中“分析报告→人工审批”为业务摘要，实际还需用户确认建议及服务端复核，审校通过不等于人工批准。</p>
+<div aria-label="表格 6，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>至少需要的数据</th>
+<th>计算与AI各做什么</th>
+<th>可交回的任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>为什么可能缺货</td>
+<td>OMS需求+WMS可售+ERP供给+CRM质量信号</td>
+<td>程序算逐日余额，AI解释风险和替代方案</td>
+<td>ERP采购草稿或内部质量调查</td>
+</tr>
+<tr>
+<td>为什么订单延迟</td>
+<td>OMS承诺+WMS包裹+CRM催单</td>
+<td>规则判超时，AI聚合原因候选与责任线索</td>
+<td>CRM内部履约工单</td>
+</tr>
+<tr>
+<td>哪些商品问题反复发生</td>
+<td>CRM文本+OMS订单/退款+WMS履约</td>
+<td>程序定分母去重，AI提取主题并引用原文</td>
+<td>CRM内部商品问题调查</td>
+</tr>
+<tr>
+<td>为什么贡献下降</td>
+<td>OMS实收退款+财务费用成本+渠道消耗</td>
+<td>程序算可比指标，AI解释结构变化和限制</td>
+<td>CRM内部财务核查工单</td>
+</tr>
+</tbody>
+</table></div>
+<p>一条工单可以引用多个证据，但只需要一次明确的责任交接。多个分析同时发现同一对象同一窗口的风险时，预警按规则去重更新，避免把同一个问题分成一堆重复通知。模型不应把“可能相关”包装成“已证明原因”。</p>
+<h3 id="从业务流程识别ai建设重点">从业务流程识别AI建设重点</h3>
+<p>上述补货、履约、VOC、贡献四类联合分析在本项目均为<strong>强 AI 相关</strong>：模型需要结合多源证据解释问题、比较路径并说明不确定性。数据同步、指标计算、审批和回执为<strong>弱 AI 相关</strong>，提供分析所需的数据及协同支撑；隔离、幂等恢复、测试与发布为必要的<strong>AI 不相关</strong>基础。业务流程中采购、入库、发货、结算等既有办理环节继续由原系统负责，不因流程图包含它们就成为平台新增模块。</p>
+<p>实际实施以<a href="02_需求规格说明书.html">02逐项需求规格</a>为准；业务概念和行业流程不是额外功能清单。总架构及部署分工见<a href="03_开发实施文档.html#system-architecture">03系统架构</a>。</p>
+<h3 id="多agent如何协同分析同一业务问题">多Agent如何协同分析同一业务问题</h3>
+<p>总控Agent把问题分成证据和领域子任务；证据Agent主动选择知识、SQL或图检索，遇到缺口可补查；补货、履约、VOC、贡献Agent按需分析，再由方案综合与审校Agent合并结论、复核证据。8个角色并不要求每次全部运行。以“缺货伴随投诉增加”为例，补货Agent解释数量，VOC Agent判断投诉主题，关系查询提供商品与供应商的来源路径，综合Agent说明补货与质量核查应分别处理。审校通过后仍由业务人员决定是否提交建议和批准。</p>
+<p>五层架构中，这些角色属于Agent编排层，Tools、Skills、MCP、Memory、Agentic RAG、NL2SQL、NL2Cypher属于可复用通用层；采购、发货和结算仍在既有系统办理。详见<a href="03_开发实施文档.html#five-layer-architecture">五层架构与协作图</a>。</p>
+<p>进一步按时间顺序理解交互，可阅读<a href="02_需求规格说明书.html#seq-replenishment-analysis">12张核心业务时序图</a>；理解数据落在哪里，可查看<a href="05_数据与接口契约.html#core-entities">核心表与ER关系</a>。</p>
+</section><section class="doc-section" id="doc-section-017"><h2 id="stage-17">17 贯穿案例：BOX-A从发现问题到原系统执行</h2>
+<h3 id="171-正常补货链">17.1 正常补货链</h3>
+<p><img alt="可售由库存互斥分桶计算，为补货案例提供数量起点" src="../images/21-inventory-read-model.png"/></p>
+<p>先按图得到55件可售，再结合下方每日余额与ERP原供给计算缺口，不能把预留、冻结和不可售数量重复当成可售。</p>
+<p>D0=2025-10-26。WMS现货100、预留30、冻结10、不可售5，可售55；OMS新增日需求10件，不重复包含已预留30件；未来7天新增需求70件，安全缓冲2天即20件。ERP已批准供给20件预计D4可售；供应商MOQ10、packSize10，候选补货预计D6可售。CRM/WMS/OMS完整覆盖质量观察窗口（D0前44至14日签收、观察14日），成熟样本100单中3单有效投诉，未达到质量调查阈值；这批历史群组与近期需求窗口分开。</p>
+<p>目标90件，缺口90−55−20=15件，按订购倍数建议20件。平台保存ERP、OMS、WMS、CRM的来源版本、时间和快照hash，解释为什么是20而不是15，经理检查采购金额和交期后批准。执行前供货条件、权限与库存证据仍有效，平台创建ERP采购草稿并取得原单号；ERP采购负责人仍需办理后续审核。</p>
+<div aria-label="表格 7，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>日期</th>
+<th>不采取新方案的期末余额</th>
+<th>新采购D6到货20件后的余额</th>
+<th>观察</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>45</td>
+<td>45</td>
+<td>55减10</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>35</td>
+<td>35</td>
+<td>原供应尚未到</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>25</td>
+<td>25</td>
+<td>不能把D4到货提前加现货</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>35</td>
+<td>35</td>
+<td>先加原供给20，再减10</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>25</td>
+<td>25</td>
+<td>继续扣新增需求</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>15</td>
+<td>35</td>
+<td>仅方案曲线加新采购20</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>5</td>
+<td>25</td>
+<td>方案后达到20件缓冲目标</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="172-同样数量交期变化会改变结论">17.2 同样数量，交期变化会改变结论</h3>
+<p><img alt="运输及收货环节共同决定可售日期，单个到港时点不能替代最终可售时点" src="../images/06-crossborder-logistics.png"/></p>
+<p>案例中的交期变化会沿运输、到仓和质检链路传递；下方D8表示确认后的预计可售日，而非仅到港日。</p>
+<p>若原供给和候选采购都延到D8，未采取措施D1—D7余额为45、35、25、15、5、−5、−15，D6首次短缺。这个版本不能继续展示原D6到货方案为有效；旧建议过期，新分析说明需要加急/协调。时间变化与数量变化同样需要重新审核。</p>
+<h3 id="173-客诉与贡献使方案更完整">17.3 客诉与贡献使方案更完整</h3>
+<p><img alt="售后资金、实物和问题处理分别提供投诉与经营贡献分析的证据" src="../images/28-after-sales-evidence.png"/></p>
+<p>投诉主题、退款金额、退货质检和成本转回来自不同证据线，必须分别核对后才能联合解释，不能从其中一项推断其余事项已完成。</p>
+<p>如果同成熟签收群组100单中12单投诉，前一可比窗口为3/100，投诉占比从3%到12%，增加9个百分点。业务先复核主题与履约分布；不能把12单直接称“12件质量缺陷”。达到P0调查阈值时，补货转单暂停，先建议CRM内部调查。</p>
+<p>若此商品典型订单税外实收43.80USD，费6.57、履约8.00、商品成本10.00，则贡献19.23。发生退款19.90后变−0.67；只有财务确认成本转回5.00后才变4.33。把需求、投诉和贡献放在一起，才能讨论“补多少、何时补、是否先处理质量、需要核实哪些费用”，而非只看到销量就补货。</p>
+<h3 id="174-超时与业务结果">17.4 超时与业务结果</h3>
+<p><img alt="建议审批后由独立执行器创建草稿，未知结果先查原执行键回执，再观察原业务进展" src="../images/20-approved-execution.png"/></p>
+<p>超时走回执核对分支：查到已创建草稿就补记同一执行结果，不换键再次创建；后续采购是否获批由ERP业务状态另行证明。</p>
+<p>平台调用ERP创建草稿后响应丢失，执行显示UNKNOWN。采购人员不能再点一个“新建同样草稿”绕过未知状态；执行中心用原executionKey查询，查到原ERP单号则补记SUCCEEDED。之后ERP草稿被驳回也不把“曾创建成功”的执行事实改成失败，平台另显示原业务驳回状态及原因。</p>
+</section><section class="doc-section" id="doc-section-018"><h2 id="stage-18">18 术语速查</h2>
+<p>术语用于辨认业务问题和系统责任。下面的“本项目用法”是当前契约，不代表所有平台的默认口径。涉及贸易、税务和合同的术语只解释基础含义，实际办理由对应负责人按适用规则确认。</p>
+<h3 id="181-商品渠道">18.1 商品渠道</h3>
+<div aria-label="表格 8，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语与英文</th>
+<th>通俗解释</th>
+<th>本项目用法与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SKU — Stock Keeping Unit，库存单位编码</td>
+<td>企业用来区分、管理具体存货的编码。<a href="https://sell.amazon.com/blog/sku-definition-guide">Amazon 说明</a></td>
+<td>商品事实在ERP；不同租户同名BOX-A不能关联。</td>
+</tr>
+<tr>
+<td>SPU — Standard Product Unit，标准产品单元</td>
+<td>把具有共同主要特征的商品归成一类，具体规格再分成 SKU。<a href="https://cloud.tencent.com/document/product/1689/124414">腾讯云术语说明</a></td>
+<td>商品归组信息由原系统提供，不自动把不同SKU库存合并。</td>
+</tr>
+<tr>
+<td>Listing — 渠道商品刊登记录</td>
+<td>在销售渠道上展示和销售商品的一条记录，通常关联商品描述、标识和报价。<a href="https://m.media-amazon.com/images/G/35/sp-marketing-toolkit/Sellerfacingguides/Listing/Listing_Guide.pdf">Amazon 刊登指南</a></td>
+<td>确认渠道/店铺映射，未知映射进入隔离，不能让模型猜测。</td>
+</tr>
+<tr>
+<td>ASIN — Amazon Standard Identification Number</td>
+<td>Amazon 分配的 10 位字母数字商品标识。<a href="https://sell.amazon.com/blog/how-to-create-a-new-asin-amazon">Amazon ASIN 说明</a></td>
+<td>用于识别 Amazon 目录商品，不能直接代替本公司的 SKU，也不单独表示某卖家的库存。</td>
+</tr>
+<tr>
+<td>GTIN — Global Trade Item Number，全球贸易项目代码</td>
+<td>GS1 体系中标识可定价、订购或开票的贸易项目的号码。<a href="https://support.gs1.org/support/solutions/articles/43000734283-what-is-a-global-trade-item-number-gtin-">GS1 定义</a></td>
+<td>商品条码常承载 GTIN；内部 SKU 与 GTIN 用途不同。Amazon 的适用要求须按类目核实，不能推断所有商品都无例外地必须新增号码。</td>
+</tr>
+<tr>
+<td>FBA — Fulfillment by Amazon</td>
+<td>卖家把货送入 Amazon 履约网络，由其承担相应拣配、发货及售后服务。<a href="https://sell.amazon.com/blog/fba-vs-fbm">Amazon 对照说明</a></td>
+<td>独立平台仓来源；不计入自营仓可售和补货抵扣。</td>
+</tr>
+<tr>
+<td>FBM — Fulfilled by Merchant</td>
+<td>Amazon 订单由卖家负责组织履约。<a href="https://sell.amazon.com/blog/fba-vs-fbm">Amazon 对照说明</a></td>
+<td>卖家可使用自身设施或合作服务完成配送；不要理解成只能由卖家员工亲自送货。本项目不据此承诺已接通 Amazon 生产接口。</td>
+</tr>
+<tr>
+<td>销售渠道 — Sales Channel</td>
+<td>商品接触买家、产生订单的销售入口，如平台或独立站。<a href="https://help.shopify.com/en/manual/online-sales-channels">Shopify 渠道说明</a></td>
+<td>渠道回答“订单从哪里来”；仓库回答“货从哪里发”，两者不能当作同一字段。</td>
+</tr>
+<tr>
+<td>店铺 — Store / Seller Store</td>
+<td>本项目用于区分同一渠道内具体经营账号或店铺的数据归属。</td>
+<td>同一公司可以有多个店铺；渠道、店铺和渠道商品标识共同帮助确定 Listing 映射，不能只按商品名称匹配。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="182-采购库存">18.2 采购库存</h3>
+<div aria-label="表格 9，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语与英文</th>
+<th>通俗解释</th>
+<th>本项目用法与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PO — Purchase Order，采购单</td>
+<td>向供应商明确要买什么、买多少及约定价格的业务单据。<a href="https://learning.sap.com/courses/managing-logistics-in-sap-business-one/purchasing-items">SAP 采购说明</a></td>
+<td>原ERP负责采购生命周期；平台仅可经审批创建草稿。</td>
+</tr>
+<tr>
+<td>MOQ — Minimum Order Quantity，最小起订量</td>
+<td>一次采购或订购需要达到的最低数量；最小量和数量倍数可以是不同规则。<a href="https://help.shopify.com/en/manual/b2b/catalogs/quantity-pricing">Shopify 数量规则</a></td>
+<td>最低起订量与packSize分别校验；MOQ15、pack10时至少20件。</td>
+</tr>
+<tr>
+<td>提前期／交期 — Lead Time</td>
+<td>从确定的起点到货物达到约定可用节点所需的时间。<a href="https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_162488535703.html">Oracle 库存参数</a></td>
+<td>须确认起点与终点；补货用预计可售日而非到港日。</td>
+</tr>
+<tr>
+<td>安全库存 — Safety Stock</td>
+<td>为需求波动或到货偏差预留的缓冲数量。<a href="https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_162488535703.html">Oracle 库存参数</a></td>
+<td>P0安全天数乘基线日需求；不是冻结库存。</td>
+</tr>
+<tr>
+<td>再订货点 — Reorder Point / ROP</td>
+<td>库存位置降到某个水平时，触发补货判断的门槛。<a href="https://docs.oracle.com/en/cloud/saas/supply-chain-and-manufacturing/25c/faurp/policy-assignment-sets.html">Oracle 补货策略</a></td>
+<td>P0采用窗口目标和逐日余额，不直接照搬外部ROP策略。</td>
+</tr>
+<tr>
+<td>在库现货 — On Hand</td>
+<td>标准投影中指已实际记入该自营仓的物理总量，包含预留、冻结和不可售。</td>
+<td>权威WMS事实；ERP镜像不能与其相加。</td>
+</tr>
+<tr>
+<td>已预留 — Reserved</td>
+<td>标准投影中指已经分配给具体订单、尚未出库的数量。</td>
+<td>由原OMS/WMS维护；新增需求不能重复扣除已占用订单。</td>
+</tr>
+<tr>
+<td>冻结 — Frozen</td>
+<td>标准投影中指暂时禁止销售、等待规定业务处理的在库数量。</td>
+<td>标准投影与不可售互斥；来源重叠必须转换并留证据。</td>
+</tr>
+<tr>
+<td>不可售 — Unusable</td>
+<td>标准投影中指已在库、但不能作为正常可售商品使用的数量。</td>
+<td>有实物不代表能销售；平台不提供库存报废动作。</td>
+</tr>
+<tr>
+<td>在途 — In Transit</td>
+<td>运输语境下指已发出、尚未在目标地点完成接收的货物。<a href="https://learning.sap.com/courses/procurement-process-overview/explaining-stock-transfer-business-processes-in-sap-s-4hana">SAP 调拨说明</a></td>
+<td>运输在途与已批准未发运供给不同；均不能提前计现货。</td>
+</tr>
+<tr>
+<td>可售／可用 — Available</td>
+<td>标准投影中为当前自营仓还能用于新订单分配的数量。</td>
+<td>available=onHand−reserved−frozen−unusable；平台只复算核对。</td>
+</tr>
+<tr>
+<td>分配 — Allocation</td>
+<td>原OMS/WMS为订单确定履约来源及库存占用的业务动作。</td>
+<td>原OMS/WMS确定履约仓与占用；平台只分析分配结果。</td>
+</tr>
+<tr>
+<td>盘点 — Stocktake / Inventory Count</td>
+<td>把现场清点数量与账面数量核对，找出差异。</td>
+<td>差异在原WMS调查和调整，AI不能直接改余额。</td>
+</tr>
+<tr>
+<td>调拨 — Stock Transfer</td>
+<td>把同一企业的货物从一个仓库移到另一个仓库。<a href="https://learning.sap.com/courses/procurement-process-overview/explaining-stock-transfer-business-processes-in-sap-s-4hana">SAP 调拨说明</a></td>
+<td>源发出不代表目的已收；平台不办理调拨。</td>
+</tr>
+<tr>
+<td>补货 — Replenishment</td>
+<td>根据需求、库存和可确认供给，安排后续可用货源。<a href="https://docs.oracle.com/en/cloud/saas/supply-chain-and-manufacturing/25c/faurp/policy-assignment-sets.html">Oracle 补货策略</a></td>
+<td>分析数量与到货时点，批准后可创建ERP草稿，原流程继续审批。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="183-物流贸易">18.3 物流贸易</h3>
+<div aria-label="表格 10，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语与英文</th>
+<th>通俗解释</th>
+<th>本项目用法与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3PL — Third-Party Logistics，第三方物流</td>
+<td>企业委托外部服务商承担仓储、配送等部分物流工作。<a href="https://www.dsv.com/en-us/support/glossary">DSV 术语表</a></td>
+<td>第三方仓可以帮忙拣货和配送；外包操作不消除企业对订单、库存和结算的核对责任。</td>
+</tr>
+<tr>
+<td>主流向 — Head Haul / Headhaul；“头程”易混词</td>
+<td>航运英文通常指一条贸易航线货量较大的方向，与返程 Backhaul 相对。<a href="https://investor.maersk.com/static-files/63776be4-8aee-42c4-a8ff-89ee1139cb83">Maersk 官方释义</a></td>
+<td>本文中文“头程”指国内备货点至海外仓等前段运输。它与 Head haul 不严格等义；对外询价要写清起止点及运输段。</td>
+</tr>
+<tr>
+<td>尾程／最后一程 — Last Mile</td>
+<td>从当地配送节点把包裹送到最终收货地点的最后一段。<a href="https://lot.dhl.com/glossary/last-mile-delivery/">DHL 释义</a></td>
+<td>不是长度固定的一英里；“进入尾程”仍不等于买家已签收。</td>
+</tr>
+<tr>
+<td>ETA — Estimated Time of Arrival，预计到达时间</td>
+<td>对某个运输节点到达时间的预测。<a href="https://www.maersk.com/support/glossaries/shipping-terms">Maersk 术语表</a></td>
+<td>必须写清预计到港、到仓还是送达；到港 ETA 不能直接用作本项目预计可售日。</td>
+</tr>
+<tr>
+<td>ETD — Estimated Time of Departure，预计离开时间</td>
+<td>对货物或运载工具离开指定节点时间的预测。<a href="https://www.maersk.com/~/media_sc9/maersk/local-information/files/asia-pacific/korea/export/customer-advisory/maersk-understanding-of-correct-onboard-date-rule-on-bill-of-lading-20230424.pdf">Maersk 船期说明</a></td>
+<td>预计出发不是实际发运；计划调整后应保留新旧时间与来源，不能据计划时间生成完成事实。</td>
+</tr>
+<tr>
+<td>AWB — Air Waybill，航空运单</td>
+<td>航空货运中承载托运人与承运人运输合同信息的文件。<a href="https://www.iata.org/en/programs/cargo/e/efreight/">IATA 说明</a></td>
+<td>航空运单、包裹追踪号和采购单号有不同用途；取得运单不表示货物已到仓。</td>
+</tr>
+<tr>
+<td>B/L — Bill of Lading，提单</td>
+<td>海运中用于记录承运关系等事项的重要运输单据；类型会影响流转和提货安排。<a href="https://www.trade.gov/common-export-documents">美国国际贸易管理局说明</a></td>
+<td>不要把所有提单都理解成可转让凭证；本项目订单发货记录不代替正式海运单证。</td>
+</tr>
+<tr>
+<td>POD — Proof of Delivery，交付证明</td>
+<td>证明货物交付的记录，可包括签收信息及交付凭证。<a href="https://www.maersk.com/support/faqs/ground-freight-proof-of-delivery">Maersk 交付证明说明</a></td>
+<td>原ERP负责采购生命周期；平台仅可经审批创建草稿。</td>
+</tr>
+<tr>
+<td>HS Code — Harmonized System Code，商品协调制度编码</td>
+<td>WCO 建立的国际商品分类体系，国际层级以六位编码识别商品组。<a href="https://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx">WCO 说明</a></td>
+<td>目的地申报可能使用更长的本地编码；不能仅凭商品名称猜码，也不能把编码等同固定税率。</td>
+</tr>
+<tr>
+<td>Incoterms® — International Commercial Terms，国际贸易术语规则</td>
+<td>ICC 制定的交付规则，用于划分买卖双方的相关任务、成本与风险。<a href="https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/">ICC 说明</a></td>
+<td>使用时写明术语、约定地点和版本；它不是付款状态，也不能代替完整采购合同。</td>
+</tr>
+<tr>
+<td>DDP — Delivered Duty Paid，完税后交货</td>
+<td>卖方承担到约定目的地交付及进口清关等责任，通常交付时待卸货。<a href="https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf">ICC 规则选择说明</a></td>
+<td>是否具备履行目的地义务的条件需另行确认；不要把业务简称“双清包税”直接视为完整 DDP 合同。</td>
+</tr>
+<tr>
+<td>DAP — Delivered at Place，目的地交货</td>
+<td>卖方负责送到约定地点待卸货，进口清关由买方负责。<a href="https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf">ICC 规则选择说明</a></td>
+<td>与 DDP 的差别涉及进口责任；只比较运输报价总额容易漏掉责任边界。</td>
+</tr>
+<tr>
+<td>FOB — Free On Board，船上交货</td>
+<td>适用于海运或内河运输，约定在装运港船上交付，风险在该交付点转移。<a href="https://library.iccwbo.org/content/clp/Others/incoterms_2020_checklist_2024-update.pdf">ICC 规则选择说明</a></td>
+<td>不能因中文常说“离岸价”就把 FOB 套到所有空运、快递或多式联运报价。</td>
+</tr>
+<tr>
+<td>商业发票 — Commercial Invoice</td>
+<td>列明买卖货物及交易金额、用于商业和通关事项的文件。<a href="https://www.trade.gov/common-export-documents">美国国际贸易管理局说明</a></td>
+<td>它与平台结算报告、买家付款成功回执不是同一种文件；金额和货描应与交易资料对应。</td>
+</tr>
+<tr>
+<td>装箱单 — Packing List</td>
+<td>说明货物怎样装入各包装，以及件数、重量等内容的单据。<a href="https://www.trade.gov/common-export-documents">美国国际贸易管理局说明</a></td>
+<td>主要回答“箱里装了什么、装多少”，不能替代商业发票；装了多少箱也不等于多少 SKU 件数。</td>
+</tr>
+<tr>
+<td>清关 — Customs Clearance</td>
+<td>为货物进出境提交所需资料并办理有关手续，直至获得放行的过程。<a href="https://www.dhl.com/us-en/home/express/shipping-and-tracking/customs/customs-clearance.html">DHL 说明</a></td>
+<td>清关完成不等于仓库收货完成；本项目 P0 不建设报关或税务申报系统。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="184-财务经营">18.4 财务经营</h3>
+<div aria-label="表格 11，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语与英文</th>
+<th>通俗解释</th>
+<th>本项目用法与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GMV — Gross Merchandise Value，商品交易总额</td>
+<td>衡量一段时间交易规模的金额指标，具体包含项由报告口径决定。<a href="https://www.shopify.com/blog/gross-merchandise-value">Shopify 说明</a></td>
+<td>不同平台对退款、运费和税额处理可能不同；不能把 GMV 直接当到账金额或利润。本项目看板以已定义的指标为准。</td>
+</tr>
+<tr>
+<td>AOV — Average Order Value，平均订单金额</td>
+<td>同一统计口径下的销售金额除以订单数，用来观察每单规模。<a href="https://www.shopify.com/blog/gross-merchandise-value">Shopify 说明</a></td>
+<td>同期 10 单共 500 美元可得每单 50 美元；必须先说明是否含运费、取消及退款，不能跨口径相除。</td>
+</tr>
+<tr>
+<td>COGS — Cost of Goods Sold，已售商品成本</td>
+<td>与已经售出商品相对应的成本。<a href="https://www.shopify.com/blog/merchandise-inventory">Shopify 成本说明</a></td>
+<td>使用FINANCE确认的成本快照，不随当前商品主档改价而重算历史。</td>
+</tr>
+<tr>
+<td>经营贡献 — Contribution</td>
+<td>标准投影中定义为净销售额减平台费、履约运费和净商品成本。</td>
+<td>19.23 USD样例未覆盖全部企业费用，不是会计净利润。</td>
+</tr>
+<tr>
+<td>回款划付 — Payout</td>
+<td>平台或支付服务把可结算资金划至商户收款账户的动作。<a href="https://docs.stripe.com/payouts">Stripe 说明</a></td>
+<td>买家付款、平台结算与银行到账分开；平台不付款。</td>
+</tr>
+<tr>
+<td>对账 — Reconciliation</td>
+<td>把两组相关记录逐笔匹配，解释金额、费用或时间上的差异。<a href="https://docs.stripe.com/reports/payout-reconciliation">Stripe 对账说明</a></td>
+<td>比较同口径记录，缺少费用不能填零；平台不代替原财务调账。</td>
+</tr>
+<tr>
+<td>外汇／汇率 — FX / Foreign Exchange / Exchange Rate</td>
+<td>不同货币的兑换及其换算比例。<a href="https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/role_of_exchange_rates.en.html">欧洲央行说明</a></td>
+<td>7.000000为验收快照，不是实时牌价；来源汇率不能反用。</td>
+</tr>
+<tr>
+<td>RMA — Return Merchandise Authorization，退货授权</td>
+<td>批准和跟踪商品退回的安排，通常以授权编号关联原订单。<a href="https://www.shopify.com/ie/blog/return-merchandise-authorization">Shopify 说明</a></td>
+<td>原OMS记录授权，WMS记录实收；平台分别观察。</td>
+</tr>
+<tr>
+<td>退款 — Refund</td>
+<td>将已经支付的全部或部分款项退给付款方。<a href="https://docs.stripe.com/refunds">Stripe 说明</a></td>
+<td>只读原OMS成功退款累计；平台不调用支付退款。</td>
+</tr>
+<tr>
+<td>实物退货 — Return</td>
+<td>把购买的实物退回并进行接收、检验与处置的过程。<a href="https://www.shopify.com/blog/rma-return">Shopify 退货说明</a></td>
+<td>由原WMS接收检验；成本转回必须有FINANCE证据。</td>
+</tr>
+<tr>
+<td>拒付 — Chargeback</td>
+<td>持卡人向发卡机构提出付款争议，由相应争议流程处理。<a href="https://docs.stripe.com/disputes">Stripe 争议说明</a></td>
+<td>与主动退款不同，P0不新增办理能力。</td>
+</tr>
+<tr>
+<td>净销售额 — Net Sales</td>
+<td>本项目使用税外实收（含客户运费）减成功退款累计。</td>
+<td>本项目使用税外实收减成功退款；税额拆分不明则报告不完整。</td>
+</tr>
+<tr>
+<td>平台费 — Platform Fee</td>
+<td>标准投影中用于记录与平台交易相关的费用项目，按约定费用口径保存估算或实际值。</td>
+<td>来源估算和实际确认分开；6.57 USD仅为样例。</td>
+</tr>
+<tr>
+<td>履约运费 — Fulfillment Shipping Cost</td>
+<td>标准投影中指为完成订单配送承担的运费费用项。</td>
+<td>买家付4.00是收入、履约付8.00是费用；不混为差额字段。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="185-系统协同">18.5 系统协同</h3>
+<div aria-label="表格 12，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语与英文</th>
+<th>通俗解释</th>
+<th>本项目用法与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERP — Enterprise Resource Planning，企业资源计划系统</td>
+<td>把采购、库存、销售、财务等业务信息连接起来的企业管理系统。<a href="https://www.ibm.com/think/topics/enterprise-resource-planning">IBM 说明</a></td>
+<td>既有系统，权威提供商品、供应关系与采购。</td>
+</tr>
+<tr>
+<td>OMS — Order Management System，订单管理系统</td>
+<td>跟踪和组织订单从进入到履约、售后的业务过程。<a href="https://www.ibm.com/think/topics/order-management">IBM 说明</a></td>
+<td>既有订单管理系统；用户确认本场景使用OMS。</td>
+</tr>
+<tr>
+<td>WMS — Warehouse Management System，仓库管理系统</td>
+<td>帮助掌握仓内库存并组织收发与履约作业的系统。<a href="https://www.oracle.com/scm/logistics/warehouse-management/what-is-warehouse-management/">Oracle 说明</a></td>
+<td>既有仓库管理系统；权威提供库存与履约事实。</td>
+</tr>
+<tr>
+<td>幂等 — Idempotency</td>
+<td>同一业务请求重试时，不重复产生已经完成的业务结果。<a href="https://docs.stripe.com/api/idempotent_requests">Stripe 说明</a></td>
+<td>同executionKey对应同一外部对象，超时先查回执。</td>
+</tr>
+<tr>
+<td>事务发件箱 — Transactional Outbox</td>
+<td>把业务变更和待发事件一起可靠保存，再由后台发送事件的方式。<a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html">AWS 说明</a></td>
+<td>平台执行记录与待发事件同事务；发送仍可能重复，源端仍需幂等。</td>
+</tr>
+<tr>
+<td>审计轨迹 — Audit Trail</td>
+<td>按时间保留可还原操作经过的记录。<a href="https://csrc.nist.gov/glossary/term/audit_trail">NIST 释义</a></td>
+<td>关联分析、证据、审批、执行和回执，不记录密钥与客户明文。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="186-ai枢纽与数据协同">18.6 AI枢纽与数据协同</h3>
+<div aria-label="表格 13，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语与英文</th>
+<th>通俗解释</th>
+<th>本项目用法与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRM / 客户关系管理</td>
+<td>管理客户互动、服务与协同记录的系统。</td>
+<td>读取匿名客户及反馈，经审批创建内部工单，不对客发消息。</td>
+</tr>
+<tr>
+<td>ORM / 对象关系映射</td>
+<td>程序访问关系数据库的一种技术。</td>
+<td>不是订单管理系统OMS的名称。</td>
+</tr>
+<tr>
+<td>Pack Size / 订购倍数</td>
+<td>采购数量需满足的整数倍数。</td>
+<td>与最低起订量MOQ独立。</td>
+</tr>
+<tr>
+<td>VOC / 客户之声</td>
+<td>客户反馈、意见与体验材料。</td>
+<td>主题是线索，不能直接认定已证实产品缺陷。</td>
+</tr>
+<tr>
+<td>Cohort / 群组</td>
+<td>按共同条件与时间选取的一组对象。</td>
+<td>投诉比例须使用相同且已成熟的签收群组。</td>
+</tr>
+<tr>
+<td>Connector / 连接器</td>
+<td>把来源协议转成标准端口的组件。</td>
+<td>定义端口不等于已对接某厂商。</td>
+</tr>
+<tr>
+<td>Canonical ID / 统一标识</td>
+<td>关联同一业务对象的稳定平台ID。</td>
+<td>保留来源编号，禁止跨租户或相似名称自动合并。</td>
+</tr>
+<tr>
+<td>Data Lineage / 数据血缘</td>
+<td>指标与结论到输入及转换过程的关系。</td>
+<td>能追踪来源、版本、时间与计算规则。</td>
+</tr>
+<tr>
+<td>asOf / 事实时点</td>
+<td>数据内容对应的有效观察时间。</td>
+<td>与平台接收时间observedAt不同。</td>
+</tr>
+<tr>
+<td>coverageThrough / 覆盖水位</td>
+<td>某数据域已完整同步到的时间。</td>
+<td>单条最新记录不能证明全域完整。</td>
+</tr>
+<tr>
+<td>Snapshot / 分析快照</td>
+<td>冻结分析输入、范围与规则版本的记录。</td>
+<td>迟到数据生成新分析，不偷偷改历史。</td>
+</tr>
+<tr>
+<td>RAG / 检索增强生成</td>
+<td>检索相关材料后让模型依据材料回答。</td>
+<td>先过滤权限，再检索，最后复核引用。</td>
+</tr>
+<tr>
+<td>LLM / 大语言模型</td>
+<td>理解和生成语言的模型。</td>
+<td>分类、解释与归纳，不替代金额和库存计算。</td>
+</tr>
+<tr>
+<td>Evidence / 证据</td>
+<td>支持结论的来源记录、指标或知识片段。</td>
+<td>不存在或无权访问的引用不得进入回答。</td>
+</tr>
+<tr>
+<td>Prompt Injection / 提示注入</td>
+<td>外部输入试图改变模型任务或权限。</td>
+<td>客服文本和文档不是指令，授权在模型外执行。</td>
+</tr>
+<tr>
+<td>Tool Calling / 工具调用</td>
+<td>模型提出结构化工具请求，由程序验证执行。</td>
+<td>产品模型只有允许的只读工具。</td>
+</tr>
+<tr>
+<td>UNKNOWN / 结果未知</td>
+<td>无法确定外部动作是否已经生效。</td>
+<td>先查询原执行键，不换键重新创建。</td>
+</tr>
+<tr>
+<td>RBAC / 角色权限</td>
+<td>按角色规定可用操作。</td>
+<td>还须租户、环境、店铺和仓库范围过滤。</td>
+</tr>
+<tr>
+<td>DEGRADED / 降级</td>
+<td>部分能力不可用，只返回已确认的有限结果。</td>
+<td>显示RULES_ONLY，不伪称模型解释成功。</td>
+</tr>
+<tr>
+<td>累计快照 / Cumulative Snapshot</td>
+<td>截至某时点的累计结果。</td>
+<td>取最新版本，不将每次抓取值相加。</td>
+</tr>
+<tr>
+<td>Outbox租约 / Lease</td>
+<td>Worker在一段时间内处理某任务的占用权。</td>
+<td>租约过期不证明外部动作没发生，SENDING先查回执。</td>
+</tr>
+<tr>
+<td>百分点 / Percentage Point</td>
+<td>两个百分比直接相减得到的差。</td>
+<td>12%到3%的差是9个百分点，不能叫增长9%。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ai架构相关术语">AI架构相关术语</h3>
+<div aria-label="表格 14，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>含义</th>
+<th>业务理解与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent</td>
+<td>依据目标、上下文与工具反馈选择下一步的智能角色</td>
+<td>可决定先查交期还是先查投诉，但不能自己授予采购审批权</td>
+</tr>
+<tr>
+<td>多Agent协同</td>
+<td>多个职责不同的Agent共享证据、交换结构化结果并复核冲突</td>
+<td>补货与VOC共同分析，方案综合保留二者风险，而非多个聊天框</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>Agent可以调用的受控函数能力</td>
+<td>查询一个指标或证据；参数、权限与结果大小均有约束</td>
+</tr>
+<tr>
+<td>Skills</td>
+<td>经审核的可复用任务方法和输出规范</td>
+<td>补货Skill规定先查哪些约束；不是自动安装的代码插件</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>Model Context Protocol，连接模型应用与工具能力的协议</td>
+<td>让知识与图查询以统一端点接入；协议本身不等于业务授权</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>任务上下文与经过确认、可撤销的跨任务偏好</td>
+<td>记住回答详略，不把昨天的库存永久当成今天的事实</td>
+</tr>
+<tr>
+<td>Agentic RAG</td>
+<td>由Agent主动规划检索、判断缺口、改写查询和决定停止的检索增强生成</td>
+<td>先查知识，发现不足再查结构化或关系证据；本项目放在通用层</td>
+</tr>
+<tr>
+<td>NL2SQL</td>
+<td>自然语言转换为受控关系数据查询</td>
+<td>询问某商品贡献变化，由语义计划生成只读SQL并返回来源</td>
+</tr>
+<tr>
+<td>NL2Cypher</td>
+<td>自然语言转换为受控图关系查询</td>
+<td>查商品、供应商、订单、投诉之间的关联路径；关联不等于因果</td>
+</tr>
+<tr>
+<td>DAG</td>
+<td>Directed Acyclic Graph，有向无环任务依赖图</td>
+<td>证据就绪后并行分析，综合等待必需领域完成；禁止无限互相委托</td>
+</tr>
+</tbody>
+</table></div>
+</section><section class="doc-section" id="doc-section-019"><h2 id="stage-19">19 最容易混淆的边界</h2>
+<div aria-label="表格 15，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>容易混淆</th>
+<th>必须分开</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平台数据与原系统事实</td>
+<td>平台投影是有时间的副本，原系统有权威业务写入责任</td>
+</tr>
+<tr>
+<td>ERP库存镜像与WMS库存</td>
+<td>指向同一仓货物不能相加；权威来源每域唯一</td>
+</tr>
+<tr>
+<td>总量与可售</td>
+<td>占用、冻结、不可售不能拿来满足新增订单</td>
+</tr>
+<tr>
+<td>计划供给与现货</td>
+<td>未来预计入库不能提前计入现货</td>
+</tr>
+<tr>
+<td>累计快照与增量明细</td>
+<td>前者取最新，后者按唯一事件汇总；必须经适配确认</td>
+</tr>
+<tr>
+<td>模型判断与确定性指标</td>
+<td>模型解释不替代数字运算和业务授权</td>
+</tr>
+<tr>
+<td>投诉率与缺陷率</td>
+<td>投诉证据不等于经鉴定的产品缺陷</td>
+</tr>
+<tr>
+<td>相关与因果</td>
+<td>同时变化不代表某个变化导致另一个变化</td>
+</tr>
+<tr>
+<td>批准与执行成功</td>
+<td>批准是授权；成功需要目标系统确认回执</td>
+</tr>
+<tr>
+<td>平台执行成功与业务完成</td>
+<td>草稿/工单存在，不代表采购到货或问题解决</td>
+</tr>
+<tr>
+<td>退款与退货</td>
+<td>钱和货各自有状态与证据</td>
+</tr>
+<tr>
+<td>贡献与净利润</td>
+<td>贡献未覆盖所有企业费用与会计调整</td>
+</tr>
+</tbody>
+</table></div>
+</section><section class="doc-section" id="doc-section-020"><h2 id="stage-20">20 场景判断与核对</h2>
+<h3 id="场景一erp和wms都显示100件能不能说有200件">场景一：ERP和WMS都显示100件，能不能说有200件</h3>
+<p>先确认是否同一仓、同一对象、同一时点的镜像。如果是，只有一份权威余额。平台按domain_authority读取WMS库存，ERP镜像可用于核查差异，不能相加。</p>
+<h3 id="场景二平台一分钟前同步成功补货为什么仍被阻断">场景二：平台一分钟前同步成功，补货为什么仍被阻断</h3>
+<p>同步成功只证明请求处理完成。若库存asOf已超过15分钟，或coverageThrough没有完整覆盖窗口，数据仍旧。需要刷新源数据或核实延迟，不能把observedAt当库存事实时间。</p>
+<h3 id="场景三客户三次催单是否计三单投诉">场景三：客户三次催单，是否计三单投诉</h3>
+<p>投诉工单条数可以是3，但去重投诉订单数是1。分母还需是相同店铺/商品签收群组且观察期结束的订单，不能拿全店所有订单随便除。</p>
+<h3 id="场景四模型说批准采购能否直接执行">场景四：模型说批准采购，能否直接执行</h3>
+<p>不能。模型没有审批权限，建议必须由另一授权人员确认具体参数与证据。执行器还要核对源条件和有效期。只读分析工具不能调用原系统写端口。</p>
+<h3 id="场景五erp创建超时是否再次生成新的executionkey">场景五：ERP创建超时，是否再次生成新的executionKey</h3>
+<p>不能。先用原键查询。可能草稿已存在但响应丢失；换键会绕过幂等并造成重复。查不到也不一定是确定未创建，需要适配器返回权威NOT_FOUND及安全重试保证。</p>
+<h3 id="场景六ai建议采纳后销售增长是否可以写ai提升销售20">场景六：AI建议采纳后销售增长，是否可以写“AI提升销售20%”</h3>
+<p>需要可比基线、观察窗及其他影响因素。促销、季节、供给和渠道变化都可能影响结果。P0记录观察值与限制，可以报告关联变化，不能编造已经证明的因果收益。</p>
+</section><section class="doc-section" id="doc-section-021"><h2 id="stage-21">21 阅读下一份文档与范围依据</h2>
+<p>继续阅读<a href="01_阅读导航.html">01阅读导航</a>、<a href="02_需求规格说明书.html">02需求规格</a>、<a href="03_开发实施文档.html">03开发实施</a>、<a href="04_文档同步规则.html">04同步规则</a>、<a href="05_数据与接口契约.html">05数据与接口契约</a>、<a href="06_AI协作开发指南.html">06AI协作开发</a>。业务流程说明原体系如何运转；平台必须实现的能力由HUB-001—044、API-01—54及UAT-01—36共同约束。</p>
+<p>术语与流程概念参考原项目业务资料及<a href="https://www.ibm.com/think/topics/enterprise-resource-planning">IBM ERP说明</a>、<a href="https://www.ibm.com/think/topics/order-management">IBM订单管理说明</a>、<a href="https://www.oracle.com/scm/logistics/warehouse-management/what-is-warehouse-management/">Oracle WMS说明</a>。本版系统责任、分析阈值、固定验收数据及回写边界为项目设计选择。实际厂商接入、贸易条款、费用和政策需各负责人核验，文档不作为已经上线或生产验收通过的证明。</p></section>
+      </main>
+      <p class="empty-state" id="empty-state" hidden>没有匹配的章节。请更换关键词，或清空搜索恢复全文。</p>
+      <footer class="document-footer">
+        <span>正文来源：00_跨境电商业务流程与术语指南.md（维护工作区）</span>
+        <span>版本指纹 <code>e7bb8cbae749</code> · 可用 --check 校验</span>
+      </footer>
+    </div>
+  </div>
+  <div class="live-message" id="live-message" role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  "use strict";
+  const body = document.body;
+  const sidebar = document.getElementById("sidebar");
+  const toggle = document.getElementById("menu-toggle");
+  const close = document.getElementById("menu-close");
+  const scrim = document.getElementById("menu-scrim");
+  const input = document.getElementById("document-search");
+  const clear = document.getElementById("search-clear");
+  const status = document.getElementById("search-status");
+  const empty = document.getElementById("empty-state");
+  const sections = Array.from(document.querySelectorAll("#document > .doc-section"));
+  const entries = Array.from(document.querySelectorAll(".toc-entry"));
+  const live = document.getElementById("live-message");
+  const mobile = window.matchMedia("(max-width: 800px)");
+  const normalize = value => value.normalize("NFKC").toLocaleLowerCase().replace(/\s+/g, " ").trim();
+  const sectionText = new Map(sections.map(section => [section.id, normalize(section.textContent)]));
+
+  function syncSidebarAccessibility() {
+    sidebar.inert = mobile.matches && !body.classList.contains("menu-open");
+  }
+  function setMenu(open, returnFocus = true) {
+    body.classList.toggle("menu-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    syncSidebarAccessibility();
+    if (open) close.focus();
+    else if (returnFocus && mobile.matches) toggle.focus();
+  }
+  toggle.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+  close.addEventListener("click", () => setMenu(false));
+  scrim.addEventListener("click", () => setMenu(false));
+  mobile.addEventListener("change", () => { setMenu(false, false); syncSidebarAccessibility(); });
+  sidebar.addEventListener("click", event => {
+    const link = event.target.closest("a");
+    if (link && mobile.matches) {
+      setMenu(false, false);
+      if (link.getAttribute("href").startsWith("#")) {
+        const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+        if (target) { target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true }); }
+      }
+    }
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && body.classList.contains("menu-open")) setMenu(false);
+    if (event.key === "Tab" && mobile.matches && body.classList.contains("menu-open")) {
+      const focusable = Array.from(sidebar.querySelectorAll("a[href], button:not([disabled])")).filter(el => el.getClientRects().length);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+    if (event.key === "/" && !event.ctrlKey && !event.metaKey && !event.altKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+      event.preventDefault();
+      setMenu(false, false);
+      input.focus();
+    }
+  });
+  syncSidebarAccessibility();
+
+  function applySearch() {
+    const query = normalize(input.value);
+    let matches = 0;
+    let occurrences = 0;
+    const visible = new Set();
+    sections.forEach(section => {
+      const text = sectionText.get(section.id);
+      const match = !query || text.includes(query);
+      section.hidden = !match;
+      if (match) { matches++; visible.add(section.id); }
+      if (query && match) occurrences += text.split(query).length - 1;
+    });
+    entries.forEach(entry => { entry.hidden = !visible.has(entry.dataset.section); });
+    clear.disabled = !input.value;
+    empty.hidden = matches !== 0;
+    status.textContent = query
+      ? `找到 ${matches} / ${sections.length} 个章节，共 ${occurrences} 处匹配；打印仍包含全部章节。`
+      : `全文共 ${sections.length} 个章节 · 输入关键词筛选，按 / 快速搜索。`;
+  }
+  input.addEventListener("input", applySearch);
+  input.addEventListener("keydown", event => {
+    if (event.key === "Escape") { input.value = ""; applySearch(); }
+  });
+  clear.addEventListener("click", () => { input.value = ""; applySearch(); input.focus(); });
+  applySearch();
+
+  function revealHash() {
+    let id;
+    try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (target && target.closest(".doc-section")?.hidden) {
+      input.value = "";
+      applySearch();
+      target.scrollIntoView();
+    }
+  }
+  window.addEventListener("hashchange", revealHash);
+  revealHash();
+  const tocLinks = Array.from(document.querySelectorAll(".toc-entry a"));
+  const headingLinks = new Map(tocLinks.map(link => [decodeURIComponent(link.hash.slice(1)), link]));
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(records => {
+      const visible = records.filter(record => record.isIntersecting);
+      if (!visible.length) return;
+      const candidate = visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      tocLinks.forEach(link => { link.classList.remove("active"); link.removeAttribute("aria-current"); });
+      const link = headingLinks.get(candidate.target.id);
+      if (link) { link.classList.add("active"); link.setAttribute("aria-current", "location"); }
+    }, { rootMargin: "-10% 0px -70% 0px", threshold: 0 });
+    document.querySelectorAll("#document h2[id], #document h3[id], #document h4[id]").forEach(heading => observer.observe(heading));
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard?.writeText) {
+      try { await navigator.clipboard.writeText(text); return; } catch { /* file:// may deny clipboard permission. */ }
+    }
+    const previous = document.activeElement;
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.cssText = "position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;";
+    textArea.setAttribute("aria-label", "复制代码临时文本");
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    let copied = false;
+    try { copied = document.execCommand("copy"); }
+    finally { textArea.remove(); previous?.focus({ preventScroll: true }); }
+    if (!copied) throw new Error("浏览器拒绝剪贴板访问");
+  }
+  document.querySelectorAll("#document pre").forEach((pre, index) => {
+    const code = pre.querySelector("code");
+    if (!code) return;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy-button";
+    button.textContent = "复制代码";
+    button.setAttribute("aria-label", `复制第 ${index + 1} 个代码块`);
+    button.addEventListener("click", async () => {
+      try {
+        await copyText(code.textContent);
+        button.textContent = "已复制";
+        live.textContent = `第 ${index + 1} 个代码块已复制。`;
+      } catch {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        button.textContent = "请按 Ctrl+C";
+        live.textContent = "剪贴板访问受限，代码已选中，请按 Ctrl+C 或使用系统复制操作。";
+      }
+      window.setTimeout(() => { button.textContent = "复制代码"; }, 2200);
+    });
+    pre.appendChild(button);
+  });
+
+  let printDetails = [];
+  window.addEventListener("beforeprint", () => {
+    printDetails = Array.from(document.querySelectorAll("#document details:not([open])"));
+    printDetails.forEach(detail => { detail.open = true; });
+  });
+  window.addEventListener("afterprint", () => {
+    printDetails.forEach(detail => { detail.open = false; });
+    printDetails = [];
+  });
+  document.getElementById("print-all").addEventListener("click", async () => {
+    if (window.documentDiagramsReady) await window.documentDiagramsReady;
+    window.print();
+  });
+})();
+
+  </script>
+</body>
+</html>

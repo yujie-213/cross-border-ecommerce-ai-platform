@@ -1,0 +1,542 @@
+{
+  "scope": "DOCUMENT_GOVERNANCE_AND_PUBLICATION_PREPARATION_ONLY",
+  "observedHead": "f113229fa6eefc271b811e290858d596174ea52e",
+  "inventory": {
+    "files": 370,
+    "totalBytes": 22163831,
+    "byExtension": {
+      "<none>": 2,
+      ".md": 63,
+      ".html": 14,
+      ".csv": 8,
+      ".js": 5,
+      ".json": 106,
+      ".mmd": 59,
+      ".svg": 38,
+      ".png": 40,
+      ".cjs": 6,
+      ".py": 19,
+      ".zip": 2,
+      ".diff": 4,
+      ".css": 2,
+      ".tmpl": 1,
+      ".txt": 1
+    },
+    "markdownAndHtml": 77,
+    "largestFiles": [
+      {
+        "path": "docs/architecture/logical/assets/mermaid-11.15.0.min.js",
+        "bytes": 3312967
+      },
+      {
+        "path": "docs/agents/assets/mermaid-11.4.1.min.js",
+        "bytes": 2571900
+      },
+      {
+        "path": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.html",
+        "bytes": 968469
+      },
+      {
+        "path": "docs/agents/AI_DETAILED_DESIGN.html",
+        "bytes": 868076
+      },
+      {
+        "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/ai-hub-architecture.html",
+        "bytes": 853219
+      }
+    ]
+  },
+  "worktreeFindings": [],
+  "sensitiveFiles": [],
+  "excludedLocalFiles": [
+    "docs/planning/local/plan-flow.png",
+    "docs/planning/local/plan-top.png",
+    "docs/planning/__pycache__/repository_audit.cpython-313.pyc",
+    "docs/governance/local/agent-revision-check.json",
+    "docs/governance/local/agent-validation-report.json",
+    "docs/governance/local/document-browser-check.json",
+    "docs/governance/local/screenshot-inventory.json",
+    "docs/governance/local/screenshots-1.jpg",
+    "docs/governance/local/screenshots-2.jpg",
+    "docs/governance/local/screenshots-3.jpg",
+    "docs/governance/local/screenshots-4.jpg",
+    "docs/governance/local/tests.json",
+    "docs/governance/__pycache__/paths.cpython-313.pyc"
+  ],
+  "history": {
+    "reachableObjects": 459,
+    "unreachableObjectsScanned": 86,
+    "uniqueBlobs": 453,
+    "commits": 7,
+    "largestBlobBytes": 3312967,
+    "findings": [],
+    "scope": "All reachable refs plus every locally stored unreachable Git object; blob ZIP contents and commit/tag messages included; no history rewritten",
+    "historicalEmailConsent": "用户已明确同意保留现有历史邮箱公开"
+  },
+  "links": {
+    "checkedLocalTargets": 681,
+    "externalReferencesNotFetched": 214,
+    "brokenActive": [],
+    "historicalMissing": [
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_需求文档草案.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_总体逻辑架构与流程设计.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_可行性分析报告.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_概要开发设计文档.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/baseline-manifest.json"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.html"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/技术与范式选型决策表.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/AI网关缓存准入与隔离矩阵.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/S01—S10_Agent与Workflow设计.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/待验证假设与实施门槛清单.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/本次新增及修改文件清单.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/内部一致性检查记录.md"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/AI模块详细开发设计文档_v0.1.md",
+        "target": "ai-design/validation-report.json"
+      },
+      {
+        "doc": "docs/archive/ai-review-d01-d05/before/S01—S10_Agent与Workflow设计_v0.1.md",
+        "target": "../智慧中台AI应用项目_AI模块详细开发设计文档.md"
+      },
+      {
+        "doc": "docs/archive/architecture-review/nonblocking-diagram-fixes/before/智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+        "target": "智慧中台AI应用项目_需求文档草案.md"
+      },
+      {
+        "doc": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.html",
+        "target": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.html"
+      },
+      {
+        "doc": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.html",
+        "target": "00_跨境电商业务流程与术语指南.html"
+      },
+      {
+        "doc": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.html",
+        "target": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.html"
+      },
+      {
+        "doc": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.md",
+        "target": "00_跨境电商业务流程与术语指南.html"
+      },
+      {
+        "doc": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.md",
+        "target": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.html"
+      },
+      {
+        "doc": "docs/archive/engineering-review-h01-h07/before/概要开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_需求文档草案.md"
+      },
+      {
+        "doc": "docs/archive/engineering-review-h01-h07/before/概要开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_总体逻辑架构与流程设计.md"
+      },
+      {
+        "doc": "docs/archive/engineering-review-h01-h07/before/概要开发设计文档_v0.1.md",
+        "target": "智慧中台AI应用项目_可行性分析报告.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "01_%E9%98%85%E8%AF%BB%E5%AF%BC%E8%88%AA.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "02_%E9%9C%80%E6%B1%82%E8%A7%84%E6%A0%BC%E8%AF%B4%E6%98%8E%E4%B9%A6.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "03_%E5%BC%80%E5%8F%91%E5%AE%9E%E6%96%BD%E6%96%87%E6%A1%A3.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "04_%E6%96%87%E6%A1%A3%E5%90%8C%E6%AD%A5%E8%A7%84%E5%88%99.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "05_%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%A5%91%E7%BA%A6.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "06_AI%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "07_Agent%E6%A0%B8%E5%BF%83%E5%BC%95%E6%93%8E%E4%B8%8E%E8%A7%92%E8%89%B2%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/18-ai-hub-overview.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/04-commerce-lifecycle.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/11-four-business-flows.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/06-crossborder-logistics.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/19-data-evidence-lineage.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/12-product-decision.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/05-sku-mapping.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/13-listing-conversion.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/14-procurement-lifecycle.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/06-crossborder-logistics.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/15-inbound-quality.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/21-inventory-read-model.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/26-order-fulfillment.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/27-delivery-handover.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/28-after-sales-evidence.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/17-settlement-contribution.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/20-approved-execution.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/25-multi-agent-collaboration.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "02_需求规格说明书.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "03_开发实施文档.html#system-architecture"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "03_开发实施文档.html#five-layer-architecture"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "02_需求规格说明书.html#seq-replenishment-analysis"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "05_数据与接口契约.html#core-entities"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/21-inventory-read-model.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/06-crossborder-logistics.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/28-after-sales-evidence.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "../images/20-approved-execution.png"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "01_阅读导航.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "02_需求规格说明书.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "03_开发实施文档.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "04_文档同步规则.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "05_数据与接口契约.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/00_跨境电商业务流程与术语指南.html",
+        "target": "06_AI协作开发指南.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/D01—D05定点修订说明.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/baseline-manifest.json"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.html"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/技术与范式选型决策表.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/AI网关缓存准入与隔离矩阵.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/S01—S10_Agent与Workflow设计.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/待验证假设与实施门槛清单.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/本次新增及修改文件清单.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/内部一致性检查记录.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_AI模块详细开发设计文档.md",
+        "target": "ai-design/validation-report.json"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_可行性分析报告.md",
+        "target": "智慧中台AI应用项目_架构评审修订说明_R01-R09.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_可行性分析报告.md",
+        "target": "architecture/revisions/nonblocking-diagram-fixes/verification.json"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_可行性分析报告.md",
+        "target": "feasibility/illustrative-financial-model.json"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_可行性分析报告.md",
+        "target": "feasibility/report-manifest.json"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_概要开发设计文档.md",
+        "target": "智慧中台AI应用项目_概要设计审查修订说明_H01-H07.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_概要开发设计文档.md",
+        "target": "智慧中台AI应用项目_概要设计审查修订说明_H01-H07.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_概要开发设计文档.md",
+        "target": "智慧中台AI应用项目_最小代码基座交付与验收清单.md"
+      },
+      {
+        "doc": "docs/archive/governance-20261111/智慧中台AI应用项目_需求文档草案.md",
+        "target": "architecture/mermaid/01-logical-architecture.svg"
+      },
+      {
+        "doc": "docs/archive/plan96-v0.1/docs/PLAN.md",
+        "target": "../智慧中台AI应用项目_需求文档草案.md"
+      },
+      {
+        "doc": "docs/archive/plan96-v0.1/docs/PLAN.md",
+        "target": "../智慧中台AI应用项目_总体逻辑架构与流程设计.md"
+      },
+      {
+        "doc": "docs/archive/plan96-v0.1/docs/PLAN.md",
+        "target": "../智慧中台AI应用项目_可行性分析报告.md"
+      },
+      {
+        "doc": "docs/archive/plan96-v0.1/docs/PLAN.md",
+        "target": "../智慧中台AI应用项目_概要开发设计文档.md"
+      },
+      {
+        "doc": "docs/archive/plan96-v0.1/docs/PLAN.md",
+        "target": "../智慧中台AI应用项目_AI模块详细开发设计文档.md"
+      }
+    ]
+  },
+  "invariants": {
+    "taskCount": 19,
+    "sameTaskIds": true,
+    "taskSemanticChanges": [],
+    "archiveByteMismatches": [],
+    "prototypeChanged": [],
+    "frozenBusinessRuleChanges": []
+  },
+  "tests": [
+    {
+      "command": "python docs/planning/build_docs.py",
+      "result": "PASS",
+      "scope": "文档生成；本轮已执行"
+    },
+    {
+      "command": "python tools/build_requirements.py",
+      "result": "PASS",
+      "scope": "需求阅读页生成；初次旧工具失败后已修复重跑"
+    },
+    {
+      "command": "python tools/build_architecture.py extract / build",
+      "result": "PASS",
+      "scope": "架构提取与阅读页生成；本轮实际分两次执行"
+    },
+    {
+      "command": "python docs/agents/scripts/build_artifacts.py publish",
+      "result": "PASS",
+      "scope": "AI详设阅读页生成"
+    },
+    {
+      "command": "python docs/agents/scripts/check_revision.py",
+      "result": "PASS",
+      "checks": 11
+    },
+    {
+      "command": "python docs/agents/scripts/validate_artifacts.py",
+      "result": "PASS",
+      "checks": 18
+    },
+    {
+      "command": "python docs/ui/check_design.py",
+      "result": "PASS",
+      "protectedFiles": 85,
+      "contrastPairs": 9
+    },
+    {
+      "command": "node docs/planning/render_plan.cjs --browser-only",
+      "result": "PASS",
+      "combinations": 6
+    },
+    {
+      "command": "node docs/agents/scripts/browser_check.cjs",
+      "result": "PASS",
+      "combinations": 6
+    },
+    {
+      "command": "node prototypes/s01/check.cjs",
+      "result": "PASS",
+      "interactionGroups": 20,
+      "evidence": "prototypes/s01/evidence/browser-check.json",
+      "scope": "模拟原型；源码及fixture未改"
+    },
+    {
+      "command": "node docs/governance/browser-check.cjs",
+      "result": "PASS",
+      "combinations": 18,
+      "scope": "6份文档×3宽度"
+    },
+    {
+      "command": "Python AST parse / node --check",
+      "result": "PASS",
+      "pythonFiles": 14,
+      "nodeFiles": 6
+    },
+    {
+      "command": "ERP / database / model / approval / production acceptance",
+      "result": "NOT_RUN",
+      "scope": "本轮无业务开发授权"
+    },
+    {
+      "command": "python docs/planning/check_plan.py",
+      "result": "PASS",
+      "checks": 18,
+      "scope": "after explicit-path staging; original pre-stage whitelist failure retained in process history"
+    },
+    {
+      "command": "python docs/planning/repository_audit.py staged",
+      "result": "PASS",
+      "scannedFiles": 370
+    },
+    {
+      "command": "git -c core.whitespace=cr-at-eol diff --cached --check",
+      "result": "FAIL",
+      "exitCode": 2,
+      "issues": 151,
+      "scope": "Pre-existing whitespace in imported interactive HTML, vendored Mermaid and byte-preserved historical HTML/diff; no business or syntax failure; original bytes retained"
+    }
+  ],
+  "screenshotReview": {
+    "files": 40,
+    "method": "作者逐张缩略总览（4张联系表），关键UI截图沿用前轮单独检查；无EXIF；不声称OCR覆盖每个像素",
+    "outcome": "所见均为设计阅读页/模拟原型，无真实企业系统截图或可识别真实个人信息；第三方运行时许可仍未解决"
+  },
+  "publication": {
+    "status": "BLOCKED",
+    "blockers": [
+      "第三方Mermaid及内嵌图示运行时代码的完整再分发许可/依赖声明尚未核验；未增加项目LICENSE",
+      "GitHub CLI (gh) 未安装或不在PATH，未验证登录账号/创建权限/同名仓库；未创建远端或推送"
+    ],
+    "ghAvailable": false,
+    "repositoryUrl": null,
+    "publicVerified": false,
+    "remoteHead": null
+  },
+  "limitations": "Pattern scans cannot prove absence of every secret or private business fact. Historical archive links are separately reported; screenshots require visual review. No business service, model, ERP or production acceptance was run."
+}

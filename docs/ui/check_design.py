@@ -4,8 +4,13 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+sys.path.insert(0,str(ROOT/'docs/governance'))
+from paths import frozen_content_matches
 
 
 def digest(path):
@@ -45,10 +50,12 @@ def main():
     note_length = len(re.sub(r'\s', '', note))
     source_paths = ['DESIGN.md', 'docs/ui/PRODUCT_SPEC.md', 'docs/ui/ALIGNMENT.md',
                     'docs/ui/DESIGN_NOTE.md', 'docs/ui/RESEARCH.md']
-    good = not changed and not protected and note_length <= 800 and tokens_present and all(x['result'] == 'PASS' for x in ratios)
+    semantic_changes = frozen_content_matches()
+    good = not semantic_changes and not changed and not protected and note_length <= 800 and tokens_present and all(x['result'] == 'PASS' for x in ratios)
     result = dict(kind='DESIGN_ALIGNMENT', reviewType='AUTHOR_SELF_CHECK_NOT_INDEPENDENT_ACCEPTANCE',
                   command='python docs/ui/check_design.py', implementationCommit=head, businessTests='NOT_RUN',
-                  baselinesUnchanged=not changed, baselineMismatches=changed,
+                  baselinesUnchanged=not changed, frozenRuleMismatches=semantic_changes,
+                  governanceNote="Current navigation-only baselines; original byte snapshots retained in archive/governance-20261111", baselineMismatches=changed,
                   protectedUnknownFiles=len(observation['protectedUnknownPaths']), protectedMismatches=protected,
                   designNoteNonWhitespaceCharacters=note_length, designNoteWithin800=note_length <= 800,
                   paletteTokensPresentInCSS=tokens_present, contrastChecks=ratios,

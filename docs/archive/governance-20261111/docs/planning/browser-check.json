@@ -1,0 +1,82 @@
+{
+  "status": "pass",
+  "htmlSha256": "badd531df114681ed73a8b598b90b91d21ba1041edd6482db969d218babae4f6",
+  "checks": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "svg": 1,
+      "sections": 11,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "svg": 1,
+      "sections": 11,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "pass": true
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "svg": 1,
+      "sections": 11,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "theme": "light",
+      "pass": true
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "svg": 1,
+      "sections": 11,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "theme": "dark",
+      "pass": true
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "svg": 1,
+      "sections": 11,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "pass": true
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "svg": 1,
+      "sections": 11,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "visualReview": "抽查1440px首屏及完整阶段流程：节点/文字/箭头/边界可读，无遮挡；其余视口自动检查。",
+  "testedCommit": "84e68e22195d92d708afead9549d84ac3a13d3b4"
+}

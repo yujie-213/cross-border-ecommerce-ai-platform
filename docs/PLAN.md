@@ -4,7 +4,7 @@
 
 ## 1. 依据、顺序变更与唯一正文
 
-直接工程依据是[概要开发设计v0.2](../智慧中台AI应用项目_概要开发设计文档.md)及[AI详细开发设计v0.2](../智慧中台AI应用项目_AI模块详细开发设计文档.md)。正文保持原样。本次用户明确将实施顺序改为S01纵向切片；变更依据、影响及验收映射见[DECISIONS](DECISIONS.md)。旧96项草案原文/历史状态已[归档](archive/plan96-v0.1/README.md)，96个旧ID逐条见[TASK_MAPPING](TASK_MAPPING.md)，不是待逐项完成的路线。
+直接工程依据是[概要开发设计v0.2](architecture/DEVELOPMENT_DESIGN.md)及[AI详细开发设计v0.2](agents/AI_DETAILED_DESIGN.md)。正文保持原样。本次用户明确将实施顺序改为S01纵向切片；变更依据、影响及验收映射见[DECISIONS](DECISIONS.md)。旧96项草案原文/历史状态已[归档](archive/plan96-v0.1/README.md)，96个旧ID逐条见[TASK_MAPPING](TASK_MAPPING.md)，不是待逐项完成的路线。
 
 当前只有本MD是一份计划正文；PLAN.html由文档工具生成，离线内嵌SVG，无远程脚本。任务状态与证据唯一在[TASKS](TASKS.md)，[进度视图](generated/STATUS.md)从其生成，不手工维护完成率。A—D是本次工程工作轨道，不改原M0—M4产品阶段，也不等同旧草案中同名的A/B验收节点。
 

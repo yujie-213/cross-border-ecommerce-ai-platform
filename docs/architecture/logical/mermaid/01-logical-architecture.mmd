@@ -1,0 +1,106 @@
+flowchart TB
+  %% diagram: 01-logical-architecture
+  USER["运营 / 采购 / 仓库 / 客服 / 财务 / 审批 / 集成 / 审计"]
+  subgraph SYSTEM["完整逻辑系统：层与能力组不代表独立部署单元"]
+    subgraph L1["L1 体验与接入层"]
+      W01["W01 统一工作台与 API 入口"]
+    end
+    subgraph L2["L2 场景与任务编排层：两个职责分别展开"]
+      direction TB
+      subgraph SCENES["场景层：ScenarioHandler声明依赖、执行业务步骤与领域降级"]
+        direction TB
+        subgraph CORE["P0 首期场景"]
+          direction LR
+          S01["S01 供需与库存分析"]
+          S02["S02 履约风险分析"]
+          S03["S03 客户体验分析 / VOC"]
+          S04["S04 贡献与费用分析"]
+          S01 ~~~ S02 ~~~ S03 ~~~ S04
+        end
+        subgraph NEXT["P1 拓展场景"]
+          direction LR
+          S05["S05 客服辅助"]
+          S06["S06 内容与增长辅助"]
+          S07["S07 单证辅助"]
+          S05 ~~~ S06 ~~~ S07
+        end
+        subgraph LATER["P2 探索场景"]
+          direction LR
+          S08["S08 经营规划"]
+          S09["S09 视觉质检辅助"]
+          S10["S10 政策核查辅助"]
+          S08 ~~~ S09 ~~~ S10
+        end
+        CORE ~~~ NEXT ~~~ LATER
+      end
+      subgraph TASK["任务编排层：统一执行，不复制业务引擎"]
+        O01["O01 任务编排<br/>计划 / 调度 / 快照协调 / 预算<br/>跨域业务状态 / 综合审校 / 报告"]
+      end
+      O01 -->|按已注册契约调度与收集结果| SCENES
+    end
+  subgraph L3["L3 通用能力层"]
+    direction LR
+    subgraph DOMAIN["领域计算"]
+      direction TB
+      B01["B01 指标语义与计算<br/>给定输入下的唯一逐日供需评价"]
+      B02["B02 预测与优化<br/>构造情景、候选与约束求解"]
+    end
+    subgraph INTELLIGENCE["通用智能：模型仅可用允许的只读工具"]
+      direction TB
+      A01["A01 模型网关<br/>只返回调用结果与技术错误"]
+      A02["A02 内容理解与抽取"]
+      A03["A03 检索与受控查询"]
+    end
+    subgraph COLLAB["协同控制：不向模型暴露外部写工具"]
+      direction TB
+      C01["C01 建议与预警"]
+      C02["C02 审批与授权"]
+      C03["C03 受控执行与结果跟踪"]
+    end
+  end
+  subgraph L4["L4 数据与集成层"]
+    direction LR
+    D01["D01 连接器与同步"]
+    D02["D02 标准身份与投影"]
+    D03["D03 数据质量与快照<br/>唯一输入数据版本清单"]
+    D04["D04 证据登记与血缘<br/>资产定位与派生关系，不复制结果"]
+  end
+  subgraph L5["L5 运行基础层 / 基础设施层"]
+    I01["I01 运行基础<br/>实际持久化 / 任务恢复 / 凭据与运维<br/>文件与检索按需，不预建通用接口族"]
+  end
+  end
+  subgraph GOVERNANCE["横向治理：作用于各层及适配边界"]
+    G01["G01 权限与策略<br/>角色 / 企业 / 店铺 / 仓库 / 字段 / 工具"]
+    G02["G02 审计、观测与评测<br/>追踪 / 版本 / 质量 / 费用 / 恢复验证"]
+  end
+  READ["原系统授权读取端口<br/>ERP / OMS / WMS / CRM / 财务 / 渠道 / 授权知识"]
+  WRITE["原 ERP / CRM 受控写端口<br/>首期仅采购草稿 / 内部工单"]
+  MODEL["经授权的模型提供方<br/>云端或本地实现择需选择"]
+
+  USER --> W01
+  W01 -->|提交分析问题与可信范围，由O01调度| L2
+  SCENES -->|领域指标与候选计算| DOMAIN
+  SCENES -->|领域内容理解、查询与模型调用| INTELLIGENCE
+  W01 -.->|用户分别发起建议、审批及执行命令| COLLAB
+  L3 -->|标准事实、固定快照与证据引用| L4
+  L4 -.->|存储、索引、调度与密钥承载| I01
+  A02 -->|按需模型理解| A01
+  A03 -->|模型查询规划经网关| A01
+  B02 -->|调用B01评价候选情景指标，单向依赖| B01
+  C01 -->|用户另行明确提交审批| C02
+  C02 -->|有效批准和授权触发后复核| C03
+  COLLAB -->|仅C03经ActionAdapter写入| WRITE
+  INTELLIGENCE -->|仅经A01模型适配| MODEL
+  L4 -->|D01授权只读| READ
+  D01 -->|交付带来源的记录| D02
+  D02 -->|版本投影校验| D03
+  D03 -->|快照与来源血缘| D04
+  G01 -.->|作用于各层、来源、缓存、工具和执行边界| SYSTEM
+  G02 -.->|贯穿任务、数据、模型、动作和基础设施| SYSTEM
+
+  classDef current fill:#e8f4ee,stroke:#148276,color:#173b36
+  classDef future fill:#f3f4f6,stroke:#8997a3,color:#465563,stroke-dasharray:5 4
+  classDef control fill:#fff3df,stroke:#b77e24,color:#573e1f
+  class S01,S02,S03,S04 current
+  class S05,S06,S07,S08,S09,S10 future
+  class C02,C03,G01 control

@@ -1,0 +1,105 @@
+{
+  "status": "pass",
+  "revision": "R01-R09-v0.2",
+  "documents": [
+    {
+      "kind": "requirements",
+      "path": "智慧中台AI应用项目_需求文档草案.html",
+      "sha256": "4d83187824cc9bde4030d52492b636b4d10bf8ebddb11b3152931101271d765b",
+      "viewports": [
+        {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "sections": 16,
+          "diagrams": 0,
+          "sourceHash": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
+          "hasVersion02": true
+        },
+        {
+          "width": 1920,
+          "scrollWidth": 1920,
+          "sections": 16,
+          "diagrams": 0,
+          "sourceHash": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
+          "hasVersion02": true
+        },
+        {
+          "width": 390,
+          "scrollWidth": 390,
+          "sections": 16,
+          "diagrams": 0,
+          "sourceHash": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
+          "hasVersion02": true
+        }
+      ]
+    },
+    {
+      "kind": "architecture",
+      "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.html",
+      "sha256": "6f3c608232a7f68e875f9eac9d9aad8cb42853e0a26383caf9d5dfcce73514f9",
+      "viewports": [
+        {
+          "width": 1440,
+          "scrollWidth": 1440,
+          "sections": 12,
+          "diagrams": 6,
+          "sourceHash": "809c1e20fd403950cc27e70299a800424aa98893d4b803d161c338d6a4156348",
+          "hasVersion02": true
+        },
+        {
+          "width": 1920,
+          "scrollWidth": 1920,
+          "sections": 12,
+          "diagrams": 6,
+          "sourceHash": "809c1e20fd403950cc27e70299a800424aa98893d4b803d161c338d6a4156348",
+          "hasVersion02": true
+        },
+        {
+          "width": 390,
+          "scrollWidth": 390,
+          "sections": 12,
+          "diagrams": 6,
+          "sourceHash": "809c1e20fd403950cc27e70299a800424aa98893d4b803d161c338d6a4156348",
+          "hasVersion02": true
+        }
+      ]
+    }
+  ],
+  "standaloneSvg": [
+    {
+      "id": "01-logical-architecture",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "02-cross-domain-analysis",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "03-suggestion-and-approval",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "04-controlled-execution",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "05-system-data-flow",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "06-initial-deployment",
+      "parserErrors": 0,
+      "svg": true
+    }
+  ],
+  "requirementsDiagram": "current-Mermaid-SVG",
+  "offline": true,
+  "pageErrors": [],
+  "remoteRequests": [],
+  "zoomControls": "passed"
+}

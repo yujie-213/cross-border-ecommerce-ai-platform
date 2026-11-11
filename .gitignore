@@ -47,3 +47,17 @@ docs/planning/local/
 *.pth
 *.gguf
 models/weights/
+
+# Documentation governance: local QA, downloaded review material and machine settings
+docs/governance/local/
+.vscode/
+.idea/
+*.bak
+*.tmp
+# Local model/data exports
+*.bin
+*.h5
+*.hdf5
+*.ckpt
+*.parquet
+*.sql

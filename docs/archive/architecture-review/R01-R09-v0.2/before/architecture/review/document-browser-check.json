@@ -1,0 +1,63 @@
+{
+  "status": "pass",
+  "artifactSha256": "e820331543aaa6a0086b0cc8e01f2cff44b6b0924c2e0933e8d60127449f8fd5",
+  "viewports": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "sections": 12,
+      "diagrams": 6,
+      "sourceBlocks": 6
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "sections": 12,
+      "diagrams": 6,
+      "sourceBlocks": 6
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "sections": 12,
+      "diagrams": 6,
+      "sourceBlocks": 6
+    }
+  ],
+  "standaloneSvg": [
+    {
+      "id": "01-logical-architecture",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "02-cross-domain-analysis",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "03-suggestion-and-approval",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "04-controlled-execution",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "05-system-data-flow",
+      "parserErrors": 0,
+      "svg": true
+    },
+    {
+      "id": "06-initial-deployment",
+      "parserErrors": 0,
+      "svg": true
+    }
+  ],
+  "offline": true,
+  "remoteRequests": [],
+  "pageErrors": [],
+  "zoomControls": "passed"
+}

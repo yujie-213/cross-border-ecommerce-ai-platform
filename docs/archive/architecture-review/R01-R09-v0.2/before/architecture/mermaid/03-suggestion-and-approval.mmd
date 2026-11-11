@@ -1,0 +1,60 @@
+sequenceDiagram
+  %% diagram: 03-suggestion-and-approval
+  autonumber
+  participant O as O01 任务编排
+  actor U as 建议发起人
+  participant W as W01 工作台
+  participant C1 as C01 建议与预警
+  participant C2 as C02 审批与授权
+  participant G as G01 权限策略
+  participant Q as D03 质量与快照
+  actor H as 另一授权审批人
+
+  O->>C1: 报告引用、风险键、候选动作与参数模式
+  C1->>C1: 风险去重，保存DRAFT建议版本和证据绑定
+  C1-->>W: 待确认建议与业务依据
+  U->>W: 核对具体数量、日期、范围和证据
+  W->>G: 校验确认和发起权限
+  G-->>W: 允许或拒绝
+  alt 发起权限不足
+    W-->>U: 拒绝提交
+  else 允许发起
+    W->>C1: 确认suggestionId、suggestionVersion及参数指纹
+    C1->>Q: 检查建议依赖数据与快照是否仍适用
+    Q-->>C1: 有效或需要刷新
+    alt 关键证据失效或参数不完整
+      C1-->>W: 不进入审批，要求补证或生成新分析
+    else 建议满足提交条件
+      C1->>C1: DRAFT到CONFIRMED
+      C1->>C2: 提交不可变建议版本和批准范围
+      C2->>G: 校验动作类型、审批策略和人员分离要求
+      G-->>C2: 可审批范围与允许审批人
+      C2->>C2: 创建PENDING审批记录
+      C2-->>C1: 审批请求已受理
+      C1->>C1: CONFIRMED到SUBMITTED
+      C2-->>W: 待审批任务、参数指纹和有效期
+      H->>W: 查看证据并批准或拒绝
+      W->>C2: 提交人工决策及意见
+      C2->>G: 再校验当前权限、范围与独立审批人身份
+      C2->>C1: 读取被批准建议的准确版本
+      C2->>Q: 复核证据适用性及有效期
+      alt 校验通过且人工批准
+        C2->>C2: 写入APPROVED及批准参数指纹、版本和有效期
+        C2-->>W: 有效批准记录，不代表已执行
+      else 人工拒绝
+        C2->>C2: 写入REJECTED及意见
+        C2-->>W: 拒绝结果
+      else 权限、版本或证据已变化
+        C2-->>W: 不批准，要求刷新或重新提交
+      end
+    end
+  end
+  opt 后续修改数量、范围或关键证据
+    U->>W: 修改建议
+    W->>C1: 创建新建议版本
+    C1->>C1: 原版本SUPERSEDED，新版本重新确认
+    C1->>C2: 失效通知及旧版本关联
+    C2->>C2: 撤销相关批准或保留过期记录，旧批准不得用于新版本
+  end
+  Note over C1,C2: 建议状态仅C01写入；审批状态仅C02写入<br/>通过suggestionId和suggestionVersion关联，不共写状态字段
+  Note over O,H: AI审校不等于人工批准；G02记录发起、确认、审批和版本变化

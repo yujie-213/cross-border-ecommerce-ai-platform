@@ -1,0 +1,86 @@
+{
+  "status": "illustrative_not_enterprise_measurement",
+  "currency": "CNY",
+  "unit": "ten_thousand",
+  "initialInvestmentWan": 184,
+  "annualOpexWan": 80.224,
+  "annualModelCostWan": 3.024,
+  "threeYearStaticAnnualGrossThresholdWan": 141.55733333333333,
+  "threeYearDiscountedAnnualGrossThresholdAt8PctWan": 151.6221665845244,
+  "scenarios": [
+    {
+      "scenario": "conservative",
+      "annualGrossValueWan": 63.0,
+      "annualNetValueWan": -17.224,
+      "staticEconomicPaybackYears": null,
+      "threeYearNPVAt8PctWan": -228.38791850835747,
+      "threeYearTotalCostEconomicROI": -0.5549506442619245
+    },
+    {
+      "scenario": "reference",
+      "annualGrossValueWan": 119.7,
+      "annualNetValueWan": 39.476,
+      "staticEconomicPaybackYears": 4.661059884486777,
+      "threeYearNPVAt8PctWan": -82.26651933140273,
+      "threeYearTotalCostEconomicROI": -0.15440622409765653
+    },
+    {
+      "scenario": "optimistic",
+      "annualGrossValueWan": 180.0,
+      "annualNetValueWan": 99.776,
+      "staticEconomicPaybackYears": 1.8441308531109686,
+      "threeYearNPVAt8PctWan": 73.13242899964436,
+      "threeYearTotalCostEconomicROI": 0.2715695878230728
+    }
+  ],
+  "modelCalls": [
+    {
+      "callsPerTask": 5,
+      "inputTokensPerCall": 3000,
+      "outputTokensPerCall": 1000,
+      "annualCostWan": 3.024
+    },
+    {
+      "callsPerTask": 10,
+      "inputTokensPerCall": 6000,
+      "outputTokensPerCall": 2000,
+      "annualCostWan": 12.096
+    },
+    {
+      "callsPerTask": 20,
+      "inputTokensPerCall": 12000,
+      "outputTokensPerCall": 4000,
+      "annualCostWan": 48.384
+    }
+  ],
+  "threeYearTotalEconomicCostWan": 424.672,
+  "assumptions": {
+    "allValuesHypothetical": true,
+    "vendorQuotation": false,
+    "initialPersonMonths": 40,
+    "loadedCostPerPersonMonthWan": 3.5,
+    "externalAndBuildPeriodCostWan": 12,
+    "incrementalBusinessPreparationWan": 8,
+    "contingencyRate": 0.15,
+    "maintenanceFTE": 1.2,
+    "maintenanceLoadedMonthlyCostWan": 3.5,
+    "businessReviewFTE": 0.5,
+    "businessReviewMonthlyCostWan": 1.8,
+    "annualRuntimeWan": 12,
+    "annualSourceSupportWan": 4,
+    "monthlyTasks": 12000,
+    "monthsPerYear": 12,
+    "averageCallsPerTask": 5,
+    "retrySupplementFactor": 1.2,
+    "inputTokensPerCall": 3000,
+    "outputTokensPerCall": 1000,
+    "illustrativeInputPriceCNYPerMillionTokens": 5,
+    "illustrativeOutputPriceCNYPerMillionTokens": 20,
+    "discountRate": 0.08,
+    "operatingYears": 3,
+    "businessHoursBenefitWan": 29.7,
+    "avoidableStockoutLossBenefitWan": 55,
+    "fulfillmentAfterSalesBenefitWan": 25,
+    "feeRecoveryBenefitWan": 10
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\candidate.json",
+    "sha256": "7a1997ee2871f4795cc929ea5560fe53fff6f4f37d379d0d3822cb90e17e5b1d",
+    "bytes": 4557
+  },
+  "artifact": {
+    "path": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\ai-hub-architecture.html",
+    "sha256": "618df1871cea30eabd09f5554a9b10188c562899dc2711d0b49d69ec1353e500",
+    "bytes": 853219
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\ai-hub-architecture.finalize.json",
+    "summaryReceipt": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\ai-hub-architecture.finalize-summary.json",
+    "browserCheckReceipt": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\ai-hub-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-11-10T13:36:16.575Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4060,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "revision": "R01-R09",
+  "version": "0.2",
+  "publicModulesPreserved": 17,
+  "scenariosPreserved": 10,
+  "candidateCoverageTablesUnchanged": 22,
+  "codeFilesUnchanged": 3,
+  "documentPageScriptsUnchanged": true,
+  "analysisContextJointExampleValid": true,
+  "taskExecutionPathConsistent": true,
+  "b02CallsB01ForDailyEvaluation": true,
+  "a01ReturnsOnlyTechnicalStatus": true,
+  "mermaidSourcesChanged": [
+    "architecture/mermaid/01-logical-architecture.mmd",
+    "architecture/mermaid/02-cross-domain-analysis.mmd",
+    "architecture/mermaid/03-suggestion-and-approval.mmd",
+    "architecture/mermaid/05-system-data-flow.mmd",
+    "architecture/mermaid/06-initial-deployment.mmd"
+  ],
+  "controlledExecutionSourceUnchanged": true,
+  "mermaidAllParsedAndRendered": 6,
+  "offlineDocumentsChecked": 2,
+  "artifactSha256": "6f3c608232a7f68e875f9eac9d9aad8cb42853e0a26383caf9d5dfcce73514f9",
+  "reportSha256": "5c67eac416819da65493f50b1d30be3ce7d75ef2fce7871a90fe73e1bddef2f9",
+  "businessConfirmationPending": true
+}

@@ -1,0 +1,61 @@
+{
+  "documentId": "AIH-FSR-001",
+  "version": "1.0",
+  "assessmentDate": "2026-11-11",
+  "status": "conditional_document_based_assessment",
+  "enterpriseOperationalEvidence": "not_provided",
+  "financialValues": "illustrative_not_vendor_quotes_or_enterprise_forecast",
+  "architectureReviewStatus": "passed_as_confirmed_by_user",
+  "source": {
+    "path": "智慧中台AI应用项目_可行性分析报告.md",
+    "sha256": "c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b"
+  },
+  "inputs": [
+    {
+      "path": "智慧中台AI应用项目_需求文档草案.md",
+      "sha256": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541"
+    },
+    {
+      "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+      "sha256": "d9ab2286e47b76bc8e8d7857610602349506b031250b0e5f062e3ff65011bcd1"
+    },
+    {
+      "path": "智慧中台AI应用项目_架构评审修订说明_R01-R09.md",
+      "sha256": "5c67eac416819da65493f50b1d30be3ce7d75ef2fce7871a90fe73e1bddef2f9"
+    },
+    {
+      "path": "architecture/revisions/nonblocking-diagram-fixes/verification.json",
+      "sha256": "dbb8cccacbfdc76b50a28aebb6990dc8d00c1040b446fafa8f487e40a0e80110"
+    }
+  ],
+  "financialModel": {
+    "path": "feasibility/illustrative-financial-model.json",
+    "sha256": "b77d479ed0f426978c4505fd9262ff5e7556cb5244c457c4ecfdd12e19ce5199"
+  },
+  "unchangedInputBaseline": "feasibility/input-baseline.json",
+  "sourceVerificationDate": "2026-11-11",
+  "artifact": {
+    "path": "智慧中台AI应用项目_可行性分析报告.html",
+    "sha256": "f56499994b9bea6970f3a7cc248da1a6fdffc985960e67964d8d8d35213b0d28"
+  },
+  "contentChecks": {
+    "sections": 18,
+    "tables": 22,
+    "allTenScenarios": true,
+    "publicModules": 17,
+    "mappedRequirements": 22,
+    "monetaryInputsExplicitlyIllustrative": true
+  },
+  "validation": {
+    "status": "pass",
+    "protectedInputsUnchanged": 21,
+    "allTenScenarios": true,
+    "allSeventeenPublicModules": true,
+    "allTwentyTwoRequirements": true,
+    "financialArithmetic": "verified",
+    "htmlSourceHash": "matched",
+    "sourceDocumentsAndCode": "unchanged",
+    "browser": "passed at 1440, 1920 and 390px"
+  },
+  "browserCheck": "feasibility/review/browser-check.json"
+}

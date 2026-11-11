@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "f51b022a-7976-484a-b1a8-45a197e1f2f3",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\candidate.json",
+  "output": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\ai-hub-architecture.html",
+  "specification": {
+    "sha256": "7a1997ee2871f4795cc929ea5560fe53fff6f4f37d379d0d3822cb90e17e5b1d",
+    "bytes": 4557
+  },
+  "artifact": {
+    "sha256": "618df1871cea30eabd09f5554a9b10188c562899dc2711d0b49d69ec1353e500",
+    "bytes": 853219
+  }
+}

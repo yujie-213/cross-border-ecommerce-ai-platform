@@ -4,346 +4,347 @@
   "initialTrackedDiff": "empty (git diff --stat produced no output)",
   "protectedUnknownPaths": [
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.browser-check.json",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/ai-hub-architecture.browser-check.json",
       "sha256": "b370733c653f19bd116c4aa0fd13094768c0b83c1b52c8803bf914d240a699e9"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.delivery.json",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/ai-hub-architecture.delivery.json",
       "sha256": "793f369e1f2cdc627c08e492ec885e8ca6d78c5ceb70832168094874869801b3"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.finalize-summary.json",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/ai-hub-architecture.finalize-summary.json",
       "sha256": "e913ee7c906eb613942f4945ffe5995b28eb8e0582f922a41aa53724fbe47740"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.finalize.json",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/ai-hub-architecture.finalize.json",
       "sha256": "1b7d839c376bccc2a3429065e3623aec4a6501af124dde2c0d55fcd55b67521c"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.html",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/ai-hub-architecture.html",
       "sha256": "618df1871cea30eabd09f5554a9b10188c562899dc2711d0b49d69ec1353e500"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/candidate.json",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/candidate.json",
       "sha256": "7a1997ee2871f4795cc929ea5560fe53fff6f4f37d379d0d3822cb90e17e5b1d"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/document-review/document-architecture.png",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/document-review/document-architecture.png",
       "sha256": "d094d46263bd8de7e56ddbdf71212e5c7ae5ec1b4ba8f0c36ed91072b11c0dc3"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/document-review/document-browser-check.json",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/document-review/document-browser-check.json",
       "sha256": "5ca16a70e133dec82c1bab9d234cf4b4f7e1d6e5ab19d552198092f787e49b2c"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/document-review/document-scope.png",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/document-review/document-scope.png",
       "sha256": "ff2d5d48f145fe5b4204390a0f95be475f231019ac836653ac0f2d526a17cf85"
     },
     {
-      "path": ".archify/architecture-ai-hub-20261110-213455/document-review/document-top.png",
+      "path": "docs/architecture/interactive/architecture-ai-hub-20261110-213455/document-review/document-top.png",
       "sha256": "4e8fc43746393e63e535388db29fa6d61058cc2d8f3464a2072bb2a499d75c5b"
     },
     {
-      "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.browser-check.json",
+      "path": "docs/architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.browser-check.json",
       "sha256": "83f16aa0ac9acfed621b496597583a5543a54197c4dea3ee7c2eb5f44937773a"
     },
     {
-      "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.delivery.json",
+      "path": "docs/architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.delivery.json",
       "sha256": "7c4a2ed82c5dafe5d28da25a53376156f418070814254e3ab4a69ebbba72a1c3"
     },
     {
-      "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.finalize-summary.json",
+      "path": "docs/architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.finalize-summary.json",
       "sha256": "df8e8001a741a4186c091c66c9135da8e2a6163c4e9d5a8d5872183c43a76909"
     },
     {
-      "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.finalize.json",
+      "path": "docs/architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.finalize.json",
       "sha256": "a26cabb30a2070df8994a67db7cd28b96ede5c8f5e899ec0d05c1e5663bfc168"
     },
     {
-      "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.html",
+      "path": "docs/architecture/interactive/architecture-ai-runtime-20261111-110000/ai-runtime.html",
       "sha256": "68492200aa85195fae6ad0817b5068ea5e8f5b404aa55c443b2b9aefe03bc94c"
     },
     {
-      "path": ".archify/architecture-ai-runtime-20261111-110000/candidate.json",
+      "path": "docs/architecture/interactive/architecture-ai-runtime-20261111-110000/candidate.json",
       "sha256": "2a94d52363f916f5af6cf14e3d3da500b16226039c1cffef882c2488d06107c4"
     },
     {
-      "path": "00_跨境电商业务流程与术语指南.html",
-      "sha256": "b77c51cddb884bad481bba722981f31579be7ba3a3ec2aecdbe149488b4a4273"
+      "path": "docs/requirements/BUSINESS_GUIDE.html",
+      "sha256": "1e78e017a13e361ee63067ac493b6d986b7cc4400774549cb52889aad3860c76"
     },
     {
-      "path": "architecture/architecture-manifest.json",
-      "sha256": "0bd7850bfb4e90bd41af44d9b37c3861db08bc65cda839e985ef5c13a142bf75"
+      "path": "docs/architecture/logical/architecture-manifest.json",
+      "sha256": "1fff38fa015440f3d4d1685e45c7dfa793e2475a7bb64764407dc8ec939851ac"
     },
     {
-      "path": "architecture/assets/mermaid-11.15.0.min.js",
+      "path": "docs/architecture/logical/assets/mermaid-11.15.0.min.js",
       "sha256": "70137e77bb273bb2ef972b86e8b0400cca8be53cb25bfc45911a186dc98665de"
     },
     {
-      "path": "architecture/assets/mermaid-source.json",
+      "path": "docs/architecture/logical/assets/mermaid-source.json",
       "sha256": "6195e8086b9003a1bf8aaba1bc177decc0efa0a709375c96203c3cd4a78729a5"
     },
     {
-      "path": "architecture/mermaid-render-check.json",
+      "path": "docs/architecture/logical/mermaid-render-check.json",
       "sha256": "b3e8ad60cdeb1206ca4453387973fc40ebfaaf67e614cd896c8677d02bc2ccb4"
     },
     {
-      "path": "architecture/mermaid-sources.zip",
-      "sha256": "671d2293009a3aaa0497323545f1fe1caf0202145e3a9166312576714a51439b"
+      "path": "docs/architecture/logical/mermaid-sources.zip",
+      "sha256": "3c571429dd7a2fef60ade19cb579a77e95f810539533388f6d3bdfcec09de783"
     },
     {
-      "path": "architecture/mermaid/01-logical-architecture.mmd",
+      "path": "docs/architecture/logical/mermaid/01-logical-architecture.mmd",
       "sha256": "ac839ba102041b585e99769545c5539cc9c8dee004c1da38360243ac23ef57a0"
     },
     {
-      "path": "architecture/mermaid/01-logical-architecture.svg",
+      "path": "docs/architecture/logical/mermaid/01-logical-architecture.svg",
       "sha256": "34c568c2369214b451ad19de7982716b7c76eb61b222b19d3b125ee2791d5758"
     },
     {
-      "path": "architecture/mermaid/02-cross-domain-analysis.mmd",
+      "path": "docs/architecture/logical/mermaid/02-cross-domain-analysis.mmd",
       "sha256": "8c21a8a5cceec55eabee4ed51e918384f3991198fa07b4f769850ae8c2c86598"
     },
     {
-      "path": "architecture/mermaid/02-cross-domain-analysis.svg",
+      "path": "docs/architecture/logical/mermaid/02-cross-domain-analysis.svg",
       "sha256": "e788c691aa6eaa4ed45fc38a2761a5653f4930fc7db117af93dbbcda984f5de2"
     },
     {
-      "path": "architecture/mermaid/03-suggestion-and-approval.mmd",
+      "path": "docs/architecture/logical/mermaid/03-suggestion-and-approval.mmd",
       "sha256": "e60e5ae07f067f6e88ca75dec2b56806b13feff0e964d4abb64ed5090f8e4d92"
     },
     {
-      "path": "architecture/mermaid/03-suggestion-and-approval.svg",
+      "path": "docs/architecture/logical/mermaid/03-suggestion-and-approval.svg",
       "sha256": "a203cbd4f180acdcadd0375a1d34cb06ab0a2378c143958d47e990dc619817de"
     },
     {
-      "path": "architecture/mermaid/04-controlled-execution.mmd",
+      "path": "docs/architecture/logical/mermaid/04-controlled-execution.mmd",
       "sha256": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad"
     },
     {
-      "path": "architecture/mermaid/04-controlled-execution.svg",
+      "path": "docs/architecture/logical/mermaid/04-controlled-execution.svg",
       "sha256": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36"
     },
     {
-      "path": "architecture/mermaid/05-system-data-flow.mmd",
+      "path": "docs/architecture/logical/mermaid/05-system-data-flow.mmd",
       "sha256": "566bdc5a0f61f819575cc8dda6a780c45e175c7bb736348f888529b2c56c03ce"
     },
     {
-      "path": "architecture/mermaid/05-system-data-flow.svg",
+      "path": "docs/architecture/logical/mermaid/05-system-data-flow.svg",
       "sha256": "d1557a55994c2be45d2cfbf4670054ed3a11a83e5b00bb814d3611ade783c48a"
     },
     {
-      "path": "architecture/mermaid/06-initial-deployment.mmd",
+      "path": "docs/architecture/logical/mermaid/06-initial-deployment.mmd",
       "sha256": "54dd40f1e1eba08ab691d48fa8ba02687fce36a3d41b295a9d0928fc78ba1fb0"
     },
     {
-      "path": "architecture/mermaid/06-initial-deployment.svg",
+      "path": "docs/architecture/logical/mermaid/06-initial-deployment.svg",
       "sha256": "36c47201e2821eb4632fac74b534d3943eebdf0df4507a102d3367df7a02358f"
     },
     {
-      "path": "architecture/review/01-logical-architecture-preview.png",
+      "path": "docs/architecture/logical/review/01-logical-architecture-preview.png",
       "sha256": "1c54a4cd4529169a32a7276ac8c4e3ea7f351981f9f460e38eb919999899ec41"
     },
     {
-      "path": "architecture/review/05-system-data-flow-preview.png",
+      "path": "docs/architecture/logical/review/05-system-data-flow-preview.png",
       "sha256": "2b5b3879af3fabdd405f3829dfc58a5e5828835f7e9224ff0fb60d9522d561fe"
     },
     {
-      "path": "architecture/review/06-initial-deployment-preview.png",
+      "path": "docs/architecture/logical/review/06-initial-deployment-preview.png",
       "sha256": "48a71f9fc70fb766261df14602e25cded98d893e9d8f62ce63124ff8280ce048"
     },
     {
-      "path": "architecture/review/document-browser-check.json",
+      "path": "docs/architecture/logical/review/document-browser-check.json",
       "sha256": "0f69e4f5625a674f08678e21fd63c3629df8a96e8b877b48af3a02631c543df6"
     },
     {
-      "path": "architecture/review/document-top.png",
+      "path": "docs/architecture/logical/review/document-top.png",
       "sha256": "bc9714d88bf062cfdaa65ba3c89cd4b3656fb6989bcc7686386933cfae440546"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/baseline.json",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/baseline.json",
       "sha256": "ad6af1b9657a01aadcba30c877064595ebf0a7f2ebdec804aa9b8dfdd46dafe9"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/architecture-manifest.json",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/architecture-manifest.json",
       "sha256": "02bafab44129e0b772f662e34a7bf58bb78e6dd175c3e60b7bb4c6e5aa647daa"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid-render-check.json",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid-render-check.json",
       "sha256": "e88453f3aca8140111f5679f98c241a081fa2dfa0ad90c81495355943fe1157e"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid-sources.zip",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid-sources.zip",
       "sha256": "8e9545445c8d4c355b6545cb40ebcc828d89126f94034a0aec3734b07e0b4769"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/01-logical-architecture.mmd",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/01-logical-architecture.mmd",
       "sha256": "fee5690bb4fabaeff5d6598eafb0b26ca628b5f6a91215f01d964f0a5b6eb0de"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/01-logical-architecture.svg",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/01-logical-architecture.svg",
       "sha256": "7be16aa31ad225b172fa5037efb3c62c33259d0879783a3ddfbd5a7818e95750"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/02-cross-domain-analysis.mmd",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/02-cross-domain-analysis.mmd",
       "sha256": "976b9d5b3a59688d29f3cf01fecfb6a74a2d10969daa955814059acc0be84f2f"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/02-cross-domain-analysis.svg",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/02-cross-domain-analysis.svg",
       "sha256": "dbf81e7c1a1f0b5cf359f9127b5bb2b858fc8d4aef5ecdbbf98cbee3916bf51e"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/03-suggestion-and-approval.mmd",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/03-suggestion-and-approval.mmd",
       "sha256": "30beb218edd5b76f283f805b29b53124a97b2d09407c206ada503c3400d0543d"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/03-suggestion-and-approval.svg",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/03-suggestion-and-approval.svg",
       "sha256": "8bf5e23e8a061e2b7a0aa6b5a81f9f8b96df1805f81bbdd1fb08728d6a91af64"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/04-controlled-execution.mmd",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/04-controlled-execution.mmd",
       "sha256": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/04-controlled-execution.svg",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/04-controlled-execution.svg",
       "sha256": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/05-system-data-flow.mmd",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/05-system-data-flow.mmd",
       "sha256": "d23f6b1d639fc3ebcd5735c2039635ecd7804334a81f849a33cf39a8fafd81cd"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/05-system-data-flow.svg",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/05-system-data-flow.svg",
       "sha256": "b66d0c3425fa6c3c27196b97af700ea71df1da7467d6ef4b6fd1f17d681cb5e5"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/06-initial-deployment.mmd",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/06-initial-deployment.mmd",
       "sha256": "5f6ebee2f185575c6495dfb05dced10518d7518484f721cd9fd4d783ba368688"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/mermaid/06-initial-deployment.svg",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/mermaid/06-initial-deployment.svg",
       "sha256": "75628b4f6884a836d5c54665406027975c2d465012ba92a6a5cf6709d2e751b2"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/architecture/review/document-browser-check.json",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/architecture/review/document-browser-check.json",
       "sha256": "2bc0b06649f2d918e02545a13d794a05cd2fe29edfe2a41a60d009979a495ca7"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/智慧中台AI应用项目_总体逻辑架构与流程设计.html",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_总体逻辑架构与流程设计.html",
       "sha256": "e820331543aaa6a0086b0cc8e01f2cff44b6b0924c2e0933e8d60127449f8fd5"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_总体逻辑架构与流程设计.md",
       "sha256": "819471a63a65c6d09358460ed325db278a336485d782917822ef1cf056802519"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.html",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.html",
       "sha256": "d48352a1d7f9a23804146fc30b850451d7cc478ea4332840b74830911bd5e7c5"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.md",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/before/智慧中台AI应用项目_需求文档草案.md",
       "sha256": "0e74fd7fd877c9ad732f32a1023b39fd84c72e920395f0d81d35003edcddf697"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/browser-verification.json",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/browser-verification.json",
       "sha256": "0f69e4f5625a674f08678e21fd63c3629df8a96e8b877b48af3a02631c543df6"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/content-verification.json",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/content-verification.json",
       "sha256": "1be13fa0893f5cae1fcf922d42be5c446465a521f4c566b3b8400c81a2b2a97d"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/document-changes.diff",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/document-changes.diff",
       "sha256": "cbb2345e544bc58b9a034cd4aa16e8cd44def2606df26e055975bdee97903b21"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/screenshots/architecture-top.png",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/screenshots/architecture-top.png",
       "sha256": "9c114d22940914ca74d5efd974eba184b2e689c5dbd85be47e039591146b114e"
     },
     {
-      "path": "architecture/revisions/R01-R09-v0.2/screenshots/requirements-top.png",
+      "path": "docs/archive/architecture-review/R01-R09-v0.2/screenshots/requirements-top.png",
       "sha256": "27921445d233cc84ac3194ef37a1c25efd54aa2aed6752742154ae3daadb15a4"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/baseline.json",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/baseline.json",
       "sha256": "902d20065e8950ca16d493030ad63cb87fffa537c5a15559459bb1a5939df344"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/before/architecture/mermaid/01-logical-architecture.mmd",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/before/architecture/mermaid/01-logical-architecture.mmd",
       "sha256": "e2a3074e9e7ec8cd2c31bc14972966b187d573876132864d4f2a42b8a5fbef86"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/before/architecture/mermaid/03-suggestion-and-approval.mmd",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/before/architecture/mermaid/03-suggestion-and-approval.mmd",
       "sha256": "2a7534cddbb02fc2581ad75d347b8f54a361a563d45003b6e030f4aaedf3a66f"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/before/智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/before/智慧中台AI应用项目_总体逻辑架构与流程设计.md",
       "sha256": "809c1e20fd403950cc27e70299a800424aa98893d4b803d161c338d6a4156348"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/browser-verification.json",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/browser-verification.json",
       "sha256": "892b25f59e4ed280a16efdcd5577a6c294d1dc581627cd071ca92631d8244cc5"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/changes.diff",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/changes.diff",
       "sha256": "036f36b19d92914ec0e46e18526c461bcb9364d117ce3cee29c11046a9162a3b"
     },
     {
-      "path": "architecture/revisions/nonblocking-diagram-fixes/verification.json",
+      "path": "docs/archive/architecture-review/nonblocking-diagram-fixes/verification.json",
       "sha256": "dbb8cccacbfdc76b50a28aebb6990dc8d00c1040b446fafa8f487e40a0e80110"
     },
     {
-      "path": "feasibility/illustrative-financial-model.json",
+      "path": "docs/reports/feasibility/illustrative-financial-model.json",
       "sha256": "b77d479ed0f426978c4505fd9262ff5e7556cb5244c457c4ecfdd12e19ce5199"
     },
     {
-      "path": "feasibility/input-baseline.json",
+      "path": "docs/reports/feasibility/input-baseline.json",
       "sha256": "b83a08beaa189db5e7c8ca00fa3d0f1484ad6b11f8d89a786f32f258d054fa91"
     },
     {
-      "path": "feasibility/report-manifest.json",
+      "path": "docs/reports/feasibility/report-manifest.json",
       "sha256": "027120484fe98c590ba35a296154fa102a49fe422f72826e63769785b048621b"
     },
     {
-      "path": "feasibility/review/browser-check.json",
+      "path": "docs/reports/feasibility/review/browser-check.json",
       "sha256": "4a7cec2e3555b37419726e8ed0f14b44a7d8773f0770d0c940b4006675bf4bae"
     },
     {
-      "path": "feasibility/review/report-financials.png",
+      "path": "docs/reports/feasibility/review/report-financials.png",
       "sha256": "ede1b146216145f435eac113ab0223049e5068bb04c2343b61abf2c6b92c2746"
     },
     {
-      "path": "feasibility/review/report-top.png",
+      "path": "docs/reports/feasibility/review/report-top.png",
       "sha256": "4c328648de3f522fc6335db27bb9db4fe834e0a235e61fc8d6b7cf1d4994b641"
     },
     {
       "path": "tools/build_architecture.py",
-      "sha256": "8983a9769fc302f16300d773a553ab8a4eda8f9282ec7aba0d98f8e968fc7540"
+      "sha256": "97525916fe0e7dd7ccd5a31dc794e36c0480a6eea8bd9ce1a98e789af1d15f52"
     },
     {
       "path": "tools/build_requirements.py",
-      "sha256": "069cad914c4a6eadefb61df91bc7b0c1048b99ca772df2823fb347d7a26b1261"
+      "sha256": "2a812b3523aa5cda3d17c5b4993fdd8f373bf57b86c65940ffed65f0690a3a6b"
     },
     {
       "path": "tools/render_mermaid.cjs",
-      "sha256": "7c5ce652eaf541bb604a9d3708f41b3f01683ba3ea49a49446e20e6589360267"
+      "sha256": "c9e910c8cc8ac89ddc11ba6f8c0fad3ce7cff3528db773d86e9e8054ce82babd"
     },
     {
-      "path": "智慧中台AI应用项目_可行性分析报告.html",
-      "sha256": "f56499994b9bea6970f3a7cc248da1a6fdffc985960e67964d8d8d35213b0d28"
+      "path": "docs/reports/FEASIBILITY.html",
+      "sha256": "98b9894c085acacd7cc8729e218fb641f69f4aa10ef790e6a05b0b728836ead9"
     },
     {
-      "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.html",
-      "sha256": "e53be0e129b76b6bfe71bfc814c4f4d48f0806323b850c75f30d3395138457a5"
+      "path": "docs/architecture/ARCHITECTURE.html",
+      "sha256": "f3391d1889d327993be1f1be0d259abb427a9e51a286806dc6a1a2be7a653eac"
     },
     {
-      "path": "智慧中台AI应用项目_架构评审修订说明_R01-R09.md",
-      "sha256": "5c67eac416819da65493f50b1d30be3ce7d75ef2fce7871a90fe73e1bddef2f9"
+      "path": "docs/architecture/REVISION_R01_R09.md",
+      "sha256": "1a30959481be5e3bc1c55135c64bbd21351dbf770ae8f2ae9d4957d482f26041"
     },
     {
-      "path": "智慧中台AI应用项目_需求文档草案.html",
-      "sha256": "4d83187824cc9bde4030d52492b636b4d10bf8ebddb11b3152931101271d765b"
+      "path": "docs/requirements/REQUIREMENTS.html",
+      "sha256": "022850d53ea39ddcd5745bd9a16c787ae875588a227a03f0e7376590fd6c366d"
     }
   ],
   "note": "Unknown paths were listed before edits and never modified; fingerprints captured during prototype work. Existing baselines remain governed by docs/planning/baseline-manifest.json.",
-  "scope": "UX documents and independent browser prototype only; no production source, deployment, remote or push."
+  "scope": "UX documents and independent browser prototype only; no production source, deployment, remote or push.",
+  "governanceMigration": "原观察记录在docs/archive/governance-20261111/docs/ui/workspace-observation.json；本表只重定位现有85份材料和导航链接。"
 }

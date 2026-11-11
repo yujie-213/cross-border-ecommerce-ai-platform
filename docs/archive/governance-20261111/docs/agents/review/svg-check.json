@@ -1,0 +1,97 @@
+[
+  {
+    "id": "01-ai-foundation",
+    "xml": "pass",
+    "bytes": 42136
+  },
+  {
+    "id": "02-o01-handler-runtime",
+    "xml": "pass",
+    "bytes": 20471
+  },
+  {
+    "id": "03-prompt-context-harness",
+    "xml": "pass",
+    "bytes": 18971
+  },
+  {
+    "id": "04-agent-loop-tool-calling",
+    "xml": "pass",
+    "bytes": 70851
+  },
+  {
+    "id": "05-gateway-cache",
+    "xml": "pass",
+    "bytes": 39248
+  },
+  {
+    "id": "06-conditional-multi-agent",
+    "xml": "pass",
+    "bytes": 31902
+  },
+  {
+    "id": "07-llmops-evaluation-loop",
+    "xml": "pass",
+    "bytes": 20505
+  },
+  {
+    "id": "08-s01-workflow",
+    "xml": "pass",
+    "bytes": 31688
+  },
+  {
+    "id": "09-s02-workflow",
+    "xml": "pass",
+    "bytes": 28936
+  },
+  {
+    "id": "10-s03-workflow",
+    "xml": "pass",
+    "bytes": 31172
+  },
+  {
+    "id": "11-s04-workflow",
+    "xml": "pass",
+    "bytes": 29518
+  },
+  {
+    "id": "12-s05-workflow",
+    "xml": "pass",
+    "bytes": 29765
+  },
+  {
+    "id": "13-s06-workflow",
+    "xml": "pass",
+    "bytes": 29058
+  },
+  {
+    "id": "14-s07-workflow",
+    "xml": "pass",
+    "bytes": 28158
+  },
+  {
+    "id": "15-s08-workflow",
+    "xml": "pass",
+    "bytes": 32042
+  },
+  {
+    "id": "16-s09-workflow",
+    "xml": "pass",
+    "bytes": 29534
+  },
+  {
+    "id": "17-s10-workflow",
+    "xml": "pass",
+    "bytes": 30503
+  },
+  {
+    "id": "18-pause-resume-protocol",
+    "xml": "pass",
+    "bytes": 51246
+  },
+  {
+    "id": "19-s03-a02-voc-contract",
+    "xml": "pass",
+    "bytes": 42295
+  }
+]

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "documentDate": "2026-11-11",
+  "source": {
+    "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+    "sha256": "819471a63a65c6d09358460ed325db278a336485d782917822ef1cf056802519"
+  },
+  "requirements": {
+    "path": "智慧中台AI应用项目_需求文档草案.md",
+    "version": "0.1",
+    "sha256": "0e74fd7fd877c9ad732f32a1023b39fd84c72e920395f0d81d35003edcddf697"
+  },
+  "diagrams": [
+    {
+      "id": "01-logical-architecture",
+      "source": "architecture/mermaid/01-logical-architecture.mmd",
+      "sha256": "fee5690bb4fabaeff5d6598eafb0b26ca628b5f6a91215f01d964f0a5b6eb0de",
+      "svg": "architecture/mermaid/01-logical-architecture.svg",
+      "svgSha256": "7be16aa31ad225b172fa5037efb3c62c33259d0879783a3ddfbd5a7818e95750"
+    },
+    {
+      "id": "02-cross-domain-analysis",
+      "source": "architecture/mermaid/02-cross-domain-analysis.mmd",
+      "sha256": "976b9d5b3a59688d29f3cf01fecfb6a74a2d10969daa955814059acc0be84f2f",
+      "svg": "architecture/mermaid/02-cross-domain-analysis.svg",
+      "svgSha256": "dbf81e7c1a1f0b5cf359f9127b5bb2b858fc8d4aef5ecdbbf98cbee3916bf51e"
+    },
+    {
+      "id": "03-suggestion-and-approval",
+      "source": "architecture/mermaid/03-suggestion-and-approval.mmd",
+      "sha256": "30beb218edd5b76f283f805b29b53124a97b2d09407c206ada503c3400d0543d",
+      "svg": "architecture/mermaid/03-suggestion-and-approval.svg",
+      "svgSha256": "8bf5e23e8a061e2b7a0aa6b5a81f9f8b96df1805f81bbdd1fb08728d6a91af64"
+    },
+    {
+      "id": "04-controlled-execution",
+      "source": "architecture/mermaid/04-controlled-execution.mmd",
+      "sha256": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad",
+      "svg": "architecture/mermaid/04-controlled-execution.svg",
+      "svgSha256": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36"
+    },
+    {
+      "id": "05-system-data-flow",
+      "source": "architecture/mermaid/05-system-data-flow.mmd",
+      "sha256": "d23f6b1d639fc3ebcd5735c2039635ecd7804334a81f849a33cf39a8fafd81cd",
+      "svg": "architecture/mermaid/05-system-data-flow.svg",
+      "svgSha256": "b66d0c3425fa6c3c27196b97af700ea71df1da7467d6ef4b6fd1f17d681cb5e5"
+    },
+    {
+      "id": "06-initial-deployment",
+      "source": "architecture/mermaid/06-initial-deployment.mmd",
+      "sha256": "5f6ebee2f185575c6495dfb05dced10518d7518484f721cd9fd4d783ba368688",
+      "svg": "architecture/mermaid/06-initial-deployment.svg",
+      "svgSha256": "75628b4f6884a836d5c54665406027975c2d465012ba92a6a5cf6709d2e751b2"
+    }
+  ],
+  "contentChecks": {
+    "commonModules": 17,
+    "scenarios": 10,
+    "mappedCandidates": 22,
+    "mermaidDiagrams": 6,
+    "requirementsHtmlMatchesMarkdown": true
+  },
+  "artifact": {
+    "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.html",
+    "sha256": "e820331543aaa6a0086b0cc8e01f2cff44b6b0924c2e0933e8d60127449f8fd5"
+  },
+  "renderReceipt": "architecture/mermaid-render-check.json"
+}

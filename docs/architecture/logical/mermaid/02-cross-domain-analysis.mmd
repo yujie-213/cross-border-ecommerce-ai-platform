@@ -1,0 +1,89 @@
+sequenceDiagram
+  %% diagram: 02-cross-domain-analysis
+  autonumber
+  actor U as 业务人员
+  participant W as W01 工作台
+  participant G as G01 权限策略
+  participant O as O01 任务编排
+  participant Q as D03 质量与快照
+  participant S1 as S01 供需与库存分析
+  participant S3 as S03 客户体验分析
+  participant B as B01 指标计算
+  participant F as B02 预测与优化
+  participant T as A02 内容理解
+  participant R as A03 检索查询
+  participant M as A01 模型网关
+  participant E as D04 证据血缘
+
+  U->>W: 提出问题，选择店铺、仓库、SKU及窗口
+  W->>G: 校验身份与对象范围，生成可信策略上下文
+  G-->>W: 授权范围或拒绝
+  break 权限拒绝
+    W-->>U: 拒绝请求，不创建越权分析
+  end
+  W->>O: AnalysisContext，JOINT及participants，可信范围与有效预算
+  O->>O: 校验参与者和必需依赖，形成planVersion
+  O->>Q: 检查场景所需数据域并创建快照
+  Note over Q,E: D03经D02公开端口校验投影版本，并读取D01覆盖水位<br/>D04登记可追溯证据引用，不复制业务主账
+  alt 关键数据不达标
+    Q-->>O: 缺映射、过旧、覆盖缺失或供给矛盾
+    O-->>W: 阻断相关结论和可执行建议，列待补事项
+    W-->>U: 展示已确认的有限信息
+  else 数据满足分析条件
+    Q->>E: 登记snapshotId定位及父证据，不复制清单
+    Q-->>O: snapshotId及清单引用，质量结果引用
+    par 在有效预算内，领域并行一
+      O->>S1: analyze(本参与者上下文，planVersion，snapshotId)
+      S1->>B: 给定需求与供给输入，计算基线逐日指标
+      B->>E: 登记指标资产版本引用及来源链，不复制结果
+      B-->>S1: 带版本的确定性指标
+      S1->>F: 构造预测/补货候选、MOQ倍数和交期约束
+      F->>B: 用候选情景输入调用同一逐日指标定义
+      B-->>F: 余额、首次缺货日和缺口的指标结果引用
+      F-->>S1: 情景/优化结果及B01评价引用，不重算余额
+      S1-->>O: DomainResult，参与者/计划/快照引用及领域限制
+    and 在有效预算内，领域并行二
+      O->>S3: analyze(本参与者上下文，planVersion，snapshotId)
+      S3->>T: 对授权脱敏反馈分类与提取主题
+      opt 使用语言模型提供方
+        T->>M: 受结构化模式与预算约束的理解请求
+        M-->>T: 模型调用结果或TIMEOUT等技术错误
+      end
+      T-->>S3: 主题结果、原文引用、UNKNOWN项
+      S3->>B: 按成熟签收群组去重计算投诉占比
+      B-->>S3: 分子、分母、窗口、指标版本
+      S3->>S3: 按质量依赖判断可用结果与业务限制
+      S3-->>O: DomainResult，调查信号或能力缺失/领域限制
+    end
+    O->>R: 仅联合报告证据缺口补查，不重复领域检索
+    R->>G: 再校验知识、字段和对象范围
+    R->>E: 按当前权限检索并解析引用
+    E-->>R: 证据或缺项，不返回越权内容
+    R-->>O: 有权限的补证结果与范围限制
+    opt 需要新输入且有效maxReplans尚有额度
+      O->>O: 更新计划并记录重规划用量
+      O->>Q: 需要新数据时创建新的固定输入版本
+      Q-->>O: 新snapshotId，不修改旧快照
+      O->>S1: 用新快照重跑受影响的供需分析
+      S1-->>O: 同版本领域结果
+      O->>S3: 用新快照重跑受影响的体验分析
+      S3-->>O: 同版本领域结果
+    end
+    O->>O: 先依据领域限制和必需/可选依赖判定可发布内容
+    opt 业务条件允许生成联合解释
+      O->>M: 用已获准证据生成联合报告解释
+      alt 模型调用成功
+        M-->>O: 结构化输出，业务审校由O01负责
+      else 模型失败或模式校验失败
+        M-->>O: TIMEOUT、UNAVAILABLE或INVALID_OUTPUT等技术错误
+      end
+    end
+    O->>O: 综合业务策略与审校结果，决定完整/部分/RULES_ONLY/阻断
+    Note over O,M: RULES_ONLY是O01报告业务状态，不是A01错误码<br/>缺失质量信号不等于安全，依赖它的业务结论必须阻断
+    O->>E: 校验报告引用存在、版本匹配及访问范围
+    E-->>O: 引用校验结果
+    O->>O: 保存领域结论及产物引用、reportVersion和有效预算
+    O-->>W: 已发布报告、引用、限制和候选方案
+    W-->>U: 只读分析到此结束，不自动生成C01/C02/C03记录
+  end
+  Note over W,E: G02贯穿记录任务、模型、规则、证据、费用与降级；任一模型调用均有超时及失败处理

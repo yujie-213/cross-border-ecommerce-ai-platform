@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="light" name="color-scheme"/><meta content="c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b" name="source-sha256"/><title>可行性分析报告 · 跨境电商智慧中台 AI 应用项目</title><style>
+:root{--paper:#fbfaf6;--ink:#173342;--muted:#63757e;--teal:#087e78;--line:#d9e2df;--nav:#102d3e;--soft:#edf5f1;--side:258px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.9 'Microsoft YaHei','PingFang SC',sans-serif}a{color:var(--teal);text-underline-offset:4px}button{font:inherit;cursor:pointer}a:focus-visible,button:focus-visible,.table-scroll:focus-visible{outline:3px solid #bf873c;outline-offset:3px}
+.skip{position:fixed;left:20px;top:-70px;z-index:20;background:white;padding:8px 16px}.skip:focus{top:12px}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);background:var(--nav);color:white;display:flex;flex-direction:column}.brand{padding:30px 24px 22px;border-bottom:1px solid #365360}.kicker{font-size:10px;letter-spacing:.15em;color:#9edacb}.brand h2{font-size:23px;line-height:1.55;margin:10px 0}.brand p{font-size:11px;color:#b4c5cc;margin:0}.toc{padding:18px 15px;overflow:auto}.toc a{display:block;padding:8px 11px;margin:3px 0;color:#c6d7dd;text-decoration:none;font-size:12px;line-height:1.65;border-left:2px solid transparent}.toc a:hover,.toc a.active{background:#1c4253;color:white;border-left-color:#94d3be}.side-foot{margin-top:auto;padding:16px 24px;font-size:10px;color:#a3b9c2;border-top:1px solid #365360}
+.workspace{margin-left:var(--side);min-width:0}.topbar{position:sticky;top:0;z-index:5;background:#f4f3ed;border-bottom:1px solid var(--line);padding:14px 34px;display:flex;justify-content:space-between;align-items:center;gap:12px}.edition{font-size:11px;color:var(--muted)}.toolbar{display:flex;gap:8px}.button{display:inline-block;background:transparent;border:1px solid #b9cac3;border-radius:4px;padding:6px 12px;text-decoration:none;color:var(--ink);font-size:11px}.button:hover{background:white;color:var(--teal);border-color:var(--teal)}.mobile-toc{display:none}.reading-shell{max-width:1320px;margin:auto;padding:38px 42px 70px}.eyebrow{color:var(--teal);font-size:11px;letter-spacing:.12em;font-weight:700;margin-bottom:14px}.document h1{font-family:'STSong','SimSun',serif;font-size:36px;line-height:1.5;letter-spacing:.02em;margin:0 0 22px;text-wrap:balance}.document h2{font-family:'STSong','SimSun',serif;font-size:27px;line-height:1.5;margin:50px 0 24px;padding-top:18px;border-top:1px solid var(--line);scroll-margin-top:88px}.document h3{font-size:18px;color:#195d57;margin:28px 0 12px}.document p{margin:14px 0}.document strong{color:#102e40}.document blockquote{margin:22px 0;padding:14px 20px;background:var(--soft);border-left:3px solid var(--teal);font-size:13px}.document blockquote p{margin:4px 0}.document ul,.document ol{padding-left:24px}.document li{margin:7px 0}.document li::marker{color:var(--teal)}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}.summary div{background:white;border:1px solid var(--line);border-top:3px solid var(--teal);padding:16px 18px}.summary b{display:block;font-family:Georgia,serif;font-size:29px;line-height:1.25}.summary span{display:block;color:var(--muted);font-size:11px;margin-top:7px}.intro{font-size:13px;color:var(--muted);line-height:1.8}.table-scroll{overflow-x:auto;border:1px solid var(--line);margin:22px 0;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.8}th{background:#eaf0ec;text-align:left;font-size:11px;color:#315347}td,th{padding:12px 13px;vertical-align:top;min-width:110px}td{border-top:1px solid var(--line)}td+td,th+th{border-left:1px solid #e2e8e4}tbody tr:nth-child(even){background:#f5f7f2}td:first-child{min-width:140px}pre{padding:20px;background:#132e3d;color:#e0eee9;border-radius:4px;overflow:auto;font:12px/1.8 Consolas,monospace}code{font-family:Consolas,monospace}p code,li code{background:#e9f0e9;padding:2px 4px;font-size:.9em}.architecture-panel{border:1px solid var(--line);border-radius:5px;margin:20px 0;background:white;overflow:hidden}.architecture-panel iframe{display:block;width:100%;border:0}footer{padding:25px 0 0;margin-top:36px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between}
+@media(min-width:1680px){:root{--side:280px}.reading-shell{padding-left:60px;padding-right:60px}}
+@media(max-width:1000px){:root{--side:220px}.reading-shell{padding:26px 25px 50px}.topbar{padding:12px 24px}.document h1{font-size:31px}.summary{gap:8px}.summary div{padding:12px}.summary span{font-size:10px}}
+@media(max-width:760px){.sidebar{display:none}.workspace{margin:0}.edition{display:none}.topbar{position:static;padding:14px 18px;flex-wrap:wrap}.mobile-toc{display:block;max-width:100%;padding:7px;background:white;border:1px solid var(--line);font:12px 'Microsoft YaHei',sans-serif}.reading-shell{padding:24px 18px 40px}.document h1{font-size:28px}.document h2{font-size:24px}.summary{grid-template-columns:repeat(2,1fr)}td,th{min-width:130px}.architecture-panel iframe{height:1100px}html{scroll-padding-top:20px}}
+@media print{@page{size:A4;margin:17mm 15mm}.sidebar,.topbar,.summary,.architecture-panel,.skip{display:none}.workspace{margin:0}.reading-shell{padding:0;max-width:none}body{font-size:10pt;line-height:1.8;background:white}.document h1{font-size:24pt}.document h2{font-size:18pt;margin-top:25pt}.document h3{font-size:12pt}h1,h2,h3{break-after:avoid}.table-scroll{overflow:visible}table{font-size:8pt;table-layout:fixed}td,th{padding:6pt;min-width:0;overflow-wrap:anywhere}thead{display:table-header-group}tr{break-inside:avoid}pre{white-space:pre-wrap;color:#111;background:#f1f4ef}footer{font-size:8pt}a{color:#17594d}}
+
+.reading-shell{max-width:1440px}.illustrative-note{background:#fff2d8;border-left:3px solid #b9822c;padding:12px 16px;color:#6c4b20;font-size:13px}.summary b.decision{font-family:inherit;font-size:21px;line-height:1.7}.toolbar{flex-wrap:wrap}.source-trace{font-size:11px;color:var(--muted);overflow-wrap:anywhere}.document h2{scroll-margin-top:85px}.document blockquote{font-size:13px}.table-scroll table td{overflow-wrap:anywhere}@media print{.illustrative-note{background:#fff;border:1px solid #888}.table-scroll{overflow:visible}table{font-size:8pt}td,th{overflow-wrap:anywhere}}</style></head><body><a class="skip" href="#document">跳至正文</a><aside class="sidebar"><div class="brand"><span class="kicker">COMMERCE AI HUB / FEASIBILITY</span><h2>智慧中台 AI<br/>可行性分析报告</h2><p>业务价值 · 数据条件 · 投入与回报</p></div><nav aria-label="报告目录" class="toc"><a href="#section-01">01 决策摘要</a><a href="#section-02">02 评估依据、范围与事实边界</a><a href="#section-03">03 业务必要性与建设方式比较</a><a href="#section-04">04 完整业务场景可行性</a><a href="#section-05">05 技术与架构实施可行性</a><a href="#section-06">06 数据与系统集成可行性</a><a href="#section-07">07 安全、隐私与合规可行性</a><a href="#section-08">08 组织、业务运营与维护可行性</a><a href="#section-09">09 验证方案与可研转实施的证据</a><a href="#section-10">10 工期与实施资源可行性</a><a href="#section-11">11 建设成本、运营成本与完整产品边界</a><a href="#section-12">12 收益、回报与敏感性分析</a><a href="#section-13">13 主要风险与应对</a><a href="#section-14">14 分阶段投资与上线门槛</a><a href="#section-15">15 待补充资料与确认事项</a><a href="#section-16">16 综合判断与建议</a><a href="#section-17">17 完整需求覆盖追踪</a><a href="#section-18">18 参考资料与可追溯说明</a></nav><div class="side-foot">V1.0 · 2026-11-11 · 条件性可研评估</div></aside><div class="workspace"><div class="topbar"><span class="edition">AIH-FSR-001 / 可行性分析</span><select aria-label="跳转章节" class="mobile-toc" id="jump"><option value="#document">选择章节</option><option value="#section-01">01 决策摘要</option><option value="#section-02">02 评估依据、范围与事实边界</option><option value="#section-03">03 业务必要性与建设方式比较</option><option value="#section-04">04 完整业务场景可行性</option><option value="#section-05">05 技术与架构实施可行性</option><option value="#section-06">06 数据与系统集成可行性</option><option value="#section-07">07 安全、隐私与合规可行性</option><option value="#section-08">08 组织、业务运营与维护可行性</option><option value="#section-09">09 验证方案与可研转实施的证据</option><option value="#section-10">10 工期与实施资源可行性</option><option value="#section-11">11 建设成本、运营成本与完整产品边界</option><option value="#section-12">12 收益、回报与敏感性分析</option><option value="#section-13">13 主要风险与应对</option><option value="#section-14">14 分阶段投资与上线门槛</option><option value="#section-15">15 待补充资料与确认事项</option><option value="#section-16">16 综合判断与建议</option><option value="#section-17">17 完整需求覆盖追踪</option><option value="#section-18">18 参考资料与可追溯说明</option></select><div class="toolbar"><a class="button" href="FEASIBILITY.md">Markdown 源文档</a><a class="button" href="feasibility/illustrative-financial-model.json">财务示算参数</a><a class="button" href="../requirements/REQUIREMENTS.html">需求基准</a><button class="button" id="print" type="button">打印 / 保存 PDF</button></div></div><div class="reading-shell"><div class="eyebrow">技术路径明确，企业落地与投资回报仍需实证</div><div class="summary"><div><b class="decision">有条件可行</b><span>基于文档的评估结论</span></div><div><b>10</b><span>完整业务场景</span></div><div><b>17</b><span>既有公共模块</span></div><div><b>22</b><span>业务需求逐项覆盖</span></div></div><p class="intro">依据已通过复核的需求与架构编制，保留完整产品规划。成本与收益使用清楚标注的演算参数；建议先阅读第01节决策摘要、第11—12节投入回报及第14—15节决策门槛和待确认事项。</p><main class="document" id="document"><h1>跨境电商智慧中台 AI 应用项目可行性分析报告</h1>
+<blockquote>
+<p>文档编号：AIH-FSR-001 ｜ 版本：1.0 ｜ 编制日期：2026-11-11</p>
+<p>评估基准：需求文档v0.2、总体逻辑架构与流程设计v0.2，以及已通过的R01—R09独立复核和后续两项非阻断性图示修正。</p>
+<p>总体结论：<strong>项目具有业务建设理由，已评审架构具备实施基础；企业落地属于有条件可行。当前足以支持带预算上限的调研与验证，尚不足以证明完整产品的实际投资回报或直接承诺全量上线。</strong></p>
+<p>报告中的工期、人月、费用、任务规模、收益及回报示算均为明确假设，不是企业实测、厂商报价或已批准预算。完整中台规划保留，分期实施不等于缩减为补货专用系统。</p>
+</blockquote>
+<h2 id="section-01">01 决策摘要</h2>
+<h3>1.1 分维度结论</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分析结论</th>
+<th>现有依据</th>
+<th>决策前仍缺少的证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务必要性</td>
+<td>跨系统联合判断具有明确应用方向</td>
+<td>22项需求、S01—S10场景及跨部门流程已梳理</td>
+<td>痛点频率、人工耗时、实际损失及改进责任人</td>
+</tr>
+<tr>
+<td>技术可行性</td>
+<td>路径清楚，可分阶段验证；无需重做核心架构</td>
+<td>模块化应用、公共能力、数据及动作边界已通过架构复核</td>
+<td>企业样本上的模型质量、查询效果、容量及故障恢复实证</td>
+</tr>
+<tr>
+<td>数据可行性</td>
+<td>是主要前置条件，当前不能认定已具备</td>
+<td>已定义权威域、映射、时点、覆盖水位与指标口径</td>
+<td>接口授权、样本、完整历史、费用覆盖及映射质量</td>
+</tr>
+<tr>
+<td>集成可行性</td>
+<td>读取与有限写入应分别判定</td>
+<td>D01读取与C03独占写入已分开</td>
+<td>实际厂商的读取权限、限流、回执查询及幂等保障</td>
+</tr>
+<tr>
+<td>经济可行性</td>
+<td>尚未证实，需要基线和试点</td>
+<td>可建立完整投入、运营及收益模型</td>
+<td>可归因收益、采购报价、实际人力及长期运营成本</td>
+</tr>
+<tr>
+<td>组织可行性</td>
+<td>依赖跨部门责任落实</td>
+<td>运营、采购、客服、财务、IT和审批角色已定义</td>
+<td>能否持续投入数据维护、金标准复核和业务跟进</td>
+</tr>
+<tr>
+<td>合规可行性</td>
+<td>存在实施路径，须按实际数据和服务范围审查</td>
+<td>已有权限、脱敏、审计及审批设计</td>
+<td>主体所在地、数据链路、供应商合同和适用监管要求</td>
+</tr>
+</tbody>
+</table></div>
+<p>本报告不为上述维度编造“已完成百分比”或综合评分。设计完整、技术方案存在和企业具备上线条件是三个不同判断。</p>
+<h3>1.2 建议的决策</h3>
+<p>建议按照原M0—M4推进有条件论证：先取得真实数据及接口证据，验证四类核心分析和平台复用，再验证有限写入，最后按收益和数据成熟度扩展S05—S10及其他P1/P2能力。每一阶段以退出条件控制后续投入。</p>
+<p>如果业务问题主要局限在单一原系统、分析频率低，或者既有报表/规则足以解决，应优先复用现有能力；架构通过不等于必须立即自建全部功能。若关键数据无法合法取得、无人承担业务结果、关键指标无法解释，相关场景暂不进入生产推广。</p>
+<h2 id="section-02">02 评估依据、范围与事实边界</h2>
+<h3>2.1 项目依据</h3>
+<ul>
+<li><a href="../requirements/REQUIREMENTS.md">需求文档v0.2</a>：业务目标、22项需求、17个公共模块、场景、契约、验收及分期。</li>
+<li><a href="../architecture/ARCHITECTURE.md">总体逻辑架构与流程设计v0.2</a>：完整架构、三类共性流程、数据流、职责与部署映射。</li>
+<li><a href="../architecture/REVISION_R01_R09.md">R01—R09修订说明</a>及本次对话中的独立复核通过确认。</li>
+<li><a href="../archive/architecture-review/nonblocking-diagram-fixes/verification.json">最新两项图示修正校验</a>：总体图B02→B01单向依赖，以及显式用户提交审批消息链。</li>
+<li><a href="../requirements/BUSINESS_GUIDE.html">跨境电商业务流程与术语指南</a>：业务事实、术语及演示案例。</li>
+</ul>
+<p>评审通过状态以用户最新确认作为评估依据；源文件中保留的“待独立复核”历史页头，不被解释为要求重新设计。架构复核通过也不代表接口已接通、数据质量达标或产品已生产验收。</p>
+<h3>2.2 三类信息分别使用</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>信息类型</th>
+<th>本报告中的例子</th>
+<th>使用方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已知设计事实</td>
+<td>S01—S10、模块职责、四种流程终点、首期两类外部动作</td>
+<td>作为方案及范围基准</td>
+</tr>
+<tr>
+<td>待验证企业事实</td>
+<td>店铺/仓库/SKU规模、订单量、接口费用、人工工时及历史损失</td>
+<td>在M0及试点中采集，不能默认成立</td>
+</tr>
+<tr>
+<td>分析假设</td>
+<td>32—51人月、示例184万元初始投入、示例任务量及回报计算</td>
+<td>展示估算方法与盈亏条件，不能当报价或收益承诺</td>
+</tr>
+</tbody>
+</table></div>
+<p>报告覆盖完整产品：首期S01—S04及公共基础，后续S01/S02/S04深化与S05—S10规划。没有依据现有资料估算全部P2生产能力的确定预算；这一未知不能用“首期报价”替代。</p>
+<h2 id="section-03">03 业务必要性与建设方式比较</h2>
+<h3>3.1 核心必要性</h3>
+<p>企业的商品流、资金流、单据流和信息流完成时间不同。单系统能够办理自身业务，却不一定能解释“为什么销量上涨但贡献下降”“有库存为什么仍缺货”“客户投诉究竟涉及商品、描述还是履约”。这些问题需要跨系统身份、口径和时间对齐。</p>
+<p>项目的业务价值由三部分组成：减少人工取数和核查；更早发现供需、履约、体验和费用风险；让有证据的建议进入责任交接及原业务流程。AI适合处理多语言文本、归纳证据和辅助解释；确定性计算、权限、审批及回执必须由相应公共模块承担。</p>
+<p>必要性应由实际问题规模支持。例如，若每周仅发生少量简单查询，人工或现有BI可能更经济；若多店铺、多仓及多部门经常联合决策，公共能力复用的价值更容易体现。当前资料只能证明后一种需求方向，不能证明该企业已达到某个规模。</p>
+<h3>3.2 备选建设方式</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>适用条件</th>
+<th>优点</th>
+<th>主要限制及核查内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原系统报表、BI及规则增强</td>
+<td>问题清楚、文本少、跨系统关联较简单</td>
+<td>初始投入与模型依赖相对有限</td>
+<td>是否已经能覆盖关键口径、时效和责任交接</td>
+</tr>
+<tr>
+<td>采购原系统或第三方AI功能</td>
+<td>厂商已有接近业务需求的功能</td>
+<td>可减少部分自研工作</td>
+<td>实际功能、数据权限、证据、采购条件、模型数据使用和退出方式</td>
+</tr>
+<tr>
+<td>按当前架构建设中台</td>
+<td>多源联合分析是稳定需求，企业愿意维护共用能力</td>
+<td>职责与指标统一，能持续扩展场景</td>
+<td>数据集成、组织治理和长期运营投入较高</td>
+</tr>
+<tr>
+<td>复用原系统及成熟服务，建设中台协同部分</td>
+<td>原有系统较完整，需要补足跨系统判断</td>
+<td>与当前“不重建业务主账”的边界相容</td>
+<td>明确哪些能力购买、哪些由项目实现，避免重复采购和开发</td>
+</tr>
+</tbody>
+</table></div>
+<p>应先完成能力清单比对，再决定自建范围。本报告不指定模型、云厂商或软件品牌，也不把全部逻辑模块转化为独立采购项。</p>
+<h2 id="section-04">04 完整业务场景可行性</h2>
+<p>以下“可实施”表示存在技术和流程路径，均以合法数据、业务责任及样本验证为条件，不代表企业当前数据已就绪。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>业务价值与可行性判断</th>
+<th>最重要的数据/组织条件</th>
+<th>主要验证与限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S01 供需与库存分析</td>
+<td>首期值得验证；确定性供需评价可先落地，学习型预测后续提升</td>
+<td>可售分桶、需求、未收采购、预计可售日、MOQ/倍数及有效质量信号</td>
+<td>B01唯一计算逐日指标；B02候选复用B01；常规到货不能掩盖中间缺货，投诉缺失不当安全</td>
+</tr>
+<tr>
+<td>S02 履约风险分析</td>
+<td>首期可实施；能将超时订单按证据分流</td>
+<td>承诺时间、订单包裹关系、出库和物流事件、客服催单</td>
+<td>迟到事件不覆盖新状态；候选原因需核实，不直接判责</td>
+</tr>
+<tr>
+<td>S03 客户体验分析/VOC</td>
+<td>首期可实施，但文本质量与语言差异需实测</td>
+<td>去重订单关联、多语言反馈、成熟签收群组、观察窗和人工主题标准</td>
+<td>评价主题质量与未知处理；投诉率不等于缺陷率，不支持没有证据的批次结论</td>
+</tr>
+<tr>
+<td>S04 贡献与费用分析</td>
+<td>首期可实施，主要难点是财务口径和费用覆盖</td>
+<td>实收、成功退款、费用、商品成本、确认转回、币种与账单语义</td>
+<td>缺项不填零，估算与实际分开，贡献不当净利润或银行到账</td>
+</tr>
+<tr>
+<td>S05 客服辅助</td>
+<td>可分期实施，先验证内部草稿辅助</td>
+<td>商品知识、有效售后政策、订单权限、语言质量及人工复核</td>
+<td>复用S03已发布结果；生成草稿不等于获准发送或承诺赔付</td>
+</tr>
+<tr>
+<td>S06 内容与增长辅助</td>
+<td>可实施但增长收益要实验验证</td>
+<td>确认的商品事实、素材授权、渠道数据和期间贡献</td>
+<td>本地化内容审核；广告归因有限时不伪造单订单成本，不自动发布/投放</td>
+</tr>
+<tr>
+<td>S07 单证辅助</td>
+<td>抽取与规则核对有实现路径</td>
+<td>真实文件版式、语言、字段位置、业务核对规则和人工复核</td>
+<td>关键字段和低置信度抽取需确认；不能由OCR结果直接写主数据或办理报关</td>
+</tr>
+<tr>
+<td>S08 经营规划</td>
+<td>潜在价值高，但适合按子问题验证</td>
+<td>可用需求预测、成本、价格/促销历史、仓网及经营约束</td>
+<td>区分预测、方案与因果效果；选品数据须获授权；不预先承诺动态定价收益</td>
+</tr>
+<tr>
+<td>S09 视觉质检辅助</td>
+<td>当前不宜据资料直接承诺生产效果</td>
+<td>商品/包装图片、缺陷标准、足够正负样本及拍摄条件</td>
+<td>少样本和跨商品泛化可能不足；先辅助识别并人工确认，再评估专用算力</td>
+</tr>
+<tr>
+<td>S10 政策核查辅助</td>
+<td>可做有来源的核查辅助</td>
+<td>官方资料版本、适用范围、商品属性、专业负责人</td>
+<td>检索和摘要不能代替专业合规判断；政策更新及适用性错误需单独管理</td>
+</tr>
+</tbody>
+</table></div>
+<p>文档抽取和预测已有可用产品形态。例如AWS文档展示了发票/收据字段抽取能力，Google文档展示了时间序列预测模型；它们仅说明技术路径存在，不证明适用于企业全部版式、语言或SKU，也不是本项目的指定选型。<a href="https://docs.aws.amazon.com/textract/latest/dg/invoices-receipts.html">AWS发票抽取说明</a>、<a href="https://docs.cloud.google.com/bigquery/docs/timesfm-model">Google时间序列模型说明</a>。</p>
+<h2 id="section-05">05 技术与架构实施可行性</h2>
+<h3>5.1 已通过设计对实施风险的作用</h3>
+<p>当前架构将任务编排与场景业务步骤分开，将确定性指标与预测/优化分开，将模型技术错误与业务降级分开，也将快照、证据和报告分开管理。这些边界有助于减少重复开发、口径漂移及状态混用，支持同一能力被多个场景调用。</p>
+<p>该优势能否实现，取决于后续交付是否遵守契约、数据归属和依赖边界。模块名称齐全并不能自动获得可复用性。实施验证应检查新增场景能否复用已有任务、计算、检索、建议和审批，而不只是检查页面是否出现。</p>
+<h3>5.2 公共模块可行性及验证条件</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>可行性与实施重点</th>
+<th>必须取得的验证证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W01</td>
+<td>工作台、报告和统一命令入口可实施</td>
+<td>单场景/联合任务表达清楚；生成建议、提交审批、执行有真实用户操作</td>
+</tr>
+<tr>
+<td>O01</td>
+<td>同一模块内部实现计划、调度、快照协调和综合发布可行</td>
+<td>不旁路场景重复执行；有效预算受控；任务、计划和报告版本可追踪</td>
+</tr>
+<tr>
+<td>D01</td>
+<td>读取连接器可实施，工作量取决于厂商</td>
+<td>授权、字段、增量方式、历史覆盖、限流、错误与恢复样本</td>
+</tr>
+<tr>
+<td>D02</td>
+<td>标准身份、状态和单位转换可实施，但需业务确认</td>
+<td>正确/冲突/缺失映射样本，权威域确认；不按近似商品名自动合并</td>
+</tr>
+<tr>
+<td>D03</td>
+<td>输入清单、质量和时效校验可实施</td>
+<td>过期、缺域、乱序及迟到数据的处理；新输入不静默改旧快照</td>
+</tr>
+<tr>
+<td>D04</td>
+<td>引用和血缘可实施，依赖来源资产可解析</td>
+<td>当前权限下引用有效、版本可定位；删除/撤权后的行为符合约定</td>
+</tr>
+<tr>
+<td>B01</td>
+<td>指标属于确定性计算，可用固定业务样例核查</td>
+<td>可售、逐日余额、投诉分母、贡献与币种结果符合口径，无第二套公式</td>
+</tr>
+<tr>
+<td>B02</td>
+<td>基线、候选和优化可分期实施</td>
+<td>候选评价调用B01；预测有滚动回测，假设和未来输入不被当作事实</td>
+</tr>
+<tr>
+<td>A01</td>
+<td>模型提供方适配、超时和成本管理可实施</td>
+<td>只返回调用结果/技术错误；更换提供方不改变业务公式或权限</td>
+</tr>
+<tr>
+<td>A02</td>
+<td>文本理解可实施，准确性需业务样本评价</td>
+<td>语言/主题分层结果、UNKNOWN处理、置信度与人工修订，不以模型自评验收</td>
+</tr>
+<tr>
+<td>A03</td>
+<td>检索与受控查询可实施</td>
+<td>检索相关性、引用质量、范围过滤及只读计划；无权材料不进入结果</td>
+</tr>
+<tr>
+<td>C01</td>
+<td>建议版本与风险去重可实施</td>
+<td>只读报告不会自动成为建议实体；确认、责任及参数绑定准确</td>
+</tr>
+<tr>
+<td>C02</td>
+<td>独立审批及有效期管理可实施</td>
+<td>发起人与审批人分离；变更参数、权限和关键证据后旧批准不可用</td>
+</tr>
+<tr>
+<td>C03</td>
+<td>受控创建在适配器具备保障时可实施</td>
+<td>原系统幂等、原键查回执、并发防重复、UNKNOWN及恢复实证</td>
+</tr>
+<tr>
+<td>G01</td>
+<td>跨层授权可实施，需要企业权限资料</td>
+<td>企业/店铺/仓库/字段/工具及动作的正反向权限样例，撤权后缓存行为</td>
+</tr>
+<tr>
+<td>G02</td>
+<td>审计、观测和评测可实施</td>
+<td>任务、来源、模型、版本及执行链可追溯；敏感内容不会无差别进入日志</td>
+</tr>
+<tr>
+<td>I01</td>
+<td>模块化应用与Worker可依托现有设施承载</td>
+<td>存储、任务恢复、凭据及备份需求清楚；容量和恢复经测量，不提前铺设技术组件</td>
+</tr>
+</tbody>
+</table></div>
+<h3>5.3 模型、检索与预测的验证方法</h3>
+<p>对RAG应分别检查资料准备、检索和最终回答。回答“带了引用”不等于引用支持结论；相关性、依据充分性和完整性需要结合业务金标准评价。Microsoft的设计指南也将检索与端到端评价作为不同环节，支持采用逐环节验证方法。<a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-solution-design-and-evaluation-guide">Microsoft RAG设计与评价指南</a>。</p>
+<p>对预测，先与企业现有基线及简单基线比较，再判断是否采用学习型方法。按SKU销量形态、缺货、促销和季节划分样本，滚动切分训练截止与未来测试窗口，防止使用测试期信息。除预测误差，还要评价缺货、库存资金和服务水平的业务影响；不能只挑某个SKU或某段旺季展示成功。</p>
+<p>对方案优化，验证候选是否满足MOQ、倍数、日期、库存范围和预算等已确认约束，再比较方案的指标及业务可执行性。求解器找到数学可行解，不代表供应商已经确认交期或采购已经批准。</p>
+<h3>5.4 容量与技术组件</h3>
+<p>首期沿用模块化应用与异步Worker。模型网关、指标、检索、审批等逻辑模块不直接变成17个微服务。数据库内检索、已有文件设施和持久化任务能满足需求时，可不引入独立搜索、向量数据库、图数据库、消息平台或GPU。</p>
+<p>容量应采集订单/包裹/工单增量、SKU×仓库组合、快照及留存、任务并发、模型调用与上下文大小。任务级并行度默认2不等于系统只运行两个任务，也不等于来源或模型API能够承担全部并发。交互查询与异步分析分别制定时延目标，并在限流、超时和积压条件下测量。</p>
+<h2 id="section-06">06 数据与系统集成可行性</h2>
+<h3>6.1 数据准备清单</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>数据域</th>
+<th>核心内容</th>
+<th>主要核查</th>
+<th>不满足时的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERP</td>
+<td>商品、供应关系、采购、已收/未收、预计可售日、MOQ/倍数</td>
+<td>状态语义、单位、供应启停、部分收货及日期终点</td>
+<td>补货供给和可执行参数不可靠</td>
+</tr>
+<tr>
+<td>OMS</td>
+<td>订单、支付、退款、承诺、商品关联</td>
+<td>新增需求与已占用订单去重，退款事实及订单粒度</td>
+<td>需求、投诉分母、履约和贡献均可能失真</td>
+</tr>
+<tr>
+<td>WMS</td>
+<td>现货、预留、冻结、不可售、收货质检、包裹事件</td>
+<td>分桶互斥、仓库责任、状态映射、事件乱序和可售时点</td>
+<td>可售和供给重复，错判履约节点</td>
+</tr>
+<tr>
+<td>CRM</td>
+<td>咨询、投诉、内部工单、时间及订单关系</td>
+<td>语言、去重、脱敏、投诉定义、成熟观察窗</td>
+<td>主题和质量判断缺证，不能当作零投诉</td>
+</tr>
+<tr>
+<td>财务</td>
+<td>平台/履约费用、商品成本、结算、成本转回、币种</td>
+<td>累计/增量语义、账单覆盖、实际/估算和汇率来源</td>
+<td>贡献只能给部分结果，不能声称净利润</td>
+</tr>
+<tr>
+<td>渠道</td>
+<td>Listing、曝光、访问、订单、广告及消耗</td>
+<td>授权粒度、店铺窗口、归因限制和促销变化</td>
+<td>内容/投放诊断受限，不能伪造订单归因</td>
+</tr>
+<tr>
+<td>知识资料</td>
+<td>商品规格、流程、有效政策、材料权限及版本</td>
+<td>来源、更新责任、有效期、内容访问范围和留存</td>
+<td>解释、客服及政策辅助不能可靠引用</td>
+</tr>
+<tr>
+<td>后续专项来源</td>
+<td>外部市场、运输、单证、图片、仓网等</td>
+<td>实际授权、数据覆盖、样本及业务标准</td>
+<td>相应P1/P2能力推迟，不阻止有条件的其他场景</td>
+</tr>
+</tbody>
+</table></div>
+<h3>6.2 就绪判断</h3>
+<p>建议先选择一个可管理的切片，例如1—2个店铺、1个仓库及20—50个有代表性的SKU，覆盖正常、缺货、退货、费用缺项和客诉案例。这是调研范围建议，不是企业实际规模，也不是生产容量上限。</p>
+<p>对已纳入试点的关键对象，逐项确认身份映射及单位；无法确认的记录隔离，不强行纳入计算。核对sourceUpdatedAt、asOf、observedAt和coverageThrough，并对每个数据域确认“数据最新”和“范围完整”如何证明。投诉需完整成熟观察窗；季节性预测的数据应覆盖所要验证的周期，资料不足时不承诺季节规律。</p>
+<p>需要形成样本数据包、字段/状态对照、权威域清单、完整性/时效结果和负责人签认。单次API成功、拿到一张报表或企业已有ERP，都不足以证明数据可行性已经通过。</p>
+<h3>6.3 接口可用性与写入保障</h3>
+<p>原系统品牌、版本、权限和合同未知，不能默认所有需要的字段和操作都开放。以Amazon SP-API为例，应用接入涉及授权，调用计划及限流又与账号、应用和站点等因素有关；这只能说明应逐项核查，不能据此推断企业ERP/CRM也有相同接口。<a href="https://developer-docs.amazon/sp-api/docs/onboarding-overview">Amazon接入说明</a>、<a href="https://developer-docs.amazon/sp-api/docs/usage-plans-and-rate-limits">调用计划与限流</a>。</p>
+<p>读取阶段需验证分页、重试、增量、删除/取消、更正、乱序与历史回补。写入阶段另行验证草稿/工单接口、前置条件、幂等键、原键查询回执和未知恢复。若创建后超时无法确认结果，不能换键重试；缺少保障时保持只读及建议导出，不以平台数据库“已发送”代替源系统确认。</p>
+<h2 id="section-07">07 安全、隐私与合规可行性</h2>
+<h3>7.1 技术安全要求</h3>
+<p>授权必须在入口、检索、缓存、引用、导出和执行处生效。模型不能通过客服文本、文件或检索结果获得额外工具或批准权。OWASP对提示注入的说明指出，RAG并不能完全消除该风险，并强调最小权限、对外部内容的区分和高风险操作人工控制；因此不能把“已经使用RAG”当作安全通过证据。<a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">OWASP提示注入说明</a>。</p>
+<p>需要核验跨企业/店铺/仓库访问、间接提示注入、敏感字段进入模型、日志泄露、撤权后缓存、旧批准、并发发送和执行未知等情况。权限反例中出现泄露或越权写入，应阻断对应范围上线。</p>
+<h3>7.2 数据与监管适用性</h3>
+<p>以下以内地运营主体作为待确认情景；企业主体、客户来源及部署地点尚未提供，不能据此完成全部地区的法律适用结论。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>事项</th>
+<th>对本项目的判断方式</th>
+<th>上线前所需材料</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人信息处理</td>
+<td>明确处理目的、必要字段、合法依据、受托关系和保留范围；脱敏不当然等于匿名化</td>
+<td>字段清单、处理目的、权限及委托协议，脱敏/删除规则</td>
+</tr>
+<tr>
+<td>模型及服务提供方</td>
+<td>核查数据实际传输、存储地区、日志保留、是否用于训练、子处理者及删除能力</td>
+<td>合同、服务条款、数据链路、访问及删除验证</td>
+</tr>
+<tr>
+<td>数据出境</td>
+<td>按实际链路、信息类型、规模和适用情形判定，不能因“跨境电商”就默认豁免或一律要求同一路径</td>
+<td>数据流向、主体、接收方、重要/敏感数据识别及必要合规手续评估</td>
+</tr>
+<tr>
+<td>内部辅助与未来对客服务</td>
+<td>内部员工使用与对境内公众提供服务须分别判断</td>
+<td>服务对象、开放入口、发布/发送方式及专业复核</td>
+</tr>
+<tr>
+<td>内容与境外市场</td>
+<td>商品内容、素材授权、适用政策及消费者相关规则需按市场核查</td>
+<td>授权资料、发布审核、目标市场及法务意见</td>
+</tr>
+<tr>
+<td>留存与证据追溯</td>
+<td>业务审计需要与最小必要、撤权和删除义务协调</td>
+<td>原始及派生产物留存表、删除/撤权流程、历史报告引用处理方式</td>
+</tr>
+</tbody>
+</table></div>
+<p>《个人信息保护法》对合法处理依据、必要性、委托处理等作出要求。保留可重识别关系的去标识数据不能直接按完全匿名数据处理，应由企业据实际处理活动确认。<a href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm">个人信息保护法</a>。</p>
+<p>《促进和规范数据跨境流动规定》对不同数据及情形规定了相应安排；本项目需结合实际数据链路判断，不能仅按行业名称推断。评估时同时查阅了2026年9月政策法规问答，不在缺少主体、规模和数据分类信息时直接套用人数门槛或认定豁免。<a href="https://www.cac.gov.cn/2024-03/22/c_1712776611775634.htm">数据跨境流动规定</a>、<a href="https://www.cac.gov.cn/2026-09/11/c_1790876549989064.htm">2026年9月政策法规问答</a>。</p>
+<p>《生成式人工智能服务管理暂行办法》第二条区分面向境内公众的服务和未向境内公众提供服务的内部研发/应用。内部辅助不因此免除个人信息、数据安全等其他义务，未来对客开放应重新评估适用范围。<a href="https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm">暂行办法</a>。</p>
+<p>《网络数据安全管理条例》对数据处理安全管理、保护措施及相关受托处理提出要求，应结合企业实际履行。本报告只识别可研事项，不能替代企业法务对具体活动的适用判断。<a href="https://www.cac.gov.cn/2024-09/30/c_1729384452307680.htm">网络数据安全管理条例</a>。</p>
+<h2 id="section-08">08 组织、业务运营与维护可行性</h2>
+<h3>8.1 人员与责任</h3>
+<p>建设期应有能够跨部门协调的业务负责人，并分别指定商品/采购、仓储履约、客服体验和财务数据负责人。数据错误回到来源或映射负责人纠正，中台重新同步分析，不能让项目组在报告里手工修成理想结果。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>项目角色</th>
+<th>假设投入，按有效FTE计</th>
+<th>核心责任</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产品/项目负责人</td>
+<td>0.5—1</td>
+<td>范围、业务规则、依赖和验收协调</td>
+</tr>
+<tr>
+<td>后端/平台工程</td>
+<td>2</td>
+<td>公共能力、任务、建议审批及受控执行</td>
+</tr>
+<tr>
+<td>数据与集成工程</td>
+<td>1—2</td>
+<td>接口、投影、质量、口径与血缘</td>
+</tr>
+<tr>
+<td>AI/算法工程</td>
+<td>1</td>
+<td>理解、检索、模型评价及预测基线</td>
+</tr>
+<tr>
+<td>前端</td>
+<td>0.5—1</td>
+<td>工作台、证据和真实操作链</td>
+</tr>
+<tr>
+<td>测试/运维</td>
+<td>1</td>
+<td>集成、权限、恢复、运行与发布验证</td>
+</tr>
+<tr>
+<td>业务领域人员</td>
+<td>另行安排兼职，避免与项目人月重复计价</td>
+<td>样本、金标准、指标签认、建议和业务结果跟踪</td>
+</tr>
+</tbody>
+</table></div>
+<p>项目团队合计约6—8个有效FTE，是后续估算的假设，不是要求新增6—8名全职员工。在册人数相同但项目可用时间不同，会直接改变工期。</p>
+<h3>8.2 运营终点与责任</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>流程</th>
+<th>可交付终点</th>
+<th>运营上不能误计的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只读分析</td>
+<td>O01已发布报告及候选方案、限制</td>
+<td>不自动产生C01建议、审批或外部动作</td>
+</tr>
+<tr>
+<td>建议</td>
+<td>C01保存并确认业务建议</td>
+<td>不等于已提交或已批准</td>
+</tr>
+<tr>
+<td>人工审批</td>
+<td>C02记录另一授权人的决策</td>
+<td>APPROVED不等于C03已经执行</td>
+</tr>
+<tr>
+<td>受控执行</td>
+<td>C03确认创建、明确失败或UNKNOWN待核</td>
+<td>SUCCEEDED不等于采购到货或客户问题解决</td>
+</tr>
+</tbody>
+</table></div>
+<p>持续运营需要覆盖连接器变化、数据质量、模型/规则版本、金标准更新、权限变更、执行未知和原系统业务结果跟踪。若没有承担这些工作的负责人，平台容易停留在演示或报告生成阶段。</p>
+<h2 id="section-09">09 验证方案与可研转实施的证据</h2>
+<p>本节提出验证方法，不声称这些验证已经执行。下列范围是初始建议，实际样本量和阈值由业务、数据及技术负责人结合风险冻结。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>验证主题</th>
+<th>建议方法</th>
+<th>通过所需证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定计算与状态</td>
+<td>逐项使用需求AC-01—AC-12，并补充边界和真实样例</td>
+<td>固定确定性结果全部符合约定口径；不能用模型解释掩盖计算差异</td>
+</tr>
+<tr>
+<td>场景正确性</td>
+<td>每核心场景先组织30—50个代表任务，覆盖正常、缺项及冲突</td>
+<td>业务人员对事实、限制、方案和引用逐项复核，记录错误类别</td>
+</tr>
+<tr>
+<td>VOC与语言</td>
+<td>可先准备300—500条授权脱敏、去重且分层的文本，由业务制定标签并裁决分歧</td>
+<td>宏观分类效果、重点问题召回、UNKNOWN和语言分层结果；阈值由业务签署</td>
+</tr>
+<tr>
+<td>联合分析与降级</td>
+<td>SINGLE、JOINT及3个以上参与者；模拟必需/可选域和模型失败</td>
+<td>参与者、计划/快照/报告引用一致；相同技术错误按业务依赖产生合理限制</td>
+</tr>
+<tr>
+<td>预测与优化</td>
+<td>与简单及现有基线比较，滚动回测，核对场景约束</td>
+<td>没有未来信息泄漏，候选逐日评价复用B01，业务指标改善有依据</td>
+</tr>
+<tr>
+<td>权限与提示注入</td>
+<td>按企业/店铺/仓库/字段设置正反例及恶意外部内容</td>
+<td>验收集中无越权返回或动作，撤权和引用校验有效；不等于承诺生产零风险</td>
+</tr>
+<tr>
+<td>创建与恢复</td>
+<td>超时、响应丢失、并发触发、租约过期、旧批准及原键回执</td>
+<td>原系统实际结果证明没有重复创建；不满足条件的写入不开放</td>
+</tr>
+<tr>
+<td>容量与费用</td>
+<td>按实际数据量和任务形态测量端到端时延、队列、token及成本</td>
+<td>指标按任务类型/分位数报告，达到冻结目标并具备预算停止条件</td>
+</tr>
+<tr>
+<td>业务收益</td>
+<td>建立对照SKU/店铺/时间窗，记录促销、缺货和价格变化</td>
+<td>可比较的效率与损失变化；与其他经营因素分开，未证明因果时不报AI净贡献</td>
+</tr>
+</tbody>
+</table></div>
+<p>权限、关键金额/库存口径、原系统重复创建等问题应作为硬门槛。解释流畅、演示顺利或少量成功案例，不足以抵消上述失败。现场试点观察可先安排4—8周，再按业务频率与季节性延长，不能只选择有利窗口。</p>
+<h2 id="section-10">10 工期与实施资源可行性</h2>
+<h3>10.1 计划方法</h3>
+<p>保留原M0—M4，不重排核心架构。首期M0—M3的工期取工作量/有效人员容量与接口/业务关键路径两者的较长值，并加入必要等待。对接授权、样本和业务签认未明确前，不承诺确定上线日。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>主要工作</th>
+<th>条件满足时的工作窗口示例</th>
+<th>主要退出条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>数据、接口、权威域、指标、权限及基线确认</td>
+<td>2—4周</td>
+<td>关键来源和责任人确定，形成可用于验证的样本</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>数据与公共能力必要子集</td>
+<td>6—10周</td>
+<td>质量、口径、证据、权限及公共调用路径可验证</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>S01—S04只读与建议试点</td>
+<td>6—10周</td>
+<td>报告质量、耗时和成本达到冻结标准，建议入口独立</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>有限审批执行及恢复</td>
+<td>4—6周</td>
+<td>两类适配器满足独立审批、前置校验、幂等和回执要求</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>既有场景深化及S05—S10分批扩展</td>
+<td>逐项估算</td>
+<td>数据、效果、业务价值和新增投入分别得到确认</td>
+</tr>
+</tbody>
+</table></div>
+<p>上表为工作窗口示例，不是各阶段可以完全并行的承诺。结合32—51人月及6—8个有效FTE，初始可安排约5—9个月的首期规划窗口；源系统采购、授权或数据补齐的额外等待可能延长。数量级应在M0后重估，不能以人员数量简单压缩审批和观察周期。</p>
+<h2 id="section-11">11 建设成本、运营成本与完整产品边界</h2><p class="illustrative-note">测算提示：本节费用、工作量及收益均为假设演算，需用企业数据和正式报价替换，不构成预算或效果承诺。</p>
+<h3>11.1 首期工作量占位估算</h3>
+<p><strong>以下是预算讨论用的假设WBS，不是已经通过现场调研的工程估算。</strong>前提为试点来源可合法接入、无需改造原系统核心流程、使用现有模型及常规设施、仅两类有限动作，且不包含P2生产级图像/市场/优化专项建设。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>工作包</th>
+<th>对应范围</th>
+<th style="text-align: right;">占位人月区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>调研、口径与契约确认</td>
+<td>M0，范围、指标、权限及项目协调</td>
+<td style="text-align: right;">3—5</td>
+</tr>
+<tr>
+<td>数据接入与治理</td>
+<td>D01—D04，试点来源和证据</td>
+<td style="text-align: right;">8—12</td>
+</tr>
+<tr>
+<td>指标及基线情景</td>
+<td>B01/B02必要子集</td>
+<td style="text-align: right;">3—5</td>
+</tr>
+<tr>
+<td>模型、理解和检索</td>
+<td>A01—A03必要子集</td>
+<td style="text-align: right;">4—6</td>
+</tr>
+<tr>
+<td>场景、编排与工作台</td>
+<td>O01、W01、S01—S04</td>
+<td style="text-align: right;">6—9</td>
+</tr>
+<tr>
+<td>建议、审批及有限执行</td>
+<td>C01—C03及两类适配器</td>
+<td style="text-align: right;">3—5</td>
+</tr>
+<tr>
+<td>权限、审计和评测能力</td>
+<td>G01/G02，实现与样本框架</td>
+<td style="text-align: right;">3—5</td>
+</tr>
+<tr>
+<td>跨系统验收与投运</td>
+<td>集成/UAT、恢复演练、部署及交接</td>
+<td style="text-align: right;">2—4</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>首期，不含完整P1/P2生产交付</strong></td>
+<td style="text-align: right;"><strong>32—51</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>公共能力只估算一次，不按17个模块分别建设独立服务。G02评测能力实现与最后的跨系统业务验收分别计工，不重复计同一工作。业务侧额外整理/复核若已计入项目人月，不再作为另一项人力重复相加。</p>
+<h3>11.2 初始投入示例</h3>
+<p>货币均为人民币万元。人月全成本、外部费用和预备费均为分析输入，不是当前市场价格或供应商报价。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>示例假设与计算</th>
+<th style="text-align: right;">金额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目团队</td>
+<td>40人月×3.5万元/人月，位于前述区间内</td>
+<td style="text-align: right;">140.00</td>
+</tr>
+<tr>
+<td>厂商接口支持及构建期运行/评测</td>
+<td>合计假设12万元；不与自研集成工作混为同项</td>
+<td style="text-align: right;">12.00</td>
+</tr>
+<tr>
+<td>额外数据整理、标注、培训与推广</td>
+<td>假设8万元，仅计项目人月未涵盖的增量费用/机会成本</td>
+<td style="text-align: right;">8.00</td>
+</tr>
+<tr>
+<td>小计</td>
+<td>140＋12＋8</td>
+<td style="text-align: right;">160.00</td>
+</tr>
+<tr>
+<td>预备费</td>
+<td>小计×15%，不是已发生支出</td>
+<td style="text-align: right;">24.00</td>
+</tr>
+<tr>
+<td><strong>初始经济投入I0</strong></td>
+<td><strong>以上合计</strong></td>
+<td style="text-align: right;"><strong>184.00</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>采用其他人力计价、已购能力、外部接口条件或数据治理范围时，必须替换输入重新估算。内部已有员工的全成本不等于新增现金支出；财务预算应同时区分经济资源投入和增量现金需求。</p>
+<h3>11.3 稳态年度运营示例</h3>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>示例假设</th>
+<th style="text-align: right;">年度经济成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平台维护与发布</td>
+<td>1.2有效FTE×3.5万元/月×12</td>
+<td style="text-align: right;">50.40</td>
+</tr>
+<tr>
+<td>业务骨干复核与运营</td>
+<td>0.5有效FTE×1.8万元/月×12</td>
+<td style="text-align: right;">10.80</td>
+</tr>
+<tr>
+<td>运行、存储、备份和基础检索</td>
+<td>假设12万元，复用现有设施后重新核算</td>
+<td style="text-align: right;">12.00</td>
+</tr>
+<tr>
+<td>模型调用</td>
+<td>按第12.2节占位单价和调用量计算</td>
+<td style="text-align: right;">3.024</td>
+</tr>
+<tr>
+<td>来源厂商持续支持</td>
+<td>假设4万元，不重复计平台维护人员工作</td>
+<td style="text-align: right;">4.00</td>
+</tr>
+<tr>
+<td><strong>年度运营经济成本O</strong></td>
+<td><strong>合计</strong></td>
+<td style="text-align: right;"><strong>80.224</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>该示例为投运后完整年度，构建期人员不与稳态维护再次同期相加。暂未实施的P1/P2、专用GPU、外部市场资料、另行收费OCR或检索服务均不在其中；若实际需要必须追加。基础检索的运行资源包含在12万元假设内，不默认另买向量数据库。</p>
+<h3>11.4 完整产品后续投入</h3>
+<p>P1涉及高级预测、滞销/供应商/运输分析、费用核查、S05—S07和统一查询深化。若来源及样本具备，可暂用12—24人月作为后续预算讨论占位，须按实际工作包重估，不是承诺总价。</p>
+<p>S08—S10含多个不同难度的业务问题，尤其市场资料、价格效果、仓网约束、图片和政策适用标准仍未知。可以先为S08、S09、S10各安排2—4人月量级的独立可行性验证讨论，但这只是专项验证，不包含全部生产能力建设。<strong>首期投入＋P1占位＋P2验证不能标为完整十场景生产交付总预算。</strong>全产品预算应逐项补齐数据、模型、样本和运营条件后形成。</p>
+<h2 id="section-12">12 收益、回报与敏感性分析</h2><p class="illustrative-note">测算提示：本节费用、工作量及收益均为假设演算，需用企业数据和正式报价替换，不构成预算或效果承诺。</p>
+<h3>12.1 收益核算原则</h3>
+<p>人工时间减少是产能释放，只有减少实际支出或形成可验证增量产出时才能计入对应现金收益。避免缺货、退款或延期的收益应按净贡献或实际成本计算，不按全部销售额计算；同一订单的退款减少、贡献改善和客服节约不能重复计入。</p>
+<p>库存资金释放单独反映营运资金变化；只有经确认的持有成本、融资费用或损失变化进入年度效益。客户体验和响应速度可以独立评价，未经验证不强行货币化。</p>
+<h3>12.2 模型成本算式与压力情景</h3>
+<p>模型年度费用可按以下方法计算，再追加未包含的独立批处理、嵌入、OCR或专用检索费用：</p>
+<p><code>年度模型费 = 月任务量N × 12 × 平均调用数r × 重试/补证系数k × (单次输入token × 输入单价/100万 + 单次输出token × 输出单价/100万)</code></p>
+<p>占位输入：N＝12,000次/月，r＝5，k＝1.2，单次输入3,000token、输出1,000token；输入/输出单价分别假设5/20元每百万token。<strong>单价仅用于演算，不是任何厂商的当前报价；r不是O01工具上限，也不是修改已批准的预算策略。</strong></p>
+<p>以上得到每任务约0.21元、每年30,240元，即3.024万元。r应包含可分摊的增量内容理解调用；若实际逐工单处理而未计入此均值，应另加费用，不能认为分析任务以外的调用免费。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>压力情景，任务量与占位单价保持相同</th>
+<th style="text-align: right;">调用数r</th>
+<th style="text-align: right;">每次输入/输出token</th>
+<th style="text-align: right;">年度模型费，万元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础演算</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3,000 / 1,000</td>
+<td style="text-align: right;">3.024</td>
+</tr>
+<tr>
+<td>调用与上下文增加</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">6,000 / 2,000</td>
+<td style="text-align: right;">12.096</td>
+</tr>
+<tr>
+<td>更重的分析任务</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">12,000 / 4,000</td>
+<td style="text-align: right;">48.384</td>
+</tr>
+</tbody>
+</table></div>
+<p>这说明即便单价不变，任务形态也能明显改变成本。需要测量任务类型、内容批量、重复计算及补证用量，在业务质量允许时复用版本化理解结果并限制无效循环；不能预设模型费永远可忽略。</p>
+<h3>12.3 年度收益演算</h3>
+<p><strong>下面全部为模拟经营参数，不代表企业现在有这些人员、损失或改进幅度。</strong>效率单价为普通业务工作价值假设，与维护人员/业务骨干的角色计价不同。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>收益项</th>
+<th>示例计算</th>
+<th style="text-align: right;">年度可计经济价值，万元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>释放分析工时</td>
+<td>50人×0.6小时/工作日×220天×90元/小时×50%实现系数</td>
+<td style="text-align: right;">29.70</td>
+</tr>
+<tr>
+<td>减少可避免缺货损失</td>
+<td>假设合格损失池220万元×经验证可改善25%</td>
+<td style="text-align: right;">55.00</td>
+</tr>
+<tr>
+<td>减少履约/售后增量损失</td>
+<td>假设独立损失池100万元×经验证可改善25%</td>
+<td style="text-align: right;">25.00</td>
+</tr>
+<tr>
+<td>费用核查实际收益</td>
+<td>假设可追回或避免费用20万元×50%</td>
+<td style="text-align: right;">10.00</td>
+</tr>
+<tr>
+<td><strong>参考情景年度总价值B</strong></td>
+<td><strong>以上项目去重后合计</strong></td>
+<td style="text-align: right;"><strong>119.70</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>损失池需由财务按唯一业务事件核验，改善比例需试点或可比观察支持；这里的“25%”“50%”只是算式输入，不是AI提升效果预测。</p>
+<h3>12.4 回报定义与结果</h3>
+<p>以下仅为首期投运范围的经济演算，不是完整十场景生产交付的投资测算。表内金额单位为人民币万元，回收期按投运后的运营年计。</p><p>采用I0＝184万元、O＝80.224万元，建设期压缩为年0、后续三个完整运营年且价值稳定，不考虑税、残值、通胀及爬坡。这个简化对早期收益偏有利，实际应加入建设等待、爬坡和追加投资。</p>
+<ul>
+<li>年度净经济价值＝B−O。</li>
+<li>静态经济回收期＝I0÷年度净经济价值；净值非正时不形成回收。</li>
+<li>三年总经济成本＝I0＋3O＝424.672万元。</li>
+<li>三年经济净回报率＝(3B−三年总经济成本)÷三年总经济成本，分母采用总成本，避免口径混用。</li>
+<li>NPV示例＝−I0＋Σ(B−O)/(1＋8%)^t，t＝1、2、3；8%是财务讨论占位，不是已确认资本成本。</li>
+</ul>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>模拟情景，不代表发生概率</th>
+<th style="text-align: right;">年度总价值B</th>
+<th style="text-align: right;">年度净经济价值</th>
+<th style="text-align: right;">静态经济回收期</th>
+<th style="text-align: right;">三年总成本口径净回报率</th>
+<th style="text-align: right;">三年NPV，8%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保守演算</td>
+<td style="text-align: right;">63.00</td>
+<td style="text-align: right;">−17.224</td>
+<td style="text-align: right;">不形成回收</td>
+<td style="text-align: right;">−55.50%</td>
+<td style="text-align: right;">−228.39</td>
+</tr>
+<tr>
+<td>参考演算</td>
+<td style="text-align: right;">119.70</td>
+<td style="text-align: right;">39.476</td>
+<td style="text-align: right;">约4.66个运营年</td>
+<td style="text-align: right;">−15.44%</td>
+<td style="text-align: right;">−82.27</td>
+</tr>
+<tr>
+<td>积极演算</td>
+<td style="text-align: right;">180.00</td>
+<td style="text-align: right;">99.776</td>
+<td style="text-align: right;">约1.84个运营年</td>
+<td style="text-align: right;">27.16%</td>
+<td style="text-align: right;">73.13</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>参考演算不满足“三年静态回收”的讨论标准，但这既不是实际项目亏损结论，也不能反过来将积极情景当作承诺。</strong>它表明需要用企业真实规模和损失数据判断项目，而不是仅凭技术可实现就认定回报良好。</p>
+<p>在该成本假设下，若要求三年静态回收，年度可计价值需至少约141.56万元；按8%三年NPV非负，则约需151.62万元/年。若排除工时产能价值，仅看增量现金，必须另行依据实际现金支出和可兑现收益计算，不能使用上述经济回收期作为现金回收期。</p>
+<p>若模型任务达到第12.2节较重情景、其他成本不变，年度模型费增加45.36万元，参考情景的年度净经济价值会由39.476万元转为约−5.884万元。因此模型成本测量、持续维护和业务复核都应纳入投资判断。</p>
+<p>演算数据及可复算参数见<a href="feasibility/illustrative-financial-model.json">财务示算记录</a>。本报告没有用演算结果代替企业收益尽调。</p>
+<h2 id="section-13">13 主要风险与应对</h2>
+<p>以下F编号仅为本报告风险事项编号，不是新增系统模块。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>风险</th>
+<th>影响</th>
+<th>控制及剩余风险</th>
+<th>责任与决策点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-01 关键来源无权或无完整接口</td>
+<td>目标场景缺少事实基础</td>
+<td>授权及字段样本先行；暂缓受影响场景</td>
+<td>数据/集成负责人，M0</td>
+</tr>
+<tr>
+<td>F-02 商品映射或单位错误</td>
+<td>同时污染需求、库存、投诉和贡献</td>
+<td>审核映射、冲突隔离及影响分析；不能靠模型猜测</td>
+<td>商品/仓库负责人，M1</td>
+</tr>
+<tr>
+<td>F-03 事实过旧或覆盖不足</td>
+<td>错判可售及补货</td>
+<td>D03分域门槛与固定输入；无法刷新时阻断</td>
+<td>来源负责人，M1/M2</td>
+</tr>
+<tr>
+<td>F-04 文本误判或解释失实</td>
+<td>错误归因、误导调查</td>
+<td>UNKNOWN、证据和业务金标准；重点问题单独评价</td>
+<td>场景业务负责人，M2</td>
+</tr>
+<tr>
+<td>F-05 技术故障被误认为业务安全</td>
+<td>在质量信号缺失时继续采购</td>
+<td>A01技术错误与场景/O01业务判定分开；必需依赖不可被改成可选</td>
+<td>产品/业务，M2</td>
+</tr>
+<tr>
+<td>F-06 越权、提示注入或敏感数据外泄</td>
+<td>法律、商业秘密与操作风险</td>
+<td>服务端权限、最小字段、模型无写工具及对抗样例；仍需持续检测</td>
+<td>安全/数据负责人，投运前</td>
+</tr>
+<tr>
+<td>F-07 UNKNOWN换键或并发重复发送</td>
+<td>重复采购草稿或工单</td>
+<td>原键核对、恢复验证；不具备保障则不开放写入</td>
+<td>系统负责人，M3</td>
+</tr>
+<tr>
+<td>F-08 费用、币种或归因不完整</td>
+<td>高估贡献及收益</td>
+<td>财务口径签认、缺项及估算标识、事件级收益去重</td>
+<td>财务，M0/M2</td>
+</tr>
+<tr>
+<td>F-09 来源或模型变化</td>
+<td>适配失效、质量或成本变化</td>
+<td>版本、固定回归样本、灰度及回滚；维护成本持续存在</td>
+<td>IT/AI负责人，运营期</td>
+</tr>
+<tr>
+<td>F-10 领域人员不参与</td>
+<td>无法形成金标准及真正闭环</td>
+<td>明确责任人和投入，试点计入跟进完成度</td>
+<td>业务管理，立项前</td>
+</tr>
+<tr>
+<td>F-11 推广扩张及技术超配</td>
+<td>预算工期失控、重复建设</td>
+<td>阶段门槛、公共能力复用、P1/P2单项估算</td>
+<td>项目负责人，M4</td>
+</tr>
+<tr>
+<td>F-12 数据留存与证据断链</td>
+<td>历史报告无法支持审计</td>
+<td>留存/删除/撤权与引用解析约定；不无条件永久复制数据</td>
+<td>数据/法务/审计，M0及运营</td>
+</tr>
+<tr>
+<td>F-13 回报测算重复或不可归因</td>
+<td>立项收益虚高</td>
+<td>对照观察、净贡献口径、区分现金与产能</td>
+<td>财务/业务，推广前</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-14">14 分阶段投资与上线门槛</h2>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>决策门槛</th>
+<th>可继续的条件</th>
+<th>不满足时的处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进入M1</td>
+<td>M0确认关键授权、样本、权威域、负责人及基本价值假设</td>
+<td>继续补证或缩小试点对象，保留完整产品规划，不直接承诺实施预算</td>
+</tr>
+<tr>
+<td>进入M2</td>
+<td>固定口径、权限、映射、快照和证据可验证</td>
+<td>修复基础能力；不得把演示输出作为业务可用结果</td>
+</tr>
+<tr>
+<td>扩大只读试点</td>
+<td>业务金标准、未知处理、时延与成本达到冻结目标</td>
+<td>维持有限验证，调整场景方法或判断不值得继续投入</td>
+</tr>
+<tr>
+<td>开放M3写入</td>
+<td>独立审批、前置校验、幂等和回执实证通过</td>
+<td>对应动作保持关闭；只读及可导出建议可单独运行</td>
+</tr>
+<tr>
+<td>进入M4规模推广</td>
+<td>价值、运营责任和增量成本有证据；场景复用已证实</td>
+<td>延后相应扩展，不为完成技术清单而部署组件</td>
+</tr>
+</tbody>
+</table></div>
+<p>“可继续”是报告建议的决策条件，不是本次已经批准投资或部署。若关键数据长期不可获得、业务价值不足、权限/写入风险不可控制，应允许暂停相关场景投入，而不以已经产生的成本作为继续投资理由。</p>
+<h2 id="section-15">15 待补充资料与确认事项</h2>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>所需资料或决定</th>
+<th>责任方</th>
+<th>对可行性结论的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>企业主体、经营市场、店铺/仓库/SKU和用户规模</td>
+<td>业务/项目负责人</td>
+<td>确认适用范围、容量和监管情景</td>
+</tr>
+<tr>
+<td>原系统厂商、版本、合同、读写权限和支持联系人</td>
+<td>IT/系统负责人</td>
+<td>确认能否接入、需否采购及等待周期</td>
+</tr>
+<tr>
+<td>各数据域脱敏样本、历史范围和覆盖证明</td>
+<td>数据/业务负责人</td>
+<td>判断四类核心分析是否可成立</td>
+</tr>
+<tr>
+<td>权威域、身份/单位/状态映射和异常处理责任</td>
+<td>商品/仓库/集成</td>
+<td>决定指标可信度及治理成本</td>
+</tr>
+<tr>
+<td>指标、费用、币种/汇率、投诉窗口及阈值</td>
+<td>财务/采购/客服</td>
+<td>决定结果能否比较及动作是否适用</td>
+</tr>
+<tr>
+<td>场景必需/可选依赖及允许的业务降级</td>
+<td>业务/产品</td>
+<td>决定缺数据或模型失败时如何发布结果</td>
+</tr>
+<tr>
+<td>当前分析耗时、问题频率、实际损失及已用工具</td>
+<td>业务/财务</td>
+<td>判断是否值得建设、如何避免重复购买</td>
+</tr>
+<tr>
+<td>初始/年度预算、真实全成本和采购报价</td>
+<td>财务/采购/项目</td>
+<td>替换示算，判断实际经济性</td>
+</tr>
+<tr>
+<td>数据流向、模型合同、留存/删除和权限矩阵</td>
+<td>数据/法务/安全</td>
+<td>确认合法处理、出境及追溯安排</td>
+</tr>
+<tr>
+<td>审批和执行人员、动作有效期与源系统保障</td>
+<td>业务/系统负责人</td>
+<td>决定是否允许有限写入</td>
+</tr>
+<tr>
+<td>有效人员时间、验收负责人及业务观察窗口</td>
+<td>管理层/项目</td>
+<td>重估工期和试点资源</td>
+</tr>
+<tr>
+<td>时延、费用、质量及RPO/RTO目标</td>
+<td>业务/IT/运维</td>
+<td>确认容量、运营与恢复是否可接受</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-16">16 综合判断与建议</h2>
+<p><strong>业务上值得验证，技术上具备实施路径，数据和接口是先决条件，经济性与企业落地准备度尚未被证实。</strong>建议以现有已通过复核的架构作为基线，通过M0和只读试点取得投资决策证据；不再进行无依据的架构重构，也不把全部未来能力转化为当前必须部署的组件。</p>
+<p>满足数据、授权、人员和验证条件后，S01—S04及公共能力可进入分阶段实施判断。S05—S07及既有场景深化按增量价值推进，S08—S10按专项样本和约束先验证再决定生产建设。完整规划保留，各模块编号、职责、数据归属及首期动作边界不变。</p>
+<p>在企业真实收益达到可接受回报门槛、长期运营有人负责、关键风险通过验证之前，不宜把“架构合理”升级为“全量投资回报已确认”。本次交付只形成可行性报告，不修改原需求、架构、代码或启动开发部署。</p>
+<h2 id="section-17">17 完整需求覆盖追踪</h2>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>原需求编号</th>
+<th>场景或平台归属</th>
+<th>可行性验证重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 补货与缺货</td>
+<td>S01</td>
+<td>可售、逐日评价、候选约束和质量依赖</td>
+</tr>
+<tr>
+<td>2 履约异常</td>
+<td>S02</td>
+<td>订单包裹粒度、承诺和事件顺序</td>
+</tr>
+<tr>
+<td>3 VOC与商品问题</td>
+<td>S03</td>
+<td>主题、语言、去重和成熟群组</td>
+</tr>
+<tr>
+<td>4 贡献分析</td>
+<td>S04</td>
+<td>费用覆盖、币种、账单语义和缺项</td>
+</tr>
+<tr>
+<td>5 映射与质量诊断</td>
+<td>D02/D03</td>
+<td>审核身份、单位状态及质量门槛</td>
+</tr>
+<tr>
+<td>6 销量预测</td>
+<td>S01/B02</td>
+<td>与基线比较、滚动回测及需求失真</td>
+</tr>
+<tr>
+<td>7 滞销治理</td>
+<td>S01</td>
+<td>库龄、剩余需求及处置效益</td>
+</tr>
+<tr>
+<td>8 供应商风险</td>
+<td>S01</td>
+<td>交期、短收、质量及可追溯关系</td>
+</tr>
+<tr>
+<td>9 运输到货风险</td>
+<td>S02</td>
+<td>事件覆盖、可售终点及交期偏差</td>
+</tr>
+<tr>
+<td>10 多语言客服</td>
+<td>S05</td>
+<td>有效知识、事实及人工草稿复核</td>
+</tr>
+<tr>
+<td>11 售后处理辅助</td>
+<td>S05</td>
+<td>复用主题与证据，不办理退款</td>
+</tr>
+<tr>
+<td>12 页面本地化</td>
+<td>S06</td>
+<td>商品事实、内容授权及发布审核</td>
+</tr>
+<tr>
+<td>13 广告诊断与素材</td>
+<td>S06</td>
+<td>贡献复用、归因限制及实验效果</td>
+</tr>
+<tr>
+<td>14 费用账单核查</td>
+<td>S04</td>
+<td>匹配准确性、实际追回及收益去重</td>
+</tr>
+<tr>
+<td>15 单证核对</td>
+<td>S07</td>
+<td>真实版式、字段证据及人工确认</td>
+</tr>
+<tr>
+<td>16 自然语言查询/知识助手</td>
+<td>W01+A03</td>
+<td>只读语义计划、权限、引用和歧义</td>
+</tr>
+<tr>
+<td>17 跨部门协同</td>
+<td>C01—C03</td>
+<td>四类流程终点、责任及执行未知</td>
+</tr>
+<tr>
+<td>18 市场与选品</td>
+<td>S08</td>
+<td>授权市场资料和可验证经营假设</td>
+</tr>
+<tr>
+<td>19 定价促销模拟</td>
+<td>S08</td>
+<td>需求响应、约束及增量效果</td>
+</tr>
+<tr>
+<td>20 多仓布局优化</td>
+<td>S08</td>
+<td>需求、成本、仓网与服务约束</td>
+</tr>
+<tr>
+<td>21 图片辅助质检</td>
+<td>S09</td>
+<td>样本、拍摄条件、泛化及误判</td>
+</tr>
+<tr>
+<td>22 政策风险检查</td>
+<td>S10</td>
+<td>官方版本、适用性及专业复核</td>
+</tr>
+</tbody>
+</table></div>
+<p>NFR-01—03的权限/证据/注入风险见第07、09节；NFR-04的恢复与幂等见第06、09节；NFR-05—06预算与降级见第05、09、12节；NFR-07—09性能、恢复及评测见第05、08—10节。需求中AC-01—AC-12作为后续验证输入保留，未在本报告中声称其实现已经通过。</p>
+<h2 id="section-18">18 参考资料与可追溯说明</h2>
+<p>外部资料核查日期：2026-11-11。技术文档只支持技术路径判断，不构成厂商选型、价格承诺或企业效果证明；监管资料用于识别适用条件，不是全部地区法律的穷尽清单。</p>
+<div aria-label="可行性分析表格，可横向滚动" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>本报告使用位置与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-solution-design-and-evaluation-guide">Microsoft RAG设计与评价指南</a></td>
+<td>5.3：逐环节与最终回答分别评价</td>
+</tr>
+<tr>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/timesfm-model">Google TimesFM说明</a></td>
+<td>4：说明预测提供方的技术路径存在</td>
+</tr>
+<tr>
+<td><a href="https://docs.aws.amazon.com/textract/latest/dg/invoices-receipts.html">AWS发票/收据分析说明</a></td>
+<td>4：说明字段抽取的技术路径存在</td>
+</tr>
+<tr>
+<td><a href="https://developer-docs.amazon/sp-api/docs/onboarding-overview">Amazon应用接入说明</a></td>
+<td>6.3：接入与授权条件不能默认具备</td>
+</tr>
+<tr>
+<td><a href="https://developer-docs.amazon/sp-api/docs/usage-plans-and-rate-limits">Amazon调用计划与限流</a></td>
+<td>6.3：读取能力需结合实际账号和操作核查</td>
+</tr>
+<tr>
+<td><a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">OWASP提示注入说明</a></td>
+<td>7.1：RAG不能单独消除提示注入，需权限与人工控制</td>
+</tr>
+<tr>
+<td><a href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm">个人信息保护法</a></td>
+<td>7.2：处理必要性、合法依据、委托及数据识别</td>
+</tr>
+<tr>
+<td><a href="https://www.cac.gov.cn/2024-03/22/c_1712776611775634.htm">数据跨境流动规定</a></td>
+<td>7.2：按数据和实际情形判断跨境安排</td>
+</tr>
+<tr>
+<td><a href="https://www.cac.gov.cn/2026-09/11/c_1790876549989064.htm">2026年9月数据出境政策法规问答</a></td>
+<td>7.2：结合较新官方解释评估适用性</td>
+</tr>
+<tr>
+<td><a href="https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm">生成式人工智能服务管理暂行办法</a></td>
+<td>7.2：区分内部应用和面向境内公众服务</td>
+</tr>
+<tr>
+<td><a href="https://www.cac.gov.cn/2024-09/30/c_1729384452307680.htm">网络数据安全管理条例</a></td>
+<td>7.2：网络数据处理安全管理的适用评估</td>
+</tr>
+</tbody>
+</table></div>
+<p>输入文档指纹、财务演算及文档校验记录保存在本报告的<a href="feasibility/report-manifest.json">交付清单</a>中，用于确认评估依据和演算口径。原需求、架构及既有代码保持原样。</p></main><footer><span>报告来源：智慧中台AI应用项目_可行性分析报告.md · 指纹 c3ae8ddf9fcf</span><span>原需求与架构保持原样 · 外部资料核查：2026-11-11</span></footer></div></div><script>
+document.getElementById('print').addEventListener('click',()=>window.print());
+document.getElementById('jump').addEventListener('change',e=>{const el=document.querySelector(e.target.value);if(el)el.scrollIntoView()});
+const navs=[...document.querySelectorAll('.toc a')];
+const observer=new IntersectionObserver(entries=>{const active=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];if(active)navs.forEach(a=>a.classList.toggle('active',a.hash==='#'+active.target.id));},{rootMargin:'-90px 0px -65% 0px'});
+document.querySelectorAll('.document h2').forEach(h=>observer.observe(h));
+</script></body></html>

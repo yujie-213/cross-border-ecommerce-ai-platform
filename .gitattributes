@@ -1,0 +1,6 @@
+# Preserve byte-addressed baselines, archives, fixtures and historical evidence.
+# Document generators write UTF-8 explicitly; do not normalize old evidence on add.
+* -text
+*.png binary
+*.zip binary
+*.pdf binary

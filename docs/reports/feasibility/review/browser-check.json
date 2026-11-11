@@ -1,0 +1,31 @@
+{
+  "status": "pass",
+  "artifactSha256": "f56499994b9bea6970f3a7cc248da1a6fdffc985960e67964d8d8d35213b0d28",
+  "viewports": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "sections": 18,
+      "tables": 22,
+      "sourceHash": "c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b"
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "sections": 18,
+      "tables": 22,
+      "sourceHash": "c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b"
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "sections": 18,
+      "tables": 22,
+      "sourceHash": "c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b"
+    }
+  ],
+  "offline": true,
+  "toc": "passed",
+  "pageErrors": [],
+  "remoteRequests": []
+}

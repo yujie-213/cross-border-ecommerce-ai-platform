@@ -2,6 +2,9 @@
 
 本台账登记18项近期工作及1项本轮获准的独立产品/视觉原型；SETUP是本轮整理/建仓，A/B为S01必要子集，C按需，D只登记下一项S01专项设计。旧96项完整原稿/状态见archive/plan96-v0.1，旧ID映射见TASK_MAPPING.md。未来场景不预建空任务。
 
+
+文档治理附记（2026-11-11）：本轮只迁移路径和记录公开准备；以下19项任务状态、依赖、验收、提交与评审历史均保持不变。治理范围/实际提交/检查和公开阻碍见HANDOFF.md及governance/PUBLICATION.md，不将文档治理计为S01或公共能力开发验收。
+
 ## 唯一状态与验收规则
 
 状态仅TODO、IN_PROGRESS、BLOCKED、REVIEW、ACCEPTED。TODO不代表获准执行；领取前核对依赖、入口、实际负责人/文件范围/branch/HEAD。遇实际障碍才BLOCKED并写原因/责任/解除条件。完成实现进入REVIEW，不自动ACCEPTED；逐项验收必须有适用真实证据、实现commit、命令/环境/样本/退出码、制品/评审引用。FAIL/NOT_RUN不能填PASS，文档/Mock不替代真实ERP/模型/动作/生产验收。重要契约须评审；本轮SETUP交付REVIEW，不伪造独立验收。

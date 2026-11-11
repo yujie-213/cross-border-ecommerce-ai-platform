@@ -1,0 +1,28 @@
+flowchart LR
+  %% diagram: 06-initial-deployment
+  USER["用户浏览器"]
+  subgraph APP["同一代码体系与模块边界，不按逻辑模块建微服务"]
+    WEB["静态前端资源<br/>W01页面，可由API宿主托管"]
+    API["部署单元A：模块化应用 / API宿主<br/>W01入口、O01任务接口、B/A查询子集<br/>C01/C02、C03执行入口、G01/G02接入"]
+    WORKER["部署单元B：异步Worker宿主<br/>D01同步、D02-D04处理、O01调度<br/>已启用场景执行业务步骤、B/A公共能力<br/>C03执行与恢复，复用同一模块实现"]
+  end
+  subgraph INFRA["I01 首期必要承载能力，可复用企业已有设施"]
+    DB[("关系存储<br/>模块私有表/Schema、版本、任务/Outbox、回执")]
+    FILES["有实际附件/知识来源时的文件访问<br/>复用受控文件设施，不默认独立对象存储"]
+    CONFIG["密钥引用、配置、日志、指标及备份<br/>复用现有身份与运维设施"]
+    INDEX["有实际检索需求时选择实现<br/>可使用数据库内检索，不预建Index接口族"]
+  end
+  ORIGINAL["企业原ERP / OMS / WMS / CRM / 财务 / 渠道"]
+  PROVIDER["经授权模型提供方<br/>按选型使用云服务或本地实现"]
+  USER --> WEB
+  WEB --> API
+  API -->|创建和查询任务| DB
+  WORKER -->|领取任务、租约和恢复| DB
+  API -->|各模块自有持久化访问| DB
+  WORKER -->|各模块自有持久化访问| DB
+  API & WORKER -.->|按实际接入需求| FILES
+  API & WORKER --> CONFIG
+  API & WORKER -.->|按实际查询需求| INDEX
+  WORKER -->|D01授权读取；C03独占业务写入| ORIGINAL
+  API & WORKER -->|仅经A01模型适配| PROVIDER
+  API -.->|模块角色配置与同版本契约| WORKER

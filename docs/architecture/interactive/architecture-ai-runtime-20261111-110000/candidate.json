@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "O01 与场景内 Runtime 的职责边界",
+    "locale": "zh-CN",
+    "output": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "o",
+      "type": "backend",
+      "label": "O01 正式任务",
+      "sublabel": "计划 / 预算 / 检查点",
+      "pos": [
+        40,
+        50
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "h",
+      "type": "backend",
+      "label": "ScenarioHandler",
+      "sublabel": "领域规则与降级",
+      "pos": [
+        400,
+        50
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "r",
+      "type": "backend",
+      "label": "可选 Runtime 库",
+      "sublabel": "场景内有界循环",
+      "pos": [
+        760,
+        50
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "c",
+      "type": "database",
+      "label": "O01 既有持久化",
+      "sublabel": "MySQL / 条件提交",
+      "pos": [
+        40,
+        320
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "t",
+      "type": "backend",
+      "label": "A03 只读工具",
+      "sublabel": "白名单 / 当前权限",
+      "pos": [
+        400,
+        320
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "a",
+      "type": "backend",
+      "label": "A01 模型网关",
+      "sublabel": "技术结果 / 不执行工具",
+      "pos": [
+        760,
+        320
+      ],
+      "size": [
+        180,
+        76
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "dispatch",
+      "from": "o",
+      "to": "h",
+      "label": "派发参与者"
+    },
+    {
+      "id": "optional",
+      "from": "h",
+      "to": "r",
+      "label": "按需内部调用"
+    },
+    {
+      "id": "persist",
+      "from": "o",
+      "to": "c",
+      "label": "条件持久化"
+    },
+    {
+      "id": "model",
+      "from": "r",
+      "to": "a",
+      "label": "模型调用"
+    },
+    {
+      "id": "tools",
+      "from": "r",
+      "to": "t",
+      "label": "受控只读调用"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "任务权威",
+      "items": [
+        "O01 独占任务、计划、共享预算和检查点",
+        "Runtime 没有任务 API、队列或自有预算"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "控制边界",
+      "items": [
+        "G01/G02 覆盖模型、工具和状态提交",
+        "C03 不进入模型工具集合"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "设计状态",
+      "items": [
+        "第 11 步建议，等待独立审查",
+        "首批最小代码基座仍不开启模型"
+      ]
+    }
+  ]
+}

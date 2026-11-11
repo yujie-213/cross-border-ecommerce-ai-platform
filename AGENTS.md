@@ -8,7 +8,7 @@
 2. 记录实际分支、HEAD、git status和未提交diff；未知改动先保留，不覆盖、reset --hard、clean、强推或擅自stash。
 3. 项目代码/契约/计划/状态/证据以Git版本文件为准；ERP等仍为业务事实权威。生成进度视图只读，TASKS是唯一任务状态与验收台账。
 4. 工具与模型不绑定。更换AI执行者不改变契约、验收、预算或权限；不要在规范中强制某模型/编码工具。
-5. 当前用户只授权计划整理、旧稿归档、当前目录本地Git初始化及提交。不得据此执行A/B/C开发任务、S01设计或业务代码、部署、创建远端或push。下一条S01专项设计指令到达后即可开始设计，无S02/全公共能力前置。
+5. 最新授权为项目文档治理、公开安全审查及新建GitHub Public仓库发布；安全/许可、明确登录账号、同名仓库及origin检查通过后才能创建与普通push，否则停止报告。历史只本地Git限制保留为当时事实。本轮不得开发S01、正式前端或A/B/C业务代码，不重写历史、不强推。S01仍需完整专项设计与相应开发授权，无S02/全公共能力前置。
 
 ## 稳定边界
 
@@ -29,3 +29,7 @@
 每次完成或中断都更新TASKS对应记录、HANDOFF的增量事实/未完成项/真实测试/提交，必要时更新DECISIONS，然后从TASKS生成状态。不要手写第二份完成率。无提交或交接不全时保留事实与阻碍，不虚造SHA或验收。
 
 文档命令：`python docs/planning/build_docs.py`、`python docs/planning/check_plan.py`。真实开发测试按专项设计后冻结的命令执行。补充约定见docs/COLLABORATION.md；本轮结束后停止，等待下一条开发指令。
+
+## 文档位置
+
+分类入口为docs/README.md。五份正文位于docs/requirements、architecture、agents、reports；治理前原文字节快照与旧计划在docs/archive，旧路径对照见docs/governance/migration.json。业务状态仍只读docs/TASKS.md，公开准备与阻碍见docs/governance/PUBLICATION.md。

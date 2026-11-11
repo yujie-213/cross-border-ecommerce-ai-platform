@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-runtime-20261111-110000\\candidate.json",
+    "sha256": "2a94d52363f916f5af6cf14e3d3da500b16226039c1cffef882c2488d06107c4",
+    "bytes": 3006
+  },
+  "artifact": {
+    "path": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-runtime-20261111-110000\\ai-runtime.html",
+    "sha256": "68492200aa85195fae6ad0817b5068ea5e8f5b404aa55c443b2b9aefe03bc94c",
+    "bytes": 835361
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-runtime-20261111-110000\\ai-runtime.finalize.json",
+    "summaryReceipt": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-runtime-20261111-110000\\ai-runtime.finalize-summary.json",
+    "browserCheckReceipt": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-runtime-20261111-110000\\ai-runtime.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-11-10T13:36:16.575Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 3449,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

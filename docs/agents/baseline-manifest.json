@@ -1,0 +1,22 @@
+[
+  {
+    "path": "docs/requirements/REQUIREMENTS.md",
+    "sha256": "01f97cbe093cdf643b6758417109cea5944ca2a07744b0c4790bc6a17674994b",
+    "bytes": 45634
+  },
+  {
+    "path": "docs/architecture/ARCHITECTURE.md",
+    "sha256": "048f38f79feb1a0872949878b3a4af9bdf2599203f3509dade7252a3ed31cebf",
+    "bytes": 56713
+  },
+  {
+    "path": "docs/reports/FEASIBILITY.md",
+    "sha256": "b7d1b387ff7c5082f30155764308253c52bb87938ad7bef0c5de582d54c33e0d",
+    "bytes": 48251
+  },
+  {
+    "path": "docs/architecture/DEVELOPMENT_DESIGN.md",
+    "sha256": "44ff412f559530cc86270012490041242bd39014a1ab408c9617de2ba18eb410",
+    "bytes": 118315
+  }
+]

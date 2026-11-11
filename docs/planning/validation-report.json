@@ -23,12 +23,17 @@
       "check": "immutable-design-baselines",
       "result": "PASS",
       "detail": [
-        "智慧中台AI应用项目_需求文档草案.md",
-        "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
-        "智慧中台AI应用项目_可行性分析报告.md",
-        "智慧中台AI应用项目_概要开发设计文档.md",
-        "智慧中台AI应用项目_AI模块详细开发设计文档.md"
+        "docs/requirements/REQUIREMENTS.md",
+        "docs/architecture/ARCHITECTURE.md",
+        "docs/reports/FEASIBILITY.md",
+        "docs/architecture/DEVELOPMENT_DESIGN.md",
+        "docs/agents/AI_DETAILED_DESIGN.md"
       ]
+    },
+    {
+      "check": "frozen-rules-only-navigation-migrated",
+      "result": "PASS",
+      "detail": []
     },
     {
       "check": "unique-task-ids",
@@ -93,9 +98,9 @@
       "result": "PASS",
       "detail": {
         "source": "docs/PLAN.md",
-        "sourceSha256": "b1b511725ad9396030a11ab34d0cf7ff1324f31a1cd352de3e13bc5af00b2cd5",
+        "sourceSha256": "28308bf96680723fa91287089029935d08ef77641ef65cae7222f4ce0568a8da",
         "html": "docs/PLAN.html",
-        "htmlSha256": "badd531df114681ed73a8b598b90b91d21ba1041edd6482db969d218babae4f6",
+        "htmlSha256": "ed3230cb9f93cd0547e822eb6f2aa784bf9a7bac4074186d75fdf0b39d535faf",
         "diagramSourceSha256": "2d7ff2ff9d028c8af92a5ebbaf21dba63017e0652388458206467c4cca996b32",
         "diagramSvgSha256": "ba33f77b076bee04562c3a63fe4532aa23a74141a3357a03902562b77c3be081",
         "tables": 9,
@@ -140,7 +145,7 @@
       "check": "tracked-whitelist",
       "result": "PASS",
       "detail": {
-        "tracked": 242,
+        "tracked": 370,
         "over": []
       }
     }

@@ -1,6 +1,6 @@
 {
   "status": "pass",
-  "htmlSha256": "badd531df114681ed73a8b598b90b91d21ba1041edd6482db969d218babae4f6",
+  "htmlSha256": "ed3230cb9f93cd0547e822eb6f2aa784bf9a7bac4074186d75fdf0b39d535faf",
   "checks": [
     {
       "width": 1440,
@@ -77,6 +77,5 @@
   ],
   "errors": [],
   "remoteRequests": [],
-  "visualReview": "抽查1440px首屏及完整阶段流程：节点/文字/箭头/边界可读，无遮挡；其余视口自动检查。",
-  "testedCommit": "84e68e22195d92d708afead9549d84ac3a13d3b4"
+  "visualReview": "recorded separately"
 }

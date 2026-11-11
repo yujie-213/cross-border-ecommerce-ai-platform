@@ -1,0 +1,39 @@
+# 文档治理与 GitHub 公开准备
+
+本轮仅做文档治理、公开安全检查和 GitHub 发布准备，不开发补货 Agent、不启动正式前端、不调整业务规则或现有任务状态。开始时为 main / `f113229fa6eefc271b811e290858d596174ea52e`，跟踪区干净、无远端，另有85个既有未跟踪文件。用户已明确同意现有 Git 历史提交邮箱公开；不改写历史。
+
+## 发布停止点
+
+**尚未创建 GitHub 仓库、配置 origin 或推送。**
+
+1. 本机未发现 `gh` 命令，也未在常见安装位置发现 GitHub CLI。当前登录账号、仓库创建权限与同名仓库是否存在均为 NOT_RUN。
+2. 现有 Mermaid 包及独立 HTML 内嵌运行时的完整第三方再分发许可尚未核验。包内已有许可注释均保留，详见根目录 THIRD_PARTY_NOTICES.md；本轮不添加项目 LICENSE。仅添加 `.gitignore` 不能解决历史中的第三方材料风险。
+
+按照用户“无法确定公开风险就停止”的要求，公开发布保持阻断。安装/登录也不会自动解除许可阻碍。目标仓库名为 `cross-border-ecommerce-ai-platform`，目标账号未验证，不虚构 URL、Public 状态或远端 SHA。
+
+如后续负责人先完成许可核验，再由用户手动安装与登录：
+
+```powershell
+winget install --id GitHub.cli --exact --source winget
+gh auth login --hostname github.com --git-protocol https --web
+gh auth status --hostname github.com
+gh api user --jq .login
+```
+
+不使用 `--show-token`，不把凭据写进命令、文档或 Git。后续执行者须重新检查安全结果、登录账号、同名仓库和 origin；符合本轮授权条件后才能创建 Public 仓库及普通 push。若同名仓库已存在或 origin 指向其他项目，应停止报告，不覆盖、不改名、不强推。
+
+## 治理与验证范围
+
+当前分类导航见 docs/README.md；逐文件旧路径、新路径和治理前指纹见 migration.json。五份原文快照位于 docs/archive/governance-20261111，当前正文只修链接；旧计划17份原字节保留。历史版本在docs/archive，不建立第二份当前权威正文。历史固定报告和模拟原型证据保留，原型源码、交互测试、fixture 与样式不改。
+
+`audit.py` 扫描当前文件、ZIP 内部成员与全部可达历史及本地不可达 Git 对象的 blob/提交消息；仅输出候选位置，不回显潜在秘密。Git 作者邮箱另行记录用户明确同意。扫描不将 Git tree 二进制对象内的数字误判为手机号。
+
+没有应用配置契约，不虚构 `.env.example`；当前静态预览不需要环境变量。`.gitignore` 覆盖凭据、虚拟环境、缓存、日志、数据库、模型和本地检查产物。`.gitattributes` 保留按字节取证的历史文件，不进行入库换行转换。最大现有资源约3.3MB，无需 Git LFS；未引入模型权重或大数据。
+
+实际测试、文件扫描、路径检查、任务/规则保全结果记录在 audit.json。历史证据中的失败不删除，原有 REVIEW 不改为 ACCEPTED。新仓库未发布，README 的 GitHub 实际展示、默认分支和远端 SHA 均为 NOT_RUN。
+
+额外格式检查 `git -c core.whitespace=cr-at-eol diff --cached --check` 返回2：151处既有空白问题位于独立图示HTML、第三方Mermaid及归档HTML/diff。为保留原文和第三方字节未批量格式化；该项如实记录FAIL，不影响已通过的语法、链接和模拟交互检查。
+
+## S01 MVP 门槛
+
+现有材料足以继续S01专项设计与负责人评审；尚不具备直接开始正式MVP编码的全部条件。UX-S01-01待最终签认，完整D-S01-01、试点范围、库存/供给/需求口径、质量/时效矩阵及必要契约仍待冻结。按PLAN完成设计后再领取最小工程与真实只读链路任务，不把本轮文档治理当作开发授权。

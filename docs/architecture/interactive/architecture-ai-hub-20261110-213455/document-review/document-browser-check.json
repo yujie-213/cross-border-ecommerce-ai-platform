@@ -1,0 +1,28 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "headings": 16,
+      "tables": 10,
+      "iframes": 1
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "headings": 16,
+      "tables": 10,
+      "iframes": 1
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "headings": 16,
+      "tables": 10,
+      "iframes": 1
+    }
+  ],
+  "pageErrors": [],
+  "reviewFolder": "D:\\电商项目\\跨境电商智慧AI平台\\.archify\\architecture-ai-hub-20261110-213455\\document-review"
+}

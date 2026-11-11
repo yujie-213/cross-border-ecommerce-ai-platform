@@ -1,0 +1,21 @@
+{
+  "tools/build_architecture.py": "8983a9769fc302f16300d773a553ab8a4eda8f9282ec7aba0d98f8e968fc7540",
+  "tools/build_requirements.py": "069cad914c4a6eadefb61df91bc7b0c1048b99ca772df2823fb347d7a26b1261",
+  "tools/render_mermaid.cjs": "7c5ce652eaf541bb604a9d3708f41b3f01683ba3ea49a49446e20e6589360267",
+  "architecture/mermaid/01-logical-architecture.mmd": "e2a3074e9e7ec8cd2c31bc14972966b187d573876132864d4f2a42b8a5fbef86",
+  "architecture/mermaid/01-logical-architecture.svg": "b738194f4f85d7977284c5008f4f13949f551742bbc8f35736455866f1d54b47",
+  "architecture/mermaid/02-cross-domain-analysis.mmd": "8c21a8a5cceec55eabee4ed51e918384f3991198fa07b4f769850ae8c2c86598",
+  "architecture/mermaid/02-cross-domain-analysis.svg": "e788c691aa6eaa4ed45fc38a2761a5653f4930fc7db117af93dbbcda984f5de2",
+  "architecture/mermaid/03-suggestion-and-approval.mmd": "2a7534cddbb02fc2581ad75d347b8f54a361a563d45003b6e030f4aaedf3a66f",
+  "architecture/mermaid/03-suggestion-and-approval.svg": "2f9ea1059b067aac9d1995e1fe45c3a2104a55c30a61e924239ddfa725344116",
+  "architecture/mermaid/04-controlled-execution.mmd": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad",
+  "architecture/mermaid/04-controlled-execution.svg": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36",
+  "architecture/mermaid/05-system-data-flow.mmd": "566bdc5a0f61f819575cc8dda6a780c45e175c7bb736348f888529b2c56c03ce",
+  "architecture/mermaid/05-system-data-flow.svg": "d1557a55994c2be45d2cfbf4670054ed3a11a83e5b00bb814d3611ade783c48a",
+  "architecture/mermaid/06-initial-deployment.mmd": "54dd40f1e1eba08ab691d48fa8ba02687fce36a3d41b295a9d0928fc78ba1fb0",
+  "architecture/mermaid/06-initial-deployment.svg": "36c47201e2821eb4632fac74b534d3943eebdf0df4507a102d3367df7a02358f",
+  "智慧中台AI应用项目_需求文档草案.md": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
+  "智慧中台AI应用项目_需求文档草案.html": "4d83187824cc9bde4030d52492b636b4d10bf8ebddb11b3152931101271d765b",
+  "智慧中台AI应用项目_总体逻辑架构与流程设计.md": "809c1e20fd403950cc27e70299a800424aa98893d4b803d161c338d6a4156348",
+  "智慧中台AI应用项目_总体逻辑架构与流程设计.html": "6f3c608232a7f68e875f9eac9d9aad8cb42853e0a26383caf9d5dfcce73514f9"
+}

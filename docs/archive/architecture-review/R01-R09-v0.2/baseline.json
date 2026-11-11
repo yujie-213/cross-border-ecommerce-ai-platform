@@ -1,0 +1,28 @@
+{
+  "files": {
+    "智慧中台AI应用项目_总体逻辑架构与流程设计.html": "e820331543aaa6a0086b0cc8e01f2cff44b6b0924c2e0933e8d60127449f8fd5",
+    "智慧中台AI应用项目_总体逻辑架构与流程设计.md": "819471a63a65c6d09358460ed325db278a336485d782917822ef1cf056802519",
+    "智慧中台AI应用项目_需求文档草案.html": "d48352a1d7f9a23804146fc30b850451d7cc478ea4332840b74830911bd5e7c5",
+    "智慧中台AI应用项目_需求文档草案.md": "0e74fd7fd877c9ad732f32a1023b39fd84c72e920395f0d81d35003edcddf697",
+    "architecture/mermaid/01-logical-architecture.mmd": "fee5690bb4fabaeff5d6598eafb0b26ca628b5f6a91215f01d964f0a5b6eb0de",
+    "architecture/mermaid/01-logical-architecture.svg": "7be16aa31ad225b172fa5037efb3c62c33259d0879783a3ddfbd5a7818e95750",
+    "architecture/mermaid/02-cross-domain-analysis.mmd": "976b9d5b3a59688d29f3cf01fecfb6a74a2d10969daa955814059acc0be84f2f",
+    "architecture/mermaid/02-cross-domain-analysis.svg": "dbf81e7c1a1f0b5cf359f9127b5bb2b858fc8d4aef5ecdbbf98cbee3916bf51e",
+    "architecture/mermaid/03-suggestion-and-approval.mmd": "30beb218edd5b76f283f805b29b53124a97b2d09407c206ada503c3400d0543d",
+    "architecture/mermaid/03-suggestion-and-approval.svg": "8bf5e23e8a061e2b7a0aa6b5a81f9f8b96df1805f81bbdd1fb08728d6a91af64",
+    "architecture/mermaid/04-controlled-execution.mmd": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad",
+    "architecture/mermaid/04-controlled-execution.svg": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36",
+    "architecture/mermaid/05-system-data-flow.mmd": "d23f6b1d639fc3ebcd5735c2039635ecd7804334a81f849a33cf39a8fafd81cd",
+    "architecture/mermaid/05-system-data-flow.svg": "b66d0c3425fa6c3c27196b97af700ea71df1da7467d6ef4b6fd1f17d681cb5e5",
+    "architecture/mermaid/06-initial-deployment.mmd": "5f6ebee2f185575c6495dfb05dced10518d7518484f721cd9fd4d783ba368688",
+    "architecture/mermaid/06-initial-deployment.svg": "75628b4f6884a836d5c54665406027975c2d465012ba92a6a5cf6709d2e751b2",
+    "architecture/architecture-manifest.json": "02bafab44129e0b772f662e34a7bf58bb78e6dd175c3e60b7bb4c6e5aa647daa",
+    "architecture/mermaid-render-check.json": "e88453f3aca8140111f5679f98c241a081fa2dfa0ad90c81495355943fe1157e",
+    "architecture/mermaid-sources.zip": "8e9545445c8d4c355b6545cb40ebcc828d89126f94034a0aec3734b07e0b4769"
+  },
+  "codeFiles": {
+    "tools/build_architecture.py": "8983a9769fc302f16300d773a553ab8a4eda8f9282ec7aba0d98f8e968fc7540",
+    "tools/build_requirements.py": "069cad914c4a6eadefb61df91bc7b0c1048b99ca772df2823fb347d7a26b1261",
+    "tools/render_mermaid.cjs": "7c5ce652eaf541bb604a9d3708f41b3f01683ba3ea49a49446e20e6589360267"
+  }
+}

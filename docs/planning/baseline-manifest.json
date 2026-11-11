@@ -1,27 +1,27 @@
 [
   {
-    "path": "智慧中台AI应用项目_需求文档草案.md",
-    "sha256": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
-    "bytes": 45683
+    "path": "docs/requirements/REQUIREMENTS.md",
+    "sha256": "01f97cbe093cdf643b6758417109cea5944ca2a07744b0c4790bc6a17674994b",
+    "bytes": 45634
   },
   {
-    "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
-    "sha256": "d9ab2286e47b76bc8e8d7857610602349506b031250b0e5f062e3ff65011bcd1",
-    "bytes": 56730
+    "path": "docs/architecture/ARCHITECTURE.md",
+    "sha256": "048f38f79feb1a0872949878b3a4af9bdf2599203f3509dade7252a3ed31cebf",
+    "bytes": 56713
   },
   {
-    "path": "智慧中台AI应用项目_可行性分析报告.md",
-    "sha256": "c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b",
-    "bytes": 48331
+    "path": "docs/reports/FEASIBILITY.md",
+    "sha256": "b7d1b387ff7c5082f30155764308253c52bb87938ad7bef0c5de582d54c33e0d",
+    "bytes": 48251
   },
   {
-    "path": "智慧中台AI应用项目_概要开发设计文档.md",
-    "sha256": "cf8119e270e894fbb68d3db0361ccdf87b4e0b506c476eb130321e24c08dff80",
-    "bytes": 118461
+    "path": "docs/architecture/DEVELOPMENT_DESIGN.md",
+    "sha256": "44ff412f559530cc86270012490041242bd39014a1ab408c9617de2ba18eb410",
+    "bytes": 118315
   },
   {
-    "path": "智慧中台AI应用项目_AI模块详细开发设计文档.md",
-    "sha256": "3a47900213bb2175649c4d2b33eca0fb144268cf85ac8520a65ff19a1da16b9c",
-    "bytes": 180064
+    "path": "docs/agents/AI_DETAILED_DESIGN.md",
+    "sha256": "f1e5ba66e5567eda4a5b699267f90c03022b863556d6bf05dabdd1a06f08e7c8",
+    "bytes": 179901
   }
 ]

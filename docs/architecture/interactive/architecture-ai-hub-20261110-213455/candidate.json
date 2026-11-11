@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "智慧中台：应用逻辑与读写边界",
+    "locale": "zh-CN",
+    "output": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {"id":"business-users","type":"external","label":"业务与审批人员","sublabel":"按岗位与数据范围授权","pos":[40,40],"size":[220,86]},
+    {"id":"workspace","type":"frontend","label":"L1 统一工作台","sublabel":"查询 / 报告 / 建议 / 审批","tag":"入口统一鉴权","pos":[420,40],"size":[240,100]},
+    {"id":"scenarios","type":"backend","label":"L2 场景与任务编排","sublabel":"补货 / 履约 / VOC / 贡献","tag":"共享快照与预算","pos":[420,270],"size":[240,108]},
+    {"id":"domain-services","type":"backend","label":"L3 领域计算服务","sublabel":"指标 / 预测 / 情景推演","tag":"确定性口径唯一归属","pos":[40,510],"size":[240,108]},
+    {"id":"ai-services","type":"backend","label":"L3 通用智能能力","sublabel":"模型 / 理解 / 检索查询","tag":"模型仅可用只读工具","pos":[420,510],"size":[240,108]},
+    {"id":"proposal-approval","type":"security","label":"L3 建议与人工审批","sublabel":"确认参数 / 独立授权人批准","tag":"C01 / C02","pos":[800,510],"size":[250,108]},
+    {"id":"data-integration","type":"database","label":"L4 数据与集成","sublabel":"映射 / 投影 / 质量 / 证据","tag":"D01—D04","pos":[40,760],"size":[240,108]},
+    {"id":"model-provider","type":"external","label":"模型与检索实现","sublabel":"经授权的可替换提供方","tag":"经网关及数据端口访问","pos":[420,760],"size":[240,108]},
+    {"id":"controlled-executor","type":"security","label":"L3 受控执行器","sublabel":"复核 / 幂等 / 回执 / 跟踪","tag":"C03 独占写入端口","pos":[800,760],"size":[250,108]},
+    {"id":"read-source-ports","type":"external","label":"原系统授权读取端口","sublabel":"ERP / OMS / WMS / CRM","tag":"财务 / 渠道","pos":[40,1010],"size":[240,108]},
+    {"id":"write-source-ports","type":"external","label":"ERP / CRM 写入端口","sublabel":"采购草稿 / 内部工单","tag":"业务继续在原系统办理","pos":[800,1010],"size":[250,108]}
+  ],
+  "connections": [
+    {"id":"user-entry","from":"business-users","to":"workspace","label":"授权访问","variant":"security"},
+    {"id":"start-analysis","from":"workspace","to":"scenarios","label":"问题与范围","variant":"emphasis"},
+    {"id":"domain-analysis","from":"scenarios","to":"domain-services","label":"领域计算"},
+    {"id":"ai-analysis","from":"scenarios","to":"ai-services","label":"有界调度"},
+    {"id":"submit-proposal","from":"scenarios","to":"proposal-approval","label":"用户确认建议","variant":"security"},
+    {"id":"controlled-metrics","from":"ai-services","to":"domain-services","label":"受控指标查询"},
+    {"id":"standard-evidence","from":"domain-services","to":"data-integration","label":"标准事实与证据"},
+    {"id":"provider-access","from":"ai-services","to":"model-provider","label":"受控适配"},
+    {"id":"approved-execution","from":"proposal-approval","to":"controlled-executor","label":"批准后执行前复核","variant":"security"},
+    {"id":"read-source","from":"data-integration","to":"read-source-ports","label":"授权只读同步"},
+    {"id":"write-source","from":"controlled-executor","to":"write-source-ports","label":"有效批准与执行键","variant":"security"}
+  ],
+  "cards": [
+    {"dot":"cyan","title":"逻辑视图与实现阶段","items":["需求草案，非已上线架构或部署拓扑。","首期采用模块化单体与任务Worker；图中节点不等于微服务。","L5运行基础提供存储、索引、队列和密钥适配，不承载业务规则。"]},
+    {"dot":"emerald","title":"复用与事实归属","items":["D01—D04归属读取、映射、快照和证据；检索实现通过这些受控端口访问事实。","B01集中定义指标；场景组合能力，不复制公式。","原系统读取端口与写入端口可属于同一产品，此处按权限路径分开绘制。"]},
+    {"dot":"rose","title":"贯穿治理与写入边界","items":["G01权限与G02审计评测覆盖入口、检索、缓存、工具和执行。","AI没有批准权和写入工具；只有C03在独立人工批准及前置复核后可调用写端口。","执行超时先以原键查回执；创建成功不等于到货或问题解决。"]}
+  ]
+}

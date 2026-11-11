@@ -1,0 +1,23 @@
+{
+  "00_跨境电商业务流程与术语指南.html": "b77c51cddb884bad481bba722981f31579be7ba3a3ec2aecdbe149488b4a4273",
+  "智慧中台AI应用项目_总体逻辑架构与流程设计.html": "e53be0e129b76b6bfe71bfc814c4f4d48f0806323b850c75f30d3395138457a5",
+  "智慧中台AI应用项目_总体逻辑架构与流程设计.md": "d9ab2286e47b76bc8e8d7857610602349506b031250b0e5f062e3ff65011bcd1",
+  "智慧中台AI应用项目_架构评审修订说明_R01-R09.md": "5c67eac416819da65493f50b1d30be3ce7d75ef2fce7871a90fe73e1bddef2f9",
+  "智慧中台AI应用项目_需求文档草案.html": "4d83187824cc9bde4030d52492b636b4d10bf8ebddb11b3152931101271d765b",
+  "智慧中台AI应用项目_需求文档草案.md": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
+  "architecture/mermaid/01-logical-architecture.mmd": "ac839ba102041b585e99769545c5539cc9c8dee004c1da38360243ac23ef57a0",
+  "architecture/mermaid/01-logical-architecture.svg": "34c568c2369214b451ad19de7982716b7c76eb61b222b19d3b125ee2791d5758",
+  "architecture/mermaid/02-cross-domain-analysis.mmd": "8c21a8a5cceec55eabee4ed51e918384f3991198fa07b4f769850ae8c2c86598",
+  "architecture/mermaid/02-cross-domain-analysis.svg": "e788c691aa6eaa4ed45fc38a2761a5653f4930fc7db117af93dbbcda984f5de2",
+  "architecture/mermaid/03-suggestion-and-approval.mmd": "e60e5ae07f067f6e88ca75dec2b56806b13feff0e964d4abb64ed5090f8e4d92",
+  "architecture/mermaid/03-suggestion-and-approval.svg": "a203cbd4f180acdcadd0375a1d34cb06ab0a2378c143958d47e990dc619817de",
+  "architecture/mermaid/04-controlled-execution.mmd": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad",
+  "architecture/mermaid/04-controlled-execution.svg": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36",
+  "architecture/mermaid/05-system-data-flow.mmd": "566bdc5a0f61f819575cc8dda6a780c45e175c7bb736348f888529b2c56c03ce",
+  "architecture/mermaid/05-system-data-flow.svg": "d1557a55994c2be45d2cfbf4670054ed3a11a83e5b00bb814d3611ade783c48a",
+  "architecture/mermaid/06-initial-deployment.mmd": "54dd40f1e1eba08ab691d48fa8ba02687fce36a3d41b295a9d0928fc78ba1fb0",
+  "architecture/mermaid/06-initial-deployment.svg": "36c47201e2821eb4632fac74b534d3943eebdf0df4507a102d3367df7a02358f",
+  "tools/build_architecture.py": "8983a9769fc302f16300d773a553ab8a4eda8f9282ec7aba0d98f8e968fc7540",
+  "tools/build_requirements.py": "069cad914c4a6eadefb61df91bc7b0c1048b99ca772df2823fb347d7a26b1261",
+  "tools/render_mermaid.cjs": "7c5ce652eaf541bb604a9d3708f41b3f01683ba3ea49a49446e20e6589360267"
+}

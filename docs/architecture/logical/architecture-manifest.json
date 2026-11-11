@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "documentDate": "2026-11-11",
+  "source": {
+    "path": "ARCHITECTURE.md",
+    "sha256": "048f38f79feb1a0872949878b3a4af9bdf2599203f3509dade7252a3ed31cebf"
+  },
+  "requirements": {
+    "path": "REQUIREMENTS.md",
+    "version": "0.1",
+    "sha256": "01f97cbe093cdf643b6758417109cea5944ca2a07744b0c4790bc6a17674994b"
+  },
+  "diagrams": [
+    {
+      "id": "01-logical-architecture",
+      "source": "docs/architecture/logical/mermaid/01-logical-architecture.mmd",
+      "sha256": "ac839ba102041b585e99769545c5539cc9c8dee004c1da38360243ac23ef57a0",
+      "svg": "docs/architecture/logical/mermaid/01-logical-architecture.svg",
+      "svgSha256": "34c568c2369214b451ad19de7982716b7c76eb61b222b19d3b125ee2791d5758"
+    },
+    {
+      "id": "02-cross-domain-analysis",
+      "source": "docs/architecture/logical/mermaid/02-cross-domain-analysis.mmd",
+      "sha256": "8c21a8a5cceec55eabee4ed51e918384f3991198fa07b4f769850ae8c2c86598",
+      "svg": "docs/architecture/logical/mermaid/02-cross-domain-analysis.svg",
+      "svgSha256": "e788c691aa6eaa4ed45fc38a2761a5653f4930fc7db117af93dbbcda984f5de2"
+    },
+    {
+      "id": "03-suggestion-and-approval",
+      "source": "docs/architecture/logical/mermaid/03-suggestion-and-approval.mmd",
+      "sha256": "e60e5ae07f067f6e88ca75dec2b56806b13feff0e964d4abb64ed5090f8e4d92",
+      "svg": "docs/architecture/logical/mermaid/03-suggestion-and-approval.svg",
+      "svgSha256": "a203cbd4f180acdcadd0375a1d34cb06ab0a2378c143958d47e990dc619817de"
+    },
+    {
+      "id": "04-controlled-execution",
+      "source": "docs/architecture/logical/mermaid/04-controlled-execution.mmd",
+      "sha256": "108c28b4d62b90ad7e6a179cbecf384d1285ba264eef0c48d46ea31b758aa5ad",
+      "svg": "docs/architecture/logical/mermaid/04-controlled-execution.svg",
+      "svgSha256": "bc73e108804730ce8ce49cb815e357ff211b8812b7d605d0b2104bfae81a2e36"
+    },
+    {
+      "id": "05-system-data-flow",
+      "source": "docs/architecture/logical/mermaid/05-system-data-flow.mmd",
+      "sha256": "566bdc5a0f61f819575cc8dda6a780c45e175c7bb736348f888529b2c56c03ce",
+      "svg": "docs/architecture/logical/mermaid/05-system-data-flow.svg",
+      "svgSha256": "d1557a55994c2be45d2cfbf4670054ed3a11a83e5b00bb814d3611ade783c48a"
+    },
+    {
+      "id": "06-initial-deployment",
+      "source": "docs/architecture/logical/mermaid/06-initial-deployment.mmd",
+      "sha256": "54dd40f1e1eba08ab691d48fa8ba02687fce36a3d41b295a9d0928fc78ba1fb0",
+      "svg": "docs/architecture/logical/mermaid/06-initial-deployment.svg",
+      "svgSha256": "36c47201e2821eb4632fac74b534d3943eebdf0df4507a102d3367df7a02358f"
+    }
+  ],
+  "contentChecks": {
+    "commonModules": 17,
+    "scenarios": 10,
+    "mappedCandidates": 22,
+    "mermaidDiagrams": 6,
+    "requirementsHtmlMatchesMarkdown": true
+  },
+  "artifact": {
+    "path": "ARCHITECTURE.html",
+    "sha256": "f3391d1889d327993be1f1be0d259abb427a9e51a286806dc6a1a2be7a653eac"
+  },
+  "renderReceipt": "docs/architecture/logical/mermaid-render-check.json"
+}

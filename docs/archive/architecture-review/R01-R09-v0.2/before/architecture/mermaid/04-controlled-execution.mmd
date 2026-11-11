@@ -1,0 +1,81 @@
+sequenceDiagram
+  %% diagram: 04-controlled-execution
+  autonumber
+  actor U as 授权执行人员
+  participant W as W01 工作台
+  participant C3 as C03 受控执行与结果跟踪
+  participant G as G01 权限策略
+  participant C2 as C02 审批与授权
+  participant C1 as C01 建议与预警
+  participant Q as D03 质量与快照
+  participant A as C03的ActionAdapter
+  participant X as 原ERP或CRM
+  participant D as D02 标准身份与投影
+
+  U->>W: 对有效批准发起执行
+  W->>C3: approvalId、建议版本、动作及可信身份上下文
+  C3->>G: 校验当前执行权限、范围及动作白名单
+  G-->>C3: 授权结果
+  break 当前执行权限或动作白名单不满足
+    C3-->>W: 拒绝执行，不读取外部前置条件或提交写入
+  end
+  C3->>C2: 读取有效批准、参数指纹、有效期和撤销状态
+  C2-->>C3: 不可变批准版本或无效原因
+  C3->>C1: 读取该建议的准确版本与状态
+  C1-->>C3: 建议版本及动作参数
+  C3->>Q: 复核证据时效、输入版本与适用条件
+  Q-->>C3: 有效或需要重新分析
+  break 批准、建议版本或证据无效
+    C3-->>W: 拒绝执行，要求刷新或重新审批
+  end
+  C3->>A: 校验来源当前前置条件
+  A->>X: 授权读取供应、商品、对象状态等必要条件
+  X-->>A: 当前条件与来源版本
+  A-->>C3: 前置条件校验结果
+  alt 任一授权、批准、版本或当前条件不满足
+    C3-->>W: 拒绝外部提交，列原因及刷新要求
+  else 允许提交
+    critical C03本地原子保护，不是跨系统分布式事务
+      C3->>C3: 绑定逻辑动作、批准版本、请求指纹与executionKey
+      C3->>C3: 唯一约束及状态比较，防止并发重复发送
+    end
+    C3->>C3: READY到SENDING，保存发送意图
+    C3->>A: execute(executionKey, approvedPayload)
+    A->>X: 创建采购草稿或内部工单，同一幂等键
+    alt 明确创建成功
+      X-->>A: 外部单号及确认回执
+      A-->>C3: 已确认创建结果
+      C3->>C3: SUCCEEDED，保存外部ID和回执
+    else 权威确认未创建且本次失败
+      X-->>A: 明确未生效的错误
+      A-->>C3: 已确认失败类型
+      C3->>C3: FAILED，保留原键与失败依据
+    else 超时、断连或响应丢失
+      A-->>C3: 无法确认是否已生效
+      C3->>C3: UNKNOWN，不生成新executionKey
+      C3->>A: queryReceipt(原executionKey)
+      A->>X: 查询原键对应结果
+      X-->>A: 已存在、权威未创建或仍不确定
+      alt 查到原外部单号
+        A-->>C3: 确认已创建
+        C3->>C3: SUCCEEDED，补记同一动作结果
+      else 权威NOT_FOUND且适配器保证可安全重试
+        A-->>C3: 未创建依据与安全重试能力
+        C3->>C3: 重新核查有效批准、权限、条件及重试预算
+        C3->>A: 仍有效时用原executionKey重试
+        Note over C3,X: 重试仍按相同回执分支处理，不直接假定成功
+      else 查询仍不确定或无安全重试保证
+        A-->>C3: 维持UNKNOWN及待核原因
+        C3-->>W: 待调查，不允许换键重复创建
+      end
+    end
+    C3-->>W: 当前执行状态、外部单号或待核事项
+    opt 已确认创建，且后续业务投影已同步
+      Note over X,D: 后续批准、到货、工单办理仍在原系统发生<br/>D01读取后由D02形成带来源时间的业务投影
+      C3->>D: 按外部ID和权限读取后续业务结果
+      D-->>C3: 原系统状态、事实时点与证据引用
+      C3->>C3: 记录业务结果关联，不改写曾成功创建的事实
+      C3-->>W: 分开展示执行状态与业务状态
+    end
+  end
+  Note over W,D: G02追踪全过程；Worker租约过期不证明外部未执行<br/>恢复SENDING或UNKNOWN时先按原键核对回执
