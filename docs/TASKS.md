@@ -2994,13 +2994,72 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "DESIGN_REVIEW"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "26af91242f4ea5f0bb5a1d85ed21f24520662d23"
+  ],
+  "testedCommit": "26af91242f4ea5f0bb5a1d85ed21f24520662d23",
+  "evidence": [
+    {
+      "kind": "PLANNING_SELF_CHECK",
+      "acceptanceIds": [
+        "D-S01-MVP-TODO/AC1",
+        "D-S01-MVP-TODO/AC2",
+        "D-S01-MVP-TODO/AC3"
+      ],
+      "command": "PowerShell here-string | python -（任务JSON/依赖DAG/启用门禁/原验收编号与来源/状态/保全/Markdown/链接检查）",
+      "environment": "Windows / Python markdown/Git；仅计划文档作者自检，非独立任务评审",
+      "sample": "31项台账：细化13个既有A/B/C任务，保全9个其余既有记录，新增9项（4准入门/4场景与验收/本轮规划）。交付依赖无环、无C-02/C-03/C-05或S02前置；21项当前实施/准入任务均有交付/AC/预期证据，完整引用原MVP 22个S01-AC。67个所涉及文档本地链接无断链，7表可解析；所有未来实现/真实验收无伪造证据",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/TASKS.md"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-MVP-TODO/AC1",
+        "D-S01-MVP-TODO/AC2",
+        "D-S01-MVP-TODO/AC3"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / 项目既有文档工具；仅文档检查",
+      "sample": "build_docs/check_plan均退出0，31项台账/18项文档规则PASS；生成状态/DAG来自TASKS，不另写进度或第二份TODO",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-MVP-TODO/AC1",
+        "D-S01-MVP-TODO/AC2",
+        "D-S01-MVP-TODO/AC3"
+      ],
+      "command": "Git对象对照、差异文件白名单、未知YAML哈希/秘密启发式与应用入口检查",
+      "environment": "main / 接手85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3；跟踪起点/暂存为空",
+      "sample": "仅计划/原则ADR/必要索引/交接/派生文件；原需求/概要/AI详设/MVP/专项/ERP报告与JSON/单SKU表/原型等全部未改，无src/pyproject/migrations初始化。YAML指纹匹配旧证据且未跟踪、不暂存；定向秘密启发式0发现。新ERP/认证/模型请求0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "DEVELOPMENT_PLAN_REVIEW",
+      "acceptanceIds": [
+        "D-S01-MVP-TODO/AC1",
+        "D-S01-MVP-TODO/AC2",
+        "D-S01-MVP-TODO/AC3"
+      ],
+      "command": "NOT_RUN：负责人和星星评审本轮开发任务计划，再决定具体开发授权",
+      "environment": "本轮只有规划授权，无软件/数据/安全签认的替代",
+      "sample": "负责人五项原则确认记ADR，不等于真实身份/八域数据/规则/TLS或模型用途许可已签认；四门BLOCKED，实施任务仍TODO且未指派。当前文档交付REVIEW，所有新软件/ERP闭环/真实LLM/业务/MC验收NOT_RUN",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/TASKS.md"
+    }
+  ],
   "review": null,
   "branch": "main",
-  "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
+  "observedHead": "26af91242f4ea5f0bb5a1d85ed21f24520662d23",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -3013,6 +3072,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "本轮仅规划登记；未领取开发，已知实际准入缺口单列BLOCKED，不把原则同意当完成",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "分阶段开发TODO已提交并经依赖/覆盖/保全及18项文档规则检查；只完成规划文档，开发未开始、准入缺口未关闭，交负责人和星星评审后另行授权",
+      "observedHead": "26af91242f4ea5f0bb5a1d85ed21f24520662d23"
     }
   ]
 }

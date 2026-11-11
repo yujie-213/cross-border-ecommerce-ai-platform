@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=987f617eee8c55e47d89e2b28c9fc53c9ecea252b73dc07ffbea53493033fb16
+%% TASKS sourceSha256=840d2028848915a4cacecaa2460da03a449ff805eea4fbe9392bdbb30d4c2fa5
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -12,16 +12,25 @@ flowchart TB
   B_03["B-03 B01 S01确定性供需指标"]
   B_04["B-04 B02 S01基线/候选与约束"]
   B_05["B-05 O01 Handler调度/报告与G01/G02边界"]
-  C_01["C-01 A01/ModelProvider与调用控制最小实现"]
+  C_01["C-01 A01真实解释必需的网关/Provider与调用控制子集"]
   C_02["C-02 A02内容理解与结构化产物（按需）"]
   C_03["C-03 A03 RAG/只读Tool/Skill最小契约（按需）"]
-  C_04["C-04 已选模型用途最小评测与Golden Dataset"]
+  C_04["C-04 S01真实模型解释用途评测与安全降级验收（必做）"]
   C_05["C-05 Runtime/Harness/Loop启用评审（按需）"]
   D_S01_01["D-S01-01 S01补货专项详细设计（第一阶段）"]
   UX_S01_01["UX-S01-01 S01采购补货交互原型与项目视觉规范"]
   D_S01_MVP_PLAN["D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）"]
   D_S01_ERP_01["D-S01-ERP-01 S01 A01必做范围修订、教学ERP调查与MVP方案更新"]
   D_S01_ENTRY_01["D-S01-ENTRY-01 单SKU最小开发准入核对与决策建议（仅文档）"]
+  D_S01_DATA_01["D-S01-DATA-01 单SKU身份恢复与受控数据准入"]
+  D_S01_RULE_01["D-S01-RULE-01 单SKU供需/候选与质量规则签认"]
+  D_S01_ERP_ACCESS_01["D-S01-ERP-ACCESS-01 教学ERP真实只读启用与安全条件确认"]
+  D_S01_AI_ACCESS_01["D-S01-AI-ACCESS-01 A01真实Provider/模型用途启用条件确认"]
+  D_S01_LIVE_01["D-S01-LIVE-01 单SKU教学ERP真实读取与受控补充闭环验收"]
+  D_S01_DEV_01["D-S01-DEV-01 S01 Workflow与规则报告/AI解释语义接入"]
+  D_S01_UI_01["D-S01-UI-01 沿用S01原型的真实API/AI详情对接"]
+  D_S01_ACCEPT_01["D-S01-ACCEPT-01 单SKU S01 MVP端到端复现与负责人验收"]
+  D_S01_MVP_TODO["D-S01-MVP-TODO S01 MVP分阶段开发任务规划（本轮仅文档）"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -33,8 +42,9 @@ flowchart TB
   A_03 --> B_01
   A_04 --> B_01
   B_01 --> B_02
-  D_S01_01 --> B_03
+  D_S01_RULE_01 --> B_02
   A_01 --> B_03
+  D_S01_RULE_01 --> B_03
   B_03 --> B_04
   A_05 --> B_05
   B_02 --> B_05
@@ -45,3 +55,21 @@ flowchart TB
   C_01 --> C_03
   B_02 --> C_03
   C_01 --> C_04
+  D_S01_DEV_01 --> C_04
+  D_S01_AI_ACCESS_01 --> C_04
+  A_01 --> D_S01_AI_ACCESS_01
+  B_01 --> D_S01_LIVE_01
+  B_02 --> D_S01_LIVE_01
+  D_S01_DATA_01 --> D_S01_LIVE_01
+  D_S01_RULE_01 --> D_S01_LIVE_01
+  D_S01_ERP_ACCESS_01 --> D_S01_LIVE_01
+  B_05 --> D_S01_DEV_01
+  B_04 --> D_S01_DEV_01
+  C_01 --> D_S01_DEV_01
+  D_S01_DEV_01 --> D_S01_UI_01
+  A_04 --> D_S01_UI_01
+  A_06 --> D_S01_ACCEPT_01
+  D_S01_LIVE_01 --> D_S01_ACCEPT_01
+  D_S01_DEV_01 --> D_S01_ACCEPT_01
+  D_S01_UI_01 --> D_S01_ACCEPT_01
+  C_04 --> D_S01_ACCEPT_01
