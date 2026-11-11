@@ -1083,12 +1083,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/HANDOFF.md",
     "docs/generated/",
     "docs/planning/git-whitelist.json",
-    "docs/planning/validation-report.json"
+    "docs/planning/validation-report.json",
+    "docs/agents/S01_补货Agent专项详细设计.html",
+    "docs/agents/scripts/build_s01_reading.cjs"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
     "一份S01专项详细设计主文档：定位、设计思想、架构/意图/时序及逐图讲稿、逻辑伪代码、边界、待确认项",
-    "本轮不追加实现切片、MVP计划或开发TODO；评审后另行授权"
+    "本轮不追加实现切片、MVP计划或开发TODO；评审后另行授权",
+    "2026-11-11 追加授权：从Markdown生成离线HTML阅读版；保留正文、图表与讲稿，不改变业务设计"
   ],
   "acceptance": [
     {
@@ -1106,7 +1109,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "plannedTests": [
     "本轮文档结构/相对链接/图与讲稿对应/冻结基线及Mermaid离线parse+render；不执行ERP、模型或业务工程测试",
-    "负责人独立专项设计评审；业务口径不足保持待确认，不冻结生产字段或阈值"
+    "负责人独立专项设计评审；业务口径不足保持待确认，不冻结生产字段或阈值",
+    "node docs/agents/scripts/build_s01_reading.cjs --check：离线阅读版、同源指纹、图表/讲稿/伪代码、响应布局与阅读交互；不代表S01业务验收"
   ],
   "risks": [
     "输入不足可先形成有缺口的设计，不补造企业事实"
@@ -1116,9 +1120,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "858af84b8527adee98a26a2e87ed8fdf10d81e90"
+    "858af84b8527adee98a26a2e87ed8fdf10d81e90",
+    "a0c26153e65020d1b061556e84b27b74dce9964e"
   ],
-  "testedCommit": "858af84b8527adee98a26a2e87ed8fdf10d81e90",
+  "testedCommit": "a0c26153e65020d1b061556e84b27b74dce9964e",
   "evidence": [
     {
       "kind": "DESIGN_SELF_CHECK",
@@ -1186,12 +1191,39 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/agents/S01_补货Agent专项详细设计.md"
+    },
+    {
+      "kind": "HTML_READING_VIEW",
+      "acceptanceIds": [
+        "D-S01-01/AC1",
+        "D-S01-01/AC3"
+      ],
+      "command": "node docs/agents/scripts/build_s01_reading.cjs；node docs/agents/scripts/build_s01_reading.cjs --check",
+      "environment": "Windows / 已有Python markdown、Node/Playwright、本地headless Edge、Mermaid 11.4.1；仅文档构建，阻止HTTP",
+      "sample": "HTML提交a0c26153e65020d1b061556e84b27b74dce9964e；11章、9张内嵌SVG/9份讲稿/6块伪代码；1440/1920/390三宽×深浅6组布局PASS；9图放大/缩放/适宽/Esc焦点恢复、拖动、手机弹窗、主题记忆、讲稿与图源展开、页内锚点PASS；浏览器错误/远程请求0；作者查看桌面/图表原尺寸/手机深色截图；HTML SHA256=eb48d77111d005a9460ae27c5081eacc08ffc49864de918b23071300df92dd71；MD SHA256=53684a012e65115c320569cb6acf4737dc51edc0a3523f59a9ff01f6ccf1ed9a且原字节未改",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/S01_补货Agent专项详细设计.html"
+    },
+    {
+      "kind": "HTML_DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-01/AC3"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check；定向Python/Git保全与秘密模式核对",
+      "environment": "Windows / 本地Python、Git；文档与仓库范围检查",
+      "sample": "18项文档检查PASS；源MD与14指定文件保全、其余18项任务未变；本轮10份精确变更秘密0发现。未知未跟踪docs/ERP-openapi.yaml为收尾期间出现，未读取/修改/暂存；无业务验收",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
     }
   ],
   "review": null,
   "branch": "main",
-  "observedHead": "858af84b8527adee98a26a2e87ed8fdf10d81e90",
-  "dirtyPaths": [],
+  "observedHead": "a0c26153e65020d1b061556e84b27b74dce9964e",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -1208,6 +1240,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "只交第一阶段专项设计；1架构/3意图/5时序及9份讲稿，逻辑伪代码/降级/人工/待决项齐全。图表离线渲染和文档自检通过，负责人独立评审NOT_RUN；未拆MVP/TODO、未调查ERP、未开发，停止等待评审。",
       "observedHead": "858af84b8527adee98a26a2e87ed8fdf10d81e90"
+    },
+    {
+      "date": "2026-11-11",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "reason": "用户追加HTML阅读版授权；Codex单人负责HTML/文档构建脚本/导航及台账交接，设计评审状态不变，禁止扩展为业务开发",
+      "observedHead": "c7e3dca74295a737eab40f8e46445e5d93a94f95"
+    },
+    {
+      "date": "2026-11-11",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "reason": "新增授权的HTML阅读版已本地提交并通过离线浏览器检查。首轮390px页尾长hash溢出FAIL已修复，重测6组布局与交互PASS。MD与冻结设计/原型不变；无ERP/模型/业务开发，独立设计评审仍NOT_RUN。 收尾新出现未跟踪docs/ERP-openapi.yaml，归属未知，保留且未读取/修改/暂存。",
+      "observedHead": "a0c26153e65020d1b061556e84b27b74dce9964e"
     }
   ]
 }
