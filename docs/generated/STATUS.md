@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`cf7149ba76b72c6c36f360f30022b118faf5484c882cbe0981d3c8810150135b`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`987f617eee8c55e47d89e2b28c9fc53c9ecea252b73dc07ffbea53493033fb16`。不要手工编辑；候选不是执行授权。
 
-任务 21 项；TODO 16；IN_PROGRESS 0；BLOCKED 0；REVIEW 5；ACCEPTED 0。
+任务 22 项；TODO 16；IN_PROGRESS 0；BLOCKED 0；REVIEW 6；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 6 | 0 | 0 | 0 | 0 |
 | B | 5 | 5 | 0 | 0 | 0 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
-| D | 4 | 0 | 0 | 0 | 4 | 0 |
+| D | 5 | 0 | 0 | 0 | 5 | 0 |
 
 ## 当前活动记录
 
@@ -19,6 +19,7 @@
 - UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
 - D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）：REVIEW；实际执行者=Codex（本轮单人文档执行者）。
 - D-S01-ERP-01 S01 A01必做范围修订、教学ERP调查与MVP方案更新：REVIEW；实际执行者=Codex（单人执行，不使用代理）。
+- D-S01-ENTRY-01 单SKU最小开发准入核对与决策建议（仅文档）：REVIEW；实际执行者=Codex（单人文档执行）。
 
 ## 全部近期记录
 
@@ -45,5 +46,6 @@
 | UX-S01-01 | S01采购补货交互原型与项目视觉规范 | REVIEW | 无；仍核对入口指令 |
 | D-S01-MVP-PLAN | S01 MVP实施文档与最小底座范围（仅文档） | REVIEW | 无；仍核对入口指令 |
 | D-S01-ERP-01 | S01 A01必做范围修订、教学ERP调查与MVP方案更新 | REVIEW | 无；仍核对入口指令 |
+| D-S01-ENTRY-01 | 单SKU最小开发准入核对与决策建议（仅文档） | REVIEW | 无；仍核对入口指令 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

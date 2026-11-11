@@ -1761,3 +1761,147 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ]
 }
 ```
+
+## D-S01-ENTRY-01 单SKU最小开发准入核对（仅文档）
+
+```json
+{
+  "id": "D-S01-ENTRY-01",
+  "stage": "D",
+  "title": "单SKU最小开发准入核对与决策建议（仅文档）",
+  "kind": "design",
+  "dependsOn": [],
+  "entryCondition": "负责人本轮明确要求基于42a9417及既有S01设计/实施/ERP证据核对单SKU准入；直接复用D-S01-ERP-01证据，不要求其已独立验收，不新增接口验证/开发TODO/业务代码",
+  "ownerRole": "本轮文档核对执行者；身份、数据、规则与质量决定由负责人评审",
+  "assignee": "Codex（单人文档执行）",
+  "allowedPaths": [
+    "docs/agents/S01_单SKU开发准入核对.md",
+    "docs/README.md",
+    "docs/agents/index.md",
+    "docs/planning/git-whitelist.json",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/validation-report.json"
+  ],
+  "parallelCondition": "单人串行；原MVP/调查报告/JSON/专项与原型均只读；未跟踪ERP YAML原样保留，不读取凭据",
+  "deliverables": [
+    "一份简洁单SKU八域准入表：来源/旧实测/缺口/推荐处理/结果限制",
+    "三项最少负责人决定与建议；不假定身份/企业规则，不把既有字段类型当成现存输入数据集",
+    "必要导航/白名单/状态与交接、真实文档检查及Git提交；完成停止等评审"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-ENTRY-01/AC1",
+      "text": "八域逐项可追溯，明确原样本别名与未绑定身份，不补未知为0、不推断完整覆盖"
+    },
+    {
+      "id": "D-S01-ENTRY-01/AC2",
+      "text": "决定收敛并列推荐方案及MVP结果影响，区分供需/采购适用性/真实AI和完整验收"
+    },
+    {
+      "id": "D-S01-ENTRY-01/AC3",
+      "text": "不新调用ERP/认证/模型、不扩大探测、不改原型或业务代码/原设计，无开发TODO；必要检查/提交/交接真实"
+    }
+  ],
+  "plannedTests": [
+    "PowerShell here-string | python -：八域/三项决定、证据id与字段类型对照、Markdown表格/相对链接、基点保全/台账保全/秘密启发式",
+    "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+    "本轮ERP/认证/模型调用和业务测试NOT_RUN，独立准入评审NOT_RUN；现有实测仅引用，不重放"
+  ],
+  "risks": [
+    "原始身份/数量未保存，SKU-A只是既有样本别名；不能用旧证据直接计算或冒称八域已就绪",
+    "负责人尚未签认试点映射、补充数据/计算策略和质量策略；本文推荐不是冻结规则或开发授权"
+  ],
+  "requiredEvidenceKinds": [
+    "DESIGN_REVIEW"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "6759de4f58a19dafa98af8b4a1f6abc87970572b"
+  ],
+  "testedCommit": "6759de4f58a19dafa98af8b4a1f6abc87970572b",
+  "evidence": [
+    {
+      "kind": "DESIGN_SELF_CHECK",
+      "acceptanceIds": [
+        "D-S01-ENTRY-01/AC1",
+        "D-S01-ENTRY-01/AC2",
+        "D-S01-ENTRY-01/AC3"
+      ],
+      "command": "PowerShell here-string | python -（Markdown HTMLParser、旧证据id/字段类型、原任务JSON、链接与边界核对）",
+      "environment": "Windows / 既有Python markdown/Git；基于42a9417的文档核对，非真实软件或业务验收",
+      "sample": "核对表8项数据/3项决定/4层结果表均正确解析；17个旧实测id存在且关键类型/空值/503相符；123本轮所涉及MD本地链接无断链。主文档SHA256=62c6561e733d4994da3a48ee31721d88d2fdcf4d8023fba1693bd15ef9f0ff1d；负责人未签认，准入缺口不宣告关闭",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/S01_单SKU开发准入核对.md"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-ENTRY-01/AC1",
+        "D-S01-ENTRY-01/AC2",
+        "D-S01-ENTRY-01/AC3"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / 既有Python markdown/Git；基于42a9417的文档核对，非真实软件或业务验收",
+      "sample": "22项台账、18项文档规则PASS；仅新增design核对记录，原21项任务JSON保持不变，无正式开发TODO",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-ENTRY-01/AC1",
+        "D-S01-ENTRY-01/AC2",
+        "D-S01-ENTRY-01/AC3"
+      ],
+      "command": "git diff 42a9417 --name-only；Git对象逐字节/未知文件哈希/秘密启发式检查",
+      "environment": "Windows / 既有Python markdown/Git；基于42a9417的文档核对，非真实软件或业务验收",
+      "sample": "四份文档/索引/白名单固定于真实提交；其他业务/原型/冻结文件与原MVP/专项/ERP报告/JSON未改。原始YAML未跟踪且哈希仍匹配历史证据，未暂存；定向秘密启发式0发现，无业务入口初始化。新ERP/认证/模型请求均0，不重放旧授权",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "DESIGN_REVIEW",
+      "acceptanceIds": [
+        "D-S01-ENTRY-01/AC1",
+        "D-S01-ENTRY-01/AC2",
+        "D-S01-ENTRY-01/AC3"
+      ],
+      "command": "NOT_RUN：负责人单SKU准入/身份/补充数据与规则/质量策略评审；真实ERP/LLM/软件验收",
+      "environment": "Windows / 既有Python markdown/Git；基于42a9417的文档核对，非真实软件或业务验收",
+      "sample": "SKU-A仅旧样本别名，原始值未保存；当前尚不具备可采购候选业务准入。三项建议均待决定，不能以本文替代授权、数据或规则冻结",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/agents/S01_单SKU开发准入核对.md"
+    }
+  ],
+  "review": null,
+  "branch": "main",
+  "observedHead": "6759de4f58a19dafa98af8b4a1f6abc87970572b",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-11",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "领取单SKU文档核对；只复用旧证据，无新ERP调用或开发授权",
+      "observedHead": "42a941790b4611c391ee1b8f659d3d969ef8b856"
+    },
+    {
+      "date": "2026-11-11",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "单SKU准入表已独立提交，8域/3决定及引用保全自检与18项文档规则通过；不新调用ERP/模型、不编码、不生成开发TODO，停止等负责人评审。",
+      "observedHead": "6759de4f58a19dafa98af8b4a1f6abc87970572b"
+    }
+  ]
+}
+```
