@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "0.2",
+  "taskType": "VOC_CLASSIFICATION",
+  "taskRef": {
+    "tenantId": "tenant-fixture",
+    "taskId": "task-voc-success"
+  },
+  "planVersion": "plan-voc-1",
+  "participantId": "p-s03",
+  "snapshotId": "snapshot-voc-fixture-1",
+  "principalRef": {
+    "tenantId": "tenant-fixture",
+    "principalId": "user-voc-fixture"
+  },
+  "policyContextRef": {
+    "id": "policy-voc-fixture",
+    "version": "1"
+  },
+  "contentRefs": [
+    {
+      "tenantId": "tenant-fixture",
+      "id": "feedback-success",
+      "version": "1"
+    }
+  ],
+  "taxonomyRef": {
+    "id": "taxonomy-voc-fixture",
+    "version": "1"
+  },
+  "budgetHandleRef": {
+    "tenantId": "tenant-fixture",
+    "id": "task-budget-voc-success",
+    "version": "1"
+  },
+  "deadline": "2026-11-11T04:00:30Z",
+  "traceId": "trace-voc-success",
+  "parentSpanId": "span-s03-success"
+}

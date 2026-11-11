@@ -1,0 +1,11 @@
+flowchart TB
+  I[I01 Worker 领取 / 租约] --> O[O01 run_task]
+  O -->|冻结参与者 / plan / snapshot / 共享许可| H[ScenarioHandler.analyze]
+  H -->|默认路径| F[领域确定性 Workflow]
+  H -->|选配：已批准策略和输入| R[内部 Runtime.run / resume]
+  R -->|仅运行产物 / 停止原因 / 检查点草案| H
+  H -->|版本化 DomainResult / 约束缺口| O
+  H -->|经公开控制端口提交检查点| O
+  O -->|条件提交自身状态| DB[(O01 既有持久化)]
+  R -->|只读工具提案通过后| A3[A03 ToolExecutor]
+  R -->|唯一模型调用路径| A1[A01]

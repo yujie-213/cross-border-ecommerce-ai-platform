@@ -1,0 +1,30 @@
+{
+  "tenantId": "tenant-fixture",
+  "id": "context-voc-success",
+  "version": "1",
+  "purpose": "A02_VOC_CLASSIFICATION",
+  "snapshotId": "snapshot-voc-fixture-1",
+  "taxonomyRef": {
+    "id": "taxonomy-voc-fixture",
+    "version": "1"
+  },
+  "segments": [
+    {
+      "kind": "USER_FEEDBACK",
+      "controlTrust": "DATA",
+      "sensitivity": "PRIVATE_FEEDBACK",
+      "contentId": "feedback-success",
+      "sourceRef": {
+        "tenantId": "tenant-fixture",
+        "id": "feedback-success",
+        "version": "1"
+      },
+      "sourceEvidenceId": "ev-feedback-success-1",
+      "language": "zh-CN",
+      "text": "物流一直没更新，我要投诉。"
+    }
+  ],
+  "omissionReasons": [],
+  "history": [],
+  "memory": []
+}

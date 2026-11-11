@@ -1,0 +1,24 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S01 Handler
+  participant D as D03 / D02公开读口
+  participant B as B01
+  participant F as B02
+  participant A as A01（可选解释）
+  O->>D: 依参与者需求冻结snapshot与质量
+  O->>S: analyze / 计划快照 / 预算
+  S->>D: 固定输入与质量依赖
+  S->>B: 基线逐日指标
+  B-->>S: 可售 / 余额 / 首缺 / 缺口Refs
+  S->>F: 需求情景 / MOQ倍数 / 可售日期约束
+  F->>B: 每个候选调用同一指标评价
+  B-->>F: 版本化评价Refs
+  F-->>S: 候选 / 假设 / B01引用
+  S->>S: 规则检查与质量限制
+  opt 业务允许且获准解释
+    S->>A: 仅引用已计算结果生成解释
+    A-->>S: 解释或技术错误
+  end
+  S-->>O: DomainResult / 补证依赖 / 领域限制
+  O->>O: 联合需要时显式调度S03，审校发布报告
+  Note over O,A: 不自动创建C01建议；S01不反向调度S03

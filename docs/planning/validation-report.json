@@ -1,0 +1,149 @@
+{
+  "scope": "DOCUMENTATION_AND_LOCAL_REPOSITORY_ONLY",
+  "businessTests": "NOT_RUN",
+  "checks": [
+    {
+      "check": "required-files",
+      "result": "PASS",
+      "detail": [
+        "AGENTS.md",
+        "docs/PLAN.md",
+        "docs/PLAN.html",
+        "docs/TASKS.md",
+        "docs/HANDOFF.md",
+        "docs/DECISIONS.md",
+        "docs/COLLABORATION.md",
+        "docs/CI_RULES.md",
+        "docs/planning/git-whitelist.json",
+        "docs/planning/security-scan.json",
+        "docs/planning/repository-receipt.json"
+      ]
+    },
+    {
+      "check": "immutable-design-baselines",
+      "result": "PASS",
+      "detail": [
+        "智慧中台AI应用项目_需求文档草案.md",
+        "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+        "智慧中台AI应用项目_可行性分析报告.md",
+        "智慧中台AI应用项目_概要开发设计文档.md",
+        "智慧中台AI应用项目_AI模块详细开发设计文档.md"
+      ]
+    },
+    {
+      "check": "unique-task-ids",
+      "result": "PASS",
+      "detail": {
+        "tasks": 18,
+        "stages": {
+          "SETUP": 1,
+          "A": 6,
+          "B": 5,
+          "C": 5,
+          "D": 1
+        }
+      }
+    },
+    {
+      "check": "valid-acyclic-dependencies",
+      "result": "PASS",
+      "detail": {
+        "invalid": [],
+        "cycles": []
+      }
+    },
+    {
+      "check": "task-shape",
+      "result": "PASS",
+      "detail": "字段/状态/验收/测试/文件范围"
+    },
+    {
+      "check": "s01-design-no-code-or-s02-gate",
+      "result": "PASS",
+      "detail": "S01设计不依赖A/B/C/S02"
+    },
+    {
+      "check": "acceptance-evidence-rules",
+      "result": "PASS",
+      "detail": "无伪造验收；语义/环境/评审身份还须人工核验"
+    },
+    {
+      "check": "generated-status-and-dependencies",
+      "result": "PASS",
+      "detail": "从TASKS生成"
+    },
+    {
+      "check": "exact-historical-archive",
+      "result": "PASS",
+      "detail": "17份旧管理文件字节不变"
+    },
+    {
+      "check": "all-96-ids-history-mapped",
+      "result": "PASS",
+      "detail": {
+        "oldStates": {
+          "REVIEW": 1,
+          "TODO": 95
+        },
+        "mappingIsNotAcceptance": true
+      }
+    },
+    {
+      "check": "plan-html-diagram-sync",
+      "result": "PASS",
+      "detail": {
+        "source": "docs/PLAN.md",
+        "sourceSha256": "b1b511725ad9396030a11ab34d0cf7ff1324f31a1cd352de3e13bc5af00b2cd5",
+        "html": "docs/PLAN.html",
+        "htmlSha256": "badd531df114681ed73a8b598b90b91d21ba1041edd6482db969d218babae4f6",
+        "diagramSourceSha256": "2d7ff2ff9d028c8af92a5ebbaf21dba63017e0652388458206467c4cca996b32",
+        "diagramSvgSha256": "ba33f77b076bee04562c3a63fe4532aa23a74141a3357a03902562b77c3be081",
+        "tables": 9,
+        "sections": 11
+      }
+    },
+    {
+      "check": "offline-browser-layout",
+      "result": "PASS",
+      "detail": "3宽度×深浅主题，无远程请求；SVG有效"
+    },
+    {
+      "check": "preserved-milestone-mc-scope",
+      "result": "PASS",
+      "detail": "原M0—M4/MC01—MC12保留；S01另立验收"
+    },
+    {
+      "check": "active-collaboration-consistency",
+      "result": "PASS",
+      "detail": "静态约束检查；语义仍须人工复核"
+    },
+    {
+      "check": "no-business-initialization",
+      "result": "PASS",
+      "detail": {
+        "managementOnly": true,
+        "paths": [
+          "src",
+          "pyproject.toml",
+          "alembic.ini",
+          "migrations",
+          "docker-compose.yml"
+        ]
+      }
+    },
+    {
+      "check": "whitelist-secret-scan",
+      "result": "PASS",
+      "detail": "启发式秘密扫描，不保证识别所有敏感信息"
+    },
+    {
+      "check": "tracked-whitelist",
+      "result": "PASS",
+      "detail": {
+        "tracked": 0,
+        "over": []
+      }
+    }
+  ],
+  "status": "PASS"
+}

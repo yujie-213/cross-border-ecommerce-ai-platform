@@ -1,0 +1,77 @@
+{
+  "document": "AIH-AI-LLD-001 v0.2",
+  "status": "pass",
+  "checks": [
+    {
+      "check": "S01—S10默认选型及全部业务场景设计正文不变",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "总体架构与技术范式决策正文不变",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "四份基线及已认可交互架构图所有文件原字节不变",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "14张不相关Mermaid源及SVG均原字节不变",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "三份ModelRequest使用唯一字段集合及类型",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "三份解析后ProviderRequest与Prompt/Context/Schema/工具摘要一致",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "三例Schema/语义位置/UNKNOWN区别及模拟Decimal结算自洽",
+      "status": "pass",
+      "details": [
+        {
+          "caseId": "success",
+          "valid": true
+        },
+        {
+          "caseId": "technical-failure",
+          "valid": true
+        },
+        {
+          "caseId": "semantic-unknown",
+          "valid": true
+        }
+      ]
+    },
+    {
+      "check": "文档输出Schema拒绝UNKNOWN假确定值和额外危险字段",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "Loop首轮与反馈轮均明确预留/Provider/G02/结算且Runtime只回Handler",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "WAIT/VOC验收断言覆盖",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "OFF无设施与实际输出分类门禁在正文/缓存图一致",
+      "status": "pass",
+      "details": null
+    }
+  ],
+  "scope": "Only document/fixture/schema/arithmetic/diff consistency; no business implementation or model execution",
+  "sourceSha256": "3a47900213bb2175649c4d2b33eca0fb144268cf85ac8520a65ff19a1da16b9c",
+  "independentReview": "pending"
+}

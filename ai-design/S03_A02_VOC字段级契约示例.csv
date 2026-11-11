@@ -1,0 +1,30 @@
+﻿字段/资产,模拟值及构建规则,校验与归属
+
+PromptSpec,a02.voc.classify@1；owner=A02；变量为taxonomy值、contentId、language、feedbackText,System/Developer来自可信版本化模板；feedbackText只进User数据，不可插入Developer指令
+ContextBundle,成功context-voc-success@1；失败context-voc-failure@1；未知context-voc-unknown@1,每包仅含一个item、taxonomy版本、原文evidenceRef、固定snapshot与遗漏清单；无聊天历史/长期Memory/私有跨用户片段
+ContextSegment,kind=USER_FEEDBACK、controlTrust=DATA、sensitivity=PRIVATE_FEEDBACK、language=zh-CN；sourceRef与sourceEvidenceId来自C.1,A02构建、G01约束；A01校验引用可读与模型用途许可；不因已脱敏就改成TENANT_PUBLIC
+ModelRequest,成功完整请求就是附录A.1 JSON；另外两例taskId/logicalCallId/attemptId/contextBundleRef/allowanceRef/traceId分别替换为case对应标识,§9.1唯一契约；parametersRef/promptRef等为对象；deadline始终具体时间；不使用deadlineRef或TaskRef.version
+ProviderRequest.payload,"messages为下面成功示例；parameters={temperature:0,maxOutputTokens:128}；toolSpecs=[]；outputSchema为C.3完整Schema对象；modelRevision=model-fixture-rev-1",这些具体值由可信引用解析；工具digest=规范化空数组的SHA256；模板/参数/Schema/Context摘要由文档样例构建器计算，不由模型填入
+ProviderRequest.control,原taskRef、单列planVersion、p-s03、snapshot、attempt/allowance/trace；deadline=2026-11-11T04:00:30Z；若模拟dbNow=04:00:00Z且providerTimeout=20秒，则timeoutMs=20000,时间/参数只是fixture，无生产SLA；剩余时间为0则不发送；control不作为提示词或任意厂商字段发出
+
+落库/返回环节,成功CLASSIFIED,模型技术失败,业务语义UNKNOWN
+
+A01响应,SUCCESS+validatedObject、usageRef、实际model/Prompt/Schema/digest版本；toolRequests=[]、cacheStatus=OFF,TECH_ERROR/TIMEOUT、validatedObject=null；SENT且usage未知，保留原attempt记录,SUCCESS+合法UNKNOWN对象，非技术错误；同样有实际usage和版本
+A02自有产物,understanding-success@1保存contentRef、taxonomy、classification、span、模型/Prompt/Schema/输入版本及usageRef；D04指向此资产及ev-feedback-success-1,不创建伪造有效understanding_result/UNKNOWN标签；A02失败尝试仅关联原输入、G02技术/usage记录,understanding-unknown@1保存UNKNOWN与原因，theme/intent/confidence=null；D04可追溯原文，不当无投诉或无缺陷
+A02给S03,能力结果Ref及有效覆盖/限制；主题/意图仍为派生标签，投诉资格由S03规则和B01口径决定,技术失败及覆盖缺口Ref，不能说“业务UNKNOWN分类成功”；S03按必需依赖限制，不能把空标签当零投诉,有效的UNKNOWN结果Ref与待核标记；不得以null当false/0，不能静默丢样本提高准确率
+G02审计,actorRef、taskRef、planVersion、participantId、snapshotId、attempt/trace、allowanceRef、source/understanding/evidenceRefs、版本和COMPLETED事件,同关联链加TIMEOUT/SENT/usageUnknown与核对状态，无正文；同attempt事件去重,同关联链加semanticStatus=UNKNOWN及unknownReason、COMPLETED_WITH_UNKNOWN事件，无原文/个人资料
+O01预算,按usageRef幂等结算模拟0.000128，释放剩余预留；原attempt只记一次费用,原0.000384继续占额；停止自动新模型调用，经既有G02/提供方记录核对；任务可按策略有界结束，未决费用另核对,正常结算模拟0.000064，不能因为UNKNOWN把真实调用视为免费；交人工或继续获准确定性步骤
+
+验收编号,必须断言,证据与适用边界
+
+VOC-01 输入/隔离,source/content/Context/allowance所有tenant一致；taskRef无version且planVersion独立；只送当前单条脱敏内容；模型不可扩scope,契约fixture及负例；真实权限/来源仍需集成验证
+VOC-02 解析,ModelRequest禁止parameters/deadlineRef/toolSpecs/toolSpecsDigest别名；解析后parameters/具体messages/完整Schema/toolSpecs=[]与其引用一致；timeout不超过剩余期限,文档样例可做字段/摘要自检；不是证明提供方支持Schema
+VOC-03 成功,"success输出通过完整Schema；contentId完全匹配；span[0,7)定位“物流一直没更新”；A02/D04仅原所有者保存并返回Refs，未直接算投诉率",fixture内容人为指定，只证明协议示例自洽，不证明分类效果
+VOC-04 技术失败,TIMEOUT/SENT不创建有效understandingRef；semanticStatus不伪造UNKNOWN；usage/cost=null，预留0.000384不退；无第二次模型调用,模拟故障断言；真实计费/回执与恢复需后续验证
+VOC-05 语义UNKNOWN,technicalStatus=SUCCESS且Schema合法；theme/intent/confidence=null、unknownReason非null；存UNKNOWN产物可回溯，不把未知当无投诉/安全,模拟语义结果；判断阈值/人工复核标准仍待业务冻结
+VOC-06 用量/去重,模拟成功/UNKNOWN费用分别0.000128/0.000064；重复attempt结算或结果重入不能重复费用/产物；技术失败保留未知而非0,计价为fixture Decimal演算，非供应商报价或已测成本
+VOC-07 输出拒绝,非JSON、Schema非法、额外字段、未知contentId、越界span拒绝有效落标签；不能以UNKNOWN兜底格式/越权错误,输出Schema及A02语义负例；不以平均模型评分掩盖
+VOC-08 发布与依赖,A02结果是能力产物，不直接发布O01报告；S03/Handler才构造DomainResult，缺成熟分母/必需质量信号不能填零/放行,未来按AC/MC与领域矩阵验收；示例不增加自主Agent
+VOC-09 缓存与审计,cacheStatus=OFF，不创建缓存设施；G02记录引用/版本/technical与semantic区分，无反馈全文；输入公开也不能省略实际输出共享判定,此例私有反馈始终禁响应缓存，不用于证明共享缓存可用
+VOC-10 无隐含循环,每例单独modelCalls≤1；A01解析/Schema失败不自动调用格式修复；无Runtime/多Agent/自有预算,与S03原Workflow选型一致；真实模型启用须另过V05/V09/V13
+

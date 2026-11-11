@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S09 Handler
+  participant U as A02 视觉理解
+  participant A as A01（LLM视觉时）
+  participant E as D04
+  participant H as W01 / 质检人工
+  O->>S: 图片版本 / 检查标准 / 预算
+  S->>S: 权限 / 图片质量 / 标准完整性检查
+  S->>U: 获准图片Refs / 缺陷taxonomy
+  opt 选用已验证的多模态LLM提供方
+    U->>A: 图片理解请求 / 原task许可
+    A-->>U: 识别结果或技术错误
+  end
+  U->>E: 登记图片区域证据（能力支持时）
+  U-->>S: 可疑缺陷Refs / UNKNOWN / 能力限制
+  S-->>O: 辅助发现 / 人工复核项
+  O-->>H: 发布辅助结果
+  Note over O,H: 模型失败不等于无缺陷；不放行、不报废、不调库存

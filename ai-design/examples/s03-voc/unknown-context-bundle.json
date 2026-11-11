@@ -1,0 +1,30 @@
+{
+  "tenantId": "tenant-fixture",
+  "id": "context-voc-unknown",
+  "version": "1",
+  "purpose": "A02_VOC_CLASSIFICATION",
+  "snapshotId": "snapshot-voc-fixture-1",
+  "taxonomyRef": {
+    "id": "taxonomy-voc-fixture",
+    "version": "1"
+  },
+  "segments": [
+    {
+      "kind": "USER_FEEDBACK",
+      "controlTrust": "DATA",
+      "sensitivity": "PRIVATE_FEEDBACK",
+      "contentId": "feedback-unknown",
+      "sourceRef": {
+        "tenantId": "tenant-fixture",
+        "id": "feedback-unknown",
+        "version": "1"
+      },
+      "sourceEvidenceId": "ev-feedback-unknown-1",
+      "language": "zh-CN",
+      "text": "还是这样。"
+    }
+  ],
+  "omissionReasons": [],
+  "history": [],
+  "memory": []
+}

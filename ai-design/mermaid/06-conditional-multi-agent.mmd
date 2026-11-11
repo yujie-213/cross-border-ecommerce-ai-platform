@@ -1,0 +1,18 @@
+sequenceDiagram
+  participant O as O01 唯一任务与预算
+  participant H as 同一场景 Handler / 固定协调者
+  participant W as Worker 角色（条件启用）
+  participant R as Reviewer 角色（条件启用）
+  participant A as A01 / A03 公共调用
+  O->>H: 一个参与者视图 / task预算
+  H->>O: 预留受限分支额度与并发槽
+  H->>W: 最小AgentMessage / 固定输入引用
+  W->>A: 原许可内生成或取证
+  A-->>W: 受控结果 / usage / 错误
+  W-->>H: 结构化候选产物 / 版本 / 证据
+  H->>R: 仅必要候选及事实Refs，不共享原始聊天
+  R->>A: 有获准额度才执行独立审校
+  R-->>H: 问题清单 / 证据冲突 / 无批准效力
+  H->>H: 确定性Reducer校验版本与约束
+  H->>O: checkpoint / DomainResult 或受限结果
+  Note over H,R: 当前无必建多Agent；默认单Workflow。无独立服务、消息总线或新预算

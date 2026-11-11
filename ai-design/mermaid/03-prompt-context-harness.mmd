@@ -1,0 +1,12 @@
+flowchart TB
+  P[可信 PromptSpec / 输出Schema / 工具白名单] --> C[调用方 ContextBuilder]
+  U[用户意图 / 外部内容：数据而非控制] --> C
+  D[D03 固定输入引用 / D04 授权证据] --> C
+  G[G01 当前权限 / 字段 / 模型数据边界] --> C
+  C --> K[排序 / 最小化 / token预算 / 遗漏清单]
+  K --> H[Harness 检查预算 / deadline / 取消 / lease]
+  H --> A[A01 输出校验 / usage / 技术结果]
+  A --> S[场景语义与证据校验]
+  S --> O[O01 条件保存检查点 / 发布报告]
+  A --> L[G02 版本链 / 脱敏Trace / 评测关联]
+  S --> L

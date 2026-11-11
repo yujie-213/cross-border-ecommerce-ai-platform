@@ -1,0 +1,47 @@
+sequenceDiagram
+  autonumber
+  participant S as 场景 / O01报告 / A03即席用例
+  participant B as 对应运行控制 / O01任务或A03查询
+  participant G as G01 当前授权
+  participant A as A01 模型网关
+  participant M as ModelProvider
+  participant T as A03 只读工具 / 检索
+  participant D as B01 / D04 / 受控数据查询
+  participant L as G02 观测评测
+  S->>G: 校验当前身份、用途、范围及模型数据边界，取得获准策略
+  alt 正式分析任务
+    S->>B: 使用 O01 taskId / TaskBudgetHandle
+  else W01 发起即席查询
+    S->>B: A03 建立 queryId / QueryRunContext，校验请求及周期额度
+  end
+  S->>B: 申请调用额度及 deadline
+  B-->>S: allowanceRef 或预算受限
+  break 未获预算许可或当前授权拒绝
+    S->>S: 由对应编排层决定终止或获准降级，不调用模型
+  end
+  opt 当前操作确需模型，已获模型额度许可
+    S->>A: ModelRequest / prompt与context版本引用
+    A->>M: 适配调用，限制技术超时
+    M-->>A: 内容、usage、toolRequests 或技术错误
+    A-->>S: 标准化响应 / 技术状态
+    A->>L: 脱敏技术轨迹与 usage
+    S->>B: 结算或保守保留未知消耗
+  end
+  alt 当前操作是只读检索或存在获准工具提案
+    S->>G: 核验工具白名单、参数与当前范围
+    S->>B: 预留工具额度
+    break 工具权限或额度核验不通过
+      S->>S: 拒绝工具调用，按领域/联合策略处理
+    end
+    S->>T: 受控 ToolInvocation，服务端绑定scope与snapshot
+    T->>G: 再次校验资源权限及过滤条件
+    T->>D: 白名单查询 / 指标结果 / 证据解析
+    D-->>T: 固定版本引用与最小结果
+    T-->>S: ToolResult / evidenceRefs
+    S->>B: 结算工具消耗
+    Note over S,M: 如需后续模型调用，仍走同一路径并计入同一预算
+  else 技术失败或预算不足
+    S->>S: 按调用来源处理：场景/联合业务策略，或即席有界错误
+  end
+  S->>L: 业务决策、版本链及评测关联引用
+  Note over A,T: A01 不执行函数；A03 工具不含 C03 写动作

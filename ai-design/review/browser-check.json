@@ -1,0 +1,108 @@
+{
+  "artifact": "D:\\电商项目\\跨境电商智慧AI平台\\智慧中台AI应用项目_AI模块详细开发设计文档.html",
+  "sha256": "0fdffc8f139653c4a8ea9b8a303ac76c283816ff7e14f5c90eeff33732abec25",
+  "status": "pass",
+  "checks": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "svg": 19,
+      "tables": 50,
+      "headings": 88,
+      "brokenFigures": 0,
+      "status": "pass"
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "svg": 19,
+      "tables": 50,
+      "headings": 88,
+      "brokenFigures": 0,
+      "status": "pass"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "theme": "light",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "svg": 19,
+      "tables": 50,
+      "headings": 88,
+      "brokenFigures": 0,
+      "status": "pass"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "theme": "dark",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "svg": 19,
+      "tables": 50,
+      "headings": 88,
+      "brokenFigures": 0,
+      "status": "pass"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "width": 390,
+      "scrollWidth": 390,
+      "svg": 19,
+      "tables": 50,
+      "headings": 88,
+      "brokenFigures": 0,
+      "status": "pass"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "width": 390,
+      "scrollWidth": 390,
+      "svg": 19,
+      "tables": 50,
+      "headings": 88,
+      "brokenFigures": 0,
+      "status": "pass"
+    }
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "interactions": {
+    "tocFilterMatches": 4,
+    "filterCorrect": true,
+    "themeToggle": true
+  },
+  "visualReview": "pending",
+  "screenshots": [
+    "reading-dark-top.png",
+    "reading-light-top.png",
+    "cache-diagram.png",
+    "s03-workflow.png",
+    "runtime-boundary.png",
+    "llmops-loop.png",
+    "cache-matrix.png"
+  ]
+}

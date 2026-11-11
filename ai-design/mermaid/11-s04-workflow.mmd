@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S04 Handler
+  participant D as D02 / D03
+  participant B as B01
+  participant R as A03 / D04
+  participant A as A01（可选）
+  O->>S: 参与者视图 / 费用期间 / 固定snapshot
+  S->>D: 累计或增量账单 / 退款 / 成本 / 覆盖
+  S->>B: 确认口径 / 币种 / 缺项规则
+  B-->>S: 贡献与差异metricRefs / 不完整标记
+  S->>R: 授权费用证据解析
+  R-->>S: evidenceRefs / 未确认项
+  opt 允许生成解释
+    S->>A: 引用确定性分解结果和缺项
+    A-->>S: 候选归因 / 技术错误
+  end
+  S-->>O: DomainResult / 财务限制 / 核查候选
+  O->>O: 发布报告，不修改源账务

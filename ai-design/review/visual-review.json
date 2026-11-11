@@ -1,0 +1,21 @@
+{
+  "document": "AIH-AI-LLD-001 v0.2 D01—D05",
+  "status": "sampled-review-complete",
+  "artifactSha256": "0fdffc8f139653c4a8ea9b8a303ac76c283816ff7e14f5c90eeff33732abec25",
+  "viewport": {
+    "height": 1000,
+    "width": 1440
+  },
+  "reviewedScreenshots": [
+    "agent-loop-d02.png",
+    "cache-diagram.png",
+    "voc-contract-d05.png"
+  ],
+  "findings": [
+    "Revised Loop uses readable width with horizontal scrolling inside its figure",
+    "Sampled cache and VOC diagrams have readable labels; tall diagrams use normal vertical scrolling",
+    "Independent SVG files retain full diagram detail"
+  ],
+  "scope": "Sampled perceptual review only, not a full-canvas visual review of all 19 diagrams",
+  "independentReview": "pending"
+}

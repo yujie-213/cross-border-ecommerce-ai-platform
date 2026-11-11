@@ -1,0 +1,50 @@
+{
+  "source": "智慧中台AI应用项目_概要开发设计文档.md",
+  "renderer": "Mermaid 11.15.0 (existing pinned local asset)",
+  "diagrams": [
+    {
+      "id": "01-engineering-dependencies",
+      "source": "design/mermaid/01-engineering-dependencies.mmd",
+      "svg": "design/mermaid/01-engineering-dependencies.svg",
+      "sourceSha256": "40c2b8c3ca7f29d54a481f8ac087e83227d3c77f57e267bf5a9c9075c7b107c4"
+    },
+    {
+      "id": "02-single-joint-analysis",
+      "source": "design/mermaid/02-single-joint-analysis.mmd",
+      "svg": "design/mermaid/02-single-joint-analysis.svg",
+      "sourceSha256": "8799ec63c652bb6580806d5a94e291259748eb76a514aaef76a2ca22763178c4"
+    },
+    {
+      "id": "03-data-to-snapshot",
+      "source": "design/mermaid/03-data-to-snapshot.mmd",
+      "svg": "design/mermaid/03-data-to-snapshot.svg",
+      "sourceSha256": "a87951817df7a51e732d2dee04d2484099bbba60bbb3fc7c75899b4a622fcfa4"
+    },
+    {
+      "id": "04-ai-tools-common-path",
+      "source": "design/mermaid/04-ai-tools-common-path.mmd",
+      "svg": "design/mermaid/04-ai-tools-common-path.svg",
+      "sourceSha256": "4a7ca6f56d050d917a2f07f3572f99cfc0fa4ad31fd364f6a3a027ec28ff94ad"
+    },
+    {
+      "id": "05-work-item-lifecycle",
+      "source": "design/mermaid/05-work-item-lifecycle.mmd",
+      "svg": "design/mermaid/05-work-item-lifecycle.svg",
+      "sourceSha256": "efd5ea87197e1f0296415b8a8246da1baef6f7f61879546a2ca026c0dd293d0a"
+    },
+    {
+      "id": "06-approval-execution-recovery",
+      "source": "design/mermaid/06-approval-execution-recovery.mmd",
+      "svg": "design/mermaid/06-approval-execution-recovery.svg",
+      "sourceSha256": "e5b80e6c479da096e87367cf2746ea1ee8605c72efc290ef154f62ec5cf89173"
+    }
+  ],
+  "documentVersion": "0.2",
+  "changedDiagrams": [
+    "02-single-joint-analysis",
+    "03-data-to-snapshot",
+    "04-ai-tools-common-path",
+    "05-work-item-lifecycle",
+    "06-approval-execution-recovery"
+  ]
+}

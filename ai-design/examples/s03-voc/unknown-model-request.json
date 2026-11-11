@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "0.2",
+  "logicalCallId": "voc-call-unknown",
+  "attemptId": "voc-attempt-unknown-1",
+  "taskRef": {
+    "tenantId": "tenant-fixture",
+    "taskId": "task-voc-unknown"
+  },
+  "queryRef": null,
+  "planVersion": "plan-voc-1",
+  "participantId": "p-s03",
+  "snapshotId": "snapshot-voc-fixture-1",
+  "principalRef": {
+    "tenantId": "tenant-fixture",
+    "principalId": "user-voc-fixture"
+  },
+  "purpose": "A02_VOC_CLASSIFICATION",
+  "policyContextRef": {
+    "id": "policy-voc-fixture",
+    "version": "1"
+  },
+  "deploymentRef": {
+    "id": "model-fixture",
+    "version": "1"
+  },
+  "promptRef": {
+    "id": "a02.voc.classify",
+    "version": "1"
+  },
+  "contextBundleRef": {
+    "tenantId": "tenant-fixture",
+    "id": "context-voc-unknown",
+    "version": "1"
+  },
+  "outputSchemaRef": {
+    "id": "a02.voc.output",
+    "version": "1"
+  },
+  "requiredCapabilities": [
+    "structured_output"
+  ],
+  "toolSpecRefs": [],
+  "parametersRef": {
+    "id": "generation-voc-fixture",
+    "version": "1"
+  },
+  "allowanceRef": {
+    "tenantId": "tenant-fixture",
+    "id": "allowance-voc-unknown-1",
+    "version": "1"
+  },
+  "deadline": "2026-11-11T04:00:30Z",
+  "cachePolicyRef": {
+    "id": "cache-off",
+    "version": "1"
+  },
+  "traceId": "trace-voc-unknown",
+  "parentSpanId": "span-a02-unknown"
+}

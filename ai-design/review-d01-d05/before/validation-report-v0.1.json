@@ -1,0 +1,168 @@
+{
+  "document": "AIH-AI-LLD-001 v0.1",
+  "date": "2026-11-11",
+  "status": "pass",
+  "sourceSha256": "b07072cbf02282e53f6400d85065ad85eddd5e5a2d37b9c88067636977744181",
+  "checks": [
+    {
+      "check": "四份授权基线指纹未变",
+      "status": "pass",
+      "details": [
+        {
+          "path": "智慧中台AI应用项目_需求文档草案.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_可行性分析报告.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_概要开发设计文档.md",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "check": "直接工程基线版本及统一上下文",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "ER01—ER10逐项对应",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "MC01—MC12逐项对应",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "M0—M4分期覆盖",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "十场景全部设计项及独立时序",
+      "status": "pass",
+      "details": [
+        {
+          "scenario": "S01",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S02",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S03",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S04",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S05",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S06",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S07",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S08",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S09",
+          "missing": [],
+          "sequenceDiagrams": 1
+        },
+        {
+          "scenario": "S10",
+          "missing": [],
+          "sequenceDiagrams": 1
+        }
+      ]
+    },
+    {
+      "check": "17份独立图源与正文同步",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "17份SVG XML完整",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "真实Mermaid渲染通过",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "HTML内嵌全部17张SVG",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "HTML无远程script或stylesheet运行依赖",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "引用仅限四份基线与本次产物",
+      "status": "pass",
+      "details": []
+    },
+    {
+      "check": "全部文档本地链接可定位",
+      "status": "pass",
+      "details": []
+    },
+    {
+      "check": "接口JSON示例可解析",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "16个AI控制验收样例",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "HTML浏览器多视口深浅主题及离线检查",
+      "status": "pass",
+      "details": {
+        "tocFilterMatches": 4,
+        "filterCorrect": true,
+        "themeToggle": true
+      }
+    },
+    {
+      "check": "Archify职责图完整交付门禁",
+      "status": "pass",
+      "details": null
+    }
+  ],
+  "verificationScope": "文档结构、引用、基线指纹、图示和静态阅读材料；无业务实现/MC验收/模型效果/企业联调/压测/部署",
+  "semanticReviewRef": "内部一致性检查记录.md",
+  "independentReview": "pending"
+}

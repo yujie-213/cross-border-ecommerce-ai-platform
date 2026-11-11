@@ -1,0 +1,465 @@
+<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="plan-source-sha256" content="b1b511725ad9396030a11ab34d0cf7ff1324f31a1cd352de3e13bc5af00b2cd5"><title>S01先行 · 代码底座与通用AI计划</title><style>
+:root{--bg:#f3f5f7;--paper:#fff;--fg:#172a3b;--muted:#566c7e;--line:#d9e2e9;--accent:#126d63;--soft:#edf6f3}
+html[data-theme=dark]{--bg:#111b26;--paper:#1a2938;--fg:#e7f0f7;--muted:#b2c6d7;--line:#374f63;--accent:#7cd7c7;--soft:#24403f}
+*{box-sizing:border-box}[hidden]{display:none!important}html{scroll-padding-top:28px}body{margin:0;font:16px/1.85 "Microsoft YaHei",sans-serif;color:var(--fg);background:var(--bg)}a{color:var(--accent)}header{background:#122e3c;color:#effaf8;padding:30px 38px;border-bottom:4px solid #469f92}header h1{font-size:29px;margin:8px 0}header p{margin:8px 0;color:#c8dde2}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.actions a,.actions button{font:14px sans-serif;padding:9px 13px;border:1px solid #58778b;background:#26475b;color:#effaf8;border-radius:6px;text-decoration:none;cursor:pointer}.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:25px;max-width:1660px;margin:auto;padding:28px}aside{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow:auto;font-size:14px}aside a{display:block;padding:7px 8px;text-decoration:none;color:var(--muted)}main{min-width:0;background:var(--paper);padding:30px 36px;border:1px solid var(--line);border-radius:10px}h2{font-size:23px;margin-top:40px;border-top:1px solid var(--line);padding-top:25px}p,td,li{overflow-wrap:anywhere}blockquote{margin:20px 0;padding:10px 20px;background:var(--soft);border-left:4px solid var(--accent)}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;margin:20px 0}table{border-collapse:collapse;width:100%;min-width:680px;font-size:14px;line-height:1.8}td,th{padding:11px 12px;vertical-align:top;text-align:left;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}th{background:var(--soft)}code{font:13px/1.7 Consolas,monospace;background:var(--soft);padding:2px 4px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--soft);padding:15px;border-radius:6px}figure{margin:22px 0;background:#fff;color:#172a3b;padding:16px;border:1px solid #d9e2e9;border-radius:7px}figure svg{display:block;width:100%;height:auto}figcaption{font-size:14px;color:#185950;margin-top:12px}summary{cursor:pointer}.callout{padding:15px;background:var(--soft);border:1px solid var(--line);border-radius:6px}footer{margin:24px auto;max-width:1500px;padding:18px;color:var(--muted);font-size:13px}
+@media(max-width:1000px){.layout{grid-template-columns:1fr;padding:16px}aside{position:relative;max-height:280px;background:var(--paper);padding:12px}main{padding:20px}header{padding:24px}header h1{font-size:24px}}@media print{header,aside,footer,.actions{display:none}.layout{display:block;padding:0}main{border:0;padding:0}body{background:white;color:black;font-size:10pt}h2{break-after:avoid}.table-scroll{overflow:visible}table{min-width:0;font-size:9pt}details{display:none}}
+</style></head><body><header><p>开发实施计划 v0.2 · 2026-11-11 · S01纵向切片</p><h1>先完成所需底座，再按使用方补齐能力</h1><p>A 最小工程 · B 必要公共能力 · C 按需AI · D 逐场景专项</p><div class="actions"><a href="PLAN.md">Markdown正文</a><a href="TASKS.md">唯一任务台账</a><a href="HANDOFF.md">交接入口</a><a href="TASK_MAPPING.md">旧96项映射</a><button id="theme">切换深浅主题</button><button onclick="print()">打印</button></div></header><div class="layout"><aside aria-label="章节目录"><a href="#section-1">1. 依据、顺序变更与唯一正文</a><a href="#section-2">2. A—D轨道与必需/按需边界</a><a href="#section-3">3. 开发顺序与可并行事项</a><a href="#section-4">4. 阶段A的启动、交付与验收</a><a href="#section-5">5. 阶段B按S01实际需求建设</a><a href="#section-6">6. 阶段C最小AI路径与门槛</a><a href="#section-7">7. 近期任务及进入S01条件</a><a href="#section-8">8. 原M0—M4及MC01—MC12保留/映射</a><a href="#section-9">9. 模拟、真实ERP与未验证条件</a><a href="#section-10">10. 场景登记与后续流程</a><a href="#section-11">11. 管理、Git与本轮停止点</a></aside><main><div class="callout">下一条指令可直接开始S01专项设计；不等待S02或全通用AI。本轮不开发业务代码。所有MC/S01业务测试均未执行。</div><article><h1>代码底座与通用AI能力分阶段开发计划 v0.2</h1>
+<p>日期：2026-11-11。当前范围：精简计划、协作机制、旧稿归档、本地Git初始化与提交；不初始化业务代码，不执行下列开发任务。下一条指令可以直接进入S01专项设计，不再等待S02或全部通用能力。</p>
+<h2 id="section-1">1. 依据、顺序变更与唯一正文</h2>
+<p>直接工程依据是<a href="../智慧中台AI应用项目_概要开发设计文档.md">概要开发设计v0.2</a>及<a href="../智慧中台AI应用项目_AI模块详细开发设计文档.md">AI详细开发设计v0.2</a>。正文保持原样。本次用户明确将实施顺序改为S01纵向切片；变更依据、影响及验收映射见<a href="DECISIONS.md">DECISIONS</a>。旧96项草案原文/历史状态已<a href="archive/plan96-v0.1/README.md">归档</a>，96个旧ID逐条见<a href="TASK_MAPPING.md">TASK_MAPPING</a>，不是待逐项完成的路线。</p>
+<p>当前只有本MD是一份计划正文；PLAN.html由文档工具生成，离线内嵌SVG，无远程脚本。任务状态与证据唯一在<a href="TASKS.md">TASKS</a>，<a href="generated/STATUS.md">进度视图</a>从其生成，不手工维护完成率。A—D是本次工程工作轨道，不改原M0—M4产品阶段，也不等同旧草案中同名的A/B验收节点。</p>
+<h2 id="section-2">2. A—D轨道与必需/按需边界</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>轨道</th>
+<th>目标与近期范围</th>
+<th>交付物/启用边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A 最小工程底座</td>
+<td>Python/FastAPI，MySQL/SQLAlchemy/Alembic，配置/错误/日志，G01身份/权限/租户最小子集，API与独立Worker，I01持久投递/租约/恢复，O01最小任务契约与测试基础</td>
+<td>仅创建实际使用包/迁移；可启动、可查询、可取消/恢复、有真实MySQL故障证据。无S02/模型/外写前置</td>
+</tr>
+<tr>
+<td>B 必要业务公共能力</td>
+<td>按S01字段与验收分批实现D01读取适配、D02映射标准化、D03质量/snapshot、D04证据、B01供需指标、B02基线/候选约束、O01 Handler/报告、G01/G02边界</td>
+<td>不是一开始建完所有数据域/连接器；按S01设计选择当次所需子集，模块职责不合并/复制</td>
+</tr>
+<tr>
+<td>C 通用AI能力</td>
+<td>A01/ModelProvider、Prompt/Context版本、预算/费用/超时/调用记录、最小评测；A02、A03/RAG、Function Calling/Skill按真实用例启用</td>
+<td>S01规则闭环可完全不依赖C；实际启用模型前必须完成该用途的许可、预算、结构/安全/质量门槛</td>
+</tr>
+<tr>
+<td>D 业务场景按需</td>
+<td>先S01专项设计，再确认公共能力→拆纵向切片任务→实现→测试验收→复盘；S02—S10只登记</td>
+<td>本轮仅登记S01下一项设计任务，不预拆其他场景的空实现任务；“Agent”是业务名称，默认范式仍按已认可Workflow选择</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>不预建</strong>独立Agent平台、完整LLMOps、长期Memory、Redis、MQ、Milvus、Neo4j或复杂多Agent通信。响应缓存默认OFF，不创建缓存表/实例/清理线程/失效通道等设施。基础Harness的权限、Schema、预算、deadline、取消和记录随实际模型调用必需；自主Loop、暂停恢复、多角色、专用框架只有固定Workflow确实不足且有评测证据才评审启用，不能变成基座前置。</p>
+<h2 id="section-3">3. 开发顺序与可并行事项</h2>
+<figure><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 788.73828125 837.5" height="837.5" class="flowchart" xmlns="http://www.w3.org/2000/svg" width="788.73828125" id="plan_flow_v2"><style>#plan_flow_v2{font-family:Microsoft YaHei,sans-serif;font-size:17px;fill:#172a3b;}#plan_flow_v2 .error-icon{fill:hsl(340, 33.3333333333%, 99.7058823529%);}#plan_flow_v2 .error-text{fill:rgb(0.5000000001, 1.0000000001, 0.8333333334);stroke:rgb(0.5000000001, 1.0000000001, 0.8333333334);}#plan_flow_v2 .edge-thickness-normal{stroke-width:1px;}#plan_flow_v2 .edge-thickness-thick{stroke-width:3.5px;}#plan_flow_v2 .edge-pattern-solid{stroke-dasharray:0;}#plan_flow_v2 .edge-thickness-invisible{stroke-width:0;fill:none;}#plan_flow_v2 .edge-pattern-dashed{stroke-dasharray:3;}#plan_flow_v2 .edge-pattern-dotted{stroke-dasharray:2;}#plan_flow_v2 .marker{fill:#526e80;stroke:#526e80;}#plan_flow_v2 .marker.cross{stroke:#526e80;}#plan_flow_v2 svg{font-family:Microsoft YaHei,sans-serif;font-size:17px;}#plan_flow_v2 p{margin:0;}#plan_flow_v2 .label{font-family:Microsoft YaHei,sans-serif;color:#172a3b;}#plan_flow_v2 .cluster-label text{fill:rgb(0.5000000001, 1.0000000001, 0.8333333334);}#plan_flow_v2 .cluster-label span{color:rgb(0.5000000001, 1.0000000001, 0.8333333334);}#plan_flow_v2 .cluster-label span p{background-color:transparent;}#plan_flow_v2 .label text,#plan_flow_v2 span{fill:#172a3b;color:#172a3b;}#plan_flow_v2 .node rect,#plan_flow_v2 .node circle,#plan_flow_v2 .node ellipse,#plan_flow_v2 .node polygon,#plan_flow_v2 .node path{fill:#edf6f3;stroke:#278b7c;stroke-width:1px;}#plan_flow_v2 .rough-node .label text,#plan_flow_v2 .node .label text,#plan_flow_v2 .image-shape .label,#plan_flow_v2 .icon-shape .label{text-anchor:middle;}#plan_flow_v2 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#plan_flow_v2 .rough-node .label,#plan_flow_v2 .node .label,#plan_flow_v2 .image-shape .label,#plan_flow_v2 .icon-shape .label{text-align:center;}#plan_flow_v2 .node.clickable{cursor:pointer;}#plan_flow_v2 .root .anchor path{fill:#526e80!important;stroke-width:0;stroke:#526e80;}#plan_flow_v2 .arrowheadPath{fill:#0b0b0b;}#plan_flow_v2 .edgePath .path{stroke:#526e80;stroke-width:2.0px;}#plan_flow_v2 .flowchart-link{stroke:#526e80;fill:none;}#plan_flow_v2 .edgeLabel{background-color:hsl(40, 33.3333333333%, 94.7058823529%);text-align:center;}#plan_flow_v2 .edgeLabel p{background-color:hsl(40, 33.3333333333%, 94.7058823529%);}#plan_flow_v2 .edgeLabel rect{opacity:0.5;background-color:hsl(40, 33.3333333333%, 94.7058823529%);fill:hsl(40, 33.3333333333%, 94.7058823529%);}#plan_flow_v2 .labelBkg{background-color:rgba(245.9999999999, 242.9999999999, 236.9999999999, 0.5);}#plan_flow_v2 .cluster rect{fill:hsl(340, 33.3333333333%, 99.7058823529%);stroke:hsl(340, 0%, 89.7058823529%);stroke-width:1px;}#plan_flow_v2 .cluster text{fill:rgb(0.5000000001, 1.0000000001, 0.8333333334);}#plan_flow_v2 .cluster span{color:rgb(0.5000000001, 1.0000000001, 0.8333333334);}#plan_flow_v2 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:hsl(340, 33.3333333333%, 99.7058823529%);border:1px solid hsl(340, 0%, 89.7058823529%);border-radius:2px;pointer-events:none;z-index:100;}#plan_flow_v2 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#172a3b;}#plan_flow_v2 rect.text{fill:none;stroke-width:0;}#plan_flow_v2 .icon-shape,#plan_flow_v2 .image-shape{background-color:hsl(40, 33.3333333333%, 94.7058823529%);text-align:center;}#plan_flow_v2 .icon-shape p,#plan_flow_v2 .image-shape p{background-color:hsl(40, 33.3333333333%, 94.7058823529%);padding:2px;}#plan_flow_v2 .icon-shape rect,#plan_flow_v2 .image-shape rect{opacity:0.5;background-color:hsl(40, 33.3333333333%, 94.7058823529%);fill:hsl(40, 33.3333333333%, 94.7058823529%);}#plan_flow_v2 :root{--mermaid-font-family:Microsoft YaHei,sans-serif;}</style><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="plan_flow_v2_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="plan_flow_v2_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="plan_flow_v2_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="plan_flow_v2_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="plan_flow_v2_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="plan_flow_v2_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_SETUP_DESIGN_0" d="M417.375,63.5L417.375,68.083C417.375,72.667,417.375,81.833,417.375,90.333C417.375,98.833,417.375,106.667,417.375,110.583L417.375,114.5"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_DESIGN_CONTRACT_1" d="M304.5,168.465L276.525,173.971C248.549,179.477,192.599,190.488,164.624,199.911C136.648,209.333,136.648,217.167,136.648,221.083L136.648,225"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_CONTRACT_A_2" d="M136.648,284.5L136.648,291.25C136.648,298,136.648,311.5,136.648,324.333C136.648,337.167,136.648,349.333,136.648,355.417L136.648,361.5"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_DESIGN_B_3" d="M417.375,174L417.375,178.583C417.375,183.167,417.375,192.333,417.375,206.125C417.375,219.917,417.375,238.333,417.375,258.917C417.375,279.5,417.375,302.25,417.375,319.708C417.375,337.167,417.375,349.333,417.375,355.417L417.375,361.5"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_SLICE_4" d="M136.648,421L136.648,425.583C136.648,430.167,136.648,439.333,145.509,448.209C154.37,457.085,172.092,465.671,180.952,469.963L189.813,474.256"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_SLICE_5" d="M417.375,421L417.375,425.583C417.375,430.167,417.375,439.333,408.514,448.209C399.653,457.085,381.932,465.671,373.071,469.963L364.21,474.256"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_SLICE_CHECK_6" d="M277.012,557L277.012,563.75C277.012,570.5,277.012,584,291.486,597.228C305.96,610.455,334.907,623.411,349.381,629.888L363.855,636.366"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" id="L_DESIGN_C_7" d="M530.25,172.974L550.331,177.728C570.413,182.483,610.576,191.991,630.657,205.954C650.738,219.917,650.738,238.333,650.738,258.917C650.738,279.5,650.738,302.25,650.738,325C650.738,347.75,650.738,370.5,650.738,391.083C650.738,411.667,650.738,430.083,650.738,443.208C650.738,456.333,650.738,464.167,650.738,468.083L650.738,472"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_CHECK_8" d="M650.738,557L650.738,563.75C650.738,570.5,650.738,584,629.496,597.303C608.253,610.607,565.768,623.714,544.526,630.267L523.283,636.821"></path><path marker-end="url(#plan_flow_v2_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_CHECK_NEXT_9" d="M429.512,693.5L429.512,698.083C429.512,702.667,429.512,711.833,429.512,720.333C429.512,728.833,429.512,736.667,429.512,740.583L429.512,744.5"></path></g><g class="edgeLabels"><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g><rect style="stroke: none" class="background"></rect></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g><g transform="translate(650.73828125, 325)" class="edgeLabel"><g transform="translate(-99.66064453125, -13)" class="label"><g><rect height="26" width="199.3212890625" y="-3" x="-2" style="" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">实际需要LLM/检索才选择</tspan></tspan></text></g></g></g><g transform="translate(650.73828125, 597.5)" class="edgeLabel"><g transform="translate(-96.479248046875, -13)" class="label"><g><rect height="26" width="192.95849609375" y="-3" x="-3" style="" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">只约束实际启用的AI用途</tspan></tspan></text></g></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><text y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"></tspan></text></g></g></g><g class="nodes"><g transform="translate(417.375, 35.75)" id="flowchart-SETUP-0" class="node default"><rect height="55.5" width="253.5" y="-27.75" x="-126.75" style="" class="basic label-container"></rect><g transform="translate(-96.75, -12.75)" style="" class="label"><rect></rect><foreignObject height="25.5" width="193.5"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>本轮：计划整理与本地Git</p></span></div></foreignObject></g></g><g transform="translate(417.375, 146.25)" id="flowchart-DESIGN-1" class="node default"><rect height="55.5" width="225.75" y="-27.75" x="-112.875" style="" class="basic label-container"></rect><g transform="translate(-82.875, -12.75)" style="" class="label"><rect></rect><foreignObject height="25.5" width="165.75"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>下一步：S01专项设计</p></span></div></foreignObject></g></g><g transform="translate(136.6484375, 256.75)" id="flowchart-CONTRACT-3" class="node default"><rect height="55.5" width="257.296875" y="-27.75" x="-128.6484375" style="" class="basic label-container"></rect><g transform="translate(-98.6484375, -12.75)" style="" class="label"><rect></rect><foreignObject height="25.5" width="197.296875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>A-01 必要版本与契约冻结</p></span></div></foreignObject></g></g><g transform="translate(136.6484375, 393.25)" id="flowchart-A-5" class="node default"><rect height="55.5" width="213" y="-27.75" x="-106.5" style="" class="basic label-container"></rect><g transform="translate(-76.5, -12.75)" style="" class="label"><rect></rect><foreignObject height="25.5" width="153"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>阶段A 最小工程底座</p></span></div></foreignObject></g></g><g transform="translate(417.375, 393.25)" id="flowchart-B-7" class="node default"><rect height="55.5" width="258.453125" y="-27.75" x="-129.2265625" style="" class="basic label-container"></rect><g transform="translate(-99.2265625, -12.75)" style="" class="label"><rect></rect><foreignObject height="25.5" width="198.453125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>阶段B 仅S01所需公共能力</p></span></div></foreignObject></g></g><g transform="translate(277.01171875, 516.5)" id="flowchart-SLICE-9" class="node default"><rect height="81" width="260" y="-40.5" x="-130" style="" class="basic label-container"></rect><g transform="translate(-100, -25.5)" style="" class="label"><rect></rect><foreignObject height="51" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>S01纵向切片任务（专项设计后新增）</p></span></div></foreignObject></g></g><g transform="translate(429.51171875, 665.75)" id="flowchart-CHECK-13" class="node default"><rect height="55.5" width="233.015625" y="-27.75" x="-116.5078125" style="" class="basic label-container"></rect><g transform="translate(-86.5078125, -12.75)" style="" class="label"><rect></rect><foreignObject height="25.5" width="173.015625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>S01自有工程/业务验收</p></span></div></foreignObject></g></g><g transform="translate(650.73828125, 516.5)" id="flowchart-C-15" class="node default"><rect height="81" width="260" y="-40.5" x="-130" style="" class="basic label-container"></rect><g transform="translate(-100, -25.5)" style="" class="label"><rect></rect><foreignObject height="51" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>阶段C 按需AI能力与用途评测</p></span></div></foreignObject></g></g><g transform="translate(429.51171875, 789)" id="flowchart-NEXT-19" class="node default"><rect height="81" width="260" y="-40.5" x="-130" style="" class="basic label-container"></rect><g transform="translate(-100, -25.5)" style="" class="label"><rect></rect><foreignObject height="51" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>阶段D：复盘，再登记下一个场景</p></span></div></foreignObject></g></g></g></g></g></svg><figcaption>阶段流程（来自本MD图源） · <a href="planning/diagrams/plan-flow.svg">打开SVG</a></figcaption><details><summary>Mermaid图源</summary><pre>flowchart TB
+  SETUP[&quot;本轮：计划整理与本地Git&quot;] --&gt; DESIGN[&quot;下一步：S01专项设计&quot;]
+  DESIGN --&gt; CONTRACT[&quot;A-01 必要版本与契约冻结&quot;]
+  CONTRACT --&gt; A[&quot;阶段A 最小工程底座&quot;]
+  DESIGN --&gt; B[&quot;阶段B 仅S01所需公共能力&quot;]
+  A --&gt; SLICE[&quot;S01纵向切片任务（专项设计后新增）&quot;]
+  B --&gt; SLICE
+  SLICE --&gt; CHECK[&quot;S01自有工程/业务验收&quot;]
+  DESIGN -. &quot;实际需要LLM/检索才选择&quot; .-&gt; C[&quot;阶段C 按需AI能力与用途评测&quot;]
+  C -. &quot;只约束实际启用的AI用途&quot; .-&gt; CHECK
+  CHECK --&gt; NEXT[&quot;阶段D：复盘，再登记下一个场景&quot;]
+</pre></details></figure>
+
+<p>S01设计现在可准备，下一条明确指令到达即可开展；不依赖A/B代码完成、S02、A02/VOC或所有真实来源就绪。设计中缺资料标待确认，禁止补造企业字段/模型能力。</p>
+<p>实现时按真实依赖推进：A-01后A-02→A-03；身份A-04和运行骨架可在不相交文件内并行；A-05持久任务依赖存储/授权，A-06验收工程。S01设计给定字段/约束后，B-03纯指标可与读取适配B-01并行；B-02依赖映射，B-04依赖B-03，B-05依赖最小任务和快照/证据契约。公共契约、迁移链、组合根、依赖锁与台账单一集成人合入。</p>
+<p>阶段B各任务只落实当前切片所需范围，不能用“B整阶段全部完成”作S01设计门槛。S01实现任务在专项设计后才拆；其dependsOn逐项列实际选中的A/B/C任务，不依赖抽象的“全AI就绪”。C-01/C-04只在该切片真用模型时成为启用门槛，A02/A03有真实用例才排期。</p>
+<h2 id="section-4">4. 阶段A的启动、交付与验收</h2>
+<p>版本/驱动/OS/事务语义在A-01验证冻结，不使用latest或将当前文档工具环境当生产标准。拟定入口如下，均是未来工程实现后的命令，本轮不执行、不声称文件已存在：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>拟定方式</th>
+<th>验收要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>配置</td>
+<td>从经审查的示例配置/环境注入DB/身份/预算/日志；秘密不入Git</td>
+<td>必填项缺失拒绝启动相关能力；不降匿名、不放无限预算；日志无明文秘密</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>复用获准实例或经确认的本地测试实例；不默认新增中间件</td>
+<td>InnoDB/精度/UTC/连接权限/目标版本可核验；SQLite不能替代</td>
+</tr>
+<tr>
+<td>迁移</td>
+<td><code>alembic upgrade head</code>，显式单次执行</td>
+<td>干净库可迁移，唯一迁移历史；API/Worker启动不自行迁移</td>
+</tr>
+<tr>
+<td>API</td>
+<td><code>uvicorn commerce_hub.entrypoints.http.app:create_app --factory</code></td>
+<td>live/ready区分，ready检查真实依赖；不内嵌启动Worker</td>
+</tr>
+<tr>
+<td>Worker</td>
+<td><code>python -m commerce_hub.entrypoints.worker</code></td>
+<td>与API同制品/迁移版本、独立PID，按注册workKind领取</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>具体命令随工程工具锁定；至少真实MySQL集成与双进程故障验证</td>
+<td>API重启不丢任务，重复投递/旧lease/超限/取消有界，任务/审计/工作项事务一致</td>
+</tr>
+</tbody>
+</table></div>
+<p>A交付最小代码/配置/依赖锁、迁移、入口/短事务/租约与授权实现、测试、运行/恢复说明和实际commit/日志。生产组合根不注册伪S02/S01 Handler，不静态返回DomainResult冒充执行；尚无业务Handler时用<strong>仅测试装配</strong>的受控工作项验证I01工程链，不能发布第二套任务平台/生产探针API。S01正式路径留专项设计后自己的纵向切片验证。</p>
+<h2 id="section-5">5. 阶段B按S01实际需求建设</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>能力/所有者</th>
+<th>首个S01切片的必要内容</th>
+<th>暂不建设 / 验收关键点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D01</td>
+<td>一个明确模式的模拟文件/读取适配器；真实ERP接口授权后另验证</td>
+<td>不接全部ERP/OMS/WMS/CRM；来源/批次/覆盖/失败/重复读取可追</td>
+</tr>
+<tr>
+<td>D02</td>
+<td>S01实际SKU/仓库/单位/库存分桶/供给状态映射及不可变投影</td>
+<td>不猜商品身份、不重建主账、不相加库存镜像；歧义/未映射隔离</td>
+</tr>
+<tr>
+<td>D03</td>
+<td>必需字段质量/时效/覆盖与固定snapshot manifest</td>
+<td>新输入新snapshot，不能只存latest/hash；不保存O01计划/报告</td>
+</tr>
+<tr>
+<td>D04</td>
+<td>原记录、B01/B02结果的受控证据引用及血缘</td>
+<td>当前权限/版本/删除可复核；不复制manifest/指标明细</td>
+</tr>
+<tr>
+<td>B01</td>
+<td>已确认输入下可售、逐日余额、首次缺货日、缓冲与缺口等实际使用子集</td>
+<td>唯一确定性计算，单位/时间窗/缺项显式；LLM不算数</td>
+</tr>
+<tr>
+<td>B02</td>
+<td>明确假设的需求基线、MOQ/倍数/可售日期候选与约束比较</td>
+<td>每候选调用B01评价；学习型预测/大型求解器没有证据不提前引入</td>
+</tr>
+<tr>
+<td>O01</td>
+<td>task/plan/participant/snapshot引用、ScenarioHandler、报告/取消与恢复契约</td>
+<td>不重做领域步骤，场景不反向调度；测试Handler不能冒充生产场景</td>
+</tr>
+<tr>
+<td>G01/G02</td>
+<td>实际租户/字段/证据权限，必需审计、Trace/版本/调用记录</td>
+<td>默认拒绝；测试身份仍校验，不将日志做第二业务主账</td>
+</tr>
+</tbody>
+</table></div>
+<p>B01/D01等编号指<strong>既有模块</strong>，A-xx/B-xx/C-xx是新台账任务ID，不改变模块编号。库存/采购日期/质量信号等具体字段、指标和输入假设在S01专项设计中冻结。S03质量分析不强制先整体开发；若缺必需质量信号，S01可以验证有依据的供需计算，但相关安全/采购结论必须阻断，不能认定“无投诉=安全”。若真需执行另一场景分析，仍由O01显式纳入参与者，不隐藏互调。</p>
+<h2 id="section-6">6. 阶段C最小AI路径与门槛</h2>
+<p>A01提供统一ModelRequest→内部ProviderRequest、能力匹配、Schema/技术错误、受控超时/重试、usage与版本。复用O01任务预算或A03获准QueryRun控制，禁止A01再建预算/任务权威；taskRef与planVersion分开，参数/Prompt/工具引用按AI详设v0.2统一。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>能力</th>
+<th>必需时点</th>
+<th>最低验收</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt/Context</td>
+<td>首个真实模型用途</td>
+<td>模板/变量/输出Schema/内容hash和来源/信任/遗漏清单可追；外部文本不升级成指令</td>
+</tr>
+<tr>
+<td>预算/记录</td>
+<td>每次有费调用前</td>
+<td>原子预留→A01→Provider→G02→结算；未知usage占额不按0退还，重试/恢复不重置</td>
+</tr>
+<tr>
+<td>A02</td>
+<td>S01或下一场景有真实理解/抽取需求</td>
+<td>成功/技术失败/业务UNKNOWN区分，结构和引用校验，金标准/权限/用途许可具备；不以VOC开发作S01前置</td>
+</tr>
+<tr>
+<td>A03/RAG/Tool/Skill</td>
+<td>真的需要检索/只读工具时</td>
+<td>先权限过滤后检索/回源，ToolSpec/版本/Schema/白名单/预算最小集合；模型提案不等于执行许可，无C03/任意SQL/shell/URL</td>
+</tr>
+<tr>
+<td>最小评测</td>
+<td>启用某模型用途前</td>
+<td>授权Golden Dataset、规则/人工分层、结构/引用/注入/UNKNOWN/费用/时延阈值；硬失败不平均</td>
+</tr>
+<tr>
+<td>Runtime/Harness/Loop</td>
+<td>明确证明固定Workflow不足后</td>
+<td>不建第二O01；共享预算/停止/检查点/恢复/RunOutcome与YIELD门禁验证；未通过不启用</td>
+</tr>
+</tbody>
+</table></div>
+<p>不启用模型时，S01规则MVP仍可推进。供应商/模型版本/地域/计费/保留未确认则该用途保持关闭，而非阻塞全部S01专项设计。语义/响应缓存都不作为收益假设，OFF不实例化缓存设施。</p>
+<h2 id="section-7">7. 近期任务及进入S01条件</h2>
+<p>台账当前仅18项：本轮SETUP-001；阶段A 6项；B 5项；C 5项（含按需评估）；D只登记下一项S01专项设计。状态/负责人/范围/依赖/逐条验收/测试/风险唯一见TASKS。近期开工顺序：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>交付与验收</th>
+<th>计划测试方式（尚未执行）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-S01-01 S01专项设计</td>
+<td>字段/流程/约束/质量/输出/公共能力子集/自有S01-AC、实现切片清单；不以S02/全AI为前置</td>
+<td>模拟样例桌面走查、口径/依赖/权限/降级审查；缺口列明</td>
+</tr>
+<tr>
+<td>A-01 必要版本/契约</td>
+<td>精确技术版本、最小task/Handler/Refs/错误/事务/测试契约、所有者与创建时点</td>
+<td>兼容矩阵与契约正反例，变更评审</td>
+</tr>
+<tr>
+<td>A-02 最小骨架/配置</td>
+<td>FastAPI应用工厂、统一配置/错误/基本日志、依赖锁</td>
+<td>启动/缺配置/无秘密日志/错误信封验证</td>
+</tr>
+<tr>
+<td>A-03 MySQL/ORM/迁移</td>
+<td>真实MySQL连接、单迁移链、短事务/Repository子集</td>
+<td>干净库迁移、回滚、Decimal/UTC/唯一键</td>
+</tr>
+<tr>
+<td>A-04 身份/租户子集</td>
+<td>签名/身份校验、当前scope与字段/租户边界</td>
+<td>越权/过期/错误签名、Worker/证据边界负例</td>
+</tr>
+<tr>
+<td>A-05 API/Worker/持久任务</td>
+<td>API与独立Worker、MySQL投递、租约/重试/恢复与O01最小用例</td>
+<td>两PID停启/重启/并发领取/旧lease/事务失败/取消</td>
+</tr>
+<tr>
+<td>A-06 工程闭环验收</td>
+<td>真实运行/故障证据、配置/迁移/交接与commit</td>
+<td>复现工程链；不能宣称S02领域MC或真实ERP通过</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>进入S01专项设计</strong>只需收到下一条设计指令、可定位的两份工程基线和当前Git管理文件；不需要等上述开发任务完成。建议下一步输入见HANDOFF。<strong>进入S01代码切片</strong>则需该切片专项设计/关键业务口径获评审、实际选中的契约/权限/配置/数据策略可用及测试期望明确；代码任务在专项设计后追加稳定ID，按它的真实依赖选择A/B/C子集，不预建所有目录。本轮没有执行D-S01-01或任何A/B/C任务。</p>
+<h2 id="section-8">8. 原M0—M4及MC01—MC12保留/映射</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>原阶段</th>
+<th>本次保留的要求 / 影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>来源/授权/口径/责任/质量/预算等前提未删除。缺真实接口时可做标simulated的工程设计/验证，不声称M0真实条件已满足</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>公共基座按S01纵向切片逐项实施，允许S01设计先准备；原S02最小闭环及其MC验收作为独立保留项，不再是S01硬依赖</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>先交付S01切片，不等于四类P0/联合只读试点全部验收；其他场景准备开发时另立专项</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>两类外写仍须独立审批/当前源条件/原子保障/幂等/回执真实证明；本轮及首个只读S01不开放</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>P1/P2继续登记并按价值/资料/质量/费用/运维逐项验证；不展开旧96项路线</td>
+</tr>
+</tbody>
+</table></div>
+<p>MC原文以HLD§4.3为准，本表只分离验收证据，不改测试主体/预期。当前以下全部<strong>未执行</strong>：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>MC</th>
+<th>原验收保留</th>
+<th>S01后续新增验收 / 不冒用原则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MC01</td>
+<td>干净测试库迁移、API/Worker独立启动</td>
+<td>S01-AC-ENG01自有工程证据；不能推导原整组MC通过</td>
+</tr>
+<tr>
+<td>MC02</td>
+<td>D01 simulated批次及S02 A/B映射投影期望</td>
+<td>S01-AC-DATA01供应/库存输入另列；不是S02夹具验收</td>
+</tr>
+<tr>
+<td>MC03</td>
+<td>正式授权分析202及task/plan/work/审计原子持久化</td>
+<td>S01-AC-TASK01按S01参与者验证，保留原任务契约</td>
+</tr>
+<tr>
+<td>MC04</td>
+<td>原受理事务故障全回滚/去重</td>
+<td>S01-AC-TX01记录S01路径，不篡改原MC记录</td>
+</tr>
+<tr>
+<td>MC05</td>
+<td>原task停Worker/API重启后可续跑</td>
+<td>S01-AC-REC01另留同类工程证据</td>
+</tr>
+<tr>
+<td>MC06</td>
+<td>明确Worker→O01→S02.analyze→B01链</td>
+<td>待真正S02实施再验；S01调用链绝不填为此项PASS</td>
+</tr>
+<tr>
+<td>MC07</td>
+<td>S02固定asOf下A超承诺/B不误报及快照/指标/证据/报告</td>
+<td>待S02实施再验；S01数量/日期/逐日曲线用S01-AC-CALC01等</td>
+</tr>
+<tr>
+<td>MC08</td>
+<td>原报告可重读且无自动C01/C02/C03</td>
+<td>S01-AC-REPORT01自有证据，保持无自动建议/动作终点</td>
+</tr>
+<tr>
+<td>MC09</td>
+<td>原双Worker/旧lease/去重发布</td>
+<td>S01-AC-CONC01另记场景和版本，不隐式冒充S02验证</td>
+</tr>
+<tr>
+<td>MC10</td>
+<td>原崩溃/报告后重入/重试超限收尾</td>
+<td>S01-AC-FAULT01，未知计费/源动作另按原所有者处理</td>
+</tr>
+<tr>
+<td>MC11</td>
+<td>原跨租户/扩大scope/未注册能力/关键数据缺失</td>
+<td>S01-AC-SEC01按S01资源与质量反例覆盖</td>
+</tr>
+<tr>
+<td>MC12</td>
+<td>原取消/不复活/配置日志/文档交接</td>
+<td>S01-AC-CANCEL01自有证据及未完成事项</td>
+</tr>
+</tbody>
+</table></div>
+<p>上述S01-AC是<strong>建议验收槽位</strong>，具体输入/期望/命令由S01专项设计冻结，尚未成为已实施测试。原MC记录未删除、未标PASS/不适用，也不将旧M1-019/020标为已完成。若未来正式修订原验收范围，须另有明确评审，不能靠本表暗改基线。</p>
+<h2 id="section-9">9. 模拟、真实ERP与未验证条件</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>证据类别</th>
+<th>可证明</th>
+<th>不能证明 / 未具备时处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模拟输入+真实工程组件</td>
+<td>指定样例的确定性指标、真实MySQL事务/租约/Handler/快照/证据/报告/恢复</td>
+<td>不证明企业接口连通、授权/覆盖/时效、实际收益、生产容量；报告标simulated</td>
+</tr>
+<tr>
+<td>真实ERP/其他必要来源只读</td>
+<td>经许可接口/导出版本、字段/单位/映射、分页/增量/删除、覆盖和源责任</td>
+<td>一次API成功不等于数据就绪；未知字段列待确认，保留模拟工程路线和限制</td>
+</tr>
+<tr>
+<td>真实模型用途验证</td>
+<td>已许可内容、实际模型/Schema/usage/预算与分层质量</td>
+<td>Mock响应/Schema成功不证明效果；未冻结版本/计价/质量目标则关闭用途</td>
+</tr>
+<tr>
+<td>真实外部动作</td>
+<td>原批准范围、当前源条件/原子性、幂等/权威回执与UNKNOWN恢复</td>
+<td>当前未授权；只读S01/采购候选不代表允许创建采购草稿，更不是采购批准/到货</td>
+</tr>
+</tbody>
+</table></div>
+<p>S01设计需要优先确认：SKU/仓/单位；库存分桶及互斥/镜像；需求来源/窗口；未收供给/预计可售日；MOQ/倍数/交期/缓冲；质量调查/缺信号阻断；输入模式/脱敏样例及期望输出。真实ERP品牌/版本/API/权限未提供则明确待确认，不预建厂商SDK。</p>
+<p>技术版本/DB环境/身份发行方/数据地域与留存、模型用途/预算/计价、任务期限/并发/租约、质量/时延/恢复目标尚需逐项冻结。它们限制相关实现/启用，不要求先完成全项目调研才允许写S01专项设计。</p>
+<h2 id="section-10">10. 场景登记与后续流程</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>登记ID</th>
+<th>场景</th>
+<th>当前安排</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REG-S01</td>
+<td>供需/库存/补货</td>
+<td>第一个实施场景；下一步D-S01-01专项设计，默认确定性Workflow，必要时AI解释</td>
+</tr>
+<tr>
+<td>REG-S02</td>
+<td>履约风险</td>
+<td>后续按需；原S02优先切片/MC仍保留，非S01前置</td>
+</tr>
+<tr>
+<td>REG-S03</td>
+<td>VOC</td>
+<td>后续按需；质量信号缺失不得自动认安全</td>
+</tr>
+<tr>
+<td>REG-S04</td>
+<td>贡献/费用</td>
+<td>后续按需；B01唯一金额口径</td>
+</tr>
+<tr>
+<td>REG-S05</td>
+<td>客服/售后辅助</td>
+<td>后续专项设计，不默认对客发送/退款</td>
+</tr>
+<tr>
+<td>REG-S06</td>
+<td>内容/增长辅助</td>
+<td>后续专项设计，不自动发布/投放</td>
+</tr>
+<tr>
+<td>REG-S07</td>
+<td>单证辅助</td>
+<td>后续专项设计，抽取+规则+人工</td>
+</tr>
+<tr>
+<td>REG-S08</td>
+<td>经营规划</td>
+<td>后续专项设计，求解/指标复用，无自动改价/调仓</td>
+</tr>
+<tr>
+<td>REG-S09</td>
+<td>视觉质检</td>
+<td>后续专项验证，技术失败非无缺陷</td>
+</tr>
+<tr>
+<td>REG-S10</td>
+<td>政策核查</td>
+<td>后续专项设计，版本证据+专业复核</td>
+</tr>
+<tr>
+<td>REG-ACTIONS</td>
+<td>C01—C03有限协作/动作</td>
+<td>业务需要时单独评审/拆任务；不从只读报告自动进入</td>
+</tr>
+<tr>
+<td>REG-ADHOC</td>
+<td>A03完整即席查询</td>
+<td>真需要时按HLD§6.4实现请求/周期额度，不开放无界入口</td>
+</tr>
+</tbody>
+</table></div>
+<p>每个新场景遵循“专项详细设计→必要公共能力确认→任务拆解→实现→测试验收→复盘”。登记不是空开发任务或完成状态；将来采用新任务ID，保留与旧ID映射。原场景默认范式/模块/data归属不改变。</p>
+<h2 id="section-11">11. 管理、Git与本轮停止点</h2>
+<p>最短接手：根AGENTS→HANDOFF→TASKS当前任务/相关契约，实时读取branch/HEAD/dirty；状态规则唯一在TASKS，重要决策在DECISIONS。结束/中断记录真实提交、命令/结果和未完成项，生成进度，不覆盖他人修改，不绑定某AI模型/工具。</p>
+<p>本轮仅初始化当前目录<strong>本地</strong>仓库（若已存在则复用），只暂存显式安全白名单，不git add .；不创建远端、不push、不改远端权限。忽略秘密/数据库/缓存/虚拟环境/日志/权重，记录保留未跟踪内容。初始提交SHA用后续本地记录引用，最终HEAD由Git读取，不要求提交写自己的SHA。</p>
+<p>本轮文件变化、归档/ID映射、白名单/扫描与Git回执见<a href="planning/FILES.md">交付清单</a>、<a href="planning/validation-report.json">校验记录</a>、<a href="planning/repository-receipt.json">仓库回执</a>。本轮完成后停止，等待下一条S01专项设计/开发指令，不执行任何后续业务任务。</p></article></main></div><footer>唯一正文为PLAN.md；HTML与SVG是派生阅读材料。原M0—M4、MC01—MC12保留，S01另立验收。</footer><script>document.getElementById('theme').onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'};</script></body></html>

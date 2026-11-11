@@ -1,0 +1,48 @@
+sequenceDiagram
+  autonumber
+  participant W as W01 用户命令
+  participant J as I01 Worker / 工作项
+  participant O as O01 唯一协调者
+  participant H as ScenarioHandler
+  participant R as 可选 Runtime
+  participant L as G02
+  J->>O: run_task / 当前work与lease
+  O->>H: analyze / 原plan / snapshot / budget
+  H->>R: run
+  R-->>H: RunOutcome.NEED_INPUT / checkpointDraft
+  H-->>O: DomainResult.constraints.execution=YIELD / WaitRequest
+  critical 同一MySQL短事务，各所有者写本方记录
+    O->>O: 校验lease / epoch / revision，保存WAITING_INPUT与waitId
+    O->>J: 当前投递DONE，创建去重的原deadline收尾项
+    O->>L: 必需等待审计
+    O->>O: 唯一commit；失败全部回滚
+  end
+  O-->>W: 可查询缺字段 / waitId / revision，非最终报告
+  W->>O: ResumeCommand / commandId / expectedRevision / inputRefs
+  alt 同命令同指纹已受理
+    O-->>W: 返回原ack与当前状态，不重复排队
+  else 已取消、到期、旧wait或版本冲突
+    O->>O: 到期/取消按同任务锁幂等收尾，不复活终态
+    O-->>W: 安全拒绝或明确终态
+  else 当前授权/版本/期限/输入均合法
+    critical 同一MySQL短事务的恢复受理
+      O->>O: 记录命令 / inputEventRef / READY_TO_RESUME / 新generation
+      O->>J: 新PENDING唤醒项 / 唯一去重键，原DONE不复活
+      O->>L: 必需恢复审计
+      O->>O: 唯一commit
+    end
+    O-->>W: ack / wakeRef，仅表示受理
+    J->>O: 新lease领取后重入
+    O->>O: 再验dbNow小于原deadline / 当前权限 / plan / generation
+    alt 领取时已到期或取消
+      O->>O: 只做最终阻断/失败/取消收尾，不调用模型
+    else 可继续
+      O->>H: 原checkpoint / 已消耗及未决预算Refs
+      H->>R: resume / 新epoch / 原额度，不重置预算
+      R-->>H: RunOutcome / 完成或再次YIELD原因
+      H-->>O: Handler生成FINAL或YIELD的DomainResult
+      O->>O: 仅FINAL且门禁通过才发布；YIELD再原子交接
+    end
+  end
+  Note over J,O: WAITING_RETRY采用同一交接，另登记nextRetryAt唤醒；到期项始终保留
+  Note over O,R: 旧lease迟到不能写入或发布，pending usage只按原attempt核对

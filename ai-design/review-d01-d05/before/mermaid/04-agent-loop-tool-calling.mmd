@@ -1,0 +1,40 @@
+sequenceDiagram
+  autonumber
+  participant H as ScenarioHandler / Runtime
+  participant O as O01 控制与共享预算
+  participant G as G01 当前权限
+  participant A as A01
+  participant M as ModelProvider
+  participant T as A03 ToolExecutor
+  participant D as B01 / D04 / 公开读口
+  participant L as G02
+  H->>G: 核验模型用途及当前数据范围
+  H->>O: 检查计划/取消/租约，申请模型 attempt 预留
+  O-->>H: allowanceRef / deadline 或拒绝
+  break 许可或当前权限不成立
+    H-->>O: 运行停止原因，供领域/整体策略判断
+  end
+  H->>A: ModelRequest / Prompt / Context / allowance
+  A->>M: 映射协议后调用，禁止隐藏 SDK 重试
+  M-->>A: 内容 / 完整 toolRequests / usage 或技术错误
+  A->>L: attemptId / usage / 技术状态 / 版本
+  A-->>H: ModelResponse，A01 不执行工具
+  H->>O: 按 usage 结算，未知保留预留
+  loop 仅在原期限和所有额度内
+    H->>H: 校验提案、重复性与场景完成条件
+    alt 有合法只读工具提案
+      H->>G: 当前白名单与范围检查
+      H->>O: 预留工具及可能嵌套模型额度
+      H->>T: ToolInvocation，服务端绑定 scope/snapshot
+      T->>G: 独立授权与检索预过滤
+      T->>D: 参数化只读查询 / 指标 / 证据
+      D-->>T: 版本化结果 / 错误 / 覆盖与引用
+      T-->>H: 校验后的最小 ToolResult
+      H->>O: 结算并条件保存 checkpoint
+      H->>A: 若需反馈模型，先取同任务的新 attempt 许可
+      A-->>H: 结构化候选回答或新提案
+    else 完成 / 信息不足 / 无进展 / 超限
+      H-->>O: DomainResult / 缺口 / 领域限制
+    end
+  end
+  Note over H,T: 图中循环为可选能力，场景默认显式 Workflow；无 C03 模型工具

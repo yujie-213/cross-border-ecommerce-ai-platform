@@ -1,0 +1,24 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S08 Handler
+  participant R as A03 / O01公开结果读口
+  participant F as B02
+  participant B as B01
+  participant A as A01（可选）
+  O->>S: 经营子问题 / 固定输入 / 预算
+  S->>R: 获准市场资料 / S01预测 / S03与S04已发布Refs
+  R-->>S: 兼容结果或缺失依赖
+  alt 输入与约束具备
+    S->>F: 目标函数 / 约束 / 假设版本
+    F->>B: 每个候选复用指标评价
+    B-->>F: 指标Refs
+    F-->>S: 候选 / 无解 / 约束校验
+    opt 已获准解释
+      S->>A: 对比已有方案与假设
+      A-->>S: 权衡说明 / 技术错误
+    end
+  else 必需资料或约束不足
+    S->>S: 阻断对应子问题并列验证清单
+  end
+  S-->>O: DomainResult / 需要新参与者的缺口
+  O->>O: 必要重规划统一扣额，发布受限报告

@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S02 Handler
+  participant D as D02 / D03
+  participant B as B01
+  participant R as A03 / D04
+  O->>S: 固定plan/snapshot及预算的参与者视图
+  S->>D: 读取承诺 / 订单包裹 / 事件覆盖
+  D-->>S: 固定版本 / 缺口
+  S->>B: 超承诺与事件时长指标
+  B-->>S: metricRefs / 缺项
+  S->>S: 分为未出库和物流停滞等队列
+  opt 后续确需补证且已启用
+    S->>R: 授权事件证据与处理知识
+    R-->>S: evidenceRefs / 覆盖限制
+  end
+  S-->>O: 风险队列 / 候选原因 / 待核项
+  O->>O: 引用审校 / 发布只读报告
+  Note over O,R: 首批模型关闭；用户另选才创建内部工单建议

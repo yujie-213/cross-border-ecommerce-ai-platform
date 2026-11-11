@@ -1,0 +1,14 @@
+stateDiagram-v2
+  [*] --> PENDING: 本地事务创建工作项
+  PENDING --> LEASED: 到期领取 / 更新租约并提交
+  RETRY_WAIT --> LEASED: 到期且预算允许
+  LEASED --> LEASED: 合法 token 心跳
+  LEASED --> DONE: 所有者处理结束 / 条件提交
+  LEASED --> RETRY_WAIT: 可重进入口的失败或租约过期，尚有投递预算
+  LEASED --> DEAD: 不可重试或预算耗尽
+  PENDING --> CANCELLED: 尚未执行且授权取消
+  RETRY_WAIT --> CANCELLED: 尚未重试且授权取消
+  LEASED --> CANCELLED: 所有者确认无未决外部副作用且协作停止
+  DONE --> [*]
+  DEAD --> [*]
+  CANCELLED --> [*]

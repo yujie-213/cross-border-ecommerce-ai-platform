@@ -1,0 +1,25 @@
+﻿内部phase / 触发,O01持久化与交接,I01工作项 / 报告行为
+
+ACTIVE / 合法领取后执行,绑定当前task/plan/participant/snapshot/checkpointRevision、ownerEpoch与当前lease；安全点保存进度,原工作项LEASED；未完成结果只作partialOutputRef，不发布
+WAITING_INPUT / NEED_INPUT且允许期限内澄清,保存waitId、typed missingFields/allowedResponses、resume条件和固定taskDeadline；保留已消耗/未知预留及最小产物Refs,同一短事务中当前投递DONE、登记唯一到期收尾工作项和必需审计；任务仍RUNNING，参与者未完成，无“自动轮询模型”工作项
+WAITING_RETRY / RETRY_SCHEDULED且重试可证明安全,保存waitId、nextRetryAt、retryOrdinal/剩余上限、原因及原attempt/usage关联；未决计费先核对，不能重发,当前投递DONE；同事务按runAfter登记去重后的后续工作项及到期收尾项；I01的RETRY_WAIT仍只表达投递失败重投，不用作Agent业务等待状态
+READY_TO_RESUME / 恢复命令或到时重试被接受,锁定任务/检查点后校验当前权限、deadline、waitId/revision/plan，保存inputEventRef（如有）、resumeGeneration和唤醒去重键,原DONE投递不复活；新PENDING工作项只负责重新进入O01，不直接调用模型；到期收尾项保留
+ACTIVE / 新工作项获得新租约,O01核验唤醒代际后将phase转ACTIVE，读取原产物/预算；pendingCalls先核对；依赖不相容不执行,新leaseToken，旧lease不能提交；重复唤醒仅返回当前状态/复用结果
+ENDED / 最终完成、取消、超期或不可继续,FINAL且满足领域/证据门禁才有最终DomainResult；取消/失败/阻断收尾由O01决定，不复活终态,完成相应投递/终止无用待唤醒项；报告完整性与任务技术终态保持基线；未知模型费用另行核对，不阻止任务有界结束
+
+对象 / 所有者,字段级要求,原子性与拒绝语义
+
+O01 checkpoint / 等待条件,taskId、planVersion、participantId、snapshotId、revision、ownerEpoch、phase、waitId、resumeGeneration、taskDeadline、missingFields/allowedResponses或nextRetryAt、retryOrdinal/上限、completedStep/partialOutputRefs、versionBundleRef、pendingCall/usage/allowanceRefs,只保存受控Ref和执行元数据，输入正文仍按原所有者存储；不复制D03清单/G02成本事实/完整聊天
+O01接受的ResumeCommand,commandId、taskRef、planVersion、participantId、waitId、expectedCheckpointRevision、inputEventRefs、payloadFingerprint；身份由G01建立,"唯一键 (tenantId,taskId,commandId)；同键同指纹返回原ack及当前任务状态，不新排队；同键异指纹409/COMMAND_CONFLICT"
+I01唤醒/到期工作项,owner=O01，已注册分析重进入口，payloadRef指O01 task/checkpoint；wake键含task/participant/waitId/resumeGeneration/reason；到期键含taskId/frozenDeadline,无任意函数/模型请求payload；新工作项不增加任务预算或整体重试额度；重复投递经O01检查waitId/代际后无副作用结束
+
+协议验收编号,模拟竞争/故障,必须断言（未来实现验收）
+
+WAIT-01,保存等待后、I01完成前、审计时或commit前失败,同事务全回滚，无“等待已保存但永无唤醒/到期项”半状态；重投不丢原预算
+WAIT-02,交接提交成功但返回丢失，旧Worker重试,waitId/revision复用既有交接，当前投递DONE，旧lease不发布、不再次调用模型
+WAIT-03,同commandId同指纹重复、异指纹重复、两个command竞争同revision,分别为同ack/无新工作项、COMMAND_CONFLICT、一个成功另一个STALE_CHECKPOINT
+WAIT-04,恢复受理在期限前，Worker领取时恰等于deadline,等号超期；无模型调用，幂等执行到期收尾，不因已受理而延期
+WAIT-05,取消/恢复/到期工作项三者交错、旧lease迟到,同任务锁和CAS只允许合法线性化结果；终态不复活；迟到结果不发布；未决费用不释放
+WAIT-06,WAITING_RETRY新工作项多次投递/旧唤醒代际重复,O01保存的retryOrdinal、总调用次数和预算不重置；旧generation无副作用结束
+WAIT-07,唤醒项/到期项投递耗尽或基础设施恢复,经既有owner失败收尾/读取和重进入口到期检查收尾；明确FAILED或获准最终受限报告，不允许无限RUNNING
+WAIT-08,YIELD携带看似完整partialOutputRef,发布器拒绝YIELD；DomainResult只有Handler可构造，最终域结果需FINAL和证据/版本门禁

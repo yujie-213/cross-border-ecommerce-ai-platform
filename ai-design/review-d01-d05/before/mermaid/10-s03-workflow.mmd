@@ -1,0 +1,22 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S03 Handler
+  participant D as D02 / D03
+  participant U as A02
+  participant A as A01（需要LLM时）
+  participant B as B01
+  O->>S: 统一snapshot / 各自成熟队列参数
+  S->>D: 反馈与签收队列 / 订单关联 / 质量
+  loop 原task预算内的有界批次
+    S->>U: 脱敏内容Refs / taxonomy版本
+    opt 使用获准模型提供方
+      U->>A: 结构化主题抽取
+      A-->>U: 输出或技术错误 / usage
+    end
+    U-->>S: understandingRefs / UNKNOWN / 原文位置
+  end
+  S->>B: 同成熟队列去重投诉订单统计
+  B-->>S: 分子 / 分母 / 样本量 / metricRefs
+  S->>S: 主题与调查信号 / 缺失限制
+  S-->>O: DomainResult / 质量信号 / 证据
+  O->>O: 联合结果审查 / 报告发布

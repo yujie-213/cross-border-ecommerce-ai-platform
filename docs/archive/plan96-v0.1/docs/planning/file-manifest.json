@@ -1,0 +1,106 @@
+{
+  "scope": "planning-documents-only",
+  "modifiedExistingFiles": [],
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "change": "added",
+      "bytes": 5261,
+      "sha256": "9588e5aeeb8cfac2135399f46d038bad31c588c46c03dafe698e5aaa29cb23b2"
+    },
+    {
+      "path": "docs/CI_RULES.md",
+      "change": "added",
+      "bytes": 4702,
+      "sha256": "27e2a7c3d34b9cc333064a0baf31c0a32059c6b4c92ff3c071c5b3db7c180829"
+    },
+    {
+      "path": "docs/COLLABORATION.md",
+      "change": "added",
+      "bytes": 10758,
+      "sha256": "3565de2557b6367bf162f6323c72240a9000260150d8291a42ead7242c1d328d"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "change": "added",
+      "bytes": 4320,
+      "sha256": "989ba334d7d460e0bf1a82dc563d3580d9667e276d19f3af9d02af8ab691aa0b"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "change": "added",
+      "bytes": 4932,
+      "sha256": "301914efb25291eccec99861b3ae65fa7f2072a7716bc58326b1f26eaca1b99f"
+    },
+    {
+      "path": "docs/PLAN.md",
+      "change": "added",
+      "bytes": 16660,
+      "sha256": "0deef4aba2a4e8ea86958271e143e419541613971f86220b44dd80aa76c24b21"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "change": "added",
+      "bytes": 171301,
+      "sha256": "b915b2d381b35f4a4387f4f6687841216dcd42adbd2252bba510416d452222a1"
+    },
+    {
+      "path": "docs/generated/DEPENDENCIES.mmd",
+      "change": "added",
+      "bytes": 10660,
+      "sha256": "a882eb7554850a1f8f32f7f9bcfff6579602cceb867f6d301d242c796e7beda5"
+    },
+    {
+      "path": "docs/generated/STATUS.md",
+      "change": "added",
+      "bytes": 9924,
+      "sha256": "5441e5992b7aaf95901eb991d36e1afcdd1c2332771e5d459697fdce93d52785"
+    },
+    {
+      "path": "docs/planning/FILES.md",
+      "change": "added",
+      "hashOmittedReason": "self-referential listing/manifest"
+    },
+    {
+      "path": "docs/planning/baseline-manifest.json",
+      "change": "added",
+      "bytes": 940,
+      "sha256": "f96ca3098b227564c7068e7450c9ff4c588c64d7e5229ea293d4ae8e962ec93f"
+    },
+    {
+      "path": "docs/planning/check_plan.py",
+      "change": "added",
+      "bytes": 11778,
+      "sha256": "ca1e634efa80e3318f7dcd04b5eb530b12a835b590dd95f407995b0ed9f33064"
+    },
+    {
+      "path": "docs/planning/file-manifest.json",
+      "change": "added",
+      "hashOmittedReason": "self-referential listing/manifest"
+    },
+    {
+      "path": "docs/planning/initial-workspace-observation.json",
+      "change": "added",
+      "bytes": 412,
+      "sha256": "1cf2c1ac05cf85ae85c636ca5525c268b9046d99f7e736e378c79d4ed96bfb85"
+    },
+    {
+      "path": "docs/planning/render_status.py",
+      "change": "added",
+      "bytes": 3880,
+      "sha256": "e9bc2122319797d832a938008cf1b9b07e2b0dd7b56e2e2703b42f7c9072718a"
+    },
+    {
+      "path": "docs/planning/task_io.py",
+      "change": "added",
+      "bytes": 889,
+      "sha256": "b8aeb915994144d7d522a0f40ae71af3ae5d9ea22f138c21e573e08aa906e973"
+    },
+    {
+      "path": "docs/planning/validation-report.json",
+      "change": "added",
+      "bytes": 3555,
+      "sha256": "a3504b4fed381b202df1f1a58cda84f74abf08bd6b788cec16b8d1f5ab5dade0"
+    }
+  ]
+}

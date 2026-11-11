@@ -1,0 +1,46 @@
+{
+  "scope": "current project and parents only",
+  "observedBeforeInitialization": true,
+  "repositoryRootsChecked": [
+    "D:\\电商项目\\跨境电商智慧AI平台",
+    "D:\\电商项目",
+    "D:\\"
+  ],
+  "gitDirectoryExists": [
+    false,
+    false,
+    false
+  ],
+  "revParse": {
+    "exitCode": 128,
+    "configured": false
+  },
+  "status": {
+    "exitCode": 128,
+    "configured": false
+  },
+  "identity": {
+    "user.name": {
+      "exitCode": 0,
+      "configured": true
+    },
+    "user.email": {
+      "exitCode": 0,
+      "configured": true
+    }
+  },
+  "customHooks": {
+    "exitCode": 1,
+    "configured": false
+  },
+  "customTemplate": {
+    "exitCode": 1,
+    "configured": false
+  },
+  "signing": {
+    "exitCode": 1,
+    "configured": false
+  },
+  "ownershipCheck": "17 original managed files matched previous manifest before replacement; their byte-identical archive preserved. No unknown edits overwritten. Non-whitelist original materials remain untouched.",
+  "sensitiveNameCheck": "No secret-named files found; content scan separately before staging."
+}

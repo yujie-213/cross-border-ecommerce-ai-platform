@@ -1,0 +1,34 @@
+sequenceDiagram
+  autonumber
+  participant S as S03 Workflow
+  participant U as A02
+  participant D as D02/D03/D04公开端口
+  participant O as O01 原预算
+  participant A as A01
+  participant M as ModelProvider
+  participant L as G02
+  S->>U: understand / 单条contentRef / taxonomy / task视图
+  U->>D: 当前授权下解析固定输入与原文证据
+  D-->>U: 最小正文 / 版本 / evidenceRef
+  U->>U: 可信Prompt与ContextBundle，cache-off，无工具
+  U->>O: 原子reserve本attempt，deadline和总预算校验
+  O-->>U: allowanceRef或拒绝
+  U->>A: 统一ModelRequest，参数/模板/工具引用与具体deadline
+  A->>A: 解析ProviderRequest，校验能力/许可/消息/Schema
+  A->>M: 锁外发送，原attempt，禁止隐藏重试
+  M-->>A: 模拟响应或TIMEOUT
+  A->>A: JSON与完整输出Schema验证
+  A->>L: usage / 技术状态 / 版本与trace
+  A-->>U: ModelResponse / usageRef或未决标记
+  U->>O: 幂等结算或保留未知占额
+  alt 合法CLASSIFIED或语义UNKNOWN
+    U->>U: 输入ID/span/taxonomy语义校验，保存本方产物
+    U->>D: D04登记派生证据，关联原文及A02结果
+    U->>L: 最小结果/审计关联，不存原文
+    U-->>S: understandingRef / 语义状态 / 覆盖与限制
+  else 技术失败或INVALID_OUTPUT
+    U->>L: 失败/未决关联，无伪标签
+    U-->>S: 能力技术失败 / 覆盖缺口
+  end
+  S->>S: 按领域规则处理，UNKNOWN/失败不填0
+  Note over S,L: 这是显式Workflow示例，无Runtime、多Agent、工具Loop、响应缓存或新增基础设施

@@ -1,0 +1,74 @@
+sequenceDiagram
+  autonumber
+  participant H as ScenarioHandler
+  participant R as 可选 Runtime
+  participant O as O01 控制与共享预算
+  participant G as G01 当前权限
+  participant A as A01
+  participant M as ModelProvider
+  participant T as A03 ToolExecutor
+  participant D as B01 / D04 / 公开读口
+  participant L as G02
+  H->>R: run / resume，固定视图及同一任务预算句柄
+  R->>G: 核验用途、数据范围和当前权限
+  R->>O: 首次调用前检查取消/期限/租约，原子reserve attempt-1
+  O-->>R: allowanceRef / deadline 或拒绝
+  break 授权或许可拒绝，停止本次执行
+    R-->>H: RunOutcome / 控制停止原因
+    H-->>O: Handler生成最终受限DomainResult或YIELD交接请求
+  end
+  R->>A: ModelRequest-1 / 引用与许可
+  A->>M: 解析ProviderRequest后调用，禁止SDK隐藏重试
+  M-->>A: 内容 / 完整 toolRequests / usage 或技术错误
+  A->>L: attempt-1用量/技术状态/实际版本，按attemptId去重
+  A-->>R: ModelResponse / usageRef或未决标记
+  R->>O: settle attempt-1，未知或审计失败保留占额
+  O-->>R: 结算结果 / 是否允许继续
+  loop 仅有工具提案且未满足任何停止条件
+    R->>R: 检查完成/无进展/轮数/余额/取消/deadline/lease
+    alt 有合法只读工具提案
+      R->>G: 当前工具白名单与范围检查
+      R->>O: reserve工具额度，嵌套模型仍需独立受控attempt许可
+      O-->>R: 工具许可或拒绝
+      break 工具授权或预算拒绝
+        R-->>H: RunOutcome / 拒绝原因，不执行工具及后续模型
+        H-->>O: Handler生成受限DomainResult或YIELD交接
+      end
+      R->>T: ToolInvocation，服务端绑定scope/snapshot
+      T->>G: 独立授权与检索预过滤
+      T->>D: 参数化只读查询 / 指标 / 证据
+      D-->>T: 版本化结果 / 错误 / 覆盖与引用
+      T->>L: invocationId / 工具结果状态 / usage关联
+      T-->>R: 最小ToolResult，作为数据反馈
+      R->>O: settle工具额度，未知消耗保留
+      R->>H: on_checkpoint草案（非DomainResult）
+      H->>O: 条件保存checkpoint / 当前lease与revision
+      R->>R: 工具反馈后重新检查完成与全部停止条件
+      break 已完成、缺信息、技术未决或任一停止条件满足
+        R-->>H: RunOutcome / 完成或停止原因，不再调用模型
+        H-->>O: Handler生成FINAL或YIELD的DomainResult
+      end
+      R->>G: 再校验后续模型用途与当前数据范围
+      R->>O: 原task余额reserve feedback-attempt，检查期限/取消/lease
+      O-->>R: 新attempt许可或拒绝，不重置总预算
+      break 后续模型许可或授权拒绝
+        R-->>H: RunOutcome / 控制停止，不调用A01或Provider
+        H-->>O: Handler生成受限DomainResult或YIELD交接
+      end
+      R->>A: 后续ModelRequest / 新attemptId / 原逻辑步骤关联
+      A->>M: 解析后的ProviderRequest / 完整工具反馈消息
+      M-->>A: 内容 / 新工具提案 / usage或技术错误
+      A->>L: feedback-attempt用量/技术状态/版本，幂等记录
+      A-->>R: ModelResponse / usageRef或未决标记
+      R->>O: settle feedback-attempt，未知或审计失败保留占额
+      O-->>R: 原任务剩余额度 / 继续或停止
+      R->>R: Evaluate / 完成、无进展、错误与预算停止检查
+    else 非法工具、信息缺失或无可继续步骤
+      R->>R: 设置RunOutcome原因并停止循环
+    end
+  end
+  R-->>H: RunOutcome / outputRefs / checkpointDraft / usageRefs
+  H->>H: 领域语义/证据校验，转换为FINAL或YIELD
+  H-->>O: 仅Handler生成DomainResult / constraints.execution
+  O->>O: YIELD只交接，FINAL经发布门禁后才可形成报告
+  Note over H,T: 所有模型往返共享O01预算与A01，Runtime不返回DomainResult，无C03模型工具

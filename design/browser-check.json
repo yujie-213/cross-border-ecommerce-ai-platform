@@ -1,0 +1,106 @@
+{
+  "documentVersion": "0.2",
+  "browser": "Edge headless",
+  "viewports": [
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "sections": 20,
+      "tables": 35,
+      "svg": 6,
+      "zeroSizeSvg": 0,
+      "edition": "V0.2 · 2026-11-11第 10 步 · 待独立复核"
+    },
+    {
+      "width": 1920,
+      "documentWidth": 1920,
+      "sections": 20,
+      "tables": 35,
+      "svg": 6,
+      "zeroSizeSvg": 0,
+      "edition": "V0.2 · 2026-11-11第 10 步 · 待独立复核"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "sections": 20,
+      "tables": 35,
+      "svg": 6,
+      "zeroSizeSvg": 0,
+      "edition": "V0.2 · 2026-11-11第 10 步 · 待独立复核"
+    }
+  ],
+  "zoom": [
+    {
+      "id": "01",
+      "fit": 1070,
+      "native": 1514.578125,
+      "plus": 1893.234375,
+      "pass": true
+    },
+    {
+      "id": "02",
+      "fit": 1070,
+      "native": 1591,
+      "plus": 1988.75,
+      "pass": true
+    },
+    {
+      "id": "03",
+      "fit": 1070,
+      "native": 2067.875,
+      "plus": 2584.84375,
+      "pass": true
+    },
+    {
+      "id": "04",
+      "fit": 1070,
+      "native": 1434,
+      "plus": 1792.5,
+      "pass": true
+    },
+    {
+      "id": "05",
+      "fit": 1070,
+      "native": 1107.75,
+      "plus": 1384.6875,
+      "pass": true
+    },
+    {
+      "id": "06",
+      "fit": 1070,
+      "native": 1784,
+      "plus": 2230,
+      "pass": true
+    }
+  ],
+  "standalone": [
+    {
+      "id": "01-engineering-dependencies",
+      "opened": true
+    },
+    {
+      "id": "02-single-joint-analysis",
+      "opened": true
+    },
+    {
+      "id": "03-data-to-snapshot",
+      "opened": true
+    },
+    {
+      "id": "04-ai-tools-common-path",
+      "opened": true
+    },
+    {
+      "id": "05-work-item-lifecycle",
+      "opened": true
+    },
+    {
+      "id": "06-approval-execution-recovery",
+      "opened": true
+    }
+  ],
+  "scriptErrors": [],
+  "remoteRequests": [],
+  "offline": true
+}

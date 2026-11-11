@@ -1,0 +1,22 @@
+flowchart TB
+  UI[W01 前端工作台] --> HTTP[entrypoints/http / FastAPI]
+  HTTP --> APP[Application Services / W01、O01、C01—C03]
+  WK[entrypoints/worker] --> APP
+  APP -->|仅 O01 经 ScenarioHandler.analyze 调度| SH[scenarios / S01—S10 领域流程]
+  APP -->|O01 共享快照与证据| DATA[data / D03、D04 公开契约]
+  SH --> AI[capabilities / A01—A03 公共契约]
+  SH --> B2[capabilities/forecasting / B02]
+  B2 -->|候选情景指标评价，单向依赖| B1[capabilities/metrics / B01]
+  SH --> B1
+  B1 --> DATA
+  SYNC[data / D01、D02 接入与投影] --> DATA
+  WK --> I[infrastructure / I01 持久工作项与运行支持]
+  APP --> I
+  DATA --> PORTS[所属模块的 Domain / Repository 等端口]
+  AI --> PORTS
+  I --> PORTS
+  ADP[adapters / MySQL、模型、读源、动作] -.实现对应端口.-> PORTS
+  ADP --> DB[(MySQL)]
+  ADP --> EXT[模型及业务源接口 / 读写适配分离]
+  BOOT[bootstrap / 组合根] -.注入具体实现.-> APP
+  GOV[governance / G01、G02] -.所有入口及调用边界强制治理.-> APP

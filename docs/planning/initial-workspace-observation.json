@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-11",
+  "cwd": "D:\\电商项目\\跨境电商智慧AI平台",
+  "gitRepositoryPresent": false,
+  "commands": [
+    "git rev-parse --show-toplevel",
+    "git status --short --branch"
+  ],
+  "exitCodes": [
+    1,
+    1
+  ],
+  "result": "fatal: not a git repository (or any of the parent directories): .git",
+  "scope": "Read-only observation; no git init or commit performed"
+}

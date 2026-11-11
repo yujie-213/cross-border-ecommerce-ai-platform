@@ -1,0 +1,116 @@
+[
+  {
+    "id": "01-ai-foundation",
+    "title": "AI公共底座",
+    "source": "mermaid/01-ai-foundation.mmd",
+    "svg": "mermaid/01-ai-foundation.svg"
+  },
+  {
+    "id": "02-o01-handler-runtime",
+    "title": "O01与Runtime边界",
+    "source": "mermaid/02-o01-handler-runtime.mmd",
+    "svg": "mermaid/02-o01-handler-runtime.svg"
+  },
+  {
+    "id": "03-prompt-context-harness",
+    "title": "Prompt/Context/Harness",
+    "source": "mermaid/03-prompt-context-harness.mmd",
+    "svg": "mermaid/03-prompt-context-harness.svg"
+  },
+  {
+    "id": "04-agent-loop-tool-calling",
+    "title": "Agent Loop与工具",
+    "source": "mermaid/04-agent-loop-tool-calling.mmd",
+    "svg": "mermaid/04-agent-loop-tool-calling.svg"
+  },
+  {
+    "id": "05-gateway-cache",
+    "title": "模型网关与缓存",
+    "source": "mermaid/05-gateway-cache.mmd",
+    "svg": "mermaid/05-gateway-cache.svg"
+  },
+  {
+    "id": "06-conditional-multi-agent",
+    "title": "条件性多角色协作",
+    "source": "mermaid/06-conditional-multi-agent.mmd",
+    "svg": "mermaid/06-conditional-multi-agent.svg"
+  },
+  {
+    "id": "07-llmops-evaluation-loop",
+    "title": "可观测与评测闭环",
+    "source": "mermaid/07-llmops-evaluation-loop.mmd",
+    "svg": "mermaid/07-llmops-evaluation-loop.svg"
+  },
+  {
+    "id": "08-s01-workflow",
+    "title": "S01业务时序",
+    "source": "mermaid/08-s01-workflow.mmd",
+    "svg": "mermaid/08-s01-workflow.svg"
+  },
+  {
+    "id": "09-s02-workflow",
+    "title": "S02业务时序",
+    "source": "mermaid/09-s02-workflow.mmd",
+    "svg": "mermaid/09-s02-workflow.svg"
+  },
+  {
+    "id": "10-s03-workflow",
+    "title": "S03业务时序",
+    "source": "mermaid/10-s03-workflow.mmd",
+    "svg": "mermaid/10-s03-workflow.svg"
+  },
+  {
+    "id": "11-s04-workflow",
+    "title": "S04业务时序",
+    "source": "mermaid/11-s04-workflow.mmd",
+    "svg": "mermaid/11-s04-workflow.svg"
+  },
+  {
+    "id": "12-s05-workflow",
+    "title": "S05业务时序",
+    "source": "mermaid/12-s05-workflow.mmd",
+    "svg": "mermaid/12-s05-workflow.svg"
+  },
+  {
+    "id": "13-s06-workflow",
+    "title": "S06业务时序",
+    "source": "mermaid/13-s06-workflow.mmd",
+    "svg": "mermaid/13-s06-workflow.svg"
+  },
+  {
+    "id": "14-s07-workflow",
+    "title": "S07业务时序",
+    "source": "mermaid/14-s07-workflow.mmd",
+    "svg": "mermaid/14-s07-workflow.svg"
+  },
+  {
+    "id": "15-s08-workflow",
+    "title": "S08业务时序",
+    "source": "mermaid/15-s08-workflow.mmd",
+    "svg": "mermaid/15-s08-workflow.svg"
+  },
+  {
+    "id": "16-s09-workflow",
+    "title": "S09业务时序",
+    "source": "mermaid/16-s09-workflow.mmd",
+    "svg": "mermaid/16-s09-workflow.svg"
+  },
+  {
+    "id": "17-s10-workflow",
+    "title": "S10业务时序",
+    "source": "mermaid/17-s10-workflow.mmd",
+    "svg": "mermaid/17-s10-workflow.svg"
+  },
+  {
+    "id": "18-pause-resume-protocol",
+    "title": "暂停与恢复交接协议",
+    "source": "mermaid/18-pause-resume-protocol.mmd",
+    "svg": "mermaid/18-pause-resume-protocol.svg"
+  },
+  {
+    "id": "19-s03-a02-voc-contract",
+    "title": "S03/A02 VOC字段级用例",
+    "source": "mermaid/19-s03-a02-voc-contract.mmd",
+    "svg": "mermaid/19-s03-a02-voc-contract.svg"
+  }
+]

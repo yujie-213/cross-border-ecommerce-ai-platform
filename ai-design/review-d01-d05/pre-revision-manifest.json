@@ -1,0 +1,412 @@
+[
+  {
+    "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.browser-check.json",
+    "sha256": "83f16aa0ac9acfed621b496597583a5543a54197c4dea3ee7c2eb5f44937773a",
+    "bytes": 21468
+  },
+  {
+    "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.delivery.json",
+    "sha256": "7c4a2ed82c5dafe5d28da25a53376156f418070814254e3ab4a69ebbba72a1c3",
+    "bytes": 656
+  },
+  {
+    "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.finalize-summary.json",
+    "sha256": "df8e8001a741a4186c091c66c9135da8e2a6163c4e9d5a8d5872183c43a76909",
+    "bytes": 1708
+  },
+  {
+    "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.finalize.json",
+    "sha256": "a26cabb30a2070df8994a67db7cd28b96ede5c8f5e899ec0d05c1e5663bfc168",
+    "bytes": 35344
+  },
+  {
+    "path": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.html",
+    "sha256": "68492200aa85195fae6ad0817b5068ea5e8f5b404aa55c443b2b9aefe03bc94c",
+    "bytes": 835361
+  },
+  {
+    "path": ".archify/architecture-ai-runtime-20261111-110000/candidate.json",
+    "sha256": "2a94d52363f916f5af6cf14e3d3da500b16226039c1cffef882c2488d06107c4",
+    "bytes": 3006
+  },
+  {
+    "path": "ai-design/AI网关缓存准入与隔离矩阵.csv",
+    "sha256": "54ebc559958503c73a0c69911e67c77ae63c71b4da8b386c223f5ff5b90dfd51",
+    "bytes": 3870
+  },
+  {
+    "path": "ai-design/AI网关缓存准入与隔离矩阵.md",
+    "sha256": "dd871f31cd719473ec4bf7dbc8f356e158f6cbd29b1fbb56b2c5193ccce33a44",
+    "bytes": 10426
+  },
+  {
+    "path": "ai-design/S01—S10_Agent与Workflow设计.csv",
+    "sha256": "0f1fe4712279195695b09f8287b7685a5e52503a9eda313424c00107178656d7",
+    "bytes": 23433
+  },
+  {
+    "path": "ai-design/S01—S10_Agent与Workflow设计.md",
+    "sha256": "03685c8f9dde1392524eb69ba83bd4e61754a72905737f7d8b29fd2ebfe6af83",
+    "bytes": 34133
+  },
+  {
+    "path": "ai-design/S01—S10_选型总览.csv",
+    "sha256": "231335097e55d500e835a09e5ee8cb5f1c938bc2bfbe93cdc806a7e3ad2ca12d",
+    "bytes": 5674
+  },
+  {
+    "path": "ai-design/assets/mermaid-11.4.1.min.js",
+    "sha256": "a43bc1afd446f9c4cc66ac5dd45d02e8d65e26fc5344ec0ef787f88d6ddb6f9e",
+    "bytes": 2571900
+  },
+  {
+    "path": "ai-design/assets/render.html",
+    "sha256": "3350b9fe6f2fcf01ba623c44845d90b880f001fcdfa4c38951c13018621e28a4",
+    "bytes": 115
+  },
+  {
+    "path": "ai-design/baseline-manifest.json",
+    "sha256": "9d8e7f7b7e363982118e332778ae2982c014f06f102662a11d4c0b7936f14330",
+    "bytes": 746
+  },
+  {
+    "path": "ai-design/file-manifest.json",
+    "sha256": "14824c81ab4180ef878fa634da457662ba1c2f575333f69a7dd75fa986752738",
+    "bytes": 16319
+  },
+  {
+    "path": "ai-design/index.md",
+    "sha256": "749892e613a9e1779fd43b4adf68c168c9126e5b2327ff6e066e263605cf5954",
+    "bytes": 2898
+  },
+  {
+    "path": "ai-design/mermaid-manifest.json",
+    "sha256": "3efc58bf07b9f99a5f288ecaeed9c995d4c59daaf584d274de16023054cdb93d",
+    "bytes": 2948
+  },
+  {
+    "path": "ai-design/mermaid/01-ai-foundation.mmd",
+    "sha256": "f33bfc870e12967e94d0fd6dd628725fcd32b3190896f9b73a6f29de0ea25f16",
+    "bytes": 1372
+  },
+  {
+    "path": "ai-design/mermaid/01-ai-foundation.svg",
+    "sha256": "82e60998b671fa45dff7ef4ccefeeed0689ba703424cf45080e646b14251ef32",
+    "bytes": 42136
+  },
+  {
+    "path": "ai-design/mermaid/02-o01-handler-runtime.mmd",
+    "sha256": "3540fbffc2bf346357748eb7f5a10f714f125d06e9e598369a8f61638949fa61",
+    "bytes": 602
+  },
+  {
+    "path": "ai-design/mermaid/02-o01-handler-runtime.svg",
+    "sha256": "f86a087247413072e5923692959e0ca4b2153d39d1a82f17fc8032e9e87beabe",
+    "bytes": 20298
+  },
+  {
+    "path": "ai-design/mermaid/03-prompt-context-harness.mmd",
+    "sha256": "a8839330719ed5a846ecf9c406ed6b88150bb197ad42baa9b8eba500784b35d0",
+    "bytes": 609
+  },
+  {
+    "path": "ai-design/mermaid/03-prompt-context-harness.svg",
+    "sha256": "cc8ed461cca113857ef37535e3a57aa48cb9b2630bd02844febde40ec409a8f0",
+    "bytes": 18971
+  },
+  {
+    "path": "ai-design/mermaid/04-agent-loop-tool-calling.mmd",
+    "sha256": "446cfefc0b2bc3720b7aeb12ff4e883ca4ca92d70280112e4cd58f24e9e7adb3",
+    "bytes": 1807
+  },
+  {
+    "path": "ai-design/mermaid/04-agent-loop-tool-calling.svg",
+    "sha256": "d1f1c829e801e3c3bd3e2f553b2d169675f1b73c866fd67b236534af0cc26348",
+    "bytes": 46173
+  },
+  {
+    "path": "ai-design/mermaid/05-gateway-cache.mmd",
+    "sha256": "e67e57d63223fb6f80ba9fe507699be364ec61d333a0a8682ee41a3ffeebee05",
+    "bytes": 1024
+  },
+  {
+    "path": "ai-design/mermaid/05-gateway-cache.svg",
+    "sha256": "804bdeb958f791ffc6761e28eae8fb9c3eb7538fff166d1a36bb7c5b42b7b0e8",
+    "bytes": 29697
+  },
+  {
+    "path": "ai-design/mermaid/06-conditional-multi-agent.mmd",
+    "sha256": "614057bd8d8093533fcc5e2e0a7ccd915494eb2ded23572c62ab80ef88f71d35",
+    "bytes": 917
+  },
+  {
+    "path": "ai-design/mermaid/06-conditional-multi-agent.svg",
+    "sha256": "fb40d41ca5d56b2b0dc186ea529184e617b430cbd4fddff879a0186a6e67efc1",
+    "bytes": 31902
+  },
+  {
+    "path": "ai-design/mermaid/07-llmops-evaluation-loop.mmd",
+    "sha256": "bda5c1a24615e5e2e01bbbd824f8305446146bf530e2dbf868dfa5c18486547d",
+    "bytes": 607
+  },
+  {
+    "path": "ai-design/mermaid/07-llmops-evaluation-loop.svg",
+    "sha256": "fe0c655e54020018eb8d2a2513467bc5800bd7ae2086fd7e30e5ba1558c3967e",
+    "bytes": 20505
+  },
+  {
+    "path": "ai-design/mermaid/08-s01-workflow.mmd",
+    "sha256": "bf7ec67fd045bcdbd84e6e784c5297efaaabd1458e6bfd3c72bc1eb6df93bdda",
+    "bytes": 935
+  },
+  {
+    "path": "ai-design/mermaid/08-s01-workflow.svg",
+    "sha256": "283caf892e9299bf1d1cbc9fe1aa630d7905f6bfd8fd4eb663854f58bb541de2",
+    "bytes": 31688
+  },
+  {
+    "path": "ai-design/mermaid/09-s02-workflow.mmd",
+    "sha256": "bab3f062dee9861d634a6ba26c1d4af023a452fdc81e6de282a0580facd4597c",
+    "bytes": 728
+  },
+  {
+    "path": "ai-design/mermaid/09-s02-workflow.svg",
+    "sha256": "bb378256262c24a1b52ebaf1a155a52bab3b8d757333938c23a45d5c50e9ace8",
+    "bytes": 28936
+  },
+  {
+    "path": "ai-design/mermaid/10-s03-workflow.mmd",
+    "sha256": "e5aa9c17b8cdb9a2bcc5dfa5aae0179b5df544e9e09194050d0be77bb2bc30c3",
+    "bytes": 818
+  },
+  {
+    "path": "ai-design/mermaid/10-s03-workflow.svg",
+    "sha256": "0691dc29a88cbe1142c31798e03156e81345fa6d85097e124e4ebda2a8d5c0e6",
+    "bytes": 31172
+  },
+  {
+    "path": "ai-design/mermaid/11-s04-workflow.mmd",
+    "sha256": "e44d0dd5948e95ea99ccd9a8b4d58526fd8083f602db8e5ef93a6c443ae0ee81",
+    "bytes": 707
+  },
+  {
+    "path": "ai-design/mermaid/11-s04-workflow.svg",
+    "sha256": "5712093c12ea6f01151ad3e6d1877ce9de996985baa77ba16e58feaa10d2f260",
+    "bytes": 29518
+  },
+  {
+    "path": "ai-design/mermaid/12-s05-workflow.mmd",
+    "sha256": "25c34fc3432f09ed2119454b8e47a5e8d8f163b77eae2e94af9e667cd58912e1",
+    "bytes": 786
+  },
+  {
+    "path": "ai-design/mermaid/12-s05-workflow.svg",
+    "sha256": "8bf53effe2e83783bd0bc81a1b539c7763d93fd0fab251d8973e6b03acfc0153",
+    "bytes": 29765
+  },
+  {
+    "path": "ai-design/mermaid/13-s06-workflow.mmd",
+    "sha256": "2a56549d82591684894c4bf38be763580ba3a4114356c986645e57fbeb29ae58",
+    "bytes": 740
+  },
+  {
+    "path": "ai-design/mermaid/13-s06-workflow.svg",
+    "sha256": "176236e7e873f249568ebca87711457cc2ae5c732988f5d25873c6ad23d7b17c",
+    "bytes": 29058
+  },
+  {
+    "path": "ai-design/mermaid/14-s07-workflow.mmd",
+    "sha256": "85cc0023011ed5eb0927c62f3f22f7f06b06f51e3c6f173d0dbaf23fc0047d6e",
+    "bytes": 686
+  },
+  {
+    "path": "ai-design/mermaid/14-s07-workflow.svg",
+    "sha256": "e33b904b6e4c3707f64cad00a888f0f77a2e011462a451a8db78d3d571e3a1ef",
+    "bytes": 28158
+  },
+  {
+    "path": "ai-design/mermaid/15-s08-workflow.mmd",
+    "sha256": "69c5ccb1c3b01b982efb2aaa13db361ddf443fbc7de7377ed53d1817481dea23",
+    "bytes": 876
+  },
+  {
+    "path": "ai-design/mermaid/15-s08-workflow.svg",
+    "sha256": "59b9eac45f7a7e30ff23b319822bc33241902d82bc790a50c7c1dc7a4cca6f9c",
+    "bytes": 32042
+  },
+  {
+    "path": "ai-design/mermaid/16-s09-workflow.mmd",
+    "sha256": "f15846fd601cf80d3e711e30da3624ed9b90b607a6649f57ba550632bdf57be0",
+    "bytes": 773
+  },
+  {
+    "path": "ai-design/mermaid/16-s09-workflow.svg",
+    "sha256": "ebdfe544ff80f059461c8d0bb27bad403fe369c6bfb49c80daa6891e0c18c14a",
+    "bytes": 29534
+  },
+  {
+    "path": "ai-design/mermaid/17-s10-workflow.mmd",
+    "sha256": "b69cdefa93be0fe9cd1a2f4ca92957e07e2da29721162b1656bc6439fe2763e4",
+    "bytes": 819
+  },
+  {
+    "path": "ai-design/mermaid/17-s10-workflow.svg",
+    "sha256": "cc6c737466d5d316e5c0fc458134530cc201ee4ecad6723198d14e1c19ab02da",
+    "bytes": 30503
+  },
+  {
+    "path": "ai-design/review/browser-check.json",
+    "sha256": "8ba05952b94362cf0878f3dc2478a02396b93f976d3f27bd120a1335f5cc58e7",
+    "bytes": 2219
+  },
+  {
+    "path": "ai-design/review/cache-diagram.png",
+    "sha256": "afdd94b8ab79209cd15d9f3314ea1a0d2dbbe5a0ea3db9dcb845fa6a35579280",
+    "bytes": 110228
+  },
+  {
+    "path": "ai-design/review/cache-matrix.png",
+    "sha256": "a809296f97817593e0b5a30fe53420ee09430ade81791cae9bf89657b6b262f3",
+    "bytes": 220058
+  },
+  {
+    "path": "ai-design/review/llmops-loop.png",
+    "sha256": "97a0432352c3f343af981d24a3d015446b1f15ea02da211892d54db0156398f2",
+    "bytes": 122477
+  },
+  {
+    "path": "ai-design/review/mermaid-render-check.json",
+    "sha256": "a173c17ebc1f64b5a62951da7089e7dcd5b571bb595849c62bcf395eed7ef4f1",
+    "bytes": 1683
+  },
+  {
+    "path": "ai-design/review/reading-dark-top.png",
+    "sha256": "9406ee9c6b20e029af3a014727250fa60622e83fd9e77c6cf0f4c575fcbfc361",
+    "bytes": 171540
+  },
+  {
+    "path": "ai-design/review/reading-light-top.png",
+    "sha256": "aae50d0591c6d1ffd8ae7e1aef83ccd3636031aa2b22aec781c5abc85f70343b",
+    "bytes": 174145
+  },
+  {
+    "path": "ai-design/review/runtime-boundary.png",
+    "sha256": "a15a63a7fc66b9fc1d113dd693c02263e2b34cce2d0ea337a1101b6217f8c9d9",
+    "bytes": 131444
+  },
+  {
+    "path": "ai-design/review/s03-workflow.png",
+    "sha256": "5d97da6c87f93a100ad1108623fe1a1de15b423f4a88d6f24dbdbc6c8b852b77",
+    "bytes": 140047
+  },
+  {
+    "path": "ai-design/review/svg-check.json",
+    "sha256": "2307833e768a5f4abded724282ca6d12f5121ec99d8f15c1cd0c0b5e6cdb73e1",
+    "bytes": 1431
+  },
+  {
+    "path": "ai-design/review/visual-review.json",
+    "sha256": "afcae85c1fa0286778f5642ec6db6a871c0eaf2c72cfb7a86f7b56520168a8ac",
+    "bytes": 629
+  },
+  {
+    "path": "ai-design/scripts/browser_check.cjs",
+    "sha256": "a0fda01f050536d33b94fad1a96d53a9eb9d31893d7ab64c39a335e1df420c25",
+    "bytes": 4261
+  },
+  {
+    "path": "ai-design/scripts/build_artifacts.py",
+    "sha256": "22d622ee2b75bff8e12f0deac58c2ad9cbf2f5815884b6b376d6e1a4c4c7bd0f",
+    "bytes": 13244
+  },
+  {
+    "path": "ai-design/scripts/file_manifest.py",
+    "sha256": "4719397c12df8b19d4e42b57bec0ab5baff687bf37b51eae46cc0a63ea3b0fc3",
+    "bytes": 2454
+  },
+  {
+    "path": "ai-design/scripts/render_mermaid.cjs",
+    "sha256": "5fdfac9184102583a113d6a0270b718b9283ac538f7d30158b85e0711f12744d",
+    "bytes": 2588
+  },
+  {
+    "path": "ai-design/scripts/validate_artifacts.py",
+    "sha256": "c58c06e4f4d503c8bdc97671831a6cd8012cdf4ae0f7f00aaa1ace28bf943297",
+    "bytes": 5432
+  },
+  {
+    "path": "ai-design/validation-report.json",
+    "sha256": "626977caa13cb64d19c4caf8cbd0d781ee8c5ff2994836dcafbd05dd53149ce2",
+    "bytes": 4124
+  },
+  {
+    "path": "ai-design/内部一致性检查记录.md",
+    "sha256": "94dca99687e51c739af21b0be7d721235d81f44f287a14253930354442675108",
+    "bytes": 4363
+  },
+  {
+    "path": "ai-design/待验证假设与实施门槛清单.csv",
+    "sha256": "cc88f6f339808a83b76eb0ce24e25f4d20cd0c1a589045c7f6620789471a8e92",
+    "bytes": 3091
+  },
+  {
+    "path": "ai-design/待验证假设与实施门槛清单.md",
+    "sha256": "649f9ff4cfb0c5cb1c571504e1dd5f5b8a7c2a169193162cbf5a2c80a0a33b55",
+    "bytes": 3689
+  },
+  {
+    "path": "ai-design/技术与范式选型决策表.csv",
+    "sha256": "e65c706d451ce518befa1d8af3d4de67eb76db460849613bccd0391f6e5dd00c",
+    "bytes": 3241
+  },
+  {
+    "path": "ai-design/技术与范式选型决策表.md",
+    "sha256": "8302046c2fa2ab7c90f32a53c9fe032bf1704a617fa501d28118e4eac56e05e2",
+    "bytes": 4907
+  },
+  {
+    "path": "ai-design/本次新增及修改文件清单.md",
+    "sha256": "01446c82744c4005db51357fb2f35f2adbb069409a8c52e66ea5238af20b7694",
+    "bytes": 8907
+  },
+  {
+    "path": "ai-design/核心接口与权限隔离设计表.csv",
+    "sha256": "3893542fcaabfd321239a388ba9689dbe162d4e97d90564a77c0e1b1ec05314b",
+    "bytes": 6918
+  },
+  {
+    "path": "ai-design/核心接口与权限隔离设计表.md",
+    "sha256": "05704dad9a327bc22bba4b160af3ce5e5ae2ce2b65e7f2e7997cef5afe16df24",
+    "bytes": 13109
+  },
+  {
+    "path": "智慧中台AI应用项目_AI模块详细开发设计文档.html",
+    "sha256": "b8337533adae0dd5d1aa29405a2cd4c86f4c4d6055f5e2e08e2fe3b9d766e708",
+    "bytes": 683472
+  },
+  {
+    "path": "智慧中台AI应用项目_AI模块详细开发设计文档.md",
+    "sha256": "b07072cbf02282e53f6400d85065ad85eddd5e5a2d37b9c88067636977744181",
+    "bytes": 134146
+  },
+  {
+    "path": "智慧中台AI应用项目_概要开发设计文档.md",
+    "sha256": "cf8119e270e894fbb68d3db0361ccdf87b4e0b506c476eb130321e24c08dff80",
+    "bytes": 118461
+  },
+  {
+    "path": "智慧中台AI应用项目_需求文档草案.md",
+    "sha256": "fcb62c1f3dfaff750b24c6c21b277a5f5e107f3d956c69c4850a9620120a0541",
+    "bytes": 45683
+  },
+  {
+    "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+    "sha256": "d9ab2286e47b76bc8e8d7857610602349506b031250b0e5f062e3ff65011bcd1",
+    "bytes": 56730
+  },
+  {
+    "path": "智慧中台AI应用项目_可行性分析报告.md",
+    "sha256": "c3ae8ddf9fcfe9175911176da683d20a7a8ae7557c1805cf57118dd25318ee6b",
+    "bytes": 48331
+  }
+]

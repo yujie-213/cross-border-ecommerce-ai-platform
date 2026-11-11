@@ -1,0 +1,690 @@
+--- 概要开发设计文档_v0.1.md
++++ 智慧中台AI应用项目_概要开发设计文档.md
+@@ -1,6 +1,6 @@
+ # 跨境电商智慧中台 AI 应用项目概要开发设计文档
+ 
+-> 文档编号：AIH-HLD-001 ｜ 版本：0.1 ｜ 日期：2026-11-11 ｜ 状态：第 8 步概要设计，待独立审查
++> 文档编号：AIH-HLD-001 ｜ 版本：0.2 ｜ 日期：2026-11-11 ｜ 状态：第 10 步 H01—H07 定点修订，待独立复核
+ >
+ > 设计基线：需求文档草案 v0.2、总体逻辑架构与流程设计 v0.2（含最新两项图示修正）、可行性分析报告 v1.0。本文将已确认的逻辑架构映射为工程方案，保留 S01—S10、17 个公共模块、22 项候选需求及既有建设阶段。
+ >
+@@ -21,6 +21,8 @@
+ 【确定】不调整已通过 R01—R09 的职责边界。原文中历史性的“待复核”页眉不构成本轮重新设计依据；以用户确认的复核结果和最新图示修正为准。三份基线正文及已有图文件保持不变。
+ 
+ 【待验证】企业接口尚未被本文接通或测通；真实租户/店铺/仓库规模、数据量、同步频率、任务峰值、模型地域与审批岗位尚不足以冻结容量和上线日期。可研的人月、价格和收益示例不得直接写成 API SLA、线程数或采购配置。
++
++本轮仅以以上三份项目基线、本文 v0.1 和本次 H01—H07 意见为修订依据，不关联其他历史项目。主要增补位置为第 4.1—4.4、6.4、12.3、13.2.1 节；第 5.3 节为工程约束索引。完整修订对照见[H01—H07 修订说明](智慧中台AI应用项目_概要设计审查修订说明_H01-H07.md)。
+ 
+ ## 02 产品范围、分期与工程建设边界
+ 
+@@ -118,67 +120,106 @@
+ 
+ ## 04 建议代码目录与协作归属
+ 
+-以下是未来工程目录提案，不是本轮已生成的工程。每个模块按实际职责建立 application/domain/ports/contracts；只有薄包装的模块不强制填满全部空目录。S05—S10 当前只保留归属和注册约定，实施时再创建其代码与迁移。
++### 4.1 分批创建目录，不提前生成空模块
++
++以下均为未来工程提案，本轮不创建。目录分为“首批闭环实际需要”“后续公共能力有使用方时创建”“P1/P2 未来场景”三类。首批闭环是 M1 内部的工程验收切片，不替代 M0—M4，也不以补货或某个场景收缩完整产品范围。每个目录只有出现实际契约、用例或实现时才创建，不强制复制一套空 application/domain/ports/contracts。
+ 
+ ```text
+-commerce-ai-hub/                         # 未来代码工程，本文不初始化
+-├─ pyproject.toml                        # 依赖、检查配置；锁文件工具待冻结
+-├─ migrations/                          # 推荐 Alembic；单一迁移历史
++commerce-ai-hub/                         # 首批拟创建；当前仅目录设计
++├─ pyproject.toml                        # 版本与依赖锁定后创建
++├─ migrations/                          # 只建首批实际使用的表，单一历史
+ ├─ src/commerce_hub/
+-│  ├─ bootstrap/                        # 配置、依赖装配、场景/工具/动作注册
++│  ├─ bootstrap/                        # 配置与依赖装配，只注册已实现能力
+ │  ├─ entrypoints/
+-│  │  ├─ http/                          # FastAPI 应用、路由、错误映射
+-│  │  └─ worker/                        # 领取循环、任务分派、优雅退出
+-│  ├─ contracts/                        # 最小共享引用/身份/错误信封；非全量 DTO 仓库
+-│  ├─ workspace/                        # W01 工作台应用服务与响应视图
+-│  ├─ orchestration/                    # O01：task、plan、budget、report 内部分工
+-│  │  ├─ contracts/                    # AnalysisContext、ScenarioHandler、DomainResult
+-│  │  ├─ application/                  # 调度、检查点、联合审查与发布
+-│  │  ├─ domain/                       # 任务/计划/预算/报告不变量
+-│  │  └─ ports/                        # TaskStore、BudgetHandle 等真实需求
++│  │  ├─ http/                          # app.py 工厂、分析/报告/健康入口
++│  │  └─ worker/                        # __main__.py、领取与分派入口
++│  ├─ contracts/                        # 确实跨模块使用的引用/身份/错误信封
++│  ├─ workspace/                        # W01 分析提交、状态与报告视图
++│  ├─ orchestration/                    # O01 最小任务、计划、预算及报告用例
++│  │  └─ contracts/                    # AnalysisContext/ScenarioHandler/DomainResult
+ │  ├─ scenarios/
+-│  │  ├─ s01_supply_inventory/          # 领域流程，不另建模型网关或指标库
+-│  │  ├─ s02_fulfillment/
+-│  │  ├─ s03_customer_voc/
+-│  │  ├─ s04_contribution_fees/
+-│  │  └─ s05…s10/                      # 未来按阶段落地，非当前空工程要求
++│  │  └─ s02_fulfillment/               # 首个真实调用公共能力的窄切片 Handler
+ │  ├─ capabilities/
+-│  │  ├─ metrics/                      # B01
+-│  │  ├─ forecasting/                  # B02
+-│  │  ├─ models/                       # A01 网关、ModelProvider 契约
+-│  │  ├─ understanding/                # A02
+-│  │  └─ retrieval/                    # A03；受控查询、工具定义与检索端口
++│  │  └─ metrics/                      # B01 首批履约事实评价，不建空预测/AI 目录
+ │  ├─ data/
+-│  │  ├─ sync/                         # D01
+-│  │  ├─ projection/                   # D02
+-│  │  ├─ quality/                      # D03 质量与快照
+-│  │  └─ evidence/                     # D04 引用与血缘
+-│  ├─ collaboration/
+-│  │  ├─ suggestions/                  # C01
+-│  │  ├─ approvals/                    # C02
+-│  │  └─ executions/                   # C03
++│  │  ├─ sync/                         # D01 最小批次/覆盖契约，测试夹具接入
++│  │  ├─ projection/                   # D02 样例身份与事件投影
++│  │  ├─ quality/                      # D03 真实持久化的质量/快照
++│  │  └─ evidence/                     # D04 真实引用登记与解析
+ │  ├─ governance/
+-│  │  ├─ access/                      # G01
+-│  │  └─ observability/               # G02 审计、Trace、成本与评测契约
+-│  ├─ infrastructure/                 # I01 持久任务、运行配置、凭据引用
++│  │  ├─ access/                      # G01 测试身份与数据范围校验，非认证旁路
++│  │  └─ observability/               # G02 必需审计与 Trace
++│  ├─ infrastructure/                 # I01 MySQL 工作项与运行配置
+ │  └─ adapters/
+-│     ├─ mysql/<owner>/               # 按 O01/D03/C02 等归属实现 Repository
+-│     ├─ sources/<source_type>/       # D01 读连接器；具体 ERP/CRM 待验证
+-│     ├─ actions/<action_type>/       # C03 写动作；与只读凭据和接口分离
+-│     ├─ models/<provider>/           # A01 云端/本地协议适配
+-│     └─ retrieval/                  # A03 基础 MySQL 查询；候选索引按需添加
++│     └─ mysql/<owner>/               # 仅首批模块的 Repository 与事务适配
+ ├─ tests/
+-│  ├─ unit/<owner>/
+-│  ├─ contract/
+-│  ├─ integration/
+-│  └─ faults/                         # 并发、回执丢失、越权和恢复
+-└─ docs/
+-   ├─ contracts/                      # 版本化公开接口及样例
+-   ├─ decisions/                      # 已冻结/暂缓决策与依据
+-   └─ handoff/                        # 模块交接与测试证据，非聊天记录堆积
++│  ├─ fixtures/                        # 明示 simulated 的 D01 测试连接器与样本
++│  ├─ contract/                        # 实际使用的协议
++│  ├─ integration/                     # API—MySQL—Worker 闭环
++│  └─ faults/                          # 回滚、崩溃、越权、重复处理
++└─ docs/                               # 契约、配置、迁移、验收与交接说明
+ ```
+ 
+ 前端工程归属待企业现有门户和团队技术栈确认，概要阶段不凭空选定 React/Vue。前端只消费 W01/API 的契约，不直接访问数据库、模型密钥或 Worker。不存在没有明确职责的 utils、万能 common、通用索引工厂或独立 Memory 服务。
++
++| 创建类别 | 后续目录归属 | 创建触发条件 |
++|---|---|---|
++| 后续公共能力 | capabilities/forecasting（B02）、models（A01）、understanding（A02）、retrieval（A03） | 对应预测/模型/理解/检索用例已排期且有真实使用方；A03 即席启用须同时实现第 6.4 节控制 |
++| 后续协作能力 | collaboration/suggestions（C01）、approvals（C02）、executions（C03） | 建议协作用例进入交付；C01/C02 原子提交按第 12.3 节，写动作另过 M3 门槛 |
++| 后续数据/基础设施适配 | adapters/sources、actions、models、retrieval | 某个具体连接器/动作/提供方/索引被验证并纳入实施；不先建厂商空目录 |
++| P0 后续场景 | scenarios/s01_supply_inventory、s03_customer_voc、s04_contribution_fees | M2 分步实施，不因首批用 S02 验证工程链而删减 |
++| P1/P2 未来场景 | scenarios/s05_customer_assistance、s06_content_growth、s07_documents、s08_planning、s09_visual_quality、s10_policy_check | 依原业务规划逐项排期；当前只保留目录归属说明 |
++
++### 4.2 最小可运行代码基座的交付定义与依赖顺序
++
++【建议】最小交付不是“API 能启动”或“静态返回报告”，而是用真实 MySQL、两个独立进程、已注册的 S02 窄切片 ScenarioHandler，走通 **API→任务与工作项原子落库→Worker 领取→O01 派发场景→公共指标/快照/证据→持久报告→API 读取**。源数据使用模拟夹具；任务、数据库事务、租约、授权、Handler 调用和报告持久化不得模拟。不开启模型调用和外部写动作，不把未实现的模块注册成伪成功能力。
++
++| 开发顺序（未来实施） | 最小模块/产物 | 前置依赖与完成定义 |
++|---|---|---|
++| 1 版本与边界冻结 | 已选 Python/依赖锁、配置 schema、现有公共契约所需子集 | 先解决 V01/V12；不生成无人使用接口；冻结测试夹具口径 |
++| 2 持久化与治理 | I01 连接/短事务/工作项；G01 测试身份/范围；G02 审计/Trace；对应迁移 | MySQL 可用且迁移显式执行；具备事务回滚和租户隔离测试 |
++| 3 数据切片 | D01 测试连接器、D02 投影、D03 质量/manifest、D04 引用；B01 一项履约评价 | 使用第 2 步持久化与治理；夹具经所有者公开用例装载，不直接散写业务表 |
++| 4 领域与编排 | S02 Handler；O01 SINGLE 任务、计划、持久报告和取消点 | S02 真正调用 B01 与数据公开契约；O01 只经 ScenarioHandler 调度；JOINT 契约保留，未实现能力明确拒绝 |
++| 5 两个入口装配 | W01/API、独立 Worker、bootstrap | 由组合根注册第 2—4 步实际实现；API 与 Worker 使用同一迁移版本和同一 MySQL |
++| 6 闭环与故障验收 | 第 4.3 节逐项证据、操作说明、最小 CI | 不以单元 Mock 测试代替跨进程和真实 MySQL 验证；通过后再依原 M1/M2 计划扩展公共能力 |
++
++建议运行入口如下，均为未来开发后的操作约定，本轮不执行：
++
++| 入口 | 拟定启动方式/责任 | 启动依赖与边界 |
++|---|---|---|
++| 数据库迁移 | `alembic upgrade head`，独立运维/开发命令 | 配置与版本已冻结→MySQL 就绪→迁移完成；API/Worker 不自行迁移 |
++| API | `uvicorn commerce_hub.entrypoints.http.app:create_app --factory` | MySQL/迁移/必要配置就绪；提供 `/health/live`、`/health/ready` 及分析/报告资源；ready 校验其真实依赖 |
++| Worker | `python -m commerce_hub.entrypoints.worker` | 与 API 相同代码/配置版本；MySQL/迁移就绪；只领取已注册 workKind；不由 API 启动 |
++| 样例装载 | tests/fixtures 的测试装载过程调用 D01/D02 用例 | 仅显式测试环境，标示 simulated；不是生产公开 API 或后台常驻导入服务 |
++
++启动顺序为“冻结配置与依赖→MySQL→迁移→测试数据装载→API 与 Worker（两者可分别启动）”。可以先停 Worker 证明 API 受理后的任务仍持久存在；前端框架、云模型、Milvus、Neo4j、C01—C03 都不是此闭环运行依赖。
++
++### 4.3 最小代码基座交付与客观验收清单
++
++以下 MC 编号是验收项，不是新增模块。样例采用 S02：固定 asOf 下，夹具订单 A 已超承诺时点仍未完成、B 尚未到承诺时点；具体字段/期望值在测试 fixture 与 B01 评价样例中显式冻结，仅为工程验证，不代表企业正式履约口径。
++
++| 编号 | 交付/操作 | 可客观验收的结果与证据 |
++|---|---|---|
++| MC01 | 从干净测试库显式迁移；独立启动 API、Worker | 迁移版本可查、ready 通过；两个 PID/入口可独立停止，无额外中间件依赖 |
++| MC02 | 通过受控测试过程装载 D01 模拟批次 | 可查 simulated 来源、批次/覆盖、D02 修订、映射版本及预期 A/B 数据；不冒充真实接口 |
++| MC03 | 已授权身份提交 `POST /api/v1/analysis-tasks` | 返回 202/taskRef/Location；提交后 MySQL 同时存在同一 tenant 的 task/plan 与工作项及必需审计 |
++| MC04 | 在任务/工作项落库中间注入失败 | task、work 和必需审计全回滚，不返回受理成功；重复命令不产生第二个任务 |
++| MC05 | 先停 Worker，受理任务后重启 API，再启动 Worker | 原 taskId 仍可查询并被处理；不依赖 API 内存或 BackgroundTasks 续跑 |
++| MC06 | 跟踪 Worker→O01→S02.analyze | 同一 trace/task/plan/participant/snapshot 引用链；确认调用 S02/B01，不能静态拼一份 DomainResult 冒充执行 |
++| MC07 | 检查固定输入、计算和报告 | D03 manifest 可解析，B01 输出夹具约定的确定性超时指标，S02 据其规则标出 A 风险、B 不被误报；D04 引用能回源；O01 发布报告并持久关联产物 |
++| MC08 | 使用 `GET /analysis-tasks/{id}` 与报告 API，重启进程后再读 | 查询得到终态和 reportRef；报告/证据版本保持，未自动产生建议、审批或执行记录 |
++| MC09 | 两个 Worker 竞争领取、失租约的旧 Worker 迟到 | 当前 token 才能提交；同 task/plan/snapshot 的重复处理不重复发布逻辑结果/报告版本，恢复不丢任务；过程有审计 |
++| MC10 | 注入只读步骤崩溃、已提交报告但工作项未完成、重试超限 | 按第 11 节重入/复用已完成结果；已发布报告不重复创建；超限明确失败/待人工，不无限重试 |
++| MC11 | 跨租户读取、扩大 scope、未注册场景或缺必需数据 | 拒绝越权/不支持能力；质量缺口明确阻断相关结论，不把缺失当零/成功 |
++| MC12 | 取消排队/运行任务，检查配置、日志及文档 | 安全检查点生效，迟到结果不复活；无明文秘密；交付契约、迁移/运行/配置/测试证据和交接清单 |
++
++MC01—MC12 是未来开发交付的通过条件，本次均只定义验收方法，未执行也不标记通过。后续公共能力启用的附加门槛分别为：C01/C02 的事务故障测试见第 12.3 节，A03 即席控制测试见第 6.4 节，C03 来源校验与 UNKNOWN 测试见第 13.2.1 节；不把这三项扩展的实际代码混入最初运行闭环。
++
++### 4.4 模拟与真实验证的证据分级
++
++模拟连接器仅替代外部源读取，不能替代 MySQL、事务、Worker、权限或报告。测试身份仍须验证签名/范围，测试密钥与发行方仅用于隔离环境，生产不得开启匿名绕过模式。模拟数据报告必须携带数据来源标记及限制，可证工程链路和恢复行为；不能证明真实接口连通、授权、覆盖、新鲜度、映射质量、业务收益或生产容量。
++
++真实只读集成另需企业测试接口/受控导出、来源责任人、实际分页/限流/删除/时区/覆盖与质量记录；真实写入还必须逐动作证明源前置条件、原子条件执行、幂等、回执与人工责任。证据分别标注“模拟工程验证 / 真实只读验证 / 真实动作验证”，前一级通过不自动获得后一级资格，M0/M3 门槛不变。
+ 
+ ## 05 模块公共契约与唯一责任
+ 
+@@ -198,13 +239,13 @@
+ | B02 | `forecast`、`evaluate_candidates` | ForecastRequest、约束、候选假设、模型版本 → Forecast/ScenarioResultRef、B01 评价引用 | 场景→B02→B01；新增预测器/候选策略；不实现第二套逐日平衡/缺口公式 |
+ | A01 | `invoke_model`、`describe_capabilities` | ModelRequest、上下文片段、输出模式、调用许可 → ModelResponse/TechnicalError、usage | 由场景/A02/A03/O01 报告环节调用；注入 ModelProvider；不执行工具、不判断业务降级 |
+ | A02 | `understand`、`revise_annotation` | 文本/文档/图像受控引用、taxonomyVersion → 结构化标签、置信度/UNKNOWN、修订引用 | 读 D02/D03，需要时调 A01；供场景/B01 使用其结果；不计算投诉率分母、不自行合并身份 |
+-| A03 | `retrieve`、`query_semantic`、`invoke_read_tool` | QuerySpec、scope、snapshot/assetVersion、toolVersion → 证据/指标引用、受控结果 | 读 D02/D03/D04，指标调用 B01；解释需要时调 A01；新增 RetrievalProvider/白名单只读工具 |
+-| C01 | `create_suggestion`、`confirm`、`submit_for_approval`、`supersede` | 已发布分析/证据引用、用户选择、版本 → SuggestionRef、确认状态/approvalRef | 人工经 W01 触发；C01→C02 提交公开命令；不因建议确认自动审批；不写外部系统 |
+-| C02 | `submit_approval`、`decide`、`revoke`、`validate_approval` | 冻结建议/动作/指纹、审批人操作 → ApprovalRef、当前有效性及范围 | 读 C01 公开查询核验版本；供 C03；独立审批规则可扩展，不承担动作执行 |
++| A03 | `retrieve`、`query_semantic`、`invoke_read_tool`；即席入口运行控制见 6.4 | QuerySpec、受信 QueryRunContext 或任务许可、scope、版本 → 证据/指标引用、受控结果及 usage | 读 D02/D03/D04，指标调用 B01；解释需要时调 A01；即席许可不得由调用者自签 |
++| C01 | `create_suggestion`、`confirm`、`submit_for_approval`、`supersede`；独立只读版本视图 | 已发布分析/证据引用、用户选择、版本 → SuggestionRef、确认状态/approvalRef | SubmitForApprovalUseCase 为提交事务唯一协调者，经注入的 C02 提交命令协作；只写 C01，详见 12.3 |
++| C02 | `submit_approval`、`decide`、`revoke`、`validate_approval` | 冻结建议/动作/指纹、审批人操作 → ApprovalRef、当前有效性及范围 | 提交命令不回调 C01；决策用例经独立只读端口核验建议版本，不依赖 C01 提交服务，详见 12.3 |
+ | C03 | `request_execution`、`dispatch`、`reconcile_receipt`、`read_execution` | 有效审批引用、明确执行命令、executionKey → ExecutionRef、源记录/回执状态 | 检查 C01/C02/G01，借 I01 排队，调用 ActionAdapter；唯一外部写入模块 |
+ | G01 | `authenticate`、`authorize`、`derive_scope` | 验证后身份、资源/动作/工具、当前策略 → EffectiveScope/允许或拒绝 | 所有入口及敏感调用；角色、数据范围、字段与动作规则扩展；不让调用方自报可信权限 |
+ | G02 | `record_audit`、`record_usage`、`record_trace`、`evaluate` | 最小事件、版本/引用、Trace、评测结果 → 审计/观测/评测记录 | 横向采集；不成为报告、审批或业务指标的第二权威；后续可导出外部观测平台 |
+-| I01 | `enqueue`、`claim`、`heartbeat`、`complete`、`defer/recover`；配置/连接/备份支持 | workKind、owner/payloadRef、lease → workRef、领取许可/投递结果 | 被 O01/C03/D01 等真实异步用例使用；采用 MySQL 持久任务；不预设 Redis/MQ/通用 Blob/Index 抽象 |
++| I01 | `enqueue`、`claim`、`heartbeat`、`complete`、`retry_later`；配置/连接/备份支持 | workKind、owner/payloadRef、lease → workRef、领取许可/投递结果 | 仅通用领取、租约和有界重投；C03 发送/核对选择归 C03，详见 11.2—11.4 |
+ 
+ ### 5.2 O01 内部职责不拆服务
+ 
+@@ -217,17 +258,22 @@
+ 
+ 这些是 O01 内部类/用例组织建议，仍共享一个任务领域和版本记录。单场景也经过同一任务流程；没有第二套“单 Agent 专属调度器”。报告审查发现领域结果需重算时，重新派发对应 ScenarioHandler，不能直接调用领域能力修补结果。
+ 
+-### 5.3 允许与禁止的调用关系
+-
+-| 主题 | 允许 | 禁止 |
+-|---|---|---|
+-| 任务与场景 | O01 调注入的 ScenarioHandler 协议；场景返回 DomainResult | O01 直接跑 B01/B02/A02 领域步骤；场景反向调度 O01 或直接启动另一场景 |
+-| 计算 | B02 调 B01 评价假设；B01 将 scenarioInputRef 视为不透明输入引用 | B01 导入 B02 实体/调用预测器；场景另建逐日指标实现 |
+-| 模型 | A01 返回模型内容/工具请求提案/技术错误；调用方决定下一步 | A01 选择 RULES_ONLY、替业务缩小范围、直接执行函数或审批 |
+-| 数据 | 模块通过所有者 Query 接口或其授权只读投影视图读取 | 导入别人的 ORM/Repository 私有实现，直接更新他方表，源 Connector 兼做写动作 |
+-| 工具与动作 | A03 工具白名单仅只读；C03 经独立动作适配器写入 | 将 C03、原始 SQL/Cypher、shell、任意 HTTP 地址注册成模型工具 |
+-| 人工控制 | 用户→W01→C01→C02 明确提交；另一次授权执行→C03 | 把确认建议当审批提交；把 APPROVED 当自动执行指令 |
+-| W01 查询 | 无任务的受控即席问题可到 A03；有快照/报告要求的分析到 O01 | 用即席接口绕过任务预算/场景规则生成跨领域正式分析报告 |
++### 5.3 统一工程规则与细则维护位置
++
++本表是约束索引；算法、状态和事务细则只在指定章节维护，其他章节使用规则号/章节引用，不各自新增例外。ER 编号是文档规则，不是模块。图中的控制点必须对应这些细则。
++
++| 规则 | 允许的工程路径 | 禁止内容 | 细则唯一维护位置 |
++|---|---|---|---|
++| ER01 任务与场景 | O01→ScenarioHandler→领域能力→DomainResult | O01 直接执行 B01/B02/A02 领域步骤；场景反向调度或隐藏参与者 | 5.2、7.1—7.2 |
++| ER02 计算唯一性 | B02 单向调用 B01 评价事实/假设 | B01 依赖 B02；重复逐日指标公式 | 5.1 中 B01/B02 契约 |
++| ER03 模型边界 | A01 只返回技术结果；业务调用方决定流程 | A01 决定业务降级、执行工具或审批 | 10.1—10.2 |
++| ER04 数据所有权 | 经所有者公开接口/授权只读投影访问 | 跨模块私有表写入、共享 ORM、把投影当源事实 | 8.1—8.4、9.1 |
++| ER05 只读工具 | A03 白名单与 G01 后端强制权限 | 模型工具注册 C03 写动作、任意 SQL/Cypher/shell/HTTP | 10.2 |
++| ER06 人工控制 | 明确确认、提交、独立审批、另行执行 | 确认即提交、批准即执行 | 13.1 |
++| ER07 即席查询 | W01→A03 的受控只读 QueryRun；正式分析→O01 | 无预算/无期限查询或包装成正式联合报告 | 6.4 |
++| ER08 本地事务 | 唯一发起协调者、共享一条 MySQL 短事务 | 内层独立 commit、新事务、跨网等待、服务循环 | 12.1、12.3 |
++| ER09 投递与外部恢复 | I01 有界重投；C03 根据执行状态决定发送或核对 | 通用工作项推断外部结果、租约失效即盲目重发 | 11.2—11.4、13.2—13.2.1 |
++| ER10 有界调用 | 运行作用域内预留/结算，同一次调用关联审计 | 子 Agent/重试重置预算；切入口获得无约束额度 | 正式任务 7.3；即席 6.4 |
+ 
+ ### 5.4 抽象的实际需求与克制范围
+ 
+@@ -240,9 +286,10 @@
+ | ActionAdapter（C03） | ERP 草稿和 CRM 工单的幂等、回执各异 | 前置核验、execute/queryReceipt；无证明的动作不注册启用 |
+ | RetrievalProvider（A03） | 知识/证据检索可由基础关系查询或未来向量/图查询实现 | 受控 QuerySpec→引用；不先建万能 IndexStore |
+ | 所有者 Repository 端口 | O01 保存计划，D03 固定 manifest，C02 保存批准版本 | 按真实聚合/查询定义；无 GenericRepository 或跨模块万能 CRUD |
+-| TaskBudgetHandle（O01） | S03、S04 并行调用不能各自消耗完整任务预算 | 预留/结算、截止时间与剩余额度；不是新模块或网络服务 |
++| TaskBudgetHandle（O01） | S03、S04 并行调用不能各自消耗完整任务预算 | 仅正式分析任务预留/结算；即席在 A03 应用用例内按 6.4 控制，不反向创建 O01 假任务 |
+ | 持久 WorkItemStore（I01） | API 重启不丢分析，C03 崩溃后能回执核对 | MySQL 领取/租约/恢复；无消息平台抽象大而全实现 |
+ | 本地事务范围 | 创建 task+work、提交 suggestion+approval 需原子落库 | 单 MySQL 短事务；无分布式事务框架 |
++| C01 ApprovalSubmitPort / C02 SuggestionRevisionReader | 前者供提交协调者调用 C02 命令；后者供 C02 决策核验建议版本 | 两个有真实使用方的窄端口，由组合根分别注入 C02 提交、C01 只读视图；不互相注入完整 Service，详见 12.3 |
+ 
+ 新增抽象必须同时交代所有者、现有用例、公开输入输出及测试边界。没有真实使用方的能力只记入待验证清单，不提前生成代码接口或独立组件。
+ 
+@@ -301,12 +348,33 @@
+ |---|---|---|
+ | `POST /api/v1/analysis-tasks`、`GET .../{id}`、`POST .../{id}/cancel` | W01→O01 | 创建持久任务返回 202/taskRef/Location；查询与取消都验证数据范围 |
+ | `GET /api/v1/reports/{id}` | W01→O01 | 返回有权限的已发布版本；下载/证据访问重新鉴权 |
+-| `POST /api/v1/queries` | W01→A03 | 受控即席查询及独立限额；不允许任意 SQL 或替代正式联合任务 |
++| `POST /api/v1/queries` | W01→A03 | 同步、有界、只读；先建立第 6.4 节 QueryRun 控制，不允许任意 SQL 或替代正式分析 |
+ | `POST /api/v1/suggestions`、`POST .../{id}/confirm`、`POST .../{id}/submit-approval` | W01→C01 | 每个动作来自明确用户操作；提交才产生 C02 PENDING |
+ | `POST /api/v1/approvals/{id}/decision`、`POST .../{id}/revoke` | W01→C02 | 核验审批人身份、独立性、版本与状态；批准不排执行任务 |
+ | `POST /api/v1/executions`、`GET .../{id}` | W01→C03 | 明确执行命令 + 当前有效审批；返回受理引用，不把 202 当源写入成功 |
+ 
+ 以上为资源级概要，不是本轮完整 OpenAPI。前端可先轮询状态，WebSocket/SSE 暂无必需证据。建议统一错误信封含 `code/message/details/traceId/retryable`，details 脱敏。401 表示未认证、403 表示未授权，资源存在性需掩蔽时使用统一 404；422 为参数错误，409 为版本/状态冲突。已受理异步任务的业务失败由任务/报告查询表达，不以最初 HTTP 成功码隐含业务成功。前端不得自行推断审批有效性或执行终态。
++
++### 6.4 W01→A03 即席查询的独立运行控制
++
++【建议】此入口仅处理短时受控查询，不创建 O01 task/plan/report，也不把用户问题送入无界 Agent Loop。W01 建立身份与命令上下文，调用 A03 的即席应用用例；**A03 是本次 QueryRun 的运行协调者**，G01 提供当前授权与获准策略，A01 仍只负责技术模型调用，G02 唯一记录调用成本事实、审计与 Trace。复杂/长时/需要场景判断的问题返回 `ANALYSIS_TASK_REQUIRED` 并提示用户显式提交 O01，不能暗中启动第二套正式分析。
++
++| 控制点 | 责任与最小设计 | 拒绝/失败行为 |
++|---|---|---|
++| 授权与上下文 | W01 验证身份；A03 再用 G01 生成 effectiveScope、字段/工具/模型数据边界与 queryPolicyVersion；QueryRunContext 属 A03，含 queryId、principal/tenant、scope、deadline、budgetRef、traceId | 参数不能扩大范围；检索预过滤、证据解析复核同正式链路；授权失败不调用数据/模型 |
++| 请求与周期额度 | A03 同时约束单 query 的模型/工具次数、tokens、费用、结果规模，以及同租户/用户的查询周期额度和并发数；预留后调用，结束结算 | 不允许反复新建 queryId 重置周期额度；同命令 key + 同指纹复用结果/处理中状态，不重复发起；异指纹拒绝 |
++| 持久化与并发 | 启用即席时才增加 A03 的 adhoc_query_run 与 adhoc_quota_window 运行记录；同 MySQL 短事务锁定额度窗口、登记预留并提交，结束条件结算 | 不是业务事实/报告账本或新预算平台；多 API 实例不能仅靠进程内计数；窗口按服务端时间划分 |
++| 超时/取消 | 服务端冻结 queryDeadline；下游 deadline 为本次剩余时间与各适配器超时的较小值；客户端只能缩短，所有重试也消耗原次数和时间 | 到期停止新调用；断连/进程崩溃不代表供应商未计费，未知消耗保持占额，关闭查询重试权限并待核对 |
++| 成本与审计 | A01 向 G02 记录带 queryId/callId 的技术 usage；A03 向 G02 记录工具、决策、拒绝/超时与结算关联；callId 去重，避免两次计费统计 | A03 额度余额只是控制状态，G02 为成本/审计事实；无法确认 usage 不能按零结算；必需运行/审计记录不可写时拒绝新查询；调用后 usage 不明保留占额和待核对关联 |
++| 响应与终点 | 返回受控结果/证据与 queryId、版本/范围限制，不生成 O01 正式 reportVersion 或 C01/C02/C03 记录 | 错误按 6.3 安全信封返回；不把即席文本包装成跨领域正式结论 |
++
++复用第 7.3 节的预留/结算规则、MySQL 条件更新方式以及已有 G01、A01、G02、A03 检索/工具契约；TaskBudgetHandle 仍归 O01 正式任务。A03 的控制在自身应用用例内实现，不抽出独立 BudgetService、通用额度框架或新增模块，也不调用 O01 为查询伪造任务。两种入口可复用经过验证的纯计算/计费值对象；没有两个真实实现前不额外抽象接口。
++
++未配置获准上限、超时或可信计费版本时，有费用的模型查询默认关闭（modelCalls=0），只开放已配置有界的确定性只读查询；不使用“无限”兜底。具体请求/周期金额、tokens、次数和期限属 V05，实际启用前必须冻结并验证。G01 策略为即席和正式入口明确分配额度，不能各自使用同一笔未扣减的剩余预算；若企业要求跨入口共享实时总额硬上限，在统一并发核算方案验证前不启用涉及该总额的收费入口，不声称两份独立计数已实现全局封顶。
++
++任何即席数据访问前先持久化运行控制及必需审计；收费模型调用还须先持久化费用预留，再调用供应商。若崩溃/超时导致结算未知，A03 通过其 queryId/callId 读取已有 G02/供应商可得记录，由同一应用用例核对；不能自动退款额度再执行同一请求。必要的核对可用既有 I01 工作项，不建立独立恢复平台；供应商无法核对时保守保留占额并交人工。来源事实/模型输出不复制为长期 Memory。
++
++启用验收至少证明：两个 API 实例竞争额度不超发；单次和周期任一额度耗尽都不调用模型；越权请求零数据泄露；多工具/重试共享原 queryDeadline；响应丢失仍保留未知消耗；相同 commandId 不二次执行；queryId/callId 可追到 G02 成本和审计；正式任务与即席不能通过切换入口扩大权限或重复使用已分配额度。此为后续启用测试计划，本轮不执行。
+ 
+ ## 07 单场景与跨领域任务执行
+ 
+@@ -360,6 +428,7 @@
+   O->>J: 记录处理完成
+   W->>O: 查询已发布报告
+   O-->>W: 报告 / 候选建议 / 完整性状态
++  Note over W,R: 首批最小闭环仅启用 S02 窄切片与 simulated 源数据，持久任务/Worker/快照/报告均真实运行
+   Note over U,O: 只读流程到报告结束；不自动创建建议、审批或外部动作
+ ```
+ 
+@@ -400,7 +469,8 @@
+ | B01 | metric_definition、metric_result | 唯一指标口径版本；结果绑定事实/假设输入和窗口；不由 O01 再存一份指标主表 |
+ | B02 | forecast_scenario、optimization_result | 假设/预测/约束及模型版本；候选指标只保存 B01 resultRef |
+ | A02 | understanding_result、annotation_revision | 标签、置信度/UNKNOWN、分类体系及人工修订；不是身份主数据 |
+-| O01 | analysis_task、task_plan、participant_run、analysis_report、budget_usage | task→plan→participant；report 引用领域结果与证据；拥有计划/报告/预算账本 |
++| O01 | analysis_task、task_plan、participant_run、analysis_report、budget_usage | task→plan→participant；report 引用领域结果与证据；拥有正式任务计划/报告/预算账本 |
++| A03（即席启用时） | adhoc_query_run、adhoc_quota_window | 仅 queryId、策略/截止时间、去重/预留/结算/并发控制和 G02 引用；不复制源事实或正式报告；详见 6.4 |
+ | C01 | suggestion_version、risk_alert | 建议内容、去重、确认/提交状态和来源报告版本；建议变更追加版本 |
+ | C02 | approval_record、approval_decision | 冻结动作、范围、指纹、有效期、审批人；与建议版本关联 |
+ | C03 | execution、execution_attempt、receipt_observation | 执行聚合、每次尝试/核对、源回执引用；唯一键与请求指纹分别保留 |
+@@ -470,7 +540,12 @@
+   VIEW -->|用户明确选择与确认| C1[C01 建议版本]
+   C1 -->|用户明确提交审批| C2[C02 独立人工审批]
+   C2 -->|另一次明确执行命令且复核通过| C3[C03 受控执行]
+-  C3 -->|仅启用的 ActionAdapter| EXT
++  C3 --> PRE[C03 经 ActionAdapter 读取来源前置状态]
++  PRE -->|窄只读查询| EXT
++  EXT -->|当前状态 / 版本 / 时点 / 覆盖| PRE
++  PRE --> SAFE{条件 PASS 且源原子保证成立}
++  SAFE -->|C03 锁外 execute / 原 key 与条件 token| EXT
++  SAFE -->|不满足或无法证明| STOP[不发送 / 有界只读重查或人工处理]
+   EXT -->|回执或核对结果，不当作完整源投影| C3
+   C3 -->|后续只读同步观察业务事实| D1
+   PV -.仅候选，按需异步构建.-> IDX[Milvus / Neo4j 派生索引]
+@@ -496,7 +571,7 @@
+ 
+ 【确定】所有业务 Agent、A02/A03 及 O01 联合报告解释都通过 A01；云端和本地模型接入 ModelProvider，模型名称不散布在路由与场景代码中。【建议】统一 ModelRequest 的输出 schema、超时、预算许可与 Trace；适配器映射模型特性、响应格式、工具请求、usage 和技术错误。不同提供方不一定支持同样的结构化输出、多模态或工具协议，能力声明不满足场景要求时返回不支持，不能静默换成语义不同的输出。
+ 
+-Agent/Workflow 作为场景内部的应用流程运行，正式持久任务在 Worker 内执行；小型同步即席查询也必须受限额、截止时间和权限约束。同一场景可包含多个角色，但不产生新的业务模块号、独立任务权威或专属模型/检索网关。O01 管参与者和任务级流程，不接管每个 Agent 的内部领域步骤。初期可用可测试的显式 Python Workflow，是否采用专门 Agent 框架留待第 11 步效果与复杂度评估。
++Agent/Workflow 作为场景内部的应用流程运行，正式持久任务在 Worker 内执行；同步即席查询运行控制以第 6.4 节为准。同一场景可包含多个角色，但不产生新的业务模块号、独立任务权威或专属模型/检索网关。O01 管参与者和任务级流程，不接管每个 Agent 的内部领域步骤。初期可用可测试的显式 Python Workflow，是否采用专门 Agent 框架留待第 11 步效果与复杂度评估。
+ 
+ ### 10.2 Function Calling、工具和权限
+ 
+@@ -516,34 +591,41 @@
+ | Memory | 按基线仅允许经确认、可撤销的偏好；事实查询仍来自 D02/D03/D04，任务状态/检查点归 O01，不能冒充长期 Memory | 当前不引入独立 Memory 服务或表；偏好持久化有明确需求后再定义归属、授权和保留期，不扩展为未经确认的经验事实库 |
+ | 检索资产 | 正文归既有受控资产，引用归 D04，检索协议和候选索引归 A03 | RAG 统一走 A03；知识更新和删除须能传播到派生索引 |
+ 
+-禁止各场景私自保存第二套长期“事实记忆”、重复建 embedding 网关、工具权限系统或模型重试框架。Prompt 中的 scope 提示不能替代 G01 的服务端权限。业务降级政策归场景/O01，A01 不因提示词、提供方默认值或低置信度擅自改变业务流程。
++资产和复用边界按本表及 ER03—ER05 执行；实现时不能通过 Prompt/Memory 改变这些职责。具体权限细则维护于第 14 节，不在模板中另设一套例外。
+ 
+ ### 10.4 AI 公共调用路径图
+ 
+ ```mermaid
+ sequenceDiagram
+   autonumber
+-  participant S as 场景 Workflow / O01 报告步骤
+-  participant B as O01 TaskBudgetHandle
++  participant S as 场景 / O01报告 / A03即席用例
++  participant B as 对应运行控制 / O01任务或A03查询
+   participant G as G01 当前授权
+   participant A as A01 模型网关
+   participant M as ModelProvider
+   participant T as A03 只读工具 / 检索
+   participant D as B01 / D04 / 受控数据查询
+   participant L as G02 观测评测
+-  S->>G: 校验用途、范围与模型数据边界
++  S->>G: 校验当前身份、用途、范围及模型数据边界，取得获准策略
++  alt 正式分析任务
++    S->>B: 使用 O01 taskId / TaskBudgetHandle
++  else W01 发起即席查询
++    S->>B: A03 建立 queryId / QueryRunContext，校验请求及周期额度
++  end
+   S->>B: 申请调用额度及 deadline
+   B-->>S: allowanceRef 或预算受限
+   break 未获预算许可或当前授权拒绝
+     S->>S: 由对应编排层决定终止或获准降级，不调用模型
+   end
+-  S->>A: ModelRequest / prompt与context版本引用
+-  A->>M: 适配调用，限制技术超时
+-  M-->>A: 内容、usage、toolRequests 或技术错误
+-  A-->>S: 标准化响应 / 技术状态
+-  A->>L: 脱敏技术轨迹与 usage
+-  S->>B: 结算或保守保留未知消耗
+-  alt 返回只读工具提案且当前流程允许
++  opt 当前操作确需模型，已获模型额度许可
++    S->>A: ModelRequest / prompt与context版本引用
++    A->>M: 适配调用，限制技术超时
++    M-->>A: 内容、usage、toolRequests 或技术错误
++    A-->>S: 标准化响应 / 技术状态
++    A->>L: 脱敏技术轨迹与 usage
++    S->>B: 结算或保守保留未知消耗
++  end
++  alt 当前操作是只读检索或存在获准工具提案
+     S->>G: 核验工具白名单、参数与当前范围
+     S->>B: 预留工具额度
+     break 工具权限或额度核验不通过
+@@ -557,13 +639,13 @@
+     S->>B: 结算工具消耗
+     Note over S,M: 如需后续模型调用，仍走同一路径并计入同一预算
+   else 技术失败或预算不足
+-    S->>S: 场景或联合编排决定重试、规则模式、部分或阻断
++    S->>S: 按调用来源处理：场景/联合业务策略，或即席有界错误
+   end
+   S->>L: 业务决策、版本链及评测关联引用
+   Note over A,T: A01 不执行函数；A03 工具不含 C03 写动作
+ ```
+ 
+-图仅定义公共路径和一次工具往返的控制点，不在本阶段冻结 Agent Loop、停止条件算法、完整 Harness/Context Engineering 或 LLMOps 平台。G02 记录延迟、tokens/费用、错误、人工采纳/修订和版本引用；不能以“模型调用成功”替代业务效果评测。
++图中的“对应运行控制”是两个既有模块内部职责的并列标注，不是新服务：正式任务按 7.3，即席查询按 6.4；即席不得使用另一份 TaskBudgetHandle。纯检索无需模型时仍经过授权、工具/期限/额度与 G02 审计路径，跳过 A01/ModelProvider，不能跳过控制。图仅定义公共路径和一次工具往返，不冻结第 11 步的完整 Agent/LLMOps 设计。
+ 
+ ## 11 异步 Worker、任务持久化与恢复
+ 
+@@ -574,7 +656,7 @@
+ | 状态体系 | 所有者与建议状态 | 含义 |
+ |---|---|---|
+ | 分析任务技术进度 | O01：QUEUED、RUNNING、SUCCEEDED、FAILED、CANCELLED | 任务是否完成处理；最终报告完整性另行表达 |
+-| 持久工作项投递 | I01：PENDING、LEASED、RETRY_WAIT、RECOVERY_REQUIRED、DONE、DEAD、CANCELLED | 领取/投递/恢复；不代替业务状态 |
++| 持久工作项投递 | I01：PENDING、LEASED、RETRY_WAIT、DONE、DEAD、CANCELLED | 仅通用领取/有界重投；不设所有任务必经的专用恢复态 |
+ | 建议/审批/外部执行 | C01/C02/C03 使用已确认状态，见第 13 节 | 不能因工作项 DEAD 推断源动作失败；UNKNOWN 必须保留 |
+ 
+ 分析流程正确发布 BLOCKED 报告可视为技术处理成功，但不表示业务分析完整；执行模块处理出明确 FAILED 时，对应投递可 DONE；回执核对耗尽自动预算可将工作项置 DEAD/人工处理，但执行仍 UNKNOWN。三者互不覆盖。
+@@ -585,7 +667,7 @@
+ 
+ 心跳、完成、重排和检查点使用 leaseToken/版本条件更新；以数据库 UTC 时间判定租约过期。旧 Worker 失去租约后不能覆盖新状态或发布旧计划报告。并发任务各自创建 Session，不能把同一个 AsyncSession 放进并发 gather；这是 SQLAlchemy 的明确使用边界。[SQLAlchemy 官方异步并发说明](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#using-asyncsession-with-concurrent-tasks)
+ 
+-租约只约束本地状态写入，不足以撤回旧 Worker 已发出的外部请求；系统是**至少一次工作项处理 + 业务幂等/核对**，不宣称外部 exactly-once。租约超时后按 workKind 进入恢复判断，外部执行工作项不得被通用队列自动重新发送。
++租约只约束本地状态写入，不足以撤回旧 Worker 已发出的外部请求；系统是**至少一次工作项处理 + 业务幂等/核对**，不宣称外部 exactly-once。租约过期按投递次数/期限重排或 DEAD，Worker 仍只分派同一所有者用例。是否复用结果、重跑只读步骤或核对外部回执，由所有者读取自己的业务状态决定，不由 I01 判断“源是否创建”。
+ 
+ ### 11.3 生命周期图
+ 
+@@ -596,12 +678,7 @@
+   RETRY_WAIT --> LEASED: 到期且预算允许
+   LEASED --> LEASED: 合法 token 心跳
+   LEASED --> DONE: 所有者处理结束 / 条件提交
+-  LEASED --> RETRY_WAIT: 已知安全可重试失败
+-  LEASED --> RECOVERY_REQUIRED: 租约失效或外部结果不确定
+-  RECOVERY_REQUIRED --> PENDING: 所有者确认可恢复的只读/本地步骤
+-  RECOVERY_REQUIRED --> RETRY_WAIT: C03 核对确认未写且同键重发安全
+-  RECOVERY_REQUIRED --> DONE: 已获终态或已原子交接后续核对任务
+-  RECOVERY_REQUIRED --> DEAD: 自动恢复耗尽 / 转人工
++  LEASED --> RETRY_WAIT: 可重进入口的失败或租约过期，尚有投递预算
+   LEASED --> DEAD: 不可重试或预算耗尽
+   PENDING --> CANCELLED: 尚未执行且授权取消
+   RETRY_WAIT --> CANCELLED: 尚未重试且授权取消
+@@ -611,7 +688,18 @@
+   CANCELLED --> [*]
+ ```
+ 
+-此状态机属于 I01。RECOVERY_REQUIRED→RETRY_WAIT 的 C03 分支必须满足第 13 节全部核对与复核条件，不能只凭租约过期或“未收到响应”触发重发。人工恢复创建有审计的新恢复工作项并关联原 workId，不任意把已结束记录改回运行。
++此状态机仅属于 I01，v0.1 的通用 RECOVERY_REQUIRED 已移除；C03 的 UNKNOWN 及回执恢复完整保留。图中“重进入口”不等于重发外部 HTTP。人工补处理创建有审计的新工作项并关联原 workId，不任意复活终态记录。
++
++| 工作项真实用例 | 租约过期/重复投递后由所有者执行 | 不强加的恢复逻辑 |
++|---|---|---|
++| O01 只读分析 | 读取 task/plan/snapshot 与检查点；复用已完成产物，未完成安全步骤才重跑；报告已发布则返回原 reportRef 并完成投递 | 不查外部动作回执、不要求 UNKNOWN 或专门通用恢复策略类 |
++| D01 同步/本地步骤 | 读取批次/可分析游标，按既有去重与事务提交标记续做 | 不套用“已创建外部单据”的判断 |
++| C03 执行 | 读取 execution：终态直接复用；READY 才进入首次发送前核验；SENDING/UNKNOWN 先经原键核对，只有已持久化的合法同键重发许可才可按 13.2.1 复核重发 | I01 不直接调 ActionAdapter，不因重投把 SENDING 当 READY |
++| C03 回执核对 | 根据原 key 查询；未决则持久交接下一次核对，或保留 UNKNOWN 转人工 | 不把工作项 DONE/DEAD 当作动作成功/失败 |
++
++C03 可在一个本地短事务中保存 UNKNOWN/核对计划、创建后续核对工作项并结束当前投递；若交接前崩溃，原工作项重入 C03 时仍据 SENDING/UNKNOWN 转核对。若通用投递预算已耗尽而原执行仍 SENDING/UNKNOWN，C03 的未决执行查询必须列出它及关联 DEAD 工作项，交由有权限人员核对，不能静默丢弃或由 I01 改成业务 FAILED。无需新增恢复服务、消息平台或所有任务都实现的 RecoveryStrategy 接口。
++
++对 O01/D01 等无外部写副作用的工作项，投递耗尽由 Worker 分派对应所有者的失败收尾用例：O01 已有报告则复用，否则记录本方 FAILED；D01 标记批次失败且不推进可分析游标。所有者按第 12.1 节将本方终结、必需审计与 I01 DEAD 同一短事务提交，I01 只写自己的记录；异常回滚后继续按原记录处理，不允许形成无限 RUNNING。该收尾只为已注册用例提供明确失败通知，不引入通用恢复框架。
+ 
+ ### 11.4 重试、取消与最小事件机制
+ 
+@@ -632,7 +720,7 @@
+ | O01 创建分析任务 | task/初始 plan + I01 work_item + 必需审计 | Worker 后续取数/模型；事务失败则整体不受理 |
+ | D01/D02 批次可用提交 | 对应投影修订、批次处理标记、可分析游标推进 | 读源在事务外；大批分段后以提交标记暴露可用版本 |
+ | D03 冻结快照 | 快照及固定 manifest、质量结论引用 | 输入必须已提交；不长期锁定源/投影；失败不发布半个 manifest |
+-| C01 用户提交审批 | 核验建议版本；C02 PENDING；C01 SUBMITTED；必需审计 | 由发起用例协调公开服务，共享当前本地事务，不自动执行 |
++| C01 用户提交审批 | C01 SubmitForApprovalUseCase 唯一协调；C02 写 PENDING；C01 写 SUBMITTED；G02 必需审计 | 共享同一 MySQL 事务，唯一提交/回滚责任及无环装配见 12.3 |
+ | C02 决策 | 决策、批准范围/指纹/有效期、审计 | 不在此事务中调用外部系统或自动创建执行任务 |
+ | C03 请求执行 | 验证批准和状态后保存执行意图、稳定 key、I01 work_item、审计 | 返回 202，Worker 在发送前再复核；不长持审批锁等 HTTP |
+ | C03 发送/回执 | 发送前记录 SENDING/attempt；回执后按 key/version 更新聚合和引用 | 实际 HTTP 在两段短事务之间；崩溃/超时走 UNKNOWN 核对 |
+@@ -640,13 +728,37 @@
+ 
+ 【建议】由发起用例持有一段本地事务范围；跨模块调用仍走公开服务，各模块仅通过自己的 Repository 写表，不能让每层 Service 各自 commit。组合根注入同一事务上下文，**仅用于顺序的同一命令**；并发分支各用独立 Session/事务。提交失败可整体回滚，不能用“大家共用数据库”作为直接跨表写入的理由。
+ 
+-C01→C02 提交命令与 C02→C01 只读版本核验通过窄协议注入，避免双向构造整个服务对象或递归业务调用。无需引入独立 CQRS 平台或跨服务事务框架。
++C01/C02 的具体协调、端口装配及故障语义统一在第 12.3 节定义；其他跨模块事务遵守 ER08，不复制另一套提交规则。
+ 
+ ### 12.2 一致性等级与不确定窗口
+ 
+ 任务/审批/执行聚合及其必需投递记录以 MySQL 本地事务和唯一约束保证局部一致；源系统→分析投影、投影→候选索引属于带覆盖/延迟标记的最终一致。跨系统 `asOf`、数据库提交与外部写入没有统一原子事务。必须显式记录已知、过期、缺失和 UNKNOWN，而非以技术重试掩盖。
+ 
+-发送前授权复核与外部真正接受之间仍有竞态窗口。支持源版本/条件写入时使用其前置条件；不支持时需冻结业务可接受的时效与撤销边界，无法满足风险要求的动作不启用。数据库租约、指纹和审批锁都不能自动解决该外部竞态。
++发送前授权复核与外部真正接受之间仍有竞态窗口；来源并发变化的条件读取/原子执行门槛统一见第 13.2.1 节，批准撤销与在途请求的业务边界仍属 V07。数据库租约、指纹和审批锁不构成跨系统原子性证明。
++
++### 12.3 C01/C02 提交审批的单一事务协调
++
++【建议】**C01 的 SubmitForApprovalUseCase 是唯一事务协调者**，位于 collaboration/suggestions/application。W01 明确提交命令后只调用该用例；API 路由、bootstrap、C02 提交服务都不另行提交。I01/MySQL 适配负责提供同一连接/AsyncSession 的本地事务范围，协调者控制其开始、commit 和异常 rollback；不把 ORM Session 暴露给领域对象。
++
++| 参与者 | 同一事务内的责任 | 不得承担的责任 |
++|---|---|---|
++| C01 SubmitForApprovalUseCase | 开事务；通过自己的 Repository 锁定/校验建议版本及 CONFIRMED 状态、当前权限与命令去重；调用 C02 窄命令；保存本方 SUBMITTED 与 approvalRef；最终唯一 commit | 不写 C02 表；不调用外部接口、不并行分派、不提前返回成功 |
++| C02 ApprovalSubmission 应用命令 | 接收受信任的冻结建议/动作/范围/指纹/有效期及当前 txScope；仅经自己的 Repository 插入 PENDING 并返回未提交的 approvalRef | 不回调 C01 Submit 服务；不新开事务、不 commit、不返回对外已受理结论 |
++| G02 必需审计写入 | 使用同一 txScope、自己的 Repository 追加提交事件 | 不单独提交，不把完整建议复制成审计账本 |
++| MySQL 事务适配 | 所有参与 Repository 绑定同一 Session/连接；执行协调者触发的一次提交/回滚 | 不能因 Repository/Service 嵌套自动 commit，不能开启 REQUIRES_NEW 或以多连接“各自成功”冒充原子性 |
++
++顺序为：锁定建议及命令键→校验获准版本/权限/状态→形成冻结提交信封→C02 插入 PENDING→C01 写 SUBMITTED/关联→G02 追加必需审计→协调者 commit→W01 返回已提交结果。C02/G02 只可 flush 供本事务校验/取 ID，不能 commit。任一步异常、唯一键冲突处理失败、审计不可写或 commit 明确失败均由协调者回滚全部写入；C01 保持原状态、无孤立 PENDING，不返回成功。若提交已完成而响应丢失，重试同 commandId/指纹在 C01 命令去重记录中返回原 approvalRef；提交结果不明先查询同命令结果，不创建第二份批准申请。
++
++无环装配分成四个可独立构造的用例/视图，而不是 C01Service↔C02Service 互相注入：
++
++| 使用者 | 自有窄端口与注入对象 | 依赖终点 |
++|---|---|---|
++| C01 SubmitForApprovalUseCase | C01 所需的 ApprovalSubmitPort，由组合根绑定 C02 ApprovalSubmission 命令 | C02 提交命令只依赖本方 Repository/策略，不回调 C01；可信建议校验已由持锁协调者完成 |
++| C02 ApprovalDecisionUseCase | C02 所需的 SuggestionRevisionReader，由组合根绑定 C01 独立只读版本视图 | 只读视图仅依赖 C01 查询 Repository，不依赖 C01 提交用例或 C02；决策仍属于 C02 |
++
++端口由消费方按实际需求定义，使用结构化只读信封/公共 Ref，组合根按结构契约注入，不要求 C01/C02 领域或应用代码交叉导入具体服务实现。C02 提交命令为内部受信调用，W01 不直接暴露绕过 C01 协调的创建接口。C02 审批决策在其自身短事务内核验当前建议版本与批准范围；需要锁定建议时经该窄只读端口取得同一事务的受控读/锁，锁顺序统一为建议→审批，不写 C01。两个用例对象的依赖均为单向无环，不新增模块或通用事务编排框架。
++
++后续验收必须覆盖：在 C02 写入后、C01 状态写入后、审计写入时和 commit 前分别故障注入，均无部分提交；提交成功响应丢失后同命令重试返回原申请；两个并发提交只得到同一个有效申请；任意内层独立 commit/额外 Session 的实现均视为契约失败。具体数据库测试待开发时执行。
+ 
+ ## 13 建议、审批、受控执行与失败恢复
+ 
+@@ -669,11 +781,32 @@
+ | requestFingerprint | C02/C03 对冻结 actionType/schema/payload/scope 的规范化摘要 | 不替代审批原内容；同 key 指纹不同视为冲突 |
+ | sourceRecordId / receiptRef | ActionAdapter 核对源动作与请求的真实关系 | “请求已接收”不等于草稿/工单已创建，更不等于业务最终完成 |
+ 
+-ActionAdapter 至少声明 actionType/version、权限要求、前置条件核验能力、execute(executionKey)、queryReceipt(executionKey)，以及源幂等范围/期限、查询时延、NOT_FOUND 的权威性。默认不假设任何企业 API 已有这些能力。仅源接收号或网关 200 而无可验证结果时，不得据此进入业务 SUCCEEDED。
++ActionAdapter 至少声明 actionType/version、权限要求、readPreconditions、execute(executionKey, approvedPayload, conditionToken)、queryReceipt(executionKey)，以及源幂等范围/期限、查询时延、NOT_FOUND 的权威性；conditionToken 仅在来源证明支持时使用，具体门槛见 13.2.1。默认不假设任何企业 API 已有这些能力。仅源接收号或网关 200 而无可验证结果时，不得据此进入业务 SUCCEEDED。
+ 
+ 【确定】超时、断网、进程崩溃、租约失效而无法证明未发送时转 UNKNOWN；先用**原 executionKey** 查询源回执。只有权威查询确认未创建、适配器证明同 key 重发安全、批准/当前权限/业务前置条件仍有效、预算允许，才可同键重试。NOT_FOUND 若只是索引延迟、查错范围或暂不可见，不构成重发依据。核对仍不明则继续 UNKNOWN 并转人工，不自动换 key 创建第二单。
+ 
+ 回执核对可由最小权限的系统恢复身份继续进行，以确定已发生事实；任何新的写入重试仍须当前合法授权及有效审批，不能凭历史用户 Token 继续写。撤销、超时、内容变更使新写入不再合法时禁止重发，但已发请求仍须核对，不得伪造失败或回滚。
++
++### 13.2.1 C03 发送前的来源状态读取与原子条件
++
++【建议】报告/建议中的 D03 快照用于解释获批依据，不能证明发送时来源状态仍满足动作条件。C03 dispatch 必须先读本方执行状态：终态复用；SENDING/UNKNOWN 先按 13.2 核对原 key；仅 READY 或经核对明确允许重发的原执行进入下述来源检查。此读取是 C03 动作适配器对具体动作的窄前置查询，不替代 D01 同步或建立第二套分析投影。
++
++| 步骤/结果 | 责任与契约 | C03 处理与证据 |
++|---|---|---|
++| 当前授权及批准核验 | C03 经 G01、C01/C02 公开接口验证动作/指纹/有效期、建议版本和范围 | 失败且明确未发送则 FAILED/原因；不调用 execute |
++| readPreconditions | ActionAdapter 用受控只读接口读取本动作必需来源事实，返回 sourceObjectRefs、currentState、sourceVersion/conditionToken、observedAt、coverage/缺失和技术错误 | C03 按已批准动作规则判断，不让 LLM 决策；每次尝试留 observationRef/规则版本，敏感值最小保存 |
++| PASS（判断结果，不是新执行状态） | 事实齐备/可信/足够新，且在批准范围内；源能原子保证相关条件 | 才可记录 SENDING 并 execute；只读核验与写请求均在数据库锁外 |
++| BLOCKED | 来源对象关闭/失效、状态不符、批准锁定版本不匹配、业务条件不成立 | 明确未发送时 FAILED，并提示重新分析/建议/审批；禁止自动修改获批 payload 以“适配”新状态 |
++| UNVERIFIABLE / 技术读取失败 | 无法读取必要状态、覆盖不足、版本不可核验或无安全原子机制 | 明确未调用 execute 时不标 UNKNOWN；可在原期限/预算内保持 READY 重试只读核验，超限/不支持则 FAILED/未发送原因，保留人工流程 |
++| execute 的条件冲突 | 源在真正创建草稿/工单时原子比较版本/条件 | 若源明确保证未应用，记录 FAILED/CONDITION_CONFLICT，不盲目改 token 重发；若不能证明是否应用，转 UNKNOWN 并核对 |
++
++采购草稿的具体前置事实可能包括获批供应商/SKU/采购对象的有效状态、获批版本及允许数量等；CRM 内部工单可能包括目标订单/客户关联、工单对象和归属权限。字段与阈值由每个动作合同确认（V06），此处不新增采购策略或 CRM 功能，也不把这些例子当企业接口已提供的字段。
++
++**先读后写本身不能消除并发变化。**有 ETag/版本号/原子条件创建能力时，ActionAdapter 在 execute 中携带原 observation 的 conditionToken，由源在写入点原子判定；多个相关对象须证明关键不变量均受条件覆盖，单个对象的 ETag 不自动保护整个动作。没有版本条件写入时，仅当源另有经过验证的等效原子校验/不变量保证才允许启用；只有“刚刚读过”“数据足够新”或本地租约/锁均不构成安全执行证明，无法证明则禁用该自动动作并保留只读建议/人工操作。
++
++读取后、发送前再检查本地有效批准与 leaseToken，并记录 SENDING/attempt；数据库事务立即提交，再执行 HTTP。sourceVersion/observation 是本次尝试的前置条件证据，不替换 executionKey 或修改冻结 requestFingerprint；若批准本身锁定某源版本，新版本必须符合批准要求，不能通过换 conditionToken 绕过。任何重发都重新读取和判断条件，但先执行 13.2 的原键回执核对，不以“当前来源不满足”倒推出过去一定未写。
++
++后续验收至少覆盖：快照旧而当前来源已变化、读取失败/过期、两个执行并发改变源状态、读取后状态变化导致原子条件拒绝、多个对象条件覆盖不足、源无安全机制拒绝启用，以及条件冲突时响应丢失转 UNKNOWN。真实来源不支持这些证明时，M3 对应动作保持关闭，不能仅凭 Mock 条件写测试宣称安全。
+ 
+ ### 13.3 技术调用链
+ 
+@@ -686,6 +819,7 @@
+   participant C1 as C01 建议服务
+   participant C2 as C02 审批服务
+   participant C3 as C03 执行服务
++  participant G2 as G02 必需审计
+   participant J as I01 / MySQL
+   participant R as Worker
+   participant X as ActionAdapter / 外部系统
+@@ -694,11 +828,37 @@
+   C1-->>W: CONFIRMED，未提交审批
+   U->>W: 明确点击“提交审批”
+   W->>C1: submit_for_approval(建议版本, commandId)
+-  C1->>C2: submit_approval(冻结动作、scope、fingerprint)
+-  C2-->>C1: PENDING / approvalRef
+-  C1->>J: 同一短事务提交建议状态、审批和审计
++  C1->>J: 协调者开始唯一 txScope，锁定本方建议/命令键
++  C1->>C1: 校验当前权限、CONFIRMED版本与命令去重
++  break 无权或状态/版本冲突
++    C1->>J: rollback，未调用 C02
++    C1-->>W: 拒绝提交
++  end
++  break 同一命令已成功提交
++    C1->>J: 结束只读检查，不新增写入
++    C1-->>W: 返回原 approvalRef
++  end
++  C1->>C2: 经 ApprovalSubmitPort 提交冻结信封与同一 txScope
++  C2->>J: 仅 C02 Repository 写 PENDING，不 commit
++  C2-->>C1: 未提交 approvalRef，不回调 C01
++  C1->>J: 仅 C01 Repository 写 SUBMITTED / approvalRef
++  C1->>G2: 同 txScope 追加必需审计
++  G2->>J: 仅 G02 Repository 写审计，不 commit
++  alt 所有本地步骤及提交成功
++    C1->>J: 协调者唯一 commit
++    C1-->>W: 已提交审批 / 原 approvalRef
++  else 任一步明确失败，包括提交失败
++    C1->>J: 协调者 rollback 全部写入
++    break 本次提交结束
++      C1-->>W: 返回安全错误，无孤立申请
++    end
++  else 提交结果不确定
++    break 先查询同 commandId，不新建申请
++      C1-->>W: 返回待核对结果，重试查询原命令
++    end
++  end
+   H->>W: 查看冻结内容并批准
+-  W->>C2: decide(APPROVED, 当前授权审批人)
++  W->>C2: decide(APPROVED)，经独立只读端口核验建议版本
+   C2->>J: 保存批准版本、有效期和审计
+   C2-->>W: APPROVED，不自动执行
+   U->>W: 明确点击“执行已批准动作”
+@@ -712,15 +872,33 @@
+   C3-->>W: 202 / executionRef
+   R->>J: 领取执行项并提交租约
+   R->>C3: dispatch(executionRef, leaseToken)
+-  C3->>C3: 再核验当前权限、批准、指纹和前置条件
+-  break 发送前复核不通过且尚未发送
+-    C3->>J: 记录明确未发送的失败原因，不调用外部写入
+-  end
+-  C3->>J: 短事务记录 SENDING / attempt 后提交
+-  C3->>X: 锁外发送，携带原 executionKey / fingerprint
++  C3->>C3: 读取执行状态及同键重发许可
++  break 已是 SUCCEEDED / FAILED
++    C3-->>R: 返回既有结果，不重新发送
++  end
++  break SENDING/UNKNOWN 且无有效原键核对重发许可
++    C3->>X: queryReceipt(原 executionKey)，按13.2核对
++    X-->>C3: 源事实或仍未知
++    C3->>J: 保存核对结果/后续核对工作项，本次不直接发送
++  end
++  C3->>C3: 仅 READY 或已核对获准的原键重发，核验权限、批准与指纹
++  break 本地复核不通过且明确未发送
++    C3->>J: FAILED / 未发送原因，禁止读取或写入越权来源
++  end
++  C3->>X: readPreconditions(获批动作/来源对象)
++  X-->>C3: currentState / sourceVersion或conditionToken / observedAt / coverage
++  C3->>C3: 按获批规则判断 PASS / BLOCKED / UNVERIFIABLE
++  break 非 PASS 或无安全原子执行保证，明确尚未发送
++    C3->>J: 有界只读重查或 FAILED/未发送原因，禁止 execute
++  end
++  C3->>J: 再验批准及lease，短事务记 SENDING / observationRef 后提交
++  C3->>X: 锁外 execute(原 key / fingerprint / conditionToken)，源原子校验
+   alt 获得可验证源结果
+     X-->>C3: 源 recordId / receipt
+     C3->>J: 条件记录 SUCCEEDED 或明确 FAILED
++  else 来源条件冲突且权威证明未应用
++    X-->>C3: CONDITION_CONFLICT / not applied
++    C3->>J: FAILED，保留原 key/指纹，不自动修改请求
+   else 结果不确定 / 响应丢失
+     C3->>J: UNKNOWN 或恢复标记，持久化核对任务
+     R->>C3: reconcile_receipt(原 executionKey)
+@@ -730,8 +908,8 @@
+       C3->>J: 核验内容后保存 SUCCEEDED / 源引用
+     else 权威未创建且全部重发条件满足
+       C3->>C2: 重发前再次验证批准与当前合法性
+-      C3->>J: 记录同键重试许可与工作项
+-      Note over C3,X: 再发送仍走原 dispatch 路径，禁止更换 key 或 payload
++      C3->>J: 保存同键重试计划与工作项
++      Note over C3,X: 重发仍经原 dispatch 的 readPreconditions/原子条件路径，禁止更换 key 或 payload
+     else 仍未知或不允许重发
+       C3->>J: 未知保留 UNKNOWN 转人工；已证实未创建且禁止重发则 FAILED
+     end
+@@ -741,7 +919,7 @@
+   Note over W,X: 不持数据库事务等待 HTTP；草稿/工单成功不等于后续业务完成
+ ```
+ 
+-若 Worker 在 SENDING 提交后崩溃而来不及写 UNKNOWN，恢复服务据 SENDING + 租约过期先进入核对路径，不能直接重发。图中的 C03 自检包含 G01、C01/C02 公开核验，未省略安全要求。审批人与发起人独立性的具体岗位/代理规则待业务冻结，但不得由同一 Agent 替代独立人工审批。
++图中 C01 的提交协调、回滚及无环装配以 12.3 为准；ActionAdapter 的 readPreconditions/execute/queryReceipt 是同一已批准动作的技术调用，不是新模块。明确的发送状态门禁维护于 13.2.1：SENDING/UNKNOWN 不进入新发送链，只走回执核对；I01 重投不改变该门禁。图中的 C03 自检包含 G01、C01/C02 公开核验。审批人与发起人独立性具体规则仍属 V07。
+ 
+ ## 14 安全与权限概要
+ 
+@@ -775,6 +953,8 @@
+ | AI/业务评测 | 固定样本/金标准、VOC 分类与 UNKNOWN、检索证据命中、幻觉/口径/人工采纳、延迟和单位任务成本 | 分语言/场景/模型版本，不能仅看总体平均分或模型自评分 |
+ 
+ 额外必须覆盖：SINGLE 与 JOINT 同一契约；三个以上参与者在默认并行度 2 下分波不丢任务；maxReplans=1 时超限行为；O01 不直接调用领域步骤；A01 技术失败由场景/O01 决策；建议确认不创建 PENDING，审批批准不创建外部写入；同 executionKey 不同 payload 被拒绝；UNKNOWN 恢复不会换 key。
++
++本轮增补的专项验收以对应章节为准：首批基座 MC01—MC12（4.3）、即席控制（6.4）、普通任务与 C03 重入分流（11.3）、跨模块原子提交（12.3）、来源条件/竞态（13.2.1）。测试计划引用这些规则，不另维护含义不同的第二份用例要求。
+ 
+ ### 15.2 观测与评测基础
+ 
+@@ -838,7 +1018,7 @@
+ 
+ 公共契约变更先给出兼容影响和消费者清单，通过审查后再并行开发调用方。迁移链、组合根、共享引用结构和公开 API 由指定集成人协调；不同任务不能同时各改一份统一接口或自行创建“暂用公共库”。提交交接包括变更文件、运行/测试命令、真实结果、配置项/密钥引用、迁移顺序和遗留项，不提交真实凭据或未经许可的企业样本。
+ 
+-接口文档采用可版本控制的 schema/样例，HTTP OpenAPI 由未来代码生成并与文档校验；本轮只定义其归属与语义，不伪造已存在的 OpenAPI、SDK 或测试通过记录。依赖检查至少限制 O01 对场景实现/领域能力的越界调用、场景对私有适配器导入、B01→B02 反向依赖、A01→C01/C02/C03 和工具写入能力。
++接口文档采用可版本控制的 schema/样例，HTTP OpenAPI 由未来代码生成并与文档校验；本轮只定义其归属与语义。依赖检查和交接验收统一引用第 5.3 节 ER01—ER10，以及第 4.1 节目录创建时点；禁止各开发任务另抄一份约束再自行添加例外。
+ 
+ ## 19 尚未冻结的决策与验证清单
+ 
+@@ -850,14 +1030,14 @@
+ | V02 | ERP/OMS/WMS/TMS/CRM/财务真实接口、授权与样本 | 系统责任人+数据负责人：接口合同、测试环境、分页/增量/删除/限流及覆盖 | M0；Mock 通过不得替代真实连通 |
+ | V03 | 统一 SKU/单位/状态、权威来源、指标口径与领域窗口 | 业务+数据负责人：映射审核、成熟队列/贡献等口径样例 | 相关场景开发与验收前冻结 |
+ | V04 | required/optional 参与者及领域/联合降级矩阵 | 各场景负责人：COMPLETE/PARTIAL/RULES_ONLY/BLOCKED 判定实例 | 禁止未冻结策略隐式跳过必要领域 |
+-| V05 | 实际容量、预算、租约/超时/重试和保留配置 | 技术+运维+财务：峰值、连接池/源配额、成本、故障恢复测量 | 默认并行 2、重规划 1 保留；其他数值通过验证冻结 |
+-| V06 | 两类动作的源幂等、key 期限、权威回执/NOT_FOUND 与条件写入 | ERP/CRM 责任人：响应丢失、迟到、重复请求及查询演练 | M3 动作逐一启用门槛；无可靠保证则保留人工流程 |
++| V05 | 正式任务和即席请求/周期额度、入口分配/共享总额要求、期限/并发/重试、租约与容量 | 技术+运维+财务：多 API 额度竞争、未知用量、连接池/配额、故障恢复测量 | 并行 2、重规划 1 保留；即席付费前冻结 6.4 配置；跨入口总额未验证则不启用相关收费入口 |
++| V06 | 两类动作的 readPreconditions 字段/覆盖、源原子条件及多对象不变量、幂等 key 期限和权威回执 | ERP/CRM 责任人：13.2.1 的来源竞态、条件拒绝、响应丢失/迟到与 NOT_FOUND 演练 | M3 逐动作启用；仅先读后写/Mock 成功不够，无安全保证则保留人工流程 |
+ | V07 | 批准有效期、独立审批人/代理规则、撤销与发送竞态 | 业务+安全：岗位矩阵、允许的线性化边界和失败处置流程 | C02/C03 实际启用前冻结；不承诺撤回在途请求 |
+ | V08 | 身份发行方、JWT/浏览器方案、禁用/撤销时效、字段权限 | 安全+前端：认证协议与威胁评审、范围测试 | 上线认证与执行前冻结；不假设已有 SSO |
+ | V09 | 数据地域、供应商条款、个人信息/快照/审计/备份的保留删除 | 业务数据责任人+法务+安全：适用性与合同、删除验证 | 相应数据用于云模型/生产前确认 |
+ | V10 | Milvus 引入收益与版本/部署依赖 | 检索负责人+运维：分语言召回、隔离、过滤、删除、容量与成本对比 | A03 基础方案不能满足且收益成立才部署 |
+ | V11 | Neo4j 引入价值与版本/许可 | 数据/业务+运维：真实多跳查询、MySQL 对照、权限和成本 | 确有关系查询收益才部署；无收益不建组件 |
+-| V12 | 前端门户/框架、依赖锁工具、类型检查器、CI 平台与运行方式 | 工程负责人：企业现状、维护能力与可复现构建方案 | 工程初始化前选定必要项；不影响逻辑契约 |
++| V12 | 首批 S02 工程夹具/期望、运行/迁移入口、目录时点、依赖锁与 CI；前端门户另按需选择 | 工程负责人：4.1—4.4 的交付定义、模拟/真实证据分级与可复现构建 | 工程初始化前冻结必要项；MC 通过仅代表工程闭环，不替代 M0/M2/M3 |
+ | V13 | 模型提供方/本地算力、输出能力、质量/成本阈值 | AI+安全+运维：评测集、供应商配额/地域、GPU 实测 | 每个提供方/业务用途独立验证后开放 |
+ | V14 | 完整 Agent Harness、Context、Loop、Skills/Memory 策略与 LLMOps | 第 11 步设计负责人：真实工作流、失败样本和运营需求 | 本轮只冻结公共边界；不在此提前落地完整平台 |
+ | V15 | 备份恢复、审计完整性、任务长期积压与人工恢复责任 | 运维+模块负责人：恢复演练、保留周期、值守/核对流程 | 生产前冻结 RPO/RTO 与故障处置，不引用示例代替实测 |
+@@ -877,6 +1057,7 @@
+ | 需求第 12—15 节；架构第 10—12 节 | 可复用扩展、验收、完整范围分期 | 第 02、15—20 节 |
+ | 可研第 05、08—10、13—15 节 | 技术/组织可行性、验证和上线条件 | 第 10—19 节，技术选型与验证清单 |
+ | 可研第 11—12 节 | 成本/收益为假设，需要真实数据校准 | 第 01、07、17、19 节；不把演算直接变为容量或采购决策 |
++| 本次 H01—H07 审查意见 | 最小交付、事务、即席、来源核验、任务精简、统一规则、分批目录 | H01/H07→4.1—4.4；H02→12.3/图06；H03→6.4/图04；H04→13.2.1/图03/图06；H05→11.3/图05；H06→5.3 与细则引用 |
+ 
+ ### 20.2 22 项需求的工程归属核对
+ 
+@@ -907,9 +1088,11 @@
+ |---|---|---|
+ | 01 | 01-engineering-dependencies | 工程模块与依赖关系 |
+ | 02 | 02-single-joint-analysis | 单场景/联合任务 |
+-| 03 | 03-data-to-snapshot | 数据同步到快照及报告/写入边界 |
+-| 04 | 04-ai-tools-common-path | AI 模型/只读工具公共路径 |
+-| 05 | 05-work-item-lifecycle | Worker 投递状态与恢复 |
+-| 06 | 06-approval-execution-recovery | 人工提交、审批、受控执行和 UNKNOWN |
+-
+-本轮校验限文档内容、基线指纹、Mermaid 渲染、SVG/XML、离线 HTML 与阅读布局，不等于代码测试、接口联调、容量验证或 AI 效果验证。`design/validation-report.json` 记录实际校验结果；`design/file-manifest.json` 列出新增文件及用途。基线文档、旧图、原有构建工具均不修改。完成后等待独立审查，不自动推进工程初始化或第 11 步详细设计。
++| 03 | 03-data-to-snapshot | 数据同步到快照、来源条件核验及受控写入边界 |
++| 04 | 04-ai-tools-common-path | 正式任务/即席查询的有界模型与只读工具路径 |
++| 05 | 05-work-item-lifecycle | 精简后的通用工作项投递状态；业务恢复归所有者 |
++| 06 | 06-approval-execution-recovery | 单一审批事务、来源状态/原子条件、原键 UNKNOWN 核对 |
++
++本轮修订对照与剩余问题见[H01—H07 修订说明](智慧中台AI应用项目_概要设计审查修订说明_H01-H07.md)；[最小代码基座交付与验收清单](智慧中台AI应用项目_最小代码基座交付与验收清单.md)由本文 4.1—4.4 派生，唯一维护来源仍为本文。清单不表示本轮创建或验收过代码。
++
++本轮校验限文档内容、基线指纹、Mermaid 渲染、SVG/XML、离线 HTML 与阅读布局，不等于代码测试、接口联调、容量验证或 AI 效果验证。`design/validation-report.json` 记录当前 v0.2 实际校验结果；`design/file-manifest.json` 记录本次新增/修改文件，v0.1 正文快照及差异证据保存在 `design/review-h01-h07/`。三份设计基线及其既有 architecture/feasibility 图示、原有构建工具均不修改；本轮只同步概要设计及其派生文件。完成后等待独立复核，不自动推进代码开发或第 11 步详细设计。

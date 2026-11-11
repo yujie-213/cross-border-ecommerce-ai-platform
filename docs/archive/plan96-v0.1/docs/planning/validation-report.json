@@ -1,0 +1,138 @@
+{
+  "document": "分阶段实施计划与AI协作协议 v0.1",
+  "date": "2026-11-11",
+  "status": "pass",
+  "tasks": 96,
+  "byStage": {
+    "M0": 10,
+    "M1": 36,
+    "M2": 16,
+    "M3": 12,
+    "M4": 22
+  },
+  "byStatus": {
+    "REVIEW": 1,
+    "TODO": 95
+  },
+  "taskLedgerSha256": "b915b2d381b35f4a4387f4f6687841216dcd42adbd2252bba510416d452222a1",
+  "checks": [
+    {
+      "check": "所需管理文件存在",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "五份授权基线指纹未变",
+      "status": "pass",
+      "details": [
+        {
+          "path": "智慧中台AI应用项目_需求文档草案.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_总体逻辑架构与流程设计.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_可行性分析报告.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_概要开发设计文档.md",
+          "unchanged": true
+        },
+        {
+          "path": "智慧中台AI应用项目_AI模块详细开发设计文档.md",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "check": "任务ID唯一且阶段一致",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "每任务定义/范围/验收/测试/风险/依据完整",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "验收criterionId稳定唯一",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "依赖存在且无环",
+      "status": "pass",
+      "details": {
+        "missing": [],
+        "cycles": []
+      }
+    },
+    {
+      "check": "任务状态和优先级只用协议枚举",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "状态事实与ACCEPTED基本证据约束",
+      "status": "pass",
+      "details": []
+    },
+    {
+      "check": "基线引用仅使用五份授权别名",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "状态/依赖视图由唯一TASKS生成且无漂移",
+      "status": "pass",
+      "details": []
+    },
+    {
+      "check": "A/B任务分组及最终MC验收责任存在",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "M0—M4及MC01—MC12逐项映射",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "S01—S10和22候选需求覆盖",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "Git启动无ACCEPTED前置死锁",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "S01设计准备与MVP实际门槛分开",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "ERP与CRM逐动作门槛独立，不互相挂靠",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "check": "本轮文档链接可定位且不关联未授权项目文件",
+      "status": "pass",
+      "details": {
+        "broken": [],
+        "unauthorized": []
+      }
+    }
+  ],
+  "gitRepositoryPresent": false,
+  "notices": [
+    "当前不是Git仓库；工作区草案未提交，无开发验收SHA，本轮不建仓"
+  ],
+  "scope": "规划文档/任务字段/DAG/源指纹/生成漂移与基本证据约束；未运行业务、MC、真实接口、模型、压测或部署",
+  "independentReview": "pending"
+}

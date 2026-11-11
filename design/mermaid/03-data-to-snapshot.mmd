@@ -1,0 +1,34 @@
+flowchart TB
+  EXT[外部 ERP / OMS / WMS / TMS / CRM / 平台 / 财务]
+  EXT -->|只读 API 或受控导入，实际能力待验证| D1[D01 批次 / 游标 / 覆盖声明]
+  D1 --> D2[D02 身份映射 / 单位状态标准化]
+  D2 --> PV[(MySQL 不可变投影修订及来源引用)]
+  D2 --> ERR[映射歧义 / 缺失 / 隔离记录]
+  PV --> D3[D03 质量检查 / 固定输入 manifest]
+  D1 -->|可分析覆盖与新鲜度| D3
+  ERR -->|缺口影响质量| D3
+  O[O01 参与者声明 / scope / asOf] --> D3
+  D3 --> SN[(D03 analysis_snapshot / snapshot_input_ref)]
+  SN --> SC[O01 调 ScenarioHandler]
+  PV -->|按快照固定版本只读| SC
+  SC --> CALC[B01 指标 / B02 情景 / A02 理解 / A03 检索 / A01 模型]
+  CALC --> RES[(各能力所有者的固定版本结果)]
+  SN -->|快照引用| EV[D04 证据引用与血缘]
+  RES -->|结果和资产位置引用| EV
+  RES -->|DomainResult 引用| RPT[O01 审查 / 报告发布]
+  EV -->|授权证据视图| RPT
+  RPT --> VIEW[W01 报告 / 候选建议]
+  VIEW -->|用户明确选择与确认| C1[C01 建议版本]
+  C1 -->|用户明确提交审批| C2[C02 独立人工审批]
+  C2 -->|另一次明确执行命令且复核通过| C3[C03 受控执行]
+  C3 --> PRE[C03 经 ActionAdapter 读取来源前置状态]
+  PRE -->|窄只读查询| EXT
+  EXT -->|当前状态 / 版本 / 时点 / 覆盖| PRE
+  PRE --> SAFE{条件 PASS 且源原子保证成立}
+  SAFE -->|C03 锁外 execute / 原 key 与条件 token| EXT
+  SAFE -->|不满足或无法证明| STOP[不发送 / 有界只读重查或人工处理]
+  EXT -->|回执或核对结果，不当作完整源投影| C3
+  C3 -->|后续只读同步观察业务事实| D1
+  PV -.仅候选，按需异步构建.-> IDX[Milvus / Neo4j 派生索引]
+  EV -.授权元数据与引用.-> IDX
+  IDX -.仅向 A03 提供候选引用，回源复核.-> CALC

@@ -1,0 +1,62 @@
+{
+  "documentVersion": "0.2",
+  "renderer": "Mermaid 11.15.0",
+  "browser": "Edge headless",
+  "results": [
+    {
+      "id": "01-engineering-dependencies",
+      "parse": true,
+      "render": true,
+      "viewBox": "0 0 1514.587890625 1064",
+      "width": 1514.578125,
+      "height": 1064,
+      "textCount": 38,
+      "preserved": true
+    },
+    {
+      "id": "02-single-joint-analysis",
+      "parse": true,
+      "render": true,
+      "viewBox": "-24 -20 1591 2317",
+      "width": 1591,
+      "height": 2317,
+      "textCount": 99
+    },
+    {
+      "id": "03-data-to-snapshot",
+      "parse": true,
+      "render": true,
+      "viewBox": "0 0 2067.8828125 2605.817138671875",
+      "width": 2067.875,
+      "height": 2605.8125,
+      "textCount": 53
+    },
+    {
+      "id": "04-ai-tools-common-path",
+      "parse": true,
+      "render": true,
+      "viewBox": "-54 -20 1434 2427",
+      "width": 1434,
+      "height": 2427,
+      "textCount": 106
+    },
+    {
+      "id": "05-work-item-lifecycle",
+      "parse": true,
+      "render": true,
+      "viewBox": "0 0 1107.7550048828125 575.2000122070312",
+      "width": 1107.75,
+      "height": 575.1875,
+      "textCount": 23
+    },
+    {
+      "id": "06-approval-execution-recovery",
+      "parse": true,
+      "render": true,
+      "viewBox": "-24 -20 1784 5118",
+      "width": 1784,
+      "height": 5118,
+      "textCount": 205
+    }
+  ]
+}

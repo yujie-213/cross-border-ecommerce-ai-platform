@@ -1,0 +1,218 @@
+{
+  "revision": "H01—H07",
+  "documentVersion": "0.2",
+  "filesAdded": 8,
+  "filesModified": 22,
+  "filesDeleted": 0,
+  "baselineFilesVerifiedUnchanged": 72,
+  "files": [
+    {
+      "path": "design/browser-check.json",
+      "change": "修改",
+      "purpose": "文档索引、指纹或验证记录",
+      "bytes": 1966,
+      "sha256": "f7166ab380b0fa319d830239402c302e8776edc53620f91f083a23b2e81888bd"
+    },
+    {
+      "path": "design/content-check.json",
+      "change": "修改",
+      "purpose": "文档索引、指纹或验证记录",
+      "bytes": 1239,
+      "sha256": "0741e7b4de4bf97df199fcade041717d278edcded6815c1684928055a36c5e19"
+    },
+    {
+      "path": "design/mermaid-manifest.json",
+      "change": "修改",
+      "purpose": "文档索引、指纹或验证记录",
+      "bytes": 2010,
+      "sha256": "170a7caf1bba70592f7d00f7bb314ba5d3dfd6778c72af65c37ff8e21a4776b4"
+    },
+    {
+      "path": "design/mermaid-render-check.json",
+      "change": "修改",
+      "purpose": "文档索引、指纹或验证记录",
+      "bytes": 1403,
+      "sha256": "68789f1b9b78c2357b9d01bb7bc922550ab4d3da91b4dddbbaed266d53954326"
+    },
+    {
+      "path": "design/mermaid/02-single-joint-analysis.mmd",
+      "change": "修改",
+      "purpose": "修订后的Mermaid源图",
+      "bytes": 2060,
+      "sha256": "8799ec63c652bb6580806d5a94e291259748eb76a514aaef76a2ca22763178c4"
+    },
+    {
+      "path": "design/mermaid/02-single-joint-analysis.svg",
+      "change": "修改",
+      "purpose": "与修订源图同步的SVG",
+      "bytes": 57987,
+      "sha256": "7528ea6d5339ade2255c9b0baaa7f4c98823221bd3bfa99a14dac03b6763911b"
+    },
+    {
+      "path": "design/mermaid/03-data-to-snapshot.mmd",
+      "change": "修改",
+      "purpose": "修订后的Mermaid源图",
+      "bytes": 1884,
+      "sha256": "a87951817df7a51e732d2dee04d2484099bbba60bbb3fc7c75899b4a622fcfa4"
+    },
+    {
+      "path": "design/mermaid/03-data-to-snapshot.svg",
+      "change": "修改",
+      "purpose": "与修订源图同步的SVG",
+      "bytes": 82424,
+      "sha256": "3ad33b093640ec643bf45fe234da1e7f9c9545835f9d5e84ca8850e44b98b48b"
+    },
+    {
+      "path": "design/mermaid/04-ai-tools-common-path.mmd",
+      "change": "修改",
+      "purpose": "修订后的Mermaid源图",
+      "bytes": 2154,
+      "sha256": "4a7ca6f56d050d917a2f07f3572f99cfc0fa4ad31fd364f6a3a027ec28ff94ad"
+    },
+    {
+      "path": "design/mermaid/04-ai-tools-common-path.svg",
+      "change": "修改",
+      "purpose": "与修订源图同步的SVG",
+      "bytes": 58014,
+      "sha256": "0cbf7e1d06190f4ab1934d37bd59f4cd1979588f1b962c6e1134ec9da95f59ec"
+    },
+    {
+      "path": "design/mermaid/05-work-item-lifecycle.mmd",
+      "change": "修改",
+      "purpose": "修订后的Mermaid源图",
+      "bytes": 651,
+      "sha256": "efd5ea87197e1f0296415b8a8246da1baef6f7f61879546a2ca026c0dd293d0a"
+    },
+    {
+      "path": "design/mermaid/05-work-item-lifecycle.svg",
+      "change": "修改",
+      "purpose": "与修订源图同步的SVG",
+      "bytes": 45416,
+      "sha256": "451702301d1742c58ca30fafe2f1d8592db7218421c2effda9d7b3c44d6c7401"
+    },
+    {
+      "path": "design/mermaid/06-approval-execution-recovery.mmd",
+      "change": "修改",
+      "purpose": "修订后的Mermaid源图",
+      "bytes": 4810,
+      "sha256": "e5b80e6c479da096e87367cf2746ea1ee8605c72efc290ef154f62ec5cf89173"
+    },
+    {
+      "path": "design/mermaid/06-approval-execution-recovery.svg",
+      "change": "修改",
+      "purpose": "与修订源图同步的SVG",
+      "bytes": 96345,
+      "sha256": "41751f2c609f512ad0a59562be42c323b9b45f8fcc9c7942510ee1f1b3a51528"
+    },
+    {
+      "path": "design/qa-approval-diagram.png",
+      "change": "修改",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 85146,
+      "sha256": "c2e6df7439b977c54298382d354d6abeb6b8dfce978ee08ff813c09a7a2cd53b"
+    },
+    {
+      "path": "design/qa-desktop.png",
+      "change": "修改",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 176883,
+      "sha256": "5d063772e3e210ccddf7abeeca34012fe5d31d1f01c9eeef3a5cfef9412ebfa5"
+    },
+    {
+      "path": "design/qa-engineering-diagram.png",
+      "change": "修改",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 84294,
+      "sha256": "397d52fa6974411ab8c0327b554e4bc41c0b8d6d5ffc7f8d6c77a004e4eadbea"
+    },
+    {
+      "path": "design/qa-mobile.png",
+      "change": "修改",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 61248,
+      "sha256": "66964ad81d378ad4e42c530b53ebd7ac4440120ecb97425e0d7ab8b9012b106b"
+    },
+    {
+      "path": "design/review-h01-h07/before/概要开发设计文档_v0.1.md",
+      "change": "新增",
+      "purpose": "本次授权概要设计v0.1的修订前快照",
+      "bytes": 91167,
+      "sha256": "ff643b978ef2d7c4fb12c8262f1485e32dabd0f8f286c2b05965fdb8f47f6594"
+    },
+    {
+      "path": "design/review-h01-h07/pre-revision-manifest.json",
+      "change": "新增",
+      "purpose": "文档索引、指纹或验证记录",
+      "bytes": 14246,
+      "sha256": "b443a7fd0bbdb18282d94a9aeeb94cce22ffa16aa5f67894319c444933c178b8"
+    },
+    {
+      "path": "design/review-h01-h07/qa-approval-commit.png",
+      "change": "新增",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 92215,
+      "sha256": "3a180b988ea54fa5cf8ce9567647b79cbf81e1adc257289c308bc8cea2246cff"
+    },
+    {
+      "path": "design/review-h01-h07/qa-execution-source.png",
+      "change": "新增",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 97381,
+      "sha256": "98875457e57fcc56b496098b4c67062ee4515a297e6460ed86ab7399165723d6"
+    },
+    {
+      "path": "design/review-h01-h07/qa-task-state.png",
+      "change": "新增",
+      "purpose": "本轮阅读布局/关键图示检查截图",
+      "bytes": 73267,
+      "sha256": "348b2401a158b075eec07a787c41c51547f4e50c38013950d64f4acb6b41621b"
+    },
+    {
+      "path": "design/review-h01-h07/概要设计_v0.1-v0.2.diff",
+      "change": "新增",
+      "purpose": "v0.1→v0.2逐行差异",
+      "bytes": 75403,
+      "sha256": "31528130aed5c8adef1d68abe0da5c0ea83cb57b780e48adbf7ef6c83f5acc76"
+    },
+    {
+      "path": "design/validation-report.json",
+      "change": "修改",
+      "purpose": "文档索引、指纹或验证记录",
+      "bytes": 2896,
+      "sha256": "c715ed33db56c0ea86163b5fb2e1a9e964d409cc6d7d0cbea692cbf4bda7375b"
+    },
+    {
+      "path": "智慧中台AI应用项目_最小代码基座交付与验收清单.md",
+      "change": "新增",
+      "purpose": "由正文4.1—4.4派生的 MC01—MC12 清单",
+      "bytes": 11693,
+      "sha256": "e9d1005bfa9cf155fc30ade392d2f0ee8c199ca2e53105b6d45abd0f41c87d8e"
+    },
+    {
+      "path": "智慧中台AI应用项目_概要开发设计文档.html",
+      "change": "修改",
+      "purpose": "v0.2 离线阅读版",
+      "bytes": 549185,
+      "sha256": "6a74f51cd16c18e313c990bbd06ee1c3c0496eaefdff3646dc9e311f9b4d733c"
+    },
+    {
+      "path": "智慧中台AI应用项目_概要开发设计文档.md",
+      "change": "修改",
+      "purpose": "v0.2 概要设计唯一正文源",
+      "bytes": 118461,
+      "sha256": "cf8119e270e894fbb68d3db0361ccdf87b4e0b506c476eb130321e24c08dff80"
+    },
+    {
+      "path": "智慧中台AI应用项目_概要设计审查修订说明_H01-H07.md",
+      "change": "新增",
+      "purpose": "H01—H07 处理、前后差异、剩余验证",
+      "bytes": 8603,
+      "sha256": "d4bfe533c57f10f6a362c280508346ed748b1f0e000ef5864f169e90eac0cf0b"
+    },
+    {
+      "path": "design/file-manifest.json",
+      "change": "修改",
+      "purpose": "本次新增/修改文件清单；自身不计算自引用指纹"
+    }
+  ]
+}

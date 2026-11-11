@@ -1,0 +1,274 @@
+{
+  "scope": "本轮管理文件变化；基线/既有设计附件只入库不改",
+  "selfHashExcluded": [
+    "docs/planning/file-manifest.json",
+    "docs/planning/FILES.md"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "change": "ADDED",
+      "sha256": "4d95fa673c7dab985c0fd8c864b089f5e8f8976cdf2edc8030ad79a058d4b121"
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "MODIFIED",
+      "sha256": "3c1b60e6d3a4c0d2d24feab23269822992a0b6f7ebb0155222454bc3a7178d2c"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/AGENTS.md",
+      "change": "ARCHIVED",
+      "sha256": "9588e5aeeb8cfac2135399f46d038bad31c588c46c03dafe698e5aaa29cb23b2"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/archive-manifest.json",
+      "change": "ARCHIVED",
+      "sha256": "edfced9a5001538964e2d712715b7cf329a6bb92720b21c02c25dccb3dc845dc"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/CI_RULES.md",
+      "change": "ARCHIVED",
+      "sha256": "27e2a7c3d34b9cc333064a0baf31c0a32059c6b4c92ff3c071c5b3db7c180829"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/COLLABORATION.md",
+      "change": "ARCHIVED",
+      "sha256": "3565de2557b6367bf162f6323c72240a9000260150d8291a42ead7242c1d328d"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/DECISIONS.md",
+      "change": "ARCHIVED",
+      "sha256": "989ba334d7d460e0bf1a82dc563d3580d9667e276d19f3af9d02af8ab691aa0b"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/generated/DEPENDENCIES.mmd",
+      "change": "ARCHIVED",
+      "sha256": "a882eb7554850a1f8f32f7f9bcfff6579602cceb867f6d301d242c796e7beda5"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/generated/STATUS.md",
+      "change": "ARCHIVED",
+      "sha256": "5441e5992b7aaf95901eb991d36e1afcdd1c2332771e5d459697fdce93d52785"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/HANDOFF.md",
+      "change": "ARCHIVED",
+      "sha256": "301914efb25291eccec99861b3ae65fa7f2072a7716bc58326b1f26eaca1b99f"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/PLAN.md",
+      "change": "ARCHIVED",
+      "sha256": "0deef4aba2a4e8ea86958271e143e419541613971f86220b44dd80aa76c24b21"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/baseline-manifest.json",
+      "change": "ARCHIVED",
+      "sha256": "f96ca3098b227564c7068e7450c9ff4c588c64d7e5229ea293d4ae8e962ec93f"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/check_plan.py",
+      "change": "ARCHIVED",
+      "sha256": "ca1e634efa80e3318f7dcd04b5eb530b12a835b590dd95f407995b0ed9f33064"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/file-manifest.json",
+      "change": "ARCHIVED",
+      "sha256": null
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/FILES.md",
+      "change": "ARCHIVED",
+      "sha256": null
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/initial-workspace-observation.json",
+      "change": "ARCHIVED",
+      "sha256": "1cf2c1ac05cf85ae85c636ca5525c268b9046d99f7e736e378c79d4ed96bfb85"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/render_status.py",
+      "change": "ARCHIVED",
+      "sha256": "e9bc2122319797d832a938008cf1b9b07e2b0dd7b56e2e2703b42f7c9072718a"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/task_io.py",
+      "change": "ARCHIVED",
+      "sha256": "b8aeb915994144d7d522a0f40ae71af3ae5d9ea22f138c21e573e08aa906e973"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/planning/validation-report.json",
+      "change": "ARCHIVED",
+      "sha256": "a3504b4fed381b202df1f1a58cda84f74abf08bd6b788cec16b8d1f5ab5dade0"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/docs/TASKS.md",
+      "change": "ARCHIVED",
+      "sha256": "b915b2d381b35f4a4387f4f6687841216dcd42adbd2252bba510416d452222a1"
+    },
+    {
+      "path": "docs/archive/plan96-v0.1/README.md",
+      "change": "ARCHIVED",
+      "sha256": "cbd378632357dae5e78a0cf6855fd719370fdd7d7dee5927f74c79613cfa9251"
+    },
+    {
+      "path": "docs/CI_RULES.md",
+      "change": "MODIFIED",
+      "sha256": "021c176dbd0dfe3f0c006d2156e09425e36e9cc06e3643d72cdb2db6a5a09168"
+    },
+    {
+      "path": "docs/COLLABORATION.md",
+      "change": "MODIFIED",
+      "sha256": "78db5447232c790040d3b42f6b7e234507f68b866c7cd5dba2444c3cf7a198b1"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "change": "MODIFIED",
+      "sha256": "f46823110c4bc8eb3860d7e203995ffc06df833da188d32d42fb5fd79e56142d"
+    },
+    {
+      "path": "docs/generated/DEPENDENCIES.mmd",
+      "change": "MODIFIED",
+      "sha256": "9ec8190f48e7c751d87e965d9161a5a45aad7775e72d508d332821b4913b9ddd"
+    },
+    {
+      "path": "docs/generated/STATUS.md",
+      "change": "MODIFIED",
+      "sha256": "d274853f4c8b218b13b6de36eea4042972b1677f4eb0350a92edaa01dd64fc4e"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "change": "MODIFIED",
+      "sha256": "d93a1bb13397a3dacd905f2e154e71edd5888a27520e39eee52d0262a53caea2"
+    },
+    {
+      "path": "docs/PLAN.html",
+      "change": "ADDED",
+      "sha256": "badd531df114681ed73a8b598b90b91d21ba1041edd6482db969d218babae4f6"
+    },
+    {
+      "path": "docs/PLAN.md",
+      "change": "MODIFIED",
+      "sha256": "b1b511725ad9396030a11ab34d0cf7ff1324f31a1cd352de3e13bc5af00b2cd5"
+    },
+    {
+      "path": "docs/planning/authorization-and-scope.json",
+      "change": "ADDED",
+      "sha256": "9b913a72dc5d1e3a659dce43e50202b2ada4793e1cba5e0904fb546526489a1f"
+    },
+    {
+      "path": "docs/planning/baseline-manifest.json",
+      "change": "UNCHANGED",
+      "sha256": "f96ca3098b227564c7068e7450c9ff4c588c64d7e5229ea293d4ae8e962ec93f"
+    },
+    {
+      "path": "docs/planning/browser-check.json",
+      "change": "ADDED",
+      "sha256": "faa73d2da64a34593b0506e29ab1d0bce6e5a6b608edac1de39bf7328258266e"
+    },
+    {
+      "path": "docs/planning/build_docs.py",
+      "change": "ADDED",
+      "sha256": "b73a3ac752beab9be41861fce6292b008cdd00a8dec855a864a4cd2d2b1b804c"
+    },
+    {
+      "path": "docs/planning/check_plan.py",
+      "change": "MODIFIED",
+      "sha256": "56e87f8892f4e64f284b91c12561ef2d6a09ebd6190dff0a917de4d121467c26"
+    },
+    {
+      "path": "docs/planning/diagrams/plan-flow.mmd",
+      "change": "ADDED",
+      "sha256": "2d7ff2ff9d028c8af92a5ebbaf21dba63017e0652388458206467c4cca996b32"
+    },
+    {
+      "path": "docs/planning/diagrams/plan-flow.svg",
+      "change": "ADDED",
+      "sha256": "ba33f77b076bee04562c3a63fe4532aa23a74141a3357a03902562b77c3be081"
+    },
+    {
+      "path": "docs/planning/diagrams/render-receipt.json",
+      "change": "ADDED",
+      "sha256": "44f58d3fffb90c639729983e55794983cb6e14097c1bae3424518c7e29eaa54e"
+    },
+    {
+      "path": "docs/planning/file-manifest.json",
+      "change": "MODIFIED",
+      "sha256": null
+    },
+    {
+      "path": "docs/planning/FILES.md",
+      "change": "MODIFIED",
+      "sha256": null
+    },
+    {
+      "path": "docs/planning/git-whitelist.json",
+      "change": "ADDED",
+      "sha256": "48bb87982ff21b6f28ec277a0bdee3e8ebe0996b860e76fa4286934f70066744"
+    },
+    {
+      "path": "docs/planning/initial-workspace-observation.json",
+      "change": "UNCHANGED",
+      "sha256": "1cf2c1ac05cf85ae85c636ca5525c268b9046d99f7e736e378c79d4ed96bfb85"
+    },
+    {
+      "path": "docs/planning/plan-build.json",
+      "change": "ADDED",
+      "sha256": "0e60131b0ad710e88fbec5b0c98ede328fca05472e8883f30b237d7c5c8f93f2"
+    },
+    {
+      "path": "docs/planning/preflight.json",
+      "change": "ADDED",
+      "sha256": "d5b9d5d93598109293d1b06c60d70e372ac4f6e52010b3f3c287ffea18f180b1"
+    },
+    {
+      "path": "docs/planning/render_plan.cjs",
+      "change": "ADDED",
+      "sha256": "915012e0eb6dd2e8b4748940cc94fbccb94e8603c82519f42b5c695d5cfa71fb"
+    },
+    {
+      "path": "docs/planning/render_status.py",
+      "change": "MODIFIED",
+      "sha256": "111a7118ced913f215e32f5a327ccf2b4e5a8e55b877e89ca89364ad9e2cd699"
+    },
+    {
+      "path": "docs/planning/repository-receipt.json",
+      "change": "ADDED",
+      "sha256": "724d6ce946088f32a15765335f88545e84ebdee8f95b50908f3c223184b60c5b"
+    },
+    {
+      "path": "docs/planning/repository_audit.py",
+      "change": "ADDED",
+      "sha256": "a38eaa990c0b020ca0431ea8e677b7add4dc380d663e6fd233c55ab80cf11ce8"
+    },
+    {
+      "path": "docs/planning/security-scan.json",
+      "change": "ADDED",
+      "sha256": "4c8c6079701d02f4885e5a2f91e53cc790700404a4200be744febfad2bc10221"
+    },
+    {
+      "path": "docs/planning/task-mapping.json",
+      "change": "ADDED",
+      "sha256": "88e672c0c7019d027b37afb76b9a0750767143dc312c40e0978b8678fb4ced8c"
+    },
+    {
+      "path": "docs/planning/task_io.py",
+      "change": "UNCHANGED",
+      "sha256": "b8aeb915994144d7d522a0f40ae71af3ae5d9ea22f138c21e573e08aa906e973"
+    },
+    {
+      "path": "docs/planning/validation-report.json",
+      "change": "MODIFIED",
+      "sha256": "9bd0eccb9e8e00c511bc20c43af309dd50a292cda5db056c4b81c831512ef842"
+    },
+    {
+      "path": "docs/TASK_MAPPING.md",
+      "change": "ADDED",
+      "sha256": "7b68612049d32fe70d49a6d3ffbebc651174f4c7050fb334985bf172027aa26f"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "change": "MODIFIED",
+      "sha256": "f085674702b88242ce0509d0ff53722692322cdd0238da2d9f8a2e0c2d849f70"
+    }
+  ]
+}

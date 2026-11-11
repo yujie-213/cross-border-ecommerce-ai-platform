@@ -1,0 +1,32 @@
+﻿门槛,才可推进的实现内容,必须先提供的证据
+
+OFF（当前默认）,复用ModelRequest中的cache-off配置与既有G02字段，模型路径按原权限/预算执行,无需缓存设施；首个S03/A02示例固定OFF，仍不使AI成为首批S02基座依赖
+单项用途精确缓存批准,仅为真实获准用例实现有界进程内缓存、准入/输出分类/Key/失效与测试,实际重复请求与收益、正数TTL/容量/留存、当前授权/来源校验、输入和实际输出共享分类均能证明；独立评审通过
+跨用户共享启用,只开放现有矩阵允许的同tenant公开类别，原隔离限制不变,输出本身无私有上下文/个性化/敏感内容，来源引用对共享范围均有权；分类规则/决策Ref和当前epoch可验证，反例通过
+多进程共享存储/语义缓存,本次不实施；已有方案不足时重新评估,额外性能/运维收益与隔离证据；不因“未来缓存可能跨进程”提前创建基础设施
+
+类别,准入 / 最小隔离,跨用户 / 跨会话,版本与有效期 / 失效
+
+仅公共模板/schema/无业务文本格式示范,可；租户分区、APPROVED_TEMPLATE 用途,同租户经批准可 / 可；跨租户仍默认禁止响应共享,模板/模型/schema/参数精确相同；有界TTL；版本/策略变化即miss
+企业内公开的稳定知识解释,条件可；TENANT_PUBLIC 且无私有上下文/个性化/工具提案,同tenant双方当前有知识权限才可 / 可,不可变知识版本、适用范围、Prompt/模型绑定；更新/删除/撤权即拒绝旧命中
+用户自己的静态低敏文本改写,条件可；USER 或 SESSION，需获准用途,不可 / USER且明确无会话依赖才可,内容hash+user授权+Prompt/模型；留存受用户内容政策约束；本轮默认关闭
+聊天、售后回复、客户资料、用户个性化,不准入持久或共享网关缓存；最多同次调用结果引用去重,不可 / 不可,不做跨请求响应缓存；任务恢复仍用原受控产物并当前鉴权
+动态库存、供给、价格、实时订单/履约状态,禁止网关响应缓存,不可 / 不可,业务产物固定snapshot可回溯，但不作当前事实；发送前实时校验归C03
+费用、贡献、币种/汇率、财务核查,禁止网关响应缓存,不可 / 不可,B01已有固定版本产物按权限复用，禁止LLM缓存伪装财务权威
+建议确认、审批、批准/撤销、执行与回执状态,禁止,不可 / 不可,当前状态经C所有者公开接口读取；不设短TTL绕过实时复核
+Tool Calling / 需运行时工具 / 含动态RAG结果,首期禁止缓存模型toolRequests或最终响应,不可 / 不可,防跳过工具权限、执行及usage；静态证据摘要以后另行准入验证
+含秘密、敏感个人信息、未知授权或分类,禁止；分类失败默认拒绝,不可 / 不可,不能只把tenant/user加进key就认为可以缓存秘密
+错误、拒绝、部分流、截断、INVALID_OUTPUT、usage未知,禁止成功响应缓存,不可 / 不可,技术熔断/负载状态不是内容缓存；拒绝权限后不做全局负缓存泄露资源存在性
+政策核查的适用性结论,禁止；可复用版本化原文引用不等于复用结论,不可 / 不可,有效时间/地区/商品属性/适用性必须每次核查与专业复核
+
+KeyMaterial 字段,绑定规则
+
+tenantId / sharingMode,tenantId 必填且所有模式均禁止跨tenant；sharingMode=SESSION/USER/TENANT_PUBLIC/APPROVED_TEMPLATE，来自G01策略不由模型/客户端选择
+principalPartition / sessionPartition,SESSION包含user与session；USER包含user、session显式NO_SESSION_DEPENDENCY；获准租户共享用显式TENANT_PUBLIC标记代替user/session，不能偷偷省略；任何私有变量出现自动降级隔离或禁缓存
+effectiveScopeDigest / policyVersion / authEpoch,当前获准店铺/仓库/字段/用途/角色范围规范化指纹；当前授权变化导致miss/deny；原用户权限不能代表所有读取者
+provider / deployment / actualModelRevision / capabilityPolicy,实际受评测的不可变版本；若仅有可能漂移的别名，不能安全钉住时禁缓存
+promptRef / resolvedPromptDigest / outputSchemaDigest / parametersDigest,逻辑引用按§9.1解析，System/Developer/User有效消息内容和具体parameters均规范化；缺省值展开，模板/参数/Schema版本与内容hash同时绑定
+contextDigest / dataVersions,消息顺序、每段内容hash、snapshotId（适用时）、映射/指标/理解/人工修订、知识/asset/chunk/indexGeneration、时间/地区适用域；未列清依赖则禁缓存
+toolSpecsDigest / toolPolicy,A01从toolSpecRefs解析后的toolSpecs计算工具名/版本/Schema/白名单摘要；首期任何动态tool request路径直接bypass；不能缓存后省略本该执行的工具
+runtime/context/harness/cachePolicy/outputClassification规则版本,选择、压缩、敏感处理、准入、输出共享判定及Key规范版本；改变则miss；具体输出判定和内容指纹保存为值元数据，不能在响应生成前伪造为已知Key输入
+

@@ -1,0 +1,11 @@
+flowchart TB
+  SETUP["本轮：计划整理与本地Git"] --> DESIGN["下一步：S01专项设计"]
+  DESIGN --> CONTRACT["A-01 必要版本与契约冻结"]
+  CONTRACT --> A["阶段A 最小工程底座"]
+  DESIGN --> B["阶段B 仅S01所需公共能力"]
+  A --> SLICE["S01纵向切片任务（专项设计后新增）"]
+  B --> SLICE
+  SLICE --> CHECK["S01自有工程/业务验收"]
+  DESIGN -. "实际需要LLM/检索才选择" .-> C["阶段C 按需AI能力与用途评测"]
+  C -. "只约束实际启用的AI用途" .-> CHECK
+  CHECK --> NEXT["阶段D：复盘，再登记下一个场景"]

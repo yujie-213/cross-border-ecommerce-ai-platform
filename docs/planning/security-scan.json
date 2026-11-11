@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "mode": "WHITELIST_WORKTREE",
+  "scannedFiles": 211,
+  "findings": [],
+  "sensitiveNamesAcrossWorkspace": [],
+  "limitations": "启发式模式/文件名检查，不保证全部秘密/个人信息均可识别；白名单均获准设计/管理材料，无真实ERP数据。"
+}

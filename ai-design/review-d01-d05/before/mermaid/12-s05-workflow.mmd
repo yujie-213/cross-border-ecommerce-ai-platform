@@ -1,0 +1,21 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S05 Handler
+  participant U as A02
+  participant R as A03
+  participant A as A01
+  participant H as W01 / 客服人工
+  O->>S: 单场景参与者视图 / 会话引用 / 预算
+  S->>U: 意图与语言理解
+  U-->>S: 意图 / UNKNOWN
+  S->>R: 订单最小事实 / 有效政策 / 已发布主题
+  R-->>S: 授权证据与覆盖缺口
+  alt 必需证据齐备且意图清楚
+    S->>A: 基于证据生成内部草稿
+    A-->>S: 草稿 / 引用 / 技术错误
+  else 存在关键缺口
+    S->>S: 生成澄清和人工接手事项
+  end
+  S-->>O: 草稿Refs / 限制 / 待核项
+  O-->>H: 发布辅助结果，人工复核
+  Note over O,H: 不发送客户消息；可选受限检索Loop须另过效果门槛

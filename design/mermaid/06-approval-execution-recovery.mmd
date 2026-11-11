@@ -1,0 +1,106 @@
+sequenceDiagram
+  autonumber
+  actor U as 发起人 / 执行人
+  actor H as 独立审批人
+  participant W as W01 / HTTP
+  participant C1 as C01 建议服务
+  participant C2 as C02 审批服务
+  participant C3 as C03 执行服务
+  participant G2 as G02 必需审计
+  participant J as I01 / MySQL
+  participant R as Worker
+  participant X as ActionAdapter / 外部系统
+  U->>W: 选择建议并确认
+  W->>C1: confirm(建议版本, 用户命令)
+  C1-->>W: CONFIRMED，未提交审批
+  U->>W: 明确点击“提交审批”
+  W->>C1: submit_for_approval(建议版本, commandId)
+  C1->>J: 协调者开始唯一 txScope，锁定本方建议/命令键
+  C1->>C1: 校验当前权限、CONFIRMED版本与命令去重
+  break 无权或状态/版本冲突
+    C1->>J: rollback，未调用 C02
+    C1-->>W: 拒绝提交
+  end
+  break 同一命令已成功提交
+    C1->>J: 结束只读检查，不新增写入
+    C1-->>W: 返回原 approvalRef
+  end
+  C1->>C2: 经 ApprovalSubmitPort 提交冻结信封与同一 txScope
+  C2->>J: 仅 C02 Repository 写 PENDING，不 commit
+  C2-->>C1: 未提交 approvalRef，不回调 C01
+  C1->>J: 仅 C01 Repository 写 SUBMITTED / approvalRef
+  C1->>G2: 同 txScope 追加必需审计
+  G2->>J: 仅 G02 Repository 写审计，不 commit
+  alt 所有本地步骤及提交成功
+    C1->>J: 协调者唯一 commit
+    C1-->>W: 已提交审批 / 原 approvalRef
+  else 任一步明确失败，包括提交失败
+    C1->>J: 协调者 rollback 全部写入
+    break 本次提交结束
+      C1-->>W: 返回安全错误，无孤立申请
+    end
+  else 提交结果不确定
+    break 先查询同 commandId，不新建申请
+      C1-->>W: 返回待核对结果，重试查询原命令
+    end
+  end
+  H->>W: 查看冻结内容并批准
+  W->>C2: decide(APPROVED)，经独立只读端口核验建议版本
+  C2->>J: 保存批准版本、有效期和审计
+  C2-->>W: APPROVED，不自动执行
+  U->>W: 明确点击“执行已批准动作”
+  W->>C3: request_execution(approvalRef, commandId)
+  C3->>C2: validate_approval(指纹、范围、当前有效性)
+  C2-->>C3: 验证结果
+  break 当前授权或批准核验不通过
+    C3-->>W: 拒绝受理，不创建可发送工作项
+  end
+  C3->>J: 同一短事务保存 READY、executionKey 与 work_item
+  C3-->>W: 202 / executionRef
+  R->>J: 领取执行项并提交租约
+  R->>C3: dispatch(executionRef, leaseToken)
+  C3->>C3: 读取执行状态及同键重发许可
+  break 已是 SUCCEEDED / FAILED
+    C3-->>R: 返回既有结果，不重新发送
+  end
+  break SENDING/UNKNOWN 且无有效原键核对重发许可
+    C3->>X: queryReceipt(原 executionKey)，按13.2核对
+    X-->>C3: 源事实或仍未知
+    C3->>J: 保存核对结果/后续核对工作项，本次不直接发送
+  end
+  C3->>C3: 仅 READY 或已核对获准的原键重发，核验权限、批准与指纹
+  break 本地复核不通过且明确未发送
+    C3->>J: FAILED / 未发送原因，禁止读取或写入越权来源
+  end
+  C3->>X: readPreconditions(获批动作/来源对象)
+  X-->>C3: currentState / sourceVersion或conditionToken / observedAt / coverage
+  C3->>C3: 按获批规则判断 PASS / BLOCKED / UNVERIFIABLE
+  break 非 PASS 或无安全原子执行保证，明确尚未发送
+    C3->>J: 有界只读重查或 FAILED/未发送原因，禁止 execute
+  end
+  C3->>J: 再验批准及lease，短事务记 SENDING / observationRef 后提交
+  C3->>X: 锁外 execute(原 key / fingerprint / conditionToken)，源原子校验
+  alt 获得可验证源结果
+    X-->>C3: 源 recordId / receipt
+    C3->>J: 条件记录 SUCCEEDED 或明确 FAILED
+  else 来源条件冲突且权威证明未应用
+    X-->>C3: CONDITION_CONFLICT / not applied
+    C3->>J: FAILED，保留原 key/指纹，不自动修改请求
+  else 结果不确定 / 响应丢失
+    C3->>J: UNKNOWN 或恢复标记，持久化核对任务
+    R->>C3: reconcile_receipt(原 executionKey)
+    C3->>X: 查询原 key 回执
+    X-->>C3: 已创建 / 权威未创建 / 仍未知
+    alt 已创建
+      C3->>J: 核验内容后保存 SUCCEEDED / 源引用
+    else 权威未创建且全部重发条件满足
+      C3->>C2: 重发前再次验证批准与当前合法性
+      C3->>J: 保存同键重试计划与工作项
+      Note over C3,X: 重发仍经原 dispatch 的 readPreconditions/原子条件路径，禁止更换 key 或 payload
+    else 仍未知或不允许重发
+      C3->>J: 未知保留 UNKNOWN 转人工；已证实未创建且禁止重发则 FAILED
+    end
+  end
+  W->>C3: 查询执行与回执
+  C3-->>W: 当前状态及源记录引用
+  Note over W,X: 不持数据库事务等待 HTTP；草稿/工单成功不等于后续业务完成

@@ -1,0 +1,49 @@
+# Secrets / local settings
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets.*
+# Python / node / tool caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+node_modules/
+.coverage
+coverage.xml
+htmlcov/
+# Local data / databases / backups
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.dump
+backups/
+data/private/
+# Logs / temporary and machine-specific output
+*.log
+logs/
+tmp/
+.tmp/
+.DS_Store
+Thumbs.db
+docs/planning/local/
+# Model weights, not model adapter source
+*.safetensors
+*.onnx
+*.pt
+*.pth
+*.gguf
+models/weights/

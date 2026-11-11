@@ -1,0 +1,1007 @@
+{
+  "oldTaskCount": 96,
+  "newTaskCount": 18,
+  "mappingIsNotAcceptance": true,
+  "rows": [
+    {
+      "oldId": "M0-001",
+      "oldTitle": "实施计划与协作协议独立审查",
+      "oldStatus": "REVIEW",
+      "targets": [
+        "SETUP-001"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-002",
+      "oldTitle": "Git事实源落地与初始白名单入库",
+      "oldStatus": "TODO",
+      "targets": [
+        "SETUP-001"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-003",
+      "oldTitle": "工程版本与运行兼容矩阵冻结",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-004",
+      "oldTitle": "首批S02夹具与最小契约冻结",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-01",
+        "D-S01-01",
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "原S02夹具/映射/契约保留待实施；新S01范围不等同原项完成"
+    },
+    {
+      "oldId": "M0-005",
+      "oldTitle": "真实来源授权与字段样本清单",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01",
+        "D-S01-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-006",
+      "oldTitle": "业务范围、权威域与指标口径签认",
+      "oldStatus": "TODO",
+      "targets": [
+        "D-S01-01",
+        "B-03"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-007",
+      "oldTitle": "身份、字段权限与数据使用条件冻结",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-04",
+        "C-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-008",
+      "oldTitle": "质量、降级、预算和验收目标冻结",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-01",
+        "C-01",
+        "C-04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-009",
+      "oldTitle": "两类外部动作可行性与岗位条件调查",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M0-010",
+      "oldTitle": "M0退出与受限工程实施授权",
+      "oldStatus": "TODO",
+      "targets": [
+        "D-S01-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "旧全局推进门槛不再约束S01设计；相关真实启用/验收要求未删除"
+    },
+    {
+      "oldId": "M1-001",
+      "oldTitle": "最小工程契约与所有者集成约定",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-002",
+      "oldTitle": "最小工程骨架与配置锁定",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-003",
+      "oldTitle": "MySQL短事务与模块自有持久化适配",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-03"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-004",
+      "oldTitle": "G01测试身份与数据范围强制检查",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-005",
+      "oldTitle": "G02必需审计与Trace最小链",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-02",
+        "B-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-006",
+      "oldTitle": "I01工作项领取、租约与有界重投",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-007",
+      "oldTitle": "O01持久任务受理与版本/命令去重",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-05",
+        "B-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-008",
+      "oldTitle": "FastAPI与独立Worker最小装配",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-009",
+      "oldTitle": "节点A可靠性与最小工程检查",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-06"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-010",
+      "oldTitle": "验收节点A：工程基础闭环",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-06"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-011",
+      "oldTitle": "D01模拟批次与覆盖契约",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-012",
+      "oldTitle": "D02 S02身份映射与不可变投影",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01",
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "原S02夹具/映射/契约保留待实施；新S01范围不等同原项完成"
+    },
+    {
+      "oldId": "M1-013",
+      "oldTitle": "D03质量门槛与固定snapshot manifest",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-014",
+      "oldTitle": "D04最小证据登记与当前权限解析",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-015",
+      "oldTitle": "B01首项履约确定性指标",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "原S02/MC保留待真正实施；不得以S01测试替代或标完成"
+    },
+    {
+      "oldId": "M1-016",
+      "oldTitle": "S02最小ScenarioHandler",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "原S02/MC保留待真正实施；不得以S01测试替代或标完成"
+    },
+    {
+      "oldId": "M1-017",
+      "oldTitle": "O01正式SINGLE调度与报告发布/恢复",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-018",
+      "oldTitle": "W01分析任务与报告/证据API",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-019",
+      "oldTitle": "MC01—MC12完整闭环与故障复验",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "原S02/MC保留待真正实施；不得以S01测试替代或标完成"
+    },
+    {
+      "oldId": "M1-020",
+      "oldTitle": "验收节点B：业务计算最小闭环",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "原S02/MC保留待真正实施；不得以S01测试替代或标完成"
+    },
+    {
+      "oldId": "M1-021",
+      "oldTitle": "ERP首期只读连接器",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-022",
+      "oldTitle": "OMS首期只读连接器",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-023",
+      "oldTitle": "WMS首期只读连接器",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-024",
+      "oldTitle": "CRM首期反馈只读连接器",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S03"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-025",
+      "oldTitle": "财务费用与成本首期只读接入",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-026",
+      "oldTitle": "渠道首期必要只读子集",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-027",
+      "oldTitle": "D02四类P0域标准投影扩展",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-01",
+        "REG-S01",
+        "REG-S02",
+        "REG-S03",
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "近期仅复用S01所需子集；原四域/联合/整阶段验收保留登记，不因S01通过而完成"
+    },
+    {
+      "oldId": "M1-028",
+      "oldTitle": "D03/D04真实质量与证据扩展",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-029",
+      "oldTitle": "B01 P0指标目录与确定性计算",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-03",
+        "REG-S01",
+        "REG-S02",
+        "REG-S03",
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "近期仅复用S01所需子集；原四域/联合/整阶段验收保留登记，不因S01通过而完成"
+    },
+    {
+      "oldId": "M1-030",
+      "oldTitle": "B02基线情景与候选评价",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-031",
+      "oldTitle": "O01 AI共享预算最小实现",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-032",
+      "oldTitle": "A01网关首个获准Provider",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-033",
+      "oldTitle": "A02首个VOC分类能力切片",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-034",
+      "oldTitle": "A03必要检索与只读工具",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-03"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-035",
+      "oldTitle": "G02 AI版本/评测与反馈基础",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M1-036",
+      "oldTitle": "M1公共基座真实只读就绪验收",
+      "oldStatus": "TODO",
+      "targets": [
+        "D-S01-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "旧全局推进门槛不再约束S01设计；相关真实启用/验收要求未删除"
+    },
+    {
+      "oldId": "M2-001",
+      "oldTitle": "S01补货专项设计与MVP范围",
+      "oldStatus": "TODO",
+      "targets": [
+        "D-S01-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-002",
+      "oldTitle": "S01只读补货Workflow MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-003",
+      "oldTitle": "S01真实只读试点人工核对",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-004",
+      "oldTitle": "S02完整P0风险分流",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-005",
+      "oldTitle": "S03 VOC与成熟群组分析",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S03"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-006",
+      "oldTitle": "S04贡献与费用P0分析",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-007",
+      "oldTitle": "O01联合分析与跨领域降级",
+      "oldStatus": "TODO",
+      "targets": [
+        "B-05",
+        "REG-S01",
+        "REG-S02",
+        "REG-S03",
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "近期仅复用S01所需子集；原四域/联合/整阶段验收保留登记，不因S01通过而完成"
+    },
+    {
+      "oldId": "M2-008",
+      "oldTitle": "W01统一报告、证据与角色视图",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-009",
+      "oldTitle": "C01建议确认与规则预警",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-010",
+      "oldTitle": "四场景及联合只读业务UAT",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01",
+        "REG-S02",
+        "REG-S03",
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "近期仅复用S01所需子集；原四域/联合/整阶段验收保留登记，不因S01通过而完成"
+    },
+    {
+      "oldId": "M2-011",
+      "oldTitle": "P0安全与提示注入验收",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-04",
+        "A-06",
+        "C-03"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-012",
+      "oldTitle": "P0模型/Prompt/RAG质量回归",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-013",
+      "oldTitle": "只读容量、预算与恢复压力验证",
+      "oldStatus": "TODO",
+      "targets": [
+        "A-06",
+        "C-01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-014",
+      "oldTitle": "只读部署、备份、回滚与手册",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-015",
+      "oldTitle": "只读受限试点发布与观察",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M2-016",
+      "oldTitle": "M2阶段验收与M3准入评审",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01",
+        "REG-S02",
+        "REG-S03",
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "近期仅复用S01所需子集；原四域/联合/整阶段验收保留登记，不因S01通过而完成"
+    },
+    {
+      "oldId": "M3-001",
+      "oldTitle": "有限动作/审批岗位与源前置条件冻结",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-002",
+      "oldTitle": "C02独立审批及有效性校验",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-003",
+      "oldTitle": "C01/C02原子提交审批",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-004",
+      "oldTitle": "C03执行意图与受控分派",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-005",
+      "oldTitle": "ERP采购草稿ActionAdapter",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-006",
+      "oldTitle": "CRM内部工单ActionAdapter",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-007",
+      "oldTitle": "C03 UNKNOWN原键恢复与业务结果关联",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-008",
+      "oldTitle": "W01人工协作与执行状态视图",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-009",
+      "oldTitle": "写入公共机制安全与事务故障验收",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-010",
+      "oldTitle": "ERP动作逐项启用门槛与受控发布",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-011",
+      "oldTitle": "CRM动作逐项启用门槛与受控发布",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M3-012",
+      "oldTitle": "M3有限动作阶段验收",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ACTIONS"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "未来真有动作需求再专项设计；原审批/源条件/幂等/UNKNOWN要求保留"
+    },
+    {
+      "oldId": "M4-001",
+      "oldTitle": "S01学习型需求/交期预测验证与接入",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-002",
+      "oldTitle": "S01滞销库存治理",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-003",
+      "oldTitle": "S01供应商风险分析",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-004",
+      "oldTitle": "S02运输到货风险扩展",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S02"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-005",
+      "oldTitle": "S04费用账单核查深化",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S04"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-006",
+      "oldTitle": "A03完整即席QueryRun与知识助手",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-ADHOC"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-007",
+      "oldTitle": "S05客服/售后辅助专项验证与设计",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-008",
+      "oldTitle": "S05客服/售后辅助MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-009",
+      "oldTitle": "S06内容与增长专项设计",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S06"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-010",
+      "oldTitle": "S06本地化与增长辅助MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S06"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-011",
+      "oldTitle": "S07单证抽取与校验专项验证",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S07"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-012",
+      "oldTitle": "S07单证辅助MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S07"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-013",
+      "oldTitle": "S08经营规划专项数据与约束验证",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S08"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-014",
+      "oldTitle": "S08市场与选品辅助MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S08"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-015",
+      "oldTitle": "S08定价促销模拟MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S08"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-016",
+      "oldTitle": "S08多仓布局优化MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S08"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-017",
+      "oldTitle": "S09缺陷标准与视觉提供方专项验证",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S09"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-018",
+      "oldTitle": "S09视觉质检辅助MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S09"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-019",
+      "oldTitle": "S10政策来源与专业复核标准",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S10"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-020",
+      "oldTitle": "S10政策核查辅助MVP",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S10"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-021",
+      "oldTitle": "高级AI/检索/运行技术按需评估",
+      "oldStatus": "TODO",
+      "targets": [
+        "C-05"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    },
+    {
+      "oldId": "M4-022",
+      "oldTitle": "完整规划分批发布、回归与运营验收",
+      "oldStatus": "TODO",
+      "targets": [
+        "REG-S01",
+        "REG-S02",
+        "REG-S03",
+        "REG-S04",
+        "REG-S05",
+        "REG-S06",
+        "REG-S07",
+        "REG-S08",
+        "REG-S09",
+        "REG-S10"
+      ],
+      "disposition": "ARCHIVED_DRAFT",
+      "note": "归档草案；不是已完成，不将映射等同验收"
+    }
+  ]
+}

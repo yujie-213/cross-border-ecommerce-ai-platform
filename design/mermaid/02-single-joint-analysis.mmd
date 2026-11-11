@@ -1,0 +1,49 @@
+sequenceDiagram
+  autonumber
+  actor U as 用户
+  participant W as W01 / HTTP
+  participant O as O01 应用服务
+  participant J as I01 持久任务
+  participant R as Worker
+  participant D as D03 快照
+  participant S as ScenarioHandler
+  participant P as B01/B02/A02/A03/A01
+  participant E as D04 证据
+  U->>W: 提交单场景或联合分析
+  W->>O: 已授权的 AnalysisContext
+  O->>J: 同一短事务保存任务与待处理项
+  O-->>W: 202 / taskRef
+  R->>J: 领取并提交租约
+  R->>O: run_task(taskRef, leaseToken)
+  O->>D: 按参与者声明冻结共同锚点和输入版本
+  D-->>O: snapshotId / manifest / quality
+  break 关键数据不达标，既有策略不允许继续相关分析
+    O->>O: 发布阻断/有限信息与待补事项，不派发无依据步骤
+    O->>J: 记录本次处理完成
+  end
+  alt SINGLE：如 S02
+    O->>S: analyze(单参与者视图, budgetHandle)
+    S->>P: 按 S02 领域流程调用公共能力
+    P-->>S: 固定版本产物/技术错误
+    S-->>O: DomainResult / 领域降级结果
+  else JOINT：如 S03 + S04
+    loop 按可配置并行度分波调度参与者
+      O->>S: analyze(各参与者受限视图, 共享预算)
+      S->>P: 领域步骤及确定性计算
+      P-->>S: 各能力结果引用
+      S-->>O: 各自 DomainResult
+    end
+  end
+  O->>E: 校验证据引用和权限
+  E-->>O: 可发布证据视图/缺口
+  opt 仅联合报告解释确需 AI 或检索
+    O->>P: 仅 A01/A03 报告级调用，计入共享预算
+    P-->>O: 解释/引用或技术错误
+  end
+  O->>O: 审查冲突、应用联合降级；需重算则重派场景
+  O->>O: 核验计划/租约，保存并发布报告版本
+  O->>J: 记录处理完成
+  W->>O: 查询已发布报告
+  O-->>W: 报告 / 候选建议 / 完整性状态
+  Note over W,R: 首批最小闭环仅启用 S02 窄切片与 simulated 源数据，持久任务/Worker/快照/报告均真实运行
+  Note over U,O: 只读流程到报告结束；不自动创建建议、审批或外部动作

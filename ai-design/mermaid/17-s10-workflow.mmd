@@ -1,0 +1,21 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S10 Handler
+  participant R as A03
+  participant U as A02
+  participant A as A01
+  participant H as W01 / 专业复核
+  O->>S: 商品 / 地区 / 日期 / 资料版本 / 预算
+  S->>R: 受控检索有效条款与例外
+  R-->>S: evidenceRefs / 有效期 / 冲突与缺项
+  S->>U: 条款及属性结构化提取
+  U-->>S: 字段/条款映射 / UNKNOWN
+  S->>S: 时间地区及必要属性规则核对
+  alt 具备辅助解释条件
+    S->>A: 仅基于可访问条款归纳待核问题
+    A-->>S: 引用解释 / 不确定性 / 技术错误
+  else 关键资料不足或冲突
+    S->>S: 列待确认事项，不给确定合规结论
+  end
+  S-->>O: 辅助核查结果 / 限制 / 专业复核项
+  O-->>H: 发布报告供专业人员判断

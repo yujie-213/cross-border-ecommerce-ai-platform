@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-11",
+  "authorized": [
+    "Rewrite lean A-D plan and collaboration files",
+    "Archive/map prior 96-task draft without changing old states",
+    "Initialize local repository in current directory if none and create local commits using an explicit safe whitelist"
+  ],
+  "notAuthorized": [
+    "Business scaffolding or S01 implementation",
+    "Running future A/B/C or S01 design tasks this turn",
+    "Creating remotes, pushing, public hosting or changing remote permissions"
+  ],
+  "sequenceChange": "S01 first; S02 and all-common-capabilities completion are not prerequisites; original M0-M4 and MC01-MC12 retained"
+}

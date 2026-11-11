@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.2",
+  "simulated": true,
+  "taskType": "VOC_CLASSIFICATION",
+  "taxonomyRef": {
+    "id": "taxonomy-voc-fixture",
+    "version": "1"
+  },
+  "items": [
+    {
+      "caseId": "success",
+      "contentId": "feedback-success",
+      "contentRef": {
+        "tenantId": "tenant-fixture",
+        "id": "feedback-success",
+        "version": "1"
+      },
+      "sourceEvidenceId": "ev-feedback-success-1",
+      "text": "物流一直没更新，我要投诉。",
+      "language": "zh-CN"
+    },
+    {
+      "caseId": "technical-failure",
+      "contentId": "feedback-failure",
+      "contentRef": {
+        "tenantId": "tenant-fixture",
+        "id": "feedback-failure",
+        "version": "1"
+      },
+      "sourceEvidenceId": "ev-feedback-failure-1",
+      "text": "包裹还没有发出。",
+      "language": "zh-CN"
+    },
+    {
+      "caseId": "semantic-unknown",
+      "contentId": "feedback-unknown",
+      "contentRef": {
+        "tenantId": "tenant-fixture",
+        "id": "feedback-unknown",
+        "version": "1"
+      },
+      "sourceEvidenceId": "ev-feedback-unknown-1",
+      "text": "还是这样。",
+      "language": "zh-CN"
+    }
+  ]
+}

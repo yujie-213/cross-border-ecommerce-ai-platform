@@ -1,0 +1,154 @@
+{
+  "$id": "a02.voc.output@1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "items"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.2"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contentId",
+          "semanticStatus",
+          "theme",
+          "intent",
+          "unknownReason",
+          "confidence",
+          "spans"
+        ],
+        "properties": {
+          "contentId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "semanticStatus": {
+            "enum": [
+              "CLASSIFIED",
+              "UNKNOWN"
+            ]
+          },
+          "theme": {
+            "enum": [
+              "LOGISTICS",
+              "PRODUCT",
+              "DESCRIPTION",
+              "SERVICE",
+              "OTHER",
+              null
+            ]
+          },
+          "intent": {
+            "enum": [
+              "COMPLAINT",
+              "INQUIRY",
+              "OTHER",
+              null
+            ]
+          },
+          "unknownReason": {
+            "enum": [
+              "INSUFFICIENT_CONTEXT",
+              "AMBIGUOUS",
+              "OUT_OF_TAXONOMY",
+              null
+            ]
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "spans": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "start",
+                "end"
+              ],
+              "properties": {
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "semanticStatus": {
+                  "const": "UNKNOWN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "theme": {
+                  "const": null
+                },
+                "intent": {
+                  "const": null
+                },
+                "confidence": {
+                  "const": null
+                },
+                "unknownReason": {
+                  "enum": [
+                    "INSUFFICIENT_CONTEXT",
+                    "AMBIGUOUS",
+                    "OUT_OF_TAXONOMY"
+                  ]
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "theme": {
+                  "enum": [
+                    "LOGISTICS",
+                    "PRODUCT",
+                    "DESCRIPTION",
+                    "SERVICE",
+                    "OTHER"
+                  ]
+                },
+                "intent": {
+                  "enum": [
+                    "COMPLAINT",
+                    "INQUIRY",
+                    "OTHER"
+                  ]
+                },
+                "unknownReason": {
+                  "const": null
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

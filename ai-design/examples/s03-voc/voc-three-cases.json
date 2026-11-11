@@ -1,0 +1,169 @@
+{
+  "simulated": true,
+  "pricing": {
+    "version": "pricing-fixture-1",
+    "currency": "CNY",
+    "inputPerMillion": "1",
+    "outputPerMillion": "2",
+    "reservedPerAttempt": "0.000384"
+  },
+  "cases": [
+    {
+      "caseId": "success",
+      "taskId": "task-voc-success",
+      "logicalCallId": "voc-call-success",
+      "attemptId": "voc-attempt-success-1",
+      "providerRequestId": "provider-fixture-success-1",
+      "technicalStatus": "SUCCESS",
+      "finishReason": "STOP",
+      "error": null,
+      "validatedObject": {
+        "schemaVersion": "0.2",
+        "items": [
+          {
+            "contentId": "feedback-success",
+            "semanticStatus": "CLASSIFIED",
+            "theme": "LOGISTICS",
+            "intent": "COMPLAINT",
+            "unknownReason": null,
+            "confidence": null,
+            "spans": [
+              {
+                "start": 0,
+                "end": 7
+              }
+            ]
+          }
+        ]
+      },
+      "a02Status": "COMPLETED",
+      "understandingRef": {
+        "tenantId": "tenant-fixture",
+        "id": "understanding-success",
+        "version": "1"
+      },
+      "derivedEvidenceId": "ev-understanding-success-1",
+      "usage": {
+        "status": "KNOWN",
+        "inputTokens": 64,
+        "outputTokens": 32,
+        "actualCost": "0.000128",
+        "currency": "CNY",
+        "pricingVersion": "pricing-fixture-1"
+      },
+      "budgetSettlement": {
+        "state": "SETTLED",
+        "retained": "0.000128",
+        "released": "0.000256"
+      },
+      "usageRef": {
+        "tenantId": "tenant-fixture",
+        "id": "usage-voc-success-1",
+        "version": "1"
+      },
+      "auditRef": {
+        "tenantId": "tenant-fixture",
+        "id": "audit-voc-success-1",
+        "version": "1"
+      },
+      "traceId": "trace-voc-success"
+    },
+    {
+      "caseId": "technical-failure",
+      "taskId": "task-voc-failure",
+      "logicalCallId": "voc-call-failure",
+      "attemptId": "voc-attempt-failure-1",
+      "providerRequestId": "provider-fixture-failure-1",
+      "technicalStatus": "TECH_ERROR",
+      "finishReason": null,
+      "error": {
+        "code": "TIMEOUT",
+        "stage": "SENT",
+        "retryable": false
+      },
+      "validatedObject": null,
+      "a02Status": "TECH_FAILED",
+      "understandingRef": null,
+      "derivedEvidenceId": null,
+      "usage": {
+        "status": "UNKNOWN",
+        "inputTokens": null,
+        "outputTokens": null,
+        "actualCost": null,
+        "currency": "CNY",
+        "pricingVersion": "pricing-fixture-1"
+      },
+      "budgetSettlement": {
+        "state": "PENDING_RECONCILIATION",
+        "retained": "0.000384",
+        "released": "0.000000"
+      },
+      "usageRef": {
+        "tenantId": "tenant-fixture",
+        "id": "usage-voc-failure-1",
+        "version": "1"
+      },
+      "auditRef": {
+        "tenantId": "tenant-fixture",
+        "id": "audit-voc-failure-1",
+        "version": "1"
+      },
+      "traceId": "trace-voc-failure"
+    },
+    {
+      "caseId": "semantic-unknown",
+      "taskId": "task-voc-unknown",
+      "logicalCallId": "voc-call-unknown",
+      "attemptId": "voc-attempt-unknown-1",
+      "providerRequestId": "provider-fixture-unknown-1",
+      "technicalStatus": "SUCCESS",
+      "finishReason": "STOP",
+      "error": null,
+      "validatedObject": {
+        "schemaVersion": "0.2",
+        "items": [
+          {
+            "contentId": "feedback-unknown",
+            "semanticStatus": "UNKNOWN",
+            "theme": null,
+            "intent": null,
+            "unknownReason": "INSUFFICIENT_CONTEXT",
+            "confidence": null,
+            "spans": []
+          }
+        ]
+      },
+      "a02Status": "COMPLETED_WITH_UNKNOWN",
+      "understandingRef": {
+        "tenantId": "tenant-fixture",
+        "id": "understanding-unknown",
+        "version": "1"
+      },
+      "derivedEvidenceId": "ev-understanding-unknown-1",
+      "usage": {
+        "status": "KNOWN",
+        "inputTokens": 32,
+        "outputTokens": 16,
+        "actualCost": "0.000064",
+        "currency": "CNY",
+        "pricingVersion": "pricing-fixture-1"
+      },
+      "budgetSettlement": {
+        "state": "SETTLED",
+        "retained": "0.000064",
+        "released": "0.000320"
+      },
+      "usageRef": {
+        "tenantId": "tenant-fixture",
+        "id": "usage-voc-unknown-1",
+        "version": "1"
+      },
+      "auditRef": {
+        "tenantId": "tenant-fixture",
+        "id": "audit-voc-unknown-1",
+        "version": "1"
+      },
+      "traceId": "trace-voc-unknown"
+    }
+  ]
+}

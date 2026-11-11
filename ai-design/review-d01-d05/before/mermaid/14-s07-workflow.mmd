@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S07 Handler
+  participant U as A02 文档理解
+  participant E as D04
+  participant H as W01 / 单证人工
+  O->>S: 文件固定版本 / 核对规则 / 预算
+  S->>S: 权限、类型、大小和页数检查
+  S->>U: 按获准解析器抽取字段
+  U->>E: 登记字段原文位置与资产版本
+  U-->>S: 字段Refs / 页覆盖 / UNKNOWN
+  S->>S: 跨单商品、数量、单位等确定性核对
+  S->>E: 解析差异证据定位
+  E-->>S: 可访问证据 / 缺口
+  S-->>O: 差异清单 / 待确认关键字段
+  O-->>H: 发布辅助结果供人工复核
+  Note over O,H: 不直接写ERP、不办理报关

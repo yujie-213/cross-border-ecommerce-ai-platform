@@ -1,0 +1,30 @@
+{
+  "tenantId": "tenant-fixture",
+  "id": "context-voc-failure",
+  "version": "1",
+  "purpose": "A02_VOC_CLASSIFICATION",
+  "snapshotId": "snapshot-voc-fixture-1",
+  "taxonomyRef": {
+    "id": "taxonomy-voc-fixture",
+    "version": "1"
+  },
+  "segments": [
+    {
+      "kind": "USER_FEEDBACK",
+      "controlTrust": "DATA",
+      "sensitivity": "PRIVATE_FEEDBACK",
+      "contentId": "feedback-failure",
+      "sourceRef": {
+        "tenantId": "tenant-fixture",
+        "id": "feedback-failure",
+        "version": "1"
+      },
+      "sourceEvidenceId": "ev-feedback-failure-1",
+      "language": "zh-CN",
+      "text": "包裹还没有发出。"
+    }
+  ],
+  "omissionReasons": [],
+  "history": [],
+  "memory": []
+}

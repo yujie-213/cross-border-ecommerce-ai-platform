@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant O as O01
+  participant S as S06 Handler
+  participant R as A03 / D04
+  participant B as B01
+  participant A as A01 / A02
+  participant H as W01 / 内容人工
+  O->>S: 商品与目标市场范围 / 固定输入
+  S->>R: 商品事实 / 术语 / 素材许可 / S04已发布引用
+  opt 广告诊断已具数据
+    S->>B: 期间指标，明确归因限制
+    B-->>S: metricRefs / 缺项
+  end
+  S->>A: 有限候选本地化/生成
+  A-->>S: 文案与主张引用 / 技术错误
+  S->>S: 规则检查事实/术语/禁用声明
+  S-->>O: 辅助文案 / 诊断假设 / 审核问题
+  O-->>H: 发布内部结果供人工确认
+  Note over O,H: 不发布页面、不投放、不调整广告预算
