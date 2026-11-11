@@ -1575,3 +1575,189 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ]
 }
 ```
+
+## D-S01-ERP-01 教学ERP调查与MVP方案修订（仅文档/获准只读）
+
+```json
+{
+  "id": "D-S01-ERP-01",
+  "stage": "D",
+  "title": "S01 A01必做范围修订、教学ERP调查与MVP方案更新",
+  "kind": "design",
+  "dependsOn": [],
+  "entryCondition": "2026-11-11 用户明确授权静态ERP调查、环境允许下最小安全只读验证、原实施文档修订、本地独立提交及普通远端同步；不编码、不生成TODO、不启动下一阶段",
+  "ownerRole": "本轮文档/接口调查集成人；业务与设计评审由负责人待签认",
+  "assignee": "Codex（单人执行，不使用代理）",
+  "allowedPaths": [
+    "docs/agents/S01_MVP实施文档.md",
+    "docs/agents/S01_ERP接口调查与字段映射.md",
+    "docs/agents/evidence/s01-erp-survey-20261111.json",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "docs/agents/index.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/governance/PUBLICATION.md"
+  ],
+  "parallelCondition": "本轮单一执行者；原型/冻结基线/S01专项正文只读；本地YAML原字节保留，凭据不入文件或日志",
+  "deliverables": [
+    "可追溯的ERP接口/字段/缺口调查报告及无敏感响应证据；区分静态声明与本轮真实观察",
+    "更新同一路径MVP实施文档：A01真实解释必做、失败仍可发布受限规则报告、结构输出/预算/日志/版本/验收/详情对接",
+    "必要ADR/索引/台账与交接、本地提交和经增量安全/身份/祖先检查后的普通远端同步"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-ERP-01/AC1",
+      "text": "A01真实实现/真实LLM调用及展示为MVP验收必做；沿用既有网关，不将模型成功设为规则报告发布必要条件"
+    },
+    {
+      "id": "D-S01-ERP-01/AC2",
+      "text": "相关ERP方法/路径/参数/字段/鉴权/分页/错误/业务含义及缺口可追溯，真实调用事实与文档声明区分，零值不补未知"
+    },
+    {
+      "id": "D-S01-ERP-01/AC3",
+      "text": "主数据路径/受控补充/D01-D03/B01-B02/原型对接/待决项落实，教学模拟ERP不冒充官方或生产验证"
+    },
+    {
+      "id": "D-S01-ERP-01/AC4",
+      "text": "只读/无业务代码或TODO/无凭据敏感响应入库/原型基线保全、检查/提交/远端结果真实记录"
+    }
+  ],
+  "plannedTests": [
+    "本轮：OpenAPI静态结构/Refs/操作和字段映射一致性、最小HTTPS只读探测、文档/保全/秘密启发式、build_docs/check_plan、Git普通push前后核验",
+    "已按负责人明确HTTPS verify=False调查例外完成有界只读鉴权/字段观察；正式证书策略及完整覆盖仍待确认。所有业务写接口禁止调用；真实LLM与业务实现验收本轮NOT_RUN"
+  ],
+  "risks": [
+    "自签名TLS：正常校验失败及HTTP四次404保留，负责人后续明确授权本轮verify=False例外；正式接入证书策略仍待确认，不能默认关闭校验",
+    "店仓SKU映射、完整需求窗口、逐SKU未收/可售日、订购倍数和成熟质量口径仍有缺口；REST销售订单真实503未掩盖，未知不补0",
+    "本地OpenAPI为独立教学模拟系统而非官方/生产ERP；本轮只同步已检查自有文档增量，不宣布旧第三方许可缺口闭合"
+  ],
+  "requiredEvidenceKinds": [
+    "DESIGN_REVIEW"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "3db663c084d749600c526abffa5b8e322f582b2b"
+  ],
+  "testedCommit": "3db663c084d749600c526abffa5b8e322f582b2b",
+  "evidence": [
+    {
+      "kind": "DESIGN_SELF_CHECK",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC1",
+        "D-S01-ERP-01/AC2",
+        "D-S01-ERP-01/AC3",
+        "D-S01-ERP-01/AC4"
+      ],
+      "command": "作者对照本轮要求/既有概要与AI契约；PowerShell here-string | python -（OpenAPI一致性/字段观察计数/链接/表格/边界校验）",
+      "environment": "Windows / Python yaml、markdown；仅文档与调查作者自检",
+      "sample": "24静态操作与原始YAML一致；135本地链接无断链；A01必做、四类结构、真实调用及展示验收、错误降级写入v0.2；不重建模型网关，不以模型成功为规则报告发布条件",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/S01_MVP实施文档.md"
+    },
+    {
+      "kind": "ERP_BOUNDED_READ_OBSERVATION",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC2"
+      ],
+      "command": "临时无凭据探测工具：health/auth + GET查询及3类文档确认只读的兼容POST查询；返回仅保留类型/空值/计数",
+      "environment": "真实网络读取教学模拟ERP v5.1.0；用户明确本轮HTTPS verify=False例外；每次业务limit/length=1",
+      "sample": "6入口/健康探测，2次认证，20次业务查询；16不同查询操作尝试，15返回200，10非空。0业务写入、0敏感原值保存；同一店仓SKU关系/完整覆盖未证，不等于ERP业务验收通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/agents/evidence/s01-erp-survey-20261111.json"
+    },
+    {
+      "kind": "ERP_SALES_REST_OBSERVATION",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC2"
+      ],
+      "command": "GET /api/v1/sales-orders，限定选定店/仓且limit=1",
+      "environment": "教学ERP / R2-V08",
+      "sample": "实际HTTP503，未伪造成功、未静默切换模拟；兼容订单另行读取的日期/覆盖仍不完整",
+      "exitCode": null,
+      "result": "FAIL",
+      "artifactRef": "docs/agents/evidence/s01-erp-survey-20261111.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC4"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / 项目既有文档工具",
+      "sample": "21项台账、18项文档规则PASS；既有20项任务JSON保持不变，仅新增本轮design记录；独立评审未运行",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC4"
+      ],
+      "command": "PowerShell here-string | python -（Git对象/任务JSON/应用入口/秘密启发式/原文哈希检查）",
+      "environment": "main / 基点8f79f4b56689d04fb4b0de7560b05f60b86278c5",
+      "sample": "17份原专项/HTML/构建器/冻结基线/PLAN/AGENTS/视觉/UI/原型字节不变；无正式业务代码/应用初始化/开发TODO。YAML哈希不变，保留未跟踪；定向秘密模式0发现",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "REMOTE_SYNC",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC4"
+      ],
+      "command": "git ls-remote origin refs/heads/main；git merge-base --is-ancestor；增量历史扫描；git push origin HEAD:refs/heads/main；再次ls-remote",
+      "environment": "Git Credential Manager和连接器同一yujie-213账号；既有Public origin，无force/新仓库/API重建",
+      "sample": "推送前远端895167c7c1b76db2e46209fa4480e4819e65a06f为祖先；7个待同步提交/38个变更提交blob定向秘密扫描0发现、无新增第三方runtime。普通push退出0，远端已实测为3db663c084d749600c526abffa5b8e322f582b2b；本证据/交接收尾提交随后普通同步并最终查询，不填写自身SHA",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/governance/PUBLICATION.md"
+    },
+    {
+      "kind": "DESIGN_REVIEW",
+      "acceptanceIds": [
+        "D-S01-ERP-01/AC1",
+        "D-S01-ERP-01/AC2",
+        "D-S01-ERP-01/AC3",
+        "D-S01-ERP-01/AC4"
+      ],
+      "command": "NOT_RUN：负责人独立设计评审、完整ERP业务覆盖及真实LLM/工程/S01/MC验收",
+      "environment": "仅调查与文档；无正式软件实现",
+      "sample": "REVIEW而非ACCEPTED；店仓映射、时间/逐SKU供给/可售日/倍数/质量补充、TLS正式策略、模型Provider与数据许可/预算等待确认；停止等待负责人评审",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/agents/S01_ERP接口调查与字段映射.md"
+    }
+  ],
+  "review": null,
+  "branch": "main",
+  "observedHead": "3db663c084d749600c526abffa5b8e322f582b2b",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-11",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "按最新任务领取调查与文档范围；A01成为MVP必做；ERP认证与TLS信任按安全条件使用，未知YAML原文只读、不默认发布",
+      "observedHead": "8f79f4b56689d04fb4b0de7560b05f60b86278c5"
+    },
+    {
+      "date": "2026-11-11",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "静态调查/获准有界真实只读和v0.2方案修订已提交、自检通过并普通同步；REST销售503、核心数据覆盖缺口及未运行的真实LLM/业务验收如实保留。仅文档工作交付待评审，不自动编码。",
+      "observedHead": "3db663c084d749600c526abffa5b8e322f582b2b"
+    }
+  ]
+}
+```
