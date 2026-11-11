@@ -9,7 +9,7 @@
 | [项目 README](../README.md) | 对外介绍、实际能力、预览方法 |
 | [AGENTS](../AGENTS.md) | 协作入口、授权与稳定边界 |
 | [PLAN](PLAN.md) / [HTML](PLAN.html) | 当前 A—D 实施顺序；保留原里程碑与 MC 含义 |
-| [TASKS](TASKS.md) | 唯一任务状态与验收台账 |
+| [TASKS](TASKS.md) | 唯一任务状态与验收台账；含基于85a146e的S01 MVP分阶段开发TODO与准入条件，待负责人/星星评审 |
 | [DECISIONS](DECISIONS.md) | 当前决策、ADR 与待冻结事项 |
 | [COLLABORATION](COLLABORATION.md) / [CI_RULES](CI_RULES.md) | 分工、提交、交接与检查约定 |
 | [HANDOFF](HANDOFF.md) | 最近增量、实际检查和停止点 |
