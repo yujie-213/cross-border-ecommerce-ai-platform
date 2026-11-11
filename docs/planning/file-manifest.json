@@ -128,17 +128,17 @@
     {
       "path": "docs/generated/DEPENDENCIES.mmd",
       "change": "MODIFIED",
-      "sha256": "9ec8190f48e7c751d87e965d9161a5a45aad7775e72d508d332821b4913b9ddd"
+      "sha256": "4ca5eee374a34f185dc033137badc76274b2b4b81a9c22c8a98af9fdc01c999a"
     },
     {
       "path": "docs/generated/STATUS.md",
       "change": "MODIFIED",
-      "sha256": "d274853f4c8b218b13b6de36eea4042972b1677f4eb0350a92edaa01dd64fc4e"
+      "sha256": "0247e78abc4a4c9043a15b2e051838441263699ed7e4bf71d0cf6e99c51ec469"
     },
     {
       "path": "docs/HANDOFF.md",
       "change": "MODIFIED",
-      "sha256": "d93a1bb13397a3dacd905f2e154e71edd5888a27520e39eee52d0262a53caea2"
+      "sha256": "bb0a01ddcd1b3f242fd13c4500b34448c76baa65cf63d8df8fd12eb0af2eb620"
     },
     {
       "path": "docs/PLAN.html",
@@ -163,7 +163,7 @@
     {
       "path": "docs/planning/browser-check.json",
       "change": "ADDED",
-      "sha256": "faa73d2da64a34593b0506e29ab1d0bce6e5a6b608edac1de39bf7328258266e"
+      "sha256": "db818c33689d37cf7103ba0e95db91d3669d2d72812a4267e3b3ebc542832819"
     },
     {
       "path": "docs/planning/build_docs.py",
@@ -207,8 +207,8 @@
     },
     {
       "path": "docs/planning/initial-workspace-observation.json",
-      "change": "UNCHANGED",
-      "sha256": "1cf2c1ac05cf85ae85c636ca5525c268b9046d99f7e736e378c79d4ed96bfb85"
+      "change": "MODIFIED",
+      "sha256": "91f02b2fe1fbceb68ebaa79b5922928c64f8085bd49f9faf55afdee50b7eb7fa"
     },
     {
       "path": "docs/planning/plan-build.json",
@@ -233,7 +233,7 @@
     {
       "path": "docs/planning/repository-receipt.json",
       "change": "ADDED",
-      "sha256": "724d6ce946088f32a15765335f88545e84ebdee8f95b50908f3c223184b60c5b"
+      "sha256": "b231d5f7650600fb278f85a65047d8f8701cf2a23e9aec00db91316ec8cc65bf"
     },
     {
       "path": "docs/planning/repository_audit.py",
@@ -258,7 +258,7 @@
     {
       "path": "docs/planning/validation-report.json",
       "change": "MODIFIED",
-      "sha256": "9bd0eccb9e8e00c511bc20c43af309dd50a292cda5db056c4b81c831512ef842"
+      "sha256": "e8359564520abad5d1aa99806562eaf0c8ce19618c0fa9f80db6683bb39cc381"
     },
     {
       "path": "docs/TASK_MAPPING.md",
@@ -268,7 +268,7 @@
     {
       "path": "docs/TASKS.md",
       "change": "MODIFIED",
-      "sha256": "f085674702b88242ce0509d0ff53722692322cdd0238da2d9f8a2e0c2d849f70"
+      "sha256": "aa3f0ab0abfdb4deb9008457cd0e4a5645625f18b9fe06af8429dc2bc0636a8d"
     }
   ]
 }

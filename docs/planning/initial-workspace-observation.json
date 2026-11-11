@@ -11,5 +11,6 @@
     1
   ],
   "result": "fatal: not a git repository (or any of the parent directories): .git",
-  "scope": "Read-only observation; no git init or commit performed"
+  "scope": "HISTORICAL previous-plan observation; not current repository state",
+  "supersededForCurrentStateBy": "docs/planning/repository-receipt.json and live Git"
 }

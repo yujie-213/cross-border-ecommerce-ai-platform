@@ -59,17 +59,76 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DOCUMENT_CHECK",
     "REPOSITORY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "84e68e22195d92d708afead9549d84ac3a13d3b4"
+  ],
+  "testedCommit": "84e68e22195d92d708afead9549d84ac3a13d3b4",
+  "evidence": [
+    {
+      "environment": "Windows / 本地Python与Node/Edge；仅文档及本地Git",
+      "sample": "五份已认可设计基线、17份归档、18项新台账、96项历史映射；无真实ERP/模型调用",
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "SETUP-001/AC1",
+        "SETUP-001/AC2"
+      ],
+      "command": "python docs/planning/check_plan.py",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "environment": "Windows / 本地Python与Node/Edge；仅文档及本地Git",
+      "sample": "五份已认可设计基线、17份归档、18项新台账、96项历史映射；无真实ERP/模型调用",
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "SETUP-001/AC2"
+      ],
+      "command": "node docs/planning/render_plan.cjs --browser-only",
+      "artifactRef": "docs/planning/browser-check.json"
+    },
+    {
+      "environment": "Windows / 本地Python与Node/Edge；仅文档及本地Git",
+      "sample": "五份已认可设计基线、17份归档、18项新台账、96项历史映射；无真实ERP/模型调用",
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "SETUP-001/AC3"
+      ],
+      "command": "python docs/planning/repository_audit.py staged; python docs/planning/repository_audit.py final",
+      "artifactRef": "docs/planning/repository-receipt.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
+  "branch": "main",
+  "observedHead": "84e68e22195d92d708afead9549d84ac3a13d3b4",
+  "dirtyPaths": [
+    "docs/HANDOFF.md",
+    "docs/TASKS.md",
+    "docs/generated/DEPENDENCIES.mmd",
+    "docs/generated/STATUS.md",
+    "docs/planning/FILES.md",
+    "docs/planning/browser-check.json",
+    "docs/planning/file-manifest.json",
+    "docs/planning/initial-workspace-observation.json",
+    "docs/planning/repository-receipt.json",
+    "docs/planning/validation-report.json"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
-  "history": []
+  "history": [
+    {
+      "date": "2026-11-11",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "真实初始commit已创建，文档/浏览器/秘密扫描/白名单/基线检查通过；不代替独立验收；证据文件由后续本地提交固定",
+      "observedHead": "84e68e22195d92d708afead9549d84ac3a13d3b4"
+    }
+  ]
 }
 ```
 

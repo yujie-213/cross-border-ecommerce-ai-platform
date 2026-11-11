@@ -2,7 +2,7 @@
 
 由repository_audit.py生成。只改管理/计划文档及文档工具；五份基线未改，未建业务工程。旧17份文件字节保全，96项任务/评审状态逐ID可追。实际提交及剩余未跟踪见[仓库回执](repository-receipt.json)。
 
-管理范围数量：{"ADDED": 17, "MODIFIED": 14, "ARCHIVED": 19, "UNCHANGED": 3}。ARCHIVED包括17份原稿、说明与指纹清单。白名单内既有设计/图表/修订史只读入库，不计本轮新增设计。
+管理范围数量：{"ADDED": 17, "MODIFIED": 15, "ARCHIVED": 19, "UNCHANGED": 2}。ARCHIVED包括17份原稿、说明与指纹清单。白名单内既有设计/图表/修订史只读入库，不计本轮新增设计。
 
 | 路径 | 变化 |
 |---|---|
@@ -46,7 +46,7 @@
 | [docs/planning/file-manifest.json](../../docs/planning/file-manifest.json) | MODIFIED |
 | [docs/planning/FILES.md](../../docs/planning/FILES.md) | MODIFIED |
 | [docs/planning/git-whitelist.json](../../docs/planning/git-whitelist.json) | ADDED |
-| [docs/planning/initial-workspace-observation.json](../../docs/planning/initial-workspace-observation.json) | UNCHANGED |
+| [docs/planning/initial-workspace-observation.json](../../docs/planning/initial-workspace-observation.json) | MODIFIED |
 | [docs/planning/plan-build.json](../../docs/planning/plan-build.json) | ADDED |
 | [docs/planning/preflight.json](../../docs/planning/preflight.json) | ADDED |
 | [docs/planning/render_plan.cjs](../../docs/planning/render_plan.cjs) | ADDED |

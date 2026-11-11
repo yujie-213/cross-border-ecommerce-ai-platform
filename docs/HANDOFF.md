@@ -12,7 +12,7 @@ S01是下一项：收到下一条明确指令即可开展D-S01-01设计。未写
 
 初始化前的实测：当前目录及父目录都无.git，git rev-parse/status退出128（非仓库）；旧17文件hash与上次交付一致；无敏感命名文件；Git user.name/email已配置。详细预检见planning/preflight.json。
 
-Git创建/提交的实际结果会记录于[repository-receipt](planning/repository-receipt.json)；该文件的observedHead是采集时HEAD，不是要求随每次提交改写自身SHA。接手始终运行：
+Git已创建，初始提交为 `84e68e22195d92d708afead9549d84ac3a13d3b4`，分支 `main`，211个白名单文件，未设远端。提交后已跟踪工作区曾核验干净；本次证据更新由后续本地文档提交固定。完整实际结果记录于[repository-receipt](planning/repository-receipt.json)；该文件的observedHead是采集时HEAD，不是要求随每次提交改写自身SHA。接手始终运行：
 
 ```text
 git branch --show-current
@@ -21,7 +21,9 @@ git status --short --branch --untracked-files=all
 git diff --stat
 ```
 
-本轮实际文档/浏览器/安全/Git校验见[validation-report](planning/validation-report.json)、[security-scan](planning/security-scan.json)、[FILES](planning/FILES.md)。计划中的pytest/启动方式是未来约定，当前没有运行任何业务测试。剩余未跟踪/忽略文件及归属限制由仓库回执记录，不能自动git add .。
+本轮实际文档/浏览器/安全/Git校验见[validation-report](planning/validation-report.json)、[security-scan](planning/security-scan.json)、[FILES](planning/FILES.md)。计划中的pytest/启动方式是未来约定，当前没有运行任何业务测试。剩余85个未跟踪文件及忽略文件/归属限制由仓库回执逐项记录，不能自动git add .。
+
+实跑结果：`python docs/planning/check_plan.py` 退出0（17项文档检查PASS）；`node docs/planning/render_plan.cjs --browser-only` 退出0（三宽度×深浅主题通过、无远程请求，完整流程截图已抽查）；`python docs/planning/repository_audit.py staged` 退出0（211个暂存blob无疑似秘密）；初始提交后的 `python docs/planning/repository_audit.py final` 退出0（白名单/基线blob/无远端/已跟踪区干净）。这是文档及仓库验证，ERP/模型/MC/S01业务验收均NOT_RUN。最新提交及工作区在接手时实时读Git，证据引用的被测初始提交保持不变。
 
 ## 最短接手与下一步输入
 

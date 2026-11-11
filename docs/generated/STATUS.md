@@ -1,12 +1,12 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`f085674702b88242ce0509d0ff53722692322cdd0238da2d9f8a2e0c2d849f70`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`aa3f0ab0abfdb4deb9008457cd0e4a5645625f18b9fe06af8429dc2bc0636a8d`。不要手工编辑；候选不是执行授权。
 
-任务 18 项；TODO 17；IN_PROGRESS 1；BLOCKED 0；REVIEW 0；ACCEPTED 0。
+任务 18 项；TODO 17；IN_PROGRESS 0；BLOCKED 0；REVIEW 1；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
-| SETUP | 1 | 0 | 1 | 0 | 0 | 0 |
+| SETUP | 1 | 0 | 0 | 0 | 1 | 0 |
 | A | 6 | 6 | 0 | 0 | 0 | 0 |
 | B | 5 | 5 | 0 | 0 | 0 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
@@ -14,13 +14,13 @@
 
 ## 当前活动记录
 
-- SETUP-001 精简计划/归档与本地Git交付：IN_PROGRESS；实际执行者=本轮AI执行者。
+- SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
 
 ## 全部近期记录
 
 | ID | 内容 | 状态 | 直接依赖 |
 |---|---|---|---|
-| SETUP-001 | 精简计划/归档与本地Git交付 | IN_PROGRESS | 无；仍核对入口指令 |
+| SETUP-001 | 精简计划/归档与本地Git交付 | REVIEW | 无；仍核对入口指令 |
 | A-01 | S01所需最小版本与公共契约冻结 | TODO | D-S01-01 |
 | A-02 | 最小骨架、配置、错误与日志 | TODO | A-01 |
 | A-03 | MySQL、SQLAlchemy与Alembic子集 | TODO | A-02 |

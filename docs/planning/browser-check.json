@@ -77,5 +77,6 @@
   ],
   "errors": [],
   "remoteRequests": [],
-  "visualReview": "人工抽查1440px页面首屏与阶段流程，文字/箭头/边界可读；其余视口自动检查，不声称全页逐像素复核。"
+  "visualReview": "抽查1440px首屏及完整阶段流程：节点/文字/箭头/边界可读，无遮挡；其余视口自动检查。",
+  "testedCommit": "84e68e22195d92d708afead9549d84ac3a13d3b4"
 }
