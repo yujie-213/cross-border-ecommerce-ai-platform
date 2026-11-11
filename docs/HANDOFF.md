@@ -1,5 +1,14 @@
 # 当前增量交接 v0.3
 
+## 既有 GitHub 仓库发布核查停止点（2026-11-11）
+
+用户明确仓库已创建、不得重建，只准真实 Git 推送并保留历史，禁止逐文件上传替代。Codex 接手 main / `6247e8356d5892f3ed5a1e7007e632e39263b458`，工作区干净、无 remote。只更新许可核查、公开准备、TASKS附记及本交接，未动业务实现/原始第三方资源。
+
+连接器账号 yujie-213；目标仓库存在且 Public/有写权限，heads 查询409空仓库。无 push/pack 导入接口；create_commit 无法保留本地 commit 的原始元数据和 SHA。未调用远端写入，未配置 origin、未强推或改写历史。远端提交/目录/README 发布后核验 NOT_RUN。
+
+许可已定向核对：Mermaid 两版本主许可 MIT；交互 HTML 已带 Archify/字体完整公告，但完整依赖许可及实际内嵌品牌图标条件尚未闭合，不能解除公开阻碍。事实、来源、指纹与恢复条件见 [许可核查](governance/LICENSE_REVIEW.md) 和 [连接器记录](governance/connector-publication-check.json)。本轮 build_docs.py 退出0（仅生成本地阅读版，不代表GitHub发布）；check_plan.py 退出0，18项PASS；核查JSON结构/4个历史blob记录检查PASS；普通diff --check曾因CRLF报告FAIL，恢复原文件换行后按cr-at-eol重验；最终真实提交由 Git 查询。许可通过且有已认证 Git 传输通道后才能普通 push，并重新检查远端祖先关系及发布结果。
+
+
 最新范围为文档治理与GitHub公开发布准备，业务任务状态只读TASKS。用户已授权检查通过后创建新Public仓库；本轮未授权Agent/正式前端/业务服务开发。下面的UX和SETUP授权记录是历史事实，不覆盖本轮新授权。
 
 ## 文档治理与公开发布停止点（2026-11-11）

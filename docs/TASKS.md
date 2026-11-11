@@ -1,5 +1,8 @@
 # 唯一任务与验收台账 v0.2
 
+发布跟进附记（2026-11-11）：Codex 在 main / `6247e8356d5892f3ed5a1e7007e632e39263b458` 领取既有仓库许可/连接器核查，起点干净且无 remote；写入范围为 HANDOFF、TASKS 附记、THIRD_PARTY_NOTICES、governance 的 PUBLICATION/许可报告/核查 JSON。既有19项业务任务状态不变。目标账号/仓库/Public/写权限已验证，远端为空；当前连接器不支持本地提交 push，未做远端写入。许可材料与图标核查仍 BLOCKED，发布后 SHA/目录/README 检查 NOT_RUN。证据见 [增量核查](governance/LICENSE_REVIEW.md) 和 [核查记录](governance/connector-publication-check.json)；本轮提交由最终 Git 查询记录，不伪造 SHA。
+
+
 本台账登记18项近期工作及1项本轮获准的独立产品/视觉原型；SETUP是本轮整理/建仓，A/B为S01必要子集，C按需，D只登记下一项S01专项设计。旧96项完整原稿/状态见archive/plan96-v0.1，旧ID映射见TASK_MAPPING.md。未来场景不预建空任务。
 
 

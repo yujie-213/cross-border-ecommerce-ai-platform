@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-11",
+  "observedHead": "6247e8356d5892f3ed5a1e7007e632e39263b458",
+  "branch": "main",
+  "assignee": "Codex",
+  "scope": "许可核查、GitHub连接器能力与既有目标仓库只读检查；无业务开发",
+  "licenseResult": "BLOCKED",
+  "historyScope": "git rev-list --objects --all；匹配Mermaid包及architecture-ai交互HTML；不是全部第三方依赖完整性证明",
+  "materials": [
+    {
+      "blob": "c66006d502d848585d39a61284bef91402d86722",
+      "historicalPath": ".archify/architecture-ai-hub-20261110-213455/ai-hub-architecture.html",
+      "sha256": "618df1871cea30eabd09f5554a9b10188c562899dc2711d0b49d69ec1353e500",
+      "bytes": 853219,
+      "mermaidMainCopyrightPresent": false,
+      "archifyNoticeChars": 19521,
+      "fontOFLPresent": true,
+      "embeddedNoticeMentionsRestrictedIcons": true
+    },
+    {
+      "blob": "14afb7f79f3444f3f2ba05acf00b754c146968ad",
+      "historicalPath": ".archify/architecture-ai-runtime-20261111-110000/ai-runtime.html",
+      "sha256": "68492200aa85195fae6ad0817b5068ea5e8f5b404aa55c443b2b9aefe03bc94c",
+      "bytes": 835361,
+      "mermaidMainCopyrightPresent": false,
+      "archifyNoticeChars": 19521,
+      "fontOFLPresent": true,
+      "embeddedNoticeMentionsRestrictedIcons": true
+    },
+    {
+      "blob": "b01ad01a2a0265d96e085cfe678036d291a804e3",
+      "historicalPath": "ai-design/assets/mermaid-11.4.1.min.js",
+      "sha256": "a43bc1afd446f9c4cc66ac5dd45d02e8d65e26fc5344ec0ef787f88d6ddb6f9e",
+      "bytes": 2571900,
+      "mermaidMainCopyrightPresent": false,
+      "archifyNoticeChars": 0,
+      "fontOFLPresent": false,
+      "embeddedNoticeMentionsRestrictedIcons": false
+    },
+    {
+      "blob": "dd3209bdb84dfe7bed3a6ecade7c8ac9d12ceac2",
+      "historicalPath": "architecture/assets/mermaid-11.15.0.min.js",
+      "sha256": "70137e77bb273bb2ef972b86e8b0400cca8be53cb25bfc45911a186dc98665de",
+      "bytes": 3312967,
+      "mermaidMainCopyrightPresent": false,
+      "archifyNoticeChars": 0,
+      "fontOFLPresent": false,
+      "embeddedNoticeMentionsRestrictedIcons": false
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/mermaid-js/mermaid/mermaid@11.4.1/LICENSE",
+      "result": "MIT；已读取"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mermaid-js/mermaid/mermaid@11.15.0/LICENSE",
+      "result": "MIT；已读取"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cure53/DOMPurify/3.2.1/LICENSE",
+      "result": "Apache-2.0 OR MPL-2.0；已读取"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/OFL.txt",
+      "result": "OFL-1.1；已读取；不是固定字体字节来源证明"
+    }
+  ],
+  "github": {
+    "login": "yujie-213",
+    "repository": "yujie-213/cross-border-ecommerce-ai-platform",
+    "repositoryId": "1453919821",
+    "visibility": "public",
+    "pushPermission": true,
+    "defaultBranch": "main",
+    "headsQuery": "https://api.github.com/repos/yujie-213/cross-border-ecommerce-ai-platform/git/refs/heads",
+    "headsResult": "409 Git Repository is empty.",
+    "remoteSha": null,
+    "remoteStructure": "NOT_RUN: empty repository",
+    "remoteReadme": "NOT_RUN: empty repository",
+    "mutations": 0
+  },
+  "connector": {
+    "result": "UNSUPPORTED_LOCAL_GIT_PUSH",
+    "reason": "工具目录无git push/send-pack/pack导入；create_commit只有message/tree_sha/parent_sha/additional_parent_shas，无原始commit导入或原作者/提交者/时间/签名字段，不能原样保留本地提交对象与SHA；不以逐文件上传替代",
+    "localOriginConfigured": false
+  },
+  "remaining": [
+    "补齐Mermaid主许可全文及确定性依赖版本、版权和完整许可清单（含历史包）",
+    "核对交互HTML实际内嵌品牌矢量及各自许可、署名、变更说明/商标条件；公告提及某图标不能证明实际打包，也不能证明未打包",
+    "核对全部拟发布历史中的运行时与资源来源；不删历史或改写提交规避",
+    "许可通过后改用具有本地Git传输能力的已认证通道；普通push前检查远端祖先关系，之后再验SHA、目录和README"
+  ]
+}

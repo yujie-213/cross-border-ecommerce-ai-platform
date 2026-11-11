@@ -1,5 +1,10 @@
 # 文档治理与 GitHub 公开准备
 
+## 最新核查（2026-11-11，覆盖下文历史停止点）
+
+用户已自行创建仓库，明确禁止再次创建。当前连接器账号 yujie-213，既有 Public 目标为 [cross-border-ecommerce-ai-platform](https://github.com/yujie-213/cross-border-ecommerce-ai-platform)，有写权限；heads 查询返回409空仓库。未推送、未配置 origin、无远端 SHA。当前连接器不支持本地 Git push 或原始提交导入；未以 Git Data 重建提交或逐文件上传代替。许可核查已细化，但仍有主许可/依赖材料及图标条款缺口，未通过发布门槛，详见 [许可核查](LICENSE_REVIEW.md) 和 [原始记录](connector-publication-check.json)。下文“尚未创建仓库”和账号未验证等是此前事实，不能作为当前结论。
+
+
 本轮仅做文档治理、公开安全检查和 GitHub 发布准备，不开发补货 Agent、不启动正式前端、不调整业务规则或现有任务状态。开始时为 main / `f113229fa6eefc271b811e290858d596174ea52e`，跟踪区干净、无远端，另有85个既有未跟踪文件。用户已明确同意现有 Git 历史提交邮箱公开；不改写历史。
 
 ## 发布停止点
