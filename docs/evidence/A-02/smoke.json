@@ -17,10 +17,11 @@
       "result": "PASS"
     }
   ],
-  "time": "2026-11-12T02:35:20.846117+00:00",
+  "time": "2026-11-12T02:43:08.216319+00:00",
   "databaseWrites": 0,
   "erpCalls": 0,
   "modelCalls": 0,
   "ownedApiProcessStopped": true,
-  "credentialLeakObserved": false
+  "credentialLeakObserved": false,
+  "testedCommit": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
 }

@@ -85,12 +85,13 @@
   "modelCalls": 0,
   "otherDatabasesModified": false,
   "serverVersion": "8.0.27",
-  "databaseCreatedThisRun": true,
+  "databaseCreatedThisRun": false,
   "versions": {
     "SQLAlchemy": "2.0.57",
     "PyMySQL": "1.2.4",
     "alembic": "1.20.1",
     "cryptography": "50.0.2"
   },
-  "python": "3.13.5"
+  "python": "3.13.5",
+  "testedCommit": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
 }

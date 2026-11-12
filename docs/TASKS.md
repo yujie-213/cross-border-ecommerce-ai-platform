@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前执行授权（2026-11-12，覆盖下方历史附记）：负责人已认可A-01原则/职责并授权普通技术细节自主确定，已授权读取.env和唯一独立测试库必要验证，以及检查后直接A-02。当前真实实现/证据见A-01/A-02记录；不再以逐字段签认阻断普通开发，四项业务安全门及D-S01-01整体状态不变。
+
 本次授权增量（2026-11-12，基于e9433ef）：负责人批准仅修正A-04/A-05/B-05/D-S01-DEV-01/C-04的交付物、AC和完成证据文字，保留dependsOn、六阶段、31项任务及原真实模式门禁；授权Codex准备A-01评审材料和非破坏性MySQL检查，本人担任最终契约评审负责人，逐项签认尚未进行。当前材料见[评审稿](contracts/s01/A-01-契约评审稿.md)，实际证据见A-01记录；D-S01-01整体REVIEW、四项准入BLOCKED保持，其他开发仍未授权。下方旧“本轮仅规划”等措辞保留为原计划授权事实，不能覆盖本次有界授权。
 
 发布跟进附记（2026-11-11）：Codex 在 main / `6247e8356d5892f3ed5a1e7007e632e39263b458` 领取既有仓库许可/连接器核查，起点干净且无 remote；写入范围为 HANDOFF、TASKS 附记、THIRD_PARTY_NOTICES、governance 的 PUBLICATION/许可报告/核查 JSON。既有19项业务任务状态不变。目标账号/仓库/Public/写权限已验证，远端为空；当前连接器不支持本地提交 push，未做远端写入。许可材料与图标核查仍 BLOCKED，发布后 SHA/目录/README 检查 NOT_RUN。证据见 [增量核查](governance/LICENSE_REVIEW.md) 和 [核查记录](governance/connector-publication-check.json)；本轮提交由最终 Git 查询记录，不伪造 SHA。
@@ -177,7 +179,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-01"
   ],
   "entryCondition": "2026-11-12负责人认可现有A-01契约原则和职责，授权普通字段/DTO/错误码自主确定，替代逐项签认手续；授权读取.env及独立测试库真实兼容验证，检查后直接A-02。真实身份/ERP/业务规则/模型门禁不变。",
-  "ownerRole": "项目负责人本人担任A-01最终契约评审负责人；Codex只准备草案、自检与串行集成，星星复核结果按真实记录",
+  "ownerRole": "项目负责人认可契约原则并授权普通技术细节自主确定；Codex负责当前技术基线/兼容实测与单人集成，重大架构/关键规则/真实数据安全仍由负责人决定",
   "assignee": "Codex（本轮唯一执行者及集成人）",
   "allowedPaths": [
     "docs/contracts/s01/A-01-契约评审稿.md",
@@ -226,11 +228,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "8fbfce3799605ce3a87306e8a6a398055db67946"
+    "8fbfce3799605ce3a87306e8a6a398055db67946",
+    "be2a3f9547b31340efc053ca710af22b5e01e497",
+    "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
   ],
-  "testedCommit": "8fbfce3799605ce3a87306e8a6a398055db67946",
+  "testedCommit": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
   "evidence": [
     {
       "kind": "REVIEW_MATERIAL_SELF_CHECK",
@@ -289,11 +293,58 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "REAL_MYSQL_COMPATIBILITY",
+      "acceptanceIds": [
+        "A-01/AC1"
+      ],
+      "command": "clean-environment python tools/check_mysql_compat.py --output docs/evidence/A-01/mysql-compatibility.json",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "实际Server8.0.27、SQLAlchemy2.0.57/PyMySQL1.2.4、15项真实检查PASS；独立目标库首轮创建，提交后复验复用同库，随机fixture表均只清理自己新建项。其他库不改，无用户/授权变更，无SQLite替代。仅工程机制，不当A-03迁移或A-05恢复验收。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-01/mysql-compatibility.json"
+    },
+    {
+      "kind": "DEPENDENCY_COMPATIBILITY",
+      "acceptanceIds": [
+        "A-01/AC1"
+      ],
+      "command": "python -m pip install --require-hashes -r requirements.lock；python -m pip install -e . --no-deps --no-build-isolation；python -m pip check；python -m pytest",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "干净环境35个精确发行版/官方哈希安装，pip check及22测试PASS；锁SHA见证据。Python/OS组合仅当前已验；1条HTTPX弃用提示保留，未隐藏。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-02/tests.json"
+    },
+    {
+      "kind": "CURRENT_CONTRACT_AUTHORIZATION",
+      "acceptanceIds": [
+        "A-01/AC2",
+        "A-01/AC3"
+      ],
+      "command": "负责人本轮明确认可既有契约原则/模块职责，授权普通字段/DTO/错误码自主确定；ADR-S01-BOOT-001记录直接消费范围",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "本轮授权覆盖普通实现细节，不再要求逐项签认；已明确snapshotId/manifestRef、HTTP/内部错误映射、ModelRequest唯一命名与HTTP DTO到AnalysisContext映射。没有擅自冻结关键业务规则或放行四门，不冒称星星已评审所有代码。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/DECISIONS.md"
+    },
+    {
+      "kind": "REPOSITORY_AND_DOCUMENT_CHECK",
+      "acceptanceIds": [],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff 59bc034 --check；定向秘密/任务保全检查；git push origin HEAD:refs/heads/main；git ls-remote origin refs/heads/main",
+      "environment": "main / testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d；GitHub yujie-213既有Public origin，连接器与本机GCM同账号",
+      "sample": "18项文档检查PASS，31项任务/全部dependsOn/四门与其他29条记录保全；31个本轮增量文件秘密启发式及实际密码字面量扫描0发现，.env/未知YAML不入Git。普通push退出0且ls-remote确认实现提交4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d；本条证据收尾提交随后普通同步，最终SHA由Git查询。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
     }
   ],
   "review": null,
   "branch": "main",
-  "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae",
+  "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -326,6 +377,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "负责人明确简化契约评审，授权真实独立MySQL验证和完成后直接A-02；不再以普通字段逐项签认为阻断，真实业务安全门保留",
       "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "当前获准子集已实现/实测并提交；负责人已认可契约原则并授权普通细节自主确定，不再等待逐字段审批。交付不自动ACCEPTED，不把工程验证升级为真实业务/ERP/模型或生产验收",
+      "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
     }
   ],
   "completionEvidence": [
@@ -355,7 +413,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-01"
   ],
   "entryCondition": "2026-11-12用户明确授权必要环境与契约检查后直接开发A-02；A-01当前消费原则已认可，普通技术细节由执行者依既有设计确定。仅最小骨架/配置/错误/日志与健康检查，不自动开展A-03及业务能力。",
-  "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
+  "ownerRole": "Codex（本轮唯一实现者/测试者/台账集成人）；工程交付不自动业务验收，原四门仍由相应负责人解除",
   "assignee": "Codex（本轮唯一执行者及集成人）",
   "allowedPaths": [
     "pyproject.toml",
@@ -372,7 +430,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/README.md",
     "docs/generated/",
     "docs/planning/git-whitelist.json",
-    "docs/planning/validation-report.json"
+    "docs/planning/validation-report.json",
+    "tools/smoke_foundation.py",
+    ".gitignore",
+    "README.md"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -398,13 +459,75 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "be2a3f9547b31340efc053ca710af22b5e01e497",
+    "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
+  ],
+  "testedCommit": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-02/AC1",
+        "A-02/AC2"
+      ],
+      "command": "clean-environment python -m pytest；clean-environment python -m pip check",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "22项自动化测试PASS、依赖无冲突；配置缺失/字面量密码/环境覆盖/remote TLS策略、启动无SQL、readiness不冒称能力、HTTP/校验/未捕获错误脱敏、trace与日志/业务路由拒绝。所有身份/业务数据均显式fixture，非真实身份或业务验收。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-02/tests.json"
+    },
+    {
+      "kind": "REAL_API_PROCESS",
+      "acceptanceIds": [
+        "A-02/AC1",
+        "A-02/AC2"
+      ],
+      "command": "clean-environment python tools/smoke_foundation.py --output docs/evidence/A-02/smoke.json",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "实际独立API进程live200、ready503但真实MySQL只读连通，未实现S01/持久化/身份/Worker明确报告；业务/执行/模型路由404，trace一致、未发现实际凭据泄漏，已停止自己的进程。API没有迁移/写库/启动Worker或调用ERP/模型。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-02/smoke.json"
+    },
+    {
+      "kind": "LOCKED_CLEAN_INSTALL",
+      "acceptanceIds": [
+        "A-02/AC1"
+      ],
+      "command": "python -m venv .tmp/a02-clean；python -m pip install --require-hashes -r requirements.lock；python -m pip install -e . --no-deps --no-build-isolation",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "全新隔离环境成功安装35发行版与本地包，实际测试通过。初次受限ensurepip失败后受控执行成功；pip-tools长时无输出后终止，采用已测版本＋官方PyPI哈希锁并以干净安装证明，不虚称工具首轮成功。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-02/tests.json"
+    },
+    {
+      "kind": "NOT_IMPLEMENTED_ACCEPTANCE",
+      "acceptanceIds": [],
+      "command": "NOT_RUN：A-03迁移/持久化、A-04真实身份、A-05持久Worker与S01业务/ERP/模型/浏览器/生产验收",
+      "environment": "Windows10 build19045 / CPython3.13.5 / 干净锁文件环境；testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+      "sample": "当前只有A-02骨架和数据库机制验证；原型/既有专项保持，四项业务安全门仍BLOCKED。未把仅工程测试计为完整S01-AC或S02 MC通过。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "REPOSITORY_AND_DOCUMENT_CHECK",
+      "acceptanceIds": [],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff 59bc034 --check；定向秘密/任务保全检查；git push origin HEAD:refs/heads/main；git ls-remote origin refs/heads/main",
+      "environment": "main / testedCommit=4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d；GitHub yujie-213既有Public origin，连接器与本机GCM同账号",
+      "sample": "18项文档检查PASS，31项任务/全部dependsOn/四门与其他29条记录保全；31个本轮增量文件秘密启发式及实际密码字面量扫描0发现，.env/未知YAML不入Git。普通push退出0且ls-remote确认实现提交4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d；本条证据收尾提交随后普通同步，最终SHA由Git查询。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    }
+  ],
   "review": null,
   "branch": "main",
-  "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae",
+  "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -423,6 +546,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "单人领取A-02最小骨架，获准MySQL15项兼容检查已PASS；保留原型/专项与四门，不创建业务Handler/表/Worker占位",
       "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "当前获准子集已实现/实测并提交；负责人已认可契约原则并授权普通细节自主确定，不再等待逐字段审批。交付不自动ACCEPTED，不把工程验证升级为真实业务/ERP/模型或生产验收",
+      "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
     }
   ],
   "completionEvidence": [
