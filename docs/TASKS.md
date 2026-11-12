@@ -5180,6 +5180,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
       "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
       "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "changeType": "MERGED_MAIN_ENGINEERING_REVERIFICATION",
+      "observedHead": "56cc62a69d90527dcd02e53f20aae01b26b878e4",
+      "reason": "验收文档56cc62a已普通同步评审分支并ff-only合入本地main；该HEAD新全量601 PASS/0失败/0错误/0跳过、9条验证命令PASS，原601逐名及历史证据/模型核账指纹保全；新ERP/模型0，后续仅文档证据收尾并经最终检查后普通推送main。分项工程ACCEPTED、整体REVIEW与四门不变。",
+      "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/postmerge-verification.json"
     }
   ],
   "acceptanceRefs": [

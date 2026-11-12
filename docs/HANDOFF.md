@@ -2,6 +2,8 @@
 
 ## 教学后端分项验收、main 合入与前端准入（2026-11-12，基于1619bc1）
 
+实际合并复验：验收文档提交56cc62a69d90527dcd02e53f20aae01b26b878e4已同步远端评审分支，随后以ff-only从b1813e5合入本地main；在56cc62a上新执行601 PASS、0 FAIL/ERROR/SKIP、9条验证命令全PASS，文档18项PASS。原601逐名、原验收证据、源码/测试/工具/迁移/依赖保全；原付费task的1条budget/3条attempt/3条usage前后指纹一致，仍3次/5642Token/$0.15预约。新证据见[合并后复验](evidence/S01-BACKEND-ACCEPTANCE/postmerge-verification.json)、[一致性](evidence/S01-BACKEND-ACCEPTANCE/consistency.json)、[核账保全](evidence/S01-BACKEND-ACCEPTANCE/budget-preservation.json)。后续收尾提交仅文档/证据，最终main HEAD与该被测HEAD区分；完成最终HEAD文档/一致性检查后普通推送，以Git读回和最终交付回执确定同步结果。本轮新ERP/模型调用0。
+
 负责人已明确通知本人及星星独立评审完成：交付1619bc1d1f7018bb8116dafeceaf9713fe52687e、已验证实现c965a334b6bbc3c689fb334c80f8cf0a9ee84dad的教学后端工程范围ACCEPTED并允许普通合main。实际接手D:/电商项目/跨境电商智慧AI平台、codex/s01-backend-closure/1619bc1；fetch后本地/远端main均b1813e5、评审分支均1619bc1，main为祖先、可ff-only。已跟踪区干净，仅原docs/ERP-openapi.yaml未跟踪保留，指纹15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128、1681341字节。未读取/改写本机凭据，未新建代理。
 
 按混合任务范围登记：DEV此前工程ACCEPTED保留；LIVE整体REVIEW，review/history记教学后端分项ACCEPTED；C-04整体REVIEW/五例FAIL、3次/5067+575=5642Token、UNKNOWN费用/$0.15预约和四门BLOCKED保留。未完成用途修复/评测、普通分析接入真实模型归原C-04独立剩余范围；没有新真实模型或ERP请求，不修改算法/src/tests/依赖/迁移，也不放宽文档校验器。原历史FAIL/NOT_RUN及601项证据逐字保全。

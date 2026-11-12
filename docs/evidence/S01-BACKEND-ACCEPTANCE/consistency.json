@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "date": "2026-11-12",
+  "testedMergedMain": "56cc62a69d90527dcd02e53f20aae01b26b878e4",
+  "reviewDelivery": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+  "originalTestedImplementation": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "mergeMethod": "git merge --ff-only codex/s01-backend-closure",
+  "sourceTestsToolsMigrationsDependenciesUnchanged": true,
+  "original601NamesPreserved": true,
+  "allOriginalEvidencePreserved": true,
+  "newFullRegression": {
+    "total": 601,
+    "passed": 601,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "baselineCases": 399,
+    "baselineCasesPreserved": true,
+    "addedCases": 202
+  },
+  "allNineVerificationCommandsPassed": true,
+  "documentationCheck": "python docs/planning/build_docs.py; python docs/planning/check_plan.py: PASS 18/18",
+  "unknownOpenApiSha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+  "unknownOpenApiStillUntracked": true,
+  "c04": {
+    "taskState": "REVIEW",
+    "overallEvaluation": "FAIL",
+    "caseResults": {
+      "A": "AVAILABLE",
+      "B": "AVAILABLE",
+      "C": "INVALID_OUTPUT",
+      "D": "NOT_RUN",
+      "E": "NOT_RUN"
+    }
+  },
+  "enterpriseGates": "ALL_FOUR_BLOCKED",
+  "frontendTask": "D-S01-UI-01 TODO, preparation only",
+  "newLiveErpRequests": 0,
+  "newLiveModelRequests": 0,
+  "budgetPreservation": "budget-preservation.json",
+  "nextStep": "Commit only documentation/evidence, run final HEAD documentation/consistency checks, then ordinary push main if remote has not drifted. Final push receipt is verified directly by Git and reported to owner; no self-referential commit SHA in this artifact."
+}
