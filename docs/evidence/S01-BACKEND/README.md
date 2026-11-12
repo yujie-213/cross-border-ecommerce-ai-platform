@@ -1,5 +1,7 @@
 # S01 后端闭环评审证据
 
+后续分项验收增量：负责人和星星已批准本目录对应的教学后端工程范围ACCEPTED及普通合main，见[验收登记](../S01-BACKEND-ACCEPTANCE/review.md)。下文与原JSON保留1619bc1交付时点；C-04整体FAIL/REVIEW和四项正式企业门BLOCKED没有改变，合并后新复验另存，不覆盖原证据。
+
 当前分支 `codex/s01-backend-closure`，工作基点 `e547335323fd19fccd324752dbeb1d08c9e21c2d`。状态与实现提交只以 [TASKS](../../TASKS.md) 为准；本轮交付停止在正式前端对接之前。
 
 最终被测实现 `c965a334b6bbc3c689fb334c80f8cf0a9ee84dad`：全量601 PASS，教学Golden9项和独立进程5项PASS。真实模型3次，A/B成功、C校验拒绝，D/E未运行，五例用途评测FAIL；费用UNKNOWN保留$0.15预约。交付REVIEW，完整分级结论见 [后端报告](backend-report.md)。

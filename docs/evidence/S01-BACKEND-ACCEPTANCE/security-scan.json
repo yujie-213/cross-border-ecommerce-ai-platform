@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "Every unique changed blob in origin/main..review HEAD, plus exact current acceptance documents; unknown OpenAPI and ignored secrets excluded",
+  "baseCommit": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "reviewHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+  "historicalUniqueBlobs": 147,
+  "worktreePaths": [
+    "AGENTS.md",
+    "README.md",
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/TASKS.md",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/preflight.json",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md",
+    "docs/evidence/S01-BACKEND/README.md",
+    "docs/generated/DEPENDENCIES.mmd",
+    "docs/generated/STATUS.md",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/ui/S01-frontend-entry.md"
+  ],
+  "findings": [],
+  "triagedFindings": [
+    {
+      "path": "tests/unit/data/test_erp.py",
+      "line": 16,
+      "rule": "LITERAL_SECRET",
+      "value": "REDACTED",
+      "disposition": "FALSE_POSITIVE",
+      "reason": "Explicit offline fixture constant used with injected Transport; never a configured ERP credential"
+    },
+    {
+      "path": "tests/unit/data/test_erp.py",
+      "line": 45,
+      "rule": "LITERAL_SECRET",
+      "value": "REDACTED",
+      "disposition": "FALSE_POSITIVE",
+      "reason": "Explicit offline fixture constant used with injected Transport; never a configured ERP credential"
+    }
+  ],
+  "limitations": "Heuristic secret patterns do not prove absence of every secret; raw responses and local credentials are not publication inputs."
+}

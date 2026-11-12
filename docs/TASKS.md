@@ -1,3 +1,5 @@
+当前分项验收与合并授权（2026-11-12，交付1619bc1/被审实现c965a33）：负责人和星星批准教学后端工程范围ACCEPTED及普通合main。LIVE含正式业务未验范围，整体仍REVIEW并在review/history登记部分验收；C-04保持REVIEW、五例FAIL（A/B成功、C拒绝、D/E未发），5642Token/费用UNKNOWN/$0.15预约保留。原DEV工程ACCEPTED和四项企业门BLOCKED不变。D-S01-UI-01确认下一阶段但仍TODO，本轮只准入交接、无前端编码或新真实模型调用。
+
 当前后端交付（2026-11-12，固定c965a33）：LIVE/C-04提交REVIEW、review=null。教学API写入及独立GET、9项Golden和5项独立进程PASS；全量601 PASS。真实模型3次A/B成功、C拒绝，D/E NOT_RUN，五例用途评测FAIL；Token5642、费用UNKNOWN预约$0.15保留。教学验证不解除四项企业门，前端NOT_RUN，不合main；旧“本轮未授权/未调用”的阶段记录按历史时点阅读。详见docs/evidence/S01-BACKEND/backend-report.md。
 
 当前教学仿真授权增量（2026-11-12）：沿同一开发分支继续，独立批次API写入/回读与教学规则计算验证获准，企业真实规则/经营数据不代签。费用可选、模型10次/$1总上限不变。
@@ -3061,7 +3063,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "本轮完整后端闭环及最新教学ERP仿真API数据授权；限固定教学host/账号店仓/独立批次，先验副作用与幂等，原10请求/$1模型上限不增加；正式企业门不解除，最终后端REVIEW、前端之前停止。",
+  "entryCondition": "负责人明确保留整体真实用途FAIL及REVIEW；本轮仅登记、工程合并与离线/隔离库复验，不授权新增真实模型请求。未完成用途评测和正常S01在线模型接入作为本任务独立剩余范围，后续指令/许可和预算核对后再执行。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex主集成及冻结范围并行Agent",
   "allowedPaths": [
@@ -3190,7 +3192,34 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-BACKEND/model/report.md"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "负责人和星星（负责人本轮明确通知独立评审结论；Codex仅登记）",
+    "date": "2026-11-12",
+    "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+    "evidenceCommit": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+    "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md",
+    "scope": "S01_MODEL_PURPOSE_EVALUATION",
+    "decision": "五例真实用途评测FAIL，整体不ACCEPTED，C-04保持REVIEW；正确拒绝C及停止D/E不阻塞已合格工程合main。",
+    "scopeDecision": "NOT_ACCEPTED",
+    "overallTaskDecision": "REVIEW",
+    "caseResults": {
+      "A": "AVAILABLE",
+      "B": "AVAILABLE",
+      "C": "INVALID_OUTPUT",
+      "D": "NOT_RUN",
+      "E": "NOT_RUN"
+    },
+    "realModelCalls": 3,
+    "inputTokens": 5067,
+    "outputTokens": 575,
+    "totalTokens": 5642,
+    "costStatus": "UNKNOWN",
+    "retainedCostReservationUsd": "0.15",
+    "remainingScope": [
+      "原C-04下独立安排C输出引用契约与D/E完整真实用途覆盖的修复/评测/验收；不得修改历史结果或换task/key盲重发",
+      "正常S01分析流程的真实模型接入和正式启用单独安排，不能把独立评测入口当已交付在线能力；本轮新调用0"
+    ]
+  },
   "branch": "codex/s01-backend-closure",
   "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
   "dirtyPaths": [
@@ -3225,6 +3254,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
       "reason": "教学独立批次API写读/准入、9项Golden和5项独立进程PASS；固定全量601 PASS。真实模型3次A/B成功、C校验拒绝，D/E NOT_RUN、评测FAIL，原预算与安全停止保留。提交材料评审，不登记ACCEPTED，不解除正式企业门，不开发前端。"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "changeType": "OWNER_SCOPED_ACCEPTANCE",
+      "reason": "独立评审确认A/B可用、C缺文内引用正确拒绝、D/E按规则未发；3次/5642Token/费用UNKNOWN/$0.15预约保留，五例FAIL不改PASS，后续独立修复验收。",
+      "observedHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+      "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md"
     }
   ],
   "completionEvidence": [
@@ -4796,7 +4835,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-RULE-01",
     "D-S01-ERP-ACCESS-01"
   ],
-  "entryCondition": "本轮完整后端闭环及最新教学ERP仿真API数据授权；限固定教学host/账号店仓/独立批次，先验副作用与幂等，原10请求/$1模型上限不增加；正式企业门不解除，最终后端REVIEW、前端之前停止。",
+  "entryCondition": "负责人和星星已完成1619bc1交付的独立评审，教学后端工程范围ACCEPTED并允许合main；企业正式数据/规则/ERP安全门仍BLOCKED，LIVE整体REVIEW。本轮仅验收登记/合并/复验和前端准入交接，无新增ERP或模型调用。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": "Codex主集成及冻结范围并行Agent",
   "allowedPaths": [
@@ -5036,7 +5075,44 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-BACKEND/backend-report.md"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "负责人和星星（负责人本轮明确通知独立评审结论；Codex仅登记）",
+    "date": "2026-11-12",
+    "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+    "evidenceCommit": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+    "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md",
+    "scope": "S01_TEACHING_BACKEND_ENGINEERING_ONLY",
+    "decision": "教学场景后端工程范围ACCEPTED；任务含企业正式数据/规则与完整业务验收，整体保持REVIEW。允许该工程代码普通合入main。",
+    "scopeDecision": "ACCEPTED",
+    "overallTaskDecision": "REVIEW",
+    "acceptedScope": [
+      "教学ERP仿真API写入与独立GET回读、来源追踪与教学规则区分",
+      "B01/B02及9项独立Golden；5项真实API/Worker/MySQL；601项工程回归",
+      "任务创建/取消/幂等/历史/报告/证据/当前权限",
+      "统一Token/Provider适配、费用可空/未知费用预约保留、0005与历史核账保全",
+      "S01后端API契约和运行文档"
+    ],
+    "retainedEvidence": [
+      {
+        "index": 1,
+        "artifactRef": "docs/evidence/D-S01-LIVE-01/source-index.json",
+        "result": "FAIL",
+        "reason": "保留历史源失败/正式业务未运行事实；不计作本次教学工程新增实测或整体任务通过。"
+      },
+      {
+        "index": 5,
+        "artifactRef": "docs/evidence/D-S01-LIVE-01/owner-rule-review.md",
+        "result": "NOT_RUN",
+        "reason": "保留历史源失败/正式业务未运行事实；不计作本次教学工程新增实测或整体任务通过。"
+      },
+      {
+        "index": 11,
+        "artifactRef": "docs/evidence/S01-BACKEND/backend-report.md",
+        "result": "NOT_RUN",
+        "reason": "保留历史源失败/正式业务未运行事实；不计作本次教学工程新增实测或整体任务通过。"
+      }
+    ]
+  },
   "branch": "codex/s01-backend-closure",
   "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
   "dirtyPaths": [
@@ -5094,6 +5170,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
       "reason": "教学独立批次API写读/准入、9项Golden和5项独立进程PASS；固定全量601 PASS。真实模型3次A/B成功、C校验拒绝，D/E NOT_RUN、评测FAIL，原预算与安全停止保留。提交材料评审，不登记ACCEPTED，不解除正式企业门，不开发前端。"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "changeType": "OWNER_SCOPED_ACCEPTANCE",
+      "reason": "负责人批准教学后端工程分项ACCEPTED并合main；LIVE混合范围整体REVIEW、历史FAIL/NOT_RUN保全，四项正式企业门不解除。",
+      "observedHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+      "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md"
     }
   ],
   "acceptanceRefs": [
@@ -5348,7 +5434,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "A-04"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可以先用已实现API和显式工程测试数据接入；实际单SKU数据展示须D-S01-LIVE-01，真实AI成功展示须C-04获准结果。",
+  "entryCondition": "下一阶段已确认为D-S01-UI-01，保持TODO、未领取编码。本轮仅完成准入交接；等负责人下一条开发指令，以本轮同步后的最新main为基线，沿用统一中台产品原型/视觉/架构，消费已验收教学固定包真实API。普通后端仅off/mock，C-04剩余用途评测/正常流程真实模型接入独立安排，企业四门不解除。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": null,
   "allowedPaths": [
@@ -5359,7 +5445,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
     "正式workspace中复用工作台/列表/详情/证据/空态和DESIGN视觉；最少API适配/真实任务轮询/取消与刷新重读",
-    "本次报告Ref/基线候选/逐日图表/来源/限制/版本、四类AI解释/依据/独立状态展示；原离线原型保留参照"
+    "本次报告Ref/基线候选/逐日图表/来源/限制/版本、四类AI解释/依据/独立状态展示；原离线原型保留参照",
+    "单SKU店仓SKU选项/任务创建状态取消/库存需求缺货候选/服务端七日序列图表/AI与Token及降级/质量风险人工确认说明/证据历史/教学标识；只接实际接口，不用前端Mock冒充真实能力"
   ],
   "acceptance": [
     {
@@ -5405,7 +5492,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "branch": null,
   "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
   "dirtyPaths": [],
-  "latestHandoffRef": "docs/HANDOFF.md",
+  "latestHandoffRef": "docs/ui/S01-frontend-entry.md",
   "blocker": null,
   "history": [
     {
@@ -5414,6 +5501,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "TODO",
       "reason": "本轮仅规划登记；未领取开发，已知实际准入缺口单列BLOCKED，不把原则同意当完成",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "TODO",
+      "changeType": "NEXT_STAGE_PREPARATION_ONLY",
+      "reason": "确认下一阶段与准入范围，新增API能力/缺失能力和剩余依赖交接；任务保持TODO、不创建前端代码或依赖。",
+      "observedHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+      "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md"
     }
   ],
   "acceptanceRefs": [

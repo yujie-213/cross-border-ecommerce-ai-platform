@@ -1,5 +1,5 @@
 {
-  "authorization": "2026-11-12 用户授权 S01 完整后端、教学 API 仿真与受限模型验证、提交及普通同步评审分支；前端之前停止。",
+  "authorization": "2026-11-12 负责人批准S01教学后端工程分项验收、普通合入main和GitHub同步；C-04 FAIL/四门BLOCKED保留，仅前端准入交接。",
   "policy": "Exact paths; no blanket add; no secrets, raw teaching responses or untracked OpenAPI; no history rewrite.",
   "paths": [
     ".env.example",
@@ -337,6 +337,12 @@
     "docs/evidence/D-S01-LIVE-01/real-workflow.json",
     "docs/evidence/D-S01-LIVE-01/source-index.json",
     "docs/evidence/D-S01-LIVE-01/verification.json",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/budget-preservation.json",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/consistency.json",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/postmerge-verification.json",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/preflight.json",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE/security-scan.json",
     "docs/evidence/S01-BACKEND/README.md",
     "docs/evidence/S01-BACKEND/admission/admission-report.md",
     "docs/evidence/S01-BACKEND/admission/rule-decision-checklist.md",
@@ -428,6 +434,7 @@
     "docs/ui/PRODUCT_SPEC.md",
     "docs/ui/RESEARCH.md",
     "docs/ui/REVIEW_FIX.md",
+    "docs/ui/S01-frontend-entry.md",
     "docs/ui/check_design.py",
     "docs/ui/design-review-before-review-fix.json",
     "docs/ui/design-review-palette-check-fail.json",

@@ -1,5 +1,15 @@
 # 当前增量交接 v0.3
 
+## 教学后端分项验收、main 合入与前端准入（2026-11-12，基于1619bc1）
+
+负责人已明确通知本人及星星独立评审完成：交付1619bc1d1f7018bb8116dafeceaf9713fe52687e、已验证实现c965a334b6bbc3c689fb334c80f8cf0a9ee84dad的教学后端工程范围ACCEPTED并允许普通合main。实际接手D:/电商项目/跨境电商智慧AI平台、codex/s01-backend-closure/1619bc1；fetch后本地/远端main均b1813e5、评审分支均1619bc1，main为祖先、可ff-only。已跟踪区干净，仅原docs/ERP-openapi.yaml未跟踪保留，指纹15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128、1681341字节。未读取/改写本机凭据，未新建代理。
+
+按混合任务范围登记：DEV此前工程ACCEPTED保留；LIVE整体REVIEW，review/history记教学后端分项ACCEPTED；C-04整体REVIEW/五例FAIL、3次/5067+575=5642Token、UNKNOWN费用/$0.15预约和四门BLOCKED保留。未完成用途修复/评测、普通分析接入真实模型归原C-04独立剩余范围；没有新真实模型或ERP请求，不修改算法/src/tests/依赖/迁移，也不放宽文档校验器。原历史FAIL/NOT_RUN及601项证据逐字保全。
+
+默认工具四入口新执行均退出0并明确NOT_RUN/禁网；普通S01_BACKEND要求显式test/mock/network=false、catalog和off/mock解释，没有采购写入路由，真实评测是独立装配。新检查与原验收依据分开，见[preflight](evidence/S01-BACKEND-ACCEPTANCE/preflight.json)及[验收范围](evidence/S01-BACKEND-ACCEPTANCE/review.md)。合并后固定HEAD的全量/文档/保全检查将单列本目录新证据，不覆盖原S01-BACKEND/verification.json。普通同步评审分支后ff-only合入main，最终HEAD与远端以真实Git查询为准；若漂移或关键失败停止推送，不强行处理。
+
+下一阶段D-S01-UI-01已确认但仍TODO、未领取编码，交接见[前端准入](ui/S01-frontend-entry.md)。使用本轮最终同步后的最新main作为后续开工基线，复用统一原型/视觉/架构；已实现任务/选项/报告/证据/历史API和未实现采购/正常流程在线DeepSeek明确分开。前端开发仍待下一条指令。本轮完成main同步后停止。
+
 ## S01 后端闭环与教学仿真交付（2026-11-12，基于e547335）
 
 实际工作区 `D:/电商项目/跨境电商智慧AI平台`、分支 `codex/s01-backend-closure`。接手基点 `e547335323fd19fccd324752dbeb1d08c9e21c2d`；实现提交 `5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30`，可重复验证工具提交及最终被测HEAD `c965a334b6bbc3c689fb334c80f8cf0a9ee84dad`。旧3条并行线已按冻结范围交付，主集成串行处理公共契约、迁移、组合根和台账；本收口没有新建代理。未知 `docs/ERP-openapi.yaml` 只读保留未跟踪，不暂存；`.env/.env.erp`、私有原始请求/响应/模型内容均不入Git。当前未提交范围为本轮脱敏证据、TASKS/HANDOFF/DECISIONS/README/运行手册及生成状态；精确范围由最终Git和白名单检查核对。

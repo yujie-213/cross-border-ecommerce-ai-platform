@@ -1,0 +1,54 @@
+{
+  "branch": "codex/s01-backend-closure",
+  "head": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+  "main": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "remoteReview": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
+  "fastForwardPossible": true,
+  "trackedForbiddenFiles": [],
+  "unknownOpenApiSha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+  "unknownOpenApiBytes": 1681341,
+  "testsUnchangedSinceValidatedImplementation": true,
+  "defaultEntryRuns": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "tools.deepseek_connectivity"
+      ],
+      "exitCode": 0,
+      "output": "{\"status\": \"NOT_RUN\", \"network\": \"DISABLED\", \"reason\": \"Separate paid-call authorization and USD budget required\"}",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "tools.s01_model_evaluation"
+      ],
+      "exitCode": 0,
+      "output": "{\"status\": \"NOT_RUN\", \"network\": \"DISABLED\", \"reason\": \"Explicit evaluation authorization required\"}",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "tools.s01_teaching_dataset"
+      ],
+      "exitCode": 0,
+      "output": "{\"result\": \"NOT_RUN\", \"batchId\": \"S01-AI-TEST-20261112\", \"code\": \"TEACHING_DATA_EXECUTION_NOT_ENABLED\"}",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "tools.s01_backend_observation_smoke"
+      ],
+      "exitCode": 0,
+      "output": "{\"result\": \"NOT_RUN\", \"reason\": \"EXPLICIT_REAL_BACKEND_FLAG_REQUIRED\"}",
+      "stderr": ""
+    }
+  ],
+  "scope": "Actual new pre-merge Git/default-entry inspection; historical601 acceptance is not claimed as a new run."
+}
