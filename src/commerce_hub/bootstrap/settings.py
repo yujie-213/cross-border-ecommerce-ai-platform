@@ -26,6 +26,15 @@ class Settings(BaseSettings):
     db_password: SecretStr = Field(validation_alias="S01_TEST_DB_PASSWORD", repr=False)
     db_connect_timeout: int = Field(default=5, ge=1, le=10, validation_alias="S01_TEST_DB_CONNECT_TIMEOUT_SECONDS")
     db_ssl_ca: str = Field(default="", validation_alias="S01_TEST_DB_SSL_CA", repr=False)
+    auth_issuer: str = Field(default="", validation_alias="COMMERCE_AUTH_ISSUER")
+    auth_audience: str = Field(default="", validation_alias="COMMERCE_AUTH_AUDIENCE")
+    auth_signing_key: SecretStr = Field(default=SecretStr(""), validation_alias="COMMERCE_AUTH_SIGNING_KEY", repr=False)
+    browser_origin: str = Field(default="https://localhost", validation_alias="COMMERCE_BROWSER_ORIGIN")
+    lease_seconds: int = Field(default=10, ge=1, le=120, validation_alias="COMMERCE_LEASE_SECONDS")
+    heartbeat_seconds: float = Field(default=2, ge=0.05, le=30, validation_alias="COMMERCE_HEARTBEAT_SECONDS")
+    poll_seconds: float = Field(default=0.2, ge=0.05, le=10, validation_alias="COMMERCE_POLL_SECONDS")
+    task_deadline_seconds: int = Field(default=120, ge=1, le=600, validation_alias="COMMERCE_TASK_DEADLINE_SECONDS")
+    max_delivery_attempts: int = Field(default=3, ge=1, le=10, validation_alias="COMMERCE_MAX_DELIVERY_ATTEMPTS")
 
     @field_validator("db_user", "db_password")
     @classmethod
@@ -47,7 +56,16 @@ class Settings(BaseSettings):
             raise ValueError("remote database requires trusted CA")
         if self.db_ssl_ca and not Path(self.db_ssl_ca).is_file():
             raise ValueError("trusted CA file missing")
+        configured = (bool(self.auth_issuer), bool(self.auth_audience), bool(self.auth_signing_key.get_secret_value()))
+        if any(configured) and (not all(configured) or len(self.auth_signing_key.get_secret_value().encode()) < 32):
+            raise ValueError("incomplete trusted identity configuration")
+        if self.heartbeat_seconds >= self.lease_seconds / 2:
+            raise ValueError("heartbeat must be shorter than half lease")
         return self
+
+    @property
+    def auth_configured(self):
+        return bool(self.auth_issuer and self.auth_audience and self.auth_signing_key.get_secret_value())
 
     def connection_kwargs(self) -> dict:
         # Used only by the connector. Never log this result.

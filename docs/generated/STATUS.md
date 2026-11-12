@@ -1,13 +1,13 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`10582052f00ca6db2f93b2a50f9ec0b472dcea2f9c5483dc564004c7e5246d0e`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`9fc9aa6fefa76d3449ec9b0d55d84396b739c5a5637a5a6a976c4c11dd24b359`。不要手工编辑；候选不是执行授权。
 
-任务 31 项；TODO 18；IN_PROGRESS 0；BLOCKED 4；REVIEW 9；ACCEPTED 0。
+任务 31 项；TODO 14；IN_PROGRESS 4；BLOCKED 4；REVIEW 9；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
 | SETUP | 1 | 0 | 0 | 0 | 1 | 0 |
-| A | 6 | 4 | 0 | 0 | 2 | 0 |
+| A | 6 | 0 | 4 | 0 | 2 | 0 |
 | B | 5 | 5 | 0 | 0 | 0 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
 | D | 14 | 4 | 0 | 4 | 6 | 0 |
@@ -17,6 +17,10 @@
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
 - A-01 S01所需最小版本与公共契约冻结：REVIEW；实际执行者=Codex（本轮唯一执行者及集成人）。
 - A-02 最小骨架、配置、错误与日志：REVIEW；实际执行者=Codex（本轮唯一执行者及集成人）。
+- A-03 MySQL、SQLAlchemy与Alembic子集：IN_PROGRESS；实际执行者=Codex主集成；storage_migrations代理负责指定存储/迁移/测试文件。
+- A-04 身份认证、权限与租户必要子集：IN_PROGRESS；实际执行者=Codex主集成；g01_access代理负责governance/access与security测试。
+- A-05 API/独立Worker与MySQL持久任务：IN_PROGRESS；实际执行者=Codex负责任务/预算/投递/组合根/API/Worker；g01_access代理只补独立集成测试。
+- A-06 工程底座复现与故障验收：IN_PROGRESS；实际执行者=Codex主集成与最终复验；storage_migrations代理只补实际进程测试。
 - D-S01-01 S01补货专项详细设计（第一阶段）：REVIEW；实际执行者=Codex（本轮唯一文档执行者与台账集成人）。
 - UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
 - D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）：REVIEW；实际执行者=Codex（本轮单人文档执行者）。
@@ -35,10 +39,10 @@
 | SETUP-001 | 精简计划/归档与本地Git交付 | REVIEW | 无；仍核对入口指令 |
 | A-01 | S01所需最小版本与公共契约冻结 | REVIEW | D-S01-01 |
 | A-02 | 最小骨架、配置、错误与日志 | REVIEW | A-01 |
-| A-03 | MySQL、SQLAlchemy与Alembic子集 | TODO | A-02 |
-| A-04 | 身份认证、权限与租户必要子集 | TODO | A-02 |
-| A-05 | API/独立Worker与MySQL持久任务 | TODO | A-03, A-04 |
-| A-06 | 工程底座复现与故障验收 | TODO | A-05 |
+| A-03 | MySQL、SQLAlchemy与Alembic子集 | IN_PROGRESS | A-02 |
+| A-04 | 身份认证、权限与租户必要子集 | IN_PROGRESS | A-02 |
+| A-05 | API/独立Worker与MySQL持久任务 | IN_PROGRESS | A-03, A-04 |
+| A-06 | 工程底座复现与故障验收 | IN_PROGRESS | A-05 |
 | B-01 | D01/D02 S01输入适配与标准化 | TODO | D-S01-01, A-03, A-04 |
 | B-02 | D03/D04 S01质量/快照与证据 | TODO | B-01, D-S01-RULE-01 |
 | B-03 | B01 S01确定性供需指标 | TODO | A-01, D-S01-RULE-01 |

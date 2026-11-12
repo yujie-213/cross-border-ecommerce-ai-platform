@@ -181,10 +181,20 @@ def test_logger_discards_arbitrary_message_arguments_and_traceback(isolate_runti
     assert json.loads(logged)["event"] == "redacted_event"
 
 
-@pytest.mark.parametrize("path", ["/api/v1/analysis-tasks", "/api/v1/reports", "/api/v1/executions",
+def test_oversized_request_rejected_before_parsing_or_authentication(settings, isolate_runtime):
+    with TestClient(create_app(settings)) as client:
+        response = client.post("/api/v1/analysis-tasks", content=(FIXTURE_SECRET * 3000).encode(),
+                               headers={"Content-Type": "application/json"})
+        assert response.status_code == 413
+        assert response.json()["code"] == "REQUEST_TOO_LARGE"
+        assert FIXTURE_SECRET not in response.text
+    assert FIXTURE_SECRET not in isolate_runtime.getvalue()
+
+
+@pytest.mark.parametrize("path", ["/api/v1/reports", "/api/v1/executions",
                                   "/api/v1/approvals", "/api/v1/models", "/docs", "/openapi.json"])
 def test_unimplemented_routes_are_not_registered(settings, path):
     app = create_app(settings)
-    assert {route.path for route in app.routes} == {"/health/live", "/health/ready"}
+    assert "/api/v1/analysis-tasks" in {route.path for route in app.routes}
     with TestClient(app) as client:
         assert client.get(path).status_code == 404

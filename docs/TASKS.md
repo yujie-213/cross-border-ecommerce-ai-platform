@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前第一大阶段授权（2026-11-12，基于526829b）：用户明确授权A-03/A-04/A-05/A-06全部剩余开发和普通问题自行修复；按现有依赖推进，契约/目录不冲突部分并行，Codex主集成人协调公共文件。实际实现/验证状态只读下方JSON；四项外部业务安全门不解除，不自动开始第二阶段。
+
 当前执行授权（2026-11-12，覆盖下方历史附记）：负责人已认可A-01原则/职责并授权普通技术细节自主确定，已授权读取.env和唯一独立测试库必要验证，以及检查后直接A-02。当前真实实现/证据见A-01/A-02记录；不再以逐字段签认阻断普通开发，四项业务安全门及D-S01-01整体状态不变。
 
 本次授权增量（2026-11-12，基于e9433ef）：负责人批准仅修正A-04/A-05/B-05/D-S01-DEV-01/C-04的交付物、AC和完成证据文字，保留dependsOn、六阶段、31项任务及原真实模式门禁；授权Codex准备A-01评审材料和非破坏性MySQL检查，本人担任最终契约评审负责人，逐项签认尚未进行。当前材料见[评审稿](contracts/s01/A-01-契约评审稿.md)，实际证据见A-01记录；D-S01-01整体REVIEW、四项准入BLOCKED保持，其他开发仍未授权。下方旧“本轮仅规划”等措辞保留为原计划授权事实，不能覆盖本次有界授权。
@@ -578,15 +580,29 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-02"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-02之后可先准备必要存储实现；真实迁移/事务验收必须有获准MySQL实例/账号/目标版本，缺环境不能算完成。",
-  "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
+  "assignee": "Codex主集成；storage_migrations代理负责指定存储/迁移/测试文件",
   "allowedPaths": [
-    "migrations/（未来）",
-    "src/commerce_hub/infrastructure/",
-    "src/commerce_hub/adapters/mysql/",
-    "tests/integration/mysql/（未来）",
-    "docs/evidence/A-03/（未来，仅脱敏证据）"
+    "src/commerce_hub/infrastructure/database.py",
+    "src/commerce_hub/infrastructure/__init__.py",
+    "migrations/",
+    "alembic.ini",
+    "tests/conftest.py",
+    "tests/integration/mysql/",
+    "docs/evidence/A-03/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "README.md",
+    "AGENTS.md",
+    "pyproject.toml",
+    "requirements.lock",
+    ".env.example",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -612,15 +628,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -628,6 +646,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
+      "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
     }
   ],
   "completionEvidence": [
@@ -653,18 +678,31 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-02"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-01/A-02契约后可先做受控签名测试身份与越权路径；真实浏览器发行方/会话与租户范围须负责人签认后启用。",
-  "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
+  "assignee": "Codex主集成；g01_access代理负责governance/access与security测试",
   "allowedPaths": [
     "src/commerce_hub/governance/access/",
-    "tests/security/（当前身份与浏览器边界）",
-    "docs/evidence/A-04/（未来，仅脱敏证据）"
+    "tests/security/",
+    "src/commerce_hub/entrypoints/http/tasks.py",
+    "docs/evidence/A-04/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "README.md",
+    "AGENTS.md",
+    "pyproject.toml",
+    "requirements.lock",
+    ".env.example",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
     "G01可信身份/租户/当前scope/字段权限窄实现及公开授权端口；用受控签名测试身份和已具备API接缝验证，不以真实Worker/数据/证据/报告发布实现作为本任务完成前置",
-    "沿A-01逐项签认的同源方案实现浏览器身份传输、会话期限/CSRF等相应控制；测试身份和正式身份配置证据分开，真实发行方/租户未签认不启用，无重复用户管理产品"
+    "沿已认可A-01同源方案实现浏览器身份传输、会话期限/CSRF等相应控制；测试身份和正式身份配置证据分开，真实发行方/租户未签认不启用，无重复用户管理产品"
   ],
   "acceptance": [
     {
@@ -686,15 +724,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SECURITY",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -702,6 +742,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
+      "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
     }
   ],
   "completionEvidence": [
@@ -727,16 +774,31 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-03",
     "A-04"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-03/A-04后开发持久任务骨架；不要求ERP或模型在线，测试装配与生产注册隔离。",
-  "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
+  "assignee": "Codex负责任务/预算/投递/组合根/API/Worker；g01_access代理只补独立集成测试",
   "allowedPaths": [
-    "src/commerce_hub/entrypoints/",
-    "src/commerce_hub/infrastructure/",
     "src/commerce_hub/orchestration/",
+    "src/commerce_hub/infrastructure/work.py",
+    "src/commerce_hub/infrastructure/work_tables.py",
     "src/commerce_hub/governance/observability/",
-    "tests/integration/orchestration/（未来）",
-    "docs/evidence/A-05/（未来，仅脱敏证据）"
+    "src/commerce_hub/bootstrap/",
+    "src/commerce_hub/entrypoints/",
+    "tests/integration/orchestration/",
+    "tests/support/",
+    "docs/evidence/A-05/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "README.md",
+    "AGENTS.md",
+    "pyproject.toml",
+    "requirements.lock",
+    ".env.example",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -766,15 +828,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -782,6 +846,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
+      "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
     }
   ],
   "completionEvidence": [
@@ -810,14 +881,26 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-05"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-05之后验收已用底座，不阻止B/C纯模块开发；S01整体验收必须引用本结果。",
-  "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
+  "assignee": "Codex主集成与最终复验；storage_migrations代理只补实际进程测试",
   "allowedPaths": [
-    "tests/integration/实际工程范围（未来）",
-    "docs/evidence/A-06/（未来）",
-    "docs/runbooks/最小运行说明（未来）",
-    "docs/evidence/A-06/（未来，仅脱敏证据）"
+    "tests/integration/processes/",
+    "docs/runbooks/",
+    "docs/evidence/A-06/",
+    "docs/evidence/A-06/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "README.md",
+    "AGENTS.md",
+    "pyproject.toml",
+    "requirements.lock",
+    ".env.example",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -842,15 +925,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -858,6 +943,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
+      "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
     }
   ],
   "completionEvidence": [

@@ -15,6 +15,7 @@ dependencies = [
   "uvicorn==0.54.0",
   "SQLAlchemy==2.0.57",
   "PyMySQL[rsa]==1.2.4",
+  "PyJWT==2.15.1",
 ]
 
 [project.optional-dependencies]
@@ -26,3 +27,4 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = ["mysql: opt-in tests against the authorized isolated real MySQL database"]

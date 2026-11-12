@@ -26,6 +26,7 @@
 | Agent 设计 | [S01 补货专项详细设计（第一阶段）](agents/S01_补货Agent专项详细设计.md) / [HTML 阅读版](agents/S01_补货Agent专项详细设计.html)； [AI 模块详设](agents/AI_DETAILED_DESIGN.md) / [HTML](agents/AI_DETAILED_DESIGN.html)；[设计索引](agents/index.md)；[S01—S10 设计](agents/S01—S10_Agent与Workflow设计.md)；[模拟契约示例](agents/examples/s03-voc/) |
 | MVP 实施 | [S01 MVP 实施文档 v0.2](agents/S01_MVP实施文档.md)；[教学ERP调查与字段映射](agents/S01_ERP接口调查与字段映射.md)；[脱敏证据](agents/evidence/s01-erp-survey-20261111.json)；[单SKU开发准入核对与建议](agents/S01_单SKU开发准入核对.md)。A01解释必做，ERP缺口/受控补充与原型对接明确；本轮无开发 |
 | A-01 / A-02 工程入口 | [契约材料与当前授权增量](contracts/s01/A-01-契约评审稿.md)；[真实MySQL兼容证据](evidence/A-01/mysql-compatibility.json)；[A-02实际进程检查](evidence/A-02/smoke.json)；[启动/测试命令](../README.md)。负责人认可原则，普通字段自主确定；旧逐项评审材料保留历史，本机.env不入Git，四项业务安全门不解除 |
+| 第一大阶段运行 | [A-03—A-06启动/迁移/测试/恢复命令](runbooks/phase-a.md)。独立MySQL上的真实迁移/权限/持久任务和API/Worker进程验证；状态/适用证据仍只在TASKS，工程Handler只在tests装配 |
 | UI 设计 | [产品功能规格](ui/PRODUCT_SPEC.md)；[视觉规范](../DESIGN.md)；[参考研究](ui/RESEARCH.md)；[一致性与缺口](ui/ALIGNMENT.md)；[评审修复记录](ui/REVIEW_FIX.md)；[独立原型](../prototypes/s01/index.html) |
 | 报告 | [可行性分析](reports/FEASIBILITY.md) / [HTML](reports/FEASIBILITY.html)；[示例测算](reports/feasibility/illustrative-financial-model.json)（非真实企业收益） |
 | 历史归档 | [归档说明与旧链接定位](archive/README.md)；[旧96项计划](archive/plan96-v0.1/README.md)；[本次路径迁移表](governance/migration.json) |

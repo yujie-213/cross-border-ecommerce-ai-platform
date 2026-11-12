@@ -50,7 +50,7 @@ def main():
             assert body["details"]["s01"] == "not_implemented"
             assert body["traceId"] == response.headers["X-Trace-Id"]
             report["checks"].append({"check": "real_mysql_connected_but_mvp_not_ready", "result": "PASS", "httpStatus": 503})
-            for path in ["/api/v1/analysis-tasks", "/api/v1/executions", "/api/v1/models"]:
+            for path in ["/api/v1/reports", "/api/v1/executions", "/api/v1/models"]:
                 assert client.get(path).status_code == 404
             report["checks"].append({"check": "no_unimplemented_business_routes", "result": "PASS"})
             report["status"] = "PASS"
