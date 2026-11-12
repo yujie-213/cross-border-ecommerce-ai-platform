@@ -1,3 +1,13 @@
+## C-04独立真实A—E交付（2026-11-13）
+
+当前真实C-04新授权交付（2026-11-13，固定412c016）：新任务b8007816493d4b4ead5d993fef1128a2按CDEAB真实5/5 AVAILABLE、Schema/结构化引用/事实通过，无文内标记；新9147输入+900输出=10047Token、缓存2048/未命中7099，费用UNKNOWN/$0.25预约保留。639后端/31前端/6浏览器PASS，原632逐名保全。旧五例FAIL、5642Token/UNKNOWN/$0.15原指纹不变；C-04仍REVIEW、review=null，四企业门BLOCKED，不合main。新证据docs/evidence/C-04-STRUCTURED-LIVE/report.md；下方旧NOT_RUN为历史授权时点，不覆盖本条。
+
+接手codex/s01-ui-c04-fix/48ce3e9，GitHub同SHA、跟踪区干净，未知OpenAPI保留。实现固定 `412c0161c187b1245ca4e5b7b8a74d58e24df709`，用户新授权允许新任务/独立记录及合理复测；旧任务限制不再阻断本轮。显式新配置与旧配置并存，原教学租户/包/规则/批次摘要不动，新主体/token/key/task/logicalCall隔离；CDEAB顺序、10请求/240000Token/$1/每次$0.05预约，单并发/30秒/600秒/单投递/首败分析。新真实首轮五次全部通过，故无额外修复或重复付费。Prompt/schema/校验仍为前轮已验证v2，无B01/B02/迁移/前端改动。
+
+实际Token逐条与Provider和G02匹配，费用null/UNKNOWN不影响AVAILABLE，原预约不释放。C首次缺货/期末零缺口仍保留，D无候选/未知约束候选，E UNKNOWN候选和BLOCKED质量不可解除；A18件且到货前风险、B无需补货无0件单。原632保全、新7授权工程测试；639 PASS/0FAIL/ERROR/SKIP，九命令均0。真实Edge6、客户端31/类型与构建PASS；浏览器只是普通off模式API，不能冒充在线DeepSeek接入。所有自有演示和评测API/Worker/Vite已停止。
+
+原付费task1budget/3attempt/3usage前后指纹相同，原v1持久FAIL报告SELECT校验PASS；源catalog包指纹核对原catalog-review。真实新证据与旧S01-BACKEND、S01-UI-C04-FIX分目录，原敏感响应仅data/private。可复现只读核验入口在新证据verify_readonly.py（默认NOT_RUN，--verify只SELECT）；取证脚本初次误用actual_cost字段后按真实cost列更正，无新模型重发。完成证据普通推送评审分支后停止，不合main、不自动ACCEPTED、不扩下一业务；用途/企业准入与完整S01验收由负责人/星星独立评审。最终Git同步以实际读回为准。
+
 ## C-04真实评测新授权领取
 
 当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。

@@ -45,3 +45,12 @@ python docs/planning/check_plan.py
 有界模型评测使用同一个固定授权 task、最多5个 A—E 请求、总预算$1、每次保守预留$0.05，无自动重试。仅发送已计算并标明来源的工程或教学 quantity 事实和引用，不发送源 ERP 原响应。官方费率只用于该次授权上限预检，不作为平台计价或实际费用；无法预检则 NOT_RUN。输出四数组经过 Schema、引用、受控自然同义表述、未知与质量/审批门禁校验；不宣称能证明任意自由文本。原始返回只存 `data/private/`。再次运行不得更改授权 id、任务或 key 绕过已发送记录。
 
 模型工具通过独立 `bootstrap.s01_model_evaluation` API 和 Worker 执行，固定授权派生租户、主体与命令 key；O01 的可选 `validate_command` 消费钩子拒绝换 key 创建第二预算任务，原场景不受影响。五例在同一个 task 预算内串行，首次失败停止剩余例，A 的合法规则报告仍可发布，评测 `analysisReport.evaluation.status` 单独显示失败。内部所有成功 case 的 G02 回执在发布和读取时核验；公开结果去掉源包、投影、manifest 和内部案例记录。固定600秒 task deadline、单次投递，不因工具重启恢复预算或期限。
+
+
+## C-04结构化引用真实复验（2026-11-13收尾）
+
+新明确授权、配置和脱敏结果见docs/evidence/C-04-STRUCTURED-LIVE/report.md。首轮C/D/E/A/B五次均通过。原旧授权/失败与记录仍保留；新任务独立主体/预算/命令/logicalCall，原教学包不改。普通S01_BACKEND仍只off/mock；此次为独立官方模型用途评测，不是浏览器在线模型启用。
+
+默认不会付费：`python -m tools.s01_model_evaluation` 输出NOT_RUN。真实入口仅识别Git固定授权；需显式test/deepseek/network=true、官方base URL/model及本机Key、私有catalog/output、可信本地身份装配。已结束新任务的同command重放只能核对原结果，不能用作新调用。必要新复测须根据负责人当前授权登记新的具体授权/预算及定位理由，保留旧记录，不换key复活旧任务。
+
+只核验既有结果：`python docs/evidence/C-04-STRUCTURED-LIVE/verify_readonly.py --verify`，仅在既有唯一隔离库SELECT并读取私有capture，逐条对照事实/版本/Token/G02及公开摘要；不发送模型/ERP、不写账。需原私有capture和获准本机.env。没有私有资料则NOT_RUN/缺失，不重新付费获取或伪造。

@@ -1,0 +1,54 @@
+{
+  "result": "PASS",
+  "scope": "Successor campaign only; earlier development failures remain in S01-UI-C04-FIX/history.json",
+  "events": [
+    {
+      "event": "Explicit successor authorization",
+      "authorizationId": "s01-c04-structured-20261112-r1",
+      "result": "AUTHORIZED"
+    },
+    {
+      "event": "Offline focused unit/integration",
+      "passed": 52,
+      "result": "PASS",
+      "paidCalls": 0
+    },
+    {
+      "event": "Live first round CDEAB",
+      "passed": 5,
+      "failed": 0,
+      "paidCalls": 5,
+      "result": "PASS",
+      "diagnosedPromptFixes": 0,
+      "targetedPaidRetests": 0
+    },
+    {
+      "event": "Read-only temporary summarizer",
+      "result": "FAIL",
+      "reason": "Initially used non-existent G02 actual_cost column; corrected to existing cost column. No model resend, database write or raw response disclosure."
+    },
+    {
+      "event": "Every Provider usage dimension matched G02",
+      "result": "PASS"
+    },
+    {
+      "event": "Full backend/9 checks",
+      "passed": 639,
+      "result": "PASS"
+    },
+    {
+      "event": "Frontend build/unit/browser",
+      "unitPassed": 31,
+      "browserPassed": 6,
+      "result": "PASS"
+    },
+    {
+      "event": "Preservation helper repository import path",
+      "result": "FAIL_THEN_PASS",
+      "reason": "Temporary helper initially lacked repository root on sys.path; added it and completed 30 unrelated task/source package/secret checks. No product test change or paid retry."
+    }
+  ],
+  "assertionsRemoved": false,
+  "businessRulesChanged": false,
+  "historicalFailure": "PRESERVED"
+}

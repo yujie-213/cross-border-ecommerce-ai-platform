@@ -1,3 +1,5 @@
+当前真实C-04新授权交付（2026-11-13，固定412c016）：新任务b8007816493d4b4ead5d993fef1128a2按CDEAB真实5/5 AVAILABLE、Schema/结构化引用/事实通过，无文内标记；新9147输入+900输出=10047Token、缓存2048/未命中7099，费用UNKNOWN/$0.25预约保留。639后端/31前端/6浏览器PASS，原632逐名保全。旧五例FAIL、5642Token/UNKNOWN/$0.15原指纹不变；C-04仍REVIEW、review=null，四企业门BLOCKED，不合main。新证据docs/evidence/C-04-STRUCTURED-LIVE/report.md；下方旧NOT_RUN为历史授权时点，不覆盖本条。
+
 当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。
 
 当前竞态与引用修复交付（2026-11-12，固定a3da2ba）：UI/C-04均REVIEW、review=null。前端31/浏览器6/后端632 PASS，原603逐名保全；原C原文v1拒绝重现、v2离线PASS，不改历史FAIL。新增真实C/D/E NOT_RUN（缺新授权），新增Token0；5642Token/UNKNOWN费用/$0.15预约指纹一致，四企业门BLOCKED。手机LOW技术债只登记，无布局改动；不合main，待负责人和星星独立评审。详见docs/evidence/S01-UI-C04-FIX/report.md。
@@ -3073,7 +3075,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。",
+  "entryCondition": "本轮新授权独立任务已真实C/D/E/A/B全PASS、G02逐条核对、639后端/31客户端/6浏览器复验；保持REVIEW，等待负责人/星星独立评审，不合main或自动ACCEPTED。历史原五例FAIL/旧NOT_RUN时点/5642Token/UNKNOWN费用/$0.15预约保留，四企业门BLOCKED；普通在线后端仍off/mock。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（本轮C-04真实复验，单人串行）",
   "allowedPaths": [
@@ -3145,13 +3147,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "MODEL_EVAL",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
     "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
-    "a3da2ba1948009c93501bed1a6ccfcc7749d51cc"
+    "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+    "412c0161c187b1245ca4e5b7b8a74d58e24df709"
   ],
-  "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+  "testedCommit": "412c0161c187b1245ca4e5b7b8a74d58e24df709",
   "evidence": [
     {
       "kind": "MODEL_EVAL",
@@ -3257,6 +3260,33 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/S01-UI-C04-FIX/offline-revalidation.json"
+    },
+    {
+      "kind": "REAL_MODEL",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "Explicit successor CLI --execute --authorization-id s01-c04-structured-20261112-r1 --max-requests 10 --max-cost-usd 1 --request-risk-usd .05; independent local API/Worker and authorized existing teaching catalog",
+      "environment": "Fixed 412c0161c187b1245ca4e5b7b8a74d58e24df709; official HTTPS api.deepseek.com / deepseek-flash; isolated s01_a01_test_20261112; no ERP network or procurement writes",
+      "sample": "C/D/E/A/B 5 real AVAILABLE, schema/ref/facts PASS, no inline markers, 9147 input+900 output=10047 total; cache2048/7099; actualCost UNKNOWN/$0.25 reservation retained; new task/key/logicalCalls distinct",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/C-04-STRUCTURED-LIVE/execution.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "python -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/C-04-STRUCTURED-LIVE --baseline-evidence docs/evidence/S01-UI-C04-FIX/backend-regression.json; verify_readonly.py --verify",
+      "environment": "Fixed 412c0161c187b1245ca4e5b7b8a74d58e24df709; offline model faults; real isolated MySQL and current readonly paid-record verification",
+      "sample": "639 PASS/0 FAIL/ERROR/SKIP, original632 preserved; new authorization/order/identity/key/budget/failure-stop tests, all quantity/date/ref/risk/quality/authority negatives retained",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/C-04-STRUCTURED-LIVE/backend-regression.json"
     }
   ],
   "review": null,
@@ -3336,6 +3366,26 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "authorizationId": "s01-c04-structured-20261112-r1",
       "status": "IN_PROGRESS",
       "evidenceRef": "docs/evidence/C-04-STRUCTURED-LIVE/authorization.json"
+    },
+    {
+      "event": "STRUCTURED_LIVE_REVIEW",
+      "at": "2026-11-13",
+      "branch": "codex/s01-ui-c04-fix",
+      "testedCommit": "412c0161c187b1245ca4e5b7b8a74d58e24df709",
+      "status": "REVIEW",
+      "authorizationId": "s01-c04-structured-20261112-r1",
+      "taskRef": {
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+        "taskId": "b8007816493d4b4ead5d993fef1128a2"
+      },
+      "realCases": "CDEAB_ALL_PASS",
+      "paidRequests": 5,
+      "newTotalTokens": 10047,
+      "newCost": "UNKNOWN",
+      "newReservationUsd": "0.25",
+      "oldReservationUsd": "0.15",
+      "originalEvaluation": "FAIL_UNCHANGED",
+      "evidenceRef": "docs/evidence/C-04-STRUCTURED-LIVE/report.md"
     }
   ],
   "completionEvidence": [

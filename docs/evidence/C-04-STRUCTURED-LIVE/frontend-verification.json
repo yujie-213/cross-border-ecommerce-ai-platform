@@ -1,0 +1,85 @@
+{
+  "result": "PASS",
+  "testedCommit": "412c0161c187b1245ca4e5b7b8a74d58e24df709",
+  "unit": {
+    "passed": 31,
+    "failed": 0
+  },
+  "vueTypecheck": "PASS",
+  "productionBuild": "PASS",
+  "commands": [
+    {
+      "command": "npm run test -- --reporter=json --outputFile=../.tmp/c04-live-unit-final.json",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "S01_UI_EVIDENCE_DIR=docs/evidence/C-04-STRUCTURED-LIVE npm run test:browser",
+      "exitCode": 0
+    }
+  ],
+  "browser": {
+    "channel": "msedge",
+    "passed": 6,
+    "failed": 0,
+    "realApiTests": 4,
+    "protocolFixtureTests": 2,
+    "durationMs": 43942.175,
+    "tests": [
+      {
+        "name": "REAL: A—E teaching packages, Worker reports, chart/table, refresh, previousReportRef, evidence, responsive",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL: queued cancel, refresh resume and evidence revocation do not leak old report",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL: uncertain create reuses persisted key after refresh; CSRF and Origin stay enforced",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "PROTOCOL FIXTURES: AI statuses, token unknown, failures, empty and bounded history pagination",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "PROTOCOL FIXTURES: polling is bounded, stops on denial; exact-scope pagination and keyboard",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL API + transport delay: task switch, closed dialog, logout and permission denial discard late evidence",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      }
+    ]
+  },
+  "frontendSourceUnchangedFromRaceFix": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+  "viewports": [
+    1440,
+    1024,
+    390
+  ],
+  "testServersStopped": true,
+  "modelCallsFromBrowser": 0,
+  "erpCalls": 0
+}

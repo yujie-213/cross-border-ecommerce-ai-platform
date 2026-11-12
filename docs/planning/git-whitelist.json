@@ -692,6 +692,7 @@
     "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-A-390.png",
     "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-E-1440.png",
     "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/history-1440.png",
-    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/revoked-evidence.png"
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/revoked-evidence.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/verify_readonly.py"
   ]
 }

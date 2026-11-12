@@ -1,0 +1,57 @@
+{
+  "result": "PASS",
+  "testedCommit": "412c0161c187b1245ca4e5b7b8a74d58e24df709",
+  "method": "Original task SELECT-only fingerprints before new authorization and after all backend tests; new task each Provider dimension matched to G02 by verify_readonly.py before/after browser tests",
+  "historicalBefore": {
+    "status": "PASS",
+    "scope": "SELECT only, original paid evaluation task; no API/model call",
+    "tableCounts": {
+      "o01_budgets": 1,
+      "o01_budget_attempts": 3,
+      "g02_usage_facts": 3
+    },
+    "fingerprints": {
+      "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+      "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+      "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+    },
+    "reservedCostUsd": "0.15000000",
+    "usedCalls": 3,
+    "usedTokens": 5642
+  },
+  "historicalAfter": {
+    "status": "PASS",
+    "scope": "SELECT only, original paid evaluation task; no API/model call",
+    "tableCounts": {
+      "o01_budgets": 1,
+      "o01_budget_attempts": 3,
+      "g02_usage_facts": 3
+    },
+    "fingerprints": {
+      "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+      "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+      "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+    },
+    "reservedCostUsd": "0.15000000",
+    "usedCalls": 3,
+    "usedTokens": 5642
+  },
+  "historicalUnchanged": true,
+  "successorTaskRef": {
+    "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+    "taskId": "b8007816493d4b4ead5d993fef1128a2"
+  },
+  "successorUsage": {
+    "inputTokens": 9147,
+    "outputTokens": 900,
+    "totalTokens": 10047,
+    "cachedInputTokens": 2048,
+    "uncachedInputTokens": 7099
+  },
+  "successorCalls": 5,
+  "successorActualCost": null,
+  "successorCostStatus": "UNKNOWN",
+  "successorReservationUsd": "0.25",
+  "historicalReservationUsd": "0.15",
+  "releasedUnknownReservations": false
+}

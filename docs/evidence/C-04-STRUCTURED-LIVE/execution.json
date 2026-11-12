@@ -1,0 +1,296 @@
+{
+  "result": "PASS",
+  "testedCommit": "412c0161c187b1245ca4e5b7b8a74d58e24df709",
+  "scope": "New explicit S01 official DeepSeek evaluation; fixed teaching GET captures through actual API/independent Worker/O01/G02/MySQL",
+  "authorizationId": "s01-c04-structured-20261112-r1",
+  "taskRef": {
+    "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+    "taskId": "b8007816493d4b4ead5d993fef1128a2"
+  },
+  "reportRef": {
+    "reportId": "b8007816493d4b4ead5d993fef1128a2",
+    "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+  },
+  "taskState": "SUCCEEDED",
+  "caseOrder": [
+    "C",
+    "D",
+    "E",
+    "A",
+    "B"
+  ],
+  "cases": [
+    {
+      "caseId": "C",
+      "status": "AVAILABLE",
+      "schema": "PASS",
+      "references": "PASS",
+      "domain": "PASS",
+      "versionDigests": "PASS",
+      "g02ReceiptMatched": true,
+      "snapshotRef": "snapshot-875f005946b9f4981052b35b7cbad4d98c8538702af5a63e8b713a82b3aee047",
+      "logicalCall": "s01-natural-e8f9e0d9c61d-8c8538702af5a63e8b713a82b3aee047",
+      "usageRef": "d4a2925387df492680c04cc6acdecbce",
+      "usage": {
+        "inputTokens": 1802,
+        "outputTokens": 181,
+        "totalTokens": 1983,
+        "cachedInputTokens": 0,
+        "uncachedInputTokens": 1802,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "costStatus": "UNKNOWN",
+      "tokenUsageStatus": "KNOWN",
+      "model": "deepseek-flash",
+      "elapsedMs": 1601,
+      "originalOutputSha256": "b8b41299d9fdcc3093a4feb293993840caa39fb089af7c8e2c17e31a5f162fd1",
+      "promptRef": {
+        "id": "s01.natural-explanation.prompt",
+        "version": "controlled-2"
+      },
+      "semanticPolicy": "s01-controlled-natural-v2",
+      "requiredUnknownRefs": [],
+      "qualityGate": "CLEAR",
+      "procurementEligible": false,
+      "deterministic": {
+        "gapQuantity": "0",
+        "firstShortageDate": "2026-11-14",
+        "stockoutRisk": true,
+        "candidateCount": 0,
+        "candidateQuantities": [],
+        "limitations": [
+          "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+        ]
+      },
+      "inlineCitationsPresent": 0
+    },
+    {
+      "caseId": "D",
+      "status": "AVAILABLE",
+      "schema": "PASS",
+      "references": "PASS",
+      "domain": "PASS",
+      "versionDigests": "PASS",
+      "g02ReceiptMatched": true,
+      "snapshotRef": "snapshot-376d43ac1c989d491cc8b3333920a73254627c27ec413e32e6b38829c8ffde3c",
+      "logicalCall": "s01-natural-e8f9e0d9c61d-54627c27ec413e32e6b38829c8ffde3c",
+      "usageRef": "e2f95fa5a1a144e69096f76aab08a104",
+      "usage": {
+        "inputTokens": 1799,
+        "outputTokens": 182,
+        "totalTokens": 1981,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1287,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "costStatus": "UNKNOWN",
+      "tokenUsageStatus": "KNOWN",
+      "model": "deepseek-flash",
+      "elapsedMs": 1061,
+      "originalOutputSha256": "8f9db1ca37fd39f3da1248dfec5ea92c392d1f24374dada5b8193b040d329dbc",
+      "promptRef": {
+        "id": "s01.natural-explanation.prompt",
+        "version": "controlled-2"
+      },
+      "semanticPolicy": "s01-controlled-natural-v2",
+      "requiredUnknownRefs": [
+        "limitations"
+      ],
+      "qualityGate": "CLEAR",
+      "procurementEligible": false,
+      "deterministic": {
+        "gapQuantity": "17",
+        "firstShortageDate": "2026-11-18",
+        "stockoutRisk": true,
+        "candidateCount": 0,
+        "candidateQuantities": [],
+        "limitations": [
+          "NO_FEASIBLE_QUANTITY"
+        ]
+      },
+      "inlineCitationsPresent": 0
+    },
+    {
+      "caseId": "E",
+      "status": "AVAILABLE",
+      "schema": "PASS",
+      "references": "PASS",
+      "domain": "PASS",
+      "versionDigests": "PASS",
+      "g02ReceiptMatched": true,
+      "snapshotRef": "snapshot-84e81bd57539c2282d65e77e386689213fe84e58c86e03b2903f7ced44b480bc",
+      "logicalCall": "s01-natural-e8f9e0d9c61d-3fe84e58c86e03b2903f7ced44b480bc",
+      "usageRef": "c393b839c20e4edcbb3594b6761d6ecd",
+      "usage": {
+        "inputTokens": 1803,
+        "outputTokens": 181,
+        "totalTokens": 1984,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1291,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "costStatus": "UNKNOWN",
+      "tokenUsageStatus": "KNOWN",
+      "model": "deepseek-flash",
+      "elapsedMs": 1886,
+      "originalOutputSha256": "9a61c5b0ef32183793e32b21ebec7bccb2ce0ef10b10e7f7645f30b9caa42fb4",
+      "promptRef": {
+        "id": "s01.natural-explanation.prompt",
+        "version": "controlled-2"
+      },
+      "semanticPolicy": "s01-controlled-natural-v2",
+      "requiredUnknownRefs": [
+        "limitations"
+      ],
+      "qualityGate": "BLOCKED",
+      "procurementEligible": false,
+      "deterministic": {
+        "gapQuantity": "17",
+        "firstShortageDate": "2026-11-18",
+        "stockoutRisk": true,
+        "candidateCount": 0,
+        "candidateQuantities": [],
+        "limitations": [
+          "CANDIDATE_RULES_OR_QUALITY_BLOCKED"
+        ]
+      },
+      "inlineCitationsPresent": 0
+    },
+    {
+      "caseId": "A",
+      "status": "AVAILABLE",
+      "schema": "PASS",
+      "references": "PASS",
+      "domain": "PASS",
+      "versionDigests": "PASS",
+      "g02ReceiptMatched": true,
+      "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+      "logicalCall": "s01-natural-e8f9e0d9c61d-1404731469d506c3f21e5f0838a4c2d3",
+      "usageRef": "163eb834529b4d4b9f1971e5f551959d",
+      "usage": {
+        "inputTokens": 1985,
+        "outputTokens": 191,
+        "totalTokens": 2176,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1473,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "costStatus": "UNKNOWN",
+      "tokenUsageStatus": "KNOWN",
+      "model": "deepseek-flash",
+      "elapsedMs": 1588,
+      "originalOutputSha256": "f469af4da4f1b17ab721ee8f7ff2b368c50b01583228280c56caa9c4d105fe0c",
+      "promptRef": {
+        "id": "s01.natural-explanation.prompt",
+        "version": "controlled-2"
+      },
+      "semanticPolicy": "s01-controlled-natural-v2",
+      "requiredUnknownRefs": [],
+      "qualityGate": "CLEAR",
+      "procurementEligible": false,
+      "deterministic": {
+        "gapQuantity": "17",
+        "firstShortageDate": "2026-11-18",
+        "stockoutRisk": true,
+        "candidateCount": 1,
+        "candidateQuantities": [
+          "18"
+        ],
+        "limitations": [
+          "PROCUREMENT_EXECUTION_NOT_AUTHORIZED"
+        ]
+      },
+      "inlineCitationsPresent": 0
+    },
+    {
+      "caseId": "B",
+      "status": "AVAILABLE",
+      "schema": "PASS",
+      "references": "PASS",
+      "domain": "PASS",
+      "versionDigests": "PASS",
+      "g02ReceiptMatched": true,
+      "snapshotRef": "snapshot-c96c87b13c55a4251eb998e4e9ca1e92914f55c8f83bc924846b097d8db62e2a",
+      "logicalCall": "s01-natural-e8f9e0d9c61d-914f55c8f83bc924846b097d8db62e2a",
+      "usageRef": "cfead1eaea054e9ca99cf585efca667d",
+      "usage": {
+        "inputTokens": 1758,
+        "outputTokens": 165,
+        "totalTokens": 1923,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1246,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "costStatus": "UNKNOWN",
+      "tokenUsageStatus": "KNOWN",
+      "model": "deepseek-flash",
+      "elapsedMs": 1270,
+      "originalOutputSha256": "4e01c84bb410ca068e19b0198298ebb221752c6ff8b70aea3ac18a143441c35c",
+      "promptRef": {
+        "id": "s01.natural-explanation.prompt",
+        "version": "controlled-2"
+      },
+      "semanticPolicy": "s01-controlled-natural-v2",
+      "requiredUnknownRefs": [],
+      "qualityGate": "CLEAR",
+      "procurementEligible": false,
+      "deterministic": {
+        "gapQuantity": "0",
+        "firstShortageDate": null,
+        "stockoutRisk": false,
+        "candidateCount": 0,
+        "candidateQuantities": [],
+        "limitations": [
+          "NO_REPLENISHMENT_NEEDED"
+        ]
+      },
+      "inlineCitationsPresent": 0
+    }
+  ],
+  "totals": {
+    "inputTokens": 9147,
+    "outputTokens": 900,
+    "totalTokens": 10047,
+    "cachedInputTokens": 2048,
+    "uncachedInputTokens": 7099
+  },
+  "paidRequests": 5,
+  "implicitRetries": 0,
+  "duplicateLogicalCalls": 0,
+  "notRunCases": [],
+  "newActualCost": null,
+  "newCostStatus": "UNKNOWN",
+  "newUnknownCostReservationUsd": "0.25000000",
+  "budget": {
+    "maxCalls": 10,
+    "maxTokens": 240000,
+    "maxCost": "1.00000000",
+    "usedCalls": 5,
+    "usedTokens": 10047
+  },
+  "sourceCatalogPreserved": true,
+  "rawResponsesPublished": false,
+  "privateArtifactSha256": "f7672e2c799643c6996facf14671c7b5de2c93c0c9eb3dc4a4b14d8ba72bb0df",
+  "database": {
+    "server": "8.0.27",
+    "name": "s01_a01_test_20261112",
+    "timezone": "+00:00",
+    "isolation": "READ-COMMITTED"
+  },
+  "historicalTask": "192fee223c6a429d868bb584b3cf6e15",
+  "historicalEvaluation": "FAIL_UNCHANGED",
+  "historicalTokens": 5642,
+  "historicalReservationUsd": "0.15",
+  "enterpriseGates": "BLOCKED",
+  "acceptance": "REVIEW"
+}
