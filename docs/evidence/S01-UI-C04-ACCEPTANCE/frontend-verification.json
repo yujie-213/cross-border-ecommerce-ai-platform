@@ -1,0 +1,82 @@
+{
+  "result": "PASS",
+  "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
+  "unit": {
+    "passed": 31,
+    "failed": 0
+  },
+  "vueTypecheck": "PASS",
+  "productionBuild": "PASS",
+  "browser": {
+    "channel": "msedge",
+    "passed": 6,
+    "failed": 0,
+    "realApiTests": 4,
+    "protocolFixtureTests": 2,
+    "durationMs": 44252.803,
+    "tests": [
+      {
+        "name": "REAL: A—E teaching packages, Worker reports, chart/table, refresh, previousReportRef, evidence, responsive",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL: queued cancel, refresh resume and evidence revocation do not leak old report",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL: uncertain create reuses persisted key after refresh; CSRF and Origin stay enforced",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "PROTOCOL FIXTURES: AI statuses, token unknown, failures, empty and bounded history pagination",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "PROTOCOL FIXTURES: polling is bounded, stops on denial; exact-scope pagination and keyboard",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL API + transport delay: task switch, closed dialog, logout and permission denial discard late evidence",
+        "passed": true,
+        "results": [
+          "passed"
+        ]
+      }
+    ]
+  },
+  "commands": [
+    "npm run test -- --reporter=json --outputFile=../.tmp/acceptance-unit.json",
+    "npm run typecheck",
+    "npm run build",
+    "S01_UI_EVIDENCE_DIR=docs/evidence/S01-UI-C04-ACCEPTANCE npm run test:browser"
+  ],
+  "exitCodes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "testServersStopped": true,
+  "viewports": [
+    1440,
+    1024,
+    390
+  ],
+  "paidModelRequests": 0,
+  "erpNetworkRequests": 0
+}

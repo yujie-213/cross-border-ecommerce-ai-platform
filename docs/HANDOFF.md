@@ -1,3 +1,11 @@
+## main验收合并后复验完成
+
+当前验收合并后复验（2026-11-13，main固定e08f264）：--ff-only完成，本轮教学技术范围ACCEPTED，UI任务ACCEPTED、C-04技术scopeDecision=ACCEPTED/整体REVIEW。639后端/31前端/6浏览器、类型/构建PASS，639原基线逐名保全；DeepSeek与ERP联网复测按指令NOT_RUN，新增Token0。旧5642Token/$0.15及新10047Token/$0.25账本原样、费用UNKNOWN；历史证据/算法/迁移/依赖未变，企业四门BLOCKED、整体验收TODO。最终文档提交与远端main同步以Git实时回读为准；证据docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。
+
+合并前来源/origin来源均098fe19、main/origin-main均6fdf10c；仅添加e08f264验收文档后git merge --ff-only codex/s01-ui-c04-fix，无冲突或改写。实际重跑九项后端命令、31单测/类型/生产构建及6项Edge，全部通过，自有API/Worker/Vite已停止。真实模型A—E的五例PASS仍引用被审098fe19证据，本轮未重复联网；Provider/ERP外部请求0，两付费任务所有1budget/3或5attempt/3或5usage指纹完全一致。最终收尾仅文档/证据，不改src/tests/tools/frontend/migrations/依赖。原不受范围影响的29任务记录及历史FAIL/NOT_RUN全部保全。
+
+剩余：LIVE正式经营数据/规则/安全/用途签认、普通前端真实AI在线接入和D-S01-ACCEPT-01完整S01-AC端到端复现/负责人验收；LOW手机表格技术债不实施。建议先明确后续教学整体验收口径及对应准入/模型正常流程条件，负责人另行授权后按原台账推进，不开始其他业务模块，企业正式运行前必须四门签认。本轮普通push main并核对远端后停止。
+
 # 验收合并增量（2026-11-13）
 
 当前验收合并授权（2026-11-13，被审098fe19）：负责人明确通知星星独立评审完成，批准前端证据竞态、结构化引用、真实A—E教学技术验证ACCEPTED并--ff-only合main。UI任务ACCEPTED；C-04技术范围ACCEPTED、含正式用途的整体仍REVIEW。四企业门BLOCKED，S01 MVP整体未验收；旧FAIL/NOT_RUN及两笔UNKNOWN预约保留。本轮零DeepSeek/ERP网络与新增Token，不改业务算法；工程复验/同步另存docs/evidence/S01-UI-C04-ACCEPTANCE，下方旧REVIEW/停止点保留历史。

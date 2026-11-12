@@ -202,3 +202,5 @@ G01当前实现固定HS256签名/issuer/audience/期限、数据库会话/修订
 负责人明确通知星星独立评审完成，批准被审098fe19bfc2c67476cb18443bbad29d12c5d0ffd教学工程范围ACCEPTED并快进main。范围为证据竞态、结构化引用及真实DeepSeek A—E技术验证。UI登记ACCEPTED；C-04同时包含正式用途签认，沿既有LIVE分项验收惯例，技术review.scopeDecision=ACCEPTED、overallTaskDecision=REVIEW，不扩展本轮授权至企业用途。历史失败/未执行、原始证据、UNKNOWN费用和$0.15/$0.25预约保留。
 
 仅在已审查实现后追加验收/复验文档；git merge --ff-only和普通push，不重写历史。合并后重跑639后端/31前端/6浏览器及文档/安全检查，独立证据目录S01-UI-C04-ACCEPTANCE；不可运行则NOT_RUN。无DeepSeek/ERP网络或预算写入，工程测试使用现有唯一隔离库和固定教学capture。源码/Schema/业务计算/迁移/依赖/权限无变化，消费者行为兼容被审版本，无新增接口；企业四门仍BLOCKED、整体验收D-S01-ACCEPT-01待另行授权，不开始下一模块。记录详情见evidence/S01-UI-C04-ACCEPTANCE/review.md。
+
+执行事实：main以--ff-only快进至e08f2640171eb34d72a1b2df4b02933b35bed8a3；该HEAD后端639/前端31/Edge6及类型构建全部PASS，原639逐名保全。真实模型/ERP联网复测按禁令NOT_RUN、新增Token0，两既有付费账本指纹不变。正式用途及MVP整体未验收，四门继续BLOCKED。后续仅证据/文档提交，最终提交与推送以实时Git回读为准；本段不改历史ADR停止点或验收事实。

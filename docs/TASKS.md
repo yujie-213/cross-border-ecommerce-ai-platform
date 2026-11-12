@@ -1,3 +1,5 @@
+当前验收合并后复验（2026-11-13，main固定e08f264）：--ff-only完成，本轮教学技术范围ACCEPTED，UI任务ACCEPTED、C-04技术scopeDecision=ACCEPTED/整体REVIEW。639后端/31前端/6浏览器、类型/构建PASS，639原基线逐名保全；DeepSeek与ERP联网复测按指令NOT_RUN，新增Token0。旧5642Token/$0.15及新10047Token/$0.25账本原样、费用UNKNOWN；历史证据/算法/迁移/依赖未变，企业四门BLOCKED、整体验收TODO。最终文档提交与远端main同步以Git实时回读为准；证据docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。
+
 当前验收合并授权（2026-11-13，被审098fe19）：负责人明确通知星星独立评审完成，批准前端证据竞态、结构化引用、真实A—E教学技术验证ACCEPTED并--ff-only合main。UI任务ACCEPTED；C-04技术范围ACCEPTED、含正式用途的整体仍REVIEW。四企业门BLOCKED，S01 MVP整体未验收；旧FAIL/NOT_RUN及两笔UNKNOWN预约保留。本轮零DeepSeek/ERP网络与新增Token，不改业务算法；工程复验/同步另存docs/evidence/S01-UI-C04-ACCEPTANCE，下方旧REVIEW/停止点保留历史。
 
 当前真实C-04新授权交付（2026-11-13，固定412c016）：新任务b8007816493d4b4ead5d993fef1128a2按CDEAB真实5/5 AVAILABLE、Schema/结构化引用/事实通过，无文内标记；新9147输入+900输出=10047Token、缓存2048/未命中7099，费用UNKNOWN/$0.25预约保留。639后端/31前端/6浏览器PASS，原632逐名保全。旧五例FAIL、5642Token/UNKNOWN/$0.15原指纹不变；C-04仍REVIEW、review=null，四企业门BLOCKED，不合main。新证据docs/evidence/C-04-STRUCTURED-LIVE/report.md；下方旧NOT_RUN为历史授权时点，不覆盖本条。
@@ -3156,7 +3158,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
     "412c0161c187b1245ca4e5b7b8a74d58e24df709"
   ],
-  "testedCommit": "412c0161c187b1245ca4e5b7b8a74d58e24df709",
+  "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
   "evidence": [
     {
       "kind": "MODEL_EVAL",
@@ -3289,6 +3291,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/C-04-STRUCTURED-LIVE/backend-regression.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "python -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/S01-UI-C04-ACCEPTANCE --baseline-evidence docs/evidence/C-04-STRUCTURED-LIVE/backend-regression.json",
+      "environment": "Post-ff main e08f2640171eb34d72a1b2df4b02933b35bed8a3; real isolated MySQL s01_a01_test_20261112, model/ERP offline fixtures",
+      "sample": "639 PASS, original639 by-name preserved; 0 FAIL/ERROR/SKIP, all9 checks0; both existing paid task budget/attempt/usage SELECT fingerprints unchanged",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/backend-regression.json"
     }
   ],
   "review": {
@@ -3432,6 +3448,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "scopeDecision": "ACCEPTED",
       "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
       "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md"
+    },
+    {
+      "event": "POST_FF_REGRESSION",
+      "at": "2026-11-13",
+      "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
+      "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+      "merge": "--ff-only",
+      "backendPassed": 639,
+      "frontendPassed": 31,
+      "browserPassed": 6,
+      "paidRequests": 0,
+      "erpNetworkRequests": 0,
+      "newTokens": 0,
+      "budgetUnchanged": true,
+      "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md"
     }
   ],
   "completionEvidence": [
@@ -5689,7 +5720,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "465892c9342f23fd3e1614df85c564ade0a5ef9a",
     "a3da2ba1948009c93501bed1a6ccfcc7749d51cc"
   ],
-  "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+  "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
   "evidence": [
     {
       "kind": "BROWSER_API",
@@ -5758,6 +5789,36 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-UI-C04-FIX/frontend-verification.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC1",
+        "D-S01-UI-01/AC2",
+        "D-S01-UI-01/AC3",
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "python -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/S01-UI-C04-ACCEPTANCE --baseline-evidence docs/evidence/C-04-STRUCTURED-LIVE/backend-regression.json",
+      "environment": "Post-ff main e08f2640171eb34d72a1b2df4b02933b35bed8a3; real isolated MySQL s01_a01_test_20261112, model/ERP offline fixtures",
+      "sample": "639 PASS, original639 by-name preserved; 0 FAIL/ERROR/SKIP, all9 checks0; both existing paid task budget/attempt/usage SELECT fingerprints unchanged",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/backend-regression.json"
+    },
+    {
+      "kind": "BROWSER_API",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC1",
+        "D-S01-UI-01/AC2",
+        "D-S01-UI-01/AC3",
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "npm run test; npm run typecheck; npm run build; npm run test:browser",
+      "environment": "Post-ff main e08f2640171eb34d72a1b2df4b02933b35bed8a3; actual local API/Worker/Edge and fixed teaching GET captures, model off",
+      "sample": "31 unit/6 browser PASS; type/build PASS; 4 actual API+2 protocol tests; late evidence task/close/logout/revocation protection, CSRF/Origin preserved; no model/ERP network",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/frontend-verification.json"
     }
   ],
   "review": {
@@ -5852,6 +5913,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "scopeDecision": "ACCEPTED",
       "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
       "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md"
+    },
+    {
+      "event": "POST_FF_REGRESSION",
+      "at": "2026-11-13",
+      "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
+      "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+      "merge": "--ff-only",
+      "backendPassed": 639,
+      "frontendPassed": 31,
+      "browserPassed": 6,
+      "paidRequests": 0,
+      "erpNetworkRequests": 0,
+      "newTokens": 0,
+      "budgetUnchanged": true,
+      "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md"
     }
   ],
   "acceptanceRefs": [

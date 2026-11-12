@@ -1,0 +1,86 @@
+{
+  "result": "PASS",
+  "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
+  "before": {
+    "result": "PASS",
+    "scope": "SELECT only, both existing paid tasks; no model/ERP request or budget write",
+    "tasks": [
+      {
+        "taskId": "192fee223c6a429d868bb584b3cf6e15",
+        "tableCounts": {
+          "o01_budgets": 1,
+          "o01_budget_attempts": 3,
+          "g02_usage_facts": 3
+        },
+        "fingerprints": {
+          "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+          "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+          "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+        },
+        "reservedCostUsd": "0.15000000",
+        "usedCalls": 3,
+        "usedTokens": 5642
+      },
+      {
+        "taskId": "b8007816493d4b4ead5d993fef1128a2",
+        "tableCounts": {
+          "o01_budgets": 1,
+          "o01_budget_attempts": 5,
+          "g02_usage_facts": 5
+        },
+        "fingerprints": {
+          "o01_budgets": "8749b4b23b2d814770dfddf5977a934ad79203f7c4bfc01c58da7f3dc9249fbe",
+          "o01_budget_attempts": "7163a7442fe0e14e0e3dc5deb233e605c4bc3aa11595569b63010d36b3bce19b",
+          "g02_usage_facts": "bcd78641928919f3f1f06ed2363bfa4538ab669da99c0625d318b7bd7d447d1d"
+        },
+        "reservedCostUsd": "0.25000000",
+        "usedCalls": 5,
+        "usedTokens": 10047
+      }
+    ]
+  },
+  "after": {
+    "result": "PASS",
+    "scope": "SELECT only, both existing paid tasks; no model/ERP request or budget write",
+    "tasks": [
+      {
+        "taskId": "192fee223c6a429d868bb584b3cf6e15",
+        "tableCounts": {
+          "o01_budgets": 1,
+          "o01_budget_attempts": 3,
+          "g02_usage_facts": 3
+        },
+        "fingerprints": {
+          "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+          "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+          "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+        },
+        "reservedCostUsd": "0.15000000",
+        "usedCalls": 3,
+        "usedTokens": 5642
+      },
+      {
+        "taskId": "b8007816493d4b4ead5d993fef1128a2",
+        "tableCounts": {
+          "o01_budgets": 1,
+          "o01_budget_attempts": 5,
+          "g02_usage_facts": 5
+        },
+        "fingerprints": {
+          "o01_budgets": "8749b4b23b2d814770dfddf5977a934ad79203f7c4bfc01c58da7f3dc9249fbe",
+          "o01_budget_attempts": "7163a7442fe0e14e0e3dc5deb233e605c4bc3aa11595569b63010d36b3bce19b",
+          "g02_usage_facts": "bcd78641928919f3f1f06ed2363bfa4538ab669da99c0625d318b7bd7d447d1d"
+        },
+        "reservedCostUsd": "0.25000000",
+        "usedCalls": 5,
+        "usedTokens": 10047
+      }
+    ]
+  },
+  "allExistingPaidRowsUnchanged": true,
+  "paidModelRequests": 0,
+  "newTokens": 0,
+  "erpNetworkRequests": 0,
+  "costStatus": "UNKNOWN",
+  "releasedReservations": false
+}
