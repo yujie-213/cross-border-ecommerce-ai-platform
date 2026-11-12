@@ -1,5 +1,17 @@
 # 当前增量交接 v0.3
 
+## S01 独立评审后摘要一致性最小修复（2026-11-12，基于75e42bd）
+
+本轮只按负责人转达的独立评审修复validate_versions全部可确定摘要实际重算、增加格式合法篡改负例及澄清TASKS旧执行条件；不新增功能、不合并main、不进入下一阶段。默认环境工作区为C:/Users/Windows/.codex/worktrees/s01-handler-integration/跨境电商智慧AI平台，实际起点codex/s01-handler-integration/dd6d112、干净；目标分支已在D:/电商项目/跨境电商智慧AI平台检出，因此经工具受控授权在原目标工作区最小修复，不改B线分支。目标实际branch=codex/s01-parallel-review，HEAD及fetch后的origin分支均75e42bd0082e6c69022d089d9a87ab68a544085d，已跟踪区干净、diff为空；原未知未跟踪docs/ERP-openapi.yaml保留未读/改/暂存。Codex单人执行，无新代理。
+
+缺口已实际复现：原Handler仅实比contextDigest，其余五摘要只验格式；新增单元矩阵12项中10FAIL/2PASS，失败均为未拒绝格式合法的篡改值，非格式解析失败。现S01Bundle将原内容/摘要构造原样提取为无IO的resolve_content，原resolve保留请求/引用/绑定检查后调用它；validate_versions基于固定用途/当前binding与facts复用同一解析器，重建Prompt/messages、Context、参数、Schema和空工具集，全部六摘要字典逐值比较。无新模型请求、预算、外部接口、哈希副本、Schema/Refs版本或计算逻辑；原未调用/降级的空versionBundle规则保留。
+
+新增18项：六摘要×AVAILABLE/UNAVAILABLE的12个单元发布hook/读取view负例；6项真实隔离MySQL/O01负例证明篡改不能complete发布、任务/报告/预算/usage不变，合法结果能发布；再篡改持久摘要且重算外层存储指纹，读取仍404，恢复原payload/指纹后可读，模型只调用一次。相关114项PASS。固定实现d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348后执行python -m tools.verify_s01_dev，全量358 PASS/0 FAIL/0 ERROR/0 SKIP，前次340项全部保全、新增18（原C-01的281也保全），一条既有Starlette/httpx弃用提示；pip check、compileall、默认禁用连通入口、A线离线验证均退出0。真实MySQL8.0.27、s01_a01_test_20261112、UTC/READ-COMMITTED、唯一head0004_reports不变，没有清库/破坏性迁移或改其他库。原始全量脱敏输出/逐名/版本、先失败复现及114相关结果已更新原docs/evidence/D-S01-DEV-01/verification.json，testedCommit为上述新实现；原340证据可从75e42bd的同路径复取。
+
+TASKS仅澄清16项冲突的当前/历史领取条件：A/B旧阶段停止点标为历史，C-01与S01已开发状态明确，四门说明材料已复核但未签认；每条原entryCondition原样保留为新增history.previousEntryCondition，已有history不重写。历史规划段加日期/被后续有界授权覆盖标记。D-S01-DEV-01继续REVIEW、review=null，四门继续BLOCKED，其他任务状态/依赖/启用门禁/AC/评审不变；没有扩大任何TODO授权。前次工程互审保留原commit，不冒称本轮新的负责人/星星验收。
+
+真实ERP、DeepSeek、采购写入均0；未改.env或回显秘密；原型、B01/B02、D01-D04、A01网关实现、依赖/迁移/fixture及真实准入证据不改。当前修复只涉及S01用途纯解析/Handler、专属测试及台账/交接/必要派生证据。文档build/check的18项、依赖和差异检查通过后普通同步同一GitHub评审分支；最终提交SHA与同步结果由Git实际查询，不填文件自己的未知SHA。完成后停止，等待负责人和星星独立验收。
+
 ## S01 双工作线集成与评审交接（2026-11-12，基于d6f9d70）
 
 普通同步已完成并远端核对：A分支e7bdc949d5242545e4aad437e3d5debac0088926、B分支dd6d112255e10e848f6017b8153e1eceb44b7902、集成分支观察时568cc9560cfc37444ac806be9c2b4b65fbe8895e；GitHub main仍d6f9d70052e9d153daa68cef700913a21c8a633c，未合入。两独立工作区内容已提交且干净，归档工具分别因仍被活动任务引用/是当前主工作区而拒绝移除，故安全保留供评审，不手工强制删除。主集成源目录仍为D:/电商项目/跨境电商智慧AI平台；后续文档同步不改变被测工程树。

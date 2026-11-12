@@ -1,6 +1,6 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`04cfa375f6824343b72c26ffd47052cdd3eb1d7931bd9d95189f67fc25a4f1d1`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`a5e1381185c310d3b1e5b1db8a4360b9e38b177af478f844705fe8a14fa0814d`。不要手工编辑；候选不是执行授权。
 
 任务 31 项；TODO 7；IN_PROGRESS 0；BLOCKED 4；REVIEW 8；ACCEPTED 12。
 
@@ -24,7 +24,7 @@
 - D-S01-RULE-01 单SKU供需/候选与质量规则签认：BLOCKED；实际执行者=未指派。
 - D-S01-ERP-ACCESS-01 教学ERP真实只读启用与安全条件确认：BLOCKED；实际执行者=未指派。
 - D-S01-AI-ACCESS-01 A01真实Provider/模型用途启用条件确认：BLOCKED；实际执行者=未指派。
-- D-S01-DEV-01 S01 Workflow与规则报告/AI解释语义接入：REVIEW；实际执行者=Codex / handler_dev。
+- D-S01-DEV-01 S01 Workflow与规则报告/AI解释语义接入：REVIEW；实际执行者=Codex（本轮单人最小修复与集成）。
 - D-S01-MVP-TODO S01 MVP分阶段开发任务规划（本轮仅文档）：REVIEW；实际执行者=Codex（本轮唯一文档规划执行者）。
 
 ## 全部近期记录

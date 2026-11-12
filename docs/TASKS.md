@@ -4668,9 +4668,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "3e6d80202cc6e923bef7a5c452c2b38a206ac26c",
     "f515a849a901a53a19d04cb72d6ac6069c600c2c",
     "91ae745c123f46560aecdce53e1e64b27a767435",
-    "cc7c2576c93485d2534680c342d271654bafd3ba"
+    "cc7c2576c93485d2534680c342d271654bafd3ba",
+    "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348"
   ],
-  "testedCommit": "cc7c2576c93485d2534680c342d271654bafd3ba",
+  "testedCommit": "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -4682,7 +4683,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       ],
       "command": "python -m tools.verify_s01_dev",
       "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
-      "sample": "固定集成提交340 PASS，原A/B/C-01的281测试名称全部保全，新增59。真实MySQL/API/独立Worker但输入为工程样例、Provider为Mock；固定输入/质量/B01/B02/A01/DomainResult/公开报告及重入/迟到/降级正反例。",
+      "sample": "固定修复提交358 PASS/0 FAIL/0 ERROR/0 SKIP；原双线340测试名全部保全（含原A/B/C-01的281），新增18个摘要篡改负例。真实隔离MySQL/API/独立Worker但输入为工程样例、Provider为Mock；六个摘要实际重算，发布/读取拒绝格式合法篡改。",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json"
@@ -4696,7 +4697,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       ],
       "command": "python -m tools.verify_s01_dev",
       "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
-      "sample": "Mock-only/default禁网装配；错量/日期/约束/质量/审批/引用/版本丢弃；当前G01、公开字段/证据、取消/plan/lease迟到不发布、保留UNKNOWN原预算；旧报告关系越权/损坏指纹/重算指纹的错版本拒绝。",
+      "sample": "Mock-only/default禁网装配；错量/日期/约束/质量/审批/引用/版本丢弃；当前G01、公开字段/证据、取消/plan/lease迟到不发布、保留UNKNOWN原预算；旧报告关系越权/损坏指纹/重算指纹的错版本拒绝。 本次六摘要64位十六进制篡改均拒绝；外层存储指纹重算后读取仍拒绝，发布拒绝不改任务/报告/预算/usage，合法恢复后可读。",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json"
@@ -4711,7 +4712,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       ],
       "command": "A→B最终只读复审cc7c257；B→A复审58e72e6；主集成人复核并运行完整回归",
       "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
-      "sample": "双向工程互审完成；发现存储指纹/SQL归属缺口已修复。A独立复跑25项早期B单元PASS，B最终47项PASS。不是负责人/星星独立验收。",
+      "sample": "历史工程互审针对前次cc7c257实现，详情保留原制品；本轮依据用户转达的独立评审仅修摘要一致性并全量复验，不将前次互审或本轮自检冒充负责人/星星的新验收。",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/D-S01-DEV-01/cross-review.json"
@@ -4734,7 +4735,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "codex/s01-parallel-review",
-  "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d",
+  "observedHead": "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4769,6 +4770,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
       "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。公共实现依赖满足后可用显式工程样例集成；真实数据运行须D-S01-LIVE-01，真实模型评测须AI安全门/正式启用须C-04。",
       "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "reason": "按独立评审修复全部六个可确定摘要实际重算/比较；固定实现358项PASS，前次340保全、新增18，114相关测试及18项文档/依赖/差异检查PASS；四门仍BLOCKED，等待负责人和星星独立验收，不合并main。",
+      "observedHead": "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348"
     }
   ],
   "acceptanceRefs": [
