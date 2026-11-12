@@ -1,5 +1,9 @@
 # 当前增量交接 v0.3
 
+## D-S01-DEV-01验收登记与main合入（2026-11-12，基于96ba88f）
+
+用户本轮明确确认负责人及星星独立工程验收通过，批准D-S01-DEV-01登记ACCEPTED及普通合入main。实际目标工作区D:/电商项目/跨境电商智慧AI平台，接手codex/s01-parallel-review/96ba88fe6b16260954a6d95a1aa5467881353779，fetch后远端评审分支相同、origin/main=d6f9d70052e9d153daa68cef700913a21c8a633c；本地main=d16af92为评审祖先，无分叉/额外冲突，跟踪区干净，未知未跟踪docs/ERP-openapi.yaml保留。按ff-only将已验收成果合入本地main，不重写或覆盖。只将DEV工程状态由REVIEW登记ACCEPTED，review绑定d7fef0e实现、96ba88f证据及原358 PASS；真实业务门禁不由本登记解除。校验器仅增加该任务精确工程范围的NOT_RUN保留规则，原四AC/必需证据与失败拒绝规则不放宽，无延期AC豁免。文档检查后普通同步main再开始新ERP阶段，最终同步SHA由Git实际查询。
+
 ## S01 独立评审后摘要一致性最小修复（2026-11-12，基于75e42bd）
 
 本轮只按负责人转达的独立评审修复validate_versions全部可确定摘要实际重算、增加格式合法篡改负例及澄清TASKS旧执行条件；不新增功能、不合并main、不进入下一阶段。默认环境工作区为C:/Users/Windows/.codex/worktrees/s01-handler-integration/跨境电商智慧AI平台，实际起点codex/s01-handler-integration/dd6d112、干净；目标分支已在D:/电商项目/跨境电商智慧AI平台检出，因此经工具受控授权在原目标工作区最小修复，不改B线分支。目标实际branch=codex/s01-parallel-review，HEAD及fetch后的origin分支均75e42bd0082e6c69022d089d9a87ab68a544085d，已跟踪区干净、diff为空；原未知未跟踪docs/ERP-openapi.yaml保留未读/改/暂存。Codex单人执行，无新代理。

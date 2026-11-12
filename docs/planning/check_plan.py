@@ -16,7 +16,8 @@ def acceptance_errors(t,ix):
     """验收只覆盖负责人确认的适用范围；保留历史/真实模式NOT_RUN，不计为PASS。"""
     errors=[];rv=t['review'] or {};ev=t['evidence'];commits=t['implementationCommits']
     engineering_scope=(rv.get('scope')=='A_B_ENGINEERING_ONLY' or
-        (t['id']=='C-01' and rv.get('scope')=='C_01_ENGINEERING_ONLY'))
+        (t['id']=='C-01' and rv.get('scope')=='C_01_ENGINEERING_ONLY') or
+        (t['id']=='D-S01-DEV-01' and rv.get('scope')=='D_S01_DEV_ENGINEERING_ONLY'))
     def error(message):errors.append(t['id']+': '+message)
     if not commits or not all(re.fullmatch('[0-9a-f]{40}',c) for c in commits):error('real commits required')
     if not t['testedCommit'] or not all(rv.get(k) for k in ['reviewer','reviewedCommit','evidenceRef']):error('tested commit/review required')

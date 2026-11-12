@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`a5e1381185c310d3b1e5b1db8a4360b9e38b177af478f844705fe8a14fa0814d`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`5865eb04e017e92b1ce26866ea75e73932a0e75743ee22e92faba98872735607`。不要手工编辑；候选不是执行授权。
 
-任务 31 项；TODO 7；IN_PROGRESS 0；BLOCKED 4；REVIEW 8；ACCEPTED 12。
+任务 31 项；TODO 7；IN_PROGRESS 0；BLOCKED 4；REVIEW 7；ACCEPTED 13。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 4 | 0 | 0 | 0 | 1 |
-| D | 14 | 3 | 0 | 4 | 7 | 0 |
+| D | 14 | 3 | 0 | 4 | 6 | 1 |
 
 ## 当前活动记录
 
@@ -24,7 +24,6 @@
 - D-S01-RULE-01 单SKU供需/候选与质量规则签认：BLOCKED；实际执行者=未指派。
 - D-S01-ERP-ACCESS-01 教学ERP真实只读启用与安全条件确认：BLOCKED；实际执行者=未指派。
 - D-S01-AI-ACCESS-01 A01真实Provider/模型用途启用条件确认：BLOCKED；实际执行者=未指派。
-- D-S01-DEV-01 S01 Workflow与规则报告/AI解释语义接入：REVIEW；实际执行者=Codex（本轮单人最小修复与集成）。
 - D-S01-MVP-TODO S01 MVP分阶段开发任务规划（本轮仅文档）：REVIEW；实际执行者=Codex（本轮唯一文档规划执行者）。
 
 ## 全部近期记录
@@ -58,7 +57,7 @@
 | D-S01-ERP-ACCESS-01 | 教学ERP真实只读启用与安全条件确认 | BLOCKED | 无；仍核对入口指令 |
 | D-S01-AI-ACCESS-01 | A01真实Provider/模型用途启用条件确认 | BLOCKED | A-01 |
 | D-S01-LIVE-01 | 单SKU教学ERP真实读取与受控补充闭环验收 | TODO | B-01, B-02, D-S01-DATA-01, D-S01-RULE-01, D-S01-ERP-ACCESS-01 |
-| D-S01-DEV-01 | S01 Workflow与规则报告/AI解释语义接入 | REVIEW | B-05, B-04, C-01 |
+| D-S01-DEV-01 | S01 Workflow与规则报告/AI解释语义接入 | ACCEPTED | B-05, B-04, C-01 |
 | D-S01-UI-01 | 沿用S01原型的真实API/AI详情对接 | TODO | D-S01-DEV-01, A-04 |
 | D-S01-ACCEPT-01 | 单SKU S01 MVP端到端复现与负责人验收 | TODO | A-06, D-S01-LIVE-01, D-S01-DEV-01, D-S01-UI-01, C-04 |
 | D-S01-MVP-TODO | S01 MVP分阶段开发任务规划（本轮仅文档） | REVIEW | 无；仍核对入口指令 |

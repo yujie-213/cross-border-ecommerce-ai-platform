@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前验收登记（2026-11-12，基于96ba88f）：负责人确认D-S01-DEV-01已通过本人及星星独立工程验收，登记ACCEPTED并批准普通合入main；沿用d7fef0e固定实现358项证据，不把工程接受当真实业务准入。后续教学ERP真实只读阶段按本轮新授权单独领取。
+
 当前独立评审修复授权（2026-11-12，基于75e42bd0082e6c69022d089d9a87ab68a544085d）：只修复S01摘要实际重算/一致性、格式合法篡改负例及本台账旧执行条件，固定提交后全量回归、18项文档/依赖/差异检查并普通同步codex/s01-parallel-review。D-S01-DEV-01保持REVIEW，四项真实准入保持BLOCKED；不合并main、不新增功能或下一阶段，不调用ERP/真实DeepSeek/采购写入。下方旧阶段停止点和“本轮仅规划”均按各自历史时点阅读，不覆盖本条当前授权。
 
 当前双线工程交付（2026-11-12，基于d6f9d70052e9d153daa68cef700913a21c8a633c）：先冻结共用消费契约，A/B独立工作区与分支分别提交，Codex主集成公共文件。D-S01-DEV-01固定实现cc7c2576c93485d2534680c342d271654bafd3ba完成全量340 PASS/0 FAIL/0 ERROR/0 SKIP，原281保全、新增59；进入REVIEW、review=null，等待负责人和星星独立验收。数据线离线资料报告已完成并交评审，原SKU-A不能从已存类型证据恢复、八域缺口仍存在；D-S01-DATA/RULE/ERP-ACCESS/AI-ACCESS四门继续BLOCKED，资料核对不代签。真实ERP/DeepSeek/采购调用0，LIVE/C-04/UI等本轮NOT_RUN；工程互审不代替独立验收。当前集成分支codex/s01-parallel-review，GitHub main不自动合入。下方旧授权/停止点仅保留历史事实。
@@ -4662,7 +4664,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_ENGINEERING",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "cb289f4febbd2d3b83866f8143d3ce0a82e5c4eb",
     "3e6d80202cc6e923bef7a5c452c2b38a206ac26c",
@@ -4733,7 +4735,22 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（明确批准）及星星（用户确认已独立工程验收）",
+    "date": "2026-11-12",
+    "scope": "D_S01_DEV_ENGINEERING_ONLY",
+    "decision": "负责人本轮明确批准D-S01-DEV-01工程验收并合入main；真实ERP/业务规则/模型准入不由该工程验收代签。",
+    "reviewedCommit": "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348",
+    "evidenceCommit": "96ba88fe6b16260954a6d95a1aa5467881353779",
+    "evidenceRef": "docs/evidence/D-S01-DEV-01/verification.json",
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json",
+        "reason": "本次接受工程Handler交付；原真实来源/模型/前端验收未执行，后续分别按对应任务授权与门禁验收，不计PASS。"
+      }
+    ]
+  },
   "branch": "codex/s01-parallel-review",
   "observedHead": "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348",
   "dirtyPaths": [
@@ -4777,6 +4794,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "按独立评审修复全部六个可确定摘要实际重算/比较；固定实现358项PASS，前次340保全、新增18，114相关测试及18项文档/依赖/差异检查PASS；四门仍BLOCKED，等待负责人和星星独立验收，不合并main。",
       "observedHead": "d7fef0e18dbe8dc4dcee43edd4dce4f339e9f348"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "reason": "负责人确认本人及星星独立工程验收通过，批准登记并普通合入main；原358项证据沿用，真实业务门禁与其他任务状态本次登记不变。",
+      "observedHead": "96ba88fe6b16260954a6d95a1aa5467881353779"
     }
   ],
   "acceptanceRefs": [
