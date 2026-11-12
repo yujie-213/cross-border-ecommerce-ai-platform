@@ -75,6 +75,10 @@ class S01Bundle:
         for name in ["taskRef", "planVersion", "participantId", "snapshotId"]:
             if getattr(request, name) != getattr(self.context, name):
                 raise ValueError("CONTEXT_BINDING_DENIED")
+        return self.resolve_content()
+
+    def resolve_content(self):
+        """Rebuild deterministic content and digests without a call, allowance or IO."""
         data = self.context.model_dump(mode="json")
         if len(json.dumps(data).encode()) > 8192 or len({f.ref for f in self.context.facts}) != len(self.context.facts):
             raise ValueError("CONTEXT_LIMIT")

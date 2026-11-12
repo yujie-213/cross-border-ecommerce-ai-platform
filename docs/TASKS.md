@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前独立评审修复授权（2026-11-12，基于75e42bd0082e6c69022d089d9a87ab68a544085d）：只修复S01摘要实际重算/一致性、格式合法篡改负例及本台账旧执行条件，固定提交后全量回归、18项文档/依赖/差异检查并普通同步codex/s01-parallel-review。D-S01-DEV-01保持REVIEW，四项真实准入保持BLOCKED；不合并main、不新增功能或下一阶段，不调用ERP/真实DeepSeek/采购写入。下方旧阶段停止点和“本轮仅规划”均按各自历史时点阅读，不覆盖本条当前授权。
+
 当前双线工程交付（2026-11-12，基于d6f9d70052e9d153daa68cef700913a21c8a633c）：先冻结共用消费契约，A/B独立工作区与分支分别提交，Codex主集成公共文件。D-S01-DEV-01固定实现cc7c2576c93485d2534680c342d271654bafd3ba完成全量340 PASS/0 FAIL/0 ERROR/0 SKIP，原281保全、新增59；进入REVIEW、review=null，等待负责人和星星独立验收。数据线离线资料报告已完成并交评审，原SKU-A不能从已存类型证据恢复、八域缺口仍存在；D-S01-DATA/RULE/ERP-ACCESS/AI-ACCESS四门继续BLOCKED，资料核对不代签。真实ERP/DeepSeek/采购调用0，LIVE/C-04/UI等本轮NOT_RUN；工程互审不代替独立验收。当前集成分支codex/s01-parallel-review，GitHub main不自动合入。下方旧授权/停止点仅保留历史事实。
 
 当前C-01工程验收登记（2026-11-12，基于669f37e）：用户明确确认C-01已通过星星独立工程审查，并由负责人批准该阶段工程验收；本轮仅将C-01由REVIEW登记为ACCEPTED。被审实现eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f，证据提交669f37edd05fa6e59a833173c7136a0d50965ee3，引用docs/evidence/C-01/verification.json。验收仅覆盖A01/Mock/受控DeepSeek离线适配及O01/G02调用控制的工程范围，沿用原281项实测，不重跑应用测试。四项准入门禁保持BLOCKED；真实DeepSeek、费用核对和C-04保持NOT_RUN，不授权后续开发或真实模型调用。下方旧REVIEW及review=null描述均为历史事实，当前状态只读任务JSON。
@@ -34,7 +36,7 @@
 
 依据：[需求](requirements/REQUIREMENTS.md)、[概要设计](architecture/DEVELOPMENT_DESIGN.md)、[AI详设](agents/AI_DETAILED_DESIGN.md)、[S01专项](agents/S01_补货Agent专项详细设计.md)、[MVP v0.2](agents/S01_MVP实施文档.md)、[ERP调查](agents/S01_ERP接口调查与字段映射.md)、[单SKU准入核对](agents/S01_单SKU开发准入核对.md)；原型与视觉按现有PRODUCT_SPEC/ALIGNMENT/DESIGN。本计划细化实施任务，不重写冻结正文。
 
-**本轮只有规划授权。** 以下“可先开发”均指负责人和星星评审本计划、随后明确授权Codex实施并满足该任务入口后；本轮不得开始。所有新开发任务仍TODO、未指派、无实现commit/测试结果；本计划所列新软件/真实ERP闭环/真实LLM/浏览器验收全部NOT_RUN；历史只读结构探测事实继续保留，不当作新验收。未解除的BLOCKED门禁也可先准备材料，但不能伪写已关闭。
+**历史规划时点（2026-11-11，已被后续有界授权覆盖）：本轮只有规划授权。** 以下“可先开发”均指负责人和星星评审本计划、随后明确授权Codex实施并满足该任务入口后；本轮不得开始。所有新开发任务仍TODO、未指派、无实现commit/测试结果；本计划所列新软件/真实ERP闭环/真实LLM/浏览器验收全部NOT_RUN；历史只读结构探测事实继续保留，不当作新验收。未解除的BLOCKED门禁也可先准备材料，但不能伪写已关闭。
 
 | 阶段 | 复用/新增任务ID（状态只读下方JSON） | 先后与本阶段出口 |
 |---|---|---|
@@ -499,7 +501,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-01"
   ],
-  "entryCondition": "2026-11-12用户明确授权必要环境与契约检查后直接开发A-02；A-01当前消费原则已认可，普通技术细节由执行者依既有设计确定。仅最小骨架/配置/错误/日志与健康检查，不自动开展A-03及业务能力。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12用户明确授权必要环境与契约检查后直接开发A-02；A-01当前消费原则已认可，普通技术细节由执行者依既有设计确定。仅最小骨架/配置/错误/日志与健康检查，不自动开展A-03及业务能力。",
   "ownerRole": "Codex（本轮唯一实现者/测试者/台账集成人）；工程交付不自动业务验收，原四门仍由相应负责人解除",
   "assignee": "Codex（本轮唯一执行者及集成人）",
   "allowedPaths": [
@@ -689,6 +691,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12用户明确授权必要环境与契约检查后直接开发A-02；A-01当前消费原则已认可，普通技术细节由执行者依既有设计确定。仅最小骨架/配置/错误/日志与健康检查，不自动开展A-03及业务能力。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -714,7 +724,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-02"
   ],
-  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
   "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
   "assignee": "Codex主集成；storage_migrations代理负责指定存储/迁移/测试文件",
   "allowedPaths": [
@@ -882,6 +892,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -907,7 +925,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-02"
   ],
-  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
   "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
   "assignee": "Codex主集成；g01_access代理负责governance/access与security测试",
   "allowedPaths": [
@@ -1086,6 +1104,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -1111,7 +1137,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-03",
     "A-04"
   ],
-  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
   "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
   "assignee": "Codex负责任务/预算/投递/组合根/API/Worker；g01_access代理只补独立集成测试",
   "allowedPaths": [
@@ -1298,6 +1324,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -1326,7 +1360,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-05"
   ],
-  "entryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
   "ownerRole": "Codex主集成人串行协调公共文件；当前执行范围由用户本轮明确授权，不把工程交付自动ACCEPTED",
   "assignee": "Codex主集成与最终复验；storage_migrations代理只补实际进程测试",
   "allowedPaths": [
@@ -1490,6 +1524,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12负责人明确授权第一大阶段A-03至A-06全部剩余开发；按实际依赖/已认可契约推进，普通技术问题自主修复。只用现有独立MySQL测试库，真实业务/ERP/模型许可仍受原门禁，禁止第二阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -1521,7 +1563,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-03",
     "A-04"
   ],
-  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（主集成人）",
   "allowedPaths": [
@@ -1714,6 +1756,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -1745,7 +1795,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "B-01",
     "D-S01-RULE-01"
   ],
-  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（主集成人）",
   "allowedPaths": [
@@ -1923,6 +1973,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -1952,7 +2010,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-01",
     "D-S01-RULE-01"
   ],
-  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（主集成人）",
   "allowedPaths": [
@@ -2129,6 +2187,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -2155,7 +2221,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "B-03"
   ],
-  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（主集成人）",
   "allowedPaths": [
@@ -2358,6 +2424,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -2387,7 +2461,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "B-02",
     "B-03"
   ],
-  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+  "entryCondition": "历史领取条件（该工程交付已验收；其中阶段停止点仅属当时授权，不覆盖后续已明确授权的B/C-01/S01工程工作；本轮仅修复D-S01-DEV-01）：2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（主集成人）",
   "allowedPaths": [
@@ -2601,6 +2675,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
       "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -2631,7 +2713,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-05",
     "A-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-05/A-01后可先开发离线协议/Schema/超时/预算路径；一个真实Provider/deployment及许可配置须D-S01-AI-ACCESS-01签认后才可调用，受限评测不等于正式用途已开放。",
+  "entryCondition": "A01离线工程实现已获负责人和星星工程验收；本轮仅为D-S01-DEV-01摘要一致性缺陷复用S01用途纯解析逻辑及回归，不新增网关能力。真实Provider/deployment、数据许可和付费调用仍须D-S01-AI-ACCESS-01及单独授权，正式用途启用须C-04。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（单人集成）",
   "allowedPaths": [
@@ -2811,6 +2893,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reviewedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
       "evidenceRef": "docs/evidence/C-01/verification.json",
       "evidenceCommit": "669f37edd05fa6e59a833173c7136a0d50965ee3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "ACCEPTED",
+      "to": "ACCEPTED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-05/A-01后可先开发离线协议/Schema/超时/预算路径；一个真实Provider/deployment及许可配置须D-S01-AI-ACCESS-01签认后才可调用，受限评测不等于正式用途已开放。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "completionEvidence": [
@@ -3939,7 +4029,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "单SKU身份恢复与受控数据准入",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可先整理受控登记，不新联网；新增只读验证须ERP安全门及单独明确授权。",
+  "entryCondition": "已有获准资料的单SKU离线复核已交评审；原SKU-A恢复/受控包及岗位签认仍未满足，门禁继续BLOCKED。本轮不补业务事实、不新认证/联网，新增真实只读验证仍须ERP安全门与单独明确授权。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": "Codex / data_admission",
   "allowedPaths": [
@@ -4046,6 +4136,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "BLOCKED",
       "reason": "工作线A完成本地获准资料离线复核并交报告评审；资料解释疑点已收敛，原身份/数据/规则/ERP安全及实际签认条件未满足，门禁不解除。",
       "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可先整理受控登记，不新联网；新增只读验证须ERP安全门及单独明确授权。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "acceptanceRefs": [
@@ -4065,7 +4163,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "单SKU供需/候选与质量规则签认",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可与身份恢复及A-01契约准备并行，不要求先完成数据采集。",
+  "entryCondition": "已整理单SKU业务规则缺口与受控补充建议；具体净额/需求/供给/日期/约束/质量口径及固定期望例仍须岗位签认，门禁继续BLOCKED。工程样例和本轮摘要修复不代替真实规则签认。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": null,
   "allowedPaths": [
@@ -4166,6 +4264,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "BLOCKED",
       "reason": "工作线A完成本地获准资料离线复核并交报告评审；资料解释疑点已收敛，原身份/数据/规则/ERP安全及实际签认条件未满足，门禁不解除。",
       "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可与身份恢复及A-01契约准备并行，不要求先完成数据采集。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "acceptanceRefs": [
@@ -4186,7 +4292,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "教学ERP真实只读启用与安全条件确认",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。历史只读证据直接复用，不为计划重放认证。",
+  "entryCondition": "已离线复核历史ERP证据及安全缺口；可信传输/受控凭据/精确只读范围和单独启用授权仍缺，门禁继续BLOCKED。本轮不重放认证、不发ERP请求、不沿用历史TLS例外。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": null,
   "allowedPaths": [
@@ -4286,6 +4392,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "BLOCKED",
       "reason": "工作线A完成本地获准资料离线复核并交报告评审；资料解释疑点已收敛，原身份/数据/规则/ERP安全及实际签认条件未满足，门禁不解除。",
       "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。历史只读证据直接复用，不为计划重放认证。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "acceptanceRefs": [
@@ -4307,7 +4421,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-01用途契约后确认，不以全AI平台/A02/A03为前置。",
+  "entryCondition": "A01工程已验收且S01 Mock集成已交REVIEW；真实数据发送许可、用途/安全与Provider启用条件尚未签认，门禁继续BLOCKED。本轮仅工程摘要修复和Mock回归，不授权真实DeepSeek或付费调用，不以全AI平台/A02/A03为前置。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": null,
   "allowedPaths": [
@@ -4370,6 +4484,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "BLOCKED",
       "reason": "本轮仅规划登记；未领取开发，已知实际准入缺口单列BLOCKED，不把原则同意当完成",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-01用途契约后确认，不以全AI平台/A02/A03为前置。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "acceptanceRefs": [
@@ -4477,9 +4599,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "B-04",
     "C-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。公共实现依赖满足后可用显式工程样例集成；真实数据运行须D-S01-LIVE-01，真实模型评测须AI安全门/正式启用须C-04。",
+  "entryCondition": "负责人已授权显式工程输入/Mock的S01业务集成，现工程交付处于REVIEW。本轮仅按独立评审意见修复validate_versions全部可确定摘要重算/一致性、补篡改发布与读取负例、修正文案、固定提交复验及普通同步评审分支；不扩功能、不合并main、不进入下一阶段。真实数据运行须D-S01-LIVE-01，真实模型仍须AI准入及C-04。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": "Codex / handler_dev",
+  "assignee": "Codex（本轮单人最小修复与集成）",
   "allowedPaths": [
     "src/commerce_hub/scenarios/s01_supply_inventory/",
     "tests/integration/s01/",
@@ -4612,7 +4734,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "codex/s01-parallel-review",
-  "observedHead": "cc7c2576c93485d2534680c342d271654bafd3ba",
+  "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4639,6 +4761,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "独立双线提交及工程交叉审查后，固定集成提交全量340 PASS（原281保全+59），证据/交接齐全；等待负责人和星星独立验收，不登记ACCEPTED，真实业务门禁原样。",
       "observedHead": "cc7c2576c93485d2534680c342d271654bafd3ba"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "REVIEW",
+      "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。公共实现依赖满足后可用显式工程样例集成；真实数据运行须D-S01-LIVE-01，真实模型评测须AI安全门/正式启用须C-04。",
+      "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
     }
   ],
   "acceptanceRefs": [

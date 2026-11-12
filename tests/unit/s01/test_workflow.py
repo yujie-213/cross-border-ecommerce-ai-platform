@@ -151,3 +151,26 @@ def test_persisted_version_bindings_fail_closed_before_public_view(fault):
     elif fault=="prompt":versions["promptRef"]["version"]="other"
     else:versions["rawProviderContent"]="SENSITIVE_FUTURE_FIELD"
     with pytest.raises(ValueError):handler.validate_result(result)
+
+
+@pytest.mark.parametrize("field", ["resolvedPromptDigest", "contextDigest", "parametersDigest",
+    "outputSchemaDigest", "toolSpecsDigest", "promptContentHash"])
+@pytest.mark.parametrize("status", ["AVAILABLE", "UNAVAILABLE"])
+def test_well_formed_digest_tampering_rejected_at_publication_and_view(field, status):
+    handler = handler_response()
+    result = handler.run(context(), example())
+    ai = result.analysisReport["ai"]
+    if status == "UNAVAILABLE":
+        ai.update(status=status, explanation=None, reason="REFUSED")
+    # Both successful and degraded outputs with genuine version metadata remain valid.
+    handler.validate_result(result)
+    original = ai["versionBundle"]["digests"][field]
+    changed = ("0" if original[0] != "0" else "1") + original[1:]
+    assert len(changed) == 64 and int(changed, 16) >= 0 and changed != original
+    ai["versionBundle"]["digests"][field] = changed
+    with pytest.raises(ValueError, match="BROKEN_S01_EXPLANATION_VERSIONS"):
+        handler.validate_publication(result, dict(tenantId="fixture", taskId="task"), "1")
+    report = result.model_dump(mode="json")
+    report.update(taskRef=dict(tenantId="fixture", taskId="task"), planVersion="1")
+    with pytest.raises(ValueError, match="BROKEN_S01_EXPLANATION_VERSIONS"):
+        handler.report_view(report)

@@ -131,3 +131,43 @@ def test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task(make_s
     until=time.monotonic()+5
     while count(env,usage_facts)!=1 and time.monotonic()<until:time.sleep(.02)
     assert count(env,usage_facts)==1
+
+
+@pytest.mark.parametrize("field", ["resolvedPromptDigest", "contextDigest", "parametersDigest",
+    "outputSchemaDigest", "toolSpecsDigest", "promptContentHash"])
+def test_well_formed_digest_tampering_blocks_actual_publish_and_read(make_s01, field):
+    from commerce_hub.orchestration.service import TaskError
+    env = business(make_s01)
+    task_id = create(env)["taskRef"]["taskId"]
+    lease = env.queue.claim([env.spec.work_kind])
+    task = env.service.start(lease, env.principal)
+    ctx = ExecutionContext(env.service, lease, env.principal, task, Event())
+    valid = env.spec.handler.run(ctx, example())
+    bad = deepcopy(valid)
+    original = bad.analysisReport["ai"]["versionBundle"]["digests"][field]
+    changed = ("0" if original[0] != "0" else "1") + original[1:]
+    assert len(changed) == 64 and int(changed, 16) >= 0 and changed != original
+    bad.analysisReport["ai"]["versionBundle"]["digests"][field] = changed
+    budget_before = dict(row(env, budgets, task_id=task_id))
+    with pytest.raises(TaskError, match="INVALID_DOMAIN_RESULT"):
+        env.service.complete(lease, env.principal, 1, bad)
+    assert count(env, reports) == 0 and row(env, tasks, task_id=task_id)["state"] == "RUNNING"
+    assert dict(row(env, budgets, task_id=task_id)) == budget_before and count(env, usage_facts) == 1
+    env.service.complete(lease, env.principal, 1, valid)
+    original_view = env.service.read_report(env.principal, task_id)
+    persisted = dict(row(env, reports, task_id=task_id))
+    payload = deepcopy(persisted["payload"])
+    payload["analysisReport"]["ai"]["versionBundle"]["digests"][field] = changed
+    with env.database.engine.begin() as conn:
+        # Recompute the storage digest: the Handler must reject its own inconsistent version metadata.
+        conn.execute(update(reports).filter_by(tenant_id=env.tenant, task_id=task_id).values(
+            payload=payload, fingerprint=env.service.fingerprint(payload)))
+    with pytest.raises(TaskError, match="NOT_FOUND") as error:
+        env.service.read_report(env.principal, task_id)
+    assert error.value.status == 404
+    with env.database.engine.begin() as conn:
+        conn.execute(update(reports).filter_by(tenant_id=env.tenant, task_id=task_id).values(
+            payload=persisted["payload"], fingerprint=persisted["fingerprint"]))
+    assert env.service.read_report(env.principal, task_id) == original_view
+    assert count(env, reports) == count(env, usage_facts) == env.spec.handler.provider.calls == 1
+    assert dict(row(env, budgets, task_id=task_id)) == budget_before

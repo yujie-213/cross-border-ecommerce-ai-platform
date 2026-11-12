@@ -73,7 +73,8 @@ def explanation_context(binding, facts):
 
 def validate_versions(ai, facts):
     versions = ai["versionBundle"]
-    expected = S01Bundle(explanation_context(ai["binding"], facts)).refs()
+    bundle = S01Bundle(explanation_context(ai["binding"], facts))
+    expected = bundle.refs()
     refs = {key: expected[key] for key in ("deploymentRef", "promptRef", "contextBundleRef", "outputSchemaRef", "parametersRef", "cachePolicyRef")}
     if not isinstance(versions, dict) or set(versions) - (set(refs) | {"digests", "configuredModel"}):
         raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
@@ -81,10 +82,10 @@ def validate_versions(ai, facts):
         if any(versions.get(key) != value for key,value in refs.items()) or versions.get("configuredModel") != "mock-s01-v1":
             raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
         hashes = versions.get("digests", {})
-        hash_fields = {"resolvedPromptDigest", "contextDigest", "parametersDigest", "outputSchemaDigest", "toolSpecsDigest", "promptContentHash"}
-        if (not isinstance(hashes, dict) or set(hashes) != hash_fields
-            or any(not isinstance(value,str) or len(value)!=64 or any(char not in "0123456789abcdef" for char in value) for value in hashes.values())
-            or hashes["contextDigest"] != digest(explanation_context(ai["binding"], facts).model_dump(mode="json"))):
+        # Reuse the sender's pure resolver so all six hashes bind to the actual
+        # Prompt, current Context, parameters, Schema and empty tool set.
+        _, expected_hashes = bundle.resolve_content()
+        if not isinstance(hashes, dict) or hashes != expected_hashes:
             raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
     elif ai["status"] == "AVAILABLE":
         raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
