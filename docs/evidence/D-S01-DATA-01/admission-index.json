@@ -1,0 +1,296 @@
+{
+  "scope": "OFFLINE_DOCUMENT_RECONCILIATION_ONLY",
+  "date": "2026-11-12",
+  "baselineCommit": "d6f9d70052e9d153daa68cef700913a21c8a633c",
+  "branch": "codex/s01-data-admission",
+  "assignee": "Codex work line A",
+  "sourceFiles": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "9ceb44eb4d0b30e1631fd48f805cc7621ee9430234eda739cb452c5749dcbf78",
+      "bytes": 4668
+    },
+    {
+      "path": "docs/TASKS.md",
+      "sha256": "f13094a563bf55ed4785e68ac83e67208bd6fb3b9f55d208626381006c37e6e2",
+      "bytes": 237570
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "sha256": "6af00af581a5d87cb7d213cb858beb9956989720d6891a4c395bb958d7b0c372",
+      "bytes": 64396
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "179cb5d91c195638f0e5fd084d15e2f7dcaa3466f7dbfc893a495f3db9b2c4cd",
+      "bytes": 22031
+    },
+    {
+      "path": "docs/agents/S01_ERP接口调查与字段映射.md",
+      "sha256": "d1698cc9d1fb58bd562893a4c4d44e01ebb23de20aa9a1f5c6bcb2d3bf8ffc3c",
+      "bytes": 19576
+    },
+    {
+      "path": "docs/agents/evidence/s01-erp-survey-20261111.json",
+      "sha256": "0cbdfe12fe6c02f05cc6c8bb5f4ed7cf25d9aed08ceaec92d92579e491af41b5",
+      "bytes": 121614
+    },
+    {
+      "path": "docs/agents/S01_单SKU开发准入核对.md",
+      "sha256": "62c6561e733d4994da3a48ee31721d88d2fdcf4d8023fba1693bd15ef9f0ff1d",
+      "bytes": 13143
+    },
+    {
+      "path": "docs/agents/S01_MVP实施文档.md",
+      "sha256": "1407adadda38e634b8a0c6df47c3b9f97b33d9f400d4c5521af5552554097d0f",
+      "bytes": 73551
+    },
+    {
+      "path": "docs/agents/S01_补货Agent专项详细设计.md",
+      "sha256": "53684a012e65115c320569cb6acf4737dc51edc0a3523f59a9ff01f6ccf1ed9a",
+      "bytes": 93515
+    }
+  ],
+  "sourceFingerprintSemantics": "Baseline Git bytes only; shared governance files may later change during primary integration. Historical YAML fingerprint is referenced, not revalidated.",
+  "inspectionBoundary": "Named source documents and Git-tracked S01/controlled-material path inventory only. No whole-machine search, .env read or untracked YAML read.",
+  "controlledPackage": {
+    "providedInReviewedInputs": false,
+    "ref": null,
+    "rawSkuRestored": false,
+    "replacementApproved": false
+  },
+  "historicalCounts": {
+    "staticOperationsReviewed": 24,
+    "authenticatedBusinessCalls": 20,
+    "successfulBusinessQueryCalls": 19,
+    "distinctBusinessOperationsAttempted": 16,
+    "operationsReturning200": 15,
+    "operationsWithNonEmptySamples": 10,
+    "authenticationCalls": 2,
+    "businessWriteCalls": 0
+  },
+  "identity": {
+    "alias": "SKU-A",
+    "canonicalSkuId": null,
+    "rawIdentifiersSaved": false,
+    "inventoryStoreOwnershipProven": false,
+    "fullPaginationCoverageProven": false
+  },
+  "domains": [
+    {
+      "id": "identity",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V01",
+        "R2-V02",
+        "R2-V03",
+        "R2-V04",
+        "R2-V05",
+        "R2-V06",
+        "R2-V07"
+      ],
+      "missing": [
+        "actual controlled binding",
+        "store ownership",
+        "unit and precision",
+        "shared inventory allocation"
+      ],
+      "signoffRoles": [
+        "data owner",
+        "warehouse owner"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "inventory",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V01",
+        "R2-V05",
+        "R2-V06",
+        "R2-V17"
+      ],
+      "missing": [
+        "current scoped quantity and observation time",
+        "net versus disjoint buckets",
+        "reservation and mirror semantics"
+      ],
+      "signoffRoles": [
+        "warehouse owner",
+        "data owner"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "demand",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V08",
+        "R2-V19"
+      ],
+      "missing": [
+        "SKU/store binding",
+        "complete historical window",
+        "timezone and order-state treatment",
+        "future demand policy and reservation relation"
+      ],
+      "signoffRoles": [
+        "operations owner",
+        "B01/B02 reviewer"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "open_supply",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V09",
+        "R2-V10",
+        "R2-V11",
+        "R2-V18"
+      ],
+      "missing": [
+        "per-line remaining quantity",
+        "valid status and deduplication",
+        "SKU warehouse supplier binding",
+        "full open-supply coverage"
+      ],
+      "signoffRoles": [
+        "procurement owner",
+        "warehouse owner"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "saleable_date",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V04",
+        "R2-V09",
+        "R2-V10",
+        "R2-V18"
+      ],
+      "missing": [
+        "saleable date with evidence per open line",
+        "candidate lead-time endpoints and calendar",
+        "quality/transport conversion",
+        "overdue and same-day policy"
+      ],
+      "signoffRoles": [
+        "supply-chain owner",
+        "warehouse owner"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "moq",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V04",
+        "R2-V13",
+        "R2-V18"
+      ],
+      "missing": [
+        "actual value and supplier/SKU/unit applicability",
+        "validity and precedence",
+        "other applicable hard constraints"
+      ],
+      "signoffRoles": [
+        "procurement owner"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "order_multiple",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V04",
+        "R2-V18"
+      ],
+      "missing": [
+        "independent order multiple",
+        "unit conversion and scope",
+        "carton equivalence evidence if reused"
+      ],
+      "signoffRoles": [
+        "procurement owner"
+      ],
+      "actualSignoff": null
+    },
+    {
+      "id": "quality",
+      "admission": "BLOCKED",
+      "observationIds": [
+        "R2-V04",
+        "R2-V10",
+        "R2-V14",
+        "R2-V16"
+      ],
+      "missing": [
+        "scoped required policy and valid signal",
+        "mature cohort and denominator if used",
+        "investigation triggers and open investigations",
+        "degradation matrix"
+      ],
+      "signoffRoles": [
+        "quality owner",
+        "business owner"
+      ],
+      "actualSignoff": null
+    }
+  ],
+  "gateDisposition": {
+    "D-S01-DATA-01": "BLOCKED",
+    "D-S01-RULE-01": "BLOCKED",
+    "D-S01-ERP-ACCESS-01": "BLOCKED",
+    "D-S01-AI-ACCESS-01": "BLOCKED"
+  },
+  "sourceAxes": {
+    "historicalSurvey": {
+      "environment": "TEACHING_ERP",
+      "acquisitionMethod": "NETWORK_READ",
+      "nature": "OBSERVED_FACT",
+      "level": "HISTORICAL_STRUCTURE_OBSERVATION_ONLY"
+    },
+    "futureControlledPackage": {
+      "environment": "CONTROLLED_INPUT",
+      "acquisitionMethod": "CONTROLLED_FILE",
+      "nature": "CONTROLLED_FACT",
+      "provided": false
+    },
+    "engineeringFixture": {
+      "environment": "ENGINEERING_FIXTURE",
+      "acquisitionMethod": "GENERATED_FIXTURE",
+      "nature": "HYPOTHESIS",
+      "skuABindingAllowed": false
+    }
+  },
+  "documentationQuestionsResolved": [
+    "static declaration versus live observation locators",
+    "operation versus request count denominators",
+    "SKU-A cannot be restored from saved type records",
+    "historical read-only POST does not grant new access",
+    "required quality can use approved scoped signal without full S03",
+    "Mock Handler cannot close real admission"
+  ],
+  "notRun": [
+    "responsible-owner independent review",
+    "controlled raw identity restoration",
+    "eight-domain actual-data verification",
+    "business rule signoff",
+    "ERP security configuration and new authenticated reads",
+    "real model purpose evaluation",
+    "procurement write"
+  ],
+  "safety": {
+    "newErpAuthenticationCalls": 0,
+    "newErpNetworkCalls": 0,
+    "realModelCalls": 0,
+    "procurementWrites": 0,
+    "databaseCalls": 0,
+    "secretValuesRead": false,
+    "untrackedYamlRead": false
+  },
+  "reportRef": "docs/evidence/D-S01-DATA-01/admission-report.md",
+  "statusSource": "docs/TASKS.md"
+}
