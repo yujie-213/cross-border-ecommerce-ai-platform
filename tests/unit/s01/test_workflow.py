@@ -30,7 +30,9 @@ def handler_response(output=None, code="OK"):
         if output:
             output(value)
         return ModelResponse(status="SUCCESS" if code=="OK" else "TECH_ERROR", code=code,
-            validatedObject=value if code=="OK" else None, usageStatus="KNOWN")
+            validatedObject=value if code=="OK" else None, usageStatus="KNOWN", versionBundle=dict(
+                **{key: getattr(request,key).model_dump() for key in ["deploymentRef","promptRef","contextBundleRef","outputSchemaRef","parametersRef","cachePolicyRef"]},
+                digests=bundle.resolve(request)[1],configuredModel="mock-s01-v1"))
     handler.gateway = SimpleNamespace(invoke=invoke)
     return handler
 
@@ -139,3 +141,13 @@ def test_public_report_omits_raw_assets_and_raw_provider_content():
     assert "sourceSku" not in str(view) and "fixture-source" not in str(view)
     report["planVersion"]="2"
     with pytest.raises(ValueError):handler.report_view(report)
+
+
+@pytest.mark.parametrize("fault",["context","prompt","extra"])
+def test_persisted_version_bindings_fail_closed_before_public_view(fault):
+    handler=handler_response();result=handler.run(context(),example())
+    versions=result.analysisReport["ai"]["versionBundle"]
+    if fault=="context":versions["digests"]["contextDigest"]="0"*64
+    elif fault=="prompt":versions["promptRef"]["version"]="other"
+    else:versions["rawProviderContent"]="SENSITIVE_FUTURE_FIELD"
+    with pytest.raises(ValueError):handler.validate_result(result)
