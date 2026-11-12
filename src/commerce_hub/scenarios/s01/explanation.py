@@ -7,7 +7,7 @@ from typing import Annotated
 from pydantic import Field
 
 from commerce_hub.capabilities.models.contracts import (
-    StrictModel, Identifier, VersionedRef, DataRef, TaskRef, Parameters, ModelRequest,
+    StrictModel, Identifier, SnapshotIdentifier, VersionedRef, DataRef, TaskRef, Parameters, ModelRequest,
 )
 
 PURPOSE = "S01_REPLENISHMENT_EXPLANATION"
@@ -44,7 +44,7 @@ class ExplanationContext(StrictModel):
     taskRef: TaskRef
     planVersion: Identifier
     participantId: Identifier
-    snapshotId: Identifier
+    snapshotId: SnapshotIdentifier
     facts: list[Fact] = Field(min_length=1, max_length=16)
     # Data selection/field authorization belongs to the S01 caller, under current O01/G01 scope.
     sourceNature: Annotated[str, Field(pattern=r"^SIMULATED_ENGINEERING$")]

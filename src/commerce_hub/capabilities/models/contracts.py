@@ -8,6 +8,7 @@ from typing import Annotated, Literal, Protocol
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 Identifier = Annotated[str, Field(strict=True, min_length=1, max_length=64, pattern=r"^[A-Za-z0-9_.:-]+$")]
+SnapshotIdentifier = Annotated[str, Field(strict=True, min_length=1, max_length=128, pattern=r"^[A-Za-z0-9_.:-]+$")]
 
 
 class StrictModel(BaseModel):
@@ -53,7 +54,7 @@ class ModelRequest(StrictModel):
     queryRef: QueryRef | None
     planVersion: Identifier | None
     participantId: Identifier | None
-    snapshotId: Identifier | None
+    snapshotId: SnapshotIdentifier | None
     principalRef: PrincipalRef
     policyContextRef: VersionedRef
     purpose: Identifier
