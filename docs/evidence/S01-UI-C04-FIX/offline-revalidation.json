@@ -1,0 +1,67 @@
+{
+  "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+  "scope": "Unmodified original paid A/B/C responses, offline, current computed teaching facts; no raw text published.",
+  "legacyPolicy": "s01-controlled-natural-v1",
+  "policy": "s01-controlled-natural-v2",
+  "cases": [
+    {
+      "caseId": "A",
+      "originalContentSha256": "11684f2fcc7777513387b7bcd15717335ee8245065eb5c3ad6f351f49870eea7",
+      "originalVersionDigests": "PASS",
+      "originalResponseModified": false,
+      "schema": "PASS",
+      "legacy": {
+        "result": "PASS",
+        "failureCode": null
+      },
+      "structured": {
+        "result": "PASS",
+        "failureCode": null
+      }
+    },
+    {
+      "caseId": "B",
+      "originalContentSha256": "5a85ea20884de2541fd2a4853d575a8bcab5e7bc66a9d821dcbc20d9d3198d52",
+      "originalVersionDigests": "PASS",
+      "originalResponseModified": false,
+      "schema": "PASS",
+      "legacy": {
+        "result": "PASS",
+        "failureCode": null
+      },
+      "structured": {
+        "result": "PASS",
+        "failureCode": null
+      }
+    },
+    {
+      "caseId": "C",
+      "originalContentSha256": "b8b41299d9fdcc3093a4feb293993840caa39fb089af7c8e2c17e31a5f162fd1",
+      "originalVersionDigests": "PASS",
+      "originalResponseModified": false,
+      "schema": "PASS",
+      "legacy": {
+        "result": "FAIL",
+        "failureCode": "UNCONTROLLED_NATURAL_LANGUAGE"
+      },
+      "structured": {
+        "result": "PASS",
+        "failureCode": null
+      }
+    }
+  ],
+  "originalPrivateArtifactSha256": "c169ea300b74af7fcb71bc53178e1b7f1ea27e7c2f711ef910a0616b2e187054",
+  "originalPrivateArtifactPreserved": true,
+  "historicalC04": "FAIL_UNCHANGED",
+  "paidModelRequests": 0,
+  "addedTokens": 0,
+  "liveCases": {
+    "C": "NOT_RUN_NEW_AUTHORIZATION_REQUIRED",
+    "D": "NOT_RUN_NEW_AUTHORIZATION_REQUIRED",
+    "E": "NOT_RUN_NEW_AUTHORIZATION_REQUIRED"
+  },
+  "actualCost": null,
+  "costStatus": "UNKNOWN",
+  "historicalReservedUsd": "0.15",
+  "enterpriseGates": "BLOCKED"
+}

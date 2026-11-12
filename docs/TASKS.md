@@ -1,3 +1,5 @@
+当前竞态与引用修复交付（2026-11-12，固定a3da2ba）：UI/C-04均REVIEW、review=null。前端31/浏览器6/后端632 PASS，原603逐名保全；原C原文v1拒绝重现、v2离线PASS，不改历史FAIL。新增真实C/D/E NOT_RUN（缺新授权），新增Token0；5642Token/UNKNOWN费用/$0.15预约指纹一致，四企业门BLOCKED。手机LOW技术债只登记，无布局改动；不合main，待负责人和星星独立评审。详见docs/evidence/S01-UI-C04-FIX/report.md。
+
 当前竞态与引用修复授权（2026-11-12，基于0525fa7）：负责人授权仅S01证据迟到竞态和C-04结构化引用优化，Codex在codex/s01-ui-c04-fix单人串行；当前IN_PROGRESS、最终REVIEW。远端main6fdf10c、frontend0525fa7、backend56cc62a已fetch和GitHub回读核对；已跟踪区起点干净、未知OpenAPI保留。禁止算法/移动布局改动；真实C/D/E新增授权不足为NOT_RUN，不复用旧task/key，历史FAIL/5642Token/UNKNOWN费用/$0.15预约及四门BLOCKED保留。
 
 当前前端交付（2026-11-12，固定465892c）：D-S01-UI-01进入REVIEW，后端603/客户端19/浏览器5 PASS，旧601保全；教学固定包真实API/独立Worker/MySQL闭环通过，AI分支夹具与真实调用分开。C-04历史FAIL/未知费用预约与四门BLOCKED不变，不合main，待负责人和星星独立评审。
@@ -3069,7 +3071,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "本轮负责人已授权竞态及引用工程修复、测试、文档、提交普通推送独立修复分支；不合main、不改算法，不新增真实模型/ERP调用；最终REVIEW。",
+  "entryCondition": "本轮竞态与结构化引用工程修复已完成固定提交复验并交REVIEW，等待负责人/星星独立评审；旧真实C-04 FAIL保留，新真实C/D/E调用需明确新授权及原累计预算核对，不复用结束任务/key，不合main或进入下一模块。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（本轮竞态与引用修复，单人串行）",
   "allowedPaths": [
@@ -3101,7 +3103,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "frontend/tests/unit/evidence-race.test.ts",
     "tests/browser/s01/workspace.spec.ts",
     "docs/contracts/s01/backend-api.md",
-    "docs/ui/S01-frontend-entry.md"
+    "docs/ui/S01-frontend-entry.md",
+    "docs/runbooks/s01-frontend.md",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/generated/"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -3133,12 +3139,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "MODEL_EVAL",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
-    "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad"
+    "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+    "a3da2ba1948009c93501bed1a6ccfcc7749d51cc"
   ],
-  "testedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
   "evidence": [
     {
       "kind": "MODEL_EVAL",
@@ -3207,36 +3214,46 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/S01-BACKEND/model/report.md"
+    },
+    {
+      "kind": "DOMAIN_SEMANTICS",
+      "acceptanceIds": [
+        "C-04/AC2"
+      ],
+      "command": "npm run test / build / test:browser; python -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/S01-UI-C04-FIX --baseline-evidence docs/evidence/D-S01-UI-01/backend-regression.json",
+      "environment": "Fixed a3da2ba1948009c93501bed1a6ccfcc7749d51cc; real Edge/API/independent Worker/authorized isolated MySQL; offline models and fixed teaching GET captures",
+      "sample": "31 client / 6 browser (4 real API, 2 protocol fixture) / 632 backend; original603 preserved; schema/ref/fact/permissions negative cases; paid calls0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-UI-C04-FIX/backend-regression.json"
+    },
+    {
+      "kind": "OFFLINE_REVALIDATION",
+      "acceptanceIds": [
+        "C-04/AC2"
+      ],
+      "command": "PYTHONPATH=src python -m tools.revalidate_s01_c04 --offline",
+      "environment": "No ERP/model/DB IO; unchanged original private A/B/C content and controlled teaching computed facts",
+      "sample": "A/B legacy+v2 PASS; C v1 rejection reproduced and v2 PASS; original version digests matched; not new paid acceptance",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-UI-C04-FIX/offline-revalidation.json"
+    },
+    {
+      "kind": "REAL_MODEL",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC3"
+      ],
+      "command": "NOT_RUN: new C/D/E paid evaluation requires explicit successor authorization and cumulative10/$1 budget review",
+      "environment": "Current authorization tied to original ended task and first-failure stop",
+      "sample": "C/D/E new calls0; added input/output/total/cache Token0; historical5642/UNKNOWN/$0.15 unchanged",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/S01-UI-C04-FIX/offline-revalidation.json"
     }
   ],
-  "review": {
-    "reviewer": "负责人和星星（负责人本轮明确通知独立评审结论；Codex仅登记）",
-    "date": "2026-11-12",
-    "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
-    "evidenceCommit": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
-    "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md",
-    "scope": "S01_MODEL_PURPOSE_EVALUATION",
-    "decision": "五例真实用途评测FAIL，整体不ACCEPTED，C-04保持REVIEW；正确拒绝C及停止D/E不阻塞已合格工程合main。",
-    "scopeDecision": "NOT_ACCEPTED",
-    "overallTaskDecision": "REVIEW",
-    "caseResults": {
-      "A": "AVAILABLE",
-      "B": "AVAILABLE",
-      "C": "INVALID_OUTPUT",
-      "D": "NOT_RUN",
-      "E": "NOT_RUN"
-    },
-    "realModelCalls": 3,
-    "inputTokens": 5067,
-    "outputTokens": 575,
-    "totalTokens": 5642,
-    "costStatus": "UNKNOWN",
-    "retainedCostReservationUsd": "0.15",
-    "remainingScope": [
-      "原C-04下独立安排C输出引用契约与D/E完整真实用途覆盖的修复/评测/验收；不得修改历史结果或换task/key盲重发",
-      "正常S01分析流程的真实模型接入和正式启用单独安排，不能把独立评测入口当已交付在线能力；本轮新调用0"
-    ]
-  },
+  "review": null,
   "branch": "codex/s01-backend-closure",
   "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
   "dirtyPaths": [
@@ -3289,6 +3306,22 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "baseCommit": "0525fa7d57bf563816d96b28fa1b7343368d1b64",
       "scope": "证据请求绑定/结构化引用v2；旧真实评测不改；无付费调用授权",
       "status": "IN_PROGRESS"
+    },
+    {
+      "event": "UI_C04_FIX_REVIEW",
+      "assignee": "Codex",
+      "branch": "codex/s01-ui-c04-fix",
+      "baseCommit": "0525fa7d57bf563816d96b28fa1b7343368d1b64",
+      "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+      "previousTestedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "status": "REVIEW",
+      "frontendPassed": 31,
+      "browserPassed": 6,
+      "backendPassed": 632,
+      "liveCDE": "NOT_RUN_NEW_AUTHORIZATION_REQUIRED",
+      "historicalC04": "FAIL_UNCHANGED",
+      "addedPaidTokens": 0,
+      "evidenceRef": "docs/evidence/S01-UI-C04-FIX/report.md"
     }
   ],
   "completionEvidence": [
@@ -5468,7 +5501,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "A-04"
   ],
-  "entryCondition": "本轮负责人已授权竞态及引用工程修复、测试、文档、提交普通推送独立修复分支；不合main、不改算法，不新增真实模型/ERP调用；最终REVIEW。",
+  "entryCondition": "本轮竞态与结构化引用工程修复已完成固定提交复验并交REVIEW，等待负责人/星星独立评审；旧真实C-04 FAIL保留，新真实C/D/E调用需明确新授权及原累计预算核对，不复用结束任务/key，不合main或进入下一模块。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": "Codex（本轮竞态与引用修复，单人串行）",
   "allowedPaths": [
@@ -5541,11 +5574,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER_API",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "465892c9342f23fd3e1614df85c564ade0a5ef9a"
+    "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+    "a3da2ba1948009c93501bed1a6ccfcc7749d51cc"
   ],
-  "testedCommit": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+  "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
   "evidence": [
     {
       "kind": "BROWSER_API",
@@ -5601,6 +5635,19 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/D-S01-UI-01/git-receipt.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC2",
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "npm run test / build / test:browser; python -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/S01-UI-C04-FIX --baseline-evidence docs/evidence/D-S01-UI-01/backend-regression.json",
+      "environment": "Fixed a3da2ba1948009c93501bed1a6ccfcc7749d51cc; real Edge/API/independent Worker/authorized isolated MySQL; offline models and fixed teaching GET captures",
+      "sample": "31 client / 6 browser (4 real API, 2 protocol fixture) / 632 backend; original603 preserved; schema/ref/fact/permissions negative cases; paid calls0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-UI-C04-FIX/frontend-verification.json"
     }
   ],
   "review": null,
@@ -5654,6 +5701,22 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "baseCommit": "0525fa7d57bf563816d96b28fa1b7343368d1b64",
       "scope": "证据请求绑定/结构化引用v2；旧真实评测不改；无付费调用授权",
       "status": "IN_PROGRESS"
+    },
+    {
+      "event": "UI_C04_FIX_REVIEW",
+      "assignee": "Codex",
+      "branch": "codex/s01-ui-c04-fix",
+      "baseCommit": "0525fa7d57bf563816d96b28fa1b7343368d1b64",
+      "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+      "previousTestedCommit": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+      "status": "REVIEW",
+      "frontendPassed": 31,
+      "browserPassed": 6,
+      "backendPassed": 632,
+      "liveCDE": "NOT_RUN_NEW_AUTHORIZATION_REQUIRED",
+      "historicalC04": "FAIL_UNCHANGED",
+      "addedPaidTokens": 0,
+      "evidenceRef": "docs/evidence/S01-UI-C04-FIX/report.md"
     }
   ],
   "acceptanceRefs": [

@@ -50,3 +50,22 @@ npm run test:browser
 浏览器测试使用已安装 Edge、上述 API/Worker 与真实隔离库，3 个 REAL 集成测试和 2 个明确 PROTOCOL FIXTURES 测试。夹具只测 AI/异常/轮询/分页分支，不当真实模型验收。截图和脱敏摘要在 `docs/evidence/D-S01-UI-01/`；原始测试临时输出在 `.tmp/`。
 
 回归前先停止本工具，避免它的 Worker 与后端进程测试竞争。后端按既有验证命令执行，证据另存本轮目录，不覆盖 S01-BACKEND 或 C-04 历史失败证据。
+
+
+## S01竞态与C-04引用修复复验
+
+固定实现与新证据见 `docs/evidence/S01-UI-C04-FIX/report.md`。沿上述受控启动，前端单测、类型/构建和浏览器测试后停止自有服务，再执行全量回归。退出会话测试会真正撤销自有fixture身份；重复浏览器整套测试前重新启动上述harness生成新短期主体，不复用已撤销Bearer，不放宽权限。
+
+```powershell
+# frontend/ 目录，已运行受控本机API/Worker与Vite
+npm run test
+npm run build
+$env:S01_UI_EVIDENCE_DIR='docs/evidence/S01-UI-C04-FIX'
+npm run test:browser
+# 回到仓库根目录，并已停止自有API/Worker/Vite
+$env:PYTHONPATH='src'
+.tmp/stage-a-clean/Scripts/python.exe -m tools.revalidate_s01_c04 --offline
+.tmp/stage-a-clean/Scripts/python.exe -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/S01-UI-C04-FIX --baseline-evidence docs/evidence/D-S01-UI-01/backend-regression.json
+```
+
+离线原文复验只读取Git忽略的既有worker.json与教学catalog，公开仅摘要/失败码，不发送模型、不改原文/历史。原始私有文件缺失应报NOT_RUN/缺失，不重新付费获取。当前真实C/D/E为NOT_RUN，需负责人明确新增授权及原累计预算核对；不可调用已结束task或换key/新任务绕过总额。

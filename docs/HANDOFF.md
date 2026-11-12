@@ -1,3 +1,13 @@
+## S01证据竞态与C-04引用优化交付（2026-11-12）
+
+当前竞态与引用修复交付（2026-11-12，固定a3da2ba）：UI/C-04均REVIEW、review=null。前端31/浏览器6/后端632 PASS，原603逐名保全；原C原文v1拒绝重现、v2离线PASS，不改历史FAIL。新增真实C/D/E NOT_RUN（缺新授权），新增Token0；5642Token/UNKNOWN费用/$0.15预约指纹一致，四企业门BLOCKED。手机LOW技术债只登记，无布局改动；不合main，待负责人和星星独立评审。详见docs/evidence/S01-UI-C04-FIX/report.md。
+
+实现/测试提交 `a3da2ba1948009c93501bed1a6ccfcc7749d51cc`，修复分支codex/s01-ui-c04-fix，基于最新远端前端0525fa7；main6fdf10c/backend56cc62a基线已fetch+GitHub回读。源码/测试/工具/配置在证据收尾中不再变更。证据请求统一生命周期，忽略Abort的迟到成功/错误/finally不能穿透task/report/代次；关闭、会话退出、身份交换、失权立即清空。旧文内ref的重复语法移除，新v2仍唯一结构化引用、当前事实受控短语/数字/日期/必需覆盖/质量/未知/采购保护，原v1的Prompt和全部摘要重建及历史读取兼容。无Schema、依赖、迁移或B01/B02变化。
+
+前端31/类型与构建PASS；实际Edge6 PASS（4真实API，2协议夹具），新增真实GET后延迟/切换/关闭/撤权/退出；603原后端保全、新29合计632 PASS/0 FAIL/ERROR/SKIP，九命令均0，仅s01_a01_test_20261112/MySQL8.0.27/UTC/READ-COMMITTED/0005。原真实C原文按v2离线PASS，v1仍拒绝；A/B旧摘要和原持久FAIL报告SELECT兼容PASS。原1budget/3attempt/3usage指纹前后完全相同。本轮付费模型及ERP网络0。演示进程已停止后才全量回归。
+
+开发失败单列history：测试导航/失权恢复入口误用、退出真撤销fixture后全套登录403（新短期主体重跑通过）、沙箱spawn EPERM与临时脚本路径/编码；没有删除断言或放宽权限。手机端技术债见docs/ui/S01-frontend-entry.md，LOW且仅登记。新真实C/D/E要新授权，不换任务绕过原10请求/$1累计限额，不释放历史预约。C-04仍不具备整体接受条件，企业四门BLOCKED。最后Git提交/普通同步按实时读回，不自动合main。
+
 # 当前增量交接：S01证据与引用修复领取
 
 当前竞态与引用修复授权（2026-11-12，基于0525fa7）：负责人授权仅S01证据迟到竞态和C-04结构化引用优化，Codex在codex/s01-ui-c04-fix单人串行；当前IN_PROGRESS、最终REVIEW。远端main6fdf10c、frontend0525fa7、backend56cc62a已fetch和GitHub回读核对；已跟踪区起点干净、未知OpenAPI保留。禁止算法/移动布局改动；真实C/D/E新增授权不足为NOT_RUN，不复用旧task/key，历史FAIL/5642Token/UNKNOWN费用/$0.15预约及四门BLOCKED保留。

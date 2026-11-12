@@ -1,0 +1,232 @@
+{
+  "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc",
+  "result": "PASS",
+  "unit": {
+    "passed": 31,
+    "failed": 0,
+    "baseline19Preserved": true,
+    "addedEvidenceLifecycleTests": 12
+  },
+  "commands": [
+    {
+      "command": "npm run test -- --reporter=json --outputFile=../.tmp/ui-c04-unit-final.json",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "vueTypecheck": "PASS",
+      "productionBundle": "PASS"
+    },
+    {
+      "command": "S01_UI_EVIDENCE_DIR=docs/evidence/S01-UI-C04-FIX npm run test:browser",
+      "exitCode": 0
+    }
+  ],
+  "browser": {
+    "channel": "msedge",
+    "passed": 6,
+    "failed": 0,
+    "realApiTests": 4,
+    "protocolFixtureTests": 2,
+    "durationMs": 43793.205,
+    "viewports": [
+      1440,
+      1024,
+      390
+    ],
+    "tests": [
+      {
+        "name": "REAL: A—E teaching packages, Worker reports, chart/table, refresh, previousReportRef, evidence, responsive",
+        "ok": true,
+        "status": [
+          "expected"
+        ],
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL: queued cancel, refresh resume and evidence revocation do not leak old report",
+        "ok": true,
+        "status": [
+          "expected"
+        ],
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL: uncertain create reuses persisted key after refresh; CSRF and Origin stay enforced",
+        "ok": true,
+        "status": [
+          "expected"
+        ],
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "PROTOCOL FIXTURES: AI statuses, token unknown, failures, empty and bounded history pagination",
+        "ok": true,
+        "status": [
+          "expected"
+        ],
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "PROTOCOL FIXTURES: polling is bounded, stops on denial; exact-scope pagination and keyboard",
+        "ok": true,
+        "status": [
+          "expected"
+        ],
+        "results": [
+          "passed"
+        ]
+      },
+      {
+        "name": "REAL API + transport delay: task switch, closed dialog, logout and permission denial discard late evidence",
+        "ok": true,
+        "status": [
+          "expected"
+        ],
+        "results": [
+          "passed"
+        ]
+      }
+    ]
+  },
+  "transportDelay": "Test-only fetch waits after genuine authorized GET and deliberately ignores Abort; real task switch, close, revoked read and logout discard old evidence.",
+  "unitTests": [
+    {
+      "name": "S01 HTTP consumer contract submits exact scope without tenant and binds only explicit previous report",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract gates report publication independently for QUEUED",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract gates report publication independently for RUNNING",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract gates report publication independently for SUCCEEDED",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract gates report publication independently for FAILED",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract gates report publication independently for CANCELLED",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract preserves missing usage as unknown (null)",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract preserves missing usage as unknown (undefined)",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract preserves missing usage as unknown ()",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract preserves a genuine zero token value",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract renders actual HTTP 401 without inventing success",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract renders actual HTTP 403 without inventing success",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract renders actual HTTP 404 without inventing success",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract renders actual HTTP 409 without inventing success",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract renders actual HTTP 422 without inventing success",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract renders actual HTTP 503 without inventing success",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract sends same idempotency key and exact body on replay, with Cookie CSRF",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract queries one exact history scope with a bounded cursor, never scans catalog",
+      "status": "passed"
+    },
+    {
+      "name": "S01 HTTP consumer contract preserves network uncertainty",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation reads normal evidence without persisting it",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation ignores late A resolve after switching to B, including finally",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation ignores late A reject after switching to B, including finally",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation invalidates protected evidence immediately on close even if transport ignores abort",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation invalidates protected evidence immediately on logout even if transport ignores abort",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation invalidates protected evidence immediately on identity even if transport ignores abort",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation invalidates protected evidence immediately on denied even if transport ignores abort",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation invalidates protected evidence immediately on expired even if transport ignores abort",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation invalidates protected evidence immediately on dispose even if transport ignores abort",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation does not accept a response from an earlier read of the same task after reopening",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation rejects late evidence when the task report reference changes",
+      "status": "passed"
+    },
+    {
+      "name": "evidence response is bound to the open task, report and read generation clears protected data on an active permission denial",
+      "status": "passed"
+    }
+  ],
+  "erpNetworkRequests": 0,
+  "paidModelRequests": 0,
+  "addedPaidTokens": 0,
+  "processesStoppedBeforeBackendRegression": true
+}

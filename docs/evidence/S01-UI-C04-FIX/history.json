@@ -1,0 +1,52 @@
+{
+  "scope": "Development failures retained separately; no deleted assertion or relaxed authorization",
+  "events": [
+    {
+      "result": "FAIL",
+      "phase": "temporary edit script",
+      "reason": "Windows default GBK decoding and wrong working directory/quoting; corrected to explicit UTF-8/root, partial duplicate edit removed; no implementation result claimed"
+    },
+    {
+      "result": "NOT_RUN",
+      "phase": "sandboxed Vitest",
+      "reason": "Two fork spawn EPERM errors; no tests executed; authorized local-process run later passed 31"
+    },
+    {
+      "result": "FAIL",
+      "phase": "new browser preflight 1",
+      "tests": 1,
+      "reason": "Test attempted second create from detail, where create button is not present; returned through existing navigation"
+    },
+    {
+      "result": "FAIL",
+      "phase": "new browser preflight 2",
+      "tests": 1,
+      "reason": "Test tried state button after read denial cleared inaccessible task; used actual reconnect/options recovery"
+    },
+    {
+      "result": "PASS",
+      "phase": "new browser preflight 3",
+      "tests": 1
+    },
+    {
+      "result": "FAIL",
+      "phase": "fixed-commit full browser first attempt",
+      "tests": 6,
+      "reason": "Preflight logout had actually revoked own fixture identity; all six session exchanges correctly returned 403. Restarted existing G01 fixture harness with a new short-lived test subject; no permission weakening."
+    },
+    {
+      "result": "PASS",
+      "phase": "fixed-commit browser rerun",
+      "tests": 6,
+      "testedCommit": "a3da2ba1948009c93501bed1a6ccfcc7749d51cc"
+    },
+    {
+      "result": "FAIL",
+      "phase": "temporary SELECT-only compatibility script",
+      "reason": "Missing project root import path; corrected PYTHONPATH=src;. and completed, no writes"
+    }
+  ],
+  "assertionsRemoved": false,
+  "permissionsRelaxed": false,
+  "historicalC04": "FAIL_UNCHANGED"
+}
