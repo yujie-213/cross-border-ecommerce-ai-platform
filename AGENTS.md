@@ -12,6 +12,8 @@
 
 最新授权增量（2026-11-12，00b212c）：A阶段工程经星星复核，用户已授权B-01—B-05连续开发、显式隔离的S01工程插件、真实MySQL/API/Worker测试、提交与GitHub普通同步；允许样例专用未验证规则，四项真实业务准入保持BLOCKED，不进入C阶段。上方A阶段停止点作为历史保留，本条覆盖其“不开始第二阶段”限制。
 
+最新授权增量（2026-11-12，96ba88f后）：负责人确认DEV工程验收并批准普通合入main，允许真实教学ERP认证和有界只读GET/经确认只读POST，指定HTTPS教学Connector默认局部关闭证书验证（TEACHING_ERP_ONLY），禁重定向。用户已确认新试点SKT-OL-XXL；本机.env.erp注入凭据，原始敏感响应只存Git忽略私有目录。旧ERP零调用/TLS阻断停止点不覆盖本条；真实数据/业务规则按实际证据签认，缺失仍BLOCKED，禁止业务写入、真实DeepSeek、前端或其他Agent开发。
+
 ## 稳定边界
 
 - O01统一任务/预算/计划/报告，通过ScenarioHandler调场景；Runtime只回RunOutcome，Handler形成DomainResult，YIELD不发布。

@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前真实教学ERP阶段（2026-11-12，基于b1813e5）：DEV已由负责人/星星工程验收并普通合入main；本轮真实认证/有界只读及教学Connector局部TLS例外明确获准，新试点已确认。当前八域/业务规则缺口按实保留BLOCKED，真实AI/采购写入/前端及其他Agent未授权。旧零调用/仅规划/不合并main停止点保留历史，不覆盖本轮新授权。
+
 当前验收登记（2026-11-12，基于96ba88f）：负责人确认D-S01-DEV-01已通过本人及星星独立工程验收，登记ACCEPTED并批准普通合入main；沿用d7fef0e固定实现358项证据，不把工程接受当真实业务准入。后续教学ERP真实只读阶段按本轮新授权单独领取。
 
 当前独立评审修复授权（2026-11-12，基于75e42bd0082e6c69022d089d9a87ab68a544085d）：只修复S01摘要实际重算/一致性、格式合法篡改负例及本台账旧执行条件，固定提交后全量回归、18项文档/依赖/差异检查并普通同步codex/s01-parallel-review。D-S01-DEV-01保持REVIEW，四项真实准入保持BLOCKED；不合并main、不新增功能或下一阶段，不调用ERP/真实DeepSeek/采购写入。下方旧阶段停止点和“本轮仅规划”均按各自历史时点阅读，不覆盖本条当前授权。
@@ -4031,11 +4033,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "单SKU身份恢复与受控数据准入",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "已有获准资料的单SKU离线复核已交评审；原SKU-A恢复/受控包及岗位签认仍未满足，门禁继续BLOCKED。本轮不补业务事实、不新认证/联网，新增真实只读验证仍须ERP安全门与单独明确授权。",
+  "entryCondition": "负责人本轮已明确授权指定教学ERP真实认证及有界只读验证；已确认新试点SKT-OL-XXL。教学HTTPS证书按TEACHING_ERP_ONLY局部关闭校验，不重复审批正常只读请求；不授权业务写入或真实模型。数据/规则按实际八域证据与岗位签认准入，当前未满足仍BLOCKED。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": "Codex / data_admission",
+  "assignee": "Codex（本轮单人真实教学ERP接入与集成）",
   "allowedPaths": [
-    "docs/evidence/D-S01-DATA-01/"
+    "src/commerce_hub/adapters/erp.py",
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/s01_teaching/",
+    "src/commerce_hub/bootstrap/teaching_erp.py",
+    "src/commerce_hub/orchestration/contracts.py",
+    "tests/",
+    "tools/s01_erp_readonly.py",
+    "docs/evidence/D-S01-LIVE-01/",
+    "docs/contracts/s01/teaching-erp-readonly.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "AGENTS.md"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -4106,8 +4120,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "review": null,
-  "branch": "codex/s01-data-admission",
-  "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c",
+  "branch": "codex/s01-erp-readonly",
+  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4146,6 +4160,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
       "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可先整理受控登记，不新联网；新增只读验证须ERP安全门及单独明确授权。",
       "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
+      "previousEntryCondition": "已有获准资料的单SKU离线复核已交评审；原SKU-A恢复/受控包及岗位签认仍未满足，门禁继续BLOCKED。本轮不补业务事实、不新认证/联网，新增真实只读验证仍须ERP安全门与单独明确授权。",
+      "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
     }
   ],
   "acceptanceRefs": [
@@ -4165,13 +4187,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "单SKU供需/候选与质量规则签认",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "已整理单SKU业务规则缺口与受控补充建议；具体净额/需求/供给/日期/约束/质量口径及固定期望例仍须岗位签认，门禁继续BLOCKED。工程样例和本轮摘要修复不代替真实规则签认。",
+  "entryCondition": "负责人本轮已明确授权指定教学ERP真实认证及有界只读验证；已确认新试点SKT-OL-XXL。教学HTTPS证书按TEACHING_ERP_ONLY局部关闭校验，不重复审批正常只读请求；不授权业务写入或真实模型。数据/规则按实际八域证据与岗位签认准入，当前未满足仍BLOCKED。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": null,
+  "assignee": "Codex（本轮单人真实教学ERP接入与集成）",
   "allowedPaths": [
+    "src/commerce_hub/adapters/erp.py",
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/s01_teaching/",
+    "src/commerce_hub/bootstrap/teaching_erp.py",
+    "src/commerce_hub/orchestration/contracts.py",
+    "tests/",
+    "tools/s01_erp_readonly.py",
+    "docs/evidence/D-S01-LIVE-01/",
+    "docs/contracts/s01/teaching-erp-readonly.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
     "docs/DECISIONS.md",
-    "docs/contracts/s01/（未来）",
-    "docs/evidence/D-S01-RULE-01/（未来）"
+    "AGENTS.md"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -4243,9 +4275,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "review": null,
-  "branch": null,
-  "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
-  "dirtyPaths": [],
+  "branch": "codex/s01-erp-readonly",
+  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": {
     "reason": "原则已确认，但计算/日期/约束/质量具体口径尚未签认",
@@ -4274,6 +4308,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
       "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可与身份恢复及A-01契约准备并行，不要求先完成数据采集。",
       "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
+      "previousEntryCondition": "已整理单SKU业务规则缺口与受控补充建议；具体净额/需求/供给/日期/约束/质量口径及固定期望例仍须岗位签认，门禁继续BLOCKED。工程样例和本轮摘要修复不代替真实规则签认。",
+      "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
     }
   ],
   "acceptanceRefs": [
@@ -4294,12 +4336,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "教学ERP真实只读启用与安全条件确认",
   "kind": "design",
   "dependsOn": [],
-  "entryCondition": "已离线复核历史ERP证据及安全缺口；可信传输/受控凭据/精确只读范围和单独启用授权仍缺，门禁继续BLOCKED。本轮不重放认证、不发ERP请求、不沿用历史TLS例外。",
+  "entryCondition": "负责人本轮已明确授权指定教学ERP真实认证及有界只读验证；已确认新试点SKT-OL-XXL。教学HTTPS证书按TEACHING_ERP_ONLY局部关闭校验，不重复审批正常只读请求；不授权业务写入或真实模型。数据/规则按实际八域证据与岗位签认准入，当前未满足仍BLOCKED。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": null,
+  "assignee": "Codex（本轮单人真实教学ERP接入与集成）",
   "allowedPaths": [
+    "src/commerce_hub/adapters/erp.py",
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/s01_teaching/",
+    "src/commerce_hub/bootstrap/teaching_erp.py",
+    "src/commerce_hub/orchestration/contracts.py",
+    "tests/",
+    "tools/s01_erp_readonly.py",
+    "docs/evidence/D-S01-LIVE-01/",
+    "docs/contracts/s01/teaching-erp-readonly.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
     "docs/DECISIONS.md",
-    "docs/evidence/D-S01-ERP-ACCESS-01/（未来脱敏索引）"
+    "AGENTS.md"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -4371,9 +4424,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "review": null,
-  "branch": null,
-  "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
-  "dirtyPaths": [],
+  "branch": "codex/s01-erp-readonly",
+  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": {
     "reason": "正式证书策略/安全凭据配置和下一阶段新读取授权未提供",
@@ -4402,6 +4457,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
       "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。历史只读证据直接复用，不为计划重放认证。",
       "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
+      "previousEntryCondition": "已离线复核历史ERP证据及安全缺口；可信传输/受控凭据/精确只读范围和单独启用授权仍缺，门禁继续BLOCKED。本轮不重放认证、不发ERP请求、不沿用历史TLS例外。",
+      "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
     }
   ],
   "acceptanceRefs": [
@@ -4519,11 +4582,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-RULE-01",
     "D-S01-ERP-ACCESS-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。依赖和安全/数据门满足且本次只读验证另获授权后运行，不扩大原范围。",
+  "entryCondition": "负责人本轮已明确授权指定教学ERP真实认证及有界只读验证；已确认新试点SKT-OL-XXL。教学HTTPS证书按TEACHING_ERP_ONLY局部关闭校验，不重复审批正常只读请求；不授权业务写入或真实模型。数据/规则按实际八域证据与岗位签认准入，当前未满足仍BLOCKED。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": null,
+  "assignee": "Codex（本轮单人真实教学ERP接入与集成）",
   "allowedPaths": [
-    "docs/evidence/D-S01-LIVE-01/（未来）"
+    "src/commerce_hub/adapters/erp.py",
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/s01_teaching/",
+    "src/commerce_hub/bootstrap/teaching_erp.py",
+    "src/commerce_hub/orchestration/contracts.py",
+    "tests/",
+    "tools/s01_erp_readonly.py",
+    "docs/evidence/D-S01-LIVE-01/",
+    "docs/contracts/s01/teaching-erp-readonly.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "AGENTS.md"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -4560,14 +4635,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BUSINESS_REVIEW",
     "SECURITY"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
-  "dirtyPaths": [],
+  "branch": "codex/s01-erp-readonly",
+  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -4577,6 +4654,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "TODO",
       "reason": "本轮仅规划登记；未领取开发，已知实际准入缺口单列BLOCKED，不把原则同意当完成",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。依赖和安全/数据门满足且本次只读验证另获授权后运行，不扩大原范围。",
+      "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
     }
   ],
   "acceptanceRefs": [

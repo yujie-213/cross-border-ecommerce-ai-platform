@@ -28,6 +28,7 @@
 | A-01 / A-02 工程入口 | [契约材料与当前授权增量](contracts/s01/A-01-契约评审稿.md)；[真实MySQL兼容证据](evidence/A-01/mysql-compatibility.json)；[A-02实际进程检查](evidence/A-02/smoke.json)；[启动/测试命令](../README.md)。负责人认可原则，普通字段自主确定；旧逐项评审材料保留历史，本机.env不入Git，四项业务安全门不解除 |
 | 第一大阶段运行 | [A-03—A-06启动/迁移/测试/恢复命令](runbooks/phase-a.md)。独立MySQL上的真实迁移/权限/持久任务和API/Worker进程验证；状态/适用证据仍只在TASKS，工程Handler只在tests装配 |
 | S01 双线交付 | [共用消费契约](contracts/s01/D-S01-DEV-01-freeze.md)；[离线数据准入报告](evidence/D-S01-DATA-01/admission-report.md)；[业务Handler工程运行说明](runbooks/s01-business.md)；[完整回归证据](evidence/D-S01-DEV-01/verification.json)。工程样例/Mock 与真实业务准入分开，最终状态及验收仍只读 TASKS |
+| 真实教学ERP接入 | [API实测报告](evidence/D-S01-LIVE-01/api-report.md)、[八域矩阵](evidence/D-S01-LIVE-01/data-matrix.json)、[规则签认](evidence/D-S01-LIVE-01/owner-rule-review.md)、[运行边界](runbooks/s01-teaching-erp.md)。新试点已确认，真实观测与工程fixture分开；尚未通过真实B01/B02正向业务验收 |
 | UI 设计 | [产品功能规格](ui/PRODUCT_SPEC.md)；[视觉规范](../DESIGN.md)；[参考研究](ui/RESEARCH.md)；[一致性与缺口](ui/ALIGNMENT.md)；[评审修复记录](ui/REVIEW_FIX.md)；[独立原型](../prototypes/s01/index.html) |
 | 报告 | [可行性分析](reports/FEASIBILITY.md) / [HTML](reports/FEASIBILITY.html)；[示例测算](reports/feasibility/illustrative-financial-model.json)（非真实企业收益） |
 | 历史归档 | [归档说明与旧链接定位](archive/README.md)；[旧96项计划](archive/plan96-v0.1/README.md)；[本次路径迁移表](governance/migration.json) |
