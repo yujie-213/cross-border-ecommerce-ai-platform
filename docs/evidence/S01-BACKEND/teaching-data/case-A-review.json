@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "s01-teaching-case-review-v1",
+  "caseId": "A",
+  "result": "ADMITTED",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "batchId": "S01-AI-TEST-20261112",
+  "openingAvailable": "60",
+  "demandRule": "TEACHING_LAST_7_DAILY_REPLAY_V1",
+  "demand": [
+    8,
+    10,
+    9,
+    11,
+    12,
+    14,
+    13
+  ],
+  "supplyEvidence": "EXACT_BATCH_MATCH_COMPLETE_EMPTY_SET",
+  "supplyRecordCount": 0,
+  "supplyBoundary": "The empty batch-order query proves only the teaching rule's designated supply set; it does not prove all real outstanding supply for the SKU is zero.",
+  "inventoryCollection": "EXACT_SCOPE_COMPLETE_SINGLE_ROW",
+  "salesCollection": "EXACT_SCOPE_COMPLETE_SEVEN_UNIQUE_ORDERS",
+  "golden": {
+    "baselineBalances": [
+      52,
+      42,
+      33,
+      22,
+      10,
+      -4,
+      -17
+    ],
+    "gapQuantity": 17,
+    "firstStockoutDay": 6,
+    "candidateQuantity": 18,
+    "candidateArrivalDay": 7,
+    "candidateBalances": [
+      52,
+      42,
+      33,
+      22,
+      10,
+      -4,
+      1
+    ],
+    "candidateFirstStockoutDay": 6,
+    "constraintOutcome": "CANDIDATE_STILL_HAS_INTERMEDIATE_SHORTAGE",
+    "maxOrderQty": 120
+  },
+  "sourceUpdatedAtBasis": "ERP_WRITE_RECEIPT_AND_DETAIL_GET_MATCH",
+  "writeReadCanonicalComparison": "INDEPENDENT_MATCH",
+  "packageDigest": "edd68156553fca39447c22102a3125b01da9710c9fe15008eed60427f16d7961",
+  "privateArtifactRef": "private-artifact:case-A-package",
+  "rawIdentifiersPublished": false,
+  "modelCalls": 0,
+  "evidenceDigest": "ba2527dfb2b16c1292baca8cec0dbef12c2e1964bea0fb699c511e71c77f4761"
+}

@@ -1,4 +1,8 @@
+当前教学仿真授权增量（2026-11-12）：沿同一开发分支继续，独立批次API写入/回读与教学规则计算验证获准，企业真实规则/经营数据不代签。费用可选、模型10次/$1总上限不变。
+
 # 唯一任务与验收台账 v0.2
+
+当前完整后端闭环领取（2026-11-12，e547335）：负责人授权连续开发至后端REVIEW；LIVE缺口延续、C-04领取，实际负责人/文件范围见docs/contracts/s01/backend-closure.md。数据/规则不代签、真实模型最多10次/$1，前端/采购写入/自动合main不在范围。
 
 当前教学ERP交付（2026-11-12，固定54e8906）：LIVE真实接入与准入报告交REVIEW；399项工程测试PASS，原358保全、新41，真实读取/失败与独立进程回放另有证据。新试点已确认，当前业务核心数据/规则仍不满足，正向B01/B02 NOT_RUN，DATA/RULE/未满足正式ERP安全及AI门继续BLOCKED；教学TLS已明确获准且非读取阻断。DEV工程ACCEPTED/main合入事实保留，不把当前阻断报告当完整业务验收。
 
@@ -3055,13 +3059,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。安全门签认、S01语义门禁实现后，使用获准固定B01/B02结果/证据集做有界真实模型评测；模型评测不要求扩大ERP采集，不向模型发送未经许可的原始数据。",
+  "entryCondition": "本轮完整后端闭环及最新教学ERP仿真API数据授权；限固定教学host/账号店仓/独立批次，先验副作用与幂等，原10请求/$1模型上限不增加；正式企业门不解除，最终后端REVIEW、前端之前停止。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex主集成及冻结范围并行Agent",
   "allowedPaths": [
     "tests/evaluation/当前用途（未来）",
     "docs/evidence/C-04/（未来）",
-    "docs/evidence/C-04/（未来，仅脱敏证据）"
+    "docs/evidence/C-04/（未来，仅脱敏证据）",
+    "docs/contracts/s01/backend-closure.md",
+    "docs/evidence/S01-BACKEND/",
+    "src/commerce_hub/data/admission/",
+    "src/commerce_hub/scenarios/s01_backend/",
+    "src/commerce_hub/bootstrap/s01_backend.py",
+    "tests/",
+    "tools/",
+    "src/commerce_hub/adapters/models/",
+    "src/commerce_hub/capabilities/models/",
+    "src/commerce_hub/governance/observability/",
+    "src/commerce_hub/orchestration/",
+    "src/commerce_hub/bootstrap/",
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/",
+    "migrations/versions/0005_optional_usage.py"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -3080,7 +3099,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "C-04/AC3",
-      "text": "失败明确AI解释不可用，仍保留符合条件规则结果；实际费用/usage/模型Prompt版本可追；正式启用范围经负责人/指定用途评审者签认。评测使用已交付工程Handler，不反向要求其先有C-04真实成功，界面成功断言由UI/整体验收关闭"
+      "text": "失败明确AI解释不可用，仍保留符合条件规则结果；输入/输出/总Token及可选扩展、模型Prompt版本可追；无法获取用量标null/UNKNOWN，实际费用可null且不独立导致降级，未知维度保留额度。正式启用范围仍须负责人/用途评审者签认；界面断言归UI/整体验收"
     }
   ],
   "plannedTests": [
@@ -3093,13 +3112,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "MODEL_EVAL",
     "SECURITY"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
+  "branch": "codex/s01-backend-closure",
+  "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d",
   "dirtyPaths": [],
   "latestHandoffRef": null,
   "blocker": null,
@@ -3109,6 +3128,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "负责人完整后端闭环任务授权；延续LIVE缺口、有界ERP候选发现/规范化计算及最多10次/$1模型评测；主集成公共文件，冻结并行范围，不自动验收或合main。",
+      "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d",
+      "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。安全门签认、S01语义门禁实现后，使用获准固定B01/B02结果/证据集做有界真实模型评测；模型评测不要求扩大ERP采集，不向模型发送未经许可的原始数据。"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZATION_INCREMENT",
+      "reason": "负责人经老师确认允许教学ERP独立测试批次API创建/必要更新/受控清理及正式回读，来源SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP。允许teaching-s01-rules-v1和独立Golden仅教学验证，不解企业准入。Token统计基础/费用可选，旧预算/未知发送保护保留。",
+      "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d"
     }
   ],
   "completionEvidence": [
@@ -4673,9 +4706,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-RULE-01",
     "D-S01-ERP-ACCESS-01"
   ],
-  "entryCondition": "负责人本轮已明确授权指定教学ERP真实认证及有界只读验证；已确认新试点SKT-OL-XXL。教学HTTPS证书按TEACHING_ERP_ONLY局部关闭校验，不重复审批正常只读请求；不授权业务写入或真实模型。数据/规则按实际八域证据与岗位签认准入，当前未满足仍BLOCKED。",
+  "entryCondition": "本轮完整后端闭环及最新教学ERP仿真API数据授权；限固定教学host/账号店仓/独立批次，先验副作用与幂等，原10请求/$1模型上限不增加；正式企业门不解除，最终后端REVIEW、前端之前停止。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": "Codex（本轮单人真实教学ERP接入与集成）",
+  "assignee": "Codex主集成及冻结范围并行Agent",
   "allowedPaths": [
     "src/commerce_hub/adapters/erp.py",
     "src/commerce_hub/data/",
@@ -4689,17 +4722,31 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/TASKS.md",
     "docs/HANDOFF.md",
     "docs/DECISIONS.md",
-    "AGENTS.md"
+    "AGENTS.md",
+    "docs/contracts/s01/backend-closure.md",
+    "docs/evidence/S01-BACKEND/",
+    "src/commerce_hub/data/admission/",
+    "src/commerce_hub/scenarios/s01_backend/",
+    "src/commerce_hub/bootstrap/s01_backend.py",
+    "tools/",
+    "src/commerce_hub/adapters/models/",
+    "src/commerce_hub/capabilities/models/",
+    "src/commerce_hub/governance/observability/",
+    "src/commerce_hub/orchestration/",
+    "src/commerce_hub/bootstrap/",
+    "src/commerce_hub/scenarios/",
+    "migrations/versions/0005_optional_usage.py"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
     "真实单SKU窄读取→受控补充→D01批次→D02投影→D03质量/manifest→D04引用的实际证据",
-    "OpenAPI声明/原调查观察/本次返回与字段语义、类型、过滤/分页/覆盖/时点/实际限制对照；旧503和缺口不抹除"
+    "OpenAPI声明/原调查观察/本次返回与字段语义、类型、过滤/分页/覆盖/时点/实际限制对照；旧503和缺口不抹除",
+    "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP批次清单、独立Golden、实际写入/独立回读/规范化/质量/B01B02/受限模型及端到端分级证据；前端API对接材料，不开发前端"
   ],
   "acceptance": [
     {
       "id": "D-S01-LIVE-01/AC1",
-      "text": "新调用严格按本任务单独获准范围；只读且敏感响应不入Git，未知不补0、字段类型不当业务语义"
+      "text": "新调用严格限最新授权的教学测试批次API创建/必要更新/自身受控清理及独立只读回读，敏感原响应不入Git；未知不补0，字段类型不当业务语义，写回执不代替GET"
     },
     {
       "id": "D-S01-LIVE-01/AC2",
@@ -4711,7 +4758,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "plannedTests": [
-    "有界真实读取与受控文件/投影检查；失败/覆盖不足可用测试装配验证并分类，不能人为业务写入造场景"
+    "有界真实读取、教学独立批次受控写入及正式GET回读；正常/失败/UNKNOWN查证/完整分页、D01-D04、A—E教学Golden及API/Worker/MySQL验证；故障注入/离线补充/真实API分列，不冒充企业事实"
   ],
   "completionEvidence": [
     "实际端点/参数名称/数量/字段类型/限制、授权范围引用、批次/映射/manifest与脱敏证据；无认证/敏感值。",
@@ -4726,7 +4773,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BUSINESS_REVIEW",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "54e89061e4409a14ab21a96b4c14d7280b921c4f"
   ],
@@ -4814,8 +4861,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "review": null,
-  "branch": "codex/s01-erp-readonly",
-  "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+  "branch": "codex/s01-backend-closure",
+  "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4843,6 +4890,27 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "真实教学读取、八域矩阵、固定观测D01/D02/D03/O01/G01/G02及独立进程受限报告完成，399工程回归PASS；源失败保留FAIL，正向业务计算/规则验收NOT_RUN，交负责人和星星审查，不登记ACCEPTED。",
       "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "IN_PROGRESS",
+      "reason": "负责人完整后端闭环任务授权；延续LIVE缺口、有界ERP候选发现/规范化计算及最多10次/$1模型评测；主集成公共文件，冻结并行范围，不自动验收或合main。",
+      "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d",
+      "previousEntryCondition": "负责人本轮已明确授权指定教学ERP真实认证及有界只读验证；已确认新试点SKT-OL-XXL。教学HTTPS证书按TEACHING_ERP_ONLY局部关闭校验，不重复审批正常只读请求；不授权业务写入或真实模型。数据/规则按实际八域证据与岗位签认准入，当前未满足仍BLOCKED。"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZATION_INCREMENT",
+      "reason": "负责人经老师确认允许教学ERP独立测试批次API创建/必要更新/受控清理及正式回读，来源SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP。允许teaching-s01-rules-v1和独立Golden仅教学验证，不解企业准入。Token统计基础/费用可选，旧预算/未知发送保护保留。",
+      "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "TEACHING_ACCEPTANCE_SCOPE",
+      "previousAcceptanceAC1": "新调用严格按本任务单独获准范围；只读且敏感响应不入Git，未知不补0、字段类型不当业务语义",
+      "reason": "按用户最新明示教学API写入授权同步当前验收措辞；历史只读证据保持，正式企业规则与经营数据仍BLOCKED。",
+      "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d"
     }
   ],
   "acceptanceRefs": [

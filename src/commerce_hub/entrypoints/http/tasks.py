@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import Depends, Header, Request
+from fastapi import Depends, Header, Request, Query
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.responses import JSONResponse
 from commerce_hub.bootstrap.logging import trace_id
@@ -73,11 +73,29 @@ def register_task_routes(app):
         return JSONResponse(view, status_code=202, headers={"Location": "/api/v1/analysis-tasks/" + view["taskRef"]["taskId"]})
 
     @app.get("/api/v1/s01/options")
-    def options(request: Request, storeId: str, warehouseId: str, canonicalSkuId: str,
+    def options(request: Request, storeId: str | None = None, warehouseId: str | None = None, canonicalSkuId: str | None = None,
                 actor=Depends(principal)):
         service = request.app.state.tasks
+        backend = service.registry.get("S01_BACKEND")
+        if backend is not None:
+            choices = []
+            for choice in backend.handler.options(actor.tenant_id):
+                scope = choice["scope"]
+                if any(value is not None and scope[key] != [value] for key, value in
+                    (("storeIds", storeId), ("warehouseIds", warehouseId), ("canonicalSkuIds", canonicalSkuId))):
+                    continue
+                try:
+                    with service.engine.begin() as conn:
+                        service.access.authorize(conn, actor, "tasks:create", scope)
+                except AccessDenied:
+                    continue
+                choices.append(choice)
+            return dict(scenarioId=backend.scenario_id, scenarioVersion=backend.version, analysisMode="SINGLE",
+                inputMode="SERVER_PACKAGE_REF", mappedChoices=choices,
+                limitations=["READONLY_ANALYSIS_ONLY", "SOURCE_AND_RULE_ADMISSION_PER_PACKAGE", "LIVE_AI_EVALUATION_SEPARATE"],
+                maxModelCalls=backend.max_calls, actions=["analyze", "read", "cancel"])
         spec = service.registry.get("ENGINEERING_S01_BUSINESS")
-        if spec is None:
+        if spec is None or None in (storeId, warehouseId, canonicalSkuId):
             raise TaskError("UNSUPPORTED_SCENARIO", 422)
         scope = dict(tenantId=actor.tenant_id, storeIds=[storeId], warehouseIds=[warehouseId],
                      canonicalSkuIds=[canonicalSkuId], fields=["quantity"])
@@ -89,6 +107,14 @@ def register_task_routes(app):
             sourceNature="SIMULATED_ENGINEERING", inputMode="INLINE_ENGINEERING_FIXTURE", scope=scope,
             mappedChoices=[], limitations=["NO_SERVER_SIDE_MAPPED_CATALOG"], realAdmission="BLOCKED",
             aiProvider="MOCK", maxModelCalls=spec.max_calls, actions=["analyze", "read", "cancel"])
+
+    @app.get("/api/v1/analysis-tasks")
+    def history(request: Request, storeId: str, warehouseId: str, canonicalSkuId: str,
+                scenarioId: str = "S01_BACKEND", limit: int = Query(default=20, ge=1, le=50),
+                before: str | None = Query(default=None, max_length=64), actor=Depends(principal)):
+        scope = dict(tenantId=actor.tenant_id, storeIds=[storeId], warehouseIds=[warehouseId],
+            canonicalSkuIds=[canonicalSkuId], fields=["quantity"])
+        return request.app.state.tasks.history(actor, scope, scenario_id=scenarioId, limit=limit, before=before)
 
     @app.get("/api/v1/analysis-tasks/{task_id}")
     def read(task_id: str, request: Request, actor=Depends(principal)):

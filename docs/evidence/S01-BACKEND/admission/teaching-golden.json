@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "s01-teaching-golden-v1",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "ruleVersion": "teaching-s01-rules-v1",
+  "demandRule": {
+    "method": "TEACHING_LAST_7_DAILY_REPLAY_V1",
+    "description": "Sort exactly one teaching ERP sales line per source day and replay its SKU quantity in order onto D1-D7. Missing or duplicate source days produce insufficient data. No trend, seasonality, or model inference is applied.",
+    "nature": "CONTROLLED_TEACHING_RULE"
+  },
+  "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+  "oracle": "Independent decimal ledger and explicit constraint arithmetic; does not import or call B01/B02.",
+  "cases": [
+    {
+      "id": "A",
+      "purpose": "REPLENISHMENT_GAP",
+      "input": {"opening": 60, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 7, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["52", "42", "33", "22", "10", "-4", "-17"], "gapQuantity": "17", "firstStockoutDay": 6, "candidateQuantity": "18", "candidateBalances": ["52", "42", "33", "22", "10", "-4", "1"], "candidateFirstStockoutDay": 6, "constraintOutcome": "CANDIDATE_STILL_HAS_INTERMEDIATE_SHORTAGE"}
+    },
+    {
+      "id": "B",
+      "purpose": "NO_REPLENISHMENT",
+      "input": {"opening": 96, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 7, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["88", "78", "69", "58", "46", "32", "19"], "gapQuantity": "0", "firstStockoutDay": null, "candidateQuantity": null, "candidateBalances": [], "candidateFirstStockoutDay": null, "constraintOutcome": "NO_REPLENISHMENT_NEEDED"}
+    },
+    {
+      "id": "C",
+      "purpose": "INTERMEDIATE_STOCKOUT_WITH_TOTAL_COVERAGE",
+      "input": {"opening": 10, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 67], "moq": 12, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 7, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["2", "-8", "-17", "-28", "-40", "-54", "0"], "gapQuantity": "0", "firstStockoutDay": 2, "candidateQuantity": null, "candidateBalances": [], "candidateFirstStockoutDay": null, "constraintOutcome": "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"}
+    },
+    {
+      "id": "D-MOQ",
+      "purpose": "MOQ_DOMINATES_GAP_THEN_MULTIPLE_ROUNDS",
+      "input": {"opening": 60, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 24, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 1, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["52", "42", "33", "22", "10", "-4", "-17"], "gapQuantity": "17", "firstStockoutDay": 6, "candidateQuantity": "24", "candidateBalances": ["76", "66", "57", "46", "34", "20", "7"], "candidateFirstStockoutDay": null, "constraintOutcome": "CANDIDATE_FEASIBLE"}
+    },
+    {
+      "id": "D-MULTIPLE",
+      "purpose": "ORDER_MULTIPLE_IS_INDEPENDENT_FROM_MOQ",
+      "input": {"opening": 60, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 10, "maxOrderQty": 120, "candidateDay": 1, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["52", "42", "33", "22", "10", "-4", "-17"], "gapQuantity": "17", "firstStockoutDay": 6, "candidateQuantity": "20", "candidateBalances": ["72", "62", "53", "42", "30", "16", "3"], "candidateFirstStockoutDay": null, "constraintOutcome": "CANDIDATE_FEASIBLE"}
+    },
+    {
+      "id": "D-MAX",
+      "purpose": "MAX_ORDER_QTY_BLOCKS_ROUNDED_CANDIDATE",
+      "input": {"opening": 60, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 6, "maxOrderQty": 17, "candidateDay": 1, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["52", "42", "33", "22", "10", "-4", "-17"], "gapQuantity": "17", "firstStockoutDay": 6, "candidateQuantity": "18", "candidateBalances": [], "candidateFirstStockoutDay": null, "constraintOutcome": "NO_FEASIBLE_QUANTITY"}
+    },
+    {
+      "id": "D-AVAILABLE-DATE",
+      "purpose": "LATE_AVAILABLE_DATE_LEAVES_INTERMEDIATE_SHORTAGE",
+      "input": {"opening": 60, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 7, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["52", "42", "33", "22", "10", "-4", "-17"], "gapQuantity": "17", "firstStockoutDay": 6, "candidateQuantity": "18", "candidateBalances": ["52", "42", "33", "22", "10", "-4", "1"], "candidateFirstStockoutDay": 6, "constraintOutcome": "CANDIDATE_STILL_HAS_INTERMEDIATE_SHORTAGE"}
+    },
+    {
+      "id": "E-DATA",
+      "purpose": "INSUFFICIENT_DATA",
+      "input": {"opening": null, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 7, "quality": "VERIFIED_CLEAR"},
+      "expected": {"status": "INSUFFICIENT_DATA", "baselineBalances": [], "gapQuantity": null, "firstStockoutDay": null, "candidateQuantity": null, "candidateBalances": [], "candidateFirstStockoutDay": null, "constraintOutcome": "DATA_QUALITY_BLOCKED"}
+    },
+    {
+      "id": "E-QUALITY",
+      "purpose": "QUALITY_ANOMALY_BLOCKS_CANDIDATE",
+      "input": {"opening": 60, "demand": [8, 10, 9, 11, 12, 14, 13], "supply": [0, 0, 0, 0, 0, 0, 0], "moq": 12, "orderMultiple": 6, "maxOrderQty": 120, "candidateDay": 7, "quality": "INVESTIGATE"},
+      "expected": {"status": "CALCULATED", "baselineBalances": ["52", "42", "33", "22", "10", "-4", "-17"], "gapQuantity": "17", "firstStockoutDay": 6, "candidateQuantity": null, "candidateBalances": [], "candidateFirstStockoutDay": null, "constraintOutcome": "QUALITY_REQUIRES_RESOLUTION"}
+    }
+  ]
+}

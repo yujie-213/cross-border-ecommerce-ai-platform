@@ -154,11 +154,36 @@ class ProviderRequest(StrictModel):
 class Usage(StrictModel):
     inputTokens: Annotated[int, Field(strict=True, ge=0, le=2147483647)] | None = None
     outputTokens: Annotated[int, Field(strict=True, ge=0, le=2147483647)] | None = None
+    totalTokens: Annotated[int, Field(strict=True, ge=0, le=2147483647)] | None = None
     cachedInputTokens: Annotated[int, Field(strict=True, ge=0, le=2147483647)] | None = None
     uncachedInputTokens: Annotated[int, Field(strict=True, ge=0, le=2147483647)] | None = None
     actualCost: Decimal | None = None
-    currency: Literal["TEST", "USD"]
-    pricingVersion: Identifier
+    currency: Annotated[str, Field(strict=True, min_length=1, max_length=8)] | None = None
+    pricingVersion: Identifier | None = None
+
+    @model_validator(mode="after")
+    def consistent_tokens(self):
+        if self.totalTokens is not None and any(value is not None and value > self.totalTokens
+                for value in (self.inputTokens, self.outputTokens)):
+            raise ValueError("inconsistent token subtotal")
+        cache_lower = sum(value or 0 for value in (self.cachedInputTokens, self.uncachedInputTokens))
+        if self.totalTokens is not None and cache_lower > self.totalTokens:
+            raise ValueError("inconsistent cache token subtotal")
+        if self.inputTokens is not None and self.outputTokens is not None:
+            total = self.inputTokens + self.outputTokens
+            if total > 2147483647 or self.totalTokens is not None and self.totalTokens != total:
+                raise ValueError("inconsistent token total")
+            if self.totalTokens is None:
+                object.__setattr__(self, "totalTokens", total)
+        if self.inputTokens is not None:
+            if any(value is not None and value > self.inputTokens for value in (self.cachedInputTokens, self.uncachedInputTokens)):
+                raise ValueError("inconsistent cached tokens")
+            if (self.cachedInputTokens is not None and self.uncachedInputTokens is not None
+                and self.cachedInputTokens + self.uncachedInputTokens != self.inputTokens):
+                raise ValueError("inconsistent cached tokens")
+        if self.actualCost is not None and self.currency is None:
+            raise ValueError("known cost requires currency")
+        return self
 
     @field_validator("actualCost")
     @classmethod
@@ -185,6 +210,9 @@ class ModelResponse(StrictModel):
     usageRef: str | None = None
     auditRef: str | None = None
     usageStatus: Literal["KNOWN", "UNKNOWN", "NOT_SENT"]
+    tokenUsageStatus: Literal["KNOWN", "PARTIAL", "UNKNOWN", "NOT_SENT"] = "NOT_SENT"
+    costStatus: Literal["KNOWN", "UNKNOWN", "NOT_SENT"] = "NOT_SENT"
+    usage: Usage | None = None
     finishReason: str | None = None
     actualModelRevision: str | None = None
     versionBundle: dict = Field(default_factory=dict)
@@ -196,3 +224,10 @@ class ModelProvider(Protocol):
     def describe_capabilities(self) -> frozenset[str]: ...
     def preflight(self, payload: dict, cost: Decimal) -> None: ...
     def invoke(self, request: ProviderRequest) -> ProviderResult: ...
+
+
+def usage_fingerprint(value):
+    """Bind the immutable response receipt separately from later usage enrichment."""
+    fields = ("usageStatus", "tokenUsageStatus", "costStatus", "usage", "usageRef", "actualModelRevision")
+    return hashlib.sha256(json.dumps({key:value.get(key) for key in fields}, sort_keys=True,
+        separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()

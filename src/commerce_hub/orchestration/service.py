@@ -5,7 +5,7 @@ import hashlib
 import json
 from uuid import uuid4
 
-from sqlalchemy import insert, select, update, func
+from sqlalchemy import insert, select, update, func, or_, and_, cast, literal, JSON
 
 from commerce_hub.governance.access.service import AccessDenied
 from commerce_hub.infrastructure.work import LeaseLost
@@ -30,6 +30,8 @@ class HandlerSpec:
     max_tokens: int = 0
     max_cost: Decimal = Decimal("0")
     policy_version: str = "foundation-disabled-models-v1"
+    # Optional for legacy assemblies. New fee-enabled policies bind their unit explicitly.
+    cost_currency: str | None = None
 
 
 class TaskService:
@@ -48,6 +50,11 @@ class TaskService:
         spec = self.registry.get(scenario_id)
         if not spec:
             raise TaskError("UNSUPPORTED_SCENARIO", 422)
+        if hasattr(spec.handler, "validate_command"):
+            try:
+                spec.handler.validate_command(principal, command_key)
+            except (ValueError, TypeError):
+                raise TaskError("INVALID_COMMAND_KEY", 422) from None
         if "_previousReportRef" in parameters:
             raise TaskError("INVALID_PARAMETERS", 422)
         if previous_report_ref is not None:
@@ -88,7 +95,7 @@ class TaskService:
                     report_id=previous_report_ref["reportId"])).mappings().first()
                 if published is None:
                     raise TaskError("NOT_FOUND", 404)
-                self._validate_report_row(old, published)
+                self._validate_report_row(conn, old, published)
             existing = conn.execute(select(tasks).where(tasks.c.tenant_id == principal.tenant_id,
                 tasks.c.principal_id == principal.principal_id, tasks.c.command_key == command_key).with_for_update()).mappings().first()
             if existing:
@@ -133,6 +140,27 @@ class TaskService:
                 raise TaskError("NOT_FOUND", 404) from None
             return self._view(conn, row)
 
+    def history(self, principal, scope, *, scenario_id="S01_BACKEND", limit=20, before=None):
+        """Bounded, currently authorized task/report index; no parameters or assets."""
+        if type(limit) is not int or not 1 <= limit <= 50 or scenario_id not in self.registry:
+            raise TaskError("INVALID_HISTORY_QUERY", 422)
+        with self.engine.begin() as conn:
+            self.access.authorize(conn, principal, "tasks:read", scope)
+            # MySQL must compare JSON objects, not a JSON column to serialized text.
+            scope_match = tasks.c.scope == cast(literal(scope, type_=JSON), JSON)
+            query = select(tasks).where(tasks.c.tenant_id == principal.tenant_id,
+                tasks.c.scenario_id == scenario_id, scope_match)
+            if before is not None:
+                anchor = conn.execute(select(tasks).filter_by(tenant_id=principal.tenant_id,
+                    task_id=before, scenario_id=scenario_id).where(scope_match)).mappings().first()
+                if anchor is None:
+                    raise TaskError("NOT_FOUND", 404)
+                query = query.where(or_(tasks.c.created_at < anchor["created_at"],
+                    and_(tasks.c.created_at == anchor["created_at"], tasks.c.task_id < anchor["task_id"])))
+            rows = conn.execute(query.order_by(tasks.c.created_at.desc(), tasks.c.task_id.desc()).limit(limit + 1)).mappings().all()
+            return dict(items=[self._view(conn, row) for row in rows[:limit]],
+                nextCursor=rows[limit-1]["task_id"] if len(rows) > limit else None)
+
     def _view(self, conn, row):
         view = self.view(row)
         report_id = conn.execute(select(reports.c.report_id).filter_by(
@@ -141,7 +169,7 @@ class TaskService:
             view["reportRef"] = {"tenantId": row["tenant_id"], "reportId": report_id}
         return view
 
-    def _validate_report_row(self, task, report):
+    def _validate_report_row(self, conn, task, report):
         """Bind persisted payload to its owning SQL rows before linking or exposing it."""
         payload = report["payload"]
         try:
@@ -158,6 +186,18 @@ class TaskService:
             valid = False
         if not valid:
             raise TaskError("NOT_FOUND", 404)
+        spec = self.registry.get(task["scenario_id"])
+        if spec is not None and hasattr(spec.handler, "validate_report_parameters"):
+            try:
+                spec.handler.validate_report_parameters(payload, task["parameters"])
+            except (KeyError, TypeError, ValueError, IndexError):
+                raise TaskError("NOT_FOUND", 404) from None
+        if spec is not None and hasattr(spec.handler, "model_receipts"):
+            try:
+                for receipt in spec.handler.model_receipts(payload):
+                    self.audit.verify_model_receipt(conn, tenant_id=task["tenant_id"], task_id=task["task_id"], receipt=receipt)
+            except (KeyError, TypeError, ValueError):
+                raise TaskError("NOT_FOUND", 404) from None
 
     def read_report(self, principal, task_id):
         with self.engine.begin() as conn:
@@ -171,7 +211,7 @@ class TaskService:
             report = conn.execute(select(reports).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
             if row["state"] != "SUCCEEDED" or report is None:
                 raise TaskError("REPORT_NOT_PUBLISHED", 404)
-            self._validate_report_row(row, report)
+            self._validate_report_row(conn, row, report)
             # Current G01 scope authorizes the requested fields, not every field
             # of the persisted internal assets. The scenario owns its narrow read DTO.
             spec = self.registry.get(row["scenario_id"])
@@ -260,6 +300,17 @@ class TaskService:
                 if not isinstance(result, DomainResult) or result.scope != row["scope"]:
                     raise TaskError("INVALID_DOMAIN_RESULT")
                 payload = result.model_dump(mode="json")
+                if hasattr(handler, "validate_report_parameters"):
+                    try:
+                        handler.validate_report_parameters(payload, row["parameters"])
+                    except (KeyError, TypeError, ValueError, IndexError):
+                        raise TaskError("INVALID_DOMAIN_RESULT") from None
+                if hasattr(handler, "model_receipts"):
+                    try:
+                        for receipt in handler.model_receipts(payload):
+                            self.audit.verify_model_receipt(conn, tenant_id=lease.tenant_id, task_id=lease.owner_id, receipt=receipt)
+                    except (KeyError, TypeError, ValueError):
+                        raise TaskError("INVALID_DOMAIN_RESULT") from None
                 if len(json.dumps(payload)) > 262144:
                     raise TaskError("REPORT_TOO_LARGE")
                 payload.update(taskRef={"tenantId": lease.tenant_id, "taskId": lease.owner_id},

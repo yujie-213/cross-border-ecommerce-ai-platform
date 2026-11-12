@@ -92,15 +92,15 @@ def test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied(make_fou
     provider=MockProvider(mode="unknown")
     req=request(context,bundle)
     result=ModelGateway(provider).invoke(req,context,bundle)
-    assert result.code=="USAGE_UNKNOWN" and result.usageRef is None
+    assert result.code=="OK" and result.usageRef
     state=owned_row(env,budgets,task_id=context.lease.owner_id)
-    assert state["reserved_calls"]==1 and state["reserved_tokens"]==20000 and state["reserved_cost"]==Decimal(".01")
-    assert state["used_calls"]==0 and count(env,usage_facts)==0
+    assert state["reserved_calls"]==0 and state["reserved_tokens"]==20000 and state["reserved_cost"]==Decimal(".01")
+    assert state["used_calls"]==1 and count(env,usage_facts)==1
     with pytest.raises(BudgetError,match="USAGE_MUST_BE_RECONCILED"):
         request(context,bundle,attempt="attempt-2")
     other=request(context,bundle,attempt="attempt-other",logical="other-call")
-    assert ModelGateway(provider,max_concurrent=4).invoke(other,context,bundle).code=="USAGE_MUST_BE_RECONCILED"
-    assert provider.calls==1
+    assert ModelGateway(provider,max_concurrent=4).invoke(other,context,bundle).code=="OK"
+    assert provider.calls==2
 
 
 def test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset(make_foundation):
@@ -215,6 +215,6 @@ def test_required_audit_failure_rolls_back_and_conserves_allowance(make_foundati
 def test_budget_exhaustion_is_not_a_free_retry(make_foundation):
     env,context,bundle=prepare(make_foundation,max_cost=Decimal(".01"))
     req=request(context,bundle)
-    assert ModelGateway(MockProvider(mode="unknown")).invoke(req,context,bundle).code=="USAGE_UNKNOWN"
+    assert ModelGateway(MockProvider(mode="unknown")).invoke(req,context,bundle).code=="OK"
     with pytest.raises(BudgetError,match="BUDGET_DENIED"):
         request(context,bundle,attempt="attempt-2",logical="other")

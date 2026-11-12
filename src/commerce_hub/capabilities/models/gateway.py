@@ -5,7 +5,7 @@ import time
 
 from pydantic import ValidationError
 
-from .contracts import ModelRequest, ModelResponse, ProviderRequest, ProviderResult
+from .contracts import ModelRequest, ModelResponse, ProviderRequest, ProviderResult, usage_fingerprint
 
 
 class ModelGateway:
@@ -18,6 +18,8 @@ class ModelGateway:
 
     @staticmethod
     def failure(code, *, usage_status="NOT_SENT", **kwargs):
+        kwargs.setdefault("tokenUsageStatus", usage_status)
+        kwargs.setdefault("costStatus", usage_status)
         return ModelResponse(status="TECH_ERROR", code=code, usageStatus=usage_status, **kwargs)
 
     def invoke(self, value, context, bundle):
@@ -39,7 +41,7 @@ class ModelGateway:
                 logical_call_id=request.logicalCallId, allowance_ref=request.allowanceRef.model_dump(), deadline=request.deadline)
             if binding["state"] != "RESERVED":
                 return self.failure("USAGE_MUST_BE_RECONCILED" if binding["state"] in {"SENT", "UNKNOWN"} else "RESULT_UNAVAILABLE",
-                    usage_status="UNKNOWN" if binding["state"] in {"SENT", "UNKNOWN"} else "KNOWN")
+                    usage_status="UNKNOWN" if binding["state"] in {"SENT", "UNKNOWN", "USAGE_RECORDED", "USAGE_OVER_LIMIT"} else "KNOWN")
             admitted = True
             payload, digests = bundle.resolve(request)
             if not set(request.requiredCapabilities) <= self.provider.describe_capabilities():
@@ -107,13 +109,26 @@ class ModelGateway:
                 raw = self.provider.invoke(provider_request)
                 result = ProviderResult.model_validate(raw.model_dump() if isinstance(raw, ProviderResult) else raw)
                 usage = result.usage
-                known = usage.inputTokens is not None and usage.outputTokens is not None and usage.actualCost is not None
+                tokens_known = usage.inputTokens is not None and usage.outputTokens is not None and usage.totalTokens is not None
+                cost_known = usage.actualCost is not None
+                known = tokens_known and cost_known
                 usage_ref = None
-                if known:
-                    usage_ref = budget.settle(request.attemptId, usage.inputTokens + usage.outputTokens,
-                        usage.actualCost, currency=usage.currency, pricing_version=usage.pricingVersion)
-                else:
+                uncertain = result.status != "COMPLETED" and all(value is None for value in
+                    (usage.inputTokens, usage.outputTokens, usage.totalTokens, usage.actualCost))
+                if uncertain:
+                    # A transport/error response without usage does not prove completion.
+                    # Preserve UNKNOWN and the full reservation until authoritative reconciliation.
                     budget.unknown(request.attemptId)
+                elif cost_known and usage.totalTokens is not None:
+                    usage_ref = budget.settle(request.attemptId, usage.totalTokens,
+                        usage.actualCost, currency=usage.currency, pricing_version=usage.pricingVersion,
+                        input_tokens=usage.inputTokens, output_tokens=usage.outputTokens,
+                        cached_input_tokens=usage.cachedInputTokens, uncached_input_tokens=usage.uncachedInputTokens)
+                else:
+                    usage_ref = budget.record_model_usage(request.attemptId, total_tokens=usage.totalTokens,
+                        input_tokens=usage.inputTokens, output_tokens=usage.outputTokens, cost=usage.actualCost,
+                        currency=usage.currency, pricing_version=usage.pricingVersion,
+                        cached_input_tokens=usage.cachedInputTokens, uncached_input_tokens=usage.uncachedInputTokens)
                 metadata = {**details, "usage": usage.model_dump(mode="json"), "usageStatus": "KNOWN" if known else "UNKNOWN",
                     "usageRef": usage_ref, "actualModelRevision": result.actualModelRevision if result.actualModelRevision == payload["modelRevision"] else None,
                     "reportedModelDigest": hashlib.sha256((result.actualModelRevision or "").encode()).hexdigest(),
@@ -121,7 +136,11 @@ class ModelGateway:
                     "elapsedMs": int((time.monotonic() - start) * 1000)}
                 audit_ref = budget.model_event(code=result.status, details=metadata, trace_id=request.traceId)
                 box.update(result=result, usage_ref=usage_ref, audit_ref=audit_ref, known=known,
-                    over=known and (usage.actualCost > binding["max_cost"] or usage.inputTokens+usage.outputTokens > binding["max_tokens"]))
+                    tokens_known=tokens_known, cost_known=cost_known,
+                    over=(cost_known and usage.actualCost > binding["max_cost"]
+                        or any(value is not None and value > binding["max_tokens"] for value in
+                            (usage.inputTokens, usage.outputTokens, usage.totalTokens))
+                        or sum(value or 0 for value in (usage.cachedInputTokens, usage.uncachedInputTokens)) > binding["max_tokens"]))
             except Exception:
                 try:
                     budget.unknown(request.attemptId)
@@ -159,6 +178,9 @@ class ModelGateway:
             return self.failure(box["error"], usage_status="UNKNOWN", versionBundle=versions)
         result = box["result"]
         common = dict(usageStatus="KNOWN" if box["known"] else "UNKNOWN", usageRef=box["usage_ref"],
+            tokenUsageStatus="KNOWN" if box["tokens_known"] else "PARTIAL" if any(value is not None for value in
+                (result.usage.inputTokens, result.usage.outputTokens, result.usage.totalTokens)) else "UNKNOWN",
+            costStatus="KNOWN" if box["cost_known"] else "UNKNOWN", usage=result.usage,
             auditRef=box["audit_ref"], finishReason=result.finishReason,
             actualModelRevision=result.actualModelRevision if result.actualModelRevision == payload["modelRevision"] else None,
             versionBundle=versions)
@@ -166,6 +188,7 @@ class ModelGateway:
             try:
                 common["auditRef"] = budget.model_event(code=code, details={**details,
                     "usageRef": common["usageRef"], "providerRequestId": result.providerRequestId,
+                    "usageDigest": usage_fingerprint({**common, "usage": common["usage"].model_dump(mode="json")}),
                     "actualModelRevision": common["actualModelRevision"]}, trace_id=request.traceId)
             except Exception:
                 return ModelResponse(status="TECH_ERROR", code="ACCOUNTING_ERROR", **common)
@@ -192,8 +215,8 @@ class ModelGateway:
             validated = bundle.validate_output(result.content)
         except (ValidationError, TypeError, ValueError):
             return outcome("INVALID_OUTPUT")
-        if not box["known"]:
-            return outcome("USAGE_UNKNOWN")
+        # Usage dimensions are independent of a structurally/semantically valid explanation.
+        # Unknown token/cost dimensions remain reserved by O01; they are never zero or refunded.
         return outcome("OK", validated)
 
     @staticmethod

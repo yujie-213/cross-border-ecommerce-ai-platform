@@ -12,6 +12,9 @@ audit_events = Table("g02_audit_events", metadata,
 usage_facts = Table("g02_usage_facts", metadata,
     Column("tenant_id", String(64), primary_key=True), Column("task_id", String(64), primary_key=True),
     Column("attempt_id", String(64), primary_key=True), Column("usage_ref", String(64), nullable=False),
-    Column("tokens", Integer, nullable=False), Column("cost", Numeric(20,8), nullable=False),
-    Column("currency", String(8), nullable=False), Column("pricing_version", String(64), nullable=False),
+    # Legacy tokens is the normalized total; old rows remain byte-for-byte facts.
+    Column("tokens", Integer), Column("cost", Numeric(20,8)),
+    Column("currency", String(8)), Column("pricing_version", String(64)),
+    Column("input_tokens", Integer), Column("output_tokens", Integer),
+    Column("cached_input_tokens", Integer), Column("uncached_input_tokens", Integer),
     mysql_engine="InnoDB", mysql_charset="utf8mb4", mysql_collate="utf8mb4_bin")

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "s01-model-evaluation-catalog-review-v1",
+  "authorizationId": "s01-backend-20261112-v1",
+  "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+  "caseIds": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "packageDigests": {
+    "A": "edd68156553fca39447c22102a3125b01da9710c9fe15008eed60427f16d7961",
+    "B": "69413c721e7780903a20f0a29b5171c0fdae080e034a1b6871ed7253f01eb78e",
+    "C": "153ad369a11be8a7ccdd2e186af93b93fd6f9d14104fea1a1c19afc4d01bdbd2",
+    "D": "06fa99a06b3679d87294e0245ea563801f601ea86cd99241e0f1253db83f7a21",
+    "E": "130cddef586e9e64257830580b1a92a1a48a3cc2293920f24439dc2eeb3b542b"
+  },
+  "sourceKinds": {
+    "A": "ACTUAL_ERP",
+    "B": "ACTUAL_ERP",
+    "C": "ACTUAL_ERP_DRAFT",
+    "D": "A_GET_PLUS_CONTROLLED_RULE",
+    "E": "A_GET_PLUS_QUALITY_GET_AND_RULE"
+  },
+  "canonicalAudit": {
+    "A": "INDEPENDENT_WRITE_READ_MATCH",
+    "B": "INDEPENDENT_WRITE_READ_MATCH",
+    "C": "INDEPENDENT_WRITE_READ_MATCH",
+    "D": "INDEPENDENT_WRITE_READ_MATCH",
+    "E": "INDEPENDENT_WRITE_READ_MATCH"
+  },
+  "sourceUpdatedAtAudit": {
+    "A": "ERP_RECEIPT_EQUALS_DETAIL_GET",
+    "B": "ERP_RECEIPT_EQUALS_DETAIL_GET",
+    "C": "ERP_RECEIPT_EQUALS_DETAIL_GET",
+    "D": "REUSES_A_VERIFIED_FACT",
+    "E": "REUSES_A_VERIFIED_FACT"
+  },
+  "modelCalls": 0,
+  "rawIdentifiersPublished": false,
+  "evidenceDigest": "27a24d12961f4cb3bac20a5e063a8bd748733891da5b82c5347ca48b7e850cdd"
+}

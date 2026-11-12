@@ -11,6 +11,7 @@ import threading
 from pydantic import ValidationError
 
 from commerce_hub.capabilities.models.contracts import ProviderRequest, ProviderResult, Usage
+from .usage import chat_usage
 
 
 @dataclass(frozen=True)
@@ -69,7 +70,7 @@ class DeepSeekProvider:
             temperature=0, max_tokens=payload["parameters"]["maxOutputTokens"],
             thinking={"type": "disabled"}, response_format={"type": "json_object"}, stream=False), ensure_ascii=False).encode()
         conn = None
-        unknown = Usage(currency="USD", pricingVersion="deepseek-cost-unreconciled-v1")
+        unknown = Usage()
         def failure(code):
             return ProviderResult(status=code, finishReason="error", usage=unknown)
         try:
@@ -86,15 +87,7 @@ class DeepSeekProvider:
             if len(raw) > 65536:
                 return ProviderResult(status="TRUNCATED", finishReason="length", usage=unknown)
             data = json.loads(raw)
-            usage = data.get("usage") or {}
-            # All applicable counts must be explicit and consistent; no default zero.
-            inp, out = usage.get("prompt_tokens"), usage.get("completion_tokens")
-            if (type(inp) is not int or type(out) is not int or inp < 0 or out < 0 or
-                usage.get("total_tokens") != inp+out):
-                inp = out = None
-            actual = Usage(inputTokens=inp, outputTokens=out, actualCost=None, currency="USD",
-                cachedInputTokens=usage.get("prompt_cache_hit_tokens"), uncachedInputTokens=usage.get("prompt_cache_miss_tokens"),
-                pricingVersion="deepseek-cost-unreconciled-v1")
+            actual = chat_usage(data.get("usage"))
             choices = data["choices"]
             if len(choices) != 1:
                 return failure("PROVIDER_ERROR")

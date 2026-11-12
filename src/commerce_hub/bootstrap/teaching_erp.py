@@ -22,8 +22,9 @@ def registry(settings, projection=None):
             projection = json.loads(path.read_text(encoding="utf-8"))
         except Exception:
             raise ValueError("TEACHING_PACKAGE_NOT_AVAILABLE") from None
-    spec = HandlerSpec("TEACHING_S01_ADMISSION", "0.1.0", "s01.teaching.admission.v1",
-        TeachingS01AdmissionHandler(projection), policy_version="teaching-admission-no-model-v1")
+    handler = TeachingS01AdmissionHandler(projection)
+    spec = HandlerSpec("TEACHING_S01_ADMISSION", "0.1.0", "s01.teaching.admission.v1." + handler.projection.revision[:32],
+        handler, policy_version="teaching-admission-no-model-v1")
     return {spec.scenario_id:spec}
 
 

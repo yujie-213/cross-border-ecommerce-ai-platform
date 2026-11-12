@@ -12,13 +12,17 @@ def propose(snapshot, evaluator=evaluate):
     if not snapshot.candidates_allowed:
         return dict(baseline=baseline, candidates=[], limitations=["CANDIDATE_RULES_OR_QUALITY_BLOCKED"], selection=None)
     policy = snapshot.projection.input.policy
+    nature = snapshot.projection.input.sourceNature
+    demand_method = ("EXPLICIT_TEACHING_DAILY_CURVE" if nature == "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP"
+        else "EXPLICIT_VERIFIED_DAILY_CURVE" if nature == "TEACHING_ERP_OBSERVED"
+        else "EXPLICIT_ENGINEERING_DAILY_CURVE")
     gap = Decimal(baseline["gapQuantity"])
     if gap == 0:
         # Total coverage does not imply timely coverage. The current policy has
         # no approved rule for expediting/reallocating supply or sizing a bridge order.
         reason = "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED" if baseline["stockoutRisk"] else "NO_REPLENISHMENT_NEEDED"
         return dict(baseline=baseline, candidates=[], limitations=[reason], selection=None,
-                    demandMethod="EXPLICIT_ENGINEERING_DAILY_CURVE")
+                    demandMethod=demand_method)
     with localcontext() as ctx:
         ctx.prec = 50
         # Candidate search lives in B02; daily quantities/risks are always B01 results.
@@ -35,5 +39,7 @@ def propose(snapshot, evaluator=evaluate):
                                constraintVersion=policy.version, constraintRefs=[snapshot.snapshotId + "#/inputProjection/input/policy"],
                                evaluation=evaluation, procurementEligible=False))
     # No invented weights/optimality. Unresolved intermediate shortages remain visible.
-    return dict(baseline=baseline, candidates=candidates, limitations=["ENGINEERING_RULES_UNVERIFIED"],
-                selection=None, demandMethod="EXPLICIT_ENGINEERING_DAILY_CURVE")
+    admitted = snapshot.projection.input.sourceNature in {"TEACHING_ERP_OBSERVED", "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP"}
+    return dict(baseline=baseline, candidates=candidates,
+                limitations=["PROCUREMENT_EXECUTION_NOT_AUTHORIZED" if admitted else "ENGINEERING_RULES_UNVERIFIED"],
+                selection=None, demandMethod=demand_method)

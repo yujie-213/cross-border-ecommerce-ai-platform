@@ -37,3 +37,7 @@
 ## 文档位置
 
 分类入口为docs/README.md。五份正文位于docs/requirements、architecture、agents、reports；治理前原文字节快照与旧计划在docs/archive，旧路径对照见docs/governance/migration.json。业务状态仍只读docs/TASKS.md，公开准备与阻碍见docs/governance/PUBLICATION.md。
+
+最新授权增量（2026-11-12，e547335后）：负责人完整后端闭环任务覆盖旧真实模型禁用及固定SKU限制。允许有界发现最多20候选/优先3—5核验、规范化与受控补充机制、B01/B02、官方DeepSeek最多10次且累计$1（预算预检失败停止）、后端联调及对接材料、提交普通同步评审分支。明确并行文件边界见docs/contracts/s01/backend-closure.md。真实业务来源/规则不代签；禁止前端、采购写入、其他业务场景、自动合main。最终后端交付REVIEW后停止。
+
+最新授权增量（2026-11-12，本轮连续任务）：负责人经老师确认允许在固定教学ERP通过API创建/必要更新/受控清理独立仿真批次，覆盖旧教学写禁令；先确认契约/账号店仓/副作用/幂等，发送不确定先查原批次不盲重试，禁止直接ERP数据库、真实付款/发货/采购提交审批/外部通知。来源SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP，教学规则teaching-s01-rules-v1仅教学验证，不解除企业门。API写入回执不能代替正式只读回读；持续503/不完整如实阻断。原模型10请求/$1总授权不增加，最终后端REVIEW/前端之前停止。

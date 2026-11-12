@@ -61,8 +61,28 @@ def test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt(
     assert ai["status"]=="UNAVAILABLE" and ai["explanation"] is None
     assert report["dataReport"]["supplyDemand"]["baseline"]["gapQuantity"]=="15"
     assert count(env,attempts)==1 and env.spec.handler.provider.calls==1
-    if mode in {"unknown","exception","timeout"}:
+    if mode in {"exception","timeout"}:
         assert row(env,budgets,task_id=task_id)["reserved_calls"]==1
+    if mode == "unknown":
+        assert row(env,budgets,task_id=task_id)["used_calls"]==1
+        assert row(env,budgets,task_id=task_id)["reserved_cost"]==Decimal(".01")
+
+
+def test_legacy_explanation_can_publish_with_unknown_optional_charge(make_s01):
+    class TokenOnly(S01MockProvider):
+        def invoke(self, request):
+            response = super().invoke(request)
+            return response.model_copy(update={"usage": response.usage.model_copy(update={"actualCost":None,
+                "currency":None, "pricingVersion":None})})
+    env=business(make_s01,TokenOnly())
+    task_id=create(env)["taskRef"]["taskId"]
+    assert Worker(env.service).once()
+    report=env.service.read_report(env.principal,task_id)
+    assert report["analysisReport"]["ai"]["status"]=="AVAILABLE"
+    assert report["analysisReport"]["ai"]["usageStatus"]=="UNKNOWN"
+    state=row(env,budgets,task_id=task_id)
+    assert state["used_tokens"]==96 and state["used_calls"]==1
+    assert state["reserved_cost"]==Decimal(".01") and state["used_cost"]==0
 
 
 class WrongFacts(S01MockProvider):

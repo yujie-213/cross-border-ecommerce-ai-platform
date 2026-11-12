@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "s01-teaching-case-review-v1",
+  "caseId": "D",
+  "result": "ADMITTED",
+  "actualErpEvidence": "REUSES_CASE_A_GET_FACTS",
+  "policyEvidence": "CONTROLLED_TEACHING_RULE_ONLY",
+  "inventoryCollection": "REUSES_A_EXACT_SCOPE_COMPLETE_SINGLE_ROW",
+  "salesCollection": "REUSES_A_SEVEN_EXACT_KEYS_COMPLETE_NO_MIRRORS",
+  "sourceUpdatedAtBasis": "REUSES_A_ERP_WRITE_RECEIPT_AND_DETAIL_GET_MATCH",
+  "writeReadCanonicalComparison": "INDEPENDENT_MATCH_REUSED_FROM_A_FACT_SET",
+  "selectedCatalogVariant": "D-MAX",
+  "golden": {
+    "candidateQuantity": 18,
+    "maxOrderQty": 17,
+    "constraintOutcome": "NO_FEASIBLE_QUANTITY"
+  },
+  "variants": {
+    "D-MOQ": {
+      "moq": 24,
+      "orderMultiple": 6,
+      "candidateDay": 1,
+      "candidateQuantity": 24,
+      "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+    },
+    "D-MULTIPLE": {
+      "moq": 12,
+      "orderMultiple": 10,
+      "candidateDay": 1,
+      "candidateQuantity": 20,
+      "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+    },
+    "D-MAX": {
+      "maxOrderQty": 17,
+      "candidateQuantity": 18,
+      "constraintOutcome": "NO_FEASIBLE_QUANTITY",
+      "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+    },
+    "D-AVAILABLE-DATE": {
+      "candidateDay": 7,
+      "candidateFirstStockoutDay": 6,
+      "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+    }
+  },
+  "packageDigest": "06fa99a06b3679d87294e0245ea563801f601ea86cd99241e0f1253db83f7a21",
+  "privateArtifactRef": "private-artifact:case-D-package",
+  "rawIdentifiersPublished": false,
+  "modelCalls": 0,
+  "evidenceDigest": "db4bb50bf5b3c96a70cf4f2ff24a8346fc9a939045a263ed6d0a31874ace61cc"
+}

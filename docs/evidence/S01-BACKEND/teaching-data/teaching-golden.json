@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "s01-teaching-golden-v1",
+  "cases": {
+    "A": {
+      "baselineBalances": [
+        52,
+        42,
+        33,
+        22,
+        10,
+        -4,
+        -17
+      ],
+      "gapQuantity": 17,
+      "firstStockoutDay": 6,
+      "candidateQuantity": 18,
+      "candidateArrivalDay": 7,
+      "candidateBalances": [
+        52,
+        42,
+        33,
+        22,
+        10,
+        -4,
+        1
+      ],
+      "candidateFirstStockoutDay": 6,
+      "constraintOutcome": "CANDIDATE_STILL_HAS_INTERMEDIATE_SHORTAGE",
+      "maxOrderQty": 120
+    },
+    "B": {
+      "baselineBalances": [
+        88,
+        78,
+        69,
+        58,
+        46,
+        32,
+        19
+      ],
+      "gapQuantity": 0,
+      "firstStockoutDay": null,
+      "candidateQuantity": null,
+      "constraintOutcome": "NO_REPLENISHMENT_NEEDED"
+    },
+    "C": {
+      "baselineBalances": [
+        2,
+        -8,
+        -17,
+        -28,
+        -40,
+        -54,
+        0
+      ],
+      "gapQuantity": 0,
+      "firstStockoutDay": 2,
+      "constraintOutcome": "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+    },
+    "D": {
+      "candidateQuantity": 18,
+      "maxOrderQty": 17,
+      "constraintOutcome": "NO_FEASIBLE_QUANTITY"
+    },
+    "E": {
+      "constraintOutcome": "QUALITY_REQUIRES_RESOLUTION",
+      "candidateQuantity": null
+    }
+  },
+  "subcases": {
+    "D": {
+      "D-MOQ": {
+        "moq": 24,
+        "orderMultiple": 6,
+        "candidateDay": 1,
+        "candidateQuantity": 24,
+        "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+      },
+      "D-MULTIPLE": {
+        "moq": 12,
+        "orderMultiple": 10,
+        "candidateDay": 1,
+        "candidateQuantity": 20,
+        "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+      },
+      "D-MAX": {
+        "maxOrderQty": 17,
+        "candidateQuantity": 18,
+        "constraintOutcome": "NO_FEASIBLE_QUANTITY",
+        "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+      },
+      "D-AVAILABLE-DATE": {
+        "candidateDay": 7,
+        "candidateFirstStockoutDay": 6,
+        "basis": "CONTROLLED_GOLDEN_RECALCULATION"
+      }
+    },
+    "E": {
+      "E-DATA": {
+        "openingAvailable": null,
+        "status": "INSUFFICIENT_DATA",
+        "basis": "OFFLINE_GOLDEN_ONLY_NOT_ERP_MISSING_FACT"
+      },
+      "E-QUALITY": {
+        "qualityDisposition": "INVESTIGATE",
+        "basis": "ACTUAL_TEACHING_ERP_QUALITY_GET_PLUS_CONTROLLED_RULE"
+      }
+    }
+  },
+  "modelCalls": 0,
+  "evidenceDigest": "eab53995e15aaa262b6ff3898b38fcc9a4e3b4312f892f059ad31b834f5974b2"
+}

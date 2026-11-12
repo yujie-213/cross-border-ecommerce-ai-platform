@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "s01-teaching-case-review-v1",
+  "caseId": "C",
+  "result": "ADMITTED",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "batchId": "S01-AI-TEST-20261112",
+  "openingAvailable": "10",
+  "demandRule": "TEACHING_LAST_7_DAILY_REPLAY_V1",
+  "supplyRule": "TEACHING_DRAFT_TO_PLANNED_SUPPLY_V1",
+  "supplyBoundary": "Draft teaching record only; not submitted, ordered, approved, or in transit.",
+  "inventoryCollection": "EXACT_SCOPE_COMPLETE_SINGLE_ROW",
+  "salesCollection": "SEVEN_EXACT_KEYS_COMPLETE_NO_MIRRORS",
+  "golden": {
+    "baselineBalances": [
+      2,
+      -8,
+      -17,
+      -28,
+      -40,
+      -54,
+      0
+    ],
+    "gapQuantity": 0,
+    "firstStockoutDay": 2,
+    "constraintOutcome": "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+  },
+  "actualErpEvidence": "OWNED_INVENTORY_AND_PURCHASE_DRAFT_PUT_OR_POST_PLUS_DETAIL_GET",
+  "sourceUpdatedAtBasis": "ERP_INVENTORY_WRITE_RECEIPT_AND_DETAIL_GET_MATCH",
+  "writeReadCanonicalComparison": "INDEPENDENT_MATCH_INVENTORY_SALES_AND_PURCHASE_DRAFT_REQUESTS",
+  "packageDigest": "153ad369a11be8a7ccdd2e186af93b93fd6f9d14104fea1a1c19afc4d01bdbd2",
+  "privateArtifactRef": "private-artifact:case-C-package",
+  "rawIdentifiersPublished": false,
+  "modelCalls": 0,
+  "evidenceDigest": "0e34e95b3f028f921005f8fa53069473c4149c007f0ba29f1f82add8b7a73ee1"
+}

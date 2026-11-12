@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "database": "s01_a01_test_20261112",
+  "revision": "0005_optional_usage",
+  "before": {
+    "usage": {
+      "rows": 366,
+      "sha256": "1d27ef47f0ff344ff358d581c20cd1caf67d0cdf18bff7f70dc02100d9112e54"
+    },
+    "attempts": {
+      "rows": 759,
+      "sha256": "cb32962f8dca211cd5b0aa36e5a9407da937e40c47a6605dbb4185a182f66548"
+    },
+    "budgets": {
+      "rows": 1619,
+      "sha256": "efcb2164fc5de02cc046d8b032c291ed9f54f82cf128caf43ef3024d2268297b"
+    }
+  },
+  "after": {
+    "usage": {
+      "rows": 366,
+      "sha256": "1d27ef47f0ff344ff358d581c20cd1caf67d0cdf18bff7f70dc02100d9112e54"
+    },
+    "attempts": {
+      "rows": 759,
+      "sha256": "cb32962f8dca211cd5b0aa36e5a9407da937e40c47a6605dbb4185a182f66548"
+    },
+    "budgets": {
+      "rows": 1619,
+      "sha256": "efcb2164fc5de02cc046d8b032c291ed9f54f82cf128caf43ef3024d2268297b"
+    }
+  },
+  "historicalFactsPreserved": true,
+  "destructiveOperations": 0,
+  "scope": "schema relaxation and nullable token dimensions; no historical values inferred"
+}

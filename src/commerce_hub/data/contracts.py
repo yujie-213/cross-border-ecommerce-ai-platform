@@ -90,6 +90,28 @@ class FixtureInput(Contract):
     policy: Policy
 
 
+class AdmittedPolicy(Policy):
+    """Explicitly reviewed business semantics; never inferred from a fixture."""
+    version: Identifier
+    otherConstraints: Literal["REVIEWED_NOT_APPLICABLE"]
+    qualityDisposition: Literal["VERIFIED_CLEAR", "INVESTIGATE", "UNKNOWN"]
+
+
+class AdmittedInput(Contract):
+    sourceNature: Literal["TEACHING_ERP_OBSERVED", "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP"]
+    # Retain the common input identifier for existing projection consumers.
+    fixtureId: Identifier
+    provenanceRef: Identifier
+    rulesRef: Identifier
+    asOf: UtcTimestamp
+    coverageComplete: bool = Field(strict=True)
+    mapping: Mapping
+    inventory: tuple[Inventory, ...] = Field(max_length=4)
+    demand: tuple[Demand, ...] = Field(max_length=45)
+    supply: tuple[Supply, ...] = Field(max_length=30)
+    policy: AdmittedPolicy
+
+
 class Issue(Contract):
     code: str
     severity: Literal["BLOCK", "WARN", "INFO"]
@@ -114,7 +136,7 @@ class Projection(Contract):
     projectionVersion: Literal["s01-projection-v1"] = "s01-projection-v1"
     revision: str
     sourceBatchId: str
-    input: FixtureInput
+    input: FixtureInput | AdmittedInput
     inventory: tuple[CanonicalInventory, ...]
     demand: tuple[CanonicalDemand, ...]
     supply: tuple[CanonicalSupply, ...]

@@ -65,7 +65,9 @@ def test_official_protocol_mapping_and_unknown_billed_cost_are_explicit():
     conn = OfflineConnection()
     config = settings(model_network_enabled=True)
     result, provider = execute_offline(conn, config)
-    assert result.code == "USAGE_UNKNOWN" and result.validatedObject is None
+    assert result.code == "OK" and result.validatedObject is not None
+    assert result.tokenUsageStatus == "KNOWN" and result.costStatus == "UNKNOWN" and result.usageRef
+    assert result.usage.totalTokens == 96 and result.usage.actualCost is None
     assert result.actualModelRevision == "deepseek-flash" and result.usageStatus == "UNKNOWN"
     assert conn.closed and len(conn.requests) == 1
     method, path, body, headers = conn.requests[0]
@@ -96,7 +98,8 @@ def test_finish_reason_mapping(finish,code):
 def test_malformed_json_and_missing_usage_never_fabricate_zero_cost():
     conn = OfflineConnection(usage={})
     result,_=execute_offline(conn)
-    assert result.code == "USAGE_UNKNOWN" and result.usageRef is None
+    assert result.code == "OK" and result.usageRef
+    assert result.tokenUsageStatus == "UNKNOWN" and result.usage.totalTokens is None and result.usage.actualCost is None
     conn = OfflineConnection(choices=[dict(message=dict(content="{"), finish_reason="stop")])
     result,_=execute_offline(conn)
     assert result.code == "INVALID_OUTPUT" and result.usageStatus == "UNKNOWN"

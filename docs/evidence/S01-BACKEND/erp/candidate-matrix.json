@@ -1,0 +1,611 @@
+{
+  "schemaVersion": "s01-candidate-discovery-v1",
+  "generatedAt": "2026-11-12T11:03:05.659272+00:00",
+  "source": "TEACHING_ERP/NETWORK_READ/OBSERVED_FACT",
+  "candidateLimit": 20,
+  "discoveredCount": 20,
+  "verifiedCount": 5,
+  "globalEndpoints": {
+    "demand": {
+      "state": "REACHABLE",
+      "error": null,
+      "complete": false,
+      "total": 1153919,
+      "fingerprint": "1981b7a7253f4bc46092a86a5402bb29bebecc83f85efbf084f6281c7199314f"
+    },
+    "supply": {
+      "state": "REACHABLE",
+      "error": null,
+      "complete": false,
+      "total": 1234,
+      "fingerprint": "4779ba40ec7fc291106dda7bf5c854a831e07660966c41498feb9c4208b6b23e"
+    }
+  },
+  "candidates": [
+    {
+      "candidateId": "sku-ac3ab740d7f4b86790c4",
+      "knownNegativeControl": false,
+      "computability": "BLOCKED",
+      "observedDomains": 5,
+      "gapCount": 11,
+      "newestObservation": "2026-11-12T11:03:56.957582+00:00",
+      "domains": [
+        {
+          "domain": "identity",
+          "state": "PARTIAL",
+          "gaps": [],
+          "sourceFingerprints": [
+            "15dc02bdcda703e355f4b4852ed1fc746317acabdbfeea4721fe28920fdbb621",
+            "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+            "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+            "773e7314bdecae78dcc1db92e9061dd499a724e7002bd2dea9da7520c4c299eb",
+            "f98fd797df50420cc93c7eb25a7d0db5baf0a8d547db89e9f288f7783b34263e"
+          ]
+        },
+        {
+          "domain": "inventory",
+          "state": "PARTIAL",
+          "gaps": [
+            "BATCH_AGGREGATION_UNSIGNED",
+            "FRESHNESS_THRESHOLD_UNSIGNED",
+            "NET_AVAILABLE_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "f98fd797df50420cc93c7eb25a7d0db5baf0a8d547db89e9f288f7783b34263e"
+          ]
+        },
+        {
+          "domain": "demand",
+          "state": "ERROR",
+          "gaps": [
+            "ERP_503",
+            "HISTORY_TO_FUTURE_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": []
+        },
+        {
+          "domain": "supply",
+          "state": "UNKNOWN",
+          "gaps": [
+            "NO_MATCHING_LINES_NOT_ZERO",
+            "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ]
+        },
+        {
+          "domain": "availability",
+          "state": "UNKNOWN",
+          "gaps": [
+            "SELLABLE_DATE_MISSING"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12",
+            "15dc02bdcda703e355f4b4852ed1fc746317acabdbfeea4721fe28920fdbb621",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          ]
+        },
+        {
+          "domain": "moq",
+          "state": "PARTIAL",
+          "gaps": [
+            "MOQ_CONFLICT_REQUIRES_RULE"
+          ],
+          "sourceFingerprints": [
+            "15dc02bdcda703e355f4b4852ed1fc746317acabdbfeea4721fe28920fdbb621",
+            "ef651c8f0ff22b8f45644f419082ea59cedc59599a619f56e34f17c181e38c59"
+          ]
+        },
+        {
+          "domain": "orderMultiple",
+          "state": "PARTIAL",
+          "gaps": [
+            "CARTON_QUANTITY_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "15dc02bdcda703e355f4b4852ed1fc746317acabdbfeea4721fe28920fdbb621"
+          ]
+        },
+        {
+          "domain": "quality",
+          "state": "PARTIAL",
+          "gaps": [
+            "QUALITY_DECISION_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "15dc02bdcda703e355f4b4852ed1fc746317acabdbfeea4721fe28920fdbb621",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          ]
+        }
+      ],
+      "exactGaps": [
+        "BATCH_AGGREGATION_UNSIGNED",
+        "CARTON_QUANTITY_SEMANTICS_UNSIGNED",
+        "ERP_503",
+        "FRESHNESS_THRESHOLD_UNSIGNED",
+        "HISTORY_TO_FUTURE_RULE_UNSIGNED",
+        "MOQ_CONFLICT_REQUIRES_RULE",
+        "NET_AVAILABLE_SEMANTICS_UNSIGNED",
+        "NO_MATCHING_LINES_NOT_ZERO",
+        "QUALITY_DECISION_UNSIGNED",
+        "SELLABLE_DATE_MISSING",
+        "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+      ]
+    },
+    {
+      "candidateId": "sku-ba0806427a2780d68965",
+      "knownNegativeControl": false,
+      "computability": "BLOCKED",
+      "observedDomains": 5,
+      "gapCount": 11,
+      "newestObservation": "2026-11-12T11:04:13.276573+00:00",
+      "domains": [
+        {
+          "domain": "identity",
+          "state": "PARTIAL",
+          "gaps": [],
+          "sourceFingerprints": [
+            "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+            "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+            "607722308ab78a94b46b1a4c8fbb93da44b70c40b368607e163865011921211f",
+            "6ca0108cfd6a66c6f9f96b55c1742c618fe7d478d1eefde2f360b9b2cddb49fb",
+            "df3e643ef4ba05b7ac3059a950607718f95f85cbce5d6e9517c9806b9970855c"
+          ]
+        },
+        {
+          "domain": "inventory",
+          "state": "PARTIAL",
+          "gaps": [
+            "BATCH_AGGREGATION_UNSIGNED",
+            "FRESHNESS_THRESHOLD_UNSIGNED",
+            "NET_AVAILABLE_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "6ca0108cfd6a66c6f9f96b55c1742c618fe7d478d1eefde2f360b9b2cddb49fb"
+          ]
+        },
+        {
+          "domain": "demand",
+          "state": "ERROR",
+          "gaps": [
+            "ERP_503",
+            "HISTORY_TO_FUTURE_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": []
+        },
+        {
+          "domain": "supply",
+          "state": "UNKNOWN",
+          "gaps": [
+            "NO_MATCHING_LINES_NOT_ZERO",
+            "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ]
+        },
+        {
+          "domain": "availability",
+          "state": "UNKNOWN",
+          "gaps": [
+            "SELLABLE_DATE_MISSING"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "607722308ab78a94b46b1a4c8fbb93da44b70c40b368607e163865011921211f"
+          ]
+        },
+        {
+          "domain": "moq",
+          "state": "PARTIAL",
+          "gaps": [
+            "MOQ_CONFLICT_REQUIRES_RULE"
+          ],
+          "sourceFingerprints": [
+            "0d28c681f74178b1fc6e97f80712720933e9cd336a859d411e2de99b95e5cca6",
+            "607722308ab78a94b46b1a4c8fbb93da44b70c40b368607e163865011921211f"
+          ]
+        },
+        {
+          "domain": "orderMultiple",
+          "state": "PARTIAL",
+          "gaps": [
+            "CARTON_QUANTITY_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "607722308ab78a94b46b1a4c8fbb93da44b70c40b368607e163865011921211f"
+          ]
+        },
+        {
+          "domain": "quality",
+          "state": "PARTIAL",
+          "gaps": [
+            "QUALITY_DECISION_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "607722308ab78a94b46b1a4c8fbb93da44b70c40b368607e163865011921211f"
+          ]
+        }
+      ],
+      "exactGaps": [
+        "BATCH_AGGREGATION_UNSIGNED",
+        "CARTON_QUANTITY_SEMANTICS_UNSIGNED",
+        "ERP_503",
+        "FRESHNESS_THRESHOLD_UNSIGNED",
+        "HISTORY_TO_FUTURE_RULE_UNSIGNED",
+        "MOQ_CONFLICT_REQUIRES_RULE",
+        "NET_AVAILABLE_SEMANTICS_UNSIGNED",
+        "NO_MATCHING_LINES_NOT_ZERO",
+        "QUALITY_DECISION_UNSIGNED",
+        "SELLABLE_DATE_MISSING",
+        "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+      ]
+    },
+    {
+      "candidateId": "sku-c009bfeb1faef1f69207",
+      "knownNegativeControl": false,
+      "computability": "BLOCKED",
+      "observedDomains": 5,
+      "gapCount": 11,
+      "newestObservation": "2026-11-12T11:04:29.571546+00:00",
+      "domains": [
+        {
+          "domain": "identity",
+          "state": "PARTIAL",
+          "gaps": [],
+          "sourceFingerprints": [
+            "0f310e1637608bd2f1a3f266ae8cfc3a40ee46dbe5ea0346cc383071b49fa213",
+            "1daa605be8dd03092f0a33339dd70df148d307f836923b4dda1617156c5d88b3",
+            "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+            "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+            "ea21bb2ca9a3c04464128125691a5661842ca00a3fc8cd65075a4ec5ebedea1b"
+          ]
+        },
+        {
+          "domain": "inventory",
+          "state": "PARTIAL",
+          "gaps": [
+            "BATCH_AGGREGATION_UNSIGNED",
+            "FRESHNESS_THRESHOLD_UNSIGNED",
+            "NET_AVAILABLE_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "1daa605be8dd03092f0a33339dd70df148d307f836923b4dda1617156c5d88b3",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          ]
+        },
+        {
+          "domain": "demand",
+          "state": "ERROR",
+          "gaps": [
+            "ERP_503",
+            "HISTORY_TO_FUTURE_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": []
+        },
+        {
+          "domain": "supply",
+          "state": "UNKNOWN",
+          "gaps": [
+            "NO_MATCHING_LINES_NOT_ZERO",
+            "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ]
+        },
+        {
+          "domain": "availability",
+          "state": "UNKNOWN",
+          "gaps": [
+            "SELLABLE_DATE_MISSING"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "ea21bb2ca9a3c04464128125691a5661842ca00a3fc8cd65075a4ec5ebedea1b"
+          ]
+        },
+        {
+          "domain": "moq",
+          "state": "PARTIAL",
+          "gaps": [
+            "MOQ_CONFLICT_REQUIRES_RULE"
+          ],
+          "sourceFingerprints": [
+            "ea21bb2ca9a3c04464128125691a5661842ca00a3fc8cd65075a4ec5ebedea1b",
+            "f846635787b1c73c5da9d32638e8f7d6c03c162650a6bc706f6b9b10bb552973"
+          ]
+        },
+        {
+          "domain": "orderMultiple",
+          "state": "PARTIAL",
+          "gaps": [
+            "CARTON_QUANTITY_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "ea21bb2ca9a3c04464128125691a5661842ca00a3fc8cd65075a4ec5ebedea1b"
+          ]
+        },
+        {
+          "domain": "quality",
+          "state": "PARTIAL",
+          "gaps": [
+            "QUALITY_DECISION_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "ea21bb2ca9a3c04464128125691a5661842ca00a3fc8cd65075a4ec5ebedea1b"
+          ]
+        }
+      ],
+      "exactGaps": [
+        "BATCH_AGGREGATION_UNSIGNED",
+        "CARTON_QUANTITY_SEMANTICS_UNSIGNED",
+        "ERP_503",
+        "FRESHNESS_THRESHOLD_UNSIGNED",
+        "HISTORY_TO_FUTURE_RULE_UNSIGNED",
+        "MOQ_CONFLICT_REQUIRES_RULE",
+        "NET_AVAILABLE_SEMANTICS_UNSIGNED",
+        "NO_MATCHING_LINES_NOT_ZERO",
+        "QUALITY_DECISION_UNSIGNED",
+        "SELLABLE_DATE_MISSING",
+        "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+      ]
+    },
+    {
+      "candidateId": "sku-eb55c28f45c27d9d5241",
+      "knownNegativeControl": false,
+      "computability": "BLOCKED",
+      "observedDomains": 5,
+      "gapCount": 11,
+      "newestObservation": "2026-11-12T11:03:40.718415+00:00",
+      "domains": [
+        {
+          "domain": "identity",
+          "state": "PARTIAL",
+          "gaps": [],
+          "sourceFingerprints": [
+            "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+            "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+            "8b305b285a8d13caca4eef58ea97d3c53cb4038637caf895324af9519f177a88",
+            "98b861f93b760f89b3d8a5d422d17e5169934263ddf30db77ee18eda6735f8ba",
+            "daba7efb5d6ecafb2aa1e5e1737442491b5f822e1709597be8aa429ae0211e18"
+          ]
+        },
+        {
+          "domain": "inventory",
+          "state": "PARTIAL",
+          "gaps": [
+            "BATCH_AGGREGATION_UNSIGNED",
+            "FRESHNESS_THRESHOLD_UNSIGNED",
+            "NET_AVAILABLE_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "98b861f93b760f89b3d8a5d422d17e5169934263ddf30db77ee18eda6735f8ba"
+          ]
+        },
+        {
+          "domain": "demand",
+          "state": "ERROR",
+          "gaps": [
+            "ERP_503",
+            "HISTORY_TO_FUTURE_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": []
+        },
+        {
+          "domain": "supply",
+          "state": "UNKNOWN",
+          "gaps": [
+            "NO_MATCHING_LINES_NOT_ZERO",
+            "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ]
+        },
+        {
+          "domain": "availability",
+          "state": "UNKNOWN",
+          "gaps": [
+            "SELLABLE_DATE_MISSING"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "daba7efb5d6ecafb2aa1e5e1737442491b5f822e1709597be8aa429ae0211e18"
+          ]
+        },
+        {
+          "domain": "moq",
+          "state": "PARTIAL",
+          "gaps": [
+            "MOQ_CONFLICT_REQUIRES_RULE"
+          ],
+          "sourceFingerprints": [
+            "21e682aca6e4783af1fe98f9a76d6ef2580467e1b9bcef17fdf3ce93439a7b6a",
+            "daba7efb5d6ecafb2aa1e5e1737442491b5f822e1709597be8aa429ae0211e18"
+          ]
+        },
+        {
+          "domain": "orderMultiple",
+          "state": "PARTIAL",
+          "gaps": [
+            "CARTON_QUANTITY_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "daba7efb5d6ecafb2aa1e5e1737442491b5f822e1709597be8aa429ae0211e18"
+          ]
+        },
+        {
+          "domain": "quality",
+          "state": "PARTIAL",
+          "gaps": [
+            "QUALITY_DECISION_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "daba7efb5d6ecafb2aa1e5e1737442491b5f822e1709597be8aa429ae0211e18"
+          ]
+        }
+      ],
+      "exactGaps": [
+        "BATCH_AGGREGATION_UNSIGNED",
+        "CARTON_QUANTITY_SEMANTICS_UNSIGNED",
+        "ERP_503",
+        "FRESHNESS_THRESHOLD_UNSIGNED",
+        "HISTORY_TO_FUTURE_RULE_UNSIGNED",
+        "MOQ_CONFLICT_REQUIRES_RULE",
+        "NET_AVAILABLE_SEMANTICS_UNSIGNED",
+        "NO_MATCHING_LINES_NOT_ZERO",
+        "QUALITY_DECISION_UNSIGNED",
+        "SELLABLE_DATE_MISSING",
+        "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+      ]
+    },
+    {
+      "candidateId": "sku-1c5fe03ebb578d2bb976",
+      "knownNegativeControl": true,
+      "computability": "BLOCKED",
+      "observedDomains": 5,
+      "gapCount": 11,
+      "newestObservation": "2026-11-12T11:03:24.491251+00:00",
+      "domains": [
+        {
+          "domain": "identity",
+          "state": "PARTIAL",
+          "gaps": [],
+          "sourceFingerprints": [
+            "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+            "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee",
+            "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+            "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+            "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ]
+        },
+        {
+          "domain": "inventory",
+          "state": "PARTIAL",
+          "gaps": [
+            "BATCH_AGGREGATION_UNSIGNED",
+            "FRESHNESS_THRESHOLD_UNSIGNED",
+            "NET_AVAILABLE_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          ]
+        },
+        {
+          "domain": "demand",
+          "state": "ERROR",
+          "gaps": [
+            "ERP_503",
+            "HISTORY_TO_FUTURE_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": []
+        },
+        {
+          "domain": "supply",
+          "state": "UNKNOWN",
+          "gaps": [
+            "NO_MATCHING_LINES_NOT_ZERO",
+            "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ]
+        },
+        {
+          "domain": "availability",
+          "state": "UNKNOWN",
+          "gaps": [
+            "SELLABLE_DATE_MISSING"
+          ],
+          "sourceFingerprints": [
+            "042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12",
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ]
+        },
+        {
+          "domain": "moq",
+          "state": "PARTIAL",
+          "gaps": [
+            "MOQ_CONFLICT_REQUIRES_RULE"
+          ],
+          "sourceFingerprints": [
+            "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22",
+            "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ]
+        },
+        {
+          "domain": "orderMultiple",
+          "state": "PARTIAL",
+          "gaps": [
+            "CARTON_QUANTITY_SEMANTICS_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ]
+        },
+        {
+          "domain": "quality",
+          "state": "PARTIAL",
+          "gaps": [
+            "QUALITY_DECISION_UNSIGNED"
+          ],
+          "sourceFingerprints": [
+            "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ]
+        }
+      ],
+      "exactGaps": [
+        "BATCH_AGGREGATION_UNSIGNED",
+        "CARTON_QUANTITY_SEMANTICS_UNSIGNED",
+        "ERP_503",
+        "FRESHNESS_THRESHOLD_UNSIGNED",
+        "HISTORY_TO_FUTURE_RULE_UNSIGNED",
+        "MOQ_CONFLICT_REQUIRES_RULE",
+        "NET_AVAILABLE_SEMANTICS_UNSIGNED",
+        "NO_MATCHING_LINES_NOT_ZERO",
+        "QUALITY_DECISION_UNSIGNED",
+        "SELLABLE_DATE_MISSING",
+        "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+      ]
+    }
+  ],
+  "recommendation": {
+    "candidateId": "sku-ac3ab740d7f4b86790c4",
+    "tiedCandidateIds": [
+      "sku-ac3ab740d7f4b86790c4",
+      "sku-ba0806427a2780d68965",
+      "sku-c009bfeb1faef1f69207",
+      "sku-eb55c28f45c27d9d5241"
+    ],
+    "status": "CLOSEST_TIED_BLOCKED_SAMPLE",
+    "exactGaps": [
+      "BATCH_AGGREGATION_UNSIGNED",
+      "CARTON_QUANTITY_SEMANTICS_UNSIGNED",
+      "ERP_503",
+      "FRESHNESS_THRESHOLD_UNSIGNED",
+      "HISTORY_TO_FUTURE_RULE_UNSIGNED",
+      "MOQ_CONFLICT_REQUIRES_RULE",
+      "NET_AVAILABLE_SEMANTICS_UNSIGNED",
+      "NO_MATCHING_LINES_NOT_ZERO",
+      "QUALITY_DECISION_UNSIGNED",
+      "SELLABLE_DATE_MISSING",
+      "UNRECEIVED_DEDUP_RULE_UNSIGNED"
+    ]
+  },
+  "interpretation": "Empty source results are UNKNOWN and never converted to zero.",
+  "realBusinessAdmission": "BLOCKED"
+}

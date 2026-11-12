@@ -199,7 +199,7 @@ def test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget(make
     expire_owned_lease(env, lease)
     with pytest.raises(LeaseLost):
         env.queue.heartbeat(lease)
-    env.queue.recover_expired()
+    env.queue.recover_expired([env.kind])
     replacement = env.queue.claim([env.kind])
     assert replacement.owner_id == lease.owner_id and replacement.attempt == 2 and replacement.token != lease.token
     env.service.start(replacement, env.principal)
@@ -217,7 +217,7 @@ def test_exhausted_delivery_reconciles_owner_once(make_foundation):
     env = make_foundation(max_attempts=1)
     _, lease, _ = running(env)
     expire_owned_lease(env, lease)
-    env.queue.recover_expired()
+    env.queue.recover_expired([env.kind])
     env.service.reconcile_dead()
     env.service.reconcile_dead()
     assert owned_row(env, work_items)["state"] == "DEAD"

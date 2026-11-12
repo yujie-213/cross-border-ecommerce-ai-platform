@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, event, inspect, text
 
 from commerce_hub.bootstrap.settings import Settings
 
-SCHEMA_REVISION = "0004_reports"
+SCHEMA_REVISION = "0005_optional_usage"
 AUTHORIZED_TEST_DATABASE = "s01_a01_test_20261112"
 ROOT = Path(__file__).resolve().parents[3]
 REQUIRED_TABLES = frozenset({
@@ -55,7 +55,9 @@ class Database:
                 if versions != [SCHEMA_REVISION] or not REQUIRED_TABLES <= set(schema.get_table_names()):
                     return False
                 return ({"principal_revision", "token_id"} <= {column["name"] for column in schema.get_columns("o01_tasks")}
-                        and "owner_version" in {column["name"] for column in schema.get_columns("i01_work_items")})
+                        and "owner_version" in {column["name"] for column in schema.get_columns("i01_work_items")}
+                        and {"input_tokens", "output_tokens", "cached_input_tokens", "uncached_input_tokens"}
+                        <= {column["name"] for column in schema.get_columns("g02_usage_facts")})
         except Exception:
             return False
 

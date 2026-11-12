@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "s01-teaching-case-review-v1",
+  "caseId": "E",
+  "result": "ADMITTED",
+  "selectedCatalogVariant": "E-QUALITY",
+  "actualErpEvidence": "OWNED_QUALITY_RECORD_PUT_AND_DETAIL_GET_INVESTIGATE",
+  "actualQualityGet": {
+    "qcStatus": "TEACHING_QUALITY_INVESTIGATE",
+    "inspectedQty": 20,
+    "availableQty": 19,
+    "defectiveQty": 1
+  },
+  "inventoryCollection": "REUSES_A_EXACT_SCOPE_COMPLETE_SINGLE_ROW",
+  "salesCollection": "REUSES_A_SEVEN_EXACT_KEYS_COMPLETE_NO_MIRRORS",
+  "policyEvidence": "CONTROLLED_TEACHING_RULE_BOUND_TO_INVESTIGATE_DISPOSITION",
+  "sourceUpdatedAtBasis": "REUSES_A_ERP_WRITE_RECEIPT_AND_DETAIL_GET_MATCH",
+  "writeReadCanonicalComparison": "INDEPENDENT_MATCH_REUSED_FROM_A_FACT_SET",
+  "qualityAuditBoundary": "The INVESTIGATE quality PUT+GET is separate actual ERP audit evidence; the admitted quantity package binds the controlled quality rule.",
+  "golden": {
+    "constraintOutcome": "QUALITY_REQUIRES_RESOLUTION",
+    "candidateQuantity": null
+  },
+  "variants": {
+    "E-DATA": {
+      "openingAvailable": null,
+      "status": "INSUFFICIENT_DATA",
+      "basis": "OFFLINE_GOLDEN_ONLY_NOT_ERP_MISSING_FACT"
+    },
+    "E-QUALITY": {
+      "qualityDisposition": "INVESTIGATE",
+      "basis": "ACTUAL_TEACHING_ERP_QUALITY_GET_PLUS_CONTROLLED_RULE"
+    }
+  },
+  "packageDigest": "130cddef586e9e64257830580b1a92a1a48a3cc2293920f24439dc2eeb3b542b",
+  "privateArtifactRef": "private-artifact:case-E-package",
+  "rawIdentifiersPublished": false,
+  "modelCalls": 0,
+  "evidenceDigest": "1c7ffee0c055d86a13d8e0599227b0ffeaa4341bce17d7b479fc8f665a61c674"
+}

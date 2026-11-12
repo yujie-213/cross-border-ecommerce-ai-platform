@@ -58,16 +58,20 @@ def capture(projection):
             block("UNKNOWN_OR_INVALID_CONSTRAINT", "policy/" + field, "CANDIDATES")
     if not policy.candidateDates or any(d not in days for d in policy.candidateDates):
         block("UNKNOWN_OR_INVALID_CANDIDATE_DATE", "policy/candidateDates", "CANDIDATES")
-    if policy.qualityDisposition != "SAMPLE_CLEAR":
+    admitted = value.sourceNature in {"TEACHING_ERP_OBSERVED", "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP"}
+    if policy.qualityDisposition != ("VERIFIED_CLEAR" if admitted else "SAMPLE_CLEAR"):
         block("QUALITY_REQUIRES_RESOLUTION", "policy/qualityDisposition", "CANDIDATES")
     manifest = dict(contractVersion="0.1.0", projectionRevision=projection.revision,
                     sourceBatchIds=[projection.sourceBatchId], mappingVersion=value.mapping.version,
                     policyVersion=policy.version, sourceNature=value.sourceNature,
-                    acquisitionMethod="INLINE_FIXTURE", sourceEnvironment="ENGINEERING_ONLY",
+                    acquisitionMethod="VERIFIED_SOURCE_PACKAGE" if admitted else "INLINE_FIXTURE",
+                    sourceEnvironment="TEACHING_ERP" if admitted else "ENGINEERING_ONLY",
                     asOf=value.asOf.isoformat(), businessKeys=dict(sku=value.mapping.canonicalSkuId,
                     store=value.mapping.storeId, warehouse=value.mapping.warehouseId),
                     quality=[i.model_dump() for i in issues], coverageComplete=value.coverageComplete,
                     atomicAcrossSystems=False)
+    if admitted:
+        manifest.update(provenanceRef=value.provenanceRef, rulesRef=value.rulesRef)
     digest = fingerprint(manifest)
     manifest["fingerprint"] = digest
     return Snapshot(snapshotId="snapshot-" + digest, manifest=manifest, projection=projection, issues=tuple(issues))

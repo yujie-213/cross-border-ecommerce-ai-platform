@@ -29,5 +29,6 @@ def fixture_control():
     budget.validate_model_call.side_effect = lambda **kw: dict(state="RESERVED", max_tokens=20000,
         max_cost=Decimal("1"), now=datetime.now(timezone.utc))
     budget.settle.return_value = "usage-fixture"
+    budget.record_model_usage.return_value = "usage-fixture"
     budget.model_event.return_value = "audit-fixture"
     return SimpleNamespace(check=Mock(), budget=budget)

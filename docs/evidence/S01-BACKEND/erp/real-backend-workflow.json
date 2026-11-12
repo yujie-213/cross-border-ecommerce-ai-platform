@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "s01-real-backend-observation-v1",
+  "capturedAt": "2026-11-12T11:22:04.897116+00:00",
+  "result": "PASS",
+  "source": "FIXED_TEACHING_ERP_NETWORK_CAPTURE_REPLAY",
+  "erpRequestsThisRun": 0,
+  "realModelRequests": 0,
+  "procurementWrites": 0,
+  "database": {
+    "server": "8.0.27",
+    "name": "s01_a01_test_20261112",
+    "timeZone": "+00:00",
+    "isolation": "READ-COMMITTED",
+    "cleared": false
+  },
+  "processes": {
+    "api": "INDEPENDENT",
+    "worker": "INDEPENDENT",
+    "apiRestarted": true
+  },
+  "task": {
+    "state": "SUCCEEDED",
+    "persistedState": "SUCCEEDED",
+    "scenarioId": "S01_BACKEND",
+    "reportPersisted": true
+  },
+  "business": {
+    "completeness": "BLOCKED",
+    "b01Executed": false,
+    "candidateCount": 0,
+    "limitations": [
+      "DATA_QUALITY_BLOCKED"
+    ],
+    "procurementEligible": false
+  },
+  "model": {
+    "status": "NOT_ATTEMPTED",
+    "reservedCalls": 0,
+    "usedCalls": 0,
+    "sentAuditCount": 0
+  },
+  "verification": {
+    "idempotency": "PASS",
+    "evidenceCount": 1,
+    "history": "PASS",
+    "restartRead": "PASS",
+    "exactPermission": "PASS",
+    "publicPrivateLeakScan": "PASS"
+  },
+  "scope": {
+    "tenantId": "process-d335172f38404e62b90a9cf66399cead",
+    "canonicalSkuIds": [
+      "sku-ac3ab740d7f4b86790c4"
+    ],
+    "storeIds": [
+      "store-6b86b273ff34fce19d6b"
+    ],
+    "warehouseIds": [
+      "warehouse-8bd9c0d453533757387e"
+    ],
+    "fields": [
+      "quantity"
+    ]
+  },
+  "projectionRevision": "7e2764287896692f61f3b9a8768915c6aa5f06cc24ed2eec9a59abc0bd61f786",
+  "privateRefs": {
+    "discovery": "data/private/s01-backend-erp-discovery/run-20261112T110305Z-edff865b/discovery-private.json",
+    "catalog": "data/private/s01-backend-erp-discovery/run-20261112T110305Z-edff865b/backend-catalog-4ea6061e0478428e88cd84d18d00eda7.json"
+  },
+  "safety": {
+    "sourceSynthetic": true,
+    "ownerConfirmed": false,
+    "revalidationFailed": true,
+    "realBusinessAdmission": "BLOCKED",
+    "rawSourceIdsPublished": false,
+    "monetaryFieldsPublished": false
+  }
+}

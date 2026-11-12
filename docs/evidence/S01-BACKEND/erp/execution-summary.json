@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "s01-erp-discovery-execution-v1",
+  "executedAt": "2026-11-12T11:03:05Z",
+  "result": "PASS_WITH_BUSINESS_BLOCKS",
+  "candidateLimit": 20,
+  "verifiedCandidates": 5,
+  "readerEvents": 71,
+  "rawResponses": 70,
+  "globalDemand": {"state": "REACHABLE_INCOMPLETE", "total": 1153919, "scopedResult": "ERP_503"},
+  "globalSupply": {"state": "REACHABLE_INCOMPLETE", "total": 1234, "scopedResult": "NO_MATCHING_LINES_NOT_ZERO"},
+  "recommendedCandidateId": "sku-ac3ab740d7f4b86790c4",
+  "recommendation": "CLOSEST_TIED_BLOCKED_SAMPLE",
+  "knownNegativeCandidateId": "sku-1c5fe03ebb578d2bb976",
+  "realBusinessAdmission": "BLOCKED",
+  "erpBusinessWrites": 0,
+  "realModelCalls": 0,
+  "privateBundle": {
+    "controlledRef": "data/private/s01-backend-erp-discovery/run-20261112T110305Z-edff865b/discovery-private.json",
+    "sha256": "fa1809d2ba06720e342ca9bf817633678af13a85927119a33da3a5971b08cecc",
+    "bytes": 335066,
+    "rawResponseBytes": 172317,
+    "observationRef": "data/private/s01-backend-erp-discovery/run-20261112T110305Z-edff865b/best-observation.json",
+    "observationRevision": "6241b32722728305f56d3630de70e05058ebb28952a5ed9eaab6d1d2fa0ce614",
+    "observationSha256": "95b6c872772801648fc870400e2c820cae58e62409c8427e3a3ab26569bee784",
+    "ownerConfirmed": false,
+    "sourceSynthetic": true,
+    "revalidationFailed": true
+  }
+}

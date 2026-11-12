@@ -192,7 +192,7 @@ class S01SupplyInventoryHandler:
                 raise ValueError("BROKEN_S01_EXPLANATION_BINDING")
             validate_versions(ai, facts)
             if ai["status"] == "AVAILABLE":
-                if ai["reason"] != "OK" or ai["usageStatus"] != "KNOWN":
+                if ai["reason"] != "OK" or ai["usageStatus"] not in {"KNOWN", "UNKNOWN"}:
                     raise ValueError("BROKEN_S01_EXPLANATION_BINDING")
                 validate_semantics(ai["explanation"], facts)
             elif ai["status"] != "UNAVAILABLE" or ai["explanation"] is not None:

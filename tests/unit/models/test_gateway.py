@@ -45,7 +45,7 @@ def test_valid_model_request_and_query_shape():
 @pytest.mark.parametrize("mode,code", [("success", "OK"), ("missing", "INVALID_OUTPUT"), ("type", "INVALID_OUTPUT"),
     ("extra", "INVALID_OUTPUT"), ("json", "INVALID_OUTPUT"), ("refused", "REFUSED"), ("truncated", "TRUNCATED"),
     ("timeout", "TIMEOUT"), ("unavailable", "UNAVAILABLE"), ("rate_limit", "RATE_LIMITED"), ("auth", "AUTH_ERROR"),
-    ("model_mismatch", "MODEL_MISMATCH"), ("unknown", "USAGE_UNKNOWN"), ("exception", "ACCOUNTING_OR_PROVIDER_ERROR")])
+    ("model_mismatch", "MODEL_MISMATCH"), pytest.param("unknown", "OK", id="unknown-USAGE_UNKNOWN"), ("exception", "ACCOUNTING_OR_PROVIDER_ERROR")])
 def test_schema_and_technical_outcomes(mode, code):
     provider, context = MockProvider(mode=mode), fixture_control()
     result = ModelGateway(provider).invoke(fixture_request(), context, fixture_bundle())
@@ -53,7 +53,13 @@ def test_schema_and_technical_outcomes(mode, code):
     assert bool(result.validatedObject) == (code == "OK")
     assert result.cacheStatus == "OFF" and result.toolRequests == []
     if mode not in {"unknown", "timeout", "unavailable", "exception"}:
-        context.budget.settle.assert_called_once_with("attempt-1", 96, Decimal("0.0001"), currency="TEST", pricing_version="mock-v1")
+        context.budget.settle.assert_called_once_with("attempt-1", 96, Decimal("0.0001"), currency="TEST", pricing_version="mock-v1",
+            input_tokens=64, output_tokens=32, cached_input_tokens=None, uncached_input_tokens=None)
+    elif mode == "unknown":
+        context.budget.settle.assert_not_called()
+        context.budget.record_model_usage.assert_called_once()
+        context.budget.unknown.assert_not_called()
+        assert result.tokenUsageStatus == result.costStatus == "UNKNOWN"
     else:
         context.budget.settle.assert_not_called()
         context.budget.unknown.assert_called_with("attempt-1")
@@ -119,6 +125,16 @@ def test_over_budget_actual_usage_is_accounted_and_output_rejected():
     result = ModelGateway(MockProvider()).invoke(fixture_request(), context, fixture_bundle())
     assert result.code == "BUDGET_OVERRUN" and result.validatedObject is None
     context.budget.settle.assert_called_once()
+
+
+def test_cache_only_token_lower_bound_overrun_rejects_explanation():
+    class CacheOnly(MockProvider):
+        def invoke(self, request):
+            return super().invoke(request).model_copy(update={"usage":Usage(cachedInputTokens=20001)})
+    context = fixture_control()
+    result = ModelGateway(CacheOnly()).invoke(fixture_request(), context, fixture_bundle())
+    assert result.code == "BUDGET_OVERRUN" and result.validatedObject is None
+    context.budget.record_model_usage.assert_called_once()
 
 
 def test_required_usage_audit_failure_never_returns_success():
