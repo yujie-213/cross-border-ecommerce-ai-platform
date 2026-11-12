@@ -2,7 +2,7 @@
 
 面向跨境电商运营的智慧中台设计与原型项目。围绕采购、库存、订单与客户反馈，把分散的业务数据、确定性指标、AI 解释和人工决策连接起来，使建议能够追溯到输入、规则和证据。
 
-当前仓库提供需求与架构设计、代码基座及公共能力开发规划，以及采购补货场景 S01 的独立交互原型。**平台业务服务尚未实现，也未接入真实企业系统。** 本地模拟验证不代表真实业务验收、生产可用性或性能结论。
+当前已实现阶段 A 工程底座及阶段 B 的 S01 模拟工程链路，并保留需求、架构和独立交互原型。**真实 ERP、模型、业务规则准入和采购执行尚未完成。** 工程测试通过不代表真实业务验收、生产可用性或性能结论；A/B 状态保持 REVIEW，等待独立复核及负责人确认。
 
 ## 要解决的问题
 
@@ -17,14 +17,14 @@
 
 | 层次 | 已确定的设计职责 | 实现情况 |
 |---|---|---|
-| O01 编排 | 统一任务、计划、预算与报告；通过 ScenarioHandler 调用场景 | 任务/计划引用/预算控制已实现；报告与业务Handler待B轨 |
-| D01—D04 数据 | 只读接入、映射投影、唯一快照 manifest、证据定位 | 设计与计划 |
-| B01 / B02 业务分析 | B01 负责确定性指标；B02 构造候选并调用 B01 评价 | 设计与计划 |
+| O01 编排 | 统一任务、计划、预算与报告；通过 ScenarioHandler 调用场景 | 持久任务/预算/恢复、S01 工程 Handler 和事务一致报告发布已实现 |
+| D01—D04 数据 | 只读接入、映射投影、唯一快照 manifest、证据定位 | 工程输入、精确映射、质量/快照和受权证据查询已实现；真实 ERP 适配未启用 |
+| B01 / B02 业务分析 | B01 负责确定性指标；B02 构造候选并调用 B01 评价 | 显式模拟策略下逐日供需、缺口和受约束候选已实现；真实规则未验收 |
 | A01—A03 AI | 模型统一网关、受控运行时、只读工具；模型不计算权威库存 | 设计与计划 |
 | C01—C03 人工控制 | 建议、审批、另行授权执行各自管理状态 | 原型演示；服务未实现 |
 | G / I 公共工程 | 权限、审计与工作项等按当前切片补齐 | 可信签名/当前scope、审计usage、MySQL工作项与独立Worker已实现 |
 
-工程采用 Python/FastAPI、SQLAlchemy、Alembic 和 MySQL；API 与 Worker 为独立进程。当前第一大阶段已实现最小迁移、权限、持久任务、预算与恢复；S01业务服务尚未实现。响应缓存默认 OFF，不预建 Redis、消息队列、向量库或多 Agent 通信。正式前端组件库与应用技术选型尚未冻结。
+工程采用 Python/FastAPI、SQLAlchemy、Alembic 和 MySQL；API 与 Worker 为独立进程。阶段 A 提供迁移、权限、持久任务、预算与恢复，阶段 B 提供模拟输入→质量检查→供需计算→候选→报告保存及查询。响应缓存默认 OFF，不预建 Redis、消息队列、向量库或多 Agent 通信。正式前端尚未接入，现有原型保持独立。
 
 已实现的独立原型使用原生 HTML、CSS、JavaScript；文档工具使用 Python、Mermaid，浏览器检查使用 Playwright。它们不构成正式前端或平台后端。
 
@@ -32,13 +32,13 @@
 
 S01 原型包含工作台、建议列表、详情和人工审批预览，支持搜索筛选、固定逐日样例、证据反馈、模拟分析/取消/暂停、版本变化与审批失效。默认只读，显式开启后才演示人工流程，外部执行始终禁用。全部数据和身份为模拟，刷新清空状态。
 
-当前独立 MySQL 8.0.27 上的迁移、权限、事务、租约/预算及API/Worker真实重启恢复已测试；不代表ERP、业务规则或生产验收。后续仍需B轨必要公共能力、只读分析链路及对应真实数据/规则/模型许可。任务与验收状态只以 [TASKS](docs/TASKS.md) 为准。
+当前独立 MySQL 8.0.27 上的迁移、权限、事务、租约/预算、API/Worker 重启恢复和 S01 模拟报告链路已有实测证据。四项真实数据/规则/ERP/模型准入仍 BLOCKED；没有采购审批或下单接口。任务与验收状态只以 [TASKS](docs/TASKS.md) 为准。
 
-## 运行当前第一大阶段底座
+## 运行工程底座与模拟链路
 
-完整命令、身份配置、测试与恢复边界见[运行说明](docs/runbooks/phase-a.md)。显式迁移后再分别启动API/Worker；不自动启动第二阶段。
+安装、身份配置和公共 API/Worker 命令见[阶段 A 运行说明](docs/runbooks/phase-a.md)；S01 显式工程装配和一条命令演示见[阶段 B 运行说明](docs/runbooks/phase-b.md)。显式迁移后再分别启动 API/Worker。
 
-已验证环境：Windows 10 build 19045 / CPython 3.13.5；其他 OS/Python 组合未验证。根目录 `.env` 使用 [.env.example](.env.example) 的字段，在本机填写获准连接，禁止提交密码。当前提供健康、受控任务与会话接口；真实企业身份接入和S01业务服务尚未启用。
+已验证环境：Windows 10 build 19045 / CPython 3.13.5；其他 OS/Python 组合未验证。根目录 `.env` 使用 [.env.example](.env.example) 的字段，在本机填写获准连接，禁止提交密码。当前提供健康、受控任务、会话及工程报告/证据接口；真实企业身份接入和 S01 正式业务模式尚未启用。
 
 ```powershell
 python -m venv .venv
@@ -48,13 +48,16 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn commerce_hub.entrypoints.http.app:create_app --factory --host 127.0.0.1 --port 8000 --no-access-log
 ```
 
-`GET /health/live` 返回200。`GET /health/ready` 验证数据库、迁移和可信身份配置，缺项返回503；满足时200仅表示工程底座就绪，不表示S01可用。默认业务注册表为空，未实现S01明确拒绝；启动不迁移、不内嵌Worker，不调用ERP/模型。
+`GET /health/live` 返回200。`GET /health/ready` 验证数据库、迁移和可信身份配置，缺项返回503；满足时200仅表示工程底座就绪，不表示真实 S01 业务可用。默认业务注册表为空，S01 模拟链路须显式 test 装配；启动不迁移、不内嵌 Worker，不调用 ERP/模型。
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest
 .\.venv\Scripts\python.exe tools/smoke_foundation.py --output docs/evidence/A-02/smoke.json
 $env:COMMERCE_RUN_MYSQL_TESTS='1'
-.\.venv\Scripts\python.exe -m pytest -p no:cacheprovider
+.\.venv\Scripts\python.exe -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-pytest
+# 自动启动并停止自身 API/Worker，仅使用获准独立测试库和合成身份
+$env:COMMERCE_ENVIRONMENT='test'
+.\.venv\Scripts\python.exe -m tools.demo_s01
 ```
 
 独立数据库兼容验证命令为 `tools/check_mysql_compat.py`，会在固定 `s01_a01_test_20261112` 库建本次专用fixture表、验证后只清理自己的表；使用前须有该库变更授权，不能作为任意数据库探针。阶段证据与真实/模拟范围见[唯一台账](docs/TASKS.md)，A-01/A-02历史证据仍绑定当时提交。实际进程套件会自动用测试装配启动/停止自己的API/Worker进程，不注册生产探针。
@@ -77,7 +80,9 @@ $env:COMMERCE_RUN_MYSQL_TESTS='1'
 │   ├── governance/                   # 迁移映射与公开准备检查
 │   └── archive/                      # 旧计划、修订前版本与原文快照
 ├── prototypes/s01/                   # 原型源码、自动检查、截图
-└── tools/                            # 文档生成工具
+├── src/commerce_hub/                  # 公共底座与 S01 工程插件
+├── migrations/ / tests/ / examples/    # 迁移、自动化测试与合成输入
+└── tools/                            # 演示、环境检查及文档工具
 ```
 
 完整导航见 [docs/README.md](docs/README.md)。产品功能与操作流程由 [产品规格](docs/ui/PRODUCT_SPEC.md) 和可操作原型评审；视觉表达由 [DESIGN.md](DESIGN.md) 约束，两者不能互相替代。

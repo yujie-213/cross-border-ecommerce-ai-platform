@@ -1,5 +1,19 @@
 # 当前增量交接 v0.3
 
+## 阶段A/B独立评审修复与验收准备（2026-11-12，基于77d82af）
+
+本轮用户授权仅缺陷修复、补测、完整回归与验收准备/提交/普通同步，不开展C/D新功能。接手main/HEAD与GitHub main均为`77d82afe42459ea1bd11bec45a6e307481cac7c6`；跟踪区无修改，既有未知`docs/ERP-openapi.yaml`未读/改/暂存。Codex单人集成，无新代理。首次fetch因TLS握手失败，保持证书校验重试成功，origin/main基线未变。
+
+固定实现提交`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`修复B02零缺口边界：B01确认全程无缺货时不生成0件候选，返回NO_REPLENISHMENT_NEEDED；总量够而中途缺货时保留B01风险/首缺日，返回INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED，不编提前调拨/催交/桥接采购策略。缺约束/质量的阻断优先，正缺口仍沿原MOQ/独立倍数/数量上限/可售日期规则，基线与每个候选均只由B01评价，冻结业务规则未改。
+
+报告读取原来虽经当前G01 scope授权，却返回完整内部inputProjection。现改为S01拥有固定quantity工程DTO，O01先重新校验当前租户/主体/字段/SKU/店/仓，再用匹配版本的场景读取视图。公开报告保留规范scope/引用、数量指标/逐日日期、候选、质量代码与工程限制；不展开inputProjection/manifest、源映射、预留字段、记录路径或fixture标识。D04只从该公开报告解析基线/候选证据，猜旧raw evidenceId返回404；旧已存报告同样应用现读取视图，内部完整资产不重写。未知场景读取契约、版本或scope绑定不一致失败关闭。测试主体仍只有quantity原权限，没有扩大授权；真实业务逐字段契约/敏感度策略仍待相应准入，不建复杂IAM。
+
+针对固定实现提交实际完成 **187 PASS / 0 FAIL / 0 ERROR / 0 SKIP / 1条既有Starlette/httpx弃用提示**，原161项测试名称全部保全，新加26项（10候选边界、6报告视图、8真实MySQL权限/契约、2独立进程零缺口E2E）。既有进程权限测试增加字段/SKU/店仓缩权、raw证据猜测和撤权断言。全量覆盖并发幂等/取消/期限/崩溃恢复、真实MySQL事务回滚/报告一致性、证据和负面权限、S01模拟E2E；pip check、compileall、显式Alembic head、单SKU独立演示亦退出0。实际MySQL Server8.0.27、迁移唯一head0004_reports、UTC/READ-COMMITTED；复用既有独立库，不清库、不破坏性迁移、不重新安装或更换依赖。完整命令/环境/原始脱敏输出/逐测试名与新增用例见[最终证据](evidence/ab-review-fix/verification.json)，运行命令和输出范围见[阶段B说明](runbooks/phase-b.md)。
+
+README同步A底座和B模拟工程链路已实现；原设计/计划/前端原型不改。完整输入只作内部工程追溯，公开合同收窄的兼容影响在运行说明明确，已有客户端不能依赖旧版意外展开字段。中途缺货策略不足时限制候选属于明确保留项；真实字段权限/ERP/模型/业务规则/采购/生产/S02 MC仍NOT_RUN，四项BLOCKED完整保持。A/B全部仍REVIEW、review=null；推荐进入独立工程验收复核，不宣布正式通过。下一步等待星星和负责人确认，不自动启动C。
+
+本轮实现/证据分提交；最终证据提交/普通同步SHA由Git实际查询，不写自身未知SHA。未知YAML继续未跟踪，.env不入库，密码/JWT/签名密钥不输出。完成普通同步后停止。
+
 ## 第二大阶段B-01—B-05工程交付（2026-11-12，基于00b212c）
 
 用户已授权连续B阶段实现、显式工程样例规则、隔离S01插件、真实MySQL/API/Worker验证及普通GitHub同步；本轮不进入C。实际接手main / `00b212c731f90a82837d176157cba0a2508b50a9`，保留既有validation-report计数差异与未知未跟踪ERP-openapi.yaml，后者未读/改/暂存。Codex单人集成；此前准入代理只读核查，不并写文件。最新授权覆盖旧AGENTS的A阶段停止点。

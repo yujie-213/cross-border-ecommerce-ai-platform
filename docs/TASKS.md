@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前A/B独立评审修复授权（2026-11-12，基于77d82af）：仅缺陷修复、补测、最终工程验收准备及普通同步，不扩C/D。最终实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`复验187项PASS，原161项保全、新增26项；A-01—A-06/B-01—B-05保持REVIEW和review=null，四项真实业务门禁原状。详细范围与NOT_RUN见[最终证据](evidence/ab-review-fix/verification.json)。
+
 当前第二阶段授权（2026-11-12，基于00b212c）：A阶段工程已获星星复核；用户授权连续实现B-01—B-05及隔离S01工程插件，测试/提交/普通同步。仅显式工程样例策略；四项真实准入完整保持BLOCKED，不进入C阶段。Codex单人实现，准入代理只读核实；公共契约/迁移/组合根/台账串行。旧授权附记为历史。
 
 当前第一大阶段授权（2026-11-12，基于526829b）：用户明确授权A-03/A-04/A-05/A-06全部剩余开发和普通问题自行修复；按现有依赖推进，契约/目录不冲突部分并行，Codex主集成人协调公共文件。实际实现/验证状态只读下方JSON；四项外部业务安全门不解除，不自动开始第二阶段。
@@ -238,7 +240,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "be2a3f9547b31340efc053ca710af22b5e01e497",
     "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
   ],
-  "testedCommit": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "REVIEW_MATERIAL_SELF_CHECK",
@@ -344,6 +346,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -388,6 +401,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "当前获准子集已实现/实测并提交；负责人已认可契约原则并授权普通细节自主确定，不再等待逐字段审批。交付不自动ACCEPTED，不把工程验证升级为真实业务/ERP/模型或生产验收",
       "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -468,7 +488,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "be2a3f9547b31340efc053ca710af22b5e01e497",
     "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
   ],
-  "testedCommit": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -527,6 +547,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/HANDOFF.md"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -557,6 +588,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "当前获准子集已实现/实测并提交；负责人已认可契约原则并授权普通细节自主确定，不再等待逐字段审批。交付不自动ACCEPTED，不把工程验证升级为真实业务/ERP/模型或生产验收",
       "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -634,7 +672,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
-  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -671,6 +709,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/A-03/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -701,6 +750,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
       "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
       "from": "IN_PROGRESS"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -776,7 +832,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
-  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -826,6 +882,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/A-04/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -856,6 +923,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
       "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
       "from": "IN_PROGRESS"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -939,7 +1013,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
-  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -989,6 +1063,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/A-05/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1019,6 +1104,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
       "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
       "from": "IN_PROGRESS"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -1095,7 +1187,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
-  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -1132,6 +1224,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/A-06/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1162,6 +1265,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
       "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
       "from": "IN_PROGRESS"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -1243,7 +1353,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605"
   ],
-  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -1293,6 +1403,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-01/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1324,6 +1445,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
       "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -1403,7 +1531,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605"
   ],
-  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -1453,6 +1581,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-02/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1484,6 +1623,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
       "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -1560,7 +1706,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605"
   ],
-  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -1610,6 +1756,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-03/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1641,6 +1798,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
       "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -1712,9 +1876,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+    "6f98f7785850c79e29cb02cf2b0e92b5fc722a36"
   ],
-  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -1764,6 +1929,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-04/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1795,6 +1971,38 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
       "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_REVIEW_FIX_START",
+      "reason": "用户授权A/B独立评审修复与验收准备；Codex单人，main实际基点；B02零缺口边界、S01报告/证据固定数量字段视图及负面测试，保持REVIEW和四门，不扩C/D",
+      "observedHead": "77d82afe42459ea1bd11bec45a6e307481cac7c6",
+      "branch": "main",
+      "assignee": "Codex",
+      "fileScope": [
+        "src/commerce_hub/capabilities/forecasting/__init__.py",
+        "src/commerce_hub/orchestration/service.py",
+        "src/commerce_hub/scenarios/s01/__init__.py",
+        "tests/unit/forecasting/s01/test_candidates.py",
+        "tests/unit/data/test_handler.py",
+        "tests/integration/orchestration/test_s01_reports.py",
+        "tests/integration/processes/test_s01_processes.py",
+        "README.md",
+        "docs/runbooks/phase-b.md",
+        "docs/TASKS.md",
+        "docs/HANDOFF.md",
+        "docs/evidence/ab-review-fix/verification.json"
+      ],
+      "dirtyPaths": [
+        "docs/ERP-openapi.yaml (unknown untracked; preserved)"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
@@ -1880,9 +2088,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+    "6f98f7785850c79e29cb02cf2b0e92b5fc722a36"
   ],
-  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "testedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
   "evidence": [
     {
       "kind": "SIMULATED_ENGINEERING",
@@ -1932,6 +2141,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-05/verification.json"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-final --junitxml=.tmp/ab-review-final.xml",
+      "environment": "Windows10 build19045 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; all identity and input data simulated",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/ab-review-fix/verification.json",
+      "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
   "review": null,
@@ -1963,6 +2183,38 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
       "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_REVIEW_FIX_START",
+      "reason": "用户授权A/B独立评审修复与验收准备；Codex单人，main实际基点；B02零缺口边界、S01报告/证据固定数量字段视图及负面测试，保持REVIEW和四门，不扩C/D",
+      "observedHead": "77d82afe42459ea1bd11bec45a6e307481cac7c6",
+      "branch": "main",
+      "assignee": "Codex",
+      "fileScope": [
+        "src/commerce_hub/capabilities/forecasting/__init__.py",
+        "src/commerce_hub/orchestration/service.py",
+        "src/commerce_hub/scenarios/s01/__init__.py",
+        "tests/unit/forecasting/s01/test_candidates.py",
+        "tests/unit/data/test_handler.py",
+        "tests/integration/orchestration/test_s01_reports.py",
+        "tests/integration/processes/test_s01_processes.py",
+        "README.md",
+        "docs/runbooks/phase-b.md",
+        "docs/TASKS.md",
+        "docs/HANDOFF.md",
+        "docs/evidence/ab-review-fix/verification.json"
+      ],
+      "dirtyPaths": [
+        "docs/ERP-openapi.yaml (unknown untracked; preserved)"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AB_REVIEW_FIX_VERIFIED",
+      "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
+      "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
   "completionEvidence": [
