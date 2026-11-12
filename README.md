@@ -6,6 +6,8 @@
 
 S01 后端已补充固定服务端包、严格来源/规则准入适配、A—E计算、自然解释消费、历史与新旧报告关联。Token统计为基础、费用可选，未知费用不阻断合法AI解释。真实观测仍保留BLOCKED，新增交付等待负责人和星星独立验收。运行边界与复验见 [S01 业务工程说明](docs/runbooks/s01-business.md)，真实单 SKU 仍缺的资料与签认见 [离线准入报告](docs/evidence/D-S01-DATA-01/admission-report.md)。
 
+本轮教学仿真API写入/独立GET、9项Golden、5项独立进程联调及601项回归通过；真实模型3次中A/B成功、C拒绝，D/E未发送，五例用途评测FAIL。完整证据见 [后端交付报告](docs/evidence/S01-BACKEND/backend-report.md)。教学通过不批准企业正式规则或采购，当前提交REVIEW并停在前端之前。
+
 ## 要解决的问题
 
 - 库存、需求、未收供给来自不同系统，日期、单位和口径容易混用。

@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "s01-teaching-backend-process-v1",
+  "result": "PASS",
+  "capturedAt": "2026-11-12T12:42:42.148087+00:00",
+  "observedImplementationCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "command": "python -m tools.verify_s01_teaching_backend <private-catalog>",
+  "inputKind": "FIXED_REAL_GET_CAPTURE_OF_SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "erpNetworkRequestsThisRun": 0,
+  "realModelRequests": 0,
+  "procurementWrites": 0,
+  "processes": {
+    "apiPid": 19920,
+    "workerPid": 13584,
+    "independent": true,
+    "apiRestarted": true
+  },
+  "database": {
+    "server": "8.0.27",
+    "name": "s01_a01_test_20261112",
+    "timeZone": "+00:00",
+    "isolation": "READ-COMMITTED",
+    "cleared": false
+  },
+  "cases": [
+    {
+      "caseId": "A",
+      "taskRef": {
+        "taskId": "d0c8a4aef21e4e28ac4e2b8507e6d5ba",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "reportRef": {
+        "reportId": "d0c8a4aef21e4e28ac4e2b8507e6d5ba",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+      "state": "SUCCEEDED",
+      "completeness": "RULES_ONLY",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "17",
+      "candidateCount": 1,
+      "limitations": [
+        "PROCUREMENT_EXECUTION_NOT_AUTHORIZED"
+      ],
+      "qualityCodes": [],
+      "evidenceCount": 4,
+      "idempotency": "PASS",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "B",
+      "taskRef": {
+        "taskId": "34562b04cfe345059e64efc828c844d1",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "reportRef": {
+        "reportId": "34562b04cfe345059e64efc828c844d1",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-c96c87b13c55a4251eb998e4e9ca1e92914f55c8f83bc924846b097d8db62e2a",
+      "state": "SUCCEEDED",
+      "completeness": "RULES_ONLY",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "0",
+      "candidateCount": 0,
+      "limitations": [
+        "NO_REPLENISHMENT_NEEDED"
+      ],
+      "qualityCodes": [],
+      "evidenceCount": 3,
+      "idempotency": "PASS",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "C",
+      "taskRef": {
+        "taskId": "9cdb2a26c08d4270a1fde833f837597b",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "reportRef": {
+        "reportId": "9cdb2a26c08d4270a1fde833f837597b",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-875f005946b9f4981052b35b7cbad4d98c8538702af5a63e8b713a82b3aee047",
+      "state": "SUCCEEDED",
+      "completeness": "RULES_ONLY",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "0",
+      "candidateCount": 0,
+      "limitations": [
+        "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+      ],
+      "qualityCodes": [],
+      "evidenceCount": 3,
+      "idempotency": "PASS",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "D",
+      "taskRef": {
+        "taskId": "a9230866f90f4ebfa628b2aeda122334",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "reportRef": {
+        "reportId": "a9230866f90f4ebfa628b2aeda122334",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-376d43ac1c989d491cc8b3333920a73254627c27ec413e32e6b38829c8ffde3c",
+      "state": "SUCCEEDED",
+      "completeness": "RULES_ONLY",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "17",
+      "candidateCount": 0,
+      "limitations": [
+        "NO_FEASIBLE_QUANTITY"
+      ],
+      "qualityCodes": [],
+      "evidenceCount": 3,
+      "idempotency": "PASS",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "E",
+      "taskRef": {
+        "taskId": "479446125f64487cabfbad32b7dbb674",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "reportRef": {
+        "reportId": "479446125f64487cabfbad32b7dbb674",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-84e81bd57539c2282d65e77e386689213fe84e58c86e03b2903f7ced44b480bc",
+      "state": "SUCCEEDED",
+      "completeness": "PARTIAL",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "17",
+      "candidateCount": 0,
+      "limitations": [
+        "CANDIDATE_RULES_OR_QUALITY_BLOCKED"
+      ],
+      "qualityCodes": [
+        "QUALITY_REQUIRES_RESOLUTION"
+      ],
+      "evidenceCount": 3,
+      "idempotency": "PASS",
+      "procurementEligible": false
+    }
+  ],
+  "verification": {
+    "options": true,
+    "history": true,
+    "reportPersistenceAcrossRestart": true,
+    "idempotency": true,
+    "previousReportRelation": true,
+    "currentPermissionRevocation": true,
+    "internalAssetsCropped": true,
+    "evidenceResolution": true
+  },
+  "privateArtifactSha256": "0d2ad539950a9545e0c0764d34449b259ab0b9d1dae2573dd5a0c2817a057ac6",
+  "enterpriseAdmission": "BLOCKED",
+  "frontend": "NOT_RUN"
+}

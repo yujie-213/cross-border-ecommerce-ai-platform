@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "s01-live-model-execution-v1",
+  "capturedAt": "2026-11-12T12:50:58.430407+00:00",
+  "observedImplementationCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "result": "FAIL",
+  "command": "python .tmp/run_s01_paid.py <private-teaching-catalog>",
+  "environment": "Explicit test/deepseek/official HTTPS; API and Worker managed as independent subprocesses; local env files unchanged",
+  "authorizationId": "s01-backend-20261112-v1",
+  "evaluationRef": "s01-eval-53cd20be382152728ea2e2239dbcc433cc445e29db4370fdef9dbcffc399df2b",
+  "taskRef": {
+    "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+    "taskId": "192fee223c6a429d868bb584b3cf6e15"
+  },
+  "reportRef": {
+    "reportId": "192fee223c6a429d868bb584b3cf6e15",
+    "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+  },
+  "taskState": "SUCCEEDED",
+  "requestedCases": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "realModelRequests": 3,
+  "cases": [
+    {
+      "caseId": "A",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "completeness": "RULES_ONLY",
+      "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+      "status": "AVAILABLE",
+      "reason": "OK",
+      "actualModelRevision": "deepseek-flash",
+      "auditRef": "d049031da17540c68ffbefe1f14e0497",
+      "tokenUsageStatus": "KNOWN",
+      "costStatus": "UNKNOWN",
+      "usage": {
+        "inputTokens": 1822,
+        "outputTokens": 211,
+        "totalTokens": 2033,
+        "cachedInputTokens": 0,
+        "uncachedInputTokens": 1822,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "usageRef": "2d70a445bc6b4939807157441d2db6e2",
+      "g02FactMatched": true,
+      "elapsedMs": 1622,
+      "semanticPolicy": "s01-controlled-natural-v1",
+      "versionBundle": {
+        "deploymentRef": {
+          "id": "deepseek-s01-evaluation",
+          "version": "1"
+        },
+        "promptRef": {
+          "id": "s01.natural-explanation.prompt",
+          "version": "controlled-1"
+        },
+        "contextBundleRef": {
+          "id": "s01-natural-3d6393661bfc7566759ef0d30f26b669bed9d8f3891d9347",
+          "version": "s01-controlled-natural-v1",
+          "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+        },
+        "outputSchemaRef": {
+          "id": "s01.natural-explanation.schema",
+          "version": "controlled-1"
+        },
+        "parametersRef": {
+          "id": "s01.natural-explanation.parameters.1024",
+          "version": "1"
+        },
+        "cachePolicyRef": {
+          "id": "cache-off",
+          "version": "1"
+        },
+        "digests": {
+          "resolvedPromptDigest": "455409558ff9f13496ec4bb13635058fb4e4c387a4ca8089251844b4013c2123",
+          "contextDigest": "9a91ab2f5fb750200eec782ba334d2a03389e70ae210f37067d93a81e07e5109",
+          "parametersDigest": "e37b7212ac7b02bcb13dd0737536141b01fecdf5d981252fe318c13db0c7cb37",
+          "outputSchemaDigest": "8ca7eeaa94cf62dc409a7d1263667dae4c2b31af1e6e6d681d0bf4179e67ca8a",
+          "toolSpecsDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "promptContentHash": "56254e8970f0e6ec00d9cb049fa0b7147cbf62c7cab03b5570a043686038d7e7"
+        },
+        "configuredModel": "deepseek-flash"
+      }
+    },
+    {
+      "caseId": "B",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "completeness": "RULES_ONLY",
+      "snapshotRef": "snapshot-c96c87b13c55a4251eb998e4e9ca1e92914f55c8f83bc924846b097d8db62e2a",
+      "status": "AVAILABLE",
+      "reason": "OK",
+      "actualModelRevision": "deepseek-flash",
+      "auditRef": "7f156f1406d74513973e7ff352ac8df8",
+      "tokenUsageStatus": "KNOWN",
+      "costStatus": "UNKNOWN",
+      "usage": {
+        "inputTokens": 1601,
+        "outputTokens": 183,
+        "totalTokens": 1784,
+        "cachedInputTokens": 384,
+        "uncachedInputTokens": 1217,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "usageRef": "3cb6cae54553492daf9f3ffbe59cfd8c",
+      "g02FactMatched": true,
+      "elapsedMs": 1587,
+      "semanticPolicy": "s01-controlled-natural-v1",
+      "versionBundle": {
+        "deploymentRef": {
+          "id": "deepseek-s01-evaluation",
+          "version": "1"
+        },
+        "promptRef": {
+          "id": "s01.natural-explanation.prompt",
+          "version": "controlled-1"
+        },
+        "contextBundleRef": {
+          "id": "s01-natural-491a4b1d42d42d8bb3a756f3cf722cd59628ab408fe0b55b",
+          "version": "s01-controlled-natural-v1",
+          "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+        },
+        "outputSchemaRef": {
+          "id": "s01.natural-explanation.schema",
+          "version": "controlled-1"
+        },
+        "parametersRef": {
+          "id": "s01.natural-explanation.parameters.1024",
+          "version": "1"
+        },
+        "cachePolicyRef": {
+          "id": "cache-off",
+          "version": "1"
+        },
+        "digests": {
+          "resolvedPromptDigest": "ad0cf830bc0b5d2656ab02b777c9424082f1363578c56e62f4881049a054c8df",
+          "contextDigest": "aa36b793b8b561e51daae097b0d3f62886e7144334c7d48319de7b4324cb3faf",
+          "parametersDigest": "e37b7212ac7b02bcb13dd0737536141b01fecdf5d981252fe318c13db0c7cb37",
+          "outputSchemaDigest": "8ca7eeaa94cf62dc409a7d1263667dae4c2b31af1e6e6d681d0bf4179e67ca8a",
+          "toolSpecsDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "promptContentHash": "56254e8970f0e6ec00d9cb049fa0b7147cbf62c7cab03b5570a043686038d7e7"
+        },
+        "configuredModel": "deepseek-flash"
+      }
+    },
+    {
+      "caseId": "C",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "completeness": "RULES_ONLY",
+      "snapshotRef": "snapshot-875f005946b9f4981052b35b7cbad4d98c8538702af5a63e8b713a82b3aee047",
+      "status": "UNAVAILABLE",
+      "reason": "INVALID_OUTPUT",
+      "actualModelRevision": "deepseek-flash",
+      "auditRef": "cd77199495b74b3d85434be089b5ea47",
+      "tokenUsageStatus": "KNOWN",
+      "costStatus": "UNKNOWN",
+      "usage": {
+        "inputTokens": 1644,
+        "outputTokens": 181,
+        "totalTokens": 1825,
+        "cachedInputTokens": 384,
+        "uncachedInputTokens": 1260,
+        "actualCost": null,
+        "currency": null,
+        "pricingVersion": null
+      },
+      "usageRef": "a94217d75b3f425a9a805867dec3226f",
+      "g02FactMatched": true,
+      "elapsedMs": 1489,
+      "semanticPolicy": "s01-controlled-natural-v1",
+      "versionBundle": {
+        "deploymentRef": {
+          "id": "deepseek-s01-evaluation",
+          "version": "1"
+        },
+        "promptRef": {
+          "id": "s01.natural-explanation.prompt",
+          "version": "controlled-1"
+        },
+        "contextBundleRef": {
+          "id": "s01-natural-a12eb830515e6f4c6e3b973ba78c31e8237ee64a5f03b25f",
+          "version": "s01-controlled-natural-v1",
+          "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+        },
+        "outputSchemaRef": {
+          "id": "s01.natural-explanation.schema",
+          "version": "controlled-1"
+        },
+        "parametersRef": {
+          "id": "s01.natural-explanation.parameters.1024",
+          "version": "1"
+        },
+        "cachePolicyRef": {
+          "id": "cache-off",
+          "version": "1"
+        },
+        "digests": {
+          "resolvedPromptDigest": "042148986eb3359f6215b43428eb2be0e6e1ede65b401173eb1b82a2adaa1530",
+          "contextDigest": "1629327b4ecdca52100bf585f4f9b2c078c8d5e32cd5abcba01884f699e3d188",
+          "parametersDigest": "e37b7212ac7b02bcb13dd0737536141b01fecdf5d981252fe318c13db0c7cb37",
+          "outputSchemaDigest": "8ca7eeaa94cf62dc409a7d1263667dae4c2b31af1e6e6d681d0bf4179e67ca8a",
+          "toolSpecsDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "promptContentHash": "56254e8970f0e6ec00d9cb049fa0b7147cbf62c7cab03b5570a043686038d7e7"
+        },
+        "configuredModel": "deepseek-flash"
+      }
+    }
+  ],
+  "notRunCases": [
+    "D",
+    "E"
+  ],
+  "control": {
+    "maxCalls": 5,
+    "usedCalls": 3,
+    "reservedCalls": 0,
+    "maxTokens": 120000,
+    "usedTokens": 5642,
+    "reservedTokens": 0,
+    "maxCostUsd": "1.00000000",
+    "unknownCostReservationUsd": "0.15000000",
+    "actualCost": null,
+    "costStatus": "UNKNOWN",
+    "taskDeadlineSeconds": 600,
+    "maxDeliveryAttempts": 1,
+    "implicitRetries": 0,
+    "sameLogicalCallResends": 0
+  },
+  "database": {
+    "server": "8.0.27",
+    "name": "s01_a01_test_20261112",
+    "timeZone": "+00:00",
+    "isolation": "READ-COMMITTED"
+  },
+  "verification": {
+    "deterministicResultsUnchanged": true,
+    "schemaDomainSafetyValidated": "A/B accepted; C rejected; unchanged deterministic artifacts and publication validation verified; D/E not attempted",
+    "successfulUsageReceiptsMatched": true,
+    "publishedReportCount": 1,
+    "enterpriseAdmission": "BLOCKED",
+    "procurementEligible": false,
+    "allRequestedCasesAvailable": false,
+    "rawResponseModified": false,
+    "validatorRelaxed": false
+  },
+  "pricingPreflight": {
+    "date": "2026-11-12",
+    "officialPageSha256": "027bba6c9e038c25b3cb760ef9f2c803f1325489ebb28c57a97947041033789b",
+    "purpose": "One authorization exposure check only; no platform rate table or actual-cost inference"
+  },
+  "privateArtifacts": [
+    {
+      "ref": "private-artifact:worker-model-evaluation",
+      "sha256": "c169ea300b74af7fcb71bc53178e1b7f1ea27e7c2f711ef910a0616b2e187054"
+    }
+  ],
+  "limitations": [
+    "Controlled-language validation, not general prose entailment.",
+    "Null billed cost is UNKNOWN, never zero. Explicit reservation remains occupied.",
+    "Teaching API simulation and cloud-model execution do not approve enterprise data, rules, procurement or UI."
+  ],
+  "outputValidationRef": "docs/evidence/S01-BACKEND/model/output-validation.json",
+  "resultInterpretation": "Bounded evaluation FAIL: A/B AVAILABLE, C INVALID_OUTPUT, D/E NOT_RUN; technical task SUCCEEDED with legal A report.",
+  "usageTotals": {
+    "inputTokens": 5067,
+    "outputTokens": 575,
+    "totalTokens": 5642,
+    "cachedInputTokens": 768,
+    "uncachedInputTokens": 4299
+  }
+}

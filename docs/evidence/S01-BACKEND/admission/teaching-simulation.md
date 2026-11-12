@@ -38,7 +38,13 @@
 
 教学需求规则固定为 `TEACHING_LAST_7_DAILY_REPLAY_V1`：按日期排序恰好七个教学 ERP 销量日，将各日目标 SKU 数量依序重放到 D1—D7；缺日或同日重复即数据不足，不做趋势、季节性或模型推断。它属于独立 `CONTROLLED_TEACHING_RULE`，不能把预测结果或方法标成 ERP 原始事实。完整输入和期望见 `teaching-golden.json`。
 
-## 离线验证
+## 设计时点的离线验证
 
 - `tests/unit/data/test_admission.py` 覆盖独立教学入口、REAL 路径隔离、本地 fixture 拒绝、POST/GET 不可复用、batch/scope/record/value digest 一致性、逐资源 artifact provenance、未知数据下游阻断、quality 三态及 Golden A—E。
 - 测试使用脱敏、构造的受信 artifact 形状，不声称已经执行真实 ERP 写入或回读。真实 batch 证据应由 ERP 线完成后另行提供。
+
+## 实际教学批次验证增量
+
+后续同日完成 [实际写入和独立 GET](../teaching-data/dataset-evidence.json) 与 [A—E catalog](../teaching-data/catalog-review.json)，五包均为 ADMITTED，来源仍为教学仿真。写请求规范摘要与独立 GET 摘要匹配，库存更新时间由回执/GET核实；没有将本地 fixture 改标签变为网络事实。
+
+[实际计算对照](../teaching-data/calculation-comparison.json) 的9项 Golden 全部 PASS；[独立进程复验](../teaching-data/backend-process.json) 的5项 API/Worker/MySQL 场景全部 PASS。D 的四种约束是回读事实加教学规则复算；E-DATA 只是离线负例，E-QUALITY 对应实际质量 PUT/GET 加受控教学规则。当前库存随场景顺序更新，固定包保留各自时点，不宣称五种库存同时存在。批次保留/自身清理及可重复命令见 [批次手册](../teaching-data/batch-runbook.md)。

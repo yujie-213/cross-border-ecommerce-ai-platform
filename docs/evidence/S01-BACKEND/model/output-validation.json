@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "s01-live-model-output-revalidation-v1",
+  "capturedAt": "2026-11-12T12:52:00.322044+00:00",
+  "result": "PASS_REJECTION_REPRODUCED",
+  "scope": "Offline revalidation of original paid responses, unmodified; no new model calls or relaxed validation",
+  "cases": [
+    {
+      "caseId": "A",
+      "providerStatus": "COMPLETED",
+      "schema": "PASS",
+      "domain": "PASS",
+      "failureCode": null,
+      "inlineCitationChecks": [
+        {
+          "section": "recommendationReasons",
+          "supportRef": "candidate-0",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "keyEvidence",
+          "supportRef": "baseline",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "majorRisks",
+          "supportRef": "quality",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "majorRisks",
+          "supportRef": "decision",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "humanConfirmations",
+          "supportRef": "human-review",
+          "hasRequiredInlineCitation": true
+        }
+      ]
+    },
+    {
+      "caseId": "B",
+      "providerStatus": "COMPLETED",
+      "schema": "PASS",
+      "domain": "PASS",
+      "failureCode": null,
+      "inlineCitationChecks": [
+        {
+          "section": "recommendationReasons",
+          "supportRef": "limitations",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "keyEvidence",
+          "supportRef": "baseline",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "majorRisks",
+          "supportRef": "quality",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "majorRisks",
+          "supportRef": "decision",
+          "hasRequiredInlineCitation": true
+        },
+        {
+          "section": "humanConfirmations",
+          "supportRef": "human-review",
+          "hasRequiredInlineCitation": true
+        }
+      ]
+    },
+    {
+      "caseId": "C",
+      "providerStatus": "COMPLETED",
+      "schema": "PASS",
+      "domain": "FAIL",
+      "failureCode": "UNCONTROLLED_NATURAL_LANGUAGE",
+      "inlineCitationChecks": [
+        {
+          "section": "recommendationReasons",
+          "supportRef": "limitations",
+          "hasRequiredInlineCitation": false
+        },
+        {
+          "section": "keyEvidence",
+          "supportRef": "baseline",
+          "hasRequiredInlineCitation": false
+        },
+        {
+          "section": "majorRisks",
+          "supportRef": "quality",
+          "hasRequiredInlineCitation": false
+        },
+        {
+          "section": "majorRisks",
+          "supportRef": "decision",
+          "hasRequiredInlineCitation": false
+        },
+        {
+          "section": "humanConfirmations",
+          "supportRef": "human-review",
+          "hasRequiredInlineCitation": false
+        }
+      ]
+    }
+  ],
+  "modelRequestsThisRun": 0,
+  "originalResponseModified": false,
+  "semanticPolicyChanged": false,
+  "interpretation": "C contained structured supportRefs but omitted mandatory inline [ref] citations in every sentence. Strict controlled-language rejection was correct. No provider-cost requirement caused the rejection."
+}

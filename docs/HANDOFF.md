@@ -1,5 +1,23 @@
 # 当前增量交接 v0.3
 
+## S01 后端闭环与教学仿真交付（2026-11-12，基于e547335）
+
+实际工作区 `D:/电商项目/跨境电商智慧AI平台`、分支 `codex/s01-backend-closure`。接手基点 `e547335323fd19fccd324752dbeb1d08c9e21c2d`；实现提交 `5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30`，可重复验证工具提交及最终被测HEAD `c965a334b6bbc3c689fb334c80f8cf0a9ee84dad`。旧3条并行线已按冻结范围交付，主集成串行处理公共契约、迁移、组合根和台账；本收口没有新建代理。未知 `docs/ERP-openapi.yaml` 只读保留未跟踪，不暂存；`.env/.env.erp`、私有原始请求/响应/模型内容均不入Git。当前未提交范围为本轮脱敏证据、TASKS/HANDOFF/DECISIONS/README/运行手册及生成状态；精确范围由最终Git和白名单检查核对。
+
+新增复用原底座的固定catalog S01_BACKEND、严格REAL/教学准入、D01-D03快照、既有B01/B02消费、受控自然解释、options/history/previousReportRef和公开权限裁剪。没有重写计算/预算/任务平台，没有前端或其他业务Agent。A01/G02统一输入/输出/总Token、可选缓存Adapter（chat/Ollama形状离线验证）；费用可null、与AI成功分离。O01已知维度结转、未知保留原预约，可能发送不退额/盲重发，迟到仅核账。0005顺接旧迁移，仅唯一隔离库；366usage/759attempt/1619budget原字段前后行数/指纹一致，见 [迁移证据](evidence/S01-BACKEND/usage-migration.json)。
+
+先有界调查已有候选，5个核验样本仍受503/不完整需求与未收/规则缺口阻断，未反复遍历或冒充完整SKU。按新授权在教学ERP构造批次 `S01-AI-TEST-20261112`，sourceNature=`SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP`、规则 `teaching-s01-rules-v1`。商品/Listing、自有同一库存行顺序更新、七销量、质量INVESTIGATE、采购草稿与明细经独立正式GET回读；写请求规范摘要独立重建后匹配GET，库存updatedAt采用回执/GET一致字段。多建的自有第二库存已受控DELETE后GET404/精确列表0；一次商品PUT超时UNKNOWN经原ID GET确认APPLIED，无重发。销售不可删，按批次保留；不操作付款、发货、采购提交审批、库存过账或通知。原请求/返回/关联及有效时点保留私有journal，公开alias/指纹与重复命令见 [批次手册](evidence/S01-BACKEND/teaching-data/batch-runbook.md)。
+
+教学A—E均ADMITTED。A库存60、需求8/10/9/11/12/14/13，缺口17、候选18/D7可售，D6缺货仍保留；B库存96不缺货且无候选；C库存10/D7教学供给67，期末0但D2短缺，无桥接采购。D四种约束基于A事实加受控规则复算；E-QUALITY有真实质量PUT/GET与教学规则，E-DATA只是离线缺数据负例。A空采购仅本批教学指定集合，C草稿不当已下单在途；需求重放非企业预测，箱规未当倍数。独立Golden由Decimal日账生成、不调B01/B02；9项实际逐日对照PASS，未改算法迎合期望。5项固定GET capture经真实独立API/Worker/MySQL PASS（options/history/前报关联/幂等/证据/API重启/当前缩权/公开裁剪）；复放新ERP和模型请求0。
+
+最终固定HEAD全量命令 `PYTHONPATH=src .tmp/stage-a-clean/Scripts/python.exe -m tools.verify_s01_backend`：601 PASS/0 FAIL/0 ERROR/0 SKIP，原399逐名保全、新202；pip check/compileall/默认禁网入口/离线模型suite及离线资料检查均退出0。ERP/模型是离线fixture，真实数据库和进程证据另分层。MySQL8.0.27、仅 `s01_a01_test_20261112`、UTC/READ-COMMITTED、head0005_optional_usage，无清库/其他库修改。此前取消前claim失败、24个Windows临时目录PermissionError及1个租约恢复失败保留 [回归历史](evidence/S01-BACKEND/regression-history.json)。核验发现遗留项目 `teaching_erp worker` PID16640后仅停止该进程；它同时轮询隔离库是SKIP LOCKED竞争的可能因素，不宣称已证算法缺陷。相关62项通过，再以所需目录权限全量601通过；未删断言或改生产算法。
+
+真实模型执行前同日官方模型/费率预检满足原10次/$1授权，本装配进一步限定唯一固定task最多5次、600秒、单投递和首败停止。实际task `192fee223c6a429d868bb584b3cf6e15`，3次DeepSeek：A/B AVAILABLE，C Schema通过但全部句子缺必需文内[ref]，原受控语言拒绝，A01归类INVALID_OUTPUT；D/E按约定NOT_RUN。原文离线重验复现正确拒绝，没有放宽校验、改原文、换task/key或重发。输入5067/输出575/总5642，Provider缓存指标记录，三条G02回执匹配。actualCost/currency/pricingVersion为null/UNKNOWN，原费用预约$0.15保留；A/B未因费用未知降级。任务技术SUCCEEDED发布合法A报告，但五例用途评测FAIL，详见 [模型报告](evidence/S01-BACKEND/model/report.md)。原readiness的NOT_RUN保留准备时点，不覆盖实际结果。
+
+交付 [完整报告](evidence/S01-BACKEND/backend-report.md)、[证据入口](evidence/S01-BACKEND/README.md)、[API对接契约](contracts/s01/backend-api.md) 和 [运行手册](runbooks/s01-backend.md)。LIVE/C-04进入REVIEW、review=null；四项企业数据/规则/ERP/AI门仍BLOCKED，DEV既有工程ACCEPTED历史不变。教学仿真验证通过、实际教学ERP本批读取验证通过、企业正式规则/真实经营数据待验收分开。C拒绝和D/E真实模型未覆盖需独立评审安排后续；不冒称完整五例模型通过或全部MVP验收。正式前端、企业采购及正式用途签认NOT_RUN。
+
+本轮仅普通同步 `origin codex/s01-backend-closure` 评审分支，禁止force/自动合main；最终证据提交和远端SHA以真实Git查询为准，不在文件填自身未知SHA。文档生成和18项检查已PASS；精确增量98路径秘密扫描0发现、146本地链接无断链，TASKS31项依赖保全且四门BLOCKED/评审null核对通过。曾因新工具未补白名单导致文档检查FAIL，补入精确路径后18项全PASS。最终同步结果由Git真实查询确认。完成同步后停止，等待负责人和星星独立评审及下一条指令。
+
 ## 真实教学ERP接入与单SKU准入交付（2026-11-12，基于b1813e5）
 
 负责人先明确验收96ba88f/D-S01-DEV-01，已按普通ff-only合入main、登记工程ACCEPTED并同步为b1813e5e851ad1bb513f550118dc973e6605b97b；无分叉冲突/强推/覆盖未知文件。随后在原D:/电商项目/跨境电商智慧AI平台建立codex/s01-erp-readonly，Codex单人串行集成，无新代理。原默认B工作区dd6d112未改；原未知docs/ERP-openapi.yaml在本轮获准作为只读文档使用，未改/跟踪/暂存。用户本机填写忽略的.env.erp，凭据仅运行时注入；没有把密码、Token或原始敏感响应放到Git/日志。

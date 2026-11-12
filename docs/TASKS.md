@@ -1,3 +1,5 @@
+当前后端交付（2026-11-12，固定c965a33）：LIVE/C-04提交REVIEW、review=null。教学API写入及独立GET、9项Golden和5项独立进程PASS；全量601 PASS。真实模型3次A/B成功、C拒绝，D/E NOT_RUN，五例用途评测FAIL；Token5642、费用UNKNOWN预约$0.15保留。教学验证不解除四项企业门，前端NOT_RUN，不合main；旧“本轮未授权/未调用”的阶段记录按历史时点阅读。详见docs/evidence/S01-BACKEND/backend-report.md。
+
 当前教学仿真授权增量（2026-11-12）：沿同一开发分支继续，独立批次API写入/回读与教学规则计算验证获准，企业真实规则/经营数据不代签。费用可选、模型10次/$1总上限不变。
 
 # 唯一任务与验收台账 v0.2
@@ -3112,15 +3114,89 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "MODEL_EVAL",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
+    "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad"
+  ],
+  "testedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "evidence": [
+    {
+      "kind": "MODEL_EVAL",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "显式test/deepseek官方HTTPS；python -m tools.s01_model_evaluation --execute --authorization-id s01-backend-20261112-v1 --max-cost-usd 1 --request-risk-usd 0.05 --max-requests 5 --private-output <ignored-worker-result> --catalog-path <fixed-private-catalog>",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "真实3次；A/B通过Schema/受控语言/领域事实与版本/回执；C缺必需文内[ref]而INVALID_OUTPUT，未放宽或重发，D/E按首次失败停止。技术SUCCEEDED不等于五例评测通过。Token输入5067/输出575/总5642；实际费用null、UNKNOWN费用预约$0.15保留。五例评测真实FAIL。",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/S01-BACKEND/model/execution.json"
+    },
+    {
+      "kind": "MODEL_RESPONSE_REVALIDATION",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "离线重验私有原始Provider内容：NaturalExplanation.model_validate_json + 原bundle.validate_output",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "原文未改：A/B通过；C Schema通过但五句均缺文内引用，复现UNCONTROLLED_NATURAL_LANGUAGE；不是费用缺失导致。零新模型请求。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/model/output-validation.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "PYTHONPATH=src python -m tools.verify_s01_backend",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "固定HEAD601 PASS/0 FAIL/0 ERROR/0 SKIP，原399保全、新202；模型/ERP为离线fixture，适用数据库/API/Worker真实。超时取消迟到/预算幂等/篡改/未知占额/历史读取等负例，与实际模型分列。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/verification.json"
+    },
+    {
+      "kind": "HISTORICAL_USAGE_PRESERVATION",
+      "acceptanceIds": [
+        "C-04/AC3"
+      ],
+      "command": "0004→0005_optional_usage真实隔离库迁移，逐行原字段前后指纹核对",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "366usage/759attempt/1619budget历史指纹与行数相同；nullable费用和Token分项，不把历史缺失补0。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/usage-migration.json"
+    },
+    {
+      "kind": "MODEL_CASES_REMAINING",
+      "acceptanceIds": [
+        "C-04/AC1",
+        "C-04/AC2",
+        "C-04/AC3"
+      ],
+      "command": "NOT_RUN：D/E真实模型解释；首次C失败后的安全停止",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "没有用Mock冒充成功，没有换task/key获取第二预算；约束/质量的Golden及工程验证另列。后续真实覆盖由负责人评审后安排。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/S01-BACKEND/model/report.md"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-backend-closure",
-  "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d",
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -3142,6 +3218,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AUTHORIZATION_INCREMENT",
       "reason": "负责人经老师确认允许教学ERP独立测试批次API创建/必要更新/受控清理及正式回读，来源SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP。允许teaching-s01-rules-v1和独立Golden仅教学验证，不解企业准入。Token统计基础/费用可选，旧预算/未知发送保护保留。",
       "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "reason": "教学独立批次API写读/准入、9项Golden和5项独立进程PASS；固定全量601 PASS。真实模型3次A/B成功、C校验拒绝，D/E NOT_RUN、评测FAIL，原预算与安全停止保留。提交材料评审，不登记ACCEPTED，不解除正式企业门，不开发前端。"
     }
   ],
   "completionEvidence": [
@@ -4602,7 +4685,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-01"
   ],
-  "entryCondition": "DEV工程已ACCEPTED并按负责人授权合入main；本轮真实教学ERP读取授权不含真实DeepSeek或付费模型。Provider用途/发送许可/预算和C-04仍未准入，门禁继续BLOCKED。",
+  "entryCondition": "企业正式Provider/用途/数据许可与上线签认仍BLOCKED。负责人最新单独授权允许本批教学quantity事实的有界评测（原总10次/$1，实际唯一task最多5次）；该受限评测不解除正式用途门。实际A/B成功、C拒绝、D/E未发见C-04，不扩大授权。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": null,
   "allowedPaths": [
@@ -4681,6 +4764,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "明确本轮教学ERP读取与真实模型许可分离，不开展AI任务。",
       "previousEntryCondition": "A01工程已验收且S01 Mock集成已交REVIEW；真实数据发送许可、用途/安全与Provider启用条件尚未签认，门禁继续BLOCKED。本轮仅工程摘要修复和Mock回归，不授权真实DeepSeek或付费调用，不以全AI平台/A02/A03为前置。",
       "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "BOUNDED_TEACHING_EVALUATION_ONLY",
+      "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "previousEntryCondition": "DEV工程已ACCEPTED并按负责人授权合入main；本轮真实教学ERP读取授权不含真实DeepSeek或付费模型。Provider用途/发送许可/预算和C-04仍未准入，门禁继续BLOCKED。",
+      "reason": "同步最新用户授权与实际3次受限调用，保持正式AI启用BLOCKED，不以费用UNKNOWN解除或新增门。"
     }
   ],
   "acceptanceRefs": [
@@ -4773,11 +4863,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BUSINESS_REVIEW",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "54e89061e4409a14ab21a96b4c14d7280b921c4f"
+    "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+    "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
+    "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad"
   ],
-  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+  "testedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
   "evidence": [
     {
       "kind": "REAL_ERP_READ",
@@ -4858,11 +4950,95 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/D-S01-LIVE-01/owner-rule-review.md"
+    },
+    {
+      "kind": "REAL_TEACHING_ERP_WRITE",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "python -m tools.s01_teaching_dataset --execute-teaching-data（分阶段固定批次）",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "自有商品/Listing/库存/七销量/质量/采购草稿API创建或更新；超时UNKNOWN查原记录，不重发；仅自身多建库存受控删除并GET404/list0。无付款发货采购提交审批过账通知。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/teaching-data/dataset-evidence.json"
+    },
+    {
+      "kind": "REAL_ERP_READ",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "教学写入后独立正式GET详情与精确完整集合；分阶段A/B/C/E固定capture",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "写请求规范摘要独立重建并与GET比较；SKU/店仓/库存一行/七销售key无镜像；库存updatedAt来自回执与GET一致值。A空供给仅本批指定集合，C草稿派生不作真实在途。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/teaching-data/catalog-review.json"
+    },
+    {
+      "kind": "TEACHING_CALCULATION",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "python -m tools.verify_s01_teaching_golden <private-catalog>",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "9项独立Golden逐日对照PASS：A候选18仍D6缺货、B无候选、C总量0但D2短缺、D四规则、E质量阻断及离线未知库存。D为规则复算，E-DATA非ERP缺失事实；不改B01/B02。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/teaching-data/calculation-comparison.json"
+    },
+    {
+      "kind": "REAL_BACKEND_PROCESS",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "python -m tools.verify_s01_teaching_backend <private-catalog>",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "5项固定真实GET capture进入独立API/Worker/原MySQL，options/history/previousReportRef/幂等/证据/API重启/当前缩权/公开裁剪PASS；本次ERP/模型新请求0，采购适用false。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/teaching-data/backend-process.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "python -m tools.verify_s01_backend；定向发布路径秘密检查",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "固定全量601 PASS，失败历史另保留；原env/原响应不提交，未知OpenAPI保留未跟踪；教学通过不解除企业业务门。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-BACKEND/verification.json"
+    },
+    {
+      "kind": "BUSINESS_REVIEW",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "NOT_RUN：负责人和星星独立评审；企业正式经营数据/规则签认与前端另行验收",
+      "environment": "Windows / Python3.13.5 stage-a-clean / MySQL8.0.27 s01_a01_test_20261112 / UTC READ-COMMITTED / migration0005_optional_usage",
+      "sample": "本次教学规则与仿真场景通过；实际教学API指定批次读取验证通过；企业正式规则/真实经营数据仍待验收。模型部分成功及C拒绝/D/E未发见C-04。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/S01-BACKEND/backend-report.md"
     }
   ],
   "review": null,
   "branch": "codex/s01-backend-closure",
-  "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d",
+  "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4911,6 +5087,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "previousAcceptanceAC1": "新调用严格按本任务单独获准范围；只读且敏感响应不入Git，未知不补0、字段类型不当业务语义",
       "reason": "按用户最新明示教学API写入授权同步当前验收措辞；历史只读证据保持，正式企业规则与经营数据仍BLOCKED。",
       "observedHead": "e547335323fd19fccd324752dbeb1d08c9e21c2d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "reason": "教学独立批次API写读/准入、9项Golden和5项独立进程PASS；固定全量601 PASS。真实模型3次A/B成功、C校验拒绝，D/E NOT_RUN、评测FAIL，原预算与安全停止保留。提交材料评审，不登记ACCEPTED，不解除正式企业门，不开发前端。"
     }
   ],
   "acceptanceRefs": [

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "s01-backend-regression-history-v1",
+  "capturedAt": "2026-11-12T12:48:48.549695+00:00",
+  "runs": [
+    {
+      "label": "pre-final",
+      "testedCommit": null,
+      "suite": {
+        "total": 601,
+        "passed": 600,
+        "failed": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "nonPassCases": [
+        {
+          "classname": "tests.integration.orchestration.test_s01_reports",
+          "name": "test_stale_or_unauthorized_result_never_publishes[cancel]",
+          "result": "FAIL"
+        }
+      ]
+    },
+    {
+      "label": "fixed-5f6c50a",
+      "testedCommit": "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
+      "suite": {
+        "total": 601,
+        "passed": 601,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "nonPassCases": []
+    },
+    {
+      "label": "fixed-c965a33-first",
+      "testedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+      "suite": {
+        "total": 601,
+        "passed": 576,
+        "failed": 1,
+        "errors": 24,
+        "skipped": 0,
+        "baselineCases": 399,
+        "baselineCasesPreserved": true,
+        "addedCases": 202
+      },
+      "nonPassCases": [
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_exhausted_delivery_reconciles_owner_once",
+          "result": "FAIL"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_invalid_settings_never_echo_secret",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_literal_dotenv_secrets_and_environment_precedence",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_remote_database_without_trusted_ca_fails",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_post_is_journaled_then_verified_by_independent_get",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_readback_mismatch_fails_closed",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_existing_verified_record_is_idempotent_without_network",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_unresolved_send_is_never_blindly_retried",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_empty_purchase_supply_requires_exact_complete_list_get",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_nonempty_purchase_list_cannot_prove_zero_supply",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_raw_response_numbering_continues_across_processes",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_verified_readback_refresh_is_get_only_and_rebinds_raw_digest",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[POST-/api/v1/workflows/purchase-orders/1/submit]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[POST-/api/v1/stock/inbound-orders/confirm]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[POST-/api/v1/sales-workflow/1/record-payment]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[GET-https://evil.invalid/api/v1/products]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[GET-/api/v1/products/../purchase-orders]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[DELETE-/api/v1/sales-orders/1]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_public_evidence_excludes_business_keys_ids_and_private_refs",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_exact_rejects_invalid_page_before_any_create[page0]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_exact_rejects_invalid_page_before_any_create[page1]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_exact_rejects_invalid_page_before_any_create[page2]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_exact_rejects_incomplete_page_before_any_create[page0]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.data.test_teaching_dataset",
+          "name": "test_exact_rejects_incomplete_page_before_any_create[page1]",
+          "result": "ERROR"
+        },
+        {
+          "classname": "tests.unit.models.test_deepseek",
+          "name": "test_settings_defaults_and_safe_runtime_injection",
+          "result": "ERROR"
+        }
+      ]
+    }
+  ],
+  "observations": [
+    "Pre-final cancellation case failed before its assertion: immediate queue claim returned None. Isolated report-file rerun passed 22 cases.",
+    "Fixed 5f6c50a passed all 601 cases.",
+    "Fixed c965a33 first run: 24 tmp-directory PermissionError setup errors and one expired-lease recovery assertion (LEASED instead of DEAD).",
+    "Read-only process inspection found legacy project teaching_erp Worker PID16640 polling the same isolated database. Its exact command was verified before stopping only that process.",
+    "Competing SKIP LOCKED scanning is a plausible contributor to the immediate claim/recovery observations; this is an inference, not a proven algorithm defect.",
+    "After stopping that legacy Worker, targeted engineering-foundation/report lifecycle suite passed all 62 cases; no production algorithm or assertions changed.",
+    "Final all-suite result is recorded separately in verification.json; failed attempts remain in this history."
+  ],
+  "targetedCommand": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false python -m pytest -q tests/integration/orchestration/test_engineering_foundation.py tests/integration/orchestration/test_s01_reports.py --tb=short -p no:cacheprovider --basetemp=.tmp/s01-lease-isolated-check",
+  "targetedExitCode": 0,
+  "targetedPassed": 62,
+  "erpRequests": 0,
+  "modelRequests": 0,
+  "finalFixedRun": {
+    "testedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+    "suite": {
+      "total": 601,
+      "passed": 601,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "baselineCases": 399,
+      "baselineCasesPreserved": true,
+      "addedCases": 202
+    },
+    "artifactRef": "docs/evidence/S01-BACKEND/verification.json",
+    "requiredLocalPermissionUsed": true
+  }
+}

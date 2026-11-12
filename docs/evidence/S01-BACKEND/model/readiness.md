@@ -1,5 +1,7 @@
 # S01 model evaluation readiness
 
+This is the preparation-time record. Subsequent actual execution is recorded separately in `execution.json` and `report.md`; the NOT_RUN statements below describe this earlier readiness step.
+
 Status: **offline PASS; real request NOT_RUN; C-04 NOT_RUN**.
 
 This line implements a bounded evaluation adapter and controlled-language validator without changing the accepted A01 gateway, the original DeepSeek provider, or the strict Mock strategy. The prepared online path uses one persistent O01 task through independent API and Worker processes. Network access is disabled by default. No real model request was sent while preparing this evidence.

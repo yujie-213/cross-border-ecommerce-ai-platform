@@ -1,0 +1,1208 @@
+{
+  "schemaVersion": "s01-teaching-b01-b02-golden-comparison-v1",
+  "result": "PASS",
+  "capturedAt": "2026-11-12T12:42:33.503112+00:00",
+  "testedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "command": "python -m tools.verify_s01_teaching_golden <private-catalog>",
+  "oracleRef": "docs/evidence/S01-BACKEND/admission/teaching-golden.json",
+  "oracleSha256": "99dbc83eb463549ef7e16ec2861da88e532f88c8d0a77db2a1661ddf4e6ee948",
+  "oracleGeneratedByB01B02": false,
+  "erpRequestsThisRun": 0,
+  "modelRequests": 0,
+  "rows": [
+    {
+      "caseId": "A",
+      "result": "PASS",
+      "basis": "ACTUAL_TEACHING_GET_PLUS_VERSIONED_RULE",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "-17"
+        ],
+        "gapQuantity": "17",
+        "firstStockoutDay": 6,
+        "candidateQuantity": "18",
+        "candidateBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "1"
+        ],
+        "candidateFirstStockoutDay": 6,
+        "constraintOutcome": "CANDIDATE_STILL_HAS_INTERMEDIATE_SHORTAGE"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+          "scenario": "BASELINE",
+          "availableQuantity": "60",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+          "targetQuantity": "77",
+          "gapQuantity": "17",
+          "firstShortageDate": "2026-11-18",
+          "closingBalance": "-17",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "52",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "42",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "33",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "22",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "10",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-4",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-dd28fbce6a2e29039a275dca4c56c303595ffdfa3d5c0bb9dd4be10a8a8b11f1"
+        },
+        "candidates": [
+          {
+            "candidateId": "candidate-1efa3477aab092f3da2a252ff590430af7da00f751849cf30d6b2de76ef2bbe3",
+            "quantity": "18",
+            "availableDate": "2026-11-19",
+            "constraintVersion": "teaching-s01-rules-v1",
+            "constraintRefs": [
+              "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3#/inputProjection/input/policy"
+            ],
+            "evaluation": {
+              "metricVersion": "s01-engineering-daily-v1",
+              "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+              "scenario": "candidate-1efa3477aab092f3da2a252ff590430af7da00f751849cf30d6b2de76ef2bbe3",
+              "availableQuantity": "60",
+              "inTransitQuantity": "0",
+              "averageDailyDemand": "11",
+              "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+              "targetQuantity": "77",
+              "gapQuantity": "17",
+              "firstShortageDate": "2026-11-18",
+              "closingBalance": "1",
+              "stockoutRisk": true,
+              "overstockRisk": false,
+              "series": [
+                {
+                  "day": "2026-11-13",
+                  "demand": "8",
+                  "arrivals": "0",
+                  "closingBalance": "52",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-14",
+                  "demand": "10",
+                  "arrivals": "0",
+                  "closingBalance": "42",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-15",
+                  "demand": "9",
+                  "arrivals": "0",
+                  "closingBalance": "33",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-16",
+                  "demand": "11",
+                  "arrivals": "0",
+                  "closingBalance": "22",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-17",
+                  "demand": "12",
+                  "arrivals": "0",
+                  "closingBalance": "10",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-18",
+                  "demand": "14",
+                  "arrivals": "0",
+                  "closingBalance": "-4",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-19",
+                  "demand": "13",
+                  "arrivals": "18",
+                  "closingBalance": "1",
+                  "inBuffer": false
+                }
+              ],
+              "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+              "metricResultRef": "metric-c0e85ae7fb0658b3feea5a6de0eff824bcb8969896f05e0d76677f2ef3138fb3"
+            },
+            "procurementEligible": false
+          }
+        ],
+        "limitations": [
+          "PROCUREMENT_EXECUTION_NOT_AUTHORIZED"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "B",
+      "result": "PASS",
+      "basis": "ACTUAL_TEACHING_GET_PLUS_VERSIONED_RULE",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-c96c87b13c55a4251eb998e4e9ca1e92914f55c8f83bc924846b097d8db62e2a",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "88",
+          "78",
+          "69",
+          "58",
+          "46",
+          "32",
+          "19"
+        ],
+        "gapQuantity": "0",
+        "firstStockoutDay": null,
+        "candidateQuantity": null,
+        "candidateBalances": [],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "NO_REPLENISHMENT_NEEDED"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-c96c87b13c55a4251eb998e4e9ca1e92914f55c8f83bc924846b097d8db62e2a",
+          "scenario": "BASELINE",
+          "availableQuantity": "96",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "8.7272727272727272727272727272727272727272727272727",
+          "targetQuantity": "77",
+          "gapQuantity": "0",
+          "firstShortageDate": null,
+          "closingBalance": "19",
+          "stockoutRisk": false,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "88",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "78",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "69",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "58",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "46",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "32",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "19",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-db1b2197b008a48f823a1dd9f4fd2588f3bc6ea3d4ecb065ed9ab27d8ecbd7e5"
+        },
+        "candidates": [],
+        "limitations": [
+          "NO_REPLENISHMENT_NEEDED"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "C",
+      "result": "PASS",
+      "basis": "ACTUAL_TEACHING_GET_PLUS_VERSIONED_RULE",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-875f005946b9f4981052b35b7cbad4d98c8538702af5a63e8b713a82b3aee047",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "2",
+          "-8",
+          "-17",
+          "-28",
+          "-40",
+          "-54",
+          "0"
+        ],
+        "gapQuantity": "0",
+        "firstStockoutDay": 2,
+        "candidateQuantity": null,
+        "candidateBalances": [],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-875f005946b9f4981052b35b7cbad4d98c8538702af5a63e8b713a82b3aee047",
+          "scenario": "BASELINE",
+          "availableQuantity": "10",
+          "inTransitQuantity": "67",
+          "averageDailyDemand": "11",
+          "coverageDays": "0.90909090909090909090909090909090909090909090909091",
+          "targetQuantity": "77",
+          "gapQuantity": "0",
+          "firstShortageDate": "2026-11-14",
+          "closingBalance": "0",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "2",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "-8",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "-28",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "-40",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-54",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "67",
+              "closingBalance": "0",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-ce3d42aaa696cba75198274213a57de8ffdc5b1f14eb01e5955ade634a9af8d4"
+        },
+        "candidates": [],
+        "limitations": [
+          "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "D-MOQ",
+      "result": "PASS",
+      "basis": "A_GET_PLUS_CONTROLLED_GOLDEN_RULE_RECALCULATION",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-2f6e895d278b4fdcd6b57d2bb9f17f6552a0ca7c3cd3e8c5f843712ff4a77658",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "-17"
+        ],
+        "gapQuantity": "17",
+        "firstStockoutDay": 6,
+        "candidateQuantity": "24",
+        "candidateBalances": [
+          "76",
+          "66",
+          "57",
+          "46",
+          "34",
+          "20",
+          "7"
+        ],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "CANDIDATE_FEASIBLE"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-2f6e895d278b4fdcd6b57d2bb9f17f6552a0ca7c3cd3e8c5f843712ff4a77658",
+          "scenario": "BASELINE",
+          "availableQuantity": "60",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+          "targetQuantity": "77",
+          "gapQuantity": "17",
+          "firstShortageDate": "2026-11-18",
+          "closingBalance": "-17",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "52",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "42",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "33",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "22",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "10",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-4",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-0830b51c4fbadda1f4a3b1cf6df209b717fb6d2227d4bb9884aa71a961cd1a21"
+        },
+        "candidates": [
+          {
+            "candidateId": "candidate-0cf67500115de9ca15e209126e3cacc39676c3615afcc85c629e7e7eed7d6e77",
+            "quantity": "24",
+            "availableDate": "2026-11-13",
+            "constraintVersion": "teaching-s01-rules-v1",
+            "constraintRefs": [
+              "snapshot-2f6e895d278b4fdcd6b57d2bb9f17f6552a0ca7c3cd3e8c5f843712ff4a77658#/inputProjection/input/policy"
+            ],
+            "evaluation": {
+              "metricVersion": "s01-engineering-daily-v1",
+              "snapshotRef": "snapshot-2f6e895d278b4fdcd6b57d2bb9f17f6552a0ca7c3cd3e8c5f843712ff4a77658",
+              "scenario": "candidate-0cf67500115de9ca15e209126e3cacc39676c3615afcc85c629e7e7eed7d6e77",
+              "availableQuantity": "60",
+              "inTransitQuantity": "0",
+              "averageDailyDemand": "11",
+              "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+              "targetQuantity": "77",
+              "gapQuantity": "17",
+              "firstShortageDate": null,
+              "closingBalance": "7",
+              "stockoutRisk": false,
+              "overstockRisk": false,
+              "series": [
+                {
+                  "day": "2026-11-13",
+                  "demand": "8",
+                  "arrivals": "24",
+                  "closingBalance": "76",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-14",
+                  "demand": "10",
+                  "arrivals": "0",
+                  "closingBalance": "66",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-15",
+                  "demand": "9",
+                  "arrivals": "0",
+                  "closingBalance": "57",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-16",
+                  "demand": "11",
+                  "arrivals": "0",
+                  "closingBalance": "46",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-17",
+                  "demand": "12",
+                  "arrivals": "0",
+                  "closingBalance": "34",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-18",
+                  "demand": "14",
+                  "arrivals": "0",
+                  "closingBalance": "20",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-19",
+                  "demand": "13",
+                  "arrivals": "0",
+                  "closingBalance": "7",
+                  "inBuffer": false
+                }
+              ],
+              "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+              "metricResultRef": "metric-d0dbc0b8a4ebc6b6bd69aa46e5782fc5054f142fa9e2a69f343d7050138d2e79"
+            },
+            "procurementEligible": false
+          }
+        ],
+        "limitations": [
+          "PROCUREMENT_EXECUTION_NOT_AUTHORIZED"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "D-MULTIPLE",
+      "result": "PASS",
+      "basis": "A_GET_PLUS_CONTROLLED_GOLDEN_RULE_RECALCULATION",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-b94059989eb1b12a1ca0e777372a396ba6cf7dbab23b4b445a124da9f360f5f4",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "-17"
+        ],
+        "gapQuantity": "17",
+        "firstStockoutDay": 6,
+        "candidateQuantity": "20",
+        "candidateBalances": [
+          "72",
+          "62",
+          "53",
+          "42",
+          "30",
+          "16",
+          "3"
+        ],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "CANDIDATE_FEASIBLE"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-b94059989eb1b12a1ca0e777372a396ba6cf7dbab23b4b445a124da9f360f5f4",
+          "scenario": "BASELINE",
+          "availableQuantity": "60",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+          "targetQuantity": "77",
+          "gapQuantity": "17",
+          "firstShortageDate": "2026-11-18",
+          "closingBalance": "-17",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "52",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "42",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "33",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "22",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "10",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-4",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-0a5b28202df11ef16be9b9877b9ca185fec5216d73b94dd811e683295ff28dc5"
+        },
+        "candidates": [
+          {
+            "candidateId": "candidate-f59a402d1db4b2b770a4ef4d905479b212e50d46239df0ee7be97e0ee5d30be0",
+            "quantity": "20",
+            "availableDate": "2026-11-13",
+            "constraintVersion": "teaching-s01-rules-v1",
+            "constraintRefs": [
+              "snapshot-b94059989eb1b12a1ca0e777372a396ba6cf7dbab23b4b445a124da9f360f5f4#/inputProjection/input/policy"
+            ],
+            "evaluation": {
+              "metricVersion": "s01-engineering-daily-v1",
+              "snapshotRef": "snapshot-b94059989eb1b12a1ca0e777372a396ba6cf7dbab23b4b445a124da9f360f5f4",
+              "scenario": "candidate-f59a402d1db4b2b770a4ef4d905479b212e50d46239df0ee7be97e0ee5d30be0",
+              "availableQuantity": "60",
+              "inTransitQuantity": "0",
+              "averageDailyDemand": "11",
+              "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+              "targetQuantity": "77",
+              "gapQuantity": "17",
+              "firstShortageDate": null,
+              "closingBalance": "3",
+              "stockoutRisk": false,
+              "overstockRisk": false,
+              "series": [
+                {
+                  "day": "2026-11-13",
+                  "demand": "8",
+                  "arrivals": "20",
+                  "closingBalance": "72",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-14",
+                  "demand": "10",
+                  "arrivals": "0",
+                  "closingBalance": "62",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-15",
+                  "demand": "9",
+                  "arrivals": "0",
+                  "closingBalance": "53",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-16",
+                  "demand": "11",
+                  "arrivals": "0",
+                  "closingBalance": "42",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-17",
+                  "demand": "12",
+                  "arrivals": "0",
+                  "closingBalance": "30",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-18",
+                  "demand": "14",
+                  "arrivals": "0",
+                  "closingBalance": "16",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-19",
+                  "demand": "13",
+                  "arrivals": "0",
+                  "closingBalance": "3",
+                  "inBuffer": false
+                }
+              ],
+              "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+              "metricResultRef": "metric-521e212ab7f6bb33ea31bc904cd1d04ae7099f7a534c410c872d8d039b73bf84"
+            },
+            "procurementEligible": false
+          }
+        ],
+        "limitations": [
+          "PROCUREMENT_EXECUTION_NOT_AUTHORIZED"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "D-MAX",
+      "result": "PASS",
+      "basis": "A_GET_PLUS_CONTROLLED_GOLDEN_RULE_RECALCULATION",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-f2a2f2d7990a440e89760a465b090c882c61161a797c4da161d40323321ee7c8",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "-17"
+        ],
+        "gapQuantity": "17",
+        "firstStockoutDay": 6,
+        "candidateQuantity": "18",
+        "candidateBalances": [],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "NO_FEASIBLE_QUANTITY"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-f2a2f2d7990a440e89760a465b090c882c61161a797c4da161d40323321ee7c8",
+          "scenario": "BASELINE",
+          "availableQuantity": "60",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+          "targetQuantity": "77",
+          "gapQuantity": "17",
+          "firstShortageDate": "2026-11-18",
+          "closingBalance": "-17",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "52",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "42",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "33",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "22",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "10",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-4",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-725a36bfdd00c797c59842b9a71c70491855553559fb6fd8e60c4c31fc39d7d7"
+        },
+        "candidates": [],
+        "limitations": [
+          "NO_FEASIBLE_QUANTITY"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "D-AVAILABLE-DATE",
+      "result": "PASS",
+      "basis": "A_GET_PLUS_CONTROLLED_GOLDEN_RULE_RECALCULATION",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-65083254c34e8f0220c0ff6d6ddb31f5f2e3cc55527000133ef3658d3e228d07",
+      "completeness": "RULES_ONLY",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "-17"
+        ],
+        "gapQuantity": "17",
+        "firstStockoutDay": 6,
+        "candidateQuantity": "18",
+        "candidateBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "1"
+        ],
+        "candidateFirstStockoutDay": 6,
+        "constraintOutcome": "CANDIDATE_STILL_HAS_INTERMEDIATE_SHORTAGE"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-65083254c34e8f0220c0ff6d6ddb31f5f2e3cc55527000133ef3658d3e228d07",
+          "scenario": "BASELINE",
+          "availableQuantity": "60",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+          "targetQuantity": "77",
+          "gapQuantity": "17",
+          "firstShortageDate": "2026-11-18",
+          "closingBalance": "-17",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "52",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "42",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "33",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "22",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "10",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-4",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-b1a51c06649c65c76579810ca0d54c5dced77ea0872d680f5bfba40a28a2dcc0"
+        },
+        "candidates": [
+          {
+            "candidateId": "candidate-a408ac415f0d960ec6c4e4739af0b6e1fd51805be7452f0074055de7505ad0c2",
+            "quantity": "18",
+            "availableDate": "2026-11-19",
+            "constraintVersion": "teaching-s01-rules-v1",
+            "constraintRefs": [
+              "snapshot-65083254c34e8f0220c0ff6d6ddb31f5f2e3cc55527000133ef3658d3e228d07#/inputProjection/input/policy"
+            ],
+            "evaluation": {
+              "metricVersion": "s01-engineering-daily-v1",
+              "snapshotRef": "snapshot-65083254c34e8f0220c0ff6d6ddb31f5f2e3cc55527000133ef3658d3e228d07",
+              "scenario": "candidate-a408ac415f0d960ec6c4e4739af0b6e1fd51805be7452f0074055de7505ad0c2",
+              "availableQuantity": "60",
+              "inTransitQuantity": "0",
+              "averageDailyDemand": "11",
+              "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+              "targetQuantity": "77",
+              "gapQuantity": "17",
+              "firstShortageDate": "2026-11-18",
+              "closingBalance": "1",
+              "stockoutRisk": true,
+              "overstockRisk": false,
+              "series": [
+                {
+                  "day": "2026-11-13",
+                  "demand": "8",
+                  "arrivals": "0",
+                  "closingBalance": "52",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-14",
+                  "demand": "10",
+                  "arrivals": "0",
+                  "closingBalance": "42",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-15",
+                  "demand": "9",
+                  "arrivals": "0",
+                  "closingBalance": "33",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-16",
+                  "demand": "11",
+                  "arrivals": "0",
+                  "closingBalance": "22",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-17",
+                  "demand": "12",
+                  "arrivals": "0",
+                  "closingBalance": "10",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-18",
+                  "demand": "14",
+                  "arrivals": "0",
+                  "closingBalance": "-4",
+                  "inBuffer": false
+                },
+                {
+                  "day": "2026-11-19",
+                  "demand": "13",
+                  "arrivals": "18",
+                  "closingBalance": "1",
+                  "inBuffer": false
+                }
+              ],
+              "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+              "metricResultRef": "metric-3c1db046c241bed8484adf921207a2c225ba9edf48590111d82205ba4132f389"
+            },
+            "procurementEligible": false
+          }
+        ],
+        "limitations": [
+          "PROCUREMENT_EXECUTION_NOT_AUTHORIZED"
+        ],
+        "qualityCodes": []
+      },
+      "procurementEligible": false
+    },
+    {
+      "caseId": "E-DATA",
+      "result": "PASS",
+      "basis": "OFFLINE_NORMALIZED_INPUT_NEGATIVE_NOT_ERP_MISSING_FACT",
+      "expected": {
+        "status": "INSUFFICIENT_DATA",
+        "baselineBalances": [],
+        "gapQuantity": null,
+        "firstStockoutDay": null,
+        "candidateQuantity": null,
+        "candidateBalances": [],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "DATA_QUALITY_BLOCKED"
+      },
+      "actual": {
+        "baseline": null,
+        "candidates": [],
+        "qualityCodes": [
+          "UNKNOWN_OR_NEGATIVE_INVENTORY"
+        ]
+      }
+    },
+    {
+      "caseId": "E-QUALITY",
+      "result": "PASS",
+      "basis": "ACTUAL_QUALITY_GET_PLUS_CONTROLLED_RULE",
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "snapshotRef": "snapshot-84e81bd57539c2282d65e77e386689213fe84e58c86e03b2903f7ced44b480bc",
+      "completeness": "PARTIAL",
+      "expected": {
+        "status": "CALCULATED",
+        "baselineBalances": [
+          "52",
+          "42",
+          "33",
+          "22",
+          "10",
+          "-4",
+          "-17"
+        ],
+        "gapQuantity": "17",
+        "firstStockoutDay": 6,
+        "candidateQuantity": null,
+        "candidateBalances": [],
+        "candidateFirstStockoutDay": null,
+        "constraintOutcome": "QUALITY_REQUIRES_RESOLUTION"
+      },
+      "actual": {
+        "baseline": {
+          "metricVersion": "s01-engineering-daily-v1",
+          "snapshotRef": "snapshot-84e81bd57539c2282d65e77e386689213fe84e58c86e03b2903f7ced44b480bc",
+          "scenario": "BASELINE",
+          "availableQuantity": "60",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "11",
+          "coverageDays": "5.4545454545454545454545454545454545454545454545455",
+          "targetQuantity": "77",
+          "gapQuantity": "17",
+          "firstShortageDate": "2026-11-18",
+          "closingBalance": "-17",
+          "stockoutRisk": true,
+          "overstockRisk": false,
+          "series": [
+            {
+              "day": "2026-11-13",
+              "demand": "8",
+              "arrivals": "0",
+              "closingBalance": "52",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-14",
+              "demand": "10",
+              "arrivals": "0",
+              "closingBalance": "42",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-15",
+              "demand": "9",
+              "arrivals": "0",
+              "closingBalance": "33",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "11",
+              "arrivals": "0",
+              "closingBalance": "22",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "12",
+              "arrivals": "0",
+              "closingBalance": "10",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "14",
+              "arrivals": "0",
+              "closingBalance": "-4",
+              "inBuffer": false
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "13",
+              "arrivals": "0",
+              "closingBalance": "-17",
+              "inBuffer": false
+            }
+          ],
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "metricResultRef": "metric-9f984974135c0677aecfdaac26f60f87a7cc87d8f257faae1769f16d61387eb9"
+        },
+        "candidates": [],
+        "limitations": [
+          "CANDIDATE_RULES_OR_QUALITY_BLOCKED"
+        ],
+        "qualityCodes": [
+          "QUALITY_REQUIRES_RESOLUTION"
+        ]
+      },
+      "procurementEligible": false
+    }
+  ],
+  "enterpriseAdmission": "BLOCKED",
+  "limitations": [
+    "D variants change teaching rules over A GET facts; they are not additional ERP writes.",
+    "E-DATA is an explicit offline negative. E-QUALITY is backed by a distinct ERP quality GET.",
+    "Draft planned supply is teaching derivation, not submitted procurement or in-transit stock."
+  ]
+}

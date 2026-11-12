@@ -153,3 +153,5 @@ G01当前实现固定HS256签名/issuer/audience/期限、数据库会话/修订
 模型评测进一步收紧到同授权唯一O01 task、最多5请求：固定tenant/principal/command key，Handler新增可选validate_command钩子由O01创建前调用，拒绝通过HTTP换key申请第二预算。既有Handler无该钩子，旧请求/报告路径保持。独立API/Worker串行A—E，单次投递、600秒期限，解释失败停止后续请求；内部紧凑记录重建各case的B01/B02与Prompt摘要，发布/历史读取逐项验证G02成功回执，公开仅裁剪结果。无新预算表、任务系统或迁移；该装配只显式教学/工程评测，不是正式用途验收。
 
 教学派生须单独绑定方法、精确字段路径、原GET artifact及内容摘要、规则记录和时点。历史销量重放未来需求、草稿映射教学计划供给均不称ERP原始事实；库存数量和更新时间直接采用已核实的ERP回读字段，不允许规则派生或用其他接口观察时间补齐。写侧规范化内容独立从对应已核摘要的原写请求重建，再与GET规范化内容比较，不能复制读侧摘要充当写侧证明。A保留已冻结Golden的7日交期/max120，18件候选到达前的D6短缺必须展示；D的规则敏感性反例单列，不伪称均发生了额外ERP写入。正式REAL准入不接受这些教学替代。
+
+执行增量：固定实现c965a33下，教学写读与准入、9项Golden及5项API/Worker/MySQL复验通过；全量601 PASS。真实DeepSeek同一task发送3次，A/B AVAILABLE且费用null、C因缺少必需文内引用INVALID_OUTPUT后停止，D/E NOT_RUN，五例评测FAIL。未知费用$0.15原预约保留，Token5642已结转；不因失败换task/key或重发、不放宽校验。该事实提交REVIEW，正式企业准入仍BLOCKED；本条是既定停止/费用分离决策的执行记录，不签认正式模型用途。完整证据见[后端报告](evidence/S01-BACKEND/backend-report.md)和[模型报告](evidence/S01-BACKEND/model/report.md)。

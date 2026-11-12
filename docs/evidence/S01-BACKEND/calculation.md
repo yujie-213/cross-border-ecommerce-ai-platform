@@ -11,6 +11,7 @@
 |---|---|---|---|
 | 模拟工程 A—E | PASS | 固定输入下的 B01/B02 数量、日期、质量门和阻断行为符合当前引擎语义 | 真实 SKU 可采购、正式业务规则获签、真实 ERP 完整 |
 | 准入适配合同样例 | TEST_ONLY / PASS | 严格来源/规则包能规范化为 `AdmittedInput` 并复用原计算链 | 样例中的 `offline-contract:` 引用已被读取或是业务签认 |
+| 真实 API 内构造的教学仿真 | PASS | 独立 GET capture 经准入链进入原 B01/B02，9项独立 Golden 一致，5项独立进程联调一致 | 企业经营事实、已下单在途、正式规则或采购适用 |
 | 真实教学 ERP 观测 | BLOCKED | 已有只读观测和可靠字段可展示，缺口不被 fixture 替换 | 真实 B01/B02 正向候选、采购适用或完整 MVP 验收 |
 
 所有当前候选都保持 `procurementEligible=false`。AI 解释无论 AVAILABLE、UNAVAILABLE 或 NOT_ATTEMPTED，都不能改变该值、质量结论或计算完整性。
@@ -120,6 +121,8 @@ AI 只解释已计算的白名单事实：
 usage 中 input/output/total Token 或 actualCost 为 null 都表示未知，不表示 0。Token 已知但费用未知时，G02 可以已有 `usageRef`，O01 仍保留费用额度；这不影响既有规则计算的真实性，也不能被前端显示为“免费调用”。
 
 ## 验证依据与限制
+
+新增教学 [9项逐日对照](teaching-data/calculation-comparison.json) 保留每项 expected/actual、baseline/candidate 日账、首次缺货及阻断码。A 的候选18仍在 D6 缺货，未把“有候选”当成风险消除；B 不生成0件候选；C 期末0仍识别D2缺货；D 验证独立倍数、MOQ、最大量和可售日；E 分离离线数据缺失与实际质量调查。既有 B01/B02 算法没有为这些期望修改。
 
 本资料依据当前源码和已有测试：
 

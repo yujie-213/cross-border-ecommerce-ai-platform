@@ -40,6 +40,8 @@ python docs/planning/check_plan.py
 
 提交实现后运行 `python -m tools.verify_s01_backend`，生成绑定实际 HEAD 的全量证据，逐名保全原399项。真实 ERP 发现与模型评测另列，不计为离线回归网络成功。真实固定观测联调只有显式 `--run-real-backend` 才执行，它复放既有网络 capture，不再采集 ERP。
 
+教学批次固定 GET capture 的9项 Golden 对照与5项独立进程复验，使用已提交的 `tools.verify_s01_teaching_golden` 和 `tools.verify_s01_teaching_backend`。精确命令、批次记录、UNKNOWN恢复及保留状态见 [批次重复验证手册](../evidence/S01-BACKEND/teaching-data/batch-runbook.md)。回归前应停止已确认属于本项目、无需继续运行的旧测试 Worker，避免它同时轮询隔离库；不停止其他项目进程。
+
 有界模型评测使用同一个固定授权 task、最多5个 A—E 请求、总预算$1、每次保守预留$0.05，无自动重试。仅发送已计算并标明来源的工程或教学 quantity 事实和引用，不发送源 ERP 原响应。官方费率只用于该次授权上限预检，不作为平台计价或实际费用；无法预检则 NOT_RUN。输出四数组经过 Schema、引用、受控自然同义表述、未知与质量/审批门禁校验；不宣称能证明任意自由文本。原始返回只存 `data/private/`。再次运行不得更改授权 id、任务或 key 绕过已发送记录。
 
 模型工具通过独立 `bootstrap.s01_model_evaluation` API 和 Worker 执行，固定授权派生租户、主体与命令 key；O01 的可选 `validate_command` 消费钩子拒绝换 key 创建第二预算任务，原场景不受影响。五例在同一个 task 预算内串行，首次失败停止剩余例，A 的合法规则报告仍可发布，评测 `analysisReport.evaluation.status` 单独显示失败。内部所有成功 case 的 G02 回执在发布和读取时核验；公开结果去掉源包、投影、manifest 和内部案例记录。固定600秒 task deadline、单次投递，不因工具重启恢复预算或期限。
