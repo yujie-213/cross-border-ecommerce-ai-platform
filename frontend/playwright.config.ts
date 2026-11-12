@@ -1,0 +1,2 @@
+import { defineConfig } from '@playwright/test'
+export default defineConfig({ testDir: '../tests/browser/s01', testMatch: '**/*.spec.ts', workers: 1, fullyParallel: false, timeout: 45000, expect: { timeout: 12000 }, outputDir: '../.tmp/frontend-browser', reporter: [['list'], ['json', { outputFile: '../.tmp/frontend-browser-results.json' }]], use: { baseURL: 'http://localhost:5173', browserName: 'chromium', channel: 'msedge', viewport: { width: 1440, height: 1000 }, trace: 'off', screenshot: 'off', video: 'off' } })

@@ -1,3 +1,5 @@
+当前前端开发授权（2026-11-12，6fdf10c）：D-S01-UI-01已领取IN_PROGRESS，Vue3/Vite/TypeScript独立frontend工程及真实浏览器API/Worker/MySQL联调获准；只读教学、off/mock，最终REVIEW、不合main。下方旧停止点保留历史；C-04 FAIL、原核账和企业四门BLOCKED不变。
+
 当前分项验收与合并授权（2026-11-12，交付1619bc1/被审实现c965a33）：负责人和星星批准教学后端工程范围ACCEPTED及普通合main。LIVE含正式业务未验范围，整体仍REVIEW并在review/history登记部分验收；C-04保持REVIEW、五例FAIL（A/B成功、C拒绝、D/E未发），5642Token/费用UNKNOWN/$0.15预约保留。原DEV工程ACCEPTED和四项企业门BLOCKED不变。D-S01-UI-01确认下一阶段但仍TODO，本轮只准入交接、无前端编码或新真实模型调用。
 
 当前后端交付（2026-11-12，固定c965a33）：LIVE/C-04提交REVIEW、review=null。教学API写入及独立GET、9项Golden和5项独立进程PASS；全量601 PASS。真实模型3次A/B成功、C拒绝，D/E NOT_RUN，五例用途评测FAIL；Token5642、费用UNKNOWN预约$0.15保留。教学验证不解除四项企业门，前端NOT_RUN，不合main；旧“本轮未授权/未调用”的阶段记录按历史时点阅读。详见docs/evidence/S01-BACKEND/backend-report.md。
@@ -5443,13 +5445,26 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "A-04"
   ],
-  "entryCondition": "下一阶段已确认为D-S01-UI-01，保持TODO、未领取编码。本轮仅完成准入交接；等负责人下一条开发指令，以本轮同步后的最新main为基线，沿用统一中台产品原型/视觉/架构，消费已验收教学固定包真实API。普通后端仅off/mock，C-04剩余用途评测/正常流程真实模型接入独立安排，企业四门不解除。",
+  "entryCondition": "负责人本轮已授权D-S01-UI-01完整前端工程、教学固定包真实API/独立Worker/MySQL和浏览器联调、提交及普通同步评审分支；最终REVIEW、不合main。覆盖旧未领取停止点；普通off/mock，禁止真实付费模型、ERP写入、B01/B02规则改动和下一阶段。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": null,
+  "assignee": "Codex（本轮前端主开发与集成，单人串行）",
   "allowedPaths": [
-    "src/commerce_hub/workspace/",
-    "tests/browser/s01/（未来）",
-    "docs/evidence/D-S01-UI-01/（未来）"
+    "frontend/",
+    "tests/browser/s01/",
+    "tools/s01_frontend_dev.py",
+    "docs/evidence/D-S01-UI-01/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/ui/",
+    "docs/runbooks/s01-frontend.md",
+    "docs/README.md",
+    "docs/generated/",
+    "docs/planning/validation-report.json",
+    "docs/planning/git-whitelist.json",
+    "src/commerce_hub/entrypoints/http/tasks.py",
+    "tests/integration/http/test_session_recovery.py",
+    "tools/verify_s01_frontend.py"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -5476,7 +5491,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "plannedTests": [
-    "S01-AC-UI01及AI01/02、SEC01：实际API浏览器操作/刷新/失败/阻断/证据撤权；既有适用窄屏/深浅布局回归"
+    "客户端DTO/状态/原key重放单测、Vue类型检查和Vite构建；真实Edge A—E/API/独立Worker/MySQL/刷新/取消/幂等冲突/证据撤权；明确协议夹具AI/异常/轮询上限/精确分页；1440/1024/390浅色与键盘；完整既有601后端逐名保全及新增2项会话恢复。"
   ],
   "completionEvidence": [
     "实际API网络/报告Ref、浏览器日志/截图及布局/权限/AI状态结果；真实AI展示的Provider证据引用C-04，不用静态文案。",
@@ -5493,14 +5508,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER_API",
     "SECURITY"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
-  "dirtyPaths": [],
+  "branch": "codex/s01-frontend-mvp",
+  "observedHead": "6fdf10cd6850794cc1ba2695078e68a58996e974",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
   "latestHandoffRef": "docs/ui/S01-frontend-entry.md",
   "blocker": null,
   "history": [
@@ -5520,6 +5537,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
       "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
       "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "负责人提供D-S01-UI-01完整开发授权；基线跟踪区干净、未知OpenAPI保留。fetch遇TLS失败，已有本地main/origin/main同6fdf10c，交付前重试核对。",
+      "previousEntryCondition": "下一阶段已确认为D-S01-UI-01，保持TODO、未领取编码。本轮仅完成准入交接；等负责人下一条开发指令，以本轮同步后的最新main为基线，沿用统一中台产品原型/视觉/架构，消费已验收教学固定包真实API。普通后端仅off/mock，C-04剩余用途评测/正常流程真实模型接入独立安排，企业四门不解除。",
+      "observedHead": "6fdf10cd6850794cc1ba2695078e68a58996e974"
     }
   ],
   "acceptanceRefs": [

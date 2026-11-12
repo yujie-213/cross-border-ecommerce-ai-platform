@@ -1,0 +1,107 @@
+{
+  "input": "FIXED_REAL_GET_CAPTURE_OF_SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "realApi": true,
+  "independentWorker": true,
+  "erpNetworkRequests": 0,
+  "paidModelRequests": 0,
+  "cases": [
+    {
+      "caseId": "A",
+      "taskRef": {
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+        "taskId": "cb39b8d1091a45acb8888c9ae4f66ee9"
+      },
+      "reportRef": {
+        "reportId": "cb39b8d1091a45acb8888c9ae4f66ee9",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-a1429d45ccb2de64e044b83e25ec74771404731469d506c3f21e5f0838a4c2d3",
+      "packageRef": "6553d87b388f2ad029655f69d3c7f73af71c6c60c848b69ae48cb9935f3d0ebd",
+      "completeness": "RULES_ONLY",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "17",
+      "candidateQuantities": [
+        "18"
+      ],
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "B",
+      "taskRef": {
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+        "taskId": "1ec7328438814a93838246b738fd6220"
+      },
+      "reportRef": {
+        "reportId": "1ec7328438814a93838246b738fd6220",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-c96c87b13c55a4251eb998e4e9ca1e92914f55c8f83bc924846b097d8db62e2a",
+      "packageRef": "446d97d825556c972125c30408504888ae0da7976564f83c417519c8ec94bb90",
+      "completeness": "RULES_ONLY",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "0",
+      "candidateQuantities": [],
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "C",
+      "taskRef": {
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+        "taskId": "b54b76dc6dbf411abe9199d43025e9d7"
+      },
+      "reportRef": {
+        "reportId": "b54b76dc6dbf411abe9199d43025e9d7",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-875f005946b9f4981052b35b7cbad4d98c8538702af5a63e8b713a82b3aee047",
+      "packageRef": "79d4db579bf8f58f70ad593fd1b494059aa65cd301bf4cb3356abe307aad67b7",
+      "completeness": "RULES_ONLY",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "0",
+      "candidateQuantities": [],
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "D",
+      "taskRef": {
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+        "taskId": "1dbc897d68e64784818ec257b03b61d7"
+      },
+      "reportRef": {
+        "reportId": "1dbc897d68e64784818ec257b03b61d7",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-376d43ac1c989d491cc8b3333920a73254627c27ec413e32e6b38829c8ffde3c",
+      "packageRef": "5233fd6cfb6a7014c249411a1a0b9f33b0224d03ba1448f6df211e6479e0b6d7",
+      "completeness": "RULES_ONLY",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "17",
+      "candidateQuantities": [],
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "procurementEligible": false
+    },
+    {
+      "caseId": "E",
+      "taskRef": {
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9",
+        "taskId": "7193bffb8e6142ccb7977801cc6d72be"
+      },
+      "reportRef": {
+        "reportId": "7193bffb8e6142ccb7977801cc6d72be",
+        "tenantId": "s01-eval-10ae3df28c17debc90b67936020bcfb9"
+      },
+      "snapshotRef": "snapshot-84e81bd57539c2282d65e77e386689213fe84e58c86e03b2903f7ced44b480bc",
+      "packageRef": "bb8faa4f75bcb14a1ab8f755a63b70ca0ba0c65ddd2f71efaf0a8f8de9a55b29",
+      "completeness": "PARTIAL",
+      "aiStatus": "NOT_ATTEMPTED",
+      "gapQuantity": "17",
+      "candidateQuantities": [],
+      "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+      "procurementEligible": false
+    }
+  ],
+  "consoleErrors": []
+}

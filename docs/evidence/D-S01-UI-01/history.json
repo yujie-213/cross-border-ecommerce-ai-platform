@@ -1,0 +1,22 @@
+{
+  "scope": "Development failures retained separately from final fixed-commit verification",
+  "failures": [
+    {"step":"git fetch", "result":"FAIL", "reason":"Default TLS/proxy handshake failed; recovered with existing loopback proxy, HTTP/1.1 and OpenSSL, certificate verification retained."},
+    {"step":"npm metadata in sandbox", "result":"FAIL", "reason":"Only-if-cached registry response unavailable; authorized dependency install succeeded through normal package manager."},
+    {"step":"vitest in sandbox", "result":"ERROR", "reason":"Child process spawn EPERM; rerun with required process permission passed 19 tests."},
+    {"step":"browser harness setup", "result":"ERROR", "reason":"External test directory ESM declaration and explicit package ESM entry needed; corrected without product behavior change."},
+    {"step":"first browser assertions", "result":"FAIL", "count":4, "reason":"Playwright default response headers hide Set-Cookie; replaced by stronger inspection of actual browser Cookie security attributes."},
+    {"step":"browser select locator", "result":"FAIL", "count":4, "reason":"Implicit label locator included select option text; switched to accessible combobox role and exact name. One early run overlapped HMR; final fixed run has no edits."},
+    {"step":"browser locator/wait races", "result":"FAIL", "count":4, "reason":"Repeated task/report ID and navigation link caused strict matches; network loss handler needed requestfailed wait before unroute. Scoped locators and deterministic completion waits fixed."},
+    {"step":"session recovery initial environment", "result":"ERROR", "count":2, "reason":"Explicit mock/offline override was missing and local model provider config was rejected before IO; fixed command environment without changing local .env."},
+    {"step":"session recovery before fix", "result":"FAIL", "count":2, "reason":"401 did not expire invalid HttpOnly Cookie. Added minimal authenticated-session recovery response handling; 11 HTTP tests then passed."}
+  ],
+  "productIssuesCorrected": [
+    "Clearing a selected scope now clears old history and aborts stale reads.",
+    "401/403 clears protected page data and stops polling.",
+    "Invalid 401 Cookie is expired by server while trusted Bearer authentication remains required."
+  ],
+  "paidModelRequests":0,
+  "erpNetworkRequests":0,
+  "historicalEvidenceModified":false
+}

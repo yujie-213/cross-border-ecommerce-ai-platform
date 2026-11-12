@@ -58,7 +58,14 @@ def register_task_routes(app):
     @app.exception_handler(AccessDenied)
     async def access_error(_, exc):
         status = 503 if exc.code == "AUTH_BACKEND_UNAVAILABLE" else 401 if exc.code == "UNAUTHENTICATED" else 403
-        return error_response(exc.code, status, "Authentication or current authorization rejected")
+        response = error_response(exc.code, status, "Authentication or current authorization rejected")
+        if status == 401:
+            # An invalid HttpOnly cookie cannot be cleared by the browser client.
+            # Expire it so a fresh trusted bearer can establish a new session.
+            # Authentication still fails; ordinary permission/CSRF denials keep the session.
+            response.delete_cookie("commerce_session", secure=True, httponly=True, samesite="strict")
+            response.delete_cookie("commerce_csrf", secure=True, samesite="strict")
+        return response
 
     @app.exception_handler(TaskError)
     async def task_error(_, exc):

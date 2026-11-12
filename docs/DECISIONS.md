@@ -163,3 +163,14 @@ G01当前实现固定HS256签名/issuer/audience/期限、数据库会话/修订
 教学派生须单独绑定方法、精确字段路径、原GET artifact及内容摘要、规则记录和时点。历史销量重放未来需求、草稿映射教学计划供给均不称ERP原始事实；库存数量和更新时间直接采用已核实的ERP回读字段，不允许规则派生或用其他接口观察时间补齐。写侧规范化内容独立从对应已核摘要的原写请求重建，再与GET规范化内容比较，不能复制读侧摘要充当写侧证明。A保留已冻结Golden的7日交期/max120，18件候选到达前的D6短缺必须展示；D的规则敏感性反例单列，不伪称均发生了额外ERP写入。正式REAL准入不接受这些教学替代。
 
 执行增量：固定实现c965a33下，教学写读与准入、9项Golden及5项API/Worker/MySQL复验通过；全量601 PASS。真实DeepSeek同一task发送3次，A/B AVAILABLE且费用null、C因缺少必需文内引用INVALID_OUTPUT后停止，D/E NOT_RUN，五例评测FAIL。未知费用$0.15原预约保留，Token5642已结转；不因失败换task/key或重发、不放宽校验。该事实提交REVIEW，正式企业准入仍BLOCKED；本条是既定停止/费用分离决策的执行记录，不签认正式模型用途。完整证据见[后端报告](evidence/S01-BACKEND/backend-report.md)和[模型报告](evidence/S01-BACKEND/model/report.md)。
+
+
+## ADR-S01-UI-001 正式只读教学前端（2026-11-12，负责人本轮授权）
+
+在最新main `6fdf10c` 建立 `codex/s01-frontend-mvp`；独立 `frontend/` 使用Vue3/Vite/TypeScript，原生CSS继承原型Token与布局，轻量SVG仅绘服务端逐日序列并附表。三项导航与hash路由沿用原型，不引入Router/状态框架、第二后端/数据库或其他场景空模块。旧原型/设计基线/算法/迁移/旧失败证据保全。依赖按实际npm版本锁定，部署产物为静态dist，当前仅本地联调和普通评审分支同步，不发布外部站点或合main。
+
+消费者仅现有S01 options/task/report/evidence/history/session公开HTTP契约。精确scope不带tenantId；创建/取消保留原幂等key和body，UNKNOWN不换键；轮询2秒最多60次，终态/拒绝/异常停止。sessionStorage只存任务ID/所选packageRef/待核对命令及身份引用，不存Bearer、报告或ERP数据。所有读取由服务端当前权限裁剪。来源、技术状态、完整性、AI与采购适用独立；普通off/mock与独立付费评测明确分开，四门BLOCKED/C-04 FAIL和原费用预约不变。
+
+浏览器联调使用现有G01显式fixture流程、私有固定教学GET catalog和唯一获准隔离MySQL。Vite只代理loopback API且保留Origin，未扩大CORS或降低CSRF/Secure。localhost Secure Cookie行为经实际Edge验证；正式部署要求HTTPS同源及精确Origin，企业SSO和上线另行评审。新增测试控制仅私有本地文件供工具管理自有Worker/测试主体，不注册HTTP绕过。
+
+实际复现过期HttpOnly Cookie在401后残留并阻断新Bearer交换（两项负例FAIL）。最小兼容修复只在UNAUTHENTICATED/401响应删除无效session/CSRF Cookie；401语义、有效Bearer准入、403授权/CSRF/Origin、Cookie安全属性不变，无数据库或任务/业务契约变化。消费者是Cookie浏览器客户端；Bearer客户端忽略Set-Cookie不受影响。2项恢复正反例及原HTTP鉴权回归、完整后端603项/浏览器复验按实际结果登记，不以本ADR预填通过。回退为撤销该响应清理分支，401读取拒绝保持。
