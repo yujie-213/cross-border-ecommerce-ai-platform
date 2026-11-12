@@ -64,6 +64,32 @@ def validate_semantics(output, facts):
     return value
 
 
+def explanation_context(binding, facts):
+    return ExplanationContext(ref=dict(tenantId=binding["taskRef"]["tenantId"],
+        id="s01-context-" + digest(dict(binding=binding, facts=facts))[:48], version=SEMANTIC_POLICY),
+        **binding, facts=facts, sourceNature="SIMULATED_ENGINEERING", trust="UNTRUSTED_DATA",
+        sensitivity="SYNTHETIC_ONLY", omissions=["real-data", "real-model", "procurement-authorization"])
+
+
+def validate_versions(ai, facts):
+    versions = ai["versionBundle"]
+    expected = S01Bundle(explanation_context(ai["binding"], facts)).refs()
+    refs = {key: expected[key] for key in ("deploymentRef", "promptRef", "contextBundleRef", "outputSchemaRef", "parametersRef", "cachePolicyRef")}
+    if not isinstance(versions, dict) or set(versions) - (set(refs) | {"digests", "configuredModel"}):
+        raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
+    if versions:
+        if any(versions.get(key) != value for key,value in refs.items()) or versions.get("configuredModel") != "mock-s01-v1":
+            raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
+        hashes = versions.get("digests", {})
+        hash_fields = {"resolvedPromptDigest", "contextDigest", "parametersDigest", "outputSchemaDigest", "toolSpecsDigest", "promptContentHash"}
+        if (not isinstance(hashes, dict) or set(hashes) != hash_fields
+            or any(not isinstance(value,str) or len(value)!=64 or any(char not in "0123456789abcdef" for char in value) for value in hashes.values())
+            or hashes["contextDigest"] != digest(explanation_context(ai["binding"], facts).model_dump(mode="json"))):
+            raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
+    elif ai["status"] == "AVAILABLE":
+        raise ValueError("BROKEN_S01_EXPLANATION_VERSIONS")
+
+
 class S01MockProvider(MockProvider):
     """Use the existing Mock accounting/fault behavior with contextual success."""
     def invoke(self, request):
@@ -130,10 +156,7 @@ class S01SupplyInventoryHandler:
             provider="MOCK", realModelAcceptance="NOT_RUN", semanticPolicy=SEMANTIC_POLICY,
             binding=binding, supportCatalog=facts, usageStatus="NOT_SENT", versionBundle={})
         try:
-            context_value = ExplanationContext(ref=dict(tenantId=context.principal.tenant_id,
-                id="s01-context-" + digest(dict(binding=binding, facts=facts))[:48], version=SEMANTIC_POLICY),
-                **binding, facts=facts, sourceNature="SIMULATED_ENGINEERING", trust="UNTRUSTED_DATA",
-                sensitivity="SYNTHETIC_ONLY", omissions=["real-data", "real-model", "procurement-authorization"])
+            context_value = explanation_context(binding, facts)
             bundle = S01Bundle(context_value)
             request = reserve_request(context, bundle, logical_call_id=LOGICAL_CALL, attempt_id=ATTEMPT,
                 max_tokens=24000, max_cost=Decimal(".01"), trace_id=digest(binding)[:32])
@@ -166,6 +189,7 @@ class S01SupplyInventoryHandler:
                 or ai["binding"]["taskRef"]["tenantId"] != result.scope["tenantId"]
                 or ai["usageStatus"] not in {"KNOWN", "UNKNOWN", "NOT_SENT"}):
                 raise ValueError("BROKEN_S01_EXPLANATION_BINDING")
+            validate_versions(ai, facts)
             if ai["status"] == "AVAILABLE":
                 if ai["reason"] != "OK" or ai["usageStatus"] != "KNOWN":
                     raise ValueError("BROKEN_S01_EXPLANATION_BINDING")
