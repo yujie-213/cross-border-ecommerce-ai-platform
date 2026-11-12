@@ -1,5 +1,21 @@
 # 当前增量交接 v0.3
 
+## 真实教学ERP接入与单SKU准入交付（2026-11-12，基于b1813e5）
+
+负责人先明确验收96ba88f/D-S01-DEV-01，已按普通ff-only合入main、登记工程ACCEPTED并同步为b1813e5e851ad1bb513f550118dc973e6605b97b；无分叉冲突/强推/覆盖未知文件。随后在原D:/电商项目/跨境电商智慧AI平台建立codex/s01-erp-readonly，Codex单人串行集成，无新代理。原默认B工作区dd6d112未改；原未知docs/ERP-openapi.yaml在本轮获准作为只读文档使用，未改/跟踪/暂存。用户本机填写忽略的.env.erp，凭据仅运行时注入；没有把密码、Token或原始敏感响应放到Git/日志。
+
+本轮真实认证与只读GET、两个兼容只读POST（订单、库存分桶）已执行；采购明细POST虽经OpenAPI确认只读并列入白名单，但因当前试点未匹配原采购单，本轮未调用，不扩大查询。HTTPS教学地址严格固定，TEACHING_ERP_ONLY局部关闭证书验证、禁跳转/环境代理；其他HTTP/生产TLS不变。首次全局库存发现到页上限失败，候选发现各最多20条，未遍历1095条库存/360 Listing/185商品。原SKU-A无标识不能证恢复；负责人已确认新试点SKT-OL-XXL（MIMI Apparel US、美国FBA平台仓），精确库存/商品/店/仓/Listing关系通过，来源TEACHING_ERP/NETWORK_READ/OBSERVED_FACT且源synthetic=true，非生产事实/非本地Fixture。
+
+实读：库存2行physical169/3、available96/3，源时间2026-09-16与09-07，无已签净额/批次/时区/时效；商品MOQ24、箱规24、交期20；两条报价MOQ50/交期12但停用过期，另有金额约束。仓范围28采购头无匹配试点SKU行，不能推断无未收；商品AQL标准、限定日入库5条/评价2条不构成SKU成熟质量结论。REST销售503，兼容窗口超时；15秒小页单日总数880仅读1条，UTC日期空，不能外推完整需求。实际返回值/覆盖/字段/参数值受控引用在docs/evidence/D-S01-LIVE-01的api-report/data-matrix/source-index/owner-rule-review；原响应/ID/参数值仅data/private/s01-erp-20261112，OpenAPI保持未跟踪。
+
+两次整体重采集因503未通过身份全量复核，保留FAIL；早期工具覆盖latest旧记录的局限明示，后续改每次唯一私有目录。没有自动用旧数据或Mock转成功。当前演示显式指定较早固定真实网络观测包，保留原观测时点、非原子读取及SOURCE_REVALIDATION_FAILED。固定实现54e89061e4409a14ab21a96b4c14d7280b921c4f之后另作D01库存窄复核：真实认证+GET共2请求、2行完整、源tenant/店/仓/SKU一致，PASS；不覆盖此前整体失败或库存旧时点。
+
+已实现Reader→既有D01公开SourceConnector/read_pages→D02安全观测投影→D03唯一manifest/强制准入质量→原B02质量门→O01/G01/G02报告；新增TEACHING_ERP_OBSERVED兼容来源、显式教学API/独立Worker和D04观测定位。只接服务端固定packageRef/精确单SKU quantity scope，不接客户URL/raw秘密，默认不注册/不隐式选包。采集在事务外，任务/重入只消费固定输入。公开报告去除内部投影/manifest、源映射及金额；串行自查发现最低金额不属于quantity scope后在固定提交前收窄并加拒绝负例。B01/B02原代码/权威结果未修改，实际业务未满足时B01不执行、B02无候选、AI NOT_ATTEMPTED且预算0。这个观测DTO始终不可计算，不是用engineering-demo规则冒充真实业务集成。
+
+固定54e8906复验：python -m tools.verify_s01_erp全量399 PASS/0 FAIL/0 ERROR/0 SKIP，原358名称保全、新41；相关最终41项PASS。pip check、compileall、默认禁用模型入口、A线离线检查均退出0，一条既有Starlette/httpx弃用提示。MySQL8.0.27、唯一s01_a01_test_20261112、UTC/READ-COMMITTED、head0004_reports，无清库/新迁移/依赖。另用真实固定观测包在独立API PID46036/Worker45408及该库完成受权报告/证据/幂等，原始结果real-workflow.json；技术任务SUCCEEDED但completeness=BLOCKED，B01 NOT_RUN、模型0。全量回归里的ERP响应为明确OFFLINE fixture，真实网络证据分开，不混算。首次新单元34 PASS/1 FAIL是INVALID_PAGE与PAGINATION_INCOMPLETE错误码预期不符，按真实失败语义修正后35 PASS，后续端口/隐式包/金额负例累计41 PASS。
+
+当前LIVE工程与材料REVIEW、review=null；DATA/RULE及未具备源账号最小权限/留存签认的正式ERP门仍BLOCKED（教学TLS例外已满足，不再阻断本轮读），AI门原样BLOCKED。试点确认不代签业务规则；真实B01/B02正向计算、当前可采购结论及完整MVP验收继续NOT_RUN。岗位需补当前可信库存、完整SKU需求、逐行未收/可售日、独立约束和质量，按规则清单签认；不是因一个缺口停止其他域工作。未调用真实DeepSeek、采购写入、前端或其他Agent。原型与其他业务模块保持。本轮文档/保全/增量秘密检查后只普通同步新评审分支，不把本阶段代码自动合main；等待负责人和星星验收。最终SHA从Git实际查询，不填文件自己的未知SHA。
+
 ## D-S01-DEV-01验收登记与main合入（2026-11-12，基于96ba88f）
 
 用户本轮明确确认负责人及星星独立工程验收通过，批准D-S01-DEV-01登记ACCEPTED及普通合入main。实际目标工作区D:/电商项目/跨境电商智慧AI平台，接手codex/s01-parallel-review/96ba88fe6b16260954a6d95a1aa5467881353779，fetch后远端评审分支相同、origin/main=d6f9d70052e9d153daa68cef700913a21c8a633c；本地main=d16af92为评审祖先，无分叉/额外冲突，跟踪区干净，未知未跟踪docs/ERP-openapi.yaml保留。按ff-only将已验收成果合入本地main，不重写或覆盖。只将DEV工程状态由REVIEW登记ACCEPTED，review绑定d7fef0e实现、96ba88f证据及原358 PASS；真实业务门禁不由本登记解除。校验器仅增加该任务精确工程范围的NOT_RUN保留规则，原四AC/必需证据与失败拒绝规则不放宽，无延期AC豁免。文档检查后普通同步main再开始新ERP阶段，最终同步SHA由Git实际查询。

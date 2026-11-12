@@ -1,0 +1,969 @@
+{
+  "date": "2026-11-12",
+  "classification": {
+    "environment": "TEACHING_ERP",
+    "acquisitionMethod": "NETWORK_READ",
+    "nature": "OBSERVED_FACT",
+    "sourceSynthetic": true,
+    "notProductionFact": true
+  },
+  "approvedPilot": {
+    "alias": "SKU-B",
+    "sku": "SKT-OL-XXL",
+    "store": "MIMI Apparel US",
+    "warehouse": "美国FBA平台仓",
+    "ownerConfirmed": true,
+    "ownerConfirmationRef": "owner-message-20261112-SKT-OL-XXL",
+    "originalSkuARestored": false,
+    "privateIdentityRef": "data/private/s01-erp-20261112/identity.json",
+    "identityFileSha256": "c408d230a164c87e3d86a4651cefebd0845834ba5073870e3d8cd069fe8780b9"
+  },
+  "openapi": {
+    "controlledRef": "docs/ERP-openapi.yaml",
+    "sha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+    "tracked": false
+  },
+  "transport": {
+    "scope": "TEACHING_ERP_ONLY",
+    "https": true,
+    "certificateVerification": false,
+    "redirects": false,
+    "environmentProxy": false,
+    "credentialRef": ".env.erp (ignored; values not recorded)",
+    "allowedReadOnlyPostEvidence": "Local OpenAPI descriptions explicitly say 模拟领星风格只读查询 for all three registered compatibility POSTs"
+  },
+  "retainedRequestRecords": 57,
+  "events": [
+    {
+      "method": "GET",
+      "path": "/healthz",
+      "parameterNames": [],
+      "observedAt": "2026-11-12T09:33:05.257059+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "39dd7d9f0316307200362012de7563ae82aaef2bf20539a7dc3fb41dcd2ccff1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:33:05.680183+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "view"
+      ],
+      "observedAt": "2026-11-12T09:33:06.207832+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "3ff31321724b73617aa8bb816f6938051ad901aa8a419628076ff3ce9d1d4a14"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "view"
+      ],
+      "observedAt": "2026-11-12T09:33:06.600280+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "6255f4f847f95d75eb021c0599c95f18ea97639fc6b18b726143f2490808457e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/store-authorizations",
+      "parameterNames": [
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:33:07.002683+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "099da824bde6655dcb4547b956f4dac4cd0f792ff2a2923293b71e83c0cf5ed0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "parameterNames": [
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:33:07.410253+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "7bdd370f46bd41ae1b434ec333862597642e7956f0871f977f17263740f7f589"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:34:05.945501+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "view"
+      ],
+      "observedAt": "2026-11-12T09:34:06.506004+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "410c60319e069e68a4cb4271482b237dc27ba550f73aa7b073678fd71e24fc5f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameterNames": [
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:34:06.893935+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "54f190528eb27e03c31f9286dd410c77e0682f1118d72d24c263f12eb474b055"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameterNames": [
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:34:07.307874+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "68b6da5d1f1124551c8b15594d0179c590ab4bc096450477e1f1c21e5e6172b8"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:34:44.186425+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q",
+        "store_id",
+        "view",
+        "wid"
+      ],
+      "observedAt": "2026-11-12T09:34:44.752737+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "04e55135f9990b4fc6a266b3a9c8dda42756272982ffb6af2e36d76c703be3d7"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:45.159381+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "8db6ffd470ae6ae2448e3766d1e3e9a604a7048b2b6202869eb1b5aada54ec58"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/store-authorizations",
+      "parameterNames": [
+        "ids",
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:34:45.552482+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "94ef7962d1b51c0e8c964f06cd87db1ade7045441d612773333202de3a09db5e"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "parameterNames": [
+        "ids",
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:34:45.959282+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "210cf5b82bcf04c8705bfb89a50a586f0938bc3f140bf96b5fd5fc76fab9b78f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q",
+        "store_name"
+      ],
+      "observedAt": "2026-11-12T09:34:46.369304+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "452c7050efb303aaac90d866682187fa530d2fdc61fdc979aa278e01fd63df60"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sales-orders",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "shipping_warehouse",
+        "store_name",
+        "view"
+      ],
+      "observedAt": "2026-11-12T09:34:46.775609+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:52.179493+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "9f61d40f20173963028c4040410ce5665c9d9fe99f41d80d7048b54d8f867e43"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:52.603446+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "ff8e1ece2728d98d4335fccc857b996985a156f1d88b9637e4de0f49bc8ff079"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:53.070380+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "33455026e206075b78eb51f2487075882485300c84cfd70600f763e2fd92d8c8"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:53.502410+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "57ed3c28fab2421ee114575e7041a973d644e88063f684cf5735065a6dd8b070"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:53.901727+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "04b40d987d222473ca7cdcdc7a54f85f2ed09c62fe7a33aeb0bf7d3fb5b82ae4"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:34:54.337009+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "2d058a6a0e4df41c52f22dbb514fa911d1fed962c4cc32c77c9aa939770623ea"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/supplier-quotes",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "sku"
+      ],
+      "observedAt": "2026-11-12T09:34:54.759755+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "8a65fdae71d5b28a863748056741bcf2d206de3fbe395270705bab680b295aeb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:34:55.166575+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "321e08ea821c2970d8499f7fdd96b262ad794b542c9686d3f78f70e1295ba334"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:34:55.605222+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "3fb9ee27f2b1306ed8f9579db2e6429ac7c794be9764479dac06909e1c467d89"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:34:56.034151+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "320e32727c2d9eaa70de722d3f8586fcfa40708cb84c413b3c98ec7a5790e5d3"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:34:56.426934+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "16c160100752a77cea5919e1a26ae59758fefbebbe49b5369cd92da39ab62c58"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:34:56.851428+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "b3e93944f6d704b511344f2c3f4735c8bbc935c0182ecd821a6c5989c0f61cc1"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:36:58.015517+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/data/mws/orders",
+      "parameterNames": [
+        "date_type",
+        "end_date",
+        "length",
+        "offset",
+        "sid",
+        "start_date"
+      ],
+      "observedAt": "2026-11-12T09:36:58.543891+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "code": "ERP_TIMEOUT"
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/data/mws/orders",
+      "parameterNames": [
+        "date_type",
+        "end_date",
+        "length",
+        "offset",
+        "sid",
+        "start_date"
+      ],
+      "observedAt": "2026-11-12T09:37:06.946461+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "code": "ERP_TIMEOUT"
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+      "parameterNames": [
+        "length",
+        "offset",
+        "sku",
+        "wid"
+      ],
+      "observedAt": "2026-11-12T09:37:15.331781+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "9a23d5b7fcf4b60f26d16829cdf4257f009d2e40a7f943b660d782f971793f3c"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:40:22.682679+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "date_from",
+        "date_to",
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:40:23.240188+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "a1650553fe5e7ec90dc618c7739e348072e489c5f8e1568643a6604ca03fc995"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "date_from",
+        "date_to",
+        "limit",
+        "offset",
+        "warehouse_name"
+      ],
+      "observedAt": "2026-11-12T09:40:23.654809+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "7bf1f49cae79bdb9c2131f2cae6c76a8890342c88fb66239f3487546ddae5657"
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/data/mws/orders",
+      "parameterNames": [
+        "date_type",
+        "end_date",
+        "length",
+        "offset",
+        "sid",
+        "start_date"
+      ],
+      "observedAt": "2026-11-12T09:40:24.064666+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "a876d95fe14c4f5dce20328c5e3c6be2d83431b9fe4c1b9ebf4f39ebc44e5bcf"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:49:42.525467+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "code": "ERP_503"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:49:47.937914+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "code": "ERP_503"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:49:53.383151+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "code": "ERP_503"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T09:49:58.855586+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "parameterNames": [
+        "ids",
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:50:00.081512+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "parameterNames": [
+        "ids",
+        "limit",
+        "offset"
+      ],
+      "observedAt": "2026-11-12T09:50:06.491077+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q",
+        "store_name"
+      ],
+      "observedAt": "2026-11-12T09:50:11.881109+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "19c5a8a61dfb50a82d0490511082c01639567e845f6f3060938254f4f28e17af"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sales-orders",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "shipping_warehouse",
+        "store_name",
+        "view"
+      ],
+      "observedAt": "2026-11-12T09:50:13.682496+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sales-orders",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "shipping_warehouse",
+        "store_name",
+        "view"
+      ],
+      "observedAt": "2026-11-12T09:50:20.793166+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:50:26.333500+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "f38f64d23f787cb25c7f12d4425ce07b34563a1cfc2ff46d3bb2c6e44af8594f"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:50:28.195771+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q"
+      ],
+      "observedAt": "2026-11-12T09:50:34.595087+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/supplier-quotes",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "sku"
+      ],
+      "observedAt": "2026-11-12T09:50:40.003044+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/supplier-quotes",
+      "parameterNames": [
+        "limit",
+        "offset",
+        "sku"
+      ],
+      "observedAt": "2026-11-12T09:50:46.402674+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "2a6cf8bd688e74b2a6aa02d22089348c88b84c811d925d61b54cda9929a77748"
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+      "parameterNames": [
+        "length",
+        "offset",
+        "sku",
+        "wid"
+      ],
+      "observedAt": "2026-11-12T09:50:47.385505+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "66348e05f225ab99da9a75b5a46fd5b9ada66dba486f34aa15d10c64016946cb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/customer-voice",
+      "parameterNames": [
+        "date_from",
+        "date_to",
+        "kind",
+        "limit",
+        "offset",
+        "store_id"
+      ],
+      "observedAt": "2026-11-12T09:50:48.277964+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "a1650553fe5e7ec90dc618c7739e348072e489c5f8e1568643a6604ca03fc995"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "date_from",
+        "date_to",
+        "limit",
+        "offset",
+        "warehouse_name"
+      ],
+      "observedAt": "2026-11-12T09:50:48.888225+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inbound-orders",
+      "parameterNames": [
+        "date_from",
+        "date_to",
+        "limit",
+        "offset",
+        "warehouse_name"
+      ],
+      "observedAt": "2026-11-12T09:50:55.292325+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 503,
+      "responseFingerprint": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba",
+      "code": "ERP_503"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T10:06:40.773889+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q",
+        "store_id",
+        "view",
+        "wid"
+      ],
+      "observedAt": "2026-11-12T10:06:41.309797+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "9c2bf06463c202a218835906a5aacbe35d91420524a3df96cd5289bb9a2e55f5"
+    }
+  ],
+  "controlledFiles": [
+    {
+      "controlledRef": "data/private/s01-erp-20261112/discovery.json",
+      "sha256": "e878ce4be78f4359db6ae34c49935cb5229dc2ef956ae1d7bd168cc69c78d629",
+      "bytes": 5673
+    },
+    {
+      "controlledRef": "data/private/s01-erp-20261112/candidate-discovery.json",
+      "sha256": "60c74591a1ddf63a343f5e5821ac3c5152474abc7dee0a98b567c61abfa2d0d0",
+      "bytes": 55219
+    },
+    {
+      "controlledRef": "data/private/s01-erp-20261112/single-sku.json",
+      "sha256": "1ef02aa74e56df82cab861199ae9ce90bebefba7ded54b457fe8ebedf9340285",
+      "bytes": 52269
+    },
+    {
+      "controlledRef": "data/private/s01-erp-20261112/cross-check.json",
+      "sha256": "ee660b9dae7617ad70e747fdba06c339ad35c46e8193efd6d60860e6d3ac75ce",
+      "bytes": 2521
+    },
+    {
+      "controlledRef": "data/private/s01-erp-20261112/last-check.json",
+      "sha256": "8c87ae3ad2930d0f367f170f1842ed7a1648c03fe8110c9820b546e24b1839a8",
+      "bytes": 9110
+    },
+    {
+      "controlledRef": "data/private/s01-erp-20261112/latest-capture.json",
+      "sha256": "5634ec00ef0566cd096c4c0b6fe2fa1ebf277a09609c9ad2e8a871b3c000b7af",
+      "bytes": 14296
+    },
+    {
+      "controlledRef": "data/private/s01-erp-20261112/fixed-observation-capture.json",
+      "sha256": "2ce424b9ee9b38661c0ed816e0c2add5b0795e747f6b8c117e2abc00c8c12c67",
+      "bytes": 61428
+    }
+  ],
+  "requestCountLimitations": "Retained records are not asserted as the total calls of the whole session: initial iterations overwrote latest-capture; their FAIL outcomes are retained in execution history. Later capture tool writes unique per-run directories. Copied fixed-package events are deduplicated.",
+  "observations": {
+    "restSalesError": "ERP_503",
+    "compatOrdersTimeouts": true,
+    "compatSingleDayTotal": 880,
+    "compatSinglePageRows": 1,
+    "compatCoverageComplete": false,
+    "latestIdentityRevalidation": "FAIL_ERP_503",
+    "noAutomaticMockFallback": true,
+    "explicitFixedObservationPackage": true
+  },
+  "safety": {
+    "erpBusinessWrites": 0,
+    "realModelCalls": 0,
+    "rawSensitiveResponsesCommitted": false,
+    "credentialValuesCommitted": false
+  },
+  "limitations": [
+    "Two latest capture attempts failed identity-complete validation; do not call them successful current capture.",
+    "Fixed earlier observations retain original observation times and SOURCE_REVALIDATION_FAILED.",
+    "Original SKU-A cannot be recovered from historical type-only evidence; the owner explicitly confirmed a new sample."
+  ],
+  "fixedImplementationProbe": {
+    "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+    "result": "PASS",
+    "artifactRef": "docs/evidence/D-S01-LIVE-01/fixed-network-probe.json",
+    "complete": true,
+    "rows": 2,
+    "attempts": 2,
+    "currentFreshness": "NOT_ADMITTED"
+  },
+  "compatibilityPostDisposition": {
+    "staticallyConfirmedAllowlisted": 3,
+    "actuallyInvoked": [
+      "/erp/sc/data/mws/orders",
+      "/erp/sc/routing/data/local_inventory/inventoryDetails"
+    ],
+    "notRun": [
+      {
+        "path": "/erp/sc/routing/data/local_inventory/purchaseOrderList",
+        "reason": "No observed purchase order line matched current pilot; did not expand to unrelated raw orders."
+      }
+    ]
+  }
+}

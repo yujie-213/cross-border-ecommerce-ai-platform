@@ -1,0 +1,213 @@
+{
+  "version": "s01-live-observation-20261112-v1",
+  "classification": {
+    "environment": "TEACHING_ERP",
+    "acquisitionMethod": "NETWORK_READ",
+    "nature": "OBSERVED_FACT",
+    "sourceSynthetic": true,
+    "notProductionFact": true
+  },
+  "domains": [
+    {
+      "domain": "identity",
+      "observed": "新试点店/仓/商品/Listing精确关联通过；负责人已确认。源记录synthetic=true。",
+      "values": {
+        "sku": "SKT-OL-XXL",
+        "store": "MIMI Apparel US",
+        "warehouse": "美国FBA平台仓"
+      },
+      "sourceGroups": [
+        "inventory",
+        "product",
+        "store",
+        "warehouse",
+        "listing"
+      ],
+      "state": "MAPPING_VERIFIED_PILOT_CONFIRMED",
+      "missing": [
+        "单位/精度业务签认；后续503使最新身份全量复核失败"
+      ],
+      "effect": "不再因SKU-A未恢复停止；固定旧观测可追溯，不能称生产或最新数据就绪",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "inventory",
+      "observed": "精确范围2行库存，分别quantity=169/3，available=96/3；不自动合并或按差额推预留。",
+      "values": {
+        "physicalByRow": [
+          "169",
+          "3"
+        ],
+        "availableByRow": [
+          "96",
+          "3"
+        ],
+        "sourceUpdatedAt": [
+          "2026-09-16 23:00:00",
+          "2026-09-07 10:00:00"
+        ],
+        "sourceUnit": "件"
+      },
+      "sourceGroups": [
+        "inventory",
+        "buckets"
+      ],
+      "state": "OBSERVED_NOT_CALCULABLE",
+      "missing": [
+        "可售净额/预留冻结重叠口径",
+        "批次互斥及聚合",
+        "源时区/当前时效；分桶接口空不证明分桶为0"
+      ],
+      "effect": "不发布当前净可售聚合、覆盖或缺货量",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "demand",
+      "observed": "REST销售503；兼容历史/当前时间窗发生超时；15秒小页重试得单日总数880但只取1条，sid和日期局部吻合，UTC日期为空。",
+      "values": {
+        "requestedSingleDay": "2026-09-16",
+        "totalReported": 880,
+        "rowsRetainedForThatPage": 1,
+        "coverageComplete": false
+      },
+      "sourceGroups": [
+        "sales",
+        "orders_historical",
+        "orders_current",
+        "orders_retry"
+      ],
+      "state": "ERROR_OR_INCOMPLETE",
+      "missing": [
+        "完整可追溯SKU历史日序列",
+        "时区/订单状态/取消退货/去重/缺日口径",
+        "历史转未来需求及预留关系"
+      ],
+      "effect": "不能构造权威未来需求；未填0、未自动用源日均或工程曲线",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "supply",
+      "observed": "仓过滤返回28个采购头，源item_list含sku/quantity/unit_price，未匹配到该试点SKU行；不把单头pending分配给它。",
+      "values": {
+        "purchaseHeaders": 28,
+        "matchingSkuLinesInReturnedHeaders": 0
+      },
+      "sourceGroups": [
+        "purchases"
+      ],
+      "state": "COVERAGE_NOT_ADMITTED",
+      "missing": [
+        "有效未收全集/逐行状态、剩余、镜像去重及完备性声明"
+      ],
+      "effect": "不将未匹配推断为无供给或0在途",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "availability",
+      "observed": "商品交期20天；适用未收行/可售日期未具备。报价交期12天但报价已停用且过期。",
+      "values": {
+        "productLeadDays": 20,
+        "disabledQuoteLeadDays": 12
+      },
+      "sourceGroups": [
+        "product",
+        "purchases",
+        "quotes"
+      ],
+      "state": "MISSING_AVAILABLE_DATES",
+      "missing": [
+        "交期起终点/日历/运输入库质检转换",
+        "逐行可售日/过期未收处理"
+      ],
+      "effect": "不将交期整数拼成可售承诺，不发布确定首缺日/改善曲线",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "moq",
+      "observed": "商品MOQ24；两条报价minimum_quantity50，但enabled=false且有效期已过。报价还存在最低金额约束。",
+      "values": {
+        "productMOQ": 24,
+        "disabledQuoteMOQ": [
+          50,
+          50
+        ],
+        "quoteValidTo": [
+          "2026-10-30",
+          "2023-12-30"
+        ]
+      },
+      "sourceGroups": [
+        "product",
+        "quotes"
+      ],
+      "state": "OBSERVED_APPLICABILITY_UNCONFIRMED",
+      "missing": [
+        "供应商/单位/有效期/来源优先级及其他硬约束签认"
+      ],
+      "effect": "不自动采用24或50形成合规候选",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "orderMultiple",
+      "observed": "商品箱规24；未验证独立订购倍数语义。",
+      "values": {
+        "cartonQuantity": 24,
+        "independentOrderMultiple": null
+      },
+      "sourceGroups": [
+        "product"
+      ],
+      "state": "MISSING",
+      "missing": [
+        "独立倍数/单位换算/适用层级或箱规等同倍数的明确依据"
+      ],
+      "effect": "不把箱规当倍数，不默认1",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    },
+    {
+      "domain": "quality",
+      "observed": "商品有AQL抽检标准；单日仓范围入库5条、店范围评价2条，未取得试点SKU成熟质量群组/分母/有效结论。",
+      "values": {
+        "inboundRowsInDay": 5,
+        "reviewRowsInDay": 2,
+        "skuSpecificVerifiedConclusion": null
+      },
+      "sourceGroups": [
+        "product",
+        "inbound_day",
+        "voice_day"
+      ],
+      "state": "REQUIRED_SIGNAL_UNRESOLVED",
+      "missing": [
+        "required/optional/有效期",
+        "SKU关联/成熟分母/调查状态及阻断矩阵"
+      ],
+      "effect": "保留采购阻断，不把AQL标准当质量通过、不用示例12%阈值",
+      "scope": "Owner-confirmed SKU-B / one store / one warehouse; exact parameters and raw IDs stay in controlled files",
+      "queryParametersRef": "data/private/s01-erp-20261112/*: data.<sourceGroup>.parameters",
+      "observedAtRef": "data.<sourceGroup>.observedAt in controlled capture",
+      "businessAdmission": "BLOCKED"
+    }
+  ]
+}

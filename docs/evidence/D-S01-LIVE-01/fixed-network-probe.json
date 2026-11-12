@@ -1,0 +1,68 @@
+{
+  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+  "classification": "ACTUAL_TEACHING_ERP_NETWORK_READ_NOT_MOCK",
+  "sampleRef": "SKU-B",
+  "queryParameterNames": [
+    "field",
+    "match",
+    "q",
+    "store_id",
+    "wid"
+  ],
+  "queryParametersRef": "data/private/s01-erp-20261112/fixed-probe-54e89061e440/parameters.json",
+  "tls": "TEACHING_ERP_ONLY_CERTIFICATE_VERIFICATION_DISABLED_LOCALLY",
+  "businessAdmission": "BLOCKED",
+  "result": "PASS",
+  "exitCode": 0,
+  "rows": 2,
+  "complete": true,
+  "responseFingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+  "observedAt": "2026-11-12T10:06:41.342614+00:00",
+  "inventoryFreshness": "NOT_ADMITTED",
+  "availableBySourceRow": [
+    96,
+    3
+  ],
+  "sourceUpdatedAt": [
+    "2026-09-16 23:00:00",
+    "2026-09-07 10:00:00"
+  ],
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameterNames": [
+        "appId",
+        "appSecret"
+      ],
+      "observedAt": "2026-11-12T10:06:40.773889+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameterNames": [
+        "field",
+        "limit",
+        "match",
+        "offset",
+        "q",
+        "store_id",
+        "view",
+        "wid"
+      ],
+      "observedAt": "2026-11-12T10:06:41.309797+00:00",
+      "teachingERPOnly": true,
+      "tlsVerification": false,
+      "httpStatus": 200,
+      "responseFingerprint": "9c2bf06463c202a218835906a5aacbe35d91420524a3df96cd5289bb9a2e55f5"
+    }
+  ],
+  "attempts": 2,
+  "rawResponsesCommitted": false,
+  "realModelCalls": 0,
+  "erpBusinessWrites": 0,
+  "sourceTenantScopeChecked": true
+}

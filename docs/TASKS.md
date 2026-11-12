@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前教学ERP交付（2026-11-12，固定54e8906）：LIVE真实接入与准入报告交REVIEW；399项工程测试PASS，原358保全、新41，真实读取/失败与独立进程回放另有证据。新试点已确认，当前业务核心数据/规则仍不满足，正向B01/B02 NOT_RUN，DATA/RULE/未满足正式ERP安全及AI门继续BLOCKED；教学TLS已明确获准且非读取阻断。DEV工程ACCEPTED/main合入事实保留，不把当前阻断报告当完整业务验收。
+
 当前真实教学ERP阶段（2026-11-12，基于b1813e5）：DEV已由负责人/星星工程验收并普通合入main；本轮真实认证/有界只读及教学Connector局部TLS例外明确获准，新试点已确认。当前八域/业务规则缺口按实保留BLOCKED，真实AI/采购写入/前端及其他Agent未授权。旧零调用/仅规划/不合并main停止点保留历史，不覆盖本轮新授权。
 
 当前验收登记（2026-11-12，基于96ba88f）：负责人确认D-S01-DEV-01已通过本人及星星独立工程验收，登记ACCEPTED并批准普通合入main；沿用d7fef0e固定实现358项证据，不把工程接受当真实业务准入。后续教学ERP真实只读阶段按本轮新授权单独领取。
@@ -4086,9 +4088,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "BLOCKED",
   "implementationCommits": [
-    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b"
+    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+    "54e89061e4409a14ab21a96b4c14d7280b921c4f"
   ],
-  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "evidence": [
     {
       "kind": "OFFLINE_DOCUMENT_CHECK",
@@ -4117,19 +4120,33 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    },
+    {
+      "kind": "REAL_OBSERVATION_MATERIAL",
+      "acceptanceIds": [
+        "D-S01-DATA-01/AC1",
+        "D-S01-DATA-01/AC2",
+        "D-S01-DATA-01/AC3"
+      ],
+      "command": "本轮真实教学ERP只读与八域对照",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "新试点已确认、读取/范围/实际数量与缺口可定位；业务输入/规则/正式安全未满足，原准入仍BLOCKED。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/data-matrix.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-erp-readonly",
-  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": {
-    "reason": "原身份与数值未留存；当前八域未完整绑定/补证",
+    "reason": "新试点身份及精确映射已确认；当前库存净额/时区/鲜度、完整SKU需求、有效未收全集/可售日、独立约束与质量仍不齐，整体重采集出现503。",
     "responsibleRole": "负责人指定的数据/采购/仓库/质量核对人",
-    "releaseCondition": "恢复或批准唯一替代身份，明确本轮实际可用输入及缺失的结果边界，并签认受控包"
+    "releaseCondition": "补齐当前可信八域必要输入/覆盖及受控证据并按本SKU确认口径；不以旧观测、空接口或试点确认代替业务准入。"
   },
   "history": [
     {
@@ -4168,6 +4185,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
       "previousEntryCondition": "已有获准资料的单SKU离线复核已交评审；原SKU-A恢复/受控包及岗位签认仍未满足，门禁继续BLOCKED。本轮不补业务事实、不新认证/联网，新增真实只读验证仍须ERP安全门与单独明确授权。",
       "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "真实接入材料交REVIEW，更新已关闭的身份/TLS资料问题与仍缺的实际准入；不把规则建议或HTTP成功当业务通过。",
+      "previousBlocker": {
+        "reason": "原身份与数值未留存；当前八域未完整绑定/补证",
+        "responsibleRole": "负责人指定的数据/采购/仓库/质量核对人",
+        "releaseCondition": "恢复或批准唯一替代身份，明确本轮实际可用输入及缺失的结果边界，并签认受控包"
+      },
+      "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
     }
   ],
   "acceptanceRefs": [
@@ -4241,9 +4270,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "BLOCKED",
   "implementationCommits": [
-    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b"
+    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+    "54e89061e4409a14ab21a96b4c14d7280b921c4f"
   ],
-  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "evidence": [
     {
       "kind": "OFFLINE_DOCUMENT_CHECK",
@@ -4272,19 +4302,33 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    },
+    {
+      "kind": "REAL_OBSERVATION_MATERIAL",
+      "acceptanceIds": [
+        "D-S01-RULE-01/AC1",
+        "D-S01-RULE-01/AC2",
+        "D-S01-RULE-01/AC3"
+      ],
+      "command": "本轮真实教学ERP只读与八域对照",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "新试点已确认、读取/范围/实际数量与缺口可定位；业务输入/规则/正式安全未满足，原准入仍BLOCKED。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/data-matrix.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-erp-readonly",
-  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": {
-    "reason": "原则已确认，但计算/日期/约束/质量具体口径尚未签认",
+    "reason": "已有新SKU真实数量/约束观察及固定期望例，净额/批次、需求预测/预留、未收/日期、MOQ优先级/独立倍数、质量及比较策略尚未逐项签认。",
     "responsibleRole": "负责人指定采购/运营/质量与B01/B02契约评审者",
-    "releaseCondition": "当前最小规则和固定期望、质量/降级矩阵获得相应岗位签认"
+    "releaseCondition": "负责人及仓库/运营/采购/质量按owner-rule-review.md签认最小规则版本与固定期望例，并具备匹配数据。"
   },
   "history": [
     {
@@ -4316,6 +4360,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
       "previousEntryCondition": "已整理单SKU业务规则缺口与受控补充建议；具体净额/需求/供给/日期/约束/质量口径及固定期望例仍须岗位签认，门禁继续BLOCKED。工程样例和本轮摘要修复不代替真实规则签认。",
       "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "真实接入材料交REVIEW，更新已关闭的身份/TLS资料问题与仍缺的实际准入；不把规则建议或HTTP成功当业务通过。",
+      "previousBlocker": {
+        "reason": "原则已确认，但计算/日期/约束/质量具体口径尚未签认",
+        "responsibleRole": "负责人指定采购/运营/质量与B01/B02契约评审者",
+        "releaseCondition": "当前最小规则和固定期望、质量/降级矩阵获得相应岗位签认"
+      },
+      "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
     }
   ],
   "acceptanceRefs": [
@@ -4390,9 +4446,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "BLOCKED",
   "implementationCommits": [
-    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b"
+    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+    "54e89061e4409a14ab21a96b4c14d7280b921c4f"
   ],
-  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "evidence": [
     {
       "kind": "OFFLINE_DOCUMENT_CHECK",
@@ -4421,19 +4478,33 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    },
+    {
+      "kind": "REAL_OBSERVATION_MATERIAL",
+      "acceptanceIds": [
+        "D-S01-ERP-ACCESS-01/AC1",
+        "D-S01-ERP-ACCESS-01/AC2",
+        "D-S01-ERP-ACCESS-01/AC3"
+      ],
+      "command": "本轮真实教学ERP只读与八域对照",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "新试点已确认、读取/范围/实际数量与缺口可定位；业务输入/规则/正式安全未满足，原准入仍BLOCKED。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/data-matrix.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-erp-readonly",
-  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": {
-    "reason": "正式证书策略/安全凭据配置和下一阶段新读取授权未提供",
+    "reason": "教学TLS例外、指定HTTPS目标、凭据与本轮只读范围授权已落实并实测，不阻断正常读取；源账号最小权限/精确字段许可及留存责任仍待安全岗位确认，未登记正式安全准入。",
     "responsibleRole": "负责人及其指定ERP/安全管理员",
-    "releaseCondition": "正式受控传输、凭据引用及单SKU只读调用范围获得明确授权"
+    "releaseCondition": "在TEACHING_ERP_ONLY范围确认源账号/字段最小权限、留存责任与只读保护证据并独立安全评审；教学自签名证书不再作为本轮阻断或重复审批理由。"
   },
   "history": [
     {
@@ -4465,6 +4536,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
       "previousEntryCondition": "已离线复核历史ERP证据及安全缺口；可信传输/受控凭据/精确只读范围和单独启用授权仍缺，门禁继续BLOCKED。本轮不重放认证、不发ERP请求、不沿用历史TLS例外。",
       "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "真实接入材料交REVIEW，更新已关闭的身份/TLS资料问题与仍缺的实际准入；不把规则建议或HTTP成功当业务通过。",
+      "previousBlocker": {
+        "reason": "正式证书策略/安全凭据配置和下一阶段新读取授权未提供",
+        "responsibleRole": "负责人及其指定ERP/安全管理员",
+        "releaseCondition": "正式受控传输、凭据引用及单SKU只读调用范围获得明确授权"
+      },
+      "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
     }
   ],
   "acceptanceRefs": [
@@ -4486,7 +4569,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-01"
   ],
-  "entryCondition": "A01工程已验收且S01 Mock集成已交REVIEW；真实数据发送许可、用途/安全与Provider启用条件尚未签认，门禁继续BLOCKED。本轮仅工程摘要修复和Mock回归，不授权真实DeepSeek或付费调用，不以全AI平台/A02/A03为前置。",
+  "entryCondition": "DEV工程已ACCEPTED并按负责人授权合入main；本轮真实教学ERP读取授权不含真实DeepSeek或付费模型。Provider用途/发送许可/预算和C-04仍未准入，门禁继续BLOCKED。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": null,
   "allowedPaths": [
@@ -4557,6 +4640,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "按本轮独立评审修复授权澄清当前执行条件；保留原领取条件和既有历史，不改变验收、依赖、启用门禁或任务状态。",
       "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-01用途契约后确认，不以全AI平台/A02/A03为前置。",
       "observedHead": "75e42bd0082e6c69022d089d9a87ab68a544085d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "明确本轮教学ERP读取与真实模型许可分离，不开展AI任务。",
+      "previousEntryCondition": "A01工程已验收且S01 Mock集成已交REVIEW；真实数据发送许可、用途/安全与Provider启用条件尚未签认，门禁继续BLOCKED。本轮仅工程摘要修复和Mock回归，不授权真实DeepSeek或付费调用，不以全AI平台/A02/A03为前置。",
+      "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
     }
   ],
   "acceptanceRefs": [
@@ -4635,13 +4726,96 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BUSINESS_REVIEW",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "54e89061e4409a14ab21a96b4c14d7280b921c4f"
+  ],
+  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+  "evidence": [
+    {
+      "kind": "REAL_ERP_READ",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2"
+      ],
+      "command": "python -m tools.s01_erp_readonly --capture；固定实现下D01 TeachingReadSource库存窄复核",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "真实认证与多域GET/两个兼容只读POST实调；第三个采购明细POST仅静态白名单确认、本轮未调用；固定提交下库存2行完整、tenant/店/仓/SKU复核PASS；源synthetic=true仍是教学网络观察，不是生产/本地Fixture。完整原值只在受控私有位置。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/fixed-network-probe.json"
+    },
+    {
+      "kind": "REAL_ERP_SOURCE_FAILURE",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "python -m tools.s01_erp_readonly --capture",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "两次当前完整重采集未通过身份全量复核，多项ERP503；兼容订单超时/单日880条仅小页1条，部分页被拒，均未当零或Mock成功。首次迭代覆盖latest旧文件的局限如实登记，现工具每次唯一私有目录。",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/source-index.json"
+    },
+    {
+      "kind": "REAL_SOURCE_ADMISSION_WORKFLOW",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "固定54e8906真实观测包→独立API/Worker/原隔离MySQL/G01/D04报告演示",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "显式旧真实网络观测回放，后续复核失败标记保留；任务技术SUCCEEDED但业务BLOCKED，B01 NOT_RUN，B02门禁不出候选，模型0；公开quantity DTO不含原始响应/映射/金额。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/real-workflow.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "python -m tools.verify_s01_erp",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "399 PASS/0 FAIL/0 ERROR/0 SKIP，原358名称保全，新41；新切片独立41 PASS。局部TLS例外/目标与方法白名单/禁重定向/秘密脱敏/共享预算重试/分页漂移重复/G01缩权/取消/固定包均实测；回归输入是OFFLINE fixture，不冒充ERP请求。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/verification.json"
+    },
+    {
+      "kind": "PILOT_CONFIRMATION",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1"
+      ],
+      "command": "负责人本轮明确答复“确认该新样本作为试点”",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "新SKU-B=SKT-OL-XXL，MIMI Apparel US、美国FBA平台仓；不称恢复SKU-A，仅确认试点，未代签所有规则。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/source-index.json"
+    },
+    {
+      "kind": "BUSINESS_REVIEW",
+      "acceptanceIds": [
+        "D-S01-LIVE-01/AC1",
+        "D-S01-LIVE-01/AC2",
+        "D-S01-LIVE-01/AC3"
+      ],
+      "command": "NOT_RUN：完整需求/净额与时效/未收及日期/独立倍数/质量规则与输入岗位签认",
+      "environment": "Windows / 原stage-a-clean / 唯一s01_a01_test_20261112；真实教学读取与OFFLINE回归分开",
+      "sample": "真实数据正向B01/B02核心业务计算仍NOT_RUN；只交真实接入和正确准入阻断工程REVIEW，不把阻断报告当完整MVP或可采购候选验收。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/D-S01-LIVE-01/owner-rule-review.md"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-erp-readonly",
-  "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b",
+  "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4662,6 +4836,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "本轮负责人新授权覆盖旧ERP读取/TLS停止点；领取真实调查和技术接入，原缺失业务规则不擅自补齐，不把教学源synthetic样本称生产事实。",
       "previousEntryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。依赖和安全/数据门满足且本次只读验证另获授权后运行，不扩大原范围。",
       "observedHead": "b1813e5e851ad1bb513f550118dc973e6605b97b"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "真实教学读取、八域矩阵、固定观测D01/D02/D03/O01/G01/G02及独立进程受限报告完成，399工程回归PASS；源失败保留FAIL，正向业务计算/规则验收NOT_RUN，交负责人和星星审查，不登记ACCEPTED。",
+      "observedHead": "54e89061e4409a14ab21a96b4c14d7280b921c4f"
     }
   ],
   "acceptanceRefs": [

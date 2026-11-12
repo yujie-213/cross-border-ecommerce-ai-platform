@@ -1,0 +1,298 @@
+{
+  "testedCommit": "54e89061e4409a14ab21a96b4c14d7280b921c4f",
+  "result": "PASS",
+  "scope": "Actual fixed teaching-network observation replay / real isolated MySQL API independent Worker; NOT positive business calculation",
+  "inputMode": "EXPLICIT_FIXED_EARLIER_NETWORK_OBSERVATION_NOT_LATEST_SUCCESS",
+  "originalSourcePackageRef": "af8de660e98ad2c2145e3a2a753eba8bf97bea8efc00daf154ae548f0b9e24fc",
+  "apiPid": 46036,
+  "workerPids": [
+    45408
+  ],
+  "taskState": "SUCCEEDED",
+  "businessCompleteness": "BLOCKED",
+  "b01": "NOT_RUN_INPUTS_AND_RULES_BLOCKED",
+  "b02": "QUALITY_GATE_BLOCKED_NO_CANDIDATES",
+  "modelCalls": 0,
+  "procurementWrites": 0,
+  "reportPublications": 1,
+  "quantityOnlyViewVerified": true,
+  "g01IdentityScope": "Generated local teaching engineering identity; exact current scope, not enterprise/production identity acceptance",
+  "publicReport": {
+    "contractVersion": "0.1.0",
+    "sourceNature": "TEACHING_ERP_OBSERVED",
+    "completeness": "BLOCKED",
+    "scope": {
+      "fields": [
+        "quantity"
+      ],
+      "storeIds": [
+        "store-6b86b273ff34fce19d6b"
+      ],
+      "tenantId": "process-e64b7138a1d04625b975683a12060f57",
+      "warehouseIds": [
+        "warehouse-8bd9c0d453533757387e"
+      ],
+      "canonicalSkuIds": [
+        "sku-1c5fe03ebb578d2bb976"
+      ]
+    },
+    "snapshotRef": "snapshot-d67153b462a2dfe5a7f6266e32392d41834e12aff88e71d8666d621c77b4d7ee",
+    "taskRef": {
+      "taskId": "2914743d6fe849d7aa25d64b9110b032",
+      "tenantId": "process-e64b7138a1d04625b975683a12060f57"
+    },
+    "reportRef": {
+      "reportId": "2914743d6fe849d7aa25d64b9110b032",
+      "tenantId": "process-e64b7138a1d04625b975683a12060f57"
+    },
+    "planVersion": "1",
+    "scenarioId": "TEACHING_S01_ADMISSION",
+    "scenarioVersion": "0.1.0",
+    "participants": [
+      {
+        "scenarioId": "TEACHING_S01_ADMISSION",
+        "snapshotRef": "snapshot-d67153b462a2dfe5a7f6266e32392d41834e12aff88e71d8666d621c77b4d7ee"
+      }
+    ],
+    "dataReport": {
+      "observedDomains": [
+        {
+          "state": "OBSERVED",
+          "domain": "identity",
+          "sourceRefs": [
+            "read-0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+            "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+            "read-4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+            "read-5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+            "read-207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+          ],
+          "sourceTimes": [],
+          "measurements": []
+        },
+        {
+          "state": "OBSERVED",
+          "domain": "inventory",
+          "sourceRefs": [
+            "read-0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0"
+          ],
+          "sourceTimes": [
+            "2026-09-16 23:00:00",
+            "2026-09-07 10:00:00"
+          ],
+          "measurements": [
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "physical",
+              "value": "169"
+            },
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "available",
+              "value": "96"
+            },
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "physical",
+              "value": "3"
+            },
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "available",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "state": "ERROR",
+          "domain": "demand",
+          "sourceRefs": [],
+          "sourceTimes": [],
+          "measurements": []
+        },
+        {
+          "state": "INCOMPLETE",
+          "domain": "supply",
+          "sourceRefs": [
+            "read-042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ],
+          "sourceTimes": [],
+          "measurements": []
+        },
+        {
+          "state": "MISSING",
+          "domain": "availability",
+          "sourceRefs": [
+            "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+            "read-042dc1c27b559f736a00f1e2b663e6cb54b44ff724648693ade7b0cecd0f4e12"
+          ],
+          "sourceTimes": [],
+          "measurements": [
+            {
+              "unit": "DAYS",
+              "field": "lead_days",
+              "value": "20"
+            }
+          ]
+        },
+        {
+          "state": "OBSERVED",
+          "domain": "moq",
+          "sourceRefs": [
+            "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+            "read-a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+          ],
+          "sourceTimes": [],
+          "measurements": [
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "moq",
+              "value": "24"
+            },
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "quote_moq",
+              "value": "50"
+            },
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "quote_moq",
+              "value": "50"
+            }
+          ]
+        },
+        {
+          "state": "MISSING",
+          "domain": "orderMultiple",
+          "sourceRefs": [
+            "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ],
+          "sourceTimes": [],
+          "measurements": [
+            {
+              "unit": "SOURCE_PIECE",
+              "field": "carton_quantity",
+              "value": "24"
+            }
+          ]
+        },
+        {
+          "state": "INCOMPLETE",
+          "domain": "quality",
+          "sourceRefs": [
+            "read-7d92b0925a5c4f92c08d1c1ab29b78cf035801937d0bb41a9bf4c01291ad95c5",
+            "read-dea0d9588f307d61883e57e7a06cfafb1fd333185306ee11574198b92e50e7bb",
+            "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          ],
+          "sourceTimes": [],
+          "measurements": []
+        }
+      ],
+      "quality": [
+        {
+          "code": "REAL_RULES_NOT_SIGNED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "REQUIRED_QUALITY_UNRESOLVED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_REVALIDATION_FAILED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        }
+      ],
+      "supplyDemand": {
+        "baseline": null,
+        "selection": null,
+        "candidates": [],
+        "limitations": [
+          "DATA_QUALITY_BLOCKED"
+        ]
+      },
+      "scenarioSupplement": {
+        "sampleRef": "SKU-B",
+        "realAdmission": "BLOCKED",
+        "ownerConfirmed": true,
+        "sourceSynthetic": true,
+        "engineeringFixture": false,
+        "procurementEligible": false,
+        "deterministicCalculation": "NOT_RUN_INPUTS_AND_RULES_BLOCKED"
+      },
+      "evidence": [
+        {
+          "fieldPath": "observedDomains",
+          "evidenceId": "evidence-15490b8af550e089fbf0edf081ebb5a7784388a81e4a23c81a7f3348e8e7ccdb",
+          "snapshotId": "snapshot-d67153b462a2dfe5a7f6266e32392d41834e12aff88e71d8666d621c77b4d7ee",
+          "sourceModuleId": "D02"
+        }
+      ]
+    },
+    "analysisReport": {
+      "ai": {
+        "reason": "DETERMINISTIC_ADMISSION_ONLY",
+        "status": "NOT_ATTEMPTED"
+      },
+      "binding": {
+        "taskRef": {
+          "taskId": "2914743d6fe849d7aa25d64b9110b032",
+          "tenantId": "process-e64b7138a1d04625b975683a12060f57"
+        },
+        "planVersion": "1"
+      }
+    }
+  }
+}
