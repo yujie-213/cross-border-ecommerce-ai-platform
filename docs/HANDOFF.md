@@ -1,5 +1,17 @@
 # 当前增量交接 v0.3
 
+## C-01独立审查账务状态修复（2026-11-12，基于6e2c171）
+
+用户本轮仅授权TaskBudgetHandle.settle首次状态门槛、真实MySQL正反例和A/B/C-01回归、更新原证据/台账及普通GitHub main同步。实际接手main/HEAD及fetch后的origin/main均为6e2c171cf4f95cf79e2a9be4c4294540b4a833e7，跟踪区干净；未知docs/ERP-openapi.yaml保留未读改暂存。Codex单人集成，未启动新阶段或代理；A/B 11项工程ACCEPTED记录已经同步，本轮不补签或改写。
+
+固定实现提交eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f：在原预算/attempt锁内、G02 usage写入前加入允许状态检查。首次仅SENT/UNKNOWN可核账，RESERVED报ATTEMPT_NOT_SETTLEABLE，RELEASED仍报原ATTEMPT_RELEASED；已结算/超额结算继续调用原G02四维一致性校验，取消后迟到usage不因租约失效被拒绝。无表、迁移、签名、配置、依赖、组合根或真实Provider改动；B01/B02权威计算原样。直接结算未发送预留的旧用法被有意拒绝，不可伪造发送以绕过。
+
+新增9项真实隔离MySQL正反例：RESERVED/RELEASED在运行中和取消后均拒绝、完整预算/attempt/usage/审计快照不变；SENT/UNKNOWN正常与超额结算接受、exact replay只记一次，token/金额/币种/计价版本分别冲突时快照不变；新增取消后的SENT迟到账并重放，原UNKNOWN取消后迟到账继续覆盖。初轮相关测试57 PASS/1 FAIL，既有150ms deadline测试单独复跑及诊断各FAIL，确认Mock尚未进入（calls=0、UNKNOWN），不是首次结算异常；改用事件确认发送、响应保持跨过原attempt期限、再释放并有界等待核账。保留超时无输出/未知占额/迟到核账断言，未改网关行为或删除用例；后续相关58 PASS。
+
+针对上述固定SHA运行tools.verify_c01，全量**281 PASS/0 FAIL/0 ERROR/0 SKIP**，一条既有Starlette/httpx弃用提示；原C-01的272项（含A/B187项）全部保全、新增9项。pip check、compileall、默认关闭连通入口检查均PASS。真实MySQL8.0.27、s01_a01_test_20261112、UTC/READ-COMMITTED、迁移head0004_reports不变，未清库或更改其他库。当前结果、逐测试名、原始脱敏输出、相关58项及前次272记录引用、修复前测试失败经过均更新到[原C-01证据](evidence/C-01/verification.json)的reviewFix；原始前次证据仍在基线Git版本。运行方式见[原说明](runbooks/c-01.md)。
+
+其余30条TASKS记录（含A/B验收及四门）逐字段对比基线不变，31项及原依赖保全。C-01保持REVIEW、review=null，等待独立验收；真实DeepSeek/ERP/采购调用0，真实Provider/计费/C-04继续NOT_RUN，D-S01-AI-ACCESS-01及其他三门BLOCKED。没有读取本机秘密实际值或改.env；证据不把Mock或默认关闭入口当真实模型成功。文档build/check退出0、18项PASS，diff --check和7项变更文件增量脱敏扫描PASS；实现树与被测SHA一致。本轮证据提交和普通同步SHA由实际Git查询，结束后停止开发。
+
 ## C-01 A01工程实现（2026-11-12，基于c0e5af0）
 
 用户明确授权C-01工程及Mock、DeepSeek官方适配、独立默认关闭的合成连通入口、完整回归/提交/普通main同步，不授权真实模型请求。接手main/HEAD与fetch确认origin/main均为c0e5af096a41c680b0caff4b26424367bd6d0abe；A/B 11项工程ACCEPTED已同步，未补签。工作区原唯一未知未跟踪docs/ERP-openapi.yaml保留未读改暂存。Codex单人集成，无并行代理。

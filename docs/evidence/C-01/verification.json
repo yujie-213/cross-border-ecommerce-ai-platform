@@ -1,9 +1,9 @@
 {
   "scope": "C-01 MOCK/OFFLINE_TRANSPORT plus original A/B real MySQL/API/Worker regression; ZERO real model calls",
   "date": "2026-11-12",
-  "capturedAt": "2026-11-12T07:05:12.312093+00:00",
+  "capturedAt": "2026-11-12T08:10:48.104602+00:00",
   "baselineCommit": "c0e5af096a41c680b0caff4b26424367bd6d0abe",
-  "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+  "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
   "environment": {
     "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
     "os": "Windows",
@@ -42,8 +42,8 @@
         "-vv",
         "-p",
         "no:cacheprovider",
-        "--basetemp=.tmp/c01-fixed-57fac8963517",
-        "--junitxml=D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\c01-fixed-57fac8963517.xml"
+        "--basetemp=.tmp/c01-fixed-eaa7718c08c8",
+        "--junitxml=D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\c01-fixed-eaa7718c08c8.xml"
       ],
       "environmentOverrides": {
         "COMMERCE_RUN_MYSQL_TESTS": "1",
@@ -52,7 +52,7 @@
       },
       "exitCode": 0,
       "result": "PASS",
-      "rawOutput": "============================= test session starts =============================\nplatform win32 -- Python 3.13.5, pytest-9.2.0, pluggy-1.7.0 -- D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Scripts\\python.exe\nrootdir: D:\\电商项目\\跨境电商智慧AI平台\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: anyio-4.16.0\ncollecting ... collected 272 items\n\ntests/integration/http/test_task_api.py::test_authenticated_accept_query_and_idempotency PASSED [  0%]\ntests/integration/http/test_task_api.py::test_cookie_csrf_origin_revocation_and_safe_cookie_flags PASSED [  0%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[signature] PASSED [  1%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[issuer] PASSED [  1%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[audience] PASSED [  1%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[expired] PASSED [  2%]\ntests/integration/http/test_task_api.py::test_scope_expansion_and_client_trusted_metadata_rejected PASSED [  2%]\ntests/integration/http/test_task_api.py::test_production_composition_never_registers_engineering_handler PASSED [  2%]\ntests/integration/http/test_task_api.py::test_unauthenticated_task_request_has_no_anonymous_bypass PASSED [  3%]\ntests/integration/mysql/test_storage.py::test_explicit_migration_head_and_repeat_upgrade PASSED [  3%]\ntests/integration/mysql/test_storage.py::test_one_frozen_migration_chain PASSED [  4%]\ntests/integration/mysql/test_storage.py::test_other_database_target_is_refused_before_connection PASSED [  4%]\ntests/integration/mysql/test_storage.py::test_engine_construction_never_connects_or_migrates PASSED [  4%]\ntests/integration/mysql/test_storage.py::test_destructive_downgrade_guard_does_not_execute_sql PASSED [  5%]\ntests/integration/mysql/test_storage.py::test_actual_server_is_mysql_utc_read_committed PASSED [  5%]\ntests/integration/mysql/test_storage.py::test_exact_types_unique_tenant_key_and_real_rollback PASSED [  5%]\ntests/integration/orchestration/test_engineering_foundation.py::test_create_rolls_back_task_work_budget_and_required_audit PASSED [  6%]\ntests/integration/orchestration/test_engineering_foundation.py::test_same_command_replays_one_persisted_task_and_work PASSED [  6%]\ntests/integration/orchestration/test_engineering_foundation.py::test_same_command_with_changed_content_conflicts PASSED [  6%]\ntests/integration/orchestration/test_engineering_foundation.py::test_same_key_and_sku_in_other_tenant_does_not_reuse_task PASSED [  7%]\ntests/integration/orchestration/test_engineering_foundation.py::test_two_concurrent_create_commands_are_idempotent PASSED [  7%]\ntests/integration/orchestration/test_engineering_foundation.py::test_invalid_fixture_and_unregistered_s01_are_rejected_before_admission PASSED [  8%]\ntests/integration/orchestration/test_engineering_foundation.py::test_two_workers_only_one_claims_single_delivery PASSED [  8%]\ntests/integration/orchestration/test_engineering_foundation.py::test_complete_requires_current_lease_and_plan PASSED [  8%]\ntests/integration/orchestration/test_engineering_foundation.py::test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget PASSED [  9%]\ntests/integration/orchestration/test_engineering_foundation.py::test_exhausted_delivery_reconciles_owner_once PASSED [  9%]\ntests/integration/orchestration/test_engineering_foundation.py::test_cancel_queued_is_idempotent_and_does_not_publish PASSED [  9%]\ntests/integration/orchestration/test_engineering_foundation.py::test_cancel_running_rejects_late_completion PASSED [ 10%]\ntests/integration/orchestration/test_engineering_foundation.py::test_worker_deadline_expiry_is_bounded_failure PASSED [ 10%]\ntests/integration/orchestration/test_engineering_foundation.py::test_worker_rechecks_revoked_actor_before_handler PASSED [ 11%]\ntests/integration/orchestration/test_engineering_foundation.py::test_completion_audit_failure_rolls_back_owner_and_delivery PASSED [ 11%]\ntests/integration/orchestration/test_engineering_foundation.py::test_budget_two_threads_cannot_overreserve_original_task PASSED [ 11%]\ntests/integration/orchestration/test_engineering_foundation.py::test_attempt_reservation_replay_and_content_conflict PASSED [ 12%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unknown_usage_stays_reserved_and_cannot_be_resent_or_refunded PASSED [ 12%]\ntests/integration/orchestration/test_engineering_foundation.py::test_old_plan_failure_cannot_change_new_plan_state PASSED [ 12%]\ntests/integration/orchestration/test_engineering_foundation.py::test_explicit_new_owner_version_can_start_without_old_delivery_rebinding PASSED [ 13%]\ntests/integration/orchestration/test_engineering_foundation.py::test_lease_cannot_be_rebound_to_another_owner_or_work_kind PASSED [ 13%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unknown_logical_call_cannot_retry_under_a_new_attempt PASSED [ 13%]\ntests/integration/orchestration/test_engineering_foundation.py::test_usage_settlement_is_idempotent_and_g02_is_unique_fact PASSED [ 14%]\ntests/integration/orchestration/test_engineering_foundation.py::test_actual_over_limit_usage_is_not_clamped_and_blocks_more_calls PASSED [ 14%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unsent_release_is_idempotent_and_never_refunds_spent_usage PASSED [ 15%]\ntests/integration/orchestration/test_engineering_foundation.py::test_settlement_required_audit_failure_rolls_back_usage_and_control PASSED [ 15%]\ntests/integration/orchestration/test_engineering_foundation.py::test_worker_retry_is_bounded_and_keeps_original_deadline PASSED [ 15%]\ntests/integration/orchestration/test_engineering_foundation.py::test_handler_runs_outside_owner_transaction_and_emits_no_report PASSED [ 16%]\ntests/integration/orchestration/test_engineering_foundation.py::test_cancel_required_audit_failure_rolls_back_task_command_and_work PASSED [ 16%]\ntests/integration/orchestration/test_engineering_foundation.py::test_only_one_concurrent_sender_can_mark_attempt_sent PASSED [ 16%]\ntests/integration/orchestration/test_engineering_foundation.py::test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task PASSED [ 17%]\ntests/integration/orchestration/test_models.py::test_mock_success_settles_one_g02_usage_and_duplicate_cannot_resend PASSED [ 17%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[planVersion-2] PASSED [ 18%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[policyContextRef-value1] PASSED [ 18%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[allowanceRef-value2] PASSED [ 18%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[principalRef-value3] PASSED [ 19%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[snapshotId-other-snapshot] PASSED [ 19%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[participantId-other-participant] PASSED [ 19%]\ntests/integration/orchestration/test_models.py::test_deadline_cannot_extend_original_task_and_expired_task_never_sends PASSED [ 20%]\ntests/integration/orchestration/test_models.py::test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied PASSED [ 20%]\ntests/integration/orchestration/test_models.py::test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset PASSED [ 20%]\ntests/integration/orchestration/test_models.py::test_cross_gateway_concurrency_limit_is_durable_and_network_outside_locks PASSED [ 21%]\ntests/integration/orchestration/test_models.py::test_same_logical_two_reserved_attempts_cannot_race_send PASSED [ 21%]\ntests/integration/orchestration/test_models.py::test_short_attempt_deadline_and_late_result_never_publish PASSED [ 22%]\ntests/integration/orchestration/test_models.py::test_restart_uses_original_pending_attempt_and_allowance PASSED [ 22%]\ntests/integration/orchestration/test_models.py::test_revocation_before_send_is_fail_closed PASSED [ 22%]\ntests/integration/orchestration/test_models.py::test_required_audit_failure_rolls_back_and_conserves_allowance[MODEL_SENT-0-RELEASED] PASSED [ 23%]\ntests/integration/orchestration/test_models.py::test_required_audit_failure_rolls_back_and_conserves_allowance[USAGE_SETTLED-1-UNKNOWN] PASSED [ 23%]\ntests/integration/orchestration/test_models.py::test_budget_exhaustion_is_not_a_free_retry PASSED [ 23%]\ntests/integration/orchestration/test_s01_reports.py::test_pipeline_publishes_one_immutable_report_and_submit_replays PASSED [ 24%]\ntests/integration/orchestration/test_s01_reports.py::test_quality_degradation_is_reported_without_inventing_rules[null-BLOCKED] PASSED [ 24%]\ntests/integration/orchestration/test_s01_reports.py::test_quality_degradation_is_reported_without_inventing_rules[constraint-PARTIAL] PASSED [ 25%]\ntests/integration/orchestration/test_s01_reports.py::test_report_task_audit_and_ack_are_one_transaction[queue] PASSED [ 25%]\ntests/integration/orchestration/test_s01_reports.py::test_report_task_audit_and_ack_are_one_transaction[audit] PASSED [ 25%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[cancel] PASSED [ 26%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[deadline] PASSED [ 26%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[lease] PASSED [ 26%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[plan] PASSED [ 27%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[revoke] PASSED [ 27%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[binding] PASSED [ 27%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[scope] PASSED [ 28%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[missing] PASSED [ 28%]\ntests/integration/orchestration/test_s01_reports.py::test_report_rechecks_current_scope_and_tenant PASSED [ 29%]\ntests/integration/orchestration/test_s01_reports.py::test_quantity_reader_gets_only_public_view_while_full_assets_remain_internal PASSED [ 29%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[fields] PASSED [ 29%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[canonicalSkuIds] PASSED [ 30%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[warehouseIds] PASSED [ 30%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[storeIds] PASSED [ 30%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_fails_closed_without_matching_read_contract[missing-read-contract] PASSED [ 31%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_fails_closed_without_matching_read_contract[wrong-handler-version] PASSED [ 31%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_fails_closed_without_matching_read_contract[scope-binding] PASSED [ 31%]\ntests/integration/processes/test_foundation_processes.py::test_api_restart_preserves_queued_task_and_idempotency PASSED [ 32%]\ntests/integration/processes/test_foundation_processes.py::test_killed_worker_recovers_same_task_deadline_and_budget PASSED [ 32%]\ntests/integration/processes/test_foundation_processes.py::test_production_empty_registry_cannot_recover_fixture_delivery PASSED [ 33%]\ntests/integration/processes/test_foundation_processes.py::test_two_actual_workers_do_not_complete_a_task_twice PASSED [ 33%]\ntests/integration/processes/test_foundation_processes.py::test_running_cancel_blocks_late_completion PASSED [ 33%]\ntests/integration/processes/test_foundation_processes.py::test_revoked_identity_is_rechecked_by_actual_worker PASSED [ 34%]\ntests/integration/processes/test_foundation_processes.py::test_actual_worker_retry_exhaustion_is_bounded PASSED [ 34%]\ntests/integration/processes/test_s01_processes.py::test_actual_s01_api_worker_report_evidence_and_read_authorization PASSED [ 34%]\ntests/integration/processes/test_s01_processes.py::test_s01_killed_worker_recovers_original_snapshot_report_budget_and_deadline PASSED [ 35%]\ntests/integration/processes/test_s01_processes.py::test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[False] PASSED [ 35%]\ntests/integration/processes/test_s01_processes.py::test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[True] PASSED [ 36%]\ntests/security/test_access_mysql.py::test_real_current_identity_scope_and_field_limits PASSED [ 36%]\ntests/security/test_access_mysql.py::test_real_token_revocation_invalidates_old_actor_on_next_check PASSED [ 36%]\ntests/security/test_access_mysql.py::test_real_principal_revision_and_grant_changes_rechecked PASSED [ 37%]\ntests/security/test_access_mysql.py::test_real_session_expiry_is_rechecked_even_while_jwt_valid PASSED [ 37%]\ntests/security/test_access_mysql.py::test_real_revocation_serializes_with_authorized_mutation PASSED [ 37%]\ntests/security/test_access_unit.py::test_valid_signed_identity_is_immutable PASSED [ 38%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes0] PASSED [ 38%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes1] PASSED [ 38%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes2] PASSED [ 39%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes3] PASSED [ 39%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes4] PASSED [ 40%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes5] PASSED [ 40%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes6] PASSED [ 40%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes7] PASSED [ 41%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes8] PASSED [ 41%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes9] PASSED [ 41%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes10] PASSED [ 42%]\ntests/security/test_access_unit.py::test_required_claims[exp] PASSED     [ 42%]\ntests/security/test_access_unit.py::test_required_claims[iat] PASSED     [ 43%]\ntests/security/test_access_unit.py::test_required_claims[nbf] PASSED     [ 43%]\ntests/security/test_access_unit.py::test_required_claims[sub] PASSED     [ 43%]\ntests/security/test_access_unit.py::test_required_claims[tid] PASSED     [ 44%]\ntests/security/test_access_unit.py::test_required_claims[jti] PASSED     [ 44%]\ntests/security/test_access_unit.py::test_required_claims[rev] PASSED     [ 44%]\ntests/security/test_access_unit.py::test_wrong_signature_algorithm_and_malformed_token PASSED [ 45%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[storeIds] PASSED [ 45%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[warehouseIds] PASSED [ 45%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[canonicalSkuIds] PASSED [ 46%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[fields] PASSED [ 46%]\ntests/security/test_access_unit.py::test_scope_unknown_dimension_or_cross_tenant_rejected PASSED [ 47%]\ntests/security/test_access_unit.py::test_csrf_is_same_origin_and_bound_to_identity PASSED [ 47%]\ntests/security/test_access_unit.py::test_authorize_rejects_nonprincipal_without_database PASSED [ 47%]\ntests/security/test_access_unit.py::test_backend_failure_does_not_render_driver_secrets PASSED [ 48%]\ntests/unit/bootstrap/test_foundation.py::test_missing_required_settings_fail_safely PASSED [ 48%]\ntests/unit/bootstrap/test_foundation.py::test_invalid_settings_never_echo_secret PASSED [ 48%]\ntests/unit/bootstrap/test_foundation.py::test_literal_dotenv_secrets_and_environment_precedence PASSED [ 49%]\ntests/unit/bootstrap/test_foundation.py::test_remote_database_without_trusted_ca_fails PASSED [ 49%]\ntests/unit/bootstrap/test_foundation.py::test_startup_does_not_connect_or_launch_background_work PASSED [ 50%]\ntests/unit/bootstrap/test_foundation.py::test_readiness_does_not_claim_unimplemented_capabilities[True] PASSED [ 50%]\ntests/unit/bootstrap/test_foundation.py::test_readiness_does_not_claim_unimplemented_capabilities[False] PASSED [ 50%]\ntests/unit/bootstrap/test_foundation.py::test_database_failure_is_sanitized PASSED [ 51%]\ntests/unit/bootstrap/test_foundation.py::test_trace_headers_and_no_request_data_in_logs PASSED [ 51%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[401-UNAUTHENTICATED] PASSED [ 51%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[403-POLICY_DENIED] PASSED [ 52%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[404-NOT_FOUND] PASSED [ 52%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[409-CONFLICT] PASSED [ 52%]\ntests/unit/bootstrap/test_foundation.py::test_validation_and_unhandled_error_are_safe PASSED [ 53%]\ntests/unit/bootstrap/test_foundation.py::test_logger_discards_arbitrary_message_arguments_and_traceback PASSED [ 53%]\ntests/unit/bootstrap/test_foundation.py::test_oversized_request_rejected_before_parsing_or_authentication PASSED [ 54%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/reports] PASSED [ 54%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/executions] PASSED [ 54%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/approvals] PASSED [ 55%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/models] PASSED [ 55%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/docs] PASSED [ 55%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/openapi.json] PASSED [ 56%]\ntests/unit/data/test_handler.py::test_handler_no_ai_and_every_evidence_resolves PASSED [ 56%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[snapshot] PASSED [ 56%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[version] PASSED [ 57%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[metric] PASSED [ 57%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[projection] PASSED [ 58%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[evidence] PASSED [ 58%]\ntests/unit/data/test_handler.py::test_blocked_input_produces_quality_report_without_invalid_inventory_evidence PASSED [ 58%]\ntests/unit/data/test_handler.py::test_quantity_report_view_omits_raw_assets_and_unrequested_future_fields PASSED [ 59%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[fields-values0] PASSED [ 59%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[canonicalSkuIds-values1] PASSED [ 59%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[warehouseIds-values2] PASSED [ 60%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[storeIds-values3] PASSED [ 60%]\ntests/unit/data/test_handler.py::test_blocked_report_view_preserves_quality_without_raw_record_paths PASSED [ 61%]\ntests/unit/data/test_s01.py::test_fixture_null_and_exact_projection_not_zero PASSED [ 61%]\ntests/unit/data/test_s01.py::test_exact_unit_conversion_and_reserved_stays_informational PASSED [ 61%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-INCOMPLETE_COVERAGE] PASSED [ 62%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNMAPPED_IDENTITY_OR_UNIT] PASSED [ 62%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_INVENTORY] PASSED [ 62%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-STALE_OR_FUTURE_INVENTORY] PASSED [ 63%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-DEMAND_WINDOW_INCOMPLETE_OR_DUPLICATE] PASSED [ 63%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_SUPPLY] PASSED [ 63%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_OR_OVERDUE_AVAILABILITY] PASSED [ 64%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_SUPPLY_STATUS] PASSED [ 64%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-CLOSED_SUPPLY_CONFLICT] PASSED [ 65%]\ntests/unit/data/test_s01.py::test_mirror_dedup_conflict_and_ambiguous_inventory PASSED [ 65%]\ntests/unit/data/test_s01.py::test_manifest_immutable_versions_replay_and_quality_only_candidate_block PASSED [ 65%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change0] PASSED [ 66%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change1] PASSED [ 66%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change2] PASSED [ 66%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change3] PASSED [ 67%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change4] PASSED [ 67%]\ntests/unit/data/test_s01.py::test_source_port_bounded_retry_and_no_partial_success PASSED [ 68%]\ntests/unit/data/test_s01.py::test_evidence_broken_locator_is_missing PASSED [ 68%]\ntests/unit/data/test_s01.py::test_calendar_uses_normalized_utc_and_exact_large_conversion PASSED [ 68%]\ntests/unit/forecasting/s01/test_candidates.py::test_each_candidate_uses_identical_b01_and_no_optimality PASSED [ 69%]\ntests/unit/forecasting/s01/test_candidates.py::test_moq_multiple_independent_and_hard_cap_no_solution PASSED [ 69%]\ntests/unit/forecasting/s01/test_candidates.py::test_missing_constraints_only_baseline_and_quality_cannot_be_overridden PASSED [ 69%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_without_shortage_has_no_zero_piece_candidate[False] PASSED [ 70%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_without_shortage_has_no_zero_piece_candidate[True] PASSED [ 70%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_with_intermediate_shortage_requires_missing_policy[35] PASSED [ 70%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_with_intermediate_shortage_requires_missing_policy[100] PASSED [ 71%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[moq-None] PASSED [ 71%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[maxOrderQty-0] PASSED [ 72%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[orderMultiple-None] PASSED [ 72%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[candidateDates-value3] PASSED [ 72%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[candidateDates-value4] PASSED [ 73%]\ntests/unit/forecasting/s01/test_candidates.py::test_positive_gap_candidate_dates_remain_bounded_and_risk_is_evaluated_by_b01 PASSED [ 73%]\ntests/unit/metrics/s01/test_daily.py::test_known_engineering_target_gap_and_daily_series PASSED [ 73%]\ntests/unit/metrics/s01/test_daily.py::test_delayed_supply_preserves_intermediate_shortage_with_candidate PASSED [ 74%]\ntests/unit/metrics/s01/test_daily.py::test_zero_demand_coverage_is_unknown_not_infinite_or_error PASSED [ 74%]\ntests/unit/metrics/s01/test_daily.py::test_partial_receipt_uses_remaining_once_and_excludes_arrival_after_window PASSED [ 75%]\ntests/unit/metrics/s01/test_daily.py::test_invalid_data_cannot_reach_calculator PASSED [ 75%]\ntests/unit/models/test_deepseek.py::test_key_configuration_never_authorizes_network[False-False] PASSED [ 75%]\ntests/unit/models/test_deepseek.py::test_key_configuration_never_authorizes_network[False-True] PASSED [ 76%]\ntests/unit/models/test_deepseek.py::test_key_configuration_never_authorizes_network[True-False] PASSED [ 76%]\ntests/unit/models/test_deepseek.py::test_official_protocol_mapping_and_unknown_billed_cost_are_explicit PASSED [ 76%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[301-PROVIDER_ERROR] PASSED [ 77%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[401-AUTH_ERROR] PASSED [ 77%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR] PASSED [ 77%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[429-RATE_LIMITED] PASSED [ 78%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[500-UNAVAILABLE] PASSED [ 78%]\ntests/unit/models/test_deepseek.py::test_finish_reason_mapping[length-TRUNCATED] PASSED [ 79%]\ntests/unit/models/test_deepseek.py::test_finish_reason_mapping[content_filter-REFUSED] PASSED [ 79%]\ntests/unit/models/test_deepseek.py::test_finish_reason_mapping[tool_calls-PROVIDER_ERROR] PASSED [ 79%]\ntests/unit/models/test_deepseek.py::test_malformed_json_and_missing_usage_never_fabricate_zero_cost PASSED [ 80%]\ntests/unit/models/test_deepseek.py::test_transport_timeout_and_sensitive_exception_are_safe PASSED [ 80%]\ntests/unit/models/test_deepseek.py::test_unknown_usage_fact_has_known_tokens_without_fabricated_charge PASSED [ 80%]\ntests/unit/models/test_deepseek.py::test_settings_defaults_and_safe_runtime_injection PASSED [ 81%]\ntests/unit/models/test_deepseek.py::test_connectivity_entry_default_never_reads_settings_or_opens_network PASSED [ 81%]\ntests/unit/models/test_deepseek.py::test_insufficient_cost_allowance_and_absent_key_are_unsent PASSED [ 81%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch0] PASSED [ 82%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch1] PASSED [ 82%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch2] PASSED [ 83%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch3] PASSED [ 83%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch4] PASSED [ 83%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch5] PASSED [ 84%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch6] PASSED [ 84%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch7] PASSED [ 84%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch8] PASSED [ 85%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch9] PASSED [ 85%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch10] PASSED [ 86%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch11] PASSED [ 86%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch12] PASSED [ 86%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch13] PASSED [ 87%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch14] PASSED [ 87%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch15] PASSED [ 87%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch16] PASSED [ 88%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch17] PASSED [ 88%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch18] PASSED [ 88%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch19] PASSED [ 89%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch20] PASSED [ 89%]\ntests/unit/models/test_gateway.py::test_valid_model_request_and_query_shape PASSED [ 90%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[success-OK] PASSED [ 90%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[missing-INVALID_OUTPUT] PASSED [ 90%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[type-INVALID_OUTPUT] PASSED [ 91%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[extra-INVALID_OUTPUT] PASSED [ 91%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[json-INVALID_OUTPUT] PASSED [ 91%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[refused-REFUSED] PASSED [ 92%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[truncated-TRUNCATED] PASSED [ 92%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[timeout-TIMEOUT] PASSED [ 93%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[unavailable-UNAVAILABLE] PASSED [ 93%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[rate_limit-RATE_LIMITED] PASSED [ 93%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[auth-AUTH_ERROR] PASSED [ 94%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[model_mismatch-MODEL_MISMATCH] PASSED [ 94%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[unknown-USAGE_UNKNOWN] PASSED [ 94%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[exception-ACCOUNTING_OR_PROVIDER_ERROR] PASSED [ 95%]\ntests/unit/models/test_gateway.py::test_provider_request_digests_timeout_and_roles_are_checked PASSED [ 95%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[promptRef] PASSED [ 95%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[outputSchemaRef] PASSED [ 96%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[parametersRef] PASSED [ 96%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[cachePolicyRef] PASSED [ 97%]\ntests/unit/models/test_gateway.py::test_cancellation_mid_call_returns_without_waiting_and_late_usage_is_settled PASSED [ 97%]\ntests/unit/models/test_gateway.py::test_provider_timeout_is_bounded_and_no_implicit_retry PASSED [ 97%]\ntests/unit/models/test_gateway.py::test_over_budget_actual_usage_is_accounted_and_output_rejected PASSED [ 98%]\ntests/unit/models/test_gateway.py::test_required_usage_audit_failure_never_returns_success PASSED [ 98%]\ntests/unit/models/test_gateway.py::test_final_audit_cannot_expose_explanation_after_control_stop[cancel] PASSED [ 98%]\ntests/unit/models/test_gateway.py::test_final_audit_cannot_expose_explanation_after_control_stop[deadline] PASSED [ 99%]\ntests/unit/models/test_gateway.py::test_no_sensitive_context_or_output_in_audit PASSED [ 99%]\ntests/unit/models/test_gateway.py::test_model_cannot_mutate_authoritative_b01_b02_results PASSED [100%]\n\n============================== warnings summary ===============================\n.tmp\\stage-a-clean\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n--- generated xml file: D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\c01-fixed-57fac8963517.xml ----\n================== 272 passed, 1 warning in 71.65s (0:01:11) ==================\n"
+      "rawOutput": "============================= test session starts =============================\nplatform win32 -- Python 3.13.5, pytest-9.2.0, pluggy-1.7.0 -- D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Scripts\\python.exe\nrootdir: D:\\电商项目\\跨境电商智慧AI平台\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: anyio-4.16.0\ncollecting ... collected 281 items\n\ntests/integration/http/test_task_api.py::test_authenticated_accept_query_and_idempotency PASSED [  0%]\ntests/integration/http/test_task_api.py::test_cookie_csrf_origin_revocation_and_safe_cookie_flags PASSED [  0%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[signature] PASSED [  1%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[issuer] PASSED [  1%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[audience] PASSED [  1%]\ntests/integration/http/test_task_api.py::test_bad_identity_fails_before_command[expired] PASSED [  2%]\ntests/integration/http/test_task_api.py::test_scope_expansion_and_client_trusted_metadata_rejected PASSED [  2%]\ntests/integration/http/test_task_api.py::test_production_composition_never_registers_engineering_handler PASSED [  2%]\ntests/integration/http/test_task_api.py::test_unauthenticated_task_request_has_no_anonymous_bypass PASSED [  3%]\ntests/integration/mysql/test_storage.py::test_explicit_migration_head_and_repeat_upgrade PASSED [  3%]\ntests/integration/mysql/test_storage.py::test_one_frozen_migration_chain PASSED [  3%]\ntests/integration/mysql/test_storage.py::test_other_database_target_is_refused_before_connection PASSED [  4%]\ntests/integration/mysql/test_storage.py::test_engine_construction_never_connects_or_migrates PASSED [  4%]\ntests/integration/mysql/test_storage.py::test_destructive_downgrade_guard_does_not_execute_sql PASSED [  4%]\ntests/integration/mysql/test_storage.py::test_actual_server_is_mysql_utc_read_committed PASSED [  5%]\ntests/integration/mysql/test_storage.py::test_exact_types_unique_tenant_key_and_real_rollback PASSED [  5%]\ntests/integration/orchestration/test_engineering_foundation.py::test_create_rolls_back_task_work_budget_and_required_audit PASSED [  6%]\ntests/integration/orchestration/test_engineering_foundation.py::test_same_command_replays_one_persisted_task_and_work PASSED [  6%]\ntests/integration/orchestration/test_engineering_foundation.py::test_same_command_with_changed_content_conflicts PASSED [  6%]\ntests/integration/orchestration/test_engineering_foundation.py::test_same_key_and_sku_in_other_tenant_does_not_reuse_task PASSED [  7%]\ntests/integration/orchestration/test_engineering_foundation.py::test_two_concurrent_create_commands_are_idempotent PASSED [  7%]\ntests/integration/orchestration/test_engineering_foundation.py::test_invalid_fixture_and_unregistered_s01_are_rejected_before_admission PASSED [  7%]\ntests/integration/orchestration/test_engineering_foundation.py::test_two_workers_only_one_claims_single_delivery PASSED [  8%]\ntests/integration/orchestration/test_engineering_foundation.py::test_complete_requires_current_lease_and_plan PASSED [  8%]\ntests/integration/orchestration/test_engineering_foundation.py::test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget PASSED [  8%]\ntests/integration/orchestration/test_engineering_foundation.py::test_exhausted_delivery_reconciles_owner_once PASSED [  9%]\ntests/integration/orchestration/test_engineering_foundation.py::test_cancel_queued_is_idempotent_and_does_not_publish PASSED [  9%]\ntests/integration/orchestration/test_engineering_foundation.py::test_cancel_running_rejects_late_completion PASSED [  9%]\ntests/integration/orchestration/test_engineering_foundation.py::test_worker_deadline_expiry_is_bounded_failure PASSED [ 10%]\ntests/integration/orchestration/test_engineering_foundation.py::test_worker_rechecks_revoked_actor_before_handler PASSED [ 10%]\ntests/integration/orchestration/test_engineering_foundation.py::test_completion_audit_failure_rolls_back_owner_and_delivery PASSED [ 11%]\ntests/integration/orchestration/test_engineering_foundation.py::test_budget_two_threads_cannot_overreserve_original_task PASSED [ 11%]\ntests/integration/orchestration/test_engineering_foundation.py::test_attempt_reservation_replay_and_content_conflict PASSED [ 11%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unknown_usage_stays_reserved_and_cannot_be_resent_or_refunded PASSED [ 12%]\ntests/integration/orchestration/test_engineering_foundation.py::test_old_plan_failure_cannot_change_new_plan_state PASSED [ 12%]\ntests/integration/orchestration/test_engineering_foundation.py::test_explicit_new_owner_version_can_start_without_old_delivery_rebinding PASSED [ 12%]\ntests/integration/orchestration/test_engineering_foundation.py::test_lease_cannot_be_rebound_to_another_owner_or_work_kind PASSED [ 13%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unknown_logical_call_cannot_retry_under_a_new_attempt PASSED [ 13%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RESERVED-ATTEMPT_NOT_SETTLEABLE] PASSED [ 13%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RELEASED-ATTEMPT_RELEASED] PASSED [ 14%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RESERVED-ATTEMPT_NOT_SETTLEABLE] PASSED [ 14%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RELEASED-ATTEMPT_RELEASED] PASSED [ 14%]\ntests/integration/orchestration/test_engineering_foundation.py::test_sent_usage_settlement_replay_checks_every_usage_dimension[False-SENT] PASSED [ 15%]\ntests/integration/orchestration/test_engineering_foundation.py::test_sent_usage_settlement_replay_checks_every_usage_dimension[False-UNKNOWN] PASSED [ 15%]\ntests/integration/orchestration/test_engineering_foundation.py::test_sent_usage_settlement_replay_checks_every_usage_dimension[True-SENT] PASSED [ 16%]\ntests/integration/orchestration/test_engineering_foundation.py::test_sent_usage_settlement_replay_checks_every_usage_dimension[True-UNKNOWN] PASSED [ 16%]\ntests/integration/orchestration/test_engineering_foundation.py::test_usage_settlement_is_idempotent_and_g02_is_unique_fact PASSED [ 16%]\ntests/integration/orchestration/test_engineering_foundation.py::test_actual_over_limit_usage_is_not_clamped_and_blocks_more_calls PASSED [ 17%]\ntests/integration/orchestration/test_engineering_foundation.py::test_unsent_release_is_idempotent_and_never_refunds_spent_usage PASSED [ 17%]\ntests/integration/orchestration/test_engineering_foundation.py::test_settlement_required_audit_failure_rolls_back_usage_and_control PASSED [ 17%]\ntests/integration/orchestration/test_engineering_foundation.py::test_worker_retry_is_bounded_and_keeps_original_deadline PASSED [ 18%]\ntests/integration/orchestration/test_engineering_foundation.py::test_handler_runs_outside_owner_transaction_and_emits_no_report PASSED [ 18%]\ntests/integration/orchestration/test_engineering_foundation.py::test_cancel_required_audit_failure_rolls_back_task_command_and_work PASSED [ 18%]\ntests/integration/orchestration/test_engineering_foundation.py::test_only_one_concurrent_sender_can_mark_attempt_sent PASSED [ 19%]\ntests/integration/orchestration/test_engineering_foundation.py::test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task PASSED [ 19%]\ntests/integration/orchestration/test_engineering_foundation.py::test_late_sent_usage_is_accounted_and_replayed_after_cancel PASSED [ 19%]\ntests/integration/orchestration/test_models.py::test_mock_success_settles_one_g02_usage_and_duplicate_cannot_resend PASSED [ 20%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[planVersion-2] PASSED [ 20%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[policyContextRef-value1] PASSED [ 20%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[allowanceRef-value2] PASSED [ 21%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[principalRef-value3] PASSED [ 21%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[snapshotId-other-snapshot] PASSED [ 22%]\ntests/integration/orchestration/test_models.py::test_binding_mismatches_fail_before_send[participantId-other-participant] PASSED [ 22%]\ntests/integration/orchestration/test_models.py::test_deadline_cannot_extend_original_task_and_expired_task_never_sends PASSED [ 22%]\ntests/integration/orchestration/test_models.py::test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied PASSED [ 23%]\ntests/integration/orchestration/test_models.py::test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset PASSED [ 23%]\ntests/integration/orchestration/test_models.py::test_cross_gateway_concurrency_limit_is_durable_and_network_outside_locks PASSED [ 23%]\ntests/integration/orchestration/test_models.py::test_same_logical_two_reserved_attempts_cannot_race_send PASSED [ 24%]\ntests/integration/orchestration/test_models.py::test_short_attempt_deadline_and_late_result_never_publish PASSED [ 24%]\ntests/integration/orchestration/test_models.py::test_restart_uses_original_pending_attempt_and_allowance PASSED [ 24%]\ntests/integration/orchestration/test_models.py::test_revocation_before_send_is_fail_closed PASSED [ 25%]\ntests/integration/orchestration/test_models.py::test_required_audit_failure_rolls_back_and_conserves_allowance[MODEL_SENT-0-RELEASED] PASSED [ 25%]\ntests/integration/orchestration/test_models.py::test_required_audit_failure_rolls_back_and_conserves_allowance[USAGE_SETTLED-1-UNKNOWN] PASSED [ 25%]\ntests/integration/orchestration/test_models.py::test_budget_exhaustion_is_not_a_free_retry PASSED [ 26%]\ntests/integration/orchestration/test_s01_reports.py::test_pipeline_publishes_one_immutable_report_and_submit_replays PASSED [ 26%]\ntests/integration/orchestration/test_s01_reports.py::test_quality_degradation_is_reported_without_inventing_rules[null-BLOCKED] PASSED [ 27%]\ntests/integration/orchestration/test_s01_reports.py::test_quality_degradation_is_reported_without_inventing_rules[constraint-PARTIAL] PASSED [ 27%]\ntests/integration/orchestration/test_s01_reports.py::test_report_task_audit_and_ack_are_one_transaction[queue] PASSED [ 27%]\ntests/integration/orchestration/test_s01_reports.py::test_report_task_audit_and_ack_are_one_transaction[audit] PASSED [ 28%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[cancel] PASSED [ 28%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[deadline] PASSED [ 28%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[lease] PASSED [ 29%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[plan] PASSED [ 29%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[revoke] PASSED [ 29%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[binding] PASSED [ 30%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[scope] PASSED [ 30%]\ntests/integration/orchestration/test_s01_reports.py::test_stale_or_unauthorized_result_never_publishes[missing] PASSED [ 30%]\ntests/integration/orchestration/test_s01_reports.py::test_report_rechecks_current_scope_and_tenant PASSED [ 31%]\ntests/integration/orchestration/test_s01_reports.py::test_quantity_reader_gets_only_public_view_while_full_assets_remain_internal PASSED [ 31%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[fields] PASSED [ 32%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[canonicalSkuIds] PASSED [ 32%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[warehouseIds] PASSED [ 32%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_rechecks_each_current_scope_dimension[storeIds] PASSED [ 33%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_fails_closed_without_matching_read_contract[missing-read-contract] PASSED [ 33%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_fails_closed_without_matching_read_contract[wrong-handler-version] PASSED [ 33%]\ntests/integration/orchestration/test_s01_reports.py::test_report_read_fails_closed_without_matching_read_contract[scope-binding] PASSED [ 34%]\ntests/integration/processes/test_foundation_processes.py::test_api_restart_preserves_queued_task_and_idempotency PASSED [ 34%]\ntests/integration/processes/test_foundation_processes.py::test_killed_worker_recovers_same_task_deadline_and_budget PASSED [ 34%]\ntests/integration/processes/test_foundation_processes.py::test_production_empty_registry_cannot_recover_fixture_delivery PASSED [ 35%]\ntests/integration/processes/test_foundation_processes.py::test_two_actual_workers_do_not_complete_a_task_twice PASSED [ 35%]\ntests/integration/processes/test_foundation_processes.py::test_running_cancel_blocks_late_completion PASSED [ 35%]\ntests/integration/processes/test_foundation_processes.py::test_revoked_identity_is_rechecked_by_actual_worker PASSED [ 36%]\ntests/integration/processes/test_foundation_processes.py::test_actual_worker_retry_exhaustion_is_bounded PASSED [ 36%]\ntests/integration/processes/test_s01_processes.py::test_actual_s01_api_worker_report_evidence_and_read_authorization PASSED [ 37%]\ntests/integration/processes/test_s01_processes.py::test_s01_killed_worker_recovers_original_snapshot_report_budget_and_deadline PASSED [ 37%]\ntests/integration/processes/test_s01_processes.py::test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[False] PASSED [ 37%]\ntests/integration/processes/test_s01_processes.py::test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[True] PASSED [ 38%]\ntests/security/test_access_mysql.py::test_real_current_identity_scope_and_field_limits PASSED [ 38%]\ntests/security/test_access_mysql.py::test_real_token_revocation_invalidates_old_actor_on_next_check PASSED [ 38%]\ntests/security/test_access_mysql.py::test_real_principal_revision_and_grant_changes_rechecked PASSED [ 39%]\ntests/security/test_access_mysql.py::test_real_session_expiry_is_rechecked_even_while_jwt_valid PASSED [ 39%]\ntests/security/test_access_mysql.py::test_real_revocation_serializes_with_authorized_mutation PASSED [ 39%]\ntests/security/test_access_unit.py::test_valid_signed_identity_is_immutable PASSED [ 40%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes0] PASSED [ 40%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes1] PASSED [ 40%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes2] PASSED [ 41%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes3] PASSED [ 41%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes4] PASSED [ 41%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes5] PASSED [ 42%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes6] PASSED [ 42%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes7] PASSED [ 43%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes8] PASSED [ 43%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes9] PASSED [ 43%]\ntests/security/test_access_unit.py::test_invalid_claims_rejected_without_echo[changes10] PASSED [ 44%]\ntests/security/test_access_unit.py::test_required_claims[exp] PASSED     [ 44%]\ntests/security/test_access_unit.py::test_required_claims[iat] PASSED     [ 44%]\ntests/security/test_access_unit.py::test_required_claims[nbf] PASSED     [ 45%]\ntests/security/test_access_unit.py::test_required_claims[sub] PASSED     [ 45%]\ntests/security/test_access_unit.py::test_required_claims[tid] PASSED     [ 45%]\ntests/security/test_access_unit.py::test_required_claims[jti] PASSED     [ 46%]\ntests/security/test_access_unit.py::test_required_claims[rev] PASSED     [ 46%]\ntests/security/test_access_unit.py::test_wrong_signature_algorithm_and_malformed_token PASSED [ 46%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[storeIds] PASSED [ 47%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[warehouseIds] PASSED [ 47%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[canonicalSkuIds] PASSED [ 48%]\ntests/security/test_access_unit.py::test_empty_or_wildcard_scope_never_means_all[fields] PASSED [ 48%]\ntests/security/test_access_unit.py::test_scope_unknown_dimension_or_cross_tenant_rejected PASSED [ 48%]\ntests/security/test_access_unit.py::test_csrf_is_same_origin_and_bound_to_identity PASSED [ 49%]\ntests/security/test_access_unit.py::test_authorize_rejects_nonprincipal_without_database PASSED [ 49%]\ntests/security/test_access_unit.py::test_backend_failure_does_not_render_driver_secrets PASSED [ 49%]\ntests/unit/bootstrap/test_foundation.py::test_missing_required_settings_fail_safely PASSED [ 50%]\ntests/unit/bootstrap/test_foundation.py::test_invalid_settings_never_echo_secret PASSED [ 50%]\ntests/unit/bootstrap/test_foundation.py::test_literal_dotenv_secrets_and_environment_precedence PASSED [ 50%]\ntests/unit/bootstrap/test_foundation.py::test_remote_database_without_trusted_ca_fails PASSED [ 51%]\ntests/unit/bootstrap/test_foundation.py::test_startup_does_not_connect_or_launch_background_work PASSED [ 51%]\ntests/unit/bootstrap/test_foundation.py::test_readiness_does_not_claim_unimplemented_capabilities[True] PASSED [ 51%]\ntests/unit/bootstrap/test_foundation.py::test_readiness_does_not_claim_unimplemented_capabilities[False] PASSED [ 52%]\ntests/unit/bootstrap/test_foundation.py::test_database_failure_is_sanitized PASSED [ 52%]\ntests/unit/bootstrap/test_foundation.py::test_trace_headers_and_no_request_data_in_logs PASSED [ 53%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[401-UNAUTHENTICATED] PASSED [ 53%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[403-POLICY_DENIED] PASSED [ 53%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[404-NOT_FOUND] PASSED [ 54%]\ntests/unit/bootstrap/test_foundation.py::test_http_error_contract_drops_unsafe_details[409-CONFLICT] PASSED [ 54%]\ntests/unit/bootstrap/test_foundation.py::test_validation_and_unhandled_error_are_safe PASSED [ 54%]\ntests/unit/bootstrap/test_foundation.py::test_logger_discards_arbitrary_message_arguments_and_traceback PASSED [ 55%]\ntests/unit/bootstrap/test_foundation.py::test_oversized_request_rejected_before_parsing_or_authentication PASSED [ 55%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/reports] PASSED [ 55%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/executions] PASSED [ 56%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/approvals] PASSED [ 56%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/api/v1/models] PASSED [ 56%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/docs] PASSED [ 57%]\ntests/unit/bootstrap/test_foundation.py::test_unimplemented_routes_are_not_registered[/openapi.json] PASSED [ 57%]\ntests/unit/data/test_handler.py::test_handler_no_ai_and_every_evidence_resolves PASSED [ 58%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[snapshot] PASSED [ 58%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[version] PASSED [ 58%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[metric] PASSED [ 59%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[projection] PASSED [ 59%]\ntests/unit/data/test_handler.py::test_asset_binding_rejects_conflicts[evidence] PASSED [ 59%]\ntests/unit/data/test_handler.py::test_blocked_input_produces_quality_report_without_invalid_inventory_evidence PASSED [ 60%]\ntests/unit/data/test_handler.py::test_quantity_report_view_omits_raw_assets_and_unrequested_future_fields PASSED [ 60%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[fields-values0] PASSED [ 60%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[canonicalSkuIds-values1] PASSED [ 61%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[warehouseIds-values2] PASSED [ 61%]\ntests/unit/data/test_handler.py::test_report_view_rejects_unsupported_field_or_resource_scope[storeIds-values3] PASSED [ 61%]\ntests/unit/data/test_handler.py::test_blocked_report_view_preserves_quality_without_raw_record_paths PASSED [ 62%]\ntests/unit/data/test_s01.py::test_fixture_null_and_exact_projection_not_zero PASSED [ 62%]\ntests/unit/data/test_s01.py::test_exact_unit_conversion_and_reserved_stays_informational PASSED [ 62%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-INCOMPLETE_COVERAGE] PASSED [ 63%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNMAPPED_IDENTITY_OR_UNIT] PASSED [ 63%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_INVENTORY] PASSED [ 64%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-STALE_OR_FUTURE_INVENTORY] PASSED [ 64%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-DEMAND_WINDOW_INCOMPLETE_OR_DUPLICATE] PASSED [ 64%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_SUPPLY] PASSED [ 65%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_OR_OVERDUE_AVAILABILITY] PASSED [ 65%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-UNKNOWN_SUPPLY_STATUS] PASSED [ 65%]\ntests/unit/data/test_s01.py::test_quality_fail_closed[<lambda>-CLOSED_SUPPLY_CONFLICT] PASSED [ 66%]\ntests/unit/data/test_s01.py::test_mirror_dedup_conflict_and_ambiguous_inventory PASSED [ 66%]\ntests/unit/data/test_s01.py::test_manifest_immutable_versions_replay_and_quality_only_candidate_block PASSED [ 66%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change0] PASSED [ 67%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change1] PASSED [ 67%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change2] PASSED [ 67%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change3] PASSED [ 68%]\ntests/unit/data/test_s01.py::test_no_real_source_or_path_fallback[change4] PASSED [ 68%]\ntests/unit/data/test_s01.py::test_source_port_bounded_retry_and_no_partial_success PASSED [ 69%]\ntests/unit/data/test_s01.py::test_evidence_broken_locator_is_missing PASSED [ 69%]\ntests/unit/data/test_s01.py::test_calendar_uses_normalized_utc_and_exact_large_conversion PASSED [ 69%]\ntests/unit/forecasting/s01/test_candidates.py::test_each_candidate_uses_identical_b01_and_no_optimality PASSED [ 70%]\ntests/unit/forecasting/s01/test_candidates.py::test_moq_multiple_independent_and_hard_cap_no_solution PASSED [ 70%]\ntests/unit/forecasting/s01/test_candidates.py::test_missing_constraints_only_baseline_and_quality_cannot_be_overridden PASSED [ 70%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_without_shortage_has_no_zero_piece_candidate[False] PASSED [ 71%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_without_shortage_has_no_zero_piece_candidate[True] PASSED [ 71%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_with_intermediate_shortage_requires_missing_policy[35] PASSED [ 71%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_gap_with_intermediate_shortage_requires_missing_policy[100] PASSED [ 72%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[moq-None] PASSED [ 72%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[maxOrderQty-0] PASSED [ 72%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[orderMultiple-None] PASSED [ 73%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[candidateDates-value3] PASSED [ 73%]\ntests/unit/forecasting/s01/test_candidates.py::test_zero_total_gap_does_not_override_missing_constraints[candidateDates-value4] PASSED [ 74%]\ntests/unit/forecasting/s01/test_candidates.py::test_positive_gap_candidate_dates_remain_bounded_and_risk_is_evaluated_by_b01 PASSED [ 74%]\ntests/unit/metrics/s01/test_daily.py::test_known_engineering_target_gap_and_daily_series PASSED [ 74%]\ntests/unit/metrics/s01/test_daily.py::test_delayed_supply_preserves_intermediate_shortage_with_candidate PASSED [ 75%]\ntests/unit/metrics/s01/test_daily.py::test_zero_demand_coverage_is_unknown_not_infinite_or_error PASSED [ 75%]\ntests/unit/metrics/s01/test_daily.py::test_partial_receipt_uses_remaining_once_and_excludes_arrival_after_window PASSED [ 75%]\ntests/unit/metrics/s01/test_daily.py::test_invalid_data_cannot_reach_calculator PASSED [ 76%]\ntests/unit/models/test_deepseek.py::test_key_configuration_never_authorizes_network[False-False] PASSED [ 76%]\ntests/unit/models/test_deepseek.py::test_key_configuration_never_authorizes_network[False-True] PASSED [ 76%]\ntests/unit/models/test_deepseek.py::test_key_configuration_never_authorizes_network[True-False] PASSED [ 77%]\ntests/unit/models/test_deepseek.py::test_official_protocol_mapping_and_unknown_billed_cost_are_explicit PASSED [ 77%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[301-PROVIDER_ERROR] PASSED [ 77%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[401-AUTH_ERROR] PASSED [ 78%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR] PASSED [ 78%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[429-RATE_LIMITED] PASSED [ 79%]\ntests/unit/models/test_deepseek.py::test_http_error_classification_no_redirect_and_no_retries[500-UNAVAILABLE] PASSED [ 79%]\ntests/unit/models/test_deepseek.py::test_finish_reason_mapping[length-TRUNCATED] PASSED [ 79%]\ntests/unit/models/test_deepseek.py::test_finish_reason_mapping[content_filter-REFUSED] PASSED [ 80%]\ntests/unit/models/test_deepseek.py::test_finish_reason_mapping[tool_calls-PROVIDER_ERROR] PASSED [ 80%]\ntests/unit/models/test_deepseek.py::test_malformed_json_and_missing_usage_never_fabricate_zero_cost PASSED [ 80%]\ntests/unit/models/test_deepseek.py::test_transport_timeout_and_sensitive_exception_are_safe PASSED [ 81%]\ntests/unit/models/test_deepseek.py::test_unknown_usage_fact_has_known_tokens_without_fabricated_charge PASSED [ 81%]\ntests/unit/models/test_deepseek.py::test_settings_defaults_and_safe_runtime_injection PASSED [ 81%]\ntests/unit/models/test_deepseek.py::test_connectivity_entry_default_never_reads_settings_or_opens_network PASSED [ 82%]\ntests/unit/models/test_deepseek.py::test_insufficient_cost_allowance_and_absent_key_are_unsent PASSED [ 82%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch0] PASSED [ 82%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch1] PASSED [ 83%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch2] PASSED [ 83%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch3] PASSED [ 83%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch4] PASSED [ 84%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch5] PASSED [ 84%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch6] PASSED [ 85%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch7] PASSED [ 85%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch8] PASSED [ 85%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch9] PASSED [ 86%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch10] PASSED [ 86%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch11] PASSED [ 86%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch12] PASSED [ 87%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch13] PASSED [ 87%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch14] PASSED [ 87%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch15] PASSED [ 88%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch16] PASSED [ 88%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch17] PASSED [ 88%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch18] PASSED [ 89%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch19] PASSED [ 89%]\ntests/unit/models/test_gateway.py::test_invalid_model_request_never_calls_provider[patch20] PASSED [ 90%]\ntests/unit/models/test_gateway.py::test_valid_model_request_and_query_shape PASSED [ 90%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[success-OK] PASSED [ 90%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[missing-INVALID_OUTPUT] PASSED [ 91%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[type-INVALID_OUTPUT] PASSED [ 91%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[extra-INVALID_OUTPUT] PASSED [ 91%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[json-INVALID_OUTPUT] PASSED [ 92%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[refused-REFUSED] PASSED [ 92%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[truncated-TRUNCATED] PASSED [ 92%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[timeout-TIMEOUT] PASSED [ 93%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[unavailable-UNAVAILABLE] PASSED [ 93%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[rate_limit-RATE_LIMITED] PASSED [ 93%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[auth-AUTH_ERROR] PASSED [ 94%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[model_mismatch-MODEL_MISMATCH] PASSED [ 94%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[unknown-USAGE_UNKNOWN] PASSED [ 95%]\ntests/unit/models/test_gateway.py::test_schema_and_technical_outcomes[exception-ACCOUNTING_OR_PROVIDER_ERROR] PASSED [ 95%]\ntests/unit/models/test_gateway.py::test_provider_request_digests_timeout_and_roles_are_checked PASSED [ 95%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[promptRef] PASSED [ 96%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[outputSchemaRef] PASSED [ 96%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[parametersRef] PASSED [ 96%]\ntests/unit/models/test_gateway.py::test_unknown_ref_is_unsent_and_released[cachePolicyRef] PASSED [ 97%]\ntests/unit/models/test_gateway.py::test_cancellation_mid_call_returns_without_waiting_and_late_usage_is_settled PASSED [ 97%]\ntests/unit/models/test_gateway.py::test_provider_timeout_is_bounded_and_no_implicit_retry PASSED [ 97%]\ntests/unit/models/test_gateway.py::test_over_budget_actual_usage_is_accounted_and_output_rejected PASSED [ 98%]\ntests/unit/models/test_gateway.py::test_required_usage_audit_failure_never_returns_success PASSED [ 98%]\ntests/unit/models/test_gateway.py::test_final_audit_cannot_expose_explanation_after_control_stop[cancel] PASSED [ 98%]\ntests/unit/models/test_gateway.py::test_final_audit_cannot_expose_explanation_after_control_stop[deadline] PASSED [ 99%]\ntests/unit/models/test_gateway.py::test_no_sensitive_context_or_output_in_audit PASSED [ 99%]\ntests/unit/models/test_gateway.py::test_model_cannot_mutate_authoritative_b01_b02_results PASSED [100%]\n\n============================== warnings summary ===============================\n.tmp\\stage-a-clean\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n--- generated xml file: D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\c01-fixed-eaa7718c08c8.xml ----\n================== 281 passed, 1 warning in 71.09s (0:01:11) ==================\n"
     },
     {
       "command": [
@@ -110,67 +110,67 @@
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_authenticated_accept_query_and_idempotency",
-      "seconds": "0.369",
+      "seconds": "0.341",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_cookie_csrf_origin_revocation_and_safe_cookie_flags",
-      "seconds": "0.194",
+      "seconds": "0.164",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_bad_identity_fails_before_command[signature]",
-      "seconds": "0.026",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_bad_identity_fails_before_command[issuer]",
-      "seconds": "0.036",
+      "seconds": "0.029",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_bad_identity_fails_before_command[audience]",
-      "seconds": "0.034",
+      "seconds": "0.023",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_bad_identity_fails_before_command[expired]",
-      "seconds": "0.032",
+      "seconds": "0.023",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_scope_expansion_and_client_trusted_metadata_rejected",
-      "seconds": "0.160",
+      "seconds": "0.109",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_production_composition_never_registers_engineering_handler",
-      "seconds": "0.116",
+      "seconds": "0.078",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.http.test_task_api",
       "name": "test_unauthenticated_task_request_has_no_anonymous_bypass",
-      "seconds": "0.044",
+      "seconds": "0.023",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.mysql.test_storage",
       "name": "test_explicit_migration_head_and_repeat_upgrade",
-      "seconds": "0.108",
+      "seconds": "0.068",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.mysql.test_storage",
       "name": "test_one_frozen_migration_chain",
-      "seconds": "0.008",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
@@ -188,541 +188,595 @@
     {
       "classname": "tests.integration.mysql.test_storage",
       "name": "test_destructive_downgrade_guard_does_not_execute_sql",
-      "seconds": "0.017",
+      "seconds": "0.008",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.mysql.test_storage",
       "name": "test_actual_server_is_mysql_utc_read_committed",
-      "seconds": "0.006",
+      "seconds": "0.003",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.mysql.test_storage",
       "name": "test_exact_types_unique_tenant_key_and_real_rollback",
-      "seconds": "0.016",
+      "seconds": "0.008",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_create_rolls_back_task_work_budget_and_required_audit",
-      "seconds": "0.050",
+      "seconds": "0.031",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_same_command_replays_one_persisted_task_and_work",
-      "seconds": "0.045",
+      "seconds": "0.026",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_same_command_with_changed_content_conflicts",
-      "seconds": "0.043",
+      "seconds": "0.037",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_same_key_and_sku_in_other_tenant_does_not_reuse_task",
-      "seconds": "0.060",
+      "seconds": "0.038",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_two_concurrent_create_commands_are_idempotent",
-      "seconds": "0.098",
+      "seconds": "0.050",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_invalid_fixture_and_unregistered_s01_are_rejected_before_admission",
-      "seconds": "0.017",
+      "seconds": "0.015",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_two_workers_only_one_claims_single_delivery",
-      "seconds": "0.054",
+      "seconds": "0.048",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_complete_requires_current_lease_and_plan",
-      "seconds": "0.103",
+      "seconds": "0.088",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget",
-      "seconds": "0.240",
+      "seconds": "0.151",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_exhausted_delivery_reconciles_owner_once",
-      "seconds": "0.118",
+      "seconds": "0.072",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_cancel_queued_is_idempotent_and_does_not_publish",
-      "seconds": "0.084",
+      "seconds": "0.049",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_cancel_running_rejects_late_completion",
-      "seconds": "0.093",
+      "seconds": "0.066",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_worker_deadline_expiry_is_bounded_failure",
-      "seconds": "0.077",
+      "seconds": "0.064",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_worker_rechecks_revoked_actor_before_handler",
-      "seconds": "0.060",
+      "seconds": "0.055",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_completion_audit_failure_rolls_back_owner_and_delivery",
-      "seconds": "0.093",
+      "seconds": "0.067",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_budget_two_threads_cannot_overreserve_original_task",
-      "seconds": "0.084",
+      "seconds": "0.063",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_attempt_reservation_replay_and_content_conflict",
-      "seconds": "0.097",
+      "seconds": "0.067",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_unknown_usage_stays_reserved_and_cannot_be_resent_or_refunded",
-      "seconds": "0.130",
+      "seconds": "0.100",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_old_plan_failure_cannot_change_new_plan_state",
-      "seconds": "0.051",
+      "seconds": "0.048",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_explicit_new_owner_version_can_start_without_old_delivery_rebinding",
-      "seconds": "0.078",
+      "seconds": "0.070",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_lease_cannot_be_rebound_to_another_owner_or_work_kind",
-      "seconds": "0.058",
+      "seconds": "0.046",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_unknown_logical_call_cannot_retry_under_a_new_attempt",
-      "seconds": "0.102",
+      "seconds": "0.077",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+      "seconds": "0.072",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RELEASED-ATTEMPT_RELEASED]",
+      "seconds": "0.074",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+      "seconds": "0.084",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RELEASED-ATTEMPT_RELEASED]",
+      "seconds": "0.088",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-SENT]",
+      "seconds": "0.128",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-UNKNOWN]",
+      "seconds": "0.120",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-SENT]",
+      "seconds": "0.118",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-UNKNOWN]",
+      "seconds": "0.126",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_usage_settlement_is_idempotent_and_g02_is_unique_fact",
-      "seconds": "0.105",
+      "seconds": "0.093",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_actual_over_limit_usage_is_not_clamped_and_blocks_more_calls",
-      "seconds": "0.104",
+      "seconds": "0.090",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_unsent_release_is_idempotent_and_never_refunds_spent_usage",
-      "seconds": "0.123",
+      "seconds": "0.098",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_settlement_required_audit_failure_rolls_back_usage_and_control",
-      "seconds": "0.115",
+      "seconds": "0.093",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_worker_retry_is_bounded_and_keeps_original_deadline",
-      "seconds": "0.316",
+      "seconds": "0.298",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_handler_runs_outside_owner_transaction_and_emits_no_report",
-      "seconds": "0.099",
+      "seconds": "0.079",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_cancel_required_audit_failure_rolls_back_task_command_and_work",
-      "seconds": "0.104",
+      "seconds": "0.068",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_only_one_concurrent_sender_can_mark_attempt_sent",
-      "seconds": "0.106",
+      "seconds": "0.071",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_engineering_foundation",
       "name": "test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task",
-      "seconds": "0.125",
+      "seconds": "0.115",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_late_sent_usage_is_accounted_and_replayed_after_cancel",
+      "seconds": "0.107",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_mock_success_settles_one_g02_usage_and_duplicate_cannot_resend",
-      "seconds": "0.227",
+      "seconds": "0.164",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[planVersion-2]",
-      "seconds": "0.083",
+      "seconds": "0.066",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[policyContextRef-value1]",
-      "seconds": "0.085",
+      "seconds": "0.068",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[allowanceRef-value2]",
-      "seconds": "0.081",
+      "seconds": "0.066",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[principalRef-value3]",
-      "seconds": "0.166",
+      "seconds": "0.065",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[snapshotId-other-snapshot]",
-      "seconds": "0.102",
+      "seconds": "0.084",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[participantId-other-participant]",
-      "seconds": "0.100",
+      "seconds": "0.081",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_deadline_cannot_extend_original_task_and_expired_task_never_sends",
-      "seconds": "0.115",
+      "seconds": "0.082",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied",
-      "seconds": "0.303",
+      "seconds": "0.213",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset",
-      "seconds": "0.351",
+      "seconds": "0.275",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_cross_gateway_concurrency_limit_is_durable_and_network_outside_locks",
-      "seconds": "0.421",
+      "seconds": "0.275",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_same_logical_two_reserved_attempts_cannot_race_send",
-      "seconds": "0.283",
+      "seconds": "0.229",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_short_attempt_deadline_and_late_result_never_publish",
-      "seconds": "0.600",
+      "seconds": "2.071",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_restart_uses_original_pending_attempt_and_allowance",
-      "seconds": "0.254",
+      "seconds": "0.228",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_revocation_before_send_is_fail_closed",
-      "seconds": "0.195",
+      "seconds": "0.068",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[MODEL_SENT-0-RELEASED]",
-      "seconds": "0.156",
+      "seconds": "0.138",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[USAGE_SETTLED-1-UNKNOWN]",
-      "seconds": "0.188",
+      "seconds": "0.210",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_budget_exhaustion_is_not_a_free_retry",
-      "seconds": "0.194",
+      "seconds": "0.184",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_pipeline_publishes_one_immutable_report_and_submit_replays",
-      "seconds": "0.321",
+      "seconds": "0.314",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_quality_degradation_is_reported_without_inventing_rules[null-BLOCKED]",
-      "seconds": "0.159",
+      "seconds": "0.139",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_quality_degradation_is_reported_without_inventing_rules[constraint-PARTIAL]",
-      "seconds": "0.155",
+      "seconds": "0.112",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_task_audit_and_ack_are_one_transaction[queue]",
-      "seconds": "0.162",
+      "seconds": "0.111",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_task_audit_and_ack_are_one_transaction[audit]",
-      "seconds": "0.191",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.integration.orchestration.test_s01_reports",
-      "name": "test_stale_or_unauthorized_result_never_publishes[cancel]",
-      "seconds": "0.158",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.integration.orchestration.test_s01_reports",
-      "name": "test_stale_or_unauthorized_result_never_publishes[deadline]",
-      "seconds": "0.129",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.integration.orchestration.test_s01_reports",
-      "name": "test_stale_or_unauthorized_result_never_publishes[lease]",
       "seconds": "0.121",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[cancel]",
+      "seconds": "0.094",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[deadline]",
+      "seconds": "0.079",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[lease]",
+      "seconds": "0.079",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_stale_or_unauthorized_result_never_publishes[plan]",
-      "seconds": "0.123",
+      "seconds": "0.080",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_stale_or_unauthorized_result_never_publishes[revoke]",
-      "seconds": "0.173",
+      "seconds": "0.084",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_stale_or_unauthorized_result_never_publishes[binding]",
-      "seconds": "0.104",
+      "seconds": "0.072",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_stale_or_unauthorized_result_never_publishes[scope]",
-      "seconds": "0.102",
+      "seconds": "0.079",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_stale_or_unauthorized_result_never_publishes[missing]",
-      "seconds": "0.099",
+      "seconds": "0.084",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_rechecks_current_scope_and_tenant",
-      "seconds": "0.156",
+      "seconds": "0.137",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_quantity_reader_gets_only_public_view_while_full_assets_remain_internal",
-      "seconds": "0.158",
+      "seconds": "0.140",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_rechecks_each_current_scope_dimension[fields]",
-      "seconds": "0.243",
+      "seconds": "0.125",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_rechecks_each_current_scope_dimension[canonicalSkuIds]",
-      "seconds": "0.144",
+      "seconds": "0.102",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_rechecks_each_current_scope_dimension[warehouseIds]",
-      "seconds": "0.146",
+      "seconds": "0.118",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_rechecks_each_current_scope_dimension[storeIds]",
-      "seconds": "0.157",
+      "seconds": "0.115",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_fails_closed_without_matching_read_contract[missing-read-contract]",
-      "seconds": "0.136",
+      "seconds": "0.127",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_fails_closed_without_matching_read_contract[wrong-handler-version]",
-      "seconds": "0.142",
+      "seconds": "0.125",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_s01_reports",
       "name": "test_report_read_fails_closed_without_matching_read_contract[scope-binding]",
-      "seconds": "0.173",
+      "seconds": "0.131",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_api_restart_preserves_queued_task_and_idempotency",
-      "seconds": "5.547",
+      "seconds": "4.756",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_killed_worker_recovers_same_task_deadline_and_budget",
-      "seconds": "6.511",
+      "seconds": "6.486",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_production_empty_registry_cannot_recover_fixture_delivery",
-      "seconds": "7.486",
+      "seconds": "7.546",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_two_actual_workers_do_not_complete_a_task_twice",
-      "seconds": "3.959",
+      "seconds": "4.478",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_running_cancel_blocks_late_completion",
-      "seconds": "5.075",
+      "seconds": "5.059",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_revoked_identity_is_rechecked_by_actual_worker",
-      "seconds": "3.168",
+      "seconds": "3.117",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_foundation_processes",
       "name": "test_actual_worker_retry_exhaustion_is_bounded",
-      "seconds": "3.454",
+      "seconds": "3.838",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_s01_processes",
       "name": "test_actual_s01_api_worker_report_evidence_and_read_authorization",
-      "seconds": "7.483",
+      "seconds": "7.904",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_s01_processes",
       "name": "test_s01_killed_worker_recovers_original_snapshot_report_budget_and_deadline",
-      "seconds": "6.705",
+      "seconds": "6.712",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_s01_processes",
       "name": "test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[False]",
-      "seconds": "3.362",
+      "seconds": "3.236",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.processes.test_s01_processes",
       "name": "test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[True]",
-      "seconds": "3.310",
+      "seconds": "3.292",
       "result": "PASS"
     },
     {
       "classname": "tests.security.test_access_mysql",
       "name": "test_real_current_identity_scope_and_field_limits",
-      "seconds": "0.037",
+      "seconds": "0.032",
       "result": "PASS"
     },
     {
       "classname": "tests.security.test_access_mysql",
       "name": "test_real_token_revocation_invalidates_old_actor_on_next_check",
-      "seconds": "0.026",
+      "seconds": "0.025",
       "result": "PASS"
     },
     {
       "classname": "tests.security.test_access_mysql",
       "name": "test_real_principal_revision_and_grant_changes_rechecked",
-      "seconds": "0.029",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.security.test_access_mysql",
       "name": "test_real_session_expiry_is_rechecked_even_while_jwt_valid",
-      "seconds": "0.022",
+      "seconds": "0.020",
       "result": "PASS"
     },
     {
       "classname": "tests.security.test_access_mysql",
       "name": "test_real_revocation_serializes_with_authorized_mutation",
-      "seconds": "0.126",
+      "seconds": "0.124",
       "result": "PASS"
     },
     {
@@ -764,7 +818,7 @@
     {
       "classname": "tests.security.test_access_unit",
       "name": "test_invalid_claims_rejected_without_echo[changes5]",
-      "seconds": "0.002",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
@@ -890,7 +944,7 @@
     {
       "classname": "tests.security.test_access_unit",
       "name": "test_backend_failure_does_not_render_driver_secrets",
-      "seconds": "0.001",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -902,7 +956,7 @@
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_invalid_settings_never_echo_secret",
-      "seconds": "0.005",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
@@ -914,7 +968,7 @@
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_remote_database_without_trusted_ca_fails",
-      "seconds": "0.004",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
@@ -926,31 +980,31 @@
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_readiness_does_not_claim_unimplemented_capabilities[True]",
-      "seconds": "0.018",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.bootstrap.test_foundation",
-      "name": "test_readiness_does_not_claim_unimplemented_capabilities[False]",
-      "seconds": "0.015",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.bootstrap.test_foundation",
-      "name": "test_database_failure_is_sanitized",
       "seconds": "0.017",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_readiness_does_not_claim_unimplemented_capabilities[False]",
+      "seconds": "0.016",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_database_failure_is_sanitized",
+      "seconds": "0.015",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_trace_headers_and_no_request_data_in_logs",
-      "seconds": "0.019",
+      "seconds": "0.018",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_http_error_contract_drops_unsafe_details[401-UNAUTHENTICATED]",
-      "seconds": "0.016",
+      "seconds": "0.018",
       "result": "PASS"
     },
     {
@@ -962,19 +1016,19 @@
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_http_error_contract_drops_unsafe_details[404-NOT_FOUND]",
-      "seconds": "0.019",
+      "seconds": "0.017",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_http_error_contract_drops_unsafe_details[409-CONFLICT]",
-      "seconds": "0.018",
+      "seconds": "0.015",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_validation_and_unhandled_error_are_safe",
-      "seconds": "0.033",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
@@ -992,43 +1046,43 @@
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_unimplemented_routes_are_not_registered[/api/v1/reports]",
-      "seconds": "0.016",
+      "seconds": "0.017",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_unimplemented_routes_are_not_registered[/api/v1/executions]",
-      "seconds": "0.020",
+      "seconds": "0.017",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_unimplemented_routes_are_not_registered[/api/v1/approvals]",
-      "seconds": "0.020",
+      "seconds": "0.017",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_unimplemented_routes_are_not_registered[/api/v1/models]",
-      "seconds": "0.022",
+      "seconds": "0.016",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_unimplemented_routes_are_not_registered[/docs]",
-      "seconds": "0.016",
+      "seconds": "0.020",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.bootstrap.test_foundation",
       "name": "test_unimplemented_routes_are_not_registered[/openapi.json]",
-      "seconds": "0.016",
+      "seconds": "0.015",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.data.test_handler",
       "name": "test_handler_no_ai_and_every_evidence_resolves",
-      "seconds": "0.003",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
@@ -1040,37 +1094,37 @@
     {
       "classname": "tests.unit.data.test_handler",
       "name": "test_asset_binding_rejects_conflicts[version]",
-      "seconds": "0.004",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.data.test_handler",
-      "name": "test_asset_binding_rejects_conflicts[metric]",
-      "seconds": "0.004",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.data.test_handler",
-      "name": "test_asset_binding_rejects_conflicts[projection]",
       "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[metric]",
+      "seconds": "0.005",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[projection]",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
       "name": "test_asset_binding_rejects_conflicts[evidence]",
-      "seconds": "0.006",
+      "seconds": "0.008",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.data.test_handler",
       "name": "test_blocked_input_produces_quality_report_without_invalid_inventory_evidence",
-      "seconds": "0.004",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.data.test_handler",
       "name": "test_quantity_report_view_omits_raw_assets_and_unrequested_future_fields",
-      "seconds": "0.004",
+      "seconds": "0.007",
       "result": "PASS"
     },
     {
@@ -1082,19 +1136,19 @@
     {
       "classname": "tests.unit.data.test_handler",
       "name": "test_report_view_rejects_unsupported_field_or_resource_scope[canonicalSkuIds-values1]",
-      "seconds": "0.008",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.data.test_handler",
-      "name": "test_report_view_rejects_unsupported_field_or_resource_scope[warehouseIds-values2]",
       "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.data.test_handler",
-      "name": "test_report_view_rejects_unsupported_field_or_resource_scope[storeIds-values3]",
+      "name": "test_report_view_rejects_unsupported_field_or_resource_scope[warehouseIds-values2]",
       "seconds": "0.005",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_report_view_rejects_unsupported_field_or_resource_scope[storeIds-values3]",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
@@ -1106,7 +1160,7 @@
     {
       "classname": "tests.unit.data.test_s01",
       "name": "test_fixture_null_and_exact_projection_not_zero",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1118,7 +1172,7 @@
     {
       "classname": "tests.unit.data.test_s01",
       "name": "test_quality_fail_closed[<lambda>-INCOMPLETE_COVERAGE]",
-      "seconds": "0.004",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1142,13 +1196,13 @@
     {
       "classname": "tests.unit.data.test_s01",
       "name": "test_quality_fail_closed[<lambda>-DEMAND_WINDOW_INCOMPLETE_OR_DUPLICATE]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.data.test_s01",
       "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_SUPPLY]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1160,7 +1214,7 @@
     {
       "classname": "tests.unit.data.test_s01",
       "name": "test_quality_fail_closed[<lambda>-UNKNOWN_SUPPLY_STATUS]",
-      "seconds": "0.002",
+      "seconds": "0.003",
       "result": "PASS"
     },
     {
@@ -1226,7 +1280,7 @@
     {
       "classname": "tests.unit.data.test_s01",
       "name": "test_calendar_uses_normalized_utc_and_exact_large_conversion",
-      "seconds": "0.008",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
@@ -1238,13 +1292,13 @@
     {
       "classname": "tests.unit.forecasting.s01.test_candidates",
       "name": "test_moq_multiple_independent_and_hard_cap_no_solution",
-      "seconds": "0.004",
+      "seconds": "0.003",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.forecasting.s01.test_candidates",
       "name": "test_missing_constraints_only_baseline_and_quality_cannot_be_overridden",
-      "seconds": "0.011",
+      "seconds": "0.010",
       "result": "PASS"
     },
     {
@@ -1256,13 +1310,13 @@
     {
       "classname": "tests.unit.forecasting.s01.test_candidates",
       "name": "test_zero_gap_without_shortage_has_no_zero_piece_candidate[True]",
-      "seconds": "0.005",
+      "seconds": "0.003",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.forecasting.s01.test_candidates",
       "name": "test_zero_gap_with_intermediate_shortage_requires_missing_policy[35]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1280,7 +1334,7 @@
     {
       "classname": "tests.unit.forecasting.s01.test_candidates",
       "name": "test_zero_total_gap_does_not_override_missing_constraints[maxOrderQty-0]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1346,7 +1400,7 @@
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_key_configuration_never_authorizes_network[False-True]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1358,325 +1412,325 @@
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_official_protocol_mapping_and_unknown_billed_cost_are_explicit",
-      "seconds": "0.027",
+      "seconds": "0.023",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[301-PROVIDER_ERROR]",
-      "seconds": "0.032",
+      "seconds": "0.025",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[401-AUTH_ERROR]",
-      "seconds": "0.029",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.models.test_deepseek",
-      "name": "test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR]",
       "seconds": "0.028",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
+      "name": "test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR]",
+      "seconds": "0.023",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[429-RATE_LIMITED]",
-      "seconds": "0.026",
+      "seconds": "0.025",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[500-UNAVAILABLE]",
-      "seconds": "0.030",
+      "seconds": "0.026",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_finish_reason_mapping[length-TRUNCATED]",
-      "seconds": "0.033",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_finish_reason_mapping[content_filter-REFUSED]",
-      "seconds": "0.032",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_finish_reason_mapping[tool_calls-PROVIDER_ERROR]",
-      "seconds": "0.038",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_malformed_json_and_missing_usage_never_fabricate_zero_cost",
-      "seconds": "0.070",
+      "seconds": "0.052",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_transport_timeout_and_sensitive_exception_are_safe",
-      "seconds": "0.077",
+      "seconds": "0.055",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_unknown_usage_fact_has_known_tokens_without_fabricated_charge",
-      "seconds": "0.040",
+      "seconds": "0.021",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_settings_defaults_and_safe_runtime_injection",
-      "seconds": "0.008",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_connectivity_entry_default_never_reads_settings_or_opens_network",
-      "seconds": "0.011",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_insufficient_cost_allowance_and_absent_key_are_unsent",
-      "seconds": "0.013",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch0]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch1]",
-      "seconds": "0.004",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch2]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch3]",
-      "seconds": "0.007",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch4]",
-      "seconds": "0.005",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch5]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch6]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch7]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch8]",
-      "seconds": "0.005",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch9]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch10]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch11]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch12]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch13]",
-      "seconds": "0.010",
+      "seconds": "0.003",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch14]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch15]",
-      "seconds": "0.005",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch16]",
-      "seconds": "0.005",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch17]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch18]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch19]",
-      "seconds": "0.004",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch20]",
-      "seconds": "0.007",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_valid_model_request_and_query_shape",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[success-OK]",
-      "seconds": "0.010",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[missing-INVALID_OUTPUT]",
-      "seconds": "0.011",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[type-INVALID_OUTPUT]",
-      "seconds": "0.010",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[extra-INVALID_OUTPUT]",
-      "seconds": "0.014",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[json-INVALID_OUTPUT]",
-      "seconds": "0.009",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[refused-REFUSED]",
-      "seconds": "0.011",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[truncated-TRUNCATED]",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[timeout-TIMEOUT]",
-      "seconds": "0.009",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[unavailable-UNAVAILABLE]",
-      "seconds": "0.007",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[rate_limit-RATE_LIMITED]",
-      "seconds": "0.006",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[auth-AUTH_ERROR]",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[model_mismatch-MODEL_MISMATCH]",
-      "seconds": "0.006",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[unknown-USAGE_UNKNOWN]",
-      "seconds": "0.006",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[exception-ACCOUNTING_OR_PROVIDER_ERROR]",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_provider_request_digests_timeout_and_roles_are_checked",
-      "seconds": "0.009",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_unknown_ref_is_unsent_and_released[promptRef]",
-      "seconds": "0.002",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_unknown_ref_is_unsent_and_released[outputSchemaRef]",
-      "seconds": "0.002",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
@@ -1694,159 +1748,213 @@
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_cancellation_mid_call_returns_without_waiting_and_late_usage_is_settled",
-      "seconds": "0.006",
+      "seconds": "0.041",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_provider_timeout_is_bounded_and_no_implicit_retry",
-      "seconds": "0.257",
+      "seconds": "0.263",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_over_budget_actual_usage_is_accounted_and_output_rejected",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_required_usage_audit_failure_never_returns_success",
-      "seconds": "0.006",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_final_audit_cannot_expose_explanation_after_control_stop[cancel]",
-      "seconds": "0.007",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_final_audit_cannot_expose_explanation_after_control_stop[deadline]",
-      "seconds": "0.088",
+      "seconds": "0.085",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_no_sensitive_context_or_output_in_audit",
-      "seconds": "0.006",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_model_cannot_mutate_authoritative_b01_b02_results",
-      "seconds": "0.017",
+      "seconds": "0.011",
       "result": "PASS"
     }
   ],
   "newCases": [
     {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+      "seconds": "0.072",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RELEASED-ATTEMPT_RELEASED]",
+      "seconds": "0.074",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+      "seconds": "0.084",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RELEASED-ATTEMPT_RELEASED]",
+      "seconds": "0.088",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-SENT]",
+      "seconds": "0.128",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-UNKNOWN]",
+      "seconds": "0.120",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-SENT]",
+      "seconds": "0.118",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-UNKNOWN]",
+      "seconds": "0.126",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_late_sent_usage_is_accounted_and_replayed_after_cancel",
+      "seconds": "0.107",
+      "result": "PASS"
+    },
+    {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_mock_success_settles_one_g02_usage_and_duplicate_cannot_resend",
-      "seconds": "0.227",
+      "seconds": "0.164",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[planVersion-2]",
-      "seconds": "0.083",
+      "seconds": "0.066",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[policyContextRef-value1]",
-      "seconds": "0.085",
+      "seconds": "0.068",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[allowanceRef-value2]",
-      "seconds": "0.081",
+      "seconds": "0.066",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[principalRef-value3]",
-      "seconds": "0.166",
+      "seconds": "0.065",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[snapshotId-other-snapshot]",
-      "seconds": "0.102",
+      "seconds": "0.084",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_binding_mismatches_fail_before_send[participantId-other-participant]",
-      "seconds": "0.100",
+      "seconds": "0.081",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_deadline_cannot_extend_original_task_and_expired_task_never_sends",
-      "seconds": "0.115",
+      "seconds": "0.082",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied",
-      "seconds": "0.303",
+      "seconds": "0.213",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset",
-      "seconds": "0.351",
+      "seconds": "0.275",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_cross_gateway_concurrency_limit_is_durable_and_network_outside_locks",
-      "seconds": "0.421",
+      "seconds": "0.275",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_same_logical_two_reserved_attempts_cannot_race_send",
-      "seconds": "0.283",
+      "seconds": "0.229",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_short_attempt_deadline_and_late_result_never_publish",
-      "seconds": "0.600",
+      "seconds": "2.071",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_restart_uses_original_pending_attempt_and_allowance",
-      "seconds": "0.254",
+      "seconds": "0.228",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_revocation_before_send_is_fail_closed",
-      "seconds": "0.195",
+      "seconds": "0.068",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[MODEL_SENT-0-RELEASED]",
-      "seconds": "0.156",
+      "seconds": "0.138",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[USAGE_SETTLED-1-UNKNOWN]",
-      "seconds": "0.188",
+      "seconds": "0.210",
       "result": "PASS"
     },
     {
       "classname": "tests.integration.orchestration.test_models",
       "name": "test_budget_exhaustion_is_not_a_free_retry",
-      "seconds": "0.194",
+      "seconds": "0.184",
       "result": "PASS"
     },
     {
@@ -1858,7 +1966,7 @@
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_key_configuration_never_authorizes_network[False-True]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
@@ -1870,325 +1978,325 @@
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_official_protocol_mapping_and_unknown_billed_cost_are_explicit",
-      "seconds": "0.027",
+      "seconds": "0.023",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[301-PROVIDER_ERROR]",
-      "seconds": "0.032",
+      "seconds": "0.025",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[401-AUTH_ERROR]",
-      "seconds": "0.029",
-      "result": "PASS"
-    },
-    {
-      "classname": "tests.unit.models.test_deepseek",
-      "name": "test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR]",
       "seconds": "0.028",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
+      "name": "test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR]",
+      "seconds": "0.023",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[429-RATE_LIMITED]",
-      "seconds": "0.026",
+      "seconds": "0.025",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_http_error_classification_no_redirect_and_no_retries[500-UNAVAILABLE]",
-      "seconds": "0.030",
+      "seconds": "0.026",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_finish_reason_mapping[length-TRUNCATED]",
-      "seconds": "0.033",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_finish_reason_mapping[content_filter-REFUSED]",
-      "seconds": "0.032",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_finish_reason_mapping[tool_calls-PROVIDER_ERROR]",
-      "seconds": "0.038",
+      "seconds": "0.024",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_malformed_json_and_missing_usage_never_fabricate_zero_cost",
-      "seconds": "0.070",
+      "seconds": "0.052",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_transport_timeout_and_sensitive_exception_are_safe",
-      "seconds": "0.077",
+      "seconds": "0.055",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_unknown_usage_fact_has_known_tokens_without_fabricated_charge",
-      "seconds": "0.040",
+      "seconds": "0.021",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_settings_defaults_and_safe_runtime_injection",
-      "seconds": "0.008",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_connectivity_entry_default_never_reads_settings_or_opens_network",
-      "seconds": "0.011",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_deepseek",
       "name": "test_insufficient_cost_allowance_and_absent_key_are_unsent",
-      "seconds": "0.013",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch0]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch1]",
-      "seconds": "0.004",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch2]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch3]",
-      "seconds": "0.007",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch4]",
-      "seconds": "0.005",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch5]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch6]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch7]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch8]",
-      "seconds": "0.005",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch9]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch10]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch11]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch12]",
-      "seconds": "0.003",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch13]",
-      "seconds": "0.010",
+      "seconds": "0.003",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch14]",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch15]",
-      "seconds": "0.005",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch16]",
-      "seconds": "0.005",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch17]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch18]",
-      "seconds": "0.003",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch19]",
-      "seconds": "0.004",
+      "seconds": "0.002",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_invalid_model_request_never_calls_provider[patch20]",
-      "seconds": "0.007",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_valid_model_request_and_query_shape",
-      "seconds": "0.004",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[success-OK]",
-      "seconds": "0.010",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[missing-INVALID_OUTPUT]",
-      "seconds": "0.011",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[type-INVALID_OUTPUT]",
-      "seconds": "0.010",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[extra-INVALID_OUTPUT]",
-      "seconds": "0.014",
+      "seconds": "0.006",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[json-INVALID_OUTPUT]",
-      "seconds": "0.009",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[refused-REFUSED]",
-      "seconds": "0.011",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[truncated-TRUNCATED]",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[timeout-TIMEOUT]",
-      "seconds": "0.009",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[unavailable-UNAVAILABLE]",
-      "seconds": "0.007",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[rate_limit-RATE_LIMITED]",
-      "seconds": "0.006",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[auth-AUTH_ERROR]",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[model_mismatch-MODEL_MISMATCH]",
-      "seconds": "0.006",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[unknown-USAGE_UNKNOWN]",
-      "seconds": "0.006",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_schema_and_technical_outcomes[exception-ACCOUNTING_OR_PROVIDER_ERROR]",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_provider_request_digests_timeout_and_roles_are_checked",
-      "seconds": "0.009",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_unknown_ref_is_unsent_and_released[promptRef]",
-      "seconds": "0.002",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_unknown_ref_is_unsent_and_released[outputSchemaRef]",
-      "seconds": "0.002",
+      "seconds": "0.001",
       "result": "PASS"
     },
     {
@@ -2206,60 +2314,60 @@
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_cancellation_mid_call_returns_without_waiting_and_late_usage_is_settled",
-      "seconds": "0.006",
+      "seconds": "0.041",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_provider_timeout_is_bounded_and_no_implicit_retry",
-      "seconds": "0.257",
+      "seconds": "0.263",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_over_budget_actual_usage_is_accounted_and_output_rejected",
-      "seconds": "0.008",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_required_usage_audit_failure_never_returns_success",
-      "seconds": "0.006",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_final_audit_cannot_expose_explanation_after_control_stop[cancel]",
-      "seconds": "0.007",
+      "seconds": "0.004",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_final_audit_cannot_expose_explanation_after_control_stop[deadline]",
-      "seconds": "0.088",
+      "seconds": "0.085",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_no_sensitive_context_or_output_in_audit",
-      "seconds": "0.006",
+      "seconds": "0.005",
       "result": "PASS"
     },
     {
       "classname": "tests.unit.models.test_gateway",
       "name": "test_model_cannot_mutate_authoritative_b01_b02_results",
-      "seconds": "0.017",
+      "seconds": "0.011",
       "result": "PASS"
     }
   ],
   "suite": {
-    "total": 272,
-    "passed": 272,
+    "total": 281,
+    "passed": 281,
     "failed": 0,
     "errors": 0,
     "skipped": 0,
     "original187Preserved": true,
-    "addedCases": 85
+    "addedCases": 94
   },
   "officialDocumentation": {
     "checkedOn": "2026-11-12",
@@ -2301,51 +2409,445 @@
     "Initial new authority-immutability test used a wrong helper import; corrected to exercise actual B01/B02 public APIs.",
     "Sandbox blocked pytest temporary-folder access; controlled execution passed.",
     "Initial local provider configuration validation failed safely; no secrets printed and .env unchanged.",
-    "Initial cancellation expectation TASK_STOPPED corrected to allow O01 lease revocation LEASE_LOST; late result remains unavailable."
+    "Initial cancellation expectation TASK_STOPPED corrected to allow O01 lease revocation LEASE_LOST; late result remains unavailable.",
+    "Previous final implementation 57fac89635177812da36fa988d5248c746e7a87f: 272 PASS. This independent-review fix at eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f supersedes it with 281 PASS, preserves all original 272 cases and adds 9 real-MySQL state/accounting cases. See reviewFix for precommit failures and focused run."
   ],
   "recommendation": "C-01 REVIEW only; independent acceptance required",
-  "governanceChecks": {
-    "taskCount": 31,
-    "unrelated30TaskRecordsPreserved": true,
-    "allDependenciesPreserved": true,
-    "all11ABEngineeringAcceptedUnchanged": true,
-    "fourBlockedGatesUnchanged": true,
-    "c01ReviewUnsigned": true,
-    "implementationUnchangedSinceTestedCommit": true,
-    "exactWhitelist": true,
-    "incrementalSecretScan": "PASS",
-    "unknownErpYamlUntouchedAndExcluded": true,
-    "documentation": [
-      {
-        "command": [
-          "python",
-          "docs/planning/build_docs.py"
-        ],
-        "exitCode": 0,
-        "result": "PASS",
-        "rawOutput": "{\"prepared\": true, \"published\": true}\n"
-      },
-      {
-        "command": [
-          "python",
-          "docs/planning/check_plan.py"
-        ],
-        "exitCode": 0,
-        "result": "PASS",
-        "rawOutput": "{\"status\": \"PASS\", \"checks\": 18, \"failed\": []}\n"
-      },
-      {
-        "command": [
-          "git",
-          "-c",
-          "core.whitespace=cr-at-eol",
-          "diff",
-          "--check"
-        ],
-        "exitCode": 0,
-        "result": "PASS",
-        "rawOutput": ""
+  "reviewFix": {
+    "baselineCommit": "6e2c171cf4f95cf79e2a9be4c4294540b4a833e7",
+    "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
+    "scope": "O01/G02 first settlement state guard only; RESERVED rejected before usage writes; settled replay and late reconciliation retained",
+    "previousEvidence": {
+      "gitRef": "6e2c171cf4f95cf79e2a9be4c4294540b4a833e7:docs/evidence/C-01/verification.json",
+      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+      "suite": {
+        "total": 272,
+        "passed": 272,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "original187Preserved": true,
+        "addedCases": 85
       }
-    ]
+    },
+    "previous272Preserved": true,
+    "addedCases": [
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+        "seconds": "0.072",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RELEASED-ATTEMPT_RELEASED]",
+        "seconds": "0.074",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+        "seconds": "0.084",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RELEASED-ATTEMPT_RELEASED]",
+        "seconds": "0.088",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-SENT]",
+        "seconds": "0.128",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-UNKNOWN]",
+        "seconds": "0.120",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-SENT]",
+        "seconds": "0.118",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-UNKNOWN]",
+        "seconds": "0.126",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_late_sent_usage_is_accounted_and_replayed_after_cancel",
+        "seconds": "0.107",
+        "result": "PASS"
+      }
+    ],
+    "focused": {
+      "phase": "PRECOMMIT_IMPLEMENTATION_TREE",
+      "implementationCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false python -m pytest tests/integration/orchestration/test_engineering_foundation.py tests/integration/orchestration/test_models.py -p no:cacheprovider --basetemp=.tmp/c01-settle-focused-final --junitxml=.tmp/c01-settle-focused-final.xml",
+      "exitCode": 0,
+      "passed": 58,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "rawSummary": "58 passed in 9.50s",
+      "cases": [
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_create_rolls_back_task_work_budget_and_required_audit",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_same_command_replays_one_persisted_task_and_work",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_same_command_with_changed_content_conflicts",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_same_key_and_sku_in_other_tenant_does_not_reuse_task",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_two_concurrent_create_commands_are_idempotent",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_invalid_fixture_and_unregistered_s01_are_rejected_before_admission",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_two_workers_only_one_claims_single_delivery",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_complete_requires_current_lease_and_plan",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_exhausted_delivery_reconciles_owner_once",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_cancel_queued_is_idempotent_and_does_not_publish",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_cancel_running_rejects_late_completion",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_worker_deadline_expiry_is_bounded_failure",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_worker_rechecks_revoked_actor_before_handler",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_completion_audit_failure_rolls_back_owner_and_delivery",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_budget_two_threads_cannot_overreserve_original_task",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_attempt_reservation_replay_and_content_conflict",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unknown_usage_stays_reserved_and_cannot_be_resent_or_refunded",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_old_plan_failure_cannot_change_new_plan_state",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_explicit_new_owner_version_can_start_without_old_delivery_rebinding",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_lease_cannot_be_rebound_to_another_owner_or_work_kind",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unknown_logical_call_cannot_retry_under_a_new_attempt",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RELEASED-ATTEMPT_RELEASED]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RELEASED-ATTEMPT_RELEASED]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-SENT]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-UNKNOWN]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-SENT]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-UNKNOWN]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_usage_settlement_is_idempotent_and_g02_is_unique_fact",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_actual_over_limit_usage_is_not_clamped_and_blocks_more_calls",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_unsent_release_is_idempotent_and_never_refunds_spent_usage",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_settlement_required_audit_failure_rolls_back_usage_and_control",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_worker_retry_is_bounded_and_keeps_original_deadline",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_handler_runs_outside_owner_transaction_and_emits_no_report",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_cancel_required_audit_failure_rolls_back_task_command_and_work",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_only_one_concurrent_sender_can_mark_attempt_sent",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_engineering_foundation",
+          "name": "test_late_sent_usage_is_accounted_and_replayed_after_cancel",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_mock_success_settles_one_g02_usage_and_duplicate_cannot_resend",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_binding_mismatches_fail_before_send[planVersion-2]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_binding_mismatches_fail_before_send[policyContextRef-value1]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_binding_mismatches_fail_before_send[allowanceRef-value2]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_binding_mismatches_fail_before_send[principalRef-value3]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_binding_mismatches_fail_before_send[snapshotId-other-snapshot]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_binding_mismatches_fail_before_send[participantId-other-participant]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_deadline_cannot_extend_original_task_and_expired_task_never_sends",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_cross_gateway_concurrency_limit_is_durable_and_network_outside_locks",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_same_logical_two_reserved_attempts_cannot_race_send",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_short_attempt_deadline_and_late_result_never_publish",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_restart_uses_original_pending_attempt_and_allowance",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_revocation_before_send_is_fail_closed",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[MODEL_SENT-0-RELEASED]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[USAGE_SETTLED-1-UNKNOWN]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.orchestration.test_models",
+          "name": "test_budget_exhaustion_is_not_a_free_retry",
+          "result": "PASS"
+        }
+      ]
+    },
+    "assertions": [
+      "RESERVED and RELEASED rejected both before and after cancellation; full budget/attempt/G02 usage/audit snapshots unchanged.",
+      "SENT and UNKNOWN first settlement accepted, both normal and over limit; reservation released and actual usage charged once.",
+      "SETTLED and SETTLED_OVER_LIMIT exact replay unchanged; tokens/cost/currency/pricingVersion conflicts leave all accounting snapshots unchanged.",
+      "SENT and UNKNOWN late usage after cancellation retained; task/work remain cancelled.",
+      "Original short deadline test now confirms Mock entry and holds response with events across the unchanged attempt deadline; late usage accounted without publishing output."
+    ],
+    "precommitFailures": [
+      {
+        "command": "focused foundation + models, --basetemp=.tmp/c01-settle-focused",
+        "exitCode": 1,
+        "passed": 57,
+        "failed": 1,
+        "failure": "test_short_attempt_deadline_and_late_result_never_publish: usage count 0"
+      },
+      {
+        "command": "single deadline recheck, --basetemp=.tmp/c01-settle-deadline-recheck",
+        "exitCode": 1,
+        "passed": 0,
+        "failed": 1,
+        "failure": "same existing timing assertion"
+      },
+      {
+        "command": "single deadline diagnostic, --basetemp=.tmp/c01-settle-deadline-diagnostic",
+        "exitCode": 1,
+        "passed": 0,
+        "failed": 1,
+        "failure": "provider.calls=0, attempt=UNKNOWN; original 150ms deadline expired before Mock invoke; synchronized fixture corrected without changing gateway implementation"
+      }
+    ],
+    "contractImpact": "No signature/schema/table/migration/configuration/dependency/composition-root change; callers may no longer settle unsent RESERVED attempts.",
+    "acceptance": "REVIEW; independent acceptance required; all four gates unchanged BLOCKED; real model calls zero",
+    "deliveryChecks": {
+      "documentationBuild": {
+        "command": "python docs/planning/build_docs.py",
+        "exitCode": 0
+      },
+      "documentationValidation": {
+        "command": "python docs/planning/check_plan.py",
+        "exitCode": 0,
+        "checks": 18,
+        "result": "PASS"
+      },
+      "whitespace": {
+        "command": "git -c core.whitespace=cr-at-eol diff --check",
+        "exitCode": 0
+      },
+      "changedTrackedFileSecretScan": {
+        "rulesSource": "docs/planning/repository_audit.py:RULES",
+        "files": 7,
+        "findings": [],
+        "scope": "changed tracked files only; no local secret file read"
+      },
+      "other30TaskRecordsUnchanged": true,
+      "taskCount": 31,
+      "allDependenciesUnchanged": true,
+      "fourEnablementGates": "BLOCKED",
+      "implementationTreeMatchesTestedCommit": true
+    }
   }
 }

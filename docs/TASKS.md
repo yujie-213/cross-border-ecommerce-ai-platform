@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前C-01独立审查修复授权（2026-11-12，基于6e2c171）：Codex单人集成，main，跟踪区干净；仅修复O01/G02首次usage结算的状态门槛并补真实MySQL正反例、相关及全量A/B/C-01回归、原证据/交接与普通同步。既存未知docs/ERP-openapi.yaml保留未读改暂存。保持C-01 REVIEW、review=null和四门BLOCKED；禁止真实DeepSeek请求。修复被测实现eaa7718：相关58项PASS，全量281项PASS（原272保留、新增9）；pip check/compileall/默认关闭入口PASS，真实模型NOT_RUN。下方272项为前次实现的历史证据。
+
 当前C-01工程交付（2026-11-12，基于c0e5af0；被测实现57fac89）：仅A01/Mock/受控DeepSeek官方适配、默认关闭的独立合成连通入口及工程回归、提交/普通main同步。未授权真实模型请求；密钥存在不视为付费授权，四门保持BLOCKED，不开展C-02—05/D。固定实现272项工程复验PASS，C-01进入REVIEW、review=null，等待独立验收；真实模型验证NOT_RUN。下方早期“不启动C”仅为历史授权停止点。
 
 当前负责人验收确认（2026-11-12，基于da07a71）：用户明确指令“验收通过，状态由 REVIEW → ACCEPTED”；A-01—A-06、B-01—B-05仅工程交付范围登记ACCEPTED。被审实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`，最终证据提交`da07a7113e9f9d5f7e001ebd00572b41499f3ac5`，187项实测结果沿用，未重跑业务测试。四项真实准入保持BLOCKED，历史NOT_RUN不改写；B-01/AC3真实ERP方法/路径授权及适配仍NOT_RUN并延期至原ERP门禁，不能视为通过。D-S01-01整体和其他任务不变，不启动C/D。下方旧状态描述仅为当时事实，当前状态只读各JSON。
@@ -2636,6 +2638,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "src/commerce_hub/orchestration/budget.py",
     "tests/unit/models/",
     "tests/integration/orchestration/test_models.py",
+    "tests/integration/orchestration/test_engineering_foundation.py",
     "tools/deepseek_connectivity.py",
     "tools/verify_c01.py",
     ".env.example",
@@ -2679,18 +2682,19 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "status": "REVIEW",
   "implementationCommits": [
     "2f3aa8cebcf6943e2ba2f0c6153319674b6e80f8",
-    "57fac89635177812da36fa988d5248c746e7a87f"
+    "57fac89635177812da36fa988d5248c746e7a87f",
+    "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f"
   ],
-  "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+  "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
   "evidence": [
     {
       "command": "python -m tools.verify_c01",
       "environment": "Windows / Python3.13.5 / .tmp/stage-a-clean; COMMERCE_RUN_MYSQL_TESTS=1, COMMERCE_MODEL_PROVIDER=mock, COMMERCE_MODEL_NETWORK_ENABLED=false; authorized isolated MySQL8.0.27",
-      "sample": "C-01 Mock + explicit OFFLINE_TRANSPORT DeepSeek protocol fixtures; synthetic Context only; original A/B engineering API/Worker/MySQL regression; no real model request",
+      "sample": "C-01 Mock + explicit OFFLINE_TRANSPORT DeepSeek protocol fixtures; synthetic Context only; original A/B engineering API/Worker/MySQL regression; no real model request; real MySQL RESERVED/RELEASED rejection and SENT/UNKNOWN settlement, exact replay/conflict snapshots and late accounting after cancel",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/C-01/verification.json",
-      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+      "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
       "kind": "SIMULATED_ENGINEERING",
       "acceptanceIds": [
         "C-01/AC1",
@@ -2701,11 +2705,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     {
       "command": "python -m tools.verify_c01",
       "environment": "Windows / Python3.13.5 / .tmp/stage-a-clean; COMMERCE_RUN_MYSQL_TESTS=1, COMMERCE_MODEL_PROVIDER=mock, COMMERCE_MODEL_NETWORK_ENABLED=false; authorized isolated MySQL8.0.27",
-      "sample": "C-01 Mock + explicit OFFLINE_TRANSPORT DeepSeek protocol fixtures; synthetic Context only; original A/B engineering API/Worker/MySQL regression; no real model request",
+      "sample": "C-01 Mock + explicit OFFLINE_TRANSPORT DeepSeek protocol fixtures; synthetic Context only; original A/B engineering API/Worker/MySQL regression; no real model request; real MySQL RESERVED/RELEASED rejection and SENT/UNKNOWN settlement, exact replay/conflict snapshots and late accounting after cancel",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/C-01/verification.json",
-      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+      "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
       "kind": "SECURITY",
       "acceptanceIds": [
         "C-01/AC1",
@@ -2724,12 +2728,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/C-01/verification.json",
-      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f"
+      "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f"
     }
   ],
   "review": null,
   "branch": "main",
-  "observedHead": "c0e5af096a41c680b0caff4b26424367bd6d0abe",
+  "observedHead": "6e2c171cf4f95cf79e2a9be4c4294540b4a833e7",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml（既存未知未跟踪，保留不读改暂存）"
   ],
@@ -2753,6 +2757,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "ENGINEERING_DELIVERY_REVIEW",
       "reason": "完成C-01最小A01/Mock/受控DeepSeek官方适配；针对固定实现272 PASS，A/B原187项保全、新增85项。pip check/compileall/默认禁用连通入口PASS；真实模型接口/费用/C-04 NOT_RUN。review=null，四门不变，等待独立验收。",
       "observedHead": "57fac89635177812da36fa988d5248c746e7a87f"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_C01_REVIEW_FIX",
+      "reason": "用户授权最小修复settle首次状态缺口、真实MySQL正反例/全量回归、原证据与普通main同步；不调用真实模型，不改四门。",
+      "observedHead": "6e2c171cf4f95cf79e2a9be4c4294540b4a833e7"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "REVIEW_FIX_DELIVERY",
+      "reason": "首次结算仅接受SENT/UNKNOWN；未发送拒绝且预算/attempt/G02事实不变，已结算四维一致性及取消后迟到账保留。相关58 PASS；固定实现全量281 PASS，原272全部保留、新增9项；pip check/compileall/默认关闭入口PASS。既有150ms测试准入耗时失败经事件同步修正，失败历史保留于原证据。C-01仍REVIEW、review=null，四门BLOCKED、真实模型NOT_RUN。",
+      "observedHead": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f"
     }
   ],
   "completionEvidence": [

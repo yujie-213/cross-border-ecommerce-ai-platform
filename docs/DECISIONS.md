@@ -108,3 +108,4 @@ G01当前实现固定HS256签名/issuer/audience/期限、数据库会话/修订
 - 首个真实适配只支持官方https://api.deepseek.com/chat/completions及deepseek-flash，JSON Output加本地完整Schema校验，显式非思考/非流式/无工具，禁重定向、代理和自动重试。官方2026-11-12文档核实模型别名当前指向DeepSeek-V4.1-Flash-1017；不是承诺供应商不可变revision。返回model与已审核别名不同则失败关闭，不宣称远端版本已实测。
 - 实际费额未由官方响应给出时，不将估价作为实际费用；即使token已知，原费用/token/call预留继续占额，在G02技术事实记录已知token维度与费用未知。Mock的TEST费用才自动走原settle幂等结算。晚到响应仅可核账，不发布解释。
 - 回归覆盖并发预留/发送、取消/期限/未知/恢复、结构输出/拒答/截断、脱敏、禁网及B01/B02资产不变。重要公共字段/架构无变更；本条记录本轮授权内的最小实现判断，不伪造独立评审。实现及证据提交完成后C-01进入REVIEW，真实接口/账单/用途NOT_RUN。
+- 独立审查最小修复（2026-11-12，基于6e2c171）：首次settle只接受SENT/UNKNOWN，RESERVED在写G02 usage前报ATTEMPT_NOT_SETTLEABLE；保留RELEASED原错误码和SETTLED/SETTLED_OVER_LIMIT对tokens/cost/currency/pricingVersion的一致性校验，不加当前租约或任务存活条件，取消后的迟到核账继续允许。只是原发送/核账生命周期的缺口修正，无签名、表、迁移、配置、依赖或组合根变更；原直接结算未发送预留的调用方须先走实际发送边界。仅补真实隔离MySQL与Mock回归，C-01仍REVIEW、四门BLOCKED，真实模型不执行。
