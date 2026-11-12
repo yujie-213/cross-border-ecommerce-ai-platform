@@ -13,18 +13,21 @@ from . import S01BackendHandler, package_ref
 
 class S01ModelEvaluationHandler:
     def __init__(self, entries, case_ids, scope, evaluation_ref, *, authorization_id,
-                 provider=None, timeout_seconds=30, private_output=None):
-        if (not case_ids or case_ids[0] != "A" or len(case_ids) != len(set(case_ids))
+                 provider=None, timeout_seconds=30, private_output=None, case_order=None,
+                 tenant_id=None, principal_id="s01-model-evaluator", logical_namespace=None):
+        if (not case_ids or (case_order is None and case_ids[0] != "A")
+            or (case_order is not None and tuple(case_ids) != tuple(case_order)) or len(case_ids) != len(set(case_ids))
             or len(entries) != len(case_ids) or not set(case_ids) <= set("ABCDE")):
             raise ValueError("INVALID_EVALUATION_CASES")
         self.backend = S01BackendHandler(entries, provider=provider, timeout_seconds=timeout_seconds,
-            explanation_mode="natural", request_cost_reservation=Decimal(".05"))
+            explanation_mode="natural", request_cost_reservation=Decimal(".05"), logical_namespace=logical_namespace)
         self.entries, self.case_ids = deepcopy(entries), list(case_ids)
         self.scope, self.evaluation_ref = deepcopy(scope), evaluation_ref
         self.authorization_id = authorization_id
         identity = hashlib.sha256(authorization_id.encode()).hexdigest()[:32]
         self.command_key = "evaluation-" + identity
-        self.tenant = "s01-eval-" + identity
+        self.tenant = tenant_id or "s01-eval-" + identity
+        self.principal_id = principal_id
         if scope["tenantId"] != self.tenant:
             raise ValueError("EVALUATION_TENANT_MISMATCH")
         for entry in entries:
@@ -41,7 +44,7 @@ class S01ModelEvaluationHandler:
             raise ValueError("EVALUATION_SCOPE_MISMATCH")
 
     def validate_command(self, principal, key):
-        if (principal.tenant_id != self.tenant or principal.principal_id != "s01-model-evaluator"
+        if (principal.tenant_id != self.tenant or principal.principal_id != self.principal_id
             or key != self.command_key):
             raise ValueError("FIXED_EVALUATION_COMMAND_REQUIRED")
 
@@ -64,7 +67,7 @@ class S01ModelEvaluationHandler:
             return
         exchanges = []
         for row in rows:
-            logical = "s01-natural-" + row["snapshotRef"][-40:]
+            logical = self.backend.natural_logical_call(row["snapshotRef"])
             exchange = self.provider.exchange(logical) if hasattr(self.provider, "exchange") else None
             exchanges.append(dict(caseId=row["caseId"], exchange=asdict(exchange) if exchange else None))
         value = dict(taskRef=dict(tenantId=context.principal.tenant_id, taskId=context.task["task_id"]),

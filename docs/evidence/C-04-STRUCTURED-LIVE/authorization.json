@@ -1,0 +1,29 @@
+{
+  "authorizationId": "s01-c04-structured-20261112-r1",
+  "source": "Explicit user authorization after 48ce3e9: new independent tasks, S01 official DeepSeek A-E and necessary diagnosed fixes/retests permitted",
+  "scope": "S01 AI explanation evaluation only; no ERP writes/other paid services; final REVIEW, never auto-merge/ACCEPTED",
+  "caseOrder": [
+    "C",
+    "D",
+    "E",
+    "A",
+    "B"
+  ],
+  "maxRequests": 10,
+  "maxTokens": 240000,
+  "maxCostUsd": "1",
+  "perRequestRiskUsd": "0.05",
+  "maxConcurrent": 1,
+  "timeoutSeconds": 30,
+  "taskDeadlineSeconds": 600,
+  "maxDeliveryAttempts": 1,
+  "implicitRetries": 0,
+  "failPolicy": "Stop the current run on first failure; diagnose and record a successor authorization for targeted retest if needed, without reusing ended task/key/logicalCall",
+  "sourceCatalogAuthorization": "s01-backend-20261112-v1",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "historicalTaskPreserved": "192fee223c6a429d868bb584b3cf6e15",
+  "historicalTokens": 5642,
+  "historicalCost": "UNKNOWN",
+  "historicalReservationUsd": "0.15",
+  "enterpriseGates": "BLOCKED"
+}

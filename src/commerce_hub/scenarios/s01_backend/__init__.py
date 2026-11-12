@@ -28,7 +28,7 @@ def package_ref(kind, payload):
 
 class S01BackendHandler:
     """Only a trusted composition root installs source packages, never HTTP clients."""
-    def __init__(self, packages, *, provider=None, timeout_seconds=15, explanation_mode="mock", request_cost_reservation=Decimal(".01")):
+    def __init__(self, packages, *, provider=None, timeout_seconds=15, explanation_mode="mock", request_cost_reservation=Decimal(".01"), logical_namespace=None):
         if not isinstance(packages, list) or not 1 <= len(packages) <= 24:
             raise ValueError("INVALID_BACKEND_CATALOG")
         self.packages = {}
@@ -44,11 +44,17 @@ class S01BackendHandler:
             raise ValueError("INVALID_EXPLANATION_MODE")
         if provider is not None and explanation_mode == "mock" and not isinstance(provider, S01MockProvider):
             raise ValueError("BACKEND_LIVE_MODE_REQUIRES_SEPARATE_EVALUATION")
+        if logical_namespace is not None and (len(logical_namespace) != 12 or any(c not in "0123456789abcdef" for c in logical_namespace)):
+            raise ValueError("INVALID_LOGICAL_CALL_NAMESPACE")
+        self.logical_namespace = logical_namespace
         self.provider = provider
         self.explanation_mode = explanation_mode
         from commerce_hub.orchestration.budget import amount
         self.request_cost_reservation = amount(request_cost_reservation)
         self.gateway = ModelGateway(provider, timeout_seconds=timeout_seconds) if provider else None
+
+    def natural_logical_call(self, snapshot):
+        return "s01-natural-" + (self.logical_namespace + "-" + snapshot[-32:] if self.logical_namespace else snapshot[-40:])
 
     @staticmethod
     def _prepare(entry):
@@ -173,7 +179,7 @@ class S01BackendHandler:
                 ai.update(provider="AUTHORIZED_PROVIDER", realModelAcceptance="REVIEW", semanticPolicy=NATURAL_SEMANTIC_POLICY)
             try:
                 bundle = bundle_for_result(result, binding) if natural else S01Bundle(explanation_context(binding, facts))
-                logical = "s01-natural-" + result.snapshotRef[-40:] if natural else LOGICAL_CALL
+                logical = self.natural_logical_call(result.snapshotRef) if natural else LOGICAL_CALL
                 attempt = logical + "-1" if natural else ATTEMPT
                 request = reserve_request(context, bundle, logical_call_id=logical, attempt_id=attempt,
                     max_tokens=24000, max_cost=self.request_cost_reservation, trace_id=digest(binding)[:32])

@@ -22,6 +22,35 @@ from urllib.parse import urlsplit
 
 
 FIXED_AUTHORIZATION_ID = "s01-backend-20261112-v1"
+STRUCTURED_AUTHORIZATION_ID = "s01-c04-structured-20261112-r1"
+
+
+def evaluation_policy(authorization_id):
+    """Explicit reviewed execution records; source catalog authorization is independent."""
+    if authorization_id not in {FIXED_AUTHORIZATION_ID, STRUCTURED_AUTHORIZATION_ID}:
+        raise ValueError("FIXED_MODEL_AUTHORIZATION_REQUIRED")
+    successor = authorization_id == STRUCTURED_AUTHORIZATION_ID
+    identity = _authorization_identity(authorization_id)
+    return dict(authorization_id=authorization_id,
+        tenant="s01-eval-" + _authorization_identity(FIXED_AUTHORIZATION_ID),
+        principal_id="s01-model-evaluator-" + identity[:16] if successor else "s01-model-evaluator",
+        catalog_authorization_id=FIXED_AUTHORIZATION_ID,
+        max_requests=10 if successor else 5, max_cost=Decimal("1"), request_risk=Decimal(".05"),
+        case_order=tuple("CDEAB") if successor else None,
+        logical_namespace=identity[:12] if successor else None)
+
+
+def evaluation_catalog(path, *, private_root, policy):
+    ids, entries, scope = _load_private_catalog(path, private_root=private_root,
+        authorization_id=policy["catalog_authorization_id"], tenant=policy["tenant"])
+    if policy["case_order"] is not None:
+        if set(ids) != set(policy["case_order"]):
+            raise ValueError("AUTHORIZED_CASE_SET_REQUIRED")
+        by_id = dict(zip(ids, entries))
+        ids = list(policy["case_order"]); entries = [by_id[key] for key in ids]
+    return ids, entries, scope
+
+
 CATALOG_SCHEMA_VERSION = "s01-model-evaluation-catalog-v1"
 IDENTITY_TTL_MINUTES = 16
 
@@ -233,7 +262,7 @@ def _validate_api_base_url(value):
     return value.rstrip("/")
 
 
-def _ensure_fixed_identity(database, settings, *, tenant, identity, scope, expires_at):
+def _ensure_fixed_identity(database, settings, *, tenant, identity, scope, expires_at, principal_id="s01-model-evaluator"):
     """Provision once or verify the exact existing fixed evaluation identity."""
     from sqlalchemy import select, update
     from commerce_hub.governance.access import AccessControl
@@ -241,7 +270,6 @@ def _ensure_fixed_identity(database, settings, *, tenant, identity, scope, expir
 
     if not settings.auth_configured:
         raise ValueError("TRUSTED_API_IDENTITY_CONFIGURATION_REQUIRED")
-    principal_id = "s01-model-evaluator"
     actions = ["tasks:create", "tasks:read", "engineering:execute"]
     access = AccessControl(
         database.engine, settings.auth_issuer, settings.auth_audience,
@@ -316,14 +344,14 @@ def _create_and_wait(client, *, body, command_key, wait_seconds, poll_seconds=0.
     return created, current, report
 
 
-def _process_environment(*, repository, catalog_path, evaluation_ref, private_output):
+def _process_environment(*, repository, catalog_path, evaluation_ref, private_output, authorization_id=FIXED_AUTHORIZATION_ID):
     environment = os.environ.copy()
     existing = environment.get("PYTHONPATH")
     roots = [str(Path(repository) / "src"), str(repository)]
     environment["PYTHONPATH"] = os.pathsep.join(roots + ([existing] if existing else []))
     environment.update(
         COMMERCE_S01_MODEL_EVALUATION_ENABLED="true",
-        COMMERCE_S01_MODEL_EVALUATION_AUTHORIZATION_ID=FIXED_AUTHORIZATION_ID,
+        COMMERCE_S01_MODEL_EVALUATION_AUTHORIZATION_ID=authorization_id,
         COMMERCE_S01_MODEL_EVALUATION_REF=evaluation_ref,
         COMMERCE_S01_MODEL_EVALUATION_PRIVATE_OUTPUT=str(private_output),
         COMMERCE_MAX_DELIVERY_ATTEMPTS="1",
@@ -418,8 +446,8 @@ def main(argv=None):
     from commerce_hub.orchestration.budget import amount
     cap = amount(args.max_cost_usd)
     request_risk = amount(args.request_risk_usd)
-    if (args.authorization_id != FIXED_AUTHORIZATION_ID or cap != Decimal("1") or
-            args.max_requests != 5 or request_risk != Decimal("0.05")):
+    policy = evaluation_policy(args.authorization_id)
+    if (cap != policy["max_cost"] or args.max_requests != policy["max_requests"] or request_risk != policy["request_risk"]):
         raise ValueError("INVALID_EVALUATION_CAP")
     repository = Path(__file__).resolve().parents[1]
     private_root = (repository / "data" / "private").resolve()
@@ -434,13 +462,12 @@ def main(argv=None):
     from commerce_hub.scenarios.s01_backend import S01BackendHandler
 
     identity = _authorization_identity(args.authorization_id)
-    tenant = "s01-eval-" + identity
+    tenant = policy["tenant"]
     if args.catalog_path:
-        case_ids, entries, scope = _load_private_catalog(
-            args.catalog_path, private_root=private_root,
-            authorization_id=args.authorization_id, tenant=tenant,
-        )
+        case_ids, entries, scope = evaluation_catalog(args.catalog_path, private_root=private_root, policy=policy)
     else:
+        if policy["case_order"] is not None:
+            raise ValueError("CONTROLLED_TEACHING_CATALOG_REQUIRED")
         from tests.support.backend import cases as backend_cases
         entries_by_id = backend_cases()
         case_ids = list("ABCDE")
@@ -468,7 +495,7 @@ def main(argv=None):
         # second polling window without refreshing or replacing the fixed token.
         expires_at = _identity_expiration(now)
         principal_id, revision = _ensure_fixed_identity(
-            database, settings, tenant=tenant, identity=identity, scope=scope, expires_at=expires_at,
+            database, settings, tenant=tenant, identity=identity, scope=scope, expires_at=expires_at, principal_id=policy["principal_id"],
         )
         token = _issue_token(
             settings, tenant=tenant, principal_id=principal_id, identity=identity,
@@ -487,7 +514,7 @@ def main(argv=None):
             if not args.external_processes:
                 environment = _process_environment(
                     repository=repository, catalog_path=args.catalog_path,
-                    evaluation_ref=evaluation_ref, private_output=worker_private_output,
+                    evaluation_ref=evaluation_ref, private_output=worker_private_output, authorization_id=args.authorization_id,
                 )
                 api_base_url, managed_processes = _start_managed_processes(environment=environment)
             with httpx.Client(

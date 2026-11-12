@@ -12,7 +12,7 @@ from commerce_hub.orchestration.service import HandlerSpec
 from commerce_hub.scenarios.s01_backend import S01BackendHandler
 from commerce_hub.scenarios.s01_backend.evaluation import S01ModelEvaluationHandler
 from tools.s01_model_evaluation import (
-    FIXED_AUTHORIZATION_ID, _authorization_identity, _catalog_evaluation_ref, _load_private_catalog,
+    FIXED_AUTHORIZATION_ID, _authorization_identity, _catalog_evaluation_ref, evaluation_policy, evaluation_catalog,
 )
 
 
@@ -26,15 +26,14 @@ def registry(settings):
         or settings.model_max_output_tokens != 1024):
         raise ValueError("EXPLICIT_MODEL_EVALUATION_MODE_REQUIRED")
     authorization_id = os.environ.get("COMMERCE_S01_MODEL_EVALUATION_AUTHORIZATION_ID")
-    if authorization_id != FIXED_AUTHORIZATION_ID:
-        raise ValueError("FIXED_MODEL_AUTHORIZATION_REQUIRED")
-    identity = _authorization_identity(authorization_id)
-    tenant = "s01-eval-" + identity
+    policy = evaluation_policy(authorization_id)
+    tenant = policy["tenant"]
     configured = os.environ.get("COMMERCE_S01_MODEL_EVALUATION_CATALOG_PATH")
     if configured:
-        case_ids, entries, scope = _load_private_catalog(configured, private_root=ROOT / "data/private",
-            authorization_id=authorization_id, tenant=tenant)
+        case_ids, entries, scope = evaluation_catalog(configured, private_root=ROOT / "data/private", policy=policy)
     else:
+        if policy["case_order"] is not None:
+            raise ValueError("CONTROLLED_TEACHING_CATALOG_REQUIRED")
         from tests.support.backend import cases
         values = cases()
         case_ids = list("ABCDE")
@@ -47,12 +46,13 @@ def registry(settings):
     output = Path(output_value).resolve() if output_value else None
     if output is None or not output.is_relative_to((ROOT / "data/private").resolve()):
         raise ValueError("PRIVATE_EVALUATION_OUTPUT_REQUIRED")
-    authorization = EvaluationAuthorization(authorization_id, 5, Decimal("1"), Decimal(".05"))
+    authorization = EvaluationAuthorization(authorization_id, policy["max_requests"], policy["max_cost"], policy["request_risk"])
     handler = S01ModelEvaluationHandler(entries, case_ids, scope, evaluation_ref,
         authorization_id=authorization_id, provider=EvaluationProvider(settings, authorization=authorization),
-        timeout_seconds=settings.model_timeout_seconds, private_output=output)
+        timeout_seconds=settings.model_timeout_seconds, private_output=output, case_order=policy["case_order"],
+        tenant_id=tenant, principal_id=policy["principal_id"], logical_namespace=policy["logical_namespace"])
     spec = HandlerSpec("S01_MODEL_EVALUATION", "0.1.0", "s01.modeleval.v1." + evaluation_ref[-32:], handler,
-        max_calls=5, max_tokens=120000, max_cost=Decimal("1"), policy_version="s01-model-evaluation-v1", cost_currency="USD")
+        max_calls=policy["max_requests"], max_tokens=24000 * policy["max_requests"], max_cost=policy["max_cost"], policy_version="s01-model-evaluation-v1", cost_currency="USD")
     return {spec.scenario_id: spec}
 
 

@@ -1,3 +1,7 @@
+## C-04真实评测新授权领取
+
+当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。
+
 ## S01证据竞态与C-04引用优化交付（2026-11-12）
 
 当前竞态与引用修复交付（2026-11-12，固定a3da2ba）：UI/C-04均REVIEW、review=null。前端31/浏览器6/后端632 PASS，原603逐名保全；原C原文v1拒绝重现、v2离线PASS，不改历史FAIL。新增真实C/D/E NOT_RUN（缺新授权），新增Token0；5642Token/UNKNOWN费用/$0.15预约指纹一致，四企业门BLOCKED。手机LOW技术债只登记，无布局改动；不合main，待负责人和星星独立评审。详见docs/evidence/S01-UI-C04-FIX/report.md。

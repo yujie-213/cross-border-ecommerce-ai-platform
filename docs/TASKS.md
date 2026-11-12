@@ -1,3 +1,5 @@
+当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。
+
 当前竞态与引用修复交付（2026-11-12，固定a3da2ba）：UI/C-04均REVIEW、review=null。前端31/浏览器6/后端632 PASS，原603逐名保全；原C原文v1拒绝重现、v2离线PASS，不改历史FAIL。新增真实C/D/E NOT_RUN（缺新授权），新增Token0；5642Token/UNKNOWN费用/$0.15预约指纹一致，四企业门BLOCKED。手机LOW技术债只登记，无布局改动；不合main，待负责人和星星独立评审。详见docs/evidence/S01-UI-C04-FIX/report.md。
 
 当前竞态与引用修复授权（2026-11-12，基于0525fa7）：负责人授权仅S01证据迟到竞态和C-04结构化引用优化，Codex在codex/s01-ui-c04-fix单人串行；当前IN_PROGRESS、最终REVIEW。远端main6fdf10c、frontend0525fa7、backend56cc62a已fetch和GitHub回读核对；已跟踪区起点干净、未知OpenAPI保留。禁止算法/移动布局改动；真实C/D/E新增授权不足为NOT_RUN，不复用旧task/key，历史FAIL/5642Token/UNKNOWN费用/$0.15预约及四门BLOCKED保留。
@@ -3071,9 +3073,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "本轮竞态与结构化引用工程修复已完成固定提交复验并交REVIEW，等待负责人/星星独立评审；旧真实C-04 FAIL保留，新真实C/D/E调用需明确新授权及原累计预算核对，不复用结束任务/key，不合main或进入下一模块。",
+  "entryCondition": "当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": "Codex（本轮竞态与引用修复，单人串行）",
+  "assignee": "Codex（本轮C-04真实复验，单人串行）",
   "allowedPaths": [
     "tests/evaluation/当前用途（未来）",
     "docs/evidence/C-04/（未来）",
@@ -3107,7 +3109,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/runbooks/s01-frontend.md",
     "docs/planning/git-whitelist.json",
     "docs/planning/validation-report.json",
-    "docs/generated/"
+    "docs/generated/",
+    "AGENTS.md",
+    "docs/evidence/C-04-STRUCTURED-LIVE/",
+    "tests/unit/models/test_successor_evaluation.py",
+    "tests/integration/s01/test_successor_evaluation.py"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -3139,7 +3145,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "MODEL_EVAL",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
     "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
@@ -3322,6 +3328,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "historicalC04": "FAIL_UNCHANGED",
       "addedPaidTokens": 0,
       "evidenceRef": "docs/evidence/S01-UI-C04-FIX/report.md"
+    },
+    {
+      "event": "STRUCTURED_LIVE_AUTHORIZED",
+      "branch": "codex/s01-ui-c04-fix",
+      "baseCommit": "48ce3e9630ac33ab3150eb8419c283184cf9aa28",
+      "authorizationId": "s01-c04-structured-20261112-r1",
+      "status": "IN_PROGRESS",
+      "evidenceRef": "docs/evidence/C-04-STRUCTURED-LIVE/authorization.json"
     }
   ],
   "completionEvidence": [

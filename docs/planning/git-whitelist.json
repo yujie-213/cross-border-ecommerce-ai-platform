@@ -673,6 +673,25 @@
     "docs/evidence/S01-UI-C04-FIX/screenshots/detail-A-390.png",
     "docs/evidence/S01-UI-C04-FIX/screenshots/detail-E-1440.png",
     "docs/evidence/S01-UI-C04-FIX/screenshots/history-1440.png",
-    "docs/evidence/S01-UI-C04-FIX/screenshots/revoked-evidence.png"
+    "docs/evidence/S01-UI-C04-FIX/screenshots/revoked-evidence.png",
+    "tests/unit/models/test_successor_evaluation.py",
+    "tests/integration/s01/test_successor_evaluation.py",
+    "docs/evidence/C-04-STRUCTURED-LIVE/authorization.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/report.md",
+    "docs/evidence/C-04-STRUCTURED-LIVE/execution.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/backend-regression.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/frontend-verification.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/budget-preservation.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/preservation.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/history.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/offline-revalidation.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/real-browser-cases.json",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/workbench-1440.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-A-1440.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-A-1024.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-A-390.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-E-1440.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/history-1440.png",
+    "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/revoked-evidence.png"
   ]
 }
