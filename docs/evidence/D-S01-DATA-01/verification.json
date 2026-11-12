@@ -1,0 +1,108 @@
+{
+  "scope": "A_LINE_OFFLINE_DOCUMENT_EVIDENCE_NOT_BUSINESS_ACCEPTANCE",
+  "date": "2026-11-12",
+  "assignee": "Codex work line A",
+  "branch": "codex/s01-data-admission",
+  "baselineCommit": "d6f9d70052e9d153daa68cef700913a21c8a633c",
+  "implementationCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "environment": {
+    "os": "Windows",
+    "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+    "network": "NO_REQUESTS",
+    "database": "NOT_ACCESSED"
+  },
+  "runs": [
+    {
+      "command": [
+        "python",
+        "docs/evidence/D-S01-DATA-01/verify_offline.py"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "rawOutput": "{\"result\": \"PASS\", \"scope\": \"OFFLINE_DOCUMENT_RECONCILIATION_ONLY\", \"baselineCommit\": \"d6f9d70052e9d153daa68cef700913a21c8a633c\", \"sourceFingerprints\": 9, \"domains\": 8, \"observationLocators\": 30, \"businessAdmission\": \"BLOCKED\", \"independentBusinessReview\": \"NOT_RUN\"}\n"
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check",
+        "d6f9d70052e9d153daa68cef700913a21c8a633c",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "rawOutput": ""
+    }
+  ],
+  "changedFiles": [
+    "docs/evidence/D-S01-DATA-01/admission-index.json",
+    "docs/evidence/D-S01-DATA-01/admission-report.md",
+    "docs/evidence/D-S01-DATA-01/verify_offline.py"
+  ],
+  "artifactFingerprints": [
+    {
+      "path": "docs/evidence/D-S01-DATA-01/admission-index.json",
+      "sha256": "199d9a272b54ac68049ec83d0ceb5652cd374874a4cf32704618c65a37fb5683"
+    },
+    {
+      "path": "docs/evidence/D-S01-DATA-01/admission-report.md",
+      "sha256": "c735379df08a8e6fef78e672c4ffed5791b4beb4d6a35a94c78c89041f9f2df6"
+    },
+    {
+      "path": "docs/evidence/D-S01-DATA-01/verify_offline.py",
+      "sha256": "2a2e52f995e552e1c9f4a24169c79b93b79ee9910678d8f53907e03804e4f5a9"
+    }
+  ],
+  "result": "PASS",
+  "acceptanceDisposition": [
+    {
+      "acceptanceIds": [
+        "D-S01-DATA-01/AC1",
+        "D-S01-DATA-01/AC2",
+        "D-S01-DATA-01/AC3"
+      ],
+      "result": "PASS",
+      "scope": "OFFLINE_FACTS_GAPS_AND_PROVENANCE_DOCUMENTATION_ONLY",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    },
+    {
+      "acceptanceIds": [
+        "D-S01-RULE-01/AC1",
+        "D-S01-RULE-01/AC2",
+        "D-S01-RULE-01/AC3",
+        "D-S01-ERP-ACCESS-01/AC1",
+        "D-S01-ERP-ACCESS-01/AC2",
+        "D-S01-ERP-ACCESS-01/AC3"
+      ],
+      "result": "NOT_RUN",
+      "scope": "ACTUAL_BUSINESS_RULE_SECURITY_SIGNOFF_AND_NEW_ERP_VALIDATION",
+      "reason": "Only prior documents reconciled; no owner signoff or new requests authorized."
+    }
+  ],
+  "businessGateDisposition": {
+    "D-S01-DATA-01": "BLOCKED",
+    "D-S01-RULE-01": "BLOCKED",
+    "D-S01-ERP-ACCESS-01": "BLOCKED",
+    "D-S01-AI-ACCESS-01": "BLOCKED"
+  },
+  "independentReview": "NOT_RUN",
+  "safety": {
+    "newErpAuthenticationCalls": 0,
+    "newErpNetworkCalls": 0,
+    "realModelCalls": 0,
+    "procurementWrites": 0,
+    "databaseCalls": 0,
+    "secretValuesRead": false,
+    "untrackedYamlRead": false
+  },
+  "limitations": [
+    "No controlled package was provided in the reviewed input set; no claim about files outside that set.",
+    "Original SKU-A identifiers and values are unavailable; no alternative sample approved.",
+    "Historical OpenAPI source fingerprint was referenced, not revalidated against untracked YAML.",
+    "Engineering Handler/Mock evidence cannot close real-data, rule, ERP or AI gates."
+  ],
+  "handoff": "Primary integrator alone updates TASKS/HANDOFF; documentation deliverable can be reviewed while business admission stays BLOCKED."
+}
