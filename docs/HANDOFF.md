@@ -1,5 +1,17 @@
 # 当前增量交接 v0.3
 
+## A/B工程交付负责人验收登记（2026-11-12，基于da07a71）
+
+项目负责人本次明确指令：“验收通过，状态由 REVIEW → ACCEPTED”。按本轮评审上下文，将A-01—A-06、B-01—B-05共11项仅工程交付范围登记ACCEPTED，review记录本人决定、日期、范围、被审实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`及证据提交`da07a7113e9f9d5f7e001ebd00572b41499f3ac5`；原实现提交、testedCommit、证据和历史全部保留。原187 PASS / 0 FAIL / 0 ERROR / 0 SKIP / 1条既有弃用提示见[最终实测证据](evidence/ab-review-fix/verification.json)；本次没有修改应用代码、连接数据库或重跑业务测试，不新增测试通过声明，也不冒称星星另作了新一轮复核。
+
+接手main/HEAD与fetch确认的origin/main均为da07a71，已跟踪区无改动，未知未跟踪`docs/ERP-openapi.yaml`保留未读/改/暂存。写入范围仅README、TASKS、HANDOFF、派生状态和文档验收校验器；没有读取.env、修改依赖/迁移/契约/原型。四项真实数据/规则/ERP/模型准入保持原BLOCKED，D-S01-01整体及其余20项任务不变，不启动C/D。B-01/AC3真实ERP方法/路径白名单、只读POST授权和网络适配仍NOT_RUN，工程接受不代表其通过，延期绑定原D-S01-ERP-ACCESS-01门禁，真实启用前须另行授权、实测与复核。
+
+原文档校验器要求历史证据一律PASS，与保留NOT_RUN事实相冲突。现最小调整为按负责人明确工程范围校验：保留的NOT_RUN须逐项记录原证据索引/制品/原因；不计入覆盖或证据类别。真实启用AC延期须列明原因并绑定本任务现有BLOCKED门禁；适用工程AC和必需证据类别仍须实际PASS，FAIL仍拒绝。A-01新增的DESIGN_REVIEW仅登记本次真实人工决定，exitCode=0是人工登记约定，非新增自动测试结果；旧未签认记录不改写。本次规则及状态仍只以TASKS为准。
+
+实际检查：系统Python执行`python docs/planning/build_docs.py`及`python docs/planning/check_plan.py`退出0，18项文档检查PASS；`git -c core.whitespace=cr-at-eol diff --check`退出0。内存中逐项比较Git基点和当前TASKS：31项总数/原依赖/AC/原证据不变，11项接受记录合法，其余20项（含四门）逐字段不变且无依赖环。对验收校验器的16个负例均被拒绝：缺负责人/被审提交/引用/实现提交，缺NOT_RUN处理/错制品/空原因，缺工程AC证据，FAIL、PASS带失败码、NOT_RUN带成功码，缺延期记录、无关门禁/解除门禁、非工程范围跳过AC、缺DESIGN_REVIEW。上述为文档治理验证，不替代原187项应用实测。
+
+本次状态登记提交SHA和普通同步结果从Git实际查询，不填自身未知SHA；最终完成普通push并核验远端main后停止，等待下一条开发指令。
+
 ## 阶段A/B独立评审修复与验收准备（2026-11-12，基于77d82af）
 
 本轮用户授权仅缺陷修复、补测、完整回归与验收准备/提交/普通同步，不开展C/D新功能。接手main/HEAD与GitHub main均为`77d82afe42459ea1bd11bec45a6e307481cac7c6`；跟踪区无修改，既有未知`docs/ERP-openapi.yaml`未读/改/暂存。Codex单人集成，无新代理。首次fetch因TLS握手失败，保持证书校验重试成功，origin/main基线未变。

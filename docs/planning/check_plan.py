@@ -12,6 +12,43 @@ checks=[]
 def h(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def j(p):return json.loads((ROOT/p).read_text(encoding='utf-8'))
 def check(name,ok,detail):checks.append({'check':name,'result':'PASS' if ok else 'FAIL','detail':detail})
+def acceptance_errors(t,ix):
+    """验收只覆盖负责人确认的适用范围；保留历史/真实模式NOT_RUN，不计为PASS。"""
+    errors=[];rv=t['review'] or {};ev=t['evidence'];commits=t['implementationCommits']
+    def error(message):errors.append(t['id']+': '+message)
+    if not commits or not all(re.fullmatch('[0-9a-f]{40}',c) for c in commits):error('real commits required')
+    if not t['testedCommit'] or not all(rv.get(k) for k in ['reviewer','reviewedCommit','evidenceRef']):error('tested commit/review required')
+    passed=[e for e in ev if e.get('result')=='PASS' and e.get('exitCode')==0]
+    covered={a for e in passed for a in e.get('acceptanceIds',[])}
+    required={a['id'] for a in t['acceptance']};deferred=set()
+    for d in rv.get('deferredAcceptance',[]):
+        gates=d.get('blockedBy',[])
+        if (rv.get('scope')!='A_B_ENGINEERING_ONLY' or not rv.get('decision') or not d.get('reason')
+            or d.get('id') not in required or not gates or not set(gates)<=set(t.get('enablementGates',[]))
+            or any(ix.get(g,{}).get('status')!='BLOCKED' or not ix[g].get('blocker') for g in gates)):
+            error('invalid deferred acceptance')
+        else:deferred.add(d['id'])
+    if not required<=covered|deferred:error('acceptance coverage missing')
+    if not set(t['requiredEvidenceKinds'])<={e.get('kind') for e in passed}:error('evidence kind missing')
+    retained=rv.get('retainedNotRunEvidence',[])
+    not_run={i for i,e in enumerate(ev) if e.get('result')=='NOT_RUN'}
+    if not_run and (rv.get('scope')!='A_B_ENGINEERING_ONLY' or not rv.get('decision')
+        or {d.get('index') for d in retained}!=not_run or len(retained)!=len(not_run)):
+        error('NOT_RUN requires explicit scoped review disposition')
+    for d in retained:
+        i=d.get('index')
+        if (not isinstance(i,int) or i not in not_run or not d.get('reason')
+            or d.get('artifactRef')!=ev[i].get('artifactRef')):error('invalid NOT_RUN disposition')
+    for e in ev:
+        if (not all(k in e for k in ['command','environment','sample','exitCode','result','artifactRef'])
+            or e.get('result') not in ['PASS','NOT_RUN']
+            or (e.get('result')=='PASS' and e.get('exitCode')!=0)
+            or (e.get('result')=='NOT_RUN' and e.get('exitCode') is not None)):
+            error('incomplete/failing evidence')
+    for c in commits+([t['testedCommit']] if t['testedCommit'] else [])+([rv['reviewedCommit']] if rv.get('reviewedCommit') else []):
+        r=subprocess.run(['git','cat-file','-e',c+'^{commit}'],cwd=ROOT,capture_output=True)
+        if r.returncode:error('commit not found')
+    return errors
 def main():
     required=['AGENTS.md','docs/PLAN.md','docs/PLAN.html','docs/TASKS.md','docs/HANDOFF.md','docs/DECISIONS.md','docs/COLLABORATION.md','docs/CI_RULES.md','docs/planning/git-whitelist.json','docs/planning/security-scan.json','docs/planning/repository-receipt.json']
     check('required-files',all((ROOT/p).is_file() for p in required),required)
@@ -29,16 +66,7 @@ def main():
     for t in ts:
         if t['status']=='BLOCKED' and not t['blocker']:errors.append(t['id']+': missing blocker')
         if t['status']!='ACCEPTED':continue
-        rv=t['review'] or {};ev=t['evidence'];commits=t['implementationCommits']
-        if not commits or not all(re.fullmatch('[0-9a-f]{40}',c) for c in commits):errors.append(t['id']+': real commits required')
-        if not t['testedCommit'] or not all(rv.get(k) for k in ['reviewer','reviewedCommit','evidenceRef']):errors.append(t['id']+': tested commit/review required')
-        covered={a for e in ev if e.get('result')=='PASS' for a in e.get('acceptanceIds',[])}
-        if not {a['id'] for a in t['acceptance']}<=covered:errors.append(t['id']+': acceptance coverage missing')
-        if not set(t['requiredEvidenceKinds'])<={e.get('kind') for e in ev if e.get('result')=='PASS'}:errors.append(t['id']+': evidence kind missing')
-        if any(not all(k in e for k in ['command','environment','sample','exitCode','result','artifactRef']) or e.get('result')!='PASS' or e.get('exitCode')!=0 for e in ev):errors.append(t['id']+': incomplete/failing evidence')
-        for c in commits+([t['testedCommit']] if t['testedCommit'] else []):
-            r=subprocess.run(['git','cat-file','-e',c+'^{commit}'],cwd=ROOT,capture_output=True)
-            if r.returncode:errors.append(t['id']+': commit not found')
+        errors.extend(acceptance_errors(t,ix))
     check('acceptance-evidence-rules',not errors,errors or '无伪造验收；语义/环境/评审身份还须人工核验')
     check('generated-status-and-dependencies',all(p.read_text(encoding='utf-8')==text for p,text in expected(ts).items()),'从TASKS生成')
     ar=j('docs/archive/plan96-v0.1/archive-manifest.json')['files']

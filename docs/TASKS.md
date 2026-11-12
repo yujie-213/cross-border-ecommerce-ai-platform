@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前负责人验收确认（2026-11-12，基于da07a71）：用户明确指令“验收通过，状态由 REVIEW → ACCEPTED”；A-01—A-06、B-01—B-05仅工程交付范围登记ACCEPTED。被审实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`，最终证据提交`da07a7113e9f9d5f7e001ebd00572b41499f3ac5`，187项实测结果沿用，未重跑业务测试。四项真实准入保持BLOCKED，历史NOT_RUN不改写；B-01/AC3真实ERP方法/路径授权及适配仍NOT_RUN并延期至原ERP门禁，不能视为通过。D-S01-01整体和其他任务不变，不启动C/D。下方旧状态描述仅为当时事实，当前状态只读各JSON。
+
 当前A/B独立评审修复授权（2026-11-12，基于77d82af）：仅缺陷修复、补测、最终工程验收准备及普通同步，不扩C/D。最终实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`复验187项PASS，原161项保全、新增26项；A-01—A-06/B-01—B-05保持REVIEW和review=null，四项真实业务门禁原状。详细范围与NOT_RUN见[最终证据](evidence/ab-review-fix/verification.json)。
 
 当前第二阶段授权（2026-11-12，基于00b212c）：A阶段工程已获星星复核；用户授权连续实现B-01—B-05及隔离S01工程插件，测试/提交/普通同步。仅显式工程样例策略；四项真实准入完整保持BLOCKED，不进入C阶段。Codex单人实现，准入代理只读核实；公共契约/迁移/组合根/台账串行。旧授权附记为历史。
@@ -46,6 +48,9 @@
 ## 唯一状态与验收规则
 
 状态仅TODO、IN_PROGRESS、BLOCKED、REVIEW、ACCEPTED。TODO不代表获准执行；领取前核对依赖、入口、实际负责人/文件范围/branch/HEAD。遇实际障碍才BLOCKED并写原因/责任/解除条件。完成实现进入REVIEW，不自动ACCEPTED；逐项验收必须有适用真实证据、实现commit、命令/环境/样本/退出码、制品/评审引用。FAIL/NOT_RUN不能填PASS，文档/Mock不替代真实ERP/模型/动作/生产验收。重要契约须评审；本轮SETUP交付REVIEW，不伪造独立验收。
+
+
+负责人可以在已有明确工程授权范围内验收工程交付；`review.scope=A_B_ENGINEERING_ONLY`须记录本人决定、被审实现和证据引用。历史/真实模式NOT_RUN逐项由`retainedNotRunEvidence`登记索引、制品和保留原因，仍不计PASS；适用AC和必需证据类别仍须真实PASS。仅真实启用部分延期时，`deferredAcceptance`必须列出原AC、原因及本任务仍BLOCKED的启用门禁，不改变原验收条件；启用前须另行授权、实测及复核。FAIL、未解释的NOT_RUN、缺失工程证据均不能通过文档校验。本约定只区分工程接受与真实启用，不解除门禁。
 
 TASKS的JSON记录是唯一状态源；PLAN/HANDOFF只链接状态，generated视图只读。实现/证据分提交，记录观察时HEAD而不要求文件填自己的SHA。没有提交或交接不全如实记录WIP，不能ACCEPTED。下列plannedTests都是将来的测试场景，只有evidence中的实际结果才是已执行证据。
 
@@ -234,7 +239,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "8fbfce3799605ce3a87306e8a6a398055db67946",
     "be2a3f9547b31340efc053ca710af22b5e01e497",
@@ -357,9 +362,49 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "result": "PASS",
       "artifactRef": "docs/evidence/ab-review-fix/verification.json",
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
+    },
+    {
+      "kind": "DESIGN_REVIEW",
+      "acceptanceIds": [
+        "A-01/AC2",
+        "A-01/AC3"
+      ],
+      "command": "人工评审：项目负责人本次明确指令“验收通过，状态由 REVIEW → ACCEPTED”",
+      "environment": "2026-11-12 / main；被审实现6f98f7785850c79e29cb02cf2b0e92b5fc722a36；证据提交da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "sample": "当前A-01工程契约原则及公共模块职责；沿用先前授权普通技术细节自主确定的范围，不覆盖真实业务规则或D-S01-01整体",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/TASKS.md",
+      "detail": "记录负责人真实人工验收决定；exitCode=0为人工决定登记约定，不表示运行了命令或新增测试。原历史NOT_RUN不改写。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 2,
+        "artifactRef": "docs/evidence/A-01/environment-inspection.json",
+        "reason": "历史未执行记录保留；其后真实MySQL兼容实测已由REAL_MYSQL_COMPATIBILITY证据覆盖。"
+      },
+      {
+        "index": 3,
+        "artifactRef": "docs/contracts/s01/A-01-契约评审稿.md",
+        "reason": "历史逐项签认未执行记录保留；后续负责人认可契约原则并授权普通技术细节，本次明确确认工程验收；不代表D-S01-01整体或真实业务规则签认。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
   "dirtyPaths": [
@@ -407,6 +452,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -483,7 +538,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "be2a3f9547b31340efc053ca710af22b5e01e497",
     "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d"
@@ -560,7 +615,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/HANDOFF.md",
+        "reason": "保留A-02当时尚未实现后续阶段的历史记录；后续适用工程测试另有真实PASS，真实业务/ERP/模型/生产仍未验收，不改写旧结果。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "4b08e5dfd90a1e30373517f27ebe7b1224e1dd6d",
   "dirtyPaths": [
@@ -594,6 +670,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -668,7 +754,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
@@ -722,7 +808,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 2,
+        "artifactRef": "docs/evidence/A-03/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
   "dirtyPaths": [
@@ -756,6 +863,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -828,7 +945,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SECURITY",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
@@ -895,7 +1012,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/A-04/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
   "dirtyPaths": [
@@ -929,6 +1067,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -1009,7 +1157,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
@@ -1076,7 +1224,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/A-05/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
   "dirtyPaths": [
@@ -1110,6 +1279,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -1183,7 +1362,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "d98bad25a1535414b45ea764aaccb19c8005814c"
   ],
@@ -1237,7 +1416,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 2,
+        "artifactRef": "docs/evidence/A-06/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
   "dirtyPaths": [
@@ -1271,6 +1471,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -1349,7 +1559,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605"
   ],
@@ -1416,7 +1626,41 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 2,
+        "artifactRef": "docs/evidence/B-01/verification.json",
+        "reason": "真实ERP方法/路径/TLS授权与网络适配不在本次工程验收范围，B-01/AC3延期到原ERP准入；未注册外部接口，仍NOT_RUN。"
+      },
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/B-01/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": [
+      {
+        "id": "B-01/AC3",
+        "blockedBy": [
+          "D-S01-ERP-ACCESS-01"
+        ],
+        "reason": "真实ERP方法/路径白名单、兼容POST只读授权和网络适配尚未获准；不在本次模拟工程验收范围。原AC及NOT_RUN完整保留，必须在真实启用前另有授权和实测；本次不宣称该项通过。"
+      }
+    ]
+  },
   "branch": "main",
   "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
   "dirtyPaths": [
@@ -1451,6 +1695,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -1527,7 +1781,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605"
   ],
@@ -1594,7 +1848,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/B-02/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
   "dirtyPaths": [
@@ -1629,6 +1904,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -1702,7 +1987,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605"
   ],
@@ -1769,7 +2054,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/B-03/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
   "dirtyPaths": [
@@ -1804,6 +2110,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -1874,7 +2190,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605",
     "6f98f7785850c79e29cb02cf2b0e92b5fc722a36"
@@ -1942,7 +2258,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/B-04/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
   "dirtyPaths": [
@@ -2002,6 +2339,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
@@ -2086,7 +2433,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "f07c9dd5d0bde539b24713931f0ff55f803f7605",
     "6f98f7785850c79e29cb02cf2b0e92b5fc722a36"
@@ -2154,7 +2501,28 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "detail": "A/B独立评审修复后的完整回归187 PASS/0 FAIL/0 ERROR/0 SKIP，保留原161项并新增26项，1条既有弃用提示；迁移/依赖/编译/真实API与独立Worker/恢复/模拟E2E通过。只证明工程范围，不签真实ERP/业务/模型/采购/生产AC。"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人）",
+    "date": "2026-11-12",
+    "decision": "验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本次用户明确指令；仅登记A-01—A-06、B-01—B-05工程交付验收",
+    "scope": "A_B_ENGINEERING_ONLY",
+    "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+    "evidenceCommit": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+    "evidenceRef": "docs/evidence/ab-review-fix/verification.json",
+    "exclusions": [
+      "真实企业身份/数据/业务规则/ERP/模型/采购执行/生产及S02 MC不在本次验收范围；四项真实准入仍BLOCKED。",
+      "D-S01-01等专项整体状态及C/D阶段不变；本次不构成下一阶段开发授权。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 3,
+        "artifactRef": "docs/evidence/B-05/verification.json",
+        "reason": "本次仅接受工程交付；真实身份/数据/规则/ERP/模型/采购/生产未验收，四门保持BLOCKED，本证据仍NOT_RUN且不计通过。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
   "dirtyPaths": [
@@ -2214,6 +2582,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AB_REVIEW_FIX_VERIFIED",
       "reason": "用户授权独立评审缺陷修复与最终验收准备；绑定最终实现提交实测，保持REVIEW和review=null，四项真实门禁不变，不进入C/D",
       "observedHead": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
+      "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "reason": "项目负责人本次明确确认验收通过；仅A/B工程交付，真实模式未执行项保留，四门不解除，不进入C/D。",
+      "observedHead": "da07a7113e9f9d5f7e001ebd00572b41499f3ac5",
+      "reviewedCommit": "6f98f7785850c79e29cb02cf2b0e92b5fc722a36",
       "evidenceRef": "docs/evidence/ab-review-fix/verification.json"
     }
   ],
