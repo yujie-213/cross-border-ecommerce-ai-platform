@@ -1,0 +1,733 @@
+{
+  "task": "A-06",
+  "scope": "PHASE_A_ENGINEERING_ONLY",
+  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "environment": "Windows10 build19045 / CPython3.13.5 / .tmp/stage-a-clean",
+  "database": "s01_a01_test_20261112",
+  "mysqlServer": "8.0.27",
+  "migrationHead": "0003_delivery_version",
+  "lockSha256": "1bffdacfac29772a19d88e443e2bed6e2e50352f28dfeff8527fc9add2abfb83",
+  "cleanLockInstallation": {
+    "result": "PASS",
+    "exitCode": 0,
+    "distributions": 36,
+    "command": "python -m pip install --require-hashes -r requirements.lock; python -m pip install -e . --no-deps --no-build-isolation",
+    "provenance": "Fresh environment created and installed in preceding execution; lock unchanged since implementation commit"
+  },
+  "sample": "SIMULATED_ENGINEERING: real MySQL, API and independent Worker processes; controlled generated identities/tenants/costs, no business data or model calls",
+  "runs": [
+    {
+      "command": "clean-environment python -m commerce_hub.infrastructure.database",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawOutput": "Migration complete: 0003_delivery_version\n"
+    },
+    {
+      "command": "clean-environment python -m pip check",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawOutput": "No broken requirements found.\n"
+    },
+    {
+      "command": "clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawOutput": "........................................................................ [ 66%]\n.....................................                                    [100%]\n============================== warnings summary ===============================\n.tmp\\stage-a-clean\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n109 passed, 1 warning in 35.86s\n"
+    }
+  ],
+  "status": "PASS",
+  "suite": {
+    "total": 109,
+    "passed": 109,
+    "failed": 0,
+    "skipped": 0
+  },
+  "selectedCaseCount": 109,
+  "cases": [
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_authenticated_accept_query_and_idempotency",
+      "seconds": "0.299",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_cookie_csrf_origin_revocation_and_safe_cookie_flags",
+      "seconds": "0.184",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_bad_identity_fails_before_command[signature]",
+      "seconds": "0.021",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_bad_identity_fails_before_command[issuer]",
+      "seconds": "0.021",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_bad_identity_fails_before_command[audience]",
+      "seconds": "0.030",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_bad_identity_fails_before_command[expired]",
+      "seconds": "0.022",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_scope_expansion_and_client_trusted_metadata_rejected",
+      "seconds": "0.108",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_production_composition_never_registers_engineering_handler",
+      "seconds": "0.073",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.http.test_task_api",
+      "name": "test_unauthenticated_task_request_has_no_anonymous_bypass",
+      "seconds": "0.022",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_explicit_migration_head_and_repeat_upgrade",
+      "seconds": "0.083",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_one_frozen_migration_chain",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_other_database_target_is_refused_before_connection",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_engine_construction_never_connects_or_migrates",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_destructive_downgrade_guard_does_not_execute_sql",
+      "seconds": "0.008",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_actual_server_is_mysql_utc_read_committed",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.mysql.test_storage",
+      "name": "test_exact_types_unique_tenant_key_and_real_rollback",
+      "seconds": "0.011",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_create_rolls_back_task_work_budget_and_required_audit",
+      "seconds": "0.034",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_same_command_replays_one_persisted_task_and_work",
+      "seconds": "0.033",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_same_command_with_changed_content_conflicts",
+      "seconds": "0.028",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_same_key_and_sku_in_other_tenant_does_not_reuse_task",
+      "seconds": "0.057",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_two_concurrent_create_commands_are_idempotent",
+      "seconds": "0.059",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_invalid_fixture_and_unregistered_s01_are_rejected_before_admission",
+      "seconds": "0.010",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_two_workers_only_one_claims_single_delivery",
+      "seconds": "0.033",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_complete_requires_current_lease_and_plan",
+      "seconds": "0.079",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget",
+      "seconds": "0.147",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_exhausted_delivery_reconciles_owner_once",
+      "seconds": "0.071",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_cancel_queued_is_idempotent_and_does_not_publish",
+      "seconds": "0.052",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_cancel_running_rejects_late_completion",
+      "seconds": "0.077",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_worker_deadline_expiry_is_bounded_failure",
+      "seconds": "0.098",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_worker_rechecks_revoked_actor_before_handler",
+      "seconds": "0.082",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_completion_audit_failure_rolls_back_owner_and_delivery",
+      "seconds": "0.094",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_budget_two_threads_cannot_overreserve_original_task",
+      "seconds": "0.075",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_attempt_reservation_replay_and_content_conflict",
+      "seconds": "0.080",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unknown_usage_stays_reserved_and_cannot_be_resent_or_refunded",
+      "seconds": "0.105",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_old_plan_failure_cannot_change_new_plan_state",
+      "seconds": "0.056",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_explicit_new_owner_version_can_start_without_old_delivery_rebinding",
+      "seconds": "0.064",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_lease_cannot_be_rebound_to_another_owner_or_work_kind",
+      "seconds": "0.049",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unknown_logical_call_cannot_retry_under_a_new_attempt",
+      "seconds": "0.085",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_usage_settlement_is_idempotent_and_g02_is_unique_fact",
+      "seconds": "0.086",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_actual_over_limit_usage_is_not_clamped_and_blocks_more_calls",
+      "seconds": "0.086",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_unsent_release_is_idempotent_and_never_refunds_spent_usage",
+      "seconds": "0.109",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_settlement_required_audit_failure_rolls_back_usage_and_control",
+      "seconds": "0.097",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_worker_retry_is_bounded_and_keeps_original_deadline",
+      "seconds": "0.283",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_handler_runs_outside_owner_transaction_and_emits_no_report",
+      "seconds": "0.077",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_cancel_required_audit_failure_rolls_back_task_command_and_work",
+      "seconds": "0.074",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_only_one_concurrent_sender_can_mark_attempt_sent",
+      "seconds": "0.076",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_engineering_foundation",
+      "name": "test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task",
+      "seconds": "0.122",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_api_restart_preserves_queued_task_and_idempotency",
+      "seconds": "4.349",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_killed_worker_recovers_same_task_deadline_and_budget",
+      "seconds": "6.216",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_production_empty_registry_cannot_recover_fixture_delivery",
+      "seconds": "6.656",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_two_actual_workers_do_not_complete_a_task_twice",
+      "seconds": "3.546",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_running_cancel_blocks_late_completion",
+      "seconds": "4.393",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_revoked_identity_is_rechecked_by_actual_worker",
+      "seconds": "2.457",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_foundation_processes",
+      "name": "test_actual_worker_retry_exhaustion_is_bounded",
+      "seconds": "3.113",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_mysql",
+      "name": "test_real_current_identity_scope_and_field_limits",
+      "seconds": "0.037",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_mysql",
+      "name": "test_real_token_revocation_invalidates_old_actor_on_next_check",
+      "seconds": "0.027",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_mysql",
+      "name": "test_real_principal_revision_and_grant_changes_rechecked",
+      "seconds": "0.032",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_mysql",
+      "name": "test_real_session_expiry_is_rechecked_even_while_jwt_valid",
+      "seconds": "0.026",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_mysql",
+      "name": "test_real_revocation_serializes_with_authorized_mutation",
+      "seconds": "0.131",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_valid_signed_identity_is_immutable",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes0]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes1]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes2]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes3]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes4]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes5]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes6]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes7]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes8]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes9]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_invalid_claims_rejected_without_echo[changes10]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[exp]",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[iat]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[nbf]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[sub]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[tid]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[jti]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_required_claims[rev]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_wrong_signature_algorithm_and_malformed_token",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_empty_or_wildcard_scope_never_means_all[storeIds]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_empty_or_wildcard_scope_never_means_all[warehouseIds]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_empty_or_wildcard_scope_never_means_all[canonicalSkuIds]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_empty_or_wildcard_scope_never_means_all[fields]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_scope_unknown_dimension_or_cross_tenant_rejected",
+      "seconds": "0.000",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_csrf_is_same_origin_and_bound_to_identity",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_authorize_rejects_nonprincipal_without_database",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.security.test_access_unit",
+      "name": "test_backend_failure_does_not_render_driver_secrets",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_missing_required_settings_fail_safely",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_invalid_settings_never_echo_secret",
+      "seconds": "0.008",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_literal_dotenv_secrets_and_environment_precedence",
+      "seconds": "0.007",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_remote_database_without_trusted_ca_fails",
+      "seconds": "0.008",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_startup_does_not_connect_or_launch_background_work",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_readiness_does_not_claim_unimplemented_capabilities[True]",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_readiness_does_not_claim_unimplemented_capabilities[False]",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_database_failure_is_sanitized",
+      "seconds": "0.013",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_trace_headers_and_no_request_data_in_logs",
+      "seconds": "0.017",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_http_error_contract_drops_unsafe_details[401-UNAUTHENTICATED]",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_http_error_contract_drops_unsafe_details[403-POLICY_DENIED]",
+      "seconds": "0.015",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_http_error_contract_drops_unsafe_details[404-NOT_FOUND]",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_http_error_contract_drops_unsafe_details[409-CONFLICT]",
+      "seconds": "0.016",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_validation_and_unhandled_error_are_safe",
+      "seconds": "0.021",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_logger_discards_arbitrary_message_arguments_and_traceback",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_oversized_request_rejected_before_parsing_or_authentication",
+      "seconds": "0.012",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_unimplemented_routes_are_not_registered[/api/v1/reports]",
+      "seconds": "0.013",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_unimplemented_routes_are_not_registered[/api/v1/executions]",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_unimplemented_routes_are_not_registered[/api/v1/approvals]",
+      "seconds": "0.014",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_unimplemented_routes_are_not_registered[/api/v1/models]",
+      "seconds": "0.012",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_unimplemented_routes_are_not_registered[/docs]",
+      "seconds": "0.012",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.bootstrap.test_foundation",
+      "name": "test_unimplemented_routes_are_not_registered[/openapi.json]",
+      "seconds": "0.014",
+      "result": "PASS"
+    }
+  ],
+  "processCaseCount": 7,
+  "limitations": [
+    "Enterprise identity issuer/tenant configuration NOT_RUN; controlled engineering identity only",
+    "Real ERP/model/procurement/S01 business/S02 MC/production acceptance NOT_RUN",
+    "Destructive migration downgrade/DDL rollback NOT_RUN and not authorized; MySQL DDL is not transactional",
+    "One existing Starlette HTTPX TestClient deprecation warning retained",
+    "Only Windows CPython3.13.5 / MySQL8.0.27 verified",
+    "Post-commit verification reuses the already migrated authorized database; fresh-empty-database migration and destructive rollback were not rerun"
+  ],
+  "acceptanceCoverage": {
+    "A-06/AC1": "固定实现提交在干净哈希锁环境109项PASS，真实MySQL/API/独立Worker七项进程测试PASS，安装/启动/迁移/恢复命令可复现",
+    "A-06/AC2": "工程样本与真实业务证据明确分开；真实ERP/模型/S01/S02 MC/生产未验收"
+  },
+  "repositoryCheck": {
+    "result": "PASS",
+    "scannedChangedFiles": 57,
+    "secretFindings": 0,
+    "reviewedNonsecretNumericFixtureLiterals": 2,
+    "envIgnored": true,
+    "testedImplementationUnchanged": true,
+    "ledgerTasks": 31,
+    "dependencyCycles": [],
+    "blockedPreserved": 4
+  },
+  "implementationSync": {
+    "command": "git push origin HEAD:refs/heads/main; git ls-remote origin refs/heads/main",
+    "exitCode": 0,
+    "result": "PASS",
+    "observedRemoteMain": "d98bad25a1535414b45ea764aaccb19c8005814c",
+    "mode": "ordinary fast-forward; no force; evidence commit follows"
+  }
+}

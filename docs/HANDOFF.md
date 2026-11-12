@@ -14,6 +14,12 @@ A-06实际独立进程七项已通过：API重启任务/幂等保留，Worker强
 
 完整运行/迁移/测试/恢复命令见[运行说明](runbooks/phase-a.md)。当前企业身份发行方、ERP/规则/模型和生产验收仍未准入，四项业务安全门保全；API ready200仅工程底座范围，未配可信身份503，无匿名旁路。待固定实现后提交逐项证据/台账与真实同步结果；最终SHA由Git查询，不填自身未知SHA。本轮完成后停止，不开始B轨。
 
+最终实现提交`d98bad25a1535414b45ea764aaccb19c8005814c`已固定；针对该commit在.tmp/stage-a-clean复验：显式迁移检查0003_delivery_version退出0、pip check退出0、完整pytest **109 PASS / 0 FAIL / 0 SKIP / 1条既有弃用提示**，35.86秒；含7存储、28纯安全/5真实数据库权限、9 API、31任务预算和7真实独立进程、22基础测试。各项命令/原始脱敏输出/测试名称及逐AC范围见[evidence/A-03](evidence/A-03/verification.json)、[A-04](evidence/A-04/verification.json)、[A-05](evidence/A-05/verification.json)、[A-06](evidence/A-06/verification.json)。A-03—A-06进入REVIEW，review仍null，未自动ACCEPTED。此前最终复验请求曾因自动审批用量限制未执行；收到继续指令后经正常审批复验成功，未绕过审查。
+
+本次提交后复验复用既有已迁移独立库，不清库重做初始迁移；破坏性downgrade/DDL回退、真实企业身份接通、ERP/模型/采购/业务/生产仍NOT_RUN。四项BLOCKED、其余27项任务及依赖/六阶段均保全。真实Git fetch已确认远端main仍为526829b且为本地祖先；后续普通同步及最终SHA按实际Git查询，不填未发生结果。 收尾文档构建首轮误用应用venv（不含文档Markdown依赖）失败，随后使用既有系统Python和Markdown3.8重建，18项文档规则与空白检查通过，未增加应用依赖。增量秘密启发式无发现；密码字面量检查命中的两项固定Decimal/日期数值样本经AST核对为非秘密碰撞，不是连接配置或凭据；扫描首轮过严计数断言失败，经排除已核对的完整数值字面量后其余内容无命中。原始密码从未输出。.env受忽略，未知YAML未读/改/暂存。
+
+真实普通同步已完成：`git push origin HEAD:refs/heads/main`退出0，`git ls-remote origin refs/heads/main`确认远端main为`d98bad25a1535414b45ea764aaccb19c8005814c`。本轮证据/台账/交接及派生状态另提交后继续普通同步；最终本地/远端SHA以Git核验为准。无force、重写历史、.env或未知YAML上传。第一阶段交付后停止，未开始第二阶段。
+
 ## A-01真实兼容验证与A-02最小骨架（2026-11-12，基于59bc034）
 
 最新指令授权安全读取.env、在唯一独立测试库做必要兼容验证，认可A-01契约原则和模块职责，普通字段/DTO/错误码由执行者自主确定，检查后直接开发A-02，不再逐项重复审批。Codex单人接手main / `59bc0340175e412aa7a25f49627d82e7273141ae`，跟踪/暂存起点干净；未知未跟踪YAML原样保留，未读/改/暂存；无代理。四项身份数据/规则/ERP/模型业务安全门保持，不使用ERP/真实模型/采购写入，不开始A-03或业务Handler。

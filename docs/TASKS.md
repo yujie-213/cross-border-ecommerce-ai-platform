@@ -628,10 +628,49 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "d98bad25a1535414b45ea764aaccb19c8005814c"
+  ],
+  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-03/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-03/verification.json",
+      "detail": "真实MySQL显式迁移head/重复升级、其他库拒绝、类型/UTC/租户唯一键、真实DML整体回滚；非破坏性降级拒绝，不声称DDL事务回退"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-03/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-03/verification.json",
+      "detail": "按10张当前模块所有者表与公开端口实现；构造/启动不自动连接迁移"
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: not authorized/configured",
+      "environment": "真实企业身份/ERP/模型/生产",
+      "sample": "无真实业务调用；四项准入门保留",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/A-03/verification.json"
+    }
+  ],
   "review": null,
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
@@ -653,6 +692,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
       "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
+    },
+    {
+      "date": "2026-11-12",
+      "to": "REVIEW",
+      "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
+      "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
+      "from": "IN_PROGRESS"
     }
   ],
   "completionEvidence": [
@@ -724,10 +770,62 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SECURITY",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "d98bad25a1535414b45ea764aaccb19c8005814c"
+  ],
+  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-04/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-04/verification.json",
+      "detail": "固定签名算法/发行方/期限及必需声明验证；无匿名旁路"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-04/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-04/verification.json",
+      "detail": "受控身份下真实MySQL范围/字段/撤权串行化与API Cookie/CSRF验证；正式企业身份、未来数据证据/报告接缝未启用"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "A-04/AC1",
+        "A-04/AC2"
+      ],
+      "command": "clean-environment pytest full suite: tests/security + tests/integration/http",
+      "environment": "同一固定提交/干净锁环境；真实MySQL受控测试身份",
+      "sample": "28纯安全+5数据库权限+9 API测试；无企业身份发行方接通",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-04/verification.json"
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: not authorized/configured",
+      "environment": "真实企业身份/ERP/模型/生产",
+      "sample": "无真实业务调用；四项准入门保留",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/A-04/verification.json"
+    }
+  ],
   "review": null,
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
@@ -749,6 +847,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
       "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
+    },
+    {
+      "date": "2026-11-12",
+      "to": "REVIEW",
+      "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
+      "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
+      "from": "IN_PROGRESS"
     }
   ],
   "completionEvidence": [
@@ -828,10 +933,62 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "d98bad25a1535414b45ea764aaccb19c8005814c"
+  ],
+  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-05/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-05/verification.json",
+      "detail": "MySQL任务/命令/预算/投递/审计一致性、幂等409、当前G01及旧lease/plan拒绝、取消与撤权条件提交"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-05/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-05/verification.json",
+      "detail": "真实独立进程投递、心跳、停机恢复、重试耗尽；原task期限/预算/attempt不重置，未知usage占额与核账"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-05/AC3"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-05/verification.json",
+      "detail": "默认生产注册表为空；工程Handler只在tests注册，S01拒绝且reportRef为空；无MQ/通用Runtime"
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: not authorized/configured",
+      "environment": "真实企业身份/ERP/模型/生产",
+      "sample": "无真实业务调用；四项准入门保留",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/A-05/verification.json"
+    }
+  ],
   "review": null,
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
@@ -853,6 +1010,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
       "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
+    },
+    {
+      "date": "2026-11-12",
+      "to": "REVIEW",
+      "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
+      "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
+      "from": "IN_PROGRESS"
     }
   ],
   "completionEvidence": [
@@ -925,10 +1089,49 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "d98bad25a1535414b45ea764aaccb19c8005814c"
+  ],
+  "testedCommit": "d98bad25a1535414b45ea764aaccb19c8005814c",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-06/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-06/verification.json",
+      "detail": "固定实现提交在干净哈希锁环境109项PASS，真实MySQL/API/独立Worker七项进程测试PASS，安装/启动/迁移/恢复命令可复现"
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "A-06/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 clean-environment python -m pytest -p no:cacheprovider --junitxml=.tmp/phase-a-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / clean hash-locked environment / real MySQL8.0.27",
+      "sample": "SIMULATED_ENGINEERING；独立s01_a01_test_20261112，受控身份/工程Handler/模拟费用；不使用ERP或真实模型",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-06/verification.json",
+      "detail": "工程样本与真实业务证据明确分开；真实ERP/模型/S01/S02 MC/生产未验收"
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: not authorized/configured",
+      "environment": "真实企业身份/ERP/模型/生产",
+      "sample": "无真实业务调用；四项准入门保留",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/A-06/verification.json"
+    }
+  ],
   "review": null,
   "branch": "main",
   "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178",
@@ -950,6 +1153,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "领取本轮明确授权的第一大阶段工程工作；实际并行仅文件不冲突部分，依赖和四门保留，测试/实现证据随后按真实提交记录",
       "observedHead": "526829b01f167ed12f78458f1ba7549076fb6178"
+    },
+    {
+      "date": "2026-11-12",
+      "to": "REVIEW",
+      "reason": "实现已提交并针对固定commit完成109项全量复验及7项真实独立进程恢复测试；进入评审，未自动验收或开启第二阶段",
+      "observedHead": "d98bad25a1535414b45ea764aaccb19c8005814c",
+      "from": "IN_PROGRESS"
     }
   ],
   "completionEvidence": [
