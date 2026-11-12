@@ -174,3 +174,15 @@ G01当前实现固定HS256签名/issuer/audience/期限、数据库会话/修订
 浏览器联调使用现有G01显式fixture流程、私有固定教学GET catalog和唯一获准隔离MySQL。Vite只代理loopback API且保留Origin，未扩大CORS或降低CSRF/Secure。localhost Secure Cookie行为经实际Edge验证；正式部署要求HTTPS同源及精确Origin，企业SSO和上线另行评审。新增测试控制仅私有本地文件供工具管理自有Worker/测试主体，不注册HTTP绕过。
 
 实际复现过期HttpOnly Cookie在401后残留并阻断新Bearer交换（两项负例FAIL）。最小兼容修复只在UNAUTHENTICATED/401响应删除无效session/CSRF Cookie；401语义、有效Bearer准入、403授权/CSRF/Origin、Cookie安全属性不变，无数据库或任务/业务契约变化。消费者是Cookie浏览器客户端；Bearer客户端忽略Set-Cookie不受影响。2项恢复正反例及原HTTP鉴权回归、完整后端603项/浏览器复验按实际结果登记，不以本ADR预填通过。回退为撤销该响应清理分支，401读取拒绝保持。
+
+## ADR-S01-UI-C04-002 证据读取生命周期与结构化引用（2026-11-12）
+
+负责人本轮明确选择结构化引用并授权工程实施、普通细节自主决策；开发基线为远端最新前端0525fa7，main仍6fdf10c、backend-closure仍56cc62a。Codex在codex/s01-ui-c04-fix单人串行，不合main，最终REVIEW等待负责人和星星。原未知OpenAPI保留。
+
+审查结论：旧文内[ref]没有独立事实推理能力。必要绑定职责实际由单条解释唯一supportRef、当前任务/快照/版本重建的事实白名单、按ref选择的精确受控短语、数量/日期允许集、必须覆盖的事实/章节完成。本轮只移除新版的重复文内标记要求，不接受任意自由文本，不以supportRefs存在代替文本验证。每项一个事实，多判断拆项；未知、质量阻断、候选限制、首次缺货与采购权限保护继续。Schema保持不变，前端已有结构化依据展示，无需改AI布局。
+
+新Prompt controlled-2 / 策略s01-controlled-natural-v2采用简洁中文受控事实短语与结构化supportRefs；兼容匹配的旧文内标记，但不要求。旧controlled-1 Prompt、策略与全部摘要重建/严格文内规则保留，按记录的版本分派；不得将旧C响应的离线新版结果回写历史评测。无迁移、依赖、计算、预算或权限契约变更；消费者为A01用途校验、S01Backend发布/读取、原评测工具及Vue。回退可停止新版装配，历史v1读取继续。
+
+前端证据状态与弹窗归同一组合函数，捕获taskId/reportRef/读取epoch/证据代次及局部signal；任务/报告/身份/会话/权限变化和关闭立即清空并取消，迟到成功/失败/finally均须仍绑定当前上下文。无缓存或API变更。测试须模拟忽略Abort的传输，不能仅靠取消掩盖竞态。
+
+验证计划：前端单测/类型/构建、浏览器延迟交错与原五项联调、原C原文离线新版及v1重验、事实引用权限质量正反例与全量MySQL回归。原预算授权绑定已结束唯一task、首败停止，当前没有新task付费授权；真实C/D/E为NOT_RUN，新增Token0，历史UNKNOWN费用/$0.15预约保留。四企业门BLOCKED，C-04整体REVIEW/历史FAIL保留。移动端LOW技术债仅登记，不实施。

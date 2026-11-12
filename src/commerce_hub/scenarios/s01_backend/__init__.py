@@ -18,7 +18,7 @@ from commerce_hub.scenarios.s01_supply_inventory import (
 )
 from commerce_hub.scenarios.s01.explanation import S01Bundle, digest, reserve_request
 from commerce_hub.scenarios.s01.natural_explanation import (
-    NATURAL_SEMANTIC_POLICY, bundle_for_result, validate_result_versions, validate_result_explanation,
+    NATURAL_SEMANTIC_POLICY, NATURAL_SEMANTIC_POLICIES, bundle_for_result, validate_result_versions, validate_result_explanation,
 )
 
 
@@ -230,7 +230,7 @@ class S01BackendHandler:
                 raise ValueError("BROKEN_BACKEND_AI")
         else:
             facts = facts_for(result)
-            natural = ai.get("semanticPolicy") == NATURAL_SEMANTIC_POLICY
+            natural = ai.get("semanticPolicy") in NATURAL_SEMANTIC_POLICIES
             if ((not natural and (entry["kind"] != "SIMULATED" or ai["provider"] != "MOCK"
                     or ai["semanticPolicy"] != SEMANTIC_POLICY or ai["realModelAcceptance"] != "NOT_RUN"))
                 or natural and (ai["provider"] != "AUTHORIZED_PROVIDER" or ai["realModelAcceptance"] != "REVIEW")

@@ -5,7 +5,7 @@ import path from 'node:path'
 const root = path.resolve(import.meta.dirname, '../../..')
 const privateDir = path.join(root, 'data/private/s01-frontend')
 const session = JSON.parse(readFileSync(path.join(privateDir, 'session.json'), 'utf8'))
-const evidenceDir = path.join(root, 'docs/evidence/D-S01-UI-01')
+const evidenceDir = path.resolve(root, process.env.S01_UI_EVIDENCE_DIR || 'docs/evidence/D-S01-UI-01')
 mkdirSync(path.join(evidenceDir, 'screenshots'), { recursive: true })
 const observed: unknown[] = []
 async function control(action: string) {
@@ -163,7 +163,7 @@ test('PROTOCOL FIXTURES: AI statuses, token unknown, failures, empty and bounded
     await page.getByRole('button', { name: '重新查询状态', exact: true }).click()
     await expect(page.getByText('KNOWN', { exact: false })).not.toHaveCount(0)
     await expect(page.locator('.token-grid')).toContainText('100'); await expect(page.locator('.token-grid')).toContainText('120')
-    if (status === 'AVAILABLE') await expect(page.getByText('协议夹具：仅验证展示，不代表真实模型验收。')).toHaveCount(4)
+    if (status === 'AVAILABLE') { await expect(page.getByText('协议夹具：仅验证展示，不代表真实模型验收。')).toHaveCount(4); await expect(page.locator('.explanation-section small')).toHaveText(['依据：fixture-ref', '依据：fixture-ref', '依据：fixture-ref', '依据：fixture-ref']) }
     else await expect(page.getByText(status === 'UNAVAILABLE' ? 'AI 解释不可用' : '本次未启用 AI 解释', { exact: true })).toHaveCount(2)
     await page.unroute(`**/api/v1/analysis-tasks/${task.taskRef.taskId}/report`)
   }
@@ -231,4 +231,65 @@ test('PROTOCOL FIXTURES: polling is bounded, stops on denial; exact-scope pagina
   await page.getByRole('searchbox', { name: 'SKU 搜索' }).fill('no-such-authorized-sku')
   await expect(page.getByText('无符合条件的授权包')).toBeVisible()
   await expect(page.getByRole('table').locator('tbody tr')).toHaveCount(0)
+})
+
+test('REAL API + transport delay: task switch, closed dialog, logout and permission denial discard late evidence', async ({ page }) => {
+  await login(page)
+  const aReady = complete(page); const a = await create(page, 'A'); const reportA = await aReady
+  await page.getByRole('navigation', { name: '主要导航' }).getByRole('link', { name: /补货建议/ }).click()
+  const bReady = complete(page); const b = await create(page, 'B'); const reportB = await bReady
+  // Test-only transport deliberately ignores Abort after a genuine authorized GET.
+  // This verifies the production generation/binding guard, not merely fetch cancellation.
+  await page.evaluate(() => {
+    const state = { enabled: false, ready: false, finished: false, release: () => {} }
+    ;(window as unknown as { evidenceDelay: typeof state }).evidenceDelay = state
+    const original = window.fetch.bind(window)
+    window.fetch = async (input, init) => {
+      if (!state.enabled || !String(input).includes('/evidence/')) return original(input, init)
+      state.enabled = false
+      const response = await original(input, { ...init, signal: undefined })
+      state.ready = true
+      await new Promise<void>(resolve => { state.release = resolve })
+      state.finished = true
+      return response
+    }
+  })
+  const gate = async () => {
+    await page.evaluate(() => { const s = (window as unknown as { evidenceDelay: { enabled: boolean; ready: boolean; finished: boolean } }).evidenceDelay; s.enabled = true; s.ready = false; s.finished = false })
+    await page.getByRole('button', { name: '查看证据', exact: true }).first().click()
+    await expect.poll(() => page.evaluate(() => (window as unknown as { evidenceDelay: { ready: boolean } }).evidenceDelay.ready)).toBe(true)
+    await expect(page.getByRole('dialog')).toContainText('正在核对当前读取权限')
+  }
+  const release = async () => {
+    await page.evaluate(() => (window as unknown as { evidenceDelay: { release: () => void } }).evidenceDelay.release())
+    await expect.poll(() => page.evaluate(() => (window as unknown as { evidenceDelay: { finished: boolean } }).evidenceDelay.finished)).toBe(true)
+    await expect(page.getByRole('dialog')).toHaveCount(0)
+    await expect(page.locator('.evidence-json')).toHaveCount(0)
+  }
+  // Switch while the modal is open by dispatching the real rendered history event;
+  // native modal ordinarily prevents pointer access to the background table.
+  await gate()
+  await page.evaluate(() => { location.hash = '#suggestions' })
+  const rowA = page.locator('tbody tr').filter({ hasText: a.task.taskRef.taskId.slice(0, 12) })
+  await rowA.getByText(a.task.taskRef.taskId.slice(0, 12), { exact: true }).dispatchEvent('click')
+  await expect(page.getByText(reportA.reportRef.reportId, { exact: true }).first()).toBeVisible()
+  await release()
+  await page.getByRole('button', { name: '查看证据', exact: true }).first().click()
+  await expect(page.locator('.evidence-json')).toContainText('gapQuantity')
+  await page.getByRole('button', { name: '关闭弹窗', exact: true }).click()
+  await gate(); await page.getByRole('button', { name: '关闭弹窗', exact: true }).click(); await release()
+  await gate(); await control('revokeRead')
+  try {
+    await page.getByRole('button', { name: '重新查询状态', exact: true }).dispatchEvent('click')
+    await expect(page.getByRole('heading', { name: '供需与补货分析' })).toHaveCount(0)
+    await release()
+  } finally { await control('restoreRead') }
+  await page.getByRole('button', { name: '重新核对会话与选项', exact: true }).click()
+  await expect(page.getByText(reportA.reportRef.reportId, { exact: true }).first()).toBeVisible()
+  await gate()
+  await page.getByRole('button', { name: '退出会话', exact: true }).dispatchEvent('click')
+  await release()
+  await expect(page.getByText('尚未连接身份', { exact: true })).toBeVisible()
+  expect(a.task.taskRef.taskId).not.toBe(b.task.taskRef.taskId)
+  expect(reportA.reportRef).not.toEqual(reportB.reportRef)
 })

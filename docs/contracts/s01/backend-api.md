@@ -334,3 +334,10 @@ $env:PYTHONPATH='src'
 ```
 
 catalog 是受信服务端配置，不能由浏览器路径或请求体指定。真实 DeepSeek 评测使用独立受控评测装配，不通过当前 mock-only backend 启动入口偷偷开启网络。
+
+
+## 结构化解释与证据生命周期增量（本轮UI/C04修复）
+
+HTTP路由、Cookie/CSRF、权限、text/supportRefs Schema均不变。自然用途新Prompt controlled-2 / s01-controlled-natural-v2：单条解释一个当前事实的唯一supportRef，text匹配该事实受控短语，可不含重复[ref]；事实章节、必需覆盖、数字日期、未知、质量及采购边界继续校验。不是任意自然语言事实证明。旧controlled-1及摘要按原策略重建，历史报告不升级/回写。前端已有“依据”展示来自supportRefs，与模型是否写文内标记无关。
+
+证据读取绑定当前taskId、reportRef、任务读取代次、证据请求代次及会话上下文；切换/关闭/失权立即清空、取消，迟到成功、错误、finally不能覆盖当前状态。不缓存报告/证据。未增加证据API或采购能力。详细决策见ADR-S01-UI-C04-002。

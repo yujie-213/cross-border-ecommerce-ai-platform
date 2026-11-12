@@ -10,12 +10,12 @@ import ReportDetail from './components/ReportDetail.vue'
 import HistoryTable from './components/HistoryTable.vue'
 import type { Ref } from './api/types'
 const w = useWorkspace()
-const { choices, selectedRef, selected, connected, busy, loading, task, report, history, cursor, historyBefore, error, pollNote, pending, evidence, evidenceError, evidenceLoading } = w
+const { choices, selectedRef, selected, connected, busy, loading, task, report, history, cursor, historyBefore, error, pollNote, pending, evidence, evidenceError, evidenceLoading, evidenceOpen } = w
 const routes: Record<string, string> = { workbench: '工作台', suggestions: '补货建议', approvals: '人工审批', detail: '分析详情' }
 const route = ref('workbench')
 function syncRoute() { route.value = Object.hasOwn(routes, location.hash.slice(1)) ? location.hash.slice(1) : 'workbench' }
 function navigate(page: string) { location.hash = page }
-const loginToken = ref(''), loginOpen = ref(false), createOpen = ref(false), evidenceOpen = ref(false)
+const loginToken = ref(''), loginOpen = ref(false), createOpen = ref(false)
 const previous = ref<Ref | null>(null)
 const storeFilter = ref(''), warehouseFilter = ref(''), skuFilter = ref(''), stateFilter = ref('')
 const filteredChoices = computed(() => choices.value.filter(c => (!storeFilter.value || c.scope.storeIds.includes(storeFilter.value)) && (!warehouseFilter.value || c.scope.warehouseIds.includes(warehouseFilter.value)) && c.scope.canonicalSkuIds.some(id => id.toLowerCase().includes(skuFilter.value.trim().toLowerCase()))))
@@ -35,7 +35,7 @@ function newAnalysis(reanalyze = false) {
   createOpen.value = true
 }
 async function submit() { createOpen.value = false; navigate('detail'); await w.create(previous.value) }
-async function showEvidence(id: string) { evidenceOpen.value = true; await w.readEvidence(id) }
+async function showEvidence(id: string) { await w.readEvidence(id) }
 const canReanalyze = computed(() => !!report.value && choices.value.some(c => c.packageRef === report.value!.dataReport.scenarioSupplement.packageRef))
 onMounted(() => { syncRoute(); window.addEventListener('hashchange', syncRoute); void w.connect() })
 onUnmounted(() => window.removeEventListener('hashchange', syncRoute))

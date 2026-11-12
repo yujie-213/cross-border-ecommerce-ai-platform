@@ -1,3 +1,5 @@
+当前竞态与引用修复授权（2026-11-12，基于0525fa7）：负责人授权仅S01证据迟到竞态和C-04结构化引用优化，Codex在codex/s01-ui-c04-fix单人串行；当前IN_PROGRESS、最终REVIEW。远端main6fdf10c、frontend0525fa7、backend56cc62a已fetch和GitHub回读核对；已跟踪区起点干净、未知OpenAPI保留。禁止算法/移动布局改动；真实C/D/E新增授权不足为NOT_RUN，不复用旧task/key，历史FAIL/5642Token/UNKNOWN费用/$0.15预约及四门BLOCKED保留。
+
 当前前端交付（2026-11-12，固定465892c）：D-S01-UI-01进入REVIEW，后端603/客户端19/浏览器5 PASS，旧601保全；教学固定包真实API/独立Worker/MySQL闭环通过，AI分支夹具与真实调用分开。C-04历史FAIL/未知费用预约与四门BLOCKED不变，不合main，待负责人和星星独立评审。
 
 当前前端开发授权（2026-11-12，6fdf10c）：D-S01-UI-01已领取IN_PROGRESS，Vue3/Vite/TypeScript独立frontend工程及真实浏览器API/Worker/MySQL联调获准；只读教学、off/mock，最终REVIEW、不合main。下方旧停止点保留历史；C-04 FAIL、原核账和企业四门BLOCKED不变。
@@ -3067,9 +3069,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "负责人明确保留整体真实用途FAIL及REVIEW；本轮仅登记、工程合并与离线/隔离库复验，不授权新增真实模型请求。未完成用途评测和正常S01在线模型接入作为本任务独立剩余范围，后续指令/许可和预算核对后再执行。",
+  "entryCondition": "本轮负责人已授权竞态及引用工程修复、测试、文档、提交普通推送独立修复分支；不合main、不改算法，不新增真实模型/ERP调用；最终REVIEW。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": "Codex主集成及冻结范围并行Agent",
+  "assignee": "Codex（本轮竞态与引用修复，单人串行）",
   "allowedPaths": [
     "tests/evaluation/当前用途（未来）",
     "docs/evidence/C-04/（未来）",
@@ -3088,7 +3090,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "src/commerce_hub/bootstrap/",
     "src/commerce_hub/data/",
     "src/commerce_hub/scenarios/",
-    "migrations/versions/0005_optional_usage.py"
+    "migrations/versions/0005_optional_usage.py",
+    "docs/evidence/S01-UI-C04-FIX/",
+    "src/commerce_hub/scenarios/s01/natural_explanation.py",
+    "src/commerce_hub/scenarios/s01_backend/__init__.py",
+    "tests/unit/models/test_structured_references.py",
+    "tests/integration/s01/test_structured_references.py",
+    "tools/revalidate_s01_c04.py",
+    "tools/verify_s01_frontend.py",
+    "frontend/tests/unit/evidence-race.test.ts",
+    "tests/browser/s01/workspace.spec.ts",
+    "docs/contracts/s01/backend-api.md",
+    "docs/ui/S01-frontend-entry.md"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -3120,7 +3133,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "MODEL_EVAL",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "5f6c50acea6fe4dead2dec22188ed2e5f5b0eb30",
     "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad"
@@ -3268,6 +3281,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "observedHead": "1619bc1d1f7018bb8116dafeceaf9713fe52687e",
       "reviewedCommit": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
       "evidenceRef": "docs/evidence/S01-BACKEND-ACCEPTANCE/review.md"
+    },
+    {
+      "event": "UI_C04_FIX_CLAIM",
+      "assignee": "Codex（单人串行）",
+      "branch": "codex/s01-ui-c04-fix",
+      "baseCommit": "0525fa7d57bf563816d96b28fa1b7343368d1b64",
+      "scope": "证据请求绑定/结构化引用v2；旧真实评测不改；无付费调用授权",
+      "status": "IN_PROGRESS"
     }
   ],
   "completionEvidence": [
@@ -5447,9 +5468,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "A-04"
   ],
-  "entryCondition": "负责人本轮已授权D-S01-UI-01完整前端工程、教学固定包真实API/独立Worker/MySQL和浏览器联调、提交及普通同步评审分支；最终REVIEW、不合main。覆盖旧未领取停止点；普通off/mock，禁止真实付费模型、ERP写入、B01/B02规则改动和下一阶段。",
+  "entryCondition": "本轮负责人已授权竞态及引用工程修复、测试、文档、提交普通推送独立修复分支；不合main、不改算法，不新增真实模型/ERP调用；最终REVIEW。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
-  "assignee": "Codex（本轮前端主开发与集成，单人串行）",
+  "assignee": "Codex（本轮竞态与引用修复，单人串行）",
   "allowedPaths": [
     "frontend/",
     "tests/browser/s01/",
@@ -5467,7 +5488,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "src/commerce_hub/entrypoints/http/tasks.py",
     "tests/integration/http/test_session_recovery.py",
     "tools/verify_s01_frontend.py",
-    "docs/contracts/s01/backend-api.md"
+    "docs/contracts/s01/backend-api.md",
+    "docs/evidence/S01-UI-C04-FIX/",
+    "src/commerce_hub/scenarios/s01/natural_explanation.py",
+    "src/commerce_hub/scenarios/s01_backend/__init__.py",
+    "tests/unit/models/test_structured_references.py",
+    "tests/integration/s01/test_structured_references.py",
+    "tools/revalidate_s01_c04.py",
+    "frontend/tests/unit/evidence-race.test.ts",
+    "tests/browser/s01/workspace.spec.ts",
+    "docs/ui/S01-frontend-entry.md"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -5511,7 +5541,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER_API",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "465892c9342f23fd3e1614df85c564ade0a5ef9a"
   ],
@@ -5616,6 +5646,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "previousAC3": "非成功AI明确AI解释不可用，质量阻断独立；真实确认/审批/执行入口禁用，不接假成功",
       "observedDeliveryCommit": "15f8a5b0a25f9cfaedc55d7bc3514d6aeae1cb53",
       "syncEvidenceRef": "docs/evidence/D-S01-UI-01/git-receipt.json"
+    },
+    {
+      "event": "UI_C04_FIX_CLAIM",
+      "assignee": "Codex（单人串行）",
+      "branch": "codex/s01-ui-c04-fix",
+      "baseCommit": "0525fa7d57bf563816d96b28fa1b7343368d1b64",
+      "scope": "证据请求绑定/结构化引用v2；旧真实评测不改；无付费调用授权",
+      "status": "IN_PROGRESS"
     }
   ],
   "acceptanceRefs": [

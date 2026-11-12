@@ -1,5 +1,5 @@
 {
-  "authorization": "2026-11-12 负责人授权D-S01-UI-01完整只读教学前端、最小HTTP会话集成、真实浏览器/API/Worker/MySQL联调与普通评审分支同步；不合main、不解除四门。",
+  "authorization": "2026-11-12 负责人授权S01证据竞态、C-04结构化引用修复与必要离线/真实工程回归、文档、普通推送独立评审分支；不合main、不新增付费/ERP调用、不解除四门。",
   "policy": "Exact paths; no blanket add; no secrets, raw teaching responses or untracked OpenAPI; no history rewrite.",
   "paths": [
     ".env.example",
@@ -654,6 +654,25 @@
     "docs/evidence/D-S01-UI-01/budget-preservation.json",
     "docs/evidence/D-S01-UI-01/frontend-verification.json",
     "docs/evidence/D-S01-UI-01/preservation.json",
-    "docs/evidence/D-S01-UI-01/git-receipt.json"
+    "docs/evidence/D-S01-UI-01/git-receipt.json",
+    "frontend/tests/unit/evidence-race.test.ts",
+    "tests/unit/models/test_structured_references.py",
+    "tests/integration/s01/test_structured_references.py",
+    "tools/revalidate_s01_c04.py",
+    "docs/evidence/S01-UI-C04-FIX/report.md",
+    "docs/evidence/S01-UI-C04-FIX/offline-revalidation.json",
+    "docs/evidence/S01-UI-C04-FIX/frontend-verification.json",
+    "docs/evidence/S01-UI-C04-FIX/backend-regression.json",
+    "docs/evidence/S01-UI-C04-FIX/real-browser-cases.json",
+    "docs/evidence/S01-UI-C04-FIX/budget-preservation.json",
+    "docs/evidence/S01-UI-C04-FIX/preservation.json",
+    "docs/evidence/S01-UI-C04-FIX/history.json",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/workbench-1440.png",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/detail-A-1440.png",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/detail-A-1024.png",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/detail-A-390.png",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/detail-E-1440.png",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/history-1440.png",
+    "docs/evidence/S01-UI-C04-FIX/screenshots/revoked-evidence.png"
   ]
 }

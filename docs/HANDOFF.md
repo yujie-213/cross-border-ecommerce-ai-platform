@@ -1,3 +1,7 @@
+# 当前增量交接：S01证据与引用修复领取
+
+当前竞态与引用修复授权（2026-11-12，基于0525fa7）：负责人授权仅S01证据迟到竞态和C-04结构化引用优化，Codex在codex/s01-ui-c04-fix单人串行；当前IN_PROGRESS、最终REVIEW。远端main6fdf10c、frontend0525fa7、backend56cc62a已fetch和GitHub回读核对；已跟踪区起点干净、未知OpenAPI保留。禁止算法/移动布局改动；真实C/D/E新增授权不足为NOT_RUN，不复用旧task/key，历史FAIL/5642Token/UNKNOWN费用/$0.15预约及四门BLOCKED保留。
+
 # 当前增量交接 v0.3
 
 
