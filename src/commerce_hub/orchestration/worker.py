@@ -66,10 +66,10 @@ class Worker:
             if spec is None or spec.version != task["scenario_version"] or spec.work_kind != lease.kind:
                 raise TaskError("HANDLER_VERSION_MISMATCH")
             context = ExecutionContext(self.service, lease, principal, task, lost)
-            # Owner handler runs with no live transaction/Session. It returns no report in this phase.
-            spec.handler.run(context, task["parameters"])
+            # Handler runs outside a transaction and returns a public DomainResult.
+            result = spec.handler.run(context, task["parameters"])
             context.check()
-            self.service.complete(lease, principal, task["plan_version"])
+            self.service.complete(lease, principal, task["plan_version"], result)
         except LeaseLost:
             pass
         except Exception as exc:

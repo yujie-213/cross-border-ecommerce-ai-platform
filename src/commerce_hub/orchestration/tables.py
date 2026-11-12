@@ -34,3 +34,11 @@ attempts = Table("o01_budget_attempts", metadata,
     Column("max_cost", Numeric(20,8), nullable=False), Column("actual_tokens", BigInteger),
     Column("actual_cost", Numeric(20,8)), Column("usage_ref", String(64)),
     ForeignKeyConstraint(["tenant_id", "task_id"], ["o01_budgets.tenant_id", "o01_budgets.task_id"], name="fk_attempt_budget"), **options)
+
+reports = Table("o01_reports", metadata,
+    Column("tenant_id", String(64), primary_key=True), Column("task_id", String(64), primary_key=True),
+    Column("report_id", String(64), nullable=False), Column("plan_version", Integer, nullable=False),
+    Column("fingerprint", String(64), nullable=False), Column("payload", JSON, nullable=False),
+    Column("created_at", DATETIME(fsp=6), nullable=False),
+    ForeignKeyConstraint(["tenant_id", "task_id"], ["o01_tasks.tenant_id", "o01_tasks.task_id"], name="fk_report_task"),
+    UniqueConstraint("tenant_id", "report_id", name="uq_report_id"), **options)

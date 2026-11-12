@@ -9,7 +9,8 @@ from sqlalchemy import insert, select, update, func
 
 from commerce_hub.governance.access.service import AccessDenied
 from commerce_hub.infrastructure.work import LeaseLost
-from .tables import tasks, commands, budgets
+from .tables import tasks, commands, budgets, reports
+from .contracts import DomainResult
 
 
 class TaskError(RuntimeError):
@@ -49,6 +50,8 @@ class TaskService:
             raise TaskError("UNSUPPORTED_SCENARIO", 422)
         try:
             spec.handler.validate(parameters)
+            if hasattr(spec.handler, "validate_scope"):
+                spec.handler.validate_scope(parameters, scope)
         except (ValueError, TypeError):
             raise TaskError("INVALID_PARAMETERS", 422) from None
         if len(json.dumps(parameters)) > 16384:
@@ -61,7 +64,7 @@ class TaskService:
             if existing:
                 if existing["fingerprint"] != request_fingerprint:
                     raise TaskError("COMMAND_CONFLICT")
-                return self.view(existing)
+                return self._view(conn, existing)
             now = conn.scalar(select(func.utc_timestamp(6)))
             task_id, work_id = uuid4().hex, uuid4().hex
             values = dict(tenant_id=principal.tenant_id, task_id=task_id, principal_id=principal.principal_id,
@@ -98,7 +101,29 @@ class TaskService:
                 self.access.authorize(conn, principal, "tasks:read", row["scope"])
             except AccessDenied:
                 raise TaskError("NOT_FOUND", 404) from None
-            return self.view(row)
+            return self._view(conn, row)
+
+    def _view(self, conn, row):
+        view = self.view(row)
+        report_id = conn.execute(select(reports.c.report_id).filter_by(
+            tenant_id=row["tenant_id"], task_id=row["task_id"])).scalar_one_or_none()
+        if report_id and row["state"] == "SUCCEEDED":
+            view["reportRef"] = {"tenantId": row["tenant_id"], "reportId": report_id}
+        return view
+
+    def read_report(self, principal, task_id):
+        with self.engine.begin() as conn:
+            row = conn.execute(select(tasks).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
+            if not row:
+                raise TaskError("NOT_FOUND", 404)
+            try:
+                self.access.authorize(conn, principal, "tasks:read", row["scope"])
+            except AccessDenied:
+                raise TaskError("NOT_FOUND", 404) from None
+            report = conn.execute(select(reports).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
+            if row["state"] != "SUCCEEDED" or report is None:
+                raise TaskError("REPORT_NOT_PUBLISHED", 404)
+            return dict(report["payload"])
 
     def cancel(self, principal, task_id, command_key, expected_revision, trace_id):
         fp = self.fingerprint(dict(task=task_id, expectedRevision=expected_revision))
@@ -157,9 +182,30 @@ class TaskService:
         with self.engine.begin() as conn:
             self._execution(conn, lease, principal, plan_version)
 
-    def complete(self, lease, principal, plan_version):
+    def complete(self, lease, principal, plan_version, result=None):
         with self.engine.begin() as conn:
             row = self._execution(conn, lease, principal, plan_version)
+            handler = self.registry[row["scenario_id"]].handler
+            if hasattr(handler, "validate_result"):
+                try:
+                    handler.validate_result(result)
+                except (ValueError, TypeError):
+                    raise TaskError("INVALID_DOMAIN_RESULT") from None
+            if result is not None:
+                if not isinstance(result, DomainResult) or result.scope != row["scope"]:
+                    raise TaskError("INVALID_DOMAIN_RESULT")
+                payload = result.model_dump(mode="json")
+                if len(json.dumps(payload)) > 262144:
+                    raise TaskError("REPORT_TOO_LARGE")
+                payload.update(taskRef={"tenantId": lease.tenant_id, "taskId": lease.owner_id},
+                    reportRef={"tenantId": lease.tenant_id, "reportId": lease.owner_id},
+                    planVersion=str(plan_version), scenarioId=row["scenario_id"], scenarioVersion=row["scenario_version"],
+                    participants=[dict(scenarioId=row["scenario_id"], snapshotRef=result.snapshotRef)])
+                conn.execute(insert(reports).values(tenant_id=lease.tenant_id, task_id=lease.owner_id,
+                    report_id=lease.owner_id, plan_version=plan_version, fingerprint=self.fingerprint(payload),
+                    payload=payload, created_at=func.utc_timestamp(6)))
+                self.audit.record(conn, tenant_id=lease.tenant_id, principal_id=row["principal_id"],
+                    task_id=lease.owner_id, action="REPORT_PUBLISHED", details={"planVersion": plan_version})
             conn.execute(update(tasks).filter_by(tenant_id=lease.tenant_id, task_id=lease.owner_id)
                          .values(state="SUCCEEDED", revision=row["revision"] + 1))
             self.audit.record(conn, tenant_id=lease.tenant_id, principal_id=row["principal_id"],

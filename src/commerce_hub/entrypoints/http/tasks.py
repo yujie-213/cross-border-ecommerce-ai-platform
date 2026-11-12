@@ -70,6 +70,18 @@ def register_task_routes(app):
                key: Annotated[str, Header(alias="Idempotency-Key", min_length=1, max_length=128)] = ...):
         return request.app.state.tasks.cancel(actor, task_id, key, body.expectedRevision, trace_id.get())
 
+    @app.get("/api/v1/analysis-tasks/{task_id}/report")
+    def report(task_id: str, request: Request, actor=Depends(principal)):
+        return request.app.state.tasks.read_report(actor, task_id)
+
+    @app.get("/api/v1/analysis-tasks/{task_id}/evidence/{evidence_id}")
+    def evidence(task_id: str, evidence_id: str, request: Request, actor=Depends(principal)):
+        from commerce_hub.data.evidence import resolve
+        value = resolve(request.app.state.tasks.read_report(actor, task_id), evidence_id)
+        if value is None:
+            raise TaskError("NOT_FOUND", 404)
+        return value
+
     @app.post("/api/v1/session")
     def establish_session(request: Request, actor=Depends(principal)):
         bearer = request.headers.get("authorization", "")

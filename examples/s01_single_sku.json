@@ -1,0 +1,150 @@
+{
+  "sourceNature": "SIMULATED_ENGINEERING",
+  "fixtureId": "single-sku-v1",
+  "asOf": "2026-11-12T00:00:00Z",
+  "coverageComplete": true,
+  "mapping": {
+    "version": "fixture-map-v1",
+    "sourceSku": "fixture-source-sku",
+    "sourceStore": "fixture-source-store",
+    "sourceWarehouse": "fixture-source-wh",
+    "canonicalSkuId": "sku-fixture",
+    "storeId": "store-fixture",
+    "warehouseId": "warehouse-fixture",
+    "sourceUnit": "EA",
+    "unit": "EA",
+    "unitsPerSourceUnit": "1"
+  },
+  "inventory": [
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "inv-1",
+      "availableQty": "55",
+      "reservedQty": "10",
+      "semantics": "NET_AVAILABLE",
+      "sourceUpdatedAt": "2026-11-12T00:00:00Z"
+    }
+  ],
+  "demand": [
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-1",
+      "day": "2026-11-13",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-2",
+      "day": "2026-11-14",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-3",
+      "day": "2026-11-15",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-4",
+      "day": "2026-11-16",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-5",
+      "day": "2026-11-17",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-6",
+      "day": "2026-11-18",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-7",
+      "day": "2026-11-19",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-8",
+      "day": "2026-11-20",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    },
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "demand-9",
+      "day": "2026-11-21",
+      "quantity": "10",
+      "semantics": "INCREMENTAL_EXCLUDES_RESERVED"
+    }
+  ],
+  "supply": [
+    {
+      "sku": "fixture-source-sku",
+      "store": "fixture-source-store",
+      "warehouse": "fixture-source-wh",
+      "unit": "EA",
+      "recordId": "supply-1",
+      "supplyId": "purchase-line-1",
+      "remainingQty": "20",
+      "availableDate": "2026-11-16",
+      "status": "OPEN"
+    }
+  ],
+  "policy": {
+    "version": "engineering-demo-v1",
+    "horizonDays": 7,
+    "bufferDays": 2,
+    "maxAgeHours": 24,
+    "moq": "10",
+    "orderMultiple": "10",
+    "candidateDates": [
+      "2026-11-18"
+    ],
+    "maxOrderQty": "100",
+    "otherConstraints": "ENGINEERING_NOT_APPLICABLE",
+    "qualityDisposition": "SAMPLE_CLEAR"
+  }
+}
