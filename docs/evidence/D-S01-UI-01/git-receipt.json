@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "observedDeliveryCommit": "15f8a5b0a25f9cfaedc55d7bc3514d6aeae1cb53",
+  "testedImplementationCommit": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+  "remoteReviewRef": "refs/heads/codex/s01-frontend-mvp",
+  "observedRemoteReviewSha": "15f8a5b0a25f9cfaedc55d7bc3514d6aeae1cb53",
+  "observedRemoteMainSha": "6fdf10cd6850794cc1ba2695078e68a58996e974",
+  "verificationMethod": "Successful ordinary git push -u and independent GitHub GET git/ref/heads/codex/s01-frontend-mvp readback; main readback unchanged. Later receipt-only commit is a descendant, final head is reported by live Git readback.",
+  "forcePush": false,
+  "mergedMain": false,
+  "sourceDiffAfterTest": [],
+  "status": "REVIEW",
+  "untrackedPreserved": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "transport": "Existing loopback proxy; HTTP/1.1/OpenSSL certificate verification retained. Intermittent handshake failures were retried without origin/history changes."
+}

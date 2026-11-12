@@ -653,6 +653,7 @@
     "docs/evidence/D-S01-UI-01/backend-regression.json",
     "docs/evidence/D-S01-UI-01/budget-preservation.json",
     "docs/evidence/D-S01-UI-01/frontend-verification.json",
-    "docs/evidence/D-S01-UI-01/preservation.json"
+    "docs/evidence/D-S01-UI-01/preservation.json",
+    "docs/evidence/D-S01-UI-01/git-receipt.json"
   ]
 }

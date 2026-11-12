@@ -1,6 +1,10 @@
 # 当前增量交接 v0.3
 
 
+## D-S01-UI-01 普通GitHub同步完成（2026-11-12）
+
+已普通push评审分支 `codex/s01-frontend-mvp` 并通过GitHub git/ref API独立读回 `15f8a5b0a25f9cfaedc55d7bc3514d6aeae1cb53`，本地HEAD/跟踪分支相同；远端main仍6fdf10c。实测实现仍 `465892c9342f23fd3e1614df85c564ade0a5ef9a`，后续只证据/文档、源码/测试/工具/配置diff为空。间歇TLS失败未改origin/认证/TLS保护，原代理加HTTP1.1/OpenSSL普通重试成功。回执见[evidence](evidence/D-S01-UI-01/git-receipt.json)；本段随后的收尾提交仅登记此事实，最终HEAD从Git读回，不能将已测试SHA冒充收尾SHA。任务REVIEW、review=null；演示进程已停止，完成后等待负责人和星星评审，不继续下一开发。
+
 ## D-S01-UI-01 固定提交复验完成（2026-11-12）
 
 实现与被测提交 `465892c9342f23fd3e1614df85c564ade0a5ef9a`；本轮真实Edge重跑5 PASS（3 REAL/2协议夹具），客户端19 PASS、类型/构建PASS；完整后端603 PASS/0 FAIL/ERROR/SKIP，旧601逐名保全、新增2项401会话恢复，9条检查命令均退出0。MySQL8.0.27/s01_a01_test_20261112/UTC/READ-COMMITTED/0005未变。固定截图/实际task/report/snapshot与测试汇总在[evidence](evidence/D-S01-UI-01/report.md)。本轮演示API/Worker/Vite已停止后才做全量回归；仅测试自己创建的主体与任务，不操作原付费task。

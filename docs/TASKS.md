@@ -5559,6 +5559,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/D-S01-UI-01/frontend-verification.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "git push -u origin codex/s01-frontend-mvp; GitHub GET git/ref/heads/codex/s01-frontend-mvp",
+      "environment": "ordinary existing origin, certificate verification enabled; no force or main merge",
+      "sample": "交付15f8a5b远端独立读回一致；固定被测465892c与收尾无实现差异，main保持6fdf10c。后续仅回执/台账提交，最终HEAD从Git核对。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-UI-01/git-receipt.json"
     }
   ],
   "review": null,
@@ -5601,7 +5613,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "observedHead": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
       "reason": "完整正式前端及真实教学浏览器闭环已在固定提交验证：后端603/客户端19/浏览器5 PASS；旧601逐名/原证据/付费核账保全，文档与同步另按实际收尾记录。未合main，待负责人和星星独立评审；C-04 FAIL/四门BLOCKED不变。",
-      "previousAC3": "非成功AI明确AI解释不可用，质量阻断独立；真实确认/审批/执行入口禁用，不接假成功"
+      "previousAC3": "非成功AI明确AI解释不可用，质量阻断独立；真实确认/审批/执行入口禁用，不接假成功",
+      "observedDeliveryCommit": "15f8a5b0a25f9cfaedc55d7bc3514d6aeae1cb53",
+      "syncEvidenceRef": "docs/evidence/D-S01-UI-01/git-receipt.json"
     }
   ],
   "acceptanceRefs": [
