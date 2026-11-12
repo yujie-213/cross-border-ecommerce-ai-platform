@@ -1,21 +1,21 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`d472487140925e636a9c1ae2f107d23ebd94a8abccc208aedafa61b3da5e356c`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`eb45e0f01aa0a98f32667e36bc8c60918775883f7215ca1cda332e874c6f4c7b`。不要手工编辑；候选不是执行授权。
 
-任务 31 项；TODO 8；IN_PROGRESS 1；BLOCKED 4；REVIEW 7；ACCEPTED 11。
+任务 31 项；TODO 8；IN_PROGRESS 0；BLOCKED 4；REVIEW 8；ACCEPTED 11。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
 | SETUP | 1 | 0 | 0 | 0 | 1 | 0 |
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
-| C | 5 | 4 | 1 | 0 | 0 | 0 |
+| C | 5 | 4 | 0 | 0 | 1 | 0 |
 | D | 14 | 4 | 0 | 4 | 6 | 0 |
 
 ## 当前活动记录
 
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
-- C-01 A01真实解释必需的网关/Provider与调用控制子集：IN_PROGRESS；实际执行者=Codex（单人集成）。
+- C-01 A01真实解释必需的网关/Provider与调用控制子集：REVIEW；实际执行者=Codex（单人集成）。
 - D-S01-01 S01补货专项详细设计（第一阶段）：REVIEW；实际执行者=Codex（本轮唯一文档执行者与台账集成人）。
 - UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
 - D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）：REVIEW；实际执行者=Codex（本轮单人文档执行者）。
@@ -43,7 +43,7 @@
 | B-03 | B01 S01确定性供需指标 | ACCEPTED | A-01, D-S01-RULE-01 |
 | B-04 | B02 S01基线/候选与约束 | ACCEPTED | B-03 |
 | B-05 | O01 Handler调度/报告与G01/G02边界 | ACCEPTED | A-05, B-02, B-03 |
-| C-01 | A01真实解释必需的网关/Provider与调用控制子集 | IN_PROGRESS | A-05, A-01 |
+| C-01 | A01真实解释必需的网关/Provider与调用控制子集 | REVIEW | A-05, A-01 |
 | C-02 | A02内容理解与结构化产物（按需） | TODO | C-01 |
 | C-03 | A03 RAG/只读Tool/Skill最小契约（按需） | TODO | C-01, B-02 |
 | C-04 | S01真实模型解释用途评测与安全降级验收（必做） | TODO | C-01, D-S01-DEV-01, D-S01-AI-ACCESS-01 |

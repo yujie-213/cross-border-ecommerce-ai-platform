@@ -8,7 +8,9 @@ ModelRequest沿AI§9.1 0.2精确字段及引用；A01解析内部ProviderRequest
 
 DeepSeek官方文档只读核实deepseek-flash及官方chat/completions，显式JSON Output/非思考/非流式/无工具；完整Schema在本地验证，禁SDK隐藏重试/重定向/代理。真实网络默认false，密钥存在另须独立授权和USD上限。只核对COMMERCE_MODEL_API_KEY存在/非空；未显示或改写本机秘密。现本地provider值未通过新枚举，未改.env；回归显式mock+network=false，未来授权连通须按示例显式deepseek。DeepSeek即使token已知，实际扣费未知仍记G02技术事实且保留全额，不把峰值估算当实际费用。官方价格/版本/TLS/计费协议尚未真实调用验证，C-04和AI门禁不解除。
 
-预提交完整回归270 PASS/0 FAIL/0 ERROR/0 SKIP，一条既有Starlette/httpx弃用提示；包含A/B原187项及C-01 83项。开发中曾有错误测试helper导入、沙箱临时目录拒绝、本地provider值校验失败及取消后LEASE_LOST断言不符，均如实保留执行历史。运行说明见[本轮说明](runbooks/c-01.md)，独立入口默认仅NOT_RUN；真实模型/ERP/采购调用均0。实现提交固定后须用tools.verify_c01针对该SHA完整复验并保存脱敏证据，再更新REVIEW/提交与普通main同步；本段尚不冒称固定提交后测试已发生。最终SHA从真实Git查询，未知YAML不纳入。
+实现先固定2f3aa8cebcf6943e2ba2f0c6153319674b6e80f8并真实复验270 PASS；随后补上最终审计写入后的取消/期限复核及两项针对性测试，最终实现57fac89635177812da36fa988d5248c746e7a87f。针对该固定SHA执行tools.verify_c01：**272 PASS/0 FAIL/0 ERROR/0 SKIP，一条既有Starlette/httpx弃用提示**；原A/B 187项名称全部保全，新加85项。pip check、compileall、独立连通入口默认禁用检查均PASS。真实MySQL8.0.27、唯一迁移head0004_reports、UTC/READ-COMMITTED，复用原隔离库/依赖，无破坏性迁移或清库。最终审计慢写/取消、原任务恢复与UNKNOWN占额、并发限额/幂等usage、Schema/拒答/截断/超时/凭据脱敏/禁网和B01/B02资产不变均有实测覆盖。完整命令/版本/逐测试名/脱敏原始输出见[本轮证据](evidence/C-01/verification.json)，运行说明见[本轮说明](runbooks/c-01.md)。
+
+开发中曾有错误测试helper导入、沙箱临时目录拒绝、本地provider值校验失败及取消后LEASE_LOST断言不符，均保留执行历史，不伪写为首轮全通过。真实模型/ERP/采购调用均0，真实Provider/TLS/账单/地域/用途评测仍NOT_RUN；价格上界仅发送前估算，不等于供应商消费硬限额，未来真实调用前须重新核实。四门继续BLOCKED、其余30项任务JSON及所有依赖原样保全，C-02—05/D及原型/正式前端未开发。C-01仅REVIEW、review=null，等待独立验收，完成普通main同步后停止。最终证据提交与远端SHA由真实Git查询，不在文件内填自身未知SHA；未知YAML不纳入。
 
 ## A/B工程交付负责人验收登记（2026-11-12，基于da07a71）
 

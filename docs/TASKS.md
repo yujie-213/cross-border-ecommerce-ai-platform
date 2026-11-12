@@ -1,6 +1,6 @@
 # 唯一任务与验收台账 v0.2
 
-当前C-01工程授权（2026-11-12，基于c0e5af0）：仅A01/Mock/受控DeepSeek官方适配、默认关闭的独立合成连通入口及工程回归、提交/普通main同步。未授权真实模型请求；密钥存在不视为付费授权，四门保持BLOCKED，不开展C-02—05/D。C-01交付后进入REVIEW，等待独立验收。下方早期“不启动C”仅为历史授权停止点。
+当前C-01工程交付（2026-11-12，基于c0e5af0；被测实现57fac89）：仅A01/Mock/受控DeepSeek官方适配、默认关闭的独立合成连通入口及工程回归、提交/普通main同步。未授权真实模型请求；密钥存在不视为付费授权，四门保持BLOCKED，不开展C-02—05/D。固定实现272项工程复验PASS，C-01进入REVIEW、review=null，等待独立验收；真实模型验证NOT_RUN。下方早期“不启动C”仅为历史授权停止点。
 
 当前负责人验收确认（2026-11-12，基于da07a71）：用户明确指令“验收通过，状态由 REVIEW → ACCEPTED”；A-01—A-06、B-01—B-05仅工程交付范围登记ACCEPTED。被审实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`，最终证据提交`da07a7113e9f9d5f7e001ebd00572b41499f3ac5`，187项实测结果沿用，未重跑业务测试。四项真实准入保持BLOCKED，历史NOT_RUN不改写；B-01/AC3真实ERP方法/路径授权及适配仍NOT_RUN并延期至原ERP门禁，不能视为通过。D-S01-01整体和其他任务不变，不启动C/D。下方旧状态描述仅为当时事实，当前状态只读各JSON。
 
@@ -2676,10 +2676,57 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_ENGINEERING",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2f3aa8cebcf6943e2ba2f0c6153319674b6e80f8",
+    "57fac89635177812da36fa988d5248c746e7a87f"
+  ],
+  "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+  "evidence": [
+    {
+      "command": "python -m tools.verify_c01",
+      "environment": "Windows / Python3.13.5 / .tmp/stage-a-clean; COMMERCE_RUN_MYSQL_TESTS=1, COMMERCE_MODEL_PROVIDER=mock, COMMERCE_MODEL_NETWORK_ENABLED=false; authorized isolated MySQL8.0.27",
+      "sample": "C-01 Mock + explicit OFFLINE_TRANSPORT DeepSeek protocol fixtures; synthetic Context only; original A/B engineering API/Worker/MySQL regression; no real model request",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/C-01/verification.json",
+      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "C-01/AC1",
+        "C-01/AC2",
+        "C-01/AC3"
+      ]
+    },
+    {
+      "command": "python -m tools.verify_c01",
+      "environment": "Windows / Python3.13.5 / .tmp/stage-a-clean; COMMERCE_RUN_MYSQL_TESTS=1, COMMERCE_MODEL_PROVIDER=mock, COMMERCE_MODEL_NETWORK_ENABLED=false; authorized isolated MySQL8.0.27",
+      "sample": "C-01 Mock + explicit OFFLINE_TRANSPORT DeepSeek protocol fixtures; synthetic Context only; original A/B engineering API/Worker/MySQL regression; no real model request",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/C-01/verification.json",
+      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f",
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "C-01/AC1",
+        "C-01/AC2",
+        "C-01/AC3"
+      ]
+    },
+    {
+      "kind": "REAL_MODEL",
+      "acceptanceIds": [
+        "C-01/AC3"
+      ],
+      "command": "NOT_RUN — paid-call authorization and explicit USD cap not provided; no --execute invocation",
+      "environment": "DeepSeek official API; disabled for this delivery",
+      "sample": "Real connectivity, billed usage and C-04 purpose evaluation not executed",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/C-01/verification.json",
+      "testedCommit": "57fac89635177812da36fa988d5248c746e7a87f"
+    }
+  ],
   "review": null,
   "branch": "main",
   "observedHead": "c0e5af096a41c680b0caff4b26424367bd6d0abe",
@@ -2700,6 +2747,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "AUTHORIZED_C01_ENGINEERING",
       "reason": "用户明确授权C-01工程与Mock、DeepSeek官方适配、独立默认关闭连通入口、提交和普通main同步；不授权真实付费调用，不改AI门禁，不开发C-02—05/D。",
       "observedHead": "c0e5af096a41c680b0caff4b26424367bd6d0abe"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "ENGINEERING_DELIVERY_REVIEW",
+      "reason": "完成C-01最小A01/Mock/受控DeepSeek官方适配；针对固定实现272 PASS，A/B原187项保全、新增85项。pip check/compileall/默认禁用连通入口PASS；真实模型接口/费用/C-04 NOT_RUN。review=null，四门不变，等待独立验收。",
+      "observedHead": "57fac89635177812da36fa988d5248c746e7a87f"
     }
   ],
   "completionEvidence": [
