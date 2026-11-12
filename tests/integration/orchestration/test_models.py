@@ -155,11 +155,22 @@ def test_same_logical_two_reserved_attempts_cannot_race_send(make_foundation):
 
 def test_short_attempt_deadline_and_late_result_never_publish(make_foundation):
     env,context,bundle=prepare(make_foundation)
-    req=request(context,bundle,deadline=datetime.now(timezone.utc)+timedelta(seconds=.15))
-    provider=MockProvider(delay=.35)
-    result=ModelGateway(provider).invoke(req,context,bundle)
-    assert result.code=="TIMEOUT" and result.validatedObject is None
-    time.sleep(.4)
+    # Leave time for real DB admission, then hold a confirmed send past its original attempt deadline.
+    req=request(context,bundle,deadline=datetime.now(timezone.utc)+timedelta(seconds=2))
+    entered,release=threading.Event(),threading.Event()
+    provider=MockProvider(entered=entered,release=release)
+    with ThreadPoolExecutor() as pool:
+        job=pool.submit(ModelGateway(provider).invoke,req,context,bundle)
+        try:
+            assert entered.wait(3)
+            result=job.result(timeout=4)
+            assert result.code=="TIMEOUT" and result.validatedObject is None
+            assert provider.calls==1 and count(env,usage_facts)==0
+            assert owned_row(env,attempts)["state"]=="UNKNOWN"
+        finally:
+            release.set()
+    end=time.monotonic()+3
+    while time.monotonic()<end and count(env,usage_facts)==0: time.sleep(.02)
     assert count(env,usage_facts)==1 and provider.calls==1
     assert owned_row(env,budgets,task_id=context.lease.owner_id)["used_calls"]==1
 

@@ -148,6 +148,8 @@ class TaskBudgetHandle:
             row = conn.execute(select(attempts).filter_by(**key).with_for_update()).mappings().one()
             if row["state"] == "RELEASED":
                 raise BudgetError("ATTEMPT_RELEASED")
+            if row["state"] not in ["SENT", "UNKNOWN", "SETTLED", "SETTLED_OVER_LIMIT"]:
+                raise BudgetError("ATTEMPT_NOT_SETTLEABLE")
             ref = self.service.audit.record_usage(conn, **key, tokens=tokens, cost=actual, currency=currency, pricing_version=pricing_version)
             if row["state"] in ["SETTLED", "SETTLED_OVER_LIMIT"]:
                 return ref

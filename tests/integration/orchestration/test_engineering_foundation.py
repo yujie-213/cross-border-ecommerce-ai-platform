@@ -101,6 +101,13 @@ def running(env):
     return view, lease, TaskBudgetHandle(env.service, lease, env.principal, 1)
 
 
+def accounting_snapshot(env):
+    with env.database.engine.connect() as connection:
+        return {table.name: [dict(row) for row in connection.execute(select(table)
+            .filter_by(tenant_id=env.tenant).order_by(*table.primary_key.columns)).mappings()]
+            for table in [budgets, attempts, usage_facts, audit_events]}
+
+
 def expire_owned_lease(env, lease):
     with env.database.engine.begin() as connection:
         now = connection.scalar(select(func.utc_timestamp(6)))
@@ -369,6 +376,52 @@ def test_unknown_logical_call_cannot_retry_under_a_new_attempt(make_foundation):
     assert owned_row(env, budgets)["reserved_calls"] == 1
 
 
+@pytest.mark.parametrize("state,code", [("RESERVED", "ATTEMPT_NOT_SETTLEABLE"), ("RELEASED", "ATTEMPT_RELEASED")])
+@pytest.mark.parametrize("cancelled", [False, True])
+def test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged(make_foundation, state, code, cancelled):
+    env = make_foundation()
+    view, _, budget = running(env)
+    budget.reserve("fixture-call", "fixture-attempt", 10, "0.1")
+    if state == "RELEASED":
+        budget.release_unsent("fixture-attempt")
+    if cancelled:
+        current = env.service.read(env.principal, view["taskRef"]["taskId"])
+        env.service.cancel(env.principal, view["taskRef"]["taskId"], "cancel-fixture", current["revision"], uuid4().hex)
+    before = accounting_snapshot(env)
+    assert owned_row(env, attempts)["state"] == state
+    with pytest.raises(BudgetError, match="^" + code + "$"):
+        budget.settle("fixture-attempt", 7, "0.07")
+    assert accounting_snapshot(env) == before
+    assert count(env, usage_facts) == 0
+    assert count(env, audit_events, action="USAGE_SETTLED") == 0
+
+
+@pytest.mark.parametrize("state", ["SENT", "UNKNOWN"])
+@pytest.mark.parametrize("over_limit", [False, True])
+def test_sent_usage_settlement_replay_checks_every_usage_dimension(make_foundation, state, over_limit):
+    env = make_foundation()
+    _, _, budget = running(env)
+    budget.reserve("fixture-call", "fixture-attempt", 10, "0.1")
+    budget.mark_sent("fixture-attempt")
+    if state == "UNKNOWN":
+        budget.unknown("fixture-attempt")
+    cost = "0.2" if over_limit else "0.07"
+    usage = dict(tokens=7, cost=cost, currency="TEST", pricing_version="fixture-v1")
+    ref = budget.settle("fixture-attempt", **usage)
+    assert owned_row(env, attempts)["state"] == ("SETTLED_OVER_LIMIT" if over_limit else "SETTLED")
+    row = owned_row(env, budgets)
+    assert (row["reserved_calls"], row["reserved_tokens"], row["reserved_cost"]) == (0, 0, Decimal("0"))
+    assert (row["used_calls"], row["used_tokens"], row["used_cost"]) == (1, 7, Decimal(cost))
+    assert count(env, usage_facts) == count(env, audit_events, action="USAGE_SETTLED") == 1
+    before = accounting_snapshot(env)
+    assert budget.settle("fixture-attempt", **usage) == ref
+    assert accounting_snapshot(env) == before
+    for patch in [dict(tokens=8), dict(cost="0.08"), dict(currency="USD"), dict(pricing_version="fixture-v2")]:
+        with pytest.raises(ValueError, match="^USAGE_CONFLICT$"):
+            budget.settle("fixture-attempt", **(usage | patch))
+        assert accounting_snapshot(env) == before
+
+
 def test_usage_settlement_is_idempotent_and_g02_is_unique_fact(make_foundation):
     env = make_foundation()
     _, _, budget = running(env)
@@ -498,3 +551,20 @@ def test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task(mak
     assert owned_row(env, budgets)["used_calls"] == 1
     with pytest.raises(LeaseLost):
         budget.reserve("another", "another", 1, "0.01")
+
+
+def test_late_sent_usage_is_accounted_and_replayed_after_cancel(make_foundation):
+    env = make_foundation()
+    view, _, budget = running(env)
+    budget.reserve("fixture-call", "fixture-attempt", 10, "0.1")
+    budget.mark_sent("fixture-attempt")
+    current = env.service.read(env.principal, view["taskRef"]["taskId"])
+    env.service.cancel(env.principal, view["taskRef"]["taskId"], "cancel-fixture", current["revision"], uuid4().hex)
+    ref = budget.settle("fixture-attempt", 7, "0.07")
+    before = accounting_snapshot(env)
+    assert budget.settle("fixture-attempt", 7, "0.07") == ref
+    assert accounting_snapshot(env) == before
+    assert owned_row(env, tasks)["state"] == owned_row(env, work_items)["state"] == "CANCELLED"
+    assert owned_row(env, attempts)["state"] == "SETTLED"
+    assert owned_row(env, usage_facts)["usage_ref"] == ref
+    assert owned_row(env, budgets)["used_calls"] == 1
