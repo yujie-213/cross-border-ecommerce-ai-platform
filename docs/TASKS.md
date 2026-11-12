@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前C-01工程验收登记（2026-11-12，基于669f37e）：用户明确确认C-01已通过星星独立工程审查，并由负责人批准该阶段工程验收；本轮仅将C-01由REVIEW登记为ACCEPTED。被审实现eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f，证据提交669f37edd05fa6e59a833173c7136a0d50965ee3，引用docs/evidence/C-01/verification.json。验收仅覆盖A01/Mock/受控DeepSeek离线适配及O01/G02调用控制的工程范围，沿用原281项实测，不重跑应用测试。四项准入门禁保持BLOCKED；真实DeepSeek、费用核对和C-04保持NOT_RUN，不授权后续开发或真实模型调用。下方旧REVIEW及review=null描述均为历史事实，当前状态只读任务JSON。
+
 当前C-01独立审查修复授权（2026-11-12，基于6e2c171）：Codex单人集成，main，跟踪区干净；仅修复O01/G02首次usage结算的状态门槛并补真实MySQL正反例、相关及全量A/B/C-01回归、原证据/交接与普通同步。既存未知docs/ERP-openapi.yaml保留未读改暂存。保持C-01 REVIEW、review=null和四门BLOCKED；禁止真实DeepSeek请求。修复被测实现eaa7718：相关58项PASS，全量281项PASS（原272保留、新增9）；pip check/compileall/默认关闭入口PASS，真实模型NOT_RUN。下方272项为前次实现的历史证据。
 
 当前C-01工程交付（2026-11-12，基于c0e5af0；被测实现57fac89）：仅A01/Mock/受控DeepSeek官方适配、默认关闭的独立合成连通入口及工程回归、提交/普通main同步。未授权真实模型请求；密钥存在不视为付费授权，四门保持BLOCKED，不开展C-02—05/D。固定实现272项工程复验PASS，C-01进入REVIEW、review=null，等待独立验收；真实模型验证NOT_RUN。下方早期“不启动C”仅为历史授权停止点。
@@ -54,7 +56,7 @@
 状态仅TODO、IN_PROGRESS、BLOCKED、REVIEW、ACCEPTED。TODO不代表获准执行；领取前核对依赖、入口、实际负责人/文件范围/branch/HEAD。遇实际障碍才BLOCKED并写原因/责任/解除条件。完成实现进入REVIEW，不自动ACCEPTED；逐项验收必须有适用真实证据、实现commit、命令/环境/样本/退出码、制品/评审引用。FAIL/NOT_RUN不能填PASS，文档/Mock不替代真实ERP/模型/动作/生产验收。重要契约须评审；本轮SETUP交付REVIEW，不伪造独立验收。
 
 
-负责人可以在已有明确工程授权范围内验收工程交付；`review.scope=A_B_ENGINEERING_ONLY`须记录本人决定、被审实现和证据引用。历史/真实模式NOT_RUN逐项由`retainedNotRunEvidence`登记索引、制品和保留原因，仍不计PASS；适用AC和必需证据类别仍须真实PASS。仅真实启用部分延期时，`deferredAcceptance`必须列出原AC、原因及本任务仍BLOCKED的启用门禁，不改变原验收条件；启用前须另行授权、实测及复核。FAIL、未解释的NOT_RUN、缺失工程证据均不能通过文档校验。本约定只区分工程接受与真实启用，不解除门禁。
+负责人可以在已有明确工程授权范围内验收工程交付；A/B使用`review.scope=A_B_ENGINEERING_ONLY`，C-01使用仅限该任务的`review.scope=C_01_ENGINEERING_ONLY`，须记录本人决定、被审实现和证据引用。历史/真实模式NOT_RUN逐项由`retainedNotRunEvidence`登记索引、制品和保留原因，仍不计PASS；适用AC和必需证据类别仍须真实PASS。仅真实启用部分延期时，`deferredAcceptance`必须列出原AC、原因及本任务仍BLOCKED的启用门禁，不改变原验收条件；启用前须另行授权、实测及复核。C-01本次无延期AC，三个AC的工程部分均有原PASS证据，不增加延期豁免。FAIL、未解释的NOT_RUN、缺失工程证据均不能通过文档校验。本约定只区分工程接受与真实启用，不解除门禁。
 
 TASKS的JSON记录是唯一状态源；PLAN/HANDOFF只链接状态，generated视图只读。实现/证据分提交，记录观察时HEAD而不要求文件填自己的SHA。没有提交或交接不全如实记录WIP，不能ACCEPTED。下列plannedTests都是将来的测试场景，只有evidence中的实际结果才是已执行证据。
 
@@ -2679,7 +2681,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_ENGINEERING",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "2f3aa8cebcf6943e2ba2f0c6153319674b6e80f8",
     "57fac89635177812da36fa988d5248c746e7a87f",
@@ -2731,7 +2733,34 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "testedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "项目负责人（用户本人，最终批准）；星星（独立工程审查）",
+    "date": "2026-11-12",
+    "decision": "C-01阶段工程验收通过，状态由 REVIEW → ACCEPTED",
+    "decisionSource": "本轮用户明确确认星星独立工程审查通过及负责人批准；Codex仅执行验收登记，不新增独立审查结论。",
+    "scope": "C_01_ENGINEERING_ONLY",
+    "scopeDescription": "C-01/AC1—AC3工程范围：统一A01与最小ModelProvider、Mock和受控DeepSeek官方离线协议适配、版本化Prompt/Context/Schema、技术状态/日志脱敏、O01原期限/取消/预留及G02幂等核账；含首次结算状态修复、取消后迟到账、B01/B02权威结果不变及原A/B/C-01回归。",
+    "reviewedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
+    "evidenceCommit": "669f37edd05fa6e59a833173c7136a0d50965ee3",
+    "evidenceRef": "docs/evidence/C-01/verification.json",
+    "acceptanceIds": [
+      "C-01/AC1",
+      "C-01/AC2",
+      "C-01/AC3"
+    ],
+    "exclusions": [
+      "四项真实数据/规则/ERP/模型准入门禁继续BLOCKED；工程接受不授予真实用途或收费调用权限。",
+      "真实DeepSeek接口/TLS/能力验证、实际费用核对与C-04用途评测均NOT_RUN；本轮不连接数据库、不重跑应用测试、不发起模型请求、不开展后续开发。"
+    ],
+    "retainedNotRunEvidence": [
+      {
+        "index": 2,
+        "artifactRef": "docs/evidence/C-01/verification.json",
+        "reason": "真实DeepSeek、费用核对与C-04未执行，保留原REAL_MODEL NOT_RUN及exitCode=null，不计入工程PASS；启用仍须另行授权、预算上限和相应准入。"
+      }
+    ],
+    "deferredAcceptance": []
+  },
   "branch": "main",
   "observedHead": "6e2c171cf4f95cf79e2a9be4c4294540b4a833e7",
   "dirtyPaths": [
@@ -2769,6 +2798,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "REVIEW_FIX_DELIVERY",
       "reason": "首次结算仅接受SENT/UNKNOWN；未发送拒绝且预算/attempt/G02事实不变，已结算四维一致性及取消后迟到账保留。相关58 PASS；固定实现全量281 PASS，原272全部保留、新增9项；pip check/compileall/默认关闭入口PASS。既有150ms测试准入耗时失败经事件同步修正，失败历史保留于原证据。C-01仍REVIEW、review=null，四门BLOCKED、真实模型NOT_RUN。",
       "observedHead": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "OWNER_ENGINEERING_ACCEPTANCE",
+      "from": "REVIEW",
+      "to": "ACCEPTED",
+      "reason": "用户确认星星独立工程审查通过，负责人批准C-01工程验收；仅登记文档状态，沿用固定实现281 PASS和原证据，不新增测试通过声明。四门BLOCKED，真实DeepSeek/费用核对/C-04 NOT_RUN。",
+      "observedHead": "669f37edd05fa6e59a833173c7136a0d50965ee3",
+      "reviewedCommit": "eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f",
+      "evidenceRef": "docs/evidence/C-01/verification.json",
+      "evidenceCommit": "669f37edd05fa6e59a833173c7136a0d50965ee3"
     }
   ],
   "completionEvidence": [

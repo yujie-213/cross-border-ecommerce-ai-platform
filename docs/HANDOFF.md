@@ -1,5 +1,15 @@
 # 当前增量交接 v0.3
 
+## C-01工程验收登记（2026-11-12，基于669f37e）
+
+用户明确确认C-01已通过星星独立工程审查，负责人批准该阶段工程验收；Codex本轮仅登记，不另作独立评审。TASKS的C-01由REVIEW改为ACCEPTED，review填写日期2026-11-12、工程范围C_01_ENGINEERING_ONLY、评审者与负责人决定、被审实现eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f、证据提交669f37edd05fa6e59a833173c7136a0d50965ee3及[原验证证据](evidence/C-01/verification.json)，原实现/测试/历史均保留。工程验收覆盖C-01/AC1—AC3适用部分，包括A01/Mock/受控DeepSeek离线协议、结构输出/技术状态/脱敏、原O01期限/取消/预算与G02核账及本次首次结算状态修复。
+
+沿用被测实现的相关58项及全量281项PASS，不重跑应用测试、不连接数据库、不改原证据或业务实现。本轮只更新TASKS、HANDOFF、派生状态和必要的文档验收校验：校验器增加仅限C-01工程范围的NOT_RUN保留规则，要求逐项说明索引/原制品/原因；不增加延期AC豁免，不接受FAIL或缺失工程证据。四项准入门禁仍BLOCKED，真实DeepSeek、实际费用核对与C-04继续NOT_RUN，本次无真实模型请求，不授权后续开发。下方旧REVIEW停止点为历史事实，当前状态只读TASKS。
+
+实际接手main/HEAD及fetch后的origin/main均为669f37edd05fa6e59a833173c7136a0d50965ee3，跟踪区干净；未知未跟踪docs/ERP-openapi.yaml保留未读改暂存。不读取.env或秘密值，无新代理、迁移、依赖、配置或正式前端改动。完成文档一致性检查和普通GitHub main同步后停止；最终提交SHA从Git实际查询，不填自身未知SHA。
+
+实际文档验证：python docs/planning/build_docs.py和python docs/planning/check_plan.py退出0，18项检查PASS；git -c core.whitespace=cr-at-eol diff --check退出0。内存对比31条原任务，只有C-01的status/review/history变化，其余30条及全部依赖逐字段不变，原验证证据字节不变，变更仅5份文档/文档工具且增量脱敏扫描无命中。文档验收校验器13个负例（缺评审字段/决定、缺失或错配NOT_RUN处置、非工程范围/其他任务冒用C-01范围、FAIL、缺证据类别、NOT_RUN带成功码）均拒绝。本次仅为文档登记与校验，不新增应用实测或真实业务验收声明。
+
 ## C-01独立审查账务状态修复（2026-11-12，基于6e2c171）
 
 用户本轮仅授权TaskBudgetHandle.settle首次状态门槛、真实MySQL正反例和A/B/C-01回归、更新原证据/台账及普通GitHub main同步。实际接手main/HEAD及fetch后的origin/main均为6e2c171cf4f95cf79e2a9be4c4294540b4a833e7，跟踪区干净；未知docs/ERP-openapi.yaml保留未读改暂存。Codex单人集成，未启动新阶段或代理；A/B 11项工程ACCEPTED记录已经同步，本轮不补签或改写。

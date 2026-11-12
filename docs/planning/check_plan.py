@@ -15,6 +15,8 @@ def check(name,ok,detail):checks.append({'check':name,'result':'PASS' if ok else
 def acceptance_errors(t,ix):
     """验收只覆盖负责人确认的适用范围；保留历史/真实模式NOT_RUN，不计为PASS。"""
     errors=[];rv=t['review'] or {};ev=t['evidence'];commits=t['implementationCommits']
+    engineering_scope=(rv.get('scope')=='A_B_ENGINEERING_ONLY' or
+        (t['id']=='C-01' and rv.get('scope')=='C_01_ENGINEERING_ONLY'))
     def error(message):errors.append(t['id']+': '+message)
     if not commits or not all(re.fullmatch('[0-9a-f]{40}',c) for c in commits):error('real commits required')
     if not t['testedCommit'] or not all(rv.get(k) for k in ['reviewer','reviewedCommit','evidenceRef']):error('tested commit/review required')
@@ -32,7 +34,7 @@ def acceptance_errors(t,ix):
     if not set(t['requiredEvidenceKinds'])<={e.get('kind') for e in passed}:error('evidence kind missing')
     retained=rv.get('retainedNotRunEvidence',[])
     not_run={i for i,e in enumerate(ev) if e.get('result')=='NOT_RUN'}
-    if not_run and (rv.get('scope')!='A_B_ENGINEERING_ONLY' or not rv.get('decision')
+    if not_run and (not engineering_scope or not rv.get('decision')
         or {d.get('index') for d in retained}!=not_run or len(retained)!=len(not_run)):
         error('NOT_RUN requires explicit scoped review disposition')
     for d in retained:
