@@ -2,6 +2,8 @@
 
 ## S01 双工作线集成与评审交接（2026-11-12，基于d6f9d70）
 
+普通同步已完成并远端核对：A分支e7bdc949d5242545e4aad437e3d5debac0088926、B分支dd6d112255e10e848f6017b8153e1eceb44b7902、集成分支观察时568cc9560cfc37444ac806be9c2b4b65fbe8895e；GitHub main仍d6f9d70052e9d153daa68cef700913a21c8a633c，未合入。两独立工作区内容已提交且干净，归档工具分别因仍被活动任务引用/是当前主工作区而拒绝移除，故安全保留供评审，不手工强制删除。主集成源目录仍为D:/电商项目/跨境电商智慧AI平台；后续文档同步不改变被测工程树。
+
 本轮负责人授权单SKU数据准入离线核对与D-S01-DEV-01业务集成并行，最终REVIEW等待本人和星星独立验收。接手main/HEAD及fetch确认的GitHub origin/main均为d6f9d70052e9d153daa68cef700913a21c8a633c，跟踪区干净，唯一未知未跟踪docs/ERP-openapi.yaml保留未读/改/暂存。先冻结docs/contracts/s01/D-S01-DEV-01-freeze.md，再建立两个独立工作区/分支：codex/s01-data-admission与codex/s01-handler-integration；主集成人独占公共契约、API/组合根、TASKS/HANDOFF/DECISIONS。当前集成分支codex/s01-parallel-review，不自动合入GitHub main。
 
 A线文档实现58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b、证据e7bdc949d5242545e4aad437e3d5debac0088926，主区分别cherry-pick为58a8b71/b00d646。报告docs/evidence/D-S01-DATA-01/admission-report.md、索引和验证器核对9份Git基线来源指纹、8个数据域、30个观察引用。原始标识/数量未保存、库存店铺归属和完整覆盖未证，不能恢复SKU-A或替换成fixture；只关闭资料定位/历史计数分母/来源解释。八域最小受控包、业务规则/质量策略、可信传输及负责人岗位签认仍缺。报告交评审，DATA/RULE/ERP-ACCESS/AI-ACCESS四门仍BLOCKED，不把资料PASS写成业务准入。

@@ -46,5 +46,14 @@
     "Initial preservation script raised KeyError for legacy task without enablementGates; fixed optional-field comparison; this is checker-only, no application change."
   ],
   "reviewState": "REVIEW",
-  "independentOwnerAndXingxingAcceptance": "NOT_RUN"
+  "independentOwnerAndXingxingAcceptance": "NOT_RUN",
+  "githubSyncVerified": {
+    "aBranchHead": "e7bdc949d5242545e4aad437e3d5debac0088926",
+    "bBranchHead": "dd6d112255e10e848f6017b8153e1eceb44b7902",
+    "observedIntegratedBranchHead": "568cc9560cfc37444ac806be9c2b4b65fbe8895e",
+    "mainHead": "d6f9d70052e9d153daa68cef700913a21c8a633c",
+    "mainMerged": false,
+    "forcePush": false
+  },
+  "worktreeCleanup": "Archive attempted; app refused active-owner/primary checkout removal; both clean committed independent worktrees retained safely."
 }
