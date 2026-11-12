@@ -1,5 +1,15 @@
 # 当前增量交接 v0.3
 
+## C-01 A01工程实现（2026-11-12，基于c0e5af0）
+
+用户明确授权C-01工程及Mock、DeepSeek官方适配、独立默认关闭的合成连通入口、完整回归/提交/普通main同步，不授权真实模型请求。接手main/HEAD与fetch确认origin/main均为c0e5af096a41c680b0caff4b26424367bd6d0abe；A/B 11项工程ACCEPTED已同步，未补签。工作区原唯一未知未跟踪docs/ERP-openapi.yaml保留未读改暂存。Codex单人集成，无并行代理。
+
+ModelRequest沿AI§9.1 0.2精确字段及引用；A01解析内部ProviderRequest/digest、输出完整Schema、拒答/截断/超时/取消/失败技术状态。S01拥有工程版最小Prompt/Context/四类解释Schema，不接入现S01 Handler，不修改B01/B02权威资产或判断。仅扩展原O01 TaskBudgetHandle公开核验/原子发送槽/G02审计方法，复用reserve/settle/usage，未新增表/迁移/依赖或默认装配。短事务外网络，跨连接核账；原attempt UNKNOWN占额和拒重发、原task期限/取消/租约始终保留。晚到usage可核账，晚到解释不发布。
+
+DeepSeek官方文档只读核实deepseek-flash及官方chat/completions，显式JSON Output/非思考/非流式/无工具；完整Schema在本地验证，禁SDK隐藏重试/重定向/代理。真实网络默认false，密钥存在另须独立授权和USD上限。只核对COMMERCE_MODEL_API_KEY存在/非空；未显示或改写本机秘密。现本地provider值未通过新枚举，未改.env；回归显式mock+network=false，未来授权连通须按示例显式deepseek。DeepSeek即使token已知，实际扣费未知仍记G02技术事实且保留全额，不把峰值估算当实际费用。官方价格/版本/TLS/计费协议尚未真实调用验证，C-04和AI门禁不解除。
+
+预提交完整回归270 PASS/0 FAIL/0 ERROR/0 SKIP，一条既有Starlette/httpx弃用提示；包含A/B原187项及C-01 83项。开发中曾有错误测试helper导入、沙箱临时目录拒绝、本地provider值校验失败及取消后LEASE_LOST断言不符，均如实保留执行历史。运行说明见[本轮说明](runbooks/c-01.md)，独立入口默认仅NOT_RUN；真实模型/ERP/采购调用均0。实现提交固定后须用tools.verify_c01针对该SHA完整复验并保存脱敏证据，再更新REVIEW/提交与普通main同步；本段尚不冒称固定提交后测试已发生。最终SHA从真实Git查询，未知YAML不纳入。
+
 ## A/B工程交付负责人验收登记（2026-11-12，基于da07a71）
 
 项目负责人本次明确指令：“验收通过，状态由 REVIEW → ACCEPTED”。按本轮评审上下文，将A-01—A-06、B-01—B-05共11项仅工程交付范围登记ACCEPTED，review记录本人决定、日期、范围、被审实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`及证据提交`da07a7113e9f9d5f7e001ebd00572b41499f3ac5`；原实现提交、testedCommit、证据和历史全部保留。原187 PASS / 0 FAIL / 0 ERROR / 0 SKIP / 1条既有弃用提示见[最终实测证据](evidence/ab-review-fix/verification.json)；本次没有修改应用代码、连接数据库或重跑业务测试，不新增测试通过声明，也不冒称星星另作了新一轮复核。

@@ -1,7 +1,8 @@
 """O01 original-task allowance control. G02 owns actual usage facts."""
 from decimal import Decimal, InvalidOperation
+from datetime import timezone
 
-from sqlalchemy import insert, select, update
+from sqlalchemy import insert, select, update, func
 
 from .tables import budgets, attempts
 
@@ -28,6 +29,55 @@ class TaskBudgetHandle:
         if not isinstance(attempt_id, str) or not 1 <= len(attempt_id) <= 64:
             raise BudgetError("INVALID_ATTEMPT")
         return dict(tenant_id=self.lease.tenant_id, task_id=self.lease.owner_id, attempt_id=attempt_id)
+
+    def validate_model_call(self, *, task_ref, principal_ref, plan_version, policy_ref,
+                            attempt_id, logical_call_id, allowance_ref, deadline):
+        """Public O01 binding read; current authority/lease and original deadline are authoritative."""
+        key = self._key(attempt_id)
+        if (task_ref != {"tenantId": key["tenant_id"], "taskId": key["task_id"]} or
+            principal_ref != {"tenantId": self.principal.tenant_id, "principalId": self.principal.principal_id} or
+            plan_version != str(self.plan_version) or
+            allowance_ref != {"tenantId": key["tenant_id"], "id": attempt_id, "version": "1"}):
+            raise BudgetError("MODEL_BINDING_DENIED")
+        with self.service.engine.begin() as conn:
+            task = self.service._execution(conn, self.lease, self.principal, self.plan_version)
+            budget = conn.execute(select(budgets).filter_by(tenant_id=key["tenant_id"], task_id=key["task_id"])).mappings().one()
+            row = conn.execute(select(attempts).filter_by(**key)).mappings().first()
+            if (policy_ref != {"id": budget["policy_version"], "version": "1"} or not row or
+                row["logical_call_id"] != logical_call_id or deadline > task["deadline"].replace(tzinfo=timezone.utc)):
+                raise BudgetError("MODEL_BINDING_DENIED")
+            now = conn.scalar(select(func.utc_timestamp(6))).replace(tzinfo=timezone.utc)
+            if deadline <= now:
+                raise BudgetError("DEADLINE_EXCEEDED")
+            return dict(state=row["state"], max_tokens=row["max_tokens"], max_cost=row["max_cost"], now=now)
+
+    def send_model(self, attempt_id, logical_call_id, *, max_inflight, details, trace_id):
+        """Serialize send admission across processes using the existing task budget row."""
+        key = self._key(attempt_id)
+        if type(max_inflight) is not int or not 1 <= max_inflight <= 4:
+            raise BudgetError("INVALID_CONCURRENCY")
+        with self.service.engine.begin() as conn:
+            self.service._execution(conn, self.lease, self.principal, self.plan_version)
+            conn.execute(select(budgets).filter_by(tenant_id=key["tenant_id"], task_id=key["task_id"]).with_for_update()).one()
+            row = conn.execute(select(attempts).filter_by(**key).with_for_update()).mappings().one()
+            if row["state"] != "RESERVED" or row["logical_call_id"] != logical_call_id:
+                raise BudgetError("ATTEMPT_NOT_SENDABLE")
+            pending = conn.execute(select(attempts.c.logical_call_id, attempts.c.state).filter_by(tenant_id=key["tenant_id"], task_id=key["task_id"])
+                .where(attempts.c.state.in_(["SENT", "UNKNOWN"]))).all()
+            if logical_call_id in [p.logical_call_id for p in pending] or any(p.state == "UNKNOWN" for p in pending):
+                raise BudgetError("USAGE_MUST_BE_RECONCILED")
+            if len(pending) >= max_inflight:
+                raise BudgetError("CONCURRENCY_DENIED")
+            self.service.audit.record(conn, tenant_id=key["tenant_id"], task_id=key["task_id"],
+                principal_id=self.principal.principal_id, action="MODEL_SENT", trace_id=trace_id, details=details)
+            conn.execute(update(attempts).filter_by(**key).values(state="SENT"))
+
+    def model_event(self, *, code, details, trace_id):
+        """Late technical facts may be recorded after cancellation; this never authorizes a send."""
+        with self.service.engine.begin() as conn:
+            return self.service.audit.record(conn, tenant_id=self.lease.tenant_id, task_id=self.lease.owner_id,
+                principal_id=self.principal.principal_id, action="MODEL_RESULT", code=code,
+                details=details, trace_id=trace_id)
 
     def reserve(self, logical_call_id, attempt_id, tokens, cost):
         upper = amount(cost)

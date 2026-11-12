@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前C-01工程授权（2026-11-12，基于c0e5af0）：仅A01/Mock/受控DeepSeek官方适配、默认关闭的独立合成连通入口及工程回归、提交/普通main同步。未授权真实模型请求；密钥存在不视为付费授权，四门保持BLOCKED，不开展C-02—05/D。C-01交付后进入REVIEW，等待独立验收。下方早期“不启动C”仅为历史授权停止点。
+
 当前负责人验收确认（2026-11-12，基于da07a71）：用户明确指令“验收通过，状态由 REVIEW → ACCEPTED”；A-01—A-06、B-01—B-05仅工程交付范围登记ACCEPTED。被审实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`，最终证据提交`da07a7113e9f9d5f7e001ebd00572b41499f3ac5`，187项实测结果沿用，未重跑业务测试。四项真实准入保持BLOCKED，历史NOT_RUN不改写；B-01/AC3真实ERP方法/路径授权及适配仍NOT_RUN并延期至原ERP门禁，不能视为通过。D-S01-01整体和其他任务不变，不启动C/D。下方旧状态描述仅为当时事实，当前状态只读各JSON。
 
 当前A/B独立评审修复授权（2026-11-12，基于77d82af）：仅缺陷修复、补测、最终工程验收准备及普通同步，不扩C/D。最终实现`6f98f7785850c79e29cb02cf2b0e92b5fc722a36`复验187项PASS，原161项保全、新增26项；A-01—A-06/B-01—B-05保持REVIEW和review=null，四项真实业务门禁原状。详细范围与NOT_RUN见[最终证据](evidence/ab-review-fix/verification.json)。
@@ -2625,13 +2627,24 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-05/A-01后可先开发离线协议/Schema/超时/预算路径；一个真实Provider/deployment及许可配置须D-S01-AI-ACCESS-01签认后才可调用，受限评测不等于正式用途已开放。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（单人集成）",
   "allowedPaths": [
     "src/commerce_hub/capabilities/models/",
     "src/commerce_hub/adapters/models/",
-    "当前Prompt/Context/Schema资源（A-01冻结实际路径）",
-    "tests/unit/models/（未来）",
-    "docs/evidence/C-01/（未来，仅脱敏证据）"
+    "src/commerce_hub/scenarios/s01/explanation.py",
+    "src/commerce_hub/bootstrap/settings.py",
+    "src/commerce_hub/orchestration/budget.py",
+    "tests/unit/models/",
+    "tests/integration/orchestration/test_models.py",
+    "tools/deepseek_connectivity.py",
+    "tools/verify_c01.py",
+    ".env.example",
+    "docs/runbooks/c-01.md",
+    "docs/evidence/C-01/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/planning/（派生文档及精确白名单）"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -2663,15 +2676,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_ENGINEERING",
     "SECURITY"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "c0e5af096a41c680b0caff4b26424367bd6d0abe",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml（既存未知未跟踪，保留不读改暂存）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -2679,6 +2694,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_C01_ENGINEERING",
+      "reason": "用户明确授权C-01工程与Mock、DeepSeek官方适配、独立默认关闭连通入口、提交和普通main同步；不授权真实付费调用，不改AI门禁，不开发C-02—05/D。",
+      "observedHead": "c0e5af096a41c680b0caff4b26424367bd6d0abe"
     }
   ],
   "completionEvidence": [

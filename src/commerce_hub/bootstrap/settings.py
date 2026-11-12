@@ -35,6 +35,22 @@ class Settings(BaseSettings):
     poll_seconds: float = Field(default=0.2, ge=0.05, le=10, validation_alias="COMMERCE_POLL_SECONDS")
     task_deadline_seconds: int = Field(default=120, ge=1, le=600, validation_alias="COMMERCE_TASK_DEADLINE_SECONDS")
     max_delivery_attempts: int = Field(default=3, ge=1, le=10, validation_alias="COMMERCE_MAX_DELIVERY_ATTEMPTS")
+    model_provider: Literal["mock", "deepseek"] = Field(default="mock", validation_alias="COMMERCE_MODEL_PROVIDER")
+    model_base_url: Literal["https://api.deepseek.com"] = Field(default="https://api.deepseek.com", validation_alias="COMMERCE_MODEL_BASE_URL")
+    model_name: Literal["deepseek-flash"] = Field(default="deepseek-flash", validation_alias="COMMERCE_MODEL_NAME")
+    model_api_key: SecretStr = Field(default=SecretStr(""), validation_alias="COMMERCE_MODEL_API_KEY", repr=False)
+    model_network_enabled: bool = Field(default=False, validation_alias="COMMERCE_MODEL_NETWORK_ENABLED")
+    model_timeout_seconds: float = Field(default=15, gt=0, le=30, validation_alias="COMMERCE_MODEL_TIMEOUT_SECONDS")
+    model_max_output_tokens: int = Field(default=512, ge=32, le=1024, validation_alias="COMMERCE_MODEL_MAX_OUTPUT_TOKENS")
+    model_max_concurrent: int = Field(default=1, ge=1, le=4, validation_alias="COMMERCE_MODEL_MAX_CONCURRENT")
+
+    @field_validator("model_provider", mode="before")
+    @classmethod
+    def normalize_provider_name(cls, value):
+        if not isinstance(value, str):
+            return value
+        name = value.strip().lower()
+        return {"deepseek_official": "deepseek", "deepseek-official": "deepseek"}.get(name, name)
 
     @field_validator("db_user", "db_password")
     @classmethod
