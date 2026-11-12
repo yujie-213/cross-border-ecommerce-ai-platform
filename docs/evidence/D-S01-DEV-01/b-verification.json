@@ -1,0 +1,351 @@
+{
+  "date": "2026-11-12",
+  "capturedAt": "2026-11-12T08:53:53.507998+00:00",
+  "scope": "Workline B fixed-SHA synthetic S01 Handler integration; real authorized isolated MySQL, Mock-only model IO",
+  "branch": "codex/s01-handler-integration",
+  "baselineCommit": "d6f9d70052e9d153daa68cef700913a21c8a633c",
+  "testedCommit": "91ae745c123f46560aecdce53e1e64b27a767435",
+  "publicCompatibilityCommit": "3e6d802",
+  "environment": {
+    "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "database": "s01_a01_test_20261112",
+    "modelProvider": "mock",
+    "modelNetworkEnabled": false
+  },
+  "runs": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/unit/s01",
+        "tests/integration/s01",
+        "-vv",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp=.tmp/s01-final-91ae745c123f",
+        "--junitxml=.tmp/s01-final.xml"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "rawOutput": "============================= test session starts =============================\nplatform win32 -- Python 3.13.5, pytest-9.2.0, pluggy-1.7.0 -- D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Scripts\\python.exe\nrootdir: C:\\Users\\Windows\\.codex\\worktrees\\s01-handler-integration\\跨境电商智慧AI平台\nconfigfile: pyproject.toml\nplugins: anyio-4.16.0\ncollecting ... collected 47 items\n\ntests/unit/s01/test_workflow.py::test_workflow_preserves_every_authoritative_asset_and_requires_human_review PASSED [  2%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[quantity] PASSED [  4%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[date] PASSED [  6%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[constraint] PASSED [  8%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[quality] PASSED [ 10%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[approval] PASSED [ 12%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[ref] PASSED [ 14%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[cross-snapshot] PASSED [ 17%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[omit-risk] PASSED [ 19%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[omit-human] PASSED [ 21%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[extra] PASSED [ 23%]\ntests/unit/s01/test_workflow.py::test_ai_success_cannot_clear_required_quality_or_investigation[UNKNOWN] PASSED [ 25%]\ntests/unit/s01/test_workflow.py::test_ai_success_cannot_clear_required_quality_or_investigation[INVESTIGATE] PASSED [ 27%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[REFUSED] PASSED [ 29%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[TRUNCATED] PASSED [ 31%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[INVALID_OUTPUT] PASSED [ 34%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[USAGE_UNKNOWN] PASSED [ 36%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[TIMEOUT] PASSED [ 38%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[RESULT_UNAVAILABLE] PASSED [ 40%]\ntests/unit/s01/test_workflow.py::test_missing_input_reports_gap_without_zero_or_fabricated_candidates PASSED [ 42%]\ntests/unit/s01/test_workflow.py::test_publication_rejects_cross_task_plan_or_snapshot_bindings PASSED [ 44%]\ntests/unit/s01/test_workflow.py::test_non_mock_provider_is_rejected_before_call PASSED [ 46%]\ntests/unit/s01/test_workflow.py::test_reentry_budget_failure_degrades_without_changing_attempt_or_retrying PASSED [ 48%]\ntests/unit/s01/test_workflow.py::test_previous_report_is_metadata_and_cannot_change_manifest_or_scope PASSED [ 51%]\ntests/unit/s01/test_workflow.py::test_public_report_omits_raw_assets_and_raw_provider_content PASSED [ 53%]\ntests/unit/s01/test_workflow.py::test_persisted_version_bindings_fail_closed_before_public_view[context] PASSED [ 55%]\ntests/unit/s01/test_workflow.py::test_persisted_version_bindings_fail_closed_before_public_view[prompt] PASSED [ 57%]\ntests/unit/s01/test_workflow.py::test_persisted_version_bindings_fail_closed_before_public_view[extra] PASSED [ 59%]\ntests/integration/s01/test_business_workflow.py::test_actual_gateway_settles_original_budget_and_publishes_only_quantity_report PASSED [ 61%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[refused] PASSED [ 63%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[truncated] PASSED [ 65%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[json] PASSED [ 68%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[unknown] PASSED [ 70%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[exception] PASSED [ 72%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[timeout] PASSED [ 74%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[quantity] PASSED [ 76%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[date] PASSED [ 78%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[constraint] PASSED [ 80%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[quality] PASSED [ 82%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[approval] PASSED [ 85%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[reference] PASSED [ 87%]\ntests/integration/s01/test_business_workflow.py::test_real_workflow_never_allows_ai_to_clear_quality_gate[UNKNOWN] PASSED [ 89%]\ntests/integration/s01/test_business_workflow.py::test_real_workflow_never_allows_ai_to_clear_quality_gate[INVESTIGATE] PASSED [ 91%]\ntests/integration/s01/test_business_workflow.py::test_reentry_after_usage_settlement_never_resends_or_invents_explanation PASSED [ 93%]\ntests/integration/s01/test_business_workflow.py::test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[cancel] PASSED [ 95%]\ntests/integration/s01/test_business_workflow.py::test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[plan] PASSED [ 97%]\ntests/integration/s01/test_business_workflow.py::test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[lease] PASSED [100%]\n\n- generated xml file: C:\\Users\\Windows\\.codex\\worktrees\\s01-handler-integration\\跨境电商智慧AI平台\\.tmp\\s01-final.xml -\n============================= 47 passed in 8.11s ==============================\n"
+    }
+  ],
+  "cases": [
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_workflow_preserves_every_authoritative_asset_and_requires_human_review",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[quantity]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[date]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[constraint]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[quality]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[approval]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[ref]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[cross-snapshot]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[omit-risk]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[omit-human]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[extra]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_ai_success_cannot_clear_required_quality_or_investigation[UNKNOWN]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_ai_success_cannot_clear_required_quality_or_investigation[INVESTIGATE]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[REFUSED]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[TRUNCATED]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[INVALID_OUTPUT]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[USAGE_UNKNOWN]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[TIMEOUT]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[RESULT_UNAVAILABLE]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_missing_input_reports_gap_without_zero_or_fabricated_candidates",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_publication_rejects_cross_task_plan_or_snapshot_bindings",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_non_mock_provider_is_rejected_before_call",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_reentry_budget_failure_degrades_without_changing_attempt_or_retrying",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_previous_report_is_metadata_and_cannot_change_manifest_or_scope",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_public_report_omits_raw_assets_and_raw_provider_content",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_persisted_version_bindings_fail_closed_before_public_view[context]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_persisted_version_bindings_fail_closed_before_public_view[prompt]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.s01.test_workflow",
+      "name": "test_persisted_version_bindings_fail_closed_before_public_view[extra]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_actual_gateway_settles_original_budget_and_publishes_only_quantity_report",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[refused]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[truncated]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[json]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[unknown]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[exception]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[timeout]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[quantity]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[date]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[constraint]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[quality]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[approval]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[reference]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_real_workflow_never_allows_ai_to_clear_quality_gate[UNKNOWN]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_real_workflow_never_allows_ai_to_clear_quality_gate[INVESTIGATE]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_reentry_after_usage_settlement_never_resends_or_invents_explanation",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[cancel]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[plan]",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.s01.test_business_workflow",
+      "name": "test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[lease]",
+      "result": "PASS"
+    }
+  ],
+  "suite": {
+    "total": 47,
+    "passed": 47,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "original44Preserved": true
+  },
+  "coverage": {
+    "AC1": "Fixed input/quality/B01/B02 pipeline reused unchanged; real task and original budget/G02 publication tested",
+    "AC2": "Schema-success wrong quantity/date/constraint/quality/approval/reference rejected; exact controlled fact quotation required; D04 and metric/evaluation refs retained",
+    "AC3": "Provider failure/unknown degrades rules report; UNKNOWN retains allowance; quality/investigate preserved; late cancel/old plan/lost lease never publish",
+    "AC4": "Mock-only constructor, bounded existing fixture contract, fixed original logicalCall/attempt on reentry, no purchase actions"
+  },
+  "crossReview": {
+    "reviewedCommit": "58e72e6",
+    "artifact": "docs/evidence/D-S01-DATA-01/admission-report.md",
+    "reviewer": "Codex workline B",
+    "result": "No blocking documentation finding",
+    "scope": "Cross-line technical/source review only; not owner or Xingxing independent acceptance",
+    "peerReview": {
+      "reviewer": "Codex workline A",
+      "reviewedCommit": "cb289f4febbd2d3b83866f8143d3ce0a82e5c4eb",
+      "result": "No blocking issue; independently reran25 unit tests PASS",
+      "scope": "Technical cross-review only; final version hardening subsequently verified by workline B and main full regression"
+    }
+  },
+  "executionHistory": [
+    "Initial unit run 12 FAIL/13 PASS exposed existing D03 snapshot-73-character vs A01 Identifier-64 mismatch. Public SnapshotIdentifier compatibility fix by main integrator cherry-picked as36e9524; no assertion removed.",
+    "After public compatibility fix 25 unit PASS; 19 real isolated MySQL/Mock integration PASS. Added public evidence/evaluation references and combined44 PASS before fixed implementation commit.",
+    "Cross-review field hardening restricts public version metadata to six bound refs, configured Mock model and six digests; context digest must match current binding/facts. Original44 preserved;3 new negative cases;47 PASS precommit, fixed-SHA rerun recorded above."
+  ],
+  "safety": {
+    "realErpCalls": 0,
+    "realModelCalls": 0,
+    "procurementWrites": 0,
+    "otherDatabasesModified": false,
+    "secretValuesPrinted": false,
+    "realDataRuleErpAiAdmission": "BLOCKED"
+  },
+  "limitations": [
+    "Exact canonical text policy validates bounded synthetic facts; arbitrary free prose is intentionally rejected and real model purpose evaluation remains C-04 NOT_RUN.",
+    "Source identity remains engineering fixture, never recovered SKU-A; real data/rules/ERP/AI admission not closed.",
+    "Full main API/independent Worker regression and cross-line integration evidence are owned by main integrator; this file claims only its listed47 tests."
+  ],
+  "recommendation": "REVIEW; owner and Xingxing independent acceptance pending",
+  "previousFixedRun": {
+    "testedCommit": "cb289f4febbd2d3b83866f8143d3ce0a82e5c4eb",
+    "suite": {
+      "total": 44,
+      "passed": 44,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "runs": [
+      {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "tests/unit/s01",
+          "tests/integration/s01",
+          "-vv",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp=.tmp/s01-fixed-cb289f4febbd",
+          "--junitxml=.tmp/s01-fixed.xml"
+        ],
+        "exitCode": 0,
+        "result": "PASS",
+        "rawOutput": "============================= test session starts =============================\nplatform win32 -- Python 3.13.5, pytest-9.2.0, pluggy-1.7.0 -- D:\\电商项目\\跨境电商智慧AI平台\\.tmp\\stage-a-clean\\Scripts\\python.exe\nrootdir: C:\\Users\\Windows\\.codex\\worktrees\\s01-handler-integration\\跨境电商智慧AI平台\nconfigfile: pyproject.toml\nplugins: anyio-4.16.0\ncollecting ... collected 44 items\n\ntests/unit/s01/test_workflow.py::test_workflow_preserves_every_authoritative_asset_and_requires_human_review PASSED [  2%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[quantity] PASSED [  4%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[date] PASSED [  6%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[constraint] PASSED [  9%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[quality] PASSED [ 11%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[approval] PASSED [ 13%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[ref] PASSED [ 15%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[cross-snapshot] PASSED [ 18%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[omit-risk] PASSED [ 20%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[omit-human] PASSED [ 22%]\ntests/unit/s01/test_workflow.py::test_structurally_valid_but_unsafe_explanations_are_discarded[extra] PASSED [ 25%]\ntests/unit/s01/test_workflow.py::test_ai_success_cannot_clear_required_quality_or_investigation[UNKNOWN] PASSED [ 27%]\ntests/unit/s01/test_workflow.py::test_ai_success_cannot_clear_required_quality_or_investigation[INVESTIGATE] PASSED [ 29%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[REFUSED] PASSED [ 31%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[TRUNCATED] PASSED [ 34%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[INVALID_OUTPUT] PASSED [ 36%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[USAGE_UNKNOWN] PASSED [ 38%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[TIMEOUT] PASSED [ 40%]\ntests/unit/s01/test_workflow.py::test_technical_failure_keeps_rules_and_explicit_unavailable_status[RESULT_UNAVAILABLE] PASSED [ 43%]\ntests/unit/s01/test_workflow.py::test_missing_input_reports_gap_without_zero_or_fabricated_candidates PASSED [ 45%]\ntests/unit/s01/test_workflow.py::test_publication_rejects_cross_task_plan_or_snapshot_bindings PASSED [ 47%]\ntests/unit/s01/test_workflow.py::test_non_mock_provider_is_rejected_before_call PASSED [ 50%]\ntests/unit/s01/test_workflow.py::test_reentry_budget_failure_degrades_without_changing_attempt_or_retrying PASSED [ 52%]\ntests/unit/s01/test_workflow.py::test_previous_report_is_metadata_and_cannot_change_manifest_or_scope PASSED [ 54%]\ntests/unit/s01/test_workflow.py::test_public_report_omits_raw_assets_and_raw_provider_content PASSED [ 56%]\ntests/integration/s01/test_business_workflow.py::test_actual_gateway_settles_original_budget_and_publishes_only_quantity_report PASSED [ 59%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[refused] PASSED [ 61%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[truncated] PASSED [ 63%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[json] PASSED [ 65%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[unknown] PASSED [ 68%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[exception] PASSED [ 70%]\ntests/integration/s01/test_business_workflow.py::test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[timeout] PASSED [ 72%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[quantity] PASSED [ 75%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[date] PASSED [ 77%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[constraint] PASSED [ 79%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[quality] PASSED [ 81%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[approval] PASSED [ 84%]\ntests/integration/s01/test_business_workflow.py::test_gateway_schema_success_still_requires_domain_semantic_gate[reference] PASSED [ 86%]\ntests/integration/s01/test_business_workflow.py::test_real_workflow_never_allows_ai_to_clear_quality_gate[UNKNOWN] PASSED [ 88%]\ntests/integration/s01/test_business_workflow.py::test_real_workflow_never_allows_ai_to_clear_quality_gate[INVESTIGATE] PASSED [ 90%]\ntests/integration/s01/test_business_workflow.py::test_reentry_after_usage_settlement_never_resends_or_invents_explanation PASSED [ 93%]\ntests/integration/s01/test_business_workflow.py::test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[cancel] PASSED [ 95%]\ntests/integration/s01/test_business_workflow.py::test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[plan] PASSED [ 97%]\ntests/integration/s01/test_business_workflow.py::test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[lease] PASSED [100%]\n\n- generated xml file: C:\\Users\\Windows\\.codex\\worktrees\\s01-handler-integration\\跨境电商智慧AI平台\\.tmp\\s01-fixed.xml -\n============================= 44 passed in 6.11s ==============================\n"
+      }
+    ]
+  },
+  "implementationCommits": [
+    "cb289f4febbd2d3b83866f8143d3ce0a82e5c4eb",
+    "91ae745c123f46560aecdce53e1e64b27a767435"
+  ]
+}
