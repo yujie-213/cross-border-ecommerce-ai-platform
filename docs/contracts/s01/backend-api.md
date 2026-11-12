@@ -37,7 +37,7 @@ Idempotency-Key: <1..128 chars>
 
 | HTTP | code | 含义与前端处理 |
 |---|---|---|
-| 401 | `UNAUTHENTICATED` | 未登录、Token 无效或 Bearer/Cookie 冲突；回到登录，不回显凭据。 |
+| 401 | `UNAUTHENTICATED` | 未登录、Token 无效或 Bearer/Cookie 冲突；响应清理无效会话/CSRF Cookie，回到可信身份连接，不回显凭据；重新连接仍需有效 Bearer。 |
 | 403 | `POLICY_DENIED` | 当前主体无该 scope/action 权限；隐藏资源详情，不把它当作资源不存在的证明。 |
 | 403 | 其他授权拒绝码 | 当前授权已撤销或范围不匹配；停止轮询和后续命令。 |
 | 404 | `NOT_FOUND` | 资源不存在、跨租户、无读取权限、持久化绑定无效或证据不可解析；统一显示“不可访问或不存在”。 |

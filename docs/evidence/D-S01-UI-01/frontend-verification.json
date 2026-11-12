@@ -1,0 +1,160 @@
+{
+  "testedCommit": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+  "result": "PASS",
+  "commands": [
+    {
+      "command": "npm run test",
+      "result": "PASS",
+      "exitCode": 0,
+      "passed": 19,
+      "failed": 0
+    },
+    {
+      "command": "npm run build",
+      "result": "PASS",
+      "exitCode": 0,
+      "typescript": "vue-tsc --noEmit",
+      "bundle": "Vite production static build"
+    },
+    {
+      "command": "npm run test:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "passed": 5,
+      "failed": 0,
+      "realTests": 3,
+      "protocolFixtureTests": 2
+    }
+  ],
+  "browser": {
+    "channel": "msedge",
+    "realBrowser": true,
+    "viewports": [
+      1440,
+      1024,
+      390
+    ],
+    "pageOverflow": false,
+    "cookieFlags": [
+      "Secure",
+      "HttpOnly",
+      "SameSite=Strict"
+    ],
+    "csrfAndOrigin": "ENFORCED"
+  },
+  "processes": {
+    "apiPid": 21432,
+    "initialWorkerPid": 26508,
+    "independent": true,
+    "testWorkerPauseAndRestart": true,
+    "allOwnedProcessesStoppedBeforeBackendRegression": true
+  },
+  "tests": [
+    {
+      "name": "REAL: A—E teaching packages, Worker reports, chart/table, refresh, previousReportRef, evidence, responsive",
+      "status": "expected",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "name": "REAL: queued cancel, refresh resume and evidence revocation do not leak old report",
+      "status": "expected",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "name": "REAL: uncertain create reuses persisted key after refresh; CSRF and Origin stay enforced",
+      "status": "expected",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "name": "PROTOCOL FIXTURES: AI statuses, token unknown, failures, empty and bounded history pagination",
+      "status": "expected",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "name": "PROTOCOL FIXTURES: polling is bounded, stops on denial; exact-scope pagination and keyboard",
+      "status": "expected",
+      "results": [
+        "passed"
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/detail-A-1024.png",
+      "sha256": "12e2f776777eabc8003abfc1e61a5b1733d2b3141ac8da1fd0354f7da41bd66a",
+      "bytes": 253500
+    },
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/detail-A-1440.png",
+      "sha256": "16800d49b5a154af7b60cccb0dc704370a59318ee7291610812e720d7b21c649",
+      "bytes": 258098
+    },
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/detail-A-390.png",
+      "sha256": "5061c79b54ffa710c1d67bd378b0d21781af1be626e2b52517704686a76d5dc2",
+      "bytes": 217692
+    },
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/detail-E-1440.png",
+      "sha256": "9dcef922a9945b57fa7e3aeb10b3d32a0b26aa36e7e832589574d7b9fca6e1b9",
+      "bytes": 205859
+    },
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/history-1440.png",
+      "sha256": "161ab0a74e7dc0f0659a1ec4dd8471e1aac4404ddd9a0f5cbeeed2b2aa3aac93",
+      "bytes": 205413
+    },
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/revoked-evidence.png",
+      "sha256": "45021873c025da3540c89d9ed9c6e2b51fd3571e184944554da65d285a4b69c3",
+      "bytes": 50493
+    },
+    {
+      "path": "docs/evidence/D-S01-UI-01/screenshots/workbench-1440.png",
+      "sha256": "b4a88a1186c51a1d59b95ad96bcd445f935b6e095b1cf08f7d551d882306badb",
+      "bytes": 84012
+    }
+  ],
+  "versions": {
+    "name": "xuheng-s01-workspace",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+      "dev": "vite --host localhost --port 5173 --strictPort",
+      "build": "vue-tsc --noEmit && vite build",
+      "typecheck": "vue-tsc --noEmit",
+      "test": "vitest run",
+      "test:browser": "playwright test"
+    },
+    "dependencies": {
+      "vue": "3.5.45"
+    },
+    "devDependencies": {
+      "@playwright/test": "1.65.0",
+      "@types/node": "26.6.6",
+      "@vitejs/plugin-vue": "6.0.10",
+      "typescript": "6.0.3",
+      "vite": "8.3.8",
+      "vitest": "5.1.0",
+      "vue-tsc": "3.3.14"
+    }
+  },
+  "realApiCasesRef": "docs/evidence/D-S01-UI-01/real-browser-cases.json",
+  "erpNetworkRequests": 0,
+  "paidModelRequests": 0,
+  "procurementWrites": 0,
+  "limits": [
+    "AI AVAILABLE/UNAVAILABLE use explicit protocol fixtures, not paid model acceptance.",
+    "Existing teaching GET capture is replayed, no new ERP network calls.",
+    "Enterprise four gates stay BLOCKED; C-04 prior five-case FAIL retained."
+  ]
+}

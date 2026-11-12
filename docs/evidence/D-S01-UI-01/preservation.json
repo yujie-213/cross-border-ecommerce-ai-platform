@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "testedCommit": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+  "baseCommit": "6fdf10cd6850794cc1ba2695078e68a58996e974",
+  "implementationUnchangedAfterTest": true,
+  "unrelatedTaskRecordsPreserved": 30,
+  "C04Unchanged": true,
+  "enterpriseGates": {
+    "D-S01-DATA-01": "BLOCKED",
+    "D-S01-RULE-01": "BLOCKED",
+    "D-S01-ERP-ACCESS-01": "BLOCKED",
+    "D-S01-AI-ACCESS-01": "BLOCKED"
+  },
+  "oldPrototypeAndAlgorithmsMigrationsFixturesPreserved": true,
+  "historicalEvidencePreserved": true,
+  "actualSecretMatches": [],
+  "incrementalPathsScanned": 53,
+  "clientBundleSecretMatches": 0,
+  "unknownOpenapi": {
+    "tracked": false,
+    "bytes": 1681341,
+    "sha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128"
+  },
+  "taskStatus": "REVIEW",
+  "review": null
+}

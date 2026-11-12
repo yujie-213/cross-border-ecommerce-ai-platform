@@ -1,3 +1,5 @@
+当前前端交付（2026-11-12，固定465892c）：D-S01-UI-01进入REVIEW，后端603/客户端19/浏览器5 PASS，旧601保全；教学固定包真实API/独立Worker/MySQL闭环通过，AI分支夹具与真实调用分开。C-04历史FAIL/未知费用预约与四门BLOCKED不变，不合main，待负责人和星星独立评审。
+
 当前前端开发授权（2026-11-12，6fdf10c）：D-S01-UI-01已领取IN_PROGRESS，Vue3/Vite/TypeScript独立frontend工程及真实浏览器API/Worker/MySQL联调获准；只读教学、off/mock，最终REVIEW、不合main。下方旧停止点保留历史；C-04 FAIL、原核账和企业四门BLOCKED不变。
 
 当前分项验收与合并授权（2026-11-12，交付1619bc1/被审实现c965a33）：负责人和星星批准教学后端工程范围ACCEPTED及普通合main。LIVE含正式业务未验范围，整体仍REVIEW并在review/history登记部分验收；C-04保持REVIEW、五例FAIL（A/B成功、C拒绝、D/E未发），5642Token/费用UNKNOWN/$0.15预约保留。原DEV工程ACCEPTED和四项企业门BLOCKED不变。D-S01-UI-01确认下一阶段但仍TODO，本轮只准入交接、无前端编码或新真实模型调用。
@@ -5464,7 +5466,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/planning/git-whitelist.json",
     "src/commerce_hub/entrypoints/http/tasks.py",
     "tests/integration/http/test_session_recovery.py",
-    "tools/verify_s01_frontend.py"
+    "tools/verify_s01_frontend.py",
+    "docs/contracts/s01/backend-api.md"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -5483,7 +5486,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "D-S01-UI-01/AC3",
-      "text": "非成功AI明确AI解释不可用，质量阻断独立；真实确认/审批/执行入口禁用，不接假成功"
+      "text": "AVAILABLE展示已校验解释，UNAVAILABLE显示不可用，NOT_ATTEMPTED明确未启用；Token缺失未知、质量独立，真实确认/审批/执行不开放，不接假成功。"
     },
     {
       "id": "D-S01-UI-01/AC4",
@@ -5508,17 +5511,63 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER_API",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "465892c9342f23fd3e1614df85c564ade0a5ef9a"
+  ],
+  "testedCommit": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+  "evidence": [
+    {
+      "kind": "BROWSER_API",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC1",
+        "D-S01-UI-01/AC2",
+        "D-S01-UI-01/AC3",
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "cd frontend; npm run test:browser",
+      "environment": "Windows / installed Microsoft Edge / actual FastAPI + independent Worker / authorized isolated MySQL; 3 REAL tests + 2 explicit PROTOCOL FIXTURES",
+      "sample": "5 PASS/0 FAIL，A—E实际教学GET capture报告，创建/取消/刷新/前报关联/原key核对/冲突/证据撤权；1440/1024/390、60次轮询上限、分页、键盘。真实模型0，协议夹具不替代C-04。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-UI-01/frontend-verification.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC2",
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "python -m tools.verify_s01_frontend --run-backend; npm run test:browser; incremental secret and preservation checks",
+      "environment": "s01_a01_test_20261112 / MySQL8.0.27 / UTC / READ-COMMITTED / 0005_optional_usage; current signed identity/Cookie/CSRF/Origin",
+      "sample": "后端603 PASS/0 FAIL/ERROR/SKIP，旧601逐名保全；401恢复2项、现权限/CSRF/Origin/撤权负例；原付费任务1budget/3attempt/3usage指纹一致、5642Token/$0.15预约不变，无秘密进入增量Git。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-UI-01/backend-regression.json"
+    },
+    {
+      "kind": "FRONTEND_CONTRACT",
+      "acceptanceIds": [
+        "D-S01-UI-01/AC1",
+        "D-S01-UI-01/AC2",
+        "D-S01-UI-01/AC3",
+        "D-S01-UI-01/AC4"
+      ],
+      "command": "cd frontend; npm run test; npm run build",
+      "environment": "Node24.21.0 / npm11.19.0 / locked Vue3.5.45, Vite8.3.8, TypeScript6.0.3",
+      "sample": "客户端19 PASS，vue-tsc --noEmit与production build退出0；不重算B01/B02、unknown不补0、精确scope/稳定key。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-UI-01/frontend-verification.json"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-frontend-mvp",
   "observedHead": "6fdf10cd6850794cc1ba2695078e68a58996e974",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
-  "latestHandoffRef": "docs/ui/S01-frontend-entry.md",
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -5545,6 +5594,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "负责人提供D-S01-UI-01完整开发授权；基线跟踪区干净、未知OpenAPI保留。fetch遇TLS失败，已有本地main/origin/main同6fdf10c，交付前重试核对。",
       "previousEntryCondition": "下一阶段已确认为D-S01-UI-01，保持TODO、未领取编码。本轮仅完成准入交接；等负责人下一条开发指令，以本轮同步后的最新main为基线，沿用统一中台产品原型/视觉/架构，消费已验收教学固定包真实API。普通后端仅off/mock，C-04剩余用途评测/正常流程真实模型接入独立安排，企业四门不解除。",
       "observedHead": "6fdf10cd6850794cc1ba2695078e68a58996e974"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "observedHead": "465892c9342f23fd3e1614df85c564ade0a5ef9a",
+      "reason": "完整正式前端及真实教学浏览器闭环已在固定提交验证：后端603/客户端19/浏览器5 PASS；旧601逐名/原证据/付费核账保全，文档与同步另按实际收尾记录。未合main，待负责人和星星独立评审；C-04 FAIL/四门BLOCKED不变。",
+      "previousAC3": "非成功AI明确AI解释不可用，质量阻断独立；真实确认/审批/执行入口禁用，不接假成功"
     }
   ],
   "acceptanceRefs": [

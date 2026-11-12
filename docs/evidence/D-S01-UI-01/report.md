@@ -22,7 +22,9 @@
 
 ## 测试与验收映射
 
-固定被测实现提交与真实结果在本目录 verification / backend-regression / real-browser-cases 中登记。源实现提交后再运行，证据收尾提交另列，二者区分。开发期失败与修复记录见 history.json。
+固定被测实现 `465892c9342f23fd3e1614df85c564ade0a5ef9a`。前端[验证记录](frontend-verification.json)：客户端 **19 PASS**，类型检查与生产构建PASS，Edge浏览器 **5 PASS**（3 REAL、2 PROTOCOL FIXTURES）；后端[完整回归](backend-regression.json)：**603 PASS / 0 FAIL / 0 ERROR / 0 SKIP**，旧601逐名保全、新增2项Cookie恢复，9条命令全PASS。文档检查18项PASS。开发期失败与修复记录见 [history](history.json)，与最终0失败分开；原C-04历史FAIL不改写。
+
+固定提交的源码/测试/工具/配置与证据收尾提交保持一致；最终Git回执另列。真实隔离库MySQL8.0.27、UTC/READ-COMMITTED、head0005不变，无清库/其他库操作。原[付费核账保全](budget-preservation.json)前后完全一致。
 
 | 验收 | 验证内容 |
 |---|---|

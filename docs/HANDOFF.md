@@ -1,6 +1,12 @@
 # 当前增量交接 v0.3
 
 
+## D-S01-UI-01 固定提交复验完成（2026-11-12）
+
+实现与被测提交 `465892c9342f23fd3e1614df85c564ade0a5ef9a`；本轮真实Edge重跑5 PASS（3 REAL/2协议夹具），客户端19 PASS、类型/构建PASS；完整后端603 PASS/0 FAIL/ERROR/SKIP，旧601逐名保全、新增2项401会话恢复，9条检查命令均退出0。MySQL8.0.27/s01_a01_test_20261112/UTC/READ-COMMITTED/0005未变。固定截图/实际task/report/snapshot与测试汇总在[evidence](evidence/D-S01-UI-01/report.md)。本轮演示API/Worker/Vite已停止后才做全量回归；仅测试自己创建的主体与任务，不操作原付费task。
+
+原付费任务before/after的1budget/3attempt/3usage指纹一致，仍3次/5642Token/$0.15预约，费用UNKNOWN。旧原型、算法、迁移、旧失败证据及其他TASKS记录保全；未知OpenAPI仍未跟踪、1681341字节/15f7fd5d摘要未变。D-S01-UI-01只登记REVIEW、review=null，企业四门BLOCKED/C-04五例FAIL原样，等待负责人和星星独立评审。后续收尾仅证据/台账/契约说明，最终提交与普通远端同步由实际Git读回为准，不合main、不进入下一阶段。
+
 ## D-S01-UI-01 前端MVP开发增量（2026-11-12，基于6fdf10c）
 
 负责人本轮已授权完整前端搭建、真实教学固定包API/独立Worker/MySQL和浏览器联调、提交普通同步 `codex/s01-frontend-mvp`，最终REVIEW、不合main。接手实际main/6fdf10cd6850794cc1ba2695078e68a58996e974、跟踪区干净，仅原 `docs/ERP-openapi.yaml` 未跟踪保留；先前fetch遇TLS失败，经现有代理/HTTP1.1/OpenSSL且不关闭证书校验后成功fetch，远端main同基点。单人串行，无新代理或其他场景开发。
@@ -9,7 +15,7 @@
 
 本轮先19项客户端单测/构建通过；Edge真实A—E报告、刷新、previousReportRef、原key重放、取消/撤权/Origin/CSRF/冲突及2类协议夹具合计5项通过，1440/1024/390无页面溢出，截图已保存。开发过程测试模块/定位/等待问题及沙箱EPERM保留本轮history，未降低权限或测试断言。实际复现过期HttpOnly Cookie残留阻断新Bearer交换，两项负例FAIL后最小401删除无效Cookie；HTTP相关11项PASS，后续固定提交的全量和浏览器复验另登记，不沿用旧代码结果冒称新实现已验。
 
-原C-04五例FAIL/3次5642Token/费用UNKNOWN与$0.15预约、企业四门BLOCKED、LIVE/DEV历史验收保持。新ERP/付费模型/采购写入0。旧原型、B01/B02、迁移和既有失败证据不改；本轮证据独立存[交付目录](evidence/D-S01-UI-01/report.md)。固定提交后复验、逐项证据及最终SHA/同步仍在收口；TASKS暂IN_PROGRESS，最终仅REVIEW等待负责人/星星独立评审。
+原C-04五例FAIL/3次5642Token/费用UNKNOWN与$0.15预约、企业四门BLOCKED、LIVE/DEV历史验收保持。新ERP/付费模型/采购写入0。旧原型、B01/B02、迁移和既有失败证据不改；本轮证据独立存[交付目录](evidence/D-S01-UI-01/report.md)。该段记录开发时点；随后固定提交复验结果见上节，当前TASKS为REVIEW，最终SHA/同步以Git回执为准。
 
 ## 教学后端分项验收、main 合入与前端准入（2026-11-12，基于1619bc1）
 

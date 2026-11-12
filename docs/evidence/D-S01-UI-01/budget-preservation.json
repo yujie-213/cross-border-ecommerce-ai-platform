@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "method": "SELECT only before and after fixed implementation verification; no paid task commands",
+  "before": {
+    "status": "PASS",
+    "scope": "SELECT only, original paid evaluation task; no API/model call",
+    "tableCounts": {
+      "o01_budgets": 1,
+      "o01_budget_attempts": 3,
+      "g02_usage_facts": 3
+    },
+    "fingerprints": {
+      "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+      "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+      "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+    },
+    "reservedCostUsd": "0.15000000",
+    "usedCalls": 3,
+    "usedTokens": 5642
+  },
+  "after": {
+    "status": "PASS",
+    "scope": "SELECT only, original paid evaluation task; no API/model call",
+    "tableCounts": {
+      "o01_budgets": 1,
+      "o01_budget_attempts": 3,
+      "g02_usage_facts": 3
+    },
+    "fingerprints": {
+      "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+      "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+      "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+    },
+    "reservedCostUsd": "0.15000000",
+    "usedCalls": 3,
+    "usedTokens": 5642
+  },
+  "unchanged": true
+}
