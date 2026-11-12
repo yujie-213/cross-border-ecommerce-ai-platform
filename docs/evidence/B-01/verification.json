@@ -1,0 +1,174 @@
+{
+  "task": "B-01",
+  "scope": "PHASE_B_ENGINEERING_SLICE_ONLY",
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean",
+  "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+  "fullVerificationRef": "docs/evidence/phase-b/verification.json",
+  "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+  "exitCode": 0,
+  "suite": {
+    "total": 161,
+    "passed": 161,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 1
+  },
+  "selectedCaseCount": 21,
+  "cases": [
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_fixture_null_and_exact_projection_not_zero",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_exact_unit_conversion_and_reserved_stays_informational",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-INCOMPLETE_COVERAGE]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-UNMAPPED_IDENTITY_OR_UNIT]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_INVENTORY]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-STALE_OR_FUTURE_INVENTORY]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-DEMAND_WINDOW_INCOMPLETE_OR_DUPLICATE]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_SUPPLY]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_OVERDUE_AVAILABILITY]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-UNKNOWN_SUPPLY_STATUS]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_quality_fail_closed[<lambda>-CLOSED_SUPPLY_CONFLICT]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_mirror_dedup_conflict_and_ambiguous_inventory",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_manifest_immutable_versions_replay_and_quality_only_candidate_block",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_no_real_source_or_path_fallback[change0]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_no_real_source_or_path_fallback[change1]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_no_real_source_or_path_fallback[change2]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_no_real_source_or_path_fallback[change3]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_no_real_source_or_path_fallback[change4]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_source_port_bounded_retry_and_no_partial_success",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_evidence_broken_locator_is_missing",
+      "seconds": "0.000",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_s01",
+      "name": "test_calendar_uses_normalized_utc_and_exact_large_conversion",
+      "seconds": "0.004",
+      "result": "PASS"
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptanceId": "B-01/AC1",
+      "result": "PASS",
+      "detail": "Explicit SIMULATED_ENGINEERING inline connector, strict DTO, no URL/path or fallback, deterministic source batch and versioned projection. Real controlled-source/ERP implementation remains NOT_RUN."
+    },
+    {
+      "acceptanceId": "B-01/AC2",
+      "result": "PASS",
+      "detail": "Engineering checks reject incomplete coverage, unknown mapping/units/null/negative quantities and supply availability; mirror lines deduplicate or block conflict. Bounded read port retries timeout/503 once and never retries 403."
+    },
+    {
+      "acceptanceId": "B-01/AC3",
+      "result": "NOT_RUN",
+      "detail": "No real ERP network adapter is registered. Real method/path/TLS authorization and live read-only verification remain gated; only engineering source port is exercised."
+    }
+  ],
+  "notRun": [
+    "Real ERP adapter/network/TLS verification",
+    "Original SKU-A identity recovery",
+    "Business-approved metric/calendar/constraint/quality rules",
+    "Real enterprise identity onboarding",
+    "Real model/provider evaluation",
+    "Purchasing approval or writes",
+    "Production and S02 MC acceptance"
+  ],
+  "review": null
+}

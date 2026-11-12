@@ -1,5 +1,19 @@
 # 当前增量交接 v0.3
 
+## 第二大阶段B-01—B-05工程交付（2026-11-12，基于00b212c）
+
+用户已授权连续B阶段实现、显式工程样例规则、隔离S01插件、真实MySQL/API/Worker验证及普通GitHub同步；本轮不进入C。实际接手main / `00b212c731f90a82837d176157cba0a2508b50a9`，保留既有validation-report计数差异与未知未跟踪ERP-openapi.yaml，后者未读/改/暂存。Codex单人集成；此前准入代理只读核查，不并写文件。最新授权覆盖旧AGENTS的A阶段停止点。
+
+实现提交 `f07c9dd5d0bde539b24713931f0ff55f803f7605`：D01有限只读分页/重试端口与内联工程适配器；D02显式身份/单位/状态映射和精确Decimal不可变投影；D03唯一质量与snapshot manifest；D04授权报告证据定位。B01唯一逐日供需/库存/缺口计算，B02只构造有限MOQ/独立倍数/上限/日期候选并复用B01，不编权重或宣称最优。S01工程Handler形成DomainResult；O01在当前权限/计划/租约/取消/期限复核后将不可变报告、任务成功、审计和投递确认同事务提交。唯一迁移链追加0004_reports，未建第二套权限/调度/预算/日志，未引Redis/MQ或模型。默认正式注册表仍为空，工程装配显式test环境开启。
+
+针对该固定commit实际复验 **161 PASS / 0 FAIL / 0 ERROR / 0 SKIP / 1条既有Starlette/httpx客户端弃用提示**，MySQL Server 8.0.27、SQLAlchemy/PyMySQL/Alembic真实连接，独立API/Worker进程协作及强杀恢复通过；完整原始脱敏命令输出/版本/测试名见[全量证据](evidence/phase-b/verification.json)，逐AC范围见[evidence/B-01](evidence/B-01/verification.json)、[B-02](evidence/B-02/verification.json)、[B-03](evidence/B-03/verification.json)、[B-04](evidence/B-04/verification.json)、[B-05](evidence/B-05/verification.json)。pip check、compileall、显式迁移head检查和独立演示均退出0。本轮复用原hash锁环境，未重新安装依赖；实际初始0004升级发生在固定commit前，commit后只复验head与真实事务/迁移链，不冒称重新建库迁移。初轮全量158 PASS/3个临时目录权限ERROR，仓库内临时目录重试仍受限，经正常受控执行消除；较早一项精度测试手算期望错误已修正并回归，不删除测试掩盖失败。
+
+[复现命令](runbooks/phase-b.md)提供显式启动/迁移/完整测试/一条演示。演示真实HTTP→独立Worker→MySQL持久报告：合成净可用55、窗口需求90、行级未收20、缺口15、候选20；基线首缺2026-11-20，候选末余额5，AI NOT_ATTEMPTED、procurementEligible恒false。报告/evidence读取重新校验租户/当前范围，API重启仍读同一报告；Worker强杀恢复原参数/快照/预算/期限，attempt2且仅发布一次。测试仅停止自建进程、不清其他项目库，密码/JWT/签名密钥不写仓库或证据。
+
+四项BLOCKED完整保全，真实ERP网络适配/可信TLS、原SKU-A绑定、真实库存/需求/行级未收/可售日/独立倍数与质量口径、真实模型/企业身份/采购/生产及S02 MC均NOT_RUN。UTC D0/次日D1、同日供给先入、积压/缓冲、净可用及增量需求等只属engineering-demo-v1，未签成真实业务规则。B-01真实方法/路径授权验收明确NOT_RUN。B阶段仅工程切片进入REVIEW，review仍null，D-S01-DEV-01等其余26条和原dependsOn/31任务/六阶段不变；不自动ACCEPTED。待负责人和星星复核，下一阶段须另行授权。
+
+Git fetch已确认origin/main仍为00b212c且为本地祖先；实现/证据分提交，最终证据提交与远端SHA只据真实Git查询，不填自身未知SHA。未知YAML继续保留，原设计和前端原型未改。完成证据提交、计划校验与普通同步后停止。
+
 ## 第一大阶段A-03—A-06工程交付（2026-11-12，基于526829b）
 
 最新用户授权覆盖第一大阶段全部剩余A-03/A-04/A-05/A-06、必要测试/提交/普通同步，非重大阻断不逐项等待；明确不进入第二阶段。实际main/HEAD与GitHub均为`526829b01f167ed12f78458f1ba7549076fb6178`，跟踪/暂存起点干净，未知未跟踪YAML保留不读/改/暂存。Codex主集成人负责公共契约/组合根/锁/台账；按授权并行由storage_migrations代理只写存储迁移/其测试和后续processes测试，g01_access代理只写access/security及后续orchestration测试，不同AI未并写同文件。相关端口先约定，主集成人统一整合及复验。

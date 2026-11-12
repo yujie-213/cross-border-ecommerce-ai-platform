@@ -1,0 +1,186 @@
+{
+  "task": "B-05",
+  "scope": "PHASE_B_ENGINEERING_SLICE_ONLY",
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean",
+  "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+  "fullVerificationRef": "docs/evidence/phase-b/verification.json",
+  "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+  "exitCode": 0,
+  "suite": {
+    "total": 161,
+    "passed": 161,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 1
+  },
+  "selectedCaseCount": 23,
+  "cases": [
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_pipeline_publishes_one_immutable_report_and_submit_replays",
+      "seconds": "0.207",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_quality_degradation_is_reported_without_inventing_rules[null-BLOCKED]",
+      "seconds": "0.092",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_quality_degradation_is_reported_without_inventing_rules[constraint-PARTIAL]",
+      "seconds": "0.093",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_report_task_audit_and_ack_are_one_transaction[queue]",
+      "seconds": "0.108",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_report_task_audit_and_ack_are_one_transaction[audit]",
+      "seconds": "0.110",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[cancel]",
+      "seconds": "0.085",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[deadline]",
+      "seconds": "0.074",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[lease]",
+      "seconds": "0.073",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[plan]",
+      "seconds": "0.073",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[revoke]",
+      "seconds": "0.069",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[binding]",
+      "seconds": "0.068",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[scope]",
+      "seconds": "0.070",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_stale_or_unauthorized_result_never_publishes[missing]",
+      "seconds": "0.072",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.orchestration.test_s01_reports",
+      "name": "test_report_rechecks_current_scope_and_tenant",
+      "seconds": "0.107",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_s01_processes",
+      "name": "test_actual_s01_api_worker_report_evidence_and_read_authorization",
+      "seconds": "5.963",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.integration.processes.test_s01_processes",
+      "name": "test_s01_killed_worker_recovers_original_snapshot_report_budget_and_deadline",
+      "seconds": "5.794",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_handler_no_ai_and_every_evidence_resolves",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[snapshot]",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[version]",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[metric]",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[projection]",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_asset_binding_rejects_conflicts[evidence]",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.data.test_handler",
+      "name": "test_blocked_input_produces_quality_report_without_invalid_inventory_evidence",
+      "seconds": "0.002",
+      "result": "PASS"
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptanceId": "B-05/AC1",
+      "result": "PASS",
+      "detail": "ScenarioHandler composes public D01/D02/D03/D04/B01/B02 assets into DomainResult; O01 owns only task/budget/plan/report. Handler asset-version/binding checks run before publication. Engineering S01 only, no real Workflow activation."
+    },
+    {
+      "acceptanceId": "B-05/AC2",
+      "result": "PASS",
+      "detail": "Real MySQL atomic report/task/audit/ack rollback tested; replay returns one report; stale lease/plan, cancel, deadline, missing result and revoked identity reject publication. Real HTTP/API restart and killed Worker recovery preserve parameters/snapshot/budget/deadline and publish once."
+    },
+    {
+      "acceptanceId": "B-05/AC3",
+      "result": "PASS",
+      "detail": "Engineering report labels sourceNature, completeness, blocked real admission, non-procurement and AI NOT_ATTEMPTED. Default production registry empty; no confirmation/submission/approval/execution endpoints."
+    }
+  ],
+  "notRun": [
+    "Real ERP adapter/network/TLS verification",
+    "Original SKU-A identity recovery",
+    "Business-approved metric/calendar/constraint/quality rules",
+    "Real enterprise identity onboarding",
+    "Real model/provider evaluation",
+    "Purchasing approval or writes",
+    "Production and S02 MC acceptance"
+  ],
+  "review": null
+}

@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+当前第二阶段授权（2026-11-12，基于00b212c）：A阶段工程已获星星复核；用户授权连续实现B-01—B-05及隔离S01工程插件，测试/提交/普通同步。仅显式工程样例策略；四项真实准入完整保持BLOCKED，不进入C阶段。Codex单人实现，准入代理只读核实；公共契约/迁移/组合根/台账串行。旧授权附记为历史。
+
 当前第一大阶段授权（2026-11-12，基于526829b）：用户明确授权A-03/A-04/A-05/A-06全部剩余开发和普通问题自行修复；按现有依赖推进，契约/目录不冲突部分并行，Codex主集成人协调公共文件。实际实现/验证状态只读下方JSON；四项外部业务安全门不解除，不自动开始第二阶段。
 
 当前执行授权（2026-11-12，覆盖下方历史附记）：负责人已认可A-01原则/职责并授权普通技术细节自主确定，已授权读取.env和唯一独立测试库必要验证，以及检查后直接A-02。当前真实实现/证据见A-01/A-02记录；不再以逐字段签认阻断普通开发，四项业务安全门及D-S01-01整体状态不变。
@@ -1191,16 +1193,22 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-03",
     "A-04"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-03/A-04后，可先按A-01契约开发离线解析、可替换SourceConnector和受控文件校验；实际身份/字段投影受D-S01-DATA-01和D-S01-RULE-01约束，真实ERP调用另过D-S01-ERP-ACCESS-01；闭环真实读取由D-S01-LIVE-01验收。",
+  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（主集成人）",
   "allowedPaths": [
+    "src/commerce_hub/data/contracts.py",
     "src/commerce_hub/data/sync/",
     "src/commerce_hub/data/projection/",
-    "src/commerce_hub/adapters/sources/",
-    "tests/unit/data/（未来）",
-    "tests/integration/data/（未来）",
-    "docs/evidence/B-01/（未来，仅脱敏证据）"
+    "tests/unit/data/",
+    "docs/evidence/B-01/",
+    "docs/evidence/phase-b/verification.json",
+    "docs/runbooks/phase-b.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -1231,15 +1239,70 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+  ],
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-01/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-01/verification.json",
+      "detail": "Explicit SIMULATED_ENGINEERING inline connector, strict DTO, no URL/path or fallback, deterministic source batch and versioned projection. Real controlled-source/ERP implementation remains NOT_RUN."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-01/verification.json",
+      "detail": "Engineering checks reject incomplete coverage, unknown mapping/units/null/negative quantities and supply availability; mirror lines deduplicate or block conflict. Bounded read port retries timeout/503 once and never retries 403."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-01/AC3"
+      ],
+      "command": "NOT_RUN: real ERP authorization and adapter remain gated",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-01/verification.json",
+      "detail": "No real ERP network adapter is registered. Real method/path/TLS authorization and live read-only verification remain gated; only engineering source port is exercised."
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: real gates remain BLOCKED",
+      "environment": "Real enterprise identity / ERP / business rules / model / production",
+      "sample": "No real business calls; fixture is synthetic and does not restore SKU-A",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-01/verification.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
+  "dirtyPaths": [
+    "docs/planning/validation-report.json（接手既有派生计数差异）",
+    "docs/ERP-openapi.yaml（未知未跟踪，保留不读改暂存）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -1247,6 +1310,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_ENGINEERING_START",
+      "reason": "负责人明确授权B全部工程实现和S01隔离样例；真实模式仍受四门约束",
+      "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "ENGINEERING_DELIVERY",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
+      "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
     }
   ],
   "completionEvidence": [
@@ -1278,14 +1355,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "B-01",
     "D-S01-RULE-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。质量/覆盖/日期等规则矩阵签认后开发；可以用显式测试样例验证缺失/冲突，不要求所有真实质量事实齐备才实现阻断。",
+  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（主集成人）",
   "allowedPaths": [
     "src/commerce_hub/data/quality/",
     "src/commerce_hub/data/evidence/",
-    "tests/integration/data/（当前质量与证据）",
-    "docs/evidence/B-02/（未来，仅脱敏证据）"
+    "tests/unit/data/",
+    "docs/evidence/B-02/",
+    "docs/evidence/phase-b/verification.json",
+    "docs/runbooks/phase-b.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -1315,15 +1399,70 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+  ],
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-02/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-02/verification.json",
+      "detail": "D03 captures sole content-addressed manifest bound to exact immutable D02 revision, source batch, scope, mapping/policy versions; changed data makes a new snapshot."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-02/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-02/verification.json",
+      "detail": "Engineering quality distinguishes calculation blocks and candidate-only blocks; missing/stale/conflicting/ambiguous data never silently becomes zero or a purchasing candidate. Business-signed quality rules remain NOT_RUN."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-02/AC3"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-02/verification.json",
+      "detail": "D04 locators resolve authorized persisted report assets. Broken references are rejected; report/evidence reads recheck tenant/current permission and field scope. Missing/deleted-path behavior tested without destructive database deletion."
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: real gates remain BLOCKED",
+      "environment": "Real enterprise identity / ERP / business rules / model / production",
+      "sample": "No real business calls; fixture is synthetic and does not restore SKU-A",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-02/verification.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
+  "dirtyPaths": [
+    "docs/planning/validation-report.json（接手既有派生计数差异）",
+    "docs/ERP-openapi.yaml（未知未跟踪，保留不读改暂存）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -1331,6 +1470,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_ENGINEERING_START",
+      "reason": "负责人明确授权B全部工程实现和S01隔离样例；真实模式仍受四门约束",
+      "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "ENGINEERING_DELIVERY",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
+      "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
     }
   ],
   "completionEvidence": [
@@ -1360,13 +1513,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "A-01",
     "D-S01-RULE-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。已签认的MetricDefinition/需求与时间口径后可用固定期望样例开发纯B01，不需要ERP在线或真实SKU已绑定；未签认不得选常见公式代替。",
+  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（主集成人）",
   "allowedPaths": [
     "src/commerce_hub/capabilities/metrics/",
-    "tests/unit/metrics/s01/（未来）",
-    "docs/evidence/B-03/（未来，仅脱敏证据）"
+    "tests/unit/metrics/s01/",
+    "docs/evidence/B-03/",
+    "docs/evidence/phase-b/verification.json",
+    "docs/runbooks/phase-b.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -1396,15 +1556,70 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+  ],
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-03/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-03/verification.json",
+      "detail": "Shared B01 evaluator uses net available once, incremental demand excluding reservation, line remaining supply, same-day entry and finite window; mirrors do not double count."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-03/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-03/verification.json",
+      "detail": "Explicit engineering-demo-v1 UTC/daily/backlog/buffer semantics tested including zero demand, missing values, exact unit conversion, partial receipts, late supply and window boundaries. Real signed business rules NOT_RUN."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-03/AC3"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-03/verification.json",
+      "detail": "Baseline and every engineering candidate use the same versioned B01 evaluator and snapshot/metric refs. No LLM or frontend computes authoritative quantities. No S02 MC claim."
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: real gates remain BLOCKED",
+      "environment": "Real enterprise identity / ERP / business rules / model / production",
+      "sample": "No real business calls; fixture is synthetic and does not restore SKU-A",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-03/verification.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
+  "dirtyPaths": [
+    "docs/planning/validation-report.json（接手既有派生计数差异）",
+    "docs/ERP-openapi.yaml（未知未跟踪，保留不读改暂存）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -1412,6 +1627,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_ENGINEERING_START",
+      "reason": "负责人明确授权B全部工程实现和S01隔离样例；真实模式仍受四门约束",
+      "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "ENGINEERING_DELIVERY",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
+      "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
     }
   ],
   "completionEvidence": [
@@ -1438,13 +1667,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "B-03"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。B-03与相同已签认需求/候选/质量策略后可做纯候选逻辑；真实日期/MOQ/倍数未知必须拒绝相应候选，不以样例值代替。",
+  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（主集成人）",
   "allowedPaths": [
     "src/commerce_hub/capabilities/forecasting/",
-    "tests/unit/forecasting/s01/（未来）",
-    "docs/evidence/B-04/（未来，仅脱敏证据）"
+    "tests/unit/forecasting/s01/",
+    "docs/evidence/B-04/",
+    "docs/evidence/phase-b/verification.json",
+    "docs/runbooks/phase-b.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -1474,15 +1710,70 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+  ],
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-04/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-04/verification.json",
+      "detail": "Finite engineering arrival-date candidates use separately declared MOQ/orderMultiple/cap; unknown constraints or unresolved quality withhold candidates. No header-to-SKU allocation or implied saleable date."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-04/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-04/verification.json",
+      "detail": "Every candidate invokes the same B01 evaluator; unit spy verifies call count, unchanged metric version and snapshot refs. No invented weights, optimality or automatic selection."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-04/AC3"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-04/verification.json",
+      "detail": "Quality blocks or limits candidate generation; procurementEligible always false. No model exists to override quality. Actual business safety/constraints remain NOT_RUN."
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: real gates remain BLOCKED",
+      "environment": "Real enterprise identity / ERP / business rules / model / production",
+      "sample": "No real business calls; fixture is synthetic and does not restore SKU-A",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-04/verification.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
+  "dirtyPaths": [
+    "docs/planning/validation-report.json（接手既有派生计数差异）",
+    "docs/ERP-openapi.yaml（未知未跟踪，保留不读改暂存）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -1490,6 +1781,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_ENGINEERING_START",
+      "reason": "负责人明确授权B全部工程实现和S01隔离样例；真实模式仍受四门约束",
+      "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "ENGINEERING_DELIVERY",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
+      "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
     }
   ],
   "completionEvidence": [
@@ -1519,14 +1824,31 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "B-02",
     "B-03"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-05/B-02/B-03后实现O01公共发布子集，不再实现S01业务Workflow或第二调度；真实业务注册由D-S01-DEV-01负责。",
+  "entryCondition": "2026-11-12最新授权：A阶段已获星星复核，连续完成B-01—B-05工程切片及隔离S01插件；仅SIMULATED_ENGINEERING及明确未验证策略。真实数据/业务规则/ERP/模型仍按原门禁，禁止真实调用/采购写入，不进入C阶段。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（主集成人）",
   "allowedPaths": [
     "src/commerce_hub/orchestration/",
-    "src/commerce_hub/workspace/",
-    "tests/integration/orchestration/（当前发布用例）",
-    "docs/evidence/B-05/（未来，仅脱敏证据）"
+    "src/commerce_hub/scenarios/s01/",
+    "src/commerce_hub/bootstrap/engineering.py",
+    "src/commerce_hub/entrypoints/http/tasks.py",
+    "src/commerce_hub/infrastructure/database.py",
+    "migrations/versions/0004_reports.py",
+    "tests/integration/orchestration/test_s01_reports.py",
+    "tests/integration/processes/test_s01_processes.py",
+    "tests/support/s01.py",
+    "tests/support/s01_process.py",
+    "tests/support/s01_worker.py",
+    "examples/s01_single_sku.json",
+    "tools/demo_s01.py",
+    "docs/evidence/B-05/",
+    "docs/evidence/phase-b/verification.json",
+    "docs/runbooks/phase-b.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -1556,15 +1878,70 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "f07c9dd5d0bde539b24713931f0ff55f803f7605"
+  ],
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-05/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-05/verification.json",
+      "detail": "ScenarioHandler composes public D01/D02/D03/D04/B01/B02 assets into DomainResult; O01 owns only task/budget/plan/report. Handler asset-version/binding checks run before publication. Engineering S01 only, no real Workflow activation."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-05/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-05/verification.json",
+      "detail": "Real MySQL atomic report/task/audit/ack rollback tested; replay returns one report; stale lease/plan, cancel, deadline, missing result and revoked identity reject publication. Real HTTP/API restart and killed Worker recovery preserve parameters/snapshot/budget/deadline and publish once."
+    },
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "B-05/AC3"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+      "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean / real MySQL 8.0.27",
+      "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-05/verification.json",
+      "detail": "Engineering report labels sourceNature, completeness, blocked real admission, non-procurement and AI NOT_ATTEMPTED. Default production registry empty; no confirmation/submission/approval/execution endpoints."
+    },
+    {
+      "kind": "REAL_BUSINESS_ENABLEMENT",
+      "acceptanceIds": [],
+      "command": "NOT_RUN: real gates remain BLOCKED",
+      "environment": "Real enterprise identity / ERP / business rules / model / production",
+      "sample": "No real business calls; fixture is synthetic and does not restore SKU-A",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-05/verification.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9",
+  "dirtyPaths": [
+    "docs/planning/validation-report.json（接手既有派生计数差异）",
+    "docs/ERP-openapi.yaml（未知未跟踪，保留不读改暂存）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -1572,6 +1949,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "AUTHORIZED_ENGINEERING_START",
+      "reason": "负责人明确授权B全部工程实现和S01隔离样例；真实模式仍受四门约束",
+      "observedHead": "00b212c731f90a82837d176157cba0a2508b50a9"
+    },
+    {
+      "date": "2026-11-12",
+      "changeType": "ENGINEERING_DELIVERY",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "固定实现提交后161项自动化测试通过（真实MySQL/独立API/Worker）；仅工程切片待复核，真实业务/ERP/规则/模型准入不变，未自动ACCEPTED",
+      "observedHead": "f07c9dd5d0bde539b24713931f0ff55f803f7605"
     }
   ],
   "completionEvidence": [

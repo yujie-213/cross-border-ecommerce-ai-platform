@@ -1,0 +1,66 @@
+{
+  "task": "B-04",
+  "scope": "PHASE_B_ENGINEERING_SLICE_ONLY",
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean",
+  "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+  "fullVerificationRef": "docs/evidence/phase-b/verification.json",
+  "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+  "exitCode": 0,
+  "suite": {
+    "total": 161,
+    "passed": 161,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 1
+  },
+  "selectedCaseCount": 3,
+  "cases": [
+    {
+      "classname": "tests.unit.forecasting.s01.test_candidates",
+      "name": "test_each_candidate_uses_identical_b01_and_no_optimality",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.forecasting.s01.test_candidates",
+      "name": "test_moq_multiple_independent_and_hard_cap_no_solution",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.forecasting.s01.test_candidates",
+      "name": "test_missing_constraints_only_baseline_and_quality_cannot_be_overridden",
+      "seconds": "0.006",
+      "result": "PASS"
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptanceId": "B-04/AC1",
+      "result": "PASS",
+      "detail": "Finite engineering arrival-date candidates use separately declared MOQ/orderMultiple/cap; unknown constraints or unresolved quality withhold candidates. No header-to-SKU allocation or implied saleable date."
+    },
+    {
+      "acceptanceId": "B-04/AC2",
+      "result": "PASS",
+      "detail": "Every candidate invokes the same B01 evaluator; unit spy verifies call count, unchanged metric version and snapshot refs. No invented weights, optimality or automatic selection."
+    },
+    {
+      "acceptanceId": "B-04/AC3",
+      "result": "PASS",
+      "detail": "Quality blocks or limits candidate generation; procurementEligible always false. No model exists to override quality. Actual business safety/constraints remain NOT_RUN."
+    }
+  ],
+  "notRun": [
+    "Real ERP adapter/network/TLS verification",
+    "Original SKU-A identity recovery",
+    "Business-approved metric/calendar/constraint/quality rules",
+    "Real enterprise identity onboarding",
+    "Real model/provider evaluation",
+    "Purchasing approval or writes",
+    "Production and S02 MC acceptance"
+  ],
+  "review": null
+}

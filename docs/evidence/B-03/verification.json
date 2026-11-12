@@ -1,0 +1,78 @@
+{
+  "task": "B-03",
+  "scope": "PHASE_B_ENGINEERING_SLICE_ONLY",
+  "testedCommit": "f07c9dd5d0bde539b24713931f0ff55f803f7605",
+  "environment": "Windows10 / CPython3.13.5 / existing hash-locked .tmp/stage-a-clean",
+  "sample": "examples/s01_single_sku.json; engineering-demo-v1; s01-projection-v1; s01-engineering-daily-v1",
+  "fullVerificationRef": "docs/evidence/phase-b/verification.json",
+  "command": "COMMERCE_RUN_MYSQL_TESTS=1 python -m pytest -p no:cacheprovider --basetemp=.tmp/phase-b-commit-verified --junitxml=.tmp/phase-b-commit-results.xml",
+  "exitCode": 0,
+  "suite": {
+    "total": 161,
+    "passed": 161,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 1
+  },
+  "selectedCaseCount": 5,
+  "cases": [
+    {
+      "classname": "tests.unit.metrics.s01.test_daily",
+      "name": "test_known_engineering_target_gap_and_daily_series",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.metrics.s01.test_daily",
+      "name": "test_delayed_supply_preserves_intermediate_shortage_with_candidate",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.metrics.s01.test_daily",
+      "name": "test_zero_demand_coverage_is_unknown_not_infinite_or_error",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.metrics.s01.test_daily",
+      "name": "test_partial_receipt_uses_remaining_once_and_excludes_arrival_after_window",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "classname": "tests.unit.metrics.s01.test_daily",
+      "name": "test_invalid_data_cannot_reach_calculator",
+      "seconds": "0.003",
+      "result": "PASS"
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptanceId": "B-03/AC1",
+      "result": "PASS",
+      "detail": "Shared B01 evaluator uses net available once, incremental demand excluding reservation, line remaining supply, same-day entry and finite window; mirrors do not double count."
+    },
+    {
+      "acceptanceId": "B-03/AC2",
+      "result": "PASS",
+      "detail": "Explicit engineering-demo-v1 UTC/daily/backlog/buffer semantics tested including zero demand, missing values, exact unit conversion, partial receipts, late supply and window boundaries. Real signed business rules NOT_RUN."
+    },
+    {
+      "acceptanceId": "B-03/AC3",
+      "result": "PASS",
+      "detail": "Baseline and every engineering candidate use the same versioned B01 evaluator and snapshot/metric refs. No LLM or frontend computes authoritative quantities. No S02 MC claim."
+    }
+  ],
+  "notRun": [
+    "Real ERP adapter/network/TLS verification",
+    "Original SKU-A identity recovery",
+    "Business-approved metric/calendar/constraint/quality rules",
+    "Real enterprise identity onboarding",
+    "Real model/provider evaluation",
+    "Purchasing approval or writes",
+    "Production and S02 MC acceptance"
+  ],
+  "review": null
+}

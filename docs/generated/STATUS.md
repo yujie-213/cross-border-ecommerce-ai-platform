@@ -1,14 +1,14 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`b6c826fddd33f256f60391b26c8ad8e60801a22f8358224a2b8cb1a6e183e3c3`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`802097414805775acbfd75ab4b2fd5c20c0eef4753b01e7c4c338098a6342ce5`。不要手工编辑；候选不是执行授权。
 
-任务 31 项；TODO 14；IN_PROGRESS 0；BLOCKED 4；REVIEW 13；ACCEPTED 0。
+任务 31 项；TODO 9；IN_PROGRESS 0；BLOCKED 4；REVIEW 18；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
 | SETUP | 1 | 0 | 0 | 0 | 1 | 0 |
 | A | 6 | 0 | 0 | 0 | 6 | 0 |
-| B | 5 | 5 | 0 | 0 | 0 | 0 |
+| B | 5 | 0 | 0 | 0 | 5 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
 | D | 14 | 4 | 0 | 4 | 6 | 0 |
 
@@ -21,6 +21,11 @@
 - A-04 身份认证、权限与租户必要子集：REVIEW；实际执行者=Codex主集成；g01_access代理负责governance/access与security测试。
 - A-05 API/独立Worker与MySQL持久任务：REVIEW；实际执行者=Codex负责任务/预算/投递/组合根/API/Worker；g01_access代理只补独立集成测试。
 - A-06 工程底座复现与故障验收：REVIEW；实际执行者=Codex主集成与最终复验；storage_migrations代理只补实际进程测试。
+- B-01 D01/D02 S01输入适配与标准化：REVIEW；实际执行者=Codex（主集成人）。
+- B-02 D03/D04 S01质量/快照与证据：REVIEW；实际执行者=Codex（主集成人）。
+- B-03 B01 S01确定性供需指标：REVIEW；实际执行者=Codex（主集成人）。
+- B-04 B02 S01基线/候选与约束：REVIEW；实际执行者=Codex（主集成人）。
+- B-05 O01 Handler调度/报告与G01/G02边界：REVIEW；实际执行者=Codex（主集成人）。
 - D-S01-01 S01补货专项详细设计（第一阶段）：REVIEW；实际执行者=Codex（本轮唯一文档执行者与台账集成人）。
 - UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
 - D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）：REVIEW；实际执行者=Codex（本轮单人文档执行者）。
@@ -43,11 +48,11 @@
 | A-04 | 身份认证、权限与租户必要子集 | REVIEW | A-02 |
 | A-05 | API/独立Worker与MySQL持久任务 | REVIEW | A-03, A-04 |
 | A-06 | 工程底座复现与故障验收 | REVIEW | A-05 |
-| B-01 | D01/D02 S01输入适配与标准化 | TODO | D-S01-01, A-03, A-04 |
-| B-02 | D03/D04 S01质量/快照与证据 | TODO | B-01, D-S01-RULE-01 |
-| B-03 | B01 S01确定性供需指标 | TODO | A-01, D-S01-RULE-01 |
-| B-04 | B02 S01基线/候选与约束 | TODO | B-03 |
-| B-05 | O01 Handler调度/报告与G01/G02边界 | TODO | A-05, B-02, B-03 |
+| B-01 | D01/D02 S01输入适配与标准化 | REVIEW | D-S01-01, A-03, A-04 |
+| B-02 | D03/D04 S01质量/快照与证据 | REVIEW | B-01, D-S01-RULE-01 |
+| B-03 | B01 S01确定性供需指标 | REVIEW | A-01, D-S01-RULE-01 |
+| B-04 | B02 S01基线/候选与约束 | REVIEW | B-03 |
+| B-05 | O01 Handler调度/报告与G01/G02边界 | REVIEW | A-05, B-02, B-03 |
 | C-01 | A01真实解释必需的网关/Provider与调用控制子集 | TODO | A-05, A-01 |
 | C-02 | A02内容理解与结构化产物（按需） | TODO | C-01 |
 | C-03 | A03 RAG/只读Tool/Skill最小契约（按需） | TODO | C-01, B-02 |
