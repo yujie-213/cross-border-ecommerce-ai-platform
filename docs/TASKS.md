@@ -1,3 +1,5 @@
+当前同步阻塞增量：本地main已完成ff-only和639/31/6复验，教学技术验收登记有效；普通push main遇GitHub TLS持续握手失败/直连重置，远端main仍6fdf10c（接口回读）。本轮远端同步未完成，等待网络恢复后仅核对/普通push；不改验收范围、四门或预算。详情docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。
+
 当前验收合并后复验（2026-11-13，main固定e08f264）：--ff-only完成，本轮教学技术范围ACCEPTED，UI任务ACCEPTED、C-04技术scopeDecision=ACCEPTED/整体REVIEW。639后端/31前端/6浏览器、类型/构建PASS，639原基线逐名保全；DeepSeek与ERP联网复测按指令NOT_RUN，新增Token0。旧5642Token/$0.15及新10047Token/$0.25账本原样、费用UNKNOWN；历史证据/算法/迁移/依赖未变，企业四门BLOCKED、整体验收TODO。最终文档提交与远端main同步以Git实时回读为准；证据docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。
 
 当前验收合并授权（2026-11-13，被审098fe19）：负责人明确通知星星独立评审完成，批准前端证据竞态、结构化引用、真实A—E教学技术验证ACCEPTED并--ff-only合main。UI任务ACCEPTED；C-04技术范围ACCEPTED、含正式用途的整体仍REVIEW。四企业门BLOCKED，S01 MVP整体未验收；旧FAIL/NOT_RUN及两笔UNKNOWN预约保留。本轮零DeepSeek/ERP网络与新增Token，不改业务算法；工程复验/同步另存docs/evidence/S01-UI-C04-ACCEPTANCE，下方旧REVIEW/停止点保留历史。

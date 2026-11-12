@@ -1,3 +1,7 @@
+## 当前阻塞：远端main未同步
+
+本地main已--ff-only完成教学技术验收合并，固定e08f264重跑639后端/31单测/6浏览器/类型构建及18文档检查全部PASS，后续e8b9738只收尾证据。普通push main因本机GitHub TLS握手持续失败；已尝试完整证书校验的现有代理OpenSSL/schannel/SOCKS与直连，未改全局网络、源或历史。GitHub接口回读main仍6fdf10c、source仍098fe19，不能宣称远端完成；本地最新HEAD按实际Git读回。已请求负责人恢复GitHub网络或提供可用本机代理。网络恢复后先fetch/核对无漂移，再普通push main/回读；若远端出现未审新增提交则按指令停止。仅传输未完成，不重跑付费API、ERP或改账本；验收范围ACCEPTED和四门BLOCKED保持。
+
 ## main验收合并后复验完成
 
 当前验收合并后复验（2026-11-13，main固定e08f264）：--ff-only完成，本轮教学技术范围ACCEPTED，UI任务ACCEPTED、C-04技术scopeDecision=ACCEPTED/整体REVIEW。639后端/31前端/6浏览器、类型/构建PASS，639原基线逐名保全；DeepSeek与ERP联网复测按指令NOT_RUN，新增Token0。旧5642Token/$0.15及新10047Token/$0.25账本原样、费用UNKNOWN；历史证据/算法/迁移/依赖未变，企业四门BLOCKED、整体验收TODO。最终文档提交与远端main同步以Git实时回读为准；证据docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。

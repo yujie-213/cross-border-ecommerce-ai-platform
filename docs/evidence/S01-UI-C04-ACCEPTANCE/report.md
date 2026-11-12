@@ -30,3 +30,9 @@ python docs/planning/check_plan.py
 # frontend/中 npm run test; npm run typecheck; npm run build
 # 按docs/runbooks/s01-frontend.md启动受控本机API/Worker/Vite，另设新证据目录后 npm run test:browser
 ```
+
+## 远端同步阻塞（本轮实际传输事实）
+
+初始fetch成功，源分支精确098fe19、main6fdf10c祖先核对通过。验收登记e08f264并--ff-only本地main，全部639/31/6回归与18项文档检查及安全/账本保全通过，收尾证据提交e8b97389922194691c15cc6f4c82c86c754ff714。随后保持证书验证的现有HTTP代理/OpenSSL、Windows schannel和SOCKS通道Git fetch/push均TLS握手失败，直连连接重置；原代理公开DNS诊断超时。没有关闭TLS校验、强推、换源或通过API重建Git历史。
+
+GitHub接口独立回读确认远端main仍6fdf10cd6850794cc1ba2695078e68a58996e974、来源仍098fe19bfc2c67476cb18443bbad29d12c5d0ffd。本轮技术范围仍ACCEPTED，本地合并完成；远端同步FAIL/未完成，不宣称推送成功。负责人已收到恢复网络/提供可用本机代理的请求；网络恢复后仅需重新核对远端无漂移，普通push main并回读。该传输阻塞与应用测试结果分开，保留已测e08f264和后续仅文档证据提交；最新本地HEAD以Git实际读取为准。
