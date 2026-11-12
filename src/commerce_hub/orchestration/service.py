@@ -42,12 +42,23 @@ class TaskService:
     def fingerprint(value):
         return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
 
-    def create(self, principal, command_key, scenario_id, scope, parameters, trace_id):
+    def create(self, principal, command_key, scenario_id, scope, parameters, trace_id, *, previous_report_ref=None):
         if len(command_key) > 128 or not command_key:
             raise TaskError("INVALID_COMMAND_KEY", 422)
         spec = self.registry.get(scenario_id)
         if not spec:
             raise TaskError("UNSUPPORTED_SCENARIO", 422)
+        if "_previousReportRef" in parameters:
+            raise TaskError("INVALID_PARAMETERS", 422)
+        if previous_report_ref is not None:
+            if not hasattr(spec.handler, "bind_previous_report"):
+                raise TaskError("UNSUPPORTED_REPORT_RELATION", 422)
+            try:
+                parameters = spec.handler.bind_previous_report(parameters, previous_report_ref)
+            except (ValueError, TypeError):
+                raise TaskError("INVALID_PARAMETERS", 422) from None
+            if previous_report_ref.get("tenantId") != principal.tenant_id:
+                raise TaskError("NOT_FOUND", 404)
         try:
             spec.handler.validate(parameters)
             if hasattr(spec.handler, "validate_scope"):
@@ -59,6 +70,25 @@ class TaskService:
         request_fingerprint = self.fingerprint(dict(scenario=scenario_id, scope=scope, parameters=parameters))
         with self.engine.begin() as conn:
             self.access.authorize(conn, principal, "tasks:create", scope)
+            if previous_report_ref is not None:
+                # A relation never grants access to its target, nor revives a terminal task.
+                old = conn.execute(select(tasks).filter_by(tenant_id=principal.tenant_id,
+                    task_id=previous_report_ref.get("reportId"))).mappings().first()
+                if (previous_report_ref.get("tenantId") != principal.tenant_id or old is None
+                        or old["state"] != "SUCCEEDED" or old["scenario_id"] != scenario_id
+                        or old["scenario_version"] != spec.version
+                        or old["scope"] != scope):
+                    raise TaskError("NOT_FOUND", 404)
+                try:
+                    self.access.authorize(conn, principal, "tasks:read", old["scope"])
+                except AccessDenied:
+                    raise TaskError("NOT_FOUND", 404) from None
+                published = conn.execute(select(reports).filter_by(
+                    tenant_id=principal.tenant_id, task_id=old["task_id"],
+                    report_id=previous_report_ref["reportId"])).mappings().first()
+                if published is None:
+                    raise TaskError("NOT_FOUND", 404)
+                self._validate_report_row(old, published)
             existing = conn.execute(select(tasks).where(tasks.c.tenant_id == principal.tenant_id,
                 tasks.c.principal_id == principal.principal_id, tasks.c.command_key == command_key).with_for_update()).mappings().first()
             if existing:
@@ -111,6 +141,24 @@ class TaskService:
             view["reportRef"] = {"tenantId": row["tenant_id"], "reportId": report_id}
         return view
 
+    def _validate_report_row(self, task, report):
+        """Bind persisted payload to its owning SQL rows before linking or exposing it."""
+        payload = report["payload"]
+        try:
+            valid = (report["tenant_id"] == task["tenant_id"] and report["task_id"] == task["task_id"]
+                and report["plan_version"] == task["plan_version"]
+                and report["fingerprint"] == self.fingerprint(payload)
+                and payload["taskRef"] == {"tenantId": task["tenant_id"], "taskId": task["task_id"]}
+                and payload["reportRef"] == {"tenantId": task["tenant_id"], "reportId": report["report_id"]}
+                and payload["planVersion"] == str(task["plan_version"])
+                and payload["scenarioId"] == task["scenario_id"]
+                and payload["scenarioVersion"] == task["scenario_version"]
+                and payload["scope"] == task["scope"])
+        except (KeyError, TypeError, ValueError):
+            valid = False
+        if not valid:
+            raise TaskError("NOT_FOUND", 404)
+
     def read_report(self, principal, task_id):
         with self.engine.begin() as conn:
             row = conn.execute(select(tasks).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
@@ -123,6 +171,7 @@ class TaskService:
             report = conn.execute(select(reports).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
             if row["state"] != "SUCCEEDED" or report is None:
                 raise TaskError("REPORT_NOT_PUBLISHED", 404)
+            self._validate_report_row(row, report)
             # Current G01 scope authorizes the requested fields, not every field
             # of the persisted internal assets. The scenario owns its narrow read DTO.
             spec = self.registry.get(row["scenario_id"])
@@ -199,6 +248,12 @@ class TaskService:
             if hasattr(handler, "validate_result"):
                 try:
                     handler.validate_result(result)
+                except (ValueError, TypeError):
+                    raise TaskError("INVALID_DOMAIN_RESULT") from None
+            if hasattr(handler, "validate_publication"):
+                try:
+                    handler.validate_publication(result,
+                        {"tenantId": lease.tenant_id, "taskId": lease.owner_id}, str(plan_version))
                 except (ValueError, TypeError):
                     raise TaskError("INVALID_DOMAIN_RESULT") from None
             if result is not None:

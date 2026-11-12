@@ -106,8 +106,11 @@ def create_app(settings: Settings | None = None, registry=None) -> FastAPI:
         migrated = connected and configuration.auth_configured and app.state.database.schema_ready()
         components = {"database": "available" if connected else "unavailable", "persistence": "available" if migrated else "not_ready",
                       "identity": "configured" if configuration.auth_configured else "not_configured", "worker": "independent_process", "s01": "not_implemented"}
+        business = bool(app.state.tasks and "ENGINEERING_S01_BUSINESS" in app.state.tasks.registry)
+        if business:
+            components["s01"] = "offline_business_mock_only"
         if migrated:
-            return {"status": "ready", "scope": "ENGINEERING_FOUNDATION_ONLY", "components": components}
+            return {"status": "ready", "scope": "ENGINEERING_S01_BUSINESS_ONLY" if business else "ENGINEERING_FOUNDATION_ONLY", "components": components}
         return error_response("NOT_READY", 503, "Required capabilities are not ready", details=components, retryable=not connected)
 
     return app

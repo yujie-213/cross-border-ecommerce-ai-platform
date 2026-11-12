@@ -22,6 +22,16 @@ class CreateTask(BaseModel):
     scenarioId: str = Field(min_length=1, max_length=64)
     scope: Scope
     parameters: dict = Field(default_factory=dict)
+    previousReportRef: "ReportRef | None" = None
+
+
+class ReportRef(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tenantId: str = Field(min_length=1, max_length=64)
+    reportId: str = Field(min_length=1, max_length=64)
+
+
+CreateTask.model_rebuild()
 
 
 class CancelTask(BaseModel):
@@ -58,8 +68,27 @@ def register_task_routes(app):
     def create(body: CreateTask, request: Request, actor=Depends(principal),
                key: Annotated[str, Header(alias="Idempotency-Key", min_length=1, max_length=128)] = ...):
         scope = dict(body.scope.model_dump(), tenantId=actor.tenant_id)
-        view = request.app.state.tasks.create(actor, key, body.scenarioId, scope, body.parameters, trace_id.get())
+        view = request.app.state.tasks.create(actor, key, body.scenarioId, scope, body.parameters, trace_id.get(),
+            previous_report_ref=body.previousReportRef.model_dump() if body.previousReportRef else None)
         return JSONResponse(view, status_code=202, headers={"Location": "/api/v1/analysis-tasks/" + view["taskRef"]["taskId"]})
+
+    @app.get("/api/v1/s01/options")
+    def options(request: Request, storeId: str, warehouseId: str, canonicalSkuId: str,
+                actor=Depends(principal)):
+        service = request.app.state.tasks
+        spec = service.registry.get("ENGINEERING_S01_BUSINESS")
+        if spec is None:
+            raise TaskError("UNSUPPORTED_SCENARIO", 422)
+        scope = dict(tenantId=actor.tenant_id, storeIds=[storeId], warehouseIds=[warehouseId],
+                     canonicalSkuIds=[canonicalSkuId], fields=["quantity"])
+        with service.engine.begin() as conn:
+            service.access.authorize(conn, actor, "tasks:create", scope)
+        # Current D02 consumes inline fixed inputs; it has no server-side mapped catalog.
+        # Echoing an authorized scope is not proof that any business mapping exists.
+        return dict(scenarioId=spec.scenario_id, scenarioVersion=spec.version, analysisMode="SINGLE",
+            sourceNature="SIMULATED_ENGINEERING", inputMode="INLINE_ENGINEERING_FIXTURE", scope=scope,
+            mappedChoices=[], limitations=["NO_SERVER_SIDE_MAPPED_CATALOG"], realAdmission="BLOCKED",
+            aiProvider="MOCK", maxModelCalls=spec.max_calls, actions=["analyze", "read", "cancel"])
 
     @app.get("/api/v1/analysis-tasks/{task_id}")
     def read(task_id: str, request: Request, actor=Depends(principal)):

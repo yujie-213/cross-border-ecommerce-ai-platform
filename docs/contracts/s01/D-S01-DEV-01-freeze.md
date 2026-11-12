@@ -12,3 +12,9 @@
 - 四项真实准入继续 BLOCKED；LIVE/C-04、真实 DeepSeek、ERP认证/网络读取、采购写入、UI及其他业务模块均不在本轮范围。A 线只用已获准文档/本地材料，零新 ERP 请求。真实 MySQL/API/独立 Worker 工程验证只用原隔离库 `s01_a01_test_20261112` 和本机获准配置。
 
 验证出口：两线各提交实现和离线/工程证据；主集成固定实现提交后运行原 A/B/C-01 全部测试与新增 Handler/API/Worker/权限/异常回归、pip check、compileall、默认关闭连通入口、文档 build/check 和 diff 检查；互审是工程交叉审查，不能冒充负责人/星星独立验收。D-S01-DEV-01 最终 REVIEW，数据/规则/ERP/AI 门禁保持原状态。
+
+集成时补充的兼容技术细节：创建请求增加可选顶层 `previousReportRef={tenantId,reportId}`，原请求仍原样有效。仅新 Handler 支持，O01 在创建事务内按当前 G01 核验旧报告已发布且同租户/场景/精确 scope；关联参与幂等指纹，持久化为任务 parameters 的保留元数据 `_previousReportRef`，传入 D01 前剥离，不参与数据 manifest。客户端直接注入保留字段拒绝。新报告只携带旧报告引用，旧数据/预算/期限不改写；新明确命令创建独立任务，不是旧任务恢复或模型重试。
+
+`GET /api/v1/s01/options` 接收 storeId/warehouseId/canonicalSkuId，按当前 G01 `tasks:create` 精确 quantity scope 校验，仅返回已注册工程模式的能力。现 D02 没有服务端映射目录，故 `mappedChoices=[]` 并明确 `NO_SERVER_SIDE_MAPPED_CATALOG`，不能把获准 scope 回显当成业务映射就绪。正式真实选项仍待后续真实数据接入，当前没有伪造真实选项。
+
+发布边界增加兼容可选 `handler.validate_publication(result, task_ref, plan_version)` 扩展点；在既有 O01 事务中只作纯校验，无新网络/SQL/预算。旧 Handler 不受影响，新 Handler 拒绝跨任务或旧计划挪用解释。无迁移、依赖、公共计算或 DomainResult 字段变化；回滚只移除显式装配，新参数和 hook 都是可选。正反例须覆盖关联幂等/越权/未发布/范围错配、旧报告不变、options 授权及任务/计划绑定。
