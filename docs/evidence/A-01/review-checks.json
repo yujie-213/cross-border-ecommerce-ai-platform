@@ -1,0 +1,243 @@
+{
+  "scope": "A01_REVIEW_DOCUMENTS_ONLY",
+  "baseCommit": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
+  "observedHead": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
+  "command": "python docs/contracts/s01/check_review.py --output",
+  "environment": "Windows / existing documentation Python; no candidate dependencies installed",
+  "checks": [
+    {
+      "check": "same-task-ids-and-dependencies",
+      "result": "PASS",
+      "detail": {
+        "count": 31,
+        "cycles": []
+      }
+    },
+    {
+      "check": "six-stage-table-preserved",
+      "result": "PASS",
+      "detail": "Original stage rows unchanged"
+    },
+    {
+      "check": "boundary-edits-only-approved-fields",
+      "result": "PASS",
+      "detail": {
+        "A-04": [
+          "acceptance",
+          "completionEvidence",
+          "deliverables"
+        ],
+        "A-05": [
+          "acceptance",
+          "completionEvidence",
+          "deliverables"
+        ],
+        "B-05": [
+          "acceptance",
+          "completionEvidence",
+          "deliverables"
+        ],
+        "D-S01-DEV-01": [
+          "acceptance",
+          "completionEvidence",
+          "deliverables"
+        ],
+        "C-04": [
+          "acceptance",
+          "completionEvidence",
+          "deliverables"
+        ]
+      }
+    },
+    {
+      "check": "other-tasks-and-four-gates-preserved",
+      "result": "PASS",
+      "detail": {
+        "businessGateIds": [
+          "D-S01-DATA-01",
+          "D-S01-RULE-01",
+          "D-S01-ERP-ACCESS-01",
+          "D-S01-AI-ACCESS-01"
+        ],
+        "designReviewUnchanged": true
+      }
+    },
+    {
+      "check": "explicit-acceptance-boundary-separation",
+      "result": "PASS",
+      "detail": "Author manually checks G01 ports -> Worker/conditional commit -> report -> Handler engineering -> real model evaluation; formal enablement gates retained"
+    },
+    {
+      "check": "positive-model-request-example",
+      "result": "PASS",
+      "detail": "Shape invariants only; fixture allowance NOT granted, no send permitted"
+    },
+    {
+      "check": "positive-ai-output-example",
+      "result": "PASS",
+      "detail": "Only a hypothetical output example; not real model evidence"
+    },
+    {
+      "check": "known-zero-versus-unknown-and-not-applicable",
+      "result": "PASS",
+      "detail": "Explicit 0 / null+reason examples; no business calculation"
+    },
+    {
+      "check": "deadline-timeout-example",
+      "result": "PASS",
+      "detail": {
+        "fixtureTimeoutMs": 20000,
+        "allowanceGranted": false
+      }
+    },
+    {
+      "check": "negative-examples",
+      "result": "PASS",
+      "detail": [
+        {
+          "id": "MODEL-ALIAS",
+          "result": "PASS",
+          "observed": [
+            "UNKNOWN_MODEL_FIELD"
+          ]
+        },
+        {
+          "id": "MODEL-DEADLINE-ALIAS",
+          "result": "PASS",
+          "observed": [
+            "UNKNOWN_MODEL_FIELD"
+          ]
+        },
+        {
+          "id": "MODEL-FREE-MESSAGES",
+          "result": "PASS",
+          "observed": [
+            "UNKNOWN_MODEL_FIELD"
+          ]
+        },
+        {
+          "id": "MODEL-TASK-VERSION",
+          "result": "PASS",
+          "observed": [
+            "TASK_REF_SHAPE"
+          ]
+        },
+        {
+          "id": "MODEL-CROSS-TENANT",
+          "result": "PASS",
+          "observed": [
+            "TENANT_MISMATCH"
+          ]
+        },
+        {
+          "id": "MODEL-TASK-QUERY",
+          "result": "PASS",
+          "observed": [
+            "S01_TASK_ONLY"
+          ]
+        },
+        {
+          "id": "MODEL-LATEST",
+          "result": "PASS",
+          "observed": [
+            "UNPINNED_REF"
+          ]
+        },
+        {
+          "id": "MODEL-TOOLS",
+          "result": "PASS",
+          "observed": [
+            "S01_TOOLS_FORBIDDEN"
+          ]
+        },
+        {
+          "id": "MODEL-LATE",
+          "result": "PASS",
+          "observed": [
+            "DEADLINE_OUTSIDE_TASK"
+          ]
+        },
+        {
+          "id": "MODEL-EXPIRED",
+          "result": "PASS",
+          "observed": [
+            "DEADLINE_EXPIRED"
+          ]
+        },
+        {
+          "id": "AI-EXTRA-FIELD",
+          "result": "PASS",
+          "observed": [
+            "AI_FIELDS"
+          ]
+        },
+        {
+          "id": "AI-UNKNOWN-REF",
+          "result": "PASS",
+          "observed": [
+            "AI_REF_NOT_ALLOWED"
+          ]
+        },
+        {
+          "id": "AI-MISSING-EVIDENCE",
+          "result": "PASS",
+          "observed": [
+            "AI_ARRAY_BOUNDS"
+          ]
+        },
+        {
+          "id": "AI-LONG-TEXT",
+          "result": "PASS",
+          "observed": [
+            "AI_TEXT_BOUNDS"
+          ]
+        },
+        {
+          "id": "AI-SEMANTIC-CONTRADICTION",
+          "result": "PASS",
+          "observed": "Structurally valid contradiction marked REJECT by authored gold example; semantic evaluation remains NOT_RUN"
+        }
+      ]
+    },
+    {
+      "check": "local-review-and-navigation-links",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "local-env-excluded-without-reading-content",
+      "result": "PASS",
+      "detail": {
+        "exists": true,
+        "ignored": true,
+        "tracked": false,
+        "contentsRead": false
+      }
+    },
+    {
+      "check": "authorized-tracked-diff-scope",
+      "result": "PASS",
+      "detail": {
+        "outOfScope": [],
+        "originalDesignAndPrototypeChanged": false
+      }
+    },
+    {
+      "check": "changed-owned-documents-secret-heuristics",
+      "result": "PASS",
+      "detail": {
+        "findings": [],
+        "envAndUnknownYamlRead": false
+      }
+    }
+  ],
+  "status": "PASS",
+  "realMysqlConnection": "NOT_RUN",
+  "serverVersionCompatibility": "NOT_RUN",
+  "candidatePackageCompatibility": "NOT_RUN",
+  "realErpModelBrowserBusinessAcceptance": "NOT_RUN",
+  "contractSignoff": "NOT_RUN",
+  "databaseChanges": 0,
+  "databaseAuthenticationRequestsThisTurn": 0,
+  "reviewDocumentSha256": "e6f862224eba9c8191782b9ee93cbd797d13323fb4b28253d990add04cd969e2"
+}

@@ -1,5 +1,7 @@
 # 唯一任务与验收台账 v0.2
 
+本次授权增量（2026-11-12，基于e9433ef）：负责人批准仅修正A-04/A-05/B-05/D-S01-DEV-01/C-04的交付物、AC和完成证据文字，保留dependsOn、六阶段、31项任务及原真实模式门禁；授权Codex准备A-01评审材料和非破坏性MySQL检查，本人担任最终契约评审负责人，逐项签认尚未进行。当前材料见[评审稿](contracts/s01/A-01-契约评审稿.md)，实际证据见A-01记录；D-S01-01整体REVIEW、四项准入BLOCKED保持，其他开发仍未授权。下方旧“本轮仅规划”等措辞保留为原计划授权事实，不能覆盖本次有界授权。
+
 发布跟进附记（2026-11-11）：Codex 在 main / `6247e8356d5892f3ed5a1e7007e632e39263b458` 领取既有仓库许可/连接器核查，起点干净且无 remote；写入范围为 HANDOFF、TASKS 附记、THIRD_PARTY_NOTICES、governance 的 PUBLICATION/许可报告/核查 JSON。既有19项业务任务状态不变。目标账号/仓库/Public/写权限已验证，远端为空；当前连接器不支持本地提交 push，未做远端写入。许可材料与图标核查仍 BLOCKED，发布后 SHA/目录/README 检查 NOT_RUN。证据见 [增量核查](governance/LICENSE_REVIEW.md) 和 [核查记录](governance/connector-publication-check.json)；本轮提交由最终 Git 查询记录，不伪造 SHA。
 
 
@@ -174,13 +176,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-S01-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。可先评审切片契约/技术兼容方案，不等待完整数据；最终技术兼容需获准测试MySQL/身份环境实测，实际业务规则另由D-S01-RULE-01签认。",
-  "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "entryCondition": "2026-11-12负责人明确授权仅准备A-01技术/契约评审材料、兼容性分析/正反例和非破坏性MySQL环境检查；本轮不签认、不执行数据库变更或业务编码。D-S01-01整体REVIEW，当前消费范围须负责人逐项签认；真实连接只使用其授权配置，兼容实测未完成仍NOT_RUN。",
+  "ownerRole": "项目负责人本人担任A-01最终契约评审负责人；Codex只准备草案、自检与串行集成，星星复核结果按真实记录",
+  "assignee": "Codex（本轮唯一材料作者及台账集成人；无契约签认权）",
   "allowedPaths": [
-    "docs/contracts/s01/（未来）",
+    "docs/contracts/s01/A-01-契约评审稿.md",
+    "docs/contracts/s01/examples.json",
+    "docs/contracts/s01/check_review.py",
+    "docs/evidence/A-01/review-checks.json",
+    "docs/evidence/A-01/environment-inspection.json",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
     "docs/DECISIONS.md",
-    "docs/evidence/A-01/（未来，仅脱敏证据）"
+    "docs/README.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    ".env（仅本机忽略文件，不入Git）"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -212,15 +224,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -228,6 +242,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "负责人批准验收边界文字修正、A-01评审材料与MySQL非破坏性检查；最终签认由负责人本人逐项进行，当前只领取材料准备，不扩展为契约冻结或实施",
+      "observedHead": "e9433ef5b433167ca6499778407c6bc6c80edf0d"
     }
   ],
   "completionEvidence": [
@@ -417,8 +438,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
-    "G01可信身份/租户/当前scope/字段权限窄实现，API/Worker/数据/证据统一授权",
-    "沿已冻结同源方案的浏览器身份传输、会话期限/CSRF等相应控制；无重复用户管理产品"
+    "G01可信身份/租户/当前scope/字段权限窄实现及公开授权端口；用受控签名测试身份和已具备API接缝验证，不以真实Worker/数据/证据/报告发布实现作为本任务完成前置",
+    "沿A-01逐项签认的同源方案实现浏览器身份传输、会话期限/CSRF等相应控制；测试身份和正式身份配置证据分开，真实发行方/租户未签认不启用，无重复用户管理产品"
   ],
   "acceptance": [
     {
@@ -427,7 +448,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "A-04/AC2",
-      "text": "跨租户同名SKU、扩大scope/证据越权、撤权读与发布均被拒；凭据不进JS/URL/日志"
+      "text": "G01端口及当前API接缝对跨租户同名SKU、扩大scope/字段/证据权限和撤权返回拒绝；可用显式受控资源适配验证读/发布授权决策。真实Worker调用点归A-05，数据/证据/报告接入归后续任务，不以其完成作为本任务前置；凭据不进JS/URL/日志，端口测试不替代最终S01-AC-SEC01"
     }
   ],
   "plannedTests": [
@@ -459,7 +480,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "completionEvidence": [
-    "获准身份配置引用及API/Worker/证据边界安全负例；测试身份和正式身份配置证据分开。",
+    "获准测试身份配置引用、签名/发行方/期限与G01端口/API当前接缝安全负例；明确受控资源适配仅证明授权决策。A-05补Worker授权复核，B-01补数据接入，B-05及D04/场景联调补证据/报告撤权和发布竞态；后续证据不是本任务完成前置。真实身份启用仍须实际配置签认。",
     "完成时填写真实实现commit、testedCommit、命令/版本/环境/输入版本/退出码与原始结果；按本任务AC逐项关联证据，未运行NOT_RUN、失败FAIL；负责人/指定评审者签认后才ACCEPTED。秘密/原始敏感响应不入Git，受控证据只登记合法引用/指纹。"
   ],
   "enablementGates": [],
@@ -494,13 +515,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
-    "API/独立Worker两个进程、MySQL I01工作项/lease fencing/重试/恢复与O01最小受理/取消",
-    "O01原task期限/额度许可、attempt预留/结算/未知usage占额的公开端口及G02最小审计；由C-01使用，不再另造预算账本"
+    "API/独立Worker两个进程、真实MySQL I01工作项/lease fencing/重试/恢复与O01最小受理/取消；验证Worker当前G01复核及lease/plan/授权条件提交端口，不以B-05报告发布完成作为本任务前置",
+    "O01原task期限/额度许可、attempt预留/结算/未知usage占额的公开端口及G02最小审计；由C-01使用，不再另造预算账本；本任务不实现B-05报告组合/持久发布或S01业务Workflow"
   ],
   "acceptance": [
     {
       "id": "A-05/AC1",
-      "text": "任务/工作项/必需审计短事务一致，命令key同内容重放/异内容409；当前lease/plan/权限发布门禁有效"
+      "text": "任务/工作项/必需审计在真实MySQL短事务一致，命令key同内容重放/异内容409；Worker调用当前G01复核，旧lease/plan、取消/超期或拒绝授权不能通过条件提交端口。可用隔离工程适配验证端口，真实报告发布/回滚/去重由B-05及场景联调证明，不能把端口测试当报告验收"
     },
     {
       "id": "A-05/AC2",
@@ -539,7 +560,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "completionEvidence": [
-    "真实两个PID和MySQL故障/预算日志、任务/投递/审计一致性证据；不填S02 MC。",
+    "真实两个PID和MySQL故障/预算日志、任务/投递/审计一致性、Worker G01复核与条件提交端口旧lease/旧plan/撤权负例。隔离测试适配明确标工程验证；B-05负责真实报告发布事务及撤权竞态，不以B-05或D-S01-DEV-01完成反向约束本任务，不填S02 MC。",
     "完成时填写真实实现commit、testedCommit、命令/版本/环境/输入版本/退出码与原始结果；按本任务AC逐项关联证据，未运行NOT_RUN、失败FAIL；负责人/指定评审者签认后才ACCEPTED。秘密/原始敏感响应不入Git，受控证据只登记合法引用/指纹。"
   ],
   "enablementGates": [],
@@ -982,13 +1003,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
-    "公开ScenarioHandler/DomainResult和O01任务/计划/participant/snapshot/报告关系、最小查询/发布读口",
-    "当前权限/lease/plan/取消/期限/证据与版本审校、不可变报告/幂等发布；业务完整性与AI状态独立"
+    "公开ScenarioHandler/DomainResult和O01任务/计划/participant/snapshot/报告关系、最小查询/发布读口；可由隔离工程Handler产出显式样例结果验收公共发布，不以D-S01-DEV-01或C-04完成作为本任务前置",
+    "当前权限/lease/plan/取消/期限/证据与版本审校、不可变报告/幂等发布；本任务提供实际报告持久发布/回滚/去重/撤权证据，业务完整性与AI状态独立；S01真实Workflow与真实模型分别由后续任务验收"
   ],
   "acceptance": [
     {
       "id": "B-05/AC1",
-      "text": "O01只发布领域结果，不计算库存/候选/解释语义；D03/D04/B01/B02资产只经公开口使用"
+      "text": "O01只发布领域结果，不计算库存/候选/解释语义；D03/D04/B01/B02资产只经公开口使用。隔离工程Handler和受控结果Ref只证明公共发布，不冒充S01 Handler、真实ERP或真实模型；不要求后续场景或模型任务先完成"
     },
     {
       "id": "B-05/AC2",
@@ -1027,7 +1048,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "completionEvidence": [
-    "S01-AC-REPORT01/RECOVERY01/SECURITY01相关工程证据、版本绑定及失败无报告证明。",
+    "真实MySQL报告发布/回滚/重复发布/刷新重读、旧plan/lease/撤权与版本绑定失败无报告证据，关联原S01-AC-REPORT01/REC01/SEC01适用部分；声明工程Handler与受控Refs范围。A-05端口测试不替代本任务，后续S01/真实模型/UI证据不作为公共发布任务完成前置，也不在此签整项业务验收。",
     "完成时填写真实实现commit、testedCommit、命令/版本/环境/输入版本/退出码与原始结果；按本任务AC逐项关联证据，未运行NOT_RUN、失败FAIL；负责人/指定评审者签认后才ACCEPTED。秘密/原始敏感响应不入Git，受控证据只登记合法引用/指纹。"
   ],
   "enablementGates": [],
@@ -1268,9 +1289,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
-    "当前四类解释的许可样本/金标准、规则/人工分层判定与已签认硬失败/语义门禁；版本化评测结果",
-    "真实API成功、失败降级/篡改数字日期/错引用/注入/预算等证据与实际usage/费用/耗时；无未经验证收益数字",
-    "AI01/AI02的界面断言由D-S01-UI-01和整体验收共同关闭；本任务只证明真实调用/服务端用途与降级，不提前宣称页面验收"
+    "在AI安全门和专项调用授权满足后，使用已交付S01工程Handler/语义门禁及获准固定B01/B02结果/证据集进行当前四类解释的有界真实用途评测；许可样本/金标准、规则/人工分层判定与硬失败要求已签认，版本化评测结果",
+    "真实Provider成功及失败降级/篡改数字日期/错引用/注入/预算等分类证据与实际usage/费用/耗时；故障注入和真实模型结果分开，无未经验证收益数字；不扩大ERP采集",
+    "AI01/AI02的界面断言由D-S01-UI-01和整体验收共同关闭；本任务只证明真实调用/服务端用途与降级，不要求D-S01-UI-01先完成，不提前宣称页面验收；通过评测及用途签认后才允许对应正式AI模式启用"
   ],
   "acceptance": [
     {
@@ -1283,7 +1304,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "C-04/AC3",
-      "text": "失败明确AI解释不可用，仍保留符合条件规则结果；实际费用/usage/模型Prompt版本可追；启用范围经负责人/指定用途评审者签认"
+      "text": "失败明确AI解释不可用，仍保留符合条件规则结果；实际费用/usage/模型Prompt版本可追；正式启用范围经负责人/指定用途评审者签认。评测使用已交付工程Handler，不反向要求其先有C-04真实成功，界面成功断言由UI/整体验收关闭"
     }
   ],
   "plannedTests": [
@@ -1315,7 +1336,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "completionEvidence": [
-    "真实Provider关联、版本/usage/耗时、结构/语义/安全判定与人工评审；阈值待安全门签认，不虚构已达标。",
+    "真实Provider关联、版本/usage/耗时、结构/语义/安全判定与人工评审、用途启用范围签认；阈值先由AI安全门签认，不虚构已达标。与DEV工程交付证据分开；不以UI展示完成作为本任务前置，AI真实成功及降级仍必须有实际调用证据。",
     "完成时填写真实实现commit、testedCommit、命令/版本/环境/输入版本/退出码与原始结果；按本任务AC逐项关联证据，未运行NOT_RUN、失败FAIL；负责人/指定评审者签认后才ACCEPTED。秘密/原始敏感响应不入Git，受控证据只登记合法引用/指纹。"
   ],
   "enablementGates": [],
@@ -2665,18 +2686,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
-    "scenarios/s01_supply_inventory真正Handler：固定输入/质量门禁→B01基线→B02候选/B01评价→经A01解释或降级→DomainResult",
-    "建议原因/关键依据/主要风险/人工确认事项四类Context/结构解释与supportRefs领域校验；B01/B02权威量/日期/质量不变",
-    "沿O01受理/查询/取消/报告/options/D04证据读口形成当前最小API；固定Workflow顺序/重入/版本绑定与新分析关联旧报告"
+    "scenarios/s01_supply_inventory真正Handler：固定输入/质量门禁→B01基线→B02候选/B01评价→经A01解释或降级→DomainResult；可在显式工程样例/Mock Provider装配中交付联调，正式真实模式仍受原enablementGates约束",
+    "建议原因/关键依据/主要风险/人工确认事项四类Context/结构解释与supportRefs领域校验；B01/B02权威量/日期/质量不变；工程正反例证明语义门禁，不以Mock当真实模型成功",
+    "沿O01受理/查询/取消/报告/options/D04证据读口形成当前最小API；固定Workflow顺序/重入/版本绑定与新分析关联旧报告；真实源/模型及UI启用证据由对应后续任务提供"
   ],
   "acceptance": [
     {
       "id": "D-S01-DEV-01/AC1",
-      "text": "实际注册S01 Handler且不复制调度/预算/计算；未具备输入/规则只给相应阻断，无假report或成功占位"
+      "text": "工程测试装配实际注册并调用真正S01 Handler且不复制调度/预算/计算；未具备输入/规则只给相应阻断，无假report或成功占位；真实运行注册与配置未满足原门禁不得启用"
     },
     {
       "id": "D-S01-DEV-01/AC2",
-      "text": "A01只读已计算产物与合法证据；结构通过仍需S01引用/事实保持门禁，错数/错日期/错约束/质量/审批丢弃解释"
+      "text": "A01只读已计算产物与合法证据；结构通过仍需S01引用/事实保持门禁，错数/错日期/错约束/质量/审批丢弃解释；工程样例/Mock验证这些正反例，真实Provider用途验收归C-04"
     },
     {
       "id": "D-S01-DEV-01/AC3",
@@ -2684,14 +2705,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "D-S01-DEV-01/AC4",
-      "text": "不开放业务C01/C02/C03真实确认/审批/执行；单SKU SINGLE、有界参数/候选和任务预算，跨模块只用公开契约"
+      "text": "不开放业务C01/C02/C03真实确认/审批/执行；单SKU SINGLE、有界参数/候选和任务预算，跨模块只用公开契约；不以C-04通过或D-S01-LIVE-01完成作为本任务工程交付前置，真实模式启用条件保持不变"
     }
   ],
   "plannedTests": [
     "S01-AC-DATA/MAP/CALC/CONSTRAINT/QUALITY/REPORT/AI相关集成与故障回归；场景用Mock与真实调用分开，真实模型验收归C-04"
   ],
   "completionEvidence": [
-    "当前实现commit、Handler/API契约与跨模块Refs/版本、阻断/降级/重入/迟到负例；D-S01-LIVE-01与C-04分别提供真实源/模型事实。",
+    "当前实现commit、Handler/API契约与跨模块Refs/版本、显式工程样例/Mock分类及结构/领域语义/阻断/降级/重入/迟到负例。不以C-04通过或D-S01-LIVE-01完成作为本任务工程交付前置；LIVE真实源和C-04真实模型事实是各自模式启用及整体验收证据，不是本任务反向依赖。没有真实模型或真实数据时如实记录NOT_RUN，不冒称完整MVP通过。",
     "完成时填写真实实现commit、testedCommit、命令/版本/环境/输入版本/退出码与原始结果；按本任务AC逐项关联证据，未运行NOT_RUN、失败FAIL；负责人/指定评审者签认后才ACCEPTED。秘密/原始敏感响应不入Git，受控证据只登记合法引用/指纹。"
   ],
   "enablementGates": [

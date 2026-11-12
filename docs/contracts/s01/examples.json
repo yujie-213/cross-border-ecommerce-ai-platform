@@ -1,0 +1,68 @@
+{
+  "scope": "SIMULATED_REVIEW_EXAMPLES_ONLY_NOT_A_PUBLISHED_SCHEMA",
+  "refs": {
+    "metric": {"tenantId": "tenant-fixture", "id": "metric-fixture", "version": "1"},
+    "gap": {"tenantId": "tenant-fixture", "id": "quality-gap-fixture", "version": "1"}
+  },
+  "modelRequest": {
+    "schemaVersion": "0.2",
+    "logicalCallId": "explanation-fixture",
+    "attemptId": "attempt-fixture-1",
+    "taskRef": {"tenantId": "tenant-fixture", "taskId": "task-fixture"},
+    "queryRef": null,
+    "planVersion": "1",
+    "participantId": "p-s01-fixture",
+    "snapshotId": "snapshot-fixture",
+    "principalRef": {"tenantId": "tenant-fixture", "principalId": "principal-fixture"},
+    "policyContextRef": {"id": "policy-fixture", "version": "1"},
+    "purpose": "S01_REPLENISHMENT_EXPLANATION",
+    "deploymentRef": {"id": "deployment-fixture-not-registered", "version": "1"},
+    "promptRef": {"id": "prompt-fixture-not-registered", "version": "1"},
+    "contextBundleRef": {"tenantId": "tenant-fixture", "id": "context-fixture", "version": "1"},
+    "outputSchemaRef": {"id": "schema-fixture-not-registered", "version": "1"},
+    "requiredCapabilities": [],
+    "toolSpecRefs": [],
+    "parametersRef": {"id": "parameters-fixture", "version": "1"},
+    "allowanceRef": {"tenantId": "tenant-fixture", "id": "allowance-fixture-not-granted", "version": "1"},
+    "deadline": "2026-11-12T02:00:30Z",
+    "cachePolicyRef": {"id": "cache-off", "version": "1"},
+    "traceId": "trace-fixture",
+    "parentSpanId": "span-fixture"
+  },
+  "fixtureControls": {
+    "now": "2026-11-12T02:00:00Z",
+    "taskDeadline": "2026-11-12T02:01:00Z",
+    "providerTimeoutMs": 20000,
+    "expectedTimeoutMs": 20000,
+    "qualityGate": "BLOCKED",
+    "allowanceGranted": false
+  },
+  "quantityExamples": [
+    {"status": "KNOWN", "value": "0", "unit": "piece", "reason": null},
+    {"status": "UNKNOWN", "value": null, "unit": "piece", "reason": "缺少获准来源"},
+    {"status": "NOT_APPLICABLE", "value": null, "unit": "piece", "reason": "该指标不适用"}
+  ],
+  "explanation": {
+    "recommendationReasons": [{"text": "缺少质量证据，先补证。", "supportRefs": [{"tenantId": "tenant-fixture", "id": "quality-gap-fixture", "version": "1"}]}],
+    "keyEvidence": [{"text": "本次质量缺项已记录。", "supportRefs": [{"tenantId": "tenant-fixture", "id": "quality-gap-fixture", "version": "1"}]}],
+    "majorRisks": [{"text": "质量缺项尚未解除，采购适用性仍受阻。", "supportRefs": [{"tenantId": "tenant-fixture", "id": "quality-gap-fixture", "version": "1"}]}],
+    "humanConfirmations": [{"text": "请人工补充获准质量依据。", "supportRefs": [{"tenantId": "tenant-fixture", "id": "quality-gap-fixture", "version": "1"}]}]
+  },
+  "negativeCases": [
+    {"id": "MODEL-ALIAS", "base": "modelRequest", "path": ["parameters"], "value": {"temperature": 0}, "expected": "UNKNOWN_MODEL_FIELD"},
+    {"id": "MODEL-DEADLINE-ALIAS", "base": "modelRequest", "path": ["deadlineRef"], "value": "fixture", "expected": "UNKNOWN_MODEL_FIELD"},
+    {"id": "MODEL-FREE-MESSAGES", "base": "modelRequest", "path": ["messages"], "value": [], "expected": "UNKNOWN_MODEL_FIELD"},
+    {"id": "MODEL-TASK-VERSION", "base": "modelRequest", "path": ["taskRef", "version"], "value": "2", "expected": "TASK_REF_SHAPE"},
+    {"id": "MODEL-CROSS-TENANT", "base": "modelRequest", "path": ["contextBundleRef", "tenantId"], "value": "other-tenant-fixture", "expected": "TENANT_MISMATCH"},
+    {"id": "MODEL-TASK-QUERY", "base": "modelRequest", "path": ["queryRef"], "value": {"tenantId": "tenant-fixture", "queryId": "query-fixture"}, "expected": "S01_TASK_ONLY"},
+    {"id": "MODEL-LATEST", "base": "modelRequest", "path": ["deploymentRef", "version"], "value": "latest", "expected": "UNPINNED_REF"},
+    {"id": "MODEL-TOOLS", "base": "modelRequest", "path": ["toolSpecRefs"], "value": [{"id": "tool-fixture", "version": "1"}], "expected": "S01_TOOLS_FORBIDDEN"},
+    {"id": "MODEL-LATE", "base": "modelRequest", "path": ["deadline"], "value": "2026-11-12T02:02:00Z", "expected": "DEADLINE_OUTSIDE_TASK"},
+    {"id": "MODEL-EXPIRED", "base": "modelRequest", "path": ["deadline"], "value": "2026-11-12T01:59:59Z", "expected": "DEADLINE_EXPIRED"},
+    {"id": "AI-EXTRA-FIELD", "base": "explanation", "path": ["purchaseQuantity"], "value": "20", "expected": "AI_FIELDS"},
+    {"id": "AI-UNKNOWN-REF", "base": "explanation", "path": ["keyEvidence", 0, "supportRefs", 0, "id"], "value": "unlisted-fixture", "expected": "AI_REF_NOT_ALLOWED"},
+    {"id": "AI-MISSING-EVIDENCE", "base": "explanation", "path": ["keyEvidence"], "value": [], "expected": "AI_ARRAY_BOUNDS"},
+    {"id": "AI-LONG-TEXT", "base": "explanation", "path": ["majorRisks", 0, "text"], "repeat": "长", "count": 501, "expected": "AI_TEXT_BOUNDS"},
+    {"id": "AI-SEMANTIC-CONTRADICTION", "base": "explanation", "path": ["recommendationReasons", 0, "text"], "value": "质量安全，可以批准采购。", "expected": "HUMAN_GOLD_REJECT", "note": "结构合法但与BLOCKED事实冲突；人工金标准指定拒绝，不声称脚本可泛化判断自然语言支持。"}
+  ]
+}

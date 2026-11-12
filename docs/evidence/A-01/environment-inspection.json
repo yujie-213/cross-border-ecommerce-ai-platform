@@ -1,0 +1,55 @@
+{
+  "scope": "NON_DESTRUCTIVE_DISCOVERY_ONLY_NOT_MYSQL_ACCEPTANCE",
+  "date": "2026-11-12",
+  "baseCommit": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
+  "environment": "Windows / PowerShell; no database authentication in this execution",
+  "observations": [
+    {
+      "command": "Get-CimInstance Win32_Service -Filter Name=MySQL (safe output only)",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawSafeOutput": {"Service": "MySQL", "State": "Running", "PID": 6268, "Executable": "", "FileProductVersion": null},
+      "limitation": "Executable path/version unavailable; service name does not identify the listener instance or its version"
+    },
+    {
+      "command": "netstat -ano -p tcp (filter local 3306/33060 listeners)",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawSafeOutput": ["TCP 0.0.0.0:3306 0.0.0.0:0 LISTENING 7548", "TCP 0.0.0.0:33060 0.0.0.0:0 LISTENING 7548"],
+      "limitation": "Listener discovery only; no authentication or queries; PID differs from service PID"
+    },
+    {
+      "command": "mysql.exe --version",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawSafeOutput": "mysql.exe Ver 8.0.27 for Win64 on x86_64 (MySQL Community Server - GPL)",
+      "limitation": "Client version only, NOT the running Server version"
+    },
+    {
+      "command": "Official PyPI exact-release JSON metadata lookup for candidate packages (no installation)",
+      "exitCode": 0,
+      "result": "PASS",
+      "rawSafeOutput": {"fastapi": "0.162.5", "pydantic": "2.14.3", "pydantic-settings": "2.16.2", "sqlalchemy": "2.0.57", "alembic": "1.20.1", "pymysql": "1.2.4", "uvicorn": "0.54.0", "pytest": "9.2.0", "httpx": "0.28.1", "jsonschema": "4.26.0"},
+      "sourcePattern": "https://pypi.org/pypi/{package}/{version}/json",
+      "limitation": "Release metadata existence and Python ranges only; compatibility/security/license/OS acceptance NOT_RUN; not a dependency lock"
+    }
+  ],
+  "priorAdmissionObservation": {
+    "result": "FAIL",
+    "exitCode": 1,
+    "safeError": "1045 Access denied for default ODBC local identity (using password: NO)",
+    "provenance": "Earlier admission inspection in this chat, before the latest approval; not retried in this execution"
+  },
+  "serverVersion": null,
+  "serverVersionResult": "NOT_RUN",
+  "realConnectionResult": "NOT_RUN",
+  "realMysqlCompatibilityResult": "NOT_RUN",
+  "candidatePackageCompatibilityResult": "NOT_RUN",
+  "proposedDatabase": "s01_a01_test_20261112",
+  "databaseCreated": false,
+  "databaseAuthenticationRequestsThisExecution": 0,
+  "databaseChanges": 0,
+  "credentialsReadOrPrintedThisExecution": false,
+  "erpRequests": 0,
+  "realModelRequests": 0
+}

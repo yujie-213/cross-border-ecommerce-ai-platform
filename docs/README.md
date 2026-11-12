@@ -25,6 +25,7 @@
 | 计划 | [PLAN](PLAN.md)；[旧96项映射](TASK_MAPPING.md)；[文档构建与检查脚本](planning/) |
 | Agent 设计 | [S01 补货专项详细设计（第一阶段）](agents/S01_补货Agent专项详细设计.md) / [HTML 阅读版](agents/S01_补货Agent专项详细设计.html)； [AI 模块详设](agents/AI_DETAILED_DESIGN.md) / [HTML](agents/AI_DETAILED_DESIGN.html)；[设计索引](agents/index.md)；[S01—S10 设计](agents/S01—S10_Agent与Workflow设计.md)；[模拟契约示例](agents/examples/s03-voc/) |
 | MVP 实施 | [S01 MVP 实施文档 v0.2](agents/S01_MVP实施文档.md)；[教学ERP调查与字段映射](agents/S01_ERP接口调查与字段映射.md)；[脱敏证据](agents/evidence/s01-erp-survey-20261111.json)；[单SKU开发准入核对与建议](agents/S01_单SKU开发准入核对.md)。A01解释必做，ERP缺口/受控补充与原型对接明确；本轮无开发 |
+| A-01 契约评审 | [逐项评审稿与选择说明](contracts/s01/A-01-契约评审稿.md)；[纯模拟正反例](contracts/s01/examples.json)；[材料自检证据](evidence/A-01/review-checks.json)。负责人本人最终逐项签认，当前未冻结；MySQL实际Server/兼容验收NOT_RUN，本机.env不入Git |
 | UI 设计 | [产品功能规格](ui/PRODUCT_SPEC.md)；[视觉规范](../DESIGN.md)；[参考研究](ui/RESEARCH.md)；[一致性与缺口](ui/ALIGNMENT.md)；[评审修复记录](ui/REVIEW_FIX.md)；[独立原型](../prototypes/s01/index.html) |
 | 报告 | [可行性分析](reports/FEASIBILITY.md) / [HTML](reports/FEASIBILITY.html)；[示例测算](reports/feasibility/illustrative-financial-model.json)（非真实企业收益） |
 | 历史归档 | [归档说明与旧链接定位](archive/README.md)；[旧96项计划](archive/plan96-v0.1/README.md)；[本次路径迁移表](governance/migration.json) |
