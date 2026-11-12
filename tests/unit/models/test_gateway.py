@@ -128,6 +128,22 @@ def test_required_usage_audit_failure_never_returns_success():
     assert result.code == "ACCOUNTING_OR_PROVIDER_ERROR" and "secret" not in result.model_dump_json()
 
 
+@pytest.mark.parametrize("stop",["cancel","deadline"])
+def test_final_audit_cannot_expose_explanation_after_control_stop(stop):
+    context=fixture_control()
+    def audit(**event):
+        if event["code"]=="OK":
+            if stop=="cancel": context.check.side_effect=TaskError("TASK_STOPPED")
+            else: time.sleep(.08)
+        return "audit-fixture"
+    context.budget.model_event.side_effect=audit
+    result=ModelGateway(MockProvider(),timeout_seconds=.05 if stop=="deadline" else 5).invoke(
+        fixture_request(),context,fixture_bundle())
+    assert result.code==("TASK_STOPPED" if stop=="cancel" else "TIMEOUT")
+    assert result.validatedObject is None
+    context.budget.settle.assert_called_once()
+
+
 def test_no_sensitive_context_or_output_in_audit(caplog):
     context, provider = fixture_control(), MockProvider()
     bundle = fixture_bundle()

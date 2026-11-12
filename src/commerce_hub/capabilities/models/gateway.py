@@ -169,6 +169,15 @@ class ModelGateway:
                     "actualModelRevision": common["actualModelRevision"]}, trace_id=request.traceId)
             except Exception:
                 return ModelResponse(status="TECH_ERROR", code="ACCOUNTING_ERROR", **common)
+            # The final required audit can itself take time or race cancellation/revocation.
+            # Recheck after it before exposing an explanation to the caller.
+            if code == "OK":
+                try:
+                    context.check()
+                    if time.monotonic() - start >= limit:
+                        return self._stop(budget, request, "TIMEOUT", details, versions)
+                except Exception as exc:
+                    return self._stop(budget, request, self._safe_code(exc, "CANCELLED"), details, versions)
             return ModelResponse(status="SUCCESS" if code == "OK" else "TECH_ERROR", code=code,
                 validatedObject=validated if code == "OK" else None, **common)
         if box["over"]:

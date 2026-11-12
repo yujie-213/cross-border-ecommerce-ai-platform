@@ -75,6 +75,7 @@ def main():
             "Concurrency is durable per task and bounded per gateway process, not a global deployment quota across all tasks.",
             "Existing local provider setting is not accepted by the new enum; local file untouched; Mock is explicitly selected for regression."],
         executionHistory=["Precommit full regression:270 PASS/0 FAIL/0 ERROR/0 SKIP, one existing deprecation warning.",
+            "First fixed implementation 2f3aa8cebcf6943e2ba2f0c6153319674b6e80f8:270 PASS; pip check/compileall/default disabled probe PASS. Final-audit cancellation/deadline race then hardened with two new tests; final testedCommit below supersedes that implementation.",
             "Initial new authority-immutability test used a wrong helper import; corrected to exercise actual B01/B02 public APIs.",
             "Sandbox blocked pytest temporary-folder access; controlled execution passed.",
             "Initial local provider configuration validation failed safely; no secrets printed and .env unchanged.",
