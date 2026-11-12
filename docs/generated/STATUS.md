@@ -1,13 +1,13 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`6bcd4c36cc1c64fd84643e2283732d4e6ab42d9c2b1725783c107e702d18e1af`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`7c748411da3e0a29d5d017c8c59a997dd61bf2e4b4db33491a4421046d37f079`。不要手工编辑；候选不是执行授权。
 
-任务 31 项；TODO 19；IN_PROGRESS 0；BLOCKED 4；REVIEW 8；ACCEPTED 0。
+任务 31 项；TODO 18；IN_PROGRESS 2；BLOCKED 4；REVIEW 7；ACCEPTED 0。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
 | SETUP | 1 | 0 | 0 | 0 | 1 | 0 |
-| A | 6 | 5 | 0 | 0 | 1 | 0 |
+| A | 6 | 4 | 2 | 0 | 0 | 0 |
 | B | 5 | 5 | 0 | 0 | 0 | 0 |
 | C | 5 | 5 | 0 | 0 | 0 | 0 |
 | D | 14 | 4 | 0 | 4 | 6 | 0 |
@@ -15,7 +15,8 @@
 ## 当前活动记录
 
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
-- A-01 S01所需最小版本与公共契约冻结：REVIEW；实际执行者=Codex（本轮唯一材料作者及台账集成人；无契约签认权）。
+- A-01 S01所需最小版本与公共契约冻结：IN_PROGRESS；实际执行者=Codex（本轮唯一执行者及集成人）。
+- A-02 最小骨架、配置、错误与日志：IN_PROGRESS；实际执行者=Codex（本轮唯一执行者及集成人）。
 - D-S01-01 S01补货专项详细设计（第一阶段）：REVIEW；实际执行者=Codex（本轮唯一文档执行者与台账集成人）。
 - UX-S01-01 S01采购补货交互原型与项目视觉规范：REVIEW；实际执行者=Codex（本轮AI执行者，实际同文件唯一写入者）。
 - D-S01-MVP-PLAN S01 MVP实施文档与最小底座范围（仅文档）：REVIEW；实际执行者=Codex（本轮单人文档执行者）。
@@ -32,8 +33,8 @@
 | ID | 内容 | 状态 | 直接依赖 |
 |---|---|---|---|
 | SETUP-001 | 精简计划/归档与本地Git交付 | REVIEW | 无；仍核对入口指令 |
-| A-01 | S01所需最小版本与公共契约冻结 | REVIEW | D-S01-01 |
-| A-02 | 最小骨架、配置、错误与日志 | TODO | A-01 |
+| A-01 | S01所需最小版本与公共契约冻结 | IN_PROGRESS | D-S01-01 |
+| A-02 | 最小骨架、配置、错误与日志 | IN_PROGRESS | A-01 |
 | A-03 | MySQL、SQLAlchemy与Alembic子集 | TODO | A-02 |
 | A-04 | 身份认证、权限与租户必要子集 | TODO | A-02 |
 | A-05 | API/独立Worker与MySQL持久任务 | TODO | A-03, A-04 |

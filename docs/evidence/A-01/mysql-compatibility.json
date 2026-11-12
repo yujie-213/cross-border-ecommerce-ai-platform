@@ -1,0 +1,96 @@
+{
+  "scope": "REAL_MYSQL_ISOLATED_ENGINEERING_COMPATIBILITY",
+  "database": "s01_a01_test_20261112",
+  "checks": [
+    {
+      "check": "real_authorized_connection",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "mysql_version_supports_required_locking",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "innodb_supported",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "driver_and_selected_database",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "session_utc",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "read_committed",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "decimal_exact_roundtrip",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "utc_microseconds_roundtrip",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "utf8mb4_roundtrip",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "tenant_composite_key",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "unique_constraint",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "short_transaction_rollback",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "two_connection_skip_locked",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "current_fence_updates",
+      "result": "PASS",
+      "detail": null
+    },
+    {
+      "check": "stale_fence_rejected",
+      "result": "PASS",
+      "detail": null
+    }
+  ],
+  "status": "PASS",
+  "stage": "complete",
+  "cleanup": "OWNED_FIXTURE_TABLE_REMOVED",
+  "erpCalls": 0,
+  "modelCalls": 0,
+  "otherDatabasesModified": false,
+  "serverVersion": "8.0.27",
+  "databaseCreatedThisRun": true,
+  "versions": {
+    "SQLAlchemy": "2.0.57",
+    "PyMySQL": "1.2.4",
+    "alembic": "1.20.1",
+    "cryptography": "50.0.2"
+  },
+  "python": "3.13.5"
+}

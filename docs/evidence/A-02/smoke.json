@@ -1,0 +1,26 @@
+{
+  "scope": "A02_REAL_API_PROCESS_AND_AUTHORIZED_MYSQL",
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "real_process_live",
+      "result": "PASS",
+      "httpStatus": 200
+    },
+    {
+      "check": "real_mysql_connected_but_mvp_not_ready",
+      "result": "PASS",
+      "httpStatus": 503
+    },
+    {
+      "check": "no_unimplemented_business_routes",
+      "result": "PASS"
+    }
+  ],
+  "time": "2026-11-12T02:35:20.846117+00:00",
+  "databaseWrites": 0,
+  "erpCalls": 0,
+  "modelCalls": 0,
+  "ownedApiProcessStopped": true,
+  "credentialLeakObserved": false
+}

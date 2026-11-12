@@ -126,7 +126,7 @@
       "check": "no-business-initialization",
       "result": "PASS",
       "detail": {
-        "managementOnly": true,
+        "managementOnly": false,
         "paths": [
           "src",
           "pyproject.toml",

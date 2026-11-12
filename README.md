@@ -22,9 +22,9 @@
 | B01 / B02 业务分析 | B01 负责确定性指标；B02 构造候选并调用 B01 评价 | 设计与计划 |
 | A01—A03 AI | 模型统一网关、受控运行时、只读工具；模型不计算权威库存 | 设计与计划 |
 | C01—C03 人工控制 | 建议、审批、另行授权执行各自管理状态 | 原型演示；服务未实现 |
-| G / I 公共工程 | 权限、审计与工作项等按当前切片补齐 | 设计与计划 |
+| G / I 公共工程 | 权限、审计与工作项等按当前切片补齐 | A-02配置/安全运行日志已实现；权限、审计与工作项待开发 |
 
-工程设计确定使用 Python/FastAPI、SQLAlchemy、Alembic 和 MySQL；API 与 Worker 分为独立进程。上述应用工程尚未建立。响应缓存默认 OFF，不预建 Redis、消息队列、向量库或多 Agent 通信。正式前端组件库与应用技术选型尚未冻结。
+工程采用 Python/FastAPI、SQLAlchemy、Alembic 和 MySQL；API 与 Worker 按独立进程设计。当前已建立 A-02 API 工厂、配置、错误/日志与健康接口，Worker及业务服务尚未实现。响应缓存默认 OFF，不预建 Redis、消息队列、向量库或多 Agent 通信。正式前端组件库与应用技术选型尚未冻结。
 
 已实现的独立原型使用原生 HTML、CSS、JavaScript；文档工具使用 Python、Mermaid，浏览器检查使用 Playwright。它们不构成正式前端或平台后端。
 
@@ -32,7 +32,27 @@
 
 S01 原型包含工作台、建议列表、详情和人工审批预览，支持搜索筛选、固定逐日样例、证据反馈、模拟分析/取消/暂停、版本变化与审批失效。默认只读，显式开启后才演示人工流程，外部执行始终禁用。全部数据和身份为模拟，刷新清空状态。
 
-下一阶段待做：S01 完整专项设计与口径确认、必要公共契约冻结、最小工程与只读分析链路、适用真实数据验证。ERP、数据库、模型网关、后台任务、持久审批和真实权限均未实现。任务与验收状态只以 [TASKS](docs/TASKS.md) 为准；本轮不启动这些开发任务。
+当前 MySQL 8.0.27 独立测试库与 SQLAlchemy/PyMySQL 的15项工程兼容验证已通过，不代表ERP、业务规则或生产验收。后续仍需 A-03 迁移/持久化、身份与持久任务、只读分析链路及对应真实数据/模型许可。任务与验收状态只以 [TASKS](docs/TASKS.md) 为准。
+
+## 运行当前 A-02 骨架
+
+已验证环境：Windows 10 build 19045 / CPython 3.13.5；其他 OS/Python 组合未验证。根目录 `.env` 使用 [.env.example](.env.example) 的字段，在本机填写获准连接，禁止提交密码。当前为本地开发骨架，只有健康路由，未配置真实身份或业务服务。
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --require-hashes -r requirements.lock
+.\.venv\Scripts\python.exe -m pip install -e . --no-deps --no-build-isolation
+.\.venv\Scripts\python.exe -m uvicorn commerce_hub.entrypoints.http.app:create_app --factory --host 127.0.0.1 --port 8000 --no-access-log
+```
+
+`GET /health/live` 返回200。`GET /health/ready` 只读验证数据库，当前仍返回503并列明尚未实现的持久化/身份/Worker/S01；数据库可连接不等于MVP就绪。启动不建表、不迁移、不启动Worker，不调用ERP/模型。其他业务路径返回统一404，不提供假成功。
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest
+.\.venv\Scripts\python.exe tools/smoke_foundation.py --output docs/evidence/A-02/smoke.json
+```
+
+独立数据库兼容验证命令为 `tools/check_mysql_compat.py`，会在固定 `s01_a01_test_20261112` 库建本次专用fixture表、验证后只清理自己的表；使用前须有该库变更授权，不能作为任意数据库探针。当前测试的真实/模拟范围见 [A-01兼容证据](docs/evidence/A-01/mysql-compatibility.json) 与 [A-02进程检查](docs/evidence/A-02/smoke.json)。
 
 ## 目录与文档入口
 

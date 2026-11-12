@@ -176,9 +176,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-S01-01"
   ],
-  "entryCondition": "2026-11-12负责人明确授权仅准备A-01技术/契约评审材料、兼容性分析/正反例和非破坏性MySQL环境检查；本轮不签认、不执行数据库变更或业务编码。D-S01-01整体REVIEW，当前消费范围须负责人逐项签认；真实连接只使用其授权配置，兼容实测未完成仍NOT_RUN。",
+  "entryCondition": "2026-11-12负责人认可现有A-01契约原则和职责，授权普通字段/DTO/错误码自主确定，替代逐项签认手续；授权读取.env及独立测试库真实兼容验证，检查后直接A-02。真实身份/ERP/业务规则/模型门禁不变。",
   "ownerRole": "项目负责人本人担任A-01最终契约评审负责人；Codex只准备草案、自检与串行集成，星星复核结果按真实记录",
-  "assignee": "Codex（本轮唯一材料作者及台账集成人；无契约签认权）",
+  "assignee": "Codex（本轮唯一执行者及集成人）",
   "allowedPaths": [
     "docs/contracts/s01/A-01-契约评审稿.md",
     "docs/contracts/s01/examples.json",
@@ -192,7 +192,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/generated/",
     "docs/planning/git-whitelist.json",
     "docs/planning/validation-report.json",
-    ".env（仅本机忽略文件，不入Git）"
+    ".env（仅本机忽略文件，不入Git）",
+    "tools/check_mysql_compat.py",
+    "docs/evidence/A-01/mysql-compatibility.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -224,7 +226,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "8fbfce3799605ce3a87306e8a6a398055db67946"
   ],
@@ -291,16 +293,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "main",
-  "observedHead": "8fbfce3799605ce3a87306e8a6a398055db67946",
+  "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
-  "blocker": {
-    "reason": "本轮仅评审材料交付REVIEW；完整A-01冻结仍受阻：R01—R12未逐项签认，D-S01-01当前消费范围未签，获准连接未配置，实际Server/包组合/真实MySQL兼容实测NOT_RUN。此记录不解除四项业务安全门，也不表示A-01已全部完成。",
-    "responsibleRole": "项目负责人本人（最终逐项契约评审及本机数据库配置）；Codex只准备材料，星星复核结论待提供",
-    "releaseCondition": "负责人和星星复核材料；负责人绑定被审commit逐项签认消费范围及保留项，并提供获准连接/必要的独立库验证授权。补实际版本、兼容与适用证据后再评审冻结，不自动ACCEPTED。"
-  },
+  "blocker": null,
   "history": [
     {
       "date": "2026-11-11",
@@ -321,6 +319,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "12项契约评审材料和批准的验收文字已提交并通过材料/18项文档检查，材料提交已真实普通同步；仅本轮材料供负责人/星星复核，未签认、未冻结技术/业务值，AC1/AC3及真实验收NOT_RUN，不自动开始A-02",
       "observedHead": "8fbfce3799605ce3a87306e8a6a398055db67946"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "REVIEW",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确简化契约评审，授权真实独立MySQL验证和完成后直接A-02；不再以普通字段逐项签认为阻断，真实业务安全门保留",
+      "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae"
     }
   ],
   "completionEvidence": [
@@ -349,16 +354,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "A-01"
   ],
-  "entryCondition": "本轮仅规划，以下开发/调用均未授权执行；待负责人和星星评审计划并另发开发指令后，按依赖/相应启用条件领取。A-01当前子集评审后可先开发，不需要ERP数据或模型密钥。",
+  "entryCondition": "2026-11-12用户明确授权必要环境与契约检查后直接开发A-02；A-01当前消费原则已认可，普通技术细节由执行者依既有设计确定。仅最小骨架/配置/错误/日志与健康检查，不自动开展A-03及业务能力。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
-  "assignee": null,
+  "assignee": "Codex（本轮唯一执行者及集成人）",
   "allowedPaths": [
-    "pyproject.toml（未来）",
-    "依赖锁文件（A-01冻结实际路径）",
-    "src/commerce_hub/bootstrap/",
-    "src/commerce_hub/entrypoints/",
-    "tests/unit/bootstrap/（未来）",
-    "docs/evidence/A-02/（未来，仅脱敏证据）"
+    "pyproject.toml",
+    "requirements.lock",
+    ".env.example",
+    ".python-version",
+    "src/commerce_hub/",
+    "tests/unit/bootstrap/",
+    "tests/smoke/",
+    "docs/evidence/A-02/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "docs/generated/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json"
   ],
   "parallelCondition": "依赖满足、契约稳定且实际文件不相交；迁移/组合根/公共Schema/台账串行合入",
   "deliverables": [
@@ -384,15 +398,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "SIMULATED_ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
-  "latestHandoffRef": null,
+  "branch": "main",
+  "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
     {
@@ -400,6 +416,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "changeType": "PLANNING_REFINEMENT",
       "reason": "基于85a146e和ADR-S01-PLAN-001细化当前S01消费者范围，状态仍TODO、未领取或编码",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "TODO",
+      "to": "IN_PROGRESS",
+      "reason": "单人领取A-02最小骨架，获准MySQL15项兼容检查已PASS；保留原型/专项与四门，不创建业务Handler/表/Worker占位",
+      "observedHead": "59bc0340175e412aa7a25f49627d82e7273141ae"
     }
   ],
   "completionEvidence": [
