@@ -123,7 +123,17 @@ class TaskService:
             report = conn.execute(select(reports).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
             if row["state"] != "SUCCEEDED" or report is None:
                 raise TaskError("REPORT_NOT_PUBLISHED", 404)
-            return dict(report["payload"])
+            # Current G01 scope authorizes the requested fields, not every field
+            # of the persisted internal assets. The scenario owns its narrow read DTO.
+            spec = self.registry.get(row["scenario_id"])
+            if spec is None or spec.version != row["scenario_version"] or not hasattr(spec.handler, "report_view"):
+                raise TaskError("NOT_FOUND", 404)
+            try:
+                if report["payload"].get("scope") != row["scope"]:
+                    raise ValueError("REPORT_SCOPE_MISMATCH")
+                return spec.handler.report_view(report["payload"])
+            except (KeyError, TypeError, ValueError, IndexError):
+                raise TaskError("NOT_FOUND", 404) from None
 
     def cancel(self, principal, task_id, command_key, expected_revision, trace_id):
         fp = self.fingerprint(dict(task=task_id, expectedRevision=expected_revision))

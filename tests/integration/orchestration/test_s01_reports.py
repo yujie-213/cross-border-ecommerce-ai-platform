@@ -165,3 +165,60 @@ def test_report_rechecks_current_scope_and_tenant(make_s01):
     with pytest.raises(TaskError) as exc:
         env.service.read_report(env.principal, task_id)
     assert exc.value.status == 404
+
+
+def test_quantity_reader_gets_only_public_view_while_full_assets_remain_internal(make_s01):
+    from commerce_hub.data.evidence import resolve
+    env = make_s01()
+    task_id = create(env)["taskRef"]["taskId"]
+    Worker(env.service).once()
+    with env.database.engine.begin() as conn:
+        raw = conn.execute(select(reports.c.payload).filter_by(tenant_id=env.tenant, task_id=task_id)).scalar_one()
+        now = conn.scalar(select(func.utc_timestamp(6)))
+        reader = env.access.provision_fixture(conn, tenant_id=env.tenant, principal_id="quantity-reader",
+            token_id=uuid4().hex, expires_at=now + timedelta(hours=1),
+            grants_by_action={"tasks:read": env.scope})
+    assert raw["dataReport"]["inputProjection"]["input"]["mapping"]["sourceSku"] == "fixture-source-sku"
+    view = env.service.read_report(reader, task_id)
+    assert "inputProjection" not in view["dataReport"] and "manifest" not in view["dataReport"]
+    assert "reservedQty" not in str(view) and "sourceSku" not in str(view)
+    assert view["dataReport"]["supplyDemand"] == raw["dataReport"]["supplyDemand"]
+    raw_evidence = [item for item in raw["dataReport"]["evidence"] if item["fieldPath"].startswith("inputProjection/")]
+    assert raw_evidence and all(resolve(view, item["evidenceId"]) is None for item in raw_evidence)
+    with env.database.engine.connect() as conn:
+        assert conn.execute(select(reports.c.payload).filter_by(tenant_id=env.tenant, task_id=task_id)).scalar_one() == raw
+
+
+@pytest.mark.parametrize("dimension", ["fields", "canonicalSkuIds", "warehouseIds", "storeIds"])
+def test_report_read_rechecks_each_current_scope_dimension(make_s01, dimension):
+    env = make_s01()
+    task_id = create(env)["taskRef"]["taskId"]
+    Worker(env.service).once()
+    assert env.service.read_report(env.principal, task_id)["reportRef"]
+    with env.database.engine.begin() as conn:
+        conn.execute(update(grants).filter_by(tenant_id=env.tenant, principal_id=env.principal.principal_id, action="tasks:read")
+            .values(scope=dict(env.scope, **{dimension: ["outside-requested-scope"]})))
+    with pytest.raises(TaskError) as exc:
+        env.service.read_report(env.principal, task_id)
+    assert exc.value.status == 404
+
+
+@pytest.mark.parametrize("fault", ["missing-read-contract", "wrong-handler-version", "scope-binding"])
+def test_report_read_fails_closed_without_matching_read_contract(make_s01, fault):
+    env = make_s01()
+    task_id = create(env)["taskRef"]["taskId"]
+    Worker(env.service).once()
+    if fault == "missing-read-contract":
+        env.service.registry.clear()
+    elif fault == "wrong-handler-version":
+        from dataclasses import replace
+        env.service.registry[env.spec.scenario_id] = replace(env.spec, version="unsupported")
+    else:
+        # Corrupt only this test's own asset to verify scope mismatch is not exposed.
+        with env.database.engine.begin() as conn:
+            raw = conn.execute(select(reports.c.payload).filter_by(tenant_id=env.tenant, task_id=task_id)).scalar_one()
+            raw["scope"]["warehouseIds"] = ["outside-requested-scope"]
+            conn.execute(update(reports).filter_by(tenant_id=env.tenant, task_id=task_id).values(payload=raw))
+    with pytest.raises(TaskError) as exc:
+        env.service.read_report(env.principal, task_id)
+    assert exc.value.status == 404

@@ -12,11 +12,17 @@ def propose(snapshot, evaluator=evaluate):
     if not snapshot.candidates_allowed:
         return dict(baseline=baseline, candidates=[], limitations=["CANDIDATE_RULES_OR_QUALITY_BLOCKED"], selection=None)
     policy = snapshot.projection.input.policy
+    gap = Decimal(baseline["gapQuantity"])
+    if gap == 0:
+        # Total coverage does not imply timely coverage. The current policy has
+        # no approved rule for expediting/reallocating supply or sizing a bridge order.
+        reason = "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED" if baseline["stockoutRisk"] else "NO_REPLENISHMENT_NEEDED"
+        return dict(baseline=baseline, candidates=[], limitations=[reason], selection=None,
+                    demandMethod="EXPLICIT_ENGINEERING_DAILY_CURVE")
     with localcontext() as ctx:
         ctx.prec = 50
-        gap = Decimal(baseline["gapQuantity"])
         # Candidate search lives in B02; daily quantities/risks are always B01 results.
-        quantity = Decimal(0) if gap == 0 else (max(gap, policy.moq) / policy.orderMultiple).to_integral_value(
+        quantity = (max(gap, policy.moq) / policy.orderMultiple).to_integral_value(
             rounding=ROUND_CEILING) * policy.orderMultiple
     if quantity > policy.maxOrderQty:
         return dict(baseline=baseline, candidates=[], limitations=["NO_FEASIBLE_QUANTITY"], selection=None)
