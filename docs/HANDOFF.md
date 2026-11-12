@@ -1,5 +1,23 @@
 # 当前增量交接 v0.3
 
+## S01 双工作线集成与评审交接（2026-11-12，基于d6f9d70）
+
+本轮负责人授权单SKU数据准入离线核对与D-S01-DEV-01业务集成并行，最终REVIEW等待本人和星星独立验收。接手main/HEAD及fetch确认的GitHub origin/main均为d6f9d70052e9d153daa68cef700913a21c8a633c，跟踪区干净，唯一未知未跟踪docs/ERP-openapi.yaml保留未读/改/暂存。先冻结docs/contracts/s01/D-S01-DEV-01-freeze.md，再建立两个独立工作区/分支：codex/s01-data-admission与codex/s01-handler-integration；主集成人独占公共契约、API/组合根、TASKS/HANDOFF/DECISIONS。当前集成分支codex/s01-parallel-review，不自动合入GitHub main。
+
+A线文档实现58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b、证据e7bdc949d5242545e4aad437e3d5debac0088926，主区分别cherry-pick为58a8b71/b00d646。报告docs/evidence/D-S01-DATA-01/admission-report.md、索引和验证器核对9份Git基线来源指纹、8个数据域、30个观察引用。原始标识/数量未保存、库存店铺归属和完整覆盖未证，不能恢复SKU-A或替换成fixture；只关闭资料定位/历史计数分母/来源解释。八域最小受控包、业务规则/质量策略、可信传输及负责人岗位签认仍缺。报告交评审，DATA/RULE/ERP-ACCESS/AI-ACCESS四门仍BLOCKED，不把资料PASS写成业务准入。
+
+B线实现cb289f4febbd2d3b83866f8143d3ce0a82e5c4eb、收窄补丁91ae745c123f46560aecdce53e1e64b27a767435、证据dd6d112255e10e848f6017b8153e1eceb44b7902；主区实现cherry-pick为34edbc4/cc7c257、证据072193e。真正S01SupplyInventoryHandler复用现D01/D02/D03/质量/B01/B02，不改权威结果；经原A01/Mock、同一任务预算/usage形成DomainResult与quantity公开报告。四类解释严格逐字允许本次受控事实与supportRefs，不证明通用自然语言语义或C-04；Model失败/UNKNOWN/语义不符安全降级，required质量/调查不被AI解除。固定logicalCall/attempt重入不重发，迟到只核账不发布。
+
+主集成实现f515a849a901a53a19d04cb72d6ac6069c600c2c接入test+mock+禁网显式bootstrap.s01_business、原受理/读/取消/报告/证据API、受权options、新分析previousReportRef关联与发布task/plan纯校验hook。options无D02服务端映射目录，故mappedChoices=[]并明示限制，不能称真实映射可用。关联仅元数据、不污染manifest；同租户/场景/版本/scope/已发布及当前读取权校验，旧任务/报告不改写。交叉审查发现关联/读取缺少存储指纹与SQL归属核验，现两入口统一校验；进程负例证明重算指纹仍不能挪用旧版本。最小公共修复3e6d802仅将D03实际73字符snapshotId的A01/Context上限特化为128，其他Identifier仍64；无迁移、依赖、B01/B02或真实装配变化。
+
+固定集成提交cc7c2576c93485d2534680c342d271654bafd3ba运行python -m tools.verify_s01_dev：全量340 PASS/0 FAIL/0 ERROR/0 SKIP，原281测试名全部保全、新增59，一条既有Starlette/httpx弃用提示；pip check、compileall、默认关闭连通入口与A离线验证均退出0。真实MySQL8.0.27、s01_a01_test_20261112、UTC/READ-COMMITTED、唯一迁移head0004_reports；没有清库或变更其他库。逐测试名/脱敏原始输出/版本/命令见docs/evidence/D-S01-DEV-01/verification.json，B固定最终47项专属证据另保留b-verification.json。相关公共82项和新装配/独立API/Worker6项聚焦亦PASS。
+
+真实开发过程保留：B首轮12失败因原snapshot上限不兼容，修复后25单元、44组合、最终47项均PASS；主区最初聚焦pytest在沙箱临时目录清理被拒，受控执行82项PASS（原未开启MySQL的尝试不能计真实API验收）；首次文档check因新增文件尚未登记精确白名单FAIL，后续补精确路径再检查，不移除规则。工程互审A→B与B→A均完成，A最终只读复审cc7c257未发现剩余阻塞缺陷；互审不代替负责人和星星独立验收。详细范围见cross-review.json。
+
+最终文档build_docs/check_plan均退出0、18项PASS，diff --check退出0；31项任务/DAG/启用门禁保全，仅DEV状态变更为REVIEW，其他27条任务逐字段不变，三个资料门记录仅补离线证据且原blocker不变。31份变更制品高置信秘密模式增量扫描0发现；工程树与cc7c257一致，原B01/B02/数据模块/依赖/迁移/fixture/C-01证据和冻结业务设计/原型均未修改。保全脚本初次因旧任务缺可选enablementGates字段抛KeyError，改为可选字段比较后PASS；不是应用缺陷或额外业务验收。
+
+真实ERP/认证网络读取、DeepSeek、采购写入调用均0；未显示/改写本机.env或秘密，数据库测试只按既有配置运行。LIVE/C-04/UI和其他业务模块本轮NOT_RUN。D-S01-DEV-01进入REVIEW、review=null；数据线资料已交评审但真实门禁继续BLOCKED，其他任务的依赖/验收状态不改写。完成文档构建/校验、保全/增量秘密启发式及普通同步review分支后停止，等待负责人和星星独立验收。最终证据提交与远端SHA从Git实际查询，不填文件自身未知SHA。
+
 ## C-01工程验收登记（2026-11-12，基于669f37e）
 
 用户明确确认C-01已通过星星独立工程审查，负责人批准该阶段工程验收；Codex本轮仅登记，不另作独立评审。TASKS的C-01由REVIEW改为ACCEPTED，review填写日期2026-11-12、工程范围C_01_ENGINEERING_ONLY、评审者与负责人决定、被审实现eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f、证据提交669f37edd05fa6e59a833173c7136a0d50965ee3及[原验证证据](evidence/C-01/verification.json)，原实现/测试/历史均保留。工程验收覆盖C-01/AC1—AC3适用部分，包括A01/Mock/受控DeepSeek离线协议、结构输出/技术状态/脱敏、原O01期限/取消/预算与G02核账及本次首次结算状态修复。

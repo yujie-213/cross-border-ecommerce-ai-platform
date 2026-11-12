@@ -27,6 +27,7 @@
 | MVP 实施 | [S01 MVP 实施文档 v0.2](agents/S01_MVP实施文档.md)；[教学ERP调查与字段映射](agents/S01_ERP接口调查与字段映射.md)；[脱敏证据](agents/evidence/s01-erp-survey-20261111.json)；[单SKU开发准入核对与建议](agents/S01_单SKU开发准入核对.md)。A01解释必做，ERP缺口/受控补充与原型对接明确；本轮无开发 |
 | A-01 / A-02 工程入口 | [契约材料与当前授权增量](contracts/s01/A-01-契约评审稿.md)；[真实MySQL兼容证据](evidence/A-01/mysql-compatibility.json)；[A-02实际进程检查](evidence/A-02/smoke.json)；[启动/测试命令](../README.md)。负责人认可原则，普通字段自主确定；旧逐项评审材料保留历史，本机.env不入Git，四项业务安全门不解除 |
 | 第一大阶段运行 | [A-03—A-06启动/迁移/测试/恢复命令](runbooks/phase-a.md)。独立MySQL上的真实迁移/权限/持久任务和API/Worker进程验证；状态/适用证据仍只在TASKS，工程Handler只在tests装配 |
+| S01 双线交付 | [共用消费契约](contracts/s01/D-S01-DEV-01-freeze.md)；[离线数据准入报告](evidence/D-S01-DATA-01/admission-report.md)；[业务Handler工程运行说明](runbooks/s01-business.md)；[完整回归证据](evidence/D-S01-DEV-01/verification.json)。工程样例/Mock 与真实业务准入分开，最终状态及验收仍只读 TASKS |
 | UI 设计 | [产品功能规格](ui/PRODUCT_SPEC.md)；[视觉规范](../DESIGN.md)；[参考研究](ui/RESEARCH.md)；[一致性与缺口](ui/ALIGNMENT.md)；[评审修复记录](ui/REVIEW_FIX.md)；[独立原型](../prototypes/s01/index.html) |
 | 报告 | [可行性分析](reports/FEASIBILITY.md) / [HTML](reports/FEASIBILITY.html)；[示例测算](reports/feasibility/illustrative-financial-model.json)（非真实企业收益） |
 | 历史归档 | [归档说明与旧链接定位](archive/README.md)；[旧96项计划](archive/plan96-v0.1/README.md)；[本次路径迁移表](governance/migration.json) |
@@ -34,6 +35,6 @@
 
 ## 阅读边界
 
-首期 S01 只读，不开放外部采购执行。当前完成的是设计、规划与模拟原型，不能把文档或原型测试当作平台公共能力已经实现。业务规则与实现边界见正文及 DECISIONS；任务状态只读 TASKS。
+首期 S01 只读，不开放外部采购执行。当前 A/B/C-01 工程能力及 S01 工程业务集成的实际范围见运行说明和 TASKS，文档、原型或 Mock 测试不代表真实业务准入。业务规则与实现边界见正文及 DECISIONS；任务状态只读 TASKS。
 
 文档治理仅调整文件归类、导航和文档工具路径。五份治理前基线原文、17份旧计划文件和已有 Git 历史保留；当前五份正文除链接与路径外不变，检查由 `docs/governance/audit.py` 执行。历史证据中的旧路径、旧 SHA 与旧机器环境表示当时事实，不作为当前运行配置。

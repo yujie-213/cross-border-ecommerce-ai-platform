@@ -1,6 +1,6 @@
-当前双线授权（2026-11-12，基于d6f9d70052e9d153daa68cef700913a21c8a633c）：负责人授权单SKU离线数据准入核对和D-S01-DEV-01工程业务Handler集成，独立工作区/分支并行，公共文件由Codex主集成；工程样例/Mock及原隔离MySQL/API/Worker验证，最终REVIEW等待负责人和星星独立验收。四项真实准入仍BLOCKED，禁止新ERP认证/网络读取、真实DeepSeek与采购写入。下方早期停止点为历史。
-
 # 唯一任务与验收台账 v0.2
+
+当前双线工程交付（2026-11-12，基于d6f9d70052e9d153daa68cef700913a21c8a633c）：先冻结共用消费契约，A/B独立工作区与分支分别提交，Codex主集成公共文件。D-S01-DEV-01固定实现cc7c2576c93485d2534680c342d271654bafd3ba完成全量340 PASS/0 FAIL/0 ERROR/0 SKIP，原281保全、新增59；进入REVIEW、review=null，等待负责人和星星独立验收。数据线离线资料报告已完成并交评审，原SKU-A不能从已存类型证据恢复、八域缺口仍存在；D-S01-DATA/RULE/ERP-ACCESS/AI-ACCESS四门继续BLOCKED，资料核对不代签。真实ERP/DeepSeek/采购调用0，LIVE/C-04/UI等本轮NOT_RUN；工程互审不代替独立验收。当前集成分支codex/s01-parallel-review，GitHub main不自动合入。下方旧授权/停止点仅保留历史事实。
 
 当前C-01工程验收登记（2026-11-12，基于669f37e）：用户明确确认C-01已通过星星独立工程审查，并由负责人批准该阶段工程验收；本轮仅将C-01由REVIEW登记为ACCEPTED。被审实现eaa7718c08c8fc5112801f36bce0ba9f4a2ddb5f，证据提交669f37edd05fa6e59a833173c7136a0d50965ee3，引用docs/evidence/C-01/verification.json。验收仅覆盖A01/Mock/受控DeepSeek离线适配及O01/G02调用控制的工程范围，沿用原281项实测，不重跑应用测试。四项准入门禁保持BLOCKED；真实DeepSeek、费用核对和C-04保持NOT_RUN，不授权后续开发或真实模型调用。下方旧REVIEW及review=null描述均为历史事实，当前状态只读任务JSON。
 
@@ -3979,9 +3979,40 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BUSINESS_REVIEW"
   ],
   "status": "BLOCKED",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "implementationCommits": [
+    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b"
+  ],
+  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "evidence": [
+    {
+      "kind": "OFFLINE_DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-DATA-01/AC1",
+        "D-S01-DATA-01/AC2",
+        "D-S01-DATA-01/AC3"
+      ],
+      "command": "python docs/evidence/D-S01-DATA-01/verify_offline.py",
+      "environment": "Windows / 已有Git资料离线复核；无ERP/DB/模型网络",
+      "sample": "9份基线来源指纹、8域缺口、30个观察引用PASS；只关闭资料定位/分母/来源层级解释，不恢复真实SKU标识、不补业务值或签认。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/verification.json"
+    },
+    {
+      "kind": "BUSINESS_REVIEW",
+      "acceptanceIds": [
+        "D-S01-DATA-01/AC1",
+        "D-S01-DATA-01/AC2",
+        "D-S01-DATA-01/AC3"
+      ],
+      "command": "NOT_RUN：负责人及数据/采购/仓库/质量/ERP安全岗位提供受控包并按本任务AC签认",
+      "environment": "Windows / 已有Git资料离线复核；无ERP/DB/模型网络",
+      "sample": "现有资料不足，原blocker/releaseCondition保持。报告已交评审，工程Mock不解除真实业务准入。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-data-admission",
   "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c",
@@ -4008,6 +4039,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "本轮负责人明确授权两条独立工作线；共用消费契约冻结于docs/contracts/s01/D-S01-DEV-01-freeze.md；主集成人统一公共文件。数据线仅离线核对，原准入门禁不解除。",
       "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c",
       "from": "BLOCKED"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "工作线A完成本地获准资料离线复核并交报告评审；资料解释疑点已收敛，原身份/数据/规则/ERP安全及实际签认条件未满足，门禁不解除。",
+      "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c"
     }
   ],
   "acceptanceRefs": [
@@ -4070,9 +4108,40 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW"
   ],
   "status": "BLOCKED",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "implementationCommits": [
+    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b"
+  ],
+  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "evidence": [
+    {
+      "kind": "OFFLINE_DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-RULE-01/AC1",
+        "D-S01-RULE-01/AC2",
+        "D-S01-RULE-01/AC3"
+      ],
+      "command": "python docs/evidence/D-S01-DATA-01/verify_offline.py",
+      "environment": "Windows / 已有Git资料离线复核；无ERP/DB/模型网络",
+      "sample": "9份基线来源指纹、8域缺口、30个观察引用PASS；只关闭资料定位/分母/来源层级解释，不恢复真实SKU标识、不补业务值或签认。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/verification.json"
+    },
+    {
+      "kind": "BUSINESS_REVIEW",
+      "acceptanceIds": [
+        "D-S01-RULE-01/AC1",
+        "D-S01-RULE-01/AC2",
+        "D-S01-RULE-01/AC3"
+      ],
+      "command": "NOT_RUN：负责人及数据/采购/仓库/质量/ERP安全岗位提供受控包并按本任务AC签认",
+      "environment": "Windows / 已有Git资料离线复核；无ERP/DB/模型网络",
+      "sample": "现有资料不足，原blocker/releaseCondition保持。报告已交评审，工程Mock不解除真实业务准入。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    }
+  ],
   "review": null,
   "branch": null,
   "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
@@ -4090,6 +4159,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "BLOCKED",
       "reason": "本轮仅规划登记；未领取开发，已知实际准入缺口单列BLOCKED，不把原则同意当完成",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "工作线A完成本地获准资料离线复核并交报告评审；资料解释疑点已收敛，原身份/数据/规则/ERP安全及实际签认条件未满足，门禁不解除。",
+      "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c"
     }
   ],
   "acceptanceRefs": [
@@ -4152,9 +4228,40 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW"
   ],
   "status": "BLOCKED",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "implementationCommits": [
+    "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b"
+  ],
+  "testedCommit": "58e72e6a3d9cfa6391eabbbb38dc38a837c6ef1b",
+  "evidence": [
+    {
+      "kind": "OFFLINE_DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-ERP-ACCESS-01/AC1",
+        "D-S01-ERP-ACCESS-01/AC2",
+        "D-S01-ERP-ACCESS-01/AC3"
+      ],
+      "command": "python docs/evidence/D-S01-DATA-01/verify_offline.py",
+      "environment": "Windows / 已有Git资料离线复核；无ERP/DB/模型网络",
+      "sample": "9份基线来源指纹、8域缺口、30个观察引用PASS；只关闭资料定位/分母/来源层级解释，不恢复真实SKU标识、不补业务值或签认。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/verification.json"
+    },
+    {
+      "kind": "BUSINESS_REVIEW",
+      "acceptanceIds": [
+        "D-S01-ERP-ACCESS-01/AC1",
+        "D-S01-ERP-ACCESS-01/AC2",
+        "D-S01-ERP-ACCESS-01/AC3"
+      ],
+      "command": "NOT_RUN：负责人及数据/采购/仓库/质量/ERP安全岗位提供受控包并按本任务AC签认",
+      "environment": "Windows / 已有Git资料离线复核；无ERP/DB/模型网络",
+      "sample": "现有资料不足，原blocker/releaseCondition保持。报告已交评审，工程Mock不解除真实业务准入。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/D-S01-DATA-01/admission-report.md"
+    }
+  ],
   "review": null,
   "branch": null,
   "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3",
@@ -4172,6 +4279,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "BLOCKED",
       "reason": "本轮仅规划登记；未领取开发，已知实际准入缺口单列BLOCKED，不把原则同意当完成",
       "observedHead": "85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "reason": "工作线A完成本地获准资料离线复核并交报告评审；资料解释疑点已收敛，原身份/数据/规则/ERP安全及实际签认条件未满足，门禁不解除。",
+      "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c"
     }
   ],
   "acceptanceRefs": [
@@ -4373,7 +4487,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "tests/support/s01_business.py",
     "docs/evidence/D-S01-DEV-01/",
     "src/commerce_hub/bootstrap/s01_business.py（主集成人）",
-    "src/commerce_hub/entrypoints/http/tasks.py（主集成人）"
+    "src/commerce_hub/entrypoints/http/tasks.py（主集成人）",
+    "src/commerce_hub/entrypoints/http/app.py（主集成人）",
+    "src/commerce_hub/orchestration/service.py（主集成人）",
+    "src/commerce_hub/capabilities/models/contracts.py（主集成人兼容修复）",
+    "src/commerce_hub/scenarios/s01/explanation.py（主集成人兼容修复）",
+    "tests/integration/processes/test_s01_business_processes.py",
+    "tests/unit/bootstrap/test_s01_business.py",
+    "tests/unit/models/test_snapshot_binding.py",
+    "tools/verify_s01_dev.py"
   ],
   "parallelCondition": "只有获得实施授权、契约稳定且实际文件不相交时可并行；公共契约/迁移/组合根/锁文件/台账单一集成人协调",
   "deliverables": [
@@ -4418,13 +4540,79 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "SIMULATED_ENGINEERING",
     "SECURITY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "cb289f4febbd2d3b83866f8143d3ce0a82e5c4eb",
+    "3e6d80202cc6e923bef7a5c452c2b38a206ac26c",
+    "f515a849a901a53a19d04cb72d6ac6069c600c2c",
+    "91ae745c123f46560aecdce53e1e64b27a767435",
+    "cc7c2576c93485d2534680c342d271654bafd3ba"
+  ],
+  "testedCommit": "cc7c2576c93485d2534680c342d271654bafd3ba",
+  "evidence": [
+    {
+      "kind": "SIMULATED_ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-DEV-01/AC1",
+        "D-S01-DEV-01/AC2",
+        "D-S01-DEV-01/AC3",
+        "D-S01-DEV-01/AC4"
+      ],
+      "command": "python -m tools.verify_s01_dev",
+      "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
+      "sample": "固定集成提交340 PASS，原A/B/C-01的281测试名称全部保全，新增59。真实MySQL/API/独立Worker但输入为工程样例、Provider为Mock；固定输入/质量/B01/B02/A01/DomainResult/公开报告及重入/迟到/降级正反例。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json"
+    },
+    {
+      "kind": "SECURITY",
+      "acceptanceIds": [
+        "D-S01-DEV-01/AC2",
+        "D-S01-DEV-01/AC3",
+        "D-S01-DEV-01/AC4"
+      ],
+      "command": "python -m tools.verify_s01_dev",
+      "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
+      "sample": "Mock-only/default禁网装配；错量/日期/约束/质量/审批/引用/版本丢弃；当前G01、公开字段/证据、取消/plan/lease迟到不发布、保留UNKNOWN原预算；旧报告关系越权/损坏指纹/重算指纹的错版本拒绝。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json"
+    },
+    {
+      "kind": "ENGINEERING_CROSS_REVIEW",
+      "acceptanceIds": [
+        "D-S01-DEV-01/AC1",
+        "D-S01-DEV-01/AC2",
+        "D-S01-DEV-01/AC3",
+        "D-S01-DEV-01/AC4"
+      ],
+      "command": "A→B最终只读复审cc7c257；B→A复审58e72e6；主集成人复核并运行完整回归",
+      "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
+      "sample": "双向工程互审完成；发现存储指纹/SQL归属缺口已修复。A独立复跑25项早期B单元PASS，B最终47项PASS。不是负责人/星星独立验收。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/D-S01-DEV-01/cross-review.json"
+    },
+    {
+      "kind": "REAL_SOURCE_MODEL_ACCEPTANCE",
+      "acceptanceIds": [
+        "D-S01-DEV-01/AC1",
+        "D-S01-DEV-01/AC2",
+        "D-S01-DEV-01/AC3",
+        "D-S01-DEV-01/AC4"
+      ],
+      "command": "NOT_RUN：真实SKU/ERP读取、真实DeepSeek与C-04、正式UI/业务验收另行授权",
+      "environment": "Windows / CPython3.13.5 / 原stage-a-clean / 原隔离MySQL8.0.27；显式工程输入与Mock，非真实业务验收",
+      "sample": "四项真实门禁仍BLOCKED；本轮只证明工程业务集成，未执行ERP/真实模型/采购写入，不冒称完整MVP或S02 MC通过。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/D-S01-DEV-01/verification.json"
+    }
+  ],
   "review": null,
-  "branch": "codex/s01-handler-integration",
-  "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c",
+  "branch": "codex/s01-parallel-review",
+  "observedHead": "cc7c2576c93485d2534680c342d271654bafd3ba",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -4444,6 +4632,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "本轮负责人明确授权两条独立工作线；共用消费契约冻结于docs/contracts/s01/D-S01-DEV-01-freeze.md；主集成人统一公共文件。数据线仅离线核对，原准入门禁不解除。",
       "observedHead": "d6f9d70052e9d153daa68cef700913a21c8a633c",
       "from": "TODO"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "独立双线提交及工程交叉审查后，固定集成提交全量340 PASS（原281保全+59），证据/交接齐全；等待负责人和星星独立验收，不登记ACCEPTED，真实业务门禁原样。",
+      "observedHead": "cc7c2576c93485d2534680c342d271654bafd3ba"
     }
   ],
   "acceptanceRefs": [

@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-12",
+  "scope": "INTEGRATION_PRESERVATION_AND_HEURISTIC_SCAN_NOT_BUSINESS_ACCEPTANCE",
+  "testedCommit": "cc7c2576c93485d2534680c342d271654bafd3ba",
+  "taskRecords": 31,
+  "changedTasks": [
+    "D-S01-DATA-01",
+    "D-S01-DEV-01",
+    "D-S01-ERP-ACCESS-01",
+    "D-S01-RULE-01"
+  ],
+  "unchangedTaskRecords": 27,
+  "allDependenciesAndEnablementGatesPreserved": true,
+  "onlyStatusChange": "D-S01-DEV-01 TODO -> REVIEW",
+  "realGateStatusAndBlockerPreserved": true,
+  "implementationTreeMatchesTestedCommit": true,
+  "preservedPaths": [
+    "src/commerce_hub/capabilities/metrics",
+    "src/commerce_hub/capabilities/forecasting",
+    "src/commerce_hub/data",
+    "migrations",
+    "requirements.lock",
+    "pyproject.toml",
+    "examples/s01_single_sku.json",
+    "docs/evidence/C-01/verification.json",
+    "docs/agents/S01_MVP实施文档.md",
+    "docs/agents/S01_ERP接口调查与字段映射.md",
+    "docs/agents/evidence/s01-erp-survey-20261111.json",
+    "docs/agents/S01_单SKU开发准入核对.md",
+    "prototypes/s01"
+  ],
+  "scannedChangedFiles": 31,
+  "secretHeuristicFindings": [],
+  "secretScanLimitations": "High-confidence token/private-key patterns only; not a guarantee of no sensitive information.",
+  "documents": {
+    "buildDocsExitCode": 0,
+    "checkPlanExitCode": 0,
+    "checks": 18,
+    "result": "PASS"
+  },
+  "executionHistory": [
+    "B first unit run:12 failures due D03 snapshot73 vs A01max64; fixed3e6d802, then25unit/44combined/47finalPASS.",
+    "Root first focused sandbox run failed on pytest temp permissions; MySQL not enabled, not real API success. Controlled focused run82PASS.",
+    "Root explicit composition/independent API/Worker/relations/cancel focused6PASS.",
+    "Initial document checkFAIL:tracked-whitelist before new precise paths registered; later18PASS with no rules relaxed.",
+    "Initial preservation script raised KeyError for legacy task without enablementGates; fixed optional-field comparison; this is checker-only, no application change."
+  ],
+  "reviewState": "REVIEW",
+  "independentOwnerAndXingxingAcceptance": "NOT_RUN"
+}
