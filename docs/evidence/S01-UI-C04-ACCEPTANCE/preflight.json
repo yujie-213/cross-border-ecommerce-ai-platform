@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "capturedAt": "2026-11-12T16:41:45.732637+00:00",
+  "fetch": "PASS",
+  "sourceBranch": "codex/s01-ui-c04-fix",
+  "sourceHead": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+  "targetBranch": "main",
+  "targetHead": "6fdf10cd6850794cc1ba2695078e68a58996e974",
+  "mainIsAncestor": true,
+  "unexpectedSourceCommits": false,
+  "trackedChanges": [],
+  "untrackedPreserved": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "mergeMethod": "--ff-only",
+  "paidRequestsAllowed": false,
+  "erpNetworkAllowed": false
+}

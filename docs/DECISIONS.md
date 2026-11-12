@@ -195,3 +195,10 @@ G01当前实现固定HS256签名/issuer/audience/期限、数据库会话/修订
 首轮独立授权s01-c04-structured-20261112-r1，O01独立任务预算10请求/240000Token/$1，每请求保守预约$0.05，并发1、30秒超时、600秒任务、单投递、首败停止/不自动重试。场景C/D/E/A/B。必要定位修复后的后续轮按最新用户授权另记具体授权/预算，不把固定首轮额度作为终止目标，不通过重复任务换key绕限。
 
 教学包原租户属于准入/规则/批次摘要绑定，不改包或重签来源；新授权在原精确教学租户下使用新独立评测主体、token、command key、task和带授权命名空间的logicalCall，G02与预算按新task独立。版本化执行许可与源catalog授权分离；只有两个显式白名单配置能装配，旧配置及读取兼容保留，不开放任意授权/身份/场景。无B01/B02/Schema/迁移/前端布局改动。消费者是显式评测CLI/组合根/Handler；正常后端仍off/mock。测试须覆盖新旧隔离、固定身份/键/场景集、Token/未知费用、失败停止与真实A—E结果。企业四门BLOCKED不变；本条技术实施依据不是独立用途验收。
+
+
+## ADR-S01-UI-C04-ACCEPT-004 教学技术验收及快进合并（2026-11-13）
+
+负责人明确通知星星独立评审完成，批准被审098fe19bfc2c67476cb18443bbad29d12c5d0ffd教学工程范围ACCEPTED并快进main。范围为证据竞态、结构化引用及真实DeepSeek A—E技术验证。UI登记ACCEPTED；C-04同时包含正式用途签认，沿既有LIVE分项验收惯例，技术review.scopeDecision=ACCEPTED、overallTaskDecision=REVIEW，不扩展本轮授权至企业用途。历史失败/未执行、原始证据、UNKNOWN费用和$0.15/$0.25预约保留。
+
+仅在已审查实现后追加验收/复验文档；git merge --ff-only和普通push，不重写历史。合并后重跑639后端/31前端/6浏览器及文档/安全检查，独立证据目录S01-UI-C04-ACCEPTANCE；不可运行则NOT_RUN。无DeepSeek/ERP网络或预算写入，工程测试使用现有唯一隔离库和固定教学capture。源码/Schema/业务计算/迁移/依赖/权限无变化，消费者行为兼容被审版本，无新增接口；企业四门仍BLOCKED、整体验收D-S01-ACCEPT-01待另行授权，不开始下一模块。记录详情见evidence/S01-UI-C04-ACCEPTANCE/review.md。

@@ -693,6 +693,21 @@
     "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/detail-E-1440.png",
     "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/history-1440.png",
     "docs/evidence/C-04-STRUCTURED-LIVE/screenshots/revoked-evidence.png",
-    "docs/evidence/C-04-STRUCTURED-LIVE/verify_readonly.py"
+    "docs/evidence/C-04-STRUCTURED-LIVE/verify_readonly.py",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/preflight.json",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/backend-regression.json",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/frontend-verification.json",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/real-browser-cases.json",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/budget-preservation.json",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/preservation.json",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/workbench-1440.png",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/detail-A-1440.png",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/detail-A-1024.png",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/detail-A-390.png",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/detail-E-1440.png",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/history-1440.png",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE/screenshots/revoked-evidence.png"
   ]
 }

@@ -1,3 +1,5 @@
+当前验收合并授权（2026-11-13，被审098fe19）：负责人明确通知星星独立评审完成，批准前端证据竞态、结构化引用、真实A—E教学技术验证ACCEPTED并--ff-only合main。UI任务ACCEPTED；C-04技术范围ACCEPTED、含正式用途的整体仍REVIEW。四企业门BLOCKED，S01 MVP整体未验收；旧FAIL/NOT_RUN及两笔UNKNOWN预约保留。本轮零DeepSeek/ERP网络与新增Token，不改业务算法；工程复验/同步另存docs/evidence/S01-UI-C04-ACCEPTANCE，下方旧REVIEW/停止点保留历史。
+
 当前真实C-04新授权交付（2026-11-13，固定412c016）：新任务b8007816493d4b4ead5d993fef1128a2按CDEAB真实5/5 AVAILABLE、Schema/结构化引用/事实通过，无文内标记；新9147输入+900输出=10047Token、缓存2048/未命中7099，费用UNKNOWN/$0.25预约保留。639后端/31前端/6浏览器PASS，原632逐名保全。旧五例FAIL、5642Token/UNKNOWN/$0.15原指纹不变；C-04仍REVIEW、review=null，四企业门BLOCKED，不合main。新证据docs/evidence/C-04-STRUCTURED-LIVE/report.md；下方旧NOT_RUN为历史授权时点，不覆盖本条。
 
 当前真实模型授权更新（2026-11-12，基于48ce3e9）：负责人已明确允许新任务/独立授权及预算、官方DeepSeek真实C/D/E和必要A/B、定位修复后合理复测，不再因旧任务结束停止。C-04本轮IN_PROGRESS，Codex沿codex/s01-ui-c04-fix单人；首轮新授权s01-c04-structured-20261112-r1、10次/240000Token/$1/每次$0.05预约、CDEAB，单并发/30秒/600秒/单投递/首败分析不盲重试。源教学包不改，新主体/token/key/task/logicalCall独立；历史FAIL/5642Token/UNKNOWN/$0.15保留。最终REVIEW、不合main，四企业门BLOCKED；普通S01在线模式仍off/mock。
@@ -3075,7 +3077,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "D-S01-AI-ACCESS-01"
   ],
-  "entryCondition": "本轮新授权独立任务已真实C/D/E/A/B全PASS、G02逐条核对、639后端/31客户端/6浏览器复验；保持REVIEW，等待负责人/星星独立评审，不合main或自动ACCEPTED。历史原五例FAIL/旧NOT_RUN时点/5642Token/UNKNOWN费用/$0.15预约保留，四企业门BLOCKED；普通在线后端仍off/mock。",
+  "entryCondition": "负责人及星星已批准被审098fe19教学技术范围ACCEPTED并授权main快进合并；正式用途签认仍待四企业门，C-04整体REVIEW；只做验收合并/工程复验，无新模型或ERP调用、不改预算/算法、不进行完整MVP验收。",
   "ownerRole": "领取时由负责人指定实际模块执行者；公共契约/迁移/组合根/锁文件/TASKS由指定集成人串行协调",
   "assignee": "Codex（本轮C-04真实复验，单人串行）",
   "allowedPaths": [
@@ -3289,9 +3291,44 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/C-04-STRUCTURED-LIVE/backend-regression.json"
     }
   ],
-  "review": null,
-  "branch": "codex/s01-backend-closure",
-  "observedHead": "c965a334b6bbc3c689fb334c80f8cf0a9ee84dad",
+  "review": {
+    "reviewer": "负责人和星星（负责人明确通知独立评审完成并批准；Codex仅登记）",
+    "date": "2026-11-13",
+    "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+    "evidenceCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+    "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md",
+    "scope": "S01_TEACHING_UI_C04_TECHNICAL_ONLY",
+    "decision": "本轮教学工程技术范围ACCEPTED，批准--ff-only合main；正式企业用途与完整S01 MVP验收不包含在内。",
+    "scopeDecision": "ACCEPTED",
+    "acceptedScope": [
+      "前端证据请求上下文绑定、关闭/切换/退出/失权迟到竞态保护",
+      "text/supportRefs结构化引用及逐条事实/引用/权限/质量校验",
+      "独立真实DeepSeek A—E五场景技术验证、实际Token/UNKNOWN费用核账"
+    ],
+    "overallTaskDecision": "REVIEW",
+    "retainedEvidence": [
+      {
+        "index": 0,
+        "result": "FAIL",
+        "artifactRef": "docs/evidence/S01-BACKEND/model/execution.json",
+        "reason": "历史授权/策略时点事实原样保留；已审查的新独立评测通过不覆盖旧失败或旧未执行记录。"
+      },
+      {
+        "index": 4,
+        "result": "NOT_RUN",
+        "artifactRef": "docs/evidence/S01-BACKEND/model/report.md",
+        "reason": "历史授权/策略时点事实原样保留；已审查的新独立评测通过不覆盖旧失败或旧未执行记录。"
+      },
+      {
+        "index": 7,
+        "result": "NOT_RUN",
+        "artifactRef": "docs/evidence/S01-UI-C04-FIX/offline-revalidation.json",
+        "reason": "历史授权/策略时点事实原样保留；已审查的新独立评测通过不覆盖旧失败或旧未执行记录。"
+      }
+    ]
+  },
+  "branch": "main",
+  "observedHead": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -3386,6 +3423,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "oldReservationUsd": "0.15",
       "originalEvaluation": "FAIL_UNCHANGED",
       "evidenceRef": "docs/evidence/C-04-STRUCTURED-LIVE/report.md"
+    },
+    {
+      "event": "OWNER_APPROVED_TECHNICAL_ACCEPTANCE_AND_FF_MERGE",
+      "at": "2026-11-13",
+      "previousStatus": "REVIEW",
+      "status": "REVIEW",
+      "scopeDecision": "ACCEPTED",
+      "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+      "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md"
     }
   ],
   "completionEvidence": [
@@ -5565,7 +5611,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DEV-01",
     "A-04"
   ],
-  "entryCondition": "本轮竞态与结构化引用工程修复已完成固定提交复验并交REVIEW，等待负责人/星星独立评审；旧真实C-04 FAIL保留，新真实C/D/E调用需明确新授权及原累计预算核对，不复用结束任务/key，不合main或进入下一模块。",
+  "entryCondition": "负责人及星星已批准被审098fe19教学技术范围ACCEPTED并授权main快进合并；只做验收合并/工程复验，无新模型或ERP调用、不改预算/算法、不进行完整MVP验收。",
   "ownerRole": "由负责人指定实际责任人；负责人/星星评审当前计划，具体业务/安全/契约签认按岗位授权",
   "assignee": "Codex（本轮竞态与引用修复，单人串行）",
   "allowedPaths": [
@@ -5638,7 +5684,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER_API",
     "SECURITY"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "465892c9342f23fd3e1614df85c564ade0a5ef9a",
     "a3da2ba1948009c93501bed1a6ccfcc7749d51cc"
@@ -5714,9 +5760,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-UI-C04-FIX/frontend-verification.json"
     }
   ],
-  "review": null,
-  "branch": "codex/s01-frontend-mvp",
-  "observedHead": "6fdf10cd6850794cc1ba2695078e68a58996e974",
+  "review": {
+    "reviewer": "负责人和星星（负责人明确通知独立评审完成并批准；Codex仅登记）",
+    "date": "2026-11-13",
+    "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+    "evidenceCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+    "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md",
+    "scope": "S01_TEACHING_UI_C04_TECHNICAL_ONLY",
+    "decision": "本轮教学工程技术范围ACCEPTED，批准--ff-only合main；正式企业用途与完整S01 MVP验收不包含在内。",
+    "scopeDecision": "ACCEPTED",
+    "acceptedScope": [
+      "前端证据请求上下文绑定、关闭/切换/退出/失权迟到竞态保护",
+      "text/supportRefs结构化引用及逐条事实/引用/权限/质量校验",
+      "独立真实DeepSeek A—E五场景技术验证、实际Token/UNKNOWN费用核账"
+    ],
+    "overallTaskDecision": "ACCEPTED",
+    "retainedEvidence": []
+  },
+  "branch": "main",
+  "observedHead": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -5781,6 +5843,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "historicalC04": "FAIL_UNCHANGED",
       "addedPaidTokens": 0,
       "evidenceRef": "docs/evidence/S01-UI-C04-FIX/report.md"
+    },
+    {
+      "event": "OWNER_APPROVED_TECHNICAL_ACCEPTANCE_AND_FF_MERGE",
+      "at": "2026-11-13",
+      "previousStatus": "REVIEW",
+      "status": "ACCEPTED",
+      "scopeDecision": "ACCEPTED",
+      "reviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+      "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/review.md"
     }
   ],
   "acceptanceRefs": [

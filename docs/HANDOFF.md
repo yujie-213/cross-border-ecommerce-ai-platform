@@ -1,3 +1,9 @@
+# 验收合并增量（2026-11-13）
+
+当前验收合并授权（2026-11-13，被审098fe19）：负责人明确通知星星独立评审完成，批准前端证据竞态、结构化引用、真实A—E教学技术验证ACCEPTED并--ff-only合main。UI任务ACCEPTED；C-04技术范围ACCEPTED、含正式用途的整体仍REVIEW。四企业门BLOCKED，S01 MVP整体未验收；旧FAIL/NOT_RUN及两笔UNKNOWN预约保留。本轮零DeepSeek/ERP网络与新增Token，不改业务算法；工程复验/同步另存docs/evidence/S01-UI-C04-ACCEPTANCE，下方旧REVIEW/停止点保留历史。
+
+接手HEAD/远端source098fe19，main/origin-main6fdf10c，无跟踪修改，未知OpenAPI保留。主集成Codex单人，仅修改TASKS/HANDOFF/DECISIONS、派生状态和本轮独立验收证据。初始合并后测试NOT_RUN；运行后记录实际结果和提交，不复用旧PASS冒充本次重跑。
+
 ## C-04独立真实A—E交付（2026-11-13）
 
 当前真实C-04新授权交付（2026-11-13，固定412c016）：新任务b8007816493d4b4ead5d993fef1128a2按CDEAB真实5/5 AVAILABLE、Schema/结构化引用/事实通过，无文内标记；新9147输入+900输出=10047Token、缓存2048/未命中7099，费用UNKNOWN/$0.25预约保留。639后端/31前端/6浏览器PASS，原632逐名保全。旧五例FAIL、5642Token/UNKNOWN/$0.15原指纹不变；C-04仍REVIEW、review=null，四企业门BLOCKED，不合main。新证据docs/evidence/C-04-STRUCTURED-LIVE/report.md；下方旧NOT_RUN为历史授权时点，不覆盖本条。
