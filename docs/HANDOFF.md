@@ -12,6 +12,12 @@
 
 真实环境观察见[检查记录](evidence/A-01/environment-inspection.json)，本轮材料自检见[自检结果](evidence/A-01/review-checks.json)。实现/材料提交固定后按COLLABORATION针对该commit重跑适用检查，再用后续证据提交记录真实SHA/结果；不填自身未知SHA。所有真实MySQL兼容/包组合/ERP/模型/浏览器/业务/MC验收和契约签认NOT_RUN。完成普通同步后停止，等待负责人和星星复核，不开始A-02。
 
+材料提交`8fbfce3799605ce3a87306e8a6a398055db67946`已固定；提交后实际执行`python docs/contracts/s01/check_review.py --output`、build_docs.py、check_plan.py、CRLF约定diff --check均退出0。材料自检14项PASS（含15个负例的文档断言）、12评审项/11表可解析、31任务/六阶段/交付DAG与四门保全；增量暂存12文件秘密启发式0发现。自检不读取.env/未知YAML，不证明真实语义评测或数据库兼容。18项文档规则PASS，原专项/基线/原型保全。
+
+A-01本轮材料交付进入REVIEW，review仍null；blocker明确完整冻结仍缺逐项签认、获准连接/Server版本及实测。AC1/AC3证据NOT_RUN；未把材料自检当消费者实现验收，四门及五项边界任务状态/门禁不变。负责人和星星复核未进行，不冒称ACCEPTED。
+
+普通同步已实测：连接器及Git Credential Manager均yujie-213，既有origin Public目标及写权核对；远端原e9433ef为祖先，`git push origin HEAD:refs/heads/main`退出0，`ls-remote`确认main为材料提交8fbfce3799605ce3a87306e8a6a398055db67946。本条台账/自检/交接证据随后另提交并普通同步；最终本地/远端SHA由Git查询，不写自身未知SHA。未强推、重写历史或上传.env/原始YAML。后续只等待负责人和星星复核及本机获准配置，不自动连接、建库、迁移或开始任何其他任务。
+
 ## S01 MVP开发任务规划交付（2026-11-12，基于85a146e）
 
 负责人最新只授权规划/必要决策交接/文档检查/提交和GitHub同步；同意单SKU、教学ERP只读＋受控补充、必要质量门禁、A01真实解释/结构输出/既有详情展示、排除真实审批执行等五项原则。原则不等于数据/规则/安全签认，详见ADR-S01-PLAN-001。完成后交负责人和星星评审，再另行授权Codex开发；不得据本台账TODO自动开始。Codex单人从main / `85a146e7abf1c9f1e4aa6a2e05a31f1d5693bfb3`接手，跟踪与暂存起点干净，既有未跟踪`docs/ERP-openapi.yaml`保留，未使用代理。

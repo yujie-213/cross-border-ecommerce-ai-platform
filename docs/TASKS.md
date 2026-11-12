@@ -224,18 +224,83 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DESIGN_REVIEW",
     "SIMULATED_ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "8fbfce3799605ce3a87306e8a6a398055db67946"
+  ],
+  "testedCommit": "8fbfce3799605ce3a87306e8a6a398055db67946",
+  "evidence": [
+    {
+      "kind": "REVIEW_MATERIAL_SELF_CHECK",
+      "acceptanceIds": [
+        "A-01/AC2"
+      ],
+      "command": "python docs/contracts/s01/check_review.py --output",
+      "environment": "Windows / main / 材料提交8fbfce3799605ce3a87306e8a6a398055db67946；既有文档工具，仅文档及非破坏性环境发现",
+      "sample": "14项材料自检PASS：31项任务/六阶段/依赖不变、五边界任务仅三类字段变化、四门与其余任务保全；正例/15个负例、来源/未知值/期限与引用示例、链接/范围/增量秘密检查PASS。人工金标准矛盾例只标明结构合法仍须拒绝，不声称泛化语义测试。仅证明评审稿自洽，不替代AC2消费者实现验收。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/A-01/review-checks.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "A-01/AC2"
+      ],
+      "command": "python docs/planning/build_docs.py；python docs/planning/check_plan.py；git -c core.whitespace=cr-at-eol diff --check",
+      "environment": "Windows / main / 材料提交8fbfce3799605ce3a87306e8a6a398055db67946；既有文档工具，仅文档及非破坏性环境发现",
+      "sample": "对材料提交实际执行：构建/校验退出0，18项规则PASS；评审稿12项/11表可解析，无第二TODO。材料暂存12文件定向秘密启发式0发现；.env已忽略且未跟踪，未知YAML未读/改/暂存。所有非授权原专项/原型/基线未改。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json"
+    },
+    {
+      "kind": "MYSQL_COMPATIBILITY",
+      "acceptanceIds": [
+        "A-01/AC1"
+      ],
+      "command": "NOT_RUN：等待负责人填写本机.env获准连接；本轮仅Get-CimInstance/netstat/mysql.exe --version及官方PyPI元数据查询",
+      "environment": "Windows / main / 材料提交8fbfce3799605ce3a87306e8a6a398055db67946；既有文档工具，仅文档及非破坏性环境发现",
+      "sample": "服务PID6268、3306/33060监听PID7548已观察；路径/Server版本不可读，客户端8.0.27不当Server版本。此前默认ODBC1045失败保留，本轮认证0/SQL0/数据库变更0。候选版本仅元数据，不是安装兼容实测；拟用独立库未创建。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/A-01/environment-inspection.json"
+    },
+    {
+      "kind": "DESIGN_REVIEW",
+      "acceptanceIds": [
+        "A-01/AC3"
+      ],
+      "command": "NOT_RUN：等待负责人本人对R01—R12逐项签认，并由星星复核",
+      "environment": "Windows / main / 材料提交8fbfce3799605ce3a87306e8a6a398055db67946；既有文档工具，仅文档及非破坏性环境发现",
+      "sample": "负责人本轮只批准验收边界修正和评审机制，未签全部字段。D-S01-01整体仍REVIEW；重要新字段只是草案，四门完整保留BLOCKED；A-01原AC1/AC3不因材料自检转PASS。",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/contracts/s01/A-01-契约评审稿.md"
+    },
+    {
+      "kind": "GITHUB_SYNC",
+      "acceptanceIds": [],
+      "command": "git push origin HEAD:refs/heads/main；git ls-remote origin refs/heads/main",
+      "environment": "Windows / main / 材料提交8fbfce3799605ce3a87306e8a6a398055db67946；既有文档工具，仅文档及非破坏性环境发现",
+      "sample": "连接器/Git Credential Manager账号yujie-213，既有Public origin及写权限已核对；远端原e9433ef是祖先，普通push退出0且ls-remote为8fbfce3799605ce3a87306e8a6a398055db67946。这是材料提交同步事实，证据收尾提交随后按同样方式同步，最终SHA从Git读取。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/HANDOFF.md"
+    }
+  ],
   "review": null,
   "branch": "main",
-  "observedHead": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
+  "observedHead": "8fbfce3799605ce3a87306e8a6a398055db67946",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
-  "blocker": null,
+  "blocker": {
+    "reason": "本轮仅评审材料交付REVIEW；完整A-01冻结仍受阻：R01—R12未逐项签认，D-S01-01当前消费范围未签，获准连接未配置，实际Server/包组合/真实MySQL兼容实测NOT_RUN。此记录不解除四项业务安全门，也不表示A-01已全部完成。",
+    "responsibleRole": "项目负责人本人（最终逐项契约评审及本机数据库配置）；Codex只准备材料，星星复核结论待提供",
+    "releaseCondition": "负责人和星星复核材料；负责人绑定被审commit逐项签认消费范围及保留项，并提供获准连接/必要的独立库验证授权。补实际版本、兼容与适用证据后再评审冻结，不自动ACCEPTED。"
+  },
   "history": [
     {
       "date": "2026-11-11",
@@ -249,6 +314,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "IN_PROGRESS",
       "reason": "负责人批准验收边界文字修正、A-01评审材料与MySQL非破坏性检查；最终签认由负责人本人逐项进行，当前只领取材料准备，不扩展为契约冻结或实施",
       "observedHead": "e9433ef5b433167ca6499778407c6bc6c80edf0d"
+    },
+    {
+      "date": "2026-11-12",
+      "from": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "12项契约评审材料和批准的验收文字已提交并通过材料/18项文档检查，材料提交已真实普通同步；仅本轮材料供负责人/星星复核，未签认、未冻结技术/业务值，AC1/AC3及真实验收NOT_RUN，不自动开始A-02",
+      "observedHead": "8fbfce3799605ce3a87306e8a6a398055db67946"
     }
   ],
   "completionEvidence": [

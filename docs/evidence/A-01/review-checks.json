@@ -1,7 +1,7 @@
 {
   "scope": "A01_REVIEW_DOCUMENTS_ONLY",
   "baseCommit": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
-  "observedHead": "e9433ef5b433167ca6499778407c6bc6c80edf0d",
+  "observedHead": "8fbfce3799605ce3a87306e8a6a398055db67946",
   "command": "python docs/contracts/s01/check_review.py --output",
   "environment": "Windows / existing documentation Python; no candidate dependencies installed",
   "checks": [
