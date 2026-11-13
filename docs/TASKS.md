@@ -6697,8 +6697,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING"
   ],
   "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
+  "implementationCommits": [
+    "1eddeb6bc383779e550fd4d3cfef1bf310cb4f47"
+  ],
+  "testedCommit": "1eddeb6bc383779e550fd4d3cfef1bf310cb4f47",
   "evidence": [
     {
       "kind": "READ_ONLY_INSPECTION",
@@ -6772,6 +6774,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "准备已完成，执行门槛BLOCKED：12只读GET两项503，独立隔离未证明，33项副作用待批；不冒充小试完成"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "精确清单和本地证据已提交1eddeb6bc383779e550fd4d3cfef1bf310cb4f47；公开文档快照75ad144已普通同步。副作用仍NOT_RUN，等待读取恢复/范围确认/精确清单批准"
     }
   ],
   "executionGate": {
@@ -6792,7 +6799,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "commit": "75ad144ecfebbe22a2a17b0c62e21094883c97cf",
     "scope": "DOCUMENTS_AND_AGGREGATE_ONLY",
     "sourceCodeAndDetailedEvidence": "LOCAL_ONLY"
-  }
+  },
+  "testedScope": "PREPARATION_DOCUMENTS_AND_DECLARED_PLAN_CHECKS_ONLY_NOT_LIVE_PILOT"
 }
 ```
 
