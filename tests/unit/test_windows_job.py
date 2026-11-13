@@ -6,6 +6,16 @@ from commerce_hub.infrastructure.windows_job import Job
 
 pytestmark=pytest.mark.skipif(os.name!='nt',reason='Windows native process ownership test')
 
+def test_duplicate_launcher_lock_does_not_read_a_mandatory_locked_byte(tmp_path,monkeypatch):
+    import tools.local_platform as launcher
+    monkeypatch.setattr(launcher,'PRIVATE',tmp_path)
+    owner=launcher.scope_lock()
+    try:assert owner is not None and launcher.scope_lock() is None
+    finally:owner.close()
+    following=launcher.scope_lock()
+    assert following is not None
+    following.close()
+
 def test_job_close_only_kills_its_own_children():
     unrelated=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'],creationflags=subprocess.CREATE_NO_WINDOW)
     job=Job()

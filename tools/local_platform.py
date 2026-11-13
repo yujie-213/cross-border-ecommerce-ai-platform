@@ -16,10 +16,9 @@ def write(path,value):
 def scope_lock():
     PRIVATE.mkdir(parents=True,exist_ok=True)
     f=(PRIVATE/'instance.lock').open('a+b');f.seek(0)
-    if not f.read(1):f.write(b'0');f.flush()
-    f.seek(0)
     try:msvcrt.locking(f.fileno(),msvcrt.LK_NBLCK,1)
     except OSError:f.close();return None
+    if os.fstat(f.fileno()).st_size==0:f.write(b'0');f.flush()
     return f
 
 
