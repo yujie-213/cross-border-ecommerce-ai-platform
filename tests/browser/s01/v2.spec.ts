@@ -22,7 +22,7 @@ test('V2 READONLY: real full-range history, server filters, current rules, zero-
   const search = page.getByLabel('SKU / 商品搜索', { exact: true })
   await search.fill('HL-CBL100-2M')
   await expect(page.getByRole('row').filter({ hasText: 'HL-CBL100-2M' })).toHaveCount(1)
-  await page.getByRole('button', { name: '查看详情', exact: true }).click()
+  await page.getByRole('row').filter({ hasText: 'HL-CBL100-2M' }).getByRole('button', { name: '查看详情', exact: true }).click()
   await expect(page.getByRole('heading', { name: /HL-CBL100-2M/ })).toBeVisible()
   await expect(page.getByText('12 / 8 件', { exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: '新建单品分析', exact: true })).toBeEnabled()
@@ -82,7 +82,7 @@ test('V2 FULL: manual entire catalog, fresh single AI, human adjustment and one 
   const search = page.getByLabel('SKU / 商品搜索', { exact: true })
   await search.fill('HL-CBL100-2M')
   await expect(page.getByRole('row').filter({ hasText: 'HL-CBL100-2M' })).toHaveCount(1)
-  await page.getByRole('button', { name: '查看详情', exact: true }).click()
+  await page.getByRole('row').filter({ hasText: 'HL-CBL100-2M' }).getByRole('button', { name: '查看详情', exact: true }).click()
   const acceptedSingle = page.waitForResponse(r => r.url().endsWith('/s01/v2/singles') && r.request().method() === 'POST')
   await page.getByRole('button', { name: '新建单品分析', exact: true }).click()
   const singleResponse = await acceptedSingle; expect(singleResponse.status()).toBe(202)
@@ -133,4 +133,32 @@ test('V2 FULL: manual entire catalog, fresh single AI, human adjustment and one 
   await page.screenshot({ path: path.join(screenshots, 'full-single-requisition-mobile.png'), fullPage: true })
   expect(errors).toEqual([])
   writeFileSync(path.join(privateDir, 'browser-full-result.json'), JSON.stringify({ result: 'PASS', batchId, singleId, operationId: operation.operationId, erpId: operation.erpId, browserResponseLossAndReplay: true, pageReloadRecovered: true, pageErrors: errors }, null, 2))
+})
+
+test('V2 RECOVERY: same saved single and requisition after API Worker restart without new AI or ERP writes', async ({ page }) => {
+  test.skip(process.env.S01_V2_RECOVERY_BROWSER !== 'true', 'Explicit existing receipt and restarted local session required')
+  test.setTimeout(90000)
+  const session = JSON.parse(readFileSync(path.join(privateDir, 'session.json'), 'utf8'))
+  const saved = JSON.parse(readFileSync(path.join(privateDir, 'browser-full-result.json'), 'utf8'))
+  const operation = JSON.parse(readFileSync(path.join(privateDir, 'live-operation.json'), 'utf8'))
+  const commands: string[] = []
+  page.on('request', r => { if (r.method() === 'POST' && /\/s01\/v2\//.test(r.url())) commands.push(r.url().split('/api/v1')[1]) })
+  await page.goto('/')
+  await page.getByRole('button', { name: '连接身份', exact: true }).first().click()
+  await page.getByLabel('短期身份令牌').fill(session.token)
+  await page.getByRole('button', { name: '连接会话', exact: true }).click()
+  await page.getByRole('row').filter({ hasText: saved.singleId }).getByRole('button', { name: '查看单品历史', exact: true }).click()
+  await expect(page.getByText('AI 解释已生成，最终决定仍由人工做出。', { exact: true })).toBeVisible()
+  await expect(page.getByText('已提交 ERP，待领导审批', { exact: true })).toBeVisible()
+  const result = await page.request.get(`/api/v1/s01/v2/singles/${saved.singleId}/requisition`)
+  expect(await result.json()).toEqual(operation)
+  const response = await page.request.post(`/api/v1/s01/v2/singles/${saved.singleId}/requisition`, {
+    headers: { 'Idempotency-Key': 'v2-restart-original-operation', 'X-CSRF-Token': (await page.context().cookies()).find(c => c.name === 'commerce_csrf')!.value, Origin: 'http://localhost:5173' },
+    data: { finalQuantity: operation.finalQuantity, adjustmentReason: operation.adjustmentReason, sourceAcknowledged: true }
+  })
+  expect(response.status()).toBe(200); expect(await response.json()).toEqual(operation)
+  expect(commands).toEqual([]) // Page reads/history do not create tasks, models or new procurement operations.
+  await page.getByRole('button', { name: '查看事实证据与未知事项', exact: true }).click()
+  await page.screenshot({ path: path.join(screenshots, 'recovery-history.png'), fullPage: true })
+  writeFileSync(path.join(privateDir, 'browser-recovery-result.json'), JSON.stringify({ result: 'PASS', singleId: saved.singleId, erpId: operation.erpId, originalOperationReplayed: true, pageCreatedCommands: commands, newModelCalls: 0, newBusinessMutations: 0 }, null, 2))
 })

@@ -30,6 +30,9 @@ def constraints(catalog,entity):
     product=next((p for p in catalog['products']['rows'] if str(p['id'])==entity['productId']),{})
     day=catalog['businessDate'];issues=[]
     if not entity['identityVerified']:issues.append('BUSINESS_SCOPE_UNRESOLVED')
+    stock=[r for r in catalog['inventory']['rows'] if str(r['id']) in entity['inventoryIds']]
+    if len(stock)!=1:issues.append('INVENTORY_BUCKET_RELATION_UNCONFIRMED')
+    elif type(stock[0].get('available')) is not int or stock[0]['available']<0:issues.append('INVENTORY_QUANTITY_UNCONFIRMED')
     unit='EA' if product.get('unit') in {'piece','件','EA'} else None
     if not unit:issues.append('PROCUREMENT_UNIT_UNCONFIRMED')
     multiple=integer(product.get('default_carton_qty'))
@@ -127,7 +130,7 @@ def analyze(catalog,entity,reader,*,opening_binding=None):
     stock=[r for r in catalog['inventory']['rows'] if str(r['id']) in entity['inventoryIds']]
     result.update(analysisState='UNANALYZABLE',sourceGrade='UNAVAILABLE',quantity=None,sourceQuantity=None,
         unit=c['unit'],constraints=c,formalPurchases=formal_purchases(catalog,entity),
-        inventory=dict(available=sum(r['available'] for r in stock) if entity['identityVerified'] and all(type(r.get('available')) is int for r in stock) else None,
+        inventory=dict(available=stock[0]['available'] if entity['identityVerified'] and len(stock)==1 and type(stock[0].get('available')) is int and stock[0]['available']>=0 else None,
             inventoryIds=entity['inventoryIds'],warehouseId=entity['warehouseId']),
         uncertainties=['NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT','SELLABLE_ETA_UNKNOWN','FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED'],
         riskGroup='UNVERIFIED',riskDate=None,sourceUrgency=None,ruleFailureCodes=[],ruleResult=None,sourceSuggestion=None,

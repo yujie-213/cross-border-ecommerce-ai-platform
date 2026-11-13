@@ -60,6 +60,16 @@ def test_bad_inventory_sku_link_does_not_hide_the_actual_catalog_product(tmp_pat
     assert all(not e['identityVerified'] for e in found)
 
 
+def test_same_scope_inventory_records_are_not_assumed_additive(tmp_path):
+    erp,reader,catalog,_=ready(tmp_path,1)
+    other=deepcopy(catalog['inventory']['rows'][0]);other.update(id=999,available=40)
+    catalog['inventory']['rows'].append(other)
+    item=analyze(catalog,entities(catalog,'1')[0],reader)
+    assert item['inventory']['available'] is None and item['quantity']==120
+    assert 'INVENTORY_BUCKET_RELATION_UNCONFIRMED' in item['procurementEligibility']['hardBlocks']
+    assert not item['procurementEligibility']['eligible']
+
+
 def test_reference_only_and_unknown_algorithm_do_not_block_scheme_b(tmp_path):
     erp,reader,catalog,values=ready(tmp_path,1)
     result=analyze(catalog,values[0],reader)

@@ -28,6 +28,7 @@ export function quantityError(item: V2Item, quantity: number, reason: string) {
 }
 export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[] }
 const issueLabels: Record<string, string> = {
+  INVENTORY_BUCKET_RELATION_UNCONFIRMED: '存在多条库存记录，未证明可相加；库存总量待核实', INVENTORY_QUANTITY_UNCONFIRMED: '库存数量未满足有效非负整数要求',
   NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT: '各接口分时读取，可能存在数据时差', SELLABLE_ETA_UNKNOWN: '实际到货可售日期未确认',
   FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED: '已有正式采购未确认有效供给，未抵扣', ERP_ALGORITHM_UNKNOWN: 'ERP 内部计算依据未知',
   ERP_DAILY_SALES_WINDOW_UNKNOWN: 'ERP 日均销量统计窗口未知', ERP_GENERATION_TIME_UNVERIFIED: '源生成时间语义未确认', ERP_PURCHASE_NETTING_UNKNOWN: 'ERP 建议是否已计入采购未知',
