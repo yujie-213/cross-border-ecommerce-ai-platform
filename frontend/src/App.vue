@@ -9,8 +9,10 @@ import StatusBadge from './components/StatusBadge.vue'
 import ReportDetail from './components/ReportDetail.vue'
 import RequisitionPanel from './components/RequisitionPanel.vue'
 import HistoryTable from './components/HistoryTable.vue'
+import V2Workbench from './components/V2Workbench.vue'
 import type { Ref } from './api/types'
 const w = useWorkspace()
+const { v2Enabled } = w
 const { choices, selectedRef, selected, connected, busy, loading, task, report, history, cursor, historyBefore, error, pollNote, pending, evidence, evidenceError, evidenceLoading, evidenceOpen } = w
 const routes: Record<string, string> = { workbench: '工作台', suggestions: '补货建议', approvals: '人工审批', detail: '分析详情' }
 const route = ref('workbench')
@@ -51,7 +53,8 @@ onUnmounted(() => window.removeEventListener('hashchange', syncRoute))
     <Notice v-if="error" tone="danger" title="操作未完成" :alert="true"><p>{{ error }}</p><button class="button small" :disabled="busy" @click="w.connect()">重新核对会话与选项</button></Notice>
     <Notice v-if="pending" tone="warning" title="命令状态待确认"><p>{{ pending.kind === 'create' ? '创建分析' : '取消任务' }} · {{ pending.createdAt }}。请核对原命令；重复核对沿用相同幂等 key，不创建新命令。</p><button class="button small" :disabled="busy || !connected" @click="w.retryCommand()">使用原命令核对</button></Notice>
     <Notice v-if="!connected" title="需要服务端可信身份">请连接已有授权会话。身份令牌仅用于交换安全 Cookie，不保存至浏览器存储；此处不能创建账号或切换角色。<button class="button small" @click="loginOpen = true">连接身份</button></Notice>
-    <template v-if="route === 'workbench' || route === 'suggestions'">
+    <V2Workbench v-if="v2Enabled && connected" @denied="w.connect()" />
+    <template v-else-if="route === 'workbench' || route === 'suggestions'">
       <div class="page-head"><div><div class="eyebrow">{{ route === 'workbench' ? 'OPERATIONS / WORKBENCH' : 'S01 / REPLENISHMENT' }}</div><h1>{{ route === 'workbench' ? '采购运营工作台' : '补货建议' }}</h1><p class="subtitle">选择授权范围，查看任务、规则报告与待核实的问题。</p></div><button class="button primary" :disabled="!connected || busy || !!pending || !choices.length" @click="newAnalysis()">＋ 新建补货分析</button></div>
       <div v-if="route === 'workbench'" class="hero-overview"><div><div class="hero-status"><span class="status-dot" />补货分析与人工复核</div><h2>先核实供需与风险，再进行人工复核</h2><p class="muted">真实 API / 独立 Worker / 本次不可变快照。打开当前报告，可由有权人员确认并提交教学请购。</p></div><button class="button" @click="navigate('suggestions')">进入补货分析 →</button></div>
       <Panel :title="route === 'workbench' ? '当前有权分析的范围' : '授权 SKU 与范围筛选'" note="授权映射内精确选择 · 在线任务重新采集">

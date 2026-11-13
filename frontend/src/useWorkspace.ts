@@ -13,6 +13,7 @@ export function useWorkspace() {
   const task = ref<Task | null>(null), report = ref<Report | null>(null), history = ref<Task[]>([])
   const cursor = ref<string | null>(null), historyBefore = ref<string | undefined>()
   const connected = ref(false), busy = ref(false), loading = ref(false), error = ref(''), pollNote = ref('')
+  const v2Enabled = ref(false)
   const pending = ref<Command | undefined>(saved.pending)
   const evidence = ref<unknown>(), evidenceError = ref(''), evidenceLoading = ref(false), evidenceOpen = ref(false)
   let evidenceEpoch = 0
@@ -21,7 +22,7 @@ export function useWorkspace() {
   let historyEpoch = 0
   const persist = () => sessionStorage.setItem(storageKey, JSON.stringify({ taskId, packageRef: selectedRef.value, pending: pending.value, owner }))
   function stop() { closeEvidence(); clearTimeout(timer); timer = undefined; epoch++; readController.abort(); readController = new AbortController() }
-  function hideProtected() { stop(); evidenceController.abort(); historyController.abort(); historyEpoch++; loading.value = false; report.value = null; task.value = null; history.value = []; choices.value = []; evidence.value = undefined; connected.value = false }
+  function hideProtected() { stop(); evidenceController.abort(); historyController.abort(); historyEpoch++; loading.value = false; report.value = null; task.value = null; history.value = []; choices.value = []; evidence.value = undefined; connected.value = false; v2Enabled.value = false }
   function fail(e: unknown) { error.value = errorText(e); if (e instanceof ApiError && [401, 403].includes(e.status)) hideProtected() }
   async function loadHistory(before?: string) {
     if (!selected.value || !connected.value) return
@@ -46,6 +47,7 @@ export function useWorkspace() {
         owner = next
       }
       const data = await api.options()
+      v2Enabled.value = data.v2Enabled === true
       choices.value = data.mappedChoices; connected.value = true
       if (!choices.value.some(x => choiceKey(x) === selectedRef.value)) selectedRef.value = ''
       persist()
@@ -131,5 +133,5 @@ export function useWorkspace() {
   }
   watch([() => task.value?.taskRef.taskId, () => JSON.stringify(report.value?.reportRef)], closeEvidence, { flush: 'sync' })
   onUnmounted(() => { stop(); historyController.abort(); evidenceController.abort() })
-  return { choices, selectedRef, selected, task, report, history, cursor, historyBefore, connected, busy, loading, error, pollNote, pending, evidence, evidenceError, evidenceLoading, evidenceOpen, connect, logout, selectPackage, loadHistory, openTask, create, cancel, readEvidence, closeEvidence, retryCommand: () => pending.value && send(pending.value) }
+  return { v2Enabled, choices, selectedRef, selected, task, report, history, cursor, historyBefore, connected, busy, loading, error, pollNote, pending, evidence, evidenceError, evidenceLoading, evidenceOpen, connect, logout, selectPackage, loadHistory, openTask, create, cancel, readEvidence, closeEvidence, retryCommand: () => pending.value && send(pending.value) }
 }

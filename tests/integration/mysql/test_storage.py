@@ -32,7 +32,7 @@ def test_explicit_migration_head_and_repeat_upgrade(database, mysql_settings):
 def test_one_frozen_migration_chain():
     script = ScriptDirectory.from_config(migration_config())
     assert script.get_heads() == [SCHEMA_REVISION]
-    assert [revision.revision for revision in script.walk_revisions()] == [SCHEMA_REVISION, "0007_monitor_scope", "0006_online_inputs", "0005_optional_usage", "0004_reports", "0003_delivery_version", "0002_actor_refs", "0001_foundation"]
+    assert [revision.revision for revision in script.walk_revisions()] == [SCHEMA_REVISION, "0009_s01_v2", "0008_s01_requisition", "0007_monitor_scope", "0006_online_inputs", "0005_optional_usage", "0004_reports", "0003_delivery_version", "0002_actor_refs", "0001_foundation"]
     source = Path(script.get_revision("0001_foundation").path).read_text(encoding="utf-8")
     assert "from commerce_hub.orchestration.tables" not in source
     assert "metadata.create_all" not in source

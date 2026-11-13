@@ -40,6 +40,15 @@ class RequisitionService:
         self._authorize(actor, scope, write=False)
         return report
 
+    def _mapping(self, scope, report):
+        return next((m for m in self.registry.mappings() if m.scope == scope), None)
+
+    def _authorize_operation(self, actor, scope, mapping):
+        self._authorize(actor, scope)
+
+    def _confirmation_metadata(self, report, mapping):
+        return {}
+
     def _row(self, conn, actor, report_id, *, lock=False):
         query = select(requisitions).filter_by(tenant_id=actor.tenant_id, report_id=report_id)
         if lock:
@@ -121,7 +130,7 @@ class RequisitionService:
         service = self
         class Context:
             def check(self):
-                service._authorize(actor, mapping.scope)
+                service._authorize_operation(actor, mapping.scope, mapping)
         context = Context()
         captures, receipt = collect_owned(client.reader, mapping, context, 'rq-'+operation[:32],
             formal_purchases=True, purchase_proofs=verified_purchase_proofs(self.engine, mapping.scope))
@@ -181,7 +190,7 @@ class RequisitionService:
         report = self._source(actor, report_id)
         scope = report['scope']
         self._authorize(actor, scope)
-        mapping = next((m for m in self.registry.mappings() if m.scope == scope), None)
+        mapping = self._mapping(scope, report)
         if mapping is None or mapping.monitor is None:
             raise TaskError('MONITOR_SCOPE_NOT_ACTIVE', 409)
         fp = fingerprint(dict(quantity=quantity, reason=reason))
@@ -209,6 +218,7 @@ class RequisitionService:
                         importBatchId=mapping.monitor.importBatchId, purpose='SALES_REPLENISHMENT',
                         aiQuantity=original, finalQuantity=quantity, adjustmentReason=reason,
                         sourceSnapshot=report['snapshotRef'], errorCode=None)
+                    content.update(self._confirmation_metadata(report, mapping))
                     conn.execute(requisitions.insert().values(tenant_id=actor.tenant_id, report_id=report_id,
                         operation_id=operation, principal_id=actor.principal_id, command_key=command_key,
                         fingerprint=fp, state=state, content=content, created_at=now, updated_at=now))
@@ -222,7 +232,7 @@ class RequisitionService:
             raise TaskError('REQUISITION_COMMAND_CONFLICT') from None
         try:
             def check():
-                self._authorize(actor, scope)
+                self._authorize_operation(actor, scope, mapping)
             client = self.client_factory(operation, check)
             if state == 'PREPARING':
                 prepared = self._prepare(actor, report, mapping, client, operation, quantity, reason)

@@ -61,6 +61,9 @@ def register_task_routes(app):
                                          request.headers.get("origin"), request.app.state.settings.browser_origin)
         return actor
 
+    from commerce_hub.entrypoints.http.s01_v2 import register_v2_routes
+    register_v2_routes(app, principal)
+
     @app.exception_handler(AccessDenied)
     async def access_error(_, exc):
         status = 503 if exc.code == "AUTH_BACKEND_UNAVAILABLE" else 401 if exc.code == "UNAUTHENTICATED" else 403
@@ -89,6 +92,12 @@ def register_task_routes(app):
     def options(request: Request, storeId: str | None = None, warehouseId: str | None = None, canonicalSkuId: str | None = None,
                 actor=Depends(principal)):
         service = request.app.state.tasks
+        if 'S01_V2_BATCH' in service.registry:
+            from commerce_hub.scenarios.s01_v2.handler import collection_scope
+            scope=collection_scope(actor.tenant_id)
+            service.registry['S01_V2_BATCH'].handler.validate_scope({},scope)
+            with service.engine.begin() as conn:service.access.authorize(conn,actor,'tasks:read',scope)
+            return dict(scenarioId='S01_BACKEND',mappedChoices=[],limitations=['V2_DYNAMIC_CATALOG'],v2Enabled=True)
         backend = service.registry.get("S01_BACKEND")
         if backend is not None:
             choices = []

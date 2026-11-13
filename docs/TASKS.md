@@ -1,3 +1,5 @@
+当前V2领取（2026-11-13）：D-S01-V2-01 IN_PROGRESS，Codex单人，codex/s01-v2-full-replenishment / e3591aacb96aca7d90b1f4e5e9efcfa5942eed14。负责人完整长任务及全范围补充覆盖旧不开发V2停止点：全部当前教学租户获准只读店仓SKU动态发现，不固定2/5SKU；写入仍限明确自有范围，方案B允许合规REFERENCE_ONLY人工请购。阶段连续推进至产品交付REVIEW，不合main。
+
 当前本轮完成（2026-11-13）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
 
 当前P3最终验收（2026-11-13）：固定3a8e95f重新复核，746全量后端/38前端/类型构建/迁移/历史兼容/1406独立只读回读通过；最小教学闭环ACCEPTED，正常合main待执行。已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣，企业四门BLOCKED；本轮无ERP业务写或模型。详见最终验收报告与S01-P3-ACCEPTANCE。
@@ -8288,5 +8290,132 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "observedAt": "2026-11-13T12:42:58.766933+00:00",
     "finalReceiptCommit": "Subsequent documentation-only receipt; final HEAD is returned from Git, no self-reference SHA fabricated"
   }
+}
+```
+
+## S01 V2完整开发
+
+```json
+{
+  "id": "D-S01-V2-01",
+  "stage": "D",
+  "title": "S01 V2完整补货工作台：动态全范围/双通道/方案B请购",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-P3-MIN-01"
+  ],
+  "entryCondition": "负责人粘贴完整长任务授权并补充全教学租户获准只读范围；独立分支连续开发，最终REVIEW不合main。",
+  "ownerRole": "Codex单人实现/集成；负责人最终验收",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "README.md",
+    "docs/",
+    "src/commerce_hub/",
+    "frontend/",
+    "tests/",
+    "tools/",
+    "migrations/versions/0009_s01_v2.py",
+    "migrations/versions/0010_s01_v2_manifests.py"
+  ],
+  "parallelCondition": "Codex单人；公共契约/迁移/组合根/台账串行；未知OpenAPI保留。",
+  "deliverables": [
+    "全部授权SKU动态发现与人工批量任务、规则/ERP降级来源、按需AI、方案B人工请购、完整前端、1000SKU工程及真实接口/浏览器证据、启动迁移恢复手册。"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-V2-01/AC01",
+      "text": "全授权范围动态SKU及唯一关系/分页完整性"
+    },
+    {
+      "id": "D-S01-V2-01/AC02",
+      "text": "人工全量任务、进度/历史/失败不漏项"
+    },
+    {
+      "id": "D-S01-V2-01/AC03",
+      "text": "批量零模型/零采购写的实际审计"
+    },
+    {
+      "id": "D-S01-V2-01/AC04",
+      "text": "原2SKU/B01B02 Golden不退化、新合法SKU同引擎"
+    },
+    {
+      "id": "D-S01-V2-01/AC05",
+      "text": "5款真实ERP降级验证且未知机制保留"
+    },
+    {
+      "id": "D-S01-V2-01/AC06",
+      "text": "来源分级及0/空/故障/重复桶区分"
+    },
+    {
+      "id": "D-S01-V2-01/AC07",
+      "text": "可证明风险排序、不可比/未知分组"
+    },
+    {
+      "id": "D-S01-V2-01/AC08",
+      "text": "单SKU主动最新采集与事实约束AI"
+    },
+    {
+      "id": "D-S01-V2-01/AC09",
+      "text": "方案B十二场景服务端采购准入"
+    },
+    {
+      "id": "D-S01-V2-01/AC10",
+      "text": "自有教学真实创建提交/独立回读/幂等"
+    },
+    {
+      "id": "D-S01-V2-01/AC11",
+      "text": "不少于1000合成SKU规模/恢复/覆盖/请求实测"
+    },
+    {
+      "id": "D-S01-V2-01/AC12",
+      "text": "真实浏览器全业务路径与截图"
+    },
+    {
+      "id": "D-S01-V2-01/AC13",
+      "text": "全量回归/迁移/历史/API独立Worker/权限/文档"
+    }
+  ],
+  "plannedTests": [
+    "冻结契约→实现；全量后端/前端/类型构建；1000SKU；真实有界小样与全枚举；自有教学单一请购及浏览器；敏感信息扫描。"
+  ],
+  "risks": [
+    "共享范围不赋予写权限；多SKU店仓歧义；静态建议及算法/在途UNKNOWN；全目录请求成本；真实接口波动。"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "BROWSER",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-v2-full-replenishment",
+  "observedHead": "e3591aacb96aca7d90b1f4e5e9efcfa5942eed14",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人完整V2授权及全范围补充；远端main一致，无并行改动；创建独立分支。直连TLS失败后沿既有本机代理/TLS验证fetch成功。"
+    }
+  ],
+  "contractRef": "docs/contracts/s01/v2-full-replenishment.md",
+  "currentPhase": "V2-4_REGRESSION_AND_LIVE_E2E",
+  "sourceDecision": "REFERENCE_ONLY不再独立阻止请购；硬约束/范围/权限/报价/人工确认仍强制；旧调查不改。",
+  "progressFacts": [
+    "动态目录/D01分页检查点/D03清单/O01批量与单品/双来源/方案B/P3状态机复用/完整工作台已实现，待固定提交后全量复验。",
+    "相关20项通过；此前17项、25项P3兼容及41项前端通过，非全量验收。真实只读全目录975对象完成，原线48件/杯无需补货保持；后续发现SKU去重口径需从ID+SKU修正为SKU字符串，并保留旧报告版本。",
+    "真实首轮报价limit200收到400已留证，改为该接口100；当前只读批次报价/建议/库存等分页完整。新观察同SKU重复建议进入UNVERIFIED，不任意选量。",
+    "真实单品模型/写入闭环和最终完整回归仍NOT_RUN；不得据只读浏览器通过提前宣称完整验收。"
+  ]
 }
 ```
