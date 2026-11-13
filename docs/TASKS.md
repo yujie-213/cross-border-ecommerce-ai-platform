@@ -1,6 +1,6 @@
 当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。
 
-当前本轮完成（2026-11-13）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
+此前P3/来源调查完成记录（2026-11-13，当时V2未开始）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
 
 当前P3最终验收（2026-11-13）：固定3a8e95f重新复核，746全量后端/38前端/类型构建/迁移/历史兼容/1406独立只读回读通过；最小教学闭环ACCEPTED，正常合main待执行。已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣，企业四门BLOCKED；本轮无ERP业务写或模型。详见最终验收报告与S01-P3-ACCEPTANCE。
 
@@ -8555,6 +8555,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "848对象数据不足/归属冲突非成功分析，不能静默变成无需补货",
     "共享SKU无真实采购写许可；真实新增第1001SKU NOT_RUN，仅合成验证",
     "有效可售在途正向抵扣和企业正式业务验收未通过，不补签P3过去记录"
-  ]
+  ],
+  "publication": {
+    "branch": "codex/s01-v2-full-replenishment",
+    "uploadedEvidenceCommit": "41fa08473c6735ff69ee99226bc8fcaaf6b6ac9b",
+    "pushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "remoteVerifiedCommit": "41fa08473c6735ff69ee99226bc8fcaaf6b6ac9b",
+    "mainRemoteUnchanged": "e3591aacb96aca7d90b1f4e5e9efcfa5942eed14",
+    "verifiedAt": "2026-11-13T17:18:24.530917+00:00",
+    "mode": "NORMAL_PUSH_NO_FORCE_NO_MERGE",
+    "receiptInterruption": "Prior receipt command was not executed because automatic approval review hit its usage limit; user resumed on 2026-11-14 and normal approval review succeeded.",
+    "receipt": "Subsequent documentation-only receipt; final HEAD must be read from Git, not fabricated in its own file"
+  }
 }
 ```
