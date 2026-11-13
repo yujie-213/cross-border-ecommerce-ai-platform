@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "policy": "Explicit public projection only; no live dotenv secret values in any changed/new publishable file",
+  "filesScanned": 70,
+  "liveSecretMatches": 0,
+  "heuristicFindingsDisposition": "Six LITERAL_SECRET matches in synthetic fixture access_token strings inspected; non-authenticating test-only values",
+  "unknownOpenapiPreserved": true,
+  "unknownOpenapiStaged": false,
+  "privateArtifactsExcluded": true,
+  "screenShotReview": "Teaching UI only; credential dialog/session/token/raw provider screens not published",
+  "limitations": "Heuristic plus exact known live-secret-value scan; no claim of universal secret detection",
+  "newHistoryObjectsScanned": 65,
+  "newHistoryLiveSecretMatches": 0,
+  "stagedFilesReviewed": 24,
+  "stagingUnknownOpenapi": false
+}

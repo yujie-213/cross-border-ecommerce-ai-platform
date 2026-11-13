@@ -1,4 +1,4 @@
-当前V2领取（2026-11-13）：D-S01-V2-01 IN_PROGRESS，Codex单人，codex/s01-v2-full-replenishment / e3591aacb96aca7d90b1f4e5e9efcfa5942eed14。负责人完整长任务及全范围补充覆盖旧不开发V2停止点：全部当前教学租户获准只读店仓SKU动态发现，不固定2/5SKU；写入仍限明确自有范围，方案B允许合规REFERENCE_ONLY人工请购。阶段连续推进至产品交付REVIEW，不合main。
+当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。
 
 当前本轮完成（2026-11-13）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
 
@@ -8389,13 +8389,136 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER",
     "DOCUMENT_CHECK"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
-  "review": null,
+  "status": "REVIEW",
+  "implementationCommits": [
+    "0bfb258ebea6019b70d57084448ad403daf29339",
+    "84139a28116b1e860def09b7d4f5faae2a1186e5",
+    "0eb6a5699a40e472aec2be45d4226a22ff696f4b",
+    "f82d95977367e578229cdf51df6e74dce4330f58"
+  ],
+  "testedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "command": "python -m pytest tests (complete fixed f82d959 suite)",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "776 total; all original746 retained; 30 added; B01/B02 unchanged",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/verification.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC01",
+        "D-S01-V2-01/AC04",
+        "D-S01-V2-01/AC06",
+        "D-S01-V2-01/AC07",
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "complete pytest + persisted D01/O01/G01/G02 read-only verification",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "1000 synthetic SKU real MySQL; 33 reads/34 resumed; crash237; cancel/retry/isolation/history",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/engineering-1000.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC01",
+        "D-S01-V2-01/AC02",
+        "D-S01-V2-01/AC03",
+        "D-S01-V2-01/AC08",
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC11",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "manual batch and explicit singles through real API/independent Worker; capture SHA256/DB audit",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "all5stores9warehouses220products221SKU975scope objects; 45HTTP final batch; 0batch models/writes; 2single models/4389Token costUNKNOWN",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/live-audit.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC01",
+        "D-S01-V2-01/AC02",
+        "D-S01-V2-01/AC03",
+        "D-S01-V2-01/AC04",
+        "D-S01-V2-01/AC05",
+        "D-S01-V2-01/AC06",
+        "D-S01-V2-01/AC07",
+        "D-S01-V2-01/AC08",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "independent auth/GET exact original order number/detail/inventory; journal review",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "owned teaching ERP1426 qty40 status待审核; create1 submit1; unique1; stock6 unchanged; no decide/order/receipt",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/requisition-live.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC10"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "Microsoft Edge real READONLY/FULL/RECOVERY/FINAL READONLY gated tests",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "manual entire catalog/filter/details/new rule AI/human adjust/real ERP/replay/restart; reference AI and zero/conflict; responsive screenshots",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/browser.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC02",
+        "D-S01-V2-01/AC05",
+        "D-S01-V2-01/AC06",
+        "D-S01-V2-01/AC07",
+        "D-S01-V2-01/AC08",
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC10",
+        "D-S01-V2-01/AC12"
+      ]
+    },
+    {
+      "kind": "UNIT_TEST",
+      "command": "npm test; npm run typecheck; npm run build",
+      "environment": "Windows/Node; Vue3/TypeScript; real build",
+      "sample": "41frontend + types + production bundle, existing design preserved",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/verification.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC12",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; exact public file/secret scan",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "contract/report/runbook/unique ledger; whitelist projection; preserved unknown OpenAPI",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/security.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC13"
+      ]
+    }
+  ],
+  "review": {
+    "reviewer": "Codex implementation self-check; owner/independent human review pending",
+    "reviewedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+    "evidenceRef": "docs/reports/S01_V2完整补货工作台交付_20261113.md",
+    "decision": "REQUEST_REVIEW_NOT_ACCEPTED_NO_MAIN_MERGE"
+  },
   "branch": "codex/s01-v2-full-replenishment",
-  "observedHead": "e3591aacb96aca7d90b1f4e5e9efcfa5942eed14",
+  "observedHead": "f82d95977367e578229cdf51df6e74dce4330f58",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml (unknown untracked preserved)"
   ],
@@ -8406,16 +8529,32 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "负责人完整V2授权及全范围补充；远端main一致，无并行改动；创建独立分支。直连TLS失败后沿既有本机代理/TLS验证fetch成功。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "完整产品、真实全授权批量/两个按需AI/唯一自有ERP申请/恢复及固定后全量测试通过，提交负责人独立评审；未知业务语义不代签。"
     }
   ],
   "contractRef": "docs/contracts/s01/v2-full-replenishment.md",
-  "currentPhase": "V2-4_REGRESSION_AND_LIVE_E2E",
+  "currentPhase": "V2-4_DELIVERED_REVIEW_NO_MAIN_MERGE",
   "sourceDecision": "REFERENCE_ONLY不再独立阻止请购；硬约束/范围/权限/报价/人工确认仍强制；旧调查不改。",
   "progressFacts": [
-    "动态目录/D01分页检查点/D03清单/O01批量与单品/双来源/方案B/P3状态机复用/完整工作台已实现，待固定提交后全量复验。",
-    "相关20项通过；此前17项、25项P3兼容及41项前端通过，非全量验收。真实只读全目录975对象完成，原线48件/杯无需补货保持；后续发现SKU去重口径需从ID+SKU修正为SKU字符串，并保留旧报告版本。",
-    "真实首轮报价limit200收到400已留证，改为该接口100；当前只读批次报价/建议/库存等分页完整。新观察同SKU重复建议进入UNVERIFIED，不任意选量。",
-    "真实单品模型/写入闭环和最终完整回归仍NOT_RUN；不得据只读浏览器通过提前宣称完整验收。"
+    "完整V2产品开发完成，最终REVIEW；普通推送独立分支，禁止自动合main。",
+    "固定f82d959后776完整后端/41前端/类型构建PASS，原746逐名保留；当前head仅后续证据/交接另记。",
+    "真实全范围221SKU975店仓对象；1规则建议/125ERP参考/1无需/848待核实/0失败未完，有效覆盖13.03%、处理100%。",
+    "7实际采集任务共245HTTP，失败报价400保留；最终主批量45HTTP，批量模型0/业务写0；2单品4389Token、费用UNKNOWN/$0.10预约保留。",
+    "真实教学申请1426原建议48→人工40，待审核，单号唯一1/库存6不变；重放/丢响应/刷新/APIWorker重启PASS；创建1+submit1，其余业务写0。",
+    "五目标SKU当前7建议记录/6正1零，NG/PZL有额外冲突，QD-S在途抵扣与PZ-M零根因仍UNKNOWN；实际报价/权限等不合不得提交，不因REFERENCE_ONLY本身拒绝。",
+    "全部开发调用与私有原始资料保留；自有API/Worker/Vite已停止；不自动下一业务场景。"
+  ],
+  "reportRef": "docs/reports/S01_V2完整补货工作台交付_20261113.md",
+  "runbookRef": "docs/runbooks/s01-v2.md",
+  "retainedLimitations": [
+    "ERP算法/更新周期/日均窗口/quantity_sug_purchase映射与在途部分收货净扣UNKNOWN",
+    "848对象数据不足/归属冲突非成功分析，不能静默变成无需补货",
+    "共享SKU无真实采购写许可；真实新增第1001SKU NOT_RUN，仅合成验证",
+    "有效可售在途正向抵扣和企业正式业务验收未通过，不补签P3过去记录"
   ]
 }
 ```

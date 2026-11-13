@@ -148,4 +148,6 @@ python docs/governance/audit.py
 
 按 [PLAN](docs/PLAN.md) 的 A—D 增量计划推进。前端及 C-04 教学技术验证已合入 main；普通页面真实 AI 接入、正式业务签认与完整 S01 MVP 端到端验收仍按 [TASKS](docs/TASKS.md) 的对应范围推进。企业正式规则、采购批准与执行分别验收和授权。
 
-GitHub 公开发布尚未完成，阻碍与检查结果见 [公开准备说明](docs/governance/PUBLICATION.md)。项目未声明开源 LICENSE；第三方资源保留其原有声明，不能据此推定已取得全部再分发许可。
+仓库已按负责人授权普通同步 GitHub；公开准备及历史检查见 [公开准备说明](docs/governance/PUBLICATION.md)。项目未声明开源 LICENSE；第三方资源保留其原有声明，不能据此推定已取得全部再分发许可。
+
+本分支 S01 V2 完整补货工作台：授权全目录批量、ERP参考降级、按需单品AI及人工请购；交付范围与实际测试见[交付报告](docs/reports/S01_V2完整补货工作台交付_20261113.md)，[启动/迁移/操作手册](docs/runbooks/s01-v2.md)。状态只读TASKS；未自动合main。

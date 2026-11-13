@@ -1,0 +1,83 @@
+{
+  "result": "VERIFIED_LIVE",
+  "observedAt": "2026-11-13T14:29:48.108059+00:00",
+  "scope": "EXPLICIT_OWNED_TEACHING_RESOURCE",
+  "sku": "HL-CBL100-2M",
+  "sourceTenant": "1",
+  "storeId": "3",
+  "warehouseId": "308",
+  "productId": "218",
+  "operationId": "86ec2fc73d58a246f3fa30736a6dc1f91c02e6561adb337d0bad8d583dce0446",
+  "erpId": "1426",
+  "erpNumber": "S01-RQ-86ec2fc73d58a246f3fa30736a6dc1f9",
+  "erpStatus": "待审核",
+  "originalQuantity": 48,
+  "humanFinalQuantity": 40,
+  "cartons": 5,
+  "unit": "EA",
+  "amount": 96.0,
+  "currency": "USD",
+  "adjustmentReason": "S01 V2 独立教学验收：原建议48件，人工调整为40件/5箱；已核对原正式采购1406，可售日期未知未抵扣。本次仅提交申请待ERP审批。",
+  "sourceGrade": "RULE_CALCULATED",
+  "sourceAcknowledged": true,
+  "exactBusinessNumberMatches": 1,
+  "availableInventoryBefore": 6,
+  "availableInventoryAfter": 6,
+  "businessWrites": 2,
+  "writeEvents": [
+    {
+      "method": "POST",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 201,
+      "sha256": "64827b0490d719ee89e8f4a0562eb81a3174a1aa71b24d9c84735523a5e87644"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/1426/submit",
+      "httpStatus": 200,
+      "sha256": "b1a0111ac5779c6ed412db06e30c9fb8b4881a3fd8405b577ee26c494830775c"
+    }
+  ],
+  "independentReadbackEvents": [
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "httpStatus": 200,
+      "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 200,
+      "sha256": "e6dcaff813c7943b824a844e8307405f6ae420db8130b649ed63119800d19db2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders/1426",
+      "httpStatus": 200,
+      "sha256": "5a92fec73e7b88cb743734bf9474f10abc0515bf15be23b9d525e975fb339ca0"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "httpStatus": 200,
+      "sha256": "73ad5472b246cf8c2aa298f101b169d51a39d0448a383e65de3b2938bcd46dbe"
+    }
+  ],
+  "approvalDecisions": 0,
+  "placedOrders": 0,
+  "receipts": 0,
+  "inbound": 0,
+  "sharedSkuMutations": 0,
+  "browserResponseLossAndReplay": true,
+  "apiWorkerRestartAndOriginalOperationReplay": true,
+  "limitations": [
+    "No leadership approval or formal purchase execution performed",
+    "Sellable ETA unknown; original approved PO1406 not deducted"
+  ]
+}
