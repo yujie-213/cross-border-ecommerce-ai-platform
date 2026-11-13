@@ -23,7 +23,7 @@
   "historicalCatalogPreserved": true,
   "actualSecretMatches": [],
   "privateDataTracked": false,
-  "reportLinksChecked": 6,
+  "reportLinksChecked": 7,
   "unknownOpenapiPreserved": true,
   "enterpriseGates": {
     "D-S01-DATA-01": "BLOCKED",

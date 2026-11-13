@@ -410,6 +410,7 @@
     "docs/evidence/S01-DATA-ASSESSMENT/assessment-facts.json",
     "docs/evidence/S01-DATA-ASSESSMENT/change-scan.json",
     "docs/evidence/S01-DATA-ASSESSMENT/preservation.json",
+    "docs/evidence/S01-DATA-ASSESSMENT/repository-state.json",
     "docs/evidence/S01-ONLINE/backend-regression.json",
     "docs/evidence/S01-ONLINE/bounded-discovery.json",
     "docs/evidence/S01-ONLINE/browser-checkpoint.json",
