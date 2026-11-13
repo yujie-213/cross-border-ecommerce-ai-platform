@@ -6582,8 +6582,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "READ_ONLY_INSPECTION"
   ],
   "status": "REVIEW",
-  "implementationCommits": [],
-  "testedCommit": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "implementationCommits": [
+    "2315416fa012f9747474aac2239cc70eade9a715"
+  ],
+  "testedCommit": "2315416fa012f9747474aac2239cc70eade9a715",
   "evidence": [
     {
       "kind": "READ_ONLY_INSPECTION",
@@ -6596,6 +6598,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-DATA-ASSESSMENT/assessment-facts.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-DATASET-DESIGN-01/AC1"
+      ],
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; exact-change and actual-secret preservation checks",
+      "environment": "本机Git/文档/只读证据，无应用测试重跑声明",
+      "sample": "18项文档检查、31原任务及旧证据保全、实际秘密0命中、报告6链接有效",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-DATA-ASSESSMENT/preservation.json"
     }
   ],
   "review": null,

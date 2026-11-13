@@ -1,6 +1,6 @@
 {
   "result": "PASS",
-  "scannedFiles": 22,
+  "scannedFiles": 6,
   "findings": [],
   "scope": "Exact current changes only; actual-secret matching is additionally in preservation.json"
 }
