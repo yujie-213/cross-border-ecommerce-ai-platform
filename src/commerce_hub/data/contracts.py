@@ -95,6 +95,7 @@ class AdmittedPolicy(Policy):
     version: Identifier
     otherConstraints: Literal["REVIEWED_NOT_APPLICABLE"]
     qualityDisposition: Literal["VERIFIED_CLEAR", "INVESTIGATE", "UNKNOWN"]
+    advisoryOnly: bool = Field(default=False, strict=True, exclude_if=lambda value: not value)
 
 
 class AdmittedInput(Contract):
@@ -104,6 +105,7 @@ class AdmittedInput(Contract):
     provenanceRef: Identifier
     rulesRef: Identifier
     asOf: UtcTimestamp
+    businessDate: date | None = Field(default=None, exclude_if=lambda value: value is None)
     coverageComplete: bool = Field(strict=True)
     mapping: Mapping
     inventory: tuple[Inventory, ...] = Field(max_length=4)

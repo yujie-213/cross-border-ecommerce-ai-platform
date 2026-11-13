@@ -9,10 +9,15 @@ from commerce_hub.adapters.models.evaluation import EvaluationProvider,Evaluatio
 from decimal import Decimal
 
 AUTHORIZATION_ID='s01-online-20261113-r1'
+MVP_AUTHORIZATION_ID='s01-mvp-20261113-p1p2'
 
 class OnlineDeepSeekProvider:
-    def __init__(self,settings,private_root):
-        self.delegate=EvaluationProvider(settings,authorization=EvaluationAuthorization(AUTHORIZATION_ID,10,Decimal('1'),Decimal('.05')))
+    def __init__(self,settings,private_root, *, authorization_id=AUTHORIZATION_ID):
+        if authorization_id not in {AUTHORIZATION_ID, MVP_AUTHORIZATION_ID}:
+            raise ValueError('UNKNOWN_ONLINE_MODEL_AUTHORIZATION')
+        owned = authorization_id == MVP_AUTHORIZATION_ID
+        self.delegate=EvaluationProvider(settings,authorization=EvaluationAuthorization(authorization_id,
+            None if owned else 10, None if owned else Decimal('1'),Decimal('.05')))
         self.private_root=Path(private_root)
 
     def describe_capabilities(self):return self.delegate.describe_capabilities()

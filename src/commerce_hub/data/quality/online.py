@@ -38,7 +38,7 @@ def capture_online(projection, receipt, mapping_verified, normalization=None):
         if normalization.get('input') is None:
             extras.append(dict(code='QUALITY_STATE_UNKNOWN',severity='BLOCK',path='quality',affects='CANDIDATES'))
         observed_at=datetime.fromisoformat(receipt['completedAt'])
-        for domain in projection['domains']:
+        for domain in ([] if receipt.get('monitoring') else projection['domains']):
             for time in domain['sourceTimes']:
                 try:
                     source=datetime.fromisoformat(time)

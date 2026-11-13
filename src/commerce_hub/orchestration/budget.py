@@ -62,7 +62,9 @@ class TaskBudgetHandle:
             func.coalesce(func.sum(budgets.c.used_tokens+budgets.c.reserved_tokens),0),
             func.coalesce(func.sum(budgets.c.used_cost+budgets.c.reserved_cost),0))
             .where(budgets.c.policy_version==shared.authorization_id)).one()
-        if totals[0]+1>shared.max_calls or totals[1]+tokens>shared.max_tokens or totals[2]+cost>shared.max_cost:
+        if (shared.max_calls is not None and totals[0]+1>shared.max_calls
+            or shared.max_tokens is not None and totals[1]+tokens>shared.max_tokens
+            or shared.max_cost is not None and totals[2]+cost>shared.max_cost):
             raise BudgetError('BUDGET_DENIED')
 
     def _key(self, attempt_id):

@@ -95,3 +95,15 @@ def test_authorization_serializes_provider_send_and_keeps_unknown_reserved(make_
     handles[0].unknown('attempt-0')
     with pytest.raises(BudgetError,match='USAGE_MUST_BE_RECONCILED'):
         handles[1].send_model('attempt-1','call-1',max_inflight=1,details={},trace_id='test')
+
+
+def test_owner_uncapped_policy_preserves_original_task_allowance_and_receipts(make_s01):
+    env,p=with_provider(make_s01)
+    shared=replace(env.spec.shared_model_authorization,max_calls=None,max_tokens=None,max_cost=None)
+    env.spec=replace(env.spec,shared_model_authorization=shared);env.service.registry={env.spec.scenario_id:env.spec}
+    for key in ['first','second','third']:
+        tid=env.submit(key)['taskRef']['taskId'];assert Worker(env.service).once()
+        assert env.service.read_report(env.principal,tid)['analysisReport']['ai']['status']=='AVAILABLE'
+    assert p.calls==3 and count(env,usage_facts)==3
+    # Replaying a completed task never sends another logical call.
+    env.submit('first');assert not Worker(env.service).once();assert p.calls==3

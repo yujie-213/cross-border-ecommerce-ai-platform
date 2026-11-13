@@ -12,8 +12,10 @@ from pathlib import Path
 import time
 from uuid import uuid4
 import hashlib
+import sys
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 PRIVATE=ROOT/'data/private/s01-online'
 
 def alias(kind,value):return kind+'-'+hashlib.sha256(str(value).encode()).hexdigest()[:20]
@@ -50,17 +52,19 @@ def main():
     parser.add_argument('--discover-options',action='store_true')
     parser.add_argument('--mapping',type=Path)
     parser.add_argument('--enable-model',action='store_true')
+    parser.add_argument('--owned-monitor',action='store_true',help='Use only the durable ACTIVE owned registry')
     parser.add_argument('--duration',type=int,choices=range(60,901),default=900)
     args=parser.parse_args()
     if not args.execute_local:
         print('NOT_RUN: explicit --execute-local required; no ERP/model IO');return
-    if bool(args.mapping)==bool(args.discover_options):raise ValueError('SELECT_PRIVATE_MAPPING_OR_BOUNDED_DISCOVERY')
+    if sum([bool(args.mapping), bool(args.discover_options), args.owned_monitor]) != 1:
+        raise ValueError('SELECT_OWNED_MONITOR_OR_EXPLICIT_DIAGNOSTIC_SOURCE')
     os.environ.update(COMMERCE_ENVIRONMENT='test',COMMERCE_MODEL_PROVIDER='mock',COMMERCE_MODEL_NETWORK_ENABLED='false',
         COMMERCE_S01_ONLINE_EXPLANATION_MODE='off')
     if args.enable_model:
         os.environ.update(COMMERCE_MODEL_PROVIDER='deepseek',COMMERCE_MODEL_NETWORK_ENABLED='true',
             COMMERCE_MODEL_MAX_OUTPUT_TOKENS='1024',COMMERCE_MODEL_MAX_CONCURRENT='1',COMMERCE_MODEL_TIMEOUT_SECONDS='30',
-            COMMERCE_S01_ONLINE_EXPLANATION_MODE='deepseek',COMMERCE_S01_ONLINE_AUTHORIZATION='s01-online-20261113-r1')
+            COMMERCE_S01_ONLINE_EXPLANATION_MODE='deepseek',COMMERCE_S01_ONLINE_AUTHORIZATION='s01-mvp-20261113-p1p2' if args.owned_monitor else 's01-online-20261113-r1')
     import jwt
     from commerce_hub.bootstrap.settings import load_settings
     from commerce_hub.infrastructure.database import Database,assert_migration_target
@@ -71,9 +75,13 @@ def main():
     if not database.schema_ready():
         database.close();raise ValueError('EXPLICIT_MIGRATION_REQUIRED_BEFORE_STARTUP')
     harness=S01ProcessHarness(database,settings)
-    harness.tenant='s01-online-teaching-local'
+    harness.tenant='s01-owned-teaching-local' if args.owned_monitor else 's01-online-teaching-local'
     try:
-        if args.discover_options:
+        if args.owned_monitor:
+            from commerce_hub.data.projection.monitor import MonitorRegistry
+            mappings=[m.model_dump(mode='json') for m in MonitorRegistry(database.engine,harness.tenant).mappings()]
+            discovery=dict(mode='ACTIVE_OWNED_MONITOR_REGISTRY',networkRequests=0)
+        elif args.discover_options:
             mappings,discovery=discover_mappings(harness.tenant)
         else:
             path=args.mapping.resolve()
@@ -92,6 +100,7 @@ def main():
                 expires_at=now+timedelta(seconds=args.duration),grants_by_action={a:scope for a in ['tasks:create','tasks:read','tasks:cancel','engineering:execute']})
         harness.token=jwt.encode(dict(iss=harness.issuer,aud=harness.audience,exp=int(now.timestamp())+args.duration,
             iat=int(now.timestamp()),nbf=int(now.timestamp())-1,sub=harness.principal_id,tid=harness.tenant,jti=harness.token_id,rev=1),harness.key,algorithm='HS256')
+        harness.secrets.append(harness.token)
         run_dir=PRIVATE/('local-'+uuid4().hex);run_dir.mkdir(parents=True)
         path=run_dir/'mapping.json';path.write_text(json.dumps(mappings,ensure_ascii=False,indent=2),encoding='utf-8',newline='\n')
         (run_dir/'discovery.json').write_text(json.dumps(discovery,ensure_ascii=False,indent=2),encoding='utf-8',newline='\n')
@@ -101,15 +110,34 @@ def main():
         harness.environment.update(COMMERCE_AUTH_ISSUER=harness.issuer,COMMERCE_AUTH_AUDIENCE=harness.audience,
             COMMERCE_AUTH_SIGNING_KEY=harness.key,COMMERCE_S01_ONLINE_ENABLED='true',COMMERCE_S01_ONLINE_MAPPING_PATH=str(path),
             COMMERCE_LEASE_SECONDS='10',COMMERCE_HEARTBEAT_SECONDS='1',COMMERCE_TASK_DEADLINE_SECONDS='240',COMMERCE_BROWSER_ORIGIN='http://localhost:5173')
+        if args.owned_monitor:
+            harness.environment.update(COMMERCE_S01_OWNED_MONITORING='true',COMMERCE_S01_MONITOR_TENANT=harness.tenant)
         harness.start_api();worker=harness.start_worker()
         receipt=dict(apiTarget=str(harness.client.base_url).rstrip('/'),token=harness.token,
             expiresAt=(now+timedelta(seconds=args.duration)).isoformat(),mappingPath=str(path),
             tenantId=harness.tenant,principalId=harness.principal_id,tokenId=harness.token_id,
-            apiPid=harness.api.process.pid,workerPid=worker.process.pid,modelAuthorization='s01-online-20261113-r1' if args.enable_model else None)
+            apiPid=harness.api.process.pid,workerPid=worker.process.pid,modelAuthorization=os.environ.get('COMMERCE_S01_ONLINE_AUTHORIZATION') if args.enable_model else None,
+            monitoring='ACTIVE_OWNED_REGISTRY' if args.owned_monitor else 'DIAGNOSTIC_ONLY')
         (PRIVATE/'session.json').write_text(json.dumps(receipt),encoding='utf-8',newline='\n')
         print('READY: online API/Worker, bounded authorized choices, private short-lived session written',flush=True)
         until=time.monotonic()+args.duration
-        while time.monotonic()<until:time.sleep(.2)
+        control_path = PRIVATE / 'owned-test-control.json'
+        if args.owned_monitor: control_path.write_text('{"status":"IDLE"}',encoding='utf-8')
+        while time.monotonic()<until:
+            if args.owned_monitor and control_path.exists():
+                command=json.loads(control_path.read_text(encoding='utf-8'))
+                if command.get('status')=='REQUESTED':
+                    action=command.get('action')
+                    if action=='pauseWorker':worker.stop()
+                    elif action=='resumeWorker':
+                        if worker.process.poll() is not None:worker=harness.start_worker()
+                    elif action=='restartProcesses':
+                        worker.stop();harness.api.stop();harness.start_api();worker=harness.start_worker()
+                        receipt.update(apiTarget=str(harness.client.base_url).rstrip('/'),apiPid=harness.api.process.pid,workerPid=worker.process.pid)
+                        (PRIVATE/'session.json').write_text(json.dumps(receipt),encoding='utf-8')
+                    else:raise ValueError('UNKNOWN_LOCAL_TEST_CONTROL')
+                    control_path.write_text(json.dumps(dict(command,status='DONE')),encoding='utf-8')
+            time.sleep(.2)
     finally:harness.close();database.close()
 
 if __name__=='__main__':main()

@@ -7,6 +7,7 @@ from commerce_hub.adapters.erp import ERPError
 from commerce_hub.data.contracts import Contract, Identifier, fingerprint
 from commerce_hub.data.sync import read_pages, SourceFailure
 from commerce_hub.data.sync.teaching import TeachingReadSource
+from commerce_hub.data.projection.monitor import MonitorBinding
 
 MODE = 'ONLINE_TEACHING_ERP'
 TEACHING_BATCH = 'S01-AI-TEST-20261112'
@@ -22,12 +23,15 @@ class OnlineMapping(Contract):
     version: Identifier = 's01-online-map-v1'
     teachingReplay: bool = Field(default=False, strict=True)
     sourceSynthetic: bool = Field(default=True, strict=True)
+    monitor: MonitorBinding | None = None
 
     def validate_scope(self):
         from commerce_hub.data.admission import AdmissionScope
         value = AdmissionScope.model_validate(self.scope).model_dump(mode='json')
         if value != self.scope or self.teachingReplay and self.sku != TEACHING_BATCH + '-A':
             raise ValueError('ONLINE_MAPPING_NOT_APPROVED')
+        if self.monitor and (self.teachingReplay or not self.sourceSynthetic):
+            raise ValueError('OWNED_TEACHING_MAPPING_REQUIRED')
         return self
 
 
@@ -38,6 +42,9 @@ def utc_now():
 def collect(reader, mapping, context, acquisition_id):
     """Never substitute missing rows. Partial domains survive other domain failures."""
     m = mapping.validate_scope()
+    if m.monitor:
+        from commerce_hub.data.sync.owned import collect_owned
+        return collect_owned(reader, m, context, acquisition_id)
     started = utc_now()
     common = dict(field='sku', q=m.sku, match='exact')
     queries = [

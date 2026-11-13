@@ -23,14 +23,16 @@ class TaskError(RuntimeError):
 class SharedModelAuthorization:
     """One explicit bounded authorization across original tasks, using O01 rows."""
     authorization_id: str
-    max_calls: int
-    max_tokens: int
-    max_cost: Decimal
+    max_calls: int | None
+    max_tokens: int | None
+    max_cost: Decimal | None
     max_inflight: int = 1
 
     def __post_init__(self):
-        if (not 1 <= len(self.authorization_id) <= 64 or not 1 <= self.max_calls <= 10
-            or not 1 <= self.max_tokens <= 100000 or not Decimal('0') < self.max_cost <= Decimal('1')
+        if (not 1 <= len(self.authorization_id) <= 64
+            or self.max_calls is not None and not 1 <= self.max_calls <= 10
+            or self.max_tokens is not None and not 1 <= self.max_tokens <= 100000
+            or self.max_cost is not None and not Decimal('0') < self.max_cost <= Decimal('1')
             or self.max_inflight != 1):
             raise ValueError('INVALID_SHARED_MODEL_AUTHORIZATION')
 

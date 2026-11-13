@@ -19,10 +19,22 @@ ROOT=Path(__file__).resolve().parents[3]
 def registry(settings):
     if settings.environment != 'test' or os.environ.get('COMMERCE_S01_ONLINE_ENABLED') != 'true':
         raise ValueError('EXPLICIT_TEACHING_ONLINE_MODE_REQUIRED')
-    path=Path(os.environ.get('COMMERCE_S01_ONLINE_MAPPING_PATH','')).resolve()
-    if not path.is_relative_to((ROOT/'data/private').resolve()):
-        raise ValueError('PRIVATE_ONLINE_MAPPING_REQUIRED')
-    mappings=[OnlineMapping.model_validate(m).validate_scope() for m in json.loads(path.read_text(encoding='utf-8'))]
+    scope_registry = None
+    if os.environ.get('COMMERCE_S01_OWNED_MONITORING') == 'true':
+        from commerce_hub.infrastructure.database import Database, assert_migration_target
+        from commerce_hub.data.projection.monitor import MonitorRegistry
+        assert_migration_target(settings)
+        tenant = os.environ.get('COMMERCE_S01_MONITOR_TENANT')
+        if not tenant: raise ValueError('EXPLICIT_MONITOR_TENANT_REQUIRED')
+        scope_registry = MonitorRegistry(Database(settings).engine, tenant)
+        mappings = scope_registry.mappings()
+    else:
+        path=Path(os.environ.get('COMMERCE_S01_ONLINE_MAPPING_PATH','')).resolve()
+        if not path.is_relative_to((ROOT/'data/private').resolve()):
+            raise ValueError('PRIVATE_ONLINE_MAPPING_REQUIRED')
+        mappings=[OnlineMapping.model_validate(m).validate_scope() for m in json.loads(path.read_text(encoding='utf-8'))]
+        if any(m.monitor for m in mappings):
+            raise ValueError('FORMAL_MONITOR_REGISTRY_REQUIRED')
     def reader_factory(context,acquisition_id):
         values=dotenv_values(ROOT/'.env.erp',interpolate=False)
         config=ERPConfig(base_url=values.get('ERP_BASE_URL') or 'https://47.107.76.124/lingxing-erp',
@@ -43,17 +55,18 @@ def registry(settings):
     mode=os.environ.get('COMMERCE_S01_ONLINE_EXPLANATION_MODE','off')
     provider=None;shared=None
     if mode=='deepseek':
-        from commerce_hub.adapters.models.online import OnlineDeepSeekProvider,AUTHORIZATION_ID
-        if (os.environ.get('COMMERCE_S01_ONLINE_AUTHORIZATION')!=AUTHORIZATION_ID
+        from commerce_hub.adapters.models.online import OnlineDeepSeekProvider,AUTHORIZATION_ID,MVP_AUTHORIZATION_ID
+        authorization_id = MVP_AUTHORIZATION_ID if scope_registry else AUTHORIZATION_ID
+        if (os.environ.get('COMMERCE_S01_ONLINE_AUTHORIZATION')!=authorization_id
             or not settings.model_network_enabled or settings.model_provider!='deepseek'
             or settings.model_max_output_tokens!=1024 or settings.model_max_concurrent!=1):
             raise ValueError('EXPLICIT_ONLINE_MODEL_AUTHORIZATION_REQUIRED')
-        provider=OnlineDeepSeekProvider(settings,ROOT/'data/private/s01-online-model')
-        shared=SharedModelAuthorization(AUTHORIZATION_ID,10,100000,Decimal('1'))
+        provider=OnlineDeepSeekProvider(settings,ROOT/'data/private/s01-online-model',authorization_id=authorization_id)
+        shared=SharedModelAuthorization(authorization_id,None,None,None) if scope_registry else SharedModelAuthorization(AUTHORIZATION_ID,10,100000,Decimal('1'))
     elif mode!='off' or settings.model_network_enabled or settings.model_provider!='mock':
         raise ValueError('INVALID_ONLINE_MODEL_MODE')
     revision=fingerprint(dict(mappings=[m.model_dump(mode='json') for m in mappings],mode=mode))
-    handler=OnlineS01Handler(mappings,reader_factory,provider=provider,timeout_seconds=settings.model_timeout_seconds)
+    handler=OnlineS01Handler(mappings,reader_factory,provider=provider,timeout_seconds=settings.model_timeout_seconds,scope_registry=scope_registry)
     spec=HandlerSpec('S01_BACKEND','0.1.0','s01.online.v1.'+revision[:32],handler,
         policy_version=shared.authorization_id if shared else 's01-online-readonly-v1',
         max_calls=1 if provider else 0,max_tokens=24000 if provider else 0,max_cost=Decimal('.05') if provider else Decimal('0'),

@@ -16,6 +16,12 @@ def observed(captures, mapping, receipt):
         and str(rows('store')[0].get('id')) == mapping.sourceStore
         and str(rows('warehouse')[0].get('id')) == mapping.sourceWarehouse
         and all(r.get('sku') == mapping.sku and r.get('store_name') == mapping.storeName for r in rows('listing')))
+    if mapping.monitor:
+        b = mapping.monitor
+        exact = exact and (str(rows('product')[0].get('id')) == b.productId
+            and len(rows('listing')) == 1 and str(rows('listing')[0].get('id')) == b.listingId
+            and {str(r.get('id')) for r in rows('inventory')} == set(b.inventoryIds)
+            and all(str(r.get('product_id')) == b.productId for r in rows('inventory')))
     # A mismatched source response is never exposed as a trustworthy quantity.
     inventory = rows('inventory') if exact else []
     product = rows('product')[0] if exact else {}
@@ -47,6 +53,9 @@ def normalize_online(captures, mapping, receipt, mapping_verified):
     The sole pre-existing teaching policy is an explicit seven-order replay. It
     cannot be applied to arbitrary SKUs or repaired with fixed catalog values.
     """
+    if mapping.monitor:
+        from commerce_hub.data.projection.owned import normalize_owned
+        return normalize_owned(captures, mapping, receipt, mapping_verified)
     issues=[]
     def block(code,path,category='SOURCE_DATA'):
         issues.append(dict(code=code,severity='BLOCK',path=path,affects='CALCULATION',category=category))
