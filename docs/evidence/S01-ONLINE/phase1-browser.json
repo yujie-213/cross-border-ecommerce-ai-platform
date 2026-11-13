@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "kind": "REAL_EDGE_REAL_ERP_API_WORKER_MYSQL",
+  "taskRef": {
+    "taskId": "741179794df045a39f781e816acce206",
+    "tenantId": "process-3eff9413e0f345e4a49c7e2b92318bdc"
+  },
+  "reportRef": {
+    "reportId": "741179794df045a39f781e816acce206",
+    "tenantId": "process-3eff9413e0f345e4a49c7e2b92318bdc"
+  },
+  "snapshotRef": "snapshot-a55227f41469ab7e4ef04f33b53501fe8b1e2899a45ac037f5e6808fe3dd3271",
+  "acquisitionId": "b7c103baf1b644d482246fc96280b36a",
+  "completeness": "BLOCKED",
+  "mode": "ONLINE_TEACHING_ERP",
+  "refresh": "PASS",
+  "evidence": "PASS",
+  "errors": []
+}

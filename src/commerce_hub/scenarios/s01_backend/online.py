@@ -3,8 +3,8 @@ from copy import deepcopy
 from commerce_hub.data.contracts import fingerprint
 from commerce_hub.data.sync.online import MODE, collect
 from commerce_hub.data.sync.online_store import AcquisitionStore
-from commerce_hub.data.projection.online import observed
-from commerce_hub.data.quality.online import capture_online, verify_asset
+from commerce_hub.data.projection.online import observed, normalize_online
+from commerce_hub.data.quality.online import capture_online, verify_asset, calculation_snapshot
 from commerce_hub.data.quality.online_store import OnlineSnapshotStore
 from commerce_hub.data.quality.observed import capture_observations
 from commerce_hub.data.projection.observed import verify_observations
@@ -69,7 +69,8 @@ class OnlineS01Handler:
             receipt.update(taskRef=dict(tenantId=row['tenant_id'],taskId=row['task_id']),
                 planVersion=str(row['plan_version']), delivery=row['delivery'], requestDigest=request_digest)
             projection, verified = observed(captures,mapping,receipt)
-            asset = capture_online(projection,receipt,verified)
+            normalization=normalize_online(captures,mapping,receipt,verified)
+            asset = capture_online(projection,receipt,verified,normalization)
             def persist(conn):
                 self.snapshots.save(conn,row['tenant_id'],row['task_id'],row['acquisition_id'],asset)
                 self.acquisitions.finish(conn,row,receipt,asset['snapshotId'])
@@ -83,18 +84,31 @@ class OnlineS01Handler:
     def rules_result(asset, previous=None):
         verify_asset(asset)
         projection = verify_observations(asset['observationProjection'])
-        snapshot = capture_observations(projection)
+        snapshot = calculation_snapshot(asset)
         acquisition = asset['manifest']['acquisition']
+        normalization=asset.get('normalization',{})
+        supplied=propose(snapshot)
+        calc=snapshot.calculation_allowed
+        completeness='BLOCKED' if not calc else 'PARTIAL' if not snapshot.candidates_allowed else 'RULES_ONLY'
+        paths=['observedDomains','quality','acquisition']
+        if supplied['baseline'] is not None:paths.append('supplyDemand/baseline')
+        paths += [f'supplyDemand/candidates/{i}' for i in range(len(supplied['candidates']))]
         data = dict(manifest=asset['manifest'],onlineAsset=asset,
             observedDomains=[d.model_dump(mode='json') for d in projection.domains],
-            quality=[i.model_dump() for i in snapshot.issues],supplyDemand=propose(snapshot),
+            quality=deepcopy(asset['manifest']['quality']),supplyDemand=supplied,
             scenarioSupplement=dict(inputMode=MODE,sourceMode=MODE,asOf=projection.observedAt.isoformat(),
                 procurementEligible=False,realAdmission='BLOCKED',engineeringFixture=False,
-                sourceSynthetic=projection.sourceSynthetic,calculationStatus='BLOCKED',previousReportRef=previous,
+                sourceSynthetic=projection.sourceSynthetic,calculationStatus='PASS' if calc else 'BLOCKED',previousReportRef=previous,
                 acquisitionId=acquisition['acquisitionId'],mappingVersion=acquisition['mappingVersion']),
             acquisition=acquisition,
-            evidence=[locator(asset['snapshotId'],path) for path in ['observedDomains','quality','acquisition']])
-        return DomainResult(contractVersion='0.1.0',sourceNature='TEACHING_ERP_OBSERVED',completeness='BLOCKED',
+            evidence=[locator(asset['snapshotId'],path,source_module={'acquisition':'D01','quality':'D03'}.get(path)
+                if 'normalization' in asset else None) for path in paths])
+        if normalization.get('input') is not None:
+            data['inputProjection']=snapshot.projection.model_dump(mode='json')
+        if 'normalization' in asset:
+            data['scenarioSupplement'].update(ruleVersion=normalization.get('ruleVersion'),unverifiedRules=normalization.get('assumptions',[]))
+        source=normalization.get('input',{}).get('sourceNature','TEACHING_ERP_OBSERVED') if normalization.get('input') else 'TEACHING_ERP_OBSERVED'
+        return DomainResult(contractVersion='0.1.0',sourceNature=source,completeness=completeness,
             scope=deepcopy(projection.scope),snapshotRef=asset['snapshotId'],dataReport=data,
             analysisReport=dict(ai=dict(status='NOT_ATTEMPTED',reason='MODEL_NOT_ENABLED')))
 

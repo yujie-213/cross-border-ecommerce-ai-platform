@@ -10,8 +10,11 @@ from uuid import uuid4
 
 ROOT=Path(__file__).resolve().parents[1]
 
-def live_mapping(scope):
+def live_mapping(scope,candidate=0):
     # Source identity metadata only. No catalog quantities, demand or package facts.
+    if candidate:
+        value=json.loads((ROOT/'data/private/s01-online-20261113/candidates.json').read_text(encoding='utf-8'))[candidate-1]['mapping']
+        return dict(value,scope=scope)
     probe=json.loads((ROOT/'data/private/s01-online-20261113/probe.json').read_text(encoding='utf-8'))
     row=probe['inventory']['rows'][0]
     return dict(scope=scope,sku=row['sku'],sourceTenant=str(row['tenant_id']),sourceStore=str(row['store_id']),
@@ -22,6 +25,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute-live',action='store_true')
     parser.add_argument('--serve',action='store_true')
+    parser.add_argument('--candidate',type=int,choices=range(4),default=0)
+    parser.add_argument('--evidence-name',default='phase1-live')
     parser.add_argument('--duration',type=int,default=600,choices=range(60,901))
     args=parser.parse_args()
     if not args.execute_live:
@@ -37,7 +42,7 @@ def main():
     harness=S01ProcessHarness(db,settings)
     private=ROOT/'data/private/s01-online-20261113'/('run-'+uuid4().hex)
     private.mkdir(parents=True)
-    mapped=live_mapping(harness.scope)
+    mapped=live_mapping(harness.scope,args.candidate)
     path=private/'mapping.json';path.write_text(json.dumps([mapped],ensure_ascii=False),encoding='utf-8')
     harness.module='commerce_hub.bootstrap.s01_online'
     harness.environment.update(COMMERCE_S01_ONLINE_ENABLED='true',COMMERCE_S01_ONLINE_MAPPING_PATH=str(path),
@@ -82,7 +87,8 @@ def main():
         harness.api.stop();harness.start_api();worker.stop();harness.start_worker()
         assert before==harness.report(first['taskId'])
         evidence.update(result='PASS',independentAcquisitions='PASS',apiWorkerRestartHistoricalRead='PASS')
-        target=ROOT/'docs/evidence/S01-ONLINE/phase1-live.json';target.parent.mkdir(parents=True,exist_ok=True)
+        if args.evidence_name not in {'phase1-live','phase2-live','phase3-live'}:raise ValueError('EVIDENCE_NAME_NOT_ALLOWED')
+        target=ROOT/('docs/evidence/S01-ONLINE/'+args.evidence_name+'.json');target.parent.mkdir(parents=True,exist_ok=True)
         target.write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding='utf-8')
         print('PASS: two independent live collections, replay, immutable snapshots and restart read',flush=True)
     finally:

@@ -6267,10 +6267,37 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING",
     "LIVE"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "6f34084154bbedee74e7b364f105d5a5e9928240"
+  ],
+  "testedCommit": "6f34084154bbedee74e7b364f105d5a5e9928240",
+  "evidence": [
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-ONLINE-01/AC1"
+      ],
+      "command": "python -m tools.s01_online_verify --execute-live",
+      "environment": "Windows / 唯一隔离MySQL / 独立API及Worker",
+      "sample": "真实教学ERP两任务，不含模型；店铺0失配导致业务BLOCKED",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ONLINE/phase1-live.json"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-S01-ONLINE-01/AC1"
+      ],
+      "command": "node .tmp/online-browser.cjs",
+      "environment": "Windows / 唯一隔离MySQL / 独立API及Worker",
+      "sample": "真实Edge点击发起第三个联网任务，刷新/证据读取",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ONLINE/phase1-browser.json"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
   "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
@@ -6281,6 +6308,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "本轮连续授权；领取和测试按真实阶段推进"
+    },
+    {
+      "date": "2026-11-13",
+      "from_": "IN_PROGRESS",
+      "to": "REVIEW",
+      "reason": "独立在线采集、幂等、不可变快照和浏览器通过；真实店铺0关联缺失，业务保持BLOCKED，尚未独立验收"
     }
   ],
   "dirtyPaths": [
@@ -6335,7 +6368,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING",
     "LIVE"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],

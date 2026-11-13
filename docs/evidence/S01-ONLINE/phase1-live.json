@@ -1,0 +1,739 @@
+{
+  "testedCommit": "6f34084154bbedee74e7b364f105d5a5e9928240",
+  "capturedAt": "2026-11-13T02:46:26.050481+00:00",
+  "kind": "REAL_ERP_REAL_MYSQL_API_INDEPENDENT_WORKER",
+  "models": "NOT_RUN",
+  "tasks": [
+    {
+      "taskId": "693d346488f84c6b96badcae37eed8f4",
+      "state": "SUCCEEDED",
+      "snapshotRef": "snapshot-86d1e5389d0f9751e51b22225a408377d9d3cf7393eec1160c7fdae2d92e5fcc",
+      "acquisition": {
+        "taskRef": {
+          "taskId": "693d346488f84c6b96badcae37eed8f4",
+          "tenantId": "process-68f2188cd79b4c539142abed34b24e96"
+        },
+        "version": "s01-online-acquisition-v1",
+        "delivery": 1,
+        "requests": [
+          {
+            "path": "/api/auth-server/oauth/access-token",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:29.091322+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/inventory",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:29.632663+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "57b6105865f8b89503eb129d3a251a2e60e24d779329e786cbe83ea8d0d2a219"
+          },
+          {
+            "path": "/api/v1/products",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:30.054409+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "3b57e78c47fc2acb4b92329ae933fab142eab3be1342de54955d3c81f508abc9"
+          },
+          {
+            "path": "/api/v1/store-authorizations",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:30.496907+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4"
+          },
+          {
+            "path": "/api/v1/warehouses",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:30.917586+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+          },
+          {
+            "path": "/api/v1/listings",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:31.333118+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "57c87838b59c8728f67d929ae99cf790771c349003d5b0783d5aef78d6ec4c54"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:31.766321+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ee876128425521a2dd6850207b468b011b0d33a37be8d63f7d653f469d385e79"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:32.201681+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "acfd5753fa09dfd76f87ed7b96cc77549c5d66a86e41728f3bf8d0dfdf3cc261"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:32.644606+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "36ef8a7b43d1cd3c29903bdc90ba12cd1a4f040bc245276aec2e2938c45d63ed"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:33.052441+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "2b0182fd0924eb5063a79b07f73cc39fb9d84c01113bd1450437717e5f94f1b5"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:33.486073+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "e61f899cabf9befb094a393c36e8f99a25fdbdf24b561bf6ee70a687e408f059"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:33.912215+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "4b6e4f619869e86a50ef8b1a1c14f92d5e66fa758bce6858cc64d0ddc1753d9c"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:34.338469+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "92d9c25c4a4da79260f334f99c69d5330eba4be38f5e1fa41ccc4c4589be1795"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:34.778666+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:35.221445+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ba16abf53b453aeb3bdd396cc3a344a46ea70a50e6a4ca092e268073b8d4664f"
+          },
+          {
+            "path": "/api/v1/inbound-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:35.662655+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a7e64cf32cbc285c4e0cc34e4e14847f2715311f8461942afb365018d461b507"
+          }
+        ],
+        "inputMode": "ONLINE_TEACHING_ERP",
+        "startedAt": "2026-11-13T02:46:28.732688+00:00",
+        "interfaces": {
+          "store": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:30.555132+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "listing": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:31.403641+00:00",
+            "fingerprint": "0fbd36d6c1907649086850d29b3305eef85e31c8aa6da5e51a9e0b5bdf62f497"
+          },
+          "product": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:30.132840+00:00",
+            "fingerprint": "7dcdd7add08b34693b7b1c182df74d9de4a27bc257f6098195c5de14ff09b978"
+          },
+          "quality": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:35.732882+00:00",
+            "fingerprint": "a683d3a97b98db751ac5cfa4b43bdc94122737126b2d6bd829bbd020323d72ee"
+          },
+          "sales-1": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:31.839402+00:00",
+            "fingerprint": "ef81c9a707d2313db7b882a3fde30af785f4b9d98766a1b72fb8b1319578bcb4"
+          },
+          "sales-2": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:32.279524+00:00",
+            "fingerprint": "e0cf35a4f596a73ad576ab40c1fe387ae062c8cce850663afccb2e1fb75d5c6e"
+          },
+          "sales-3": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:32.689361+00:00",
+            "fingerprint": "aa751f5ea235e2a494ae8445567f7b07ec4113ac49b194825d294a0fb7899466"
+          },
+          "sales-4": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:33.123189+00:00",
+            "fingerprint": "6be4a3e58159b549cc2cd0e71a247e0ece461b704b25da3b24f48d1a283928c6"
+          },
+          "sales-5": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:33.548442+00:00",
+            "fingerprint": "400a4031dfb84f1bfb43ebd1d9ececdc611621a67dfc79f60744770e31676f60"
+          },
+          "sales-6": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:33.974553+00:00",
+            "fingerprint": "c7ce2ae5e4348cd055c2cf88afbe6c1926cd4e2ea8e07871372d44db7bac736c"
+          },
+          "sales-7": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:34.411848+00:00",
+            "fingerprint": "e3c5ee6194a535d940a398ecbc147eedeedfae8aca58a68acb5c9978a164ec1b"
+          },
+          "inventory": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:29.691338+00:00",
+            "fingerprint": "d6a7de5826d0d300fefe76b4aa09874167eb28ffc10c5e8bc57cbebd9061ac9f"
+          },
+          "purchases": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:34.855269+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "warehouse": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:30.963326+00:00",
+            "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+          },
+          "purchase-draft": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:35.298688+00:00",
+            "fingerprint": "4b04fb9d3f2795fa7e27bf5af993c4d4f6bea2a8c7b9b1ec9b12723c10eb9751"
+          }
+        },
+        "completedAt": "2026-11-13T02:46:35.738708+00:00",
+        "limitations": [
+          "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "TEACHING_DATA_ONLY",
+          "NO_FIXED_CATALOG_FALLBACK"
+        ],
+        "planVersion": "1",
+        "acquisitionId": "c1abd87381ce4dc5916da2d225c381ed",
+        "requestDigest": "f924bc501aceb6064c7253d6b9615c77a11921012e2530fad1655262886c5828",
+        "mappingVersion": "s01-online-map-v1",
+        "requestedScope": {
+          "fields": [
+            "quantity"
+          ],
+          "storeIds": [
+            "store-fixture"
+          ],
+          "tenantId": "process-68f2188cd79b4c539142abed34b24e96",
+          "warehouseIds": [
+            "warehouse-fixture"
+          ],
+          "canonicalSkuIds": [
+            "sku-fixture"
+          ]
+        },
+        "acquisitionMethod": "NETWORK_READ",
+        "sourceEnvironment": "TEACHING_ERP",
+        "atomicAcrossSystems": false
+      },
+      "completeness": "BLOCKED",
+      "calculation": {
+        "baseline": null,
+        "selection": null,
+        "candidates": [],
+        "limitations": [
+          "DATA_QUALITY_BLOCKED"
+        ]
+      },
+      "quality": [
+        {
+          "code": "REAL_RULES_NOT_SIGNED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "REQUIRED_QUALITY_UNRESOLVED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_REVALIDATION_FAILED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        }
+      ],
+      "ai": {
+        "reason": "MODEL_NOT_ENABLED",
+        "status": "NOT_ATTEMPTED"
+      },
+      "idempotentReplay": "PASS",
+      "immutableSnapshot": "PASS"
+    },
+    {
+      "taskId": "c36e52ee8e4f46d5b49fa307dfc89a3c",
+      "state": "SUCCEEDED",
+      "snapshotRef": "snapshot-8b6a90ccfe2206253084507bbef0efaf691fcab39e265dea89ba554a2e6b5ef4",
+      "acquisition": {
+        "taskRef": {
+          "taskId": "c36e52ee8e4f46d5b49fa307dfc89a3c",
+          "tenantId": "process-68f2188cd79b4c539142abed34b24e96"
+        },
+        "version": "s01-online-acquisition-v1",
+        "delivery": 1,
+        "requests": [
+          {
+            "path": "/api/auth-server/oauth/access-token",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:36.703227+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/inventory",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:37.283134+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "57b6105865f8b89503eb129d3a251a2e60e24d779329e786cbe83ea8d0d2a219"
+          },
+          {
+            "path": "/api/v1/products",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:37.726032+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "3b57e78c47fc2acb4b92329ae933fab142eab3be1342de54955d3c81f508abc9"
+          },
+          {
+            "path": "/api/v1/store-authorizations",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:38.151381+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4"
+          },
+          {
+            "path": "/api/v1/warehouses",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:38.586776+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+          },
+          {
+            "path": "/api/v1/listings",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:39.013271+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "57c87838b59c8728f67d929ae99cf790771c349003d5b0783d5aef78d6ec4c54"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:39.445037+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ee876128425521a2dd6850207b468b011b0d33a37be8d63f7d653f469d385e79"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:39.876106+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "acfd5753fa09dfd76f87ed7b96cc77549c5d66a86e41728f3bf8d0dfdf3cc261"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:40.293905+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "36ef8a7b43d1cd3c29903bdc90ba12cd1a4f040bc245276aec2e2938c45d63ed"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:40.739141+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "2b0182fd0924eb5063a79b07f73cc39fb9d84c01113bd1450437717e5f94f1b5"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:41.168970+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "e61f899cabf9befb094a393c36e8f99a25fdbdf24b561bf6ee70a687e408f059"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:41.600307+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "4b6e4f619869e86a50ef8b1a1c14f92d5e66fa758bce6858cc64d0ddc1753d9c"
+          },
+          {
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:42.027577+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "92d9c25c4a4da79260f334f99c69d5330eba4be38f5e1fa41ccc4c4589be1795"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:42.490330+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:42.929348+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "ba16abf53b453aeb3bdd396cc3a344a46ea70a50e6a4ca092e268073b8d4664f"
+          },
+          {
+            "path": "/api/v1/inbound-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T02:46:43.356208+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a7e64cf32cbc285c4e0cc34e4e14847f2715311f8461942afb365018d461b507"
+          }
+        ],
+        "inputMode": "ONLINE_TEACHING_ERP",
+        "startedAt": "2026-11-13T02:46:36.344635+00:00",
+        "interfaces": {
+          "store": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:38.222971+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "listing": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:39.080412+00:00",
+            "fingerprint": "0fbd36d6c1907649086850d29b3305eef85e31c8aa6da5e51a9e0b5bdf62f497"
+          },
+          "product": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:37.789008+00:00",
+            "fingerprint": "7dcdd7add08b34693b7b1c182df74d9de4a27bc257f6098195c5de14ff09b978"
+          },
+          "quality": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:43.399979+00:00",
+            "fingerprint": "a683d3a97b98db751ac5cfa4b43bdc94122737126b2d6bd829bbd020323d72ee"
+          },
+          "sales-1": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:39.506818+00:00",
+            "fingerprint": "ef81c9a707d2313db7b882a3fde30af785f4b9d98766a1b72fb8b1319578bcb4"
+          },
+          "sales-2": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:39.931275+00:00",
+            "fingerprint": "e0cf35a4f596a73ad576ab40c1fe387ae062c8cce850663afccb2e1fb75d5c6e"
+          },
+          "sales-3": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:40.375757+00:00",
+            "fingerprint": "aa751f5ea235e2a494ae8445567f7b07ec4113ac49b194825d294a0fb7899466"
+          },
+          "sales-4": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:40.805977+00:00",
+            "fingerprint": "6be4a3e58159b549cc2cd0e71a247e0ece461b704b25da3b24f48d1a283928c6"
+          },
+          "sales-5": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:41.237541+00:00",
+            "fingerprint": "400a4031dfb84f1bfb43ebd1d9ececdc611621a67dfc79f60744770e31676f60"
+          },
+          "sales-6": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:41.658745+00:00",
+            "fingerprint": "c7ce2ae5e4348cd055c2cf88afbe6c1926cd4e2ea8e07871372d44db7bac736c"
+          },
+          "sales-7": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:42.115236+00:00",
+            "fingerprint": "e3c5ee6194a535d940a398ecbc147eedeedfae8aca58a68acb5c9978a164ec1b"
+          },
+          "inventory": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:37.362532+00:00",
+            "fingerprint": "d6a7de5826d0d300fefe76b4aa09874167eb28ffc10c5e8bc57cbebd9061ac9f"
+          },
+          "purchases": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:42.566526+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "warehouse": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:38.650545+00:00",
+            "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+          },
+          "purchase-draft": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T02:46:42.992281+00:00",
+            "fingerprint": "4b04fb9d3f2795fa7e27bf5af993c4d4f6bea2a8c7b9b1ec9b12723c10eb9751"
+          }
+        },
+        "completedAt": "2026-11-13T02:46:43.406370+00:00",
+        "limitations": [
+          "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "TEACHING_DATA_ONLY",
+          "NO_FIXED_CATALOG_FALLBACK"
+        ],
+        "planVersion": "1",
+        "acquisitionId": "050fd1657dc2425d8347147db0cfdcdf",
+        "requestDigest": "f924bc501aceb6064c7253d6b9615c77a11921012e2530fad1655262886c5828",
+        "mappingVersion": "s01-online-map-v1",
+        "requestedScope": {
+          "fields": [
+            "quantity"
+          ],
+          "storeIds": [
+            "store-fixture"
+          ],
+          "tenantId": "process-68f2188cd79b4c539142abed34b24e96",
+          "warehouseIds": [
+            "warehouse-fixture"
+          ],
+          "canonicalSkuIds": [
+            "sku-fixture"
+          ]
+        },
+        "acquisitionMethod": "NETWORK_READ",
+        "sourceEnvironment": "TEACHING_ERP",
+        "atomicAcrossSystems": false
+      },
+      "completeness": "BLOCKED",
+      "calculation": {
+        "baseline": null,
+        "selection": null,
+        "candidates": [],
+        "limitations": [
+          "DATA_QUALITY_BLOCKED"
+        ]
+      },
+      "quality": [
+        {
+          "code": "REAL_RULES_NOT_SIGNED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "REQUIRED_QUALITY_UNRESOLVED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_REVALIDATION_FAILED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        }
+      ],
+      "ai": {
+        "reason": "MODEL_NOT_ENABLED",
+        "status": "NOT_ATTEMPTED"
+      },
+      "idempotentReplay": "PASS",
+      "immutableSnapshot": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "independentAcquisitions": "PASS",
+  "apiWorkerRestartHistoricalRead": "PASS"
+}

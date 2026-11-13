@@ -1,5 +1,5 @@
 """D01 bounded online teaching ERP collection through the existing read connector."""
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from decimal import Decimal, InvalidOperation
 from typing import Literal
 from pydantic import Field
@@ -14,9 +14,9 @@ TEACHING_BATCH = 'S01-AI-TEST-20261112'
 class OnlineMapping(Contract):
     scope: dict
     sku: str = Field(min_length=1, max_length=128)
-    sourceTenant: str = Field(min_length=1, max_length=64)
-    sourceStore: str = Field(min_length=1, max_length=64)
-    sourceWarehouse: str = Field(min_length=1, max_length=64)
+    sourceTenant: str = Field(pattern=r'^[0-9]{1,20}$')
+    sourceStore: str = Field(pattern=r'^[0-9]{1,20}$')
+    sourceWarehouse: str = Field(pattern=r'^[0-9]{1,20}$')
     storeName: str = Field(min_length=1, max_length=128)
     warehouseName: str = Field(min_length=1, max_length=128)
     version: Identifier = 's01-online-map-v1'
@@ -54,7 +54,11 @@ def collect(reader, mapping, context, acquisition_id):
             ('purchase-draft', '/api/v1/purchase-orders', dict(order_sn=TEACHING_BATCH+'-PURCHASE-C', match='exact'), 'GET'),
             ('quality', '/api/v1/inbound-orders', dict(field='order_sn', q=TEACHING_BATCH+'-QC-A', match='exact'), 'GET')]
     else:
-        queries += [('sales', '/api/v1/sales-orders', dict(store_name=m.storeName, shipping_warehouse=m.warehouseName), 'GET'),
+        day=datetime.fromisoformat(started).date()
+        queries += [('sales', '/api/v1/sales-orders', dict(store_name=m.storeName, shipping_warehouse=m.warehouseName,
+            date_from=(day-timedelta(days=7)).isoformat(),date_to=day.isoformat()), 'GET'),
+            ('sales-compat', '/erp/sc/data/mws/orders',dict(sid=int(m.sourceStore),date_type=3,
+                start_date=(day-timedelta(days=7)).isoformat()+' 00:00:00',end_date=day.isoformat()+' 00:00:00'), 'POST'),
             ('purchases', '/api/v1/purchase-orders', dict(field='warehouse_name', q=m.warehouseName, match='exact'), 'GET'),
             ('buckets', '/erp/sc/routing/data/local_inventory/inventoryDetails', dict(wid=m.sourceWarehouse, sku=m.sku), 'POST'),
             ('quotes', '/api/v1/supplier-quotes', dict(sku=m.sku), 'GET')]
