@@ -1,0 +1,47 @@
+{
+  "result": "PASS_LOCAL_TEACHING_PRODUCT",
+  "mergeCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
+  "parents": [
+    "e3591aacb96aca7d90b1f4e5e9efcfa5942eed14",
+    "b8ef8cb4ef0ae28213e7879664af9ac14818f0d8"
+  ],
+  "normalTwoParentMerge": true,
+  "mergeTreeEqualsReviewedBranch": true,
+  "backend": {
+    "passed": 787,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 275.505,
+    "command": "python -m pytest tests --basetemp=.tmp/local-main-4103861 --junitxml=.tmp/local-main-4103861.xml",
+    "junitSha256": "fdad0535abc52bab3eedce62ecd423473be19b6b58e2197bd1324407a5cb632d"
+  },
+  "frontend": {
+    "passed": 43,
+    "typecheck": "PASS",
+    "productionBuild": "PASS"
+  },
+  "browser": {
+    "result": "PASS",
+    "adminAllExistingFunctionsEnabled": true,
+    "existingRequisitionId": "1426",
+    "existingRealAIReportRetained": true,
+    "sameBatchId": "b3eb6b413fd84de7a4cce2b4ac80e4bf",
+    "logoutPassed": true,
+    "newModels": 0,
+    "newERPBusinessWrites": 0,
+    "newBusinessTasks": 0
+  },
+  "localLiveBrowserCases": 4,
+  "legacyBrowserCompatibility": {
+    "passed": 6,
+    "scope": "REAL_API_WORKER_FIXED_TEACHING_CAPTURE_AND_EXPLICIT_PROTOCOL_FIXTURES_NOT_NEW_ERP_OR_PAID_MODEL",
+    "initialFailure": "One assertion expected pre-P3 heading; updated to current no-permission notice and no submit/approve/order/receive buttons, then all6 passed"
+  },
+  "startupOnActualMain": "PASS",
+  "allOwnedTestServicesStopped": true,
+  "newPaidModelCalls": 0,
+  "newERPProcurementWrites": 0,
+  "newERPBusinessData": 0,
+  "remotePublication": "PENDING_NORMAL_PUSH",
+  "observedAt": "2026-11-13T18:52:06.568052+00:00"
+}

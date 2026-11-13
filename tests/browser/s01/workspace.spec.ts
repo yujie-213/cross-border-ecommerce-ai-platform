@@ -91,7 +91,10 @@ test('REAL: A—E teaching packages, Worker reports, chart/table, refresh, previ
   }
   await page.getByRole('navigation', { name: '主要导航' }).getByRole('link', { name: /补货建议/ }).click(); await expect(page.getByRole('table').locator('tbody tr')).not.toHaveCount(0)
   await page.screenshot({ path: path.join(evidenceDir, 'screenshots/history-1440.png'), fullPage: true })
-  await page.getByRole('link', { name: /人工审批/ }).click(); await expect(page.getByRole('heading', { name: '审批功能尚未开放' })).toBeVisible()
+  await page.getByRole('link', { name: /人工审批/ }).click()
+  await expect(page.getByRole('heading', { name: '人工审批', exact: true })).toBeVisible()
+  await expect(page.getByText('当前未开放请购提交', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: /确认并提交|批准采购|正式下单|确认收货/ })).toHaveCount(0)
   expect(errors).toEqual([])
   writeFileSync(path.join(evidenceDir, 'real-browser-cases.json'), JSON.stringify({ input: 'FIXED_REAL_GET_CAPTURE_OF_SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP', realApi: true, independentWorker: true, erpNetworkRequests: 0, paidModelRequests: 0, cases: observed, consoleErrors: errors }, null, 2) + '\n')
 })

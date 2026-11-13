@@ -63,5 +63,12 @@
       "cause": "Batch file edited while the original cmd process was awaiting child exit",
       "fix": "Final frozen launcher tested fresh; no edits to running batch scripts in normal use"
     }
-  ]
+  ],
+  "postMergeVerificationRef": "docs/evidence/S01-LOCAL/main.json",
+  "postMergeTestedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
+  "legacyBrowserCompatibility": {
+    "passed": 6,
+    "scope": "REAL_API_WORKER_FIXED_TEACHING_CAPTURE_AND_EXPLICIT_PROTOCOL_FIXTURES_NOT_NEW_ERP_OR_PAID_MODEL",
+    "initialFailure": "One assertion expected pre-P3 heading; updated to current no-permission notice and no submit/approve/order/receive buttons, then all6 passed"
+  }
 }

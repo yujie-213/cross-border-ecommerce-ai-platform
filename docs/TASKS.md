@@ -1,4 +1,4 @@
-当前本地产品化（2026-11-14）：D-S01-LOCAL-01 REVIEW，固定3cac8e7完整787/43/类型构建和真实启动登录验收通过，准备按负责人授权普通合main及合后复验。
+当前本地产品化（2026-11-14）：D-S01-LOCAL-01 REVIEW，main正常merge 4103861b70a3ef8806949c7c61576d3cd8c39bb4，合后787/43/类型构建/实际启动与浏览器通过，等待普通远端同步；数据对账/企业门限制保留。
 
 当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。
 
@@ -8651,9 +8651,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "status": "REVIEW",
   "implementationCommits": [
     "e7b242d67ad1e2b23c06041de7ea2c4617c333d6",
-    "3cac8e7a33eead3150b3750c62718b7451b49ed1"
+    "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+    "4103861b70a3ef8806949c7c61576d3cd8c39bb4"
   ],
-  "testedCommit": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+  "testedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
   "evidence": [
     {
       "kind": "UNIT_TEST",
@@ -8726,13 +8727,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-LOCAL-01/AC06"
       ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "Actual main full regression and daily launcher/browser; legacy6 compatibility",
+      "environment": "Windows/real MySQL/Edge; source scopes unchanged",
+      "sample": "main787/43/build/types; local4 real cases and legacy6 separately; normal merge tree same; zero new paid/ERP writes",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/main.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC07"
+      ]
     }
   ],
   "review": {
     "reviewer": "Codex self-verification under owner conditional merge authorization; no invented independent human review",
-    "reviewedCommit": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+    "reviewedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
     "evidenceRef": "docs/reports/S01_本地产品化与main验收_20261114.md",
-    "decision": "READY_FOR_AUTHORIZED_NORMAL_MERGE_PENDING_POSTMERGE_AC07"
+    "decision": "POSTMERGE_LOCAL_PRODUCT_PASS_PENDING_REMOTE_PUBLICATION"
   },
   "branch": "codex/s01-v2-full-replenishment",
   "observedHead": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
@@ -8758,6 +8771,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "本轮真实AI和ERP采购写入新增0，复用历史实测，费用UNKNOWN与原授权不重置",
     "本地单用户loopback应用，不作企业生产安全和真实在途/分收净扣签认"
   ],
-  "reportRef": "docs/reports/S01_本地产品化与main验收_20261114.md"
+  "reportRef": "docs/reports/S01_本地产品化与main验收_20261114.md",
+  "merge": {
+    "sha": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
+    "parents": [
+      "e3591aacb96aca7d90b1f4e5e9efcfa5942eed14",
+      "b8ef8cb4ef0ae28213e7879664af9ac14818f0d8"
+    ],
+    "normal": true,
+    "postMergeBackend": 787,
+    "postMergeFrontend": 43,
+    "postMergeBrowser": "PASS",
+    "publication": "PENDING_NORMAL_PUSH"
+  }
 }
 ```

@@ -1,6 +1,6 @@
 {
   "result": "PASS_LOCAL_PRODUCT_COMPATIBILITY",
-  "observedAt": "2026-11-13T18:38:20.632841+00:00",
+  "observedAt": "2026-11-13T18:42:12.818614+00:00",
   "migrationHead": "0011_local_admin",
   "taskRef": {
     "tenantId": "s01-v2-teaching-local",
