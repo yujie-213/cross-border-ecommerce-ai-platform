@@ -1,3 +1,5 @@
+当前紧急小范围小试实测（2026-11-13）：负责人新增明确批准原清单最小创建/回读12变更、30回读，未批状态动作不执行。实测12次变更/29业务回读/1认证，12新对象独立验证、2候选/ACTIVE0；累计准备12变更/41回读/4认证。已停止ERP调用，完整2SKU及8SKU未验收，原FAIL/历史模型证据不改。下方“准备未批/零写入”是先前时点，不覆盖本增量。
+
 当前方案C第一阶段领取（2026-11-13）：负责人及星星正式批准方案C；当前只做独立范围只读核查与2SKU精确执行清单，副作用操作须再批准。尚无专用账号/独立租户；不自动扩大8/30SKU、不新增模型。公开推送只发逐项审核安全内容，旧本地受限证据/截图不进入新公开历史。
 
 当前数据与监控范围评估（2026-11-13，基于96c8526）：负责人要求先评估，确认后才进行数据小试/批量写入。新增已确定原则：正式普通查询/分析/未来批量/前端统计仅消费本项目授权创建、独立回读并关联核验的版本化监控清单，默认排除未登记SKU；只用前缀/名称不足。此前共享SKU仅诊断证据，当前正式ACTIVE清单尚未实现、成员0；--discover-options不得作为正式监控入口。推荐方案C仍待确认；四企业门及历史任务原状。
@@ -6658,7 +6660,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-S01-DATASET-DESIGN-01"
   ],
-  "entryCondition": "方案C正式批准；当前只读范围核查与精确2SKU小试清单，负责人确认清单前不得执行业务变更",
+  "entryCondition": "负责人2026-11-13紧急批准原清单最小创建及独立回读，限12变更/30回读；未批状态动作不执行；本轮完成即停止",
   "ownerRole": "主集成/负责人/老师ERP范围维护",
   "assignee": "Codex",
   "allowedPaths": [
@@ -6670,13 +6672,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/contracts/s01/",
     "docs/evidence/S01-PILOT-PREP/",
     "docs/planning/",
-    "docs/generated/"
+    "docs/generated/",
+    ".tmp/s01_limited_pilot.py",
+    "data/private/s01-pilot-limited-20261113/"
   ],
   "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
   "deliverables": [
     "只读核实独立范围与隔离限制、精确2SKU执行清单/字段/关系/副作用/预算/恢复",
     "当前拟33次业务变更/76回读含已尝试12；批准前零业务写入",
-    "批准后才执行小试、独立回读/真实对账/登记及进入8SKU结论"
+    "批准后才执行小试、独立回读/真实对账/登记及进入8SKU结论",
+    "已完成本轮12变更/29业务回读/1认证；12新对象独立核验、2受控候选/ACTIVE0，完整2SKU小试未完成"
   ],
   "acceptance": [
     {
@@ -6700,7 +6705,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "implementationCommits": [
     "1eddeb6bc383779e550fd4d3cfef1bf310cb4f47"
   ],
-  "testedCommit": "1eddeb6bc383779e550fd4d3cfef1bf310cb4f47",
+  "testedCommit": "a45031b470d0ad3269d0ac762783fa705f860c4b",
   "evidence": [
     {
       "kind": "READ_ONLY_INSPECTION",
@@ -6749,13 +6754,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-PILOT-PREP/publication-receipt-local.json"
+    },
+    {
+      "kind": "LIVE_PILOT_LIMITED_SUBSET",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe .tmp/s01_limited_pilot.py preflight; execute (two sequential invocations, one journal/session)",
+      "environment": "固定教学ERP正式API；原始数据/ID/执行脚本本地私有；非工作流/完整闭环验收",
+      "sample": "12次POST201及29次GET200；12独立回读对象、报价真实父ID、草稿销售/采购明细与金额、45件库存零额外增减；2候选但ACTIVE0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/limited-pilot-summary-local.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
-  "observedHead": "1658286bb358d2fc0b3a11ced30998e692de6824",
+  "observedHead": "a45031b470d0ad3269d0ac762783fa705f860c4b",
   "dirtyPaths": [
-    "本轮范围核查/精确计划/公开发布审查文档，非应用代码"
+    "本轮小范围实测回执/汇总及任务交接；临时执行脚本/原始证据留忽略私有目录"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -6779,19 +6796,32 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "精确清单和本地证据已提交1eddeb6bc383779e550fd4d3cfef1bf310cb4f47；公开文档快照75ad144已普通同步。副作用仍NOT_RUN，等待读取恢复/范围确认/精确清单批准"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人紧急明确批准最小教学创建12/30；本轮12/29/认证1全部成功并停止，候选2/ACTIVE0；完整工作流及8SKU仍未验收，不覆盖旧FAIL/NOT_RUN"
     }
   ],
   "executionGate": {
-    "status": "BLOCKED",
+    "status": "LIMITED_SUBSET_COMPLETED_STOPPED",
     "reasons": [
-      "仓库显示名和供应商显示名精确查重503",
-      "尚无专用账号/独立租户；共享逻辑隔离需确认",
-      "33项副作用清单未批准"
+      "本轮12次业务变更上限已用满，停止ERP调用",
+      "完整小试的收付款/出库/采购状态/收货动作尚未批准",
+      "正式监控未实现，共享租户硬隔离未证明"
     ],
     "mutationPlan": 33,
     "readPlanIncludingPreparation": 76,
-    "actualMutations": 0,
-    "actualReads": 12,
+    "actualMutations": 12,
+    "actualReads": 41,
+    "authenticationCalls": 4,
+    "thisRound": {
+      "actualMutations": 12,
+      "actualReads": 29,
+      "authenticationCalls": 1,
+      "maxMutations": 12,
+      "maxReads": 30
+    },
     "modelRequests": 0
   },
   "publication": {
@@ -6800,7 +6830,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "scope": "DOCUMENTS_AND_AGGREGATE_ONLY",
     "sourceCodeAndDetailedEvidence": "LOCAL_ONLY"
   },
-  "testedScope": "PREPARATION_DOCUMENTS_AND_DECLARED_PLAN_CHECKS_ONLY_NOT_LIVE_PILOT"
+  "testedScope": "LIVE_LIMITED_MASTER_DATA_AND_DRAFT_CRUD_WITH_INDEPENDENT_READBACK_NOT_COMPLETE_2SKU_WORKFLOW",
+  "candidateMembers": 2,
+  "activeMembers": 0
 }
 ```
 

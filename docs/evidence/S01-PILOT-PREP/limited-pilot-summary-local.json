@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "s01-limited-pilot-summary-v1",
+  "date": "2026-11-13",
+  "result": "PASS_LIMITED_SCOPE_ONLY",
+  "baseCommit": "a45031b470d0ad3269d0ac762783fa705f860c4b",
+  "callsThisRound": {
+    "authentication": 1,
+    "reads": 29,
+    "mutations": 12
+  },
+  "priorPreparation": {
+    "authentication": 3,
+    "reads": 12,
+    "mutations": 0
+  },
+  "cumulativePilotCalls": {
+    "authentication": 4,
+    "reads": 41,
+    "mutations": 12
+  },
+  "createdCounts": {
+    "stores": 1,
+    "warehouses": 1,
+    "suppliers": 1,
+    "products": 2,
+    "listings": 2,
+    "quotes": 2,
+    "openingInventoryRows": 1,
+    "salesOrders": 1,
+    "salesLines": 2,
+    "purchaseOrders": 1,
+    "purchaseLines": 1
+  },
+  "verifiedCreatedRecords": 12,
+  "candidateMembers": 2,
+  "activeMembers": 0,
+  "workflowActions": 0,
+  "modelCalls": 0,
+  "formalMonitoring": "NOT_IMPLEMENTED",
+  "independentLocalChecks": {
+    "approved_operation_subset": true,
+    "all_created_independently_read": true,
+    "readback_response_hashes": true,
+    "mutation_budget": true,
+    "read_budget": true,
+    "no_workflow_actions": true,
+    "no_update_delete": true,
+    "complete_empty_namespaces": true,
+    "quote_product_supplier_ids": true,
+    "listing_exact_store_and_sku": true,
+    "inventory_real_parent_ids": true,
+    "inventory_source_batch": true,
+    "sales_draft_uncharged": true,
+    "purchase_draft_not_in_transit": true,
+    "purchase_real_supplier": true,
+    "draft_order_totals": true,
+    "order_lines_only_owned_skus": true,
+    "order_store_warehouse": true,
+    "no_unexpected_stock_delta": true,
+    "all_calls_success": true
+  },
+  "failuresThisRound": [],
+  "stockReconciliation": {
+    "result": "PASS",
+    "balanceCall": 42,
+    "openingQuantity": 45,
+    "availableAfterSalesAndPurchaseDrafts": 45,
+    "unexpectedStockDelta": 0
+  },
+  "sourceContractUnchangedFromPreparation": true,
+  "privateEvidence": {
+    "journalRef": "data/private/s01-pilot-limited-20261113/journal.json",
+    "journalSHA256": "a692a36ff5ba072ecdf159f9a2c32f9173943e06bb49532d6421412d783b5a4d",
+    "candidateRef": "data/private/s01-pilot-limited-20261113/monitor-candidates.json",
+    "candidateSHA256": "d7ba0fb7fd97b955b06248efb5e18d068c1c8abe9dc732f305c4d1d71d814b2b",
+    "executedRunnerSHA256": "f126760436534e8cbdc501157cd70b9f183627d59549ddf570850c75cfca201f"
+  },
+  "notRun": [
+    "PAYMENT",
+    "SHIPMENT",
+    "PURCHASE_SUBMIT_PLACE",
+    "RECEIPT_CONFIRM",
+    "POSTED_LEDGER",
+    "ERP_REPLAY_IDEMPOTENCY",
+    "MULTIPAGE_QUERY",
+    "FORMAL_G01_SCOPE_ACTIVATION",
+    "B01_B02_POSITIVE_PATH",
+    "BROWSER_RETEST"
+  ],
+  "nextStage8Sku": "NO",
+  "complete2SkuTrial": "PARTIAL_FOUNDATION_READY_PENDING_SEPARATE_WORKFLOW_APPROVAL_AND_VALIDATION",
+  "publication": "LOCAL_ONLY_NOT_PUSHED",
+  "oldBackend670Frontend33BrowserFailureAndModelEvidence": "PRESERVED_NOT_RERUN",
+  "engineeringValidation": {
+    "localDataChecks": 20,
+    "localDataChecksPassed": 20,
+    "documentationChecks": 18,
+    "documentationChecksResult": "PASS",
+    "diffCheck": "PASS",
+    "otherTaskRecordsUnchanged": 37,
+    "applicationTests": "NOT_RERUN",
+    "sourceCodeUnchanged": true,
+    "unknownOpenAPIUnchanged": true,
+    "sessionTokenRemoved": true
+  }
+}
