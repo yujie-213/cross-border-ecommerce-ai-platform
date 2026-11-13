@@ -14,7 +14,7 @@ const baseline = computed(() => data.value.supplyDemand.baseline)
 const legacyOwned = computed(() => !!data.value.scenarioSupplement.monitoring && !!data.value.forecast && data.value.forecast.constraints.wholeCartonRequired !== true)
 const issues = computed(() => data.value.quality.filter((item, index, all) => all.findIndex(x => x.code === item.code && x.path === item.path) === index))
 const facts = computed(() => baseline.value ? [
-  ['当前可用库存', baseline.value.availableQuantity, '件'], ['已有在途 / 计划供给', baseline.value.inTransitQuantity, '件'],
+  ['当前可用库存', baseline.value.availableQuantity, '件'], ['计入计算的已有供给', baseline.value.inTransitQuantity, '件'],
   ['窗口需求（含缓冲）', baseline.value.targetQuantity, '件'], ['总量缺口', baseline.value.gapQuantity, '件'],
 ] : [])
 </script>
@@ -38,6 +38,12 @@ const facts = computed(() => baseline.value ? [
     <p>库存对账：期初 {{ data.forecast.stockReconciliation.openingQuantity }} − 已履约 {{ data.forecast.stockReconciliation.fulfilledQuantity }} = 当前可用 {{ data.forecast.stockReconciliation.availableQuantity }} 件（{{ data.forecast.stockReconciliation.status }}）。历史业务日与实际付款、出库过账日分别保存，未回写系统时间。</p>
     <Notice v-for="item in data.forecast.excludedSupply" :key="item.orderRef" tone="warning" title="未计入有效在途">{{ item.status }}采购的 pending 数量 {{ item.pendingQuantity }} 件尚未生效，不能抵扣需求缺口。</Notice>
     <p v-if="data.scenarioSupplement.monitoring" class="micro-note">自有监控数据集 {{ data.scenarioSupplement.monitoring.datasetId }} · scopeVersion {{ data.scenarioSupplement.monitoring.scopeVersion }} · 仅已登记并独立核验成员。</p>
+  </Panel>
+  <Panel v-if="data.existingPurchases" title="ERP 已审批正式采购" note="只发现有效正式状态 · 不检查未审批单">
+    <p v-if="!data.existingPurchases.items.length">本次未发现归属已确认的有效正式采购。覆盖：{{ data.existingPurchases.coverage }}。</p>
+    <Notice v-if="data.existingPurchases.unresolvedScopeCount" tone="warning" title="正式采购归属待核实">有 {{ data.existingPurchases.unresolvedScopeCount }} 张关联 SKU 的正式采购无法确认店铺或销售备货用途，未作为本范围供给。</Notice>
+    <div v-for="item in data.existingPurchases.items" :key="item.erpId + ':' + item.lineIndex" class="source-item"><div><b>{{ item.erpNumber }} / ERP ID {{ item.erpId }} / {{ item.status }}</b><p>{{ item.sku }}：采购 {{ item.orderedQuantity ?? '未知' }} / 已收 {{ item.receivedQuantity ?? '未知' }} / 未收 {{ item.unreceivedQuantity ?? '未知' }} 件。</p><p>计划到货 {{ item.plannedArrival || '未知' }}；可售日期 {{ item.sellableDate || '未知' }}；{{ item.includedInCalculation ? '已纳入计算' : '未抵扣供给' }}。</p></div></div>
+    <p class="micro-note">ERP 计划到货不是可售日期。有效剩余量、关闭规则或可售时间未确认时，不将原始采购总量作为在途；报告仍展示相关限制。</p>
   </Panel>
   <div class="detail-grid"><div>
     <Panel title="供需与补货分析" note="服务端 B01 / B02 计算结果">
@@ -64,7 +70,7 @@ const facts = computed(() => baseline.value ? [
       <Notice v-if="legacyOwned" tone="warning" title="旧规则候选已失效">请重新分析以获取满足 MOQ 和整箱要求的候选；历史快照仍保留用于追溯。</Notice>
       <template v-else-if="data.supplyDemand.candidates.length"><div v-for="(candidate, i) in data.supplyDemand.candidates" :key="candidate.candidateId" class="candidate"><h3>候选 {{ i + 1 }}</h3><div class="big">{{ candidate.quantity }} <small>件<template v-if="data.forecast?.constraints.wholeCartonRequired">（{{ Number(candidate.quantity) / Number(data.forecast.constraints.orderMultiple) }} 箱）</template></small></div><div class="key-value"><span>建议可售日期</span><strong>{{ candidate.availableDate }}</strong></div><div class="key-value"><span>最早缺货</span><strong>{{ candidate.evaluation.firstShortageDate || '窗口内未发现' }}</strong></div><Notice v-if="candidate.evaluation.stockoutRisk" tone="warning" title="到货前风险仍存在">期末余额 {{ candidate.evaluation.closingBalance }} 件，不代表全程无缺货。</Notice><p class="micro-note">约束版本：{{ candidate.constraintVersion }}。{{ data.forecast?.constraints.wholeCartonRequired ? 'MOQ 与整箱倍数见 ERP 采购约束；日期仍为假设，质量和审批条件未解除。' : '当前公开 API 不提供已确认的 MOQ / 订购倍数，无法在此核实。' }}</p></div></template>
       <Notice v-else title="未生成补货候选">{{ baseline && !baseline.stockoutRisk && baseline.gapQuantity === '0' ? '当前窗口无需补货。无候选不等于生成 0 件采购订单。' : '候选缺失的原因请查看质量与限制；不能推断候选量为零。' }}</Notice>
-      <Notice tone="danger" title="采购适用性：不可用于正式采购">只读教学分析；采购确认、审批和执行尚未开放。</Notice>
+      <Notice tone="danger" title="采购适用性：不可用于正式采购">企业准入仍未开放；已授权教学范围可在下方人工确认并提交 ERP 请购，等待 ERP 领导审批。</Notice>
     </Panel>
     <Panel title="版本与追溯"><dl class="metadata"><dt>本次任务</dt><dd>{{ report.taskRef.taskId }}</dd><dt>本次报告</dt><dd>{{ report.reportRef.reportId }}</dd><dt>快照</dt><dd>{{ report.snapshotRef }}</dd><dt>计划 / 场景 / 契约版本</dt><dd>{{ report.planVersion }} / {{ report.scenarioVersion }} / {{ report.contractVersion }}</dd><dt>规则版本</dt><dd>{{ shown(data.scenarioSupplement.ruleVersion) }}</dd><dt>固定 packageRef</dt><dd>{{ data.scenarioSupplement.packageRef }}</dd><dt>前序报告</dt><dd>{{ data.scenarioSupplement.previousReportRef?.reportId || '无' }}</dd><dt>企业准入</dt><dd>{{ data.scenarioSupplement.realAdmission }}</dd></dl></Panel>
   </aside></div>

@@ -7945,3 +7945,89 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "currentDeliveryScope": "采购能力调查材料REVIEW，非P3开发/采购闭环验收。四企业门保持，未知OpenAPI保留；本地提交后停止，不合main、不自动推送/开发/采购。"
 }```
+
+
+## P3最小业务闭环
+
+```json
+{
+  "id": "D-S01-P3-MIN-01",
+  "stage": "D",
+  "title": "S01正式采购展示与人工确认提交ERP采购申请最小闭环",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-P3-ERP-SURVEY-01",
+    "D-S01-P1P2-MERGE-01"
+  ],
+  "entryCondition": "2026-11-13负责人范围收缩任务明确授权开发、教学采购申请创建/提交/回读及普通推送评审分支。",
+  "ownerRole": "Codex开发；负责人和星星独立验收",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "docs/TASKS.md",
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/contracts/s01/p3-minimal-loop.md",
+    "docs/reports/",
+    "docs/evidence/S01-P3-MIN/",
+    "docs/generated/",
+    "docs/planning/",
+    "src/commerce_hub/",
+    "migrations/versions/0008_s01_requisition.py",
+    "frontend/src/",
+    "frontend/tests/",
+    "tests/",
+    "tools/s01_online_dev.py"
+  ],
+  "parallelCondition": "Codex单人；B01/B02不改，保留未知未跟踪OpenAPI；不改无关模块。",
+  "deliverables": [
+    "正式采购保守展示；持久幂等人工确认/ERP申请提交；前端闭环；相关回归与真实教学证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P3-MIN-01/AC1",
+      "text": "只发现已审批有效正式采购并核验归属；数量/可售时间未知不抵扣；原算法不改。"
+    },
+    {
+      "id": "D-S01-P3-MIN-01/AC2",
+      "text": "人工确认/权限与MOQ整箱校验、正规ERP创建提交、真实回读/幂等/UNKNOWN恢复及前端结果。"
+    },
+    {
+      "id": "D-S01-P3-MIN-01/AC3",
+      "text": "相关回归、公开安全核对、独立分支提交推送，REVIEW不合main。"
+    }
+  ],
+  "plannedTests": [
+    "D01/D02采购筛选与报告兼容单测；窄写适配及权限/幂等/未知恢复测试；MySQL/API/前端与浏览器；本项目自有教学采购申请创建提交独立回读及重复提交；文档构建检查"
+  ],
+  "risks": [
+    "已审批正样本可能缺失，不代签制造；可售日期/逐行关闭语义未知时不抵扣；共享ERP租户隔离限制。"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-p3-minimal-loop",
+  "observedHead": "6d19204c3995919327e7c16a76e0284e1f9786ba",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确收缩P3并授权最小开发；原调查提交保留。"
+    }
+  ],
+  "currentDeliveryScope": "只做正式采购展示和人工确认ERP请购提交；不查旧36或未审批/草稿，不decide/下单/收货/入库，不扩SKU不调付费模型。"
+}
+```

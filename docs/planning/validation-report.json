@@ -39,13 +39,13 @@
       "check": "unique-task-ids",
       "result": "PASS",
       "detail": {
-        "tasks": 44,
+        "tasks": 45,
         "stages": {
           "SETUP": 1,
           "A": 6,
           "B": 5,
           "C": 5,
-          "D": 27
+          "D": 28
         }
       }
     },
@@ -145,7 +145,7 @@
       "check": "tracked-whitelist",
       "result": "PASS",
       "detail": {
-        "tracked": 788,
+        "tracked": 789,
         "over": []
       }
     }

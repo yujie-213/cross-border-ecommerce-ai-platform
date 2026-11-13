@@ -17,7 +17,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from commerce_hub.governance.access.tables import grants, principals, sessions
 
 SCOPE_DIMENSIONS = ("storeIds", "warehouseIds", "canonicalSkuIds", "fields")
-ALLOWED_ACTIONS = frozenset({"tasks:create", "tasks:read", "tasks:cancel", "engineering:execute"})
+ALLOWED_ACTIONS = frozenset({"tasks:create", "tasks:read", "tasks:cancel", "engineering:execute", "s01:requisition"})
 
 
 class AccessDenied(RuntimeError):

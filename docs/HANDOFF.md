@@ -638,3 +638,8 @@ git diff --stat
 ## 未完成/中断交接模板
 
 按任务记录实际branch、观察时HEAD/基点、未提交路径与归属、真实提交、已做/未做、精确测试命令/环境/样本/退出码、FAIL/NOT_RUN、证据/hash、重要ADR、恢复步骤。未提交或交接不全不ACCEPTED。当前没有业务进程需要持续看护；本轮完成后停止。
+
+
+## P3最小闭环领取（2026-11-13）
+
+负责人新授权覆盖旧调查停止点及待审阻断规则；仅正式采购展示和人工确认→ERP采购申请创建/submit。分支codex/s01-p3-minimal-loop从调查6d19204（main基点db13298）连续创建，未知OpenAPI保留。差距/契约见docs/contracts/s01/p3-minimal-loop.md；当前IN_PROGRESS，无新ERP调用/变更/模型，后续按实际证据更新。

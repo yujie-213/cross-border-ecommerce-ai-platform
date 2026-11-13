@@ -120,8 +120,18 @@ def normalize_owned(captures, mapping, receipt, mapping_verified):
             require(running > 0, 'HISTORICAL_STOCKOUT_DEMAND_CENSORED', 'demand')
         require(running == physical, 'STOCK_LEDGER_RECONCILIATION_FAILED', 'inventory')
         supply, excluded = [], []
-        require({str(r['id']) for r in rows('purchases')} == set(b.purchaseIds), 'PURCHASE_SET_CHANGED', 'purchases')
-        for purchase in rows('purchases'):
+        formal = receipt.get('purchasePolicy') == 's01-approved-purchases-v1'
+        if formal:
+            from commerce_hub.data.projection.purchases import project_purchases
+            try:
+                result['existingPurchases'] = project_purchases(rows('purchases'), m, captures['purchases'].get('scopeProofs', []))
+            except ValueError:
+                raise OwnedInputError('FORMAL_PURCHASE_SOURCE_DRIFT', 'purchases') from None
+            assumptions.remove('REGISTERED_SUPPLY_ONLY_UNAPPROVED_PENDING_EXCLUDED')
+            assumptions.append('FORMAL_PURCHASES_ONLY_SELLABLE_SUPPLY_UNCONFIRMED_NOT_DEDUCTED')
+        else:
+            require({str(r['id']) for r in rows('purchases')} == set(b.purchaseIds), 'PURCHASE_SET_CHANGED', 'purchases')
+        for purchase in ([] if formal else rows('purchases')):
             require(str(purchase.get('tenant_id')) == m.sourceTenant and purchase.get('warehouse_name') == m.warehouseName
                 and str(purchase.get('supplier_id')) == b.supplierId
                 and any(x.get('sku') == m.sku for x in purchase.get('item_list', [])), 'PURCHASE_RELATION_DRIFT', 'purchases')

@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=a20daabc8b79a95243d3f4db6a86a8f7a5eda724716e239c98f66802e348ed7b
+%% TASKS sourceSha256=e6fc40d8a0dbb558af9cd6f5d891925aa4503c27dbc2c2ab6004c613d72a977b
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -44,6 +44,7 @@ flowchart TB
   D_S01_P1P2_MERGE_01["D-S01-P1P2-MERGE-01 P1/P2阶段验收登记、main正常合并与发布"]
   D_S01_P3_PREP_01["D-S01-P3-PREP-01 P3采购审核与执行流程开发准备（无业务执行）"]
   D_S01_P3_ERP_SURVEY_01["D-S01-P3-ERP-SURVEY-01 ERP采购全链路只读能力验证与P2/P3可行性调查"]
+  D_S01_P3_MIN_01["D-S01-P3-MIN-01 S01正式采购展示与人工确认提交ERP采购申请最小闭环"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -113,3 +114,5 @@ flowchart TB
   D_S01_P1P2_MERGE_01 --> D_S01_P3_PREP_01
   D_S01_P3_PREP_01 --> D_S01_P3_ERP_SURVEY_01
   D_S01_P1P2_MERGE_01 --> D_S01_P3_ERP_SURVEY_01
+  D_S01_P3_ERP_SURVEY_01 --> D_S01_P3_MIN_01
+  D_S01_P1P2_MERGE_01 --> D_S01_P3_MIN_01

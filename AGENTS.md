@@ -14,6 +14,8 @@
 
 最新授权增量（2026-11-12，96ba88f后）：负责人确认DEV工程验收并批准普通合入main，允许真实教学ERP认证和有界只读GET/经确认只读POST，指定HTTPS教学Connector默认局部关闭证书验证（TEACHING_ERP_ONLY），禁重定向。用户已确认新试点SKT-OL-XXL；本机.env.erp注入凭据，原始敏感响应只存Git忽略私有目录。旧ERP零调用/TLS阻断停止点不覆盖本条；真实数据/业务规则按实际证据签认，缺失仍BLOCKED，禁止业务写入、真实DeepSeek、前端或其他Agent开发。
 
+最新授权增量（2026-11-13，P3范围收缩）：负责人授权最小业务闭环开发、相关回归/浏览器与自有教学范围采购申请创建和submit、独立回读、幂等验证及普通推送独立分支；最终REVIEW、不合main。只发现已审批有效正式采购；不查询/校验/阻断未审批单或草稿，旧36不处理。无独立请购资源时采用采购草稿→提交ERP审批并明确显示待ERP审批；中台确认不等于领导审批。禁止decide/place-order/收货/入库，不扩8/30SKU，不调用新付费模型，不改B01/B02。契约见docs/contracts/s01/p3-minimal-loop.md，旧调查及全局仿真规范保留。
+
 ## 稳定边界
 
 - O01统一任务/预算/计划/报告，通过ScenarioHandler调场景；Runtime只回RunOutcome，Handler形成DomainResult，YIELD不发布。

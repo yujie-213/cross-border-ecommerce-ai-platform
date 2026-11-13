@@ -39,12 +39,12 @@ def utc_now():
     return datetime.now(timezone.utc).isoformat()
 
 
-def collect(reader, mapping, context, acquisition_id):
+def collect(reader, mapping, context, acquisition_id, *, formal_purchases=False, purchase_proofs=()):
     """Never substitute missing rows. Partial domains survive other domain failures."""
     m = mapping.validate_scope()
     if m.monitor:
         from commerce_hub.data.sync.owned import collect_owned
-        return collect_owned(reader, m, context, acquisition_id)
+        return collect_owned(reader, m, context, acquisition_id, formal_purchases=formal_purchases, purchase_proofs=purchase_proofs)
     started = utc_now()
     common = dict(field='sku', q=m.sku, match='exact')
     queries = [

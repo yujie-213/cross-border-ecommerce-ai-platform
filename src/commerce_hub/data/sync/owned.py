@@ -1,10 +1,10 @@
-"""D01 reads only registered ERP IDs. Every new task revalidates live facts."""
+"""D01 registered core facts plus bounded formal-purchase discovery; historical replay preserved."""
 from commerce_hub.adapters.erp import ERPError
 from commerce_hub.data.contracts import fingerprint
 from commerce_hub.data.sync.online import utc_now, MODE
 
 
-def collect_owned(reader, mapping, context, acquisition_id):
+def collect_owned(reader, mapping, context, acquisition_id, *, formal_purchases=False, purchase_proofs=()):
     m, b = mapping, mapping.monitor
     started = utc_now()
     queries = [
@@ -16,7 +16,7 @@ def collect_owned(reader, mapping, context, acquisition_id):
         ('sales', '/api/v1/sales-orders', {'ids': ','.join(b.salesIds)}),
         ('quotes', '/api/v1/supplier-quotes', {'quote_no': b.quoteNo}),
     ]
-    if b.purchaseIds:
+    if b.purchaseIds and not formal_purchases:
         queries.append(('purchases', '/api/v1/purchase-orders', {'ids': ','.join(b.purchaseIds)}))
     captures = {}
 
@@ -36,7 +36,17 @@ def collect_owned(reader, mapping, context, acquisition_id):
 
     for name, path, parameters in queries:
         cap(name, lambda p=path, v=parameters: reader.read(p, v, page_size=50, max_pages=2))
-    if not b.purchaseIds:
+    if formal_purchases:
+        from commerce_hub.data.projection.purchases import FORMAL_STATES, POLICY
+        for index, state in enumerate(FORMAL_STATES):
+            cap('formal-purchases-' + str(index), lambda s=state: reader.read('/api/v1/purchase-orders',
+                dict(warehouse_name=m.warehouseName, field='status_text', q=s, match='exact'), page_size=50, max_pages=5))
+        parts = [captures.pop('formal-purchases-' + str(i)) for i in range(len(FORMAL_STATES))]
+        rows = [r for part in parts for r in part['rows']]
+        captures['purchases'] = dict(rows=rows, complete=all(p['complete'] for p in parts), total=len(rows),
+            fingerprint=fingerprint(rows), observedAt=utc_now(), policyVersion=POLICY,
+            scopeProofs=list(purchase_proofs), sourceParts=[{k:v for k,v in p.items() if k != 'rows'} for p in parts])
+    elif not b.purchaseIds:
         captures['purchases'] = dict(rows=[], complete=True, total=0, fingerprint=fingerprint([]), observedAt=utc_now())
     cap('supplier', lambda: reader.detail('suppliers', b.supplierId))
     for sale_id in b.salesIds:
@@ -59,6 +69,8 @@ def collect_owned(reader, mapping, context, acquisition_id):
                         evidenceDigest=b.evidenceDigest, registryMemberDigest=fingerprint(m.model_dump(mode='json'))),
         interfaces={name: {k: v for k, v in c.items() if k != 'rows'} for name, c in captures.items()},
         requests=[{k: v for k, v in e.items() if k != 'parameterNames'} for e in reader.events],
-        limitations=['REGISTERED_IDS_ONLY', 'SHARED_ERP_TENANT_NO_SOURCE_ROW_ISOLATION',
+        limitations=['FORMAL_STATES_ONLY_NO_UNAPPROVED_READS' if formal_purchases else 'REGISTERED_IDS_ONLY', 'SHARED_ERP_TENANT_NO_SOURCE_ROW_ISOLATION',
                      'NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT', 'SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP'])
+    if formal_purchases:
+        receipt['purchasePolicy'] = POLICY
     return captures, receipt

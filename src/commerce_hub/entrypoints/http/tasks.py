@@ -39,6 +39,12 @@ class CancelTask(BaseModel):
     expectedRevision: int = Field(ge=1, strict=True)
 
 
+class ConfirmRequisition(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    finalQuantity: int = Field(ge=1, le=100000, strict=True)
+    adjustmentReason: str = Field(default='', max_length=1000)
+
+
 def register_task_routes(app):
     def principal(request: Request):
         service = request.app.state.tasks
@@ -96,11 +102,19 @@ def register_task_routes(app):
                         service.access.authorize(conn, actor, "tasks:create", scope)
                 except AccessDenied:
                     continue
+                choice['requisitionAllowed'] = False
+                if getattr(service, 'requisitions', None) is not None:
+                    try:
+                        with service.engine.begin() as conn:
+                            service.access.authorize(conn, actor, 's01:requisition', scope)
+                        choice['requisitionAllowed'] = True
+                    except AccessDenied:
+                        pass
                 choices.append(choice)
             return dict(scenarioId=backend.scenario_id, scenarioVersion=backend.version, analysisMode="SINGLE",
                 inputMode="AUTHORIZED_SCOPE" if any(c.get('inputMode') == 'ONLINE_TEACHING_ERP' for c in choices) else "SERVER_PACKAGE_REF", mappedChoices=choices,
-                limitations=["READONLY_ANALYSIS_ONLY", "SOURCE_AND_RULE_ADMISSION_PER_PACKAGE", "LIVE_AI_EVALUATION_SEPARATE"],
-                maxModelCalls=backend.max_calls, actions=["analyze", "read", "cancel"])
+                limitations=["HUMAN_CONFIRMED_TEACHING_REQUISITION_ONLY" if any(c.get('requisitionAllowed') for c in choices) else "READONLY_ANALYSIS_ONLY", "SOURCE_AND_RULE_ADMISSION_PER_PACKAGE", "LIVE_AI_EVALUATION_SEPARATE"],
+                maxModelCalls=backend.max_calls, actions=["analyze", "read", "cancel"] + (["requisition"] if any(c.get('requisitionAllowed') for c in choices) else []))
         spec = service.registry.get("ENGINEERING_S01_BUSINESS")
         if spec is None or None in (storeId, warehouseId, canonicalSkuId):
             raise TaskError("UNSUPPORTED_SCENARIO", 422)
@@ -135,6 +149,21 @@ def register_task_routes(app):
     @app.get("/api/v1/analysis-tasks/{task_id}/report")
     def report(task_id: str, request: Request, actor=Depends(principal)):
         return request.app.state.tasks.read_report(actor, task_id)
+
+    def requisition_service(request):
+        service = getattr(request.app.state.tasks, 'requisitions', None)
+        if service is None:
+            raise TaskError('REQUISITION_NOT_ENABLED', 409)
+        return service
+
+    @app.post('/api/v1/analysis-tasks/{task_id}/requisition')
+    def confirm_requisition(task_id: str, body: ConfirmRequisition, request: Request, actor=Depends(principal),
+            key: Annotated[str, Header(alias='Idempotency-Key', min_length=1, max_length=128)] = ...):
+        return requisition_service(request).confirm(actor, task_id, key, body.finalQuantity, body.adjustmentReason, trace_id.get())
+
+    @app.get('/api/v1/analysis-tasks/{task_id}/requisition')
+    def read_requisition(task_id: str, request: Request, actor=Depends(principal)):
+        return requisition_service(request).read(actor, task_id)
 
     @app.get("/api/v1/analysis-tasks/{task_id}/evidence/{evidence_id}")
     def evidence(task_id: str, evidence_id: str, request: Request, actor=Depends(principal)):
