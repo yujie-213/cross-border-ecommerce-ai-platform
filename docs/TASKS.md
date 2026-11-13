@@ -8214,8 +8214,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DOCUMENT_CHECK"
   ],
   "status": "REVIEW",
-  "implementationCommits": [],
-  "testedCommit": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+  "implementationCommits": [
+    "e96b75429aa09f74e03ac3a5543726ded1d17baf"
+  ],
+  "testedCommit": "e96b75429aa09f74e03ac3a5543726ded1d17baf",
   "evidence": [
     {
       "kind": "ERP_API",
@@ -8262,6 +8264,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "真实63次只读调查完成；REST5记录/4正1零，参考使用/无可执行降级；V2仅报告和分阶段建议，完成普通同步后停止。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "固定e96b754提交后离线63请求指纹/白名单关系、18文档/公开扫描PASS；普通push与ls-remote确认main=e96b754。随后仅回执文档提交同步，最终HEAD以Git回读；完成后停止。"
     }
   ],
   "currentDeliveryScope": "REFERENCE_ONLY：REST找到5条目标记录、4正量1零，页面一致；getSummaryList目标映射UNVERIFIED。已保存数量/商品单位/库存及QD-S审批采购200、PZ-M待审150可查；算法/真实生成时间/采购在途抵扣UNKNOWN，不进入P3请购。",
@@ -8271,6 +8278,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "projectMembersAdded": 0,
   "businessMutations": 0,
   "modelCalls": 0,
-  "implementationNote": "本轮调查脚本在工作区执行；实际固定提交在后续回执登记，不预造SHA。应用基线60e9cf2。"
+  "implementationNote": "调查脚本/报告固定e96b754；真实API在提交前工作区/应用60e9cf2执行，脚本不变；固定后仅离线指纹/关系/摘要及18文档/公开扫描复验PASS，不冒称重新联网。",
+  "deliveryRemote": {
+    "result": "PASS",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "remoteMainVerified": "e96b75429aa09f74e03ac3a5543726ded1d17baf",
+    "remoteP3Branch": "1ed6c4ccf4af17e99d0650728c415953f6e0eabc",
+    "observedAt": "2026-11-13T12:42:58.766933+00:00",
+    "finalReceiptCommit": "Subsequent documentation-only receipt; final HEAD is returned from Git, no self-reference SHA fabricated"
+  }
 }
 ```

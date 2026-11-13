@@ -23,10 +23,36 @@
     "REFERENCE_ONLY is a source verdict, not permission to procure",
     "compat 2/667 page intentionally incomplete",
     "No new browser or changed-fact/recalculation experiment was run",
-    "Scripts and report fixed commit will be recorded after commit"
+    "Survey script/report fixed commit recorded; source conclusion remains REVIEW/REFERENCE_ONLY; no V2 implementation"
   ],
   "privateAudit": {
     "path": "data/private/s01-p3-acceptance/survey-precommit-publication-audit.json",
     "sha256": "4c25c9cf4b28a3f79804da68237e887925356ebae608dd9cb329d37b690b6b85"
+  },
+  "fixedCommit": "e96b75429aa09f74e03ac3a5543726ded1d17baf",
+  "postCommitValidation": {
+    "result": "PASS",
+    "rawResponseFingerprints": "PASS_60_NON_AUTH_RESPONSES",
+    "command": "summarize.py; build_docs.py; check_plan.py; changed-history/working-tree credential and preservation audit; git diff --check",
+    "documentationChecks": 18,
+    "credentialFindings": 0,
+    "oldTaskRecordsPreserved": 44,
+    "newERPCalls": 0,
+    "newModelCalls": 0,
+    "sourceCodeUnchangedSinceRealReads": true,
+    "networkEvidenceTiming": "REAL_API_READS_IN_PRECOMMIT_WORKTREE_AT_APPLICATION_60e9cf2; NO_NETWORK_RERUN_AFTER_FIXING_SURVEY_SCRIPT_COMMIT"
+  },
+  "publication": {
+    "result": "PASS",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "remoteMainVerified": "e96b75429aa09f74e03ac3a5543726ded1d17baf",
+    "remoteP3Branch": "1ed6c4ccf4af17e99d0650728c415953f6e0eabc",
+    "observedAt": "2026-11-13T12:42:58.766933+00:00",
+    "finalReceiptCommit": "Subsequent documentation-only receipt; final HEAD is returned from Git, no self-reference SHA fabricated"
+  },
+  "postCommitAudit": {
+    "path": "data/private/s01-p3-acceptance/survey-fixed-commit-audit.json",
+    "sha256": "44e370f1e9780c100150068d956e98ef58f62d74a706ece7a358235be366d6a6"
   }
 }
