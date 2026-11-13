@@ -297,3 +297,7 @@ TASKS登记阶段PASS事实及P1P2-MERGE-01发布BLOCKED；旧REVIEW/FAIL/NOT_RU
 P1/P2验收范围仍仅当前两自有SKU闭环与整箱修复，48件6箱/马克杯无候选/旧45失效。监控与整箱任务适用范围ACCEPTED；旧ONLINE任务更宽历史FAIL/NOT_RUN原样，当前两SKU用review.scopeDecision=ACCEPTED明确签认，不把历史失败重填PASS。质量、可售ETA、当日余量、审批与企业四门不因阶段验收解除。实际合并/测试/远端SHA记录在TASKS及本轮release证据，不预写成功。
 
 发布后P3仅准备：复用G01/O01/D01—D04与既有B01/B02，不另建执行底座；核对正式采购/审批/收货API、授权角色、建议人工复核及既有36件采购整箱合规、有效在途/可售ETA与入库对账适配。未授权审批decide/place-order/receive/stock confirm，不发这些调用，不启动8/30SKU。
+
+MVP-011执行回执：正常两父合并b58919da6884c93e1a5a40dc0af985ec4bba58a9（2fba3b4/b012407），无冲突；合并后710后端/36前端及类型构建、两报告快照/规则/API/审计复核PASS。原710测试逐名保留，零ERP/付费模型/采购动作。P3接口分离与当前在途/入库适配缺口已列入TASKS PREP-01；推送结果后续按Git回读登记，不预写远端成功。
+
+MVP-011发布及P3准备回执：合并b58919d验证PASS后，首次直连TLS握手FAIL，使用已核实本机代理且保持TLS校验普通push和远端回读PASS（main=b58919d），无force。MERGE-01适用范围ACCEPTED，P3 PREP-01仅准备REVIEW；后续台账记录按正常文档提交同步，最终HEAD由Git查询。P3须补齐正式审批角色/明确执行授权、供应商可售与质检语义、审批后有效剩余供给及入库ledger适配和幂等测试，不以P1/P2验收授权采购。

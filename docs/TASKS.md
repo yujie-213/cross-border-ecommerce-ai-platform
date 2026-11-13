@@ -1,3 +1,7 @@
+当前P1/P2正式发布完成（2026-11-13）：负责人/星星阶段PASS及本轮教学公开授权已落实；main正常合并b58919d，710后端/36前端/类型构建与两持久报告重放PASS。首次直连TLS失败后，经已核实本机代理保持证书校验普通push成功，远端回读b58919d一致。MERGE-01 ACCEPTED；P3 PREP-01材料REVIEW（仅准备）。快充线48件6箱/马克杯无候选/旧45失效；质量UNKNOWN、其他条件UNCONFIRMED、ETA未承诺、采购不可执行及企业四门保留。最终台账文档提交普通同步，最终HEAD以Git实际查询为准；未采购、未扩8/30、未宣称整个S01通过。
+
+当前P1/P2实际合并（2026-11-13）：main正常--no-ff合并b58919d，父2fba3b4/b012407，零冲突且tree与已验收分支相同；合并后710后端/36前端/类型构建及两报告DB/快照/规则/API/AI审计复验PASS，未新增ERP或模型调用。48件6箱/马克杯无候选、旧45失效和全部采购限制保留；普通push尚待执行。P3正式接口/权限/状态/适配缺口及回归清单已整理到PREP-01，仅准备不采购。
+
 当前P1/P2发布授权更新（2026-11-13）：负责人允许普通教学截图/数据/报告及非敏感授权元数据公开，旧未审截图阻断撤销；真实凭据和实际第三方敏感资料仍禁止。19提交/242新增blob等历史扫描无未解决凭据发现，3处数字/字符表偶合已核实；两份早期教学ERP报告无联系人/客户/支付资料或独立保密标记。两自有SKU阶段PASS，MONITOR/CARTON按适用范围ACCEPTED，ONLINE-02/03用review.scopeDecision登记当前P1/P2 ACCEPTED并保留更宽历史FAIL/NOT_RUN。P1P2-MERGE-01恢复IN_PROGRESS，正常合main/验证/推送；P3仅开发准备，不采购。
 
 当前P1/P2阶段验收与发布检查（2026-11-13）：负责人和星星已确认两自有SKU闭环含MOQ/整箱修复阶段PASS；48件6箱、马克杯空候选、旧45失效及日期/质量/审批限制复核一致。但origin/main=2fba3b4落后18提交，普通合并会公开早期非自有SKU完整ERP报告、8张未审截图和私有模型授权关联，P1P2-MERGE-01发布BLOCKED。遵用户安全停止要求未合并/推送，合并后冒烟NOT_RUN；本轮不将旧REVIEW/FAIL改写为全项通过。原分支/证据保留，等待安全快照及继续决策；不执行P3。
@@ -7546,7 +7550,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
 {
   "id": "D-S01-P1P2-MERGE-01",
   "stage": "D",
-  "title": "P1/P2阶段验收登记与main合并前安全检查",
+  "title": "P1/P2阶段验收登记、main正常合并与发布",
   "kind": "delivery",
   "dependsOn": [
     "D-S01-CARTON-FIX-01",
@@ -7588,11 +7592,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
+  "status": "ACCEPTED",
   "implementationCommits": [
-    "c79fe5960aea5b991840505bd50efb0ef7534bea"
+    "b01240730196285041569f74b8572178228e767d",
+    "b58919da6884c93e1a5a40dc0af985ec4bba58a9"
   ],
-  "testedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+  "testedCommit": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
   "evidence": [
     {
       "kind": "ENGINEERING",
@@ -7605,18 +7610,43 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-CARTON-FIX/premerge-security-20261113.json"
+    },
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-P1P2-MERGE-01/AC1"
+      ],
+      "command": "正常--no-ff合并；冻结合并提交后全后端pytest、前端build/vitest；只读DB/原始captures/D03/规则/API/AI审计重放",
+      "environment": "main/b58919d；获准隔离MySQL/API/Worker工程回归；模型mock/network=false；无ERP业务网络",
+      "sample": "正常两父合并无冲突，tree与验收分支相同；710后端/36前端/类型构建PASS，两份报告及旧历史/取消审计PASS。48件6箱/马克杯空候选，采购限制保留；本轮无ERP/付费模型/采购动作。辅助脚本输入路径FAIL保留后修正验证器PASS，尚待push。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-CARTON-FIX/release-20261113.json"
+    },
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-P1P2-MERGE-01/AC1"
+      ],
+      "command": "使用已核实本机代理、保持TLS校验的git push origin main及git ls-remote origin refs/heads/main",
+      "environment": "main/b58919d；正常Git传输、不force、保留所有祖先；未发送ERP或模型请求",
+      "sample": "首次直连TLS握手FAIL保留；代理重试push=0、回读=0、远端与本地b58919d相同。新增历史凭据扫描PASS，普通截图/教学报告与非认证授权元数据按负责人新授权保留；最终仅台账文档提交另行正常同步，最终HEAD以Git回读为准。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-CARTON-FIX/release-20261113.json"
     }
   ],
   "review": {
-    "reviewer": "负责人和星星（用户本轮明确通知）",
-    "scope": "P1_P2_TWO_OWNED_SKU_PHASE_WITH_KNOWN_LIMITATIONS",
-    "scopeDecision": "PASS",
-    "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
-    "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
-    "decision": "业务P1/P2阶段PASS；本轮更新发布授权后旧数据类别阻断解除，待正常合并/合并后验证/推送完成。"
+    "reviewer": "负责人和星星阶段验收；负责人本轮显式发布授权；Codex按授权完成检查与同步",
+    "date": "2026-11-13",
+    "scope": "P1_P2_ACCEPTED_PHASE_MERGE_AND_PUBLICATION_ONLY",
+    "scopeDecision": "ACCEPTED",
+    "reviewedCommit": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
+    "evidenceRef": "docs/evidence/S01-CARTON-FIX/release-20261113.json",
+    "decision": "两自有SKU P1/P2阶段PASS；普通教学材料公开获准后撤销旧类别阻断，正常合main、合并后710/36及持久报告验证通过，普通push与远端SHA回读一致；企业门和采购执行限制保留。"
   },
-  "branch": "codex/s01-live-business-closure",
-  "observedHead": "083115e810652ff3f90eea29f10af891dfca7275",
+  "branch": "main",
+  "observedHead": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -7635,6 +7665,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "用户明确扩大教学作品公开授权；重新检查全部新增历史，普通截图/报告及非敏感授权ID可发布，真实凭据扫描无未解决发现；撤销旧发布阻断，不构造替代历史。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "ACCEPTED",
+      "reason": "负责人阶段验收及更新发布授权已落实；b58919d正常合main，710后端/36前端与两持久报告验证PASS，代理保留TLS普通push和远端回读PASS；旧FAIL不改，不授权采购。"
     }
   ],
   "phaseAcceptance": {
@@ -7642,9 +7677,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "scope": "P1/P2两自有SKU分析建议闭环及MOQ整箱修复",
     "reviewer": "负责人和星星",
     "knownLimitationsRetained": true,
-    "publicationAcceptance": "AUTHORIZED_PENDING_MERGE_AND_PUSH"
+    "publicationAcceptance": true
   },
-  "currentDeliveryScope": "获准直接正常合并当前原始开发分支；不得force/重写远端；实际ERP采购操作不在授权内。"
+  "currentDeliveryScope": "P1/P2两自有SKU阶段PASS及正常合并发布ACCEPTED；48件6箱/马克杯空候选及原始证据保留。P3仅准备REVIEW，质量/可售ETA/审批及企业门不解除，不扩大整个S01验收。"
 }
 ```
 
@@ -7689,13 +7724,29 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "DOCUMENT"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "b01240730196285041569f74b8572178228e767d",
+    "b58919da6884c93e1a5a40dc0af985ec4bba58a9"
+  ],
+  "testedCommit": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
+  "evidence": [
+    {
+      "kind": "DOCUMENT",
+      "acceptanceIds": [
+        "D-S01-P3-PREP-01/AC1"
+      ],
+      "command": "解析本地ERP-openapi.yaml的JSON正式契约、核对原采购409报告及owned.py状态/库存流水保护",
+      "environment": "纯本地只读；未发送ERP或模型请求",
+      "sample": "确认submit/decide/place-order/receive/stock confirm分离、审批不可逆、收货不等于过账、逐项failList及重放语义；当前有效在途/可售ETA和入库ledger适配待开发，列出授权及回归清单。仅准备，P3业务集成NOT_RUN。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-CARTON-FIX/release-20261113.json"
+    }
+  ],
   "review": null,
-  "branch": "main（合并后）",
-  "observedHead": "083115e810652ff3f90eea29f10af891dfca7275",
+  "branch": "main",
+  "observedHead": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -7704,8 +7755,73 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "负责人明确授权发布后进入P3准备；读取本地正式契约和现有保护，不发送业务调用。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "P1/P2源码已正常发布；正式接口/权限/状态/有效供应/入库ledger缺口及测试清单准备完成，零ERP调用，仅准备待审，不执行采购。"
     }
   ],
-  "executionAuthorization": "NOT_GRANTED_FOR_APPROVAL_ORDER_OR_RECEIPT"
+  "executionAuthorization": "NOT_GRANTED_FOR_APPROVAL_ORDER_OR_RECEIPT",
+  "preparation": {
+    "scope": "P3_DEVELOPMENT_PREPARATION_ONLY",
+    "source": "local ERP OpenAPI JSON document and existing code/historical 409; no business sends",
+    "openAPIsha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+    "readInterfaces": [
+      "GET /api/v1/purchase-orders/{id}",
+      "GET /api/v1/approvals/{id}",
+      "GET /api/v1/supplier-deliveries",
+      "GET /api/v1/inbound-orders/{id}",
+      "GET /api/v1/stock/ledger"
+    ],
+    "futureActions": [
+      {
+        "path": "POST /api/v1/workflows/purchase-orders/{id}/submit",
+        "precondition": "reviewed valid quantity and related owned entities; preserve ERP state and audit"
+      },
+      {
+        "path": "POST /api/v1/workflows/approvals/{id}/decide",
+        "precondition": "explicitly authorized independent human approval role; irreversible decision; no impersonation"
+      },
+      {
+        "path": "POST /api/v1/workflows/purchase-orders/{id}/place-order",
+        "precondition": "ERP approval passed and legal order state; cannot bypass 409"
+      },
+      {
+        "path": "POST /api/v1/workflows/supplier-deliveries/{id}/receive",
+        "precondition": "valid related purchase, per-SKU actual quantities; not inventory posting; over-receipt forbidden"
+      },
+      {
+        "path": "POST /api/v1/stock/inbound-orders/confirm",
+        "precondition": "legitimate pending inbound, quantity/quality/sellable terms; check each fail/failList, not just code=0; deduplicate reused receipts"
+      }
+    ],
+    "existingGaps": [
+      "Current D01 connector is read-only; future authorized execution must use an explicit separate write boundary, not weaken D01 or register unrestricted tools",
+      "owned.py blocks non-draft/unapproved/cancelled purchase states with EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING; approved pending quantity alone is insufficient",
+      "Current inventory reconciliation assumes opening stock minus verified sales; inbound movements need an explicit registered positive ledger source before continuing analysis",
+      "Need traceable authorized human recommendation review and fresh ERP/SMA recalculation before any later purchasing; do not execute an old 48 snapshot blindly"
+    ],
+    "nextChecks": [
+      "48=max(MOQ,gap) rounded by carton8; review existing pending36 through legal ERP state changes, avoid duplicate replacement orders",
+      "Independent approver identity and scope; supplier committed ship/arrival/sellable dates and quality/inspection/shelving assumptions",
+      "Only effective approved/ordered remaining supply with confirmed ETA enters B01; received stock must not also be counted as transit",
+      "Partial receipt per SKU, no cumulative over-receipt, source reference/ledger uniqueness and current inventory reconciliation",
+      "UNKNOWN sends query original key/state before retry; task restart/cancel/permission/replay and amount/quantity consistency"
+    ],
+    "reuse": [
+      "G01",
+      "O01",
+      "D01-D04",
+      "B01/B02",
+      "existing snapshots/evidence/audit"
+    ],
+    "executionAuthorization": "NOT_GRANTED",
+    "ERPWrites": 0,
+    "approvalRole": "EXTERNAL_DEPENDENCY_UNCONFIRMED",
+    "integrationTests": "NOT_RUN_PREPARATION_ONLY",
+    "skuExpansion": "NOT_RUN"
+  },
+  "currentDeliveryScope": "P3开发准备材料REVIEW；正式审批角色与执行授权未取得。后续先确认人工审核/审批/下单/收货权限和适配方案，再授权实现与真实集成；本轮不采购、不扩8/30SKU。"
 }
 ```

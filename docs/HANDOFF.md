@@ -1,3 +1,19 @@
+## P1/P2正式合并发布完成，进入P3开发准备（2026-11-13）
+
+负责人更新教学作品公开授权后，已核实两份早期教学报告无个人/客户/支付资料或独立保密限制，授权ID为不可认证元数据；普通截图按新授权保留。完整新增历史凭据扫描PASS，3处数字/字符表偶合已具体核实，不是认证用途。旧发布BLOCKED与首次TLS失败原记录保留，由新授权及真实成功回执覆盖当前状态；没有删除证据、重写祖先或另造发布快照。
+
+已正常合codex/s01-live-business-closure / b012407至main，合并提交b58919da6884c93e1a5a40dc0af985ec4bba58a9，两父2fba3b4/b012407，零冲突，tree与验收分支相同。合并后710后端（原710逐名保留、0 FAIL/ERROR/SKIP）、36前端、类型/构建，以及两份真实历史持久报告的原始captures/D02/D03/B01/B02/API投影/模型审计重放PASS；两份旧报告和两个取消任务审计也一致。新增ERP调用0/付费模型0/采购0，不把读取历史usage算成新调用。新浏览器联网测试NOT_RUN，沿用固定c79fe59真实浏览器证据并重跑前端整箱SSR。
+
+快充线48件6箱、马克杯空候选，旧45标失效；quality UNKNOWN、otherConditions UNCONFIRMED、可售ETA非承诺、D1未计当日余量、procurementEligible=false及企业四门均保留。原ONLINE宽历史FAIL/NOT_RUN保全，两SKU适用范围scopeDecision=ACCEPTED；MONITOR/CARTON和MERGE适用范围ACCEPTED，不扩大整个S01验收。
+
+首次普通直连push因schannel握手失败，确认本机既有代理后保留TLS证书校验重试，push及ls-remote均0，远端main实际回读b58919d与本地一致，无force。此次后续仅文档/台账记录提交，按正常push同步，最终本地和远端HEAD由Git最终查询，避免把文件自身未来SHA写入。未知docs/ERP-openapi.yaml仍未跟踪保留；本轮辅助只读脚本首次取消回执路径FAIL保留，修正输入定位后全量核验PASS，不改源代码。
+
+P3 PREP-01已完成本地契约和现有代码接续准备，交REVIEW：submit→独立审批decide（不可逆）→place-order→supplier delivery receive→stock inbound confirm分别控制；收货不等于库存过账，confirm须检查逐项fail/failList及reused。当前owned.py遇审批后状态明确要求EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING，库存对账也尚未纳入入库正流水，后续须最小适配这些真实业务来源，不改B01/B02公式或弱化D01只读边界。
+
+下一步先复核新鲜ERP输入和48候选、旧待审36（不满足8件整箱，继续排除在途）的合法处理方式，落实真实独立审批角色、供应商承诺可售ETA/质检上架条件，以及部分收货/有效剩余在途/库存ledger唯一性/幂等与UNKNOWN恢复测试，再明确授权P3实现和业务集成。当前只有开发准备，不代签审批、不下单、不收货、不扩8/30SKU。
+
+公开汇总：[release-20261113.json](evidence/S01-CARTON-FIX/release-20261113.json)；实际准备与状态只读TASKS。新私有MySQL回执/扫描/推送日志在data/private/s01-p1p2-release-20261113/，原证据不变。此次完成后停在P3准备REVIEW，等待下一条开发及实际执行授权。
+
 ## 负责人扩大教学公开授权，恢复P1/P2直接合并（2026-11-13）
 
 用户已明确允许普通教学截图/仿真数据/非敏感业务报告/非认证授权元数据公开，无需逐图人工审核；覆盖上一条未审材料停止点及安全快照要求。接续codex/s01-live-business-closure / 083115e，未知docs/ERP-openapi.yaml保留。两份旧教学报告无实际第三方个人/客户/支付资料及独立保密标记，授权ID非凭据；完整新增历史19提交/242 blob等扫描无未解决真实凭据，3处数字/字符表与本机短口令偶合已按具体代码核实，原扫描记录私有保留。

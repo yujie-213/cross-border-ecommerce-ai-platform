@@ -1,6 +1,6 @@
 {
   "scope": "P1_P2_AUTHORIZED_TEACHING_PUBLICATION",
-  "result": "PREMERGE_PASS",
+  "result": "PASS",
   "capturedAt": "2026-11-13T09:09:05.343897+00:00",
   "authorization": {
     "ordinaryTeachingScreenshots": true,
@@ -33,21 +33,215 @@
     "result": "PASS",
     "scope": "all newly reachable blobs/commit metadata and messages, including older versions and ZIP members",
     "objectCounts": {
-      "commit": 19,
-      "tree": 234,
-      "blob": 242
+      "commit": 20,
+      "tree": 241,
+      "blob": 252
     },
     "unresolvedFindings": 0,
     "reviewedIncidentalNumericOrAlphabetMatches": 3,
-    "privateReceipt": "data/private/s01-p1p2-release-20261113/history-secret-scan-initial.json",
+    "privateReceipt": "data/private/s01-p1p2-release-20261113/history-secret-scan-premerge-b012407.json",
     "teachingReportsReviewed": 2,
     "personalOrCustomerOrPaymentDetailsFound": 0,
     "independentConfidentialMarkingsFound": 0,
     "authorizationIdNature": "NON_AUTHENTICATING_POLICY_METADATA",
     "ordinaryScreenshots": 8
   },
-  "merge": "PENDING",
-  "postMergeValidation": "PENDING",
-  "remoteSync": "PENDING",
-  "P3": "PREPARATION_ONLY_NO_ERP_OPERATIONS"
+  "merge": {
+    "result": "PASS",
+    "commit": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
+    "firstParent": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+    "secondParent": "b01240730196285041569f74b8572178228e767d",
+    "strategy": "normal --no-ff / ort",
+    "conflicts": 0,
+    "mergedTreeMatchesAcceptedBranch": true
+  },
+  "postMergeValidation": {
+    "result": "PASS",
+    "backend": {
+      "passed": 710,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "original710Retained": true,
+      "realAuthorizedMySQL": true,
+      "command": "COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false COMMERCE_RUN_MYSQL_TESTS=1 .tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/s01-p1p2-release-backend-b58919d.xml"
+    },
+    "frontend": {
+      "passed": 36,
+      "failed": 0,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "command": "npm run build; npm test -- --reporter=json --outputFile=../.tmp/s01-p1p2-release-frontend-b58919d.json (cwd frontend)"
+    },
+    "persistedReports": {
+      "result": "PASS",
+      "immutableSnapshots": 2,
+      "rawNormalizationMatches": 2,
+      "deterministicRuleReplays": 2,
+      "APIProjectionMatches": 2,
+      "modelAudits": 2,
+      "legacyReportsUnchanged": 2,
+      "cancellationsVerified": 2,
+      "cancelledModelOrReportOrUsage": 0
+    },
+    "browserNewLiveRun": "NOT_RUN_NO_NEW_ERP_OR_PAID_MODEL_CALLS",
+    "previousLiveBrowserEvidence": "PASS_AT_c79fe59_RETAINED; frontend carton SSR rerun after merge",
+    "ERPCalls": 0,
+    "newModelCalls": 0,
+    "procurementActions": 0,
+    "helperInitialFailure": {
+      "result": "FAIL_PRESERVED",
+      "scope": "auxiliary read-only verifier only",
+      "cause": "copied helper cancellation input referenced new output path",
+      "resolution": "use original SOURCE browser receipts; full recheck PASS; no source or business data changes"
+    },
+    "warning": "Existing Starlette/httpx deprecation warning only"
+  },
+  "remoteSync": {
+    "result": "PASS",
+    "publishedMergeCommit": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
+    "initialVerifiedRemoteHead": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
+    "pushExitCode": 0,
+    "readbackExitCode": 0,
+    "TLSVerification": true,
+    "force": false,
+    "historyRewritten": false,
+    "finalDocumentationCommit": "Git HEAD / remote main queried after final record push; no self-referential SHA embedded"
+  },
+  "P3": "PREPARATION_REVIEW_READY_NO_PROCUREMENT_EXECUTION",
+  "testedCommit": "b58919da6884c93e1a5a40dc0af985ec4bba58a9",
+  "P3Preparation": {
+    "scope": "P3_DEVELOPMENT_PREPARATION_ONLY",
+    "source": "local ERP OpenAPI JSON document and existing code/historical 409; no business sends",
+    "openAPIsha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+    "readInterfaces": [
+      "GET /api/v1/purchase-orders/{id}",
+      "GET /api/v1/approvals/{id}",
+      "GET /api/v1/supplier-deliveries",
+      "GET /api/v1/inbound-orders/{id}",
+      "GET /api/v1/stock/ledger"
+    ],
+    "futureActions": [
+      {
+        "path": "POST /api/v1/workflows/purchase-orders/{id}/submit",
+        "precondition": "reviewed valid quantity and related owned entities; preserve ERP state and audit"
+      },
+      {
+        "path": "POST /api/v1/workflows/approvals/{id}/decide",
+        "precondition": "explicitly authorized independent human approval role; irreversible decision; no impersonation"
+      },
+      {
+        "path": "POST /api/v1/workflows/purchase-orders/{id}/place-order",
+        "precondition": "ERP approval passed and legal order state; cannot bypass 409"
+      },
+      {
+        "path": "POST /api/v1/workflows/supplier-deliveries/{id}/receive",
+        "precondition": "valid related purchase, per-SKU actual quantities; not inventory posting; over-receipt forbidden"
+      },
+      {
+        "path": "POST /api/v1/stock/inbound-orders/confirm",
+        "precondition": "legitimate pending inbound, quantity/quality/sellable terms; check each fail/failList, not just code=0; deduplicate reused receipts"
+      }
+    ],
+    "existingGaps": [
+      "Current D01 connector is read-only; future authorized execution must use an explicit separate write boundary, not weaken D01 or register unrestricted tools",
+      "owned.py blocks non-draft/unapproved/cancelled purchase states with EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING; approved pending quantity alone is insufficient",
+      "Current inventory reconciliation assumes opening stock minus verified sales; inbound movements need an explicit registered positive ledger source before continuing analysis",
+      "Need traceable authorized human recommendation review and fresh ERP/SMA recalculation before any later purchasing; do not execute an old 48 snapshot blindly"
+    ],
+    "nextChecks": [
+      "48=max(MOQ,gap) rounded by carton8; review existing pending36 through legal ERP state changes, avoid duplicate replacement orders",
+      "Independent approver identity and scope; supplier committed ship/arrival/sellable dates and quality/inspection/shelving assumptions",
+      "Only effective approved/ordered remaining supply with confirmed ETA enters B01; received stock must not also be counted as transit",
+      "Partial receipt per SKU, no cumulative over-receipt, source reference/ledger uniqueness and current inventory reconciliation",
+      "UNKNOWN sends query original key/state before retry; task restart/cancel/permission/replay and amount/quantity consistency"
+    ],
+    "reuse": [
+      "G01",
+      "O01",
+      "D01-D04",
+      "B01/B02",
+      "existing snapshots/evidence/audit"
+    ],
+    "executionAuthorization": "NOT_GRANTED",
+    "ERPWrites": 0,
+    "approvalRole": "EXTERNAL_DEPENDENCY_UNCONFIRMED",
+    "integrationTests": "NOT_RUN_PREPARATION_ONLY",
+    "skuExpansion": "NOT_RUN"
+  },
+  "updatedAt": "2026-11-13T09:14:10.437064+00:00",
+  "privateArtifactPins": [
+    {
+      "path": ".tmp/s01-p1p2-release-backend-b58919d.xml",
+      "sha256": "5da34b24e8344196f0dc0896974c39b4b468e0ef3e251112585e13478a044549",
+      "committed": false
+    },
+    {
+      "path": ".tmp/s01-p1p2-release-frontend-b58919d.json",
+      "sha256": "6697d64c501d7c551c15497510762c3877554f5610b99a5dc2eb982d338327a7",
+      "committed": false
+    },
+    {
+      "path": ".tmp/s01-p1p2-release-backend-b58919d.log",
+      "sha256": "b486c6959a937c14bd6d8570fc717d9636543d7a7d8e5b900f7cac4f1403240a",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-p1p2-release-20261113/mysql-verification.json",
+      "sha256": "22f637c35a069be214cfa94efd784c566fcbdfbdd4faafccc41afcdc2aa9d968",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-p1p2-release-20261113/history-secret-scan-premerge-b012407.json",
+      "sha256": "4e1128720d6fe357c65ebe98623005819e3675106a514ef80091db0da62e9acf",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-p1p2-release-20261113/verification-helper-initial-failure.json",
+      "sha256": "793aff1e0ab0cb8a30ca525192c19056381866ffadd2c7d82945679251830b29",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-p1p2-release-20261113/push-source.json",
+      "sha256": "6b20ad0aa67655c61847592895332ea63a5101d5e2ea6d3db2c1577daeb5cd42",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-p1p2-release-20261113/first-push-failure.json",
+      "sha256": "fff929020042e7b483d1bf777e5d73898bd837cb1fb94d6b7d286428b32fa55b",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-p1p2-release-20261113/history-secret-scan-merge-b58919d.json",
+      "sha256": "949495a162b0b1ea1f387f6429d5e00ea6573792466eac5d7d27335928a696d8",
+      "committed": false
+    }
+  ],
+  "deliveryStatus": "ACCEPTED_P1_P2_PHASE_AND_SOURCE_PUBLICATION",
+  "retainedFailures": [
+    {
+      "result": "FAIL",
+      "phase": "first direct git push",
+      "cause": "schannel TLS handshake failure",
+      "resolution": "existing verified loopback proxy, TLS verification retained; ordinary push and remote readback PASS"
+    },
+    {
+      "result": "FAIL_PRESERVED",
+      "scope": "auxiliary read-only verifier only",
+      "cause": "copied helper cancellation input referenced new output path",
+      "resolution": "use original SOURCE browser receipts; full recheck PASS; no source or business data changes"
+    }
+  ],
+  "completedAt": "2026-11-13T09:19:19.637104+00:00",
+  "publicationHistoryScan": {
+    "result": "PASS",
+    "objectCounts": {
+      "commit": 21,
+      "tree": 241,
+      "blob": 252
+    },
+    "unresolvedCredentials": 0,
+    "reviewedIncidentalNumericOrAlphabetMatches": 3,
+    "ordinaryTeachingDataAllowed": true
+  }
 }
