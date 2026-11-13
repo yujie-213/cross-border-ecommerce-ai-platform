@@ -1,4 +1,4 @@
-当前P3最小闭环交付（2026-11-13）：D-S01-P3-MIN-01 REVIEW，固定9859473；真实采购申请1406/48件/待审核，独立回读与同操作幂等通过；394相关后端/38前端/类型构建/真实浏览器与重启恢复通过。已审批正式采购正样本BLOCKED、有效可售供应UNKNOWN不抵扣；未查旧36、不做待审阻断、不decide/下单/收货/入库，不扩SKU不调付费模型，不合main。远端推送按后续实际Git回读登记。
+当前P3最小闭环交付（2026-11-13）：D-S01-P3-MIN-01 REVIEW，固定9859473；真实采购申请1406/48件/待审核，独立回读与同操作幂等通过；394相关后端/38前端/类型构建/真实浏览器与重启恢复通过。已审批正式采购正样本BLOCKED、有效可售供应UNKNOWN不抵扣；未查旧36、不做待审阻断、不decide/下单/收货/入库，不扩SKU不调付费模型，不合main。已普通推送并回读评审分支2bae0ea；main仍db13298，最终回执文档随后同步。
 
 当前采购能力调查交付（2026-11-13）：D-S01-P3-ERP-SURVEY-01 REVIEW；实现/文档固定2a0af2d，91相关离线测试与18文档检查PASS，36HTTP尝试=4认证+32GET，业务变更0/模型0。报告区分VERIFIED/CONTRACT_ONLY/BLOCKED/NOT_SUPPORTED/UNKNOWN，16+32未实测。全局仿真规范已引用；P1/P2算法和原证据保持。仅本地调查提交，不合main、不开始P3。
 
@@ -8064,7 +8064,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       ],
       "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; git -c core.whitespace=cr-at-eol diff --check; changed-history secret and preservation audit",
       "environment": "本地Git/系统Python；无业务请求",
-      "sample": "ADR范围收缩/统一规范沿用/唯一台账/交接；原全部任务JSON/调查证据/B01/B02/未知OpenAPI保全；普通独立分支推送结果按远端回读追加。",
+      "sample": "ADR范围收缩/统一规范沿用/唯一台账/交接；原全部任务JSON/调查证据/B01/B02/未知OpenAPI保全；普通独立分支推送结果按远端回读追加。 实际git push=0/ls-remote=0，远端评审分支2bae0ea与本地一致，main仍db13298；无force/合并。",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
@@ -8088,6 +8088,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "9859473实现固定；真实ERP申请创建提交/独立回读/幂等、394相关后端与38前端/构建/浏览器通过。已审批正样本与可售供应限制明确保留，不代签制造。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "2bae0ea证据/交接已普通推送独立分支，独立ls-remote确认同SHA；main仍db13298。最后仅回执文档提交同步，等待独立验收，不合main。"
     }
   ],
   "currentDeliveryScope": "最小教学请购闭环REVIEW：真实1406/48件/待审核，创建+submit共2变更并独立回读/幂等通过；394相关后端/38前端/类型构建/真实浏览器首提与重启恢复通过。正式已审批正样本缺失、可售供应UNKNOWN不抵扣；旧36/待审阻断/领导决定/下单/收货/入库/付费模型均未执行，不扩SKU，不合main。",
@@ -8095,6 +8100,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "Approved formal PO positive live sample BLOCKED; source-filtered empty queries VERIFIED, multi-SKU/scope behavior engineering PASS only",
     "Committed sellable date and effective remainder closure semantics UNKNOWN; no ERP supply deduction",
     "No production admission or independent acceptance; REVIEW only"
-  ]
+  ],
+  "deliveryRemote": {
+    "verifiedCommit": "2bae0ea85a4f44e35fddb2092eec225e8f4f040a",
+    "verifiedRemoteBranch": "refs/heads/codex/s01-p3-minimal-loop",
+    "remoteMain": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+    "observedAt": "2026-11-13T11:42:20.281909+00:00",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "method": "Normal git push -u origin codex/s01-p3-minimal-loop followed by independent git ls-remote",
+    "state": "REVIEW",
+    "mergedMain": false,
+    "note": "This receipt records the actual delivery commit before the subsequent bookkeeping commit; final branch HEAD is checked again after pushing bookkeeping."
+  }
 }
 ```

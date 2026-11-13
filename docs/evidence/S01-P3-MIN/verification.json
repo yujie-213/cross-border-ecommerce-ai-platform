@@ -2072,5 +2072,18 @@
     "privateArtifact": "data/private/s01-p3-min/final-publication-audit.json",
     "privateArtifactSha256": "6d57157ce07395f77d3fe96d4e31d28b888997b6eeb7dadaa5cda59b8d7a8108",
     "preservation": "PASS"
-  }
+  },
+  "deliveryRemote": {
+    "verifiedCommit": "2bae0ea85a4f44e35fddb2092eec225e8f4f040a",
+    "verifiedRemoteBranch": "refs/heads/codex/s01-p3-minimal-loop",
+    "remoteMain": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+    "observedAt": "2026-11-13T11:42:20.281909+00:00",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "method": "Normal git push -u origin codex/s01-p3-minimal-loop followed by independent git ls-remote",
+    "state": "REVIEW",
+    "mergedMain": false,
+    "note": "This receipt records the actual delivery commit before the subsequent bookkeeping commit; final branch HEAD is checked again after pushing bookkeeping."
+  },
+  "localServices": "This task-owned API/Worker launcher and Vite sessions stopped; no matching processes remained."
 }
