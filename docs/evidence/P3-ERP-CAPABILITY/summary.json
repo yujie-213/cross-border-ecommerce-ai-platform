@@ -1,0 +1,585 @@
+{
+  "version": "p3-erp-capability-investigation-v1",
+  "date": "2026-11-13",
+  "baseCommit": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+  "branch": "codex/p3-erp-capability-survey",
+  "scope": "READ_ONLY_INVESTIGATION_NOT_P3_IMPLEMENTATION",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "counts": {
+    "totalHTTPAttempts": 36,
+    "authentication": 4,
+    "businessReadAttempts": 32,
+    "businessMutations": 0,
+    "modelCalls": 0
+  },
+  "localOpenAPI": {
+    "path": "docs/ERP-openapi.yaml",
+    "tracked": false,
+    "preserved": true,
+    "sha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+    "version": "5.1.0",
+    "deployedOpenAPIFetch": "UNKNOWN_404_AT_openapi.json",
+    "liveResourceSchemaDigest": "fdb8e431491c5f4e2b9c162b4e9ab0b11eed6940101fba5119c444d62ef03c22",
+    "matchesPreviousResourceContract": true
+  },
+  "facts": {
+    "purchase": {
+      "id": 1398,
+      "tenant_id": 1,
+      "status_text": "待审核",
+      "received_qty": 0,
+      "pending_qty": 36,
+      "planned_arrival": "2026-11-15"
+    },
+    "purchaseLine": {
+      "sku": "HL-CBL100-2M",
+      "quantity": 36
+    },
+    "approval": {
+      "id": 1806,
+      "business_type": "采购单",
+      "status_text": "审批中",
+      "submitted_at": "2026-11-13T05:23:17+00:00",
+      "decided_at": ""
+    },
+    "ownWarehouseDiscovery": {
+      "noIdsFilter": true,
+      "total": 1,
+      "nonemptyPages": 1,
+      "endPageEmpty": true,
+      "multiNonemptyPages": "UNKNOWN",
+      "crossCreatorCase": "UNKNOWN",
+      "multiSKUCase": "UNKNOWN"
+    },
+    "linkedDeliveries": 0,
+    "linkedInbounds": 0,
+    "purchaseAmendments": 0,
+    "inventory": {
+      "cableAvailable": 6,
+      "mugAvailable": 81
+    },
+    "historicalOutbound": {
+      "id": 1135474,
+      "ledgerIds": [
+        1268669,
+        1268670
+      ],
+      "cableDelta": -9,
+      "mugDelta": -4
+    },
+    "purchaseStableOnReads": true
+  },
+  "limitations": [
+    "CURRENT_D01_REGISTERED_PURCHASE_IDS_ONLY",
+    "NO_CONFIRMED_NATIVE_PURCHASE_STORE_OR_PURPOSE_FIELD",
+    "NO_VERIFIED_ORDERED_OR_PARTIAL_PURCHASE",
+    "NO_AUTHORIZED_APPROVAL_DECISION",
+    "NO_PURCHASE_ROW_SCOPE_IN_LIVE_SUPPORTED_RESOURCES",
+    "NON_ATOMIC_CROSS_INTERFACE_READS"
+  ],
+  "failuresPreserved": [
+    {
+      "run": 1,
+      "kind": "HELPER_FIELD_KEY_ERROR",
+      "recovered": "warehouse.name; separately preserved r2"
+    },
+    {
+      "kind": "EXPECTED_UNSUPPORTED_SKU_EXACT_FILTER",
+      "status": 400
+    },
+    {
+      "kind": "OPENAPI_CONVENTIONAL_PATH_NOT_FOUND",
+      "status": 404
+    },
+    {
+      "kind": "WIDE_LEDGER_READ_TIMEOUT",
+      "seconds": 12,
+      "recovered": "Exact owned outbound query HTTP200; broad completeness still UNKNOWN"
+    }
+  ],
+  "offlineTests": {
+    "result": "PASS",
+    "tests": 91,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "networkCalls": 0,
+    "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests/unit/data/test_owned.py tests/unit/data/test_erp.py tests/unit/data/test_candidate_discovery.py tests/unit/metrics/s01/test_daily.py tests/unit/forecasting/s01/test_candidates.py -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-erp-capability-offline.xml",
+    "junitSHA256": "5b3fa1c539fe1beae0394bf2a4610773a4213eb66f6cd6d2e02e711589e5acdc",
+    "resultArtifact": "docs/evidence/P3-ERP-CAPABILITY/offline-results.json"
+  },
+  "procurement48_16_32": "CONTRACT_ONLY_NOT_EXECUTED",
+  "runs": [
+    {
+      "privateJournal": "data/private/p3-erp-capability-20261113/journal.json",
+      "journalSHA256": "d7396c4930955d4d4ad659f4e3ce40f54335f51416a8ed682273f45e3320c7ab",
+      "result": "FAIL_PRESERVED",
+      "calls": [
+        {
+          "serial": 1,
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "at": "2026-11-13T10:11:14.156132+00:00"
+        },
+        {
+          "serial": 2,
+          "method": "GET",
+          "path": "/api/v1/me",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b",
+          "responseRef": "data/private/p3-erp-capability-20261113/response-002.json",
+          "at": "2026-11-13T10:11:15.029457+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 3,
+          "method": "GET",
+          "path": "/api/v1/data-contract",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "9b265c17b22c73dddd018615618101d88d155e63c00252e816f88b17fbec8d68",
+          "responseRef": "data/private/p3-erp-capability-20261113/response-003.json",
+          "at": "2026-11-13T10:11:15.735125+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 4,
+          "method": "GET",
+          "path": "/api/v1/access/catalog",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "5ef0e1b81198e0c12af6fc9cbc8d34fbfc9d34c53e6993bdcc7b328b6d923a06",
+          "responseRef": "data/private/p3-erp-capability-20261113/response-004.json",
+          "at": "2026-11-13T10:11:16.443545+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 5,
+          "method": "GET",
+          "path": "/api/v1/access/roles",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "bd9ef5967b26aa785af5ee510dd8b199096af2b7d5a7b72cc1b6e926fd14c6cf",
+          "responseRef": "data/private/p3-erp-capability-20261113/response-005.json",
+          "at": "2026-11-13T10:11:17.184652+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 6,
+          "method": "GET",
+          "path": "/api/v1/warehouses/308",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "437ffc92f2b5c4cd4fe9db806463af5a6017b423b2fbdee59e0294b64151d393",
+          "responseRef": "data/private/p3-erp-capability-20261113/response-006.json",
+          "at": "2026-11-13T10:11:17.879965+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 7,
+          "method": "GET",
+          "path": "/api/v1/store-authorizations/3",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "d5d09d6b4e1e4e2a4eb75251365d786d1a484d04fcfe4b3116708482b5d7bd72",
+          "responseRef": "data/private/p3-erp-capability-20261113/response-007.json",
+          "at": "2026-11-13T10:11:18.570659+00:00",
+          "parameterNames": []
+        }
+      ]
+    },
+    {
+      "privateJournal": "data/private/p3-erp-capability-20261113-r2/journal.json",
+      "journalSHA256": "61988faf8d0649ec89a16853233e28179be6dacd9630d6901081c353af58a3ce",
+      "result": "PASS_READ_ONLY_INVESTIGATION",
+      "calls": [
+        {
+          "serial": 1,
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "at": "2026-11-13T10:11:31.045688+00:00"
+        },
+        {
+          "serial": 2,
+          "method": "GET",
+          "path": "/api/v1/me",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-002.json",
+          "at": "2026-11-13T10:11:31.871544+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 3,
+          "method": "GET",
+          "path": "/api/v1/data-contract",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "9b265c17b22c73dddd018615618101d88d155e63c00252e816f88b17fbec8d68",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-003.json",
+          "at": "2026-11-13T10:11:32.577490+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 4,
+          "method": "GET",
+          "path": "/api/v1/access/catalog",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "5ef0e1b81198e0c12af6fc9cbc8d34fbfc9d34c53e6993bdcc7b328b6d923a06",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-004.json",
+          "at": "2026-11-13T10:11:33.289560+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 5,
+          "method": "GET",
+          "path": "/api/v1/access/roles",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "bd9ef5967b26aa785af5ee510dd8b199096af2b7d5a7b72cc1b6e926fd14c6cf",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-005.json",
+          "at": "2026-11-13T10:11:34.024823+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 6,
+          "method": "GET",
+          "path": "/api/v1/warehouses/308",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "437ffc92f2b5c4cd4fe9db806463af5a6017b423b2fbdee59e0294b64151d393",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-006.json",
+          "at": "2026-11-13T10:11:34.734720+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 7,
+          "method": "GET",
+          "path": "/api/v1/store-authorizations/3",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "d5d09d6b4e1e4e2a4eb75251365d786d1a484d04fcfe4b3116708482b5d7bd72",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-007.json",
+          "at": "2026-11-13T10:11:35.454051+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 8,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "884e2ae7a2db88c95f98c80fd375705757eeddd1dfb6ccefb20387eb7f6040fa",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-008.json",
+          "at": "2026-11-13T10:11:36.172433+00:00",
+          "parameterNames": [
+            "field",
+            "limit",
+            "match",
+            "offset",
+            "q"
+          ]
+        },
+        {
+          "serial": 9,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "ac4a0d878ddd6a2d23e4bcec03fee4b89e6a6b01d6717ef28516405bcd019b99",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-009.json",
+          "at": "2026-11-13T10:11:36.875812+00:00",
+          "parameterNames": [
+            "field",
+            "limit",
+            "match",
+            "offset",
+            "q"
+          ]
+        },
+        {
+          "serial": 10,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "f037a3e8edd26b9d08b877cd0706d3c04f94ba0620cfa5b91b8bf1ff586824e8",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-010.json",
+          "at": "2026-11-13T10:11:37.572905+00:00",
+          "parameterNames": [
+            "limit",
+            "offset",
+            "warehouse_name"
+          ]
+        },
+        {
+          "serial": 11,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders/1398",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "c78c0ac4748b1826db33dfa1da2f9c72055d4e8f0fe122616ccc81ae22536da2",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-011.json",
+          "at": "2026-11-13T10:11:38.268018+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 12,
+          "method": "GET",
+          "path": "/api/v1/record-context/purchase-orders/1398",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "31948f1beed40b38411e856c1732b47ee4e0126245f01f3e031714961281e5e3",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-012.json",
+          "at": "2026-11-13T10:11:38.986070+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 13,
+          "method": "GET",
+          "path": "/api/v1/approvals",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "83d1ffefc6f91ed28ea875636353e78f05834e276b32f0910733c0f3e9408244",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-013.json",
+          "at": "2026-11-13T10:11:39.759031+00:00",
+          "parameterNames": [
+            "field",
+            "limit",
+            "match",
+            "offset",
+            "q"
+          ]
+        },
+        {
+          "serial": 14,
+          "method": "GET",
+          "path": "/api/v1/approvals/1806",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "b618153b24af1da0bccb4af1613cf3f0cde2b43552c2c037dd26f268f8110f81",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-014.json",
+          "at": "2026-11-13T10:11:40.471467+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 15,
+          "method": "GET",
+          "path": "/api/v1/supplier-deliveries",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-015.json",
+          "at": "2026-11-13T10:11:41.173630+00:00",
+          "parameterNames": [
+            "field",
+            "limit",
+            "match",
+            "offset",
+            "q"
+          ]
+        },
+        {
+          "serial": 16,
+          "method": "GET",
+          "path": "/api/v1/inbound-orders",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-016.json",
+          "at": "2026-11-13T10:11:41.883904+00:00",
+          "parameterNames": [
+            "field",
+            "limit",
+            "match",
+            "offset",
+            "q"
+          ]
+        },
+        {
+          "serial": 17,
+          "method": "GET",
+          "path": "/api/v1/purchase-amendments",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "fc546940d17070415db3ba769aa080a7f7612f826dbca3dfa66bcead6a3d5788",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-017.json",
+          "at": "2026-11-13T10:11:42.606345+00:00",
+          "parameterNames": [
+            "limit",
+            "offset",
+            "purchase_id"
+          ]
+        },
+        {
+          "serial": 18,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "httpStatus": 400,
+          "state": "ACKNOWLEDGED",
+          "sha256": "43fc8319c7cd6e2053d648753ff3cf5e8b8588328587408872dd4dfb009e61bc",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-018.json",
+          "at": "2026-11-13T10:11:43.319455+00:00",
+          "parameterNames": [
+            "field",
+            "limit",
+            "match",
+            "offset",
+            "q"
+          ]
+        },
+        {
+          "serial": 19,
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "a60d4396e88948f1805dd13e983d6320ba477388dcf2548dc868a0dfddf27d5e",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-019.json",
+          "at": "2026-11-13T10:11:44.016828+00:00",
+          "parameterNames": [
+            "ids",
+            "limit",
+            "offset",
+            "view"
+          ]
+        },
+        {
+          "serial": 20,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders/1398",
+          "httpStatus": 200,
+          "state": "ACKNOWLEDGED",
+          "sha256": "c78c0ac4748b1826db33dfa1da2f9c72055d4e8f0fe122616ccc81ae22536da2",
+          "responseRef": "data/private/p3-erp-capability-20261113-r2/response-020.json",
+          "at": "2026-11-13T10:11:44.717167+00:00",
+          "parameterNames": []
+        }
+      ]
+    },
+    {
+      "privateJournal": "data/private/p3-erp-capability-20261113-supplement/journal.json",
+      "journalSHA256": "ba38e4e5a01c7d18d2a812168bc2379cdea2d42253b8f2f9fc51b1d77938b2f4",
+      "result": "PARTIAL_READS_PRESERVED",
+      "calls": [
+        {
+          "serial": 1,
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "httpStatus": 200,
+          "at": "2026-11-13T10:12:59.715229+00:00"
+        },
+        {
+          "serial": 2,
+          "method": "GET",
+          "path": "/openapi.json",
+          "httpStatus": 404,
+          "sha256": "68941240fb49e2e78e3fdeb532d2297487efe387905360fe0ff2f18b02017708",
+          "responseRef": "data/private/p3-erp-capability-20261113-supplement/response-002.json",
+          "at": "2026-11-13T10:13:00.538620+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 3,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "httpStatus": 200,
+          "sha256": "240c2feab00334181a9ad5e9e5f0b1816b69a0bb14d8839cd7cd3fc16d0c4952",
+          "responseRef": "data/private/p3-erp-capability-20261113-supplement/response-003.json",
+          "at": "2026-11-13T10:13:01.230917+00:00",
+          "parameterNames": [
+            "limit",
+            "offset",
+            "status_text",
+            "warehouse_name"
+          ]
+        },
+        {
+          "serial": 4,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "httpStatus": 200,
+          "sha256": "2d9346a9763d15bd6c77a02d9625692361e5b750a3e5cdcfa7092d4347fad425",
+          "responseRef": "data/private/p3-erp-capability-20261113-supplement/response-004.json",
+          "at": "2026-11-13T10:13:01.947798+00:00",
+          "parameterNames": [
+            "limit",
+            "offset",
+            "status_text",
+            "warehouse_name"
+          ]
+        },
+        {
+          "serial": 5,
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "state": "FAILED",
+          "error": "TimeoutError",
+          "at": "2026-11-13T10:13:02.646780+00:00",
+          "parameterNames": [
+            "limit",
+            "offset",
+            "sku",
+            "warehouse_name"
+          ]
+        }
+      ]
+    },
+    {
+      "privateJournal": "data/private/p3-erp-capability-20261113-ledger-exact/journal.json",
+      "journalSHA256": "2da9a92dfb51e82fce4819235988c5e60b4a913b2cee3418c433cdf678541f95",
+      "result": "COMPLETED_EXACT_READS",
+      "calls": [
+        {
+          "serial": 1,
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "httpStatus": 200,
+          "at": "2026-11-13T10:13:57.907366+00:00"
+        },
+        {
+          "serial": 2,
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153929",
+          "httpStatus": 200,
+          "sha256": "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04",
+          "responseRef": "data/private/p3-erp-capability-20261113-ledger-exact/response-002.json",
+          "at": "2026-11-13T10:13:58.743825+00:00",
+          "parameterNames": []
+        },
+        {
+          "serial": 3,
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "httpStatus": 200,
+          "sha256": "a86326d6527dc57fdfe42f4f0f530a13837973b1848341c2c8922d7129e7f2a5",
+          "responseRef": "data/private/p3-erp-capability-20261113-ledger-exact/response-003.json",
+          "at": "2026-11-13T10:13:59.461371+00:00",
+          "parameterNames": [
+            "limit",
+            "offset",
+            "record_id",
+            "resource"
+          ]
+        },
+        {
+          "serial": 4,
+          "method": "GET",
+          "path": "/api/v1/purchase-orders/1398",
+          "httpStatus": 200,
+          "sha256": "c78c0ac4748b1826db33dfa1da2f9c72055d4e8f0fe122616ccc81ae22536da2",
+          "responseRef": "data/private/p3-erp-capability-20261113-ledger-exact/response-004.json",
+          "at": "2026-11-13T10:14:00.171544+00:00",
+          "parameterNames": []
+        }
+      ]
+    }
+  ]
+}

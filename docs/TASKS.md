@@ -1,3 +1,5 @@
+当前采购能力调查（2026-11-13）：D-S01-P3-ERP-SURVEY-01 IN_PROGRESS；最新main db13298建立独立分支，仅契约/有界只读/离线和文档，本轮禁止审批/下单/收货/入库/模型。旧P1/P2验收与证据保持。
+
 当前P1/P2正式发布完成（2026-11-13）：负责人/星星阶段PASS及本轮教学公开授权已落实；main正常合并b58919d，710后端/36前端/类型构建与两持久报告重放PASS。首次直连TLS失败后，经已核实本机代理保持证书校验普通push成功，远端回读b58919d一致。MERGE-01 ACCEPTED；P3 PREP-01材料REVIEW（仅准备）。快充线48件6箱/马克杯无候选/旧45失效；质量UNKNOWN、其他条件UNCONFIRMED、ETA未承诺、采购不可执行及企业四门保留。最终台账文档提交普通同步，最终HEAD以Git实际查询为准；未采购、未扩8/30、未宣称整个S01通过。
 
 当前P1/P2实际合并（2026-11-13）：main正常--no-ff合并b58919d，父2fba3b4/b012407，零冲突且tree与已验收分支相同；合并后710后端/36前端/类型构建及两报告DB/快照/规则/API/AI审计复验PASS，未新增ERP或模型调用。48件6箱/马克杯无候选、旧45失效和全部采购限制保留；普通push尚待执行。P3正式接口/权限/状态/适配缺口及回归清单已整理到PREP-01，仅准备不采购。
@@ -7823,5 +7825,79 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "skuExpansion": "NOT_RUN"
   },
   "currentDeliveryScope": "P3开发准备材料REVIEW；正式审批角色与执行授权未取得。后续先确认人工审核/审批/下单/收货权限和适配方案，再授权实现与真实集成；本轮不采购、不扩8/30SKU。"
+}
+```
+
+## ERP采购能力调查（独立只读任务）
+
+```json
+{
+  "id": "D-S01-P3-ERP-SURVEY-01",
+  "stage": "D",
+  "title": "ERP采购全链路只读能力验证与P2/P3可行性调查",
+  "kind": "design",
+  "dependsOn": [
+    "D-S01-P3-PREP-01",
+    "D-S01-P1P2-MERGE-01"
+  ],
+  "entryCondition": "2026-11-13负责人长任务明确授权契约/有界只读ERP/离线验证、文档规范和本地提交；不实施P3，不审批/下单/收货/入库。",
+  "ownerRole": "Codex调查；负责人和星星评审",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/standards/ERP_SIMULATION_DATA_POLICY.md",
+    "docs/reports/P3_ERP采购能力验证与可行性分析_20261113.md",
+    "docs/evidence/P3-ERP-CAPABILITY/",
+    "docs/generated/",
+    "docs/planning/validation-report.json",
+    "docs/planning/git-whitelist.json"
+  ],
+  "parallelCondition": "Codex单人调查；不修改业务算法和未知ERP-openapi.yaml。",
+  "deliverables": [
+    "A—E能力报告、权限/状态/字段/实测证据矩阵、全项目ERP仿真规范及下一阶段方案"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P3-ERP-SURVEY-01/AC1",
+      "text": "真实ERP与契约/离线证据分开，覆盖A—E和十场景及范围完整性，形成可执行后续方案；无未授权副作用。"
+    },
+    {
+      "id": "D-S01-P3-ERP-SURVEY-01/AC2",
+      "text": "统一仿真规范引用既有决定、维护唯一台账/交接、文档检查及本地Git提交，最终REVIEW。"
+    }
+  ],
+  "plannedTests": [
+    "当前账号身份/契约/已登记仓库采购分页、采购/审批/送货/入库/库存流水独立只读核验；受影响B01/B02/D01/D02离线测试；文档构建和校验"
+  ],
+  "risks": [
+    "独立审批未授权；收货与库存联动仅契约时不能宣称已验证；仓库/用途/店铺/跨人员完整发现可能证据不足。"
+  ],
+  "requiredEvidenceKinds": [
+    "ERP_READ_ONLY",
+    "OFFLINE_TEST",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/p3-erp-capability-survey",
+  "observedHead": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked, preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "最新main与origin/main一致；用户明确授权独立调查，不开发P3。"
+    }
+  ]
 }
 ```

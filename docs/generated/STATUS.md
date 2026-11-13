@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`56c4ae440f6690656dad59ca2f7ec02612f56acf95c461614d1ac0ebbe7e46ef`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`da1e1016bd0eba32b67e1d207cd38ef0bff53ab7201ae61c616dea641e462c4f`。不要手工编辑；候选不是执行授权。
 
-任务 43 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 17；ACCEPTED 17。
+任务 44 项；TODO 5；IN_PROGRESS 1；BLOCKED 4；REVIEW 17；ACCEPTED 17。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 26 | 2 | 0 | 4 | 15 | 5 |
+| D | 27 | 2 | 1 | 4 | 15 | 5 |
 
 ## 当前活动记录
 
@@ -35,6 +35,7 @@
 - D-S01-FORECAST-SURVEY-01 自有两SKU ERP未来销量接口只读核实：REVIEW；实际执行者=Codex。
 - D-S01-P1P2-BUSINESS-REVIEW-01 P1/P2补货数量与供应商采购约束独立业务核查：REVIEW；实际执行者=Codex。
 - D-S01-P3-PREP-01 P3采购审核与执行流程开发准备（无业务执行）：REVIEW；实际执行者=Codex。
+- D-S01-P3-ERP-SURVEY-01 ERP采购全链路只读能力验证与P2/P3可行性调查：IN_PROGRESS；实际执行者=Codex。
 
 ## 全部近期记录
 
@@ -83,5 +84,6 @@
 | D-S01-CARTON-FIX-01 | MOQ与ERP整箱采购规则最小修复及两SKU真实复验 | ACCEPTED | D-S01-P1P2-BUSINESS-REVIEW-01, D-S01-ONLINE-02, D-S01-ONLINE-03 |
 | D-S01-P1P2-MERGE-01 | P1/P2阶段验收登记、main正常合并与发布 | ACCEPTED | D-S01-CARTON-FIX-01, D-S01-MONITOR-SCOPE-01, D-S01-ONLINE-02, D-S01-ONLINE-03 |
 | D-S01-P3-PREP-01 | P3采购审核与执行流程开发准备（无业务执行） | REVIEW | D-S01-P1P2-MERGE-01 |
+| D-S01-P3-ERP-SURVEY-01 | ERP采购全链路只读能力验证与P2/P3可行性调查 | IN_PROGRESS | D-S01-P3-PREP-01, D-S01-P1P2-MERGE-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。
