@@ -1,3 +1,5 @@
+当前P3最小闭环交付（2026-11-13）：D-S01-P3-MIN-01 REVIEW，固定9859473；真实采购申请1406/48件/待审核，独立回读与同操作幂等通过；394相关后端/38前端/类型构建/真实浏览器与重启恢复通过。已审批正式采购正样本BLOCKED、有效可售供应UNKNOWN不抵扣；未查旧36、不做待审阻断、不decide/下单/收货/入库，不扩SKU不调付费模型，不合main。远端推送按后续实际Git回读登记。
+
 当前采购能力调查交付（2026-11-13）：D-S01-P3-ERP-SURVEY-01 REVIEW；实现/文档固定2a0af2d，91相关离线测试与18文档检查PASS，36HTTP尝试=4认证+32GET，业务变更0/模型0。报告区分VERIFIED/CONTRACT_ONLY/BLOCKED/NOT_SUPPORTED/UNKNOWN，16+32未实测。全局仿真规范已引用；P1/P2算法和原证据保持。仅本地调查提交，不合main、不开始P3。
 
 当前P1/P2正式发布完成（2026-11-13）：负责人/星星阶段PASS及本轮教学公开授权已落实；main正常合并b58919d，710后端/36前端/类型构建与两持久报告重放PASS。首次直连TLS失败后，经已核实本机代理保持证书校验普通push成功，远端回读b58919d一致。MERGE-01 ACCEPTED；P3 PREP-01材料REVIEW（仅准备）。快充线48件6箱/马克杯无候选/旧45失效；质量UNKNOWN、其他条件UNCONFIRMED、ETA未承诺、采购不可执行及企业四门保留。最终台账文档提交普通同步，最终HEAD以Git实际查询为准；未采购、未扩8/30、未宣称整个S01通过。
@@ -8009,10 +8011,65 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ERP_API",
     "DOCUMENT_CHECK"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "9859473e7c2406f96d9a5a22be39851648c8fec0"
+  ],
+  "testedCommit": "9859473e7c2406f96d9a5a22be39851648c8fec0",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC1",
+        "D-S01-P3-MIN-01/AC2",
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests/unit/data tests/unit/metrics/s01 tests/unit/forecasting/s01 tests/unit/bootstrap tests/integration/s01 tests/integration/http tests/integration/mysql -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-related-9859473.xml",
+      "environment": "获准隔离MySQL/fixture ERP/mock模型；不连接ERP或付费模型",
+      "sample": "固定9859473，394相关后端全部PASS/无跳过；正式状态、多SKU行/范围不明/数量规则/回放保全/权限/并发/拒绝/UNKNOWN与恢复。正向已审批实测不在此PASS内。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC2",
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": "npm --prefix frontend run test -- --run; npm --prefix frontend run build; Playwright --grep P3 REAL / P3 RECOVERY",
+      "environment": "已有Edge/Vite/独立API和Worker/授权工程库；教学模式off/mock",
+      "sample": "38前端PASS/类型构建PASS；首次真实浏览器提交1 PASS（提交前工作区），固定实现重启后恢复与原操作重放/人工审批页/390px/马克杯1 PASS；原付费模型浏览器专项NOT_RUN。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "ERP_API",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC1",
+        "D-S01-P3-MIN-01/AC2"
+      ],
+      "command": "Browser confirmation; docs/evidence/S01-P3-MIN/verify_live_readback.py",
+      "environment": "固定教学ERP/自有2SKU及仓库308；.env.erp仅本机；正式API，无数据库直改",
+      "sample": "真实1406/48件/待审核，POST201+submit200，共2业务变更；独立列表total1/详情/库存6、相同操作重放通过。正式采购三个状态查询为空VERIFIED；非空正样本BLOCKED、可售供应UNKNOWN不抵扣。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; git -c core.whitespace=cr-at-eol diff --check; changed-history secret and preservation audit",
+      "environment": "本地Git/系统Python；无业务请求",
+      "sample": "ADR范围收缩/统一规范沿用/唯一台账/交接；原全部任务JSON/调查证据/B01/B02/未知OpenAPI保全；普通独立分支推送结果按远端回读追加。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-p3-minimal-loop",
   "observedHead": "6d19204c3995919327e7c16a76e0284e1f9786ba",
@@ -8026,8 +8083,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "负责人明确收缩P3并授权最小开发；原调查提交保留。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "9859473实现固定；真实ERP申请创建提交/独立回读/幂等、394相关后端与38前端/构建/浏览器通过。已审批正样本与可售供应限制明确保留，不代签制造。"
     }
   ],
-  "currentDeliveryScope": "只做正式采购展示和人工确认ERP请购提交；不查旧36或未审批/草稿，不decide/下单/收货/入库，不扩SKU不调付费模型。"
+  "currentDeliveryScope": "最小教学请购闭环REVIEW：真实1406/48件/待审核，创建+submit共2变更并独立回读/幂等通过；394相关后端/38前端/类型构建/真实浏览器首提与重启恢复通过。正式已审批正样本缺失、可售供应UNKNOWN不抵扣；旧36/待审阻断/领导决定/下单/收货/入库/付费模型均未执行，不扩SKU，不合main。",
+  "deliveryLimitations": [
+    "Approved formal PO positive live sample BLOCKED; source-filtered empty queries VERIFIED, multi-SKU/scope behavior engineering PASS only",
+    "Committed sellable date and effective remainder closure semantics UNKNOWN; no ERP supply deduction",
+    "No production admission or independent acceptance; REVIEW only"
+  ]
 }
 ```

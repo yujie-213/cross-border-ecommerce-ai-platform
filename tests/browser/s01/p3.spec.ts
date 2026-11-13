@@ -1,5 +1,5 @@
 import { test, expect } from '../../../frontend/node_modules/@playwright/test/index.mjs'
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import path from 'node:path'
 const root = path.resolve(import.meta.dirname, '../../..')
 const enabled = process.env.S01_P3_BROWSER === 'true'
@@ -8,6 +8,7 @@ const out = path.join(root, 'data/private/s01-p3-min')
 
 test('P3 REAL: owned analysis, human confirmation, ERP submit, lost browser response and same-operation replay', async ({ page }) => {
   test.skip(!enabled, 'Explicit authorized owned teaching create/submit only')
+  test.skip(existsSync(path.join(out, 'browser-operation.json')), 'Owned batch already submitted; use P3 RECOVERY to verify the same operation')
   test.setTimeout(240000)
   mkdirSync(out, { recursive: true })
   const errors: string[] = []
@@ -73,4 +74,52 @@ test('P3 REAL: owned analysis, human confirmation, ERP submit, lost browser resp
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   await page.screenshot({ path: path.join(out, 'submitted-mobile.png'), fullPage: true })
   expect(errors).toEqual([])
+})
+
+test('P3 RECOVERY: restart, original-operation replay, review page and mug no-replenishment regression', async ({ page }) => {
+  test.skip(process.env.S01_P3_RECOVERY_BROWSER !== 'true', 'Existing authorized operation only; no new procurement writes')
+  test.setTimeout(180000)
+  const currentSession = JSON.parse(readFileSync(path.join(root, 'data/private/s01-online/session.json'), 'utf8'))
+  const original = JSON.parse(readFileSync(path.join(out, 'browser-operation.json'), 'utf8'))
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message))
+  await page.goto('/')
+  await page.getByRole('button', { name: '连接身份', exact: true }).first().click()
+  await page.getByLabel('短期身份令牌').fill(currentSession.token)
+  await page.getByRole('button', { name: '连接会话', exact: true }).click()
+  await expect(page.getByText('可信会话 · 已连接')).toBeVisible()
+  await page.evaluate(id => {
+    const saved = JSON.parse(sessionStorage.getItem('xuheng.s01.v1') || '{}')
+    sessionStorage.setItem('xuheng.s01.v1', JSON.stringify({ ...saved, taskId: id }))
+  }, original.reportId)
+  await page.goto('/#detail'); await page.reload()
+  await expect(page.getByText('已提交 ERP，待领导审批', { exact: true })).toBeVisible()
+  const cookies = await page.context().cookies()
+  const endpoint = '/api/v1/analysis-tasks/' + original.reportId + '/requisition'
+  const repeated = await page.request.post(endpoint, { data: original.original.body, headers: {
+    'Idempotency-Key': original.original.key, 'X-CSRF-Token': decodeURIComponent(cookies.find(c => c.name === 'commerce_csrf')!.value), Origin: 'http://localhost:5173' } })
+  expect(repeated.status()).toBe(200)
+  expect(await repeated.json()).toEqual(original.result)
+  await page.goto('/#approvals')
+  await expect(page.getByText('已提交 ERP，待领导审批', { exact: true })).toBeVisible()
+  await page.screenshot({ path: path.join(out, 'recovery-desktop.png'), fullPage: true })
+  await page.setViewportSize({ width: 390, height: 844 })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await page.screenshot({ path: path.join(out, 'recovery-mobile.png'), fullPage: true })
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await page.goto('/#suggestions')
+  await page.getByRole('button', { name: '＋ 新建补货分析', exact: true }).click()
+  const selector = page.getByRole('combobox', { name: '授权 SKU / 来源', exact: true })
+  await selector.selectOption({ label: (await selector.locator('option').allTextContents()).find(x => x.includes('HL-MUG350-WH'))! })
+  const reportResponse = page.waitForResponse(r => r.url().endsWith('/report') && r.status() === 200)
+  await page.getByRole('button', { name: '发起真实分析任务', exact: true }).click()
+  const mug = await (await reportResponse).json()
+  expect(mug.dataReport.supplyDemand.candidates).toEqual([])
+  expect(mug.dataReport.supplyDemand.baseline.availableQuantity).toBe('81')
+  expect(mug.dataReport.supplyDemand.limitations).toEqual(['NO_REPLENISHMENT_NEEDED'])
+  expect(mug.dataReport.forecast.constraints.orderMultiple).toBe('12')
+  expect(mug.dataReport.forecast.excludedSupply).toEqual([])
+  await expect(page.getByText('本报告没有可提交的当前补货候选，请先重新分析。', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: '确认并提交 ERP 请购', exact: true })).toHaveCount(0)
+  expect(errors).toEqual([])
+  writeFileSync(path.join(out, 'recovery-check.json'), JSON.stringify({ result: 'PASS', repeated: await repeated.json(), mugReport: mug, pageErrors: errors }, null, 2))
 })

@@ -44,7 +44,11 @@ test('OWNED REAL: two ERP SMA reports, AI, evidence, scope and cancellation', as
     expect(report.completeness).toBe('RULES_ONLY')
     if (sku.includes('CBL')) {
       expect(report.dataReport.supplyDemand.candidates.map((c: any) => c.quantity)).toEqual(['48'])
-      expect(report.dataReport.forecast.excludedSupply[0].pendingQuantity).toBe('36')
+      if (report.dataReport.existingPurchases?.policyVersion === 's01-approved-purchases-v1') {
+        expect(report.dataReport.forecast.excludedSupply).toEqual([])
+      } else {
+        expect(report.dataReport.forecast.excludedSupply[0].pendingQuantity).toBe('36')
+      }
       expect(report.dataReport.forecast.constraints.orderMultiple).toBe('8')
       await expect(page.locator('.candidate .big')).toContainText('48 件（6 箱）')
     } else {
