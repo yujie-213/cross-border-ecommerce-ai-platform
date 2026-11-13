@@ -39,3 +39,98 @@ test('V2 READONLY: real full-range history, server filters, current rules, zero-
   expect(errors).toEqual([])
   writeFileSync(path.join(privateDir, 'browser-readonly-result.json'), JSON.stringify({ result: 'PASS', batchId: batch.task.taskRef.taskId, pageErrors: errors, newModelCalls: 0, newBusinessMutations: 0 }, null, 2))
 })
+
+// This test has one authorized teaching create+submit. Never rerun it after a receipt exists.
+test('V2 FULL: manual entire catalog, fresh single AI, human adjustment and one real ERP requisition with lost browser response replay', async ({ page }) => {
+  test.skip(process.env.S01_V2_FULL_BROWSER !== 'true', 'Explicit model and owned teaching write authorization required')
+  test.setTimeout(600000)
+  const session = JSON.parse(readFileSync(path.join(privateDir, 'session.json'), 'utf8'))
+  expect(session.modelEnabled && session.requisitionEnabled).toBe(true)
+  expect(existsSync(path.join(privateDir, 'live-operation.json')), 'A real receipt already exists: use recovery test, never create another').toBe(false)
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message))
+  mkdirSync(screenshots, { recursive: true })
+  await page.goto('/')
+  await page.getByRole('button', { name: '连接身份', exact: true }).first().click()
+  await page.getByLabel('短期身份令牌').fill(session.token)
+  await page.getByRole('button', { name: '连接会话', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '全量补货工作台', exact: true })).toBeVisible()
+  const acceptedBatch = page.waitForResponse(r => r.url().endsWith('/s01/v2/batches') && r.request().method() === 'POST')
+  await page.getByRole('button', { name: '分析全部 SKU', exact: true }).click()
+  const batchResponse = await acceptedBatch; expect(batchResponse.status()).toBe(202)
+  const batch = await batchResponse.json(), batchId = batch.taskRef.taskId
+  writeFileSync(path.join(privateDir, 'live-batch.json'), JSON.stringify(batch, null, 2))
+  let progress: any
+  await expect.poll(async () => {
+    const r = await page.request.get(`/api/v1/s01/v2/batches/${batchId}`); expect(r.status()).toBe(200)
+    progress = await r.json(); return progress.task.state
+  }, { timeout: 280000, intervals: [2000] }).toBe('SUCCEEDED')
+  expect(progress.enumerationComplete).toBe(true)
+  expect(progress.statisticsVersion).toBe('v2-counts-v2')
+  expect(progress.summary.unfinished).toBe(0)
+  const items: any[] = []
+  for (let offset = 0; offset < progress.summary.scopeObjectCount; offset += 100) {
+    const r = await page.request.get(`/api/v1/s01/v2/batches/${batchId}/items?limit=100&offset=${offset}`)
+    expect(r.status()).toBe(200); const body = await r.json(); expect(body.total).toBe(progress.summary.scopeObjectCount); items.push(...body.items)
+  }
+  expect(new Set(items.map(r => r.entityKey)).size).toBe(progress.summary.scopeObjectCount)
+  expect(new Set(items.map(r => r.sku)).size).toBe(progress.summary.discoveredSkuCount)
+  writeFileSync(path.join(privateDir, 'live-progress.json'), JSON.stringify(progress, null, 2))
+  writeFileSync(path.join(privateDir, 'live-items.json'), JSON.stringify(items, null, 2))
+  await page.getByRole('button', { name: '刷新状态', exact: true }).click()
+  await expect(page.getByText(String(progress.summary.scopeObjectCount), { exact: true })).toBeVisible()
+  await page.screenshot({ path: path.join(screenshots, 'full-batch-desktop.png'), fullPage: true })
+  const search = page.getByLabel('SKU / 商品搜索', { exact: true })
+  await search.fill('HL-CBL100-2M')
+  await expect(page.getByRole('row').filter({ hasText: 'HL-CBL100-2M' })).toHaveCount(1)
+  await page.getByRole('button', { name: '查看详情', exact: true }).click()
+  const acceptedSingle = page.waitForResponse(r => r.url().endsWith('/s01/v2/singles') && r.request().method() === 'POST')
+  await page.getByRole('button', { name: '新建单品分析', exact: true }).click()
+  const singleResponse = await acceptedSingle; expect(singleResponse.status()).toBe(202)
+  const single = await singleResponse.json(), singleId = single.taskRef.taskId
+  writeFileSync(path.join(privateDir, 'live-single-task.json'), JSON.stringify(single, null, 2))
+  let detail: any
+  await expect.poll(async () => {
+    const r = await page.request.get(`/api/v1/s01/v2/singles/${singleId}`); expect(r.status()).toBe(200)
+    detail = await r.json(); return detail.task.state
+  }, { timeout: 200000, intervals: [2000] }).toBe('SUCCEEDED')
+  writeFileSync(path.join(privateDir, 'live-single.json'), JSON.stringify(detail, null, 2))
+  expect(detail.report.analysisReport.ai.status, detail.report.analysisReport.ai.reason).toBe('AVAILABLE')
+  expect(detail.report.dataReport.item.quantity).toBe(48)
+  expect(detail.report.dataReport.item.procurementEligibility.scopeAuthorized).toBe(true)
+  await expect(page.getByText('AI 解释已生成，最终决定仍由人工做出。', { exact: true })).toBeVisible({ timeout: 15000 })
+  const submit = page.getByRole('button', { name: '确认并提交 ERP 请购', exact: true })
+  const quantity = page.getByLabel('最终采购数量 / 件', { exact: true })
+  await quantity.fill('13'); await expect(submit).toBeDisabled()
+  await quantity.fill('40'); await expect(submit).toBeDisabled()
+  const adjustmentReason = 'S01 V2 独立教学验收：原建议48件，人工调整为40件/5箱；已核对原正式采购1406，可售日期未知未抵扣。本次仅提交申请待ERP审批。'
+  await page.getByLabel('调整原因（修改数量时必填）', { exact: true }).fill(adjustmentReason)
+  await page.getByRole('checkbox', { name: /我理解建议来源及未验证事项/ }).check()
+  await expect(submit).toBeEnabled()
+  let operation: any
+  const routePattern = `**/api/v1/s01/v2/singles/${singleId}/requisition`
+  await page.route(routePattern, async route => {
+    if (route.request().method() !== 'POST') { await route.continue(); return }
+    const response = await route.fetch({ timeout: 120000 })
+    operation = await response.json()
+    writeFileSync(path.join(privateDir, 'live-operation.json'), JSON.stringify(operation, null, 2))
+    await route.abort('failed') // Deliberate browser response loss after server acknowledgement; no second ERP create.
+  })
+  await submit.click()
+  await expect(page.getByRole('button', { name: '使用原命令核对', exact: true })).toBeEnabled({ timeout: 120000 })
+  expect(operation.state, operation.errorCode).toBe('SUBMITTED')
+  await page.unroute(routePattern)
+  await page.getByRole('button', { name: '使用原命令核对', exact: true }).click()
+  await expect(page.getByText('已提交 ERP，待领导审批', { exact: true })).toBeVisible({ timeout: 30000 })
+  const saved = await page.request.get(`/api/v1/s01/v2/singles/${singleId}/requisition`)
+  expect(saved.status()).toBe(200); expect(await saved.json()).toEqual(operation)
+  expect(operation.finalQuantity).toBe(40); expect(Number(operation.aiQuantity)).toBe(48)
+  expect(operation.adjustmentReason).toBe(adjustmentReason)
+  await page.screenshot({ path: path.join(screenshots, 'full-single-requisition-desktop.png'), fullPage: true })
+  await page.reload()
+  await expect(page.getByText('已提交 ERP，待领导审批', { exact: true })).toBeVisible()
+  await page.setViewportSize({ width: 390, height: 844 })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await page.screenshot({ path: path.join(screenshots, 'full-single-requisition-mobile.png'), fullPage: true })
+  expect(errors).toEqual([])
+  writeFileSync(path.join(privateDir, 'browser-full-result.json'), JSON.stringify({ result: 'PASS', batchId, singleId, operationId: operation.operationId, erpId: operation.erpId, browserResponseLossAndReplay: true, pageReloadRecovered: true, pageErrors: errors }, null, 2))
+})

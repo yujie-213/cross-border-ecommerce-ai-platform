@@ -12,14 +12,15 @@ export function csrfCookie(): string {
   const raw = document.cookie.split('; ').find(x => x.startsWith('commerce_csrf='))?.slice('commerce_csrf='.length)
   return raw ? decodeURIComponent(raw) : ''
 }
-export async function request<T>(path: string, init: RequestInit = {}, signal?: AbortSignal): Promise<T> {
+export async function request<T>(path: string, init: RequestInit = {}, signal?: AbortSignal, timeoutMs = 15000): Promise<T> {
   const headers = new Headers(init.headers)
   if (init.body) headers.set('Content-Type', 'application/json')
   if (init.method && !['GET', 'HEAD'].includes(init.method)) {
     const csrf = csrfCookie()
     if (csrf) headers.set('X-CSRF-Token', csrf)
   }
-  const response = await fetch('/api/v1' + path, { ...init, headers, credentials: 'same-origin', cache: 'no-store', signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(15000)]) : AbortSignal.timeout(15000) })
+  const timeout = AbortSignal.timeout(timeoutMs)
+  const response = await fetch('/api/v1' + path, { ...init, headers, credentials: 'same-origin', cache: 'no-store', signal: signal ? AbortSignal.any([signal, timeout]) : timeout })
   if (!response.ok) {
     const data = await response.json().catch(() => ({}))
     throw new ApiError(response.status, typeof data.code === 'string' ? data.code : 'HTTP_ERROR', data.traceId)
