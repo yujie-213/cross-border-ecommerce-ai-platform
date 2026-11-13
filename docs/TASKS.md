@@ -1,3 +1,5 @@
+当前P1/P2发布授权更新（2026-11-13）：负责人允许普通教学截图/数据/报告及非敏感授权元数据公开，旧未审截图阻断撤销；真实凭据和实际第三方敏感资料仍禁止。19提交/242新增blob等历史扫描无未解决凭据发现，3处数字/字符表偶合已核实；两份早期教学ERP报告无联系人/客户/支付资料或独立保密标记。两自有SKU阶段PASS，MONITOR/CARTON按适用范围ACCEPTED，ONLINE-02/03用review.scopeDecision登记当前P1/P2 ACCEPTED并保留更宽历史FAIL/NOT_RUN。P1P2-MERGE-01恢复IN_PROGRESS，正常合main/验证/推送；P3仅开发准备，不采购。
+
 当前P1/P2阶段验收与发布检查（2026-11-13）：负责人和星星已确认两自有SKU闭环含MOQ/整箱修复阶段PASS；48件6箱、马克杯空候选、旧45失效及日期/质量/审批限制复核一致。但origin/main=2fba3b4落后18提交，普通合并会公开早期非自有SKU完整ERP报告、8张未审截图和私有模型授权关联，P1P2-MERGE-01发布BLOCKED。遵用户安全停止要求未合并/推送，合并后冒烟NOT_RUN；本轮不将旧REVIEW/FAIL改写为全项通过。原分支/证据保留，等待安全快照及继续决策；不执行P3。
 
 当前MOQ/整箱规则修复（2026-11-13，固定c79fe59）：CARTON-FIX-01交REVIEW；负责人确认ERP商品default_carton_qty为采购倍数。快充线MOQ12/倍数8，缺口44.14285722→48件6箱；马克杯MOQ12/倍数12仍空候选。缺失/非法/关系异常箱规BLOCK不默认1；其他条件UNCONFIRMED、质量UNKNOWN、采购不可执行。旧45报告标历史失效但证据不改。710后端/36前端/真实浏览器及两种取消PASS，原688保全；真实模型2次5764Token/UNKNOWN/$0.10预约。原40任务原状、企业四门BLOCKED，未业务写入/采购/合main/公开推送。报告docs/reports/S01_MOQ整箱规则修复验证_20261113.md；完成后等待负责人及星星独立验收。
@@ -6442,7 +6444,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "负责人和星星（用户明确通知）",
+    "date": "2026-11-13",
+    "scope": "P1_P2_OWNED_TWO_SKU_PHASE_ONLY",
+    "scopeDecision": "ACCEPTED",
+    "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+    "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
+    "decision": "当前两自有SKU正向计算/真实AI/前端闭环阶段PASS；原任务更宽历史调查的FAIL/NOT_RUN保留，整体REVIEW不倒改。"
+  },
   "branch": "codex/s01-live-business-closure",
   "observedHead": "3a46fd4c35c04770b95bfab43016c92606757f9e",
   "latestHandoffRef": "docs/HANDOFF.md",
@@ -6467,10 +6477,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "两SKU真实ERP输入/SMA/AI/浏览器闭环与冻结提交复验完成；历史FAIL/NOT_RUN不改，等待负责人及独立评审。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "本轮登记当前P1/P2两自有SKU范围ACCEPTED；整体REVIEW仅保留既有更宽历史测试状态，原FAIL/NOT_RUN不改；发布获准正常合main。"
     }
   ],
   "dirtyPaths": [],
-  "currentDeliveryScope": "P1/P2自有两SKU教学分析建议REVIEW；四企业门BLOCKED，不扩8/30，不采购审批执行。"
+  "currentDeliveryScope": "两自有SKU P1/P2适用范围阶段PASS/ACCEPTED，结果以整箱修复c79fe59/a6cc7dd为准；原任务更宽历史FAIL/NOT_RUN及企业门保留，不代表整个S01或采购执行验收。",
+  "phaseAcceptance": {
+    "result": "PASS",
+    "scope": "当前两自有SKU P1/P2分析建议与展示闭环",
+    "reviewer": "负责人和星星",
+    "knownLimitationsRetained": true
+  }
 }
 ```
 
@@ -6587,7 +6608,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "负责人和星星（用户明确通知）",
+    "date": "2026-11-13",
+    "scope": "P1_P2_OWNED_TWO_SKU_PHASE_ONLY",
+    "scopeDecision": "ACCEPTED",
+    "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+    "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
+    "decision": "当前两自有SKU正向计算/真实AI/前端闭环阶段PASS；原任务更宽历史调查的FAIL/NOT_RUN保留，整体REVIEW不倒改。"
+  },
   "branch": "codex/s01-live-business-closure",
   "observedHead": "3a46fd4c35c04770b95bfab43016c92606757f9e",
   "latestHandoffRef": "docs/HANDOFF.md",
@@ -6617,15 +6646,26 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "两SKU真实ERP输入/SMA/AI/浏览器闭环与冻结提交复验完成；历史FAIL/NOT_RUN不改，等待负责人及独立评审。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "本轮登记当前P1/P2两自有SKU范围ACCEPTED；整体REVIEW仅保留既有更宽历史测试状态，原FAIL/NOT_RUN不改；发布获准正常合main。"
     }
   ],
   "dirtyPaths": [],
   "holdReason": null,
-  "currentDeliveryScope": "P1/P2自有两SKU教学分析建议REVIEW；四企业门BLOCKED，不扩8/30，不采购审批执行。",
+  "currentDeliveryScope": "两自有SKU P1/P2适用范围阶段PASS/ACCEPTED，结果以整箱修复c79fe59/a6cc7dd为准；原任务更宽历史FAIL/NOT_RUN及企业门保留，不代表整个S01或采购执行验收。",
   "historicalProposedContinuationDependencies": [
     "D-S01-MONITOR-SCOPE-01",
     "D-S01-DATASET-IMPORT-01"
-  ]
+  ],
+  "phaseAcceptance": {
+    "result": "PASS",
+    "scope": "当前两自有SKU P1/P2分析建议与展示闭环",
+    "reviewer": "负责人和星星",
+    "knownLimitationsRetained": true
+  }
 }
 ```
 
@@ -7025,11 +7065,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "LIVE",
     "ENGINEERING"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239"
   ],
-  "testedCommit": "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239",
+  "testedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
   "evidence": [
     {
       "kind": "ENGINEERING",
@@ -7056,7 +7096,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "负责人和星星（用户明确通知阶段评审通过，发布授权本轮更新）",
+    "date": "2026-11-13",
+    "scope": "P1_P2_TWO_OWNED_SKU_PHASE_WITH_KNOWN_LIMITATIONS",
+    "scopeDecision": "ACCEPTED",
+    "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+    "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
+    "decision": "仅两自有SKU P1/P2范围阶段PASS；监控与MOQ/整箱修复验收通过，企业四门和采购限制保留。"
+  },
   "branch": "codex/s01-live-business-closure",
   "observedHead": "3a46fd4c35c04770b95bfab43016c92606757f9e",
   "dirtyPaths": [],
@@ -7077,9 +7125,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "两SKU真实ERP输入/SMA/AI/浏览器闭环与冻结提交复验完成；历史FAIL/NOT_RUN不改，等待负责人及独立评审。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "ACCEPTED",
+      "reason": "负责人和星星明确阶段验收PASS，用户更新公开授权；沿用c79fe59/a6cc7dd实际证据，不将阶段验收扩大为采购执行或整个S01验收。"
     }
   ],
-  "currentDeliveryScope": "P1/P2自有两SKU教学分析建议REVIEW；四企业门BLOCKED，不扩8/30，不采购审批执行。"
+  "currentDeliveryScope": "P1/P2两自有SKU当前适用交付范围ACCEPTED；48件6箱/马克杯空候选，其他条件及企业四门保留；本轮授权正常合main/推送，不采购。",
+  "phaseAcceptance": {
+    "result": "PASS",
+    "scope": "P1/P2两自有SKU",
+    "reviewer": "负责人和星星",
+    "knownLimitationsRetained": true
+  }
 }
 ```
 
@@ -7408,7 +7467,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING",
     "LIVE"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "c79fe5960aea5b991840505bd50efb0ef7534bea"
   ],
@@ -7439,7 +7498,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/S01-CARTON-FIX/verification.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "负责人和星星（用户明确通知阶段评审通过，发布授权本轮更新）",
+    "date": "2026-11-13",
+    "scope": "P1_P2_TWO_OWNED_SKU_PHASE_WITH_KNOWN_LIMITATIONS",
+    "scopeDecision": "ACCEPTED",
+    "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+    "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
+    "decision": "仅两自有SKU P1/P2范围阶段PASS；监控与MOQ/整箱修复验收通过，企业四门和采购限制保留。"
+  },
   "branch": "codex/s01-live-business-closure",
   "observedHead": "11328013ac8559aaa66982280526f39cec2f68b7",
   "dirtyPaths": [],
@@ -7455,9 +7522,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "c79fe59最小整箱适配修复及冻结代码真实两SKU/AI/浏览器和710/36回归PASS；48件6箱/马克杯空候选，历史45失效；不执行采购，等待负责人及星星独立验收。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "ACCEPTED",
+      "reason": "负责人和星星明确阶段验收PASS，用户更新公开授权；沿用c79fe59/a6cc7dd实际证据，不将阶段验收扩大为采购执行或整个S01验收。"
     }
   ],
-  "currentDeliveryScope": "MOQ与整箱规则最小修复及两SKU复验REVIEW；仅已确认约束合规的人工审核候选。日期/质量/审批仍未放行，旧36待审核单须未来获授权复核；不扩8/30、不合main、不公开推送。"
+  "currentDeliveryScope": "P1/P2两自有SKU当前适用交付范围ACCEPTED；48件6箱/马克杯空候选，其他条件及企业四门保留；本轮授权正常合main/推送，不采购。",
+  "phaseAcceptance": {
+    "result": "PASS",
+    "scope": "P1/P2两自有SKU",
+    "reviewer": "负责人和星星",
+    "knownLimitationsRetained": true
+  }
 }
 ```
 
@@ -7476,7 +7554,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-ONLINE-02",
     "D-S01-ONLINE-03"
   ],
-  "entryCondition": "负责人及星星确认两自有SKU P1/P2在已知业务限制下阶段验收通过，授权最小检查后正常合main/推送；发现重大安全问题必须停止。",
+  "entryCondition": "负责人及星星确认两自有SKU P1/P2在已知业务限制下阶段验收通过，授权最小检查后正常合main/推送；发现重大安全问题必须停止。 最新发布授权允许普通教学截图、教学数据、非敏感报告与授权元数据，不再要求逐图审核或安全快照；实际凭据/第三方敏感资料仍禁止。",
   "ownerRole": "负责人/星星验收；Codex集成",
   "assignee": "Codex",
   "allowedPaths": [
@@ -7486,9 +7564,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/evidence/S01-CARTON-FIX/premerge-security-20261113.json",
     "docs/planning/git-whitelist.json",
     "docs/planning/validation-report.json",
-    "docs/generated/"
+    "docs/generated/",
+    "AGENTS.md",
+    "docs/governance/PUBLICATION.md",
+    "docs/evidence/S01-CARTON-FIX/release-20261113.json"
   ],
-  "parallelCondition": "Codex单人；未执行合并/推送/采购。",
+  "parallelCondition": "Codex单人按正常Git流程合并、合并后验证、普通push；不执行采购。",
   "deliverables": [
     "已验收提交/结果/限制与发布历史检查；安全停止证据及继续条件"
   ],
@@ -7507,9 +7588,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "ENGINEERING"
   ],
-  "status": "BLOCKED",
-  "implementationCommits": [],
-  "testedCommit": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "status": "IN_PROGRESS",
+  "implementationCommits": [
+    "c79fe5960aea5b991840505bd50efb0ef7534bea"
+  ],
+  "testedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
   "evidence": [
     {
       "kind": "ENGINEERING",
@@ -7530,17 +7613,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "scopeDecision": "PASS",
     "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
     "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
-    "decision": "业务阶段通过事实登记；发布安全阻断，未完成条件式ACCEPTED迁移/合并发布；既有FAIL/NOT_RUN及REVIEW记录保留。"
+    "decision": "业务P1/P2阶段PASS；本轮更新发布授权后旧数据类别阻断解除，待正常合并/合并后验证/推送完成。"
   },
   "branch": "codex/s01-live-business-closure",
-  "observedHead": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "observedHead": "083115e810652ff3f90eea29f10af891dfca7275",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
-  "blocker": {
-    "code": "RESTRICTED_LOCAL_HISTORY_WOULD_BE_PUBLISHED",
-    "reason": "直接普通合并会把受限ERP报告/未审截图/私有模型授权关联的祖先提交带入main；不满足本轮无敏感数据发布条件。",
-    "resolution": "从已fetch远端main准备不继承受限历史的安全发布快照，逐项审核代码/文档/脱敏摘要并保留原本地证据，取得继续授权后合并复验推送。"
-  },
+  "blocker": null,
   "history": [
     {
       "date": "2026-11-13",
@@ -7551,6 +7630,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "BLOCKED",
       "reason": "真实检查发现受限历史会进入拟发布祖先；按用户明确安全停止要求未合并/推送，不删除历史。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "用户明确扩大教学作品公开授权；重新检查全部新增历史，普通截图/报告及非敏感授权ID可发布，真实凭据扫描无未解决发现；撤销旧发布阻断，不构造替代历史。"
     }
   ],
   "phaseAcceptance": {
@@ -7558,8 +7642,70 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "scope": "P1/P2两自有SKU分析建议闭环及MOQ整箱修复",
     "reviewer": "负责人和星星",
     "knownLimitationsRetained": true,
-    "publicationAcceptance": false
+    "publicationAcceptance": "AUTHORIZED_PENDING_MERGE_AND_PUSH"
   },
-  "currentDeliveryScope": "仅登记用户阶段验收PASS事实及合并前安全阻断；原任务REVIEW历史不倒改，不虚称已合并/已发布或整个S01通过。"
+  "currentDeliveryScope": "获准直接正常合并当前原始开发分支；不得force/重写远端；实际ERP采购操作不在授权内。"
+}
+```
+
+
+## P3开发准备（发布后接续，不执行采购）
+
+```json
+{
+  "id": "D-S01-P3-PREP-01",
+  "stage": "D",
+  "title": "P3采购审核与执行流程开发准备（无业务执行）",
+  "kind": "design",
+  "dependsOn": [
+    "D-S01-P1P2-MERGE-01"
+  ],
+  "entryCondition": "用户明确要求P1/P2正式合并推送后进入P3开发准备；仅准备接口/权限/状态和测试清单，不执行审批/下单/收货。",
+  "ownerRole": "负责人/合法采购审批角色；Codex准备",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/TASKS.md",
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/evidence/S01-CARTON-FIX/release-20261113.json",
+    "docs/generated/"
+  ],
+  "parallelCondition": "Codex单人文档及既有契约阅读，不ERP写入、不模型、不实现采购执行器。",
+  "deliverables": [
+    "复用既有任务/权限/快照的P3最小接续点、正式ERP接口/状态与权限边界、48件及旧36件复核、可售ETA/质检语义、幂等和状态变化回归清单"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P3-PREP-01/AC1",
+      "text": "列出正式接口与现有适配缺口、真实审批角色/独立授权和库存对账条件；准备不等于执行获准，不绕过ERP状态机或扩大8/30SKU。"
+    }
+  ],
+  "plannedTests": [
+    "本地OpenAPI与历史409证据核对、当前适配状态保护和幂等边界检查；此轮不运行P3业务集成。"
+  ],
+  "risks": [
+    "审批决定不可反转且角色未取得；旧待审批36不满足箱规8；审批后的在途/ETA尚无准入映射；新收货会改变库存对账假设。"
+  ],
+  "requiredEvidenceKinds": [
+    "DOCUMENT"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "main（合并后）",
+  "observedHead": "083115e810652ff3f90eea29f10af891dfca7275",
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确授权发布后进入P3准备；读取本地正式契约和现有保护，不发送业务调用。"
+    }
+  ],
+  "executionAuthorization": "NOT_GRANTED_FOR_APPROVAL_ORDER_OR_RECEIPT"
 }
 ```

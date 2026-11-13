@@ -781,6 +781,7 @@
     "tools/verify_s01_frontend.py",
     "tools/verify_s01_teaching_backend.py",
     "tools/verify_s01_teaching_golden.py",
-    "docs/evidence/S01-CARTON-FIX/premerge-security-20261113.json"
+    "docs/evidence/S01-CARTON-FIX/premerge-security-20261113.json",
+    "docs/evidence/S01-CARTON-FIX/release-20261113.json"
   ]
 }

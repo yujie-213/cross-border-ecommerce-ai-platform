@@ -1,0 +1,53 @@
+{
+  "scope": "P1_P2_AUTHORIZED_TEACHING_PUBLICATION",
+  "result": "PREMERGE_PASS",
+  "capturedAt": "2026-11-13T09:09:05.343897+00:00",
+  "authorization": {
+    "ordinaryTeachingScreenshots": true,
+    "teachingBusinessData": true,
+    "nonSensitiveReports": true,
+    "nonSensitiveAuthorizationMetadata": true,
+    "perScreenshotApprovalRequired": false,
+    "credentialsAllowed": false,
+    "actualThirdPartySensitiveDataAllowed": false,
+    "ordinaryGitMergeAndPush": true,
+    "ERPProcurementActions": false
+  },
+  "previousBlocker": "SUPERSEDED_BY_EXPLICIT_OWNER_PUBLICATION_AUTHORIZATION",
+  "reviewedImplementation": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+  "reviewedEvidence": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "sourceHeadBeforeRegistration": "083115e810652ff3f90eea29f10af891dfca7275",
+  "phaseAcceptance": "PASS_WITH_KNOWN_BUSINESS_LIMITATIONS",
+  "business": {
+    "cableQuantity": "48",
+    "cartons": "6",
+    "mugCandidates": [],
+    "legacy45Obsolete": true,
+    "quality": "UNKNOWN",
+    "otherConditions": "UNCONFIRMED",
+    "ETA": "NOT_COMMITTED",
+    "procurementEligible": false,
+    "pending36Excluded": true
+  },
+  "premergeScan": {
+    "result": "PASS",
+    "scope": "all newly reachable blobs/commit metadata and messages, including older versions and ZIP members",
+    "objectCounts": {
+      "commit": 19,
+      "tree": 234,
+      "blob": 242
+    },
+    "unresolvedFindings": 0,
+    "reviewedIncidentalNumericOrAlphabetMatches": 3,
+    "privateReceipt": "data/private/s01-p1p2-release-20261113/history-secret-scan-initial.json",
+    "teachingReportsReviewed": 2,
+    "personalOrCustomerOrPaymentDetailsFound": 0,
+    "independentConfidentialMarkingsFound": 0,
+    "authorizationIdNature": "NON_AUTHENTICATING_POLICY_METADATA",
+    "ordinaryScreenshots": 8
+  },
+  "merge": "PENDING",
+  "postMergeValidation": "PENDING",
+  "remoteSync": "PENDING",
+  "P3": "PREPARATION_ONLY_NO_ERP_OPERATIONS"
+}
