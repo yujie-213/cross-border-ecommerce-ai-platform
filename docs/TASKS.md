@@ -1,3 +1,5 @@
+当前最终可行性验证（2026-11-13）：负责人取消此前固定调用上限，保持自建范围、低频/幂等和不可逆动作边界。实际6变更尝试（5成功/1下单409）、30回读全200、1认证；销售日期/履约/出库/重放通过，采购审批前置阻断、部分收货NOT_RUN；两SKU正向计算仍BLOCKED。PILOT交REVIEW，建议B待负责人和星星确认，未切换模式/扩容；原FAIL/旧测试保留。
+
 当前紧急小范围小试实测（2026-11-13）：负责人新增明确批准原清单最小创建/回读12变更、30回读，未批状态动作不执行。实测12次变更/29业务回读/1认证，12新对象独立验证、2候选/ACTIVE0；累计准备12变更/41回读/4认证。已停止ERP调用，完整2SKU及8SKU未验收，原FAIL/历史模型证据不改。下方“准备未批/零写入”是先前时点，不覆盖本增量。
 
 当前方案C第一阶段领取（2026-11-13）：负责人及星星正式批准方案C；当前只做独立范围只读核查与2SKU精确执行清单，副作用操作须再批准。尚无专用账号/独立租户；不自动扩大8/30SKU、不新增模型。公开推送只发逐项审核安全内容，旧本地受限证据/截图不进入新公开历史。
@@ -6660,7 +6662,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-S01-DATASET-DESIGN-01"
   ],
-  "entryCondition": "负责人2026-11-13紧急批准原清单最小创建及独立回读，限12变更/30回读；未批状态动作不执行；本轮完成即停止",
+  "entryCondition": "本轮最终可行性验证已执行并停止；负责人取消固定调用上限但保留自有范围/教学内部副作用/幂等及不可逆审批边界；最终建议B等待负责人和星星确认，不实施模式切换",
   "ownerRole": "主集成/负责人/老师ERP范围维护",
   "assignee": "Codex",
   "allowedPaths": [
@@ -6674,14 +6676,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "docs/planning/",
     "docs/generated/",
     ".tmp/s01_limited_pilot.py",
-    "data/private/s01-pilot-limited-20261113/"
+    "data/private/s01-pilot-limited-20261113/",
+    ".tmp/s01_final_verify.py",
+    ".tmp/s01_final_component_check.py",
+    "data/private/s01-final-verification-20261113/"
   ],
   "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
   "deliverables": [
     "只读核实独立范围与隔离限制、精确2SKU执行清单/字段/关系/副作用/预算/恢复",
     "当前拟33次业务变更/76回读含已尝试12；批准前零业务写入",
     "批准后才执行小试、独立回读/真实对账/登记及进入8SKU结论",
-    "已完成本轮12变更/29业务回读/1认证；12新对象独立核验、2受控候选/ACTIVE0，完整2SKU小试未完成"
+    "已完成本轮12变更/29业务回读/1认证；12新对象独立核验、2受控候选/ACTIVE0，完整2SKU小试未完成",
+    "最终可行性报告交REVIEW：销售日期/履约/出库流水和幂等PASS；采购下单409审批前置，部分收货NOT_RUN；建议路线B待确认，完整2SKU/8SKU未验收"
   ],
   "acceptance": [
     {
@@ -6701,11 +6707,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "LIVE",
     "ENGINEERING"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "1eddeb6bc383779e550fd4d3cfef1bf310cb4f47"
+    "1eddeb6bc383779e550fd4d3cfef1bf310cb4f47",
+    "07d83e1da6fbe714e8c9b1fa5d995e0132cf5575"
   ],
-  "testedCommit": "a45031b470d0ad3269d0ac762783fa705f860c4b",
+  "testedCommit": "07d83e1da6fbe714e8c9b1fa5d995e0132cf5575",
   "evidence": [
     {
       "kind": "READ_ONLY_INSPECTION",
@@ -6766,13 +6773,61 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-PILOT-PREP/limited-pilot-summary-local.json"
+    },
+    {
+      "kind": "LIVE_FINAL_SALES_AND_STOCK",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": "private final runner preflight / sales / ship-after-local-guard-fix / diagnostics / shipment-replay / final-reads",
+      "environment": "固定教学ERP正式API；仅本项目真实ID",
+      "sample": "日期窗口/销售履约/库存45→36与100→96、独立流水-9/-4、发货重放不双扣；本轮30 GET200",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/final-feasibility-summary-local.json"
+    },
+    {
+      "kind": "LIVE_FINAL_PURCHASE",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": "submit → independent GET → place-order → independent rejection/state/approval GET",
+      "environment": "仅已登记采购；未代签审批",
+      "sample": "submit成功、待审核pending36；place-order409要求审批通过，不是503。未执行审批决定/收货，不能当有效在途",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/final-feasibility-summary-local.json"
+    },
+    {
+      "kind": "CAPTURED_ERP_COMPONENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe .tmp/s01_final_component_check.py",
+      "environment": "真实ERP不可变捕获的离线组件验证；负例单独标注，非实时/G01正式验收",
+      "sample": "2SKU身份通过、B01质量拒绝/B02无基线候选；4个超时/外店负例按预期阻断；正向场景均BLOCKED",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/final-feasibility-summary-local.json"
+    },
+    {
+      "kind": "ENGINEERING_REGRESSION",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest -q tests/unit/metrics/s01 tests/unit/forecasting/s01 tests/unit/data/test_online.py tests/unit/data/test_online_calculation.py",
+      "environment": "既有离线单元回归，未改Golden/B01/B02/质量门禁，无网络/模型",
+      "sample": "38项通过；pytest缓存目录权限警告保留，旧670/33及浏览器FAIL未重验/覆盖",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/final-feasibility-summary-local.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
-  "observedHead": "a45031b470d0ad3269d0ac762783fa705f860c4b",
+  "observedHead": "07d83e1da6fbe714e8c9b1fa5d995e0132cf5575",
   "dirtyPaths": [
-    "本轮小范围实测回执/汇总及任务交接；临时执行脚本/原始证据留忽略私有目录"
+    "最终验证摘要/回执/交接/生成视图；原始业务、真实ID及执行器仅忽略私有目录"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -6801,26 +6856,30 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "负责人紧急明确批准最小教学创建12/30；本轮12/29/认证1全部成功并停止，候选2/ACTIVE0；完整工作流及8SKU仍未验收，不覆盖旧FAIL/NOT_RUN"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "最终决策性小试结束；本轮6变更尝试/30回读/1认证。5变更成功、采购下单409审批前置；建议B待确认，不宣告完整工作流或正向验收通过"
     }
   ],
   "executionGate": {
-    "status": "LIMITED_SUBSET_COMPLETED_STOPPED",
+    "status": "FINAL_FEASIBILITY_REVIEW_STOPPED",
     "reasons": [
-      "本轮12次业务变更上限已用满，停止ERP调用",
-      "完整小试的收付款/出库/采购状态/收货动作尚未批准",
-      "正式监控未实现，共享租户硬隔离未证明"
+      "最终建议B等待负责人和星星确认，未切换模式",
+      "采购审批决定不可反转，未在本轮代签；部分收货未执行",
+      "正式监控及新数据集规则准入未实现"
     ],
-    "mutationPlan": 33,
-    "readPlanIncludingPreparation": 76,
-    "actualMutations": 12,
-    "actualReads": 41,
-    "authenticationCalls": 4,
+    "oldFixedCallCaps": "REMOVED_BY_OWNER_NOT_A_STOP_REASON",
+    "actualMutations": 18,
+    "actualReads": 71,
+    "authenticationCalls": 5,
     "thisRound": {
-      "actualMutations": 12,
-      "actualReads": 29,
-      "authenticationCalls": 1,
-      "maxMutations": 12,
-      "maxReads": 30
+      "actualMutations": 6,
+      "successfulMutations": 5,
+      "rejected409": 1,
+      "actualReads": 30,
+      "authenticationCalls": 1
     },
     "modelRequests": 0
   },
@@ -6830,9 +6889,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "scope": "DOCUMENTS_AND_AGGREGATE_ONLY",
     "sourceCodeAndDetailedEvidence": "LOCAL_ONLY"
   },
-  "testedScope": "LIVE_LIMITED_MASTER_DATA_AND_DRAFT_CRUD_WITH_INDEPENDENT_READBACK_NOT_COMPLETE_2SKU_WORKFLOW",
+  "testedScope": "FINAL_FEASIBILITY_REVIEW_ONLY_SALES_PASS_PURCHASE_APPROVAL_BLOCKED_POSITIVE_B01_B02_BLOCKED",
   "candidateMembers": 2,
-  "activeMembers": 0
+  "activeMembers": 0,
+  "recommendation": "B_PENDING_OWNER_AND_XINGXING_CONFIRMATION"
 }
 ```
 

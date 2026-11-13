@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`ab62339b605b4d58e3ebb3b1d4a8470dbca8f7f4089600c9bb0bb4bd71e596cd`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`cdd302d6a516d04c996ff7e106cf2c41acd004ef1b745c54160f3f7a889b0b16`。不要手工编辑；候选不是执行授权。
 
-任务 38 项；TODO 6；IN_PROGRESS 2；BLOCKED 4；REVIEW 12；ACCEPTED 14。
+任务 38 项；TODO 6；IN_PROGRESS 1；BLOCKED 4；REVIEW 13；ACCEPTED 14。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 21 | 3 | 2 | 4 | 10 | 2 |
+| D | 21 | 3 | 1 | 4 | 11 | 2 |
 
 ## 当前活动记录
 
@@ -31,7 +31,7 @@
 - D-S01-ONLINE-02 在线数据准入与B01/B02：REVIEW；实际执行者=Codex。
 - D-S01-ONLINE-03 正常在线任务DeepSeek解释：IN_PROGRESS；实际执行者=Codex。
 - D-S01-DATASET-DESIGN-01 仿真经营数据与监控范围评估：REVIEW；实际执行者=Codex。
-- D-S01-DATASET-PILOT-01 独立数据范围和ERP能力小试：IN_PROGRESS；实际执行者=Codex。
+- D-S01-DATASET-PILOT-01 独立数据范围和ERP能力小试：REVIEW；实际执行者=Codex。
 
 ## 全部近期记录
 
@@ -72,7 +72,7 @@
 | D-S01-ONLINE-02 | 在线数据准入与B01/B02 | REVIEW | D-S01-ONLINE-01, B-03, B-04 |
 | D-S01-ONLINE-03 | 正常在线任务DeepSeek解释 | IN_PROGRESS | D-S01-ONLINE-02, C-01 |
 | D-S01-DATASET-DESIGN-01 | 仿真经营数据与监控范围评估 | REVIEW | 无；仍核对入口指令 |
-| D-S01-DATASET-PILOT-01 | 独立数据范围和ERP能力小试 | IN_PROGRESS | D-S01-DATASET-DESIGN-01 |
+| D-S01-DATASET-PILOT-01 | 独立数据范围和ERP能力小试 | REVIEW | D-S01-DATASET-DESIGN-01 |
 | D-S01-MONITOR-SCOPE-01 | D02版本化自建SKU监控清单 | TODO | D-S01-DATASET-DESIGN-01, D-S01-DATASET-PILOT-01 |
 | D-S01-DATASET-IMPORT-01 | S01八场景最小经营数据集 | TODO | D-S01-DATASET-PILOT-01, D-S01-MONITOR-SCOPE-01 |
 
