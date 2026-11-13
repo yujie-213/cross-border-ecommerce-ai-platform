@@ -137,7 +137,7 @@ def test_normalize_returns_only_public_admitted_input_and_stable_refs():
     assert first == second
     assert parsed.sourceNature == "TEACHING_ERP_OBSERVED"
     assert parsed.fixtureId == value["inputId"] == value["fixtureId"]
-    assert "inputId" not in first and set(first) == set(AdmittedInput.model_fields)
+    assert "inputId" not in first and set(first) == {name for name, field in AdmittedInput.model_fields.items() if field.is_required()}
     assert len(first["provenanceRef"]) == len(first["rulesRef"]) == 64
     assert package_revision(value) == package_revision(AdmissionPackage.model_validate(value))
 
@@ -354,7 +354,7 @@ def test_teaching_mode_normalizes_with_distinct_non_operating_source_nature():
     parsed = AdmittedInput.model_validate(result)
     assert parsed.sourceNature == "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP"
     assert teaching_package_revision(value) == teaching_package_revision(deepcopy(value))
-    assert set(result) == set(AdmittedInput.model_fields)
+    assert set(result) == {name for name, field in AdmittedInput.model_fields.items() if field.is_required()}
 
 
 def test_teaching_admission_connector_is_one_complete_immutable_d01_page():

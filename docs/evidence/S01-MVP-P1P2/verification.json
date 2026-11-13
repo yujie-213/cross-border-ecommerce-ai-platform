@@ -1,0 +1,3873 @@
+{
+  "scope": "OWNED_TWO_SKU_TEACHING_ERP_P1_P2_REVIEW_ONLY",
+  "result": "PASS",
+  "deliveryStatus": "REVIEW",
+  "independentAcceptance": "NOT_RUN",
+  "capturedAt": "2026-11-13T06:50:59.063710+00:00",
+  "testedCommit": "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239",
+  "baseCommit": "3a46fd4c35c04770b95bfab43016c92606757f9e",
+  "branch": "codex/s01-live-business-closure",
+  "reportRef": "docs/reports/S01_P1P2_两SKU闭环验证_20261113.md",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "registry": {
+    "activeMembers": 2,
+    "scopeVersion": 1,
+    "datasetId": "hailan-s01-pilot-20261113-v1"
+  },
+  "strategy": {
+    "method": "SIMPLE_MOVING_AVERAGE",
+    "version": "s01-sma-mvp-v1",
+    "timezone": "UTC+08:00",
+    "businessDate": "2026-11-13",
+    "windowStart": "2026-11-06",
+    "windowEnd": "2026-11-12",
+    "observationDays": 7,
+    "forecastDays": 7,
+    "coverageDays": 7,
+    "configurable": true,
+    "demandDateSemantics": "D1_AFTER_D0",
+    "firstForecastDate": "2026-11-14"
+  },
+  "results": [
+    {
+      "sku": "HL-CBL100-2M",
+      "availableQuantity": "6",
+      "dailySales": [
+        {
+          "day": "2026-11-06",
+          "quantity": "4"
+        },
+        {
+          "day": "2026-11-07",
+          "quantity": "5"
+        },
+        {
+          "day": "2026-11-08",
+          "quantity": "4"
+        },
+        {
+          "day": "2026-11-09",
+          "quantity": "6"
+        },
+        {
+          "day": "2026-11-10",
+          "quantity": "9"
+        },
+        {
+          "day": "2026-11-11",
+          "quantity": "5"
+        },
+        {
+          "day": "2026-11-12",
+          "quantity": "6"
+        }
+      ],
+      "totalSales": "39",
+      "averageDailyDemand": "5.571428571428571428571428571",
+      "forecastDays": 7,
+      "forecastQuantity": "39.00000000000000000000000000",
+      "calculationHorizonDays": 9,
+      "calculationTargetQuantity": "50.14285722",
+      "gapQuantity": "44.14285722",
+      "inTransitQuantity": "0",
+      "candidateQuantities": [
+        "45"
+      ],
+      "constraints": {
+        "moq": "12",
+        "quality": "UNKNOWN",
+        "quoteVersion": 1,
+        "orderMultiple": null,
+        "supplierLeadDays": 2,
+        "quantityResolution": "1",
+        "procurementEligible": false
+      },
+      "stockReconciliation": {
+        "status": "PASS",
+        "openingQuantity": "45",
+        "availableQuantity": "6",
+        "fulfilledQuantity": "39"
+      },
+      "aiStatus": "AVAILABLE",
+      "usage": {
+        "tokens": 2713,
+        "input_tokens": 2412,
+        "output_tokens": 301,
+        "cached_input_tokens": 512,
+        "uncached_input_tokens": 1900,
+        "cost": null
+      },
+      "reservedCost": "0.05000000",
+      "actualCostStatus": "UNKNOWN",
+      "reportFingerprint": "5b4f39f2385b6f1bd7b7310b8e956eac69b8bddf5cdfed0758930e6bb22f755d"
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "availableQuantity": "81",
+      "dailySales": [
+        {
+          "day": "2026-11-06",
+          "quantity": "2"
+        },
+        {
+          "day": "2026-11-07",
+          "quantity": "3"
+        },
+        {
+          "day": "2026-11-08",
+          "quantity": "2"
+        },
+        {
+          "day": "2026-11-09",
+          "quantity": "3"
+        },
+        {
+          "day": "2026-11-10",
+          "quantity": "4"
+        },
+        {
+          "day": "2026-11-11",
+          "quantity": "2"
+        },
+        {
+          "day": "2026-11-12",
+          "quantity": "3"
+        }
+      ],
+      "totalSales": "19",
+      "averageDailyDemand": "2.714285714285714285714285714",
+      "forecastDays": 7,
+      "forecastQuantity": "19.00000000000000000000000000",
+      "calculationHorizonDays": 11,
+      "calculationTargetQuantity": "29.85714292",
+      "gapQuantity": "0",
+      "inTransitQuantity": "0",
+      "candidateQuantities": [],
+      "constraints": {
+        "moq": "12",
+        "quality": "UNKNOWN",
+        "quoteVersion": 1,
+        "orderMultiple": null,
+        "supplierLeadDays": 4,
+        "quantityResolution": "1",
+        "procurementEligible": false
+      },
+      "stockReconciliation": {
+        "status": "PASS",
+        "openingQuantity": "100",
+        "availableQuantity": "81",
+        "fulfilledQuantity": "19"
+      },
+      "aiStatus": "AVAILABLE",
+      "usage": {
+        "tokens": 2436,
+        "input_tokens": 2165,
+        "output_tokens": 271,
+        "cached_input_tokens": 512,
+        "uncached_input_tokens": 1653,
+        "cost": null
+      },
+      "reservedCost": "0.05000000",
+      "actualCostStatus": "UNKNOWN",
+      "reportFingerprint": "74f1c1f14024fd3b52fb4802b5231c8948dcf543bf97f89b08df0bf22477bc99"
+    }
+  ],
+  "excludedSupply": {
+    "reason": "NOT_APPROVED_EFFECTIVE_SUPPLY",
+    "pendingQuantity": "36",
+    "countedAsInTransit": false
+  },
+  "model": {
+    "authorization": "s01-mvp-20261113-p1p2",
+    "actualModelRevision": "deepseek-flash",
+    "requests": 2,
+    "available": 2,
+    "inputTokens": 4577,
+    "outputTokens": 572,
+    "totalTokens": 5149,
+    "cachedInputTokens": 1024,
+    "uncachedInputTokens": 3553,
+    "actualCost": null,
+    "actualCostStatus": "UNKNOWN",
+    "retainedCostReservationUSD": "0.10",
+    "historicalAuthorizationsUnchanged": true
+  },
+  "backend": {
+    "result": "PASS",
+    "exitCode": 0,
+    "total": 688,
+    "passed": 688,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "baselineCases": 670,
+    "baselineCasesPreserved": true,
+    "environment": "Authorized isolated real MySQL/API/independent Worker; ERP/model fixtures in this suite",
+    "command": "COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false COMMERCE_RUN_MYSQL_TESTS=1 .tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/s01-mvp-backend-6cf9ae4.xml",
+    "cases": [
+      {
+        "classname": "tests.integration.http.test_session_recovery",
+        "name": "test_unauthenticated_browser_cookie_is_expired_and_reconnect_requires_valid_bearer[expired]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_session_recovery",
+        "name": "test_unauthenticated_browser_cookie_is_expired_and_reconnect_requires_valid_bearer[conflicting_bearer]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_authenticated_accept_query_and_idempotency",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_cookie_csrf_origin_revocation_and_safe_cookie_flags",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_bad_identity_fails_before_command[signature]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_bad_identity_fails_before_command[issuer]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_bad_identity_fails_before_command[audience]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_bad_identity_fails_before_command[expired]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_scope_expansion_and_client_trusted_metadata_rejected",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_production_composition_never_registers_engineering_handler",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.http.test_task_api",
+        "name": "test_unauthenticated_task_request_has_no_anonymous_bypass",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_explicit_migration_head_and_repeat_upgrade",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_one_frozen_migration_chain",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_other_database_target_is_refused_before_connection",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_engine_construction_never_connects_or_migrates",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_destructive_downgrade_guard_does_not_execute_sql",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_actual_server_is_mysql_utc_read_committed",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.mysql.test_storage",
+        "name": "test_exact_types_unique_tenant_key_and_real_rollback",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_create_rolls_back_task_work_budget_and_required_audit",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_same_command_replays_one_persisted_task_and_work",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_same_command_with_changed_content_conflicts",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_same_key_and_sku_in_other_tenant_does_not_reuse_task",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_two_concurrent_create_commands_are_idempotent",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_invalid_fixture_and_unregistered_s01_are_rejected_before_admission",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_two_workers_only_one_claims_single_delivery",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_complete_requires_current_lease_and_plan",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_lost_lease_recovers_same_task_without_resetting_deadline_or_budget",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_exhausted_delivery_reconciles_owner_once",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_cancel_queued_is_idempotent_and_does_not_publish",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_cancel_running_rejects_late_completion",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_worker_deadline_expiry_is_bounded_failure",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_worker_rechecks_revoked_actor_before_handler",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_completion_audit_failure_rolls_back_owner_and_delivery",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_budget_two_threads_cannot_overreserve_original_task",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_attempt_reservation_replay_and_content_conflict",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unknown_usage_stays_reserved_and_cannot_be_resent_or_refunded",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_old_plan_failure_cannot_change_new_plan_state",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_explicit_new_owner_version_can_start_without_old_delivery_rebinding",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_lease_cannot_be_rebound_to_another_owner_or_work_kind",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unknown_logical_call_cannot_retry_under_a_new_attempt",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[False-RELEASED-ATTEMPT_RELEASED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RESERVED-ATTEMPT_NOT_SETTLEABLE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_usage_settlement_leaves_all_accounting_facts_unchanged[True-RELEASED-ATTEMPT_RELEASED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-SENT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[False-UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-SENT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_sent_usage_settlement_replay_checks_every_usage_dimension[True-UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_usage_settlement_is_idempotent_and_g02_is_unique_fact",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_actual_over_limit_usage_is_not_clamped_and_blocks_more_calls",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_unsent_release_is_idempotent_and_never_refunds_spent_usage",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_settlement_required_audit_failure_rolls_back_usage_and_control",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_worker_retry_is_bounded_and_keeps_original_deadline",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_handler_runs_outside_owner_transaction_and_emits_no_report",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_cancel_required_audit_failure_rolls_back_task_command_and_work",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_only_one_concurrent_sender_can_mark_attempt_sent",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_late_unknown_usage_is_accounted_after_cancel_without_reopening_task",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_engineering_foundation",
+        "name": "test_late_sent_usage_is_accounted_and_replayed_after_cancel",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_mock_success_settles_one_g02_usage_and_duplicate_cannot_resend",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_binding_mismatches_fail_before_send[planVersion-2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_binding_mismatches_fail_before_send[policyContextRef-value1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_binding_mismatches_fail_before_send[allowanceRef-value2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_binding_mismatches_fail_before_send[principalRef-value3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_binding_mismatches_fail_before_send[snapshotId-other-snapshot]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_binding_mismatches_fail_before_send[participantId-other-participant]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_deadline_cannot_extend_original_task_and_expired_task_never_sends",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_unknown_cost_remains_reserved_and_same_logical_retry_is_denied",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_known_failure_retry_uses_new_attempt_same_task_no_deadline_reset",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_cross_gateway_concurrency_limit_is_durable_and_network_outside_locks",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_same_logical_two_reserved_attempts_cannot_race_send",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_short_attempt_deadline_and_late_result_never_publish",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_restart_uses_original_pending_attempt_and_allowance",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_revocation_before_send_is_fail_closed",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[MODEL_SENT-0-RELEASED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_required_audit_failure_rolls_back_and_conserves_allowance[USAGE_SETTLED-1-UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_models",
+        "name": "test_budget_exhaustion_is_not_a_free_retry",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_currency_cannot_be_mixed_between_attempts",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_cache_only_lower_bound_and_later_dimensions_cannot_hide_overrun",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_known_token_dimensions_unknown_cost_persist_and_later_cost_moves_reservation_once",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_partial_token_fact_keeps_token_reservation_until_total_becomes_known",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_late_usage_after_cancel_accounts_without_task_or_report_publication",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_legacy_complete_settle_remains_compatible_with_optional_dimensions",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_g02_or_required_audit_failure_rolls_back_fact_attempt_and_budget[FailingUsageFactAudit-FIXTURE_G02_FAILURE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_optional_usage",
+        "name": "test_g02_or_required_audit_failure_rolls_back_fact_attempt_and_budget[FailingRequiredAudit-FIXTURE_AUDIT_FAILURE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_pipeline_publishes_one_immutable_report_and_submit_replays",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_quality_degradation_is_reported_without_inventing_rules[null-BLOCKED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_quality_degradation_is_reported_without_inventing_rules[constraint-PARTIAL]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_task_audit_and_ack_are_one_transaction[queue]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_task_audit_and_ack_are_one_transaction[audit]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[cancel]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[deadline]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[lease]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[plan]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[revoke]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[binding]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[scope]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_stale_or_unauthorized_result_never_publishes[missing]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_rechecks_current_scope_and_tenant",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_quantity_reader_gets_only_public_view_while_full_assets_remain_internal",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_rechecks_each_current_scope_dimension[fields]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_rechecks_each_current_scope_dimension[canonicalSkuIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_rechecks_each_current_scope_dimension[warehouseIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_rechecks_each_current_scope_dimension[storeIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_fails_closed_without_matching_read_contract[missing-read-contract]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_fails_closed_without_matching_read_contract[wrong-handler-version]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.orchestration.test_s01_reports",
+        "name": "test_report_read_fails_closed_without_matching_read_contract[scope-binding]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_backend_processes",
+        "name": "test_backend_five_cases_history_relation_permissions_and_restart",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_backend_processes",
+        "name": "test_backend_cancel_and_untrusted_package_do_not_publish",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_api_restart_preserves_queued_task_and_idempotency",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_killed_worker_recovers_same_task_deadline_and_budget",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_production_empty_registry_cannot_recover_fixture_delivery",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_two_actual_workers_do_not_complete_a_task_twice",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_running_cancel_blocks_late_completion",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_revoked_identity_is_rechecked_by_actual_worker",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_foundation_processes",
+        "name": "test_actual_worker_retry_exhaustion_is_bounded",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_s01_business_processes",
+        "name": "test_business_api_worker_mock_report_relation_and_immutable_old_report",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_s01_business_processes",
+        "name": "test_business_cancel_before_worker_never_calls_model_or_publishes",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_s01_processes",
+        "name": "test_actual_s01_api_worker_report_evidence_and_read_authorization",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_s01_processes",
+        "name": "test_s01_killed_worker_recovers_original_snapshot_report_budget_and_deadline",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_s01_processes",
+        "name": "test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_s01_processes",
+        "name": "test_zero_gap_simulated_pipeline_persists_risk_without_zero_piece_order[True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_teaching_processes",
+        "name": "test_teaching_admission_process_preserves_source_blocking_fixed_reports_and_current_auth",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.processes.test_teaching_processes",
+        "name": "test_teaching_cancelled_task_never_rereads_source_or_publishes",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_natural_explanation_publishes_and_reads_with_optional_charge_unknown[A]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_natural_explanation_publishes_and_reads_with_optional_charge_unknown[B]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_natural_explanation_publishes_and_reads_with_optional_charge_unknown[C]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_natural_explanation_publishes_and_reads_with_optional_charge_unknown[D]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_natural_explanation_publishes_and_reads_with_optional_charge_unknown[E]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_success_report_usage_receipt_cannot_be_replaced[usageRef-other]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_success_report_usage_receipt_cannot_be_replaced[costStatus-UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_success_report_usage_receipt_cannot_be_replaced[tokenUsageStatus-UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_success_report_usage_receipt_cannot_be_replaced[auditRef-other]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_success_report_usage_receipt_cannot_be_replaced[actualModelRevision-other]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_success_report_usage_receipt_cannot_be_replaced[usage-value5]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_publication_checks_usage_receipt_and_later_billing_preserves_report",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_model_failure_preserves_calculation_and_no_second_attempt[exception]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_model_failure_preserves_calculation_and_no_second_attempt[json]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_model_failure_preserves_calculation_and_no_second_attempt[unknown]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_model_failure_preserves_calculation_and_no_second_attempt[timeout]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_model_failure_preserves_calculation_and_no_second_attempt[refused]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_model_failure_preserves_calculation_and_no_second_attempt[model_mismatch]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_late_results_never_publish_after_lifecycle_changes[cancel]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_late_results_never_publish_after_lifecycle_changes[plan]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_late_results_never_publish_after_lifecycle_changes[lease]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_late_results_never_publish_after_lifecycle_changes[deadline]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_backend_workflow",
+        "name": "test_self_consistent_package_swap_cannot_publish_or_replace_historical_input",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_actual_gateway_settles_original_budget_and_publishes_only_quantity_report",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[refused]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[truncated]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[json]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[unknown]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[exception]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_failure_or_unknown_keeps_rule_report_without_new_model_attempt[timeout]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_legacy_explanation_can_publish_with_unknown_optional_charge",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[quantity]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[date]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[constraint]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[quality]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[approval]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_gateway_schema_success_still_requires_domain_semantic_gate[reference]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_real_workflow_never_allows_ai_to_clear_quality_gate[UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_real_workflow_never_allows_ai_to_clear_quality_gate[INVESTIGATE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_reentry_after_usage_settlement_never_resends_or_invents_explanation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[cancel]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[plan]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_late_mock_response_does_not_publish_cancelled_stale_or_lost_task[lease]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_well_formed_digest_tampering_blocks_actual_publish_and_read[resolvedPromptDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_well_formed_digest_tampering_blocks_actual_publish_and_read[contextDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_well_formed_digest_tampering_blocks_actual_publish_and_read[parametersDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_well_formed_digest_tampering_blocks_actual_publish_and_read[outputSchemaDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_well_formed_digest_tampering_blocks_actual_publish_and_read[toolSpecsDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_business_workflow",
+        "name": "test_well_formed_digest_tampering_blocks_actual_publish_and_read[promptContentHash]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_model_evaluation_workflow",
+        "name": "test_evaluation_uses_one_task_budget_and_rejects_new_key",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_model_evaluation_workflow",
+        "name": "test_nonprimary_evaluation_receipt_is_checked_on_read",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_model_evaluation_workflow",
+        "name": "test_evaluation_failure_stops_remaining_cases_but_keeps_primary_rule_report",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_monitor_scope",
+        "name": "test_monitor_registry_is_durable_idempotent_and_rejects_version_rewrite",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_monitor_scope",
+        "name": "test_monitor_content_integrity_is_checked_on_read",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_models",
+        "name": "test_current_online_limits_are_explained_without_inventing_a_business_baseline[success]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_models",
+        "name": "test_current_online_limits_are_explained_without_inventing_a_business_baseline[invalid]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_models",
+        "name": "test_shared_call_budget_survives_new_tasks_and_new_gateway_instances",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_models",
+        "name": "test_token_risk_is_aggregated_across_original_tasks",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_models",
+        "name": "test_authorization_serializes_provider_send_and_keeps_unknown_reserved",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_models",
+        "name": "test_owner_uncapped_policy_preserves_original_task_allowance_and_receipts",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_workflow",
+        "name": "test_online_tasks_collect_independently_replay_and_history_never_recollect",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_workflow",
+        "name": "test_completed_acquisition_is_reused_after_a_worker_lease_crash",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_workflow",
+        "name": "test_data_commit_is_fenced_by_original_task_authority[cancel]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_workflow",
+        "name": "test_data_commit_is_fenced_by_original_task_authority[deadline]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_workflow",
+        "name": "test_data_commit_is_fenced_by_original_task_authority[plan]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_online_workflow",
+        "name": "test_data_commit_is_fenced_by_original_task_authority[lease]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_structured_references",
+        "name": "test_structured_only_explanation_uses_existing_accounting_and_safe_fallback[A-None]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_structured_references",
+        "name": "test_structured_only_explanation_uses_existing_accounting_and_safe_fallback[C-None]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_structured_references",
+        "name": "test_structured_only_explanation_uses_existing_accounting_and_safe_fallback[E-None]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_structured_references",
+        "name": "test_structured_only_explanation_uses_existing_accounting_and_safe_fallback[A-quantity]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_structured_references",
+        "name": "test_structured_only_explanation_uses_existing_accounting_and_safe_fallback[A-reference]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_structured_references",
+        "name": "test_structured_only_explanation_uses_existing_accounting_and_safe_fallback[E-approval]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_successor_evaluation",
+        "name": "test_c_first_successor_task_preserves_budget_key_and_safe_failure_stop[False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.integration.s01.test_successor_evaluation",
+        "name": "test_c_first_successor_task_preserves_budget_key_and_safe_failure_stop[True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_mysql",
+        "name": "test_real_current_identity_scope_and_field_limits",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_mysql",
+        "name": "test_real_token_revocation_invalidates_old_actor_on_next_check",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_mysql",
+        "name": "test_real_principal_revision_and_grant_changes_rechecked",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_mysql",
+        "name": "test_real_session_expiry_is_rechecked_even_while_jwt_valid",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_mysql",
+        "name": "test_real_revocation_serializes_with_authorized_mutation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_valid_signed_identity_is_immutable",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes5]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes6]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes7]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes8]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes9]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_invalid_claims_rejected_without_echo[changes10]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[exp]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[iat]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[nbf]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[sub]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[tid]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[jti]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_required_claims[rev]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_wrong_signature_algorithm_and_malformed_token",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_empty_or_wildcard_scope_never_means_all[storeIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_empty_or_wildcard_scope_never_means_all[warehouseIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_empty_or_wildcard_scope_never_means_all[canonicalSkuIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_empty_or_wildcard_scope_never_means_all[fields]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_scope_unknown_dimension_or_cross_tenant_rejected",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_csrf_is_same_origin_and_bound_to_identity",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_authorize_rejects_nonprincipal_without_database",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.security.test_access_unit",
+        "name": "test_backend_failure_does_not_render_driver_secrets",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_missing_required_settings_fail_safely",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_invalid_settings_never_echo_secret",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_literal_dotenv_secrets_and_environment_precedence",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_remote_database_without_trusted_ca_fails",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_startup_does_not_connect_or_launch_background_work",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_readiness_does_not_claim_unimplemented_capabilities[True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_readiness_does_not_claim_unimplemented_capabilities[False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_database_failure_is_sanitized",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_trace_headers_and_no_request_data_in_logs",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_http_error_contract_drops_unsafe_details[401-UNAUTHENTICATED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_http_error_contract_drops_unsafe_details[403-POLICY_DENIED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_http_error_contract_drops_unsafe_details[404-NOT_FOUND]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_http_error_contract_drops_unsafe_details[409-CONFLICT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_validation_and_unhandled_error_are_safe",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_logger_discards_arbitrary_message_arguments_and_traceback",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_oversized_request_rejected_before_parsing_or_authentication",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_unimplemented_routes_are_not_registered[/api/v1/reports]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_unimplemented_routes_are_not_registered[/api/v1/executions]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_unimplemented_routes_are_not_registered[/api/v1/approvals]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_unimplemented_routes_are_not_registered[/api/v1/models]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_unimplemented_routes_are_not_registered[/docs]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_foundation",
+        "name": "test_unimplemented_routes_are_not_registered[/openapi.json]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_s01_business",
+        "name": "test_live_or_network_composition_is_rejected[development-mock-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_s01_business",
+        "name": "test_live_or_network_composition_is_rejected[test-deepseek-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_s01_business",
+        "name": "test_live_or_network_composition_is_rejected[test-mock-True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.bootstrap.test_s01_business",
+        "name": "test_explicit_test_composition_keeps_one_original_task_budget",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_normalize_returns_only_public_admitted_input_and_stable_refs",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_constructed_non_erp_sample_adapts_into_existing_deterministic_chain",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_engineering_sample_is_explicitly_blocked_and_cannot_fall_back_to_fixture_success",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_test_only_contract_is_disabled_by_default_but_can_exercise_shape_explicitly",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_real_mode_rejects_simulated_or_unknown_required_field[SIMULATED-extra0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_real_mode_rejects_simulated_or_unknown_required_field[UNKNOWN-extra1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_controlled_fact_requires_fact_basis_and_all_source_identity_fields",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_source_requires_at_least_one_network_observation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_missing_exact_scope_fact_or_rule_provenance_blocks[/scope/tenantId]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_missing_exact_scope_fact_or_rule_provenance_blocks[/scope/canonicalSkuIds]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_missing_exact_scope_fact_or_rule_provenance_blocks[/inventory/test-inventory-1/availableQty]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_missing_exact_scope_fact_or_rule_provenance_blocks[/policy/moq]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_duplicate_complex_and_unexpected_provenance_paths_fail_closed",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_collection_completeness_record_count_must_match[/inventory-0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_collection_completeness_record_count_must_match[/demand-1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_collection_completeness_record_count_must_match[/supply-2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_empty_required_collection_reports_admission_issue_even_with_completeness_record",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_required_real_values_cannot_be_unknown[/inventory/test-inventory-1/availableQty-<lambda>]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_required_real_values_cannot_be_unknown[/demand/test-demand-1/quantity-<lambda>]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_required_real_values_cannot_be_unknown[/supply/test-supply-1/remainingQty-<lambda>]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_required_real_values_cannot_be_unknown[/supply/test-supply-1/availableDate-<lambda>]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_required_real_values_cannot_be_unknown[/policy/moq-<lambda>]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_required_real_values_cannot_be_unknown[/policy/qualityDisposition-<lambda>]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_provenance_observation_cannot_postdate_server_assembly",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_field_value_digest_prevents_quantity_or_collection_reuse",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_production_admission_rejects_obvious_test_reference_schemes[sourceRef-mock:pretend-source]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_production_admission_rejects_obvious_test_reference_schemes[sourceRef-fixture:pretend-source]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_production_admission_rejects_obvious_test_reference_schemes[approvalRecordRef-simulated:pretend-approval]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_content_digest_binds_exact_content",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[policy-RULE_POLICY_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[scope-RULE_SCOPE_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[asOf-RULE_AS_OF_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[semantics-ENGINE_SEMANTICS_UNSUPPORTED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[validity-RULE_NOT_EFFECTIVE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[signedLater-RULE_ATTESTATION_AFTER_ASSEMBLY]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_attestation_exact_scope_time_validity_and_engine_semantics[signedAfterAsOf-RULE_ATTESTATION_AFTER_AS_OF]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_rule_record_is_operator_provided_not_inferred_from_names_or_prefixes",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_unknown_fields_and_identifier_mismatch_are_rejected",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_mode_normalizes_with_distinct_non_operating_source_nature",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_admission_connector_is_one_complete_immutable_d01_page",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_admission_connector_read_reuses_bounded_d01_then_normalizes",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_mode_does_not_weaken_real_analysis_entry_point",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_local_fixture_cannot_pretend_to_be_actual_io[writeOperationRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_local_fixture_cannot_pretend_to_be_actual_io[writeReceiptRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_local_fixture_cannot_pretend_to_be_actual_io[readBackOperationRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_local_fixture_cannot_pretend_to_be_actual_io[readBackArtifactRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_receipt_alone_or_reused_as_readback_is_insufficient",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_readback_identity_scope_records_and_values_must_match[batch-TEACHING_BATCH_ID_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_readback_identity_scope_records_and_values_must_match[scope-TEACHING_SOURCE_SCOPE_DIGEST_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_readback_identity_scope_records_and_values_must_match[canonicalScope-TEACHING_CANONICAL_SCOPE_DIGEST_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_readback_identity_scope_records_and_values_must_match[record-TEACHING_RECORD_IDS_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_readback_identity_scope_records_and_values_must_match[content-READ_BACK_CONTENT_DIGEST_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_write_readback_identity_scope_records_and_values_must_match[writeContent-WRITE_READ_CANONICAL_CONTENT_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_field_provenance_binds_exact_readback_or_controlled_rule_artifact",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_resource_artifact_digest_binds_record_ids_and_field_values",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_demand_and_planned_supply_may_use_explicit_bounded_derivations",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_derivation_cannot_replace_inventory_or_lose_get_lineage",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_derivation_binds_method_source_digest_and_teaching_rule",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_quality_disposition_can_normalize_for_downstream_quality_gate[VERIFIED_CLEAR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_quality_disposition_can_normalize_for_downstream_quality_gate[INVESTIGATE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_quality_disposition_can_normalize_for_downstream_quality_gate[UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_teaching_unknown_required_quantity_normalizes_then_d03_blocks_calculation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_admission",
+        "name": "test_golden_catalog_uses_independent_daily_and_constraint_arithmetic",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_candidate_discovery",
+        "name": "test_candidate_discovery_is_bounded_and_retains_negative_control",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_candidate_discovery",
+        "name": "test_global_failure_is_not_retried_per_candidate",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_candidate_discovery",
+        "name": "test_candidate_verification_scopes_inventory_to_one_store_and_warehouse",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_candidate_discovery",
+        "name": "test_empty_records_are_unknown_not_zero",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_candidate_discovery",
+        "name": "test_public_assessment_has_aliases_and_no_source_identifier_values",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_candidate_discovery",
+        "name": "test_fixed_private_candidate_builds_quantity_only_blocked_observation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_mutation_or_unknown_destination_is_denied_before_authentication[POST-/api/v1/purchase-orders]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_mutation_or_unknown_destination_is_denied_before_authentication[DELETE-/api/v1/inventory]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_mutation_or_unknown_destination_is_denied_before_authentication[GET-https://evil.invalid]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_mutation_or_unknown_destination_is_denied_before_authentication[GET-/api/v1/products/../workflows]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_mutation_or_unknown_destination_is_denied_before_authentication[PUT-/api/v1/products]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_teaching_only_destination_is_exact[http://47.107.76.124/lingxing-erp]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_teaching_only_destination_is_exact[https://evil.invalid/lingxing-erp]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_teaching_only_destination_is_exact[https://47.107.76.124/lingxing-erp?x=1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_teaching_only_destination_is_exact[https://47.107.76.124/lingxing-erp/]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_tls_exception_is_connection_local_and_never_follows_redirect",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_auth_secret_and_token_never_enter_events_or_configuration_repr",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_http_failure_never_becomes_an_empty_success_or_fixture[503-ERP_503]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_http_failure_never_becomes_an_empty_success_or_fixture[401-ERP_AUTH_REJECTED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_http_failure_never_becomes_an_empty_success_or_fixture[403-ERP_AUTH_REJECTED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_http_failure_never_becomes_an_empty_success_or_fixture[302-ERP_REDIRECT_REJECTED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_timeout_retry_and_request_budget_are_shared_not_reset",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_bounded_retry_retains_failure_then_reads_real_transport_response",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_complete_pages_preserve_unknown_and_charge_all_requests",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_incomplete_or_unstable_pagination_fails_closed[second0-PAGINATION_INCOMPLETE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_incomplete_or_unstable_pagination_fails_closed[second1-PAGINATION_DRIFT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_incomplete_or_unstable_pagination_fails_closed[second2-REPEATED_PAGE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_incomplete_or_unstable_pagination_fails_closed[second3-DUPLICATE_RECORD]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_bounded_discovery_is_explicitly_incomplete_and_read_does_not_silently_use_it",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_invalid_page_is_not_zero[envelope0-INVALID_PAGE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_invalid_page_is_not_zero[envelope1-INVALID_PAGE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_invalid_page_is_not_zero[envelope2-PAGINATION_INCOMPLETE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_invalid_page_is_not_zero[envelope3-INVALID_PAGE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_confirmed_read_only_post_uses_json_body_and_rejects_business_failure",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_d01_source_port_keeps_complete_batch_and_unknowns",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_erp",
+        "name": "test_d01_does_not_add_a_second_retry_or_switch_source_on_503",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_handler_no_ai_and_every_evidence_resolves",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_asset_binding_rejects_conflicts[snapshot]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_asset_binding_rejects_conflicts[version]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_asset_binding_rejects_conflicts[metric]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_asset_binding_rejects_conflicts[projection]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_asset_binding_rejects_conflicts[evidence]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_blocked_input_produces_quality_report_without_invalid_inventory_evidence",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_quantity_report_view_omits_raw_assets_and_unrequested_future_fields",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_report_view_rejects_unsupported_field_or_resource_scope[fields-values0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_report_view_rejects_unsupported_field_or_resource_scope[canonicalSkuIds-values1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_report_view_rejects_unsupported_field_or_resource_scope[warehouseIds-values2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_report_view_rejects_unsupported_field_or_resource_scope[storeIds-values3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_handler",
+        "name": "test_blocked_report_view_preserves_quality_without_raw_record_paths",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_online_observations_are_freshly_collected_and_never_admitted_by_names",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[503]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[401]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[302]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_foreign_source_identity_hides_quantities_and_blocks",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_manifest_binds_acquisition_and_projection",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online",
+        "name": "test_online_parameters_reject_fixed_facts_and_cross_scope_before_network",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_online_teaching_input_consumes_existing_b01_b02_without_reserved_double_deduction",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[missing-sale]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[wrong-date]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[foreign-sku]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[duplicate-order]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[unknown-supply]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[mapping]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_unknown_online_facts_never_generate_a_false_candidate[timeout]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_freshness_and_candidate_constraints_stay_in_d03[stale]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_freshness_and_candidate_constraints_stay_in_d03[future]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_freshness_and_candidate_constraints_stay_in_d03[quality]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_freshness_and_candidate_constraints_stay_in_d03[unknown-moq]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_online_calculation",
+        "name": "test_box_quantity_never_changes_the_independent_teaching_multiple",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_sma_reuses_calculation_and_excludes_pending_supply",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_sufficient_inventory_does_not_make_zero_candidate",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_complete_empty_day_is_zero_but_missing_page_blocks",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[foreign]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[unpaid]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[duplicate-ledger]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[quote-expired]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[unknown-po]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[stock-drift]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_owned_inputs_fail_closed[wrong-parent]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_stockout_history_cannot_be_treated_as_complete_uncensored_demand",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_business_timezone_excludes_partial_current_day",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_advisory_policy_never_clears_investigation_or_observed_business_quality[SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP-UNKNOWN-True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_advisory_policy_never_clears_investigation_or_observed_business_quality[SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP-INVESTIGATE-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_owned",
+        "name": "test_advisory_policy_never_clears_investigation_or_observed_business_quality[TEACHING_ERP_OBSERVED-UNKNOWN-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_fixture_null_and_exact_projection_not_zero",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_exact_unit_conversion_and_reserved_stays_informational",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-INCOMPLETE_COVERAGE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-UNMAPPED_IDENTITY_OR_UNIT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_INVENTORY]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-STALE_OR_FUTURE_INVENTORY]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-DEMAND_WINDOW_INCOMPLETE_OR_DUPLICATE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_NEGATIVE_SUPPLY]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-UNKNOWN_OR_OVERDUE_AVAILABILITY]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-UNKNOWN_SUPPLY_STATUS]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_quality_fail_closed[<lambda>-CLOSED_SUPPLY_CONFLICT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_mirror_dedup_conflict_and_ambiguous_inventory",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_manifest_immutable_versions_replay_and_quality_only_candidate_block",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_no_real_source_or_path_fallback[change0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_no_real_source_or_path_fallback[change1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_no_real_source_or_path_fallback[change2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_no_real_source_or_path_fallback[change3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_no_real_source_or_path_fallback[change4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_source_port_bounded_retry_and_no_partial_success",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_evidence_broken_locator_is_missing",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_s01",
+        "name": "test_calendar_uses_normalized_utc_and_exact_large_conversion",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_dataset_contains_only_documented_crud_records_and_batch_keys",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_post_is_journaled_then_verified_by_independent_get",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_readback_mismatch_fails_closed",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_existing_verified_record_is_idempotent_without_network",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_unresolved_send_is_never_blindly_retried",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_run_requires_explicit_teaching_data_execution_flag",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_empty_purchase_supply_requires_exact_complete_list_get",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_nonempty_purchase_list_cannot_prove_zero_supply",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_raw_response_numbering_continues_across_processes",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_verified_readback_refresh_is_get_only_and_rebinds_raw_digest",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[POST-/api/v1/workflows/purchase-orders/1/submit]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[POST-/api/v1/stock/inbound-orders/confirm]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[POST-/api/v1/sales-workflow/1/record-payment]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[GET-https://evil.invalid/api/v1/products]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[GET-/api/v1/products/../purchase-orders]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_request_layer_rejects_workflows_external_urls_and_sales_delete_before_transport[DELETE-/api/v1/sales-orders/1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_public_evidence_excludes_business_keys_ids_and_private_refs",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_business_content_uses_only_requested_fields",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_exact_rejects_invalid_page_before_any_create[page0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_exact_rejects_invalid_page_before_any_create[page1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_exact_rejects_invalid_page_before_any_create[page2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_exact_rejects_incomplete_page_before_any_create[page0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_dataset",
+        "name": "test_exact_rejects_incomplete_page_before_any_create[page1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_observed_source_never_uses_engineering_semantics_or_runs_b01",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_projection_fails_closed_on_raw_data_scope_or_integrity[unknownField]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_projection_fails_closed_on_raw_data_scope_or_integrity[scope]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_projection_fails_closed_on_raw_data_scope_or_integrity[revision]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_projection_fails_closed_on_raw_data_scope_or_integrity[duplicateDomain]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_projection_fails_closed_on_raw_data_scope_or_integrity[monetary]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_fixed_package_scope_publication_and_quantity_only_view",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_changed_quantity_cannot_publish_against_original_source_package",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.data.test_teaching_workflow",
+        "name": "test_explicit_teaching_assembly_has_no_implicit_file_or_live_model_fallback",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_each_candidate_uses_identical_b01_and_no_optimality",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_moq_multiple_independent_and_hard_cap_no_solution",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_missing_constraints_only_baseline_and_quality_cannot_be_overridden",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_gap_without_shortage_has_no_zero_piece_candidate[False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_gap_without_shortage_has_no_zero_piece_candidate[True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_gap_with_intermediate_shortage_requires_missing_policy[35]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_gap_with_intermediate_shortage_requires_missing_policy[100]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_total_gap_does_not_override_missing_constraints[moq-None]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_total_gap_does_not_override_missing_constraints[maxOrderQty-0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_total_gap_does_not_override_missing_constraints[orderMultiple-None]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_total_gap_does_not_override_missing_constraints[candidateDates-value3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_zero_total_gap_does_not_override_missing_constraints[candidateDates-value4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.forecasting.s01.test_candidates",
+        "name": "test_positive_gap_candidate_dates_remain_bounded_and_risk_is_evaluated_by_b01",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.metrics.s01.test_daily",
+        "name": "test_known_engineering_target_gap_and_daily_series",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.metrics.s01.test_daily",
+        "name": "test_delayed_supply_preserves_intermediate_shortage_with_candidate",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.metrics.s01.test_daily",
+        "name": "test_zero_demand_coverage_is_unknown_not_infinite_or_error",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.metrics.s01.test_daily",
+        "name": "test_partial_receipt_uses_remaining_once_and_excludes_arrival_after_window",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.metrics.s01.test_daily",
+        "name": "test_invalid_data_cannot_reach_calculator",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_key_configuration_never_authorizes_network[False-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_key_configuration_never_authorizes_network[False-True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_key_configuration_never_authorizes_network[True-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_official_protocol_mapping_and_unknown_billed_cost_are_explicit",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_http_error_classification_no_redirect_and_no_retries[301-PROVIDER_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_http_error_classification_no_redirect_and_no_retries[401-AUTH_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_http_error_classification_no_redirect_and_no_retries[402-AUTH_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_http_error_classification_no_redirect_and_no_retries[429-RATE_LIMITED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_http_error_classification_no_redirect_and_no_retries[500-UNAVAILABLE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_finish_reason_mapping[length-TRUNCATED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_finish_reason_mapping[content_filter-REFUSED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_finish_reason_mapping[tool_calls-PROVIDER_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_malformed_json_and_missing_usage_never_fabricate_zero_cost",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_transport_timeout_and_sensitive_exception_are_safe",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_unknown_usage_fact_has_known_tokens_without_fabricated_charge",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_settings_defaults_and_safe_runtime_injection",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_connectivity_entry_default_never_reads_settings_or_opens_network",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_deepseek",
+        "name": "test_insufficient_cost_allowance_and_absent_key_are_unsent",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_official_protocol_tokens_are_separate_from_unknown_actual_cost",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_gateway_validates_content_with_known_tokens_and_unknown_cost",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_same_logical_call_is_never_blindly_resent",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_distinct_logical_calls_use_the_same_bounded_authorization",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_http_failures_do_not_redirect_or_retry[301-PROVIDER_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_http_failures_do_not_redirect_or_retry[401-AUTH_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_http_failures_do_not_redirect_or_retry[429-RATE_LIMITED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_http_failures_do_not_redirect_or_retry[503-UNAVAILABLE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_preflight_is_fail_closed[changes0-NETWORK_DISABLED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_preflight_is_fail_closed[changes1-UNSUPPORTED_MODEL]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_preflight_is_fail_closed[changes2-UNSUPPORTED_MODEL]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_preflight_is_fail_closed[changes3-CREDENTIAL_MISSING]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_malformed_usage_is_unknown_and_never_zero_cost",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_partial_usage_preserves_each_known_dimension",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_evaluation_tool_is_default_off_and_offline_suite_covers_a_to_e",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_evaluation_tool_rejects_missing_or_nonfixed_authorization_before_settings[args0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_evaluation_tool_rejects_missing_or_nonfixed_authorization_before_settings[args1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_private_teaching_catalog_is_bound_to_authorization_tenant_scope_and_case_sequence",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_private_catalog_path_cannot_escape_private_root",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_evaluation_cli_client_creates_once_then_only_polls_and_reads_report",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_managed_process_environment_forces_single_delivery_and_fixed_deadline",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_evaluation_provider",
+        "name": "test_fixed_identity_token_covers_full_bounded_poll_window",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch5]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch6]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch7]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch8]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch9]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch10]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch11]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch12]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch13]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch14]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch15]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch16]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch17]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch18]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch19]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_invalid_model_request_never_calls_provider[patch20]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_valid_model_request_and_query_shape",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[success-OK]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[missing-INVALID_OUTPUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[type-INVALID_OUTPUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[extra-INVALID_OUTPUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[json-INVALID_OUTPUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[refused-REFUSED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[truncated-TRUNCATED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[timeout-TIMEOUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[unavailable-UNAVAILABLE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[rate_limit-RATE_LIMITED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[auth-AUTH_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[model_mismatch-MODEL_MISMATCH]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[unknown-USAGE_UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_schema_and_technical_outcomes[exception-ACCOUNTING_OR_PROVIDER_ERROR]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_provider_request_digests_timeout_and_roles_are_checked",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_unknown_ref_is_unsent_and_released[promptRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_unknown_ref_is_unsent_and_released[outputSchemaRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_unknown_ref_is_unsent_and_released[parametersRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_unknown_ref_is_unsent_and_released[cachePolicyRef]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_cancellation_mid_call_returns_without_waiting_and_late_usage_is_settled",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_provider_timeout_is_bounded_and_no_implicit_retry",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_over_budget_actual_usage_is_accounted_and_output_rejected",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_cache_only_token_lower_bound_overrun_rejects_explanation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_required_usage_audit_failure_never_returns_success",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_final_audit_cannot_expose_explanation_after_control_stop[cancel]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_final_audit_cannot_expose_explanation_after_control_stop[deadline]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_no_sensitive_context_or_output_in_audit",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_gateway",
+        "name": "test_model_cannot_mutate_authoritative_b01_b02_results",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_controlled_natural_language_accepts_verified_a_to_e_building_blocks[False-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_controlled_natural_language_accepts_verified_a_to_e_building_blocks[True-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_controlled_natural_language_accepts_verified_a_to_e_building_blocks[False-True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>5]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>6]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unbounded_claims_reversals_and_injection_are_rejected[<lambda>7]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_unknown_and_quality_cannot_be_omitted_or_declared_clear",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_context_rejects_undeclared_literals_and_unknown_certainty_loss",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_backend_bundle_is_rebuilt_from_computed_a_to_e_results[A]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_backend_bundle_is_rebuilt_from_computed_a_to_e_results[B]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_backend_bundle_is_rebuilt_from_computed_a_to_e_results[C]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_backend_bundle_is_rebuilt_from_computed_a_to_e_results[D]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_backend_bundle_is_rebuilt_from_computed_a_to_e_results[E]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_result_version_rebuild_rejects_binding_and_computed_fact_tampering",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_simulated_business_data_in_teaching_erp_remains_explicitly_synthetic",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_natural_explanation",
+        "name": "test_version_rebuild_rejects_source_relabeling_and_source_digest_tampering",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_snapshot_binding",
+        "name": "test_actual_d03_snapshot_is_accepted_without_truncation",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_snapshot_binding",
+        "name": "test_invalid_snapshot_identifiers_remain_rejected[snapshot_id0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_snapshot_binding",
+        "name": "test_invalid_snapshot_identifiers_remain_rejected[invalid/snapshot]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_snapshot_binding",
+        "name": "test_invalid_snapshot_identifiers_remain_rejected[]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_snapshot_binding",
+        "name": "test_invalid_snapshot_identifiers_remain_rejected[123]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_snapshot_binding",
+        "name": "test_snapshot_bound_does_not_expand_task_or_other_identifiers",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_structured_only_citations_keep_single_fact_and_protected_states[False-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_structured_only_citations_keep_single_fact_and_protected_states[True-False]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_structured_only_citations_keep_single_fact_and_protected_states[False-True]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[keyEvidence-patch0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[keyEvidence-patch1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[recommendationReasons-patch2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[keyEvidence-patch3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[keyEvidence-patch4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[majorRisks-patch5]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[recommendationReasons-patch6]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[recommendationReasons-patch7]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[recommendationReasons-patch8]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[recommendationReasons-patch9]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_existing_ref_does_not_make_false_or_unrelated_claims_valid[recommendationReasons-patch10]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_quality_and_unknown_cannot_be_reinterpreted[True-\\u8d28\\u91cf\\u963b\\u65ad\\u5df2\\u7ecf\\u89e3\\u9664\\uff0c\\u53ef\\u4ee5\\u91c7\\u8d2d]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_quality_and_unknown_cannot_be_reinterpreted[False-\\u9700\\u6c42\\u672a\\u77e5\\u63090\\u4ef6\\u5904\\u7406]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_confirmed_intermediate_shortage_risk_cannot_be_omitted",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_no_candidate_cannot_be_invented_or_turned_into_zero_unit_purchase[B]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_no_candidate_cannot_be_invented_or_turned_into_zero_unit_purchase[C]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_no_candidate_cannot_be_invented_or_turned_into_zero_unit_purchase[D]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_no_candidate_cannot_be_invented_or_turned_into_zero_unit_purchase[E]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_legacy_policy_is_strict_and_schema_stays_unchanged",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_structured_references",
+        "name": "test_policy_cannot_be_relabelled_without_rebuilding_digests_and_context",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_successor_evaluation",
+        "name": "test_successor_identity_calls_and_budget_are_explicit_and_separate",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_successor_evaluation",
+        "name": "test_successor_catalog_reorders_without_modifying_source_payload_or_digest",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_successor_evaluation",
+        "name": "test_handler_binds_new_principal_command_and_declared_order[case_order0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_successor_evaluation",
+        "name": "test_handler_binds_new_principal_command_and_declared_order[case_order1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_successor_evaluation",
+        "name": "test_successor_cli_rejects_mismatched_budget_before_settings",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_provider_missing_dimensions_are_unknown[raw0-expected0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_provider_missing_dimensions_are_unknown[raw1-expected1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_provider_missing_dimensions_are_unknown[raw2-expected2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_provider_missing_dimensions_are_unknown[raw3-expected3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_provider_missing_dimensions_are_unknown[raw4-expected4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_invalid_provider_usage_is_rejected[raw0]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_invalid_provider_usage_is_rejected[raw1]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_invalid_provider_usage_is_rejected[raw2]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_invalid_provider_usage_is_rejected[raw3]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_invalid_provider_usage_is_rejected[raw4]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.models.test_usage",
+        "name": "test_provider_neutral_usage_supports_local_models_without_currency",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_admitted_pipeline",
+        "name": "test_admitted_contract_uses_original_calculation_and_is_default_disabled",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[A]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[B]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[C]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[D]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[E]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[scope]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[quantity]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[source]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[package]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[task]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[quality]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_publication_rejects_valid_shape_tampering[reference]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_backend",
+        "name": "test_browser_cannot_supply_paths_rules_or_erp_payloads",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_package_routing",
+        "name": "test_teaching_packages_have_distinct_durable_routes",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_package_routing",
+        "name": "test_backend_catalogs_have_distinct_routes_and_restarts_are_stable",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_teaching_pipeline",
+        "name": "test_teaching_contract_keeps_source_and_public_report_is_cropped",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_teaching_pipeline",
+        "name": "test_teaching_publication_cannot_relabel_as_operating_fact",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_workflow_preserves_every_authoritative_asset_and_requires_human_review",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[quantity]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[date]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[constraint]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[quality]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[approval]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[ref]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[cross-snapshot]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[omit-risk]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[omit-human]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_structurally_valid_but_unsafe_explanations_are_discarded[extra]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_ai_success_cannot_clear_required_quality_or_investigation[UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_ai_success_cannot_clear_required_quality_or_investigation[INVESTIGATE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[REFUSED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[TRUNCATED]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[INVALID_OUTPUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[USAGE_UNKNOWN]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[TIMEOUT]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_technical_failure_keeps_rules_and_explicit_unavailable_status[RESULT_UNAVAILABLE]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_missing_input_reports_gap_without_zero_or_fabricated_candidates",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_publication_rejects_cross_task_plan_or_snapshot_bindings",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_non_mock_provider_is_rejected_before_call",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_reentry_budget_failure_degrades_without_changing_attempt_or_retrying",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_previous_report_is_metadata_and_cannot_change_manifest_or_scope",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_public_report_omits_raw_assets_and_raw_provider_content",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_persisted_version_bindings_fail_closed_before_public_view[context]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_persisted_version_bindings_fail_closed_before_public_view[prompt]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_persisted_version_bindings_fail_closed_before_public_view[extra]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[AVAILABLE-resolvedPromptDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[AVAILABLE-contextDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[AVAILABLE-parametersDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[AVAILABLE-outputSchemaDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[AVAILABLE-toolSpecsDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[AVAILABLE-promptContentHash]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[UNAVAILABLE-resolvedPromptDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[UNAVAILABLE-contextDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[UNAVAILABLE-parametersDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[UNAVAILABLE-outputSchemaDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[UNAVAILABLE-toolSpecsDigest]",
+        "result": "PASS"
+      },
+      {
+        "classname": "tests.unit.s01.test_workflow",
+        "name": "test_well_formed_digest_tampering_rejected_at_publication_and_view[UNAVAILABLE-promptContentHash]",
+        "result": "PASS"
+      }
+    ]
+  },
+  "frontend": {
+    "result": "PASS",
+    "exitCode": 0,
+    "passed": 33,
+    "failed": 0,
+    "commands": [
+      "npm run build",
+      "npm test -- --reporter=json --outputFile=../.tmp/s01-mvp-frontend-6cf9ae4.json"
+    ],
+    "cwd": "frontend"
+  },
+  "browser": {
+    "result": "PASS",
+    "exitCode": 0,
+    "tests": 1,
+    "environment": "Real teaching ERP/official DeepSeek/API/independent Worker/MySQL/Vue/browser",
+    "initialCommand": "S01_OWNED_BROWSER=true npx playwright test owned.spec.ts --config playwright.config.ts",
+    "frozenCommitCommand": "S01_OWNED_BROWSER=true S01_OWNED_BROWSER_RESUME=true npx playwright test owned.spec.ts --config playwright.config.ts",
+    "cwd": "frontend",
+    "frozenCommitResumeExtraModelRequests": 0,
+    "checks": {
+      "replay": "PASS",
+      "unregisteredScope": "PASS",
+      "refresh": "PASS",
+      "evidence": "PASS",
+      "cancellation": "PASS"
+    },
+    "pageErrors": [],
+    "runningCancellation": "PASS",
+    "visualReview": "Both private report screenshots inspected"
+  },
+  "mysqlCancellation": {
+    "cancellation": {
+      "state": "CANCELLED",
+      "counts": {
+        "o01_budget_attempts": 0,
+        "o01_reports": 0,
+        "g02_usage_facts": 0
+      }
+    },
+    "running-cancellation": {
+      "state": "CANCELLED",
+      "counts": {
+        "o01_budget_attempts": 0,
+        "o01_reports": 0,
+        "g02_usage_facts": 0
+      }
+    }
+  },
+  "recovery": {
+    "apiAndWorkerRestart": true,
+    "historicalReportUnchanged": true,
+    "currentHandlerValidatedDatabaseReportProjectionUnchanged": true,
+    "registryDurable": true,
+    "result": "PASS"
+  },
+  "retainedFailures": [
+    {
+      "scope": "ERP preflight",
+      "result": "FAIL",
+      "reason": "Initial local /me envelope handling; stopped before mutations; corrected data unwrap matched original account and tenant"
+    },
+    {
+      "scope": "First backend regression",
+      "result": "FAIL",
+      "passed": 682,
+      "failed": 2,
+      "reason": "Legacy required-field assertion included new optional businessDate; corrected compatibility assertion"
+    },
+    {
+      "scope": "First owned browser",
+      "result": "FAIL",
+      "reason": "Expected 400/403 for unregistered SKU; actual 422"
+    },
+    {
+      "scope": "Second owned browser",
+      "result": "FAIL",
+      "reason": "Expected 202 for cancellation; actual 200"
+    },
+    {
+      "scope": "Auxiliary database audit",
+      "result": "FAIL",
+      "reason": "Compared internal report against API projection; current Handler report_view comparison subsequently passed"
+    },
+    {
+      "scope": "Historical online browser",
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/S01-ONLINE/phase3-browser-failure.json",
+      "unchanged": true
+    }
+  ],
+  "limitations": [
+    "Independent supplier order multiple unconfirmed; integer EA is advisory resolution only",
+    "Quality UNKNOWN; procurementEligible=false; teaching advisory only",
+    "ERP shared tenant row-level isolation not established",
+    "Historical business dates differ from actual posting dates",
+    "Supplier quote lead time is not a committed purchase ETA",
+    "Explicit registered sales set; new records require independent verification and scope revision",
+    "Approved supply ETA mapping awaits P3; status changes block rather than guess"
+  ],
+  "enterpriseGates": "BLOCKED",
+  "procurementApprovalAndExecution": "NOT_RUN",
+  "sku8And30": "NOT_RUN",
+  "wholeS01MvpAcceptance": "NOT_RUN",
+  "privateArtifactPins": [
+    {
+      "path": ".tmp/s01-mvp-backend-6cf9ae4.xml",
+      "sha256": "4e44b6867fc4b68657713724c59d24e7c864df22905a6aedc8df094b56333571"
+    },
+    {
+      "path": ".tmp/s01-mvp-frontend-6cf9ae4.json",
+      "sha256": "0c35aef889842abebbcb8922668c9f3fe1f7672fd65d9d789e8b00205f1aac67"
+    },
+    {
+      "path": ".tmp/s01-mvp-backend.xml",
+      "sha256": "8bfe5db1e70f8a3c4c5f7720979f01d5baa16be45e8c576579820f558878dcaa"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/business-journal.json",
+      "sha256": "44a3070bfe1d98c7b8d12da829489c3a468c129d2fcc217d7abf2d895fc38c5b"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/input-verification.json",
+      "sha256": "7e0927cef57d644c2b764ea143536ada7b23a1fa3a74c2207714bdad1fe13d82"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/reports.json",
+      "sha256": "d0eaddf3630d7708924539cb6c190ea0707976996e0fd4613c3fd8f926ae9912"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/result.json",
+      "sha256": "28899439a3c79e774f07e6284e54dc8b7529e7577413f81b01904391ddbfe665"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/cancellation.json",
+      "sha256": "93ae1ee499faa2cf540338778ecc14cb369e50844a5e2267ed4607ef90579c9e"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/running-cancellation.json",
+      "sha256": "b62c30aa8f5b7df2361107437438f1b85078d439b08dd0c4d5a3ddce11d6b289"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/attempt-failures.json",
+      "sha256": "2809c5554e45142b2d62d8b1c317bb6ba2e8ff759dd7da5eaa619a3744e5b62b"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/restart-verification.json",
+      "sha256": "37c1c14d4cfd8bf58cf02e0952acf3f82c14c6162b336d127ce91c1ee09e59c5"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/mysql-frozen-final.json",
+      "sha256": "ac2c40b917ff2db843e92d99e63d9dc2d8a6a529bb4ad9a9a7a6bdf4a457c9d6"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/HL-CBL100-2M-resume.png",
+      "sha256": "957b82baf9bacdf91294f8fa67117c226b68addfcf22b5f9a584079681af7012"
+    },
+    {
+      "path": "data/private/s01-mvp-20261113/browser/HL-MUG350-WH-resume.png",
+      "sha256": "0ddd00a420ce49b345feca5fb1394ce2dee656ce0f4cae91c0fdfb937b8b92e5"
+    }
+  ],
+  "rawPrivateArtifactsCommitted": false,
+  "documentationChecks": {
+    "result": "PASS",
+    "checks": 18,
+    "commands": [
+      "python docs/planning/build_docs.py",
+      "python docs/planning/check_plan.py"
+    ]
+  },
+  "changeReview": {
+    "result": "PASS",
+    "exactConfiguredSecretMatches": 0,
+    "pathsScanned": [
+      "AGENTS.md",
+      "docs/DECISIONS.md",
+      "docs/HANDOFF.md",
+      "docs/TASKS.md",
+      "docs/evidence/S01-MVP-P1P2/verification.json",
+      "docs/generated/DEPENDENCIES.mmd",
+      "docs/generated/STATUS.md",
+      "docs/planning/git-whitelist.json",
+      "docs/planning/validation-report.json",
+      "docs/reports/S01_P1P2_两SKU闭环验证_20261113.md",
+      "frontend/src/App.vue",
+      "frontend/src/api/types.ts",
+      "frontend/src/components/ReportDetail.vue",
+      "frontend/src/domain.ts",
+      "migrations/versions/0007_monitor_scope.py",
+      "src/commerce_hub/adapters/erp.py",
+      "src/commerce_hub/adapters/models/evaluation.py",
+      "src/commerce_hub/adapters/models/online.py",
+      "src/commerce_hub/bootstrap/s01_online.py",
+      "src/commerce_hub/capabilities/metrics/__init__.py",
+      "src/commerce_hub/data/contracts.py",
+      "src/commerce_hub/data/projection/monitor.py",
+      "src/commerce_hub/data/projection/online.py",
+      "src/commerce_hub/data/projection/owned.py",
+      "src/commerce_hub/data/quality/__init__.py",
+      "src/commerce_hub/data/quality/online.py",
+      "src/commerce_hub/data/sync/online.py",
+      "src/commerce_hub/data/sync/owned.py",
+      "src/commerce_hub/infrastructure/database.py",
+      "src/commerce_hub/orchestration/budget.py",
+      "src/commerce_hub/orchestration/service.py",
+      "src/commerce_hub/scenarios/s01/natural_explanation.py",
+      "src/commerce_hub/scenarios/s01_backend/online.py",
+      "src/commerce_hub/scenarios/s01_supply_inventory/__init__.py",
+      "tests/browser/s01/owned.spec.ts",
+      "tests/integration/mysql/test_storage.py",
+      "tests/integration/s01/test_monitor_scope.py",
+      "tests/integration/s01/test_online_models.py",
+      "tests/unit/data/test_admission.py",
+      "tests/unit/data/test_owned.py",
+      "tools/s01_online_dev.py",
+      "tools/s01_register_monitor.py"
+    ],
+    "privateRawArtifactsIncluded": false,
+    "untrackedOpenApiPreserved": true,
+    "publication": "NOT_RUN_LOCAL_ONLY",
+    "whitespaceCommand": "git -c core.whitespace=cr-at-eol diff --check"
+  }
+}

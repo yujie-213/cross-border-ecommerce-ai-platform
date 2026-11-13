@@ -25,21 +25,22 @@ MODEL_REVISION = "deepseek-flash"
 @dataclass(frozen=True)
 class EvaluationAuthorization:
     authorization_id: str
-    max_requests: int
-    max_total_cost_usd: Decimal
+    max_requests: int | None
+    max_total_cost_usd: Decimal | None
     per_request_risk_usd: Decimal = Decimal("0.05")
 
     def __post_init__(self):
         if not self.authorization_id or not 1 <= len(self.authorization_id) <= 48:
             raise ValueError("INVALID_EVALUATION_AUTHORIZATION")
-        if type(self.max_requests) is not int or not 1 <= self.max_requests <= 10:
+        if self.max_requests is not None and (type(self.max_requests) is not int or not 1 <= self.max_requests <= 10):
             raise ValueError("INVALID_EVALUATION_REQUEST_LIMIT")
-        if (not self.max_total_cost_usd.is_finite() or
+        if self.max_total_cost_usd is not None and (not self.max_total_cost_usd.is_finite() or
                 not Decimal("0") < self.max_total_cost_usd <= Decimal("1")):
             raise ValueError("INVALID_EVALUATION_COST_LIMIT")
         if (not self.per_request_risk_usd.is_finite() or
-                not Decimal("0") < self.per_request_risk_usd <= self.max_total_cost_usd or
-                self.per_request_risk_usd * self.max_requests > self.max_total_cost_usd):
+                not Decimal("0") < self.per_request_risk_usd or
+                self.max_total_cost_usd is not None and (self.per_request_risk_usd > self.max_total_cost_usd or
+                    self.max_requests is not None and self.per_request_risk_usd * self.max_requests > self.max_total_cost_usd)):
             raise ValueError("INVALID_EVALUATION_RISK_RESERVATION")
 
 
@@ -90,7 +91,7 @@ class EvaluationProvider:
                 payload["parameters"]["maxOutputTokens"] > min(self.settings.model_max_output_tokens, 1024)):
             raise ValueError("UNSUPPORTED_MODEL")
         risk = self.risk_reservation(payload)
-        if risk > cost or risk > auth.max_total_cost_usd:
+        if risk > cost or auth.max_total_cost_usd is not None and risk > auth.max_total_cost_usd:
             raise ValueError("COST_ALLOWANCE_TOO_SMALL")
 
     def exchange(self, logical_call_id):
@@ -102,14 +103,14 @@ class EvaluationProvider:
         request = ProviderRequest.model_validate(request.model_dump())
         payload = request.payload.model_dump()
         risk = self.risk_reservation(payload)
-        self.preflight(payload, self.authorization.max_total_cost_usd)
+        self.preflight(payload, self.authorization.max_total_cost_usd or self.authorization.per_request_risk_usd)
         logical_call_id = request.control.logicalCallId
         with self._lock:
             if logical_call_id in self._logical_calls:
                 raise ValueError("USAGE_MUST_BE_RECONCILED")
-            if len(self._logical_calls) + 1 > self.authorization.max_requests:
+            if self.authorization.max_requests is not None and len(self._logical_calls) + 1 > self.authorization.max_requests:
                 raise ValueError("BUDGET_DENIED")
-            if self._reserved_exposure + risk > self.authorization.max_total_cost_usd:
+            if self.authorization.max_total_cost_usd is not None and self._reserved_exposure + risk > self.authorization.max_total_cost_usd:
                 raise ValueError("BUDGET_DENIED")
             self._logical_calls.add(logical_call_id)
             self._reserved_exposure += risk

@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "s01-final-feasibility-summary-v1",
+  "date": "2026-11-13",
+  "baseCommit": "07d83e1da6fbe714e8c9b1fa5d995e0132cf5575",
+  "recommendation": "B_PENDING_OWNER_AND_XINGXING_CONFIRMATION",
+  "completePositiveERPReplenishment": "BLOCKED",
+  "callsThisRound": {
+    "mutations": 6,
+    "reads": 30,
+    "authentication": 1
+  },
+  "mutationResults": {
+    "success": 5,
+    "rejected409": 1
+  },
+  "cumulativePilotIncludingPreparation": {
+    "mutations": 18,
+    "reads": 71,
+    "authentication": 5
+  },
+  "oldFixedCallCaps": "REMOVED_BY_OWNER_DURING_THIS_ROUND_NOT_A_STOP_REASON",
+  "modelsCalled": 0,
+  "activeMembers": 0,
+  "scopeVersion": 0,
+  "capabilities": [
+    {
+      "capability": "已登记真实ID、店仓商品Listing关系",
+      "status": "PASS",
+      "evidence": "按真实ID回读；商品limit=1两页无重复/越界；正式监控另列"
+    },
+    {
+      "capability": "历史业务日期与创建时间",
+      "status": "PASS",
+      "evidence": "订单日11月10日；系统created_at为11月13日，未写系统时间"
+    },
+    {
+      "capability": "教学内部有效销售及日期读取",
+      "status": "PASS",
+      "evidence": "local_only、已支付/已发货；日期包含1单、排除0单；两明细9/4"
+    },
+    {
+      "capability": "销售出库、余额和流水",
+      "status": "PASS",
+      "evidence": "快充线45→36、马克杯100→96；流水-9/-4独立回读"
+    },
+    {
+      "capability": "同参考发货重放",
+      "status": "PASS",
+      "evidence": "reused=true，同一shipment/outbound/两条流水，余额未再减"
+    },
+    {
+      "capability": "供应商有效报价/MOQ/交期",
+      "status": "PASS",
+      "evidence": "两份有效version1报价；MOQ12、交期2/4天；不是独立订购倍数"
+    },
+    {
+      "capability": "采购提交",
+      "status": "PASS",
+      "evidence": "真实工作流生成待审核采购及关联审批；不是有效在途"
+    },
+    {
+      "capability": "采购下单动作",
+      "status": "FAIL",
+      "evidence": "HTTP409：只有审批通过的待下单采购可以下单；属业务前置拒绝，不是服务故障"
+    },
+    {
+      "capability": "有效在途与采购后续链",
+      "status": "BLOCKED",
+      "evidence": "前置审批尚未获授权；待审核pending_qty=36不能作有效在途"
+    },
+    {
+      "capability": "部分收货、入库流水与未收对账",
+      "status": "NOT_RUN",
+      "evidence": "没有为绕过审批创建送货/收货或修改状态，不能判断ERP不支持"
+    },
+    {
+      "capability": "快充线正向补货计算",
+      "status": "BLOCKED",
+      "evidence": "仅一个已履约历史业务日；未批准未来需求/可售日期/独立倍数等准入，B01拒绝、B02无基线候选"
+    },
+    {
+      "capability": "马克杯无需补货结论",
+      "status": "BLOCKED",
+      "evidence": "库存96可读，但未来需求及规则不齐；不将候选空集称为无需补货"
+    },
+    {
+      "capability": "正式scopeVersion/ACTIVE及G01统一消费",
+      "status": "NOT_RUN",
+      "evidence": "仅受控候选证据，scopeVersion0/ACTIVE0，未启用正式自动分析"
+    },
+    {
+      "capability": "读取失败不当作零的工程检查",
+      "status": "PASS",
+      "evidence": "既有回归及明确标注的超时注入，均阻断；不冒充本轮实时503"
+    }
+  ],
+  "actualStock": {
+    "cable": 36,
+    "mug": 96,
+    "openingTotal": 145,
+    "confirmedOutbound": 13,
+    "currentTotal": 132
+  },
+  "purchase": {
+    "status": "PENDING_APPROVAL",
+    "sourcePendingQty": 36,
+    "effectiveTransitQty": "UNKNOWN_NOT_ADMITTED",
+    "receiptExecuted": false
+  },
+  "serviceFailuresThisRound": [],
+  "queryReliabilityLimit": "ONE_BOUNDED_WINDOW_NOT_PEAK_LOAD_OR_SLA_PROOF; LEGACY_GLOBAL_AND_COMPAT_ROUTES_NOT_RETESTED",
+  "verification": {
+    "crossChecks": {
+      "all_30_reads_http200": true,
+      "six_mutation_attempts": true,
+      "five_success_one_business_rejection": true,
+      "no_503_or_transport_unknown": true,
+      "all_private_response_hashes": true,
+      "initial_journal_unchanged": true,
+      "old_source_and_tests_unchanged": true,
+      "quote_constraints_cable": true,
+      "quote_constraints_mug": true,
+      "historical_order_creation_separate": true,
+      "date_include_exclude": true,
+      "stock_reconciles_145_minus_13": true,
+      "ledger_replay_unchanged": true,
+      "approval_not_decided": true,
+      "no_receipt_or_delivery_mutations": true,
+      "source_pending_not_effective_supply": true,
+      "both_actual_sku_inputs_blocked": true
+    },
+    "unitRegressionPassed": 38,
+    "unitRegressionExitCode": 0,
+    "unitRegressionWarnings": [
+      "Pytest cache directory write denied; assertions all passed"
+    ],
+    "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest -q tests/unit/metrics/s01 tests/unit/forecasting/s01 tests/unit/data/test_online.py tests/unit/data/test_online_calculation.py",
+    "capturedSkuComponentChecks": 2,
+    "separatelyLabelledOfflineNegativeChecks": 4,
+    "oldBackend670Frontend33AndBrowserFailure": "PRESERVED_NOT_FULLY_RERUN",
+    "documentationInitialCheck": {
+      "result": "FAIL",
+      "check": "tracked-whitelist",
+      "cause": "Previous local pilot receipt and summary were committed without two exact whitelist entries; four exact receipt/summary entries now added including final artifacts",
+      "privateFailureRef": "data/private/s01-final-verification-20261113/documentation-whitelist-first-fail.json"
+    },
+    "documentationChecks": 18,
+    "documentationFinalResult": "PASS",
+    "diffCheck": "PASS"
+  },
+  "privateEvidence": {
+    "journalRef": "data/private/s01-final-verification-20261113/journal.json",
+    "journalSHA256": "a212072f58b2c0f3ac3abe412b9cabeede61ff490f74f04b18a69918de18865b",
+    "candidateRef": "data/private/s01-final-verification-20261113/monitor-candidates-final.json",
+    "candidateSHA256": "a198492733f3d1bbf28fe5cb2c6ebdabb638ad8d929257058f443c996ecf2272",
+    "componentRef": "data/private/s01-final-verification-20261113/component-verification.json",
+    "componentSHA256": "fa82611f5a1b37a0c9108d5e01dd328751423a8a615f14e6fa7f704ccd101e70",
+    "runnerSHA256": "feac9506a40465f12fc340f9bcc03864fae4b43404c6cfdc79d8940629166630"
+  },
+  "localExecutorCorrection": "Before shipment send, allowlist incorrectly resolved future uncreated sale.2. Corrected locally; original receipt not repeated; call journal proves no earlier ship send.",
+  "sourceCodeChanged": false,
+  "teachingModeImplemented": false,
+  "expanded8Or30Sku": false,
+  "publicPush": "NOT_PERFORMED"
+}

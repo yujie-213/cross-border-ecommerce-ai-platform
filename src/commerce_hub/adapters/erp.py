@@ -6,13 +6,14 @@ import http.client
 import json
 import ssl
 import time
+import re
 from urllib.parse import urlencode
 
 BASE_URL = "https://47.107.76.124/lingxing-erp"
 READ_GET = frozenset({"/healthz", *["/api/v1/" + name for name in (
     "products", "warehouses", "store-authorizations", "listings", "inventory", "sales-orders",
     "purchase-orders", "supplier-deliveries", "inbound-orders", "supplier-quotes",
-    "customer-tickets", "customer-voice", "replenishment")]})
+    "customer-tickets", "customer-voice", "replenishment", "stock/ledger")]})
 # Local OpenAPI descriptions explicitly declare these three POSTs as read-only queries.
 READ_POST = frozenset({"/erp/sc/data/mws/orders",
     "/erp/sc/routing/data/local_inventory/purchaseOrderList",
@@ -78,7 +79,7 @@ class TeachingERPReader:
 
     def _request(self, method, path, values=None, *, authentication=False):
         if (authentication and (method != "POST" or path != AUTH_PATH)
-            or not authentication and not (method == "GET" and path in READ_GET or method == "POST" and path in READ_POST)):
+            or not authentication and not (method == "GET" and (path in READ_GET or self._detail_path(path)) or method == "POST" and path in READ_POST)):
             raise ERPError("ERP_OPERATION_NOT_ALLOWLISTED")
         values = dict(values or {})
         if not authentication and any(any(s in key.lower() for s in ["token", "secret", "password", "url"]) for key in values):
@@ -155,6 +156,17 @@ class TeachingERPReader:
 
     def health(self):
         return self._request("GET", "/healthz")
+
+    @staticmethod
+    def _detail_path(path):
+        return bool(re.fullmatch(r'/api/v1/(sales-workflow|suppliers)/[1-9][0-9]{0,19}', path))
+
+    def detail(self, resource, record_id):
+        path = f'/api/v1/{resource}/{record_id}'
+        if not self._detail_path(path):
+            raise ERPError('ERP_OPERATION_NOT_ALLOWLISTED')
+        self.authenticate()
+        return self._read_request('GET', path, {})
 
     def discover(self, path, parameters=None, *, page_size=20):
         """Bounded candidate discovery. Incomplete results are never calculation inputs."""

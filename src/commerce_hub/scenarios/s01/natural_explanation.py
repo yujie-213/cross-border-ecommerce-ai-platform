@@ -348,7 +348,11 @@ def bundle_for_result(result, binding, *, semantic_policy=NATURAL_SEMANTIC_POLIC
     quality_codes = {issue["code"] for issue in issues if issue.get("path") == "policy/qualityDisposition"
                      or str(issue.get("code", "")).startswith("QUALITY_")}
     disposition = value.dataReport.get("inputProjection", {}).get("input", {}).get("policy", {}).get("qualityDisposition")
-    if quality_codes & {"QUALITY_REQUIRES_RESOLUTION", "QUALITY_STATE_UNKNOWN", "QUALITY_BLOCKED"} or disposition == "BLOCK":
+    if 'QUALITY_UNKNOWN_ADVISORY_ONLY' in quality_codes:
+        quality_phrases, quality_gate = [
+            '质量状态未知，当前仅供建议复核，采购质量门仍阻断，AI不能放行',
+        ], 'BLOCKED'
+    elif quality_codes & {"QUALITY_REQUIRES_RESOLUTION", "QUALITY_STATE_UNKNOWN", "QUALITY_BLOCKED"} or disposition == "BLOCK":
         quality_phrases, quality_gate = [
             "质量门仍阻断，AI不能解除质量检查", "质量状态未通过，模型不能取消质量阻断",
         ], "BLOCKED"
@@ -380,6 +384,32 @@ def bundle_for_result(result, binding, *, semantic_policy=NATURAL_SEMANTIC_POLIC
         "身份、覆盖范围、供给日期、约束和质量仍须人工复核，采购尚未批准",
     ],
         section="humanConfirmations"))
+
+    forecast = value.dataReport.get('forecast')
+    if forecast:
+        facts.append(_result_fact(catalog, 'forecast', phrase=(
+            f"最近 {forecast['observationDays']} 个完整业务日销量为 {forecast['totalSales']} 件，"
+            f"采用简单移动平均预测未来 {forecast['forecastDays']} 日需求为 {forecast['forecastQuantity']} 件"),
+            section='keyEvidence', numbers=[str(forecast['observationDays']), forecast['totalSales'],
+                str(forecast['forecastDays']), forecast['forecastQuantity']]))
+        constraints = forecast['constraints']
+        if constraints.get('wholeCartonRequired') is True:
+            facts.append(_result_fact(catalog, 'constraints', phrase=(
+                f"ERP 有效报价最小起订量为 {constraints['moq']} 件，商品箱规和采购订购倍数均为 {constraints['orderMultiple']} 件，"
+                '采购必须同时满足最小起订量和整箱要求，质量、可售日期及审批条件仍未确认'), section='humanConfirmations',
+                certainty='UNKNOWN', numbers=[constraints['moq'], constraints['orderMultiple']]))
+            facts.append(_result_fact(catalog, 'availability-assumptions',
+                phrase='可售日期仅按报价交期推导，未承诺实际到货可售；需求从次日计算，未覆盖采集当日剩余需求',
+                section='majorRisks'))
+        else:
+            # Historical snapshots retain their original controlled explanation.
+            facts.append(_result_fact(catalog, 'constraints', phrase=(
+                f"ERP 报价最小起订量为 {constraints['moq']} 件，交期为 {forecast['leadDays']} 天，"
+                '独立订购倍数未确认，候选按整数件生成且仅供复核'), section='humanConfirmations',
+                certainty='UNKNOWN', numbers=[constraints['moq'], str(forecast['leadDays'])]))
+        if any(c['evaluation']['stockoutRisk'] for c in candidates):
+            facts.append(_result_fact(catalog, 'candidate-arrival-risk',
+                phrase='候选到货前仍存在中途缺货风险，期末补足不能消除该风险', section='majorRisks'))
 
     source_nature = {
         "SIMULATED_ENGINEERING": "SIMULATED_ENGINEERING",

@@ -1,0 +1,319 @@
+{
+  "scope": "OWNED_TWO_SKU_READ_ONLY_FORECAST_INTERFACE_SURVEY",
+  "deliveryStatus": "REVIEW",
+  "result": "PASS_WITH_RETAINED_SOURCE_FAILURES",
+  "observedApplicationCommit": "30ac007b5b69cf7e42de7e00240d967b1e73e855",
+  "branch": "codex/s01-live-business-closure",
+  "reportRef": "docs/reports/S01_ERP未来销量预测接口补充核实_20261113.md",
+  "schemaScan": {
+    "openApiSha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+    "pathsScanned": 178,
+    "operationsScanned": 252,
+    "matchingOperationsWithResolvedSchemas": [
+      {
+        "method": "POST",
+        "path": "/erp/sc/routing/restocking/analysis/getSummaryList"
+      },
+      {
+        "method": "POST",
+        "path": "/basicOpen/overSeaWarehouse/stockOrder/detail"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/replenishment"
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/replenishment"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/replenishment/{id}"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/v1/replenishment/{id}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/record-context/replenishment/{id}"
+      }
+    ],
+    "otherForecastRoutesFound": false,
+    "excludedOtherKeywordMatch": {
+      "path": "/basicOpen/overSeaWarehouse/stockOrder/detail",
+      "reason": "predicted_* fields are logistics/other monetary costs, not sales forecasts; not called"
+    }
+  },
+  "liveResults": {
+    "skus": [
+      {
+        "sku": "HL-CBL100-2M",
+        "restStatus": 200,
+        "restTotal": 0
+      },
+      {
+        "sku": "HL-MUG350-WH",
+        "restStatus": 200,
+        "restTotal": 0
+      }
+    ],
+    "ownedStoreSummary": {
+      "mskuViewStatus": 200,
+      "mskuViewTotal": 0,
+      "asinViewStatus": 200,
+      "asinViewTotal": 0
+    },
+    "priorIdentityAndOwnedStoreVerificationReused": true,
+    "businessWrites": 0,
+    "modelRequests": 0,
+    "result": "PASS"
+  },
+  "network": {
+    "totalAttempts": 25,
+    "authRequests": 4,
+    "readGetAttempts": 18,
+    "readOnlySummaryPostAttempts": 3,
+    "businessReadAttempts": 21,
+    "read200": 15,
+    "read503": 6,
+    "businessWrites": 0,
+    "modelRequests": 0,
+    "paidTokensAdded": 0
+  },
+  "sourceMetadata": {
+    "kind": "synthetic",
+    "recordPolicy": "dataset-includes-manual-simulation",
+    "summaryOperationClass": "query",
+    "summaryLocalResource": "replenishment",
+    "summaryMaintenance": "readonly_projection",
+    "perFieldMapping": "NOT_VERIFIED",
+    "storedResourceFields": [
+      "daily_sales",
+      "suggested_qty",
+      "generated_at",
+      "lead_days",
+      "safety_days",
+      "moq"
+    ]
+  },
+  "fieldClassification": [
+    {
+      "path": "sales_info.sales_avg_{3,7,14,30,60,90}",
+      "nature": "HISTORICAL_AVERAGE",
+      "grain": "scalar over labeled trailing N days",
+      "businessDayCutoff": "UNKNOWN"
+    },
+    {
+      "path": "sales_info.sales_total_{3,7,14,30,60,90}",
+      "nature": "HISTORICAL_TOTAL",
+      "grain": "scalar over labeled trailing N days",
+      "businessDayCutoff": "UNKNOWN"
+    },
+    {
+      "path": "suggest_info.estimated_sale_quantity",
+      "nature": "DECLARED_FORECAST_TOTAL",
+      "grain": "scalar",
+      "horizon": "UNKNOWN",
+      "ownSkuAvailable": false
+    },
+    {
+      "path": "suggest_info.estimated_sale_avg_quantity",
+      "nature": "DECLARED_FORECAST_DAILY_AVERAGE",
+      "grain": "scalar daily average",
+      "horizon": "UNKNOWN",
+      "ownSkuAvailable": false
+    },
+    {
+      "path": "suggest_info.available_sale_days / fba_available_sale_days",
+      "nature": "INVENTORY_COVERAGE_DAYS",
+      "isDailyDemandCurve": false
+    },
+    {
+      "path": "suggest_info.quantity_sug_purchase",
+      "nature": "PURCHASE_RECOMMENDATION",
+      "ownSkuAvailable": false
+    },
+    {
+      "path": "Resource_replenishment.daily_sales",
+      "nature": "STORABLE_DAILY_SALES_SCALAR",
+      "historicOrForecast": "UNKNOWN",
+      "window": "UNKNOWN"
+    },
+    {
+      "path": "Resource_replenishment.suggested_qty",
+      "nature": "STORABLE_PURCHASE_RECOMMENDATION",
+      "ownSkuAvailable": false
+    }
+  ],
+  "forecastParameters": {
+    "supportedSummarySelectors": [
+      "sid_list",
+      "data_type",
+      "asin_list",
+      "msku_list",
+      "offset",
+      "length"
+    ],
+    "unsupported": [
+      "mode",
+      "listing_date_range"
+    ],
+    "forecastHorizonOrDateRangeInput": "NOT_DECLARED",
+    "guessedMskuOrAsinUsed": false,
+    "ownedStoreDimensionsTested": [
+      2,
+      1
+    ]
+  },
+  "comparison": {
+    "currentPolicy": "s01-sma-mvp-v1",
+    "ownSmaObservationWindow": [
+      "2026-11-06",
+      "2026-11-12"
+    ],
+    "cableSmaDaily": "39/7",
+    "mugSmaDaily": "19/7",
+    "cableCandidateEA": "45",
+    "mugCandidates": [],
+    "erpNumericComparison": "NOT_AVAILABLE_NO_OWNED_RECORDS",
+    "existingReportsChanged": false
+  },
+  "conclusion": {
+    "forecastLabelFieldsExist": true,
+    "verifiedUsableOwnSkuFutureForecast": false,
+    "futureDailyCurveFound": false,
+    "realTimeCalculationEngineProven": false,
+    "preciseForecastDerivation": "UNKNOWN",
+    "recommendedInput": "KEEP_CURRENT_CONFIGURABLE_7_COMPLETE_BUSINESS_DAY_SMA",
+    "refactorB02": false,
+    "additionalForecastRouteFound": false
+  },
+  "retainedFailures": [
+    {
+      "scope": "First local survey preflight",
+      "result": "FAIL",
+      "reason": "Incorrect Listing product_id/store_id expectation; corrected to actual sku/store_name/listing_id contract; no application change"
+    },
+    {
+      "scope": "Repeated owned-store metadata read",
+      "result": "FAIL",
+      "statuses": [
+        503,
+        503
+      ],
+      "recovery": "Stopped this retry sequence; preceding successful same-owned-store verification retained"
+    },
+    {
+      "scope": "Repeated identity read",
+      "result": "FAIL",
+      "statuses": [
+        503,
+        503
+      ],
+      "recovery": "Stopped this retry sequence; remaining exact reads used earlier verified same account/store and ACTIVE scope"
+    },
+    {
+      "scope": "Mug exact replenishment query",
+      "result": "FAIL_THEN_PASS",
+      "statuses": [
+        503,
+        200
+      ]
+    },
+    {
+      "scope": "Owned-store ASIN dimension summary",
+      "result": "FAIL_THEN_PASS",
+      "statuses": [
+        503,
+        200
+      ]
+    }
+  ],
+  "privateArtifactPins": [
+    {
+      "path": "data/private/s01-forecast-survey-20261113/journal.json",
+      "sha256": "cf174e105859f00370d5000376bef2594b744f0ab0e11a1ed4e050579c373137"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r2/journal.json",
+      "sha256": "b8487dfc90e0156b4eda9753ec55a2dab6fdb75ab02d50a0c2c08fb5ef015d29"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r3/journal.json",
+      "sha256": "60baf5c5a2786441824edd6ce8dd98fab3373e098ffc3209ba6f73840612cac5"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r4/journal.json",
+      "sha256": "15cf9fa171f20ee520517191d98c0c154dadff20d89bd55c2262ede29e834df8"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/results.json",
+      "sha256": "51cf0440b43e323a7d8e8640aac21df7863e44e9cc9ccc3704b2bf1a1cfd3ddd"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/static-scan.json",
+      "sha256": "378b3bd635a35c9d998f287f8d462bf2a3c190dca76a7a14074ec602dd571701"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/003-data-contract.json",
+      "sha256": "9b265c17b22c73dddd018615618101d88d155e63c00252e816f88b17fbec8d68"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r2/003-data-contract.json",
+      "sha256": "9b265c17b22c73dddd018615618101d88d155e63c00252e816f88b17fbec8d68"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/004-field-catalog.json",
+      "sha256": "a957681fae1c0c8d59cea66cfa21e0f7d7899aa1db38080299180c7839953fb0"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r2/004-field-catalog.json",
+      "sha256": "a957681fae1c0c8d59cea66cfa21e0f7d7899aa1db38080299180c7839953fb0"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r2/008-rest-HL-CBL100-2M.json",
+      "sha256": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r4/002-rest-HL-MUG350-WH.json",
+      "sha256": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r4/003-rest-HL-MUG350-WH.json",
+      "sha256": "ef3de580d3cb4a82d790c89a81b34782ae4fbce6b3a5ae65009f4a740835a1f4"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r2/009-compat-owned-store.json",
+      "sha256": "5c5f5cd3933e1d4979047fde52ada692d2151adf7285af9ed6b77acabf8932fc"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r4/004-compat-owned-store-asin-view.json",
+      "sha256": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba"
+    },
+    {
+      "path": "data/private/s01-forecast-survey-20261113/r4/005-compat-owned-store-asin-view.json",
+      "sha256": "5e17b51c8462bacc97adba3efaf315e0f21817b2f5df6b82486e843983e1f6c7"
+    }
+  ],
+  "independentReview": "NOT_RUN",
+  "enterpriseGates": "BLOCKED",
+  "runtimeFormulaChanges": false,
+  "rawArtifactsCommitted": false,
+  "publicPush": "NOT_RUN",
+  "preservation": {
+    "existingTaskRecordsUnchanged": 38,
+    "untrackedOpenApiUnchanged": true,
+    "applicationAndFormulaPathsChanged": false,
+    "exactConfiguredSecretMatches": 0
+  },
+  "documentationChecks": {
+    "result": "PASS",
+    "checks": 18,
+    "commands": [
+      "python docs/planning/build_docs.py",
+      "python docs/planning/check_plan.py"
+    ],
+    "fixedSurveyCommit": "7658e758c7e0d3c3d1dc606c4505eee019a7d2a1"
+  }
+}

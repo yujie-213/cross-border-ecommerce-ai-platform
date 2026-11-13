@@ -98,7 +98,7 @@ def register_task_routes(app):
                     continue
                 choices.append(choice)
             return dict(scenarioId=backend.scenario_id, scenarioVersion=backend.version, analysisMode="SINGLE",
-                inputMode="SERVER_PACKAGE_REF", mappedChoices=choices,
+                inputMode="AUTHORIZED_SCOPE" if any(c.get('inputMode') == 'ONLINE_TEACHING_ERP' for c in choices) else "SERVER_PACKAGE_REF", mappedChoices=choices,
                 limitations=["READONLY_ANALYSIS_ONLY", "SOURCE_AND_RULE_ADMISSION_PER_PACKAGE", "LIVE_AI_EVALUATION_SEPARATE"],
                 maxModelCalls=backend.max_calls, actions=["analyze", "read", "cancel"])
         spec = service.registry.get("ENGINEERING_S01_BUSINESS")

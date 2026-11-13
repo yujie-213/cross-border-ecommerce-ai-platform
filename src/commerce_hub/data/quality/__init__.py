@@ -35,7 +35,8 @@ def capture(projection):
         age = value.asOf - row.sourceUpdatedAt
         if age < timedelta(0) or age > timedelta(hours=value.policy.maxAgeHours):
             block("STALE_OR_FUTURE_INVENTORY", "inventory/" + row.recordId)
-    days = {value.asOf.date() + timedelta(days=i) for i in range(1, value.policy.horizonDays + value.policy.bufferDays + 1)}
+    business_day = getattr(value, 'businessDate', None) or value.asOf.date()
+    days = {business_day + timedelta(days=i) for i in range(1, value.policy.horizonDays + value.policy.bufferDays + 1)}
     actual = [row.day for row in projection.demand]
     if set(actual) != days or len(actual) != len(days):
         block("DEMAND_WINDOW_INCOMPLETE_OR_DUPLICATE", "demand")
@@ -47,7 +48,7 @@ def capture(projection):
             block("UNKNOWN_SUPPLY_STATUS", "supply/" + row.recordId)
         if row.remainingQty is None or row.remainingQty < 0:
             block("UNKNOWN_OR_NEGATIVE_SUPPLY", "supply/" + row.recordId)
-        if row.status == "OPEN" and (row.availableDate is None or row.availableDate <= value.asOf.date()):
+        if row.status == "OPEN" and (row.availableDate is None or row.availableDate <= business_day):
             block("UNKNOWN_OR_OVERDUE_AVAILABILITY", "supply/" + row.recordId)
         if row.status in {"RECEIVED", "CANCELLED"} and row.remainingQty != 0:
             block("CLOSED_SUPPLY_CONFLICT", "supply/" + row.recordId)
@@ -60,7 +61,12 @@ def capture(projection):
         block("UNKNOWN_OR_INVALID_CANDIDATE_DATE", "policy/candidateDates", "CANDIDATES")
     admitted = value.sourceNature in {"TEACHING_ERP_OBSERVED", "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP"}
     if policy.qualityDisposition != ("VERIFIED_CLEAR" if admitted else "SAMPLE_CLEAR"):
-        block("QUALITY_REQUIRES_RESOLUTION", "policy/qualityDisposition", "CANDIDATES")
+        if (value.sourceNature == 'SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP'
+            and policy.advisoryOnly and policy.qualityDisposition == 'UNKNOWN'):
+            issues.append(Issue(code='QUALITY_UNKNOWN_ADVISORY_ONLY', severity='WARN',
+                                path='policy/qualityDisposition', affects='CANDIDATES'))
+        else:
+            block("QUALITY_REQUIRES_RESOLUTION", "policy/qualityDisposition", "CANDIDATES")
     manifest = dict(contractVersion="0.1.0", projectionRevision=projection.revision,
                     sourceBatchIds=[projection.sourceBatchId], mappingVersion=value.mapping.version,
                     policyVersion=policy.version, sourceNature=value.sourceNature,
@@ -72,6 +78,7 @@ def capture(projection):
                     atomicAcrossSystems=False)
     if admitted:
         manifest.update(provenanceRef=value.provenanceRef, rulesRef=value.rulesRef)
+        if value.businessDate is not None: manifest['businessDate'] = value.businessDate.isoformat()
     digest = fingerprint(manifest)
     manifest["fingerprint"] = digest
     return Snapshot(snapshotId="snapshot-" + digest, manifest=manifest, projection=projection, issues=tuple(issues))

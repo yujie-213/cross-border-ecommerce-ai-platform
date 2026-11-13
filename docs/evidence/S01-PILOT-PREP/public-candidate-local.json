@@ -1,0 +1,20 @@
+{
+  "result": "CANDIDATE_READY_FOR_FINAL_DIFF_REVIEW",
+  "baseRemoteMain": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "branch": "refs/heads/codex/s01-pilot-scope-review",
+  "commit": "75ad144ecfebbe22a2a17b0c62e21094883c97cf",
+  "tree": "f0ba961f1a9236566bc6f66c5c6da9a4ce7373e9",
+  "changedPaths": [
+    "docs/contracts/s01/owned-dataset-scope.md",
+    "docs/evidence/S01-PILOT-PREP/public-test-summary.json",
+    "docs/planning/git-whitelist.json",
+    "docs/reports/S01_2SKU小试_公开评审摘要.md"
+  ],
+  "newCommitCount": 1,
+  "priorLocalRestrictedCommitsIncluded": false,
+  "originalBranchUnchanged": true,
+  "applicationCodeIncluded": false,
+  "indexFile": ".tmp\\pilot-publication-index",
+  "supplementalWhitelistSha256": "ec01dc24cce395a2ad5392bc62b9f1d9af76bf3a17e1cf171dc392177ed8fdd8",
+  "pushExecuted": false
+}

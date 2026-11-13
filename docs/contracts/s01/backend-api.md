@@ -5,6 +5,14 @@
 
 ## 1. 对接原则
 
+### 2026-11-13 在线模式兼容增量
+
+显式在线装配 `commerce_hub.bootstrap.s01_online` 注册相同 `S01_BACKEND/0.1.0`。options的在线选项返回 `choiceRef`、`inputMode=ONLINE_TEACHING_ERP`、精确scope、`asOf=null`；选项只是服务端授权映射，API不联网查数。SKU选择限定最多20个已配置映射，Worker重新核实来源身份；不支持无界商品搜索。
+
+创建在线任务的 `parameters` 为 `{"inputMode":"ONLINE_TEACHING_ERP"}`，不传packageRef、源事实、路径或规则。原固定包请求不变，只有显式配置固定目录才可用。在线任务永不回退固定包。新命令新采集；同key重放原任务。受理事务不等待ERP网络；Worker在锁外采集，短事务复核身份、租约、plan及期限后，D01提交采集回执、D03保存不可变输入。已完成采集在恢复中复用；未完成尝试保留INTERRUPTED、最多两次采集尝试。旧租约及取消后不可提交/发布。
+
+在线公开报告新增 `dataReport.acquisition`：采集ID、请求范围、开始/完成时间、接口覆盖/错误/条数/摘要、映射版本和多接口非原子限制；`observedDomains`提供有依据的原字段观测，语义未确认不能视为净可售。manifest、规范化内部输入和原始敏感响应不公开；历史读取不访问ERP，固定到原snapshot。报告技术成功与业务BLOCKED/PARTIAL分别展示。`scenarioSupplement.inputMode`区分在线与固定来源，在线报告无需packageRef。
+
 - 前端先调用 options，使用服务端返回的 `packageRef` 和精确 scope 创建任务。浏览器不能提交 ERP 原始响应、文件路径、来源签认或业务规则。
 - 任务技术状态、报告完整性、AI 可用性和采购适用性是四个独立维度，不能合并成一个“成功”状态。
 - `state=SUCCEEDED` 只表示任务完成且报告已发布。它不表示 `completeness=RULES_ONLY`、AI `AVAILABLE`、真实业务准入通过或可以采购。
@@ -341,3 +349,15 @@ catalog 是受信服务端配置，不能由浏览器路径或请求体指定。
 HTTP路由、Cookie/CSRF、权限、text/supportRefs Schema均不变。自然用途新Prompt controlled-2 / s01-controlled-natural-v2：单条解释一个当前事实的唯一supportRef，text匹配该事实受控短语，可不含重复[ref]；事实章节、必需覆盖、数字日期、未知、质量及采购边界继续校验。不是任意自然语言事实证明。旧controlled-1及摘要按原策略重建，历史报告不升级/回写。前端已有“依据”展示来自supportRefs，与模型是否写文内标记无关。
 
 证据读取绑定当前taskId、reportRef、任务读取代次、证据请求代次及会话上下文；切换/关闭/失权立即清空、取消，迟到成功、错误、finally不能覆盖当前状态。不缓存报告/证据。未增加证据API或采购能力。详细决策见ADR-S01-UI-C04-002。
+
+## 在线业务准入增量（阶段2）
+
+在线规范化区分TECHNICAL、SOURCE_DATA和BUSINESS_RULE缺口。当前授权映射不等于已确认净可售、未来曲线、供给可售日、MOQ独立倍数或质量清晰。普通观测只能调用B02的既有质量前置阻断，不调用B01编造数字。已确认身份域的原库存字段单独展示，不能冒充已签净可售。
+
+只有当前联网事实和明确教学规则都满足的teaching-s01-rules-v1路径，才规范化为现有AdmittedInput并调用D02→D03→B02/B01；七条指定历史销量重放为教学假设，独立倍数6、D7可用日及最大120是教学规则，绝不从箱规/交期自动推断。当前真实教学批次店铺0失配、草稿状态不可识别，不能启用此正向路径。其余SKU缺少已签规则，保持UNKNOWN/BLOCKED。快照v2记录规范化摘要、实际接口错误、源数据过期/时点和质量版本；v1历史仍按原版本读取。
+
+## 普通在线AI增量（阶段3）
+
+显式在线装配可启用官方DeepSeek，off为默认；与独立A—E评测任务完全分开。当前在线快照映射核实后，合法局部结果/限制可通过同一S01四类解释、A01和O01/G02；没有供需基线时只能解释数量/日期未知、质量/规则仍阻断及人工核实事项。身份失配或没有本次合法事实时NOT_ATTEMPTED。不从旧评测/固定包复制当前回答。
+
+新授权policy `s01-online-20261113-r1` 为所有本轮在线任务共享上限10请求、100000Token、1 USD；各原任务最多一次模型、24000Token、0.05 USD预约。O01原预算和attempt按policy聚合核算，跨进程短事务命名锁保护预约与单并发send，未知发送阻断后续send；所有网络在锁外。费用null保留预约，不影响通过Schema/事实/引用校验的解释。任务恢复不换logicalCall/attempt，重启不增加授权额度。Provider实际输入/输出只存忽略私有目录，公开报告只给通过校验的解释、实际Token、usageRef和实际模型版本。

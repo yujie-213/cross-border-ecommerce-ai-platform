@@ -1,0 +1,459 @@
+{
+  "scope": "OWNED_TWO_SKU_MOQ_WHOLE_CARTON_FIX_REVIEW_ONLY",
+  "result": "PASS",
+  "deliveryStatus": "REVIEW",
+  "independentAcceptance": "NOT_RUN",
+  "capturedAt": "2026-11-13T08:41:51.361032+00:00",
+  "testedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+  "implementationCommits": [
+    "c79fe5960aea5b991840505bd50efb0ef7534bea"
+  ],
+  "baseCommit": "11328013ac8559aaa66982280526f39cec2f68b7",
+  "branch": "codex/s01-live-business-closure",
+  "reportRef": "docs/reports/S01_MOQ整箱规则修复验证_20261113.md",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "ruleVersion": "s01-whole-carton-v1",
+  "constraintVersion": "s01-sma-mvp-v1.whole-carton-v1",
+  "registry": {
+    "scopeVersion": 1,
+    "activeMembers": 2,
+    "changed": false
+  },
+  "before": {
+    "cable": {
+      "moq": "12",
+      "internalOrderMultiple": "1",
+      "confirmedSupplierMultiple": null,
+      "candidateQuantity": "45"
+    },
+    "mug": {
+      "candidateQuantities": []
+    }
+  },
+  "after": [
+    {
+      "sku": "HL-CBL100-2M",
+      "capturedAt": "2026-11-13T08:29:39.630615+00:00",
+      "dailySales": [
+        {
+          "day": "2026-11-06",
+          "quantity": "4"
+        },
+        {
+          "day": "2026-11-07",
+          "quantity": "5"
+        },
+        {
+          "day": "2026-11-08",
+          "quantity": "4"
+        },
+        {
+          "day": "2026-11-09",
+          "quantity": "6"
+        },
+        {
+          "day": "2026-11-10",
+          "quantity": "9"
+        },
+        {
+          "day": "2026-11-11",
+          "quantity": "5"
+        },
+        {
+          "day": "2026-11-12",
+          "quantity": "6"
+        }
+      ],
+      "totalSales": "39",
+      "calculationDailyDemand": "5.57142858",
+      "availableQuantity": "6",
+      "targetQuantity": "50.14285722",
+      "gapQuantity": "44.14285722",
+      "inTransitQuantity": "0",
+      "baselineFirstShortageDate": "2026-11-15",
+      "constraints": {
+        "moq": "12",
+        "quality": "UNKNOWN",
+        "moqSource": "supplier-quotes.minimum_quantity",
+        "ruleVersion": "s01-whole-carton-v1",
+        "quoteVersion": 1,
+        "orderMultiple": "8",
+        "otherConditions": "UNCONFIRMED",
+        "defaultCartonQty": "8",
+        "supplierLeadDays": 2,
+        "availableDateBasis": "QUOTE_LEAD_NOT_COMMITTED_SELLABLE_ETA",
+        "quantityResolution": "1",
+        "orderMultipleSource": "products.default_carton_qty",
+        "procurementEligible": false,
+        "wholeCartonRequired": true
+      },
+      "candidateQuantities": [
+        "48"
+      ],
+      "candidateCartons": [
+        "6"
+      ],
+      "candidateAvailableDates": [
+        "2026-11-15"
+      ],
+      "candidateFirstShortageDates": [
+        null
+      ],
+      "closingBalance": "3.85714278",
+      "quoteVersion": 1,
+      "quoteValidity": [
+        "2026-11-10",
+        "2026-12-13"
+      ],
+      "modelStatus": "AVAILABLE",
+      "usage": {
+        "input_tokens": 2660,
+        "output_tokens": 358,
+        "tokens": 3018,
+        "cached_input_tokens": 512,
+        "uncached_input_tokens": 2148,
+        "cost": null
+      },
+      "costStatus": "UNKNOWN",
+      "reservedCost": "0.05000000",
+      "rawNormalizationMatches": true,
+      "immutableAssetVerified": true,
+      "rulesReplayMatches": true,
+      "apiViewMatches": true,
+      "modelAuditMatches": true
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "capturedAt": "2026-11-13T08:29:53.499674+00:00",
+      "dailySales": [
+        {
+          "day": "2026-11-06",
+          "quantity": "2"
+        },
+        {
+          "day": "2026-11-07",
+          "quantity": "3"
+        },
+        {
+          "day": "2026-11-08",
+          "quantity": "2"
+        },
+        {
+          "day": "2026-11-09",
+          "quantity": "3"
+        },
+        {
+          "day": "2026-11-10",
+          "quantity": "4"
+        },
+        {
+          "day": "2026-11-11",
+          "quantity": "2"
+        },
+        {
+          "day": "2026-11-12",
+          "quantity": "3"
+        }
+      ],
+      "totalSales": "19",
+      "calculationDailyDemand": "2.71428572",
+      "availableQuantity": "81",
+      "targetQuantity": "29.85714292",
+      "gapQuantity": "0",
+      "inTransitQuantity": "0",
+      "baselineFirstShortageDate": null,
+      "constraints": {
+        "moq": "12",
+        "quality": "UNKNOWN",
+        "moqSource": "supplier-quotes.minimum_quantity",
+        "ruleVersion": "s01-whole-carton-v1",
+        "quoteVersion": 1,
+        "orderMultiple": "12",
+        "otherConditions": "UNCONFIRMED",
+        "defaultCartonQty": "12",
+        "supplierLeadDays": 4,
+        "availableDateBasis": "QUOTE_LEAD_NOT_COMMITTED_SELLABLE_ETA",
+        "quantityResolution": "1",
+        "orderMultipleSource": "products.default_carton_qty",
+        "procurementEligible": false,
+        "wholeCartonRequired": true
+      },
+      "candidateQuantities": [],
+      "candidateCartons": [],
+      "candidateAvailableDates": [],
+      "candidateFirstShortageDates": [],
+      "closingBalance": "51.14285708",
+      "quoteVersion": 1,
+      "quoteValidity": [
+        "2026-11-10",
+        "2026-12-13"
+      ],
+      "modelStatus": "AVAILABLE",
+      "usage": {
+        "input_tokens": 2418,
+        "output_tokens": 328,
+        "tokens": 2746,
+        "cached_input_tokens": 512,
+        "uncached_input_tokens": 1906,
+        "cost": null
+      },
+      "costStatus": "UNKNOWN",
+      "reservedCost": "0.05000000",
+      "rawNormalizationMatches": true,
+      "immutableAssetVerified": true,
+      "rulesReplayMatches": true,
+      "apiViewMatches": true,
+      "modelAuditMatches": true
+    }
+  ],
+  "formula": "ceil(max(gap,MOQ)/orderMultiple)*orderMultiple",
+  "B01B02FormulaChanged": false,
+  "goldenChanged": false,
+  "quantitySearchCap": {
+    "cableBefore": "63",
+    "cableAfter": "64",
+    "mugBefore": "42",
+    "mugAfter": "48",
+    "nature": "ENGINEERING_BOUND_NOT_SUPPLIER_LIMIT"
+  },
+  "tests": {
+    "backend": {
+      "passed": 710,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "previous688Retained": true,
+      "added": 22,
+      "command": "COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false COMMERCE_RUN_MYSQL_TESTS=1 .tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/s01-carton-backend-c79fe59.xml"
+    },
+    "frontend": {
+      "passed": 36,
+      "failed": 0,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "command": "npm run build; npm test -- --reporter=json --outputFile=../.tmp/s01-carton-frontend-c79fe59.json"
+    },
+    "browser": {
+      "passed": 1,
+      "failed": 0,
+      "command": "node node_modules/@playwright/test/cli.js test owned.spec.ts --config playwright.config.ts --reporter=list,json (cwd frontend)",
+      "checks": [
+        "two real ERP/AI reports",
+        "48 units / 6 cartons",
+        "mug no candidate",
+        "constraint evidence",
+        "legacy candidate obsolete and hidden",
+        "refresh",
+        "idempotent replay",
+        "unregistered scope rejected",
+        "queued cancellation",
+        "running ERP collection cancellation"
+      ]
+    },
+    "pureDatabaseReverification": {
+      "result": "PASS",
+      "snapshots": 2,
+      "rawNormalizationMatches": 2,
+      "legacyReportProjectionsUnchanged": 2,
+      "modelAudits": 2,
+      "cancelledTasks": 2,
+      "cancelledModelAttempts": 0,
+      "cancelledReports": 0,
+      "cancelledUsage": 0
+    }
+  },
+  "procurementRegressionCases": [
+    {
+      "moq": 12,
+      "carton": 8,
+      "quantity": 48
+    },
+    {
+      "moq": 50,
+      "carton": 8,
+      "quantity": 56
+    },
+    {
+      "moq": 12,
+      "carton": 12,
+      "quantity": 48
+    },
+    {
+      "moq": 12,
+      "carton": 100,
+      "quantity": 100
+    },
+    {
+      "moq": 3,
+      "carton": 8,
+      "smallGap": true,
+      "quantity": 8
+    },
+    {
+      "moq": 12,
+      "carton": 8,
+      "smallGap": true,
+      "quantity": 16
+    }
+  ],
+  "rejectedCartonCases": [
+    "missing",
+    "null",
+    "zero",
+    "negative",
+    "boolean",
+    "fractional",
+    "string",
+    "unverified product/tenant/SKU/unit/quote relation"
+  ],
+  "ERP": {
+    "completedReceiptAttempts": 47,
+    "authentication": 2,
+    "businessGETs": 45,
+    "status200": 47,
+    "businessWrites": 0,
+    "interruptedCollection": {
+      "savedProductGETResponses": 1,
+      "completeReceipt": false,
+      "totalAuthenticationAttempts": "NOT_ASSERTED_FROM_PARTIAL_LOG"
+    }
+  },
+  "model": {
+    "calls": 2,
+    "status": "AVAILABLE",
+    "inputTokens": 5078,
+    "outputTokens": 686,
+    "totalTokens": 5764,
+    "cachedInputTokens": 1024,
+    "uncachedInputTokens": 4054,
+    "costStatus": "UNKNOWN",
+    "reservedCostUSD": "0.10",
+    "previousUsageUnchanged": true
+  },
+  "historicalFailurePreserved": {
+    "code": "RAW_CAPTURE_NOT_FOUND:sales",
+    "scope": "auxiliary verifier only",
+    "cause": "JSON fingerprint serialization differed from D01 canonical compact JSON",
+    "resolution": "use actual D01 canonical fingerprint; full raw-normalization/immutable/rules/API/audit recheck PASS",
+    "businessDataChanged": false
+  },
+  "limitations": [
+    "quote lead is not committed sellable ETA",
+    "D1 excludes current-day remaining demand",
+    "quality UNKNOWN",
+    "other procurement conditions UNCONFIRMED",
+    "procurementEligible=false",
+    "existing unapproved 36 is excluded and not carton compliant; authorized human review required",
+    "shared teaching tenant source-row isolation unproven",
+    "enterprise gates BLOCKED"
+  ],
+  "historicalReports": {
+    "immutable": true,
+    "oldCandidateNotCurrent": true,
+    "frontendObsoleteLabel": true,
+    "oldCandidateCardsAndCurveHidden": true
+  },
+  "ERPProcurementExecution": "NOT_AUTHORIZED_NOT_RUN",
+  "merge": "NOT_RUN",
+  "publicPush": "NOT_RUN",
+  "privateArtifacts": [
+    {
+      "path": ".tmp/s01-carton-backend-c79fe59.xml",
+      "sha256": "950f7b69e492940879a72d06b5751cde51b479c729c655b6fee48ba5c29d50bd",
+      "committed": false
+    },
+    {
+      "path": ".tmp/s01-carton-focused.xml",
+      "sha256": "ba4a0eb354d77c5d64024ab9fbd3e0580a01427c4fc935ee5eca4cac8026d942",
+      "committed": false
+    },
+    {
+      "path": ".tmp/s01-carton-frontend-c79fe59.json",
+      "sha256": "7ed8f31b92f491b2b66c75dcd60ee9e8d1ba7615520804842c5dfa8865d0432c",
+      "committed": false
+    },
+    {
+      "path": ".tmp/s01-carton-browser-c79fe59.log",
+      "sha256": "ba6d1a88140df70bca709fadf4300eff8d53c52801ccf4a0f3f2492b052a4ff6",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/mysql-verification.json",
+      "sha256": "146b764d10658b1eebdacc4c248337780051313545e6156cb38e2a6777914bef",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/verification-helper-initial-failure.json",
+      "sha256": "82d451f72fad09914df414f0840ef5b7c90f230a7bb57fb6c652512e177a1e6e",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/accepted.json",
+      "sha256": "092415bd4a5008bd536de0bf73c860b0d99dcd55c4513300cf04e489f17db13a",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/cancellation.json",
+      "sha256": "3df4f4a93e416b7076677b1f3a8614730c992054f05fc399ee79ab76f981765c",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/HL-CBL100-2M.png",
+      "sha256": "f89d71e3447ea0f8479a443a5f300132a11d6a1f88169162fb1794c55bed34f3",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/HL-MUG350-WH.png",
+      "sha256": "f84df2527bf1199cf0af03eaa28a32022766e0a19acd88ed7c96ec501e567e42",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/legacy-rule-obsolete.png",
+      "sha256": "26815d529d117cdcdffbd655beda9ac106e2ffa0f2e08e7b33a3ef30c7145525",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/reports.json",
+      "sha256": "b3d20ca157c0227d0c486fd645ced717cf70c7c5045587eca8bcd63e2aecdb62",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/result.json",
+      "sha256": "703b6ebb7430cca92f7b2f409a21dfe3fa8fb8912ede2a1e1f4c9f11cacb9152",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/browser/running-cancellation.json",
+      "sha256": "2317b12ddb0f234799773d7dbbc7ae8b1c966785b8ee6da570ee41884b409449",
+      "committed": false
+    },
+    {
+      "path": "data/private/s01-carton-fix-20261113/repository-scan-initial-failure.json",
+      "sha256": "36ec550f518337683374613728603d75130d3f6cc7bd70be8c2e1cd7907c93c6",
+      "committed": false
+    }
+  ],
+  "reportArtifact": {
+    "path": "docs/reports/S01_MOQ整箱规则修复验证_20261113.md",
+    "sha256": "3df1a90ea13918f78daea28f3a55b48aaabdc7149fa3edc71817cb4c4c7f724e"
+  },
+  "repositoryChecks": {
+    "result": "PASS",
+    "originalTaskRecordsUnchanged": 40,
+    "B01B02AndGoldenUnchanged": true,
+    "privateArtifactHashesMatch": true,
+    "environmentCredentialValueScan": "PASS",
+    "scannedFiles": 19,
+    "secretValuesNotPrinted": true,
+    "unknownOpenAPIUntrackedPreserved": true,
+    "publicPush": "NOT_RUN",
+    "publicProviderURLAndLoopbackHostCheckedInAddedDiff": true,
+    "initialWholeFileScanFalsePositivePreserved": true,
+    "initialScanFailurePrivateArtifact": "data/private/s01-carton-fix-20261113/repository-scan-initial-failure.json",
+    "documentationChecks": {
+      "result": "PASS",
+      "count": 18
+    },
+    "diffWhitespaceCheck": "PASS"
+  }
+}

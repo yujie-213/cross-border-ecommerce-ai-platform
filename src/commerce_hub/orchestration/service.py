@@ -20,6 +20,24 @@ class TaskError(RuntimeError):
 
 
 @dataclass(frozen=True)
+class SharedModelAuthorization:
+    """One explicit bounded authorization across original tasks, using O01 rows."""
+    authorization_id: str
+    max_calls: int | None
+    max_tokens: int | None
+    max_cost: Decimal | None
+    max_inflight: int = 1
+
+    def __post_init__(self):
+        if (not 1 <= len(self.authorization_id) <= 64
+            or self.max_calls is not None and not 1 <= self.max_calls <= 10
+            or self.max_tokens is not None and not 1 <= self.max_tokens <= 100000
+            or self.max_cost is not None and not Decimal('0') < self.max_cost <= Decimal('1')
+            or self.max_inflight != 1):
+            raise ValueError('INVALID_SHARED_MODEL_AUTHORIZATION')
+
+
+@dataclass(frozen=True)
 class HandlerSpec:
     scenario_id: str
     version: str
@@ -32,6 +50,11 @@ class HandlerSpec:
     policy_version: str = "foundation-disabled-models-v1"
     # Optional for legacy assemblies. New fee-enabled policies bind their unit explicitly.
     cost_currency: str | None = None
+    shared_model_authorization: SharedModelAuthorization | None = None
+
+    def __post_init__(self):
+        if self.shared_model_authorization and self.policy_version != self.shared_model_authorization.authorization_id:
+            raise ValueError('SHARED_AUTHORIZATION_POLICY_MISMATCH')
 
 
 class TaskService:
@@ -280,6 +303,16 @@ class TaskService:
     def checkpoint(self, lease, principal, plan_version):
         with self.engine.begin() as conn:
             self._execution(conn, lease, principal, plan_version)
+
+    def execution_transaction(self, lease, principal, plan_version, operation):
+        """Coordinate a data owner's short commit with current execution authority.
+
+        The callback must be local DB work; network IO remains outside this transaction.
+        Data owners retain their own tables and contracts.
+        """
+        with self.engine.begin() as conn:
+            self._execution(conn, lease, principal, plan_version)
+            return operation(conn)
 
     def complete(self, lease, principal, plan_version, result=None):
         with self.engine.begin() as conn:

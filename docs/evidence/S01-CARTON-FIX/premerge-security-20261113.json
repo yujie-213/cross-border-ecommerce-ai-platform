@@ -1,0 +1,120 @@
+{
+  "scope": "P1_P2_PREMERGE_ONLY",
+  "capturedAt": "2026-11-13T08:55:11.668878+00:00",
+  "result": "BLOCKED_PUBLICATION_SECURITY",
+  "ownerAndXingXingPhaseAcceptance": "PASS_WITH_KNOWN_BUSINESS_LIMITATIONS",
+  "reviewedImplementation": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+  "reviewedEvidence": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "localMain": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "fetchedOriginMain": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "commitsAhead": 18,
+  "mergeBase": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "fastForwardPossible": true,
+  "unmergedIndexEntries": 0,
+  "functionalEvidence": {
+    "result": "PASS_REVALIDATED_EXISTING_EVIDENCE",
+    "cableQuantity": "48",
+    "cableCartons": "6",
+    "mugCandidates": [],
+    "legacy45Obsolete": true,
+    "backend": 710,
+    "frontend": 36,
+    "browser": 1,
+    "artifactHashesVerified": true,
+    "sourceUnchangedSinceTestedCommit": true
+  },
+  "retainedConditions": {
+    "quality": "UNKNOWN",
+    "otherProcurementConditions": "UNCONFIRMED",
+    "sellableETA": "NOT_COMMITTED",
+    "procurementEligible": false,
+    "unapproved36Excluded": true,
+    "existing36CartonCompliance": "REQUIRES_AUTHORIZED_REVIEW",
+    "enterpriseGates": "BLOCKED"
+  },
+  "security": {
+    "result": "FAIL_TO_RELEASE_BRANCH_HISTORY",
+    "nonOwnedHistoricalReports": 2,
+    "unreviewedScreenshots": 8,
+    "restrictedExamples": [
+      {
+        "path": "docs/evidence/S01-ONLINE/browser-checkpoint.json",
+        "sha256": "54ff13b8ab52947183fabb131b96c7d4272d66ce3c544bb1769832923576af0a",
+        "reason": "Two complete prior non-owned-SKU ERP-derived browser reports with source scope/business observations and full AI explanations"
+      },
+      {
+        "path": "docs/evidence/S01-DATA-ASSESSMENT/assessment-facts.json",
+        "sha256": "7254c31eedc91b4dcbbd7a790005861208d5dc76c7ced295f90d4482e9a34b99",
+        "reason": "Includes private model authorization ID and task linkage, not only a public test summary"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/online-ai-1.png",
+        "sha256": "e2cdb8bf812f34c3e2028d9f333323691b9211a57e9cc957e8b2e70606f165cf",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/online-ai-2.png",
+        "sha256": "3d40ed16d7129d1d8661e1f63786cf64aac2d1ab244d34b8b52b4038e2a9a4f2",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/online-authorized-options.png",
+        "sha256": "74c9f05df8d12ee985a4ef351ab426391fed93a7a017de0abdf763af45da4780",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/online-report-1.png",
+        "sha256": "28467f168dbc664ea91024b29f87695d6673f69f9f4d1ba0a45a816a9947dc89",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/online-report-2.png",
+        "sha256": "5a188faa6bf46f697071d4b1c7eccbc8e1680dda348b6ec9f4b079b4f74bd2fb",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/phase1-acquisition-evidence.png",
+        "sha256": "900e3e631c75c05652a9fe250bd6cfa5cb01104f9c636a552d5b15889609127d",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/phase1-online-report.png",
+        "sha256": "63faf195e0d4d6545ee2dbc063f90a40c043c776d92bed7c4132640522f0ff9b",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      },
+      {
+        "path": "docs/evidence/S01-ONLINE/screenshots/phase1-options.png",
+        "sha256": "479b2a4c4eac5e2b71d3011afcef0f331076715d7a4b41b59818117b3f0168ad",
+        "reason": "Unreviewed ERP browser screenshot, previously restricted from public history"
+      }
+    ],
+    "introducingCommits": [
+      "5ae0d32",
+      "2315416"
+    ],
+    "tipOnlyRemovalInsufficient": true,
+    "credentialScan": "NOT_EXHAUSTIVE_STOPPED_AFTER_CONFIRMED_RESTRICTED_DATA",
+    "reason": "A normal merge makes all 18 commits reachable from main; private ERP-derived reports, unreviewed screenshots and private model authorization linkage would be published"
+  },
+  "nextReleaseCondition": "Prepare an independently reviewed safe code/document snapshot from origin/main without restricted parent history; preserve original local branch and evidence; then reauthorize/retry merge and smoke tests",
+  "actions": {
+    "merge": "NOT_RUN_SECURITY_STOP",
+    "mergeCommit": null,
+    "push": "NOT_RUN",
+    "postMergeSmoke": "NOT_RUN_NO_MERGE",
+    "ERPCalls": 0,
+    "modelCalls": 0,
+    "procurementActions": 0,
+    "historyDeleted": false,
+    "unknownOpenAPIPreserved": true
+  },
+  "recordChecks": {
+    "documentChecks": 18,
+    "credentialValueScan": "PASS_FOR_NEW_RECORD_FILES",
+    "findings": 0,
+    "original41TasksUnchanged": true,
+    "historyPreserved": true
+  }
+}

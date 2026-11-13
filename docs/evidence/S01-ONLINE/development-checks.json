@@ -1,0 +1,424 @@
+{
+  "runs": [
+    {
+      "suite": "online-phase1-relevant",
+      "kind": "FIXTURE_ERP_REAL_MYSQL_WHERE_MARKED",
+      "cases": [
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_explicit_migration_head_and_repeat_upgrade",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_one_frozen_migration_chain",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_other_database_target_is_refused_before_connection",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_engine_construction_never_connects_or_migrates",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_destructive_downgrade_guard_does_not_execute_sql",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_actual_server_is_mysql_utc_read_committed",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.mysql.test_storage",
+          "name": "test_exact_types_unique_tenant_key_and_real_rollback",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_missing_required_settings_fail_safely",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_invalid_settings_never_echo_secret",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_literal_dotenv_secrets_and_environment_precedence",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_remote_database_without_trusted_ca_fails",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_startup_does_not_connect_or_launch_background_work",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_readiness_does_not_claim_unimplemented_capabilities[True]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_readiness_does_not_claim_unimplemented_capabilities[False]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_database_failure_is_sanitized",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_trace_headers_and_no_request_data_in_logs",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_http_error_contract_drops_unsafe_details[401-UNAUTHENTICATED]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_http_error_contract_drops_unsafe_details[403-POLICY_DENIED]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_http_error_contract_drops_unsafe_details[404-NOT_FOUND]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_http_error_contract_drops_unsafe_details[409-CONFLICT]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_validation_and_unhandled_error_are_safe",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_logger_discards_arbitrary_message_arguments_and_traceback",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_oversized_request_rejected_before_parsing_or_authentication",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_unimplemented_routes_are_not_registered[/api/v1/reports]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_unimplemented_routes_are_not_registered[/api/v1/executions]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_unimplemented_routes_are_not_registered[/api/v1/approvals]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_unimplemented_routes_are_not_registered[/api/v1/models]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_unimplemented_routes_are_not_registered[/docs]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_foundation",
+          "name": "test_unimplemented_routes_are_not_registered[/openapi.json]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_s01_business",
+          "name": "test_live_or_network_composition_is_rejected[development-mock-False]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_s01_business",
+          "name": "test_live_or_network_composition_is_rejected[test-deepseek-False]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_s01_business",
+          "name": "test_live_or_network_composition_is_rejected[test-mock-True]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.bootstrap.test_s01_business",
+          "name": "test_explicit_test_composition_keeps_one_original_task_budget",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[A]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[B]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[C]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[D]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_five_business_cases_call_existing_calculators_with_fixed_expectations[E]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[scope]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[quantity]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[source]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[package]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[task]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[quality]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_publication_rejects_valid_shape_tampering[reference]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.s01.test_backend",
+          "name": "test_browser_cannot_supply_paths_rules_or_erp_payloads",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_observations_are_freshly_collected_and_never_admitted_by_names",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[503]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[401]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[302]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_foreign_source_identity_hides_quantities_and_blocks",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_manifest_binds_acquisition_and_projection",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_parameters_reject_fixed_facts_and_cross_scope_before_network",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "suite": "online-phase2",
+      "kind": "FIXTURE_ERP_REAL_MYSQL_WHERE_MARKED",
+      "cases": [
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_observations_are_freshly_collected_and_never_admitted_by_names",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[503]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[401]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_http_failure_preserves_error_never_zero_or_fixed_fallback[302]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_foreign_source_identity_hides_quantities_and_blocks",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_manifest_binds_acquisition_and_projection",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online",
+          "name": "test_online_parameters_reject_fixed_facts_and_cross_scope_before_network",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_online_teaching_input_consumes_existing_b01_b02_without_reserved_double_deduction",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[missing-sale]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[wrong-date]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[foreign-sku]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[duplicate-order]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[unknown-supply]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[mapping]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_unknown_online_facts_never_generate_a_false_candidate[timeout]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_freshness_and_candidate_constraints_stay_in_d03[stale]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_freshness_and_candidate_constraints_stay_in_d03[future]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_freshness_and_candidate_constraints_stay_in_d03[quality]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_freshness_and_candidate_constraints_stay_in_d03[unknown-moq]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.unit.data.test_online_calculation",
+          "name": "test_box_quantity_never_changes_the_independent_teaching_multiple",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.s01.test_online_workflow",
+          "name": "test_online_tasks_collect_independently_replay_and_history_never_recollect",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.s01.test_online_workflow",
+          "name": "test_completed_acquisition_is_reused_after_a_worker_lease_crash",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.s01.test_online_workflow",
+          "name": "test_data_commit_is_fenced_by_original_task_authority[cancel]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.s01.test_online_workflow",
+          "name": "test_data_commit_is_fenced_by_original_task_authority[deadline]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.s01.test_online_workflow",
+          "name": "test_data_commit_is_fenced_by_original_task_authority[plan]",
+          "result": "PASS"
+        },
+        {
+          "classname": "tests.integration.s01.test_online_workflow",
+          "name": "test_data_commit_is_fenced_by_original_task_authority[lease]",
+          "result": "PASS"
+        }
+      ]
+    }
+  ],
+  "frontend": {
+    "unitTests": 31,
+    "typecheck": "PASS",
+    "build": "PASS"
+  },
+  "historicalFailures": [
+    "Wrong test directory: no tests ran",
+    "Inherited non-project model provider caused 6 setup errors; explicit mock/off overrides restored 53 PASS",
+    "Sandbox spawn EPERM for Vitest; normal local permission 31 PASS"
+  ],
+  "phase2PositiveRealB01": "NOT_RUN_SOURCE_AND_RULES_BLOCKED",
+  "phase2PositiveFixtureB01": "PASS",
+  "historicalEvidencePreserved": true
+}

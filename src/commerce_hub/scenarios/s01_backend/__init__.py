@@ -166,10 +166,15 @@ class S01BackendHandler:
             return observed
         result = self._rules_result(entry, deepcopy(context.task["scope"]))
         result.dataReport["scenarioSupplement"]["previousReportRef"] = previous
+        return self.explain_result(context, result,
+            model_allowed=entry['kind'] == 'SIMULATED' or self.explanation_mode == 'natural')
+
+    def explain_result(self, context, result, *, model_allowed):
+        """Shared S01 explanation path over an already validated deterministic result."""
         binding = dict(taskRef=dict(tenantId=context.principal.tenant_id, taskId=context.task["task_id"]),
             planVersion=str(context.task["plan_version"]), snapshotId=result.snapshotRef, participantId="s01")
         ai = dict(status="NOT_ATTEMPTED", explanation=None, reason="MODEL_NOT_ENABLED", binding=binding)
-        if self.gateway and (entry["kind"] == "SIMULATED" or self.explanation_mode == "natural"):
+        if self.gateway and model_allowed:
             facts = facts_for(result)
             natural = self.explanation_mode == "natural"
             ai = dict(status="UNAVAILABLE", explanation=None, reason="AI_EXPLANATION_UNAVAILABLE", provider="MOCK",

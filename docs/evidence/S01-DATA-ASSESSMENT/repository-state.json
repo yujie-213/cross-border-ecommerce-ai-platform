@@ -1,0 +1,13 @@
+{
+  "result": "LOCAL_COMMITTED_REMOTE_NOT_EXECUTED",
+  "observedLocalCommit": "f3a406e6e327459716bbd9f80d623de8400e8d1f",
+  "branch": "codex/s01-live-business-closure",
+  "destination": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
+  "verifiedVisibility": "public",
+  "verifiedCurrentUserPushPermission": true,
+  "pushAutoReview": "REJECTED_BEFORE_EXECUTION",
+  "reason": "Automatic review requires more specific authorization for public disclosure of online ERP/model evidence and screenshots",
+  "alternativeUploadAttempted": false,
+  "mainMerged": false,
+  "approvalNeeded": "Allow ordinary push of this review branch including its sanitized evidence and screenshots to the specified public repository"
+}

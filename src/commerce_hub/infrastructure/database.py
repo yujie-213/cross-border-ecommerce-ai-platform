@@ -8,12 +8,14 @@ from sqlalchemy import create_engine, event, inspect, text
 
 from commerce_hub.bootstrap.settings import Settings
 
-SCHEMA_REVISION = "0005_optional_usage"
+SCHEMA_REVISION = "0007_monitor_scope"
 AUTHORIZED_TEST_DATABASE = "s01_a01_test_20261112"
 ROOT = Path(__file__).resolve().parents[3]
 REQUIRED_TABLES = frozenset({
     "g01_principals", "g01_grants", "g01_sessions", "g02_audit_events", "g02_usage_facts",
     "o01_tasks", "o01_commands", "o01_budgets", "o01_budget_attempts", "i01_work_items", "o01_reports",
+    "d01_online_acquisitions", "d03_online_snapshots",
+    "d02_monitor_scopes",
 })
 
 

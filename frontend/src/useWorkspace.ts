@@ -1,7 +1,7 @@
 import { computed, onUnmounted, ref, watch } from 'vue'
 import { api, ApiError, createBody, errorText } from './api/client'
 import type { Choice, Command, Ref, Report, Task } from './api/types'
-import { canReport, terminal } from './domain'
+import { canReport, terminal, choiceKey } from './domain'
 
 const storageKey = 'xuheng.s01.v1'
 interface Saved { taskId?: string; packageRef?: string; pending?: Command; owner?: string }
@@ -9,7 +9,7 @@ const restore = (): Saved => { try { return JSON.parse(sessionStorage.getItem(st
 export function useWorkspace() {
   const saved = restore()
   const choices = ref<Choice[]>([]), selectedRef = ref(saved.packageRef || '')
-  const selected = computed(() => choices.value.find(x => x.packageRef === selectedRef.value))
+  const selected = computed(() => choices.value.find(x => choiceKey(x) === selectedRef.value))
   const task = ref<Task | null>(null), report = ref<Report | null>(null), history = ref<Task[]>([])
   const cursor = ref<string | null>(null), historyBefore = ref<string | undefined>()
   const connected = ref(false), busy = ref(false), loading = ref(false), error = ref(''), pollNote = ref('')
@@ -47,7 +47,7 @@ export function useWorkspace() {
       }
       const data = await api.options()
       choices.value = data.mappedChoices; connected.value = true
-      if (!choices.value.some(x => x.packageRef === selectedRef.value)) selectedRef.value = ''
+      if (!choices.value.some(x => choiceKey(x) === selectedRef.value)) selectedRef.value = ''
       persist()
       if (selected.value) await loadHistory()
       if (taskId) await openTask(taskId)

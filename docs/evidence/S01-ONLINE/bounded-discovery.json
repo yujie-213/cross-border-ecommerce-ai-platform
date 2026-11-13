@@ -1,0 +1,207 @@
+{
+  "kind": "REAL_ERP_BOUNDED_DIAGNOSTIC",
+  "inventoryDiscoveryLimit": 20,
+  "inventoryDiscoveryTotal": 1096,
+  "discoveryComplete": false,
+  "verifiedCandidates": [
+    {
+      "skuAlias": "sku-1c5fe03ebb578d2bb976",
+      "mappingVerified": true,
+      "interfaces": {
+        "inventory": {
+          "complete": true,
+          "total": 2,
+          "fingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+          "observedAt": "2026-11-13T02:49:11.864329+00:00"
+        },
+        "product": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+          "observedAt": "2026-11-13T02:49:12.261958+00:00"
+        },
+        "store": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+          "observedAt": "2026-11-13T02:49:12.667020+00:00"
+        },
+        "warehouse": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+          "observedAt": "2026-11-13T02:49:13.071472+00:00"
+        },
+        "listing": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee",
+          "observedAt": "2026-11-13T02:49:13.462955+00:00"
+        },
+        "sales": {
+          "complete": false,
+          "error": "ERP_TIMEOUT",
+          "httpStatus": null
+        },
+        "purchases": {
+          "complete": true,
+          "total": 29,
+          "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa",
+          "observedAt": "2026-11-13T02:49:26.071896+00:00"
+        },
+        "buckets": {
+          "complete": true,
+          "total": 0,
+          "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "observedAt": "2026-11-13T02:49:26.515339+00:00"
+        },
+        "quotes": {
+          "complete": true,
+          "total": 2,
+          "fingerprint": "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22",
+          "observedAt": "2026-11-13T02:49:26.919575+00:00"
+        }
+      },
+      "networkRequests": 12,
+      "quality": "BLOCKED",
+      "blockers": [
+        "DEMAND_COVERAGE_UNPROVEN",
+        "NET_AVAILABLE_AND_BUCKET_RELATION_UNCONFIRMED",
+        "SUPPLY_DATES_AND_MULTIPLE_UNKNOWN"
+      ]
+    },
+    {
+      "skuAlias": "sku-eb55c28f45c27d9d5241",
+      "mappingVerified": true,
+      "interfaces": {
+        "inventory": {
+          "complete": true,
+          "total": 2,
+          "fingerprint": "98b861f93b760f89b3d8a5d422d17e5169934263ddf30db77ee18eda6735f8ba",
+          "observedAt": "2026-11-13T02:49:27.855665+00:00"
+        },
+        "product": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "daba7efb5d6ecafb2aa1e5e1737442491b5f822e1709597be8aa429ae0211e18",
+          "observedAt": "2026-11-13T02:49:28.260921+00:00"
+        },
+        "store": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+          "observedAt": "2026-11-13T02:49:28.667418+00:00"
+        },
+        "warehouse": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+          "observedAt": "2026-11-13T02:49:29.061174+00:00"
+        },
+        "listing": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "8b305b285a8d13caca4eef58ea97d3c53cb4038637caf895324af9519f177a88",
+          "observedAt": "2026-11-13T02:49:29.454145+00:00"
+        },
+        "sales": {
+          "complete": false,
+          "error": "ERP_503",
+          "httpStatus": 503
+        },
+        "purchases": {
+          "complete": true,
+          "total": 29,
+          "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa",
+          "observedAt": "2026-11-13T02:49:42.088351+00:00"
+        },
+        "buckets": {
+          "complete": true,
+          "total": 0,
+          "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "observedAt": "2026-11-13T02:49:42.509739+00:00"
+        },
+        "quotes": {
+          "complete": true,
+          "total": 4,
+          "fingerprint": "21e682aca6e4783af1fe98f9a76d6ef2580467e1b9bcef17fdf3ce93439a7b6a",
+          "observedAt": "2026-11-13T02:49:42.908282+00:00"
+        }
+      },
+      "networkRequests": 12,
+      "quality": "BLOCKED",
+      "blockers": [
+        "DEMAND_COVERAGE_UNPROVEN",
+        "NET_AVAILABLE_AND_BUCKET_RELATION_UNCONFIRMED",
+        "SUPPLY_DATES_AND_MULTIPLE_UNKNOWN"
+      ]
+    },
+    {
+      "skuAlias": "sku-ac3ab740d7f4b86790c4",
+      "mappingVerified": true,
+      "interfaces": {
+        "inventory": {
+          "complete": true,
+          "total": 2,
+          "fingerprint": "f98fd797df50420cc93c7eb25a7d0db5baf0a8d547db89e9f288f7783b34263e",
+          "observedAt": "2026-11-13T02:49:43.829461+00:00"
+        },
+        "product": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "15dc02bdcda703e355f4b4852ed1fc746317acabdbfeea4721fe28920fdbb621",
+          "observedAt": "2026-11-13T02:49:44.231809+00:00"
+        },
+        "store": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+          "observedAt": "2026-11-13T02:49:44.630841+00:00"
+        },
+        "warehouse": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+          "observedAt": "2026-11-13T02:49:45.041857+00:00"
+        },
+        "listing": {
+          "complete": true,
+          "total": 1,
+          "fingerprint": "773e7314bdecae78dcc1db92e9061dd499a724e7002bd2dea9da7520c4c299eb",
+          "observedAt": "2026-11-13T02:49:45.445396+00:00"
+        },
+        "sales": {
+          "complete": false,
+          "error": "ERP_TIMEOUT",
+          "httpStatus": null
+        },
+        "purchases": {
+          "complete": true,
+          "total": 29,
+          "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa",
+          "observedAt": "2026-11-13T02:50:02.233550+00:00"
+        },
+        "buckets": {
+          "complete": true,
+          "total": 0,
+          "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "observedAt": "2026-11-13T02:50:02.665061+00:00"
+        },
+        "quotes": {
+          "complete": true,
+          "total": 4,
+          "fingerprint": "ef651c8f0ff22b8f45644f419082ea59cedc59599a619f56e34f17c181e38c59",
+          "observedAt": "2026-11-13T02:50:03.078399+00:00"
+        }
+      },
+      "networkRequests": 13,
+      "quality": "BLOCKED",
+      "blockers": [
+        "DEMAND_COVERAGE_UNPROVEN",
+        "NET_AVAILABLE_AND_BUCKET_RELATION_UNCONFIRMED",
+        "SUPPLY_DATES_AND_MULTIPLE_UNKNOWN"
+      ]
+    }
+  ],
+  "positiveBusinessCalculation": "BLOCKED"
+}

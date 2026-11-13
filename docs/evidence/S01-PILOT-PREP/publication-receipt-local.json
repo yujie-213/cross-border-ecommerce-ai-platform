@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "scope": "REVIEWED_DOCUMENTS_ONLY_NORMAL_PUBLIC_BRANCH_PUSH",
+  "branch": "codex/s01-pilot-scope-review",
+  "remoteCommit": "75ad144ecfebbe22a2a17b0c62e21094883c97cf",
+  "baseMain": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "changedPaths": [
+    "docs/contracts/s01/owned-dataset-scope.md",
+    "docs/evidence/S01-PILOT-PREP/public-test-summary.json",
+    "docs/planning/git-whitelist.json",
+    "docs/reports/S01_2SKU小试_公开评审摘要.md"
+  ],
+  "applicationCodePublished": false,
+  "rawOrFullBusinessEvidencePublished": false,
+  "providerResponsesOrAuthorizationPublished": false,
+  "screenshotsPublished": false,
+  "currentLocalSourceBranch": "codex/s01-live-business-closure",
+  "currentLocalSourceBasis": "1658286bb358d2fc0b3a11ced30998e692de6824",
+  "priorRestrictedLocalHistoryIncluded": false,
+  "forced": false,
+  "mergedMain": false,
+  "remoteReadBack": "git ls-remote returned identical commit",
+  "scopeOwnerApproval": "PENDING_EXACT_MUTATION_PLAN_AND_RESOURCE_SCOPE",
+  "actualPilotMutations": 0,
+  "currentModelRequests": 0
+}

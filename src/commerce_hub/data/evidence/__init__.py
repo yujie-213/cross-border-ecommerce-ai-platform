@@ -2,8 +2,8 @@
 from commerce_hub.data.contracts import fingerprint
 
 
-def locator(snapshot_id, path):
-    module = {"inputProjection": "D02", "observedDomains": "D02", "manifest": "D03"}.get(path.split("/")[0], "B01" if path == "supplyDemand/baseline" else "B02")
+def locator(snapshot_id, path, *, source_module=None):
+    module = source_module or {"inputProjection": "D02", "observedDomains": "D02", "manifest": "D03"}.get(path.split("/")[0], "B01" if path == "supplyDemand/baseline" else "B02")
     return dict(evidenceId="evidence-" + fingerprint([snapshot_id, path]),
                 snapshotId=snapshot_id, sourceModuleId=module, fieldPath=path)
 

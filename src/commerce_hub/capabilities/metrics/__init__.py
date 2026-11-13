@@ -10,13 +10,13 @@ METRIC_VERSION = "s01-engineering-daily-v1"
 def evaluate(snapshot, *, candidate=None):
     if not snapshot.calculation_allowed:
         raise ValueError("DATA_QUALITY_BLOCKED")
-    # Fixed engineering semantics: D0 is asOf UTC date; D1 follows D0;
+    # D0 is the explicitly admitted business date, or legacy asOf UTC date;
     # same-day supply enters before incremental demand; negative balances backlog.
     with localcontext() as ctx:
         ctx.prec = 50
         projection = snapshot.projection
         policy = projection.input.policy
-        start = projection.input.asOf.date()
+        start = getattr(projection.input, 'businessDate', None) or projection.input.asOf.date()
         horizon_end = start + timedelta(days=policy.horizonDays)
         end = horizon_end + timedelta(days=policy.bufferDays)
         available = projection.inventory[0].availableQty
