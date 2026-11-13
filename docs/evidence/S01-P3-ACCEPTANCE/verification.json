@@ -106,12 +106,66 @@
     },
     {
       "path": "data/private/s01-p3-acceptance/history-replay/mysql-verification.json",
-      "sha256": "1118f602d07d7af9c4aafe87e93b6fab38f16f1f2fdfff0428b4bed7462f857b"
+      "sha256": "984f31b1361ae4e26b8edcdd9125cb6a07027f00eb7e1746c90797d9800410e9",
+      "previousObservationSha256": "1118f602d07d7af9c4aafe87e93b6fab38f16f1f2fdfff0428b4bed7462f857b",
+      "phase": "POSTMERGE_REPLAY",
+      "note": "Same auxiliary output path refreshed by postmerge replay; prior digest retained as historical observation only, current file pinned here. Original ERP/report source artifacts unchanged."
     },
     {
       "path": "data/private/s01-p3-acceptance/history-secret-scan.json",
       "sha256": "4fc2186846ae90c49d2a42ab9d62552454ab93b3a5e50eb80020088f74c3bcba"
+    },
+    {
+      "path": ".tmp/p3-postmerge-full.xml",
+      "sha256": "ff5b6ef38c1b19f7325db858bda310c21b3752e75bf2ee1a51a28b6541d6bc4d"
+    },
+    {
+      "path": ".tmp/p3-postmerge-full.log",
+      "sha256": "a69b492f0be5efa8ad609962dcbd4963bdc9a47b77cded3b9d6897fd4b151cfb"
+    },
+    {
+      "path": ".tmp/p3-postmerge-frontend.json",
+      "sha256": "9ee287aed4c7c0f4b6f0503f257f7123ff376b795820e7ec0d40d707562ef362"
     }
   ],
-  "merge": "PENDING"
+  "merge": {
+    "result": "PASS",
+    "commit": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+    "firstParent": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+    "secondParent": "1ed6c4ccf4af17e99d0650728c415953f6e0eabc",
+    "strategy": "normal --no-ff / ort",
+    "conflicts": 0,
+    "treeMatchesAcceptedBranch": true
+  },
+  "postMergeValidation": {
+    "result": "PASS",
+    "testedCommit": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+    "backend": {
+      "passed": 746,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-postmerge-full.xml"
+    },
+    "frontend": {
+      "passed": 38,
+      "typecheck": "PASS",
+      "productionBuild": "PASS"
+    },
+    "historicalReplay": "PASS_2_REPORTS_2_LEGACY_2_CANCELLED",
+    "newERPCalls": 0,
+    "newModelCalls": 0,
+    "businessMutations": 0,
+    "warning": "Existing Starlette/httpx deprecation warning retained"
+  },
+  "publication": {
+    "result": "PASS",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "remoteMain": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+    "remoteP3Branch": "1ed6c4ccf4af17e99d0650728c415953f6e0eabc",
+    "normalPush": true,
+    "forced": false,
+    "observedAt": "2026-11-13T12:38:02.945553+00:00"
+  }
 }

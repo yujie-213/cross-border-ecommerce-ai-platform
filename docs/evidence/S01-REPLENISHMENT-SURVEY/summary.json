@@ -1,0 +1,1529 @@
+{
+  "result": "REFERENCE_ONLY",
+  "restClassification": "REFERENCE_ONLY",
+  "compatSelectedClassification": "UNVERIFIED",
+  "reportRef": "docs/reports/S01_ERP补货建议来源验证与V2可行性_20261113.md",
+  "observedAt": "2026-11-13T12:39:37.771242+00:00",
+  "applicationCommit": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+  "scope": {
+    "tenantId": 1,
+    "storeId": 1,
+    "storeName": "MIMI Apparel US",
+    "role": "administrator",
+    "broadPermissionsObserved": true,
+    "accountNamePublished": false,
+    "explicitlyAuthorizedSurveySKUs": [
+      "YF-SO-NG-OS",
+      "YF-SO-PZ-L",
+      "YF-SO-QD-S",
+      "YF-SO-QD-L",
+      "YF-SO-PZ-M"
+    ],
+    "projectOwnedMembershipGranted": false,
+    "independentInventoryWarehouseIds": [
+      303
+    ],
+    "sourceRecommendationWarehouseId": "NOT_PRESENT",
+    "incidentalCompatStoreRows": 2,
+    "incidentalRowsAnalyzedAsMembers": false,
+    "wholeStoreDiscoveryComplete": false
+  },
+  "counts": {
+    "targetRecommendationRecords": 5,
+    "positiveQuantityRecords": 4,
+    "zeroQuantityRecords": 1,
+    "usableFallbackRecords": 0,
+    "httpAttempts": 63,
+    "httpStatus": {
+      "200": 63
+    },
+    "methodCounts": {
+      "POST": 6,
+      "GET": 57
+    },
+    "authenticationRequests": 3,
+    "readOnlyQueryPosts": 3,
+    "businessReads": 60,
+    "businessMutations": 0,
+    "modelRequests": 0
+  },
+  "latencyMs": {
+    "min": 33,
+    "max": 3071,
+    "total": 7881
+  },
+  "comparisons": [
+    {
+      "sku": "YF-SO-NG-OS",
+      "sourceClass": "REAL_NETWORK_OBSERVATION_OF_EXISTING_TEACHING_RECORD",
+      "tenantId": 1,
+      "storeId": 1,
+      "storeName": "MIMI Apparel US",
+      "recommendationId": 679,
+      "recommendationNumber": "REC-YF-SO-NG-OS-2026",
+      "screenshotObserved": {
+        "suggested_qty": 120,
+        "daily_sales": 5,
+        "local_available": 0,
+        "overseas_available": 0,
+        "fba_available": 0,
+        "inbound": 0,
+        "urgency": "最急",
+        "stockout_date": "2026-11-14",
+        "status_text": "待确认"
+      },
+      "restObserved": {
+        "suggested_qty": 120,
+        "daily_sales": 5.0,
+        "local_available": 0,
+        "overseas_available": 0,
+        "fba_available": 0,
+        "inbound": 0,
+        "urgency": "最急",
+        "stockout_date": "2026-11-14",
+        "status_text": "待确认"
+      },
+      "pageApiMatch": true,
+      "timestamps": {
+        "generated_at": "2026-11-14",
+        "created_at": "2026-11-13T04:49:04+00:00",
+        "updated_at": "2026-11-13T04:49:04+00:00"
+      },
+      "generatedAtEqualsStockoutDate": true,
+      "product": {
+        "id": 217,
+        "sku": "YF-SO-NG-OS",
+        "unit": "件",
+        "moq": 50,
+        "default_carton_qty": 10,
+        "procurement_lead_days": 14
+      },
+      "supplierConfigured": false,
+      "inventory": {
+        "id": 1136,
+        "tenant_id": 1,
+        "store_id": 1,
+        "wid": 303,
+        "product_id": 217,
+        "sku": "YF-SO-NG-OS",
+        "quantity": 0,
+        "available": 0
+      },
+      "listingCount": 0,
+      "listingComplete": true,
+      "unitEvidence": "PRODUCT_UNIT_PIECE_VERIFIED;SUGGESTION_FIELD_UNIT_METADATA_NOT_EXPLICIT",
+      "suggestionInterpretation": "SAVED_SOURCE_SUGGESTION_NOT_DETERMINISTIC_NEED",
+      "projectOwnedMember": false,
+      "classification": "REFERENCE_ONLY",
+      "procurementAllowed": false
+    },
+    {
+      "sku": "YF-SO-PZ-L",
+      "sourceClass": "REAL_NETWORK_OBSERVATION_OF_EXISTING_TEACHING_RECORD",
+      "tenantId": 1,
+      "storeId": 1,
+      "storeName": "MIMI Apparel US",
+      "recommendationId": 674,
+      "recommendationNumber": "REC-YF-SO-PZ-L-2026",
+      "screenshotObserved": {
+        "suggested_qty": 1200,
+        "daily_sales": 60,
+        "local_available": 0,
+        "overseas_available": 0,
+        "fba_available": 0,
+        "inbound": 0,
+        "urgency": "最急",
+        "stockout_date": "2026-11-14",
+        "status_text": "待确认"
+      },
+      "restObserved": {
+        "suggested_qty": 1200,
+        "daily_sales": 60.0,
+        "local_available": 0,
+        "overseas_available": 0,
+        "fba_available": 0,
+        "inbound": 0,
+        "urgency": "最急",
+        "stockout_date": "2026-11-14",
+        "status_text": "待确认"
+      },
+      "pageApiMatch": true,
+      "timestamps": {
+        "generated_at": "2026-11-14",
+        "created_at": "2026-11-13T04:46:55+00:00",
+        "updated_at": "2026-11-13T04:46:55+00:00"
+      },
+      "generatedAtEqualsStockoutDate": true,
+      "product": {
+        "id": 212,
+        "sku": "YF-SO-PZ-L",
+        "unit": "件",
+        "moq": 200,
+        "default_carton_qty": 20,
+        "procurement_lead_days": 10
+      },
+      "supplierConfigured": true,
+      "inventory": {
+        "id": 1131,
+        "tenant_id": 1,
+        "store_id": 1,
+        "wid": 303,
+        "product_id": 212,
+        "sku": "YF-SO-PZ-L",
+        "quantity": 0,
+        "available": 0
+      },
+      "listingCount": 0,
+      "listingComplete": true,
+      "unitEvidence": "PRODUCT_UNIT_PIECE_VERIFIED;SUGGESTION_FIELD_UNIT_METADATA_NOT_EXPLICIT",
+      "suggestionInterpretation": "SAVED_SOURCE_SUGGESTION_NOT_DETERMINISTIC_NEED",
+      "projectOwnedMember": false,
+      "classification": "REFERENCE_ONLY",
+      "procurementAllowed": false
+    },
+    {
+      "sku": "YF-SO-QD-S",
+      "sourceClass": "REAL_NETWORK_OBSERVATION_OF_EXISTING_TEACHING_RECORD",
+      "tenantId": 1,
+      "storeId": 1,
+      "storeName": "MIMI Apparel US",
+      "recommendationId": 676,
+      "recommendationNumber": "REC-YF-SO-QD-S-2026",
+      "screenshotObserved": {
+        "suggested_qty": 60,
+        "daily_sales": 10,
+        "local_available": 0,
+        "overseas_available": 40,
+        "fba_available": 40,
+        "inbound": 200,
+        "urgency": "急",
+        "stockout_date": "2026-12-08",
+        "status_text": "已生成采购单"
+      },
+      "restObserved": {
+        "suggested_qty": 60,
+        "daily_sales": 10.0,
+        "local_available": 0,
+        "overseas_available": 40,
+        "fba_available": 40,
+        "inbound": 200,
+        "urgency": "急",
+        "stockout_date": "2026-12-08",
+        "status_text": "已生成采购单"
+      },
+      "pageApiMatch": true,
+      "timestamps": {
+        "generated_at": "2026-12-08",
+        "created_at": "2026-11-13T04:47:37+00:00",
+        "updated_at": "2026-11-13T04:47:37+00:00"
+      },
+      "generatedAtEqualsStockoutDate": true,
+      "product": {
+        "id": 214,
+        "sku": "YF-SO-QD-S",
+        "unit": "件",
+        "moq": 60,
+        "default_carton_qty": 12,
+        "procurement_lead_days": 8
+      },
+      "supplierConfigured": true,
+      "inventory": {
+        "id": 1133,
+        "tenant_id": 1,
+        "store_id": 1,
+        "wid": 303,
+        "product_id": 214,
+        "sku": "YF-SO-QD-S",
+        "quantity": 40,
+        "available": 40
+      },
+      "listingCount": 0,
+      "listingComplete": true,
+      "unitEvidence": "PRODUCT_UNIT_PIECE_VERIFIED;SUGGESTION_FIELD_UNIT_METADATA_NOT_EXPLICIT",
+      "suggestionInterpretation": "SAVED_SOURCE_SUGGESTION_NOT_DETERMINISTIC_NEED",
+      "projectOwnedMember": false,
+      "classification": "REFERENCE_ONLY",
+      "procurementAllowed": false
+    },
+    {
+      "sku": "YF-SO-QD-L",
+      "sourceClass": "REAL_NETWORK_OBSERVATION_OF_EXISTING_TEACHING_RECORD",
+      "tenantId": 1,
+      "storeId": 1,
+      "storeName": "MIMI Apparel US",
+      "recommendationId": 678,
+      "recommendationNumber": "REC-YF-SO-QD-L-2026",
+      "screenshotObserved": {
+        "suggested_qty": 50,
+        "daily_sales": 1,
+        "local_available": 0,
+        "overseas_available": 60,
+        "fba_available": 60,
+        "inbound": 0,
+        "urgency": "一般",
+        "stockout_date": "2027-01-13",
+        "status_text": "待确认"
+      },
+      "restObserved": {
+        "suggested_qty": 50,
+        "daily_sales": 1.0,
+        "local_available": 0,
+        "overseas_available": 60,
+        "fba_available": 60,
+        "inbound": 0,
+        "urgency": "一般",
+        "stockout_date": "2027-01-13",
+        "status_text": "待确认"
+      },
+      "pageApiMatch": true,
+      "timestamps": {
+        "generated_at": "2027-01-13",
+        "created_at": "2026-11-13T04:48:43+00:00",
+        "updated_at": "2026-11-13T04:48:43+00:00"
+      },
+      "generatedAtEqualsStockoutDate": true,
+      "product": {
+        "id": 216,
+        "sku": "YF-SO-QD-L",
+        "unit": "件",
+        "moq": 50,
+        "default_carton_qty": 10,
+        "procurement_lead_days": 12
+      },
+      "supplierConfigured": true,
+      "inventory": {
+        "id": 1135,
+        "tenant_id": 1,
+        "store_id": 1,
+        "wid": 303,
+        "product_id": 216,
+        "sku": "YF-SO-QD-L",
+        "quantity": 60,
+        "available": 60
+      },
+      "listingCount": 0,
+      "listingComplete": true,
+      "unitEvidence": "PRODUCT_UNIT_PIECE_VERIFIED;SUGGESTION_FIELD_UNIT_METADATA_NOT_EXPLICIT",
+      "suggestionInterpretation": "SAVED_SOURCE_SUGGESTION_NOT_DETERMINISTIC_NEED",
+      "projectOwnedMember": false,
+      "classification": "REFERENCE_ONLY",
+      "procurementAllowed": false
+    },
+    {
+      "sku": "YF-SO-PZ-M",
+      "sourceClass": "REAL_NETWORK_OBSERVATION_OF_EXISTING_TEACHING_RECORD",
+      "tenantId": 1,
+      "storeId": 1,
+      "storeName": "MIMI Apparel US",
+      "recommendationId": 673,
+      "recommendationNumber": "REC-YF-SO-PZ-M-2026",
+      "screenshotObserved": {
+        "suggested_qty": 0,
+        "daily_sales": 6,
+        "local_available": 0,
+        "overseas_available": 0,
+        "fba_available": 0,
+        "inbound": 0,
+        "urgency": "最急",
+        "stockout_date": "2026-11-14",
+        "status_text": "待确认"
+      },
+      "restObserved": {
+        "suggested_qty": 0,
+        "daily_sales": 6.0,
+        "local_available": 0,
+        "overseas_available": 0,
+        "fba_available": 0,
+        "inbound": 0,
+        "urgency": "最急",
+        "stockout_date": "2026-11-14",
+        "status_text": "待确认"
+      },
+      "pageApiMatch": true,
+      "timestamps": {
+        "generated_at": "2026-11-14",
+        "created_at": "2026-11-13T04:46:34+00:00",
+        "updated_at": "2026-11-13T04:46:34+00:00"
+      },
+      "generatedAtEqualsStockoutDate": true,
+      "product": {
+        "id": 211,
+        "sku": "YF-SO-PZ-M",
+        "unit": "件",
+        "moq": 50,
+        "default_carton_qty": 10,
+        "procurement_lead_days": 10
+      },
+      "supplierConfigured": true,
+      "inventory": {
+        "id": 1130,
+        "tenant_id": 1,
+        "store_id": 1,
+        "wid": 303,
+        "product_id": 211,
+        "sku": "YF-SO-PZ-M",
+        "quantity": 0,
+        "available": 0
+      },
+      "listingCount": 0,
+      "listingComplete": true,
+      "unitEvidence": "PRODUCT_UNIT_PIECE_VERIFIED;SUGGESTION_FIELD_UNIT_METADATA_NOT_EXPLICIT",
+      "suggestionInterpretation": "SAVED_SOURCE_SUGGESTION_NOT_DETERMINISTIC_NEED",
+      "projectOwnedMember": false,
+      "classification": "REFERENCE_ONLY",
+      "procurementAllowed": false
+    }
+  ],
+  "relatedPurchases": [
+    {
+      "sku": "YF-SO-QD-S",
+      "purchase": {
+        "id": 1397,
+        "tenant_id": 1,
+        "order_sn": "PO-YF-SO-QD-S-2026",
+        "warehouse_name": "华东服装仓",
+        "status_text": "待到货",
+        "planned_arrival": "2026-12-18",
+        "received_qty": 0,
+        "pending_qty": 200,
+        "source_plan_no": null,
+        "created_at": "2026-11-13T04:47:42+00:00",
+        "updated_at": "2026-11-13T04:47:53+00:00"
+      },
+      "lines": [
+        {
+          "sku": "YF-SO-QD-S",
+          "quantity": 200
+        }
+      ],
+      "independentDetailMatches": true,
+      "approvals": [
+        {
+          "id": 1805,
+          "tenant_id": 1,
+          "business_type": "采购单",
+          "business_no": "PO-YF-SO-QD-S-2026",
+          "status_text": "已通过",
+          "submitted_at": "2026-11-13T04:47:45+00:00",
+          "decided_at": "2026-11-13T04:47:50+00:00"
+        }
+      ],
+      "deliveryContext": [
+        {
+          "id": 933,
+          "tenant_id": 1,
+          "purchase_order_sn": "PO-YF-SO-QD-S-2026",
+          "warehouse_name": "华东服装仓",
+          "status_text": "未收货",
+          "received_qty": 0,
+          "item_list": [
+            {
+              "sku": "YF-SO-QD-S",
+              "quantity": 200
+            }
+          ]
+        }
+      ],
+      "relation": "SAME_SKU_ONLY_NO_EXPLICIT_SOURCE_PLAN",
+      "qualifiesForCurrentP3OwnedScope": false,
+      "eligibleSupplyQuantity": null
+    },
+    {
+      "sku": "YF-SO-PZ-M",
+      "purchase": {
+        "id": 1403,
+        "tenant_id": 1,
+        "order_sn": "AI-PO-YF-SO-PZ-M-20261113160337",
+        "warehouse_name": "MVP-G-20261112 独立教学仓",
+        "status_text": "待审核",
+        "planned_arrival": "2026-11-01",
+        "received_qty": 0,
+        "pending_qty": 150,
+        "source_plan_no": "REC-YF-SO-PZ-M-2026",
+        "created_at": "2026-11-13T08:03:37+00:00",
+        "updated_at": "2026-11-13T08:03:39+00:00"
+      },
+      "lines": [
+        {
+          "sku": "YF-SO-PZ-M",
+          "quantity": 150
+        }
+      ],
+      "independentDetailMatches": true,
+      "approvals": [
+        {
+          "id": 1808,
+          "tenant_id": 1,
+          "business_type": "采购单",
+          "business_no": "AI-PO-YF-SO-PZ-M-20261113160337",
+          "status_text": "审批中",
+          "submitted_at": "2026-11-13T08:03:39+00:00",
+          "decided_at": ""
+        }
+      ],
+      "deliveryContext": [],
+      "relation": "EXPLICIT_SOURCE_PLAN",
+      "qualifiesForCurrentP3OwnedScope": false,
+      "eligibleSupplyQuantity": null
+    }
+  ],
+  "pagination": {
+    "restSelectedIds": {
+      "total": 5,
+      "pages": 3,
+      "pageSize": 2,
+      "complete": true,
+      "offsets": [
+        0,
+        2,
+        4
+      ],
+      "duplicateRows": 0
+    },
+    "compatSelectedMSKU": {
+      "total": 0,
+      "complete": true
+    },
+    "compatStoreMSKU": {
+      "total": 667,
+      "fetched": 2,
+      "complete": false,
+      "reason": "INTENTIONAL_BOUNDED_PAGE_LIMIT_NO_TRAVERSAL"
+    },
+    "compatStoreASIN": {
+      "total": 0,
+      "complete": true
+    }
+  },
+  "verified": [
+    "5_TARGET_PAGE_REST_VALUES_MATCH",
+    "PRODUCT_AND_INVENTORY_TENANT_STORE_SKU_IDS_MATCH",
+    "PRODUCT_UNIT_PIECE",
+    "REST_BATCH_3_PAGE_COMPLETE",
+    "QUERY_POST_READONLY_CATALOG_AND_LOCAL_SCHEMA",
+    "QD_S_PO_200_REMAINING_AND_APPROVAL_PASSED",
+    "PZ_M_EXPLICIT_SOURCE_PO_150_APPROVAL_PENDING",
+    "FIVE_RECORDS_UNCHANGED_ON_REPEAT_GET"
+  ],
+  "unknown": [
+    "SUGGESTION_ALGORITHM_AND_VERSION",
+    "DAILY_SALES_DENOMINATOR_WINDOW",
+    "SUGGESTION_UNIT_METADATA_CONVERSION",
+    "TRUE_GENERATION_TIME_AND_SLA",
+    "REALTIME_OR_PERIODIC_RECALCULATION",
+    "APPROVED_PO_DEDUCTION",
+    "TRANSIT_ETA_AND_PARTIAL_RECEIPT_DEDUCTION",
+    "RECOMMENDATION_WAREHOUSE_BINDING",
+    "QD_S_EXPLICIT_RECOMMENDATION_TO_PO_LINK",
+    "PZ_M_ZERO_REASON_CODE_OR_CALCULATION_FAILURE_TRACE",
+    "COMPAT_QUANTITY_SUG_PURCHASE_NONEMPTY_TARGET_MAPPING"
+  ],
+  "exceptions": {
+    "currentHTTPFailures": [],
+    "currentIncompleteResponse": "compat store MSKU read deliberately capped at 2/667; not a complete batch",
+    "retainedHistorical503Evidence": "docs/evidence/S01-FORECAST-SURVEY/verification.json"
+  },
+  "traceEvents": [
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameters": null,
+      "label": "authentication",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:02.859728+00:00",
+      "httpStatus": 200,
+      "elapsedMs": 221
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "parameters": {},
+      "label": "identity",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:03.732719+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/002-identity.json",
+      "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b",
+      "elapsedMs": 46
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-contract",
+      "parameters": {},
+      "label": "data-contract",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:04.430618+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/003-data-contract.json",
+      "sha256": "9b265c17b22c73dddd018615618101d88d155e63c00252e816f88b17fbec8d68",
+      "elapsedMs": 43
+    },
+    {
+      "method": "GET",
+      "path": "/static/compat-field-catalog.json",
+      "parameters": {},
+      "label": "field-catalog",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:05.125444+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/004-field-catalog.json",
+      "sha256": "a957681fae1c0c8d59cea66cfa21e0f7d7899aa1db38080299180c7839953fb0",
+      "elapsedMs": 3071
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/store-authorizations",
+      "parameters": {
+        "field": "store_name",
+        "q": "MIMI Apparel US",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "store-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:08.848591+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/005-store-p0.json",
+      "sha256": "34b4aa903ccd757496659df5b48fae4f2419bc23e0687c8fd982e51bddc20efd",
+      "elapsedMs": 35
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-NG-OS",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "recommendation-YF-SO-NG-OS-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:09.535482+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/006-recommendation-YF-SO-NG-OS-p0.json",
+      "sha256": "8f05fe881800ff9f702269bf7e021a282d260925dfb12c98ab8e692456449aeb",
+      "elapsedMs": 44
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-NG-OS",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "product-YF-SO-NG-OS-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:10.230789+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/007-product-YF-SO-NG-OS-p0.json",
+      "sha256": "ff5c9ca0033fdfd17e31edabb10d524b856c42929cbc0448b0dffae9fd6e8f86",
+      "elapsedMs": 54
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-NG-OS",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "listing-YF-SO-NG-OS-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:10.937020+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/008-listing-YF-SO-NG-OS-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 71
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-NG-OS",
+        "match": "exact",
+        "store_id": 1,
+        "view": "full",
+        "offset": 0,
+        "limit": 10
+      },
+      "label": "stock-YF-SO-NG-OS-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:11.660286+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/009-stock-YF-SO-NG-OS-p0.json",
+      "sha256": "677142f88db2a88b92679bdfecc973830e008b203372097fc7be1ae532d163d4",
+      "elapsedMs": 63
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/679",
+      "parameters": {},
+      "label": "detail-YF-SO-NG-OS",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:12.375251+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/010-detail-YF-SO-NG-OS.json",
+      "sha256": "dabf77bfec548d88890bd0b7d9b411e0274713057ebdbc8e99e59b9054eb036c",
+      "elapsedMs": 79
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/replenishment/679",
+      "parameters": {},
+      "label": "context-YF-SO-NG-OS",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:13.105844+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/011-context-YF-SO-NG-OS.json",
+      "sha256": "7073a58e47f9b2782bff36f466b96cd1586875e18dca57e8e1cee566c756e42c",
+      "elapsedMs": 65
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-L",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "recommendation-YF-SO-PZ-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:13.823159+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/012-recommendation-YF-SO-PZ-L-p0.json",
+      "sha256": "cb243ed01f6a5735df4d09de0b7eafaafd3f5d50e77261dd8b66bdf8b108a66e",
+      "elapsedMs": 79
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-L",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "product-YF-SO-PZ-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:14.553675+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/013-product-YF-SO-PZ-L-p0.json",
+      "sha256": "2f7f8ac231ae75efdb49b8102e45c4dc897ec6efefb3cdcb56dae30c8245f484",
+      "elapsedMs": 75
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-L",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "listing-YF-SO-PZ-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:15.280223+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/014-listing-YF-SO-PZ-L-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 61
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-L",
+        "match": "exact",
+        "store_id": 1,
+        "view": "full",
+        "offset": 0,
+        "limit": 10
+      },
+      "label": "stock-YF-SO-PZ-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:15.993348+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/015-stock-YF-SO-PZ-L-p0.json",
+      "sha256": "e21372333d942b9b0bc0a3b52aa009f086b1814c5a1a9c4e2ed7f80af387461f",
+      "elapsedMs": 86
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/674",
+      "parameters": {},
+      "label": "detail-YF-SO-PZ-L",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:16.731094+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/016-detail-YF-SO-PZ-L.json",
+      "sha256": "946230b52c28c1f5cd9bd7cd7440982c4e9c97e8aeae8907fa78341249c2dc87",
+      "elapsedMs": 59
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/replenishment/674",
+      "parameters": {},
+      "label": "context-YF-SO-PZ-L",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:17.442059+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/017-context-YF-SO-PZ-L.json",
+      "sha256": "0c170491a376917a36da2ff9a6e1c9865191372d9b1f7af0e10a6150bc8d89b1",
+      "elapsedMs": 53
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-S",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "recommendation-YF-SO-QD-S-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:18.148340+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/018-recommendation-YF-SO-QD-S-p0.json",
+      "sha256": "410e231ca33ee28c01e91d60ee1855ef5e245ec0484261729e5b262b0af56b8b",
+      "elapsedMs": 69
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-S",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "product-YF-SO-QD-S-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:18.868684+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/019-product-YF-SO-QD-S-p0.json",
+      "sha256": "ba6fd7f74db2829bce0108de1374914bea177024777ed799b1a4ceac4aa1a702",
+      "elapsedMs": 49
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-S",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "listing-YF-SO-QD-S-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:19.569930+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/020-listing-YF-SO-QD-S-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 54
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-S",
+        "match": "exact",
+        "store_id": 1,
+        "view": "full",
+        "offset": 0,
+        "limit": 10
+      },
+      "label": "stock-YF-SO-QD-S-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:20.275355+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/021-stock-YF-SO-QD-S-p0.json",
+      "sha256": "a755892ef3046a34b2be4ca70818cdf4e2eed56fbb7e57c95ee43bf5bd905e7b",
+      "elapsedMs": 36
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/676",
+      "parameters": {},
+      "label": "detail-YF-SO-QD-S",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:20.963066+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/022-detail-YF-SO-QD-S.json",
+      "sha256": "f714869462440a0c580eaefa69bf60bd2153a1ac99d1f089de9b88cc387d828a",
+      "elapsedMs": 41
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/replenishment/676",
+      "parameters": {},
+      "label": "context-YF-SO-QD-S",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:21.656293+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/023-context-YF-SO-QD-S.json",
+      "sha256": "7c55cba6859cb9d990a47bbe332a691fbb25a180bc5755812c1b2d17eca6b85f",
+      "elapsedMs": 58
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-L",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "recommendation-YF-SO-QD-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:22.368703+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/024-recommendation-YF-SO-QD-L-p0.json",
+      "sha256": "9e4394764ae1b9f91258a25ddbd89670deff0f45a51974a7d9a3f0fd3a4d3fd3",
+      "elapsedMs": 87
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-L",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "product-YF-SO-QD-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:23.107672+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/025-product-YF-SO-QD-L-p0.json",
+      "sha256": "2c5646f11b1dd638532e30b6d486723b6423870d5a9cf4afcc2c8895cde02b93",
+      "elapsedMs": 52
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-L",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "listing-YF-SO-QD-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:23.811543+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/026-listing-YF-SO-QD-L-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 66
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-QD-L",
+        "match": "exact",
+        "store_id": 1,
+        "view": "full",
+        "offset": 0,
+        "limit": 10
+      },
+      "label": "stock-YF-SO-QD-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:24.529105+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/027-stock-YF-SO-QD-L-p0.json",
+      "sha256": "21bd42b7fc2d9ac8968df22916d5d45f3b46e12f57557884f606c528fb91d918",
+      "elapsedMs": 57
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/678",
+      "parameters": {},
+      "label": "detail-YF-SO-QD-L",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:25.237871+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/028-detail-YF-SO-QD-L.json",
+      "sha256": "5fff916fa603f74991554bfd2bd70f84cde6fa4652aca00f29fb3834460e8674",
+      "elapsedMs": 34
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/replenishment/678",
+      "parameters": {},
+      "label": "context-YF-SO-QD-L",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:25.922817+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/029-context-YF-SO-QD-L.json",
+      "sha256": "fa4193e815aac72363d0a9e2734f92cc8958eb24350ea98a73fd24f1d4b39871",
+      "elapsedMs": 48
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-M",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "recommendation-YF-SO-PZ-M-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:26.624946+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/030-recommendation-YF-SO-PZ-M-p0.json",
+      "sha256": "d5d92d939a7a829abdcaec8d8a1fd8326215cefff4fdab5f6ca24b73299611ca",
+      "elapsedMs": 73
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-M",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "product-YF-SO-PZ-M-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:27.351060+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/031-product-YF-SO-PZ-M-p0.json",
+      "sha256": "ee2b4a5bf1511f76eb582a48c241468a70954811ee6894eda6fa34944aeafcee",
+      "elapsedMs": 37
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-M",
+        "match": "exact",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "listing-YF-SO-PZ-M-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:28.039624+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/032-listing-YF-SO-PZ-M-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 38
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "parameters": {
+        "field": "sku",
+        "q": "YF-SO-PZ-M",
+        "match": "exact",
+        "store_id": 1,
+        "view": "full",
+        "offset": 0,
+        "limit": 10
+      },
+      "label": "stock-YF-SO-PZ-M-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:28.730305+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/033-stock-YF-SO-PZ-M-p0.json",
+      "sha256": "4ed867f3795addac5a61220690b4c76874c61b89113620f2074eb9be09d3156c",
+      "elapsedMs": 56
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/673",
+      "parameters": {},
+      "label": "detail-YF-SO-PZ-M",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:29.439092+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/034-detail-YF-SO-PZ-M.json",
+      "sha256": "9093be6fa6b80d36daa5557ab5a6edb9ea0fedc54093572c57ea2cf147b18ce1",
+      "elapsedMs": 33
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/replenishment/673",
+      "parameters": {},
+      "label": "context-YF-SO-PZ-M",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:30.123706+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/035-context-YF-SO-PZ-M.json",
+      "sha256": "65ed0cc907efbd5d4c24a6eb4a1a92695c555c2d7974c8f312781f2fe87e6202",
+      "elapsedMs": 43
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/routing/restocking/analysis/getSummaryList",
+      "parameters": {
+        "sid_list": [
+          1
+        ],
+        "data_type": 2,
+        "msku_list": [
+          "YF-SO-NG-OS",
+          "YF-SO-PZ-L",
+          "YF-SO-QD-S",
+          "YF-SO-QD-L",
+          "YF-SO-PZ-M"
+        ],
+        "offset": 0,
+        "length": 2
+      },
+      "label": "compat-selected-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:27:30.820426+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122702/036-compat-selected-p0.json",
+      "sha256": "ce2bb3626d7a0263a17d942f53c08c6054f149ae248beb315c4d1470e10988b6",
+      "elapsedMs": 177
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameters": null,
+      "label": "authentication",
+      "attempt": 1,
+      "at": "2026-11-13T12:28:56.642720+00:00",
+      "httpStatus": 200,
+      "elapsedMs": 248
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "parameters": {},
+      "label": "identity",
+      "attempt": 1,
+      "at": "2026-11-13T12:28:57.542109+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/002-identity.json",
+      "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b",
+      "elapsedMs": 55
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "ids": "679,674,676,678,673",
+        "store_name": "MIMI Apparel US",
+        "offset": 0,
+        "limit": 2
+      },
+      "label": "batch-rest-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:28:58.248502+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/003-batch-rest-p0.json",
+      "sha256": "a21eafe21f9fdbc144117382cabc51d00b9811b3b7cd5f4d7635f9c9da157d65",
+      "elapsedMs": 73
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "ids": "679,674,676,678,673",
+        "store_name": "MIMI Apparel US",
+        "offset": 2,
+        "limit": 2
+      },
+      "label": "batch-rest-p1",
+      "attempt": 1,
+      "at": "2026-11-13T12:28:58.973033+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/004-batch-rest-p1.json",
+      "sha256": "57c4d48a620c6a70a746ad4c047d8eb52e0df660f08ba9169968821088b5cb3c",
+      "elapsedMs": 52
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "parameters": {
+        "ids": "679,674,676,678,673",
+        "store_name": "MIMI Apparel US",
+        "offset": 4,
+        "limit": 2
+      },
+      "label": "batch-rest-p2",
+      "attempt": 1,
+      "at": "2026-11-13T12:28:59.676399+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/005-batch-rest-p2.json",
+      "sha256": "ab2d2701095268fa65e84d28dd1c668b1fe99fdc378af9b49626a72c2816c14a",
+      "elapsedMs": 74
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/routing/restocking/analysis/getSummaryList",
+      "parameters": {
+        "sid_list": [
+          1
+        ],
+        "data_type": 2,
+        "offset": 0,
+        "length": 2
+      },
+      "label": "compat-store-msku-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:00.400901+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/006-compat-store-msku-p0.json",
+      "sha256": "35cfe6c28fca0bfc83b0b17280f19c139dc2ca2db402b324717bcc043554da01",
+      "elapsedMs": 164
+    },
+    {
+      "method": "POST",
+      "path": "/erp/sc/routing/restocking/analysis/getSummaryList",
+      "parameters": {
+        "sid_list": [
+          1
+        ],
+        "data_type": 1,
+        "offset": 0,
+        "length": 2
+      },
+      "label": "compat-store-asin-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:01.216289+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/007-compat-store-asin-p0.json",
+      "sha256": "e1250b7f49f94e393e0c856f98836f513f05de5a0afb6f5f4461b6c628329aa5",
+      "elapsedMs": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "parameters": {
+        "ids": "303",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "warehouse-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:02.067596+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/008-warehouse-p0.json",
+      "sha256": "e19a1dcb0ca6072cd0678a276972014be0c0894792d563be99689de85a0a2c37",
+      "elapsedMs": 333
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameters": {
+        "q": "YF-SO-NG-OS",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "purchase-YF-SO-NG-OS-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:03.052141+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/009-purchase-YF-SO-NG-OS-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 63
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameters": {
+        "q": "YF-SO-PZ-L",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "purchase-YF-SO-PZ-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:03.766922+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/010-purchase-YF-SO-PZ-L-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 78
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameters": {
+        "q": "YF-SO-QD-S",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "purchase-YF-SO-QD-S-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:04.496568+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/011-purchase-YF-SO-QD-S-p0.json",
+      "sha256": "b1e32fcf41014b7c936af9d51189f7a653f27997bfc02ede0fd123eff5ef306f",
+      "elapsedMs": 94
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders/1397",
+      "parameters": {},
+      "label": "po-detail-YF-SO-QD-S",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:05.241846+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/012-po-detail-YF-SO-QD-S.json",
+      "sha256": "2da6fe23e6a66cbbf2820eb8671454404564750da45740ee066933e7da28218a",
+      "elapsedMs": 76
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameters": {
+        "q": "YF-SO-QD-L",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "purchase-YF-SO-QD-L-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:05.969148+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/013-purchase-YF-SO-QD-L-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 71
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameters": {
+        "q": "YF-SO-PZ-M",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "purchase-YF-SO-PZ-M-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:06.691666+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/014-purchase-YF-SO-PZ-M-p0.json",
+      "sha256": "27e47bfbb9290fe38d4dc96518c3a6f919c433fa2f10f4763d15724571aea1e4",
+      "elapsedMs": 91
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders/1403",
+      "parameters": {},
+      "label": "po-detail-YF-SO-PZ-M",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:07.434440+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/015-po-detail-YF-SO-PZ-M.json",
+      "sha256": "c21029e35f0061fab44c0f9e9526fc1d664c1379b88303578826bf84f7da1e08",
+      "elapsedMs": 45
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "parameters": {
+        "field": "source_plan_no",
+        "q": "REC-YF-SO-QD-S-2026",
+        "match": "exact",
+        "offset": 0,
+        "limit": 5
+      },
+      "label": "qd-source-plan-p0",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:08.131601+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/016-qd-source-plan-p0.json",
+      "sha256": "3f06e1e14a8027232b964fb28a335c9db9f83f538bf94e0a39525367263c6e49",
+      "elapsedMs": 49
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/679",
+      "parameters": {},
+      "label": "repeat-YF-SO-NG-OS",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:08.832025+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/017-repeat-YF-SO-NG-OS.json",
+      "sha256": "dabf77bfec548d88890bd0b7d9b411e0274713057ebdbc8e99e59b9054eb036c",
+      "elapsedMs": 81
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/674",
+      "parameters": {},
+      "label": "repeat-YF-SO-PZ-L",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:09.565106+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/018-repeat-YF-SO-PZ-L.json",
+      "sha256": "946230b52c28c1f5cd9bd7cd7440982c4e9c97e8aeae8907fa78341249c2dc87",
+      "elapsedMs": 73
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/676",
+      "parameters": {},
+      "label": "repeat-YF-SO-QD-S",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:10.289926+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/019-repeat-YF-SO-QD-S.json",
+      "sha256": "f714869462440a0c580eaefa69bf60bd2153a1ac99d1f089de9b88cc387d828a",
+      "elapsedMs": 51
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/678",
+      "parameters": {},
+      "label": "repeat-YF-SO-QD-L",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:10.992239+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/020-repeat-YF-SO-QD-L.json",
+      "sha256": "5fff916fa603f74991554bfd2bd70f84cde6fa4652aca00f29fb3834460e8674",
+      "elapsedMs": 55
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment/673",
+      "parameters": {},
+      "label": "repeat-YF-SO-PZ-M",
+      "attempt": 1,
+      "at": "2026-11-13T12:29:11.698856+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-122856/021-repeat-YF-SO-PZ-M.json",
+      "sha256": "9093be6fa6b80d36daa5557ab5a6edb9ea0fedc54093572c57ea2cf147b18ce1",
+      "elapsedMs": 43
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "parameters": null,
+      "label": "authentication",
+      "attempt": 1,
+      "at": "2026-11-13T12:31:41.352672+00:00",
+      "httpStatus": 200,
+      "elapsedMs": 226
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "parameters": {},
+      "label": "identity",
+      "attempt": 1,
+      "at": "2026-11-13T12:31:42.229947+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-123141/002-identity.json",
+      "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b",
+      "elapsedMs": 56
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/purchase-orders/1397",
+      "parameters": {},
+      "label": "po-context-YF-SO-QD-S",
+      "attempt": 1,
+      "at": "2026-11-13T12:31:42.937945+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-123141/003-po-context-YF-SO-QD-S.json",
+      "sha256": "b55858b50058a2f3da7a898e58ed60fbd7b4e7d036169f902ccf1b57cf46b393",
+      "elapsedMs": 73
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/approvals/1805",
+      "parameters": {},
+      "label": "approval-YF-SO-QD-S",
+      "attempt": 1,
+      "at": "2026-11-13T12:31:43.661421+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-123141/004-approval-YF-SO-QD-S.json",
+      "sha256": "72b3e18888af713cc312d89ef63730ee0482602cd2fb8ef40a9066a3f94f2454",
+      "elapsedMs": 60
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/record-context/purchase-orders/1403",
+      "parameters": {},
+      "label": "po-context-YF-SO-PZ-M",
+      "attempt": 1,
+      "at": "2026-11-13T12:31:44.372293+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-123141/005-po-context-YF-SO-PZ-M.json",
+      "sha256": "62ac425653ff425aa3f2d7abd643a5bd4fdbf834c8fd8e3563205294dda2afda",
+      "elapsedMs": 40
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/approvals/1808",
+      "parameters": {},
+      "label": "approval-YF-SO-PZ-M",
+      "attempt": 1,
+      "at": "2026-11-13T12:31:45.063995+00:00",
+      "httpStatus": 200,
+      "privateResponse": "data/private/s01-replenishment-survey/20261113-123141/006-approval-YF-SO-PZ-M.json",
+      "sha256": "ddea509e6c410d624b4d8cbf9697a255e1ea8a32825fa14c5e0da2aab0a22416",
+      "elapsedMs": 44
+    }
+  ],
+  "privateArtifactPins": [
+    {
+      "path": "data/private/s01-replenishment-survey/20261113-122702/findings.json",
+      "sha256": "91a0715eb18d29448f9cc004f8f900b91c0753f0bfaef323b00d5d4459cd1901"
+    },
+    {
+      "path": "data/private/s01-replenishment-survey/20261113-122856/supplement.json",
+      "sha256": "11fa01c8360f421676a8b7026644dd00bc59db1d244695b4e32dc92e52f68dcb"
+    },
+    {
+      "path": "data/private/s01-replenishment-survey/20261113-123141/purchase-traces.json",
+      "sha256": "9b9d37466d8d64142906f0d9c03bfa6676fa7aa47ebd407499ff362206e87638"
+    },
+    {
+      "path": "data/private/s01-replenishment-survey/20261113-122702/journal.json",
+      "sha256": "000b8653646aead928cef32a1ebf14554508aef3bccbc254c53796982f28f3d6"
+    },
+    {
+      "path": "data/private/s01-replenishment-survey/20261113-122856/journal.json",
+      "sha256": "36fca49e1a98c7a9eb40cac460ef6193b70e53d58775f687d5867b76875abff8"
+    },
+    {
+      "path": "data/private/s01-replenishment-survey/20261113-123141/journal.json",
+      "sha256": "3928923483fa81c15d570365c960e10f8b556c5e928db04745672dee90e6b372"
+    }
+  ],
+  "assumptions": [
+    "Product unit piece suggests source quantity uses piece, but field-specific unit contract is not proven",
+    "No Listing and empty MSKU query may explain missing compat matches; causal implementation not proven",
+    "Teaching product descriptions are author-maintained scenario intent, not calculator logs or instructions"
+  ],
+  "decision": "REFERENCE DISPLAY ONLY; NO_DIRECT_REQUISITION; V2_DESIGN_RECOMMENDED_PENDING_SCOPE_AND_SOURCE_CONTRACT_APPROVAL"
+}

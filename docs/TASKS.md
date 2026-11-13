@@ -1,3 +1,5 @@
+当前本轮完成（2026-11-13）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
+
 当前P3最终验收（2026-11-13）：固定3a8e95f重新复核，746全量后端/38前端/类型构建/迁移/历史兼容/1406独立只读回读通过；最小教学闭环ACCEPTED，正常合main待执行。已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣，企业四门BLOCKED；本轮无ERP业务写或模型。详见最终验收报告与S01-P3-ACCEPTANCE。
 
 当前领取（2026-11-13，P3正式验收与补货建议来源调查）：Codex单人，起点codex/s01-p3-minimal-loop / 3a8e95fe3aca33d1bf285d4f7774b450216adaec，main/origin/main db13298；唯一未知未跟踪docs/ERP-openapi.yaml保留。先全量回归/独立复核，条件通过后ACCEPTED及正常合main/推送；随后仅对截图5SKU/MIMI Apparel US及授权只读范围调查。写入范围为TASKS/HANDOFF/DECISIONS、调查与验收报告/脱敏证据/生成视图，必要阻断修复；不开发V2、不改B01/B02、不ERP业务写/模型。
@@ -7950,7 +7952,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "currentDeliveryScope": "采购能力调查材料REVIEW，非P3开发/采购闭环验收。四企业门保持，未知OpenAPI保留；本地提交后停止，不合main、不自动推送/开发/采购。"
-}```
+}
+```
 
 
 ## P3最小业务闭环
@@ -8123,9 +8126,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "ACCEPTED",
       "reason": "负责人本轮明确条件合并授权；Codex重新独立检查固定3a8e95f，全量746/38与迁移/历史/只读回读无阻断。仅最小闭环，不接受未验证正样本/在途抵扣。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "ACCEPTED",
+      "reason": "正常合并main 60e9cf2d53d368999936b894fa8c7f6d32352d9d；合并后746/38/类型构建/历史回放通过，普通push和独立ls-remote一致。"
     }
   ],
-  "currentDeliveryScope": "P3最小教学请购闭环ACCEPTED；746全量后端/38前端/类型构建/迁移历史兼容及1406只读回读PASS。正常合main获准且待执行；已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣、企业门BLOCKED保留。",
+  "currentDeliveryScope": "P3最小教学闭环ACCEPTED并正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d，已普通push/ls-remote一致；合并前后各746全量后端/38前端/类型构建及迁移历史兼容PASS；申请1406只读回读PASS。自有已审批正样本未验证、有效在途UNKNOWN不抵扣、企业门BLOCKED保留。",
   "deliveryLimitations": [
     "Approved formal PO positive live sample BLOCKED; source-filtered empty queries VERIFIED, multi-SKU/scope behavior engineering PASS only",
     "Committed sellable date and effective remainder closure semantics UNKNOWN; no ERP supply deduction",
@@ -8142,6 +8150,127 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "state": "REVIEW",
     "mergedMain": false,
     "note": "This receipt records the actual delivery commit before the subsequent bookkeeping commit; final branch HEAD is checked again after pushing bookkeeping."
+  },
+  "mergePublication": {
+    "mergeCommit": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+    "acceptedBranchCommit": "1ed6c4ccf4af17e99d0650728c415953f6e0eabc",
+    "remoteMainVerified": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+    "postMergeBackend": 746,
+    "postMergeFrontend": 38,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "evidenceRef": "docs/evidence/S01-P3-ACCEPTANCE/verification.json"
   }
+}
+```
+
+## ERP补货建议来源与V2可行性调查
+
+```json
+{
+  "id": "D-S01-REPLENISHMENT-SURVEY-01",
+  "stage": "D",
+  "title": "ERP现有补货建议真实只读验证及S01 V2可行性评估",
+  "kind": "investigation",
+  "dependsOn": [
+    "D-S01-P3-MIN-01"
+  ],
+  "entryCondition": "负责人本轮明确授权P3最终验收合并后，优先截图5SKU/MIMI店铺，有限只读GET及经确认query POST；不开发V2/不业务写/不模型。",
+  "ownerRole": "Codex单人调查；负责人审阅",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/reports/S01_ERP补货建议来源验证与V2可行性_20261113.md",
+    "docs/evidence/S01-REPLENISHMENT-SURVEY/",
+    "docs/generated/",
+    "docs/planning/"
+  ],
+  "parallelCondition": "Codex单人；无代理；B01/B02及P3代码不改，未知OpenAPI保留。",
+  "deliverables": [
+    "逐SKU页面/API/商品库存采购对照、脱敏HTTP指纹及可行性报告；无V2实现。"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-REPLENISHMENT-SURVEY-01/AC1",
+      "text": "确认账号租户店铺与调查授权边界，以精确有界只读API验证5SKU及字段/采购关联；异常/空值/不完整如实保留。"
+    },
+    {
+      "id": "D-S01-REPLENISHMENT-SURVEY-01/AC2",
+      "text": "区分观察/Schema/工程/推测，给出来源等级及V2最小改造/阶段/风险；不实现、不业务写、不扩大正式成员。"
+    }
+  ],
+  "plannedTests": [
+    "真实认证/身份/精确列表/独立详情上下文/已知ID三页批量；5SKU商品库存关联、同SKU采购/审批独立GET；离线白名单摘要断言、文档/公开凭据扫描。"
+  ],
+  "risks": [
+    "管理员共享权限不等于本项目资产；建议无仓ID/Listing缺失/未来生成时间；在途跨仓晚到与部分收货语义不明；参考值误用于请购。"
+  ],
+  "requiredEvidenceKinds": [
+    "ERP_API",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [],
+  "testedCommit": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+  "evidence": [
+    {
+      "kind": "ERP_API",
+      "acceptanceIds": [
+        "D-S01-REPLENISHMENT-SURVEY-01/AC1",
+        "D-S01-REPLENISHMENT-SURVEY-01/AC2"
+      ],
+      "command": "read_only_probe.py; supplemental_reads.py; purchase_trace_reads.py; summarize.py",
+      "environment": "固定教学ERP/本机.env.erp，真实只读GET与已声明query POST，原始响应私有不入Git",
+      "sample": "63HTTP全200=3认证+60业务读取；5目标记录/4正数量/1零；商品库存关联与两采购独立详情/审批通过或审批中核对；REST已知ID3页完整，兼容店铺2/667有界不完整保留。REFERENCE_ONLY，USABLE_FALLBACK=0。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-REPLENISHMENT-SURVEY/summary.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-REPLENISHMENT-SURVEY-01/AC1",
+        "D-S01-REPLENISHMENT-SURVEY-01/AC2"
+      ],
+      "command": "summarize.py; python docs/planning/build_docs.py; python docs/planning/check_plan.py; full changed-file credential/preservation audit; git diff --check",
+      "environment": "本地离线白名单摘要/原始响应指纹与实际Git检查；无新网络",
+      "sample": "63次真实请求原件指纹、页面API值/关联/3页完整性断言PASS；18文档检查PASS，16变更/新增文件凭据扫描0发现；原44任务/B01/B02/未知OpenAPI保全，无V2实现。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-REPLENISHMENT-SURVEY/verification.json"
+    }
+  ],
+  "review": null,
+  "branch": "main",
+  "observedHead": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人本轮明确授权在P3完成后调查截图5SKU，不再仅自建两SKU。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "真实63次只读调查完成；REST5记录/4正1零，参考使用/无可执行降级；V2仅报告和分阶段建议，完成普通同步后停止。"
+    }
+  ],
+  "currentDeliveryScope": "REFERENCE_ONLY：REST找到5条目标记录、4正量1零，页面一致；getSummaryList目标映射UNVERIFIED。已保存数量/商品单位/库存及QD-S审批采购200、PZ-M待审150可查；算法/真实生成时间/采购在途抵扣UNKNOWN，不进入P3请购。",
+  "reportRef": "docs/reports/S01_ERP补货建议来源验证与V2可行性_20261113.md",
+  "sourceVerdict": "REFERENCE_ONLY",
+  "usableFallbackRecords": 0,
+  "projectMembersAdded": 0,
+  "businessMutations": 0,
+  "modelCalls": 0,
+  "implementationNote": "本轮调查脚本在工作区执行；实际固定提交在后续回执登记，不预造SHA。应用基线60e9cf2。"
 }
 ```

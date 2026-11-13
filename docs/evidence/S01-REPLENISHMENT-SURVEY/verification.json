@@ -1,0 +1,32 @@
+{
+  "result": "PASS_SURVEY_INTEGRITY_NOT_FALLBACK_ACCEPTANCE",
+  "applicationBaseline": "60e9cf2d53d368999936b894fa8c7f6d32352d9d",
+  "offlineSummaryCommand": ".tmp/stage-a-clean/Scripts/python.exe docs/evidence/S01-REPLENISHMENT-SURVEY/summarize.py",
+  "checks": {
+    "rawResponseFingerprints": "PASS",
+    "fiveScreenshotRESTComparisons": "PASS",
+    "productInventoryRelationships": "PASS",
+    "independentPurchaseDetailsAndApprovalBusinessNumbers": "PASS",
+    "boundedRESTBatchPaging": "PASS_2_2_1",
+    "historicalP3B01B02Artifacts": "PRESERVED",
+    "oldTaskRecords": 44,
+    "unknownUntrackedOpenAPI": "PRESERVED",
+    "documentationChecks": 18,
+    "documentationFailures": 0,
+    "publicationScan": "PASS_16_FILES_0_FINDINGS",
+    "applicationChangesSinceAcceptedMerge": 0,
+    "sourceAPIAtCommit": "REAL_READS_IN_PRECOMMIT_WORKTREE; APPLICATION_AT_60e9cf2",
+    "businessMutations": 0,
+    "modelCalls": 0
+  },
+  "limitations": [
+    "REFERENCE_ONLY is a source verdict, not permission to procure",
+    "compat 2/667 page intentionally incomplete",
+    "No new browser or changed-fact/recalculation experiment was run",
+    "Scripts and report fixed commit will be recorded after commit"
+  ],
+  "privateAudit": {
+    "path": "data/private/s01-p3-acceptance/survey-precommit-publication-audit.json",
+    "sha256": "4c25c9cf4b28a3f79804da68237e887925356ebae608dd9cb329d37b690b6b85"
+  }
+}
