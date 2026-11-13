@@ -31,8 +31,14 @@ python docs/planning/check_plan.py
 # 按docs/runbooks/s01-frontend.md启动受控本机API/Worker/Vite，另设新证据目录后 npm run test:browser
 ```
 
-## 远端同步阻塞（本轮实际传输事实）
+## 历史远端同步阻塞（现已解除）
 
 初始fetch成功，源分支精确098fe19、main6fdf10c祖先核对通过。验收登记e08f264并--ff-only本地main，全部639/31/6回归与18项文档检查及安全/账本保全通过，收尾证据提交e8b97389922194691c15cc6f4c82c86c754ff714。随后保持证书验证的现有HTTP代理/OpenSSL、Windows schannel和SOCKS通道Git fetch/push均TLS握手失败，直连连接重置；原代理公开DNS诊断超时。没有关闭TLS校验、强推、换源或通过API重建Git历史。
 
 GitHub接口独立回读确认远端main仍6fdf10cd6850794cc1ba2695078e68a58996e974、来源仍098fe19bfc2c67476cb18443bbad29d12c5d0ffd。本轮技术范围仍ACCEPTED，本地合并完成；远端同步FAIL/未完成，不宣称推送成功。负责人已收到恢复网络/提供可用本机代理的请求；网络恢复后仅需重新核对远端无漂移，普通push main并回读。该传输阻塞与应用测试结果分开，保留已测e08f264和后续仅文档证据提交；最新本地HEAD以Git实际读取为准。
+
+## 远端同步恢复确认
+
+当前同步完成：用户再次授权重推后，已通过Clash 127.0.0.1:7890、保留TLS证书校验普通push main成功（6fdf10c..85ce1cd），GitHub接口回读远端为85ce1cd45504d25e066eafaa7497e5dcb08f6754，本地/跟踪引用一致。此前网络阻塞已解除，下方失败记录保留为历史。教学技术验收范围ACCEPTED、四企业门BLOCKED及整体验收TODO保持；639后端/31前端/6浏览器等固定e08f264测试沿用，本次只追加文档同步记录，无新模型/ERP调用或Token。
+
+回读时点UTC：2026-11-13T00:52:07.515299+00:00。本次后续仅文档收尾提交，最终main与远端一致性按实际Git回读，未重新运行业务/付费测试；固定已测源码无变化。

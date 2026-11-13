@@ -1,3 +1,5 @@
+当前同步完成：用户再次授权重推后，已通过Clash 127.0.0.1:7890、保留TLS证书校验普通push main成功（6fdf10c..85ce1cd），GitHub接口回读远端为85ce1cd45504d25e066eafaa7497e5dcb08f6754，本地/跟踪引用一致。此前网络阻塞已解除，下方失败记录保留为历史。教学技术验收范围ACCEPTED、四企业门BLOCKED及整体验收TODO保持；639后端/31前端/6浏览器等固定e08f264测试沿用，本次只追加文档同步记录，无新模型/ERP调用或Token。
+
 当前同步阻塞增量：本地main已完成ff-only和639/31/6复验，教学技术验收登记有效；普通push main遇GitHub TLS持续握手失败/直连重置，远端main仍6fdf10c（接口回读）。本轮远端同步未完成，等待网络恢复后仅核对/普通push；不改验收范围、四门或预算。详情docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。
 
 当前验收合并后复验（2026-11-13，main固定e08f264）：--ff-only完成，本轮教学技术范围ACCEPTED，UI任务ACCEPTED、C-04技术scopeDecision=ACCEPTED/整体REVIEW。639后端/31前端/6浏览器、类型/构建PASS，639原基线逐名保全；DeepSeek与ERP联网复测按指令NOT_RUN，新增Token0。旧5642Token/$0.15及新10047Token/$0.25账本原样、费用UNKNOWN；历史证据/算法/迁移/依赖未变，企业四门BLOCKED、整体验收TODO。最终文档提交与远端main同步以Git实时回读为准；证据docs/evidence/S01-UI-C04-ACCEPTANCE/report.md。
@@ -3465,6 +3467,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "newTokens": 0,
       "budgetUnchanged": true,
       "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md"
+    },
+    {
+      "event": "REMOTE_MAIN_SYNC_CONFIRMED",
+      "at": "2026-11-13T00:52:07.515299+00:00",
+      "syncedCommit": "85ce1cd45504d25e066eafaa7497e5dcb08f6754",
+      "method": "ordinary git push origin main via Clash; TLS verification enabled",
+      "remoteReadback": "PASS",
+      "sourceReviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+      "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
+      "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md"
     }
   ],
   "completionEvidence": [
@@ -5929,6 +5941,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "erpNetworkRequests": 0,
       "newTokens": 0,
       "budgetUnchanged": true,
+      "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md"
+    },
+    {
+      "event": "REMOTE_MAIN_SYNC_CONFIRMED",
+      "at": "2026-11-13T00:52:07.515299+00:00",
+      "syncedCommit": "85ce1cd45504d25e066eafaa7497e5dcb08f6754",
+      "method": "ordinary git push origin main via Clash; TLS verification enabled",
+      "remoteReadback": "PASS",
+      "sourceReviewedCommit": "098fe19bfc2c67476cb18443bbad29d12c5d0ffd",
+      "testedCommit": "e08f2640171eb34d72a1b2df4b02933b35bed8a3",
       "evidenceRef": "docs/evidence/S01-UI-C04-ACCEPTANCE/report.md"
     }
   ],
