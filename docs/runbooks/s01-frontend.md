@@ -6,7 +6,10 @@
 
 使用已有 `.tmp/stage-a-clean` Python 环境、本机 `.env` 获准 MySQL 账号及唯一 `s01_a01_test_20261112`，迁移应已处于 `0005_optional_usage`。启动工具不执行迁移、清库或 ERP / 模型访问。已有私有教学批次 catalog 必须就绪；不能用不存在的包自动回落到模拟 SKU。
 
+当前开发机已安装 Python 3.13.5、Node.js 24.21.0 / npm 11.19.0 及前端依赖。新机器先按根 README 安装 Python 依赖，在 `frontend/` 执行 `npm ci`，并取得获准的本机 `.env`、私有 `data/private/s01-teaching-dataset/S01-AI-TEST-20261112/catalog.json`；这些私有资料不随 Git 分发。普通页面模型 off；独立 DeepSeek A—E 评测通过不表示页面会自动发送模型请求。
+
 ```powershell
+Set-Location -LiteralPath 'D:\电商项目\跨境电商智慧AI平台'
 $env:PYTHONPATH='src'
 .tmp/stage-a-clean/Scripts/python.exe -m tools.s01_frontend_dev --execute-local
 ```
@@ -16,14 +19,16 @@ $env:PYTHONPATH='src'
 另一终端：
 
 ```powershell
-cd frontend
-npm ci
+Set-Location -LiteralPath 'D:\电商项目\跨境电商智慧AI平台\frontend'
 $s01Local = Get-Content ../data/private/s01-frontend/session.json -Raw | ConvertFrom-Json
 $env:S01_API_TARGET=$s01Local.apiTarget
+Set-Clipboard -Value $s01Local.token
 npm run dev
 ```
 
-打开 `http://localhost:5173`。点击“连接身份”，从本机私有回执取得短期 Bearer 连接；它只用于 POST `/api/v1/session` 交换 Cookie，用后清空，不写入浏览器存储。已有 Cookie 可留空核对。不要在此输入 ERP 密码或服务端签名密钥。开发代理只允许 loopback HTTP API，浏览器同源，不扩 CORS、不关闭 CSRF / Origin、不删除 Secure。实际 Edge 已核验 localhost Secure Cookie 行为；非 localhost 正式部署必须使用 HTTPS。
+等终端 1 显示 READY 后再启动终端 2。打开 `http://localhost:5173`，点击“连接身份”，将剪贴板令牌粘贴到“短期身份令牌”，点击“连接会话”。连接后在另一个 PowerShell 执行 `Set-Clipboard -Value ''` 清空剪贴板；令牌不复制到聊天、Git 或 URL。它只用于 POST `/api/v1/session` 交换 Cookie，用后清空，不写入浏览器存储。已有 Cookie 可留空核对。开发代理只允许 loopback HTTP API，浏览器同源，保留 CSRF / Origin / Secure；非 localhost 正式部署必须使用 HTTPS。
+
+后端及测试身份默认在900秒（15分钟）到期，不是常驻服务。两个终端各按Ctrl+C停止；重启时先后端、再重新读取session.json并启动Vite，最后连接新令牌。API使用动态端口，重启后不能继续沿用上一次S01_API_TARGET。只启动通用空注册表底座会导致UNSUPPORTED_SCENARIO，应使用上述S01专用入口。5173端口占用时先关闭属于本项目的旧Vite；缺少私有catalog或数据库/迁移不满足时按实际报错补齐，不会自动创建或迁移。
 
 生产静态交付为 `npm run build` 生成的 `frontend/dist/`，由部署方同源托管并把 `/api/` 转发到既有 FastAPI；`COMMERCE_BROWSER_ORIGIN` 必须与真实 HTTPS Origin 精确匹配。Vite 是开发工具，不是生产身份提供方。企业部署/SSO/上线与新账号权限均不在本轮验收范围。
 

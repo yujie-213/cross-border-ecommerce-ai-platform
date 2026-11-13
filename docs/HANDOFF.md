@@ -1,3 +1,9 @@
+## README与本机启动入口补齐（2026-11-13）
+
+负责人询问README及启动方式；接手main/3637beb221ee7a533d8f6dfa1a72e12b7f4541a3，跟踪区干净，未知docs/ERP-openapi.yaml保留。README此前仍写前端未接入和旧模型失败，本轮仅更新README、前端运行手册及TASKS/HANDOFF文档，补上当前教学工作台的双终端启动、动态API端口、私有短期令牌连接、默认900秒到期与重启、新机器私有包/依赖条件；不修改服务逻辑或任务验收状态。
+
+本机Python3.13.5、Node24.21.0/npm11.19.0、现有Python环境/前端依赖/.env/私有catalog存在。启动工具--help及默认无执行入口正常；SELECT确认唯一s01_a01_test_20261112连接及0005_optional_usage；本轮不实际启动新API/Worker或产生身份/任务/预算写入，无ERP/模型调用。PowerShell文档语法/相对链接及18项文档检查按实际命令验证，应用源码/测试/依赖与3637beb保持一致；此前639/31/6为既有验收基线，本轮文档变更不冒充重跑。四企业门/整体TODO及历史证据保持，完整操作入口README和docs/runbooks/s01-frontend.md。
+
 ## main远端同步完成
 
 当前同步完成：用户再次授权重推后，已通过Clash 127.0.0.1:7890、保留TLS证书校验普通push main成功（6fdf10c..85ce1cd），GitHub接口回读远端为85ce1cd45504d25e066eafaa7497e5dcb08f6754，本地/跟踪引用一致。此前网络阻塞已解除，下方失败记录保留为历史。教学技术验收范围ACCEPTED、四企业门BLOCKED及整体验收TODO保持；639后端/31前端/6浏览器等固定e08f264测试沿用，本次只追加文档同步记录，无新模型/ERP调用或Token。
