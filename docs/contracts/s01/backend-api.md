@@ -5,6 +5,14 @@
 
 ## 1. 对接原则
 
+### 2026-11-13 在线模式兼容增量
+
+显式在线装配 `commerce_hub.bootstrap.s01_online` 注册相同 `S01_BACKEND/0.1.0`。options的在线选项返回 `choiceRef`、`inputMode=ONLINE_TEACHING_ERP`、精确scope、`asOf=null`；选项只是服务端授权映射，API不联网查数。SKU选择限定最多20个已配置映射，Worker重新核实来源身份；不支持无界商品搜索。
+
+创建在线任务的 `parameters` 为 `{"inputMode":"ONLINE_TEACHING_ERP"}`，不传packageRef、源事实、路径或规则。原固定包请求不变，只有显式配置固定目录才可用。在线任务永不回退固定包。新命令新采集；同key重放原任务。受理事务不等待ERP网络；Worker在锁外采集，短事务复核身份、租约、plan及期限后，D01提交采集回执、D03保存不可变输入。已完成采集在恢复中复用；未完成尝试保留INTERRUPTED、最多两次采集尝试。旧租约及取消后不可提交/发布。
+
+在线公开报告新增 `dataReport.acquisition`：采集ID、请求范围、开始/完成时间、接口覆盖/错误/条数/摘要、映射版本和多接口非原子限制；`observedDomains`提供有依据的原字段观测，语义未确认不能视为净可售。manifest、规范化内部输入和原始敏感响应不公开；历史读取不访问ERP，固定到原snapshot。报告技术成功与业务BLOCKED/PARTIAL分别展示。`scenarioSupplement.inputMode`区分在线与固定来源，在线报告无需packageRef。
+
 - 前端先调用 options，使用服务端返回的 `packageRef` 和精确 scope 创建任务。浏览器不能提交 ERP 原始响应、文件路径、来源签认或业务规则。
 - 任务技术状态、报告完整性、AI 可用性和采购适用性是四个独立维度，不能合并成一个“成功”状态。
 - `state=SUCCEEDED` 只表示任务完成且报告已发布。它不表示 `completeness=RULES_ONLY`、AI `AVAILABLE`、真实业务准入通过或可以采购。

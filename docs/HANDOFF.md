@@ -1,3 +1,9 @@
+## 在线业务闭环领取（2026-11-13）
+
+当前在线闭环授权（2026-11-13，基于main/2fba3b4）：负责人授权连续完成ERP在线只读采集、既有B01/B02在线消费及正常流程DeepSeek解释三个阶段，独立分支codex/s01-live-business-closure，Codex单人集成。模型独立授权s01-online-20261113-r1：最多10次/100000Token/$1，单并发、有界超时、未知发送不重发。仅教学、禁止ERP业务写入/采购执行，不合main；最终REVIEW，企业四门原状。未知docs/ERP-openapi.yaml保留。
+
+接手跟踪区干净，无未提交diff；已fetch最新origin/main同基点。文件范围：D01/D02/D03在线增量、S01组合根与Handler、HTTP/前端兼容适配、必要迁移/测试/工具及交接证据。原固定catalog、历史模型任务和全部验收证据保全。初始所有新实测NOT_RUN。
+
 ## README与本机启动入口补齐（2026-11-13）
 
 负责人询问README及启动方式；接手main/3637beb221ee7a533d8f6dfa1a72e12b7f4541a3，跟踪区干净，未知docs/ERP-openapi.yaml保留。README此前仍写前端未接入和旧模型失败，本轮仅更新README、前端运行手册及TASKS/HANDOFF文档，补上当前教学工作台的双终端启动、动态API端口、私有短期令牌连接、默认900秒到期与重启、新机器私有包/依赖条件；不修改服务逻辑或任务验收状态。

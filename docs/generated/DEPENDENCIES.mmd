@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=e9b874e456abafe8701fe0f6e4e7ea85a8e1a45ee8b558e1ef7cd4d782044cdd
+%% TASKS sourceSha256=d816013b67599e63172b91790a8ce42545dbf03cd986ad64c0babdada5cc2570
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -31,6 +31,9 @@ flowchart TB
   D_S01_UI_01["D-S01-UI-01 沿用S01原型的真实API/AI详情对接"]
   D_S01_ACCEPT_01["D-S01-ACCEPT-01 单SKU S01 MVP端到端复现与负责人验收"]
   D_S01_MVP_TODO["D-S01-MVP-TODO S01 MVP分阶段开发任务规划（本轮仅文档）"]
+  D_S01_ONLINE_01["D-S01-ONLINE-01 ERP在线采集与工作台入口"]
+  D_S01_ONLINE_02["D-S01-ONLINE-02 在线数据准入与B01/B02"]
+  D_S01_ONLINE_03["D-S01-ONLINE-03 正常在线任务DeepSeek解释"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -73,3 +76,11 @@ flowchart TB
   D_S01_DEV_01 --> D_S01_ACCEPT_01
   D_S01_UI_01 --> D_S01_ACCEPT_01
   C_04 --> D_S01_ACCEPT_01
+  A_06 --> D_S01_ONLINE_01
+  B_01 --> D_S01_ONLINE_01
+  D_S01_UI_01 --> D_S01_ONLINE_01
+  D_S01_ONLINE_01 --> D_S01_ONLINE_02
+  B_03 --> D_S01_ONLINE_02
+  B_04 --> D_S01_ONLINE_02
+  D_S01_ONLINE_02 --> D_S01_ONLINE_03
+  C_01 --> D_S01_ONLINE_03

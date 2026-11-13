@@ -31,6 +31,11 @@ class ExecutionContext:
     def budget(self):
         return TaskBudgetHandle(self.service, self.lease, self.principal, self.task["plan_version"])
 
+    def commit_data(self, operation):
+        if self.lost.is_set():
+            raise LeaseLost('LEASE_LOST')
+        return self.service.execution_transaction(self.lease, self.principal, self.task['plan_version'], operation)
+
 
 class Worker:
     def __init__(self, service, heartbeat_seconds=2):

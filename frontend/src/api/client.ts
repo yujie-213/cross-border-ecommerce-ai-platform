@@ -28,7 +28,7 @@ export async function request<T>(path: string, init: RequestInit = {}, signal?: 
 }
 export function createBody(choice: Choice, previous: Ref | null = null): CreateBody {
   const { storeIds, warehouseIds, canonicalSkuIds, fields } = choice.scope
-  return { analysisMode: 'SINGLE', scenarioId: 'S01_BACKEND', scope: { storeIds, warehouseIds, canonicalSkuIds, fields }, parameters: { packageRef: choice.packageRef }, previousReportRef: previous }
+  return { analysisMode: 'SINGLE', scenarioId: 'S01_BACKEND', scope: { storeIds, warehouseIds, canonicalSkuIds, fields }, parameters: choice.inputMode === 'ONLINE_TEACHING_ERP' ? { inputMode: 'ONLINE_TEACHING_ERP' } : { packageRef: choice.packageRef! }, previousReportRef: previous }
 }
 export const api = {
   options: (signal?: AbortSignal) => request<Options>('/s01/options', {}, signal),

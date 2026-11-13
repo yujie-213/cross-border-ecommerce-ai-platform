@@ -281,6 +281,16 @@ class TaskService:
         with self.engine.begin() as conn:
             self._execution(conn, lease, principal, plan_version)
 
+    def execution_transaction(self, lease, principal, plan_version, operation):
+        """Coordinate a data owner's short commit with current execution authority.
+
+        The callback must be local DB work; network IO remains outside this transaction.
+        Data owners retain their own tables and contracts.
+        """
+        with self.engine.begin() as conn:
+            self._execution(conn, lease, principal, plan_version)
+            return operation(conn)
+
     def complete(self, lease, principal, plan_version, result=None):
         with self.engine.begin() as conn:
             row = self._execution(conn, lease, principal, plan_version)

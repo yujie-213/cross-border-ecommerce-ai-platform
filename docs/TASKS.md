@@ -1,3 +1,5 @@
+当前在线闭环授权（2026-11-13，基于main/2fba3b4）：负责人授权连续完成ERP在线只读采集、既有B01/B02在线消费及正常流程DeepSeek解释三个阶段，独立分支codex/s01-live-business-closure，Codex单人集成。模型独立授权s01-online-20261113-r1：最多10次/100000Token/$1，单并发、有界超时、未知发送不重发。仅教学、禁止ERP业务写入/采购执行，不合main；最终REVIEW，企业四门原状。未知docs/ERP-openapi.yaml保留。
+
 当前启动文档补齐（2026-11-13，基于main/3637beb）：仅纠正README旧阶段描述，增加现有S01本机教学工作台双终端启动/身份/15分钟到期重启说明，更新前端手册与交接；31条任务JSON及验收范围不变，无新业务开发、ERP或模型调用。
 
 当前同步完成：用户再次授权重推后，已通过Clash 127.0.0.1:7890、保留TLS证书校验普通push main成功（6fdf10c..85ce1cd），GitHub接口回读远端为85ce1cd45504d25e066eafaa7497e5dcb08f6754，本地/跟踪引用一致。此前网络阻塞已解除，下方失败记录保留为历史。教学技术验收范围ACCEPTED、四企业门BLOCKED及整体验收TODO保持；639后端/31前端/6浏览器等固定e08f264测试沿用，本次只追加文档同步记录，无新模型/ERP调用或Token。
@@ -6215,6 +6217,209 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "分阶段开发TODO已提交并经依赖/覆盖/保全及18项文档规则检查；只完成规划文档，开发未开始、准入缺口未关闭，交负责人和星星评审后另行授权",
       "observedHead": "26af91242f4ea5f0bb5a1d85ed21f24520662d23"
     }
+  ]
+}
+```
+
+## D-S01-ONLINE-01 ERP在线采集与工作台入口
+
+```json
+{
+  "id": "D-S01-ONLINE-01",
+  "stage": "D",
+  "title": "ERP在线采集与工作台入口",
+  "kind": "implementation",
+  "dependsOn": [
+    "A-06",
+    "B-01",
+    "D-S01-UI-01"
+  ],
+  "entryCondition": "负责人2026-11-13三阶段连续授权；各真实验证遵守本轮用途及预算",
+  "ownerRole": "主集成",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "src/commerce_hub/",
+    "tests/",
+    "tools/",
+    "frontend/",
+    "migrations/",
+    "docs/",
+    "README.md"
+  ],
+  "parallelCondition": "Codex单人串行",
+  "deliverables": [
+    "ERP在线采集与工作台入口",
+    "独立实现提交与阶段证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-ONLINE-01/AC1",
+      "text": "真实Worker新采集、两独立任务、幂等重放、快照/历史、错误阻断和无固定包回退"
+    }
+  ],
+  "plannedTests": [
+    "真实Worker新采集、两独立任务、幂等重放、快照/历史、错误阻断和无固定包回退"
+  ],
+  "risks": [
+    "教学数据不等于企业经营事实；缺口保持UNKNOWN/BLOCKED"
+  ],
+  "requiredEvidenceKinds": [
+    "ENGINEERING",
+    "LIVE"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "本轮连续授权；领取和测试按真实阶段推进"
+    }
+  ],
+  "dirtyPaths": [
+    "本轮精确范围见git diff及docs/planning/git-whitelist.json"
+  ]
+}
+```
+
+## D-S01-ONLINE-02 在线数据准入与B01/B02
+
+```json
+{
+  "id": "D-S01-ONLINE-02",
+  "stage": "D",
+  "title": "在线数据准入与B01/B02",
+  "kind": "implementation",
+  "dependsOn": [
+    "D-S01-ONLINE-01",
+    "B-03",
+    "B-04"
+  ],
+  "entryCondition": "负责人2026-11-13三阶段连续授权；各真实验证遵守本轮用途及预算",
+  "ownerRole": "主集成",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "src/commerce_hub/",
+    "tests/",
+    "tools/",
+    "frontend/",
+    "migrations/",
+    "docs/",
+    "README.md"
+  ],
+  "parallelCondition": "Codex单人串行",
+  "deliverables": [
+    "在线数据准入与B01/B02",
+    "独立实现提交与阶段证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-ONLINE-02/AC1",
+      "text": "真实ERP标准化、可信或受限计算、来源绑定、负例和Golden保全；正向受阻单列"
+    }
+  ],
+  "plannedTests": [
+    "真实ERP标准化、可信或受限计算、来源绑定、负例和Golden保全；正向受阻单列"
+  ],
+  "risks": [
+    "教学数据不等于企业经营事实；缺口保持UNKNOWN/BLOCKED"
+  ],
+  "requiredEvidenceKinds": [
+    "ENGINEERING",
+    "LIVE"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "TODO",
+      "reason": "本轮连续授权；领取和测试按真实阶段推进"
+    }
+  ],
+  "dirtyPaths": [
+    "本轮精确范围见git diff及docs/planning/git-whitelist.json"
+  ]
+}
+```
+
+## D-S01-ONLINE-03 正常在线任务DeepSeek解释
+
+```json
+{
+  "id": "D-S01-ONLINE-03",
+  "stage": "D",
+  "title": "正常在线任务DeepSeek解释",
+  "kind": "implementation",
+  "dependsOn": [
+    "D-S01-ONLINE-02",
+    "C-01"
+  ],
+  "entryCondition": "负责人2026-11-13三阶段连续授权；各真实验证遵守本轮用途及预算",
+  "ownerRole": "主集成",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "src/commerce_hub/",
+    "tests/",
+    "tools/",
+    "frontend/",
+    "migrations/",
+    "docs/",
+    "README.md"
+  ],
+  "parallelCondition": "Codex单人串行",
+  "deliverables": [
+    "正常在线任务DeepSeek解释",
+    "独立实现提交与阶段证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-ONLINE-03/AC1",
+      "text": "本次在线快照到A01/G02及Vue，真实Token、事实引用、失败降级与预算/幂等/恢复保全"
+    }
+  ],
+  "plannedTests": [
+    "本次在线快照到A01/G02及Vue，真实Token、事实引用、失败降级与预算/幂等/恢复保全"
+  ],
+  "risks": [
+    "教学数据不等于企业经营事实；缺口保持UNKNOWN/BLOCKED"
+  ],
+  "requiredEvidenceKinds": [
+    "ENGINEERING",
+    "LIVE"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "TODO",
+      "reason": "本轮连续授权；领取和测试按真实阶段推进"
+    }
+  ],
+  "dirtyPaths": [
+    "本轮精确范围见git diff及docs/planning/git-whitelist.json"
   ]
 }
 ```

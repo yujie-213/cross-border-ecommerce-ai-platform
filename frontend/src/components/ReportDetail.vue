@@ -19,6 +19,12 @@ const facts = computed(() => baseline.value ? [
 <template>
   <div class="detail-top"><div><div class="eyebrow">S01 / REPORT</div><h1>{{ report.scope.canonicalSkuIds.join('、') }}</h1><p class="subtitle">{{ report.scope.storeIds.join('、') }} / {{ report.scope.warehouseIds.join('、') }} · 分析时点 {{ shown(data.scenarioSupplement.asOf) }}</p></div><StatusBadge :value="report.completeness" /></div>
   <Notice tone="warning" :title="sourceText(report.sourceNature)"><p class="mono wrap">{{ report.sourceNature }}</p>仅教学 / 只读复核，企业正式四项门禁保持 BLOCKED，当前结果不可作为正式采购依据。</Notice>
+  <Panel v-if="data.acquisition" title="本次 ERP 在线采集" note="历史报告始终读取本次快照">
+    <dl class="metadata"><dt>采集标识</dt><dd>{{ data.acquisition.acquisitionId }}</dd><dt>开始 / 完成</dt><dd>{{ data.acquisition.startedAt }} / {{ data.acquisition.completedAt }}</dd><dt>映射版本</dt><dd>{{ data.acquisition.mappingVersion }}</dd></dl>
+    <div v-for="(item, name) in data.acquisition.interfaces" :key="name" class="key-value"><span>{{ name }}</span><strong>{{ item.error || (item.complete ? '读取完整' : '覆盖不完整') }}<template v-if="item.total !== undefined"> · {{ item.total }} 条</template></strong></div>
+    <p class="micro-note">教学 ERP 只读网络采集，多接口不保证原子时点；采集时间不代表业务数据新鲜。缺失与失败不按零处理。</p>
+    <div v-for="domain in data.observedDomains || []" :key="domain.domain"><template v-if="domain.measurements.length"><p>{{ domain.domain }} · {{ domain.state }} · 源时点 {{ domain.sourceTimes.join('、') || '未知' }}</p><p v-for="(measurement, i) in domain.measurements" :key="i">{{ measurement.field }}：{{ shown(measurement.value) }}（{{ measurement.unit }}，ERP 原字段观测，业务语义仍须核实）</p></template></div>
+  </Panel>
   <div class="detail-grid"><div>
     <Panel title="供需与补货分析" note="服务端 B01 / B02 计算结果">
       <div v-if="baseline" class="summary-grid"><div v-for="[name, value, unit] in facts" :key="name" class="summary-item"><small>{{ name }}</small><strong>{{ value }} <span>{{ unit }}</span></strong></div></div>
