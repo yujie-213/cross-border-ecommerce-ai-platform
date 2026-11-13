@@ -42,6 +42,15 @@
   "newPaidModelCalls": 0,
   "newERPProcurementWrites": 0,
   "newERPBusinessData": 0,
-  "remotePublication": "PENDING_NORMAL_PUSH",
+  "remotePublication": {
+    "result": "PASS",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "verifiedRemoteMain": "dbcf55662d42e84a21318914b7332e8625d826c5",
+    "verifiedRemoteV2Branch": "b8ef8cb4ef0ae28213e7879664af9ac14818f0d8",
+    "verifiedAt": "2026-11-13T18:55:12.125877+00:00",
+    "noForce": true,
+    "finalReceipt": "Subsequent documentation-only receipt; final HEAD returned by independent Git readback, no future self-SHA fabricated."
+  },
   "observedAt": "2026-11-13T18:52:06.568052+00:00"
 }

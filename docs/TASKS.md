@@ -1,4 +1,4 @@
-当前本地产品化（2026-11-14）：D-S01-LOCAL-01 REVIEW，main正常merge 4103861b70a3ef8806949c7c61576d3cd8c39bb4，合后787/43/类型构建/实际启动与浏览器通过，等待普通远端同步；数据对账/企业门限制保留。
+当前本地教学产品交付（2026-11-14）：D-S01-LOCAL-01与S01 V2在本地教学适用范围ACCEPTED，main正常合并4103861b70a3ef8806949c7c61576d3cd8c39bb4、合后787/43/类型构建与实际运行通过，普通远端dbcf556已核对。企业门及新业务日对账限制保留；本轮完成后停止。
 
 当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。
 
@@ -8391,14 +8391,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER",
     "DOCUMENT_CHECK"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "0bfb258ebea6019b70d57084448ad403daf29339",
     "84139a28116b1e860def09b7d4f5faae2a1186e5",
     "0eb6a5699a40e472aec2be45d4226a22ff696f4b",
     "f82d95977367e578229cdf51df6e74dce4330f58"
   ],
-  "testedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+  "testedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
   "evidence": [
     {
       "kind": "UNIT_TEST",
@@ -8514,10 +8514,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "review": {
-    "reviewer": "Codex implementation self-check; owner/independent human review pending",
-    "reviewedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
-    "evidenceRef": "docs/reports/S01_V2完整补货工作台交付_20261113.md",
-    "decision": "REQUEST_REVIEW_NOT_ACCEPTED_NO_MAIN_MERGE"
+    "reviewer": "Codex test/evidence review under explicit owner conditional acceptance and merge authorization (2026-11-14); no independent human review invented",
+    "reviewedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
+    "evidenceRef": "docs/reports/S01_本地产品化与main验收_20261114.md",
+    "decision": "ACCEPTED_LOCAL_TEACHING_PRODUCT_ONLY",
+    "scope": "LOCAL_SINGLE_ADMIN_S01_V2_PRODUCT_WITH_RETAINED_BUSINESS_LIMITS",
+    "priorReview": {
+      "reviewer": "Codex implementation self-check; owner/independent human review pending",
+      "reviewedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+      "evidenceRef": "docs/reports/S01_V2完整补货工作台交付_20261113.md",
+      "decision": "REQUEST_REVIEW_NOT_ACCEPTED_NO_MAIN_MERGE"
+    }
   },
   "branch": "codex/s01-v2-full-replenishment",
   "observedHead": "f82d95977367e578229cdf51df6e74dce4330f58",
@@ -8536,10 +8543,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "完整产品、真实全授权批量/两个按需AI/唯一自有ERP申请/恢复及固定后全量测试通过，提交负责人独立评审；未知业务语义不代签。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "ACCEPTED",
+      "reason": "负责人完整条件授权；main正常合并4103861、787/43/类型构建/本地4浏览器与旧6兼容通过，普通push及独立远端dbcf556一致；数据/企业限制保留。"
     }
   ],
   "contractRef": "docs/contracts/s01/v2-full-replenishment.md",
-  "currentPhase": "V2-4_DELIVERED_REVIEW_NO_MAIN_MERGE",
+  "currentPhase": "ACCEPTED_IN_MAIN_LOCAL_PRODUCT",
   "sourceDecision": "REFERENCE_ONLY不再独立阻止请购；硬约束/范围/权限/报价/人工确认仍强制；旧调查不改。",
   "progressFacts": [
     "完整V2产品开发完成，最终REVIEW；普通推送独立分支，禁止自动合main。",
@@ -8569,6 +8581,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "mode": "NORMAL_PUSH_NO_FORCE_NO_MERGE",
     "receiptInterruption": "Prior receipt command was not executed because automatic approval review hit its usage limit; user resumed on 2026-11-14 and normal approval review succeeded.",
     "receipt": "Subsequent documentation-only receipt; final HEAD must be read from Git, not fabricated in its own file"
+  },
+  "merge": {
+    "commit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
+    "verifiedRemoteMain": "dbcf55662d42e84a21318914b7332e8625d826c5",
+    "acceptanceScope": "LOCAL_TEACHING_V2_WITH_ALL_RETAINED_UNKNOWN_AND_DATA_QUALITY_LIMITS"
   }
 }
 ```
@@ -8648,7 +8665,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER",
     "DOCUMENT_CHECK"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "e7b242d67ad1e2b23c06041de7ea2c4617c333d6",
     "3cac8e7a33eead3150b3750c62718b7451b49ed1",
@@ -8739,13 +8756,32 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-LOCAL-01/AC07"
       ]
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "Normal git push origin main V2 branch; independent git ls-remote; build_docs/check_plan",
+      "environment": "Windows/GitHub; existing local proxy with TLS verification",
+      "sample": "Remote main dbcf556 and V2 b8ef8cb independently matched; no force; all runtime tests stopped",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/main.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC07"
+      ]
     }
   ],
   "review": {
-    "reviewer": "Codex self-verification under owner conditional merge authorization; no invented independent human review",
+    "reviewer": "Codex test/evidence review under explicit owner conditional acceptance and merge authorization (2026-11-14); no independent human review invented",
     "reviewedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
     "evidenceRef": "docs/reports/S01_本地产品化与main验收_20261114.md",
-    "decision": "POSTMERGE_LOCAL_PRODUCT_PASS_PENDING_REMOTE_PUBLICATION"
+    "decision": "ACCEPTED_LOCAL_TEACHING_PRODUCT_ONLY",
+    "scope": "LOCAL_SINGLE_ADMIN_S01_V2_PRODUCT_WITH_RETAINED_BUSINESS_LIMITS",
+    "priorReview": {
+      "reviewer": "Codex self-verification under owner conditional merge authorization; no invented independent human review",
+      "reviewedCommit": "4103861b70a3ef8806949c7c61576d3cd8c39bb4",
+      "evidenceRef": "docs/reports/S01_本地产品化与main验收_20261114.md",
+      "decision": "POSTMERGE_LOCAL_PRODUCT_PASS_PENDING_REMOTE_PUBLICATION"
+    }
   },
   "branch": "codex/s01-v2-full-replenishment",
   "observedHead": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
@@ -8764,6 +8800,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "REVIEW",
       "reason": "固定后787/43/types/build/真实密码浏览器与恢复/原生Windows边界通过，准备条件授权普通合main及合后复验。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "ACCEPTED",
+      "reason": "负责人完整条件授权；main正常合并4103861、787/43/类型构建/本地4浏览器与旧6兼容通过，普通push及独立远端dbcf556一致；数据/企业限制保留。"
     }
   ],
   "retainedLimits": [
@@ -8782,7 +8823,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "postMergeBackend": 787,
     "postMergeFrontend": 43,
     "postMergeBrowser": "PASS",
-    "publication": "PENDING_NORMAL_PUSH"
+    "publication": "PASS",
+    "verifiedRemoteMain": "dbcf55662d42e84a21318914b7332e8625d826c5"
+  },
+  "publication": {
+    "result": "PASS",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "verifiedRemoteMain": "dbcf55662d42e84a21318914b7332e8625d826c5",
+    "verifiedRemoteV2Branch": "b8ef8cb4ef0ae28213e7879664af9ac14818f0d8",
+    "verifiedAt": "2026-11-13T18:55:12.125877+00:00",
+    "noForce": true,
+    "finalReceipt": "Subsequent documentation-only receipt; final HEAD returned by independent Git readback, no future self-SHA fabricated."
   }
 }
 ```
