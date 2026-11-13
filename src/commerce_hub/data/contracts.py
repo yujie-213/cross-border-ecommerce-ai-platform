@@ -93,7 +93,7 @@ class FixtureInput(Contract):
 class AdmittedPolicy(Policy):
     """Explicitly reviewed business semantics; never inferred from a fixture."""
     version: Identifier
-    otherConstraints: Literal["REVIEWED_NOT_APPLICABLE"]
+    otherConstraints: Literal["REVIEWED_NOT_APPLICABLE", "UNCONFIRMED"]
     qualityDisposition: Literal["VERIFIED_CLEAR", "INVESTIGATE", "UNKNOWN"]
     advisoryOnly: bool = Field(default=False, strict=True, exclude_if=lambda value: not value)
 

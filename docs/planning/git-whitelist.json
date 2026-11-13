@@ -1,5 +1,5 @@
 {
-  "authorization": "2026-11-13接续3a46fd4，本轮P1/P2自有两SKU监控、ERP正式API仿真经营历史、7日SMA和真实模型/前端闭环获准；仅本地提交评审，不扩8/30、不代签采购审批、不合main。此白名单不是公开发布许可，受限历史和原始私有证据不推送。 追加本轮两个自建SKU ERP未来销量接口只读补充核实及必要报告/台账/交接，禁止业务写入/模型/公式改动；仅本地保存。 追加2026-11-13 P1/P2补货计算与采购约束只读业务核查报告及脱敏证据/台账交接；不改业务代码、参数或结果，不业务写入、不模型，仅本地评审。",
+  "authorization": "2026-11-13接续3a46fd4，本轮P1/P2自有两SKU监控、ERP正式API仿真经营历史、7日SMA和真实模型/前端闭环获准；仅本地提交评审，不扩8/30、不代签采购审批、不合main。此白名单不是公开发布许可，受限历史和原始私有证据不推送。 追加本轮两个自建SKU ERP未来销量接口只读补充核实及必要报告/台账/交接，禁止业务写入/模型/公式改动；仅本地保存。 追加2026-11-13 P1/P2补货计算与采购约束只读业务核查报告及脱敏证据/台账交接；不改业务代码、参数或结果，不业务写入、不模型，仅本地评审。 追加负责人确认MOQ及default_carton_qty整箱业务规则后的最小输入/来源/状态/AI/前端修复、必要回归和两SKU真实复验；采购写入仍禁止，仅本地REVIEW。",
   "policy": "Exact paths; no blanket add; no secrets, raw teaching responses or untracked OpenAPI; no history rewrite.",
   "paths": [
     ".env.example",
@@ -409,6 +409,7 @@
     "docs/evidence/S01-BACKEND/teaching-data/teaching-golden.json",
     "docs/evidence/S01-BACKEND/usage-migration.json",
     "docs/evidence/S01-BACKEND/verification.json",
+    "docs/evidence/S01-CARTON-FIX/verification.json",
     "docs/evidence/S01-DATA-ASSESSMENT/assessment-facts.json",
     "docs/evidence/S01-DATA-ASSESSMENT/change-scan.json",
     "docs/evidence/S01-DATA-ASSESSMENT/preservation.json",
@@ -514,6 +515,7 @@
     "docs/reports/S01_2SKU小试精确执行清单_20261113.md",
     "docs/reports/S01_ERP业务数据最终验证_20261113.md",
     "docs/reports/S01_ERP未来销量预测接口补充核实_20261113.md",
+    "docs/reports/S01_MOQ整箱规则修复验证_20261113.md",
     "docs/reports/S01_P1P2_两SKU闭环验证_20261113.md",
     "docs/reports/S01_P1P2_补货计算与采购约束独立业务核查_20261113.md",
     "docs/reports/S01_数据环境与监控范围决策评估_20261113.md",
@@ -570,6 +572,7 @@
     "frontend/src/useWorkspace.ts",
     "frontend/src/workspace.css",
     "frontend/tests/unit/api.test.ts",
+    "frontend/tests/unit/carton-report.test.ts",
     "frontend/tests/unit/evidence-race.test.ts",
     "frontend/tests/unit/online.test.ts",
     "frontend/tsconfig.json",

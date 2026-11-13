@@ -49,6 +49,8 @@ def facts_for(result):
         facts.append(dict(ref='forecast', kind='metric', text='Owner approved SMA policy ' + _json({k: forecast[k] for k in
             ('method','observationDays','windowStart','windowEnd','totalSales','averageDailyDemand','forecastDays','forecastQuantity','leadDays','coverageDays','calculationHorizonDays')})))
         facts.append(dict(ref='constraints', kind='limitation', text='ERP quote and advisory constraints ' + _json(forecast['constraints'])))
+        if forecast['constraints'].get('wholeCartonRequired') is True:
+            facts.append(dict(ref='availability-assumptions', kind='limitation', text='Sellable date is an uncommitted quote-lead assumption. D1 demand excludes the remainder of acquisition day. Quality, actual availability and approval remain unconfirmed.'))
         if any(c['evaluation']['stockoutRisk'] for c in supply['candidates']):
             facts.append(dict(ref='candidate-arrival-risk', kind='limitation', text='Candidate arrival does not prevent the intermediate shortage shown by B01.'))
     return facts

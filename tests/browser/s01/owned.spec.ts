@@ -1,9 +1,9 @@
 import { test, expect } from '../../../frontend/node_modules/@playwright/test/index.mjs'
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import path from 'node:path'
 const root = path.resolve(import.meta.dirname, '../../..')
 const enabled = process.env.S01_OWNED_BROWSER === 'true'
-const out = path.join(root, 'data/private/s01-mvp-20261113/browser')
+const out = path.join(root, 'data/private/s01-carton-fix-20261113/browser')
 
 test('OWNED REAL: two ERP SMA reports, AI, evidence, scope and cancellation', async ({ page }) => {
   test.skip(!enabled, 'Explicit owned live integration required')
@@ -43,12 +43,20 @@ test('OWNED REAL: two ERP SMA reports, AI, evidence, scope and cancellation', as
     expect(report.dataReport.forecast.observationDays).toBe(7)
     expect(report.completeness).toBe('RULES_ONLY')
     if (sku.includes('CBL')) {
-      expect(report.dataReport.supplyDemand.candidates.map((c: any) => c.quantity)).toEqual(['45'])
+      expect(report.dataReport.supplyDemand.candidates.map((c: any) => c.quantity)).toEqual(['48'])
       expect(report.dataReport.forecast.excludedSupply[0].pendingQuantity).toBe('36')
+      expect(report.dataReport.forecast.constraints.orderMultiple).toBe('8')
+      await expect(page.locator('.candidate .big')).toContainText('48 件（6 箱）')
     } else {
       expect(report.dataReport.supplyDemand.candidates).toEqual([])
       expect(report.dataReport.supplyDemand.limitations).toEqual(['NO_REPLENISHMENT_NEEDED'])
+      expect(report.dataReport.forecast.constraints.orderMultiple).toBe('12')
     }
+    expect(report.dataReport.forecast.constraints.wholeCartonRequired).toBe(true)
+    expect(report.dataReport.forecast.constraints.ruleVersion).toBe('s01-whole-carton-v1')
+    expect(report.dataReport.forecast.constraints.otherConditions).toBe('UNCONFIRMED')
+    await expect(page.getByText(/ERP 箱规 \/ 采购订购倍数/)).toBeVisible()
+    await expect(page.getByText(/需求从采集业务日次日计算/)).toBeVisible()
     expect(report.analysisReport.ai.status, report.analysisReport.ai.reason).toBe('AVAILABLE')
     expect(report.analysisReport.ai.usage.totalTokens).toBeGreaterThan(0)
     await expect(page.getByRole('heading', { name: '需求预测与 ERP 采购约束', exact: true })).toBeVisible()
@@ -57,6 +65,8 @@ test('OWNED REAL: two ERP SMA reports, AI, evidence, scope and cancellation', as
     await page.reload(); await expect(page.getByText(report.snapshotRef, { exact: true })).toBeVisible()
     const forecastEvidence = page.locator('.source-item').filter({ hasText: /^forecast/ }).getByRole('button', { name: '查看证据', exact: true })
     await forecastEvidence.click(); await expect(page.locator('.evidence-json')).toContainText('SIMPLE_MOVING_AVERAGE')
+    await expect(page.locator('.evidence-json')).toContainText('products.default_carton_qty')
+    await expect(page.locator('.evidence-json')).toContainText('s01-whole-carton-v1')
     await page.getByRole('button', { name: '关闭弹窗', exact: true }).click()
   }
   if (resume) {
@@ -70,6 +80,25 @@ test('OWNED REAL: two ERP SMA reports, AI, evidence, scope and cancellation', as
       await expect(page.getByText('解释可用', { exact: true })).toBeVisible()
       await page.screenshot({ path: path.join(out, report.scope.canonicalSkuIds[0] + '-resume.png'), fullPage: true })
     }
+  }
+  // Old immutable results remain readable, but never appear as current candidates.
+  const oldFile = path.join(root, 'data/private/s01-mvp-20261113/browser/reports.json')
+  if (existsSync(oldFile)) {
+    const old = JSON.parse(readFileSync(oldFile, 'utf8'))[0]
+    await page.evaluate(taskId => {
+      const saved = JSON.parse(sessionStorage.getItem('xuheng.s01.v1') || '{}')
+      sessionStorage.setItem('xuheng.s01.v1', JSON.stringify({ ...saved, taskId }))
+    }, old.taskRef.taskId)
+    await page.goto('/#detail'); await page.reload()
+    await expect(page.getByText('历史规则报告 · 采购候选已失效', { exact: true })).toBeVisible()
+    await expect(page.locator('.candidate .big')).toHaveCount(0)
+    await page.screenshot({ path: path.join(out, 'legacy-rule-obsolete.png'), fullPage: true })
+    await page.evaluate(taskId => {
+      const saved = JSON.parse(sessionStorage.getItem('xuheng.s01.v1') || '{}')
+      sessionStorage.setItem('xuheng.s01.v1', JSON.stringify({ ...saved, taskId }))
+    }, reports[reports.length - 1].taskRef.taskId)
+    await page.reload()
+    await expect(page.getByText(reports[reports.length - 1].snapshotRef, { exact: true })).toBeVisible()
   }
   const checks = await page.evaluate(async (original) => {
     const csrf = decodeURIComponent(document.cookie.split('; ').find(x => x.startsWith('commerce_csrf='))!.slice(14))

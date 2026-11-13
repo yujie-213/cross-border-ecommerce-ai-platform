@@ -13,7 +13,7 @@ from commerce_hub.data.projection import project
 from commerce_hub.data.quality import capture
 
 
-def owned_case(quantities=(4,5,4,6,9,5,6), opening=45):
+def owned_case(quantities=(4,5,4,6,9,5,6), opening=45, carton=8):
     m = OnlineMapping(scope=dict(tenantId='owned-fixture',canonicalSkuIds=['fixture-sku'],
         storeIds=['fixture-store'],warehouseIds=['fixture-wh'],fields=['quantity']),sku='fixture-sku',
         sourceTenant='1',sourceStore='2',sourceWarehouse='3',storeName='Fixture Store',warehouseName='Fixture Warehouse',
@@ -26,7 +26,7 @@ def owned_case(quantities=(4,5,4,6,9,5,6), opening=45):
         taskRef=dict(tenantId='owned-fixture',taskId='fixture-task'),planVersion='1')
     inv=dict(id=7,tenant_id=1,sku=m.sku,store_id=2,wid=3,product_id=1,
         quantity=opening-sum(quantities),available=opening-sum(quantities),updated_at=receipt['completedAt'])
-    values=dict(product=[dict(id=1,tenant_id=1,sku=m.sku)],store=[dict(id=2,tenant_id=1)],
+    values=dict(product=[dict(id=1,tenant_id=1,sku=m.sku,unit='piece',default_carton_qty=carton)],store=[dict(id=2,tenant_id=1)],
         warehouse=[dict(id=3,tenant_id=1)],listing=[dict(id=4,tenant_id=1,sku=m.sku,store_name=m.storeName)],
         inventory=[inv],supplier=[dict(id=5,tenant_id=1)],
         quotes=[dict(id=6,quote_no='fixture-quote',product_id=1,supplier_id=5,sku=m.sku,enabled=True,status='effective',
@@ -62,14 +62,71 @@ def test_owned_sma_reuses_calculation_and_excludes_pending_supply():
     assert f['windowStart']=='2026-11-06' and f['windowEnd']=='2026-11-12'
     assert f['calculationHorizonDays']==9 and f['forecastQuantity']=='39.00000000000000000000000000'
     assert s['baseline']['availableQuantity']=='6' and s['baseline']['inTransitQuantity']=='0'
-    assert s['candidates'][0]['quantity']=='45' and s['candidates'][0]['procurementEligible'] is False
+    assert s['candidates'][0]['quantity']=='48' and s['candidates'][0]['procurementEligible'] is False
     assert f['excludedSupply'][0]['pendingQuantity']=='36'
-    assert f['constraints']['orderMultiple'] is None and n['input']['policy']['orderMultiple']=='1'
+    assert f['constraints']['orderMultiple']=='8' and n['input']['policy']['orderMultiple']=='8'
+    assert f['constraints']['ruleVersion']=='s01-whole-carton-v1'
+    assert f['constraints']['wholeCartonRequired'] is True
+    assert n['input']['policy']['otherConstraints']=='UNCONFIRMED'
+    assert s['candidates'][0]['constraintVersion']==n['ruleVersion']=='s01-sma-mvp-v1.whole-carton-v1'
+    source=next(p for p in n['fieldProvenance'] if p['fieldPath']=='/policy/orderMultiple')
+    assert source['nature']=='ERP_NETWORK' and source['sourceRef'].endswith('/product')
+    assert source['valueDigest']==fingerprint('8') and source['sourceVersion']=='s01-whole-carton-v1'
     assert all(i['severity']!='BLOCK' for i in result.dataReport['quality'])
     binding=dict(taskRef=dict(tenantId='owned-fixture',taskId='fixture-task'),planVersion='1',snapshotId=result.snapshotRef,participantId='s01')
     bundle=bundle_for_result(result,binding)
     assert {f.ref for f in bundle.context.facts} >= {'forecast','constraints','quality'}
     assert next(f for f in bundle.context.facts if f.ref=='quality').qualityGate=='BLOCKED'
+    assert '采购必须同时满足最小起订量和整箱要求' in next(f for f in bundle.context.facts if f.ref=='constraints').allowedPhrases[0]
+    assert any(f.ref=='availability-assumptions' for f in bundle.context.facts)
+
+
+@pytest.mark.parametrize('moq,carton,opening,expected',[
+    (12,8,45,'48'), (50,8,45,'56'), (12,12,45,'48'),
+    (12,100,45,'100'), (3,8,88,'8'), (12,8,88,'16'), (12,1,45,'45'),
+])
+def test_quote_moq_and_product_carton_are_independent_hard_constraints(moq,carton,opening,expected):
+    case=owned_case(opening=opening,carton=carton)
+    # Product MOQ deliberately differs: the related effective supplier quote wins.
+    case[1]['product']['rows'][0]['moq']=999
+    case[1]['quotes']['rows'][0].update(minimum_quantity=moq,minimum_amount='0')
+    n,result=calculate(case);c=result.dataReport['supplyDemand']['candidates'][0]
+    assert c['quantity']==expected and int(expected)>=moq and int(expected)%carton==0
+    assert n['input']['policy']['moq']==str(moq)
+    assert c['evaluation']['firstShortageDate'] is None and not c['procurementEligible']
+
+
+@pytest.mark.parametrize('carton',[None,0,-1,True,1.5,'8'])
+def test_invalid_carton_never_defaults_to_one(carton):
+    n,result=calculate(owned_case(carton=carton))
+    assert n['input'] is None and result.completeness=='BLOCKED'
+    assert result.dataReport['supplyDemand']['candidates']==[]
+    assert n['issues'][0]['code']=='CARTON_QUANTITY_MISSING_OR_INVALID'
+
+
+@pytest.mark.parametrize('fault',['missing','product-id','tenant','sku','duplicate','unit','quote-product','quote-supplier'])
+def test_carton_applies_only_to_exact_product_and_supplier_quote(fault):
+    case=owned_case();c=case[1];p=c['product']['rows'][0]
+    if fault=='missing':p.pop('default_carton_qty')
+    elif fault=='product-id':p['id']=999
+    elif fault=='tenant':p['tenant_id']=999
+    elif fault=='sku':p['sku']='another'
+    elif fault=='duplicate':c['product']['rows'].append(deepcopy(p))
+    elif fault=='unit':p['unit']='case'
+    elif fault=='quote-product':c['quotes']['rows'][0]['product_id']=999
+    elif fault=='quote-supplier':c['quotes']['rows'][0]['supplier_id']=999
+    n,result=calculate(case)
+    assert n['input'] is None and result.dataReport['supplyDemand']['candidates']==[]
+    assert any(i['severity']=='BLOCK' for i in result.dataReport['quality'])
+
+
+def test_carton_mug_has_no_zero_order_and_retains_its_own_quote_lead():
+    case=owned_case(quantities=(2,3,2,3,4,2,3),opening=100,carton=12)
+    case[1]['quotes']['rows'][0]['lead_days']=4
+    n,result=calculate(case);s=result.dataReport['supplyDemand']
+    assert n['forecast']['totalSales']=='19' and n['input']['policy']['orderMultiple']=='12'
+    assert s['baseline']['availableQuantity']=='81' and s['baseline']['targetQuantity']=='29.85714292'
+    assert s['candidates']==[] and s['limitations']==['NO_REPLENISHMENT_NEEDED']
 
 
 def test_sufficient_inventory_does_not_make_zero_candidate():

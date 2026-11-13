@@ -4,6 +4,8 @@ from decimal import Decimal, ROUND_CEILING
 from commerce_hub.data.contracts import AdmittedInput, fingerprint
 from commerce_hub.data.admission import FieldProvenance
 
+PROCUREMENT_RULE_VERSION = 's01-whole-carton-v1'
+
 
 class OwnedInputError(ValueError):
     def __init__(self, code, path): self.code, self.path = code, path
@@ -11,13 +13,14 @@ class OwnedInputError(ValueError):
 
 def normalize_owned(captures, mapping, receipt, mapping_verified):
     m, b = mapping, mapping.monitor
+    constraint_version = b.policy.version + '.whole-carton-v1'
     issues, assumptions = [], ['SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP',
-        'ORDER_MULTIPLE_UNCONFIRMED_INTEGER_EA_RESOLUTION_ONLY',
         'QUALITY_UNKNOWN_ADVISORY_ONLY', 'NO_ENTERPRISE_BUSINESS_ADMISSION',
         'REGISTERED_SUPPLY_ONLY_UNAPPROVED_PENDING_EXCLUDED',
         'HISTORICAL_STOCK_RECONSTRUCTED_IN_SIMULATION_NOT_BACKDATED_POSTING']
     assumptions.append('ERP_LEAD_DAYS_TO_ADVISORY_AVAILABLE_DATE_NOT_COMMITTED_PO_ETA')
-    result = dict(input=None, issues=issues, ruleVersion=b.policy.version, assumptions=assumptions)
+    assumptions += ['OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED', 'D1_EXCLUDES_CURRENT_DAY_REMAINING_DEMAND']
+    result = dict(input=None, issues=issues, ruleVersion=constraint_version, assumptions=assumptions)
     def block(code, path):
         issues.append(dict(code=code, severity='BLOCK', path=path, affects='CALCULATION', category='SOURCE_DATA'))
     def require(ok, code, path):
@@ -33,6 +36,15 @@ def normalize_owned(captures, mapping, receipt, mapping_verified):
         business_day = anchor.astimezone(timezone(offset)).date()
         start = business_day - timedelta(days=b.policy.observationDays)
         days = {start + timedelta(days=i): Decimal(0) for i in range(b.policy.observationDays)}
+        products = rows('product')
+        require(len(products) == 1 and str(products[0].get('id')) == b.productId
+            and str(products[0].get('tenant_id')) == m.sourceTenant and products[0].get('sku') == m.sku,
+            'PRODUCT_CONSTRAINT_RELATION_UNVERIFIED', 'product')
+        product = products[0]
+        require(product.get('unit') == 'piece', 'CARTON_UNIT_UNCONFIRMED', 'product/unit')
+        carton = product.get('default_carton_qty')
+        require(type(carton) is int and carton > 0, 'CARTON_QUANTITY_MISSING_OR_INVALID', 'product/default_carton_qty')
+        multiple = Decimal(carton)
         require(len(rows('inventory')) == len(b.inventoryIds), 'INVENTORY_SET_CHANGED', 'inventory')
         require({str(r['id']) for r in rows('inventory')} == set(b.inventoryIds), 'INVENTORY_SET_CHANGED', 'inventory')
         inv = rows('inventory')
@@ -126,7 +138,7 @@ def normalize_owned(captures, mapping, receipt, mapping_verified):
         canonical = dict(sku=m.scope['canonicalSkuIds'][0], store=m.scope['storeIds'][0], warehouse=m.scope['warehouseIds'][0])
         value = AdmittedInput(sourceNature='SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP',
             fixtureId='owned-' + receipt['acquisitionId'], provenanceRef='owned-' + fingerprint(receipt)[:32],
-            rulesRef=b.policy.version, asOf=anchor, businessDate=business_day, coverageComplete=True,
+            rulesRef=constraint_version, asOf=anchor, businessDate=business_day, coverageComplete=True,
             mapping=dict(version=m.version, sourceSku=canonical['sku'], sourceStore=canonical['store'],
                 sourceWarehouse=canonical['warehouse'], canonicalSkuId=canonical['sku'], storeId=canonical['store'],
                 warehouseId=canonical['warehouse'], sourceUnit='EA', unit='EA', unitsPerSourceUnit='1'),
@@ -134,10 +146,10 @@ def normalize_owned(captures, mapping, receipt, mapping_verified):
                 unit='EA', availableQty=str(available), reservedQty=None, semantics='NET_AVAILABLE', sourceUpdatedAt=anchor)],
             demand=[dict(recordId=f'owned-demand-{i}', **canonical, unit='EA', day=business_day + timedelta(days=i),
                 quantity=str(daily), semantics='INCREMENTAL_EXCLUDES_RESERVED') for i in range(1, horizon + 1)],
-            supply=supply, policy=dict(version=b.policy.version, horizonDays=horizon, bufferDays=0, maxAgeHours=24,
-                moq=str(moq), orderMultiple='1', candidateDates=[business_day + timedelta(days=max(1, lead))],
-                maxOrderQty=str((daily * horizon + moq).to_integral_value(rounding=ROUND_CEILING)),
-                otherConstraints='REVIEWED_NOT_APPLICABLE', qualityDisposition='UNKNOWN', advisoryOnly=True))
+            supply=supply, policy=dict(version=constraint_version, horizonDays=horizon, bufferDays=0, maxAgeHours=24,
+                moq=str(moq), orderMultiple=str(multiple), candidateDates=[business_day + timedelta(days=max(1, lead))],
+                maxOrderQty=str(((daily * horizon + moq) / multiple).to_integral_value(rounding=ROUND_CEILING) * multiple),
+                otherConstraints='UNCONFIRMED', qualityDisposition='UNKNOWN', advisoryOnly=True))
         forecast = dict(method='SIMPLE_MOVING_AVERAGE', policyVersion=b.policy.version,
             timezone=b.policy.timezone, observationDays=b.policy.observationDays,
             windowStart=start.isoformat(), windowEnd=(business_day - timedelta(days=1)).isoformat(),
@@ -147,7 +159,10 @@ def normalize_owned(captures, mapping, receipt, mapping_verified):
             calculationHorizonDays=horizon, leadDays=lead, coverageDays=b.policy.coverageDays,
             rounding='DAILY_CEILING_8_DECIMALS', history=history,
             constraints=dict(moq=str(moq), supplierLeadDays=lead, quoteVersion=quote['version'],
-                orderMultiple=None, quantityResolution='1', quality='UNKNOWN', procurementEligible=False),
+                orderMultiple=str(multiple), defaultCartonQty=str(multiple), wholeCartonRequired=True,
+                ruleVersion=PROCUREMENT_RULE_VERSION, quantityResolution='1', quality='UNKNOWN', procurementEligible=False,
+                moqSource='supplier-quotes.minimum_quantity', orderMultipleSource='products.default_carton_qty',
+                otherConditions='UNCONFIRMED', availableDateBasis='QUOTE_LEAD_NOT_COMMITTED_SELLABLE_ETA'),
             excludedSupply=excluded, stockReconciliation=dict(openingQuantity=b.openingQuantity,
                 fulfilledQuantity=str(total_sold), availableQuantity=str(available), status='PASS'))
         provenance = []
@@ -156,14 +171,17 @@ def normalize_owned(captures, mapping, receipt, mapping_verified):
             ('/policy/moq', 'ERP_NETWORK', str(moq), 'quotes'),
             ('/policy/leadDays', 'ERP_NETWORK', lead, 'quotes'),
             ('/forecast', 'CONTROLLED_FACT', forecast['forecastQuantity'], 'sales'),
-            ('/policy/orderMultiple', 'UNKNOWN', None, 'quotes')]:
+            ('/policy/orderMultiple', 'ERP_NETWORK', str(multiple), 'product'),
+            ('/policy/wholeCartonRule', 'CONTROLLED_FACT', PROCUREMENT_RULE_VERSION, 'product')]:
             provenance.append(FieldProvenance(fieldPath=path, assertion='RULE_VALUE' if nature != 'ERP_NETWORK' else 'VALUE_OBSERVED',
-                nature=nature, sourceVersion=b.policy.version, owner='project-owner',
+                nature=nature, sourceVersion=PROCUREMENT_RULE_VERSION if path in {'/policy/orderMultiple', '/policy/wholeCartonRule'} else b.policy.version, owner='project-owner',
                 sourceRef='snapshot:' + receipt['acquisitionId'] + '/' + source, observedAt=anchor,
-                valueDigest=fingerprint(val), factBasis='Owner approved configurable SMA from independently read ERP business dates' if nature == 'CONTROLLED_FACT' else None,
-                unknownReason='No independent supplier order multiple in verified ERP contract; integer EA is advisory resolution' if nature == 'UNKNOWN' else None).model_dump(mode='json'))
+                valueDigest=fingerprint(val), factBasis=(
+                    'Owner confirmed MOQ and mandatory whole-carton procurement; registered product default_carton_qty is the order multiple for the related supplier quote'
+                    if path == '/policy/wholeCartonRule' else 'Owner approved configurable SMA from independently read ERP business dates'
+                    ) if nature == 'CONTROLLED_FACT' else None).model_dump(mode='json'))
         result.update(input=value.model_dump(mode='json'), forecast=forecast, fieldProvenance=provenance)
-        issues.append(dict(code='ORDER_MULTIPLE_UNCONFIRMED', severity='WARN', path='policy/orderMultiple', affects='CANDIDATES', category='BUSINESS_RULE'))
+        issues.append(dict(code='OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED', severity='WARN', path='policy/otherConstraints', affects='CANDIDATES', category='BUSINESS_RULE'))
     except OwnedInputError as error:
         block(error.code, error.path)
     except (ValueError, KeyError, TypeError, ArithmeticError):

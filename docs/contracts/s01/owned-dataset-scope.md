@@ -24,3 +24,10 @@ D02管理Dataset、ImportBatch、MonitoredMember及不可变ScopeVersion。成�
 G02记录审计，D04定位证据，D03唯一拥有manifest，B01唯一负责指标，B02负责情景与候选，A01只解释获准事实。所有真实身份、请求/响应及授权信息按本机受控留存策略保存，不默认公开。
 
 本契约尚未实施，不证明已有ACTIVE监控清单或业务验收通过。
+
+
+## 当前MOQ与整箱规则增量（2026-11-13）
+
+负责人已签认s01-whole-carton-v1：采购同时满足有效供应商报价minimum_quantity和对应商品default_carton_qty整箱倍数。仅在登记商品tenant/id/SKU/件单位、有效报价supplier/product/SKU及有效期一致时适用；箱规缺失/非正/非整数或关系不明明确阻断，不默认1。D02传入既有policy.orderMultiple，B02按原ceil(max(gap,moq)/multiple)*multiple计算，B01仍唯一负责逐日评价；组合版本为SMA版本.whole-carton-v1。
+
+AdmittedPolicy.otherConstraints新增UNCONFIRMED，保留原值供历史兼容；新报告的constraints/FieldProvenance声明ERP字段来源及负责人规则版本，其他日期/质量/审批条件不获放行。采购候选始终procurementEligible=false。旧报告不改写，旧AI按原快照校验；前端对整箱规则前的自有预测报告显示历史失效并隐藏当前候选卡，不以旧45件充当新建议。无需修改登记集或建立第二供应商管理。

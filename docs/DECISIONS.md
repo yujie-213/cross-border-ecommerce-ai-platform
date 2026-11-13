@@ -264,3 +264,14 @@ D02增加不可变版本化监控登记（真实ID/关系/批次/独立回读证
 影响消费者：D01正式范围回读、D02归一化、D03不可变manifest、B02仅需求方法标记、A01受控上下文、API/前端新增可选预测与范围元数据。旧固定包/回放/历史及Golden兼容。验证覆盖跨范围、关联漂移、未审批pending、0/缺失/重复/断货、真实MySQL/API/独立Worker、真实模型usage及浏览器取消。企业四门保持BLOCKED，最终交REVIEW。
 
 P1实施契约补充：AdmittedInput可选businessDate仅在已准入的自有策略中出现，B01/D03以其确定D0日期，数量公式和旧asOf UTC默认不变；无该字段时序列化保持旧字节形状。正式产品扩展含generic custom_fields，但当前未给出独立订购倍数字段ID、单位或供应商组合语义，不自建/写入猜测的倍数。
+
+
+## ADR-S01-MVP-009 MOQ与商品箱规同时约束采购（2026-11-13，负责人正式确认）
+
+负责人已确认当前教学ERP供应商采购必须同时满足MOQ与整箱，商品default_carton_qty即当前采购订购倍数。这是新业务签认，覆盖MVP-008中倍数尚未确认的当前适用判断；历史45件报告与审查记录保留，不倒改。
+
+仅ACTIVE自有教学范围：MOQ取当前有效且绑定登记supplier/product/SKU的报价minimum_quantity，订购倍数取精确登记商品default_carton_qty；验证商品tenant/id/SKU/件单位与报价supplier/product/SKU/有效期。规则版本s01-whole-carton-v1单独保留，来源指向本次快照商品/报价及负责人签认；有效组合策略版本为原SMA版本加.whole-carton-v1，不重写登记历史。缺失、非正、非整数箱规或关系无法确认时不默认1，明确阻断；B01/B02接口及公式不改。
+
+AdmittedPolicy.otherConstraints增加UNCONFIRMED枚举，既有REVIEWED_NOT_APPLICABLE保留供历史读取；本批新输入用UNCONFIRMED并保留未确认质量、审批、交期可售/日历/质检和当日余量风险。此状态不解除采购门；procurementEligible始终false。工程数量搜索上限按合法箱规向上对齐，仍非供应商限额。
+
+消费者：D02输入及FieldProvenance、D03不可变资产、A01受控解释、前端MOQ/倍数/箱数及日期限制；旧报告仍按其快照验证，前端将未含本规则的自有预测报告明确标为历史失效并不呈现为当前候选。无全局供应商管理、无采购业务写入。覆盖MOQ非倍数/大于缺口/箱规大于窗口需求、缺失/非法/关系漂移、历史绑定与真实两SKUERP/模型/浏览器复验。最终REVIEW待负责人和星星独立验收，不自动合main或公开推受限历史。
