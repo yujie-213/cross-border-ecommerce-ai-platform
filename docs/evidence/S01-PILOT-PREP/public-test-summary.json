@@ -1,0 +1,17 @@
+{
+  "publicationScope": "ENGINEERING_DOCUMENTS_AND_NON_SENSITIVE_AGGREGATES_ONLY",
+  "previousBackendTestCount": 670,
+  "previousFrontendTestCount": 33,
+  "previousFrontendTypecheck": "PASS",
+  "previousFrontendBuild": "PASS",
+  "previousBrowserCancellation": "FAIL_RETAINED_NOT_RETESTED",
+  "applicationTestsRerunThisPreparation": false,
+  "currentPilotBusinessMutations": 0,
+  "currentModelRequests": 0,
+  "pilotExecution": "NOT_RUN_PENDING_EXACT_PLAN_AND_RANGE_APPROVAL",
+  "monitoredDatasetImplementation": "NOT_YET_IMPLEMENTED",
+  "includesERPResponsesOrBusinessRecords": false,
+  "includesProviderResponsesOrAuthorizationInformation": false,
+  "includesScreenshots": false,
+  "includesConnectionInformationOrSecrets": false
+}
