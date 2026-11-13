@@ -1,3 +1,7 @@
+当前P1/P2交付（2026-11-13，固定6cf9ae4）：MONITOR-SCOPE-01/ONLINE-02/ONLINE-03进入REVIEW、review=null。scopeVersion1/ACTIVE2；最近7完整业务日ERP销量39/19，库存6/81对账通过；快充线45EA待复核候选、马克杯无需补货且空候选。真实AI2次5149Token、费用UNKNOWN/$0.10预约保留；固定提交后688后端/33前端/真实浏览器/取消/重启通过，原失败不改。独立倍数/质量/共享租户限制保留、企业四门BLOCKED；P3需合法审批及另行阶段确认，不扩8/30、不合main/公开推送。证据docs/evidence/S01-MVP-P1P2/verification.json；完整S01验收仍未完成。
+
+当前P1/P2连续授权（2026-11-13，接续3a46fd4）：负责人确认ERP优先、最近7完整业务日SMA可配置策略、自建2SKU正式监控和真实ERP销售历史构建、必要真实模型/浏览器闭环；合理调用无旧固定次数硬上限。仅本项目教学内部资源，无外部交易/采购审批代签，不扩8/30SKU、不合main。旧预算和FAIL证据保留；本轮新任务账本独立。Codex单人，未知ERP-openapi.yaml保留。
+
 当前最终可行性验证（2026-11-13）：负责人取消此前固定调用上限，保持自建范围、低频/幂等和不可逆动作边界。实际6变更尝试（5成功/1下单409）、30回读全200、1认证；销售日期/履约/出库/重放通过，采购审批前置阻断、部分收货NOT_RUN；两SKU正向计算仍BLOCKED。PILOT交REVIEW，建议B待负责人和星星确认，未切换模式/扩容；原FAIL/旧测试保留。
 
 当前紧急小范围小试实测（2026-11-13）：负责人新增明确批准原清单最小创建/回读12变更、30回读，未批状态动作不执行。实测12次变更/29业务回读/1认证，12新对象独立验证、2候选/ACTIVE0；累计准备12变更/41回读/4认证。已停止ERP调用，完整2SKU及8SKU未验收，原FAIL/历史模型证据不改。下方“准备未批/零写入”是先前时点，不覆盖本增量。
@@ -6343,17 +6347,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "B-03",
     "B-04"
   ],
-  "entryCondition": "负责人2026-11-13三阶段连续授权；各真实验证遵守本轮用途及预算",
+  "entryCondition": "当前P1/P2连续授权（2026-11-13，接续3a46fd4）：负责人确认ERP优先、最近7完整业务日SMA可配置策略、自建2SKU正式监控和真实ERP销售历史构建、必要真实模型/浏览器闭环；合理调用无旧固定次数硬上限。仅本项目教学内部资源，无外部交易/采购审批代签，不扩8/30SKU、不合main。旧预算和FAIL证据保留；本轮新任务账本独立。Codex单人，未知ERP-openapi.yaml保留。",
   "ownerRole": "主集成",
   "assignee": "Codex",
   "allowedPaths": [
     "src/commerce_hub/",
+    "migrations/versions/",
     "tests/",
     "tools/",
     "frontend/",
-    "migrations/",
     "docs/",
-    "README.md"
+    "AGENTS.md"
   ],
   "parallelCondition": "Codex单人串行",
   "deliverables": [
@@ -6378,9 +6382,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "5ae0d32f6c9c38be615ca43420ba658a2d97dceb"
+    "5ae0d32f6c9c38be615ca43420ba658a2d97dceb",
+    "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239"
   ],
-  "testedCommit": "5ae0d32f6c9c38be615ca43420ba658a2d97dceb",
+  "testedCommit": "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239",
   "evidence": [
     {
       "kind": "LIVE",
@@ -6405,11 +6410,35 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/S01-ONLINE/bounded-discovery.json"
+    },
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-ONLINE-02/AC1"
+      ],
+      "command": "固定6cf9ae4后全量pytest + npm run build + npm test；精确命令见摘要",
+      "environment": "唯一获准MySQL/API/独立Worker；套件中外部ERP/模型明确夹具",
+      "sample": "688后端PASS/原670逐名保留；33前端PASS/类型检查构建PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
+    },
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-ONLINE-02/AC1"
+      ],
+      "command": "正式ERP独立回读/登记验证 + owned.spec.ts实际浏览器 + 重启/数据库回读",
+      "environment": "真实教学ERP/官方DeepSeek/MySQL/API/独立Worker/Vue浏览器",
+      "sample": "scopeVersion1/ACTIVE2；快充线45EA候选、马克杯空候选；AI2次5149Token/费用UNKNOWN/$0.10预约；取消/恢复通过，非企业采购验收",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
-  "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "observedHead": "3a46fd4c35c04770b95bfab43016c92606757f9e",
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -6422,11 +6451,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "真实在线受限路径及26项相关工程验证完成；正向真实B01/候选仍BLOCKED，不代表业务验收"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人本轮P1/P2连续授权；既有验收及失败原证据保留，新增实测另记"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "两SKU真实ERP输入/SMA/AI/浏览器闭环与冻结提交复验完成；历史FAIL/NOT_RUN不改，等待负责人及独立评审。"
     }
   ],
-  "dirtyPaths": [
-    "本轮精确范围见git diff及docs/planning/git-whitelist.json"
-  ]
+  "dirtyPaths": [],
+  "currentDeliveryScope": "P1/P2自有两SKU教学分析建议REVIEW；四企业门BLOCKED，不扩8/30，不采购审批执行。"
 }
 ```
 
@@ -6442,17 +6480,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-ONLINE-02",
     "C-01"
   ],
-  "entryCondition": "2026-11-13负责人将当前工作切换为数据环境及监控范围评估；评估后停下，新的开发/ERP业务写入/模型复测等待确认，正式分析仅允许自建登记且验证的ACTIVE数据集",
+  "entryCondition": "当前P1/P2连续授权（2026-11-13，接续3a46fd4）：负责人确认ERP优先、最近7完整业务日SMA可配置策略、自建2SKU正式监控和真实ERP销售历史构建、必要真实模型/浏览器闭环；合理调用无旧固定次数硬上限。仅本项目教学内部资源，无外部交易/采购审批代签，不扩8/30SKU、不合main。旧预算和FAIL证据保留；本轮新任务账本独立。Codex单人，未知ERP-openapi.yaml保留。",
   "ownerRole": "主集成",
   "assignee": "Codex",
   "allowedPaths": [
     "src/commerce_hub/",
+    "migrations/versions/",
     "tests/",
     "tools/",
     "frontend/",
-    "migrations/",
     "docs/",
-    "README.md"
+    "AGENTS.md"
   ],
   "parallelCondition": "Codex单人串行",
   "deliverables": [
@@ -6475,11 +6513,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING",
     "LIVE"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "96c8526265c766722066b8a82eafb8f36ed1796c"
+    "96c8526265c766722066b8a82eafb8f36ed1796c",
+    "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239"
   ],
-  "testedCommit": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "testedCommit": "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239",
   "evidence": [
     {
       "kind": "LIVE",
@@ -6516,11 +6555,35 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 1,
       "result": "FAIL",
       "artifactRef": "docs/evidence/S01-ONLINE/phase3-browser-failure.json"
+    },
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-ONLINE-03/AC1"
+      ],
+      "command": "固定6cf9ae4后全量pytest + npm run build + npm test；精确命令见摘要",
+      "environment": "唯一获准MySQL/API/独立Worker；套件中外部ERP/模型明确夹具",
+      "sample": "688后端PASS/原670逐名保留；33前端PASS/类型检查构建PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
+    },
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-ONLINE-03/AC1"
+      ],
+      "command": "正式ERP独立回读/登记验证 + owned.spec.ts实际浏览器 + 重启/数据库回读",
+      "environment": "真实教学ERP/官方DeepSeek/MySQL/API/独立Worker/Vue浏览器",
+      "sample": "scopeVersion1/ACTIVE2；快充线45EA候选、马克杯空候选；AI2次5149Token/费用UNKNOWN/$0.10预约；取消/恢复通过，非企业采购验收",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
     }
   ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
-  "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "observedHead": "3a46fd4c35c04770b95bfab43016c92606757f9e",
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -6533,13 +6596,27 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "4次真实受限解释AVAILABLE/7460Token、670后端/33前端通过；浏览器整例FAIL保留。负责人改为评估并要求确认后续，不再开发或发起新模型/共享SKU分析"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人本轮P1/P2连续授权；既有验收及失败原证据保留，新增实测另记"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "本轮连续授权覆盖旧等待停止点；旧holdReason保留于此历史：负责人要求先完成方案评估再确认下一步；已有受限AI工程证据保全，完整正向和浏览器取消复验尚未完成"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "两SKU真实ERP输入/SMA/AI/浏览器闭环与冻结提交复验完成；历史FAIL/NOT_RUN不改，等待负责人及独立评审。"
     }
   ],
-  "dirtyPaths": [
-    "本轮精确范围见git diff及docs/planning/git-whitelist.json"
-  ],
-  "holdReason": "负责人要求先完成方案评估再确认下一步；已有受限AI工程证据保全，完整正向和浏览器取消复验尚未完成",
-  "proposedContinuationDependencies": [
+  "dirtyPaths": [],
+  "holdReason": null,
+  "currentDeliveryScope": "P1/P2自有两SKU教学分析建议REVIEW；四企业门BLOCKED，不扩8/30，不采购审批执行。",
+  "historicalProposedContinuationDependencies": [
     "D-S01-MONITOR-SCOPE-01",
     "D-S01-DATASET-IMPORT-01"
   ]
@@ -6908,11 +6985,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-DATASET-DESIGN-01",
     "D-S01-DATASET-PILOT-01"
   ],
-  "entryCondition": "本轮仅评估和方案；执行小试/代码/业务写入须负责人确认精确独立范围、动作和上限",
+  "entryCondition": "当前P1/P2连续授权（2026-11-13，接续3a46fd4）：负责人确认ERP优先、最近7完整业务日SMA可配置策略、自建2SKU正式监控和真实ERP销售历史构建、必要真实模型/浏览器闭环；合理调用无旧固定次数硬上限。仅本项目教学内部资源，无外部交易/采购审批代签，不扩8/30SKU、不合main。旧预算和FAIL证据保留；本轮新任务账本独立。Codex单人，未知ERP-openapi.yaml保留。",
   "ownerRole": "主集成/负责人/老师ERP范围维护",
-  "assignee": null,
+  "assignee": "Codex",
   "allowedPaths": [
-    "本任务确认后精确登记，不预建应用目录"
+    "src/commerce_hub/",
+    "migrations/versions/",
+    "tests/",
+    "tools/",
+    "frontend/",
+    "docs/",
+    "AGENTS.md"
   ],
   "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
   "deliverables": [
@@ -6936,13 +7019,40 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "LIVE",
     "ENGINEERING"
   ],
-  "status": "TODO",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239"
+  ],
+  "testedCommit": "6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239",
+  "evidence": [
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-MONITOR-SCOPE-01/AC1"
+      ],
+      "command": "固定6cf9ae4后全量pytest + npm run build + npm test；精确命令见摘要",
+      "environment": "唯一获准MySQL/API/独立Worker；套件中外部ERP/模型明确夹具",
+      "sample": "688后端PASS/原670逐名保留；33前端PASS/类型检查构建PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
+    },
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-MONITOR-SCOPE-01/AC1"
+      ],
+      "command": "正式ERP独立回读/登记验证 + owned.spec.ts实际浏览器 + 重启/数据库回读",
+      "environment": "真实教学ERP/官方DeepSeek/MySQL/API/独立Worker/Vue浏览器",
+      "sample": "scopeVersion1/ACTIVE2；快充线45EA候选、马克杯空候选；AI2次5149Token/费用UNKNOWN/$0.10预约；取消/恢复通过，非企业采购验收",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-MVP-P1P2/verification.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "3a46fd4c35c04770b95bfab43016c92606757f9e",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -6951,8 +7061,19 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "TODO",
       "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人本轮P1/P2连续授权；既有验收及失败原证据保留，新增实测另记"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "两SKU真实ERP输入/SMA/AI/浏览器闭环与冻结提交复验完成；历史FAIL/NOT_RUN不改，等待负责人及独立评审。"
     }
-  ]
+  ],
+  "currentDeliveryScope": "P1/P2自有两SKU教学分析建议REVIEW；四企业门BLOCKED，不扩8/30，不采购审批执行。"
 }
 ```
 

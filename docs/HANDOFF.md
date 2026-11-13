@@ -1,3 +1,23 @@
+## P1/P2 两 SKU 闭环交付 REVIEW（2026-11-13）
+
+接续分支 codex/s01-live-business-closure，基点 `3a46fd4c35c04770b95bfab43016c92606757f9e`，起点跟踪区干净、未知 docs/ERP-openapi.yaml 保留；Codex 单人。实现固定 `6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239`，后续仅证据/台账/交接提交，最终 HEAD 由 Git 查询；本地受限历史未公开、未合 main。
+
+真实 ERP 补建六笔双商品销售及教学内部履约，原 11/10 订单不重复；11/6—12 完整业务日销量快充线39/马克杯19，当前库存6/81，45−39=6、100−19=81及逐流水核对通过。实际过账11/13，不混作历史过账。D02登记已scopeVersion1/ACTIVE2，真实ID/关系/导入批次/回读指纹落持久层，API/Worker/报告/AI/前端共用范围；未登记SKU拒绝。
+
+ERP报价MOQ均12、交期2/4天。采用可配置7日SMA，既有B01/B02公式保留，新增可选businessDate锚；快充线45EA仅复核候选，基线11/15缺货风险；马克杯NO_REPLENISHMENT_NEEDED且candidates=[]。待审批pending36不作有效在途。独立订购倍数未确认，整数EA仅建议分辨率，质量UNKNOWN；所有procurementEligible=false、四企业门BLOCKED。
+
+官方DeepSeek实际2次均AVAILABLE，4577输入+572输出=5149Token，缓存1024/非缓存3553；费用UNKNOWN、预约$0.10保留。新账本s01-mvp-20261113-p1p2，原授权和UNKNOWN费用不改。固定提交后688后端/33前端及构建PASS、原670逐名保全；两SKU真实浏览器、刷新/证据/幂等/越权、排队及ERP采集中取消、独立API/Worker重启PASS。取消任务MySQL独立核对CANCELLED且模型attempt/report/usage全0；重启报告投影不变。本轮预检解包、旧测试可选字段、浏览器状态码断言、辅助报告投影比较的FAIL均保留；历史ONLINE浏览器FAIL不覆盖。
+
+任务MONITOR-SCOPE-01/ONLINE-02/ONLINE-03均REVIEW，不自动ACCEPTED，整体S01未验收。P3前需负责人复核建议/假设、合法ERP审批角色、供应商承诺及质量/倍数确认和下一阶段授权；共享租户行级隔离未证明。已登记销售为显式集合，新增经营对象须版本登记/回读；已审批在途的ETA适配留P3，状态变化明确阻断。不扩8/30SKU，在P2交评审停止。
+
+报告：[两SKU闭环](reports/S01_P1P2_两SKU闭环验证_20261113.md)；摘要：[verification.json](evidence/S01-MVP-P1P2/verification.json)。原始响应、真实ID、模型回执、截图和会话仅在Git忽略的data/private/s01-mvp-20261113/及既有s01-online/，不提交。短期本机运行及复现方式见报告；更换主体不能盲重放旧幂等key，否则可能创建新付费任务。
+
+## P1/P2接续领取（2026-11-13）
+
+当前P1/P2连续授权（2026-11-13，接续3a46fd4）：负责人确认ERP优先、最近7完整业务日SMA可配置策略、自建2SKU正式监控和真实ERP销售历史构建、必要真实模型/浏览器闭环；合理调用无旧固定次数硬上限。仅本项目教学内部资源，无外部交易/采购审批代签，不扩8/30SKU、不合main。旧预算和FAIL证据保留；本轮新任务账本独立。Codex单人，未知ERP-openapi.yaml保留。
+
+实际分支codex/s01-live-business-closure，HEAD 3a46fd4c35c04770b95bfab43016c92606757f9e；已跟踪区干净，无diff，只有未知docs/ERP-openapi.yaml。保留历史、原真实模型账本和取消FAIL；本轮初始实测NOT_RUN。
+
 ## 最终ERP数据可行性验证交付与停止（2026-11-13）
 
 基点codex/s01-live-business-closure/07d83e1da6fbe714e8c9b1fa5d995e0132cf5575，跟踪区干净，未知docs/ERP-openapi.yaml原样保留。负责人授权最小教学内部履约/采购能力验证，并在本轮明确取消旧21/35等调用硬上限；仍禁止其他人数据、外部交易和未批不可逆审批。本轮单人仅临时执行器/私有证据/报告与台账，不改应用/核心公式/Golden/质量门禁/前端。
