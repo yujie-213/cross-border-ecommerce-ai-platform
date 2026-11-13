@@ -1,3 +1,15 @@
+## P1/P2阶段验收已确认，main合并因发布安全停止（2026-11-13）
+
+负责人和星星明确通知阶段评审通过，授权最小检查后正常合main/普通push，发现重大安全问题则停。接手codex/s01-live-business-closure / a6cc7ddbb9b893a8f1415e1d5000ee179c098b31；仅未知docs/ERP-openapi.yaml未跟踪，原样保留。c79fe59实现/a6cc7dd证据及祖先关系、冻结代码差异、710后端/36前端/真实浏览器和私有产物hash核对一致；快充线有效分析候选48件6箱、马克杯空候选，旧45明确失效；本轮仅检查既有证据，没有重跑联网业务或模型。
+
+实际git fetch后本地main与origin/main均2fba3b42597b87b4efa8ecc7c6a83a38b6fba804，为分支祖先、落后18提交，无未解决索引冲突。但受限的docs/evidence/S01-ONLINE/browser-checkpoint.json含2份非自有SKU完整ERP衍生报告和AI正文，screenshots有8张未审ERP截图；S01-DATA-ASSESSMENT/assessment-facts.json另含私有模型授权及任务关联。5ae0d32/2315416等祖先在正常合并后也会被发布，不能只删tip再push。依用户安全停止条件，未切main、未merge、未push，未创建合并提交；合并后冒烟NOT_RUN。
+
+唯一台账新增P1P2-MERGE-01 BLOCKED，记录负责人/星星P1/P2两SKU阶段PASS事实；原41条任务JSON不倒改（含历史REVIEW/FAIL/NOT_RUN），条件式全项ACCEPTED迁移未执行。业务阶段验收与公开发布状态分开，安全阻断不代表48件结果未通过评审。quality UNKNOWN、otherConditions UNCONFIRMED、报价日期非承诺ETA、D1不含当日余量、procurementEligible=false、企业四门BLOCKED均保留。待审批36继续排除在途，本身不符合8件整箱，留获授权人员后续处理。
+
+安全检查摘要：[premerge-security-20261113.json](evidence/S01-CARTON-FIX/premerge-security-20261113.json)；决定见ADR-S01-MVP-010。只记录受限文件路径/指纹及结构类型，不复制业务值或密钥。原分支和证据保留、不改写/删除。继续需要从origin/main准备独立安全快照并审核其新增历史，取得继续方案后再合并复验发布；本轮不自动构造或替换已验收分支。
+
+P3进入条件仍为负责人下一阶段指令、合法独立审批人员、候选/旧36采购整箱合规复核、承诺可售日期及质检上架条件确认。未执行采购、不扩8/30SKU；当前因确认的发布安全问题停止。后续本地文档记录提交SHA以Git实际查询为准。
+
 ## MOQ与ERP整箱规则修复交付REVIEW（2026-11-13）
 
 接续 codex/s01-live-business-closure / 11328013ac8559aaa66982280526f39cec2f68b7，跟踪区起点干净，未知 docs/ERP-openapi.yaml 原样保留。负责人已正式确认MOQ与整箱同时满足、default_carton_qty为采购倍数，授权最小修复及真实ERP/AI/前端复验，不授权采购审批下单收货。Codex单人；实现及被测提交 c79fe5960aea5b991840505bd50efb0ef7534bea，后续仅证据/台账/交接，最终HEAD由Git查询。

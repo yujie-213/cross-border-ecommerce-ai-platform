@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`87b429ac1c23063cbceacfa4f875c16ac38e52e12df48764155a4b1cfb397129`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`d4257d9dda8fb8afdc804f0632c539aa5199d092233444d1ab54f791e2c4c1e7`。不要手工编辑；候选不是执行授权。
 
-任务 41 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 18；ACCEPTED 14。
+任务 42 项；TODO 5；IN_PROGRESS 0；BLOCKED 5；REVIEW 18；ACCEPTED 14。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 24 | 2 | 0 | 4 | 16 | 2 |
+| D | 25 | 2 | 0 | 5 | 16 | 2 |
 
 ## 当前活动记录
 
@@ -36,6 +36,7 @@
 - D-S01-FORECAST-SURVEY-01 自有两SKU ERP未来销量接口只读核实：REVIEW；实际执行者=Codex。
 - D-S01-P1P2-BUSINESS-REVIEW-01 P1/P2补货数量与供应商采购约束独立业务核查：REVIEW；实际执行者=Codex。
 - D-S01-CARTON-FIX-01 MOQ与ERP整箱采购规则最小修复及两SKU真实复验：REVIEW；实际执行者=Codex。
+- D-S01-P1P2-MERGE-01 P1/P2阶段验收登记与main合并前安全检查：BLOCKED；实际执行者=Codex。
 
 ## 全部近期记录
 
@@ -82,5 +83,6 @@
 | D-S01-FORECAST-SURVEY-01 | 自有两SKU ERP未来销量接口只读核实 | REVIEW | D-S01-MONITOR-SCOPE-01 |
 | D-S01-P1P2-BUSINESS-REVIEW-01 | P1/P2补货数量与供应商采购约束独立业务核查 | REVIEW | D-S01-ONLINE-02, D-S01-ONLINE-03, D-S01-MONITOR-SCOPE-01 |
 | D-S01-CARTON-FIX-01 | MOQ与ERP整箱采购规则最小修复及两SKU真实复验 | REVIEW | D-S01-P1P2-BUSINESS-REVIEW-01, D-S01-ONLINE-02, D-S01-ONLINE-03 |
+| D-S01-P1P2-MERGE-01 | P1/P2阶段验收登记与main合并前安全检查 | BLOCKED | D-S01-CARTON-FIX-01, D-S01-MONITOR-SCOPE-01, D-S01-ONLINE-02, D-S01-ONLINE-03 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

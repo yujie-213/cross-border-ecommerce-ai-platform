@@ -1,3 +1,5 @@
+当前P1/P2阶段验收与发布检查（2026-11-13）：负责人和星星已确认两自有SKU闭环含MOQ/整箱修复阶段PASS；48件6箱、马克杯空候选、旧45失效及日期/质量/审批限制复核一致。但origin/main=2fba3b4落后18提交，普通合并会公开早期非自有SKU完整ERP报告、8张未审截图和私有模型授权关联，P1P2-MERGE-01发布BLOCKED。遵用户安全停止要求未合并/推送，合并后冒烟NOT_RUN；本轮不将旧REVIEW/FAIL改写为全项通过。原分支/证据保留，等待安全快照及继续决策；不执行P3。
+
 当前MOQ/整箱规则修复（2026-11-13，固定c79fe59）：CARTON-FIX-01交REVIEW；负责人确认ERP商品default_carton_qty为采购倍数。快充线MOQ12/倍数8，缺口44.14285722→48件6箱；马克杯MOQ12/倍数12仍空候选。缺失/非法/关系异常箱规BLOCK不默认1；其他条件UNCONFIRMED、质量UNKNOWN、采购不可执行。旧45报告标历史失效但证据不改。710后端/36前端/真实浏览器及两种取消PASS，原688保全；真实模型2次5764Token/UNKNOWN/$0.10预约。原40任务原状、企业四门BLOCKED，未业务写入/采购/合main/公开推送。报告docs/reports/S01_MOQ整箱规则修复验证_20261113.md；完成后等待负责人及星星独立验收。
 
 当前ERP预测接口补充调查（2026-11-13，7658e75）：FORECAST-SURVEY-01交REVIEW。存在名义预测字段，无已验证自建SKU可用未来预测；两SKU replenishment精确GET及自建店铺MSKU/ASIN汇总均成功空记录。25尝试含6次503保留，模型0/业务写0/公式改动0；保留7日SMA与45件候选，原38任务原状。不扩大开发，报告docs/reports/S01_ERP未来销量预测接口补充核实_20261113.md。
@@ -7456,5 +7458,108 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "currentDeliveryScope": "MOQ与整箱规则最小修复及两SKU复验REVIEW；仅已确认约束合规的人工审核候选。日期/质量/审批仍未放行，旧36待审核单须未来获授权复核；不扩8/30、不合main、不公开推送。"
+}
+```
+
+
+## P1/P2阶段验收登记与合并前安全停止（2026-11-13）
+
+```json
+{
+  "id": "D-S01-P1P2-MERGE-01",
+  "stage": "D",
+  "title": "P1/P2阶段验收登记与main合并前安全检查",
+  "kind": "delivery",
+  "dependsOn": [
+    "D-S01-CARTON-FIX-01",
+    "D-S01-MONITOR-SCOPE-01",
+    "D-S01-ONLINE-02",
+    "D-S01-ONLINE-03"
+  ],
+  "entryCondition": "负责人及星星确认两自有SKU P1/P2在已知业务限制下阶段验收通过，授权最小检查后正常合main/推送；发现重大安全问题必须停止。",
+  "ownerRole": "负责人/星星验收；Codex集成",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/TASKS.md",
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/evidence/S01-CARTON-FIX/premerge-security-20261113.json",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/generated/"
+  ],
+  "parallelCondition": "Codex单人；未执行合并/推送/采购。",
+  "deliverables": [
+    "已验收提交/结果/限制与发布历史检查；安全停止证据及继续条件"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P1P2-MERGE-01/AC1",
+      "text": "仅无实质安全或冲突问题才正常合并推送；存在重大问题如实停止，保全原分支证据和业务限制，不开始P3。"
+    }
+  ],
+  "plannedTests": [
+    "提交祖先/源代码差异、冻结710/36/浏览器及快照证据指纹复核；发布增量历史和未解决冲突检查；若安全则合并后冒烟。"
+  ],
+  "risks": [
+    "完整本地历史带受限ERP明细/截图/模型授权关联；仅删tip仍会公开祖先；阶段业务验收不解除采购条件。"
+  ],
+  "requiredEvidenceKinds": [
+    "ENGINEERING"
+  ],
+  "status": "BLOCKED",
+  "implementationCommits": [],
+  "testedCommit": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "evidence": [
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-P1P2-MERGE-01/AC1"
+      ],
+      "command": "git fetch/merge-base/rev-list/diff/ls-files；原冻结测试/快照及浏览器证据hash与约束复核；历史报告结构和截图清单检查",
+      "environment": "本地仓库及Git远端只读；不ERP/模型/采购",
+      "sample": "48件6箱/马克杯空候选及限制一致、原710/36/浏览器证据完整；main为祖先无冲突，但18提交含2份非自有SKU完整历史报告、8张未审ERP截图及私有模型授权关联，按用户要求停止。合并/推送/合并后冒烟NOT_RUN。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-CARTON-FIX/premerge-security-20261113.json"
+    }
+  ],
+  "review": {
+    "reviewer": "负责人和星星（用户本轮明确通知）",
+    "scope": "P1_P2_TWO_OWNED_SKU_PHASE_WITH_KNOWN_LIMITATIONS",
+    "scopeDecision": "PASS",
+    "reviewedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+    "evidenceRef": "docs/evidence/S01-CARTON-FIX/verification.json",
+    "decision": "业务阶段通过事实登记；发布安全阻断，未完成条件式ACCEPTED迁移/合并发布；既有FAIL/NOT_RUN及REVIEW记录保留。"
+  },
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "a6cc7ddbb9b893a8f1415e1d5000ee179c098b31",
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": {
+    "code": "RESTRICTED_LOCAL_HISTORY_WOULD_BE_PUBLISHED",
+    "reason": "直接普通合并会把受限ERP报告/未审截图/私有模型授权关联的祖先提交带入main；不满足本轮无敏感数据发布条件。",
+    "resolution": "从已fetch远端main准备不继承受限历史的安全发布快照，逐项审核代码/文档/脱敏摘要并保留原本地证据，取得继续授权后合并复验推送。"
+  },
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "用户确认阶段评审通过并授权最小检查后合main/普通push。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "BLOCKED",
+      "reason": "真实检查发现受限历史会进入拟发布祖先；按用户明确安全停止要求未合并/推送，不删除历史。"
+    }
+  ],
+  "phaseAcceptance": {
+    "result": "PASS",
+    "scope": "P1/P2两自有SKU分析建议闭环及MOQ整箱修复",
+    "reviewer": "负责人和星星",
+    "knownLimitationsRetained": true,
+    "publicationAcceptance": false
+  },
+  "currentDeliveryScope": "仅登记用户阶段验收PASS事实及合并前安全阻断；原任务REVIEW历史不倒改，不虚称已合并/已发布或整个S01通过。"
 }
 ```
