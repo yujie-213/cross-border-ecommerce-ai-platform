@@ -1,3 +1,5 @@
+当前MOQ/整箱规则修复（2026-11-13，固定c79fe59）：CARTON-FIX-01交REVIEW；负责人确认ERP商品default_carton_qty为采购倍数。快充线MOQ12/倍数8，缺口44.14285722→48件6箱；马克杯MOQ12/倍数12仍空候选。缺失/非法/关系异常箱规BLOCK不默认1；其他条件UNCONFIRMED、质量UNKNOWN、采购不可执行。旧45报告标历史失效但证据不改。710后端/36前端/真实浏览器及两种取消PASS，原688保全；真实模型2次5764Token/UNKNOWN/$0.10预约。原40任务原状、企业四门BLOCKED，未业务写入/采购/合main/公开推送。报告docs/reports/S01_MOQ整箱规则修复验证_20261113.md；完成后等待负责人及星星独立验收。
+
 当前ERP预测接口补充调查（2026-11-13，7658e75）：FORECAST-SURVEY-01交REVIEW。存在名义预测字段，无已验证自建SKU可用未来预测；两SKU replenishment精确GET及自建店铺MSKU/ASIN汇总均成功空记录。25尝试含6次503保留，模型0/业务写0/公式改动0；保留7日SMA与45件候选，原38任务原状。不扩大开发，报告docs/reports/S01_ERP未来销量预测接口补充核实_20261113.md。
 
 当前P1/P2交付（2026-11-13，固定6cf9ae4）：MONITOR-SCOPE-01/ONLINE-02/ONLINE-03进入REVIEW、review=null。scopeVersion1/ACTIVE2；最近7完整业务日ERP销量39/19，库存6/81对账通过；快充线45EA待复核候选、马克杯无需补货且空候选。真实AI2次5149Token、费用UNKNOWN/$0.10预约保留；固定提交后688后端/33前端/真实浏览器/取消/重启通过，原失败不改。独立倍数/质量/共享租户限制保留、企业四门BLOCKED；P3需合法审批及另行阶段确认，不扩8/30、不合main/公开推送。证据docs/evidence/S01-MVP-P1P2/verification.json；完整S01验收仍未完成。
@@ -7344,5 +7346,115 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "currentDeliveryScope": "只读业务核查材料REVIEW；45为参数既定下的正确分析候选，非全约束可执行采购量。负责人/星星审查未运行；不修复、不采购、不扩8/30SKU。"
+}
+```
+
+
+## MOQ 与 ERP 整箱采购规则修复（2026-11-13）
+
+```json
+{
+  "id": "D-S01-CARTON-FIX-01",
+  "stage": "D",
+  "title": "MOQ与ERP整箱采购规则最小修复及两SKU真实复验",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-P1P2-BUSINESS-REVIEW-01",
+    "D-S01-ONLINE-02",
+    "D-S01-ONLINE-03"
+  ],
+  "entryCondition": "负责人2026-11-13正式确认供应商采购同时满足MOQ及整箱，ERP商品default_carton_qty就是订购倍数；授权最小修复、真实ERP分析、必要AI/前端一致性与回归，禁止采购审批下单收货。",
+  "ownerRole": "主集成/负责人/星星独立验收",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "src/commerce_hub/data/contracts.py",
+    "src/commerce_hub/data/projection/owned.py",
+    "src/commerce_hub/scenarios/s01/natural_explanation.py",
+    "src/commerce_hub/scenarios/s01_supply_inventory/__init__.py",
+    "frontend/src/",
+    "frontend/tests/unit/",
+    "tests/unit/data/test_owned.py",
+    "tests/unit/forecasting/s01/test_candidates.py",
+    "tests/browser/s01/owned.spec.ts",
+    "docs/DECISIONS.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/contracts/s01/owned-dataset-scope.md",
+    "docs/reports/S01_MOQ整箱规则修复验证_20261113.md",
+    "docs/evidence/S01-CARTON-FIX/",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/generated/"
+  ],
+  "parallelCondition": "Codex单人串行；B01/B02公式和现有Golden不改。",
+  "deliverables": [
+    "有效报价MOQ与商品箱规来源/版本/关系校验、缺失箱规拒绝默认1、48件6箱与马克杯无候选的真实ERP/AI/前端证据、历史45失效提示、未知日期质量审批保留"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-CARTON-FIX-01/AC1",
+      "text": "最小输入/展示修复保持B01/B02职责，MOQ和整箱同时满足，缺失或关系异常明确阻断，真实两SKU和回归可追溯；旧证据保留，最终REVIEW等待独立验收。"
+    }
+  ],
+  "plannedTests": [
+    "MOQ与箱规组合/缺失非正及关系异常回归；历史报告/模型绑定兼容；全后端及前端类型/构建/相关单测；真实ERP→独立API/Worker→AI→浏览器两SKU及采购约束证据。"
+  ],
+  "risks": [
+    "交期不等于承诺可售日；D1仍不覆盖当日余量；未知质量及审批不因整箱确认解除；共享ERP可能漂移。"
+  ],
+  "requiredEvidenceKinds": [
+    "ENGINEERING",
+    "LIVE"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "c79fe5960aea5b991840505bd50efb0ef7534bea"
+  ],
+  "testedCommit": "c79fe5960aea5b991840505bd50efb0ef7534bea",
+  "evidence": [
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-CARTON-FIX-01/AC1"
+      ],
+      "command": "冻结c79fe59后全后端pytest、前端build/vitest及真实Playwright owned.spec；不可变D03/原始D02/规则/API/模型审计只读重放",
+      "environment": "获准本机MySQL/API/独立Worker；710项后端以mock禁模型网络；浏览器真实ERP及已授权模型单独运行",
+      "sample": "后端710 PASS/0 FAIL/ERROR/SKIP，原688逐名保留；前端36及类型/构建PASS；浏览器1 PASS含两种取消、历史候选失效、刷新/证据/幂等/越权；两份新快照及两份旧报告核验PASS。辅助指纹序列化FAIL私有保留后修正核验器PASS；B01/B02/Golden不变。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-CARTON-FIX/verification.json"
+    },
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-CARTON-FIX-01/AC1"
+      ],
+      "command": "登记自有两SKU按正式ERP精确GET回读→D02/D03→B01/B02→A01真实模型→前端；纯SELECT核对报告和usage",
+      "environment": "固定教学ERP；ACTIVE2/scopeVersion1；沿用正常超时/退避及只读范围；无ERP业务写入",
+      "sample": "快充线MOQ12/箱8，缺口44.14285722→48件6箱，候选日11/15条件性；马克杯MOQ12/箱12/库存81无候选。完整receipt47次=2认证+45GET均200，取消另存1份商品GET、其认证未作完整计数。模型2次5764Token/费用UNKNOWN/$0.10预约；取消两任务模型attempt/report/usage全0。其他条件UNCONFIRMED、质量UNKNOWN、procurementEligible=false。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-CARTON-FIX/verification.json"
+    }
+  ],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "11328013ac8559aaa66982280526f39cec2f68b7",
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确确认整箱规则并授权最小修复；跟踪区干净，未知OpenAPI保留。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "c79fe59最小整箱适配修复及冻结代码真实两SKU/AI/浏览器和710/36回归PASS；48件6箱/马克杯空候选，历史45失效；不执行采购，等待负责人及星星独立验收。"
+    }
+  ],
+  "currentDeliveryScope": "MOQ与整箱规则最小修复及两SKU复验REVIEW；仅已确认约束合规的人工审核候选。日期/质量/审批仍未放行，旧36待审核单须未来获授权复核；不扩8/30、不合main、不公开推送。"
 }
 ```

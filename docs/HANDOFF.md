@@ -1,3 +1,17 @@
+## MOQ与ERP整箱规则修复交付REVIEW（2026-11-13）
+
+接续 codex/s01-live-business-closure / 11328013ac8559aaa66982280526f39cec2f68b7，跟踪区起点干净，未知 docs/ERP-openapi.yaml 原样保留。负责人已正式确认MOQ与整箱同时满足、default_carton_qty为采购倍数，授权最小修复及真实ERP/AI/前端复验，不授权采购审批下单收货。Codex单人；实现及被测提交 c79fe5960aea5b991840505bd50efb0ef7534bea，后续仅证据/台账/交接，最终HEAD由Git查询。
+
+D02从当前有效且精确关联报价minimum_quantity读取MOQ、从登记商品default_carton_qty读取倍数，校验租户/ID/SKU/件单位和供应商报价关系；缺失/非法或关系未确认明确BLOCK，不默认1。业务规则s01-whole-carton-v1、组合策略s01-sma-mvp-v1.whole-carton-v1，来源/签认依据/指纹保留。工程maxOrderQty向上对齐箱规，快充线63→64/马克杯42→48，非供应商上限。新otherConstraints为UNCONFIRMED；旧枚举及历史模型绑定兼容，B01/B02公式/职责/Golden未改。
+
+冻结代码后真实回读仍销量39/19、库存6/81、有效在途0；快充线gap44.14285722、MOQ12/箱8，ceil(max(gap,12)/8)×8=48件6箱，建议可售11/15、候选后余额3.85714278。马克杯MOQ12/箱12/交期4，gap0/candidates=[]。两份AI和浏览器均显示新约束/数量；旧45报告显著标历史失效并隐藏候选卡和候选曲线，旧报告原件及AI不倒改。快照完成本地16:29:39/16:29:53；D03资产/原始captures指纹/D02归一化/确定性重放/API/模型审计一致，两份旧报告投影原样保全。
+
+固定c79fe59后后端710 PASS/0失败错误跳过，原688逐名保留；前端36/类型/构建PASS；真实浏览器1 PASS涵盖两SKU/证据/刷新/幂等/越权及排队和采集中取消。取消两任务MySQL独立核对CANCELLED、report/model attempt/usage均0。完整采集receipt47次=2认证+45GET均200；取消另留1份商品GET，部分采集认证尝试未作完整计数，ERP业务写0。真实模型2次AVAILABLE，5078输入+686输出=5764Token、缓存1024/未缓存4054，费用UNKNOWN/$0.10预约保留，未改旧账本。辅助核验器初次JSON指纹序列化不一致FAIL私有保留，改用D01正式指纹后完整重验PASS，不是业务失败。Starlette/httpx弃用和浏览器颜色环境提示保留。
+
+报价交期仍非承诺可售ETA；D1不含采集当日剩余需求，实际到货/质检/上架及审批仍待确认；quality UNKNOWN、otherConditions UNCONFIRMED、procurementEligible=false。旧待审批36本身不满足8件整箱，继续排除在途、不改单；未来由获授权人员审查合法更正。原40任务逐项原状、P1/P2仍REVIEW、企业四门BLOCKED；不扩8/30SKU、不合main、不公开推受限历史，不代表整体S01验收。
+
+报告：[MOQ整箱规则修复验证](reports/S01_MOQ整箱规则修复验证_20261113.md)；[脱敏证据](evidence/S01-CARTON-FIX/verification.json)。原始ERP/真实ID/模型回执/截图仅data/private/s01-carton-fix-20261113/及既有s01-online/，本地测试产物.tmp/；凭据不提交。本轮临时API/Worker/前端会话已关闭、报告快照持久化；沿用既有启动入口查看，勿换主体重放旧幂等key。CARTON-FIX-01交REVIEW、review=null，独立验收NOT_RUN，完成后停止等待负责人及星星审查，不自动进入P3。
+
 ## P1/P2 补货数量与采购约束只读业务核查（2026-11-13）
 
 接续 codex/s01-live-business-closure / 335251682f4d2b5a90dbbfdfd40086017bdda3da；跟踪区起点干净，未知 docs/ERP-openapi.yaml 原样保留。负责人只授权独立评审，不修复代码/公式/参数或结果，不调用模型或ERP业务写入。Codex单人，本轮报告与脱敏证据固定 ff5ef711dc229224284d9d02232e12b2157e35fa；后续仅台账/交接提交，实际最终HEAD由Git查询。
