@@ -217,7 +217,7 @@ test('PROTOCOL FIXTURES: polling is bounded, stops on denial; exact-scope pagina
   await page.getByRole('navigation', { name: '主要导航' }).getByRole('link', { name: /补货建议/ }).click()
   let calls: string[] = []
   await page.route('**/api/v1/analysis-tasks?**', route => { calls.push(route.request().url()); return route.fulfill({ json: { items: [task], nextCursor: new URL(route.request().url()).searchParams.has('before') ? null : 'bounded-cursor' } }) })
-  await page.getByRole('combobox', { name: '当前包 / 精确历史范围', exact: true }).selectOption(session.casePackages[0].packageRef)
+  await page.getByRole('combobox', { name: '当前 SKU / 分析来源', exact: true }).selectOption(session.casePackages[0].packageRef)
   await page.getByRole('button', { name: '刷新历史', exact: true }).click()
   await page.getByRole('button', { name: '下一页', exact: true }).click()
   await expect(page.getByRole('button', { name: '下一页', exact: true })).toBeDisabled()

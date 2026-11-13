@@ -1,0 +1,306 @@
+{
+  "result": "PASS",
+  "scope": "READ_ONLY_ASSESSMENT_NO_NEW_ERP_BUSINESS_WRITE_OR_MODEL_CALL",
+  "observedHead": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "model": {
+    "authorizationId": "s01-online-20261113-r1",
+    "maxRequests": 10,
+    "maxTokens": 100000,
+    "maxRiskUsd": "1",
+    "actualRequests": 4,
+    "inputTokens": 6846,
+    "outputTokens": 614,
+    "totalTokens": 7460,
+    "availableExplanations": 4,
+    "actualCost": null,
+    "costStatus": "UNKNOWN",
+    "reservedCostUsd": "0.20000000",
+    "currentRequestsThisAssessment": 0,
+    "tasks": [
+      {
+        "taskId": "c0e8e1db5dd84b57aff71b26d3618794",
+        "state": "SUCCEEDED",
+        "completeness": "BLOCKED",
+        "aiStatus": "AVAILABLE",
+        "snapshotRef": "snapshot-cbd8eb5377d936f9604a3ae669fac5e3511a0df46b3d05686640f6a94e6fa586",
+        "usedCalls": 1,
+        "usedTokens": 1871,
+        "reservedCostUsd": "0.05000000",
+        "attempts": [
+          {
+            "attemptId": "s01-natural-da22b6c41b13-511a0df46b3d05686640f6a94e6fa586-1",
+            "state": "USAGE_RECORDED",
+            "inputTokens": 1722,
+            "outputTokens": 149,
+            "totalTokens": 1871,
+            "cachedInputTokens": 512,
+            "uncachedInputTokens": 1210,
+            "actualCost": null,
+            "providerRequestSha256": "5051e3d119532d2e77fe4bca999843b5e1ba4538020444fb6c87bcddb4b26da2",
+            "providerResponseSha256": "671b89bd0a4533f4f92ae874b56fb5aae8ff506ee963edb3a8b2e30ad20164cc",
+            "g02MatchesProviderAndReport": true
+          }
+        ]
+      },
+      {
+        "taskId": "d4ed25e7fe4541c8bb70e3fc5058a419",
+        "state": "SUCCEEDED",
+        "completeness": "BLOCKED",
+        "aiStatus": "AVAILABLE",
+        "snapshotRef": "snapshot-80f989cb9c33b6abaa9a80d71b2f998b63c2fbd5c8376742e06e68771a64e123",
+        "usedCalls": 1,
+        "usedTokens": 1860,
+        "reservedCostUsd": "0.05000000",
+        "attempts": [
+          {
+            "attemptId": "s01-natural-da22b6c41b13-63c2fbd5c8376742e06e68771a64e123-1",
+            "state": "USAGE_RECORDED",
+            "inputTokens": 1711,
+            "outputTokens": 149,
+            "totalTokens": 1860,
+            "cachedInputTokens": 512,
+            "uncachedInputTokens": 1199,
+            "actualCost": null,
+            "providerRequestSha256": "ece3fa817fc0b47345ae0eab0f5dd7f4b3f1f0fd85339048bac25bdb8d3c9cca",
+            "providerResponseSha256": "700bc02c4274e358170e14d4c1b10242dedf455e02cc43577e8168487b72e212",
+            "g02MatchesProviderAndReport": true
+          }
+        ]
+      },
+      {
+        "taskId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+        "state": "SUCCEEDED",
+        "completeness": "BLOCKED",
+        "aiStatus": "AVAILABLE",
+        "snapshotRef": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570",
+        "usedCalls": 1,
+        "usedTokens": 1875,
+        "reservedCostUsd": "0.05000000",
+        "attempts": [
+          {
+            "attemptId": "s01-natural-da22b6c41b13-cb792c3d1e938266bfb5ec33fe1f2570-1",
+            "state": "USAGE_RECORDED",
+            "inputTokens": 1708,
+            "outputTokens": 167,
+            "totalTokens": 1875,
+            "cachedInputTokens": 512,
+            "uncachedInputTokens": 1196,
+            "actualCost": null,
+            "providerRequestSha256": "45fcc6d04c6792d0906c873fc0c335b762489d8fcd0aeb85e853d77390dbedc7",
+            "providerResponseSha256": "39a3cf09174a0412c9657277317d6f453a2688ff6b912b693f2d93085a63046c",
+            "g02MatchesProviderAndReport": true
+          }
+        ]
+      },
+      {
+        "taskId": "fbadb42f0b9d4af78d35e06ed14c5113",
+        "state": "SUCCEEDED",
+        "completeness": "BLOCKED",
+        "aiStatus": "AVAILABLE",
+        "snapshotRef": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6",
+        "usedCalls": 1,
+        "usedTokens": 1854,
+        "reservedCostUsd": "0.05000000",
+        "attempts": [
+          {
+            "attemptId": "s01-natural-da22b6c41b13-47a67b013fb1a45540d3116f5c0e27a6-1",
+            "state": "USAGE_RECORDED",
+            "inputTokens": 1705,
+            "outputTokens": 149,
+            "totalTokens": 1854,
+            "cachedInputTokens": 512,
+            "uncachedInputTokens": 1193,
+            "actualCost": null,
+            "providerRequestSha256": "faa90164eef718ab828fc25dc1f8344bb780786b8d40cba3611dc8106dbd62ca",
+            "providerResponseSha256": "3ed1c57c767a8b2834a63c66555ce9fa50c5b9cf2d7d13d753987ec910be541c",
+            "g02MatchesProviderAndReport": true
+          }
+        ]
+      }
+    ]
+  },
+  "historicalPaidTasksPreserved": {
+    "result": "PASS",
+    "scope": "SELECT only, both existing paid tasks; no model/ERP request or budget write",
+    "tasks": [
+      {
+        "taskId": "192fee223c6a429d868bb584b3cf6e15",
+        "tableCounts": {
+          "o01_budgets": 1,
+          "o01_budget_attempts": 3,
+          "g02_usage_facts": 3
+        },
+        "fingerprints": {
+          "o01_budgets": "c8cdf0050358ffd05e1e3125ecc4cfb4770f611bf10c733c92589a43a3309eb4",
+          "o01_budget_attempts": "a1c76c43d7a3de41cd91d1f38491261fffa85df32ed7ce2d798937d826856f5a",
+          "g02_usage_facts": "294d3e658e6b0e464b918c535c2495e88e93dca751b0fb747e7e8575ce403ef5"
+        },
+        "reservedCostUsd": "0.15000000",
+        "usedCalls": 3,
+        "usedTokens": 5642
+      },
+      {
+        "taskId": "b8007816493d4b4ead5d993fef1128a2",
+        "tableCounts": {
+          "o01_budgets": 1,
+          "o01_budget_attempts": 5,
+          "g02_usage_facts": 5
+        },
+        "fingerprints": {
+          "o01_budgets": "8749b4b23b2d814770dfddf5977a934ad79203f7c4bfc01c58da7f3dc9249fbe",
+          "o01_budget_attempts": "7163a7442fe0e14e0e3dc5deb233e605c4bc3aa11595569b63010d36b3bce19b",
+          "g02_usage_facts": "bcd78641928919f3f1f06ed2363bfa4538ab669da99c0625d318b7bd7d447d1d"
+        },
+        "reservedCostUsd": "0.25000000",
+        "usedCalls": 5,
+        "usedTokens": 10047
+      }
+    ]
+  },
+  "liveReadOnlyInspection": [
+    {
+      "name": "me",
+      "path": "/api/v1/me",
+      "httpStatus": 200,
+      "keys": [
+        "code",
+        "data"
+      ],
+      "responseBytes": 157
+    },
+    {
+      "name": "data-contract",
+      "path": "/api/v1/data-contract",
+      "httpStatus": 200,
+      "keys": [
+        "version",
+        "dataset_id",
+        "kind",
+        "schema_sha256",
+        "record_policy",
+        "resources",
+        "excluded_resources"
+      ],
+      "responseBytes": 6879,
+      "version": 1
+    },
+    {
+      "name": "suppliers",
+      "path": "/api/v1/suppliers",
+      "httpStatus": 200,
+      "keys": [
+        "items",
+        "total",
+        "limit",
+        "offset",
+        "page",
+        "pages"
+      ],
+      "responseBytes": 603,
+      "total": 3,
+      "itemKeys": [
+        "id",
+        "tenant_id",
+        "supplier_code",
+        "name",
+        "level",
+        "contact",
+        "phone",
+        "purchase_user",
+        "status_text",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "warehouse-metadata",
+      "path": "/api/v1/warehouses",
+      "httpStatus": 200,
+      "keys": [
+        "items",
+        "total",
+        "limit",
+        "offset",
+        "page",
+        "pages"
+      ],
+      "responseBytes": 825,
+      "total": 6,
+      "itemKeys": [
+        "id",
+        "tenant_id",
+        "warehouse_code",
+        "name",
+        "warehouse_type",
+        "country",
+        "manager",
+        "status_text",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "stock-ledger",
+      "path": "/api/v1/stock/ledger",
+      "result": "ERROR",
+      "errorType": "TimeoutError"
+    },
+    {
+      "name": "stock-balances",
+      "path": "/api/v1/stock/balances",
+      "httpStatus": 200,
+      "keys": [
+        "items",
+        "total",
+        "limit",
+        "offset"
+      ],
+      "responseBytes": 397,
+      "total": 369,
+      "itemKeys": [
+        "id",
+        "batch_no",
+        "sku",
+        "warehouse_name",
+        "quantity",
+        "available",
+        "defective",
+        "unavailable_other"
+      ]
+    },
+    {
+      "name": "manual-testing",
+      "path": "/api/v1/manual-testing",
+      "httpStatus": 200,
+      "keys": [
+        "read_only",
+        "checked_at",
+        "fixtures",
+        "warehouse",
+        "contract",
+        "capabilities",
+        "limitations"
+      ],
+      "responseBytes": 2806
+    },
+    {
+      "name": "owned-product-context",
+      "path": "/api/v1/record-context/products/{ownedId}",
+      "httpStatus": 200,
+      "responseSHA256": "9f029e58add5acf210ac7b3e7ed35ea823e40de4dd827d38bb6f537ce7b25b4d"
+    }
+  ],
+  "newBusinessWrites": 0,
+  "monitoredDatasetRegistryImplemented": false,
+  "activeFormallyRegisteredSkus": 0,
+  "sharedSkuDiagnosticsAreNotMonitoringMembership": true,
+  "isolation": {
+    "currentAccountAdministrator": true,
+    "currentAccountWildcardPermissions": true,
+    "otherUsersRightsNotInspected": true,
+    "erpExclusiveOwnershipUnproven": true,
+    "applicationRegistryIsNotErpRowSecurity": true
+  },
+  "readOnlyGetChecks": 8,
+  "authenticationOnlyPostChecks": 2
+}

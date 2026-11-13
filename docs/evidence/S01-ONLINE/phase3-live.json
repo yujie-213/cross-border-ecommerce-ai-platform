@@ -1,0 +1,795 @@
+{
+  "testedCommit": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "capturedAt": "2026-11-13T03:11:11.343608+00:00",
+  "kind": "REAL_ERP_REAL_MYSQL_API_INDEPENDENT_WORKER",
+  "models": "AUTHORIZED",
+  "tasks": [
+    {
+      "taskId": "c0e8e1db5dd84b57aff71b26d3618794",
+      "state": "SUCCEEDED",
+      "snapshotRef": "snapshot-cbd8eb5377d936f9604a3ae669fac5e3511a0df46b3d05686640f6a94e6fa586",
+      "acquisition": {
+        "taskRef": {
+          "taskId": "c0e8e1db5dd84b57aff71b26d3618794",
+          "tenantId": "process-6f069745767745be854383c405093463"
+        },
+        "version": "s01-online-acquisition-v1",
+        "delivery": 1,
+        "requests": [
+          {
+            "path": "/api/auth-server/oauth/access-token",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:14.248526+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/inventory",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:14.799010+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a05c6955c6d24aa3da22166376b82b05075a1bb2ffa51810c3396051e76e6484"
+          },
+          {
+            "path": "/api/v1/products",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:15.251491+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "1b2966d9134df106a715c5aebb51be9f65fc4972b80828a9b760c28770a1084f"
+          },
+          {
+            "path": "/api/v1/store-authorizations",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:15.687865+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "fed602482d982e765288dd796364cccdbc52d03fe817d40a2913a9cc19f1bb26"
+          },
+          {
+            "path": "/api/v1/warehouses",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:16.120504+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+          },
+          {
+            "path": "/api/v1/listings",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:16.540505+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "19c5a8a61dfb50a82d0490511082c01639567e845f6f3060938254f4f28e17af"
+          },
+          {
+            "code": "ERP_503",
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 503,
+            "observedAt": "2026-11-13T03:11:16.977795+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+          },
+          {
+            "code": "ERP_503",
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 503,
+            "observedAt": "2026-11-13T03:11:23.378448+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "/erp/sc/data/mws/orders",
+            "method": "POST",
+            "observedAt": "2026-11-13T03:11:28.818330+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "/erp/sc/data/mws/orders",
+            "method": "POST",
+            "observedAt": "2026-11-13T03:11:38.202376+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:46.624676+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a3980ae7aba5a32a82bfe05af14261050a20875df40f943c6c656b5e85ac6c90"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:47.058208+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "023e171d22d21aba4428767587a2486d22f7e956a475c0276926771c76a8b7a1"
+          },
+          {
+            "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:47.741546+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "af8a25bb609298a41ee50e10a85e75f08e01534d4b15e0da94bbef52f666255b"
+          },
+          {
+            "path": "/api/v1/supplier-quotes",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:11:48.226664+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "2a6cf8bd688e74b2a6aa02d22089348c88b84c811d925d61b54cda9929a77748"
+          }
+        ],
+        "inputMode": "ONLINE_TEACHING_ERP",
+        "startedAt": "2026-11-13T03:11:13.890206+00:00",
+        "interfaces": {
+          "sales": {
+            "error": "ERP_503",
+            "complete": false,
+            "httpStatus": 503
+          },
+          "store": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:15.754505+00:00",
+            "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c"
+          },
+          "quotes": {
+            "total": 2,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:48.322529+00:00",
+            "fingerprint": "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+          },
+          "buckets": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:47.861232+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "listing": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:16.612000+00:00",
+            "fingerprint": "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+          },
+          "product": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:15.322005+00:00",
+            "fingerprint": "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          },
+          "inventory": {
+            "total": 2,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:14.885110+00:00",
+            "fingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0"
+          },
+          "purchases": {
+            "total": 29,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:47.376574+00:00",
+            "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+          },
+          "warehouse": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:11:16.174965+00:00",
+            "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+          },
+          "sales-compat": {
+            "error": "ERP_TIMEOUT",
+            "complete": false,
+            "httpStatus": null
+          }
+        },
+        "completedAt": "2026-11-13T03:11:48.330441+00:00",
+        "limitations": [
+          "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "TEACHING_DATA_ONLY",
+          "NO_FIXED_CATALOG_FALLBACK"
+        ],
+        "planVersion": "1",
+        "acquisitionId": "bfda5d871942443bb1758edd2e23d677",
+        "requestDigest": "2ecf94619a226c3dbb67766fab6726d0935a7a1c4481c43b681ff9067b35d30c",
+        "mappingVersion": "s01-online-map-v1",
+        "requestedScope": {
+          "fields": [
+            "quantity"
+          ],
+          "storeIds": [
+            "store-fixture"
+          ],
+          "tenantId": "process-6f069745767745be854383c405093463",
+          "warehouseIds": [
+            "warehouse-fixture"
+          ],
+          "canonicalSkuIds": [
+            "sku-fixture"
+          ]
+        },
+        "acquisitionMethod": "NETWORK_READ",
+        "sourceEnvironment": "TEACHING_ERP",
+        "atomicAcrossSystems": false
+      },
+      "completeness": "BLOCKED",
+      "calculation": {
+        "baseline": null,
+        "selection": null,
+        "candidates": [],
+        "limitations": [
+          "DATA_QUALITY_BLOCKED"
+        ]
+      },
+      "quality": [
+        {
+          "code": "REAL_RULES_NOT_SIGNED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "REQUIRED_QUALITY_UNRESOLVED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_REVALIDATION_FAILED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ERP_503",
+          "path": "sales",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ERP_TIMEOUT",
+          "path": "sales-compat",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "inventory",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_RULE_UNCONFIRMED",
+          "path": "demand",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "supply",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "supply",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "policy",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "QUALITY_STATE_UNKNOWN",
+          "path": "quality",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "QUALITY_STATE_UNKNOWN",
+          "path": "quality",
+          "affects": "CANDIDATES",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "inventory",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "inventory",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "moq",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "orderMultiple",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        }
+      ],
+      "ai": {
+        "usage": {
+          "currency": null,
+          "actualCost": null,
+          "inputTokens": 1722,
+          "totalTokens": 1871,
+          "outputTokens": 149,
+          "pricingVersion": null,
+          "cachedInputTokens": 512,
+          "uncachedInputTokens": 1210
+        },
+        "reason": "OK",
+        "status": "AVAILABLE",
+        "binding": {
+          "taskRef": {
+            "taskId": "c0e8e1db5dd84b57aff71b26d3618794",
+            "tenantId": "process-6f069745767745be854383c405093463"
+          },
+          "snapshotId": "snapshot-cbd8eb5377d936f9604a3ae669fac5e3511a0df46b3d05686640f6a94e6fa586",
+          "planVersion": "1",
+          "participantId": "s01"
+        },
+        "auditRef": "2f67dbc7e3b4461390ef9df215b96a47",
+        "provider": "AUTHORIZED_PROVIDER",
+        "usageRef": "e23a113d42b34bb59adf818dc8148b78",
+        "costStatus": "UNKNOWN",
+        "explanation": {
+          "majorRisks": [
+            {
+              "text": "质量门仍阻断，AI不能解除质量检查",
+              "supportRefs": [
+                "quality"
+              ]
+            },
+            {
+              "text": "采购执行未获授权，候选仅用于只读分析",
+              "supportRefs": [
+                "decision"
+              ]
+            }
+          ],
+          "keyEvidence": [
+            {
+              "text": "基线指标缺失，数量和日期未知，需要确认",
+              "supportRefs": [
+                "baseline-missing"
+              ]
+            }
+          ],
+          "humanConfirmations": [
+            {
+              "text": "仍需人工确认身份、数据覆盖、供给日期、约束和质量，采购未获批准",
+              "supportRefs": [
+                "human-review"
+              ]
+            }
+          ],
+          "recommendationReasons": [
+            {
+              "text": "计算输入缺失，无法确定补货建议，需要确认",
+              "supportRefs": [
+                "limitations"
+              ]
+            }
+          ]
+        },
+        "usageStatus": "UNKNOWN",
+        "versionBundle": {
+          "digests": {
+            "contextDigest": "f8c4285f773ef22bce404d282fc36e1b81591bb12595aa49908250e954148659",
+            "toolSpecsDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "parametersDigest": "e37b7212ac7b02bcb13dd0737536141b01fecdf5d981252fe318c13db0c7cb37",
+            "promptContentHash": "a635fc945d4c10d1aaeacd2338b73faa1e13653481b5f57264d7197d8623da62",
+            "outputSchemaDigest": "8ca7eeaa94cf62dc409a7d1263667dae4c2b31af1e6e6d681d0bf4179e67ca8a",
+            "resolvedPromptDigest": "c3a5bd647127a1d42226508642c8222e49457ef804d15798fa5a4b00c8cb1791"
+          },
+          "promptRef": {
+            "id": "s01.natural-explanation.prompt",
+            "version": "controlled-2"
+          },
+          "deploymentRef": {
+            "id": "deepseek-s01-evaluation",
+            "version": "1"
+          },
+          "parametersRef": {
+            "id": "s01.natural-explanation.parameters.1024",
+            "version": "1"
+          },
+          "cachePolicyRef": {
+            "id": "cache-off",
+            "version": "1"
+          },
+          "configuredModel": "deepseek-flash",
+          "outputSchemaRef": {
+            "id": "s01.natural-explanation.schema",
+            "version": "controlled-1"
+          },
+          "contextBundleRef": {
+            "id": "s01-natural-88dee661d2eee15aab8e724142deb16ee2d4bcee441d987a",
+            "version": "s01-controlled-natural-v2",
+            "tenantId": "process-6f069745767745be854383c405093463"
+          }
+        },
+        "semanticPolicy": "s01-controlled-natural-v2",
+        "supportCatalog": [
+          {
+            "ref": "decision",
+            "kind": "limitation",
+            "text": "Engineering analysis only; completeness=BLOCKED; procurement eligibility remains false."
+          },
+          {
+            "ref": "baseline-missing",
+            "kind": "gap",
+            "text": "Baseline unavailable because required calculation inputs are missing or invalid."
+          },
+          {
+            "ref": "quality",
+            "kind": "limitation",
+            "text": "Quality issues [\"AVAILABLE_DATES_UNCONFIRMED\",\"DEMAND_COVERAGE_UNPROVEN\",\"DEMAND_RULE_UNCONFIRMED\",\"ERP_503\",\"ERP_TIMEOUT\",\"INDEPENDENT_ORDER_MULTIPLE_UNKNOWN\",\"INVENTORY_FRESHNESS_NOT_ADMITTED\",\"MOQ_APPLICABILITY_UNCONFIRMED\",\"NET_AVAILABLE_UNCONFIRMED\",\"QUALITY_STATE_UNKNOWN\",\"REAL_RULES_NOT_SIGNED\",\"REQUIRED_QUALITY_UNRESOLVED\",\"SOURCE_DATA_STALE_OR_FUTURE\",\"SOURCE_REVALIDATION_FAILED\",\"SOURCE_TIMEZONE_UNCONFIRMED\",\"SOURCE_TIME_INVALID\",\"SUPPLY_COVERAGE_UNPROVEN\"]; AI cannot clear required quality checks or investigations."
+          },
+          {
+            "ref": "limitations",
+            "kind": "limitation",
+            "text": "B02 limitations [\"DATA_QUALITY_BLOCKED\"]; all real business admission gates remain BLOCKED."
+          },
+          {
+            "ref": "human-review",
+            "kind": "limitation",
+            "text": "Human review of identity, data coverage, supply dates, constraints and quality is required. No procurement confirmation, approval or execution is authorized."
+          }
+        ],
+        "tokenUsageStatus": "KNOWN",
+        "actualModelRevision": "deepseek-flash",
+        "realModelAcceptance": "REVIEW"
+      },
+      "idempotentReplay": "PASS",
+      "immutableSnapshot": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "independentAcquisitions": "NOT_RUN",
+  "apiWorkerRestartHistoricalRead": "PASS",
+  "modelStatus": [
+    "AVAILABLE"
+  ]
+}

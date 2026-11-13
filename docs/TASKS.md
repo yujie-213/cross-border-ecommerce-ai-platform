@@ -1,3 +1,5 @@
+当前数据与监控范围评估（2026-11-13，基于96c8526）：负责人要求先评估，确认后才进行数据小试/批量写入。新增已确定原则：正式普通查询/分析/未来批量/前端统计仅消费本项目授权创建、独立回读并关联核验的版本化监控清单，默认排除未登记SKU；只用前缀/名称不足。此前共享SKU仅诊断证据，当前正式ACTIVE清单尚未实现、成员0；--discover-options不得作为正式监控入口。推荐方案C仍待确认；四企业门及历史任务原状。
+
 当前在线闭环授权（2026-11-13，基于main/2fba3b4）：负责人授权连续完成ERP在线只读采集、既有B01/B02在线消费及正常流程DeepSeek解释三个阶段，独立分支codex/s01-live-business-closure，Codex单人集成。模型独立授权s01-online-20261113-r1：最多10次/100000Token/$1，单并发、有界超时、未知发送不重发。仅教学、禁止ERP业务写入/采购执行，不合main；最终REVIEW，企业四门原状。未知docs/ERP-openapi.yaml保留。
 
 当前启动文档补齐（2026-11-13，基于main/3637beb）：仅纠正README旧阶段描述，增加现有S01本机教学工作台双终端启动/身份/15分钟到期重启说明，更新前端手册与交接；31条任务JSON及验收范围不变，无新业务开发、ERP或模型调用。
@@ -6434,7 +6436,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-ONLINE-02",
     "C-01"
   ],
-  "entryCondition": "负责人2026-11-13三阶段连续授权；各真实验证遵守本轮用途及预算",
+  "entryCondition": "2026-11-13负责人将当前工作切换为数据环境及监控范围评估；评估后停下，新的开发/ERP业务写入/模型复测等待确认，正式分析仅允许自建登记且验证的ACTIVE数据集",
   "ownerRole": "主集成",
   "assignee": "Codex",
   "allowedPaths": [
@@ -6468,9 +6470,48 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "LIVE"
   ],
   "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "implementationCommits": [
+    "96c8526265c766722066b8a82eafb8f36ed1796c"
+  ],
+  "testedCommit": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "evidence": [
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-ONLINE-03/AC1"
+      ],
+      "command": "tools.s01_online_verify --execute-live --candidate 1 --enable-model --task-count 1 --evidence-name phase3-live",
+      "environment": "真实教学ERP/官方DeepSeek/独立API及Worker/MySQL",
+      "sample": "普通在线受限报告真实解释；非固定包，4次累计7460Token由SELECT另核",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ONLINE/phase3-live.json"
+    },
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-ONLINE-03/AC1"
+      ],
+      "command": "python -m tools.verify_s01_frontend --run-backend --evidence-dir docs/evidence/S01-ONLINE --baseline-evidence docs/evidence/S01-UI-C04-ACCEPTANCE/backend-regression.json",
+      "environment": "真实隔离MySQL/API/Worker；外部ERP和模型为明确夹具",
+      "sample": "固定96c8526，670项PASS，原639逐名保全；前端33项/类型/构建",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ONLINE/backend-regression.json"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-S01-ONLINE-03/AC1"
+      ],
+      "command": "S01_ONLINE_BROWSER=true npm --prefix frontend run test:browser -- online.spec.ts",
+      "environment": "真实Edge/ERP/DeepSeek/API/Worker/MySQL",
+      "sample": "报告/AI/刷新/前报关联已通过；取消旧revision被拒，完整用例FAIL；追加那笔任务后来SUCCEEDED并计入费用风险",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/S01-ONLINE/phase3-browser-failure.json"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
   "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
@@ -6481,10 +6522,275 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "TODO",
       "reason": "本轮连续授权；领取和测试按真实阶段推进"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "4次真实受限解释AVAILABLE/7460Token、670后端/33前端通过；浏览器整例FAIL保留。负责人改为评估并要求确认后续，不再开发或发起新模型/共享SKU分析"
     }
   ],
   "dirtyPaths": [
     "本轮精确范围见git diff及docs/planning/git-whitelist.json"
+  ],
+  "holdReason": "负责人要求先完成方案评估再确认下一步；已有受限AI工程证据保全，完整正向和浏览器取消复验尚未完成",
+  "proposedContinuationDependencies": [
+    "D-S01-MONITOR-SCOPE-01",
+    "D-S01-DATASET-IMPORT-01"
+  ]
+}
+```
+
+## D-S01-DATASET-DESIGN-01 仿真经营数据与监控范围评估
+
+```json
+{
+  "id": "D-S01-DATASET-DESIGN-01",
+  "stage": "D",
+  "title": "仿真经营数据与监控范围评估",
+  "kind": "design",
+  "dependsOn": [],
+  "entryCondition": "本轮仅评估和方案；执行小试/代码/业务写入须负责人确认精确独立范围、动作和上限",
+  "ownerRole": "主集成/负责人/老师ERP范围维护",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/reports/S01_数据环境与监控范围决策评估_20261113.md",
+    "docs/evidence/S01-DATA-ASSESSMENT/"
+  ],
+  "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
+  "deliverables": [
+    "只读证据、现状/问题分级、A/B/C建议、分级规模和ID监控方案、最小计划调整"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-DATASET-DESIGN-01/AC1",
+      "text": "可追溯真实证据及对应范围评审；未执行的写入/模型/业务验收不得冒充通过"
+    }
+  ],
+  "plannedTests": [
+    "只读证据/文档/历史保全"
+  ],
+  "risks": [
+    "共享ERP他人可修改的隔离程度未证明",
+    "插入数据不能保证修复503/超时",
+    "教学规则不解除企业正式门"
+  ],
+  "requiredEvidenceKinds": [
+    "DOCUMENT_CHECK",
+    "READ_ONLY_INSPECTION"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [],
+  "testedCommit": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "evidence": [
+    {
+      "kind": "READ_ONLY_INSPECTION",
+      "acceptanceIds": [
+        "D-S01-DATASET-DESIGN-01/AC1"
+      ],
+      "command": "有限正式ERP GET及隔离MySQL SELECT",
+      "environment": "当前教学ERP/唯一隔离MySQL；无业务写入或新增模型",
+      "sample": "8个GET、正式接口契约及本项目旧商品上下文，原模型/账本保全",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-DATA-ASSESSMENT/assessment-facts.json"
+    }
+  ],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "dirtyPaths": [
+    "docs/reports/S01_数据环境与监控范围决策评估_20261113.md"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    }
+  ]
+}
+```
+
+## D-S01-DATASET-PILOT-01 独立数据范围和ERP能力小试
+
+```json
+{
+  "id": "D-S01-DATASET-PILOT-01",
+  "stage": "D",
+  "title": "独立数据范围和ERP能力小试",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-DATASET-DESIGN-01"
+  ],
+  "entryCondition": "本轮仅评估和方案；执行小试/代码/业务写入须负责人确认精确独立范围、动作和上限",
+  "ownerRole": "主集成/负责人/老师ERP范围维护",
+  "assignee": null,
+  "allowedPaths": [
+    "本任务确认后精确登记，不预建应用目录"
+  ],
+  "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
+  "deliverables": [
+    "负责人确认后限定独立账号/店仓、2SKU、40业务变更/80回读上限及逐路径白名单；当前不执行"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-DATASET-PILOT-01/AC1",
+      "text": "可追溯真实证据及对应范围评审；未执行的写入/模型/业务验收不得冒充通过"
+    }
+  ],
+  "plannedTests": [
+    "批准后的真实ERP独立回读、数量关系/幂等/范围隔离及适用工程回归"
+  ],
+  "risks": [
+    "共享ERP他人可修改的隔离程度未证明",
+    "插入数据不能保证修复503/超时",
+    "教学规则不解除企业正式门"
+  ],
+  "requiredEvidenceKinds": [
+    "LIVE",
+    "ENGINEERING"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "TODO",
+      "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    }
+  ]
+}
+```
+
+## D-S01-MONITOR-SCOPE-01 D02版本化自建SKU监控清单
+
+```json
+{
+  "id": "D-S01-MONITOR-SCOPE-01",
+  "stage": "D",
+  "title": "D02版本化自建SKU监控清单",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-DATASET-DESIGN-01",
+    "D-S01-DATASET-PILOT-01"
+  ],
+  "entryCondition": "本轮仅评估和方案；执行小试/代码/业务写入须负责人确认精确独立范围、动作和上限",
+  "ownerRole": "主集成/负责人/老师ERP范围维护",
+  "assignee": null,
+  "allowedPaths": [
+    "本任务确认后精确登记，不预建应用目录"
+  ],
+  "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
+  "deliverables": [
+    "真实业务ID与关系、导入/回读/归属证据、G01授权、统一查询/分析/统计范围；不开发批量执行"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-MONITOR-SCOPE-01/AC1",
+      "text": "可追溯真实证据及对应范围评审；未执行的写入/模型/业务验收不得冒充通过"
+    }
+  ],
+  "plannedTests": [
+    "批准后的真实ERP独立回读、数量关系/幂等/范围隔离及适用工程回归"
+  ],
+  "risks": [
+    "共享ERP他人可修改的隔离程度未证明",
+    "插入数据不能保证修复503/超时",
+    "教学规则不解除企业正式门"
+  ],
+  "requiredEvidenceKinds": [
+    "LIVE",
+    "ENGINEERING"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "TODO",
+      "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    }
+  ]
+}
+```
+
+## D-S01-DATASET-IMPORT-01 S01八场景最小经营数据集
+
+```json
+{
+  "id": "D-S01-DATASET-IMPORT-01",
+  "stage": "D",
+  "title": "S01八场景最小经营数据集",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-DATASET-PILOT-01",
+    "D-S01-MONITOR-SCOPE-01"
+  ],
+  "entryCondition": "本轮仅评估和方案；执行小试/代码/业务写入须负责人确认精确独立范围、动作和上限",
+  "ownerRole": "主集成/负责人/老师ERP范围维护",
+  "assignee": null,
+  "allowedPaths": [
+    "本任务确认后精确登记，不预建应用目录"
+  ],
+  "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
+  "deliverables": [
+    "批准精确规模/规则/预算后，8SKU/14天/真实ERP写回读、独立对账与8场景；通过后再讨论30SKU/60天扩容"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-DATASET-IMPORT-01/AC1",
+      "text": "可追溯真实证据及对应范围评审；未执行的写入/模型/业务验收不得冒充通过"
+    }
+  ],
+  "plannedTests": [
+    "批准后的真实ERP独立回读、数量关系/幂等/范围隔离及适用工程回归"
+  ],
+  "risks": [
+    "共享ERP他人可修改的隔离程度未证明",
+    "插入数据不能保证修复503/超时",
+    "教学规则不解除企业正式门"
+  ],
+  "requiredEvidenceKinds": [
+    "LIVE",
+    "ENGINEERING"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "TODO",
+      "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    }
   ]
 }
 ```

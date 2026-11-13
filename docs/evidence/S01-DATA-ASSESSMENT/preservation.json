@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "baselineMain": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "applicationTestedCommit": "96c8526265c766722066b8a82eafb8f36ed1796c",
+  "priorTaskRecordsPreserved": 31,
+  "protectedPathsUnchanged": [
+    "docs/requirements/REQUIREMENTS.md",
+    "docs/architecture/DEVELOPMENT_DESIGN.md",
+    "docs/agents/S01_补货Agent专项详细设计.md",
+    "docs/agents/S01_MVP实施文档.md",
+    "docs/agents/AI_DETAILED_DESIGN.md",
+    "docs/evidence/S01-BACKEND",
+    "docs/evidence/S01-BACKEND-ACCEPTANCE",
+    "docs/evidence/D-S01-UI-01",
+    "docs/evidence/S01-UI-C04-FIX",
+    "docs/evidence/C-04-STRUCTURED-LIVE",
+    "docs/evidence/S01-UI-C04-ACCEPTANCE",
+    "prototypes",
+    "requirements.lock",
+    "pyproject.toml"
+  ],
+  "noApplicationChangesAfterAssessmentInstruction": true,
+  "historicalCatalogPreserved": true,
+  "actualSecretMatches": [],
+  "privateDataTracked": false,
+  "reportLinksChecked": 6,
+  "unknownOpenapiPreserved": true,
+  "enterpriseGates": {
+    "D-S01-DATA-01": "BLOCKED",
+    "D-S01-RULE-01": "BLOCKED",
+    "D-S01-ERP-ACCESS-01": "BLOCKED",
+    "D-S01-AI-ACCESS-01": "BLOCKED"
+  },
+  "newDatasetTasksExecutionAuthorized": false,
+  "browserWipRetained": true
+}

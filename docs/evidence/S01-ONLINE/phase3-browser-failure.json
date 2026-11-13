@@ -1,0 +1,17 @@
+{
+  "result": "FAIL",
+  "stage": "Cancellation revision race assertion",
+  "verifiedBeforeFailure": [
+    "Two current ERP collections and AVAILABLE explanations",
+    "Report/snapshot/usage bindings",
+    "Refresh",
+    "previousReportRef",
+    "Replay",
+    "Evidence"
+  ],
+  "cancelledAttemptTaskId": "d4ed25e7fe4541c8bb70e3fc5058a419",
+  "responseCode": "REVISION_CONFLICT",
+  "laterTaskState": "SUCCEEDED",
+  "laterAIStatus": "AVAILABLE",
+  "correction": "Re-read current revision before confirming cancellation; reuse existing reports for remaining browser verification, no model replay"
+}

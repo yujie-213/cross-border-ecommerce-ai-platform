@@ -1,0 +1,2059 @@
+{
+  "reports": [
+    {
+      "scope": {
+        "fields": [
+          "quantity"
+        ],
+        "storeIds": [
+          "store-6b86b273ff34fce19d6b"
+        ],
+        "tenantId": "s01-online-teaching-local",
+        "warehouseIds": [
+          "warehouse-8bd9c0d453533757387e"
+        ],
+        "canonicalSkuIds": [
+          "sku-1c5fe03ebb578d2bb976"
+        ]
+      },
+      "taskRef": {
+        "taskId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+        "tenantId": "s01-online-teaching-local"
+      },
+      "reportRef": {
+        "reportId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+        "tenantId": "s01-online-teaching-local"
+      },
+      "dataReport": {
+        "observedDomains": [
+          {
+            "state": "OBSERVED",
+            "domain": "identity",
+            "sourceRefs": [
+              "read-0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+              "read-4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+              "read-5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+              "read-207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+            ],
+            "sourceTimes": [
+              "2026-09-07 10:00:00",
+              "2026-09-16 23:00:00",
+              "2026-09-30T09:35:09+00:00"
+            ],
+            "measurements": []
+          },
+          {
+            "state": "OBSERVED",
+            "domain": "inventory",
+            "sourceRefs": [
+              "read-0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+              "read-4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            ],
+            "sourceTimes": [
+              "2026-09-07 10:00:00",
+              "2026-09-16 23:00:00"
+            ],
+            "measurements": [
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "physical",
+                "value": "169"
+              },
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "available",
+                "value": "96"
+              },
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "physical",
+                "value": "3"
+              },
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "available",
+                "value": "3"
+              }
+            ]
+          },
+          {
+            "state": "ERROR",
+            "domain": "demand",
+            "sourceRefs": [],
+            "sourceTimes": [],
+            "measurements": []
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "supply",
+            "sourceRefs": [
+              "read-1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+            ],
+            "sourceTimes": [
+              "2026-10-05T12:45:30+00:00",
+              "2026-10-05T12:46:43+00:00",
+              "2026-10-16T08:06:43+00:00",
+              "2026-11-11T02:51:53+00:00",
+              "2026-11-11T07:02:59+00:00",
+              "2026-11-11T07:12:08+00:00",
+              "2026-11-11T07:18:26+00:00",
+              "2026-11-11T07:53:31+00:00",
+              "2026-11-11T08:12:01+00:00",
+              "2026-11-11T08:19:15+00:00",
+              "2026-11-11T08:43:48+00:00",
+              "2026-11-11T08:43:49+00:00",
+              "2026-11-11T08:43:50+00:00",
+              "2026-11-11T08:43:51+00:00",
+              "2026-11-11T09:04:38+00:00",
+              "2026-11-11T09:19:31+00:00",
+              "2026-11-11T09:26:52+00:00",
+              "2026-11-11T09:39:59+00:00",
+              "2026-11-11T09:42:06+00:00",
+              "2026-11-11T09:53:10+00:00"
+            ],
+            "measurements": []
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "availability",
+            "sourceRefs": [
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+              "read-1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+            ],
+            "sourceTimes": [
+              "2026-09-30T09:35:09+00:00",
+              "2026-10-05T12:45:30+00:00",
+              "2026-10-05T12:46:43+00:00",
+              "2026-10-16T08:06:43+00:00",
+              "2026-11-11T02:51:53+00:00",
+              "2026-11-11T07:02:59+00:00",
+              "2026-11-11T07:12:08+00:00",
+              "2026-11-11T07:18:26+00:00",
+              "2026-11-11T07:53:31+00:00",
+              "2026-11-11T08:12:01+00:00",
+              "2026-11-11T08:19:15+00:00",
+              "2026-11-11T08:43:48+00:00",
+              "2026-11-11T08:43:49+00:00",
+              "2026-11-11T08:43:50+00:00",
+              "2026-11-11T08:43:51+00:00",
+              "2026-11-11T09:04:38+00:00",
+              "2026-11-11T09:19:31+00:00",
+              "2026-11-11T09:26:52+00:00",
+              "2026-11-11T09:39:59+00:00",
+              "2026-11-11T09:42:06+00:00"
+            ],
+            "measurements": []
+          },
+          {
+            "state": "OBSERVED",
+            "domain": "moq",
+            "sourceRefs": [
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+              "read-a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+            ],
+            "sourceTimes": [
+              "2026-09-30T09:35:09+00:00"
+            ],
+            "measurements": [
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "moq",
+                "value": "24"
+              }
+            ]
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "orderMultiple",
+            "sourceRefs": [
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+            ],
+            "sourceTimes": [
+              "2026-09-30T09:35:09+00:00"
+            ],
+            "measurements": [
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "carton_quantity",
+                "value": "24"
+              }
+            ]
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "quality",
+            "sourceRefs": [],
+            "sourceTimes": [],
+            "measurements": []
+          }
+        ],
+        "quality": [
+          {
+            "code": "REAL_RULES_NOT_SIGNED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "NET_AVAILABLE_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "DEMAND_COVERAGE_UNPROVEN",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SUPPLY_COVERAGE_UNPROVEN",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "AVAILABLE_DATES_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "REQUIRED_QUALITY_UNRESOLVED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_REVALIDATION_FAILED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "ERP_503",
+            "path": "sales",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "sales-compat",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "NET_AVAILABLE_UNCONFIRMED",
+            "path": "inventory",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "DEMAND_RULE_UNCONFIRMED",
+            "path": "demand",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SUPPLY_COVERAGE_UNPROVEN",
+            "path": "supply",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "AVAILABLE_DATES_UNCONFIRMED",
+            "path": "supply",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+            "path": "policy",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "QUALITY_STATE_UNKNOWN",
+            "path": "quality",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "QUALITY_STATE_UNKNOWN",
+            "path": "quality",
+            "affects": "CANDIDATES",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "identity",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "identity",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "identity",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "inventory",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "inventory",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "moq",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "orderMultiple",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          }
+        ],
+        "supplyDemand": {
+          "baseline": null,
+          "selection": null,
+          "candidates": [],
+          "limitations": [
+            "DATA_QUALITY_BLOCKED"
+          ]
+        },
+        "scenarioSupplement": {
+          "asOf": "2026-11-13T03:15:43.567253+00:00",
+          "inputMode": "ONLINE_TEACHING_ERP",
+          "sourceMode": "ONLINE_TEACHING_ERP",
+          "ruleVersion": null,
+          "acquisitionId": "992c9f1fbb0249c6ac3ddaf66031583e",
+          "realAdmission": "BLOCKED",
+          "mappingVersion": "s01-online-map-v1",
+          "sourceSynthetic": true,
+          "unverifiedRules": [],
+          "calculationStatus": "BLOCKED",
+          "previousReportRef": null,
+          "engineeringFixture": false,
+          "procurementEligible": false
+        },
+        "acquisition": {
+          "taskRef": {
+            "taskId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+            "tenantId": "s01-online-teaching-local"
+          },
+          "version": "s01-online-acquisition-v1",
+          "delivery": 1,
+          "requests": [
+            {
+              "path": "/api/auth-server/oauth/access-token",
+              "method": "POST",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:09.630791+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false
+            },
+            {
+              "path": "/api/v1/inventory",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:10.187502+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "a05c6955c6d24aa3da22166376b82b05075a1bb2ffa51810c3396051e76e6484"
+            },
+            {
+              "path": "/api/v1/products",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:10.663210+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "1b2966d9134df106a715c5aebb51be9f65fc4972b80828a9b760c28770a1084f"
+            },
+            {
+              "path": "/api/v1/store-authorizations",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:11.105502+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "fed602482d982e765288dd796364cccdbc52d03fe817d40a2913a9cc19f1bb26"
+            },
+            {
+              "path": "/api/v1/warehouses",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:11.531323+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+            },
+            {
+              "path": "/api/v1/listings",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:11.974404+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "19c5a8a61dfb50a82d0490511082c01639567e845f6f3060938254f4f28e17af"
+            },
+            {
+              "code": "ERP_503",
+              "path": "/api/v1/sales-orders",
+              "method": "GET",
+              "httpStatus": 503,
+              "observedAt": "2026-11-13T03:15:12.398635+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+            },
+            {
+              "code": "ERP_503",
+              "path": "/api/v1/sales-orders",
+              "method": "GET",
+              "httpStatus": 503,
+              "observedAt": "2026-11-13T03:15:18.814955+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+            },
+            {
+              "code": "ERP_TIMEOUT",
+              "path": "/erp/sc/data/mws/orders",
+              "method": "POST",
+              "observedAt": "2026-11-13T03:15:24.252491+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false
+            },
+            {
+              "code": "ERP_TIMEOUT",
+              "path": "/erp/sc/data/mws/orders",
+              "method": "POST",
+              "observedAt": "2026-11-13T03:15:33.642160+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false
+            },
+            {
+              "path": "/api/v1/purchase-orders",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:42.056280+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "a3980ae7aba5a32a82bfe05af14261050a20875df40f943c6c656b5e85ac6c90"
+            },
+            {
+              "path": "/api/v1/purchase-orders",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:42.522572+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "023e171d22d21aba4428767587a2486d22f7e956a475c0276926771c76a8b7a1"
+            },
+            {
+              "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+              "method": "POST",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:42.966092+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "425618cd201924c5b87514b47bfc7ec75c1f49b2be2987970533b166f1c5ed55"
+            },
+            {
+              "path": "/api/v1/supplier-quotes",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:43.481724+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "2a6cf8bd688e74b2a6aa02d22089348c88b84c811d925d61b54cda9929a77748"
+            }
+          ],
+          "inputMode": "ONLINE_TEACHING_ERP",
+          "startedAt": "2026-11-13T03:15:09.272221+00:00",
+          "interfaces": {
+            "sales": {
+              "error": "ERP_503",
+              "complete": false,
+              "httpStatus": 503
+            },
+            "store": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:11.163191+00:00",
+              "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c"
+            },
+            "quotes": {
+              "total": 2,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:43.559126+00:00",
+              "fingerprint": "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+            },
+            "buckets": {
+              "total": 0,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:43.114160+00:00",
+              "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "listing": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:12.036677+00:00",
+              "fingerprint": "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+            },
+            "product": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:10.733849+00:00",
+              "fingerprint": "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+            },
+            "inventory": {
+              "total": 2,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:10.292564+00:00",
+              "fingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0"
+            },
+            "purchases": {
+              "total": 29,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:42.600329+00:00",
+              "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+            },
+            "warehouse": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:11.604855+00:00",
+              "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+            },
+            "sales-compat": {
+              "error": "ERP_TIMEOUT",
+              "complete": false,
+              "httpStatus": null
+            }
+          },
+          "completedAt": "2026-11-13T03:15:43.567253+00:00",
+          "limitations": [
+            "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+            "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+            "TEACHING_DATA_ONLY",
+            "NO_FIXED_CATALOG_FALLBACK"
+          ],
+          "planVersion": "1",
+          "acquisitionId": "992c9f1fbb0249c6ac3ddaf66031583e",
+          "requestDigest": "730384c63ddfdc5e578a4acb75cd61f4a0d435a21e4ddedecd59e820f90631f6",
+          "mappingVersion": "s01-online-map-v1",
+          "requestedScope": {
+            "fields": [
+              "quantity"
+            ],
+            "storeIds": [
+              "store-6b86b273ff34fce19d6b"
+            ],
+            "tenantId": "s01-online-teaching-local",
+            "warehouseIds": [
+              "warehouse-8bd9c0d453533757387e"
+            ],
+            "canonicalSkuIds": [
+              "sku-1c5fe03ebb578d2bb976"
+            ]
+          },
+          "acquisitionMethod": "NETWORK_READ",
+          "sourceEnvironment": "TEACHING_ERP",
+          "atomicAcrossSystems": false
+        },
+        "evidence": [
+          {
+            "fieldPath": "observedDomains",
+            "evidenceId": "evidence-e66584a0785db5f25c7c398f86d15564c983b75ee1379e598e87e6b069555274",
+            "snapshotId": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570",
+            "sourceModuleId": "D02"
+          },
+          {
+            "fieldPath": "quality",
+            "evidenceId": "evidence-08579e5bec36c270c638153d42eaa71b5a990cbb68b378fdc0c8632ff31df31d",
+            "snapshotId": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570",
+            "sourceModuleId": "D03"
+          },
+          {
+            "fieldPath": "acquisition",
+            "evidenceId": "evidence-7299d06ee2857776d476303986c3cb4f52961e3661c6335ef2c460d738cde221",
+            "snapshotId": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570",
+            "sourceModuleId": "D01"
+          }
+        ]
+      },
+      "scenarioId": "S01_BACKEND",
+      "planVersion": "1",
+      "snapshotRef": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570",
+      "completeness": "BLOCKED",
+      "participants": [
+        {
+          "scenarioId": "S01_BACKEND",
+          "snapshotRef": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570"
+        }
+      ],
+      "sourceNature": "TEACHING_ERP_OBSERVED",
+      "analysisReport": {
+        "ai": {
+          "usage": {
+            "currency": null,
+            "actualCost": null,
+            "inputTokens": 1708,
+            "totalTokens": 1875,
+            "outputTokens": 167,
+            "pricingVersion": null,
+            "cachedInputTokens": 512,
+            "uncachedInputTokens": 1196
+          },
+          "reason": "OK",
+          "status": "AVAILABLE",
+          "binding": {
+            "taskRef": {
+              "taskId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+              "tenantId": "s01-online-teaching-local"
+            },
+            "snapshotId": "snapshot-697b09772a8b11303e24a75de76a0fc9cb792c3d1e938266bfb5ec33fe1f2570",
+            "planVersion": "1",
+            "participantId": "s01"
+          },
+          "auditRef": "3b54c5b43bbd49018cab8758495bb5eb",
+          "provider": "AUTHORIZED_PROVIDER",
+          "usageRef": "73d469811e0e47198f8df660e1d8cf6e",
+          "costStatus": "UNKNOWN",
+          "explanation": {
+            "majorRisks": [
+              {
+                "text": "质量门仍阻断，AI不能解除质量检查",
+                "supportRefs": [
+                  "quality"
+                ]
+              },
+              {
+                "text": "采购执行未获授权，候选仅用于只读分析",
+                "supportRefs": [
+                  "decision"
+                ]
+              }
+            ],
+            "keyEvidence": [
+              {
+                "text": "基线指标缺失，数量和日期未知，需要确认",
+                "supportRefs": [
+                  "baseline-missing"
+                ]
+              }
+            ],
+            "humanConfirmations": [
+              {
+                "text": "仍需人工确认身份、数据覆盖、供给日期、约束和质量，采购未获批准",
+                "supportRefs": [
+                  "human-review"
+                ]
+              }
+            ],
+            "recommendationReasons": [
+              {
+                "text": "计算输入缺失，无法确定补货建议，需要确认",
+                "supportRefs": [
+                  "limitations"
+                ]
+              }
+            ]
+          },
+          "usageStatus": "UNKNOWN",
+          "versionBundle": {
+            "digests": {
+              "contextDigest": "dfbc942015da5e2174b590d9cd83dcdfa0e74963a2c4191f5638b95069e13d16",
+              "toolSpecsDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+              "parametersDigest": "e37b7212ac7b02bcb13dd0737536141b01fecdf5d981252fe318c13db0c7cb37",
+              "promptContentHash": "a635fc945d4c10d1aaeacd2338b73faa1e13653481b5f57264d7197d8623da62",
+              "outputSchemaDigest": "8ca7eeaa94cf62dc409a7d1263667dae4c2b31af1e6e6d681d0bf4179e67ca8a",
+              "resolvedPromptDigest": "90844b9e6e08cc4c4f8ef336418a9110bde0b9230737d3b084341f9de4ece473"
+            },
+            "promptRef": {
+              "id": "s01.natural-explanation.prompt",
+              "version": "controlled-2"
+            },
+            "deploymentRef": {
+              "id": "deepseek-s01-evaluation",
+              "version": "1"
+            },
+            "parametersRef": {
+              "id": "s01.natural-explanation.parameters.1024",
+              "version": "1"
+            },
+            "cachePolicyRef": {
+              "id": "cache-off",
+              "version": "1"
+            },
+            "configuredModel": "deepseek-flash",
+            "outputSchemaRef": {
+              "id": "s01.natural-explanation.schema",
+              "version": "controlled-1"
+            },
+            "contextBundleRef": {
+              "id": "s01-natural-73a2fa812c2e9ea57f021f19830f68c65afe179576237c44",
+              "version": "s01-controlled-natural-v2",
+              "tenantId": "s01-online-teaching-local"
+            }
+          },
+          "semanticPolicy": "s01-controlled-natural-v2",
+          "supportCatalog": [
+            {
+              "ref": "decision",
+              "kind": "limitation",
+              "text": "Engineering analysis only; completeness=BLOCKED; procurement eligibility remains false."
+            },
+            {
+              "ref": "baseline-missing",
+              "kind": "gap",
+              "text": "Baseline unavailable because required calculation inputs are missing or invalid."
+            },
+            {
+              "ref": "quality",
+              "kind": "limitation",
+              "text": "Quality issues [\"AVAILABLE_DATES_UNCONFIRMED\",\"DEMAND_COVERAGE_UNPROVEN\",\"DEMAND_RULE_UNCONFIRMED\",\"ERP_503\",\"ERP_TIMEOUT\",\"INDEPENDENT_ORDER_MULTIPLE_UNKNOWN\",\"INVENTORY_FRESHNESS_NOT_ADMITTED\",\"MOQ_APPLICABILITY_UNCONFIRMED\",\"NET_AVAILABLE_UNCONFIRMED\",\"QUALITY_STATE_UNKNOWN\",\"REAL_RULES_NOT_SIGNED\",\"REQUIRED_QUALITY_UNRESOLVED\",\"SOURCE_DATA_STALE_OR_FUTURE\",\"SOURCE_REVALIDATION_FAILED\",\"SOURCE_TIMEZONE_UNCONFIRMED\",\"SOURCE_TIME_INVALID\",\"SUPPLY_COVERAGE_UNPROVEN\"]; AI cannot clear required quality checks or investigations."
+            },
+            {
+              "ref": "limitations",
+              "kind": "limitation",
+              "text": "B02 limitations [\"DATA_QUALITY_BLOCKED\"]; all real business admission gates remain BLOCKED."
+            },
+            {
+              "ref": "human-review",
+              "kind": "limitation",
+              "text": "Human review of identity, data coverage, supply dates, constraints and quality is required. No procurement confirmation, approval or execution is authorized."
+            }
+          ],
+          "tokenUsageStatus": "KNOWN",
+          "actualModelRevision": "deepseek-flash",
+          "realModelAcceptance": "REVIEW"
+        }
+      },
+      "contractVersion": "0.1.0",
+      "scenarioVersion": "0.1.0"
+    },
+    {
+      "scope": {
+        "fields": [
+          "quantity"
+        ],
+        "storeIds": [
+          "store-6b86b273ff34fce19d6b"
+        ],
+        "tenantId": "s01-online-teaching-local",
+        "warehouseIds": [
+          "warehouse-8bd9c0d453533757387e"
+        ],
+        "canonicalSkuIds": [
+          "sku-1c5fe03ebb578d2bb976"
+        ]
+      },
+      "taskRef": {
+        "taskId": "fbadb42f0b9d4af78d35e06ed14c5113",
+        "tenantId": "s01-online-teaching-local"
+      },
+      "reportRef": {
+        "reportId": "fbadb42f0b9d4af78d35e06ed14c5113",
+        "tenantId": "s01-online-teaching-local"
+      },
+      "dataReport": {
+        "observedDomains": [
+          {
+            "state": "OBSERVED",
+            "domain": "identity",
+            "sourceRefs": [
+              "read-0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+              "read-4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c",
+              "read-5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e",
+              "read-207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+            ],
+            "sourceTimes": [
+              "2026-09-07 10:00:00",
+              "2026-09-16 23:00:00",
+              "2026-09-30T09:35:09+00:00"
+            ],
+            "measurements": []
+          },
+          {
+            "state": "OBSERVED",
+            "domain": "inventory",
+            "sourceRefs": [
+              "read-0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0",
+              "read-4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            ],
+            "sourceTimes": [
+              "2026-09-07 10:00:00",
+              "2026-09-16 23:00:00"
+            ],
+            "measurements": [
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "physical",
+                "value": "169"
+              },
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "available",
+                "value": "96"
+              },
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "physical",
+                "value": "3"
+              },
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "available",
+                "value": "3"
+              }
+            ]
+          },
+          {
+            "state": "ERROR",
+            "domain": "demand",
+            "sourceRefs": [],
+            "sourceTimes": [],
+            "measurements": []
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "supply",
+            "sourceRefs": [
+              "read-1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+            ],
+            "sourceTimes": [
+              "2026-10-05T12:45:30+00:00",
+              "2026-10-05T12:46:43+00:00",
+              "2026-10-16T08:06:43+00:00",
+              "2026-11-11T02:51:53+00:00",
+              "2026-11-11T07:02:59+00:00",
+              "2026-11-11T07:12:08+00:00",
+              "2026-11-11T07:18:26+00:00",
+              "2026-11-11T07:53:31+00:00",
+              "2026-11-11T08:12:01+00:00",
+              "2026-11-11T08:19:15+00:00",
+              "2026-11-11T08:43:48+00:00",
+              "2026-11-11T08:43:49+00:00",
+              "2026-11-11T08:43:50+00:00",
+              "2026-11-11T08:43:51+00:00",
+              "2026-11-11T09:04:38+00:00",
+              "2026-11-11T09:19:31+00:00",
+              "2026-11-11T09:26:52+00:00",
+              "2026-11-11T09:39:59+00:00",
+              "2026-11-11T09:42:06+00:00",
+              "2026-11-11T09:53:10+00:00"
+            ],
+            "measurements": []
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "availability",
+            "sourceRefs": [
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+              "read-1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+            ],
+            "sourceTimes": [
+              "2026-09-30T09:35:09+00:00",
+              "2026-10-05T12:45:30+00:00",
+              "2026-10-05T12:46:43+00:00",
+              "2026-10-16T08:06:43+00:00",
+              "2026-11-11T02:51:53+00:00",
+              "2026-11-11T07:02:59+00:00",
+              "2026-11-11T07:12:08+00:00",
+              "2026-11-11T07:18:26+00:00",
+              "2026-11-11T07:53:31+00:00",
+              "2026-11-11T08:12:01+00:00",
+              "2026-11-11T08:19:15+00:00",
+              "2026-11-11T08:43:48+00:00",
+              "2026-11-11T08:43:49+00:00",
+              "2026-11-11T08:43:50+00:00",
+              "2026-11-11T08:43:51+00:00",
+              "2026-11-11T09:04:38+00:00",
+              "2026-11-11T09:19:31+00:00",
+              "2026-11-11T09:26:52+00:00",
+              "2026-11-11T09:39:59+00:00",
+              "2026-11-11T09:42:06+00:00"
+            ],
+            "measurements": []
+          },
+          {
+            "state": "OBSERVED",
+            "domain": "moq",
+            "sourceRefs": [
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e",
+              "read-a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+            ],
+            "sourceTimes": [
+              "2026-09-30T09:35:09+00:00"
+            ],
+            "measurements": [
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "moq",
+                "value": "24"
+              }
+            ]
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "orderMultiple",
+            "sourceRefs": [
+              "read-bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+            ],
+            "sourceTimes": [
+              "2026-09-30T09:35:09+00:00"
+            ],
+            "measurements": [
+              {
+                "unit": "SOURCE_PIECE",
+                "field": "carton_quantity",
+                "value": "24"
+              }
+            ]
+          },
+          {
+            "state": "INCOMPLETE",
+            "domain": "quality",
+            "sourceRefs": [],
+            "sourceTimes": [],
+            "measurements": []
+          }
+        ],
+        "quality": [
+          {
+            "code": "REAL_RULES_NOT_SIGNED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "NET_AVAILABLE_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "DEMAND_COVERAGE_UNPROVEN",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SUPPLY_COVERAGE_UNPROVEN",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "AVAILABLE_DATES_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "REQUIRED_QUALITY_UNRESOLVED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_REVALIDATION_FAILED",
+            "path": "admission",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "ERP_503",
+            "path": "sales",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "sales-compat",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "NET_AVAILABLE_UNCONFIRMED",
+            "path": "inventory",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "DEMAND_RULE_UNCONFIRMED",
+            "path": "demand",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SUPPLY_COVERAGE_UNPROVEN",
+            "path": "supply",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "AVAILABLE_DATES_UNCONFIRMED",
+            "path": "supply",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+            "path": "policy",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "QUALITY_STATE_UNKNOWN",
+            "path": "quality",
+            "affects": "CALCULATION",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "QUALITY_STATE_UNKNOWN",
+            "path": "quality",
+            "affects": "CANDIDATES",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "identity",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "identity",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "identity",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "inventory",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_TIME_INVALID",
+            "path": "inventory",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "supply",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "availability",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "moq",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          },
+          {
+            "code": "SOURCE_DATA_STALE_OR_FUTURE",
+            "path": "orderMultiple",
+            "affects": "PROVENANCE",
+            "severity": "BLOCK"
+          }
+        ],
+        "supplyDemand": {
+          "baseline": null,
+          "selection": null,
+          "candidates": [],
+          "limitations": [
+            "DATA_QUALITY_BLOCKED"
+          ]
+        },
+        "scenarioSupplement": {
+          "asOf": "2026-11-13T03:16:20.982640+00:00",
+          "inputMode": "ONLINE_TEACHING_ERP",
+          "sourceMode": "ONLINE_TEACHING_ERP",
+          "ruleVersion": null,
+          "acquisitionId": "956e0bdbc9dc460ea12053d1396ca87a",
+          "realAdmission": "BLOCKED",
+          "mappingVersion": "s01-online-map-v1",
+          "sourceSynthetic": true,
+          "unverifiedRules": [],
+          "calculationStatus": "BLOCKED",
+          "previousReportRef": {
+            "reportId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+            "tenantId": "s01-online-teaching-local"
+          },
+          "engineeringFixture": false,
+          "procurementEligible": false
+        },
+        "acquisition": {
+          "taskRef": {
+            "taskId": "fbadb42f0b9d4af78d35e06ed14c5113",
+            "tenantId": "s01-online-teaching-local"
+          },
+          "version": "s01-online-acquisition-v1",
+          "delivery": 1,
+          "requests": [
+            {
+              "path": "/api/auth-server/oauth/access-token",
+              "method": "POST",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:46.914914+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false
+            },
+            {
+              "path": "/api/v1/inventory",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:47.466839+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "a05c6955c6d24aa3da22166376b82b05075a1bb2ffa51810c3396051e76e6484"
+            },
+            {
+              "path": "/api/v1/products",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:47.914327+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "1b2966d9134df106a715c5aebb51be9f65fc4972b80828a9b760c28770a1084f"
+            },
+            {
+              "path": "/api/v1/store-authorizations",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:48.324283+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "fed602482d982e765288dd796364cccdbc52d03fe817d40a2913a9cc19f1bb26"
+            },
+            {
+              "path": "/api/v1/warehouses",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:48.766420+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+            },
+            {
+              "path": "/api/v1/listings",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:15:49.203753+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "19c5a8a61dfb50a82d0490511082c01639567e845f6f3060938254f4f28e17af"
+            },
+            {
+              "code": "ERP_503",
+              "path": "/api/v1/sales-orders",
+              "method": "GET",
+              "httpStatus": 503,
+              "observedAt": "2026-11-13T03:15:49.630077+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+            },
+            {
+              "code": "ERP_503",
+              "path": "/api/v1/sales-orders",
+              "method": "GET",
+              "httpStatus": 503,
+              "observedAt": "2026-11-13T03:15:56.274329+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+            },
+            {
+              "code": "ERP_TIMEOUT",
+              "path": "/erp/sc/data/mws/orders",
+              "method": "POST",
+              "observedAt": "2026-11-13T03:16:01.732184+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false
+            },
+            {
+              "code": "ERP_TIMEOUT",
+              "path": "/erp/sc/data/mws/orders",
+              "method": "POST",
+              "observedAt": "2026-11-13T03:16:11.142840+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false
+            },
+            {
+              "path": "/api/v1/purchase-orders",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:16:19.552575+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "a3980ae7aba5a32a82bfe05af14261050a20875df40f943c6c656b5e85ac6c90"
+            },
+            {
+              "path": "/api/v1/purchase-orders",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:16:19.964196+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "023e171d22d21aba4428767587a2486d22f7e956a475c0276926771c76a8b7a1"
+            },
+            {
+              "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+              "method": "POST",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:16:20.392665+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "e4bbe05593912dd840ec6ebcd659d2927903f7739e2bd99dfcfdd22bd73ba212"
+            },
+            {
+              "path": "/api/v1/supplier-quotes",
+              "method": "GET",
+              "httpStatus": 200,
+              "observedAt": "2026-11-13T03:16:20.892094+00:00",
+              "teachingERPOnly": true,
+              "tlsVerification": false,
+              "responseFingerprint": "2a6cf8bd688e74b2a6aa02d22089348c88b84c811d925d61b54cda9929a77748"
+            }
+          ],
+          "inputMode": "ONLINE_TEACHING_ERP",
+          "startedAt": "2026-11-13T03:15:46.557569+00:00",
+          "interfaces": {
+            "sales": {
+              "error": "ERP_503",
+              "complete": false,
+              "httpStatus": 503
+            },
+            "store": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:48.402626+00:00",
+              "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c"
+            },
+            "quotes": {
+              "total": 2,
+              "complete": true,
+              "observedAt": "2026-11-13T03:16:20.976443+00:00",
+              "fingerprint": "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+            },
+            "buckets": {
+              "total": 0,
+              "complete": true,
+              "observedAt": "2026-11-13T03:16:20.529454+00:00",
+              "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            },
+            "listing": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:49.265793+00:00",
+              "fingerprint": "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+            },
+            "product": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:47.960666+00:00",
+              "fingerprint": "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+            },
+            "inventory": {
+              "total": 2,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:47.548737+00:00",
+              "fingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0"
+            },
+            "purchases": {
+              "total": 29,
+              "complete": true,
+              "observedAt": "2026-11-13T03:16:20.026141+00:00",
+              "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+            },
+            "warehouse": {
+              "total": 1,
+              "complete": true,
+              "observedAt": "2026-11-13T03:15:48.835895+00:00",
+              "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+            },
+            "sales-compat": {
+              "error": "ERP_TIMEOUT",
+              "complete": false,
+              "httpStatus": null
+            }
+          },
+          "completedAt": "2026-11-13T03:16:20.982640+00:00",
+          "limitations": [
+            "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+            "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+            "TEACHING_DATA_ONLY",
+            "NO_FIXED_CATALOG_FALLBACK"
+          ],
+          "planVersion": "1",
+          "acquisitionId": "956e0bdbc9dc460ea12053d1396ca87a",
+          "requestDigest": "bcc902feb2c231bc66d974e1bd4ae292976c07a1264c73a8c7daef73563c632e",
+          "mappingVersion": "s01-online-map-v1",
+          "requestedScope": {
+            "fields": [
+              "quantity"
+            ],
+            "storeIds": [
+              "store-6b86b273ff34fce19d6b"
+            ],
+            "tenantId": "s01-online-teaching-local",
+            "warehouseIds": [
+              "warehouse-8bd9c0d453533757387e"
+            ],
+            "canonicalSkuIds": [
+              "sku-1c5fe03ebb578d2bb976"
+            ]
+          },
+          "acquisitionMethod": "NETWORK_READ",
+          "sourceEnvironment": "TEACHING_ERP",
+          "atomicAcrossSystems": false
+        },
+        "evidence": [
+          {
+            "fieldPath": "observedDomains",
+            "evidenceId": "evidence-133a325600ca846d2e638efc6800ecadc3f321b58455a2b73e87b267896b1c4b",
+            "snapshotId": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6",
+            "sourceModuleId": "D02"
+          },
+          {
+            "fieldPath": "quality",
+            "evidenceId": "evidence-e652acf3b4b6a9ee606f3bb8c42b6cafa6c91fb81764510e263c2c1e0b447d89",
+            "snapshotId": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6",
+            "sourceModuleId": "D03"
+          },
+          {
+            "fieldPath": "acquisition",
+            "evidenceId": "evidence-d11e53582fe951798ef0346d87f26a9446d0eaa37fc1cf68c7ab8e5470328eda",
+            "snapshotId": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6",
+            "sourceModuleId": "D01"
+          }
+        ]
+      },
+      "scenarioId": "S01_BACKEND",
+      "planVersion": "1",
+      "snapshotRef": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6",
+      "completeness": "BLOCKED",
+      "participants": [
+        {
+          "scenarioId": "S01_BACKEND",
+          "snapshotRef": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6"
+        }
+      ],
+      "sourceNature": "TEACHING_ERP_OBSERVED",
+      "analysisReport": {
+        "ai": {
+          "usage": {
+            "currency": null,
+            "actualCost": null,
+            "inputTokens": 1705,
+            "totalTokens": 1854,
+            "outputTokens": 149,
+            "pricingVersion": null,
+            "cachedInputTokens": 512,
+            "uncachedInputTokens": 1193
+          },
+          "reason": "OK",
+          "status": "AVAILABLE",
+          "binding": {
+            "taskRef": {
+              "taskId": "fbadb42f0b9d4af78d35e06ed14c5113",
+              "tenantId": "s01-online-teaching-local"
+            },
+            "snapshotId": "snapshot-36ec15a029500484b4f08fc4ea96934747a67b013fb1a45540d3116f5c0e27a6",
+            "planVersion": "1",
+            "participantId": "s01"
+          },
+          "auditRef": "df7c301b4a08446d84b21d26959d0174",
+          "provider": "AUTHORIZED_PROVIDER",
+          "usageRef": "0076cf9a447f4271a56663fbd0edac36",
+          "costStatus": "UNKNOWN",
+          "explanation": {
+            "majorRisks": [
+              {
+                "text": "质量门仍阻断，AI不能解除质量检查",
+                "supportRefs": [
+                  "quality"
+                ]
+              },
+              {
+                "text": "采购执行未获授权，候选仅用于只读分析",
+                "supportRefs": [
+                  "decision"
+                ]
+              }
+            ],
+            "keyEvidence": [
+              {
+                "text": "基线指标缺失，数量和日期未知，需要确认",
+                "supportRefs": [
+                  "baseline-missing"
+                ]
+              }
+            ],
+            "humanConfirmations": [
+              {
+                "text": "仍需人工确认身份、数据覆盖、供给日期、约束和质量，采购未获批准",
+                "supportRefs": [
+                  "human-review"
+                ]
+              }
+            ],
+            "recommendationReasons": [
+              {
+                "text": "计算输入缺失，无法确定补货建议，需要确认",
+                "supportRefs": [
+                  "limitations"
+                ]
+              }
+            ]
+          },
+          "usageStatus": "UNKNOWN",
+          "versionBundle": {
+            "digests": {
+              "contextDigest": "67e87aaf0b1b0da03b1bb34911bfdc8d80a1f91160cd7dc87736b8f9afcf3cc9",
+              "toolSpecsDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+              "parametersDigest": "e37b7212ac7b02bcb13dd0737536141b01fecdf5d981252fe318c13db0c7cb37",
+              "promptContentHash": "a635fc945d4c10d1aaeacd2338b73faa1e13653481b5f57264d7197d8623da62",
+              "outputSchemaDigest": "8ca7eeaa94cf62dc409a7d1263667dae4c2b31af1e6e6d681d0bf4179e67ca8a",
+              "resolvedPromptDigest": "6365ebad9b48432a1d68aab658b2711ece1c01d228d9c689f2770f13c9336947"
+            },
+            "promptRef": {
+              "id": "s01.natural-explanation.prompt",
+              "version": "controlled-2"
+            },
+            "deploymentRef": {
+              "id": "deepseek-s01-evaluation",
+              "version": "1"
+            },
+            "parametersRef": {
+              "id": "s01.natural-explanation.parameters.1024",
+              "version": "1"
+            },
+            "cachePolicyRef": {
+              "id": "cache-off",
+              "version": "1"
+            },
+            "configuredModel": "deepseek-flash",
+            "outputSchemaRef": {
+              "id": "s01.natural-explanation.schema",
+              "version": "controlled-1"
+            },
+            "contextBundleRef": {
+              "id": "s01-natural-604beebdc8db2c876b381f458471ff4178508a3f67f67f30",
+              "version": "s01-controlled-natural-v2",
+              "tenantId": "s01-online-teaching-local"
+            }
+          },
+          "semanticPolicy": "s01-controlled-natural-v2",
+          "supportCatalog": [
+            {
+              "ref": "decision",
+              "kind": "limitation",
+              "text": "Engineering analysis only; completeness=BLOCKED; procurement eligibility remains false."
+            },
+            {
+              "ref": "baseline-missing",
+              "kind": "gap",
+              "text": "Baseline unavailable because required calculation inputs are missing or invalid."
+            },
+            {
+              "ref": "quality",
+              "kind": "limitation",
+              "text": "Quality issues [\"AVAILABLE_DATES_UNCONFIRMED\",\"DEMAND_COVERAGE_UNPROVEN\",\"DEMAND_RULE_UNCONFIRMED\",\"ERP_503\",\"ERP_TIMEOUT\",\"INDEPENDENT_ORDER_MULTIPLE_UNKNOWN\",\"INVENTORY_FRESHNESS_NOT_ADMITTED\",\"MOQ_APPLICABILITY_UNCONFIRMED\",\"NET_AVAILABLE_UNCONFIRMED\",\"QUALITY_STATE_UNKNOWN\",\"REAL_RULES_NOT_SIGNED\",\"REQUIRED_QUALITY_UNRESOLVED\",\"SOURCE_DATA_STALE_OR_FUTURE\",\"SOURCE_REVALIDATION_FAILED\",\"SOURCE_TIMEZONE_UNCONFIRMED\",\"SOURCE_TIME_INVALID\",\"SUPPLY_COVERAGE_UNPROVEN\"]; AI cannot clear required quality checks or investigations."
+            },
+            {
+              "ref": "limitations",
+              "kind": "limitation",
+              "text": "B02 limitations [\"DATA_QUALITY_BLOCKED\"]; all real business admission gates remain BLOCKED."
+            },
+            {
+              "ref": "human-review",
+              "kind": "limitation",
+              "text": "Human review of identity, data coverage, supply dates, constraints and quality is required. No procurement confirmation, approval or execution is authorized."
+            }
+          ],
+          "tokenUsageStatus": "KNOWN",
+          "actualModelRevision": "deepseek-flash",
+          "realModelAcceptance": "REVIEW"
+        }
+      },
+      "contractVersion": "0.1.0",
+      "scenarioVersion": "0.1.0"
+    }
+  ],
+  "original": {
+    "key": "6040616a-52cf-4dac-8eb6-5a26c175a2d4",
+    "taskId": "e76b8d15ea2845a9a0c3221ad18d9d29",
+    "body": {
+      "analysisMode": "SINGLE",
+      "scenarioId": "S01_BACKEND",
+      "scope": {
+        "fields": [
+          "quantity"
+        ],
+        "storeIds": [
+          "store-6b86b273ff34fce19d6b"
+        ],
+        "warehouseIds": [
+          "warehouse-8bd9c0d453533757387e"
+        ],
+        "canonicalSkuIds": [
+          "sku-1c5fe03ebb578d2bb976"
+        ]
+      },
+      "parameters": {
+        "inputMode": "ONLINE_TEACHING_ERP"
+      },
+      "previousReportRef": null
+    }
+  }
+}
