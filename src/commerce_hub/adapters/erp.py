@@ -159,7 +159,7 @@ class TeachingERPReader:
 
     @staticmethod
     def _detail_path(path):
-        return bool(re.fullmatch(r'/api/v1/(sales-workflow|suppliers)/[1-9][0-9]{0,19}', path))
+        return bool(re.fullmatch(r'/api/v1/(sales-workflow|suppliers|purchase-orders)/[1-9][0-9]{0,19}', path))
 
     def detail(self, resource, record_id):
         path = f'/api/v1/{resource}/{record_id}'

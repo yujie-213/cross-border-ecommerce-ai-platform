@@ -1,0 +1,197 @@
+{
+  "sourceNature": "SIMULATED_ENGINEERING",
+  "networkCalls": 0,
+  "algorithmModified": false,
+  "erpPartialReceiptVerified": false,
+  "scenarios": {
+    "01_no_purchase": {
+      "issues": [],
+      "limitations": [
+        "ENGINEERING_RULES_UNVERIFIED"
+      ],
+      "candidateQuantities": [
+        "40"
+      ],
+      "availableQuantity": "55",
+      "inTransitQuantity": "0",
+      "gapQuantity": "35",
+      "stockoutRisk": true,
+      "firstShortageDate": "2026-11-18",
+      "closingBalance": "-35"
+    },
+    "04_timely_ordered_assumed_open": {
+      "issues": [],
+      "limitations": [
+        "NO_REPLENISHMENT_NEEDED"
+      ],
+      "candidateQuantities": [],
+      "availableQuantity": "55",
+      "inTransitQuantity": "48",
+      "gapQuantity": "0",
+      "stockoutRisk": false,
+      "firstShortageDate": null,
+      "closingBalance": "13"
+    },
+    "05_late_ordered_assumed_open": {
+      "issues": [],
+      "limitations": [
+        "INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED"
+      ],
+      "candidateQuantities": [],
+      "availableQuantity": "55",
+      "inTransitQuantity": "48",
+      "gapQuantity": "0",
+      "stockoutRisk": true,
+      "firstShortageDate": "2026-11-18",
+      "closingBalance": "13"
+    },
+    "06_partial_assumed_16_sellable_32_remaining": {
+      "issues": [],
+      "limitations": [
+        "NO_REPLENISHMENT_NEEDED"
+      ],
+      "candidateQuantities": [],
+      "availableQuantity": "71",
+      "inTransitQuantity": "32",
+      "gapQuantity": "0",
+      "stockoutRisk": false,
+      "firstShortageDate": null,
+      "closingBalance": "13"
+    },
+    "07_canonical_cancelled": {
+      "issues": [],
+      "limitations": [
+        "ENGINEERING_RULES_UNVERIFIED"
+      ],
+      "candidateQuantities": [
+        "40"
+      ],
+      "availableQuantity": "55",
+      "inTransitQuantity": "0",
+      "gapQuantity": "35",
+      "stockoutRisk": true,
+      "firstShortageDate": "2026-11-18",
+      "closingBalance": "-35"
+    },
+    "08_two_distinct_lines": {
+      "issues": [],
+      "limitations": [
+        "NO_REPLENISHMENT_NEEDED"
+      ],
+      "candidateQuantities": [],
+      "availableQuantity": "55",
+      "inTransitQuantity": "48",
+      "gapQuantity": "0",
+      "stockoutRisk": false,
+      "firstShortageDate": null,
+      "closingBalance": "13"
+    },
+    "08_same_line_mirror_deduplicated": {
+      "issues": [
+        "DUPLICATE_RECORD"
+      ],
+      "limitations": [
+        "NO_REPLENISHMENT_NEEDED"
+      ],
+      "candidateQuantities": [],
+      "availableQuantity": "55",
+      "inTransitQuantity": "48",
+      "gapQuantity": "0",
+      "stockoutRisk": false,
+      "firstShortageDate": null,
+      "closingBalance": "13"
+    },
+    "08_conflicting_mirror_blocks": {
+      "issues": [
+        "CONFLICTING_RECORD"
+      ],
+      "limitations": [
+        "DATA_QUALITY_BLOCKED"
+      ],
+      "candidateQuantities": []
+    },
+    "09_foreign_warehouse_blocks": {
+      "issues": [
+        "UNMAPPED_IDENTITY_OR_UNIT"
+      ],
+      "limitations": [
+        "DATA_QUALITY_BLOCKED"
+      ],
+      "candidateQuantities": []
+    },
+    "10_unknown_changed_state_blocks_if_observed": {
+      "issues": [
+        "UNKNOWN_SUPPLY_STATUS"
+      ],
+      "limitations": [
+        "DATA_QUALITY_BLOCKED"
+      ],
+      "candidateQuantities": []
+    }
+  },
+  "ownedStatusMapping": {
+    "待提交": {
+      "inputAvailable": true,
+      "issues": [
+        "OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED"
+      ],
+      "inTransitQuantity": "0"
+    },
+    "待审核": {
+      "inputAvailable": true,
+      "issues": [
+        "OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED"
+      ],
+      "inTransitQuantity": "0"
+    },
+    "已取消": {
+      "inputAvailable": true,
+      "issues": [
+        "OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED"
+      ],
+      "inTransitQuantity": "0"
+    },
+    "已驳回": {
+      "inputAvailable": false,
+      "issues": [
+        "EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING"
+      ],
+      "inTransitQuantity": null
+    },
+    "待下单": {
+      "inputAvailable": false,
+      "issues": [
+        "EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING"
+      ],
+      "inTransitQuantity": null
+    },
+    "已下单": {
+      "inputAvailable": false,
+      "issues": [
+        "EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING"
+      ],
+      "inTransitQuantity": null
+    },
+    "部分收货": {
+      "inputAvailable": false,
+      "issues": [
+        "EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING"
+      ],
+      "inTransitQuantity": null
+    },
+    "已完成": {
+      "inputAvailable": false,
+      "issues": [
+        "EFFECTIVE_SUPPLY_REQUIRES_APPROVED_ETA_MAPPING"
+      ],
+      "inTransitQuantity": null
+    }
+  },
+  "notImplemented": [
+    "pending_approval_submission_guard",
+    "fresh_pre_submit_ERP_revalidation",
+    "ERP_purpose_and_store_mapping",
+    "owned_approved_and_partial_supply_normalization"
+  ],
+  "result": "PASS_OFFLINE_OBSERVATIONS_ONLY"
+}

@@ -53,12 +53,16 @@ def main():
     parser.add_argument('--mapping',type=Path)
     parser.add_argument('--enable-model',action='store_true')
     parser.add_argument('--owned-monitor',action='store_true',help='Use only the durable ACTIVE owned registry')
+    parser.add_argument('--enable-requisition',action='store_true',help='Explicit authorized teaching create/submit only; requires owned-monitor')
     parser.add_argument('--duration',type=int,choices=range(60,901),default=900)
     args=parser.parse_args()
     if not args.execute_local:
         print('NOT_RUN: explicit --execute-local required; no ERP/model IO');return
     if sum([bool(args.mapping), bool(args.discover_options), args.owned_monitor]) != 1:
         raise ValueError('SELECT_OWNED_MONITOR_OR_EXPLICIT_DIAGNOSTIC_SOURCE')
+    if args.enable_requisition and (not args.owned_monitor or args.enable_model):
+        raise ValueError('REQUISITION_REQUIRES_OWNED_SCOPE_AND_NO_NEW_MODEL_CALLS')
+    os.environ['COMMERCE_S01_REQUISITION_ENABLED'] = 'true' if args.enable_requisition else 'false'
     os.environ.update(COMMERCE_ENVIRONMENT='test',COMMERCE_MODEL_PROVIDER='mock',COMMERCE_MODEL_NETWORK_ENABLED='false',
         COMMERCE_S01_ONLINE_EXPLANATION_MODE='off')
     if args.enable_model:
@@ -97,7 +101,8 @@ def main():
         access=AccessControl(database.engine,harness.issuer,harness.audience,harness.key)
         with database.engine.begin() as conn:
             access.provision_fixture(conn,tenant_id=harness.tenant,principal_id=harness.principal_id,token_id=harness.token_id,
-                expires_at=now+timedelta(seconds=args.duration),grants_by_action={a:scope for a in ['tasks:create','tasks:read','tasks:cancel','engineering:execute']})
+                expires_at=now+timedelta(seconds=args.duration),grants_by_action={a:scope for a in
+                    ['tasks:create','tasks:read','tasks:cancel','engineering:execute'] + (['s01:requisition'] if args.enable_requisition else [])})
         harness.token=jwt.encode(dict(iss=harness.issuer,aud=harness.audience,exp=int(now.timestamp())+args.duration,
             iat=int(now.timestamp()),nbf=int(now.timestamp())-1,sub=harness.principal_id,tid=harness.tenant,jti=harness.token_id,rev=1),harness.key,algorithm='HS256')
         harness.secrets.append(harness.token)

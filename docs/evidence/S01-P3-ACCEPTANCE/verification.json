@@ -1,0 +1,117 @@
+{
+  "result": "PASS_MINIMAL_TEACHING_SCOPE",
+  "observedHead": "3a8e95fe3aca33d1bf285d4f7774b450216adaec",
+  "reviewedImplementation": "9859473e7c2406f96d9a5a22be39851648c8fec0",
+  "observedAt": "2026-11-13T12:24:33.409983+00:00",
+  "backend": {
+    "tests": 746,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 746,
+    "original710Retained": true,
+    "newCases": 36,
+    "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-accept-full-retry.xml",
+    "environment": {
+      "COMMERCE_RUN_MYSQL_TESTS": "1",
+      "COMMERCE_MODEL_PROVIDER": "mock",
+      "COMMERCE_MODEL_NETWORK_ENABLED": "false"
+    }
+  },
+  "frontend": {
+    "passed": 38,
+    "typecheck": "PASS",
+    "productionBuild": "PASS"
+  },
+  "pipCheck": "PASS",
+  "compileall": "PASS",
+  "initialEnvironmentFailures": {
+    "backend": {
+      "tests": 746,
+      "failures": 0,
+      "errors": 24,
+      "skipped": 0
+    },
+    "frontendTests": 0,
+    "frontendSuccess": false,
+    "reason": "pytest Temp cleanup lock access denied; Vitest worker process startup under restricted environment; unchanged suite rerun in full environment PASS"
+  },
+  "historyCompatibility": {
+    "persistedReports": 2,
+    "legacyReports": 2,
+    "cancelledTasks": 2,
+    "rawNormalization": "PASS",
+    "rulesReplay": "PASS",
+    "apiProjection": "PASS",
+    "modelAudit": "PASS",
+    "newModelCalls": 0
+  },
+  "migration": {
+    "singleHead": "0008_s01_requisition",
+    "previous": "0007_monitor_scope",
+    "existingMigrationChanges": 0,
+    "isolatedMySQLChecks": "PASS",
+    "destructiveOperations": 0
+  },
+  "security": {
+    "result": "PASS",
+    "historyObjects": {
+      "commit": 5,
+      "tree": 71,
+      "blob": 81
+    },
+    "unresolvedFindings": 0,
+    "reviewedNumericFixtureMatches": 1
+  },
+  "preservedFiles": {
+    "src/commerce_hub/capabilities/metrics/__init__.py": "3f4074a51712e5d0836ff7dc893e511f6a579f2a3db8cf730a7650ad95bd111b",
+    "src/commerce_hub/capabilities/forecasting/__init__.py": "87dba8a9a8e0ff364ebeca30980bfd235714f593ba86d72bccb3413960687a3f",
+    "docs/reports/P3_ERP采购能力验证与可行性分析_20261113.md": "8303067ef0a6dc01a5ace2b18d00b8cb1da8dd27ea6ad0193e80b3dccbb2df56",
+    "docs/standards/ERP_SIMULATION_DATA_POLICY.md": "7e5c7e86698e9f9fe6193e88f70987b6838e2f01d9f58d416dc09526d0b53ca9"
+  },
+  "unknownOpenApiSha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+  "limitations": [
+    "APPROVED_PO_POSITIVE_SAMPLE_NOT_VERIFIED",
+    "EFFECTIVE_TRANSIT_DEDUCTION_UNKNOWN_NOT_DEDUCTED",
+    "ENTERPRISE_GATES_BLOCKED"
+  ],
+  "liveReadback": "docs/evidence/S01-P3-ACCEPTANCE/live-readback.json",
+  "businessMutations": 0,
+  "modelCalls": 0,
+  "newBrowserRun": "NOT_RUN_READONLY_BOUNDARY",
+  "privateArtifacts": [
+    {
+      "path": ".tmp/p3-accept-full.xml",
+      "sha256": "a110e05340094a901fd12457a2351ff492c8c0b4490f3d45e01de944a7973d19"
+    },
+    {
+      "path": ".tmp/p3-accept-full.log",
+      "sha256": "3fa5de10e31096624f5b74db36e91e094f7400ec63b277be8e8b5b6b490db7a3"
+    },
+    {
+      "path": ".tmp/p3-accept-full-retry.xml",
+      "sha256": "7dc2b139709a248bda04a161abdb2280c02a72a3803ae565e2c25d950621cd68"
+    },
+    {
+      "path": ".tmp/p3-accept-full-retry.log",
+      "sha256": "a69b492f0be5efa8ad609962dcbd4963bdc9a47b77cded3b9d6897fd4b151cfb"
+    },
+    {
+      "path": ".tmp/p3-accept-frontend.json",
+      "sha256": "ade7abb496d98bd45e84703be1f6a4b9117b6039e9b94667c9dd483777b27408"
+    },
+    {
+      "path": ".tmp/p3-accept-frontend-retry.json",
+      "sha256": "73b0a74435fa07695b8fa2beea6c47f9bbd1ae03dda9547994e2452116d2ba79"
+    },
+    {
+      "path": "data/private/s01-p3-acceptance/history-replay/mysql-verification.json",
+      "sha256": "1118f602d07d7af9c4aafe87e93b6fab38f16f1f2fdfff0428b4bed7462f857b"
+    },
+    {
+      "path": "data/private/s01-p3-acceptance/history-secret-scan.json",
+      "sha256": "4fc2186846ae90c49d2a42ab9d62552454ab93b3a5e50eb80020088f74c3bcba"
+    }
+  ],
+  "merge": "PENDING"
+}

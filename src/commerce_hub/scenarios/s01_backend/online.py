@@ -20,7 +20,7 @@ from decimal import Decimal
 
 
 class OnlineS01Handler:
-    def __init__(self, mappings, reader_factory, *, fixed=None,provider=None,timeout_seconds=30,scope_registry=None):
+    def __init__(self, mappings, reader_factory, *, fixed=None,provider=None,timeout_seconds=30,scope_registry=None,formal_purchases=False,purchase_proofs=None,requisition_client_factory=None):
         if not 1 <= len(mappings) <= 20:
             raise ValueError('ONLINE_MAPPING_LIMIT')
         self.mappings = [m.validate_scope() for m in mappings]
@@ -28,6 +28,8 @@ class OnlineS01Handler:
             raise ValueError('DUPLICATE_ONLINE_MAPPING')
         self.reader_factory, self.fixed = reader_factory, fixed
         self.scope_registry = scope_registry
+        self.formal_purchases, self.purchase_proofs = formal_purchases, purchase_proofs
+        self.requisition_client_factory = requisition_client_factory
         self.acquisitions, self.snapshots = AcquisitionStore(), OnlineSnapshotStore()
         self.gateway=ModelGateway(provider,timeout_seconds=timeout_seconds) if provider else None
         self.explanation_mode='natural'
@@ -82,7 +84,9 @@ class OnlineS01Handler:
             asset = context.commit_data(lambda conn:self.snapshots.read(conn,row['tenant_id'],row['task_id'],row['snapshot_ref']))
         else:
             reader = self.reader_factory(context,row['acquisition_id'])
-            captures, receipt = collect(reader,mapping,context,row['acquisition_id'])
+            proofs = self.purchase_proofs(mapping.scope) if self.purchase_proofs else ()
+            captures, receipt = collect(reader,mapping,context,row['acquisition_id'],
+                formal_purchases=self.formal_purchases, purchase_proofs=proofs)
             receipt.update(taskRef=dict(tenantId=row['tenant_id'],taskId=row['task_id']),
                 planVersion=str(row['plan_version']), delivery=row['delivery'], requestDigest=request_digest)
             projection, verified = observed(captures,mapping,receipt)
@@ -137,6 +141,8 @@ class OnlineS01Handler:
             data['scenarioSupplement']['monitoring'] = deepcopy(acquisition['monitoring'])
             data['evidence'] += [locator(asset['snapshotId'], 'forecast', source_module='D02'),
                                  locator(asset['snapshotId'], 'fieldProvenance', source_module='D02')]
+        if 'existingPurchases' in normalization:
+            data['existingPurchases'] = deepcopy(normalization['existingPurchases'])
         source=normalization.get('input',{}).get('sourceNature','TEACHING_ERP_OBSERVED') if normalization.get('input') else 'TEACHING_ERP_OBSERVED'
         return DomainResult(contractVersion='0.1.0',sourceNature=source,completeness=completeness,
             scope=deepcopy(projection.scope),snapshotRef=asset['snapshotId'],dataReport=data,
@@ -192,7 +198,7 @@ class OnlineS01Handler:
         view=deepcopy(report)
         view['dataReport']={k:deepcopy(report['dataReport'][k]) for k in
             ('observedDomains','quality','supplyDemand','scenarioSupplement','acquisition','evidence')}
-        for key in ('forecast', 'fieldProvenance'):
+        for key in ('forecast', 'fieldProvenance', 'existingPurchases'):
             if key in report['dataReport']: view['dataReport'][key] = deepcopy(report['dataReport'][key])
         return view
 

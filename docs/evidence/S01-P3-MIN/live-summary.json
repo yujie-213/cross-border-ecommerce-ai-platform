@@ -1,0 +1,111 @@
+{
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "observedHead": "9859473e7c2406f96d9a5a22be39851648c8fec0",
+  "observedAt": "2026-11-13T11:30:36.617384+00:00",
+  "liveOperation": {
+    "operationId": "31d1cf789b276beb43772c35fe244375d14d9167d562abda5e526ae7a8f5c0f4",
+    "reportId": "d56e953a835a4bf39f32c1d3175ae084",
+    "state": "SUBMITTED",
+    "createdAt": "2026-11-13T11:20:39.225254Z",
+    "updatedAt": "2026-11-13T11:20:52.997287Z",
+    "erpId": "1406",
+    "erpNumber": "S01-RQ-31d1cf789b276beb43772c35fe244375",
+    "erpStatus": "待审核",
+    "aiQuantity": "48",
+    "finalQuantity": 48,
+    "adjustmentReason": "",
+    "purpose": "SALES_REPLENISHMENT",
+    "sourceSnapshot": "snapshot-f4bd44f852da6d1b4b0162d9ee7a346e63367d4a23d37b77f09c3a6744c2ad73",
+    "revalidatedAt": "2026-11-13T11:20:50.377139+00:00",
+    "errorCode": null,
+    "verifiedAt": "2026-11-13T11:20:52.995605+00:00",
+    "resultMeaning": "ERP_APPROVAL_REQUEST_ONLY",
+    "queryPath": "/api/v1/purchase-orders/1406"
+  },
+  "independentCalls": [
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:34.142397+00:00"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:34.564524+00:00",
+      "sha256": "66725d81c2d1ffd16e7724afdabd8668da96a64165ff09efd246e47d5add3fd2",
+      "privateResponse": "data/private/s01-p3-min/independent-113033/response-002.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders/1406",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:34.967792+00:00",
+      "sha256": "eff738c97f1e9ecf995b598c0645800d2267b1c66962a67a419160ac53098bf1",
+      "privateResponse": "data/private/s01-p3-min/independent-113033/response-003.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:35.374408+00:00",
+      "sha256": "2a63d56f2033ec45f32327d6f4f7923e44e4153871599bbb16f48eb828334eb9",
+      "privateResponse": "data/private/s01-p3-min/independent-113033/response-004.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:35.783082+00:00",
+      "sha256": "d2ed8e8e30cf6634302f78cde4c238f37278f126346b9c8247c7e0cd94eb1d93",
+      "privateResponse": "data/private/s01-p3-min/independent-113033/response-005.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:36.178776+00:00",
+      "sha256": "d2ed8e8e30cf6634302f78cde4c238f37278f126346b9c8247c7e0cd94eb1d93",
+      "privateResponse": "data/private/s01-p3-min/independent-113033/response-006.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 200,
+      "at": "2026-11-13T11:30:36.581200+00:00",
+      "sha256": "d2ed8e8e30cf6634302f78cde4c238f37278f126346b9c8247c7e0cd94eb1d93",
+      "privateResponse": "data/private/s01-p3-min/independent-113033/response-007.json"
+    }
+  ],
+  "mutations": [
+    {
+      "method": "POST",
+      "path": "/api/v1/purchase-orders",
+      "httpStatus": 201,
+      "responseFingerprint": "fedecf23afe0d9540ecd82a7ee7c7f25bd62dce4727aa051e54a62ae4ad81920"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/1406/submit",
+      "httpStatus": 200,
+      "responseFingerprint": "21c9f629894182b0a8424e83e2204dcdc2f18ca3107ff98c55e5ed7715c4b030"
+    }
+  ],
+  "independentListTotal": 1,
+  "createSubmitReadback": "VERIFIED",
+  "sameOperationReplay": true,
+  "inventoryAfter": {
+    "physical": 6,
+    "available": 6
+  },
+  "formalApprovedQueries": "VERIFIED_EMPTY",
+  "positiveApprovedSample": "BLOCKED_NO_AUTHORIZED_SAMPLE",
+  "sellableSupply": "UNKNOWN_NOT_DEDUCTED",
+  "approvalDecisions": 0,
+  "placeOrders": 0,
+  "receipts": 0,
+  "inboundConfirmations": 0,
+  "modelCalls": 0,
+  "browserPageErrors": []
+}

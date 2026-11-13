@@ -1,3 +1,11 @@
+当前P3最终验收（2026-11-13）：固定3a8e95f重新复核，746全量后端/38前端/类型构建/迁移/历史兼容/1406独立只读回读通过；最小教学闭环ACCEPTED，正常合main待执行。已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣，企业四门BLOCKED；本轮无ERP业务写或模型。详见最终验收报告与S01-P3-ACCEPTANCE。
+
+当前领取（2026-11-13，P3正式验收与补货建议来源调查）：Codex单人，起点codex/s01-p3-minimal-loop / 3a8e95fe3aca33d1bf285d4f7774b450216adaec，main/origin/main db13298；唯一未知未跟踪docs/ERP-openapi.yaml保留。先全量回归/独立复核，条件通过后ACCEPTED及正常合main/推送；随后仅对截图5SKU/MIMI Apparel US及授权只读范围调查。写入范围为TASKS/HANDOFF/DECISIONS、调查与验收报告/脱敏证据/生成视图，必要阻断修复；不开发V2、不改B01/B02、不ERP业务写/模型。
+
+当前P3最小闭环交付（2026-11-13）：D-S01-P3-MIN-01 REVIEW，固定9859473；真实采购申请1406/48件/待审核，独立回读与同操作幂等通过；394相关后端/38前端/类型构建/真实浏览器与重启恢复通过。已审批正式采购正样本BLOCKED、有效可售供应UNKNOWN不抵扣；未查旧36、不做待审阻断、不decide/下单/收货/入库，不扩SKU不调付费模型，不合main。已普通推送并回读评审分支2bae0ea；main仍db13298，最终回执文档随后同步。
+
+当前采购能力调查交付（2026-11-13）：D-S01-P3-ERP-SURVEY-01 REVIEW；实现/文档固定2a0af2d，91相关离线测试与18文档检查PASS，36HTTP尝试=4认证+32GET，业务变更0/模型0。报告区分VERIFIED/CONTRACT_ONLY/BLOCKED/NOT_SUPPORTED/UNKNOWN，16+32未实测。全局仿真规范已引用；P1/P2算法和原证据保持。仅本地调查提交，不合main、不开始P3。
+
 当前P1/P2正式发布完成（2026-11-13）：负责人/星星阶段PASS及本轮教学公开授权已落实；main正常合并b58919d，710后端/36前端/类型构建与两持久报告重放PASS。首次直连TLS失败后，经已核实本机代理保持证书校验普通push成功，远端回读b58919d一致。MERGE-01 ACCEPTED；P3 PREP-01材料REVIEW（仅准备）。快充线48件6箱/马克杯无候选/旧45失效；质量UNKNOWN、其他条件UNCONFIRMED、ETA未承诺、采购不可执行及企业四门保留。最终台账文档提交普通同步，最终HEAD以Git实际查询为准；未采购、未扩8/30、未宣称整个S01通过。
 
 当前P1/P2实际合并（2026-11-13）：main正常--no-ff合并b58919d，父2fba3b4/b012407，零冲突且tree与已验收分支相同；合并后710后端/36前端/类型构建及两报告DB/快照/规则/API/AI审计复验PASS，未新增ERP或模型调用。48件6箱/马克杯无候选、旧45失效和全部采购限制保留；普通push尚待执行。P3正式接口/权限/状态/适配缺口及回归清单已整理到PREP-01，仅准备不采购。
@@ -7823,5 +7831,317 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "skuExpansion": "NOT_RUN"
   },
   "currentDeliveryScope": "P3开发准备材料REVIEW；正式审批角色与执行授权未取得。后续先确认人工审核/审批/下单/收货权限和适配方案，再授权实现与真实集成；本轮不采购、不扩8/30SKU。"
+}
+```
+
+## ERP采购能力调查（独立只读任务）
+
+```json
+{
+  "id": "D-S01-P3-ERP-SURVEY-01",
+  "stage": "D",
+  "title": "ERP采购全链路只读能力验证与P2/P3可行性调查",
+  "kind": "design",
+  "dependsOn": [
+    "D-S01-P3-PREP-01",
+    "D-S01-P1P2-MERGE-01"
+  ],
+  "entryCondition": "2026-11-13负责人长任务明确授权契约/有界只读ERP/离线验证、文档规范和本地提交；不实施P3，不审批/下单/收货/入库。",
+  "ownerRole": "Codex调查；负责人和星星评审",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/standards/ERP_SIMULATION_DATA_POLICY.md",
+    "docs/reports/P3_ERP采购能力验证与可行性分析_20261113.md",
+    "docs/evidence/P3-ERP-CAPABILITY/",
+    "docs/generated/",
+    "docs/planning/validation-report.json",
+    "docs/planning/git-whitelist.json"
+  ],
+  "parallelCondition": "Codex单人调查；不修改业务算法和未知ERP-openapi.yaml。",
+  "deliverables": [
+    "A—E能力报告、权限/状态/字段/实测证据矩阵、全项目ERP仿真规范及下一阶段方案"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P3-ERP-SURVEY-01/AC1",
+      "text": "真实ERP与契约/离线证据分开，覆盖A—E和十场景及范围完整性，形成可执行后续方案；无未授权副作用。"
+    },
+    {
+      "id": "D-S01-P3-ERP-SURVEY-01/AC2",
+      "text": "统一仿真规范引用既有决定、维护唯一台账/交接、文档检查及本地Git提交，最终REVIEW。"
+    }
+  ],
+  "plannedTests": [
+    "当前账号身份/契约/已登记仓库采购分页、采购/审批/送货/入库/库存流水独立只读核验；受影响B01/B02/D01/D02离线测试；文档构建和校验"
+  ],
+  "risks": [
+    "独立审批未授权；收货与库存联动仅契约时不能宣称已验证；仓库/用途/店铺/跨人员完整发现可能证据不足。"
+  ],
+  "requiredEvidenceKinds": [
+    "ERP_READ_ONLY",
+    "OFFLINE_TEST",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2a0af2daefcae8af400b47adda5246ec7a83a885"
+  ],
+  "testedCommit": "2a0af2daefcae8af400b47adda5246ec7a83a885",
+  "evidence": [
+    {
+      "kind": "ERP_READ_ONLY",
+      "acceptanceIds": [
+        "D-S01-P3-ERP-SURVEY-01/AC1"
+      ],
+      "command": "docs/evidence/P3-ERP-CAPABILITY/read_only_probe.py and supplemental_reads.py; exact ledger follow-up; all request attempts in summary.runs",
+      "environment": "固定教学ERP，本机.env.erp；API只读；原始响应私有",
+      "sample": "自有2SKU/仓库308/采购1398/审批1806；36HTTP=4认证+32GET；业务变更0/模型0；SKU400、OpenAPI404、宽ledger超时及脚本首败原样保留；真实正向采购/16+32 NOT_RUN",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/P3-ERP-CAPABILITY/summary.json"
+    },
+    {
+      "kind": "OFFLINE_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-ERP-SURVEY-01/AC1"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests/unit/data/test_owned.py tests/unit/data/test_erp.py tests/unit/data/test_candidate_discovery.py tests/unit/metrics/s01/test_daily.py tests/unit/forecasting/s01/test_candidates.py -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-erp-capability-offline-2a0af2d.xml; .tmp/stage-a-clean/Scripts/python.exe docs/evidence/P3-ERP-CAPABILITY/offline_analysis.py",
+      "environment": "Windows 项目隔离Python；mock/network=false；无ERP/模型网络",
+      "sample": "固定2a0af2d：91相关测试PASS/0失败/错误/跳过，10规范化场景+8种自有状态；全部离线，不替代真实采购流程",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/P3-ERP-CAPABILITY/verification.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-P3-ERP-SURVEY-01/AC2"
+      ],
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; git diff --check; changed-file secret/link/hash audit",
+      "environment": "Windows既有系统Python/本地Git；无业务网络",
+      "sample": "18文档检查PASS，报告及统一规范链接/原OpenAPI指纹/私有4账本与响应完整性核对；应用venv缺markdown的首次FAIL另存，改用既有系统Python成功；本地提交2a0af2d后复验",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/P3-ERP-CAPABILITY/verification.json"
+    }
+  ],
+  "review": null,
+  "branch": "codex/p3-erp-capability-survey",
+  "observedHead": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked, preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "最新main与origin/main一致；用户明确授权独立调查，不开发P3。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "正式报告/统一规范/真实只读与离线证据已固定2a0af2d；91相关测试和18文档检查通过；采购执行与P3开发未运行。"
+    }
+  ],
+  "currentDeliveryScope": "采购能力调查材料REVIEW，非P3开发/采购闭环验收。四企业门保持，未知OpenAPI保留；本地提交后停止，不合main、不自动推送/开发/采购。"
+}```
+
+
+## P3最小业务闭环
+
+```json
+{
+  "id": "D-S01-P3-MIN-01",
+  "stage": "D",
+  "title": "S01正式采购展示与人工确认提交ERP采购申请最小闭环",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-P3-ERP-SURVEY-01",
+    "D-S01-P1P2-MERGE-01"
+  ],
+  "entryCondition": "2026-11-13负责人范围收缩任务明确授权开发、教学采购申请创建/提交/回读及普通推送评审分支。",
+  "ownerRole": "Codex开发；负责人和星星独立验收",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "docs/TASKS.md",
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/contracts/s01/p3-minimal-loop.md",
+    "docs/reports/",
+    "docs/evidence/S01-P3-MIN/",
+    "docs/generated/",
+    "docs/planning/",
+    "src/commerce_hub/",
+    "migrations/versions/0008_s01_requisition.py",
+    "frontend/src/",
+    "frontend/tests/",
+    "tests/",
+    "tools/s01_online_dev.py"
+  ],
+  "parallelCondition": "Codex单人；B01/B02不改，保留未知未跟踪OpenAPI；不改无关模块。",
+  "deliverables": [
+    "正式采购保守展示；持久幂等人工确认/ERP申请提交；前端闭环；相关回归与真实教学证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P3-MIN-01/AC1",
+      "text": "只发现已审批有效正式采购并核验归属；数量/可售时间未知不抵扣；原算法不改。"
+    },
+    {
+      "id": "D-S01-P3-MIN-01/AC2",
+      "text": "人工确认/权限与MOQ整箱校验、正规ERP创建提交、真实回读/幂等/UNKNOWN恢复及前端结果。"
+    },
+    {
+      "id": "D-S01-P3-MIN-01/AC3",
+      "text": "相关回归、公开安全核对、独立分支提交推送，REVIEW不合main。"
+    }
+  ],
+  "plannedTests": [
+    "D01/D02采购筛选与报告兼容单测；窄写适配及权限/幂等/未知恢复测试；MySQL/API/前端与浏览器；本项目自有教学采购申请创建提交独立回读及重复提交；文档构建检查"
+  ],
+  "risks": [
+    "已审批正样本可能缺失，不代签制造；可售日期/逐行关闭语义未知时不抵扣；共享ERP租户隔离限制。"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "ACCEPTED",
+  "implementationCommits": [
+    "9859473e7c2406f96d9a5a22be39851648c8fec0"
+  ],
+  "testedCommit": "3a8e95fe3aca33d1bf285d4f7774b450216adaec",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC1",
+        "D-S01-P3-MIN-01/AC2",
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests/unit/data tests/unit/metrics/s01 tests/unit/forecasting/s01 tests/unit/bootstrap tests/integration/s01 tests/integration/http tests/integration/mysql -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-related-9859473.xml",
+      "environment": "获准隔离MySQL/fixture ERP/mock模型；不连接ERP或付费模型",
+      "sample": "固定9859473，394相关后端全部PASS/无跳过；正式状态、多SKU行/范围不明/数量规则/回放保全/权限/并发/拒绝/UNKNOWN与恢复。正向已审批实测不在此PASS内。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC2",
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": "npm --prefix frontend run test -- --run; npm --prefix frontend run build; Playwright --grep P3 REAL / P3 RECOVERY",
+      "environment": "已有Edge/Vite/独立API和Worker/授权工程库；教学模式off/mock",
+      "sample": "38前端PASS/类型构建PASS；首次真实浏览器提交1 PASS（提交前工作区），固定实现重启后恢复与原操作重放/人工审批页/390px/马克杯1 PASS；原付费模型浏览器专项NOT_RUN。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "ERP_API",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC1",
+        "D-S01-P3-MIN-01/AC2"
+      ],
+      "command": "Browser confirmation; docs/evidence/S01-P3-MIN/verify_live_readback.py",
+      "environment": "固定教学ERP/自有2SKU及仓库308；.env.erp仅本机；正式API，无数据库直改",
+      "sample": "真实1406/48件/待审核，POST201+submit200，共2业务变更；独立列表total1/详情/库存6、相同操作重放通过。正式采购三个状态查询为空VERIFIED；非空正样本BLOCKED、可售供应UNKNOWN不抵扣。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; git -c core.whitespace=cr-at-eol diff --check; changed-history secret and preservation audit",
+      "environment": "本地Git/系统Python；无业务请求",
+      "sample": "ADR范围收缩/统一规范沿用/唯一台账/交接；原全部任务JSON/调查证据/B01/B02/未知OpenAPI保全；普通独立分支推送结果按远端回读追加。 实际git push=0/ls-remote=0，远端评审分支2bae0ea与本地一致，main仍db13298；无force/合并。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC1",
+        "D-S01-P3-MIN-01/AC2",
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-accept-full-retry.xml; frontend test/typecheck/build; independent GET; historical replay; publication history audit",
+      "environment": "完整本机环境；唯一隔离MySQL；ERP只读、模型关闭",
+      "sample": "746全量后端/38前端/类型构建PASS，原710逐名保留；0008迁移和历史报告兼容PASS；原真实1406独立回读total1/48/待审核/库存6；无业务写。初次环境失败留存。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-ACCEPTANCE/verification.json"
+    }
+  ],
+  "review": {
+    "reviewer": "Codex本轮独立重新复核；负责人明确条件授权（非冒称星星新增签认）",
+    "reviewedCommit": "3a8e95fe3aca33d1bf285d4f7774b450216adaec",
+    "evidenceRef": "docs/evidence/S01-P3-ACCEPTANCE/verification.json",
+    "date": "2026-11-13",
+    "scope": "P3_MINIMAL_TEACHING_REQUISITION_ONLY",
+    "decision": "全量与必要实测无阻断，按负责人本轮明确授权登记ACCEPTED；已审批正样本与有效在途抵扣不在通过范围，企业门不解除。"
+  },
+  "branch": "codex/s01-p3-minimal-loop",
+  "observedHead": "6d19204c3995919327e7c16a76e0284e1f9786ba",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确收缩P3并授权最小开发；原调查提交保留。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "9859473实现固定；真实ERP申请创建提交/独立回读/幂等、394相关后端与38前端/构建/浏览器通过。已审批正样本与可售供应限制明确保留，不代签制造。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "2bae0ea证据/交接已普通推送独立分支，独立ls-remote确认同SHA；main仍db13298。最后仅回执文档提交同步，等待独立验收，不合main。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "ACCEPTED",
+      "reason": "负责人本轮明确条件合并授权；Codex重新独立检查固定3a8e95f，全量746/38与迁移/历史/只读回读无阻断。仅最小闭环，不接受未验证正样本/在途抵扣。"
+    }
+  ],
+  "currentDeliveryScope": "P3最小教学请购闭环ACCEPTED；746全量后端/38前端/类型构建/迁移历史兼容及1406只读回读PASS。正常合main获准且待执行；已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣、企业门BLOCKED保留。",
+  "deliveryLimitations": [
+    "Approved formal PO positive live sample BLOCKED; source-filtered empty queries VERIFIED, multi-SKU/scope behavior engineering PASS only",
+    "Committed sellable date and effective remainder closure semantics UNKNOWN; no ERP supply deduction",
+    "Only minimal teaching requisition scope accepted; no production admission, approved PO positive live sample or effective transit deduction acceptance"
+  ],
+  "deliveryRemote": {
+    "verifiedCommit": "2bae0ea85a4f44e35fddb2092eec225e8f4f040a",
+    "verifiedRemoteBranch": "refs/heads/codex/s01-p3-minimal-loop",
+    "remoteMain": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
+    "observedAt": "2026-11-13T11:42:20.281909+00:00",
+    "pushExitCode": 0,
+    "lsRemoteExitCode": 0,
+    "method": "Normal git push -u origin codex/s01-p3-minimal-loop followed by independent git ls-remote",
+    "state": "REVIEW",
+    "mergedMain": false,
+    "note": "This receipt records the actual delivery commit before the subsequent bookkeeping commit; final branch HEAD is checked again after pushing bookkeeping."
+  }
 }
 ```

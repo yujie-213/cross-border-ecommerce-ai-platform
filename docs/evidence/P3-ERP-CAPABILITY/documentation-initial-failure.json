@@ -1,0 +1,10 @@
+{
+  "result": "FAIL_PRESERVED",
+  "command": ".tmp/stage-a-clean/Scripts/python.exe docs/planning/build_docs.py; .tmp/stage-a-clean/Scripts/python.exe docs/planning/check_plan.py",
+  "cause": "Application-only venv lacks markdown; status view not regenerated",
+  "checks": 18,
+  "failed": [
+    "generated-status-and-dependencies"
+  ],
+  "resolution": "Use existing system Python with installed markdown, per documented python commands; no dependency changes"
+}

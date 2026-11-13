@@ -65,8 +65,39 @@ def registry(settings):
         shared=SharedModelAuthorization(authorization_id,None,None,None) if scope_registry else SharedModelAuthorization(AUTHORIZATION_ID,10,100000,Decimal('1'))
     elif mode!='off' or settings.model_network_enabled or settings.model_provider!='mock':
         raise ValueError('INVALID_ONLINE_MODEL_MODE')
-    revision=fingerprint(dict(mappings=[m.model_dump(mode='json') for m in mappings],mode=mode))
-    handler=OnlineS01Handler(mappings,reader_factory,provider=provider,timeout_seconds=settings.model_timeout_seconds,scope_registry=scope_registry)
+    revision=fingerprint(dict(mappings=[m.model_dump(mode='json') for m in mappings],mode=mode,
+        purchasePolicy='s01-approved-purchases-v1' if scope_registry else None))
+    requisition_client_factory = None
+    proofs = None
+    if scope_registry:
+        from commerce_hub.scenarios.s01_backend.requisition_store import verified_purchase_proofs
+        proofs = lambda scope: verified_purchase_proofs(scope_registry.engine, scope)
+    if os.environ.get('COMMERCE_S01_REQUISITION_ENABLED') == 'true':
+        if not scope_registry:
+            raise ValueError('OWNED_MONITOR_REQUIRED_FOR_REQUISITION')
+        from commerce_hub.adapters.erp_requisition import TeachingRequisitionClient
+        def requisition_client_factory(operation, check):
+            values = dotenv_values(ROOT/'.env.erp', interpolate=False)
+            config = ERPConfig(base_url=values.get('ERP_BASE_URL') or 'https://47.107.76.124/lingxing-erp',
+                username=values.get('ERP_USERNAME') or '', password=values.get('ERP_PASSWORD') or '',
+                access_token=values.get('ERP_ACCESS_TOKEN') or '', max_requests=64)
+            private = ROOT/'data/private/s01-requisitions'/operation/('attempt-'+__import__('uuid').uuid4().hex)
+            private.mkdir(parents=True, exist_ok=False)
+            serial = [0]
+            def transport(method, path, headers, body, config):
+                check()
+                status, raw = https_transport(method, path, headers, body, config)
+                if path != AUTH_PATH:
+                    serial[0] += 1
+                    (private/f'response-{serial[0]:03d}.json').write_bytes(raw)
+                    with (private/'requests.jsonl').open('a', encoding='utf-8') as journal:
+                        journal.write(json.dumps(dict(method=method, path=path, httpStatus=status,
+                            responseFingerprint=__import__('hashlib').sha256(raw).hexdigest()))+'\n')
+                return status, raw
+            return TeachingRequisitionClient(config, transport=transport)
+    handler=OnlineS01Handler(mappings,reader_factory,provider=provider,timeout_seconds=settings.model_timeout_seconds,
+        scope_registry=scope_registry, formal_purchases=bool(scope_registry), purchase_proofs=proofs,
+        requisition_client_factory=requisition_client_factory)
     spec=HandlerSpec('S01_BACKEND','0.1.0','s01.online.v1.'+revision[:32],handler,
         policy_version=shared.authorization_id if shared else 's01-online-readonly-v1',
         max_calls=1 if provider else 0,max_tokens=24000 if provider else 0,max_cost=Decimal('.05') if provider else Decimal('0'),
