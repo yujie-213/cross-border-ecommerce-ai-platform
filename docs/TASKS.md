@@ -1,3 +1,7 @@
+当前P3最终验收（2026-11-13）：固定3a8e95f重新复核，746全量后端/38前端/类型构建/迁移/历史兼容/1406独立只读回读通过；最小教学闭环ACCEPTED，正常合main待执行。已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣，企业四门BLOCKED；本轮无ERP业务写或模型。详见最终验收报告与S01-P3-ACCEPTANCE。
+
+当前领取（2026-11-13，P3正式验收与补货建议来源调查）：Codex单人，起点codex/s01-p3-minimal-loop / 3a8e95fe3aca33d1bf285d4f7774b450216adaec，main/origin/main db13298；唯一未知未跟踪docs/ERP-openapi.yaml保留。先全量回归/独立复核，条件通过后ACCEPTED及正常合main/推送；随后仅对截图5SKU/MIMI Apparel US及授权只读范围调查。写入范围为TASKS/HANDOFF/DECISIONS、调查与验收报告/脱敏证据/生成视图，必要阻断修复；不开发V2、不改B01/B02、不ERP业务写/模型。
+
 当前P3最小闭环交付（2026-11-13）：D-S01-P3-MIN-01 REVIEW，固定9859473；真实采购申请1406/48件/待审核，独立回读与同操作幂等通过；394相关后端/38前端/类型构建/真实浏览器与重启恢复通过。已审批正式采购正样本BLOCKED、有效可售供应UNKNOWN不抵扣；未查旧36、不做待审阻断、不decide/下单/收货/入库，不扩SKU不调付费模型，不合main。已普通推送并回读评审分支2bae0ea；main仍db13298，最终回执文档随后同步。
 
 当前采购能力调查交付（2026-11-13）：D-S01-P3-ERP-SURVEY-01 REVIEW；实现/文档固定2a0af2d，91相关离线测试与18文档检查PASS，36HTTP尝试=4认证+32GET，业务变更0/模型0。报告区分VERIFIED/CONTRACT_ONLY/BLOCKED/NOT_SUPPORTED/UNKNOWN，16+32未实测。全局仿真规范已引用；P1/P2算法和原证据保持。仅本地调查提交，不合main、不开始P3。
@@ -8011,11 +8015,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ERP_API",
     "DOCUMENT_CHECK"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "9859473e7c2406f96d9a5a22be39851648c8fec0"
   ],
-  "testedCommit": "9859473e7c2406f96d9a5a22be39851648c8fec0",
+  "testedCommit": "3a8e95fe3aca33d1bf285d4f7774b450216adaec",
   "evidence": [
     {
       "kind": "UNIT_TEST",
@@ -8068,9 +8072,30 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-P3-MIN/verification.json"
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-MIN-01/AC1",
+        "D-S01-P3-MIN-01/AC2",
+        "D-S01-P3-MIN-01/AC3"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-accept-full-retry.xml; frontend test/typecheck/build; independent GET; historical replay; publication history audit",
+      "environment": "完整本机环境；唯一隔离MySQL；ERP只读、模型关闭",
+      "sample": "746全量后端/38前端/类型构建PASS，原710逐名保留；0008迁移和历史报告兼容PASS；原真实1406独立回读total1/48/待审核/库存6；无业务写。初次环境失败留存。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P3-ACCEPTANCE/verification.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "Codex本轮独立重新复核；负责人明确条件授权（非冒称星星新增签认）",
+    "reviewedCommit": "3a8e95fe3aca33d1bf285d4f7774b450216adaec",
+    "evidenceRef": "docs/evidence/S01-P3-ACCEPTANCE/verification.json",
+    "date": "2026-11-13",
+    "scope": "P3_MINIMAL_TEACHING_REQUISITION_ONLY",
+    "decision": "全量与必要实测无阻断，按负责人本轮明确授权登记ACCEPTED；已审批正样本与有效在途抵扣不在通过范围，企业门不解除。"
+  },
   "branch": "codex/s01-p3-minimal-loop",
   "observedHead": "6d19204c3995919327e7c16a76e0284e1f9786ba",
   "dirtyPaths": [
@@ -8093,13 +8118,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "2bae0ea证据/交接已普通推送独立分支，独立ls-remote确认同SHA；main仍db13298。最后仅回执文档提交同步，等待独立验收，不合main。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "ACCEPTED",
+      "reason": "负责人本轮明确条件合并授权；Codex重新独立检查固定3a8e95f，全量746/38与迁移/历史/只读回读无阻断。仅最小闭环，不接受未验证正样本/在途抵扣。"
     }
   ],
-  "currentDeliveryScope": "最小教学请购闭环REVIEW：真实1406/48件/待审核，创建+submit共2变更并独立回读/幂等通过；394相关后端/38前端/类型构建/真实浏览器首提与重启恢复通过。正式已审批正样本缺失、可售供应UNKNOWN不抵扣；旧36/待审阻断/领导决定/下单/收货/入库/付费模型均未执行，不扩SKU，不合main。",
+  "currentDeliveryScope": "P3最小教学请购闭环ACCEPTED；746全量后端/38前端/类型构建/迁移历史兼容及1406只读回读PASS。正常合main获准且待执行；已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣、企业门BLOCKED保留。",
   "deliveryLimitations": [
     "Approved formal PO positive live sample BLOCKED; source-filtered empty queries VERIFIED, multi-SKU/scope behavior engineering PASS only",
     "Committed sellable date and effective remainder closure semantics UNKNOWN; no ERP supply deduction",
-    "No production admission or independent acceptance; REVIEW only"
+    "Only minimal teaching requisition scope accepted; no production admission, approved PO positive live sample or effective transit deduction acceptance"
   ],
   "deliveryRemote": {
     "verifiedCommit": "2bae0ea85a4f44e35fddb2092eec225e8f4f040a",

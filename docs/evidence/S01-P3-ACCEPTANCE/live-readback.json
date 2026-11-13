@@ -1,0 +1,72 @@
+{
+  "result": "PASS",
+  "observedAt": "2026-11-13T12:20:43.495106+00:00",
+  "observedHead": "3a8e95fe3aca33d1bf285d4f7774b450216adaec",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "erpId": "1406",
+  "quantity": 48,
+  "status": "待审核",
+  "independentListTotal": 1,
+  "inventoryAvailable": 6,
+  "formalRecordCount": 0,
+  "positiveApprovedSample": "NOT_VERIFIED",
+  "effectiveTransitDeduction": "UNKNOWN_NOT_DEDUCTED",
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "at": "2026-11-13T12:20:40.875701+00:00",
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-13T12:20:41.424762+00:00",
+      "httpStatus": 200,
+      "sha256": "66725d81c2d1ffd16e7724afdabd8668da96a64165ff09efd246e47d5add3fd2",
+      "privateResponse": "data/private/s01-p3-acceptance/readback-122040/response-002.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders/1406",
+      "at": "2026-11-13T12:20:41.822070+00:00",
+      "httpStatus": 200,
+      "sha256": "eff738c97f1e9ecf995b598c0645800d2267b1c66962a67a419160ac53098bf1",
+      "privateResponse": "data/private/s01-p3-acceptance/readback-122040/response-003.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "at": "2026-11-13T12:20:42.208777+00:00",
+      "httpStatus": 200,
+      "sha256": "2a63d56f2033ec45f32327d6f4f7923e44e4153871599bbb16f48eb828334eb9",
+      "privateResponse": "data/private/s01-p3-acceptance/readback-122040/response-004.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-13T12:20:42.623416+00:00",
+      "httpStatus": 200,
+      "sha256": "d2ed8e8e30cf6634302f78cde4c238f37278f126346b9c8247c7e0cd94eb1d93",
+      "privateResponse": "data/private/s01-p3-acceptance/readback-122040/response-005.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-13T12:20:43.040712+00:00",
+      "httpStatus": 200,
+      "sha256": "d2ed8e8e30cf6634302f78cde4c238f37278f126346b9c8247c7e0cd94eb1d93",
+      "privateResponse": "data/private/s01-p3-acceptance/readback-122040/response-006.json"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-13T12:20:43.452992+00:00",
+      "httpStatus": 200,
+      "sha256": "d2ed8e8e30cf6634302f78cde4c238f37278f126346b9c8247c7e0cd94eb1d93",
+      "privateResponse": "data/private/s01-p3-acceptance/readback-122040/response-007.json"
+    }
+  ],
+  "businessMutations": 0,
+  "modelCalls": 0
+}

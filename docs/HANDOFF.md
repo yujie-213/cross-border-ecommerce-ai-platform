@@ -1,3 +1,7 @@
+## P3最终验收与只读调查接续（2026-11-13）
+
+固定3a8e95f，main/origin/main db13298；Codex单人，全量746后端（原710逐名保留、新36）/38前端/类型构建/迁移/持久历史回放及原1406 GET回读通过。初次受限环境24个临时目录setup错误及前端worker未启动保留后原样重跑PASS。按负责人本轮条件授权，最小教学请购闭环ACCEPTED，待正常合main/合并后复验/推送。没有新ERP业务写/模型；正向已审批采购与有效在途抵扣未验收。未知OpenAPI原样未跟踪；发布历史凭据扫描仅数值夹具偶合已核实。完成合并后仅调查截图5SKU与店铺的补货建议，不开发V2。详见reports/S01_P3最终验收合并_20261113.md及evidence/S01-P3-ACCEPTANCE/。
+
 ## P3最小闭环交付（2026-11-13）
 
 推送回执：普通git push及独立ls-remote均退出0，远端codex/s01-p3-minimal-loop为2bae0ea85a4f44e35fddb2092eec225e8f4f040a，main仍db13298f7f85efbffa6e034bc3d7d2262de26e39。后续仅本回执文档提交同步，最终HEAD以再次远端回读为准。本轮自启API/Worker与Vite均已停止，未发现遗留匹配进程。
