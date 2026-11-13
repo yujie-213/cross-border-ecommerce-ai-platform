@@ -378,6 +378,7 @@
     "docs/evidence/P3-ERP-CAPABILITY/read_only_probe.py",
     "docs/evidence/P3-ERP-CAPABILITY/summary.json",
     "docs/evidence/P3-ERP-CAPABILITY/supplemental_reads.py",
+    "docs/evidence/P3-ERP-CAPABILITY/verification.json",
     "docs/evidence/S01-BACKEND-ACCEPTANCE/budget-preservation.json",
     "docs/evidence/S01-BACKEND-ACCEPTANCE/consistency.json",
     "docs/evidence/S01-BACKEND-ACCEPTANCE/postmerge-verification.json",

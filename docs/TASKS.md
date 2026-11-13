@@ -1,4 +1,4 @@
-当前采购能力调查（2026-11-13）：D-S01-P3-ERP-SURVEY-01 IN_PROGRESS；最新main db13298建立独立分支，仅契约/有界只读/离线和文档，本轮禁止审批/下单/收货/入库/模型。旧P1/P2验收与证据保持。
+当前采购能力调查交付（2026-11-13）：D-S01-P3-ERP-SURVEY-01 REVIEW；实现/文档固定2a0af2d，91相关离线测试与18文档检查PASS，36HTTP尝试=4认证+32GET，业务变更0/模型0。报告区分VERIFIED/CONTRACT_ONLY/BLOCKED/NOT_SUPPORTED/UNKNOWN，16+32未实测。全局仿真规范已引用；P1/P2算法和原证据保持。仅本地调查提交，不合main、不开始P3。
 
 当前P1/P2正式发布完成（2026-11-13）：负责人/星星阶段PASS及本轮教学公开授权已落实；main正常合并b58919d，710后端/36前端/类型构建与两持久报告重放PASS。首次直连TLS失败后，经已核实本机代理保持证书校验普通push成功，远端回读b58919d一致。MERGE-01 ACCEPTED；P3 PREP-01材料REVIEW（仅准备）。快充线48件6箱/马克杯无候选/旧45失效；质量UNKNOWN、其他条件UNCONFIRMED、ETA未承诺、采购不可执行及企业四门保留。最终台账文档提交普通同步，最终HEAD以Git实际查询为准；未采购、未扩8/30、未宣称整个S01通过。
 
@@ -7880,10 +7880,49 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "OFFLINE_TEST",
     "DOCUMENT_CHECK"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2a0af2daefcae8af400b47adda5246ec7a83a885"
+  ],
+  "testedCommit": "2a0af2daefcae8af400b47adda5246ec7a83a885",
+  "evidence": [
+    {
+      "kind": "ERP_READ_ONLY",
+      "acceptanceIds": [
+        "D-S01-P3-ERP-SURVEY-01/AC1"
+      ],
+      "command": "docs/evidence/P3-ERP-CAPABILITY/read_only_probe.py and supplemental_reads.py; exact ledger follow-up; all request attempts in summary.runs",
+      "environment": "固定教学ERP，本机.env.erp；API只读；原始响应私有",
+      "sample": "自有2SKU/仓库308/采购1398/审批1806；36HTTP=4认证+32GET；业务变更0/模型0；SKU400、OpenAPI404、宽ledger超时及脚本首败原样保留；真实正向采购/16+32 NOT_RUN",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/P3-ERP-CAPABILITY/summary.json"
+    },
+    {
+      "kind": "OFFLINE_TEST",
+      "acceptanceIds": [
+        "D-S01-P3-ERP-SURVEY-01/AC1"
+      ],
+      "command": ".tmp/stage-a-clean/Scripts/python.exe -m pytest tests/unit/data/test_owned.py tests/unit/data/test_erp.py tests/unit/data/test_candidate_discovery.py tests/unit/metrics/s01/test_daily.py tests/unit/forecasting/s01/test_candidates.py -q --tb=short -p no:cacheprovider --junitxml=.tmp/p3-erp-capability-offline-2a0af2d.xml; .tmp/stage-a-clean/Scripts/python.exe docs/evidence/P3-ERP-CAPABILITY/offline_analysis.py",
+      "environment": "Windows 项目隔离Python；mock/network=false；无ERP/模型网络",
+      "sample": "固定2a0af2d：91相关测试PASS/0失败/错误/跳过，10规范化场景+8种自有状态；全部离线，不替代真实采购流程",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/P3-ERP-CAPABILITY/verification.json"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-S01-P3-ERP-SURVEY-01/AC2"
+      ],
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; git diff --check; changed-file secret/link/hash audit",
+      "environment": "Windows既有系统Python/本地Git；无业务网络",
+      "sample": "18文档检查PASS，报告及统一规范链接/原OpenAPI指纹/私有4账本与响应完整性核对；应用venv缺markdown的首次FAIL另存，改用既有系统Python成功；本地提交2a0af2d后复验",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/P3-ERP-CAPABILITY/verification.json"
+    }
+  ],
   "review": null,
   "branch": "codex/p3-erp-capability-survey",
   "observedHead": "db13298f7f85efbffa6e034bc3d7d2262de26e39",
@@ -7897,7 +7936,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "IN_PROGRESS",
       "reason": "最新main与origin/main一致；用户明确授权独立调查，不开发P3。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "正式报告/统一规范/真实只读与离线证据已固定2a0af2d；91相关测试和18文档检查通过；采购执行与P3开发未运行。"
     }
-  ]
-}
-```
+  ],
+  "currentDeliveryScope": "采购能力调查材料REVIEW，非P3开发/采购闭环验收。四企业门保持，未知OpenAPI保留；本地提交后停止，不合main、不自动推送/开发/采购。"
+}```

@@ -6,7 +6,7 @@
 
 91项相关离线测试PASS、10组规范化场景/8种自有状态观察，不冒充ERP。D01只读purchaseIds、空名单构造空采购；自有D02批准/部分/驳回等未映射、正向入库未纳当前销售扣减对账。B01/B02可复用；总量够但晚到时无补救数量，仅INTERMEDIATE_SHORTAGE_POLICY_UNDEFINED。报告明确多页/多SKU/跨创建人/行级隔离、店铺用途、承诺可售ETA以及48→16+32均尚未完成真实验证。
 
-新增全项目[ERP仿真规范](standards/ERP_SIMULATION_DATA_POLICY.md)，AGENTS引用；ADR-S01-P3-012整合负责人已定规则。后续落实独立审批人与精确范围/用途/可售条件、旧36合法处理，再获批独立合规48件的16+32全链路。当前不代签、不下单/收货/入库、不扩8/30、不合main，不开始P3。TASKS为唯一状态；提交和固定版本检查后交REVIEW，最终实际HEAD见Git回读，不在文档预造自身SHA。
+新增全项目[ERP仿真规范](standards/ERP_SIMULATION_DATA_POLICY.md)，AGENTS引用；ADR-S01-P3-012整合负责人已定规则。后续落实独立审批人与精确范围/用途/可售条件、旧36合法处理，再获批独立合规48件的16+32全链路。当前不代签、不下单/收货/入库、不扩8/30、不合main，不开始P3。调查交付固定提交2a0af2daefcae8af400b47adda5246ec7a83a885后复验91项通过；4私有账本/响应指纹核对通过。文档构建首用应用venv缺markdown导致FAIL已保留，改用既有系统Python后18项PASS。TASKS已REVIEW，后续仅证据/交接提交；最终实际HEAD见Git回读，不在文档预造自身SHA。
 
 ## P1/P2正式合并发布完成，进入P3开发准备（2026-11-13）
 
