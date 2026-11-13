@@ -1,0 +1,219 @@
+{
+  "result": "PASS_LOCAL_PRODUCT_COMPATIBILITY",
+  "observedAt": "2026-11-13T18:28:25.948470+00:00",
+  "migrationHead": "0011_local_admin",
+  "taskRef": {
+    "tenantId": "s01-v2-teaching-local",
+    "taskId": "b3eb6b413fd84de7a4cce2b4ac80e4bf"
+  },
+  "adminAccountsInConfiguredLocalTenant": 1,
+  "passwordStorage": "RANDOM_SALT_SCRYPT_N131072_R8_P1",
+  "passwordOrHashPublished": false,
+  "batch": {
+    "summary": {
+      "failed": 0,
+      "coverage": 0.1282051282051282,
+      "modelCalls": 0,
+      "unfinished": 0,
+      "erpReference": 125,
+      "unanalyzable": 850,
+      "processedCount": 975,
+      "ruleCalculated": 0,
+      "noReplenishment": 0,
+      "ruleSourceCount": 0,
+      "scopeObjectCount": 975,
+      "businessMutations": 0,
+      "discoveredSkuCount": 221,
+      "processingCoverage": 1,
+      "erpSourceRecordCount": 130,
+      "productIdentityCount": 220
+    },
+    "sourceLimits": {
+      "sales": {
+        "total": 31,
+        "complete": true
+      },
+      "quotes": {
+        "total": 712,
+        "complete": true
+      },
+      "stores": {
+        "total": 5,
+        "complete": true
+      },
+      "listings": {
+        "total": 363,
+        "complete": true
+      },
+      "products": {
+        "total": 220,
+        "complete": true
+      },
+      "inventory": {
+        "total": 1141,
+        "complete": true
+      },
+      "warehouses": {
+        "total": 9,
+        "complete": true
+      },
+      "suggestions": {
+        "total": 669,
+        "complete": true
+      },
+      "formalPurchases": {
+        "total": 29,
+        "errors": [],
+        "complete": true
+      }
+    },
+    "httpAttempts": 43,
+    "httpStatuses": {
+      "200": 43
+    },
+    "verifiedRawResponseFiles": 41,
+    "independentSourceSkuCount": 221,
+    "missingSkus": 0,
+    "modelAttempts": 0,
+    "usageFacts": 0,
+    "businessWrites": 0
+  },
+  "oldRealModels": {
+    "calls": 2,
+    "tokens": 4389,
+    "newPaidCalls": 0,
+    "cost": "UNKNOWN_UNCHANGED"
+  },
+  "oldRequisition": {
+    "id": "1426",
+    "savedStatus": "待审核",
+    "quantity": 40,
+    "rows": 1,
+    "newBusinessWrites": 0
+  },
+  "currentRuleDataLimit": [
+    {
+      "sku": "HL-CBL100-2M",
+      "sourceGrade": "UNAVAILABLE",
+      "analysisState": "UNANALYZABLE",
+      "ruleFailureCodes": [
+        "STOCK_SALES_RECONCILIATION_FAILED"
+      ]
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "sourceGrade": "UNAVAILABLE",
+      "analysisState": "UNANALYZABLE",
+      "ruleFailureCodes": [
+        "STOCK_SALES_RECONCILIATION_FAILED"
+      ]
+    }
+  ],
+  "startup": {
+    "newBusinessTasksOnStart": 0,
+    "newERPAuthOrReadsOnStart": 0,
+    "newModelCallsOnStart": 0,
+    "sourceEvidence": "Only one new real task explicitly created in browser; all source journal requests belong to it. Supervisor checks internal health/DB only."
+  },
+  "browser": [
+    {
+      "result": "PASS",
+      "batchId": "b3eb6b413fd84de7a4cce2b4ac80e4bf",
+      "summary": {
+        "failed": 0,
+        "coverage": 0.1282051282051282,
+        "modelCalls": 0,
+        "unfinished": 0,
+        "erpReference": 125,
+        "unanalyzable": 850,
+        "processedCount": 975,
+        "ruleCalculated": 0,
+        "noReplenishment": 0,
+        "ruleSourceCount": 0,
+        "scopeObjectCount": 975,
+        "businessMutations": 0,
+        "discoveredSkuCount": 221,
+        "processingCoverage": 1,
+        "erpSourceRecordCount": 130,
+        "productIdentityCount": 220
+      },
+      "enumerationComplete": true,
+      "sourceLimits": {
+        "sales": {
+          "total": 31,
+          "complete": true
+        },
+        "quotes": {
+          "total": 712,
+          "complete": true
+        },
+        "stores": {
+          "total": 5,
+          "complete": true
+        },
+        "listings": {
+          "total": 363,
+          "complete": true
+        },
+        "products": {
+          "total": 220,
+          "complete": true
+        },
+        "inventory": {
+          "total": 1141,
+          "complete": true
+        },
+        "warehouses": {
+          "total": 9,
+          "complete": true
+        },
+        "suggestions": {
+          "total": 669,
+          "complete": true
+        },
+        "formalPurchases": {
+          "total": 29,
+          "errors": [],
+          "complete": true
+        }
+      },
+      "existingRequisitionId": "1426",
+      "wrongPasswordRejected": true,
+      "logoutRevoked": true,
+      "acknowledgementStillRequired": true,
+      "pageErrors": [],
+      "newModels": 0,
+      "newERPBusinessWrites": 0
+    },
+    {
+      "result": "PASS",
+      "reusedCookieWithoutPassword": true,
+      "sameBatchId": "b3eb6b413fd84de7a4cce2b4ac80e4bf",
+      "newModels": 0,
+      "newERPBusinessWrites": 0
+    },
+    {
+      "result": "PASS",
+      "loginShown": true,
+      "protectedHistoryHidden": true,
+      "redirectLoop": false
+    }
+  ],
+  "launcher": {
+    "result": "PASS",
+    "observedAt": "2026-11-13T18:16:07.826058+00:00",
+    "nativeWindows": true,
+    "managedServices": 3,
+    "duplicateStartCreatedNewServices": false,
+    "sustainedReadySeconds": 848.39,
+    "exceededOld900SecondLimit": false,
+    "stopOnlyOwnedServices": true,
+    "unrelatedPortOwnerSurvived": true,
+    "portConflictRejectedBeforeSpawn": true,
+    "databaseUnavailableRejectedBeforeSpawn": true,
+    "persistentSigningConfigurationUnchanged": true,
+    "explicitMigrationOnly": true,
+    "businessMutationsByController": 0,
+    "modelCallsByController": 0
+  }
+}

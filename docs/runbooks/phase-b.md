@@ -1,3 +1,5 @@
+> 日常使用增量（2026-11-14）：当前默认入口为[Windows一键启动与管理员登录](local-platform.md)及[README](../../README.md)。下文保留原阶段/开发测试运行方式；临时Token、动态端口和900秒演示不再是日常流程。本地loopback HTTP Cookie例外以新契约为准，旧测试配置保持其原安全语义。
+
 # 第二阶段 S01 工程演示
 
 本轮只交付显式 `SIMULATED_ENGINEERING` 切片。真实身份、ERP、业务口径和模型许可仍受原门禁约束；工程样例不是恢复原 SKU-A，也不是采购建议或业务验收。任务状态见 [TASKS](../TASKS.md)。安装和本机安全配置沿用 [第一阶段运行说明](phase-a.md)，需要 requirements.lock 中的开发依赖。

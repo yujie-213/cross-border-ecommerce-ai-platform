@@ -1,3 +1,5 @@
+> 日常使用增量（2026-11-14）：当前默认入口为[Windows一键启动与管理员登录](local-platform.md)及[README](../../README.md)。下文保留原阶段/开发测试运行方式；临时Token、动态端口和900秒演示不再是日常流程。本地loopback HTTP Cookie例外以新契约为准，旧测试配置保持其原安全语义。
+
 # S01 教学ERP只读接入与准入报告
 
 本阶段只读，状态见[TASKS](../TASKS.md)，事实/缺口见[真实验证报告](../evidence/D-S01-LIVE-01/api-report.md)。已验收DEV工程在main；本阶段新代码另交REVIEW。TEACHING_ERP_ONLY：仅指定教学HTTPS主机在Connector内关闭证书验证，禁重定向/环境代理；生产必须正常证书校验。账号密码或Token只填根目录忽略的.env.erp，不放命令行/日志/Git。API本身的源错误不因TLS例外而转成功。

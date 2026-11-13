@@ -1,3 +1,5 @@
+当前日常入口：[README](../README.md) · [本地运行/登录/恢复](runbooks/local-platform.md) · [本地认证/部署契约](contracts/local-platform.md) · [架构增量](architecture/LOCAL_RUNTIME.md)。旧临时Token工具仅开发测试。
+
 # 项目文档索引
 
 本文只提供导航，不维护第二份需求、计划、任务状态或验收结论。MD 是正文，配套 HTML 是阅读材料；历史归档不是当前实施依据。

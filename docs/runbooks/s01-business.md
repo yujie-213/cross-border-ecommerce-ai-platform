@@ -1,3 +1,5 @@
+> 日常使用增量（2026-11-14）：当前默认入口为[Windows一键启动与管理员登录](local-platform.md)及[README](../../README.md)。下文保留原阶段/开发测试运行方式；临时Token、动态端口和900秒演示不再是日常流程。本地loopback HTTP Cookie例外以新契约为准，旧测试配置保持其原安全语义。
+
 # S01 业务 Handler 的工程装配与复验
 
 本轮只交付 D-S01-DEV-01 工程范围，状态只读 [TASKS](../TASKS.md)。真实业务四门仍 BLOCKED；本轮不访问 ERP/真实 DeepSeek、不写采购、不接前端。资料准入结论见 [单 SKU 离线报告](../evidence/D-S01-DATA-01/admission-report.md)。

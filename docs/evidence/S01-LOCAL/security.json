@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "PUBLIC_FILE_AND_NEW_HISTORY_EXACT_SECRET_SCAN_WITH_CONTEXT_REVIEW",
+  "unresolvedCredentialFindings": 0,
+  "publicCredentialAssignmentsFound": 0,
+  "actualPasswordOrHashPublishedAsCredentials": false,
+  "privateRuntimeAndCookieFilesIgnored": true,
+  "contextReview": "Exact character coincidences only in unchanged, pre-existing public identity metadata were independently checked against pre-task baseline. Matched contents and identifying details are not published.",
+  "unknownOpenapiExcluded": true,
+  "limitations": "Context-aware scan, not a claim that every arbitrary short character sequence is absent from all public metadata."
+}
