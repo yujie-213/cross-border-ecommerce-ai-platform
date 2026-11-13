@@ -1,6 +1,6 @@
 {
   "status": "pass",
-  "htmlSha256": "ed3230cb9f93cd0547e822eb6f2aa784bf9a7bac4074186d75fdf0b39d535faf",
+  "htmlSha256": "5689993029b779450bf2ae275d02459ca6e7c8f10a53ebc442554cafcabb0ac8",
   "checks": [
     {
       "width": 1440,
@@ -27,25 +27,25 @@
       "pass": true
     },
     {
-      "width": 1920,
-      "scrollWidth": 1920,
+      "width": 920,
+      "scrollWidth": 920,
       "svg": 1,
       "sections": 11,
       "viewport": {
-        "width": 1920,
-        "height": 1080
+        "width": 920,
+        "height": 900
       },
       "theme": "light",
       "pass": true
     },
     {
-      "width": 1920,
-      "scrollWidth": 1920,
+      "width": 920,
+      "scrollWidth": 920,
       "svg": 1,
       "sections": 11,
       "viewport": {
-        "width": 1920,
-        "height": 1080
+        "width": 920,
+        "height": 900
       },
       "theme": "dark",
       "pass": true
@@ -57,7 +57,7 @@
       "sections": 11,
       "viewport": {
         "width": 390,
-        "height": 844
+        "height": 900
       },
       "theme": "light",
       "pass": true
@@ -69,13 +69,11 @@
       "sections": 11,
       "viewport": {
         "width": 390,
-        "height": 844
+        "height": 900
       },
       "theme": "dark",
       "pass": true
     }
   ],
-  "errors": [],
-  "remoteRequests": [],
-  "visualReview": "recorded separately"
+  "remoteRequests": []
 }

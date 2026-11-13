@@ -1,0 +1,2543 @@
+{
+  "result": "PASS",
+  "capturedAt": "2026-11-13T14:42:48.850052+00:00",
+  "auditNature": "READ_ONLY_DB_AND_SHA256_CAPTURE_REPLAY",
+  "tasks": [
+    {
+      "evidenceFile": "live-batch.json",
+      "taskRef": {
+        "tenantId": "s01-v2-teaching-local",
+        "taskId": "b6f2c89177254651a5e64b635b3c1812"
+      },
+      "scenarioId": "S01_V2_BATCH",
+      "requestCount": 45,
+      "requestLimit": 400,
+      "taskCreatedAt": "2026-11-13T14:24:08.638214Z",
+      "taskCompletedAt": "2026-11-13T14:25:11.403960Z",
+      "taskElapsedSeconds": 62.765746,
+      "verifiedResponseFiles": 43,
+      "httpStatuses": {
+        "200": 45
+      },
+      "modelAttempts": 0,
+      "usageFacts": 0,
+      "usedCalls": 0,
+      "reservedCalls": 0,
+      "businessMutations": 0,
+      "sourceResourceCounts": {
+        "sales": {
+          "rows": 33,
+          "complete": true,
+          "total": 33
+        },
+        "quotes": {
+          "rows": 712,
+          "complete": true,
+          "total": 712
+        },
+        "stores": {
+          "rows": 5,
+          "complete": true,
+          "total": 5
+        },
+        "formal-0": {
+          "rows": 11,
+          "complete": true,
+          "total": 11
+        },
+        "formal-1": {
+          "rows": 18,
+          "complete": true,
+          "total": 18
+        },
+        "formal-2": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "listings": {
+          "rows": 363,
+          "complete": true,
+          "total": 363
+        },
+        "products": {
+          "rows": 220,
+          "complete": true,
+          "total": 220
+        },
+        "inventory": {
+          "rows": 1141,
+          "complete": true,
+          "total": 1141
+        },
+        "supplier-4": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "warehouses": {
+          "rows": 9,
+          "complete": true,
+          "total": 9
+        },
+        "suggestions": {
+          "rows": 669,
+          "complete": true,
+          "total": 669
+        },
+        "ledger-1135474": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135475": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135476": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135477": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135478": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135479": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135480": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "workflow-1153929": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153930": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153931": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153932": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153933": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153934": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153935": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        }
+      },
+      "requestEvents": [
+        {
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "at": "2026-11-13T14:24:08.737483+00:00",
+          "completedAt": "2026-11-13T14:24:09.600425+00:00",
+          "httpStatus": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "at": "2026-11-13T14:24:09.624624+00:00",
+          "completedAt": "2026-11-13T14:24:10.341528+00:00",
+          "httpStatus": 200,
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/store-authorizations",
+          "at": "2026-11-13T14:24:10.377473+00:00",
+          "completedAt": "2026-11-13T14:24:11.111238+00:00",
+          "httpStatus": 200,
+          "sha256": "16fac4460bca735281e75cd23e85355f5023daa1ad10a6d69ca8677c3c1c0b25"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/warehouses",
+          "at": "2026-11-13T14:24:11.149855+00:00",
+          "completedAt": "2026-11-13T14:24:11.869014+00:00",
+          "httpStatus": 200,
+          "sha256": "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-13T14:24:11.905329+00:00",
+          "completedAt": "2026-11-13T14:24:12.685220+00:00",
+          "httpStatus": 200,
+          "sha256": "b226ec1348e8ed47ae2dc79d3e1fc191bd8ca326de21eae66531a4c47e44834a"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-13T14:24:12.725242+00:00",
+          "completedAt": "2026-11-13T14:24:13.450599+00:00",
+          "httpStatus": 200,
+          "sha256": "18949f1706c32b9ef2a39d82f3138adf12bdb0f93a891cd362fe7f85da1734ec"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:24:13.496240+00:00",
+          "completedAt": "2026-11-13T14:24:14.255098+00:00",
+          "httpStatus": 200,
+          "sha256": "1f02944e37f3c28644fdfdd0a69fd8d0693e57f13d853241a6546379ff3cc56e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:24:14.295679+00:00",
+          "completedAt": "2026-11-13T14:24:15.032398+00:00",
+          "httpStatus": 200,
+          "sha256": "d924d1aff198adbe9f650d2b29a924f9867e1446fd3ea3d37508f6f5bf4db4e9"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:24:15.076949+00:00",
+          "completedAt": "2026-11-13T14:24:15.815349+00:00",
+          "httpStatus": 200,
+          "sha256": "d788ce603e7bf9c1a0f9ed4b032cace9431e6cafb329475d77de9e08e2468d35"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:24:15.853675+00:00",
+          "completedAt": "2026-11-13T14:24:16.592982+00:00",
+          "httpStatus": 200,
+          "sha256": "0892e4afa892f5b0bc5fb4625ad6d9ba8037ceef0b9d4b0ed8aa0783f1654452"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:24:16.633777+00:00",
+          "completedAt": "2026-11-13T14:24:17.384762+00:00",
+          "httpStatus": 200,
+          "sha256": "f6df613fc688a4fca095d6ab12ffaa09109b9b2d5ade39b94a1ade954c7e1546"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:24:17.423628+00:00",
+          "completedAt": "2026-11-13T14:24:18.157179+00:00",
+          "httpStatus": 200,
+          "sha256": "892e2921777b673e9824924fa82b3a0300586affc3f3f0c119fabff1b3f9b003"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:24:18.197598+00:00",
+          "completedAt": "2026-11-13T14:24:18.956091+00:00",
+          "httpStatus": 200,
+          "sha256": "994c60c814807ce061185e07826472fd046db9a653f1071a7660f0047aceb74b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:24:18.995971+00:00",
+          "completedAt": "2026-11-13T14:24:19.750264+00:00",
+          "httpStatus": 200,
+          "sha256": "29f1e70f6e1f5397e59f265224a97e7b4e27cbcdceafa767510e55ff5aad0434"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:24:19.794717+00:00",
+          "completedAt": "2026-11-13T14:24:20.538138+00:00",
+          "httpStatus": 200,
+          "sha256": "79affdbce7ea62ff272291591b53de5074d8de8d85d43b0b59e66293e4b485e3"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:24:20.578937+00:00",
+          "completedAt": "2026-11-13T14:24:21.289217+00:00",
+          "httpStatus": 200,
+          "sha256": "05105c5fba35928214156973be6159bed085c8a1a685ec98cb4ed0c3a70b08bf"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:21.372585+00:00",
+          "completedAt": "2026-11-13T14:24:22.103619+00:00",
+          "httpStatus": 200,
+          "sha256": "88d1207b0d5ae79fd25704c0bf0326542b426dade48075a89d49d111f0cce253"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:22.141979+00:00",
+          "completedAt": "2026-11-13T14:24:22.853088+00:00",
+          "httpStatus": 200,
+          "sha256": "df2dab425e396cf3852f2a7688c859adfed67851ea21dd09f85868f7bb67b52e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:22.895636+00:00",
+          "completedAt": "2026-11-13T14:24:23.625683+00:00",
+          "httpStatus": 200,
+          "sha256": "aa1f9035310691bdd917dd3ef1e3f38047081d60e05ff6ef48ecac67a391218b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:23.669312+00:00",
+          "completedAt": "2026-11-13T14:24:24.419026+00:00",
+          "httpStatus": 200,
+          "sha256": "ff96a55db1d4b364ecc4dd2f415f331b079d74427c1ce58d61da3a5bd54f828e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:24.469187+00:00",
+          "completedAt": "2026-11-13T14:24:25.202489+00:00",
+          "httpStatus": 200,
+          "sha256": "fa3457fd04127f14d8caecf4e60c51771789118138438c7bf505ae8b0cbe9825"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:25.241330+00:00",
+          "completedAt": "2026-11-13T14:24:25.981049+00:00",
+          "httpStatus": 200,
+          "sha256": "a10f7591324c009a7858ed810e83760c304a0c20d00b392caa7711c952a1a1be"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:26.020484+00:00",
+          "completedAt": "2026-11-13T14:24:26.746775+00:00",
+          "httpStatus": 200,
+          "sha256": "f68e435c74bd1e464e7063bf6efc8891950959408ef4a280e1ab10da8b29267a"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:24:26.788037+00:00",
+          "completedAt": "2026-11-13T14:24:27.514949+00:00",
+          "httpStatus": 200,
+          "sha256": "f108eb45cac47d475ff1f6fd81a1341552f425dd162734fa4e1ac72030deb3ff"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-13T14:24:27.555466+00:00",
+          "completedAt": "2026-11-13T14:24:28.296046+00:00",
+          "httpStatus": 200,
+          "sha256": "eacfeacde571f5c134813fc898718ee1f01b91116aab6a72f3e6d47783c6ebbc"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-13T14:24:28.339864+00:00",
+          "completedAt": "2026-11-13T14:24:29.095694+00:00",
+          "httpStatus": 200,
+          "sha256": "f6fc793814dc523103ca127c51ffc73e02e60a5494b1ffbccc3fc58499588f36"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-13T14:24:29.148297+00:00",
+          "completedAt": "2026-11-13T14:24:29.892704+00:00",
+          "httpStatus": 200,
+          "sha256": "0a55be299cdbd3589bb6c1368e541d40963aaa1c04e71a45de61d20631abd5f8"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:24:29.931922+00:00",
+          "completedAt": "2026-11-13T14:24:30.655235+00:00",
+          "httpStatus": 200,
+          "sha256": "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:24:30.692652+00:00",
+          "completedAt": "2026-11-13T14:24:31.418480+00:00",
+          "httpStatus": 200,
+          "sha256": "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:24:31.459214+00:00",
+          "completedAt": "2026-11-13T14:24:32.175271+00:00",
+          "httpStatus": 200,
+          "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/suppliers/4",
+          "at": "2026-11-13T14:24:38.256631+00:00",
+          "completedAt": "2026-11-13T14:24:38.973325+00:00",
+          "httpStatus": 200,
+          "sha256": "f472caf97c0d3a6714e086ec4c1ac15211103df6c22f921b503aba9a107d04cd"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153935",
+          "at": "2026-11-13T14:24:39.011497+00:00",
+          "completedAt": "2026-11-13T14:24:39.736660+00:00",
+          "httpStatus": 200,
+          "sha256": "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:39.776684+00:00",
+          "completedAt": "2026-11-13T14:24:40.501988+00:00",
+          "httpStatus": 200,
+          "sha256": "da0cf0e17f9add6f69c7ecb1cf19677ac69b18c2c4d4daeba31ce55cbd7cbf3b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153934",
+          "at": "2026-11-13T14:24:40.538472+00:00",
+          "completedAt": "2026-11-13T14:24:41.240517+00:00",
+          "httpStatus": 200,
+          "sha256": "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:41.285905+00:00",
+          "completedAt": "2026-11-13T14:24:41.995099+00:00",
+          "httpStatus": 200,
+          "sha256": "e443e3a7c5b8f7d348a42cc17028c1d1c14c857520f2471a4c9f9f7c8ffd65d6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153933",
+          "at": "2026-11-13T14:24:42.035509+00:00",
+          "completedAt": "2026-11-13T14:24:42.746234+00:00",
+          "httpStatus": 200,
+          "sha256": "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:42.787265+00:00",
+          "completedAt": "2026-11-13T14:24:43.504046+00:00",
+          "httpStatus": 200,
+          "sha256": "961997cf4e9334ff54c3f7aa51382be1f99ca2b9b25e4751835f0768da1e6fcd"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153932",
+          "at": "2026-11-13T14:24:43.549374+00:00",
+          "completedAt": "2026-11-13T14:24:44.249365+00:00",
+          "httpStatus": 200,
+          "sha256": "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:44.288798+00:00",
+          "completedAt": "2026-11-13T14:24:45.014152+00:00",
+          "httpStatus": 200,
+          "sha256": "73c472b014c01c2894a82903560f75d8a468cc9bebc8f0651c5b9002a4c72029"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153931",
+          "at": "2026-11-13T14:24:45.054561+00:00",
+          "completedAt": "2026-11-13T14:24:45.793035+00:00",
+          "httpStatus": 200,
+          "sha256": "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:45.838218+00:00",
+          "completedAt": "2026-11-13T14:24:46.562100+00:00",
+          "httpStatus": 200,
+          "sha256": "fac5065666b1d9176e549cc31abde0f8614f2c52d26fad66711920ae9dc5033d"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153930",
+          "at": "2026-11-13T14:24:46.609380+00:00",
+          "completedAt": "2026-11-13T14:24:47.324872+00:00",
+          "httpStatus": 200,
+          "sha256": "4d0def959e75f00b13ddc0cadebcc514000a05d5501fbb59476452e974748409"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:47.368901+00:00",
+          "completedAt": "2026-11-13T14:24:48.108926+00:00",
+          "httpStatus": 200,
+          "sha256": "bf43181f0cef10e7db1a1ef67cb16c50064d9dcfc680ba555d9e52ab4a2f7909"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153929",
+          "at": "2026-11-13T14:24:48.154471+00:00",
+          "completedAt": "2026-11-13T14:24:48.881927+00:00",
+          "httpStatus": 200,
+          "sha256": "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:24:48.924818+00:00",
+          "completedAt": "2026-11-13T14:24:49.634925+00:00",
+          "httpStatus": 200,
+          "sha256": "b240d96b9eead810a853473396e1f350f511e86de74b05769d0e063691d28f1f"
+        }
+      ],
+      "summary": {
+        "discoveredSkuCount": 221,
+        "scopeObjectCount": 975,
+        "processedCount": 975,
+        "ruleCalculated": 1,
+        "erpReference": 125,
+        "noReplenishment": 1,
+        "unanalyzable": 848,
+        "failed": 0,
+        "unfinished": 0,
+        "coverage": 0.13025641025641024,
+        "processingCoverage": 1.0,
+        "ruleSourceCount": 2,
+        "erpSourceRecordCount": 130,
+        "modelCalls": 0,
+        "businessMutations": 0,
+        "productIdentityCount": 220
+      },
+      "independentUniqueSourceSkuCount": 221,
+      "missingSkus": 0,
+      "resultIntegrityDigest": "e5b3efda018b268b5e3528612f60e5659422ee55132cb399eaa8b289930c21e2",
+      "targetFive": [
+        {
+          "sku": "YF-SO-NG-OS",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "217",
+              "sourceGrade": "UNVERIFIED",
+              "analysisState": "NEEDS_REVIEW",
+              "quantity": null,
+              "sourceQuantity": null,
+              "sourceSuggestionCount": 2,
+              "sourceSuggestions": [
+                {
+                  "id": 689,
+                  "sku": "YF-SO-NG-OS",
+                  "created_at": "2026-11-13T13:07:53+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T13:10:34+00:00",
+                  "status_text": "已生成采购单",
+                  "suggested_qty": 150,
+                  "recommendation_no": "AI-REC-YF-SO-NG-OS-20261113-c66b94"
+                },
+                {
+                  "id": 679,
+                  "sku": "YF-SO-NG-OS",
+                  "created_at": "2026-11-13T04:49:04+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:49:04+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 120,
+                  "recommendation_no": "REC-YF-SO-NG-OS-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 0,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1136"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "SUGGESTION_AMBIGUOUS_OR_QUERY_INCOMPLETE"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 689,
+              "recommendation_no": "AI-REC-YF-SO-NG-OS-20261113-c66b94",
+              "sku": "YF-SO-NG-OS",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 150,
+              "daily_sales": 0.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "HIGH",
+              "stockout_date": null,
+              "status_text": "已生成采购单",
+              "created_at": "2026-11-13T13:07:53+00:00",
+              "updated_at": "2026-11-13T13:10:34+00:00",
+              "generated_at": "2026-11-13T21:07:52"
+            },
+            {
+              "id": 679,
+              "recommendation_no": "REC-YF-SO-NG-OS-2026",
+              "sku": "YF-SO-NG-OS",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 120,
+              "daily_sales": 5.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "最急",
+              "stockout_date": "2026-11-14",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:49:04+00:00",
+              "updated_at": "2026-11-13T04:49:04+00:00",
+              "generated_at": "2026-11-14"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-PZ-L",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "212",
+              "sourceGrade": "UNVERIFIED",
+              "analysisState": "NEEDS_REVIEW",
+              "quantity": null,
+              "sourceQuantity": null,
+              "sourceSuggestionCount": 2,
+              "sourceSuggestions": [
+                {
+                  "id": 690,
+                  "sku": "YF-SO-PZ-L",
+                  "created_at": "2026-11-13T13:16:04+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T13:16:04+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 1200,
+                  "recommendation_no": "AI-REC-YF-SO-PZ-L-20261113-782b6d"
+                },
+                {
+                  "id": 674,
+                  "sku": "YF-SO-PZ-L",
+                  "created_at": "2026-11-13T04:46:55+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:46:55+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 1200,
+                  "recommendation_no": "REC-YF-SO-PZ-L-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 0,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1131"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "SUGGESTION_AMBIGUOUS_OR_QUERY_INCOMPLETE"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 690,
+              "recommendation_no": "AI-REC-YF-SO-PZ-L-20261113-782b6d",
+              "sku": "YF-SO-PZ-L",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 1200,
+              "daily_sales": 0.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "HIGH",
+              "stockout_date": null,
+              "status_text": "待确认",
+              "created_at": "2026-11-13T13:16:04+00:00",
+              "updated_at": "2026-11-13T13:16:04+00:00",
+              "generated_at": "2026-11-13T21:16:03"
+            },
+            {
+              "id": 674,
+              "recommendation_no": "REC-YF-SO-PZ-L-2026",
+              "sku": "YF-SO-PZ-L",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 1200,
+              "daily_sales": 60.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "最急",
+              "stockout_date": "2026-11-14",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:46:55+00:00",
+              "updated_at": "2026-11-13T04:46:55+00:00",
+              "generated_at": "2026-11-14"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-QD-S",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "214",
+              "sourceGrade": "REFERENCE_ONLY",
+              "analysisState": "ERP_REFERENCE",
+              "quantity": 60,
+              "sourceQuantity": 60,
+              "sourceSuggestionCount": 1,
+              "sourceSuggestions": [
+                {
+                  "id": 676,
+                  "sku": "YF-SO-QD-S",
+                  "created_at": "2026-11-13T04:47:37+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:47:37+00:00",
+                  "status_text": "已生成采购单",
+                  "suggested_qty": 60,
+                  "recommendation_no": "REC-YF-SO-QD-S-2026"
+                }
+              ],
+              "formalPurchases": [
+                {
+                  "sku": "YF-SO-QD-S",
+                  "erpId": "1397",
+                  "status": "待到货",
+                  "erpNumber": "PO-YF-SO-QD-S-2026",
+                  "lineIndex": 0,
+                  "sellableDate": null,
+                  "warehouseName": "华东服装仓",
+                  "plannedArrival": "2026-12-18",
+                  "warehouseMatch": false,
+                  "orderedQuantity": 200,
+                  "receivedQuantity": 0,
+                  "sourcePlanNumber": null,
+                  "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+                  "unreceivedQuantity": 200,
+                  "includedInCalculation": false,
+                  "effectiveSupplyQuantity": null
+                }
+              ],
+              "unit": "EA",
+              "inventory": {
+                "available": 40,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1133"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "ERP_ALGORITHM_UNKNOWN",
+                "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+                "ERP_GENERATION_TIME_UNVERIFIED",
+                "ERP_PURCHASE_NETTING_UNKNOWN",
+                "OVERSEAS_FBA_BUCKETS_NOT_ADDED",
+                "RELATED_PURCHASE_TARGETS_DIFFERENT_WAREHOUSE"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 676,
+              "recommendation_no": "REC-YF-SO-QD-S-2026",
+              "sku": "YF-SO-QD-S",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 60,
+              "daily_sales": 10.0,
+              "local_available": 0,
+              "overseas_available": 40,
+              "fba_available": 40,
+              "inbound": 200,
+              "urgency": "急",
+              "stockout_date": "2026-12-08",
+              "status_text": "已生成采购单",
+              "created_at": "2026-11-13T04:47:37+00:00",
+              "updated_at": "2026-11-13T04:47:37+00:00",
+              "generated_at": "2026-12-08"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-QD-L",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "216",
+              "sourceGrade": "REFERENCE_ONLY",
+              "analysisState": "ERP_REFERENCE",
+              "quantity": 50,
+              "sourceQuantity": 50,
+              "sourceSuggestionCount": 1,
+              "sourceSuggestions": [
+                {
+                  "id": 678,
+                  "sku": "YF-SO-QD-L",
+                  "created_at": "2026-11-13T04:48:43+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:48:43+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 50,
+                  "recommendation_no": "REC-YF-SO-QD-L-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 60,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1135"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "ERP_ALGORITHM_UNKNOWN",
+                "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+                "ERP_GENERATION_TIME_UNVERIFIED",
+                "ERP_PURCHASE_NETTING_UNKNOWN",
+                "OVERSEAS_FBA_BUCKETS_NOT_ADDED"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 678,
+              "recommendation_no": "REC-YF-SO-QD-L-2026",
+              "sku": "YF-SO-QD-L",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 50,
+              "daily_sales": 1.0,
+              "local_available": 0,
+              "overseas_available": 60,
+              "fba_available": 60,
+              "inbound": 0,
+              "urgency": "一般",
+              "stockout_date": "2027-01-13",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:48:43+00:00",
+              "updated_at": "2026-11-13T04:48:43+00:00",
+              "generated_at": "2027-01-13"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-PZ-M",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "211",
+              "sourceGrade": "REFERENCE_ONLY",
+              "analysisState": "NEEDS_REVIEW",
+              "quantity": null,
+              "sourceQuantity": 0,
+              "sourceSuggestionCount": 1,
+              "sourceSuggestions": [
+                {
+                  "id": 673,
+                  "sku": "YF-SO-PZ-M",
+                  "created_at": "2026-11-13T04:46:34+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:46:34+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 0,
+                  "recommendation_no": "REC-YF-SO-PZ-M-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 0,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1130"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "ERP_ALGORITHM_UNKNOWN",
+                "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+                "ERP_GENERATION_TIME_UNVERIFIED",
+                "ERP_PURCHASE_NETTING_UNKNOWN"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 673,
+              "recommendation_no": "REC-YF-SO-PZ-M-2026",
+              "sku": "YF-SO-PZ-M",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 0,
+              "daily_sales": 6.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "最急",
+              "stockout_date": "2026-11-14",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:46:34+00:00",
+              "updated_at": "2026-11-13T04:46:34+00:00",
+              "generated_at": "2026-11-14"
+            }
+          ]
+        }
+      ],
+      "ownedTwo": [
+        {
+          "sku": "HL-CBL100-2M",
+          "quantity": 48,
+          "sourceGrade": "RULE_CALCULATED",
+          "analysisState": "ANALYZED",
+          "formalPurchases": [
+            {
+              "sku": "HL-CBL100-2M",
+              "erpId": "1406",
+              "status": "待下单",
+              "erpNumber": "S01-RQ-31d1cf789b276beb43772c35fe244375",
+              "lineIndex": 0,
+              "sellableDate": null,
+              "warehouseName": "海岚洛杉矶现货仓",
+              "plannedArrival": null,
+              "warehouseMatch": true,
+              "orderedQuantity": 48,
+              "receivedQuantity": 0,
+              "sourcePlanNumber": "31d1cf789b276beb43772c35fe244375d14d9167d562abda5e526ae7a8f5c0f4",
+              "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+              "unreceivedQuantity": 48,
+              "includedInCalculation": false,
+              "effectiveSupplyQuantity": null
+            }
+          ]
+        },
+        {
+          "sku": "HL-MUG350-WH",
+          "quantity": null,
+          "sourceGrade": "RULE_CALCULATED",
+          "analysisState": "NO_REPLENISHMENT",
+          "formalPurchases": []
+        }
+      ]
+    },
+    {
+      "evidenceFile": "live-single-task.json",
+      "taskRef": {
+        "tenantId": "s01-v2-teaching-local",
+        "taskId": "51cf811a34274dcaa96e03cb5d9bd7ea"
+      },
+      "scenarioId": "S01_V2_SINGLE",
+      "requestCount": 28,
+      "requestLimit": 400,
+      "taskCreatedAt": "2026-11-13T14:25:42.156551Z",
+      "taskCompletedAt": "2026-11-13T14:26:06.244119Z",
+      "taskElapsedSeconds": 24.087568,
+      "verifiedResponseFiles": 25,
+      "httpStatuses": {
+        "200": 28
+      },
+      "modelAttempts": 1,
+      "usageFacts": 1,
+      "usedCalls": 1,
+      "reservedCalls": 0,
+      "businessMutations": 0,
+      "sourceResourceCounts": {
+        "sales": {
+          "rows": 7,
+          "complete": true,
+          "total": 7
+        },
+        "quotes": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "stores": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "formal-0": {
+          "rows": 11,
+          "complete": true,
+          "total": 11
+        },
+        "formal-1": {
+          "rows": 18,
+          "complete": true,
+          "total": 18
+        },
+        "formal-2": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "listings": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "products": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "inventory": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "supplier-4": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "warehouses": {
+          "rows": 9,
+          "complete": true,
+          "total": 9
+        },
+        "suggestions": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "ledger-1135474": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135475": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135476": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135477": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135478": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135479": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135480": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "workflow-1153929": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153930": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153931": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153932": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153933": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153934": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153935": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        }
+      },
+      "requestEvents": [
+        {
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "at": "2026-11-13T14:25:42.257382+00:00",
+          "completedAt": "2026-11-13T14:25:43.110373+00:00",
+          "httpStatus": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "at": "2026-11-13T14:25:43.138565+00:00",
+          "completedAt": "2026-11-13T14:25:43.867036+00:00",
+          "httpStatus": 200,
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/store-authorizations",
+          "at": "2026-11-13T14:25:43.902964+00:00",
+          "completedAt": "2026-11-13T14:25:44.624059+00:00",
+          "httpStatus": 200,
+          "sha256": "845262ae81031b1b4e8cd284d7624a441f240c157a7f48af3d82821228eca722"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/warehouses",
+          "at": "2026-11-13T14:25:44.658723+00:00",
+          "completedAt": "2026-11-13T14:25:45.381087+00:00",
+          "httpStatus": 200,
+          "sha256": "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-13T14:25:45.416964+00:00",
+          "completedAt": "2026-11-13T14:25:46.146747+00:00",
+          "httpStatus": 200,
+          "sha256": "22715bbfdecf7c93737ff2889d76015f9aab7ff95c0151b603072b113d8a1781"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:25:46.182119+00:00",
+          "completedAt": "2026-11-13T14:25:46.909534+00:00",
+          "httpStatus": 200,
+          "sha256": "73ad5472b246cf8c2aa298f101b169d51a39d0448a383e65de3b2938bcd46dbe"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:25:46.952687+00:00",
+          "completedAt": "2026-11-13T14:25:47.672105+00:00",
+          "httpStatus": 200,
+          "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:25:47.711165+00:00",
+          "completedAt": "2026-11-13T14:25:48.435724+00:00",
+          "httpStatus": 200,
+          "sha256": "d5a1d1a5f449017c4cb101d4375a3b6e1a292eaa53ccc525aa97f607edab979a"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-13T14:25:48.471738+00:00",
+          "completedAt": "2026-11-13T14:25:49.176399+00:00",
+          "httpStatus": 200,
+          "sha256": "8183f45c0e0ea14569ea552fb0fd033d5b3432c01923f2dc4e37712707ae9dae"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-13T14:25:49.215806+00:00",
+          "completedAt": "2026-11-13T14:25:50.015482+00:00",
+          "httpStatus": 200,
+          "sha256": "f99548be1fb7f429c4ce95770e3c2171076a81bac3a872a0a651d3fdc496b0a6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:25:50.053832+00:00",
+          "completedAt": "2026-11-13T14:25:50.810498+00:00",
+          "httpStatus": 200,
+          "sha256": "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:25:50.850240+00:00",
+          "completedAt": "2026-11-13T14:25:51.599630+00:00",
+          "httpStatus": 200,
+          "sha256": "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:25:51.637997+00:00",
+          "completedAt": "2026-11-13T14:25:52.371882+00:00",
+          "httpStatus": 200,
+          "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/suppliers/4",
+          "at": "2026-11-13T14:25:52.433984+00:00",
+          "completedAt": "2026-11-13T14:25:53.128328+00:00",
+          "httpStatus": 200,
+          "sha256": "f472caf97c0d3a6714e086ec4c1ac15211103df6c22f921b503aba9a107d04cd"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153935",
+          "at": "2026-11-13T14:25:53.164275+00:00",
+          "completedAt": "2026-11-13T14:25:53.890041+00:00",
+          "httpStatus": 200,
+          "sha256": "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:25:53.928947+00:00",
+          "completedAt": "2026-11-13T14:25:54.666100+00:00",
+          "httpStatus": 200,
+          "sha256": "da0cf0e17f9add6f69c7ecb1cf19677ac69b18c2c4d4daeba31ce55cbd7cbf3b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153934",
+          "at": "2026-11-13T14:25:54.705980+00:00",
+          "completedAt": "2026-11-13T14:25:55.444804+00:00",
+          "httpStatus": 200,
+          "sha256": "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:25:55.482657+00:00",
+          "completedAt": "2026-11-13T14:25:56.214418+00:00",
+          "httpStatus": 200,
+          "sha256": "e443e3a7c5b8f7d348a42cc17028c1d1c14c857520f2471a4c9f9f7c8ffd65d6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153933",
+          "at": "2026-11-13T14:25:56.254225+00:00",
+          "completedAt": "2026-11-13T14:25:56.962642+00:00",
+          "httpStatus": 200,
+          "sha256": "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:25:57.000961+00:00",
+          "completedAt": "2026-11-13T14:25:57.714312+00:00",
+          "httpStatus": 200,
+          "sha256": "961997cf4e9334ff54c3f7aa51382be1f99ca2b9b25e4751835f0768da1e6fcd"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153932",
+          "at": "2026-11-13T14:25:57.752628+00:00",
+          "completedAt": "2026-11-13T14:25:58.464524+00:00",
+          "httpStatus": 200,
+          "sha256": "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:25:58.506560+00:00",
+          "completedAt": "2026-11-13T14:25:59.236926+00:00",
+          "httpStatus": 200,
+          "sha256": "73c472b014c01c2894a82903560f75d8a468cc9bebc8f0651c5b9002a4c72029"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153931",
+          "at": "2026-11-13T14:25:59.276074+00:00",
+          "completedAt": "2026-11-13T14:25:59.978867+00:00",
+          "httpStatus": 200,
+          "sha256": "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:26:00.025213+00:00",
+          "completedAt": "2026-11-13T14:26:00.761100+00:00",
+          "httpStatus": 200,
+          "sha256": "fac5065666b1d9176e549cc31abde0f8614f2c52d26fad66711920ae9dc5033d"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153930",
+          "at": "2026-11-13T14:26:00.802555+00:00",
+          "completedAt": "2026-11-13T14:26:01.535603+00:00",
+          "httpStatus": 200,
+          "sha256": "4d0def959e75f00b13ddc0cadebcc514000a05d5501fbb59476452e974748409"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:26:01.577443+00:00",
+          "completedAt": "2026-11-13T14:26:02.301448+00:00",
+          "httpStatus": 200,
+          "sha256": "bf43181f0cef10e7db1a1ef67cb16c50064d9dcfc680ba555d9e52ab4a2f7909"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153929",
+          "at": "2026-11-13T14:26:02.345850+00:00",
+          "completedAt": "2026-11-13T14:26:03.078007+00:00",
+          "httpStatus": 200,
+          "sha256": "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:26:03.126842+00:00",
+          "completedAt": "2026-11-13T14:26:03.859630+00:00",
+          "httpStatus": 200,
+          "sha256": "b240d96b9eead810a853473396e1f350f511e86de74b05769d0e063691d28f1f"
+        }
+      ],
+      "usage": [
+        {
+          "tokens": 2278,
+          "input_tokens": 1973,
+          "output_tokens": 305,
+          "cost": null,
+          "currency": null,
+          "pricing_version": null
+        }
+      ],
+      "reservedCost": "0.05000000"
+    },
+    {
+      "evidenceFile": "final-batch.json",
+      "taskRef": {
+        "tenantId": "s01-v2-teaching-local",
+        "taskId": "dd7bf2129b404766bb1b756ad694ca02"
+      },
+      "scenarioId": "S01_V2_BATCH",
+      "requestCount": 45,
+      "requestLimit": 400,
+      "taskCreatedAt": "2026-11-13T14:35:23.223372Z",
+      "taskCompletedAt": "2026-11-13T14:36:34.332072Z",
+      "taskElapsedSeconds": 71.1087,
+      "verifiedResponseFiles": 43,
+      "httpStatuses": {
+        "200": 45
+      },
+      "modelAttempts": 0,
+      "usageFacts": 0,
+      "usedCalls": 0,
+      "reservedCalls": 0,
+      "businessMutations": 0,
+      "sourceResourceCounts": {
+        "sales": {
+          "rows": 33,
+          "complete": true,
+          "total": 33
+        },
+        "quotes": {
+          "rows": 712,
+          "complete": true,
+          "total": 712
+        },
+        "stores": {
+          "rows": 5,
+          "complete": true,
+          "total": 5
+        },
+        "formal-0": {
+          "rows": 11,
+          "complete": true,
+          "total": 11
+        },
+        "formal-1": {
+          "rows": 18,
+          "complete": true,
+          "total": 18
+        },
+        "formal-2": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "listings": {
+          "rows": 363,
+          "complete": true,
+          "total": 363
+        },
+        "products": {
+          "rows": 220,
+          "complete": true,
+          "total": 220
+        },
+        "inventory": {
+          "rows": 1141,
+          "complete": true,
+          "total": 1141
+        },
+        "supplier-4": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "warehouses": {
+          "rows": 9,
+          "complete": true,
+          "total": 9
+        },
+        "suggestions": {
+          "rows": 669,
+          "complete": true,
+          "total": 669
+        },
+        "ledger-1135474": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135475": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135476": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135477": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135478": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135479": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "ledger-1135480": {
+          "rows": 2,
+          "complete": true,
+          "total": 2
+        },
+        "workflow-1153929": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153930": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153931": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153932": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153933": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153934": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "workflow-1153935": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        }
+      },
+      "requestEvents": [
+        {
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "at": "2026-11-13T14:35:23.368565+00:00",
+          "completedAt": "2026-11-13T14:35:24.207888+00:00",
+          "httpStatus": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "at": "2026-11-13T14:35:24.236193+00:00",
+          "completedAt": "2026-11-13T14:35:24.925681+00:00",
+          "httpStatus": 200,
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/store-authorizations",
+          "at": "2026-11-13T14:35:24.963228+00:00",
+          "completedAt": "2026-11-13T14:35:25.696918+00:00",
+          "httpStatus": 200,
+          "sha256": "16fac4460bca735281e75cd23e85355f5023daa1ad10a6d69ca8677c3c1c0b25"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/warehouses",
+          "at": "2026-11-13T14:35:25.738043+00:00",
+          "completedAt": "2026-11-13T14:35:26.441773+00:00",
+          "httpStatus": 200,
+          "sha256": "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-13T14:35:26.485865+00:00",
+          "completedAt": "2026-11-13T14:35:27.247697+00:00",
+          "httpStatus": 200,
+          "sha256": "b226ec1348e8ed47ae2dc79d3e1fc191bd8ca326de21eae66531a4c47e44834a"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-13T14:35:27.292625+00:00",
+          "completedAt": "2026-11-13T14:35:28.002138+00:00",
+          "httpStatus": 200,
+          "sha256": "18949f1706c32b9ef2a39d82f3138adf12bdb0f93a891cd362fe7f85da1734ec"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:35:28.042205+00:00",
+          "completedAt": "2026-11-13T14:35:28.791154+00:00",
+          "httpStatus": 200,
+          "sha256": "1f02944e37f3c28644fdfdd0a69fd8d0693e57f13d853241a6546379ff3cc56e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:35:28.837049+00:00",
+          "completedAt": "2026-11-13T14:35:29.549431+00:00",
+          "httpStatus": 200,
+          "sha256": "d924d1aff198adbe9f650d2b29a924f9867e1446fd3ea3d37508f6f5bf4db4e9"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:35:29.599900+00:00",
+          "completedAt": "2026-11-13T14:35:30.353614+00:00",
+          "httpStatus": 200,
+          "sha256": "d788ce603e7bf9c1a0f9ed4b032cace9431e6cafb329475d77de9e08e2468d35"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:35:30.416324+00:00",
+          "completedAt": "2026-11-13T14:35:31.169704+00:00",
+          "httpStatus": 200,
+          "sha256": "0892e4afa892f5b0bc5fb4625ad6d9ba8037ceef0b9d4b0ed8aa0783f1654452"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:35:31.214349+00:00",
+          "completedAt": "2026-11-13T14:35:32.463872+00:00",
+          "httpStatus": 200,
+          "sha256": "f6df613fc688a4fca095d6ab12ffaa09109b9b2d5ade39b94a1ade954c7e1546"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:35:32.507804+00:00",
+          "completedAt": "2026-11-13T14:35:33.234971+00:00",
+          "httpStatus": 200,
+          "sha256": "892e2921777b673e9824924fa82b3a0300586affc3f3f0c119fabff1b3f9b003"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:35:33.282775+00:00",
+          "completedAt": "2026-11-13T14:35:34.319480+00:00",
+          "httpStatus": 200,
+          "sha256": "994c60c814807ce061185e07826472fd046db9a653f1071a7660f0047aceb74b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:35:34.365953+00:00",
+          "completedAt": "2026-11-13T14:35:35.380513+00:00",
+          "httpStatus": 200,
+          "sha256": "29f1e70f6e1f5397e59f265224a97e7b4e27cbcdceafa767510e55ff5aad0434"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:35:35.426428+00:00",
+          "completedAt": "2026-11-13T14:35:36.436110+00:00",
+          "httpStatus": 200,
+          "sha256": "79affdbce7ea62ff272291591b53de5074d8de8d85d43b0b59e66293e4b485e3"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:35:36.483953+00:00",
+          "completedAt": "2026-11-13T14:35:37.222793+00:00",
+          "httpStatus": 200,
+          "sha256": "05105c5fba35928214156973be6159bed085c8a1a685ec98cb4ed0c3a70b08bf"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:37.279381+00:00",
+          "completedAt": "2026-11-13T14:35:38.024667+00:00",
+          "httpStatus": 200,
+          "sha256": "88d1207b0d5ae79fd25704c0bf0326542b426dade48075a89d49d111f0cce253"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:38.070946+00:00",
+          "completedAt": "2026-11-13T14:35:38.800373+00:00",
+          "httpStatus": 200,
+          "sha256": "df2dab425e396cf3852f2a7688c859adfed67851ea21dd09f85868f7bb67b52e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:38.843645+00:00",
+          "completedAt": "2026-11-13T14:35:39.616601+00:00",
+          "httpStatus": 200,
+          "sha256": "aa1f9035310691bdd917dd3ef1e3f38047081d60e05ff6ef48ecac67a391218b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:39.658998+00:00",
+          "completedAt": "2026-11-13T14:35:40.402076+00:00",
+          "httpStatus": 200,
+          "sha256": "ff96a55db1d4b364ecc4dd2f415f331b079d74427c1ce58d61da3a5bd54f828e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:40.445255+00:00",
+          "completedAt": "2026-11-13T14:35:41.177890+00:00",
+          "httpStatus": 200,
+          "sha256": "fa3457fd04127f14d8caecf4e60c51771789118138438c7bf505ae8b0cbe9825"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:41.222280+00:00",
+          "completedAt": "2026-11-13T14:35:41.964708+00:00",
+          "httpStatus": 200,
+          "sha256": "a10f7591324c009a7858ed810e83760c304a0c20d00b392caa7711c952a1a1be"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:42.008486+00:00",
+          "completedAt": "2026-11-13T14:35:42.730738+00:00",
+          "httpStatus": 200,
+          "sha256": "f68e435c74bd1e464e7063bf6efc8891950959408ef4a280e1ab10da8b29267a"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:35:42.773709+00:00",
+          "completedAt": "2026-11-13T14:35:43.486148+00:00",
+          "httpStatus": 200,
+          "sha256": "f108eb45cac47d475ff1f6fd81a1341552f425dd162734fa4e1ac72030deb3ff"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-13T14:35:43.530114+00:00",
+          "completedAt": "2026-11-13T14:35:44.255161+00:00",
+          "httpStatus": 200,
+          "sha256": "eacfeacde571f5c134813fc898718ee1f01b91116aab6a72f3e6d47783c6ebbc"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-13T14:35:44.298928+00:00",
+          "completedAt": "2026-11-13T14:35:45.023874+00:00",
+          "httpStatus": 200,
+          "sha256": "f6fc793814dc523103ca127c51ffc73e02e60a5494b1ffbccc3fc58499588f36"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-13T14:35:45.073590+00:00",
+          "completedAt": "2026-11-13T14:35:45.809689+00:00",
+          "httpStatus": 200,
+          "sha256": "0a55be299cdbd3589bb6c1368e541d40963aaa1c04e71a45de61d20631abd5f8"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:35:45.856760+00:00",
+          "completedAt": "2026-11-13T14:35:46.590735+00:00",
+          "httpStatus": 200,
+          "sha256": "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:35:46.645462+00:00",
+          "completedAt": "2026-11-13T14:35:47.347002+00:00",
+          "httpStatus": 200,
+          "sha256": "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:35:47.397176+00:00",
+          "completedAt": "2026-11-13T14:35:48.116615+00:00",
+          "httpStatus": 200,
+          "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/suppliers/4",
+          "at": "2026-11-13T14:35:56.185133+00:00",
+          "completedAt": "2026-11-13T14:35:56.896297+00:00",
+          "httpStatus": 200,
+          "sha256": "f472caf97c0d3a6714e086ec4c1ac15211103df6c22f921b503aba9a107d04cd"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153935",
+          "at": "2026-11-13T14:35:56.939850+00:00",
+          "completedAt": "2026-11-13T14:35:57.678297+00:00",
+          "httpStatus": 200,
+          "sha256": "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:35:57.724786+00:00",
+          "completedAt": "2026-11-13T14:35:58.441386+00:00",
+          "httpStatus": 200,
+          "sha256": "da0cf0e17f9add6f69c7ecb1cf19677ac69b18c2c4d4daeba31ce55cbd7cbf3b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153934",
+          "at": "2026-11-13T14:35:58.485680+00:00",
+          "completedAt": "2026-11-13T14:35:59.212317+00:00",
+          "httpStatus": 200,
+          "sha256": "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:35:59.256824+00:00",
+          "completedAt": "2026-11-13T14:35:59.993851+00:00",
+          "httpStatus": 200,
+          "sha256": "e443e3a7c5b8f7d348a42cc17028c1d1c14c857520f2471a4c9f9f7c8ffd65d6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153933",
+          "at": "2026-11-13T14:36:00.044140+00:00",
+          "completedAt": "2026-11-13T14:36:00.772130+00:00",
+          "httpStatus": 200,
+          "sha256": "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:36:00.816186+00:00",
+          "completedAt": "2026-11-13T14:36:01.536486+00:00",
+          "httpStatus": 200,
+          "sha256": "961997cf4e9334ff54c3f7aa51382be1f99ca2b9b25e4751835f0768da1e6fcd"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153932",
+          "at": "2026-11-13T14:36:01.584689+00:00",
+          "completedAt": "2026-11-13T14:36:02.320894+00:00",
+          "httpStatus": 200,
+          "sha256": "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:36:02.366765+00:00",
+          "completedAt": "2026-11-13T14:36:03.098029+00:00",
+          "httpStatus": 200,
+          "sha256": "73c472b014c01c2894a82903560f75d8a468cc9bebc8f0651c5b9002a4c72029"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153931",
+          "at": "2026-11-13T14:36:03.142646+00:00",
+          "completedAt": "2026-11-13T14:36:03.868713+00:00",
+          "httpStatus": 200,
+          "sha256": "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:36:03.949089+00:00",
+          "completedAt": "2026-11-13T14:36:04.668817+00:00",
+          "httpStatus": 200,
+          "sha256": "fac5065666b1d9176e549cc31abde0f8614f2c52d26fad66711920ae9dc5033d"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153930",
+          "at": "2026-11-13T14:36:04.716783+00:00",
+          "completedAt": "2026-11-13T14:36:05.443126+00:00",
+          "httpStatus": 200,
+          "sha256": "4d0def959e75f00b13ddc0cadebcc514000a05d5501fbb59476452e974748409"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:36:05.488929+00:00",
+          "completedAt": "2026-11-13T14:36:06.225532+00:00",
+          "httpStatus": 200,
+          "sha256": "bf43181f0cef10e7db1a1ef67cb16c50064d9dcfc680ba555d9e52ab4a2f7909"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153929",
+          "at": "2026-11-13T14:36:06.273573+00:00",
+          "completedAt": "2026-11-13T14:36:06.988911+00:00",
+          "httpStatus": 200,
+          "sha256": "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-13T14:36:07.041257+00:00",
+          "completedAt": "2026-11-13T14:36:07.752312+00:00",
+          "httpStatus": 200,
+          "sha256": "b240d96b9eead810a853473396e1f350f511e86de74b05769d0e063691d28f1f"
+        }
+      ],
+      "summary": {
+        "discoveredSkuCount": 221,
+        "scopeObjectCount": 975,
+        "processedCount": 975,
+        "ruleCalculated": 1,
+        "erpReference": 125,
+        "noReplenishment": 1,
+        "unanalyzable": 848,
+        "failed": 0,
+        "unfinished": 0,
+        "coverage": 0.13025641025641024,
+        "processingCoverage": 1.0,
+        "ruleSourceCount": 2,
+        "erpSourceRecordCount": 130,
+        "modelCalls": 0,
+        "businessMutations": 0,
+        "productIdentityCount": 220
+      },
+      "independentUniqueSourceSkuCount": 221,
+      "missingSkus": 0,
+      "resultIntegrityDigest": "dd793e97b67af1804bdca53b5d3052004c29e0ed9e4add2b6031363bedeb3e24",
+      "targetFive": [
+        {
+          "sku": "YF-SO-NG-OS",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "217",
+              "sourceGrade": "UNVERIFIED",
+              "analysisState": "NEEDS_REVIEW",
+              "quantity": null,
+              "sourceQuantity": null,
+              "sourceSuggestionCount": 2,
+              "sourceSuggestions": [
+                {
+                  "id": 689,
+                  "sku": "YF-SO-NG-OS",
+                  "created_at": "2026-11-13T13:07:53+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T13:10:34+00:00",
+                  "status_text": "已生成采购单",
+                  "suggested_qty": 150,
+                  "recommendation_no": "AI-REC-YF-SO-NG-OS-20261113-c66b94"
+                },
+                {
+                  "id": 679,
+                  "sku": "YF-SO-NG-OS",
+                  "created_at": "2026-11-13T04:49:04+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:49:04+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 120,
+                  "recommendation_no": "REC-YF-SO-NG-OS-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 0,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1136"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "SUGGESTION_AMBIGUOUS_OR_QUERY_INCOMPLETE"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 689,
+              "recommendation_no": "AI-REC-YF-SO-NG-OS-20261113-c66b94",
+              "sku": "YF-SO-NG-OS",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 150,
+              "daily_sales": 0.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "HIGH",
+              "stockout_date": null,
+              "status_text": "已生成采购单",
+              "created_at": "2026-11-13T13:07:53+00:00",
+              "updated_at": "2026-11-13T13:10:34+00:00",
+              "generated_at": "2026-11-13T21:07:52"
+            },
+            {
+              "id": 679,
+              "recommendation_no": "REC-YF-SO-NG-OS-2026",
+              "sku": "YF-SO-NG-OS",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 120,
+              "daily_sales": 5.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "最急",
+              "stockout_date": "2026-11-14",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:49:04+00:00",
+              "updated_at": "2026-11-13T04:49:04+00:00",
+              "generated_at": "2026-11-14"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-PZ-L",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "212",
+              "sourceGrade": "UNVERIFIED",
+              "analysisState": "NEEDS_REVIEW",
+              "quantity": null,
+              "sourceQuantity": null,
+              "sourceSuggestionCount": 2,
+              "sourceSuggestions": [
+                {
+                  "id": 690,
+                  "sku": "YF-SO-PZ-L",
+                  "created_at": "2026-11-13T13:16:04+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T13:16:04+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 1200,
+                  "recommendation_no": "AI-REC-YF-SO-PZ-L-20261113-782b6d"
+                },
+                {
+                  "id": 674,
+                  "sku": "YF-SO-PZ-L",
+                  "created_at": "2026-11-13T04:46:55+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:46:55+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 1200,
+                  "recommendation_no": "REC-YF-SO-PZ-L-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 0,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1131"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "SUGGESTION_AMBIGUOUS_OR_QUERY_INCOMPLETE"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 690,
+              "recommendation_no": "AI-REC-YF-SO-PZ-L-20261113-782b6d",
+              "sku": "YF-SO-PZ-L",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 1200,
+              "daily_sales": 0.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "HIGH",
+              "stockout_date": null,
+              "status_text": "待确认",
+              "created_at": "2026-11-13T13:16:04+00:00",
+              "updated_at": "2026-11-13T13:16:04+00:00",
+              "generated_at": "2026-11-13T21:16:03"
+            },
+            {
+              "id": 674,
+              "recommendation_no": "REC-YF-SO-PZ-L-2026",
+              "sku": "YF-SO-PZ-L",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 1200,
+              "daily_sales": 60.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "最急",
+              "stockout_date": "2026-11-14",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:46:55+00:00",
+              "updated_at": "2026-11-13T04:46:55+00:00",
+              "generated_at": "2026-11-14"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-QD-S",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "214",
+              "sourceGrade": "REFERENCE_ONLY",
+              "analysisState": "ERP_REFERENCE",
+              "quantity": 60,
+              "sourceQuantity": 60,
+              "sourceSuggestionCount": 1,
+              "sourceSuggestions": [
+                {
+                  "id": 676,
+                  "sku": "YF-SO-QD-S",
+                  "created_at": "2026-11-13T04:47:37+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:47:37+00:00",
+                  "status_text": "已生成采购单",
+                  "suggested_qty": 60,
+                  "recommendation_no": "REC-YF-SO-QD-S-2026"
+                }
+              ],
+              "formalPurchases": [
+                {
+                  "sku": "YF-SO-QD-S",
+                  "erpId": "1397",
+                  "status": "待到货",
+                  "erpNumber": "PO-YF-SO-QD-S-2026",
+                  "lineIndex": 0,
+                  "sellableDate": null,
+                  "warehouseName": "华东服装仓",
+                  "plannedArrival": "2026-12-18",
+                  "warehouseMatch": false,
+                  "orderedQuantity": 200,
+                  "receivedQuantity": 0,
+                  "sourcePlanNumber": null,
+                  "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+                  "unreceivedQuantity": 200,
+                  "includedInCalculation": false,
+                  "effectiveSupplyQuantity": null
+                }
+              ],
+              "unit": "EA",
+              "inventory": {
+                "available": 40,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1133"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "ERP_ALGORITHM_UNKNOWN",
+                "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+                "ERP_GENERATION_TIME_UNVERIFIED",
+                "ERP_PURCHASE_NETTING_UNKNOWN",
+                "OVERSEAS_FBA_BUCKETS_NOT_ADDED",
+                "RELATED_PURCHASE_TARGETS_DIFFERENT_WAREHOUSE"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 676,
+              "recommendation_no": "REC-YF-SO-QD-S-2026",
+              "sku": "YF-SO-QD-S",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 60,
+              "daily_sales": 10.0,
+              "local_available": 0,
+              "overseas_available": 40,
+              "fba_available": 40,
+              "inbound": 200,
+              "urgency": "急",
+              "stockout_date": "2026-12-08",
+              "status_text": "已生成采购单",
+              "created_at": "2026-11-13T04:47:37+00:00",
+              "updated_at": "2026-11-13T04:47:37+00:00",
+              "generated_at": "2026-12-08"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-QD-L",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "216",
+              "sourceGrade": "REFERENCE_ONLY",
+              "analysisState": "ERP_REFERENCE",
+              "quantity": 50,
+              "sourceQuantity": 50,
+              "sourceSuggestionCount": 1,
+              "sourceSuggestions": [
+                {
+                  "id": 678,
+                  "sku": "YF-SO-QD-L",
+                  "created_at": "2026-11-13T04:48:43+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:48:43+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 50,
+                  "recommendation_no": "REC-YF-SO-QD-L-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 60,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1135"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "ERP_ALGORITHM_UNKNOWN",
+                "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+                "ERP_GENERATION_TIME_UNVERIFIED",
+                "ERP_PURCHASE_NETTING_UNKNOWN",
+                "OVERSEAS_FBA_BUCKETS_NOT_ADDED"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 678,
+              "recommendation_no": "REC-YF-SO-QD-L-2026",
+              "sku": "YF-SO-QD-L",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 50,
+              "daily_sales": 1.0,
+              "local_available": 0,
+              "overseas_available": 60,
+              "fba_available": 60,
+              "inbound": 0,
+              "urgency": "一般",
+              "stockout_date": "2027-01-13",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:48:43+00:00",
+              "updated_at": "2026-11-13T04:48:43+00:00",
+              "generated_at": "2027-01-13"
+            }
+          ]
+        },
+        {
+          "sku": "YF-SO-PZ-M",
+          "results": [
+            {
+              "storeId": "1",
+              "warehouseId": "303",
+              "productId": "211",
+              "sourceGrade": "REFERENCE_ONLY",
+              "analysisState": "NEEDS_REVIEW",
+              "quantity": null,
+              "sourceQuantity": 0,
+              "sourceSuggestionCount": 1,
+              "sourceSuggestions": [
+                {
+                  "id": 673,
+                  "sku": "YF-SO-PZ-M",
+                  "created_at": "2026-11-13T04:46:34+00:00",
+                  "store_name": "MIMI Apparel US",
+                  "updated_at": "2026-11-13T04:46:34+00:00",
+                  "status_text": "待确认",
+                  "suggested_qty": 0,
+                  "recommendation_no": "REC-YF-SO-PZ-M-2026"
+                }
+              ],
+              "formalPurchases": [],
+              "unit": "EA",
+              "inventory": {
+                "available": 0,
+                "warehouseId": "303",
+                "inventoryIds": [
+                  "1130"
+                ]
+              },
+              "uncertainties": [
+                "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+                "SELLABLE_ETA_UNKNOWN",
+                "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+                "ERP_ALGORITHM_UNKNOWN",
+                "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+                "ERP_GENERATION_TIME_UNVERIFIED",
+                "ERP_PURCHASE_NETTING_UNKNOWN"
+              ]
+            }
+          ],
+          "nativeSuggestions": [
+            {
+              "id": 673,
+              "recommendation_no": "REC-YF-SO-PZ-M-2026",
+              "sku": "YF-SO-PZ-M",
+              "store_name": "MIMI Apparel US",
+              "suggested_qty": 0,
+              "daily_sales": 6.0,
+              "local_available": 0,
+              "overseas_available": 0,
+              "fba_available": 0,
+              "inbound": 0,
+              "urgency": "最急",
+              "stockout_date": "2026-11-14",
+              "status_text": "待确认",
+              "created_at": "2026-11-13T04:46:34+00:00",
+              "updated_at": "2026-11-13T04:46:34+00:00",
+              "generated_at": "2026-11-14"
+            }
+          ]
+        }
+      ],
+      "ownedTwo": [
+        {
+          "sku": "HL-CBL100-2M",
+          "quantity": 48,
+          "sourceGrade": "RULE_CALCULATED",
+          "analysisState": "ANALYZED",
+          "formalPurchases": [
+            {
+              "sku": "HL-CBL100-2M",
+              "erpId": "1406",
+              "status": "待下单",
+              "erpNumber": "S01-RQ-31d1cf789b276beb43772c35fe244375",
+              "lineIndex": 0,
+              "sellableDate": null,
+              "warehouseName": "海岚洛杉矶现货仓",
+              "plannedArrival": null,
+              "warehouseMatch": true,
+              "orderedQuantity": 48,
+              "receivedQuantity": 0,
+              "sourcePlanNumber": "31d1cf789b276beb43772c35fe244375d14d9167d562abda5e526ae7a8f5c0f4",
+              "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+              "unreceivedQuantity": 48,
+              "includedInCalculation": false,
+              "effectiveSupplyQuantity": null
+            }
+          ]
+        },
+        {
+          "sku": "HL-MUG350-WH",
+          "quantity": null,
+          "sourceGrade": "RULE_CALCULATED",
+          "analysisState": "NO_REPLENISHMENT",
+          "formalPurchases": []
+        }
+      ]
+    },
+    {
+      "evidenceFile": "fallback-single-task.json",
+      "taskRef": {
+        "tenantId": "s01-v2-teaching-local",
+        "taskId": "8bb5e0de323842bab3f6296eb8eaef5a"
+      },
+      "scenarioId": "S01_V2_SINGLE",
+      "requestCount": 14,
+      "requestLimit": 400,
+      "taskCreatedAt": "2026-11-13T14:37:13.793965Z",
+      "taskCompletedAt": "2026-11-13T14:37:37.344172Z",
+      "taskElapsedSeconds": 23.550207,
+      "verifiedResponseFiles": 9,
+      "httpStatuses": {
+        "200": 12,
+        "503": 2
+      },
+      "modelAttempts": 1,
+      "usageFacts": 1,
+      "usedCalls": 1,
+      "reservedCalls": 0,
+      "businessMutations": 0,
+      "sourceResourceCounts": {
+        "sales": {
+          "rows": 0,
+          "complete": false,
+          "total": null
+        },
+        "quotes": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "stores": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "formal-0": {
+          "rows": 11,
+          "complete": true,
+          "total": 11
+        },
+        "formal-1": {
+          "rows": 18,
+          "complete": true,
+          "total": 18
+        },
+        "formal-2": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "listings": {
+          "rows": 0,
+          "complete": true,
+          "total": 0
+        },
+        "products": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "inventory": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        },
+        "warehouses": {
+          "rows": 9,
+          "complete": true,
+          "total": 9
+        },
+        "suggestions": {
+          "rows": 1,
+          "complete": true,
+          "total": 1
+        }
+      },
+      "requestEvents": [
+        {
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "at": "2026-11-13T14:37:13.864035+00:00",
+          "completedAt": "2026-11-13T14:37:14.729741+00:00",
+          "httpStatus": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "at": "2026-11-13T14:37:14.759019+00:00",
+          "completedAt": "2026-11-13T14:37:15.463352+00:00",
+          "httpStatus": 200,
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/store-authorizations",
+          "at": "2026-11-13T14:37:15.506256+00:00",
+          "completedAt": "2026-11-13T14:37:16.200261+00:00",
+          "httpStatus": 200,
+          "sha256": "a53eb1067f9404cbff4d285c901e3035c262676be9779dabbb718d18ee83b5b4"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/warehouses",
+          "at": "2026-11-13T14:37:16.242081+00:00",
+          "completedAt": "2026-11-13T14:37:16.963786+00:00",
+          "httpStatus": 200,
+          "sha256": "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-13T14:37:17.005811+00:00",
+          "completedAt": "2026-11-13T14:37:17.708880+00:00",
+          "httpStatus": 200,
+          "sha256": "aed8dc4bccacd1683bf3649c79dec0c2aa4035b400f2c12a82ff365ab01cd4d5"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-13T14:37:17.754703+00:00",
+          "completedAt": "2026-11-13T14:37:18.476029+00:00",
+          "httpStatus": 200,
+          "sha256": "0e19c9bf0112b3a6fe83245a72c0e48249da866bb6dd62aa3343070e1b0e70fb"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-13T14:37:18.518804+00:00",
+          "completedAt": "2026-11-13T14:37:19.254684+00:00",
+          "httpStatus": 200,
+          "sha256": "3742bcb1feae3fc554da11d59b83f37c43e5e1d39ac6b2d6a3d20962039c5c68"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-13T14:37:19.300874+00:00",
+          "completedAt": "2026-11-13T14:37:20.017490+00:00",
+          "httpStatus": 200,
+          "sha256": "c5fb109584e651b55dea36c077a25c3fb84bd1fa60edf98a43496ee995c92840"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-13T14:37:20.062139+00:00",
+          "completedAt": "2026-11-13T14:37:20.783989+00:00",
+          "httpStatus": 200,
+          "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-13T14:37:20.829449+00:00",
+          "completedAt": "2026-11-13T14:37:26.548796+00:00",
+          "httpStatus": 503,
+          "sha256": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216",
+          "error": "ERP_503"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-13T14:37:26.586521+00:00",
+          "completedAt": "2026-11-13T14:37:32.657907+00:00",
+          "httpStatus": 503,
+          "sha256": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216",
+          "error": "ERP_503"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:37:32.713549+00:00",
+          "completedAt": "2026-11-13T14:37:33.414310+00:00",
+          "httpStatus": 200,
+          "sha256": "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:37:33.459522+00:00",
+          "completedAt": "2026-11-13T14:37:34.183351+00:00",
+          "httpStatus": 200,
+          "sha256": "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-13T14:37:34.227179+00:00",
+          "completedAt": "2026-11-13T14:37:34.931981+00:00",
+          "httpStatus": 200,
+          "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+        }
+      ],
+      "usage": [
+        {
+          "tokens": 2111,
+          "input_tokens": 1845,
+          "output_tokens": 266,
+          "cost": null,
+          "currency": null,
+          "pricing_version": null
+        }
+      ],
+      "reservedCost": "0.05000000"
+    }
+  ]
+}

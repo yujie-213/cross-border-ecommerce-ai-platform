@@ -16,4 +16,10 @@ def task_service(database, settings, registry=None):
     if backend and getattr(backend.handler, 'requisition_client_factory', None):
         from commerce_hub.scenarios.s01_backend.requisition import RequisitionService
         service.requisitions = RequisitionService(service, backend.handler.scope_registry, backend.handler.requisition_client_factory)
+    service.v2_requisitions = None
+    v2 = (registry or {}).get('S01_V2_SINGLE')
+    if v2 and getattr(v2.handler, 'requisition_client_factory', None):
+        from commerce_hub.scenarios.s01_v2.requisition import V2RequisitionService
+        service.v2_requisitions = V2RequisitionService(service, v2.handler.policy,
+            v2.handler.requisition_client_factory, v2.handler.requisition_private_root)
     return service

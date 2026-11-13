@@ -6,6 +6,7 @@ from commerce_hub.bootstrap.logging import trace_id
 from commerce_hub.entrypoints.http.errors import ApiError, error_response
 from commerce_hub.governance.access.service import AccessDenied
 from commerce_hub.orchestration.service import TaskError
+from commerce_hub.entrypoints.http.local_auth import register_local_auth, secure_cookie
 
 
 class Scope(BaseModel):
@@ -51,26 +52,37 @@ def register_task_routes(app):
         if service is None:
             raise ApiError("IDENTITY_NOT_CONFIGURED", 503, "Trusted identity is not configured")
         authorization = request.headers.get("authorization", "")
+        if request.app.state.settings.local_admin_enabled and authorization:
+            raise AccessDenied('UNAUTHENTICATED')
         bearer = authorization[7:] if authorization.startswith("Bearer ") else None
         cookie = request.cookies.get("commerce_session")
         if authorization and not bearer or bearer and cookie and bearer != cookie:
             raise AccessDenied("UNAUTHENTICATED")
-        actor = service.access.authenticate(bearer or cookie)
+        try:
+            actor = service.access.authenticate(bearer or cookie)
+        except AccessDenied as exc:
+            if request.app.state.settings.local_admin_enabled and exc.code!='AUTH_BACKEND_UNAVAILABLE':raise AccessDenied('UNAUTHENTICATED') from None
+            raise
         if cookie and request.method not in {"GET", "HEAD", "OPTIONS"}:
             service.access.validate_csrf(actor, request.cookies.get("commerce_csrf"), request.headers.get("x-csrf-token"),
                                          request.headers.get("origin"), request.app.state.settings.browser_origin)
         return actor
 
+    from commerce_hub.entrypoints.http.s01_v2 import register_v2_routes
+    register_v2_routes(app, principal)
+    register_local_auth(app, principal)
+
     @app.exception_handler(AccessDenied)
     async def access_error(_, exc):
-        status = 503 if exc.code == "AUTH_BACKEND_UNAVAILABLE" else 401 if exc.code == "UNAUTHENTICATED" else 403
+        status = 503 if exc.code == "AUTH_BACKEND_UNAVAILABLE" else 401 if exc.code in {"UNAUTHENTICATED", "LOGIN_REJECTED"} else 403
         response = error_response(exc.code, status, "Authentication or current authorization rejected")
         if status == 401:
             # An invalid HttpOnly cookie cannot be cleared by the browser client.
             # Expire it so a fresh trusted bearer can establish a new session.
             # Authentication still fails; ordinary permission/CSRF denials keep the session.
-            response.delete_cookie("commerce_session", secure=True, httponly=True, samesite="strict")
-            response.delete_cookie("commerce_csrf", secure=True, samesite="strict")
+            secure=secure_cookie(_.app.state.settings)
+            response.delete_cookie("commerce_session", secure=secure, httponly=True, samesite="strict")
+            response.delete_cookie("commerce_csrf", secure=secure, samesite="strict")
         return response
 
     @app.exception_handler(TaskError)
@@ -89,6 +101,12 @@ def register_task_routes(app):
     def options(request: Request, storeId: str | None = None, warehouseId: str | None = None, canonicalSkuId: str | None = None,
                 actor=Depends(principal)):
         service = request.app.state.tasks
+        if 'S01_V2_BATCH' in service.registry:
+            from commerce_hub.scenarios.s01_v2.handler import collection_scope
+            scope=collection_scope(actor.tenant_id)
+            service.registry['S01_V2_BATCH'].handler.validate_scope({},scope)
+            with service.engine.begin() as conn:service.access.authorize(conn,actor,'tasks:read',scope)
+            return dict(scenarioId='S01_BACKEND',mappedChoices=[],limitations=['V2_DYNAMIC_CATALOG'],v2Enabled=True)
         backend = service.registry.get("S01_BACKEND")
         if backend is not None:
             choices = []
@@ -189,6 +207,7 @@ def register_task_routes(app):
         with request.app.state.database.engine.begin() as conn:
             request.app.state.tasks.access.revoke_token(conn, actor)
         response = JSONResponse({"status": "closed"})
-        response.delete_cookie("commerce_session", secure=True, httponly=True, samesite="strict")
-        response.delete_cookie("commerce_csrf", secure=True, samesite="strict")
+        secure=secure_cookie(request.app.state.settings)
+        response.delete_cookie("commerce_session", secure=secure, httponly=True, samesite="strict")
+        response.delete_cookie("commerce_csrf", secure=secure, samesite="strict")
         return response

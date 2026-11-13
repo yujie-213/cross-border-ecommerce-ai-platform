@@ -1,0 +1,164 @@
+{
+  "result": "VERIFIED_LIVE_READONLY_BATCH",
+  "taskRef": {
+    "tenantId": "s01-v2-teaching-local",
+    "taskId": "11b2571b49734ba0917bc4f63dc1e113"
+  },
+  "observedAt": "2026-11-13T13:37:15.496523+00:00",
+  "summary": {
+    "discoveredSkuCount": 222,
+    "scopeObjectCount": 975,
+    "processedCount": 975,
+    "ruleCalculated": 0,
+    "erpReference": 125,
+    "noReplenishment": 0,
+    "unanalyzable": 850,
+    "failed": 0,
+    "unfinished": 0,
+    "coverage": 0.1282051282051282,
+    "processingCoverage": 1.0,
+    "ruleSourceCount": 0,
+    "erpSourceRecordCount": 130,
+    "modelCalls": 0,
+    "businessMutations": 0
+  },
+  "enumerationComplete": true,
+  "sourceLimits": {
+    "sales": {
+      "total": 33,
+      "complete": true
+    },
+    "quotes": {
+      "error": "ERP_HTTP_ERROR",
+      "total": null,
+      "complete": false,
+      "httpStatus": 400
+    },
+    "stores": {
+      "total": 5,
+      "complete": true
+    },
+    "listings": {
+      "total": 363,
+      "complete": true
+    },
+    "products": {
+      "total": 220,
+      "complete": true
+    },
+    "inventory": {
+      "total": 1141,
+      "complete": true
+    },
+    "warehouses": {
+      "total": 9,
+      "complete": true
+    },
+    "suggestions": {
+      "total": 669,
+      "complete": true
+    },
+    "formalPurchases": {
+      "total": 29,
+      "errors": [],
+      "complete": true
+    }
+  },
+  "targetFive": [
+    {
+      "sku": "YF-SO-PZ-M",
+      "productId": "211",
+      "storeId": "1",
+      "warehouseId": "303",
+      "sourceGrade": "REFERENCE_ONLY",
+      "analysisState": "NEEDS_REVIEW",
+      "quantity": null,
+      "sourceQuantity": 0,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    },
+    {
+      "sku": "YF-SO-QD-S",
+      "productId": "214",
+      "storeId": "1",
+      "warehouseId": "303",
+      "sourceGrade": "REFERENCE_ONLY",
+      "analysisState": "ERP_REFERENCE",
+      "quantity": 60,
+      "sourceQuantity": 60,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    },
+    {
+      "sku": "YF-SO-QD-L",
+      "productId": "216",
+      "storeId": "1",
+      "warehouseId": "303",
+      "sourceGrade": "REFERENCE_ONLY",
+      "analysisState": "ERP_REFERENCE",
+      "quantity": 50,
+      "sourceQuantity": 50,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    },
+    {
+      "sku": "YF-SO-NG-OS",
+      "productId": "217",
+      "storeId": "1",
+      "warehouseId": "303",
+      "sourceGrade": "UNVERIFIED",
+      "analysisState": "NEEDS_REVIEW",
+      "quantity": null,
+      "sourceQuantity": null,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    },
+    {
+      "sku": "YF-SO-PZ-L",
+      "productId": "212",
+      "storeId": "1",
+      "warehouseId": "303",
+      "sourceGrade": "UNVERIFIED",
+      "analysisState": "NEEDS_REVIEW",
+      "quantity": null,
+      "sourceQuantity": null,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    }
+  ],
+  "ownedTwo": [
+    {
+      "sku": "HL-CBL100-2M",
+      "productId": "218",
+      "storeId": "3",
+      "warehouseId": "308",
+      "sourceGrade": "UNAVAILABLE",
+      "analysisState": "UNANALYZABLE",
+      "quantity": null,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "productId": "219",
+      "storeId": "3",
+      "warehouseId": "308",
+      "sourceGrade": "UNAVAILABLE",
+      "analysisState": "UNANALYZABLE",
+      "quantity": null,
+      "ruleFailureCodes": [
+        "RULE_CONSTRAINTS_INCOMPLETE"
+      ]
+    }
+  ],
+  "itemsPaginationComplete": true,
+  "duplicates": 0,
+  "businessMutations": 0,
+  "modelsEnabled": false
+}

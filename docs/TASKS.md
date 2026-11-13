@@ -1,4 +1,8 @@
-当前本轮完成（2026-11-13）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
+当前本地产品化（2026-11-14）：D-S01-LOCAL-01 REVIEW，固定3cac8e7完整787/43/类型构建和真实启动登录验收通过，准备按负责人授权普通合main及合后复验。
+
+当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。
+
+此前P3/来源调查完成记录（2026-11-13，当时V2未开始）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
 
 当前P3最终验收（2026-11-13）：固定3a8e95f重新复核，746全量后端/38前端/类型构建/迁移/历史兼容/1406独立只读回读通过；最小教学闭环ACCEPTED，正常合main待执行。已审批正样本NOT_VERIFIED、有效在途UNKNOWN不抵扣，企业四门BLOCKED；本轮无ERP业务写或模型。详见最终验收报告与S01-P3-ACCEPTANCE。
 
@@ -8288,5 +8292,472 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "observedAt": "2026-11-13T12:42:58.766933+00:00",
     "finalReceiptCommit": "Subsequent documentation-only receipt; final HEAD is returned from Git, no self-reference SHA fabricated"
   }
+}
+```
+
+## S01 V2完整开发
+
+```json
+{
+  "id": "D-S01-V2-01",
+  "stage": "D",
+  "title": "S01 V2完整补货工作台：动态全范围/双通道/方案B请购",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-P3-MIN-01"
+  ],
+  "entryCondition": "负责人粘贴完整长任务授权并补充全教学租户获准只读范围；独立分支连续开发，最终REVIEW不合main。",
+  "ownerRole": "Codex单人实现/集成；负责人最终验收",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "README.md",
+    "docs/",
+    "src/commerce_hub/",
+    "frontend/",
+    "tests/",
+    "tools/",
+    "migrations/versions/0009_s01_v2.py",
+    "migrations/versions/0010_s01_v2_manifests.py"
+  ],
+  "parallelCondition": "Codex单人；公共契约/迁移/组合根/台账串行；未知OpenAPI保留。",
+  "deliverables": [
+    "全部授权SKU动态发现与人工批量任务、规则/ERP降级来源、按需AI、方案B人工请购、完整前端、1000SKU工程及真实接口/浏览器证据、启动迁移恢复手册。"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-V2-01/AC01",
+      "text": "全授权范围动态SKU及唯一关系/分页完整性"
+    },
+    {
+      "id": "D-S01-V2-01/AC02",
+      "text": "人工全量任务、进度/历史/失败不漏项"
+    },
+    {
+      "id": "D-S01-V2-01/AC03",
+      "text": "批量零模型/零采购写的实际审计"
+    },
+    {
+      "id": "D-S01-V2-01/AC04",
+      "text": "原2SKU/B01B02 Golden不退化、新合法SKU同引擎"
+    },
+    {
+      "id": "D-S01-V2-01/AC05",
+      "text": "5款真实ERP降级验证且未知机制保留"
+    },
+    {
+      "id": "D-S01-V2-01/AC06",
+      "text": "来源分级及0/空/故障/重复桶区分"
+    },
+    {
+      "id": "D-S01-V2-01/AC07",
+      "text": "可证明风险排序、不可比/未知分组"
+    },
+    {
+      "id": "D-S01-V2-01/AC08",
+      "text": "单SKU主动最新采集与事实约束AI"
+    },
+    {
+      "id": "D-S01-V2-01/AC09",
+      "text": "方案B十二场景服务端采购准入"
+    },
+    {
+      "id": "D-S01-V2-01/AC10",
+      "text": "自有教学真实创建提交/独立回读/幂等"
+    },
+    {
+      "id": "D-S01-V2-01/AC11",
+      "text": "不少于1000合成SKU规模/恢复/覆盖/请求实测"
+    },
+    {
+      "id": "D-S01-V2-01/AC12",
+      "text": "真实浏览器全业务路径与截图"
+    },
+    {
+      "id": "D-S01-V2-01/AC13",
+      "text": "全量回归/迁移/历史/API独立Worker/权限/文档"
+    }
+  ],
+  "plannedTests": [
+    "冻结契约→实现；全量后端/前端/类型构建；1000SKU；真实有界小样与全枚举；自有教学单一请购及浏览器；敏感信息扫描。"
+  ],
+  "risks": [
+    "共享范围不赋予写权限；多SKU店仓歧义；静态建议及算法/在途UNKNOWN；全目录请求成本；真实接口波动。"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "BROWSER",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "0bfb258ebea6019b70d57084448ad403daf29339",
+    "84139a28116b1e860def09b7d4f5faae2a1186e5",
+    "0eb6a5699a40e472aec2be45d4226a22ff696f4b",
+    "f82d95977367e578229cdf51df6e74dce4330f58"
+  ],
+  "testedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "command": "python -m pytest tests (complete fixed f82d959 suite)",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "776 total; all original746 retained; 30 added; B01/B02 unchanged",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/verification.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC01",
+        "D-S01-V2-01/AC04",
+        "D-S01-V2-01/AC06",
+        "D-S01-V2-01/AC07",
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "complete pytest + persisted D01/O01/G01/G02 read-only verification",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "1000 synthetic SKU real MySQL; 33 reads/34 resumed; crash237; cancel/retry/isolation/history",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/engineering-1000.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC01",
+        "D-S01-V2-01/AC02",
+        "D-S01-V2-01/AC03",
+        "D-S01-V2-01/AC08",
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC11",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "manual batch and explicit singles through real API/independent Worker; capture SHA256/DB audit",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "all5stores9warehouses220products221SKU975scope objects; 45HTTP final batch; 0batch models/writes; 2single models/4389Token costUNKNOWN",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/live-audit.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC01",
+        "D-S01-V2-01/AC02",
+        "D-S01-V2-01/AC03",
+        "D-S01-V2-01/AC04",
+        "D-S01-V2-01/AC05",
+        "D-S01-V2-01/AC06",
+        "D-S01-V2-01/AC07",
+        "D-S01-V2-01/AC08",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "independent auth/GET exact original order number/detail/inventory; journal review",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "owned teaching ERP1426 qty40 status待审核; create1 submit1; unique1; stock6 unchanged; no decide/order/receipt",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/requisition-live.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC10"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "Microsoft Edge real READONLY/FULL/RECOVERY/FINAL READONLY gated tests",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "manual entire catalog/filter/details/new rule AI/human adjust/real ERP/replay/restart; reference AI and zero/conflict; responsive screenshots",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/browser.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC02",
+        "D-S01-V2-01/AC05",
+        "D-S01-V2-01/AC06",
+        "D-S01-V2-01/AC07",
+        "D-S01-V2-01/AC08",
+        "D-S01-V2-01/AC09",
+        "D-S01-V2-01/AC10",
+        "D-S01-V2-01/AC12"
+      ]
+    },
+    {
+      "kind": "UNIT_TEST",
+      "command": "npm test; npm run typecheck; npm run build",
+      "environment": "Windows/Node; Vue3/TypeScript; real build",
+      "sample": "41frontend + types + production bundle, existing design preserved",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/verification.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC12",
+        "D-S01-V2-01/AC13"
+      ]
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py; exact public file/secret scan",
+      "environment": "Windows/Python3.13; authorized isolated MySQL; explicit teaching modes only",
+      "sample": "contract/report/runbook/unique ledger; whitelist projection; preserved unknown OpenAPI",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-V2/security.json",
+      "acceptanceIds": [
+        "D-S01-V2-01/AC13"
+      ]
+    }
+  ],
+  "review": {
+    "reviewer": "Codex implementation self-check; owner/independent human review pending",
+    "reviewedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+    "evidenceRef": "docs/reports/S01_V2完整补货工作台交付_20261113.md",
+    "decision": "REQUEST_REVIEW_NOT_ACCEPTED_NO_MAIN_MERGE"
+  },
+  "branch": "codex/s01-v2-full-replenishment",
+  "observedHead": "f82d95977367e578229cdf51df6e74dce4330f58",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人完整V2授权及全范围补充；远端main一致，无并行改动；创建独立分支。直连TLS失败后沿既有本机代理/TLS验证fetch成功。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "完整产品、真实全授权批量/两个按需AI/唯一自有ERP申请/恢复及固定后全量测试通过，提交负责人独立评审；未知业务语义不代签。"
+    }
+  ],
+  "contractRef": "docs/contracts/s01/v2-full-replenishment.md",
+  "currentPhase": "V2-4_DELIVERED_REVIEW_NO_MAIN_MERGE",
+  "sourceDecision": "REFERENCE_ONLY不再独立阻止请购；硬约束/范围/权限/报价/人工确认仍强制；旧调查不改。",
+  "progressFacts": [
+    "完整V2产品开发完成，最终REVIEW；普通推送独立分支，禁止自动合main。",
+    "固定f82d959后776完整后端/41前端/类型构建PASS，原746逐名保留；当前head仅后续证据/交接另记。",
+    "真实全范围221SKU975店仓对象；1规则建议/125ERP参考/1无需/848待核实/0失败未完，有效覆盖13.03%、处理100%。",
+    "7实际采集任务共245HTTP，失败报价400保留；最终主批量45HTTP，批量模型0/业务写0；2单品4389Token、费用UNKNOWN/$0.10预约保留。",
+    "真实教学申请1426原建议48→人工40，待审核，单号唯一1/库存6不变；重放/丢响应/刷新/APIWorker重启PASS；创建1+submit1，其余业务写0。",
+    "五目标SKU当前7建议记录/6正1零，NG/PZL有额外冲突，QD-S在途抵扣与PZ-M零根因仍UNKNOWN；实际报价/权限等不合不得提交，不因REFERENCE_ONLY本身拒绝。",
+    "全部开发调用与私有原始资料保留；自有API/Worker/Vite已停止；不自动下一业务场景。"
+  ],
+  "reportRef": "docs/reports/S01_V2完整补货工作台交付_20261113.md",
+  "runbookRef": "docs/runbooks/s01-v2.md",
+  "retainedLimitations": [
+    "ERP算法/更新周期/日均窗口/quantity_sug_purchase映射与在途部分收货净扣UNKNOWN",
+    "848对象数据不足/归属冲突非成功分析，不能静默变成无需补货",
+    "共享SKU无真实采购写许可；真实新增第1001SKU NOT_RUN，仅合成验证",
+    "有效可售在途正向抵扣和企业正式业务验收未通过，不补签P3过去记录"
+  ],
+  "publication": {
+    "branch": "codex/s01-v2-full-replenishment",
+    "uploadedEvidenceCommit": "41fa08473c6735ff69ee99226bc8fcaaf6b6ac9b",
+    "pushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "remoteVerifiedCommit": "41fa08473c6735ff69ee99226bc8fcaaf6b6ac9b",
+    "mainRemoteUnchanged": "e3591aacb96aca7d90b1f4e5e9efcfa5942eed14",
+    "verifiedAt": "2026-11-13T17:18:24.530917+00:00",
+    "mode": "NORMAL_PUSH_NO_FORCE_NO_MERGE",
+    "receiptInterruption": "Prior receipt command was not executed because automatic approval review hit its usage limit; user resumed on 2026-11-14 and normal approval review succeeded.",
+    "receipt": "Subsequent documentation-only receipt; final HEAD must be read from Git, not fabricated in its own file"
+  }
+}
+```
+
+## S01 V2本地产品化与正式发布
+
+```json
+{
+  "id": "D-S01-LOCAL-01",
+  "stage": "D",
+  "title": "S01 V2本地一键启动/单管理员登录及main发布",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-V2-01"
+  ],
+  "entryCondition": "负责人最新完整授权覆盖旧REVIEW不合main停止点，完整回归通过后直接正常合main。",
+  "ownerRole": "Codex单人实现与集成；负责人条件验收授权",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "README.md",
+    ".env.example",
+    "*.cmd",
+    "src/commerce_hub/",
+    "tools/",
+    "frontend/",
+    "tests/",
+    "migrations/versions/0011_local_admin.py",
+    "docs/"
+  ],
+  "parallelCondition": "单人；保留未知docs/ERP-openapi.yaml",
+  "deliverables": [
+    "双击持续启动/安全停止/前置检查",
+    "单admin密码初始化/重置/登录/8小时会话恢复",
+    "完整业务兼容/回归/main复验/文档一致"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-LOCAL-01/AC01",
+      "text": "双击API/Worker/前端及浏览器，无到期关闭、无启动业务请求"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC02",
+      "text": "配置/依赖/DB/迁移/端口错误及仅停止自管进程"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC03",
+      "text": "单admin哈希初始化重置，无真实密码Key入库Git"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC04",
+      "text": "Cookie/CSRF/权限/撤销/退出/配置8小时/过期重启恢复"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC05",
+      "text": "V2批量/筛选/来源/历史/AI用量/原请购兼容与只读实测"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC06",
+      "text": "完整后端/前端/类型构建/浏览器/迁移兼容"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC07",
+      "text": "普通合main/复验/完整文档与远端一致"
+    }
+  ],
+  "plannedTests": [
+    "全量固定后回归及Windows/真实Edge/只读ERP/历史实测回放"
+  ],
+  "risks": [
+    "仅本机教学，不作企业生产安全签认",
+    "不重发原ERP采购，不重置模型预算"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "BROWSER",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "e7b242d67ad1e2b23c06041de7ea2c4617c333d6",
+    "3cac8e7a33eead3150b3750c62718b7451b49ed1"
+  ],
+  "testedCommit": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "command": "python -m pytest tests (fixed3cac8e7 full suite); npm test/typecheck/build",
+      "environment": "Windows/Python3.13; isolated real MySQL; real Edge where stated",
+      "sample": "787backend/43frontend; old776/41 retained; no failures/errors/skips; B01/B02 unchanged",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/verification.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC02",
+        "D-S01-LOCAL-01/AC03",
+        "D-S01-LOCAL-01/AC04",
+        "D-S01-LOCAL-01/AC05",
+        "D-S01-LOCAL-01/AC06"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "Native Windows launcher and G01/MySQL tests; read-only audit tool",
+      "environment": "Windows/Python3.13; isolated real MySQL; real Edge where stated",
+      "sample": "3owned services; duplicate/Job abrupt exit/unrelated owner/DB failures; single hash/8h/CSRF/reset/expiry",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/live.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC01",
+        "D-S01-LOCAL-01/AC02",
+        "D-S01-LOCAL-01/AC03",
+        "D-S01-LOCAL-01/AC04",
+        "D-S01-LOCAL-01/AC06"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "Real Edge LOCAL PASSWORD / RESTORE / EXPIRED",
+      "environment": "Windows/Python3.13; isolated real MySQL; real Edge where stated",
+      "sample": "password login/logout/8h Cookie/history1426/read-only batch/ack422/restore/expired no loop",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/live.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC01",
+        "D-S01-LOCAL-01/AC03",
+        "D-S01-LOCAL-01/AC04",
+        "D-S01-LOCAL-01/AC05",
+        "D-S01-LOCAL-01/AC06"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "Manual batch through password session, source SHA256 and DB audit",
+      "environment": "Windows/Python3.13; isolated real MySQL; real Edge where stated",
+      "sample": "43HTTP all200; 221SKU975scope objects; zero model/writes; new business-day own SKU reconciliation blocked retained",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/live.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC05"
+      ]
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "build_docs/check_plan; real Edge PLAN 6 layouts; explicit public secret scan",
+      "environment": "Windows/Python3.13; isolated real MySQL; real Edge where stated",
+      "sample": "18checks; README/default login/runbooks/contracts/architecture/PLAN/generated/handoff",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-LOCAL/verification.json",
+      "acceptanceIds": [
+        "D-S01-LOCAL-01/AC06"
+      ]
+    }
+  ],
+  "review": {
+    "reviewer": "Codex self-verification under owner conditional merge authorization; no invented independent human review",
+    "reviewedCommit": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+    "evidenceRef": "docs/reports/S01_本地产品化与main验收_20261114.md",
+    "decision": "READY_FOR_AUTHORIZED_NORMAL_MERGE_PENDING_POSTMERGE_AC07"
+  },
+  "branch": "codex/s01-v2-full-replenishment",
+  "observedHead": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "领取本轮产品化与条件合main授权；远端main e3591aa/V2 029e79e一致。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "固定后787/43/types/build/真实密码浏览器与恢复/原生Windows边界通过，准备条件授权普通合main及合后复验。"
+    }
+  ],
+  "retainedLimits": [
+    "当前新业务日两个自有SKU STOCK_SALES_RECONCILIATION_FAILED；保留质量阻断，不改算法/补数据以伪造通过",
+    "本轮真实AI和ERP采购写入新增0，复用历史实测，费用UNKNOWN与原授权不重置",
+    "本地单用户loopback应用，不作企业生产安全和真实在途/分收净扣签认"
+  ],
+  "reportRef": "docs/reports/S01_本地产品化与main验收_20261114.md"
 }
 ```

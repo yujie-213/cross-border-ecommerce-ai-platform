@@ -1,0 +1,67 @@
+{
+  "result": "PASS",
+  "testedCommit": "3cac8e7a33eead3150b3750c62718b7451b49ed1",
+  "backend": {
+    "passed": 787,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "baseline776Retained": true,
+    "seconds": 248.001,
+    "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock python -m pytest tests --basetemp=.tmp/local-fixed-3cac8e7 --junitxml=.tmp/local-fixed-3cac8e7.xml",
+    "junitSha256": "c3d86c2a48031903161172d586f7c745b69c9cdd68aff3604a67011be733ecaa"
+  },
+  "frontend": {
+    "passed": 43,
+    "baseline41Retained": true,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "commands": [
+      "npm test",
+      "npm run typecheck",
+      "npm run build"
+    ]
+  },
+  "migration": {
+    "head": "0011_local_admin",
+    "forwardOnly": true,
+    "repeatUpgrade": "PASS",
+    "oldMigrationsUnchanged": true,
+    "destructiveDowngrade": "REFUSED_NOT_EXECUTED"
+  },
+  "b01b02SourceChanged": false,
+  "windowsNativeTests": [
+    {
+      "classname": "tests.unit.test_windows_job",
+      "name": "test_duplicate_launcher_lock_does_not_read_a_mandatory_locked_byte",
+      "time": "0.006"
+    },
+    {
+      "classname": "tests.unit.test_windows_job",
+      "name": "test_job_close_only_kills_its_own_children",
+      "time": "0.011"
+    },
+    {
+      "classname": "tests.unit.test_windows_job",
+      "name": "test_abrupt_supervisor_death_closes_job_and_kills_owned_service",
+      "time": "0.167"
+    }
+  ],
+  "failuresPreserved": [
+    {
+      "phase": "Windows duplicate start",
+      "cause": "Read on mandatory byte range lock failed before duplicate detection",
+      "fix": "Lock first, inspect size only after acquiring; fixed3cac8e7; native regression and real duplicate startup passed"
+    },
+    {
+      "phase": "Auxiliary scripts",
+      "cause": "Initial Windows grep quoting matched no tests; one verifier indentation error; a STOPPED status assertion raced finalizer",
+      "fix": "Correct regex, syntax and bounded lifecycle observation; no extra ERP writes or paid models"
+    },
+    {
+      "phase": "Development console",
+      "cause": "Batch file edited while the original cmd process was awaiting child exit",
+      "fix": "Final frozen launcher tested fresh; no edits to running batch scripts in normal use"
+    }
+  ]
+}

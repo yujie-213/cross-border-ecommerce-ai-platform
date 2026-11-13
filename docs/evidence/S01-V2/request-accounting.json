@@ -1,0 +1,84 @@
+{
+  "result": "PASS",
+  "coverage": "ALL_V2_TASK_D01_PERSISTED_REQUESTS_IN_THIS_LOCAL_APP_TENANT",
+  "taskCount": 7,
+  "totalTaskHttpAttempts": 245,
+  "tasks": [
+    {
+      "taskId": "11b2571b49734ba0917bc4f63dc1e113",
+      "httpAttempts": 23,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 22,
+        "400": 1
+      }
+    },
+    {
+      "taskId": "51cf811a34274dcaa96e03cb5d9bd7ea",
+      "httpAttempts": 28,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 28
+      }
+    },
+    {
+      "taskId": "7463f8f27ccb4915900f4f2a2541a4e1",
+      "httpAttempts": 45,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 45
+      }
+    },
+    {
+      "taskId": "8bb5e0de323842bab3f6296eb8eaef5a",
+      "httpAttempts": 14,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 12,
+        "503": 2
+      }
+    },
+    {
+      "taskId": "b6f2c89177254651a5e64b635b3c1812",
+      "httpAttempts": 45,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 45
+      }
+    },
+    {
+      "taskId": "dd7bf2129b404766bb1b756ad694ca02",
+      "httpAttempts": 45,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 45
+      }
+    },
+    {
+      "taskId": "e8b49fecbfca4763b9ec3f08c3d56ec2",
+      "httpAttempts": 45,
+      "auth": 1,
+      "businessWrites": 0,
+      "httpStatuses": {
+        "200": 45
+      }
+    }
+  ],
+  "requisitionJournalNonAuthHttp": 33,
+  "requisitionJournalBusinessWrites": 2,
+  "otherReadEvidence": {
+    "preflightHttp": 11,
+    "independentReadbackEvidence": "requisition-live.json includes separate auth/GET events"
+  },
+  "notes": [
+    "Task request counts include each task auth and per-request retries; requisition revalidation has a separate persistent 120 request budget.",
+    "This is not a claim that the source ERP had no writes by other authorized actors.",
+    "Auth replies and credentials are never public."
+  ]
+}

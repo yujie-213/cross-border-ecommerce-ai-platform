@@ -2,6 +2,7 @@
 from copy import deepcopy
 from datetime import timedelta
 from threading import Event
+from time import monotonic, sleep
 from types import SimpleNamespace
 from uuid import uuid4
 
@@ -82,7 +83,13 @@ def test_pipeline_publishes_one_immutable_report_and_submit_replays(make_s01):
     changed = example()
     changed["inventory"][0]["availableQty"] = "56"
     second = create(env, changed, "changed-sample")
-    Worker(env.service).once()
+    # A worker poll may legally see no claimable row (e.g. SKIP LOCKED or run_after).
+    # Wait for the asynchronous owner transition, retaining the immutable-report assertions.
+    deadline = monotonic() + 2
+    while env.service.read(env.principal, second["taskRef"]["taskId"])["state"] == "QUEUED" and monotonic() < deadline:
+        Worker(env.service).once()
+        sleep(.01)
+    assert env.service.read(env.principal, second["taskRef"]["taskId"])["state"] == "SUCCEEDED"
     assert env.service.read_report(env.principal, second["taskRef"]["taskId"])["snapshotRef"] != report["snapshotRef"]
 
 

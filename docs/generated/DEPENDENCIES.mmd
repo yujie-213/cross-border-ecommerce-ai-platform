@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=8833779eccad862ec1ff7912526f2981b8354768a5754ec0a961a052d482a518
+%% TASKS sourceSha256=06e90e4be4f4eefd5c934359fb057898e2dcbe092599c1bf3d122b2933caa3f3
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -46,6 +46,8 @@ flowchart TB
   D_S01_P3_ERP_SURVEY_01["D-S01-P3-ERP-SURVEY-01 ERP采购全链路只读能力验证与P2/P3可行性调查"]
   D_S01_P3_MIN_01["D-S01-P3-MIN-01 S01正式采购展示与人工确认提交ERP采购申请最小闭环"]
   D_S01_REPLENISHMENT_SURVEY_01["D-S01-REPLENISHMENT-SURVEY-01 ERP现有补货建议真实只读验证及S01 V2可行性评估"]
+  D_S01_V2_01["D-S01-V2-01 S01 V2完整补货工作台：动态全范围/双通道/方案B请购"]
+  D_S01_LOCAL_01["D-S01-LOCAL-01 S01 V2本地一键启动/单管理员登录及main发布"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -118,3 +120,5 @@ flowchart TB
   D_S01_P3_ERP_SURVEY_01 --> D_S01_P3_MIN_01
   D_S01_P1P2_MERGE_01 --> D_S01_P3_MIN_01
   D_S01_P3_MIN_01 --> D_S01_REPLENISHMENT_SURVEY_01
+  D_S01_P3_MIN_01 --> D_S01_V2_01
+  D_S01_V2_01 --> D_S01_LOCAL_01

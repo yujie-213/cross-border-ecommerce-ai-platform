@@ -1,0 +1,48 @@
+{
+  "result": "PASS",
+  "browser": "Microsoft Edge via Playwright",
+  "nativeERPViewerScreenshotUsedAsApiEvidence": false,
+  "tests": [
+    {
+      "evidence": "browser-readonly-result.json",
+      "result": "PASS",
+      "batchId": "e8b49fecbfca4763b9ec3f08c3d56ec2",
+      "pageErrors": [],
+      "newModelCalls": 0,
+      "newBusinessMutations": 0
+    },
+    {
+      "evidence": "browser-full-result.json",
+      "result": "PASS",
+      "batchId": "b6f2c89177254651a5e64b635b3c1812",
+      "singleId": "51cf811a34274dcaa96e03cb5d9bd7ea",
+      "operationId": "86ec2fc73d58a246f3fa30736a6dc1f91c02e6561adb337d0bad8d583dce0446",
+      "erpId": "1426",
+      "browserResponseLossAndReplay": true,
+      "pageReloadRecovered": true,
+      "pageErrors": []
+    },
+    {
+      "evidence": "browser-recovery-result.json",
+      "result": "PASS",
+      "singleId": "51cf811a34274dcaa96e03cb5d9bd7ea",
+      "erpId": "1426",
+      "originalOperationReplayed": true,
+      "pageCreatedCommands": [],
+      "newModelCalls": 0,
+      "newBusinessMutations": 0
+    },
+    {
+      "evidence": "browser-final-result.json",
+      "result": "PASS",
+      "batchId": "dd7bf2129b404766bb1b756ad694ca02",
+      "singleId": "8bb5e0de323842bab3f6296eb8eaef5a",
+      "fullCoverage": true,
+      "sharedBusinessWrites": 0,
+      "explicitSingleModelTasks": 1
+    }
+  ],
+  "fixedCommit": "f82d95977367e578229cdf51df6e74dce4330f58",
+  "runtimeNotes": "First readonly/full used earlier fixed implementation; final bucket fix used 0eb6a56 production source identical to f82d959; final recovery after f82d959 reused existing operation. No new ERP order invented for fixed-code replay.",
+  "ownedDevApiWorkerAndViteStopped": true
+}

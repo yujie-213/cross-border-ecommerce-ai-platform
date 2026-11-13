@@ -1,0 +1,125 @@
+{
+  "nature": "SYNTHETIC_ERP_REAL_MYSQL_NOT_LIVE_BUSINESS",
+  "recentCompletedRuns": [
+    {
+      "taskRef": {
+        "taskId": "5c2174e2a4924d7b92b58e9778e14d69",
+        "tenantId": "s01-b7220df2e95945d9af5e4b69096a53ab"
+      },
+      "summary": {
+        "failed": 0,
+        "coverage": 1.0,
+        "modelCalls": 0,
+        "unfinished": 0,
+        "erpReference": 1000,
+        "unanalyzable": 0,
+        "processedCount": 1000,
+        "ruleCalculated": 0,
+        "noReplenishment": 0,
+        "ruleSourceCount": 0,
+        "scopeObjectCount": 1000,
+        "businessMutations": 0,
+        "discoveredSkuCount": 1000,
+        "processingCoverage": 1.0,
+        "erpSourceRecordCount": 1000,
+        "productIdentityCount": 1000
+      },
+      "sourceRequests": 33,
+      "sourceMethods": [
+        "GET"
+      ],
+      "sourceIdentityRechecks": 1,
+      "recoveredSameTask": false
+    },
+    {
+      "taskRef": {
+        "taskId": "9aac8d0676d84e8095ff4eb3f5ba662a",
+        "tenantId": "s01-280e8348b77e4af0afe0addc2f2902fc"
+      },
+      "summary": {
+        "failed": 0,
+        "coverage": 1.0,
+        "modelCalls": 0,
+        "unfinished": 0,
+        "erpReference": 1000,
+        "unanalyzable": 0,
+        "processedCount": 1000,
+        "ruleCalculated": 0,
+        "noReplenishment": 0,
+        "ruleSourceCount": 0,
+        "scopeObjectCount": 1000,
+        "businessMutations": 0,
+        "discoveredSkuCount": 1000,
+        "processingCoverage": 1.0,
+        "erpSourceRecordCount": 1000,
+        "productIdentityCount": 1000
+      },
+      "sourceRequests": 34,
+      "sourceMethods": [
+        "GET"
+      ],
+      "sourceIdentityRechecks": 2,
+      "recoveredSameTask": true
+    },
+    {
+      "taskRef": {
+        "taskId": "5e99d724627f4063b9fbb1f48f05122c",
+        "tenantId": "s01-d8887a46a9b54cc39a8beb47e03d5f98"
+      },
+      "summary": {
+        "failed": 0,
+        "coverage": 1.0,
+        "modelCalls": 0,
+        "unfinished": 0,
+        "erpReference": 1000,
+        "unanalyzable": 0,
+        "processedCount": 1000,
+        "ruleCalculated": 0,
+        "noReplenishment": 0,
+        "ruleSourceCount": 0,
+        "scopeObjectCount": 1000,
+        "businessMutations": 0,
+        "discoveredSkuCount": 1000,
+        "processingCoverage": 1.0,
+        "erpSourceRecordCount": 1000,
+        "productIdentityCount": 1000
+      },
+      "sourceRequests": 33,
+      "sourceMethods": [
+        "GET"
+      ],
+      "sourceIdentityRechecks": 1,
+      "recoveredSameTask": false
+    },
+    {
+      "taskRef": {
+        "taskId": "66961fb29d384f4bbcda95fcfcc3613e",
+        "tenantId": "s01-6708cecef6d949559c0d31c4c033d37c"
+      },
+      "summary": {
+        "failed": 0,
+        "coverage": 1.0,
+        "modelCalls": 0,
+        "unfinished": 0,
+        "erpReference": 1000,
+        "unanalyzable": 0,
+        "processedCount": 1000,
+        "ruleCalculated": 0,
+        "noReplenishment": 0,
+        "ruleSourceCount": 0,
+        "scopeObjectCount": 1000,
+        "businessMutations": 0,
+        "discoveredSkuCount": 1000,
+        "processingCoverage": 1.0,
+        "erpSourceRecordCount": 1000,
+        "productIdentityCount": 1000
+      },
+      "sourceRequests": 33,
+      "sourceMethods": [
+        "GET"
+      ],
+      "sourceIdentityRechecks": 1,
+      "recoveredSameTask": false
+    }
+  ]
+}

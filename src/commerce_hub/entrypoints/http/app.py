@@ -112,8 +112,10 @@ def create_app(settings: Settings | None = None, registry=None) -> FastAPI:
             components["s01"] = "teaching_admission_only"
         if business:
             components["s01"] = "offline_business_mock_only"
+        v2=bool(app.state.tasks and 'S01_V2_BATCH' in app.state.tasks.registry)
+        if v2:components['s01']='teaching_v2_replenishment'
         if migrated:
-            return {"status": "ready", "scope": "TEACHING_ERP_ADMISSION_ONLY" if teaching else "ENGINEERING_S01_BUSINESS_ONLY" if business else "ENGINEERING_FOUNDATION_ONLY", "components": components}
+            return {"status": "ready", "scope": 'S01_V2_TEACHING' if v2 else "TEACHING_ERP_ADMISSION_ONLY" if teaching else "ENGINEERING_S01_BUSINESS_ONLY" if business else "ENGINEERING_FOUNDATION_ONLY", "components": components}
         return error_response("NOT_READY", 503, "Required capabilities are not ready", details=components, retryable=not connected)
 
     return app

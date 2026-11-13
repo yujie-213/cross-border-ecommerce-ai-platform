@@ -1,151 +1,91 @@
 # 跨境电商智慧 AI 平台
 
-面向跨境电商运营的智慧中台项目，当前交付 S01 补货教学工程工作台。围绕库存与补货，把业务数据、确定性指标、AI 解释和人工决策连接起来，使建议能够追溯到输入、规则和证据。
+当前交付 **S01 V2 本地教学补货工作台**：从获准教学 ERP 目录动态发现店铺、仓库和SKU，人工发起批量检查，查看规则建议或ERP参考建议，按需进行单品AI解释，并由有权人员确认后提交ERP采购申请。
 
-当前已实现 Python/FastAPI 后端、独立 Worker、MySQL 持久任务和 Vue 3/TypeScript 前端，支持教学固定包的补货分析、报告、历史与受权证据读取。前端证据竞态、结构化引用契约及真实 DeepSeek A—E 五场景的教学技术范围已验收并合入 main，见 [验收合并报告](docs/evidence/S01-UI-C04-ACCEPTANCE/report.md)。最近工程基线为后端 639、前端单测 31、浏览器 6 项通过。
+后端为FastAPI、独立Worker、SQLAlchemy/Alembic/MySQL；前端为Vue3/TypeScript生产资源。任务、报告、采集证据、模型用量及请购操作持久保存。当前只提供一个本地超级管理员账号，不建设企业账号中心。
 
-**当前启动的是本机教学演示：使用既有教学 ERP 回读数据包，普通页面 AI 为 off，不自动调用 DeepSeek 或在线刷新 ERP。** 独立模型评测的五例成功记录与历史失败分开保留，见 [真实模型评测](docs/evidence/C-04-STRUCTURED-LIVE/report.md)。企业数据、规则、ERP 安全、AI 正式用途四门继续 BLOCKED；S01 MVP 整体验收和采购执行尚未完成。任务状态只读 [TASKS](docs/TASKS.md)。
+## 日常使用：双击即可启动
 
-## 启动当前 S01 工作台（Windows / PowerShell）
+已完成本机首次配置后，在仓库根目录：
 
-在当前开发机打开两个 PowerShell 终端。已有 Python 环境、前端依赖、本机 `.env` 和私有教学 catalog 可直接复用；MySQL 应可连接，库为 `s01_a01_test_20261112`，迁移已到 `0005_optional_usage`。启动工具不会自动建库或迁移。
+1. 双击 **[Start-Platform.cmd](Start-Platform.cmd)**。启动器检查配置、数据库/迁移、端口和依赖，启动API、独立Worker及前端服务，自动打开浏览器。
+2. 使用账号 **admin** 和本机初始化时设置的密码登录。无需PowerShell多终端、动态端口或手工Bearer Token。
+3. 点击“分析全部SKU”，再通过店铺/仓库/SKU/来源/状态/风险筛选结果；查看详情不调用AI。只有主动“新建单品分析”才重新采集并在获准预算内调用模型。
+4. 需要请购时核对采购事实、有效报价、MOQ/整箱，确认最终数量与来源限制后提交。平台确认不等于ERP领导审批，不下单/收货/入库。
+5. 停止时双击 **[Stop-Platform.cmd](Stop-Platform.cmd)**，或在启动窗口按Ctrl+C/关闭窗口。只关闭本项目管理的进程，不终止占用相同端口的其他服务。
 
-**终端 1：启动后端 API 和 Worker**（保持窗口运行）：
+默认地址为 **http://localhost:5173**；API只监听本机8765。请使用启动器打开的localhost地址。启动窗口保持运行，无900秒自动关闭限制。默认登录会话为8小时，浏览器刷新、重新打开和服务重启在会话有效时自动恢复；退出/过期/本机重置后重新输入账号密码。
 
-```powershell
-Set-Location -LiteralPath 'D:\电商项目\跨境电商智慧AI平台'
-$env:PYTHONPATH='src'
-.\.tmp\stage-a-clean\Scripts\python.exe -m tools.s01_frontend_dev --execute-local
-```
+启动、登录和查看历史不创建分析任务，也不调用ERP、AI或采购写入。人工批量只读、零模型；新任务才采集最新事实。正常停止/重启保留历史和原请购幂等操作，不清库。
 
-看到 `READY: independent API/Worker ...` 后再执行终端 2。后端端口由启动工具分配，写入本机私有回执，不固定为 8000。
+## 首次配置
 
-**终端 2：启动前端并复制本次短期身份令牌**：
+需要Windows、CPython **3.13**、MySQL8/9、Node/npm。当前实测Node24.21.0/npm11.19.0；项目锁定Vite的Node要求为`^20.19.0 || >=22.12.0`。不是Docker部署，不要求Redis/MQ。
 
-```powershell
-Set-Location -LiteralPath 'D:\电商项目\跨境电商智慧AI平台\frontend'
-$s01Local = Get-Content ../data/private/s01-frontend/session.json -Raw | ConvertFrom-Json
-$env:S01_API_TARGET=$s01Local.apiTarget
-Set-Clipboard -Value $s01Local.token
-npm run dev
-```
-
-打开 **http://localhost:5173**，点击右上角“连接身份”，在“短期身份令牌”中粘贴后点击“连接会话”。连接成功后清空剪贴板；令牌只在本机使用，不粘贴到聊天、Git 或 URL。随后点击“新建补货分析”，选择 A—E 中的授权包并发起任务。
-
-演示 API/Worker 和身份默认 **900 秒（15 分钟）** 后到期。到期或需要重启时，在两个终端各按 `Ctrl+C`，再依次重跑上面两组命令并连接新令牌；后端端口可能变化，需要重新读取 `S01_API_TARGET`。这是现有受控演示入口，常驻部署另行配置。
-
-新克隆的仓库还需要 Python 3.13、Node.js、安装后的依赖、本机获准 `.env` 和私有教学包：`data/private/s01-teaching-dataset/S01-AI-TEST-20261112/catalog.json`。私有包不在 Git 中。Python 安装见下方工程环境说明；若使用 `.venv`，将终端 1 的 Python 路径替换为 `.\.venv\Scripts\python.exe`。首次安装前端依赖在 `frontend/` 执行 `npm ci`。完整操作与排错见 [前端运行手册](docs/runbooks/s01-frontend.md)。
-
-## 要解决的问题
-
-- 库存、需求、未收供给来自不同系统，日期、单位和口径容易混用。
-- 补货建议需要同时考虑供给日期、MOQ、订购倍数、缓冲与质量阻断。
-- AI 解释必须有依据，不能代替库存、金额等权威计算。
-- 人工确认、提交审批、独立批准与外部执行需要分开；输入变化后旧批准不能继续使用。
-
-## 架构与技术边界
-
-设计采用模块化中台和确定性 Workflow。公共能力由场景复用，S01 采购补货是首个实施切片，无需等待 S02 或所有公共能力完成。
-
-| 层次 | 已确定的设计职责 | 实现情况 |
-|---|---|---|
-| O01 编排 | 统一任务、计划、预算与报告；通过 ScenarioHandler 调用场景 | 持久任务/预算/恢复、S01 工程 Handler 和事务一致报告发布已实现 |
-| D01—D04 数据 | 只读接入、映射投影、唯一快照 manifest、证据定位 | 工程输入、精确映射、质量/快照和受权证据查询已实现；真实教学 ERP 只读观测与准入适配已实现，真实计算门仍阻断 |
-| B01 / B02 业务分析 | B01 负责确定性指标；B02 构造候选并调用 B01 评价 | 显式模拟策略下逐日供需、缺口和受约束候选已实现；真实规则未验收 |
-| A01—A03 AI | 模型统一网关、受控运行时、只读工具；模型不计算权威库存 | A01 工程网关已验收；S01 解释与受限真实模型评测独立列证，正式用途待评审，A02/A03未实施 |
-| C01—C03 人工控制 | 建议、审批、另行授权执行各自管理状态 | 原型演示；服务未实现 |
-| G / I 公共工程 | 权限、审计与工作项等按当前切片补齐 | 可信签名/当前scope、审计usage、MySQL工作项与独立Worker已实现 |
-
-工程采用 Python/FastAPI、SQLAlchemy、Alembic 和 MySQL；API 与 Worker 为独立进程。阶段 A 提供迁移、权限、持久任务、预算与恢复，S01 提供准入输入→质量检查→供需计算→候选→报告保存及查询。Vue 3/Vite 前端通过同源代理消费现有 API；现有静态原型单独保留。响应缓存默认 OFF。
-
-独立原型使用原生 HTML、CSS、JavaScript；文档工具使用 Python、Mermaid，前端浏览器回归使用 Playwright。当前工作台入口为上方 Vue 前端。
-
-## 当前可用内容
-
-当前 S01 前端提供工作台、建议列表、详情、逐日图表与等价表、证据弹窗和历史读取，任务由实际 API/Worker 处理；刷新按任务标识重新读取服务端结果。采购审批页保留说明，不提供审批或下单接口。旧静态原型的样例与身份为模拟，预览方式见下方。
-
-当前独立 MySQL 8.0.27 上的迁移、权限、事务、租约/预算、API/Worker 重启恢复和 S01 模拟报告链路已有实测证据。四项真实数据/规则/ERP/模型准入仍 BLOCKED；没有采购审批或下单接口。任务与验收状态只以 [TASKS](docs/TASKS.md) 为准。
-
-## 工程环境安装与底座入口
-
-后端运行与用量语义见 [后端运行说明](docs/runbooks/s01-backend.md)，前端接口见 [API 对接契约](docs/contracts/s01/backend-api.md)。以下通用底座命令用于工程检查；启动当前 S01 工作台请使用上方专用启动步骤。
-
-安装、身份配置和公共 API/Worker 命令见[阶段 A 运行说明](docs/runbooks/phase-a.md)；S01 显式工程装配和一条命令演示见[阶段 B 运行说明](docs/runbooks/phase-b.md)。显式迁移后再分别启动 API/Worker。
-
-已验证环境：Windows 10 build 19045 / CPython 3.13.5；其他 OS/Python 组合未验证。根目录 `.env` 使用 [.env.example](.env.example) 的字段，在本机填写获准连接，禁止提交密码。当前提供健康、受控任务、会话及工程报告/证据接口；真实企业身份接入和 S01 正式业务模式尚未启用。
+新克隆环境只需进行一次依赖安装（项目根目录PowerShell）：
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --require-hashes -r requirements.lock
 .\.venv\Scripts\python.exe -m pip install -e . --no-deps --no-build-isolation
-.\.venv\Scripts\python.exe -m commerce_hub.infrastructure.database
-.\.venv\Scripts\python.exe -m uvicorn commerce_hub.entrypoints.http.app:create_app --factory --host 127.0.0.1 --port 8000 --no-access-log
+npm --prefix frontend ci
 ```
 
-`GET /health/live` 返回200。`GET /health/ready` 验证数据库、迁移和可信身份配置，缺项返回503；满足时200仅表示工程底座就绪，不表示真实 S01 业务可用。默认业务注册表为空，S01 模拟链路须显式 test 装配；启动不迁移、不内嵌 Worker，不调用 ERP/模型。
+当前开发机启动器也兼容已有`.tmp/stage-a-clean`环境；新环境推荐`.venv`。不要提交本机配置或依赖目录。
+
+按[.env.example](.env.example)创建Git忽略的`.env`，填写负责人提供的获准MySQL连接；**当前迁移保护仅允许`s01_a01_test_20261112`，程序不自动建库或换库**。ERP凭据使用既有本机`.env.erp`字段`ERP_USERNAME`/`ERP_PASSWORD`或`ERP_ACCESS_TOKEN`。没有获准账号时应由负责人提供，不能借用其他项目库或绕过来源权限。AI密钥只放本机`.env`的`COMMERCE_MODEL_API_KEY`；配置密钥不增加模型预算。
+
+然后双击 **[Initialize-Platform.cmd](Initialize-Platform.cmd)**：
+
+- 显式核对隔离库并前向升级至`0011_local_admin`，旧表/任务/报告不重置；日常启动不会执行迁移。
+- 首次以隐藏输入设置并确认admin密码。密码只以随机盐scrypt哈希保存于数据库，明文不写源码、README、Git或本地配置文件。已有账号不会被初始化命令覆盖。
+- 随机签名密钥和本机运行参数保存在Git忽略的`data/private/local-platform/runtime.json`，普通使用不需要复制其中内容或设置身份令牌。
+
+本机忘记密码可双击 **[Reset-Admin.cmd](Reset-Admin.cmd)**，隐藏输入两次新密码。重置会撤销该管理员旧会话，保留任务、报告及采购记录；不操作ERP账号密码。该入口依赖本机文件/数据库控制权，不能用于企业远程账号管理。
+
+本地配置的`sessionSeconds`默认28800，可设置300—86400，影响后续登录；`apiPort`/`webPort`可调整本机端口。更改后停止并重新启动。`modelEnabled`控制单品真实模型开关，`requisitionEnabled`控制已授权自有教学请购装配；关闭时界面明确提示，不回退伪造数据。运行中不要编辑或外传签名密钥。
+
+## 已实现的业务边界
+
+| 能力 | 当前行为 |
+|---|---|
+| 全授权目录 | 商品/库存/建议分页联合发现，无固定2/5/20SKU上限；同SKU不同店仓分开展示，无Listing或关联不明对象不静默遗漏 |
+| 手动批量 | 持久进度、取消、失败隔离、显式重试、历史、来源统计和风险分组；批量不调用AI、不创建采购 |
+| 双通道 | 数据合格复用原B01/B02；不足时显示ERP参考来源。零值、空集、失败和冲突不等于无需补货，多库存记录不擅自相加 |
+| 单品AI | 仅主动新建触发；解释绑定事实和未知，失败保留确定性结果；历史展示实际Token/费用状态 |
+| 人工请购 | REFERENCE_ONLY本身不禁购；必要范围/单位/报价/MOQ/整箱/正式采购核对/认知确认仍强制，提交前复读、防漂移、幂等及UNKNOWN恢复 |
+| 本地超管 | 拥有当前平台功能权限；**不扩大ERP业务授权**，共享SKU可读不等于可采购，现有自有教学范围控制继续有效 |
+
+ERP内部算法、生成周期、日均窗口及在途/部分收货抵扣语义仍有UNKNOWN；未知可售日期的采购不作为有效供给抵扣。企业数据/规则/ERP安全/AI正式用途四门保持独立准入，当前不是企业生产安全认证或S01全部企业业务验收。S02—S10、完整RBAC/SSO及前端整体重构均未开展。
+
+[V2业务交付与真实证据](docs/reports/S01_V2完整补货工作台交付_20261113.md)保留当时221SKU/975对象、真实AI及申请1426的历史观察；新批量以本次真实ERP结果为准。最新运行与合并验收见[本地产品化报告](docs/reports/S01_本地产品化与main验收_20261114.md)。唯一状态/验收台账为[TASKS](docs/TASKS.md)。
+
+## 排错与恢复
+
+- **配置或数据库不可连接**：核对`.env`、MySQL服务和获准账户。错误不会显示密码；原始本机工程日志位于`data/private/local-platform/`。
+- **迁移未就绪**：显式运行Initialize-Platform；不要手工修改alembic_version、删表、清库或换库。
+- **缺Python/前端依赖**：执行首次安装命令。启动器仅在源文件改变时自动重新构建前端，不自动联网安装依赖。
+- **端口占用**：确认占用者属于谁，或调整本地端口；启动器不会按端口杀进程。重复启动已有本项目实例只打开现有页面。
+- **密码错误/短暂锁定**：核对本机admin密码；连续失败会短暂锁定，必要时使用本机重置入口。数据库故障会明确提示服务错误，不跳转循环。
+- **会话过期**：返回账号密码登录页。Cookie为HttpOnly/SameSite Strict，写命令保留CSRF；HTTPS使用Secure，本地loopback HTTP明确限定为非Secure Cookie，不可直接对外部署。
+- **请购结果未知**：从原单品历史沿原操作核对，不换键盲发；已提交显示真实单号及原独立回读时点。重启不重置预算、报告或幂等记录。
+
+完整[日常运行/迁移/登录/恢复手册](docs/runbooks/local-platform.md)提供配置和测试说明。
+
+## 工程验证与文档
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest
-.\.venv\Scripts\python.exe tools/smoke_foundation.py --output docs/evidence/A-02/smoke.json
 $env:COMMERCE_RUN_MYSQL_TESTS='1'
-.\.venv\Scripts\python.exe -m pytest -p no:cacheprovider --basetemp=.tmp/ab-review-pytest
-# 自动启动并停止自身 API/Worker，仅使用获准独立测试库和合成身份
-$env:COMMERCE_ENVIRONMENT='test'
-.\.venv\Scripts\python.exe -m tools.demo_s01
-```
-
-独立数据库兼容验证命令为 `tools/check_mysql_compat.py`，会在固定 `s01_a01_test_20261112` 库建本次专用fixture表、验证后只清理自己的表；使用前须有该库变更授权，不能作为任意数据库探针。阶段证据与真实/模拟范围见[唯一台账](docs/TASKS.md)，A-01/A-02历史证据仍绑定当时提交。实际进程套件会自动用测试装配启动/停止自己的API/Worker进程，不注册生产探针。
-
-## 目录与文档入口
-
-```text
-.
-├── README.md / AGENTS.md / DESIGN.md
-├── docs/
-│   ├── README.md                     # 分类索引与文档职责
-│   ├── PLAN.md / TASKS.md / DECISIONS.md
-│   ├── COLLABORATION.md / HANDOFF.md
-│   ├── requirements/                 # 需求与业务术语
-│   ├── architecture/                 # 逻辑架构、概要设计、图示
-│   ├── agents/                       # AI 详设、场景设计、契约示例
-│   ├── ui/                           # 产品原型规格与视觉研究
-│   ├── reports/                      # 可行性与示例测算
-│   ├── planning/ / generated/         # 文档工具、证据与派生状态
-│   ├── governance/                   # 迁移映射与公开准备检查
-│   └── archive/                      # 旧计划、修订前版本与原文快照
-├── frontend/                         # Vue 3/TypeScript 工作台与前端测试
-├── prototypes/s01/                   # 独立静态原型、自动检查、截图
-├── src/commerce_hub/                  # 公共底座与 S01 工程插件
-├── migrations/ / tests/ / examples/    # 迁移、自动化测试与合成输入
-└── tools/                            # 演示、环境检查及文档工具
-```
-
-完整导航见 [docs/README.md](docs/README.md)。产品功能与操作流程由 [产品规格](docs/ui/PRODUCT_SPEC.md) 和可操作原型评审；视觉表达由 [DESIGN.md](DESIGN.md) 约束，两者不能互相替代。
-
-## 旧静态原型预览与文档检查
-
-直接用浏览器打开 [prototypes/s01/index.html](prototypes/s01/index.html)，无需安装或构建。也可在项目根目录启动仅监听本机的预览：
-
-```powershell
-python -m http.server 8765 --bind 127.0.0.1
-```
-
-浏览器访问 `http://127.0.0.1:8765/prototypes/s01/`。这只是静态原型预览，没有平台服务启动命令、数据库迁移或 ERP 配置；当前不需要 `.env`。
-
-文档检查：
-
-```powershell
-python -m pip install -r tools/requirements-docs.txt
+$env:COMMERCE_MODEL_PROVIDER='mock'
+$env:COMMERCE_MODEL_NETWORK_ENABLED='false'
+python -m pytest tests --basetemp=.tmp/review-fresh
+npm --prefix frontend test
+npm --prefix frontend run typecheck
+npm --prefix frontend run build
 python docs/planning/build_docs.py
 python docs/planning/check_plan.py
-python docs/ui/check_design.py
-python docs/governance/audit.py
 ```
 
-原型自动检查见 [原型说明](prototypes/s01/README.md)。需要 Node.js、现有 Playwright 与浏览器；可通过 `PLAYWRIGHT_MODULE`、`BROWSER_EXECUTABLE` 指定本机安装位置。测试仅验证模拟交互，结果与截图保留在原型的 `evidence/`。
+真实ERP/付费模型/采购证据与工程夹具分开。旧[s01_frontend_dev](docs/runbooks/s01-frontend.md)、[s01_v2_dev](docs/runbooks/s01-v2.md)的临时Token、动态端口、900秒入口仅用于历史/开发测试，**不是日常启动流程**；默认仍保留，便于复验原证据，不应对外开放。
 
-## 后续路线与公开状态
-
-按 [PLAN](docs/PLAN.md) 的 A—D 增量计划推进。前端及 C-04 教学技术验证已合入 main；普通页面真实 AI 接入、正式业务签认与完整 S01 MVP 端到端验收仍按 [TASKS](docs/TASKS.md) 的对应范围推进。企业正式规则、采购批准与执行分别验收和授权。
-
-GitHub 公开发布尚未完成，阻碍与检查结果见 [公开准备说明](docs/governance/PUBLICATION.md)。项目未声明开源 LICENSE；第三方资源保留其原有声明，不能据此推定已取得全部再分发许可。
+架构与公开契约见[文档索引](docs/README.md)、[本地启动/鉴权契约](docs/contracts/local-platform.md)、[A—D计划](docs/PLAN.md)及[决策](docs/DECISIONS.md)。旧原型在`prototypes/s01/`，不是当前平台运行入口。仓库未声明开源LICENSE，第三方资源遵守[原声明](THIRD_PARTY_NOTICES.md)。

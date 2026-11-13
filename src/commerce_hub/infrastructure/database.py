@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, event, inspect, text
 
 from commerce_hub.bootstrap.settings import Settings
 
-SCHEMA_REVISION = "0008_s01_requisition"
+SCHEMA_REVISION = "0011_local_admin"
 AUTHORIZED_TEST_DATABASE = "s01_a01_test_20261112"
 ROOT = Path(__file__).resolve().parents[3]
 REQUIRED_TABLES = frozenset({
@@ -17,6 +17,9 @@ REQUIRED_TABLES = frozenset({
     "d01_online_acquisitions", "d03_online_snapshots",
     "d02_monitor_scopes",
     "s01_requisitions",
+    "d01_v2_acquisitions", "s01_v2_items",
+    "d03_v2_manifests",
+    "g01_local_admin",
 })
 
 
