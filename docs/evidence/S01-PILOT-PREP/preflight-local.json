@@ -1,0 +1,104 @@
+{
+  "result": "PARTIAL_EXECUTION_GATE_BLOCKED",
+  "scope": "CURRENT_PREPARATION_ONLY_NO_BUSINESS_MUTATION",
+  "capturedAt": "2026-11-13T04:01:43.942499+00:00",
+  "readAttempts": 12,
+  "authenticationAttempts": 3,
+  "businessMutationCalls": 0,
+  "modelCalls": 0,
+  "accountRole": "administrator",
+  "wildcardPermission": true,
+  "dedicatedAccountOrTenantProvided": false,
+  "namespaceKeyEmptyChecks": 7,
+  "namespaceNameFailures": 2,
+  "failures": [
+    {
+      "name": "warehouse-name",
+      "httpStatus": 503
+    },
+    {
+      "name": "supplier-name",
+      "httpStatus": 503
+    }
+  ],
+  "authHistory": [
+    {
+      "result": "SUCCESS"
+    },
+    {
+      "result": "HTTP_NON_200_STATUS_NOT_CAPTURED"
+    },
+    {
+      "result": "SUCCESS",
+      "httpStatus": 200
+    }
+  ],
+  "registeredActiveMembers": 0,
+  "erpExclusiveIsolation": "UNPROVEN",
+  "applicationMonitorRegistry": "NOT_IMPLEMENTED",
+  "isolationLimit": "Scope catalog does not establish row isolation for every required master/procurement resource; no other-user access was tested",
+  "rawFiles": [
+    {
+      "name": "access-catalog.json",
+      "sha256": "5ef0e1b81198e0c12af6fc9cbc8d34fbfc9d34c53e6993bdcc7b328b6d923a06"
+    },
+    {
+      "name": "account.json",
+      "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+    },
+    {
+      "name": "cable-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    },
+    {
+      "name": "data-contract.json",
+      "sha256": "9b265c17b22c73dddd018615618101d88d155e63c00252e816f88b17fbec8d68"
+    },
+    {
+      "name": "inspection.json",
+      "sha256": "2d5a965c4bc9b3638ddef4eccefce2dc8fcc2a82d957fc26a17339442f5c5b53"
+    },
+    {
+      "name": "listing-cable-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    },
+    {
+      "name": "listing-mug-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    },
+    {
+      "name": "mug-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    },
+    {
+      "name": "name-check-auth-status.json",
+      "sha256": "ad5e46207db2b2a522ad96b789470d489fa9d236e06abb89094866feba18480b"
+    },
+    {
+      "name": "store-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    },
+    {
+      "name": "supplier-name-namespace.json",
+      "sha256": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba"
+    },
+    {
+      "name": "supplier-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    },
+    {
+      "name": "warehouse-name-namespace.json",
+      "sha256": "83482f1606b1436cabf7a6e899b1280627aeb6aa155b472fde8fa91edceb7eba"
+    },
+    {
+      "name": "warehouse-namespace.json",
+      "sha256": "85ef198a02fe03e3150e036be0f8717227f3b9b2f179eb6a2788424fb9ef856a"
+    }
+  ],
+  "oldFaultsRetained": [
+    "sales REST 503",
+    "compatibility sales timeout",
+    "stock ledger timeout"
+  ],
+  "businessExecution": "NOT_RUN_PENDING_COMPLETE_PREFLIGHT_AND_OWNER_APPROVAL"
+}

@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "commit": "75ad144ecfebbe22a2a17b0c62e21094883c97cf",
+  "base": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "newCommitCount": 1,
+  "changedPaths": [
+    "docs/contracts/s01/owned-dataset-scope.md",
+    "docs/evidence/S01-PILOT-PREP/public-test-summary.json",
+    "docs/planning/git-whitelist.json",
+    "docs/reports/S01_2SKU小试_公开评审摘要.md"
+  ],
+  "privateLocalHistoryIncluded": false,
+  "whitelistOnlyAddsReviewedContentPaths": true,
+  "publicSnapshotDocumentationChecks": 18,
+  "publicSnapshotDocumentationResult": "PASS",
+  "contentHashes": {
+    "docs/contracts/s01/owned-dataset-scope.md": "3e2f6b9d5f9775a5f14e9f4398ddce49712c63689afadfaaafcae0cdb0e372ff",
+    "docs/evidence/S01-PILOT-PREP/public-test-summary.json": "9da1419eaaaf359b511da10e05d7e60cd67b7922004ed9a3c7fd38b0093fe9e8",
+    "docs/planning/git-whitelist.json": "ec01dc24cce395a2ad5392bc62b9f1d9af76bf3a17e1cf171dc392177ed8fdd8",
+    "docs/reports/S01_2SKU小试_公开评审摘要.md": "b75c524ca4c05cbb09897073b0bd4f880a3e1fdf71e74733b154a4485b780b7a"
+  },
+  "applicationTestRerun": false,
+  "pushExecuted": false
+}

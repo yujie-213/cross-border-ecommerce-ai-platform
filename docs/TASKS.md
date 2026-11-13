@@ -1,3 +1,5 @@
+当前方案C第一阶段领取（2026-11-13）：负责人及星星正式批准方案C；当前只做独立范围只读核查与2SKU精确执行清单，副作用操作须再批准。尚无专用账号/独立租户；不自动扩大8/30SKU、不新增模型。公开推送只发逐项审核安全内容，旧本地受限证据/截图不进入新公开历史。
+
 当前数据与监控范围评估（2026-11-13，基于96c8526）：负责人要求先评估，确认后才进行数据小试/批量写入。新增已确定原则：正式普通查询/分析/未来批量/前端统计仅消费本项目授权创建、独立回读并关联核验的版本化监控清单，默认排除未登记SKU；只用前缀/名称不足。此前共享SKU仅诊断证据，当前正式ACTIVE清单尚未实现、成员0；--discover-options不得作为正式监控入口。推荐方案C仍待确认；四企业门及历史任务原状。
 
 当前在线闭环授权（2026-11-13，基于main/2fba3b4）：负责人授权连续完成ERP在线只读采集、既有B01/B02在线消费及正常流程DeepSeek解释三个阶段，独立分支codex/s01-live-business-closure，Codex单人集成。模型独立授权s01-online-20261113-r1：最多10次/100000Token/$1，单并发、有界超时、未知发送不重发。仅教学、禁止ERP业务写入/采购执行，不合main；最终REVIEW，企业四门原状。未知docs/ERP-openapi.yaml保留。
@@ -6625,8 +6627,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "REVIEW",
       "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "负责人通知本人及星星已审阅并正式批准方案C顺序和监控原则；不将小试写入/工程验收也登记通过"
     }
-  ]
+  ],
+  "planDecision": {
+    "decision": "APPROVED_C",
+    "reviewers": [
+      "负责人",
+      "星星（负责人通知）"
+    ],
+    "reviewedCommit": "1658286bb358d2fc0b3a11ced30998e692de6824",
+    "scope": "方案C顺序及监控原则，非小试执行授权",
+    "date": "2026-11-13"
+  }
 }
 ```
 
@@ -6641,15 +6658,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-S01-DATASET-DESIGN-01"
   ],
-  "entryCondition": "本轮仅评估和方案；执行小试/代码/业务写入须负责人确认精确独立范围、动作和上限",
+  "entryCondition": "方案C正式批准；当前只读范围核查与精确2SKU小试清单，负责人确认清单前不得执行业务变更",
   "ownerRole": "主集成/负责人/老师ERP范围维护",
-  "assignee": null,
+  "assignee": "Codex",
   "allowedPaths": [
-    "本任务确认后精确登记，不预建应用目录"
+    "AGENTS.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/reports/",
+    "docs/contracts/s01/",
+    "docs/evidence/S01-PILOT-PREP/",
+    "docs/planning/",
+    "docs/generated/"
   ],
   "parallelCondition": "当前Codex单人；公共契约/迁移/台账串行",
   "deliverables": [
-    "负责人确认后限定独立账号/店仓、2SKU、40业务变更/80回读上限及逐路径白名单；当前不执行"
+    "只读核实独立范围与隔离限制、精确2SKU执行清单/字段/关系/副作用/预算/恢复",
+    "当前拟33次业务变更/76回读含已尝试12；批准前零业务写入",
+    "批准后才执行小试、独立回读/真实对账/登记及进入8SKU结论"
   ],
   "acceptance": [
     {
@@ -6669,14 +6696,65 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "LIVE",
     "ENGINEERING"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
-  "evidence": [],
+  "evidence": [
+    {
+      "kind": "READ_ONLY_INSPECTION",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": "bounded exact GET preflight, local source-contract review",
+      "environment": "当前教学ERP，原始返回仅忽略私有目录",
+      "sample": "12次GET，其中仓名/供应商名503；不能将空闲编码视为独立范围通过",
+      "exitCode": 0,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/preflight-local.json"
+    },
+    {
+      "kind": "PLAN_CONTRACT_CHECK",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": "local plan schema-field and independent Decimal ledger validation",
+      "environment": "离线设计验证，非ERP/业务验收",
+      "sample": "33个POST声明字段/类型及76回读预算、计划数量自洽；所有真实ID待创建核验",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/plan-validation-local.json"
+    },
+    {
+      "kind": "LIVE_PILOT",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": "execute approved 2-SKU pilot",
+      "environment": "NOT_RUN",
+      "sample": "独立范围/精确清单/教学凭证出入库动作未批准，不执行",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/contracts/s01/pilot-2sku-plan-v1.json"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-S01-DATASET-PILOT-01/AC1"
+      ],
+      "command": "review selected file contents/diff/ancestry; isolated public snapshot check_plan; ordinary branch push + ls-remote readback",
+      "environment": "Existing public repository review branch, selected documentation only",
+      "sample": "3 engineering/aggregate documents plus exact allowlist; no application code/ERP/Provider/private history/screenshots",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PILOT-PREP/publication-receipt-local.json"
+    }
+  ],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "1658286bb358d2fc0b3a11ced30998e692de6824",
+  "dirtyPaths": [
+    "本轮范围核查/精确计划/公开发布审查文档，非应用代码"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -6684,8 +6762,37 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "TODO",
       "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "用户正式批准方案C并只领取第一阶段；确认目前无专用账号，精确清单批准前仅准备/只读核查"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "准备已完成，执行门槛BLOCKED：12只读GET两项503，独立隔离未证明，33项副作用待批；不冒充小试完成"
     }
-  ]
+  ],
+  "executionGate": {
+    "status": "BLOCKED",
+    "reasons": [
+      "仓库显示名和供应商显示名精确查重503",
+      "尚无专用账号/独立租户；共享逻辑隔离需确认",
+      "33项副作用清单未批准"
+    ],
+    "mutationPlan": 33,
+    "readPlanIncludingPreparation": 76,
+    "actualMutations": 0,
+    "actualReads": 12,
+    "modelRequests": 0
+  },
+  "publication": {
+    "branch": "codex/s01-pilot-scope-review",
+    "commit": "75ad144ecfebbe22a2a17b0c62e21094883c97cf",
+    "scope": "DOCUMENTS_AND_AGGREGATE_ONLY",
+    "sourceCodeAndDetailedEvidence": "LOCAL_ONLY"
+  }
 }
 ```
 

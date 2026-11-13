@@ -1,0 +1,1086 @@
+{
+  "planVersion": "s01-pilot-2sku-v1",
+  "status": "REVIEW_ONLY_NOT_EXECUTABLE",
+  "scopeStatus": "NOT_CONFIRMED",
+  "datasetId": "hailan-s01-pilot-20261113-v1",
+  "importBatchId": "HL-S01-P1-20261113",
+  "scopeVersion": 0,
+  "businessDay": "2026-11-13",
+  "businessTimezone": "UTC",
+  "approvalRequired": true,
+  "approved": false,
+  "credentialsOrConnectionIncluded": false,
+  "sourceBoundary": "Only newly created exact ERP IDs that pass independent readback; no existing/shared SKU adoption",
+  "gates": [
+    "Owner approves exact plan and teaching record-payment/ship side effects",
+    "Owner accepts shared-tenant logical isolation or teacher provisions stronger scope",
+    "All namespace checks repeat successfully, including warehouse/supplier names currently 503",
+    "Source contract/workflow/required fields remain compatible; ID and tenant readback verified before child writes"
+  ],
+  "externalSideEffectsForbidden": [
+    "bank/card transfer",
+    "external supplier placement",
+    "external shipment",
+    "platform push",
+    "customer notification",
+    "permission/account changes",
+    "ERP SQL access",
+    "mutation of any other owner record"
+  ],
+  "budget": {
+    "maxBusinessMutationCalls": 40,
+    "plannedBusinessMutationCalls": 33,
+    "mutationReserve": 7,
+    "maxBusinessReadCalls": 80,
+    "plannedReadCallsIncludingPreparation": 76,
+    "readReserve": 4,
+    "authenticationExcludedButBounded": true,
+    "authenticationAttemptCountToDate": 3,
+    "modelCalls": 0,
+    "readGroups": [
+      {
+        "id": "R00",
+        "count": 12,
+        "phase": "PREPARATION_ALREADY_ATTEMPTED",
+        "purpose": "Account/contract/catalog and 9 exact namespace checks; 2 name checks 503"
+      },
+      {
+        "id": "R01",
+        "count": 10,
+        "phase": "BEFORE_FIRST_WRITE",
+        "purpose": "Current account + all 9 names/business keys; require 200, complete, empty, no adoption"
+      },
+      {
+        "id": "R02",
+        "count": 11,
+        "phase": "MASTER_AND_OPENING_READBACK",
+        "purpose": "Store/warehouse/supplier/product2/listing2/quote2/opening2 independent GETs"
+      },
+      {
+        "id": "R03",
+        "count": 5,
+        "phase": "SALES_CREATED",
+        "purpose": "Sales detail3 + inventory2: CRUD must not deduct stock"
+      },
+      {
+        "id": "R04",
+        "count": 3,
+        "phase": "TEACHING_RECEIPT_VOUCHERS",
+        "purpose": "GET /sales-workflow/{ownedId} for each exact paid voucher/state"
+      },
+      {
+        "id": "R05",
+        "count": 5,
+        "phase": "AFTER_SHIPMENTS",
+        "purpose": "GET /record-context/sales-orders/{ownedId} x3 proves record/lines/related outbound IDs; inventory2"
+      },
+      {
+        "id": "R06",
+        "count": 2,
+        "phase": "PO_CREATED",
+        "purpose": "GET /purchase-orders/{ownedId} x2"
+      },
+      {
+        "id": "R07",
+        "count": 4,
+        "phase": "PO_STATES",
+        "purpose": "GET each owned PO after submit and after local place-order"
+      },
+      {
+        "id": "R08",
+        "count": 1,
+        "phase": "DELIVERY",
+        "purpose": "GET /supplier-deliveries/{ownedId}"
+      },
+      {
+        "id": "R09",
+        "count": 1,
+        "phase": "PENDING_RECEIPT",
+        "purpose": "GET /inbound-orders/{ownedId} before confirmation"
+      },
+      {
+        "id": "R10",
+        "count": 7,
+        "phase": "PARTIAL_RECEIPT",
+        "purpose": "Receipt, PO, delivery, inventory2, exact receipt stock-ledger, own warehouse balances"
+      },
+      {
+        "id": "R11",
+        "count": 3,
+        "phase": "SALES_LEDGER",
+        "purpose": "GET /stock/ledger resource=outbound-orders, record_id from each verified related outbound; no SKU-global scan"
+      },
+      {
+        "id": "R12",
+        "count": 8,
+        "phase": "REPLAYS",
+        "purpose": "Quote, PO, receipt, sales workflow, inventory2, receipt ledger and shipment ledger; compare no duplication"
+      },
+      {
+        "id": "R13",
+        "count": 4,
+        "phase": "PAGINATION",
+        "purpose": "Own product IDs limit1 offsets0/1; own sales IDs limit2 offsets0/2; exact match/no outside IDs/no drift"
+      }
+    ],
+    "maxAuthenticationCalls": 5,
+    "maxConcurrency": 1,
+    "requestTimeoutSeconds": 8
+  },
+  "expectedCreates": {
+    "stores": 1,
+    "warehouses": 1,
+    "suppliers": 1,
+    "products": 2,
+    "listings": 2,
+    "quotes": 2,
+    "openingInventoryRows": 2,
+    "salesOrders": 3,
+    "salesLines": 6,
+    "purchaseOrders": 2,
+    "purchaseLines": 2,
+    "deliveries": 1,
+    "inboundOrders": 1,
+    "teachingReceiptVouchers": 3,
+    "automaticOutbounds": 3,
+    "automaticOutboundLines": 6
+  },
+  "proposedRules": {
+    "version": "hailan-s01-pilot-rules-v1",
+    "status": "PENDING_OWNER_APPROVAL",
+    "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+    "unit": "EA",
+    "sourceUnitMapping": "1 piece = 1 EA",
+    "demandMethod": "Approved teaching scenario: mean of three paid/shipped order-business-day quantities; not enterprise forecast",
+    "horizonDays": 7,
+    "bufferDays": 0,
+    "maxAgeHours": 24,
+    "independentOrderMultiple": {
+      "HL-CBL100-2M": 6,
+      "HL-MUG350-WH": 12
+    },
+    "maxOrderQty": {
+      "HL-CBL100-2M": 120,
+      "HL-MUG350-WH": 120
+    },
+    "arrivalToSaleableBufferDays": 1,
+    "inventorySemantics": "Verified NET_AVAILABLE; do not deduct reserved twice",
+    "supplySemantics": "Only verified effective PO remaining lines; delivery/receipt not added a second time",
+    "quality": "Current inspected/available/defective and explicit approved mapping required"
+  },
+  "expectedOnlyNotObserved": {
+    "opening": {
+      "HL-CBL100-2M": 45,
+      "HL-MUG350-WH": 100
+    },
+    "sales": {
+      "HL-CBL100-2M": [
+        9,
+        10,
+        11
+      ],
+      "HL-MUG350-WH": [
+        4,
+        5,
+        6
+      ]
+    },
+    "teachingReceiptAmountsUsd": [
+      "123.51",
+      "144.40",
+      "165.29"
+    ],
+    "teachingReceiptTotalUsd": "433.20",
+    "partialReceipt": {
+      "HL-CBL100-2M": 12
+    },
+    "physicalAfterOperations": {
+      "HL-CBL100-2M": 27,
+      "HL-MUG350-WH": 85
+    },
+    "remainingPurchase": {
+      "HL-CBL100-2M": 24,
+      "HL-MUG350-WH": 24
+    },
+    "next7DayDemand": {
+      "HL-CBL100-2M": 70,
+      "HL-MUG350-WH": 35
+    },
+    "cable": {
+      "baselineGap": 19,
+      "candidateQuantity": 24,
+      "candidateAvailableDayOffset": 3,
+      "candidateClosingBalance": 5
+    },
+    "mug": {
+      "noReplenishment": true,
+      "candidateCount": 0
+    }
+  },
+  "operations": [
+    {
+      "id": "W01",
+      "method": "POST",
+      "path": "/api/v1/store-authorizations",
+      "payload": {
+        "platform": "Amazon",
+        "store_name": "海岚家居美国站",
+        "site": "US"
+      },
+      "bindEntity": "store",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W02",
+      "method": "POST",
+      "path": "/api/v1/warehouses",
+      "payload": {
+        "warehouse_code": "HL-US-LAX-01",
+        "name": "海岚洛杉矶现货仓",
+        "warehouse_type": "海外仓",
+        "country": "US",
+        "manager": "海岚仓配"
+      },
+      "bindEntity": "warehouse",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W03",
+      "method": "POST",
+      "path": "/api/v1/suppliers",
+      "payload": {
+        "supplier_code": "HL-NAM-01",
+        "name": "海岚北美生活用品供应",
+        "level": "常规供货",
+        "purchase_user": "海岚采购"
+      },
+      "bindEntity": "supplier",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W04",
+      "method": "POST",
+      "path": "/api/v1/products",
+      "payload": {
+        "sku": "HL-CBL100-2M",
+        "name": "USB-C 100W 编织快充线 2m",
+        "model": "100W-2m",
+        "category": "数码配件",
+        "price": 7.99,
+        "cost": 2.4,
+        "product_type": "经营商品",
+        "unit": "piece",
+        "brand": "海岚优选",
+        "tag": "HL-S01-P1-20261113",
+        "owner": "海岚商品组",
+        "description": "海岚跨境贸易经营商品",
+        "supplier_name": "海岚北美生活用品供应",
+        "moq": 12,
+        "procurement_lead_days": 2,
+        "default_carton_qty": 8,
+        "qc_method": "到货抽检",
+        "qc_standard": "外观及功能检查"
+      },
+      "bindEntity": "product.cable",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W05",
+      "method": "POST",
+      "path": "/api/v1/products",
+      "payload": {
+        "sku": "HL-MUG350-WH",
+        "name": "北欧风陶瓷马克杯 350ml",
+        "model": "350ml-白色",
+        "category": "家居生活",
+        "price": 12.9,
+        "cost": 3.2,
+        "product_type": "经营商品",
+        "unit": "piece",
+        "brand": "海岚优选",
+        "tag": "HL-S01-P1-20261113",
+        "owner": "海岚商品组",
+        "description": "海岚跨境贸易经营商品",
+        "supplier_name": "海岚北美生活用品供应",
+        "moq": 12,
+        "procurement_lead_days": 4,
+        "default_carton_qty": 12,
+        "qc_method": "到货抽检",
+        "qc_standard": "外观及功能检查"
+      },
+      "bindEntity": "product.mug",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W06",
+      "method": "POST",
+      "path": "/api/v1/listings",
+      "payload": {
+        "sku": "HL-CBL100-2M",
+        "platform": "Amazon",
+        "store_name": "海岚家居美国站",
+        "listing_id": "HL-US-CBL100-2M",
+        "title": "USB-C 100W 编织快充线 2m",
+        "price": 7.99
+      },
+      "bindEntity": "listing.cable",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W07",
+      "method": "POST",
+      "path": "/api/v1/listings",
+      "payload": {
+        "sku": "HL-MUG350-WH",
+        "platform": "Amazon",
+        "store_name": "海岚家居美国站",
+        "listing_id": "HL-US-MUG350-WH",
+        "title": "北欧风陶瓷马克杯 350ml",
+        "price": 12.9
+      },
+      "bindEntity": "listing.mug",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W08",
+      "method": "POST",
+      "path": "/api/v1/supplier-quotes",
+      "payload": {
+        "quote_no": "HL-S01-P1-20261113-Q-CBL",
+        "supplier_code": "HL-NAM-01",
+        "sku": "HL-CBL100-2M",
+        "currency": "USD",
+        "unit_price": "2.40",
+        "minimum_quantity": 12,
+        "lead_days": 2,
+        "valid_from": "2026-11-10",
+        "valid_to": "2026-12-13",
+        "enabled": true,
+        "expected_version": 0,
+        "request_key": "HL-S01-P1-20261113-quote-8"
+      },
+      "bindEntity": "quote.cable",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W09",
+      "method": "POST",
+      "path": "/api/v1/supplier-quotes",
+      "payload": {
+        "quote_no": "HL-S01-P1-20261113-Q-MUG",
+        "supplier_code": "HL-NAM-01",
+        "sku": "HL-MUG350-WH",
+        "currency": "USD",
+        "unit_price": "3.20",
+        "minimum_quantity": 12,
+        "lead_days": 4,
+        "valid_from": "2026-11-10",
+        "valid_to": "2026-12-13",
+        "enabled": true,
+        "expected_version": 0,
+        "request_key": "HL-S01-P1-20261113-quote-9"
+      },
+      "bindEntity": "quote.mug",
+      "expectedSideEffects": [
+        "Creates only the declared resource; independent read required"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W10",
+      "method": "POST",
+      "path": "/api/v1/inventory",
+      "payload": {
+        "batch_no": "HL-S01-P1-20261113-OPEN-CBL",
+        "wid": {
+          "$verifiedERPId": "warehouse"
+        },
+        "warehouse_name": "海岚洛杉矶现货仓",
+        "product_id": {
+          "$verifiedERPId": "product.cable"
+        },
+        "sku": "HL-CBL100-2M",
+        "store_id": {
+          "$verifiedERPId": "store"
+        },
+        "store_name": "海岚家居美国站",
+        "quantity": 45,
+        "available": 45,
+        "source_batch_no": "HL-S01-P1-20261113",
+        "order_sn": "HL-S01-P1-20261113-OPEN"
+      },
+      "bindEntity": "inventory.cable",
+      "expectedSideEffects": [
+        "Creates a known opening balance, not a fabricated posted ledger movement",
+        "No prior/other owner inventory may be updated"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W11",
+      "method": "POST",
+      "path": "/api/v1/inventory",
+      "payload": {
+        "batch_no": "HL-S01-P1-20261113-OPEN-MUG",
+        "wid": {
+          "$verifiedERPId": "warehouse"
+        },
+        "warehouse_name": "海岚洛杉矶现货仓",
+        "product_id": {
+          "$verifiedERPId": "product.mug"
+        },
+        "sku": "HL-MUG350-WH",
+        "store_id": {
+          "$verifiedERPId": "store"
+        },
+        "store_name": "海岚家居美国站",
+        "quantity": 100,
+        "available": 100,
+        "source_batch_no": "HL-S01-P1-20261113",
+        "order_sn": "HL-S01-P1-20261113-OPEN"
+      },
+      "bindEntity": "inventory.mug",
+      "expectedSideEffects": [
+        "Creates a known opening balance, not a fabricated posted ledger movement",
+        "No prior/other owner inventory may be updated"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W12",
+      "method": "POST",
+      "path": "/api/v1/sales-orders",
+      "payload": {
+        "order_sn": "HL-S01-P1-20261113-SO-1",
+        "platform_order_sn": "HL-S01-P1-20261113-ORD-1",
+        "platform": "Amazon",
+        "store_name": "海岚家居美国站",
+        "site": "US",
+        "country": "US",
+        "order_time": "2026-11-10 12:00:00",
+        "currency": "USD",
+        "amount": 123.51,
+        "shipping_warehouse": "海岚洛杉矶现货仓",
+        "delivery_method": "海岚仓配",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 9,
+            "unit_price": 7.99,
+            "amount": 71.91
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 4,
+            "unit_price": 12.9,
+            "amount": 51.6
+          }
+        ]
+      },
+      "bindEntity": "sale.1",
+      "expectedSideEffects": [
+        "Creates 1 order / 2 lines; CRUD alone must not deduct stock or forge paid/shipped status"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W13",
+      "method": "POST",
+      "path": "/api/v1/sales-orders",
+      "payload": {
+        "order_sn": "HL-S01-P1-20261113-SO-2",
+        "platform_order_sn": "HL-S01-P1-20261113-ORD-2",
+        "platform": "Amazon",
+        "store_name": "海岚家居美国站",
+        "site": "US",
+        "country": "US",
+        "order_time": "2026-11-11 12:00:00",
+        "currency": "USD",
+        "amount": 144.4,
+        "shipping_warehouse": "海岚洛杉矶现货仓",
+        "delivery_method": "海岚仓配",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 10,
+            "unit_price": 7.99,
+            "amount": 79.9
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 5,
+            "unit_price": 12.9,
+            "amount": 64.5
+          }
+        ]
+      },
+      "bindEntity": "sale.2",
+      "expectedSideEffects": [
+        "Creates 1 order / 2 lines; CRUD alone must not deduct stock or forge paid/shipped status"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W14",
+      "method": "POST",
+      "path": "/api/v1/sales-orders",
+      "payload": {
+        "order_sn": "HL-S01-P1-20261113-SO-3",
+        "platform_order_sn": "HL-S01-P1-20261113-ORD-3",
+        "platform": "Amazon",
+        "store_name": "海岚家居美国站",
+        "site": "US",
+        "country": "US",
+        "order_time": "2026-11-12 12:00:00",
+        "currency": "USD",
+        "amount": 165.29,
+        "shipping_warehouse": "海岚洛杉矶现货仓",
+        "delivery_method": "海岚仓配",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 11,
+            "unit_price": 7.99,
+            "amount": 87.89
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 6,
+            "unit_price": 12.9,
+            "amount": 77.4
+          }
+        ]
+      },
+      "bindEntity": "sale.3",
+      "expectedSideEffects": [
+        "Creates 1 order / 2 lines; CRUD alone must not deduct stock or forge paid/shipped status"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W15",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.1.id}/record-payment",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-RCPT-1",
+        "amount": "123.51",
+        "currency": "USD"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Records one teaching receipt voucher in ERP; no bank/card/third-party transfer",
+        "Must be separately approved; otherwise stop before shipment and keep fulfilled-sales acceptance NOT_RUN"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W16",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.2.id}/record-payment",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-RCPT-2",
+        "amount": "144.40",
+        "currency": "USD"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Records one teaching receipt voucher in ERP; no bank/card/third-party transfer",
+        "Must be separately approved; otherwise stop before shipment and keep fulfilled-sales acceptance NOT_RUN"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W17",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.3.id}/record-payment",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-RCPT-3",
+        "amount": "165.29",
+        "currency": "USD"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Records one teaching receipt voucher in ERP; no bank/card/third-party transfer",
+        "Must be separately approved; otherwise stop before shipment and keep fulfilled-sales acceptance NOT_RUN"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W18",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.1.id}/ship",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-SHIP-1",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 9
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 4
+          }
+        ],
+        "carrier": "海岚仓配",
+        "tracking_no": "HL-S01-P1-20261113-PARCEL-1"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Teaching shipment only; no external carrier/marketplace/customer notification",
+        "Deducts exact owned quantities and may create linked outbound records and ledger; do not post a second outbound"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W19",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.2.id}/ship",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-SHIP-2",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 10
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 5
+          }
+        ],
+        "carrier": "海岚仓配",
+        "tracking_no": "HL-S01-P1-20261113-PARCEL-2"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Teaching shipment only; no external carrier/marketplace/customer notification",
+        "Deducts exact owned quantities and may create linked outbound records and ledger; do not post a second outbound"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W20",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.3.id}/ship",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-SHIP-3",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 11
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 6
+          }
+        ],
+        "carrier": "海岚仓配",
+        "tracking_no": "HL-S01-P1-20261113-PARCEL-3"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Teaching shipment only; no external carrier/marketplace/customer notification",
+        "Deducts exact owned quantities and may create linked outbound records and ledger; do not post a second outbound"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W21",
+      "method": "POST",
+      "path": "/api/v1/purchase-orders",
+      "payload": {
+        "order_sn": "HL-S01-P1-20261113-PO-CABLE",
+        "custom_order_sn": "HL-S01-P1-20261113-PO-CABLE",
+        "supplier_id": {
+          "$verifiedERPId": "supplier"
+        },
+        "supplier_name": "海岚北美生活用品供应",
+        "warehouse_name": "海岚洛杉矶现货仓",
+        "order_time": "2026-11-10 09:00:00",
+        "purchase_currency": "USD",
+        "amount": 86.4,
+        "planned_arrival": "2026-11-15",
+        "purchase_user": "海岚采购",
+        "source_plan_no": "HL-S01-P1-20261113",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 36,
+            "unit_price": 2.4,
+            "amount": 86.4
+          }
+        ]
+      },
+      "bindEntity": "po.cable",
+      "expectedSideEffects": [
+        "Creates one owned single-SKU PO; status/received/pending/payment fields omitted; no inventory/financial settlement"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W22",
+      "method": "POST",
+      "path": "/api/v1/purchase-orders",
+      "payload": {
+        "order_sn": "HL-S01-P1-20261113-PO-MUG",
+        "custom_order_sn": "HL-S01-P1-20261113-PO-MUG",
+        "supplier_id": {
+          "$verifiedERPId": "supplier"
+        },
+        "supplier_name": "海岚北美生活用品供应",
+        "warehouse_name": "海岚洛杉矶现货仓",
+        "order_time": "2026-11-10 09:00:00",
+        "purchase_currency": "USD",
+        "amount": 76.8,
+        "planned_arrival": "2026-11-17",
+        "purchase_user": "海岚采购",
+        "source_plan_no": "HL-S01-P1-20261113",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 24,
+            "unit_price": 3.2,
+            "amount": 76.8
+          }
+        ]
+      },
+      "bindEntity": "po.mug",
+      "expectedSideEffects": [
+        "Creates one owned single-SKU PO; status/received/pending/payment fields omitted; no inventory/financial settlement"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W23",
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/{po.cable.id}/submit",
+      "payload": {},
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Local procurement state transition + audit only; no payment, stock or external placement"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W24",
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/{po.mug.id}/submit",
+      "payload": {},
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Local procurement state transition + audit only; no payment, stock or external placement"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W25",
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/{po.cable.id}/place-order",
+      "payload": {},
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Local teaching placement state + audit; no external supplier order or payment"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W26",
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/{po.mug.id}/place-order",
+      "payload": {},
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Local teaching placement state + audit; no external supplier order or payment"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W27",
+      "method": "POST",
+      "path": "/api/v1/supplier-deliveries",
+      "payload": {
+        "delivery_no": "HL-S01-P1-20261113-DEL-CBL",
+        "purchase_order_sn": "HL-S01-P1-20261113-PO-CABLE",
+        "supplier_name": "海岚北美生活用品供应",
+        "warehouse_name": "海岚洛杉矶现货仓",
+        "total_qty": 36,
+        "creator": "海岚采购",
+        "inspection_type": "到货抽检",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 36
+          }
+        ]
+      },
+      "bindEntity": "delivery.cable",
+      "expectedSideEffects": [
+        "Creates one delivery reference linked by PO business number; no second transit supply or inventory increase"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W28",
+      "method": "POST",
+      "path": "/api/v1/inbound-orders",
+      "payload": {
+        "order_sn": "HL-S01-P1-20261113-IN-CBL-12",
+        "type": 1,
+        "warehouse_name": "海岚洛杉矶现货仓",
+        "purchase_order_sn": "HL-S01-P1-20261113-PO-CABLE",
+        "supplier_name": "海岚北美生活用品供应",
+        "create_time": "2026-11-13 09:00:00",
+        "quantity": 12,
+        "inspected_qty": 12,
+        "available_qty": 12,
+        "defective_qty": 0,
+        "qc_status": "检验合格",
+        "remark": "HL-S01-P1-20261113",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 12,
+            "inspected_qty": 12,
+            "available_qty": 12,
+            "defective_qty": 0
+          }
+        ]
+      },
+      "bindEntity": "receipt.cable",
+      "expectedSideEffects": [
+        "Creates a pending partial receipt only; no inventory increase until explicit confirmation"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W29",
+      "method": "POST",
+      "path": "/api/v1/stock/inbound-orders/confirm",
+      "payload": {
+        "ids": [
+          {
+            "$verifiedERPId": "receipt.cable"
+          }
+        ]
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Confirm exactly 12 owned cable units; inventory +12, PO received +12/pending 24, ledger once",
+        "Inspect every fail/failList/reused; never infer success from code=0 alone"
+      ],
+      "replayOf": null,
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W30",
+      "method": "POST",
+      "path": "/api/v1/supplier-quotes",
+      "payload": {
+        "quote_no": "HL-S01-P1-20261113-Q-CBL",
+        "supplier_code": "HL-NAM-01",
+        "sku": "HL-CBL100-2M",
+        "currency": "USD",
+        "unit_price": "2.40",
+        "minimum_quantity": 12,
+        "lead_days": 2,
+        "valid_from": "2026-11-10",
+        "valid_to": "2026-12-13",
+        "enabled": true,
+        "expected_version": 0,
+        "request_key": "HL-S01-P1-20261113-quote-8"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Replay same key/reference and payload; no extra resource/quantity/ledger/voucher"
+      ],
+      "replayOf": "W08",
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W31",
+      "method": "POST",
+      "path": "/api/v1/workflows/purchase-orders/{po.cable.id}/place-order",
+      "payload": {},
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Replay same key/reference and payload; no extra resource/quantity/ledger/voucher"
+      ],
+      "replayOf": "W25",
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W32",
+      "method": "POST",
+      "path": "/api/v1/stock/inbound-orders/confirm",
+      "payload": {
+        "ids": [
+          {
+            "$verifiedERPId": "receipt.cable"
+          }
+        ]
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Replay same key/reference and payload; no extra resource/quantity/ledger/voucher"
+      ],
+      "replayOf": "W29",
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    },
+    {
+      "id": "W33",
+      "method": "POST",
+      "path": "/api/v1/sales-workflow/{sale.1.id}/ship",
+      "payload": {
+        "reference": "HL-S01-P1-20261113-SHIP-1",
+        "item_list": [
+          {
+            "sku": "HL-CBL100-2M",
+            "quantity": 9
+          },
+          {
+            "sku": "HL-MUG350-WH",
+            "quantity": 4
+          }
+        ],
+        "carrier": "海岚仓配",
+        "tracking_no": "HL-S01-P1-20261113-PARCEL-1"
+      },
+      "bindEntity": null,
+      "expectedSideEffects": [
+        "Replay same key/reference and payload; no extra resource/quantity/ledger/voucher"
+      ],
+      "replayOf": "W18",
+      "permit": "PENDING_OWNER_APPROVAL",
+      "retryPolicy": "READ_ORIGINAL_KEY_OR_ID_BEFORE_ANY_RESEND"
+    }
+  ],
+  "registration": {
+    "activeMembersToDate": 0,
+    "state": "PLANNED",
+    "erpTenantId": null,
+    "members": [
+      {
+        "sku": "HL-CBL100-2M",
+        "productId": null,
+        "storeId": null,
+        "warehouseId": null,
+        "listingId": null
+      },
+      {
+        "sku": "HL-MUG350-WH",
+        "productId": null,
+        "storeId": null,
+        "warehouseId": null,
+        "listingId": null
+      }
+    ],
+    "activation": "Only after owned write receipts + independent ERP IDs/relations + quantity reconciliation + current G01 grant; a local plan file is not ACTIVE D02 registry"
+  },
+  "stopConditions": [
+    "Any namespace query 503/timeout/auth denial/incomplete result",
+    "Any existing same key/name without our verified ownership",
+    "Any unsupported required field/workflow prerequisite; no fake state updates",
+    "Any foreign tenant/store/warehouse/product/listing/line or unexplained side effect",
+    "Missing usable receipt/shipment ledger or inconsistent 12-unit partial receipt",
+    "Unconfirmed send: journal UNKNOWN, query original IDs, never blind retry/change key",
+    "Any 40/80 budget exhaustion; no reset on resume",
+    "Any need for actual payment/notification/ERP account/permission change",
+    "Any unexpected public material in publication manifest",
+    "Generic POST with UNKNOWN send and no source idempotency/creation-ownership proof remains UNKNOWN even if same name/body is found; no adoption/deletion or child creation"
+  ],
+  "validity": {
+    "businessDay": "2026-11-13",
+    "businessTimezone": "UTC",
+    "expiresAt": "2026-11-14T00:00:00Z",
+    "onBusinessDayChange": "Regenerate dated plan and approval digest; never silently alter approved requests"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "sourceBasis": "1658286bb358d2fc0b3a11ced30998e692de6824",
+  "applicationCodeUnchanged": true,
+  "oldEvidenceAndScreenshotsPreserved": true,
+  "unrelatedTaskRecordsPreserved": 36,
+  "actualSecretMatches": [],
+  "privateFilesTracked": false,
+  "unknownOpenapiPreserved": true,
+  "applicationTestsRerun": false,
+  "backend670AndFrontend33Retained": true,
+  "browserCancellationFailureRetained": true,
+  "enterpriseGates": "BLOCKED_UNCHANGED",
+  "currentBusinessMutations": 0,
+  "currentModelRequests": 0,
+  "phase8Started": false,
+  "publicScope": "Three reviewed engineering/aggregate documents plus necessary exact repository allowlist; no source code or private evidence"
+}

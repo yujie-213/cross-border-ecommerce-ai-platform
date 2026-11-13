@@ -1,0 +1,314 @@
+{
+  "result": "PASS",
+  "baseRemoteMain": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
+  "publicationBranch": "codex/s01-pilot-scope-review",
+  "scope": "THREE_REVIEWED_DOCUMENTS_ONLY_NO_APPLICATION_CODE",
+  "includesPriorLocalRestrictedHistory": false,
+  "allowed": [
+    {
+      "path": "docs/contracts/s01/owned-dataset-scope.md",
+      "sha256": "3e2f6b9d5f9775a5f14e9f4398ddce49712c63689afadfaaafcae0cdb0e372ff",
+      "classification": "ALLOW_REVIEWED_ENGINEERING_OR_AGGREGATE",
+      "review": "Full text and actual candidate diff reviewed; no source business records/IDs, connection, credentials, Provider content/authorization or screenshots"
+    },
+    {
+      "path": "docs/reports/S01_2SKU小试_公开评审摘要.md",
+      "sha256": "b75c524ca4c05cbb09897073b0bd4f880a3e1fdf71e74733b154a4485b780b7a",
+      "classification": "ALLOW_REVIEWED_ENGINEERING_OR_AGGREGATE",
+      "review": "Full text and actual candidate diff reviewed; no source business records/IDs, connection, credentials, Provider content/authorization or screenshots"
+    },
+    {
+      "path": "docs/evidence/S01-PILOT-PREP/public-test-summary.json",
+      "sha256": "9da1419eaaaf359b511da10e05d7e60cd67b7922004ed9a3c7fd38b0093fe9e8",
+      "classification": "ALLOW_REVIEWED_ENGINEERING_OR_AGGREGATE",
+      "review": "Full text and actual candidate diff reviewed; no source business records/IDs, connection, credentials, Provider content/authorization or screenshots"
+    }
+  ],
+  "retainedLocal": [
+    {
+      "path": "AGENTS.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/contracts/s01/backend-api.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/contracts/s01/pilot-2sku-plan-v1.json",
+      "classification": "HOLD_COMPLETE_LOCAL_APPROVAL_PLAN_AND_PROPOSED_BUSINESS_PAYLOADS"
+    },
+    {
+      "path": "docs/evidence/S01-DATA-ASSESSMENT/assessment-facts.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-DATA-ASSESSMENT/change-scan.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-DATA-ASSESSMENT/preservation.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-DATA-ASSESSMENT/repository-state.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/backend-regression.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/bounded-discovery.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/browser-checkpoint.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/development-checks.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/phase1-browser.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/phase1-live.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/phase2-live.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/phase3-browser-failure.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/phase3-live.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/online-ai-1.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/online-ai-2.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/online-authorized-options.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/online-report-1.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/online-report-2.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/phase1-acquisition-evidence.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/phase1-online-report.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-ONLINE/screenshots/phase1-options.png",
+      "classification": "DENY_UNAPPROVED_SCREENSHOT"
+    },
+    {
+      "path": "docs/evidence/S01-PILOT-PREP/plan-validation-local.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/evidence/S01-PILOT-PREP/preflight-local.json",
+      "classification": "HOLD_ORIGINAL_OR_DETAILED_EVIDENCE_NOT_AUTHORIZED_FOR_PUBLICATION"
+    },
+    {
+      "path": "docs/generated/DEPENDENCIES.mmd",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/generated/STATUS.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/planning/git-whitelist.json",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/planning/validation-report.json",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "docs/reports/S01_2SKU小试精确执行清单_20261113.md",
+      "classification": "HOLD_COMPLETE_LOCAL_APPROVAL_PLAN_AND_PROPOSED_BUSINESS_PAYLOADS"
+    },
+    {
+      "path": "docs/reports/S01_数据环境与监控范围决策评估_20261113.md",
+      "classification": "HOLD_LOCAL_GOVERNANCE_OR_DETAILED_HISTORY_OUTSIDE_SELECTED_PUBLIC_SCOPE"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/src/api/client.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/src/api/types.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/src/components/AIExplanation.vue",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/src/components/ReportDetail.vue",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/src/domain.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/src/useWorkspace.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "frontend/tests/unit/online.test.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "migrations/versions/0006_online_inputs.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/adapters/models/online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/bootstrap/s01_online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/data/evidence/__init__.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/data/projection/online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/data/quality/online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/data/quality/online_store.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/data/sync/online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/data/sync/online_store.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/entrypoints/http/tasks.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/infrastructure/database.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/orchestration/budget.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/orchestration/service.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/orchestration/worker.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/s01_backend/__init__.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/s01_backend/online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/browser/s01/online.spec.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/browser/s01/workspace.spec.ts",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/integration/mysql/test_storage.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/integration/s01/test_online_models.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/integration/s01/test_online_workflow.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/unit/data/test_online.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tests/unit/data/test_online_calculation.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tools/s01_online_dev.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    },
+    {
+      "path": "tools/s01_online_verify.py",
+      "classification": "HOLD_CODE_PUBLICATION_NOT_PART_OF_THIS_DOCUMENT_ONLY_SNAPSHOT; source assembly/connection/private authorization coupling needs separate review, no code rewrite in current stage"
+    }
+  ],
+  "expectedNewCommitCount": 1,
+  "restrictions": [
+    "No private Provider responses or authorization information",
+    "No ERP raw/full records or internal/other-student resource information",
+    "No screenshots",
+    "No credentials, cookies, token, connection information or sensitive parameters"
+  ],
+  "actualSecretMatches": 0,
+  "sourceEvidencePreserved": true,
+  "unknownOpenapiExcluded": true,
+  "defaultAction": "DENY_ALL_PATHS_NOT_EXPLICITLY_SELECTED",
+  "supplementalGovernanceFile": "docs/planning/git-whitelist.json",
+  "supplementalReview": "Based solely on existing remote main; semantic path set only adds the three reviewed content files, no private local path or authorization facts added"
+}
