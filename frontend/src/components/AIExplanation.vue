@@ -8,7 +8,8 @@ const sections = [{ key: 'recommendationReasons', name: '建议原因' }, { key:
 </script>
 <template>
   <div class="section-head"><h3>AI 解释</h3><StatusBadge :value="ai.status" /></div>
-  <p class="micro-note">当前普通分析仅支持 off/mock。独立 DeepSeek 评测不属于本次任务的在线回答。</p>
+  <p class="micro-note">仅展示本次报告绑定并通过事实与引用校验的解释；AI 不改变数据质量、补货计算或采购权限。</p>
+  <p v-if="ai.actualModelRevision" class="micro-note">本次模型：{{ ai.actualModelRevision }} · 用量引用：{{ shown(ai.usageRef) }}</p>
   <Notice v-if="ai.provider === 'MOCK'" tone="warning" title="工程 Mock 解释">此解释来自明确启用的工程模拟 Provider。</Notice>
   <template v-if="ai.status === 'AVAILABLE'"><section v-for="section in sections" :key="section.key" class="explanation-section"><h3>{{ section.name }}</h3><ul><li v-for="(item, i) in ai.explanation?.[section.key] || []" :key="i">{{ item.text }}<small class="muted">依据：{{ item.supportRefs.join('、') }}<template v-if="item.certainty"> · {{ item.certainty }}</template></small></li></ul></section></template>
   <Notice v-else :title="ai.status === 'NOT_ATTEMPTED' ? '本次未启用 AI 解释' : 'AI 解释不可用'" :tone="ai.status === 'UNAVAILABLE' ? 'warning' : 'info'">合法规则分析仍可查看；解释状态不改变质量、计算结论或采购权限。<p v-if="ai.reason">原因：{{ ai.reason }}</p></Notice>

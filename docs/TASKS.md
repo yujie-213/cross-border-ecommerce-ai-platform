@@ -6368,10 +6368,37 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING",
     "LIVE"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "5ae0d32f6c9c38be615ca43420ba658a2d97dceb"
+  ],
+  "testedCommit": "5ae0d32f6c9c38be615ca43420ba658a2d97dceb",
+  "evidence": [
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-ONLINE-02/AC1"
+      ],
+      "command": "python -m tools.s01_online_verify --execute-live --candidate 1 --evidence-name phase2-live",
+      "environment": "真实教学ERP/唯一MySQL/独立API与Worker",
+      "sample": "映射通过的当前SKU；REST销售503、UTC兼容超时，受限B02路径；B01正向未满足",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ONLINE/phase2-live.json"
+    },
+    {
+      "kind": "LIVE_POSITIVE_B01",
+      "acceptanceIds": [
+        "D-S01-ONLINE-02/AC1"
+      ],
+      "command": "当前真实ERP完整正向输入准入",
+      "environment": "真实教学ERP",
+      "sample": "数据及企业规则缺失，不使用固定catalog补齐",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/S01-ONLINE/bounded-discovery.json"
+    }
+  ],
   "review": null,
   "branch": "codex/s01-live-business-closure",
   "observedHead": "2fba3b42597b87b4efa8ecc7c6a83a38b6fba804",
@@ -6382,6 +6409,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "TODO",
       "reason": "本轮连续授权；领取和测试按真实阶段推进"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "真实在线受限路径及26项相关工程验证完成；正向真实B01/候选仍BLOCKED，不代表业务验收"
     }
   ],
   "dirtyPaths": [
@@ -6435,7 +6467,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ENGINEERING",
     "LIVE"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],

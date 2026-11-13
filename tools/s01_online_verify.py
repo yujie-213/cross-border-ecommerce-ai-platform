@@ -26,12 +26,18 @@ def main():
     parser.add_argument('--execute-live',action='store_true')
     parser.add_argument('--serve',action='store_true')
     parser.add_argument('--candidate',type=int,choices=range(4),default=0)
+    parser.add_argument('--enable-model',action='store_true')
+    parser.add_argument('--task-count',type=int,choices=[1,2],default=2)
     parser.add_argument('--evidence-name',default='phase1-live')
     parser.add_argument('--duration',type=int,default=600,choices=range(60,901))
     args=parser.parse_args()
     if not args.execute_live:
         print('NOT_RUN: explicit --execute-live required; no ERP/model IO');return
     os.environ.update(COMMERCE_ENVIRONMENT='test',COMMERCE_MODEL_PROVIDER='mock',COMMERCE_MODEL_NETWORK_ENABLED='false')
+    if args.enable_model:
+        os.environ.update(COMMERCE_MODEL_PROVIDER='deepseek',COMMERCE_MODEL_NETWORK_ENABLED='true',
+            COMMERCE_MODEL_MAX_OUTPUT_TOKENS='1024',COMMERCE_MODEL_MAX_CONCURRENT='1',COMMERCE_MODEL_TIMEOUT_SECONDS='30',
+            COMMERCE_S01_ONLINE_EXPLANATION_MODE='deepseek',COMMERCE_S01_ONLINE_AUTHORIZATION='s01-online-20261113-r1')
     from sqlalchemy import select
     from commerce_hub.bootstrap.settings import load_settings
     from commerce_hub.infrastructure.database import Database,migrate
@@ -49,7 +55,7 @@ def main():
         COMMERCE_TASK_DEADLINE_SECONDS='240',COMMERCE_LEASE_SECONDS='10',COMMERCE_HEARTBEAT_SECONDS='1',
         COMMERCE_BROWSER_ORIGIN='http://localhost:5173')
     evidence=dict(testedCommit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
-        capturedAt=datetime.now(timezone.utc).isoformat(),kind='REAL_ERP_REAL_MYSQL_API_INDEPENDENT_WORKER',models='NOT_RUN',tasks=[])
+        capturedAt=datetime.now(timezone.utc).isoformat(),kind='REAL_ERP_REAL_MYSQL_API_INDEPENDENT_WORKER',models='AUTHORIZED' if args.enable_model else 'NOT_RUN',tasks=[])
     try:
         harness.start_api();worker=harness.start_worker()
         receipt=dict(apiTarget=str(harness.client.base_url).rstrip('/'),token=harness.token,
@@ -59,7 +65,7 @@ def main():
         if args.serve:
             print('READY: online API/Worker; private session receipt written',flush=True)
             time.sleep(args.duration);return
-        for index in range(2):
+        for index in range(args.task_count):
             key=uuid4().hex
             body=dict(analysisMode='SINGLE',scenarioId='S01_BACKEND',scope={k:v for k,v in harness.scope.items() if k!='tenantId'},parameters=dict(inputMode='ONLINE_TEACHING_ERP'),previousReportRef=None)
             accepted=harness.client.post('/api/v1/analysis-tasks',json=body,headers={'Idempotency-Key':key});assert accepted.status_code==202
@@ -82,15 +88,19 @@ def main():
                 calculation=report['dataReport']['supplyDemand'],quality=report['dataReport']['quality'],
                 ai=report['analysisReport']['ai'],idempotentReplay='PASS',immutableSnapshot='PASS'))
             print('LIVE_TASK',index+1,task['state'],report['completeness'],flush=True)
-        assert evidence['tasks'][0]['snapshotRef']!=evidence['tasks'][1]['snapshotRef']
+            if args.enable_model and report['analysisReport']['ai']['status']!='AVAILABLE':
+                print('MODEL_FIRST_FAILURE: stop new requests and analyze',report['analysisReport']['ai'].get('reason'),flush=True)
+                break
+        if len(evidence['tasks'])==2:assert evidence['tasks'][0]['snapshotRef']!=evidence['tasks'][1]['snapshotRef']
         first=evidence['tasks'][0];before=harness.report(first['taskId'])
         harness.api.stop();harness.start_api();worker.stop();harness.start_worker()
         assert before==harness.report(first['taskId'])
-        evidence.update(result='PASS',independentAcquisitions='PASS',apiWorkerRestartHistoricalRead='PASS')
+        evidence.update(result='PASS',independentAcquisitions='PASS' if len(evidence['tasks'])==2 else 'NOT_RUN',apiWorkerRestartHistoricalRead='PASS',
+            modelStatus=[t['ai']['status'] for t in evidence['tasks']] if args.enable_model else 'NOT_RUN')
         if args.evidence_name not in {'phase1-live','phase2-live','phase3-live'}:raise ValueError('EVIDENCE_NAME_NOT_ALLOWED')
         target=ROOT/('docs/evidence/S01-ONLINE/'+args.evidence_name+'.json');target.parent.mkdir(parents=True,exist_ok=True)
         target.write_text(json.dumps(evidence,ensure_ascii=False,indent=2),encoding='utf-8')
-        print('PASS: two independent live collections, replay, immutable snapshots and restart read',flush=True)
+        print(f"PASS: {len(evidence['tasks'])} live task(s), replay, immutable snapshots and restart read",flush=True)
     finally:
         harness.close();db.close()
 

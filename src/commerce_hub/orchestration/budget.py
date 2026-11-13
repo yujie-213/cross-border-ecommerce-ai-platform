@@ -1,6 +1,8 @@
 """O01 original-task allowance control. G02 owns actual usage facts."""
 from decimal import Decimal, InvalidOperation
 from datetime import timezone
+from contextlib import contextmanager
+import hashlib
 
 from sqlalchemy import insert, select, update, func
 
@@ -24,6 +26,44 @@ def amount(value):
 class TaskBudgetHandle:
     def __init__(self, service, lease, principal, plan_version):
         self.service, self.lease, self.principal, self.plan_version = service, lease, principal, plan_version
+
+    @property
+    def shared_authorization(self):
+        spec=next((s for s in self.service.registry.values() if s.work_kind == self.lease.kind),None)
+        return spec.shared_model_authorization if spec else None
+
+    @contextmanager
+    def admission_transaction(self):
+        """Serialize a bounded authorization across processes; no lock spans IO.
+
+        All facts/reservations stay in existing O01/G02 rows. The named lock is
+        released only after commit, and is connection-scoped on crash.
+        """
+        shared=self.shared_authorization
+        if shared is None:
+            with self.service.engine.begin() as conn:yield conn
+            return
+        name='o01:model-auth:'+hashlib.sha256(shared.authorization_id.encode()).hexdigest()[:40]
+        with self.service.engine.connect() as conn:
+            held=conn.scalar(select(func.get_lock(name,5)))
+            conn.commit()
+            if held != 1:raise BudgetError('CONCURRENCY_DENIED')
+            try:
+                with conn.begin():yield conn
+            finally:
+                if conn.in_transaction():conn.rollback()
+                conn.execute(select(func.release_lock(name)))
+                conn.commit()
+
+    def check_shared_reservation(self,conn,tokens,cost):
+        shared=self.shared_authorization
+        if shared is None:return
+        totals=conn.execute(select(func.coalesce(func.sum(budgets.c.used_calls+budgets.c.reserved_calls),0),
+            func.coalesce(func.sum(budgets.c.used_tokens+budgets.c.reserved_tokens),0),
+            func.coalesce(func.sum(budgets.c.used_cost+budgets.c.reserved_cost),0))
+            .where(budgets.c.policy_version==shared.authorization_id)).one()
+        if totals[0]+1>shared.max_calls or totals[1]+tokens>shared.max_tokens or totals[2]+cost>shared.max_cost:
+            raise BudgetError('BUDGET_DENIED')
 
     def _key(self, attempt_id):
         if not isinstance(attempt_id, str) or not 1 <= len(attempt_id) <= 64:
@@ -56,7 +96,7 @@ class TaskBudgetHandle:
         key = self._key(attempt_id)
         if type(max_inflight) is not int or not 1 <= max_inflight <= 4:
             raise BudgetError("INVALID_CONCURRENCY")
-        with self.service.engine.begin() as conn:
+        with self.admission_transaction() as conn:
             self.service._execution(conn, self.lease, self.principal, self.plan_version)
             conn.execute(select(budgets).filter_by(tenant_id=key["tenant_id"], task_id=key["task_id"]).with_for_update()).one()
             row = conn.execute(select(attempts).filter_by(**key).with_for_update()).mappings().one()
@@ -68,6 +108,12 @@ class TaskBudgetHandle:
                 raise BudgetError("USAGE_MUST_BE_RECONCILED")
             if len(pending) >= max_inflight:
                 raise BudgetError("CONCURRENCY_DENIED")
+            shared=self.shared_authorization
+            if shared is not None:
+                active=conn.execute(select(attempts.c.state).select_from(attempts.join(budgets,
+                    (attempts.c.tenant_id==budgets.c.tenant_id)&(attempts.c.task_id==budgets.c.task_id)))
+                    .where(budgets.c.policy_version==shared.authorization_id,attempts.c.state.in_(['SENT','UNKNOWN']))).scalars().all()
+                if active:raise BudgetError('USAGE_MUST_BE_RECONCILED' if 'UNKNOWN' in active else 'CONCURRENCY_DENIED')
             self.service.audit.record(conn, tenant_id=key["tenant_id"], task_id=key["task_id"],
                 principal_id=self.principal.principal_id, action="MODEL_SENT", trace_id=trace_id, details=details)
             conn.execute(update(attempts).filter_by(**key).values(state="SENT"))
@@ -84,7 +130,7 @@ class TaskBudgetHandle:
         if type(tokens) is not int or not 0 <= tokens <= 2147483647 or not isinstance(logical_call_id, str) or not 1 <= len(logical_call_id) <= 64:
             raise BudgetError("INVALID_ALLOWANCE")
         key = self._key(attempt_id)
-        with self.service.engine.begin() as conn:
+        with self.admission_transaction() as conn:
             self.service._execution(conn, self.lease, self.principal, self.plan_version)
             budget = conn.execute(select(budgets).filter_by(tenant_id=key["tenant_id"], task_id=key["task_id"])
                                   .with_for_update()).mappings().one()
@@ -98,6 +144,7 @@ class TaskBudgetHandle:
                 .where(attempts.c.state.in_(["SENT", "UNKNOWN", "USAGE_RECORDED", "USAGE_OVER_LIMIT"]))).first()
             if unresolved:
                 raise BudgetError("USAGE_MUST_BE_RECONCILED")
+            self.check_shared_reservation(conn,tokens,upper)
             if (budget["used_calls"] + budget["reserved_calls"] + 1 > budget["max_calls"] or
                 budget["used_tokens"] + budget["reserved_tokens"] + tokens > budget["max_tokens"] or
                 budget["used_cost"] + budget["reserved_cost"] + upper > budget["max_cost"]):

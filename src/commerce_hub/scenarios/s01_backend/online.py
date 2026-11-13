@@ -11,10 +11,16 @@ from commerce_hub.data.projection.observed import verify_observations
 from commerce_hub.data.evidence import locator
 from commerce_hub.capabilities.forecasting import propose
 from commerce_hub.orchestration.contracts import DomainResult
+from commerce_hub.scenarios.s01_backend import S01BackendHandler
+from commerce_hub.capabilities.models.gateway import ModelGateway
+from commerce_hub.scenarios.s01.natural_explanation import (NATURAL_SEMANTIC_POLICY,
+    validate_result_versions,validate_result_explanation)
+from commerce_hub.scenarios.s01_supply_inventory import facts_for
+from decimal import Decimal
 
 
 class OnlineS01Handler:
-    def __init__(self, mappings, reader_factory, *, fixed=None):
+    def __init__(self, mappings, reader_factory, *, fixed=None,provider=None,timeout_seconds=30):
         if not 1 <= len(mappings) <= 20:
             raise ValueError('ONLINE_MAPPING_LIMIT')
         self.mappings = [m.validate_scope() for m in mappings]
@@ -22,6 +28,12 @@ class OnlineS01Handler:
             raise ValueError('DUPLICATE_ONLINE_MAPPING')
         self.reader_factory, self.fixed = reader_factory, fixed
         self.acquisitions, self.snapshots = AcquisitionStore(), OnlineSnapshotStore()
+        self.gateway=ModelGateway(provider,timeout_seconds=timeout_seconds) if provider else None
+        self.explanation_mode='natural'
+        self.request_cost_reservation=Decimal('.05')
+        self.logical_namespace=fingerprint('s01-online-20261113-r1')[:12]
+
+    natural_logical_call=S01BackendHandler.natural_logical_call
 
     @staticmethod
     def online(parameters):
@@ -52,7 +64,8 @@ class OnlineS01Handler:
 
     def options(self, tenant_id):
         choices = [dict(choiceRef='online-'+fingerprint(m.scope),inputMode=MODE,sourceMode=MODE,
-            scope=deepcopy(m.scope),asOf=None,sourceNature='TEACHING_ERP_OBSERVED') for m in self.mappings if m.scope['tenantId'] == tenant_id]
+            scope=deepcopy(m.scope),asOf=None,sourceNature='TEACHING_ERP_OBSERVED',
+            displayLabels=dict(sku=m.sku,store=m.storeName,warehouse=m.warehouseName)) for m in self.mappings if m.scope['tenantId'] == tenant_id]
         return choices + (self.fixed.options(tenant_id) if self.fixed else [])
 
     def run(self, context, parameters):
@@ -76,6 +89,11 @@ class OnlineS01Handler:
                 self.acquisitions.finish(conn,row,receipt,asset['snapshotId'])
             context.commit_data(persist)
         result = self.rules_result(asset,parameters.get('_previousReportRef'))
+        # A verified identity plus actual collected domains is a legal limited
+        # context. Explanations preserve missing baseline/quality as UNKNOWN;
+        # unverified identity never sends quantities or model context.
+        if self.gateway and asset['manifest']['mappingVerified'] and 'normalization' in asset:
+            return S01BackendHandler.explain_result(self,context,result,model_allowed=True)
         context.check()
         self.validate_publication(result,dict(tenantId=row['tenant_id'],taskId=row['task_id']),str(row['plan_version']))
         return result
@@ -120,8 +138,20 @@ class OnlineS01Handler:
             acquisition=result.dataReport['acquisition']
             expected=self.rules_result(result.dataReport['onlineAsset'],result.dataReport['scenarioSupplement'].get('previousReportRef'))
             if (acquisition['taskRef'] != task_ref or acquisition['planVersion'] != str(plan_version)
-                or result != expected):
+                or result.model_copy(update={'analysisReport':expected.analysisReport}) != expected):
                 raise ValueError('ONLINE_PUBLICATION_BINDING_REJECTED')
+            ai=result.analysisReport.get('ai')
+            if ai != expected.analysisReport['ai']:
+                binding=dict(taskRef=task_ref,planVersion=str(plan_version),snapshotId=result.snapshotRef,participantId='s01')
+                if (not asset_verified_for_ai(result) or ai.get('binding')!=binding
+                    or ai.get('provider')!='AUTHORIZED_PROVIDER' or ai.get('semanticPolicy')!=NATURAL_SEMANTIC_POLICY
+                    or ai.get('realModelAcceptance')!='REVIEW' or ai.get('supportCatalog')!=facts_for(result)
+                    or ai.get('usageStatus') not in {'KNOWN','UNKNOWN','NOT_SENT'}):
+                    raise ValueError('ONLINE_AI_BINDING_REJECTED')
+                if ai.get('versionBundle'):validate_result_versions(ai,result)
+                if ai.get('status')=='AVAILABLE':validate_result_explanation(ai,result)
+                elif ai.get('status')!='UNAVAILABLE' or ai.get('explanation') is not None:
+                    raise ValueError('ONLINE_AI_BINDING_REJECTED')
         except (KeyError,TypeError,AttributeError):
             raise ValueError('ONLINE_PUBLICATION_BINDING_REJECTED') from None
 
@@ -134,6 +164,9 @@ class OnlineS01Handler:
             raise ValueError('ONLINE_REPORT_INPUT_BINDING_REJECTED')
 
     def model_receipts(self,report):
+        if report['dataReport']['scenarioSupplement'].get('inputMode') == MODE:
+            ai=report['analysisReport']['ai']
+            return [ai] if ai.get('status')=='AVAILABLE' else []
         return self.fixed.model_receipts(report) if report['dataReport']['scenarioSupplement'].get('inputMode') != MODE and self.fixed else []
 
     def report_view(self,report):
@@ -146,3 +179,8 @@ class OnlineS01Handler:
         view['dataReport']={k:deepcopy(report['dataReport'][k]) for k in
             ('observedDomains','quality','supplyDemand','scenarioSupplement','acquisition','evidence')}
         return view
+
+
+def asset_verified_for_ai(result):
+    asset=result.dataReport['onlineAsset']
+    return asset['manifest']['mappingVerified'] is True and 'normalization' in asset

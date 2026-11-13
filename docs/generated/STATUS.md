@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`a8b37b93060c8b133f0f928a337b2b1e57ee0b24d26f57ec85a0a83b3d63fd69`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`997fd0561f260f245b65928aa5efbee6d940c4399ec7376aa1a11e52a110d4af`。不要手工编辑；候选不是执行授权。
 
-任务 34 项；TODO 5；IN_PROGRESS 1；BLOCKED 4；REVIEW 10；ACCEPTED 14。
+任务 34 项；TODO 4；IN_PROGRESS 1；BLOCKED 4；REVIEW 11；ACCEPTED 14。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 17 | 2 | 1 | 4 | 8 | 2 |
+| D | 17 | 1 | 1 | 4 | 9 | 2 |
 
 ## 当前活动记录
 
@@ -28,7 +28,8 @@
 - D-S01-LIVE-01 单SKU教学ERP真实读取与受控补充闭环验收：REVIEW；实际执行者=Codex主集成及冻结范围并行Agent。
 - D-S01-MVP-TODO S01 MVP分阶段开发任务规划（本轮仅文档）：REVIEW；实际执行者=Codex（本轮唯一文档规划执行者）。
 - D-S01-ONLINE-01 ERP在线采集与工作台入口：REVIEW；实际执行者=Codex。
-- D-S01-ONLINE-02 在线数据准入与B01/B02：IN_PROGRESS；实际执行者=Codex。
+- D-S01-ONLINE-02 在线数据准入与B01/B02：REVIEW；实际执行者=Codex。
+- D-S01-ONLINE-03 正常在线任务DeepSeek解释：IN_PROGRESS；实际执行者=Codex。
 
 ## 全部近期记录
 
@@ -66,7 +67,7 @@
 | D-S01-ACCEPT-01 | 单SKU S01 MVP端到端复现与负责人验收 | TODO | A-06, D-S01-LIVE-01, D-S01-DEV-01, D-S01-UI-01, C-04 |
 | D-S01-MVP-TODO | S01 MVP分阶段开发任务规划（本轮仅文档） | REVIEW | 无；仍核对入口指令 |
 | D-S01-ONLINE-01 | ERP在线采集与工作台入口 | REVIEW | A-06, B-01, D-S01-UI-01 |
-| D-S01-ONLINE-02 | 在线数据准入与B01/B02 | IN_PROGRESS | D-S01-ONLINE-01, B-03, B-04 |
-| D-S01-ONLINE-03 | 正常在线任务DeepSeek解释 | TODO | D-S01-ONLINE-02, C-01 |
+| D-S01-ONLINE-02 | 在线数据准入与B01/B02 | REVIEW | D-S01-ONLINE-01, B-03, B-04 |
+| D-S01-ONLINE-03 | 正常在线任务DeepSeek解释 | IN_PROGRESS | D-S01-ONLINE-02, C-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

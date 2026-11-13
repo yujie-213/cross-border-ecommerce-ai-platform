@@ -218,3 +218,5 @@ D01新增最小采集记录，D03保存不可变输入及唯一manifest。单迁
 普通固定装配off/mock保持；显式在线装配可启用教学用途DeepSeek，复用既有Provider/ModelGateway及O01/G02，不改ModelRequest/ProviderRequest。新总授权最多10请求/100000Token/$1跨任务持久保护，单并发、未知发送保留预约，重启不重置。只有本次来源核实且用途允许的最小事实/限制进入Context，缺失不得编造；费用UNKNOWN可用、Token必须核对。业务事实/教学规则/企业四门分别标记。
 
 兼容消费者：现有固定包API、前端历史/重放/会话、D01读取器、D02投影、D03质量、B01/B02、A01/G02。验证分阶段记录真实ERP、真实模型、MySQL/独立进程、Fixture/Golden及浏览器，不互相替代。负例覆盖503/超时/分页/映射/过期/未知规则/取消/恢复/迟到/预算。保持原Golden期望和历史报告；回退仅关闭显式在线配置，不回填固定数据。本轮不执行阶段4/5、不合main。
+
+在线AI授权聚合实施补充：本轮按同一O01 policy聚合现有budget/attempt，不增加模型任务系统或新费用表。MySQL GET_LOCK仅保护短事务准入，提交后释放；不持有网络锁。G02仍是唯一usage事实，调用已知Token结转、未知费用保留预约。旧policy和旧任务行为不变，历史A—E不修改。合法受限解释使用已存在的baseline-missing/quality/limitations结构，不放宽受控短语或引用验证。当前业务正向BLOCKED不妨碍对真实已核实限制进行教学用途解释。

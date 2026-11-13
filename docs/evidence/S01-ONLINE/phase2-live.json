@@ -1,0 +1,1311 @@
+{
+  "testedCommit": "5ae0d32f6c9c38be615ca43420ba658a2d97dceb",
+  "capturedAt": "2026-11-13T03:00:52.185757+00:00",
+  "kind": "REAL_ERP_REAL_MYSQL_API_INDEPENDENT_WORKER",
+  "models": "NOT_RUN",
+  "tasks": [
+    {
+      "taskId": "f945d747a7274a3f8b1345bb1f5c0b8a",
+      "state": "SUCCEEDED",
+      "snapshotRef": "snapshot-825ca3936ab8e4a0b92abc843735cbb989e062b6962c4986db270579a589fba7",
+      "acquisition": {
+        "taskRef": {
+          "taskId": "f945d747a7274a3f8b1345bb1f5c0b8a",
+          "tenantId": "process-2d11adddc9af458bacc00e2e8f9f4904"
+        },
+        "version": "s01-online-acquisition-v1",
+        "delivery": 1,
+        "requests": [
+          {
+            "path": "/api/auth-server/oauth/access-token",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:00:55.226633+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/inventory",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:00:55.770042+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a05c6955c6d24aa3da22166376b82b05075a1bb2ffa51810c3396051e76e6484"
+          },
+          {
+            "path": "/api/v1/products",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:00:56.225873+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "1b2966d9134df106a715c5aebb51be9f65fc4972b80828a9b760c28770a1084f"
+          },
+          {
+            "path": "/api/v1/store-authorizations",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:00:56.649874+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "fed602482d982e765288dd796364cccdbc52d03fe817d40a2913a9cc19f1bb26"
+          },
+          {
+            "path": "/api/v1/warehouses",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:00:57.069676+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+          },
+          {
+            "path": "/api/v1/listings",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:00:57.506571+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "19c5a8a61dfb50a82d0490511082c01639567e845f6f3060938254f4f28e17af"
+          },
+          {
+            "code": "ERP_503",
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 503,
+            "observedAt": "2026-11-13T03:00:57.931008+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+          },
+          {
+            "code": "ERP_503",
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 503,
+            "observedAt": "2026-11-13T03:01:04.355565+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "/erp/sc/data/mws/orders",
+            "method": "POST",
+            "observedAt": "2026-11-13T03:01:09.797751+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "/erp/sc/data/mws/orders",
+            "method": "POST",
+            "observedAt": "2026-11-13T03:01:19.211221+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:27.644969+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a3980ae7aba5a32a82bfe05af14261050a20875df40f943c6c656b5e85ac6c90"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:28.088851+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "023e171d22d21aba4428767587a2486d22f7e956a475c0276926771c76a8b7a1"
+          },
+          {
+            "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:28.535578+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "9c58d45d1be8bc51fe2f9c39727114e0768ce88a6c9490710410cabf380bed2d"
+          },
+          {
+            "path": "/api/v1/supplier-quotes",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:29.040110+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "2a6cf8bd688e74b2a6aa02d22089348c88b84c811d925d61b54cda9929a77748"
+          }
+        ],
+        "inputMode": "ONLINE_TEACHING_ERP",
+        "startedAt": "2026-11-13T03:00:54.865785+00:00",
+        "interfaces": {
+          "sales": {
+            "error": "ERP_503",
+            "complete": false,
+            "httpStatus": 503
+          },
+          "store": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:00:56.704477+00:00",
+            "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c"
+          },
+          "quotes": {
+            "total": 2,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:29.158124+00:00",
+            "fingerprint": "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+          },
+          "buckets": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:28.673760+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "listing": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:00:57.563446+00:00",
+            "fingerprint": "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+          },
+          "product": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:00:56.283131+00:00",
+            "fingerprint": "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          },
+          "inventory": {
+            "total": 2,
+            "complete": true,
+            "observedAt": "2026-11-13T03:00:55.860186+00:00",
+            "fingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0"
+          },
+          "purchases": {
+            "total": 29,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:28.168318+00:00",
+            "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+          },
+          "warehouse": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:00:57.139062+00:00",
+            "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+          },
+          "sales-compat": {
+            "error": "ERP_TIMEOUT",
+            "complete": false,
+            "httpStatus": null
+          }
+        },
+        "completedAt": "2026-11-13T03:01:29.166517+00:00",
+        "limitations": [
+          "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "TEACHING_DATA_ONLY",
+          "NO_FIXED_CATALOG_FALLBACK"
+        ],
+        "planVersion": "1",
+        "acquisitionId": "127a571d1a7e4233b07f78fa2cffa3c7",
+        "requestDigest": "54e43c7e3e3bdfee11e53347cf836db05e4a4299f90ef950f9205ade64cd2ae6",
+        "mappingVersion": "s01-online-map-v1",
+        "requestedScope": {
+          "fields": [
+            "quantity"
+          ],
+          "storeIds": [
+            "store-fixture"
+          ],
+          "tenantId": "process-2d11adddc9af458bacc00e2e8f9f4904",
+          "warehouseIds": [
+            "warehouse-fixture"
+          ],
+          "canonicalSkuIds": [
+            "sku-fixture"
+          ]
+        },
+        "acquisitionMethod": "NETWORK_READ",
+        "sourceEnvironment": "TEACHING_ERP",
+        "atomicAcrossSystems": false
+      },
+      "completeness": "BLOCKED",
+      "calculation": {
+        "baseline": null,
+        "selection": null,
+        "candidates": [],
+        "limitations": [
+          "DATA_QUALITY_BLOCKED"
+        ]
+      },
+      "quality": [
+        {
+          "code": "REAL_RULES_NOT_SIGNED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "REQUIRED_QUALITY_UNRESOLVED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_REVALIDATION_FAILED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ERP_503",
+          "path": "sales",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ERP_TIMEOUT",
+          "path": "sales-compat",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "inventory",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_RULE_UNCONFIRMED",
+          "path": "demand",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "supply",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "supply",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "policy",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "QUALITY_STATE_UNKNOWN",
+          "path": "quality",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "QUALITY_STATE_UNKNOWN",
+          "path": "quality",
+          "affects": "CANDIDATES",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "inventory",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "inventory",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "moq",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "orderMultiple",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        }
+      ],
+      "ai": {
+        "reason": "MODEL_NOT_ENABLED",
+        "status": "NOT_ATTEMPTED"
+      },
+      "idempotentReplay": "PASS",
+      "immutableSnapshot": "PASS"
+    },
+    {
+      "taskId": "b8be9794b89b4bb59c27a068f620b0e2",
+      "state": "SUCCEEDED",
+      "snapshotRef": "snapshot-b2a448e5595a21c6fe412050a1ff1f009869e97480d466f6c709a0fe5b9100fe",
+      "acquisition": {
+        "taskRef": {
+          "taskId": "b8be9794b89b4bb59c27a068f620b0e2",
+          "tenantId": "process-2d11adddc9af458bacc00e2e8f9f4904"
+        },
+        "version": "s01-online-acquisition-v1",
+        "delivery": 1,
+        "requests": [
+          {
+            "path": "/api/auth-server/oauth/access-token",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:29.971378+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/inventory",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:30.540673+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a05c6955c6d24aa3da22166376b82b05075a1bb2ffa51810c3396051e76e6484"
+          },
+          {
+            "path": "/api/v1/products",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:30.967649+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "1b2966d9134df106a715c5aebb51be9f65fc4972b80828a9b760c28770a1084f"
+          },
+          {
+            "path": "/api/v1/store-authorizations",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:31.402817+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "fed602482d982e765288dd796364cccdbc52d03fe817d40a2913a9cc19f1bb26"
+          },
+          {
+            "path": "/api/v1/warehouses",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:31.841986+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "d681845b143ee73dc886a522356681091141bc6e2a507af966c648bff242bc1f"
+          },
+          {
+            "path": "/api/v1/listings",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:01:32.278003+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "19c5a8a61dfb50a82d0490511082c01639567e845f6f3060938254f4f28e17af"
+          },
+          {
+            "code": "ERP_503",
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 503,
+            "observedAt": "2026-11-13T03:01:32.697069+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+          },
+          {
+            "code": "ERP_503",
+            "path": "/api/v1/sales-orders",
+            "method": "GET",
+            "httpStatus": 503,
+            "observedAt": "2026-11-13T03:01:39.111521+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "116e862e98b6af477f21842627352fecde8429f2671668d261c27a6c88984216"
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "/erp/sc/data/mws/orders",
+            "method": "POST",
+            "observedAt": "2026-11-13T03:01:44.549372+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "code": "ERP_TIMEOUT",
+            "path": "/erp/sc/data/mws/orders",
+            "method": "POST",
+            "observedAt": "2026-11-13T03:01:53.942445+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:02:02.346787+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "a3980ae7aba5a32a82bfe05af14261050a20875df40f943c6c656b5e85ac6c90"
+          },
+          {
+            "path": "/api/v1/purchase-orders",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:02:02.786596+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "023e171d22d21aba4428767587a2486d22f7e956a475c0276926771c76a8b7a1"
+          },
+          {
+            "path": "/erp/sc/routing/data/local_inventory/inventoryDetails",
+            "method": "POST",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:02:03.220941+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "7cc92a7a658f7ce8f547266e5f3f6a2cd5fd84a944a2b5b706d36ff7d07e7b31"
+          },
+          {
+            "path": "/api/v1/supplier-quotes",
+            "method": "GET",
+            "httpStatus": 200,
+            "observedAt": "2026-11-13T03:02:03.706111+00:00",
+            "teachingERPOnly": true,
+            "tlsVerification": false,
+            "responseFingerprint": "2a6cf8bd688e74b2a6aa02d22089348c88b84c811d925d61b54cda9929a77748"
+          }
+        ],
+        "inputMode": "ONLINE_TEACHING_ERP",
+        "startedAt": "2026-11-13T03:01:29.611830+00:00",
+        "interfaces": {
+          "sales": {
+            "error": "ERP_503",
+            "complete": false,
+            "httpStatus": 503
+          },
+          "store": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:31.476182+00:00",
+            "fingerprint": "4f256104c7c13f1a9260bda8340c1ef0e14cb5b1d7a8dd5fc655ecd8fd7fd72c"
+          },
+          "quotes": {
+            "total": 2,
+            "complete": true,
+            "observedAt": "2026-11-13T03:02:03.769429+00:00",
+            "fingerprint": "a4d1e1c6841cc60ac89640c775e8d47d6b0874eb28636a789d108516d7843a22"
+          },
+          "buckets": {
+            "total": 0,
+            "complete": true,
+            "observedAt": "2026-11-13T03:02:03.339754+00:00",
+            "fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "listing": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:32.331417+00:00",
+            "fingerprint": "207b463bcf8501f698fc6ce6843e903a34a723f7b6dbece12fb88300c5f0eaee"
+          },
+          "product": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:31.035540+00:00",
+            "fingerprint": "bdd87048e46c6c9fa55b48683e3a1989e8fb5f06e3e355d5bc96a30561119a1e"
+          },
+          "inventory": {
+            "total": 2,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:30.600028+00:00",
+            "fingerprint": "0c1176ffe2bad47cdcb4d1cc588ac22c96c878ab6fc7f82f9b275f1a635d5bb0"
+          },
+          "purchases": {
+            "total": 29,
+            "complete": true,
+            "observedAt": "2026-11-13T03:02:02.852703+00:00",
+            "fingerprint": "1b9a7f201434ce054ef04dfbb10ac852caec61c23674f2666018c3cf4ade5faa"
+          },
+          "warehouse": {
+            "total": 1,
+            "complete": true,
+            "observedAt": "2026-11-13T03:01:31.911269+00:00",
+            "fingerprint": "5b219e936c0fcd82663983440b83e3040cf5159d2916abf86dca2255c76ef81e"
+          },
+          "sales-compat": {
+            "error": "ERP_TIMEOUT",
+            "complete": false,
+            "httpStatus": null
+          }
+        },
+        "completedAt": "2026-11-13T03:02:03.777698+00:00",
+        "limitations": [
+          "BOUNDED_EXACT_AUTHORIZED_MAPPING",
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "TEACHING_DATA_ONLY",
+          "NO_FIXED_CATALOG_FALLBACK"
+        ],
+        "planVersion": "1",
+        "acquisitionId": "c7efef4c5fc24fc79917b04e7b98ea14",
+        "requestDigest": "54e43c7e3e3bdfee11e53347cf836db05e4a4299f90ef950f9205ade64cd2ae6",
+        "mappingVersion": "s01-online-map-v1",
+        "requestedScope": {
+          "fields": [
+            "quantity"
+          ],
+          "storeIds": [
+            "store-fixture"
+          ],
+          "tenantId": "process-2d11adddc9af458bacc00e2e8f9f4904",
+          "warehouseIds": [
+            "warehouse-fixture"
+          ],
+          "canonicalSkuIds": [
+            "sku-fixture"
+          ]
+        },
+        "acquisitionMethod": "NETWORK_READ",
+        "sourceEnvironment": "TEACHING_ERP",
+        "atomicAcrossSystems": false
+      },
+      "completeness": "BLOCKED",
+      "calculation": {
+        "baseline": null,
+        "selection": null,
+        "candidates": [],
+        "limitations": [
+          "DATA_QUALITY_BLOCKED"
+        ]
+      },
+      "quality": [
+        {
+          "code": "REAL_RULES_NOT_SIGNED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIMEZONE_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INVENTORY_FRESHNESS_NOT_ADMITTED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "MOQ_APPLICABILITY_UNCONFIRMED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "REQUIRED_QUALITY_UNRESOLVED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_REVALIDATION_FAILED",
+          "path": "admission",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ERP_503",
+          "path": "sales",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "ERP_TIMEOUT",
+          "path": "sales-compat",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "NET_AVAILABLE_UNCONFIRMED",
+          "path": "inventory",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "DEMAND_RULE_UNCONFIRMED",
+          "path": "demand",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SUPPLY_COVERAGE_UNPROVEN",
+          "path": "supply",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "AVAILABLE_DATES_UNCONFIRMED",
+          "path": "supply",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "INDEPENDENT_ORDER_MULTIPLE_UNKNOWN",
+          "path": "policy",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "QUALITY_STATE_UNKNOWN",
+          "path": "quality",
+          "affects": "CALCULATION",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "QUALITY_STATE_UNKNOWN",
+          "path": "quality",
+          "affects": "CANDIDATES",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "identity",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "inventory",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID",
+          "path": "inventory",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "supply",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "availability",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "moq",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        },
+        {
+          "code": "SOURCE_DATA_STALE_OR_FUTURE",
+          "path": "orderMultiple",
+          "affects": "PROVENANCE",
+          "severity": "BLOCK"
+        }
+      ],
+      "ai": {
+        "reason": "MODEL_NOT_ENABLED",
+        "status": "NOT_ATTEMPTED"
+      },
+      "idempotentReplay": "PASS",
+      "immutableSnapshot": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "independentAcquisitions": "PASS",
+  "apiWorkerRestartHistoricalRead": "PASS"
+}

@@ -14,7 +14,7 @@ export const terminal = (state: TaskState) => ['SUCCEEDED', 'FAILED', 'CANCELLED
 export const canReport = (task: Task) => task.state === 'SUCCEEDED' && task.reportRef !== null
 export const shown = (v: unknown) => v === null || v === undefined || v === '' ? '未知' : String(v)
 export const sourceText = (nature: string) => nature === 'SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP' ? '教学 ERP 仿真业务数据' : nature === 'SIMULATED_ENGINEERING' ? '本地工程模拟数据' : nature === 'TEACHING_ERP_OBSERVED' ? '教学 ERP 只读观测数据' : nature
-export const choiceLabel = (choice: import('./api/types').Choice) => `${choice.scope.canonicalSkuIds.join('、')} · ${choice.asOf || '时点未知'} · ${choice.inputMode === 'ONLINE_TEACHING_ERP' ? '在线 ERP · 每次新采集' : choice.packageRef?.slice(0, 10)}`
+export const choiceLabel = (choice: import('./api/types').Choice) => `${choice.displayLabels?.sku || choice.scope.canonicalSkuIds.join('、')} · ${choice.asOf || '时点未知'} · ${choice.inputMode === 'ONLINE_TEACHING_ERP' ? '在线 ERP · 每次新采集' : choice.packageRef?.slice(0, 10)}`
 
 export const choiceKey = (choice: import('./api/types').Choice) => choice.choiceRef || choice.packageRef || ''
 export const matchesReport = (choice: import('./api/types').Choice, report: import('./api/types').Report) => choice.inputMode === 'ONLINE_TEACHING_ERP' ? report.dataReport.scenarioSupplement.inputMode === 'ONLINE_TEACHING_ERP' && choice.scope.tenantId === report.scope.tenantId && (['storeIds', 'warehouseIds', 'canonicalSkuIds', 'fields'] as const).every(k => JSON.stringify(choice.scope[k]) === JSON.stringify(report.scope[k])) : choice.packageRef === report.dataReport.scenarioSupplement.packageRef

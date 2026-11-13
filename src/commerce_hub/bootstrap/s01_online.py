@@ -9,7 +9,8 @@ from commerce_hub.bootstrap.settings import load_settings
 from commerce_hub.data.sync.online import OnlineMapping
 from commerce_hub.data.contracts import fingerprint
 from commerce_hub.scenarios.s01_backend.online import OnlineS01Handler
-from commerce_hub.orchestration.service import HandlerSpec
+from commerce_hub.orchestration.service import HandlerSpec,SharedModelAuthorization
+from decimal import Decimal
 from commerce_hub.entrypoints.http.app import create_app as app_factory
 from commerce_hub.entrypoints.worker.__main__ import run
 
@@ -39,12 +40,24 @@ def registry(settings):
             context.check()
             return status,raw
         return TeachingERPReader(config,transport=transport)
-    if settings.model_network_enabled or settings.model_provider != 'mock':
-        raise ValueError('ONLINE_MODEL_NOT_ENABLED_IN_PHASE1')
-    revision=fingerprint([m.model_dump(mode='json') for m in mappings])
-    handler=OnlineS01Handler(mappings,reader_factory)
+    mode=os.environ.get('COMMERCE_S01_ONLINE_EXPLANATION_MODE','off')
+    provider=None;shared=None
+    if mode=='deepseek':
+        from commerce_hub.adapters.models.online import OnlineDeepSeekProvider,AUTHORIZATION_ID
+        if (os.environ.get('COMMERCE_S01_ONLINE_AUTHORIZATION')!=AUTHORIZATION_ID
+            or not settings.model_network_enabled or settings.model_provider!='deepseek'
+            or settings.model_max_output_tokens!=1024 or settings.model_max_concurrent!=1):
+            raise ValueError('EXPLICIT_ONLINE_MODEL_AUTHORIZATION_REQUIRED')
+        provider=OnlineDeepSeekProvider(settings,ROOT/'data/private/s01-online-model')
+        shared=SharedModelAuthorization(AUTHORIZATION_ID,10,100000,Decimal('1'))
+    elif mode!='off' or settings.model_network_enabled or settings.model_provider!='mock':
+        raise ValueError('INVALID_ONLINE_MODEL_MODE')
+    revision=fingerprint(dict(mappings=[m.model_dump(mode='json') for m in mappings],mode=mode))
+    handler=OnlineS01Handler(mappings,reader_factory,provider=provider,timeout_seconds=settings.model_timeout_seconds)
     spec=HandlerSpec('S01_BACKEND','0.1.0','s01.online.v1.'+revision[:32],handler,
-        policy_version='s01-online-readonly-v1')
+        policy_version=shared.authorization_id if shared else 's01-online-readonly-v1',
+        max_calls=1 if provider else 0,max_tokens=24000 if provider else 0,max_cost=Decimal('.05') if provider else Decimal('0'),
+        cost_currency='USD' if provider else None,shared_model_authorization=shared)
     return {spec.scenario_id:spec}
 
 def create_app():

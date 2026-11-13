@@ -18,7 +18,7 @@ function navigate(page: string) { location.hash = page }
 const loginToken = ref(''), loginOpen = ref(false), createOpen = ref(false)
 const previous = ref<Ref | null>(null)
 const storeFilter = ref(''), warehouseFilter = ref(''), skuFilter = ref(''), stateFilter = ref('')
-const filteredChoices = computed(() => choices.value.filter(c => (!storeFilter.value || c.scope.storeIds.includes(storeFilter.value)) && (!warehouseFilter.value || c.scope.warehouseIds.includes(warehouseFilter.value)) && c.scope.canonicalSkuIds.some(id => id.toLowerCase().includes(skuFilter.value.trim().toLowerCase()))))
+const filteredChoices = computed(() => choices.value.filter(c => (!storeFilter.value || c.scope.storeIds.includes(storeFilter.value)) && (!warehouseFilter.value || c.scope.warehouseIds.includes(warehouseFilter.value)) && [...c.scope.canonicalSkuIds, c.displayLabels?.sku || ''].some(id => id.toLowerCase().includes(skuFilter.value.trim().toLowerCase()))))
 const stores = computed(() => [...new Set(choices.value.flatMap(c => c.scope.storeIds))])
 const warehouses = computed(() => [...new Set(choices.value.flatMap(c => c.scope.warehouseIds))])
 watch(filteredChoices, filtered => { if (selectedRef.value && !filtered.some(c => choiceKey(c) === selectedRef.value)) void w.selectPackage('') })

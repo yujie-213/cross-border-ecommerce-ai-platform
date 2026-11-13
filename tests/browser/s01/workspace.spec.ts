@@ -27,7 +27,7 @@ async function login(page: Page) {
 async function create(page: Page, caseId = 'A') {
   const pack = session.casePackages.find((x: { caseId: string }) => x.caseId === caseId)
   await page.getByRole('button', { name: '＋ 新建补货分析', exact: true }).click()
-  await page.getByRole('combobox', { name: '授权 SKU / 时点包', exact: true }).selectOption(pack.packageRef)
+  await page.getByRole('combobox', { name: '授权 SKU / 来源', exact: true }).selectOption(pack.packageRef)
   const created = page.waitForResponse(r => r.url().endsWith('/api/v1/analysis-tasks') && r.request().method() === 'POST')
   await page.getByRole('button', { name: '发起真实分析任务', exact: true }).click()
   const response = await created; expect(response.status()).toBe(202)
@@ -134,7 +134,7 @@ test('REAL: uncertain create reuses persisted key after refresh; CSRF and Origin
     await route.abort('failed') // Server accepted; browser did not receive the response.
   })
   await page.getByRole('button', { name: '＋ 新建补货分析', exact: true }).click()
-  await page.getByRole('combobox', { name: '授权 SKU / 时点包', exact: true }).selectOption(session.casePackages[0].packageRef)
+  await page.getByRole('combobox', { name: '授权 SKU / 来源', exact: true }).selectOption(session.casePackages[0].packageRef)
   await page.getByRole('button', { name: '发起真实分析任务', exact: true }).click()
   await expect(page.getByText('命令状态待确认', { exact: true })).toBeVisible()
   await lost

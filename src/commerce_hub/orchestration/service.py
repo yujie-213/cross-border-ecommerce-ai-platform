@@ -20,6 +20,22 @@ class TaskError(RuntimeError):
 
 
 @dataclass(frozen=True)
+class SharedModelAuthorization:
+    """One explicit bounded authorization across original tasks, using O01 rows."""
+    authorization_id: str
+    max_calls: int
+    max_tokens: int
+    max_cost: Decimal
+    max_inflight: int = 1
+
+    def __post_init__(self):
+        if (not 1 <= len(self.authorization_id) <= 64 or not 1 <= self.max_calls <= 10
+            or not 1 <= self.max_tokens <= 100000 or not Decimal('0') < self.max_cost <= Decimal('1')
+            or self.max_inflight != 1):
+            raise ValueError('INVALID_SHARED_MODEL_AUTHORIZATION')
+
+
+@dataclass(frozen=True)
 class HandlerSpec:
     scenario_id: str
     version: str
@@ -32,6 +48,11 @@ class HandlerSpec:
     policy_version: str = "foundation-disabled-models-v1"
     # Optional for legacy assemblies. New fee-enabled policies bind their unit explicitly.
     cost_currency: str | None = None
+    shared_model_authorization: SharedModelAuthorization | None = None
+
+    def __post_init__(self):
+        if self.shared_model_authorization and self.policy_version != self.shared_model_authorization.authorization_id:
+            raise ValueError('SHARED_AUTHORIZATION_POLICY_MISMATCH')
 
 
 class TaskService:

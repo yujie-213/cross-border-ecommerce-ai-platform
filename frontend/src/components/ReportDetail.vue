@@ -11,6 +11,7 @@ const props = defineProps<{ report: Report }>()
 defineEmits<{ evidence: [id: string] }>()
 const data = computed(() => props.report.dataReport)
 const baseline = computed(() => data.value.supplyDemand.baseline)
+const issues = computed(() => data.value.quality.filter((item, index, all) => all.findIndex(x => x.code === item.code && x.path === item.path) === index))
 const facts = computed(() => baseline.value ? [
   ['当前可用库存', baseline.value.availableQuantity, '件'], ['已有在途 / 计划供给', baseline.value.inTransitQuantity, '件'],
   ['窗口需求（含缓冲）', baseline.value.targetQuantity, '件'], ['总量缺口', baseline.value.gapQuantity, '件'],
@@ -35,7 +36,7 @@ const facts = computed(() => baseline.value ? [
       <InventoryChart v-if="baseline" :baseline="baseline" :candidates="data.supplyDemand.candidates" />
     </Panel>
     <Panel title="质量、限制与风险" note="质量与 AI 状态独立">
-      <Notice v-for="(issue, i) in data.quality" :key="i" :tone="issue.severity === 'BLOCK' ? 'danger' : 'warning'" :title="issue.code"><p>{{ issue.message || issue.path }}</p><p>字段：{{ issue.path }} · 严重度：{{ issue.severity }}。请数据 / 质量负责人核实后重新分析。</p></Notice>
+      <Notice v-for="(issue, i) in issues" :key="i" :tone="issue.severity === 'BLOCK' ? 'danger' : 'warning'" :title="issue.code"><p>{{ issue.message || issue.path }}</p><p>字段：{{ issue.path }} · 严重度：{{ issue.severity }}。请数据 / 质量负责人核实后重新分析。</p></Notice>
       <p v-if="!data.quality.length" class="muted">本报告未返回质量问题，不代表企业业务准入已通过。</p>
       <ul class="limitations"><li v-for="limit in data.supplyDemand.limitations" :key="limit">{{ label(limit) }}<small class="mono">{{ limit }}</small></li><li v-for="rule in data.scenarioSupplement.unverifiedRules || []" :key="rule">{{ label(rule) }}</li></ul>
       <p class="micro-note">需求方法：{{ shown(data.supplyDemand.demandMethod) }}。已有供给以报告口径展示；教学计划供给不等同于真实已下单在途。</p>
