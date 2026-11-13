@@ -1,5 +1,5 @@
 {
-  "authorization": "2026-11-13接续3a46fd4，本轮P1/P2自有两SKU监控、ERP正式API仿真经营历史、7日SMA和真实模型/前端闭环获准；仅本地提交评审，不扩8/30、不代签采购审批、不合main。此白名单不是公开发布许可，受限历史和原始私有证据不推送。",
+  "authorization": "2026-11-13接续3a46fd4，本轮P1/P2自有两SKU监控、ERP正式API仿真经营历史、7日SMA和真实模型/前端闭环获准；仅本地提交评审，不扩8/30、不代签采购审批、不合main。此白名单不是公开发布许可，受限历史和原始私有证据不推送。 追加本轮两个自建SKU ERP未来销量接口只读补充核实及必要报告/台账/交接，禁止业务写入/模型/公式改动；仅本地保存。",
   "policy": "Exact paths; no blanket add; no secrets, raw teaching responses or untracked OpenAPI; no history rewrite.",
   "paths": [
     ".env.example",

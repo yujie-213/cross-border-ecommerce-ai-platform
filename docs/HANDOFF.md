@@ -1,3 +1,17 @@
+## ERP 未来销量接口只读核实交付（2026-11-13）
+
+Codex 单人接续 codex/s01-live-business-closure / 30ac007b5b69cf7e42de7e00240d967b1e73e855，跟踪区起点干净、未知 docs/ERP-openapi.yaml 保留。负责人新增仅调查授权：读本地契约/报告/实现，两个自建 SKU 的正式只读 GET 和已声明只读 POST；不模型、不业务写入、不改公式。
+
+固定调查提交 `7658e758c7e0d3c3d1dc606c4505eee019a7d2a1`。全量解析本地178路径/252操作和Schema引用，getSummaryList契约有sales_avg_*历史均值、estimated_sale_quantity/estimated_sale_avg_quantity名义预测、quantity_sug_purchase采购建议；未发现其他未来销量/逐日需求预测接口。当前ERP字段目录明确query/readonly_projection/local_resource=replenishment，data-contract声明daily_sales/suggested_qty等可存储字段；逐字段派生公式/未来窗口仍未证实。
+
+真实结果：两个自建SKU按SKU精确值及自建店铺GET /api/v1/replenishment均200、items=[]、total=0；真实自建店铺POST getSummaryList按data_type=2/1均200、code0、data=[]、total0。Listing无已确认独立MSKU/ASIN，所以未猜编号，使用完整空的自建店铺查询证明范围内无记录。空记录不代表零预测，ERP无数量可与既有45EA对照。没有改动既有SMA、B01/B02、报告、监控范围及原38个任务记录。
+
+本轮25次尝试=4认证+18GET+3只读POST，21业务读取中15个200/6个503；业务写入0、模型0。首次私有预检错误要求Listing不存在字段已修正；重复店铺/身份各503两次停止对应重试；剩余精确查询及ASIN汇总各503后退避一次成功。所有失败与先前成功回执分别保留，未拿失败空数组冒充查询成功，未无界扫描共享资源。原始响应/日志在data/private/s01-forecast-survey-20261113/，敏感认证响应不落盘。
+
+FORECAST-SURVEY-01交REVIEW，独立评审NOT_RUN；原P1/P2 REVIEW、企业四门BLOCKED、历史FAIL和UNKNOWN费用均不改。建议当前继续可配置7完整业务日SMA；后续若老师提供非空真实预测样本及窗口/算法/版本/来源，再考虑D01/D02可选输入，B02仍负责约束候选并调B01评价。无当前重构或开发动作，调查完成即停止；不合main、不公开推送。
+
+报告：[ERP预测接口核实](reports/S01_ERP未来销量预测接口补充核实_20261113.md)；摘要：[verification.json](evidence/S01-FORECAST-SURVEY/verification.json)。后续证据/台账提交SHA以Git最终查询为准。
+
 ## P1/P2 两 SKU 闭环交付 REVIEW（2026-11-13）
 
 接续分支 codex/s01-live-business-closure，基点 `3a46fd4c35c04770b95bfab43016c92606757f9e`，起点跟踪区干净、未知 docs/ERP-openapi.yaml 保留；Codex 单人。实现固定 `6cf9ae4efb45c5d5b709fbb6d5e100e8d49b5239`，后续仅证据/台账/交接提交，最终 HEAD 由 Git 查询；本地受限历史未公开、未合 main。

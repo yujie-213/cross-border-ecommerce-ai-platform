@@ -1,3 +1,5 @@
+当前ERP预测接口补充调查（2026-11-13，7658e75）：FORECAST-SURVEY-01交REVIEW。存在名义预测字段，无已验证自建SKU可用未来预测；两SKU replenishment精确GET及自建店铺MSKU/ASIN汇总均成功空记录。25尝试含6次503保留，模型0/业务写0/公式改动0；保留7日SMA与45件候选，原38任务原状。不扩大开发，报告docs/reports/S01_ERP未来销量预测接口补充核实_20261113.md。
+
 当前P1/P2交付（2026-11-13，固定6cf9ae4）：MONITOR-SCOPE-01/ONLINE-02/ONLINE-03进入REVIEW、review=null。scopeVersion1/ACTIVE2；最近7完整业务日ERP销量39/19，库存6/81对账通过；快充线45EA待复核候选、马克杯无需补货且空候选。真实AI2次5149Token、费用UNKNOWN/$0.10预约保留；固定提交后688后端/33前端/真实浏览器/取消/重启通过，原失败不改。独立倍数/质量/共享租户限制保留、企业四门BLOCKED；P3需合法审批及另行阶段确认，不扩8/30、不合main/公开推送。证据docs/evidence/S01-MVP-P1P2/verification.json；完整S01验收仍未完成。
 
 当前P1/P2连续授权（2026-11-13，接续3a46fd4）：负责人确认ERP优先、最近7完整业务日SMA可配置策略、自建2SKU正式监控和真实ERP销售历史构建、必要真实模型/浏览器闭环；合理调用无旧固定次数硬上限。仅本项目教学内部资源，无外部交易/采购审批代签，不扩8/30SKU、不合main。旧预算和FAIL证据保留；本轮新任务账本独立。Codex单人，未知ERP-openapi.yaml保留。
@@ -7132,6 +7134,102 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-13",
       "to": "TODO",
       "reason": "负责人要求评估并纳入已确认监控原则；后续实施等待方案批准"
+    }
+  ]
+}
+```
+
+
+## ERP 未来销量接口补充核实（2026-11-13）
+
+```json
+{
+  "id": "D-S01-FORECAST-SURVEY-01",
+  "stage": "D",
+  "title": "自有两SKU ERP未来销量接口只读核实",
+  "kind": "design",
+  "dependsOn": [
+    "D-S01-MONITOR-SCOPE-01"
+  ],
+  "entryCondition": "负责人2026-11-13明确授权本地OpenAPI/既有报告/实现调查与两个自建SKU必要真实只读GET及已声明只读POST；不模型、不业务写入、不改公式。",
+  "ownerRole": "负责人/接口调查",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/reports/",
+    "docs/evidence/S01-FORECAST-SURVEY/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/generated/"
+  ],
+  "parallelCondition": "Codex单人；不改应用实现或公共契约。",
+  "deliverables": [
+    "预测/历史均值/逐日曲线/采购建议字段分类、两SKU真实只读结果、来源窗口与适用性建议"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-FORECAST-SURVEY-01/AC1",
+      "text": "精确范围内真实只读证据与接口来源/粒度/窗口区分，未知项不猜测，不覆盖45件既有结果。"
+    }
+  ],
+  "plannedTests": [
+    "本地全部路径及关联Schema静态搜索；正式店铺Listing与SKU关联核对；两个接口的精确筛选和来源元数据回读。"
+  ],
+  "risks": [
+    "Schema字段不代表已实现计算；空结果不代表零预测；共享教学租户限制保留。"
+  ],
+  "requiredEvidenceKinds": [
+    "LIVE",
+    "DOCUMENT"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "7658e758c7e0d3c3d1dc606c4505eee019a7d2a1"
+  ],
+  "testedCommit": "7658e758c7e0d3c3d1dc606c4505eee019a7d2a1",
+  "evidence": [
+    {
+      "kind": "DOCUMENT",
+      "acceptanceIds": [
+        "D-S01-FORECAST-SURVEY-01/AC1"
+      ],
+      "command": "完整OpenAPI解析178路径/252操作及Schema引用；核对当前字段目录、data-contract和既有D02/B02实现",
+      "environment": "本地固定OpenAPI与当前教学ERP只读元数据",
+      "sample": "名义预测字段与历史均值、库存覆盖、采购建议分开；未发现独立未来逐日预测路由；不改公式",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-FORECAST-SURVEY/verification.json"
+    },
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-FORECAST-SURVEY-01/AC1"
+      ],
+      "command": "私有只读调查执行器：GET replenishment精确SKU/自建店铺；POST getSummaryList精确真实自建店铺/data_type=2和1",
+      "environment": "本机获准账号/真实教学ERP/ACTIVE两SKU；原始响应Git忽略",
+      "sample": "两个SKU精确GET均200/total0；自建店铺两维度POST均200/code0/total0。25尝试/21业务读取含15个200及6个503，业务写0/模型0；不把空记录当0预测或ERP计算验收",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-FORECAST-SURVEY/verification.json"
+    }
+  ],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "30ac007b5b69cf7e42de7e00240d967b1e73e855",
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人新增补充调查授权，先核实ERP未来销量来源；起点跟踪区干净，未知OpenAPI保留。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "只读核实与脱敏报告已提交7658e75；名义预测字段存在，但自建两SKU无预测/建议记录；保留503和初始本地预检失败，不改现有SMA/B02。"
     }
   ]
 }

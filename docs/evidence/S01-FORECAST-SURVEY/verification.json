@@ -306,5 +306,14 @@
     "untrackedOpenApiUnchanged": true,
     "applicationAndFormulaPathsChanged": false,
     "exactConfiguredSecretMatches": 0
+  },
+  "documentationChecks": {
+    "result": "PASS",
+    "checks": 18,
+    "commands": [
+      "python docs/planning/build_docs.py",
+      "python docs/planning/check_plan.py"
+    ],
+    "fixedSurveyCommit": "7658e758c7e0d3c3d1dc606c4505eee019a7d2a1"
   }
 }
