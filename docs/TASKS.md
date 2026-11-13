@@ -1,3 +1,5 @@
+当前本地产品化领取（2026-11-14）：D-S01-LOCAL-01 IN_PROGRESS，当前V2分支029e79e，main e3591aa；完整验收通过后普通合main。
+
 当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。
 
 此前P3/来源调查完成记录（2026-11-13，当时V2未开始）：P3最小闭环ACCEPTED，正常合main 60e9cf2d53d368999936b894fa8c7f6d32352d9d且已普通推送核对；合并后746后端/38前端/类型构建/历史回放PASS。补货建议调查 D-S01-REPLENISHMENT-SURVEY-01 REVIEW：截图5SKU均找到、4正量1零，REST=REFERENCE_ONLY/兼容目标=UNVERIFIED，63HTTP全200、ERP业务写0/模型0；V2仅可行性报告，完成同步后停止。
@@ -8568,5 +8570,102 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "receiptInterruption": "Prior receipt command was not executed because automatic approval review hit its usage limit; user resumed on 2026-11-14 and normal approval review succeeded.",
     "receipt": "Subsequent documentation-only receipt; final HEAD must be read from Git, not fabricated in its own file"
   }
+}
+```
+
+## S01 V2本地产品化与正式发布
+
+```json
+{
+  "id": "D-S01-LOCAL-01",
+  "stage": "D",
+  "title": "S01 V2本地一键启动/单管理员登录及main发布",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-V2-01"
+  ],
+  "entryCondition": "负责人最新完整授权覆盖旧REVIEW不合main停止点，完整回归通过后直接正常合main。",
+  "ownerRole": "Codex单人实现与集成；负责人条件验收授权",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "README.md",
+    ".env.example",
+    "*.cmd",
+    "src/commerce_hub/",
+    "tools/",
+    "frontend/",
+    "tests/",
+    "migrations/versions/0011_local_admin.py",
+    "docs/"
+  ],
+  "parallelCondition": "单人；保留未知docs/ERP-openapi.yaml",
+  "deliverables": [
+    "双击持续启动/安全停止/前置检查",
+    "单admin密码初始化/重置/登录/8小时会话恢复",
+    "完整业务兼容/回归/main复验/文档一致"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-LOCAL-01/AC01",
+      "text": "双击API/Worker/前端及浏览器，无到期关闭、无启动业务请求"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC02",
+      "text": "配置/依赖/DB/迁移/端口错误及仅停止自管进程"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC03",
+      "text": "单admin哈希初始化重置，无真实密码Key入库Git"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC04",
+      "text": "Cookie/CSRF/权限/撤销/退出/配置8小时/过期重启恢复"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC05",
+      "text": "V2批量/筛选/来源/历史/AI用量/原请购兼容与只读实测"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC06",
+      "text": "完整后端/前端/类型构建/浏览器/迁移兼容"
+    },
+    {
+      "id": "D-S01-LOCAL-01/AC07",
+      "text": "普通合main/复验/完整文档与远端一致"
+    }
+  ],
+  "plannedTests": [
+    "全量固定后回归及Windows/真实Edge/只读ERP/历史实测回放"
+  ],
+  "risks": [
+    "仅本机教学，不作企业生产安全签认",
+    "不重发原ERP采购，不重置模型预算"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "BROWSER",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-v2-full-replenishment",
+  "observedHead": "029e79ed606e0ce81bce0bd887700ad958a91ea4",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (unknown untracked preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "领取本轮产品化与条件合main授权；远端main e3591aa/V2 029e79e一致。"
+    }
+  ]
 }
 ```

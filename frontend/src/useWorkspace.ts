@@ -52,7 +52,7 @@ export function useWorkspace() {
       if (!choices.value.some(x => choiceKey(x) === selectedRef.value)) selectedRef.value = ''
       persist()
       if (selected.value) await loadHistory()
-      if (taskId) await openTask(taskId)
+      if (taskId && !v2Enabled.value) await openTask(taskId)
     } catch (e) { fail(e) } finally { busy.value = false }
   }
   async function logout() {

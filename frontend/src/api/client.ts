@@ -22,6 +22,7 @@ export async function request<T>(path: string, init: RequestInit = {}, signal?: 
   const timeout = AbortSignal.timeout(timeoutMs)
   const response = await fetch('/api/v1' + path, { ...init, headers, credentials: 'same-origin', cache: 'no-store', signal: signal ? AbortSignal.any([signal, timeout]) : timeout })
   if (!response.ok) {
+    if (response.status === 401 && typeof window !== 'undefined') window.dispatchEvent(new Event('commerce:unauthenticated'))
     const data = await response.json().catch(() => ({}))
     throw new ApiError(response.status, typeof data.code === 'string' ? data.code : 'HTTP_ERROR', data.traceId)
   }
