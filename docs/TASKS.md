@@ -7234,3 +7234,115 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ]
 }
 ```
+
+
+## P1/P2 补货计算与采购约束独立业务核查（2026-11-13）
+
+```json
+{
+  "id": "D-S01-P1P2-BUSINESS-REVIEW-01",
+  "stage": "D",
+  "title": "P1/P2补货数量与供应商采购约束独立业务核查",
+  "kind": "design",
+  "dependsOn": [
+    "D-S01-ONLINE-02",
+    "D-S01-ONLINE-03",
+    "D-S01-MONITOR-SCOPE-01"
+  ],
+  "entryCondition": "负责人2026-11-13授权只读独立业务评审；核对实际代码/不可变输入输出/ERP报价与箱规，必要精确正式只读；不模型、不ERP业务写入、不修复公式或结果。",
+  "ownerRole": "负责人/星星业务审查",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/reports/S01_P1P2_补货计算与采购约束独立业务核查_20261113.md",
+    "docs/evidence/S01-P1P2-BUSINESS-REVIEW/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/generated/"
+  ],
+  "parallelCondition": "Codex单人只读核查；仅文档/脱敏证据写入。",
+  "deliverables": [
+    "45件逐步计算、两SKU采购约束来源与箱规语义、日期与AI一致性、分项业务判断及最小修正建议"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-P1P2-BUSINESS-REVIEW-01/AC1",
+      "text": "以本次实际代码/快照/输出和必要正式回读为依据；数学正确与输入规则充分性分开，未知不代签，完成后停止等待负责人及星星审查。"
+    }
+  ],
+  "plannedTests": [
+    "不可变实际报告输入离线B01/B02复算和独立Decimal核算；两SKU商品/供应商/报价精确只读与契约语义核查；原AI文本一致性检查；文档校验。"
+  ],
+  "risks": [
+    "箱规是否必须整箱尚未确认；业务日锚/同日先到货/报价交期不代表承诺ETA；共享教学环境非企业事实。"
+  ],
+  "requiredEvidenceKinds": [
+    "DOCUMENT",
+    "LIVE",
+    "ENGINEERING"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "ff5ef711dc229224284d9d02232e12b2157e35fa"
+  ],
+  "testedCommit": "ff5ef711dc229224284d9d02232e12b2157e35fa",
+  "evidence": [
+    {
+      "kind": "ENGINEERING",
+      "acceptanceIds": [
+        "D-S01-P1P2-BUSINESS-REVIEW-01/AC1"
+      ],
+      "command": "私有只读复核脚本：正式报告/D03资产读取、原始接口指纹及D02归一化重放、B01/B02/Handler/API投影比对、独立Decimal逐日核算",
+      "environment": "获准本机测试库SELECT；模型mock/network=false；纯本地确定性复核",
+      "sample": "两SKU全部一致；45=ceil(max(44.14285722,12)/1)*1，马克杯空候选；首次辅助方法标签比较FAIL保留，Handler正式重放PASS，无业务代码变化。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P1P2-BUSINESS-REVIEW/verification.json"
+    },
+    {
+      "kind": "LIVE",
+      "acceptanceIds": [
+        "D-S01-P1P2-BUSINESS-REVIEW-01/AC1"
+      ],
+      "command": "登记ID/精确quote_no正式GET：两商品/两报价/同供应商/两库存/一采购",
+      "environment": "固定教学ERP；共享账号/已登记本项目两SKU；正常间隔及既有只读故障保护",
+      "sample": "1认证+8GET均200；MOQ12/12、箱规8/12、交期2/4、库存6/81；待审批36仍无效；未发现拆箱许可或必须整箱条款；写入0/模型0。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P1P2-BUSINESS-REVIEW/verification.json"
+    },
+    {
+      "kind": "DOCUMENT",
+      "acceptanceIds": [
+        "D-S01-P1P2-BUSINESS-REVIEW-01/AC1"
+      ],
+      "command": "当前OpenAPI及已保存data-contract/字段目录递归语义检索、实际AI文字比对、python docs/planning/build_docs.py和check_plan.py",
+      "environment": "报告ff5ef71；本地文档与原始私有证据",
+      "sample": "报告完整回答A—D；45数学PASS/采购约束待确认，若整箱8则48；D1剩余当天需求/ETA/otherConstraints/AI文案问题分开；18项文档检查PASS，等待负责人及星星签认。",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-P1P2-BUSINESS-REVIEW/verification.json"
+    }
+  ],
+  "review": null,
+  "branch": "codex/s01-live-business-closure",
+  "observedHead": "335251682f4d2b5a90dbbfdfd40086017bdda3da",
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-13",
+      "to": "IN_PROGRESS",
+      "reason": "负责人新增只读评审授权；基点3352516，跟踪区干净，未知OpenAPI保留。"
+    },
+    {
+      "date": "2026-11-13",
+      "to": "REVIEW",
+      "reason": "ff5ef71固定只读业务核查报告及脱敏证据；算术正确，箱规/倍数与现实日期仍待确认。仅文档交付，不修改原P1/P2结果或宣布业务验收；报告完成后停止。"
+    }
+  ],
+  "currentDeliveryScope": "只读业务核查材料REVIEW；45为参数既定下的正确分析候选，非全约束可执行采购量。负责人/星星审查未运行；不修复、不采购、不扩8/30SKU。"
+}
+```
