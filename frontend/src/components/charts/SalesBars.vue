@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps<{ days: { day: string; quantity: string }[]; average?: string | null; total?: string | null }>()
+const props = defineProps<{ days: { day: string; quantity: string }[]; average?: string | null; total?: string | null; recordDatesOnly?: boolean }>()
 
 const W = 720, H = 140, L = 34, R = 10, T = 12, B = 24
 
@@ -33,7 +33,7 @@ const model = computed(() => {
 <template>
   <div v-if="model" class="bars-wrap">
     <svg :viewBox="`0 0 ${W} ${H}`" class="bars" role="img"
-         :aria-label="`最近 ${model.rows.length} 个完整业务日销量，合计 ${total || model.rows.reduce((a, r) => a + r.quantity, 0)}`">
+         :aria-label="`${recordDatesOnly ? '有记录日期' : '最近完整业务日'}销量，${model.rows.length} 个日期，合计 ${total || model.rows.reduce((a, r) => a + r.quantity, 0)}`">
       <line :x1="L" :x2="W - R" :y1="model.baseline" :y2="model.baseline" class="axis" />
       <text :x="L - 6" :y="model.baseline" text-anchor="end" class="ytick">0</text>
       <text :x="L - 6" :y="T + 4" text-anchor="end" class="ytick">{{ model.max }}</text>

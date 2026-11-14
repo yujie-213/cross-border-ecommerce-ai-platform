@@ -242,6 +242,8 @@ async function pollBatch(mine: number, count = 0) {
     const data = await request<V2Progress>(`/s01/v2/batches/${state.batchId}`)
     if (mine !== epoch) return
     state.progress = data
+    const historyRow = state.batches.find(t => t.taskRef.taskId === data.task.taskRef.taskId)
+    if (historyRow) Object.assign(historyRow, data.task, { analysisRange: data.analysisRange })
     await Promise.all([loadList(), loadPriority()])
     if (!terminal(data.task.state) && count < 300) {
       pollTimer = setTimeout(() => void pollBatch(mine, count + 1), 2000)

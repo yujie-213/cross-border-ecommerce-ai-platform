@@ -18,7 +18,7 @@ def test_reference_survives_worker_api_history_and_cannot_purchase(make_s01,tmp_
     import commerce_hub.data.sync.v2 as v2
     from commerce_hub.entrypoints.http.app import create_app
     monkeypatch.setattr(v2,'now',lambda:'2026-11-14T06:00:05+00:00')
-    e=environment(make_s01,tmp_path,1);e.erp=AdmissionERP();e.policy.owned_mappings=[e.erp.mapping]
+    e=environment(make_s01,tmp_path,1);e.erp=AdmissionERP();e.erp.legacy_runtime=True;e.policy.owned_mappings=[e.erp.mapping]
     tid,report=run(e)
     assert report['dataReport']['summary']['historicalReference']==1
     with e.database.engine.connect() as c:item=next(iter(ItemStore.read(c,e.tenant,tid).values()))

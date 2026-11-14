@@ -95,7 +95,7 @@ watch(() => route.value.query, (query, previous) => {
           <span class="sr-only">检查批次</span>
           <select :value="state.batchId" @change="navigate('/suggestions', { batch: ($event.target as HTMLSelectElement).value })">
             <option v-for="task in state.batches" :key="task.taskRef.taskId" :value="task.taskRef.taskId">
-              {{ new Date(task.deadline).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) }} · {{ task.state === 'SUCCEEDED' ? '已完成' : '进行中' }}
+              {{ new Date(task.deadline).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) }} · {{ task.state === 'SUCCEEDED' ? '已完成' : task.state === 'CANCELLED' ? '已停止' : task.state === 'FAILED' ? '失败' : '进行中' }}
             </option>
           </select>
         </label>

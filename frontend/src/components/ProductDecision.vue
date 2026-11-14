@@ -61,7 +61,7 @@ const risks: Record<string, string> = {
       <div class="panel-head"><h2>可信历史与未来需求</h2><small>已采集的全日期历史 · 当前店仓</small></div>
       <template v-if="forecast.available">
         <p class="sample-caption">{{ forecast.sampleStart }} 至 {{ forecast.sampleEnd }} · {{ forecast.orderCount }} 条记录 / {{ forecast.totalSales }} 件 · {{ forecast.observedDays }} 个有记录日 / {{ forecast.spanDays }} 天跨度 · 最近样本距今 {{ forecast.sampleAgeDays }} 天</p>
-        <SalesBars :days="forecast.dailySales || []" :average="fmt(forecast.averageDailyDemand, 2)" :total="forecast.totalSales" />
+        <SalesBars :days="forecast.dailySales || []" :average="fmt(forecast.averageDailyDemand, 2)" :total="forecast.totalSales" record-dates-only />
         <p class="muted small">图中仅展示有记录日期；空缺日期不补零。区间参考 {{ fmt(forecast.averageDailyDemand, 2) }} 件/天；销售记录日均 {{ fmt(forecast.salesRecordDayAverage, 2) }} 件/天。两者均不冒充已核验完整自然日均。</p>
         <div v-if="forecast.risks?.length" class="risk-notes"><span v-for="r in forecast.risks" :key="r">{{ risks[r] || issueLabel(r) }}</span></div>
         <div class="table-scroll"><table class="ltable compact" aria-label="需求周期情景"><thead><tr><th>规划周期</th><th class="r">区间参考需求</th><th class="r">记录日均情景需求</th><th class="r">区间参考补充库存</th></tr></thead><tbody><tr v-for="s in decision.scenarios" :key="s.days"><td>{{ s.days }} 天{{ s.days === decision.horizonDays ? ' · 主周期' : '' }}</td><td class="r num">{{ fmt(s.forecastQuantity) }}</td><td class="r num">{{ fmt(s.recordDayScenarioQuantity) }}</td><td class="r num">{{ dash(s.referenceReplenishmentQuantity) }}</td></tr></tbody></table></div>

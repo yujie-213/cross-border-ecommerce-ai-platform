@@ -17,6 +17,7 @@ def test_registered_full_history_without_shared_scan_and_next_day_does_not_inval
     erp,r,m=setup(tmp_path);c=collect_registered(r,'1',[m]);e=registered_entities(c,entities(c,'1'))[0];item=analyze(c,e,r)
     assert item['decision']['forecast']['totalSales']=='39' and item['decision']['referenceReplenishmentQuantity']==45
     assert item['quantity']==48 and c['sales']['complete'] and c['sales']['total']==7
+    assert next(s for s in item['decision']['scenarios'] if s['days']==7)['referenceReplenishmentQuantity']==33
     assert all('ids' in params and 'date_from' not in params for _,path,params in erp.calls if path=='/api/v1/sales-orders')
     r2=erp.reader(tmp_path/'tomorrow');r2.state['startedAt']='2026-11-15T06:00:00+00:00'
     c2=collect_registered(r2,'1',[m]);e2=registered_entities(c2,entities(c2,'1'))[0]

@@ -112,3 +112,12 @@ def test_comparison_ambiguous_and_revalidation_ignores_observation_identity(tmp_
     assert comparable(first)==comparable(second)
     c['suggestions']['rows'].append(dict(c['suggestions']['rows'][0],id=999));e['suggestionIds'].append('999')
     assert analyze(c,e,reader)['erpComparison']['difference'] is None
+
+
+def test_legacy_zero_quantity_ai_facts_remain_compatible_with_sealed_reports(tmp_path):
+    from commerce_hub.scenarios.s01_v2.explanation import bundle
+    _,reader,c,e=fixture(tmp_path);item=analyze(c,e,reader)
+    item.pop('decisionVersion');item.pop('decision');item['quantity']=None
+    binding=dict(taskRef=dict(tenantId='fixture',taskId='old-task'),planVersion='1',snapshotId=item['ruleResult']['snapshotId'],participantId='s01')
+    fact=next(f for f in bundle(item,binding).context.facts if f.ref=='quantity')
+    assert fact.allowedPhrases==['当前没有可靠的正数量建议，不能将零值或缺失解释为无需补货']

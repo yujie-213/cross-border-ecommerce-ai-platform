@@ -11,7 +11,11 @@ from commerce_hub.capabilities.forecasting import propose
 
 
 def snapshot_for(entity,observed,day,available,rate,horizon,c):
-    daily=Decimal(rate).quantize(Decimal('.00000001'),rounding=ROUND_CEILING)
+    daily=Decimal(rate)
+    # Round cumulative demand, then difference adjacent totals. Rounding every
+    # daily fraction upward would turn an exact 39-unit week into 39.00000006
+    # and incorrectly request one extra whole unit after ceiling the gap.
+    totals=[(daily*i).quantize(Decimal('.00000001')) for i in range(horizon+1)]
     key=dict(sku=entity['sku'],store=entity['storeId'],warehouse=entity['warehouseId'])
     digest=fingerprint([entity['entityKey'],observed.isoformat(),str(daily),horizon])
     lead=c.get('leadDays');arrival=max(1,lead) if type(lead) is int and 0<=lead<horizon else 1
@@ -20,7 +24,7 @@ def snapshot_for(entity,observed,day,available,rate,horizon,c):
         mapping=dict(version=VERSION,sourceSku=key['sku'],sourceStore=key['store'],sourceWarehouse=key['warehouse'],
             canonicalSkuId=key['sku'],storeId=key['store'],warehouseId=key['warehouse'],sourceUnit='EA',unit='EA',unitsPerSourceUnit='1'),
         inventory=[dict(recordId='observed-stock',**key,unit='EA',availableQty=str(available),semantics='NET_AVAILABLE',sourceUpdatedAt=observed)],
-        demand=[dict(recordId='reference-'+str(i),**key,unit='EA',day=day+timedelta(days=i),quantity=str(daily),semantics='INCREMENTAL_EXCLUDES_RESERVED') for i in range(1,horizon+1)],
+        demand=[dict(recordId='reference-'+str(i),**key,unit='EA',day=day+timedelta(days=i),quantity=str(totals[i]-totals[i-1]),semantics='INCREMENTAL_EXCLUDES_RESERVED') for i in range(1,horizon+1)],
         supply=[],policy=dict(version=VERSION,horizonDays=horizon,bufferDays=0,maxAgeHours=24,moq=c.get('moq'),orderMultiple=c.get('orderMultiple'),
             candidateDates=[day+timedelta(days=arrival)] if type(lead) is int else [],maxOrderQty='100000',
             otherConstraints='UNCONFIRMED',qualityDisposition='UNKNOWN',advisoryOnly=True))

@@ -113,7 +113,7 @@ function kpi(filter: Record<string, string | undefined>) { navigate('/suggestion
     </section>
 
     <template v-else-if="current">
-      <p v-if="state.progress?.analysisRange !== 'OWNED_REGISTERED'" class="banner warning">当前为历史共享目录批次，保留原始结果。点击重新检查自有商品，生成当前登记范围的分析。</p>
+      <p v-if="state.progress?.analysisRange === 'LEGACY_SHARED'" class="banner warning">当前为历史共享目录批次，保留原始结果。点击重新检查自有商品，生成当前登记范围的分析。</p>
       <div v-if="running" class="run-strip">
         <span class="pulse" />正在检查 · 已处理 {{ current.processedCount }} / {{ current.scopeObjectCount || '—' }}
         <span class="run-note">结果持续保存，可离开本页</span><button class="button small" :disabled="state.busy" @click="cancelBatch">停止本次分析</button>

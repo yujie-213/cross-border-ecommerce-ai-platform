@@ -11,7 +11,7 @@ from commerce_hub.scenarios.s01_v2.requisition import V2RequisitionService
 def result(tmp_path,monkeypatch,*,fail_ledger=False):
     import commerce_hub.data.sync.v2 as v2
     monkeypatch.setattr(v2,'now',lambda:'2026-11-14T06:00:05+00:00')
-    erp=AdmissionERP();reader=erp.reader(tmp_path)
+    erp=AdmissionERP();erp.legacy_runtime=True;reader=erp.reader(tmp_path)
     if fail_ledger:
         original=reader.resource
         def resource(name,*args,**kwargs):

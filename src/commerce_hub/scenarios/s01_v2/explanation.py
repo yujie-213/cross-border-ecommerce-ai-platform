@@ -37,7 +37,8 @@ def bundle(item,binding):
         add('quantity',text,'keyEvidence',numbers=[item['quantity']],unknown=item['unit']!='EA')
     elif item.get('decision',{}).get('status')=='NO_REPLENISHMENT':
         add('quantity','当前参考试算判断暂不补货；最终采购数量尚未确认','keyEvidence',unknown=True)
-    else:add('quantity','正数量采购依据尚未确认；参考需求与采购候选应分开查看','keyEvidence',unknown=True)
+    elif item.get('decisionVersion'):add('quantity','正数量采购依据尚未确认；参考需求与采购候选应分开查看','keyEvidence',unknown=True)
+    else:add('quantity','当前没有可靠的正数量建议，不能将零值或缺失解释为无需补货','keyEvidence',unknown=True)
     available=item['inventory']['available']
     if available is not None:add('inventory',f'本次读取的可用库存为 {available} 件' if item['unit']=='EA' else f'源库存值为 {available}，计量单位仍未确认','keyEvidence',numbers=[available],unknown=item['unit']!='EA')
     else:add('inventory','当前库存数量或业务归属未确认','keyEvidence',unknown=True)
