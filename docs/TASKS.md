@@ -8838,3 +8838,93 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   }
 }
 ```
+
+## D-S01-DATA-REVIEW-01 数据准入专项评审
+
+```json
+{
+  "id": "D-S01-DATA-REVIEW-01",
+  "stage": "D",
+  "title": "S01 V2数据准入与长期可用性独立专项评审",
+  "kind": "review",
+  "dependsOn": [
+    "D-S01-V2-01",
+    "D-S01-LOCAL-01"
+  ],
+  "entryCondition": "2026-11-14负责人专项审查授权；只读ERP/隔离重放/方案；禁止正式业务改造及合main",
+  "ownerRole": "独立审查执行者",
+  "assignee": "Codex（单人）",
+  "allowedPaths": [
+    "tools/review_s01_admission.py",
+    "tools/replay_s01_admission.py",
+    "docs/reports/S01_数据准入*",
+    "docs/evidence/S01-DATA-REVIEW/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/planning/",
+    "docs/generated/"
+  ],
+  "parallelCondition": "单人，不委派；src/frontend/migrations/未知OpenAPI不修改",
+  "deliverables": [
+    "失效根因与实数等式",
+    "现状规则矩阵",
+    "A—E比较与推荐",
+    "最小改造/前端建议/跨日期验收",
+    "不超过1000字白话总结"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-DATA-REVIEW-01/AC1",
+      "text": "两SKU两日快照/销售/库存/流水等式与代码定位"
+    },
+    {
+      "id": "D-S01-DATA-REVIEW-01/AC2",
+      "text": "完整准入矩阵/A—E/采购隔离/长期复用设计"
+    },
+    {
+      "id": "D-S01-DATA-REVIEW-01/AC3",
+      "text": "十二要求场景含30日隔离重放与边界说明"
+    },
+    {
+      "id": "D-S01-DATA-REVIEW-01/AC4",
+      "text": "独立分支提交/证据/交接/文档检查/最终REVIEW不合main"
+    }
+  ],
+  "plannedTests": [
+    "历史SHA256核验与本地DB SELECT",
+    "自有两SKU正式API有界只读",
+    "生产函数离线重放及16项比较检查",
+    "既有相关单测及文档校验"
+  ],
+  "risks": [
+    "原始ERP与凭据只留忽略私有目录",
+    "候选策略不是获准上线契约",
+    "只读当前登记ID不是全流水发现"
+  ],
+  "requiredEvidenceKinds": [
+    "ERP_API",
+    "UNIT_TEST",
+    "DOCUMENT_CHECK",
+    "REPOSITORY"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-data-admission-review",
+  "observedHead": "ece11160ecd0e820153a1c58128657a2f8788884",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml（未知未跟踪保留）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "从fetch核实最新main ece11160建立独立评审分支，仅工具/材料/台账。"
+    }
+  ]
+}
+```

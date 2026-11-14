@@ -1,3 +1,7 @@
+## 2026-11-14 数据准入专项评审接续
+
+负责人本轮独立审查授权，Codex单人，从fetch核实main/origin/main ece11160建立codex/s01-data-admission-review。初始跟踪区干净，未知docs/ERP-openapi.yaml保留。仅诊断工具/报告/证据/台账；src、前端、B01/B02、ERP业务数据不改，不模型/采购、不合main。两SKU差4/2已定位为V2滚动销售集合与固定期初口径冲突；历史快照与本轮6次只读HTTP登记事实一致。当前工具固定提交后离线复验及文档收尾；最终状态只读TASKS。
+
 main已正式交付（2026-11-14）：正常两父合并4103861b70a3ef8806949c7c61576d3cd8c39bb4；普通push与独立ls-remote退出0，远端main截至本回执为dbcf55662d42e84a21318914b7332e8625d826c5，保留V2分支b8ef8cb4ef0ae28213e7879664af9ac14818f0d8。随后仅本回执/台账文档普通同步，最终HEAD按Git回读，不编造自身未来SHA。
 
 日常双击Start-Platform.cmd，自动打开http://localhost:5173，账号admin、密码仅本机已初始化；不再复制Token/配置动态端口。Initialize/Reset为显式本机操作，默认8小时有效会话、服务持续无900秒限制。787后端/43前端/类型构建合前后通过，本地真实浏览器4项、旧开发入口6项分别通过；原生Windows持续1167.10秒、重复启动/安全停止/外部端口/DB不可达均核对。所有自管测试服务已停止。
