@@ -1,3 +1,5 @@
+S01 前端 V3 已合并 main（2026-11-14）：workbuddy/s01-frontend-v3 → main，快进至 479c7d1。合并前修复换行符污染（22 文件 CRLF→LF，纯终止符变更，内容与行为不变），并在合并前重跑 typecheck/build/51 单测/7 项浏览器用例全通过。当前 main 上四页前端可直接用 Start-Platform.cmd 或 uvicorn+worker+vite 启动。后续接手注意：.gitattributes 为 `* -text` 逐字节存储，脚本改文件务必用二进制或 newline='' 写入，否则整篇变 CRLF。
+
 前端 V3 评审后定向修复（2026-11-14）：同分支。P0 请购安全（UNKNOWN/已有单据禁止再提交、pending 绑定 single+SKU 并持久化、只允许原 key 核对、跨 SKU 不误用）；工作台改用独立 priority 数据不再复用列表筛选；单品分析创建后写 `single` 到 URL，切换重置人工输入；1080 顶部 KPI 与构成同排（≤1000 才堆叠）；台账区分读取失败与无记录，直接打开后 查看 SKU 走单品回落。验证：typecheck/build/51 单测；v3-safety.spec.ts 5 项 + v3.spec.ts 2 项通过，均为 Mock 或只读，无 ERP/模型/采购写。
 
 前端 V3 最小修复（2026-11-14）：同分支补丁，无后端改动、无模型/ERP 调用、无采购写。修复五处：①详情页路由监听漏 `?single=` 导致历史分析与批次视图互切不刷新；②单品任务 FAILED 被显示成“未生成”，现读 `errorCode` 并给可读原因+重试；③列表筛选/分页在往返与刷新后错乱（openBatch 短路不再重载、工作台异步 navigate 抢路由、setFilters+setOffset 双请求）；④请购分类与计数口径（新增 `requisitionCategory`，行筛选与计数同源，ERP 状态只认明确通过，页面标注覆盖范围）；⑤工作台“待确认”改“有建议数量”。定向验证：typecheck/build/51 单测；`v3.spec.ts` 2 项通过（真实 API 往返与刷新一致；失败态用单条 route mock，未触达 ERP/模型）。仍未解决：请购列表接口缺失（逐条回读、20 条上限）、批次统计 3–6 秒、旧真实流程 spec 待重新基线。
