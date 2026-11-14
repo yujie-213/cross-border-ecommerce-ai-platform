@@ -4,6 +4,8 @@ from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
 import json
+from sqlalchemy import select
+from commerce_hub.scenarios.s01_backend.requisition_store import requisitions
 from commerce_hub.orchestration.service import TaskError
 from commerce_hub.scenarios.s01_backend.requisition import RequisitionService
 from commerce_hub.data.sync.v2 import V2Reader
@@ -16,7 +18,7 @@ def comparable(item):
     decision=item.get('decision')
     stable_decision={k:decision.get(k) for k in ['status','horizonDays','leadDays','referenceReplenishmentQuantity','purchasableQuantity','forecastQuantity','horizonBasis']} if decision else None
     result={k:item.get(k) for k in ['sourceTenant','storeId','warehouseId','productId','sku','sourceGrade','quantity',
-        'inventory','constraints','formalPurchases','sourceSuggestion']}|dict(forecast=(item.get('ruleResult') or {}).get('forecast'),decision=stable_decision)
+        'inventory','constraints','formalPurchases','pendingPurchases','sourceSuggestion']}|dict(forecast=(item.get('ruleResult') or {}).get('forecast'),decision=stable_decision)
     if item.get('admissionVersion'):
         basis=item.get('inventoryBasis') or {};cp=basis.get('checkpoint') or {}
         result['admissionBasis']=dict(version=item['admissionVersion'],status=basis.get('status'),residual=basis.get('residual'),
@@ -28,6 +30,28 @@ class V2RequisitionService(RequisitionService):
     def __init__(self,tasks,policy,client_factory,private_root):
         super().__init__(tasks,policy,client_factory)
         self.private_root=Path(private_root)
+    @staticmethod
+    def _blocks(row):
+        # A failure before ERP creation can be corrected with a new analysis.
+        # All sent/possibly-sent operations retain their protection.
+        return row['state']!='BLOCKED' or bool(row['content'].get('erpId') or row['content'].get('payload'))
+    def _business_rows(self,conn,actor,entity_key,*,lock=False):
+        query=select(requisitions).where(requisitions.c.tenant_id==actor.tenant_id,
+            requisitions.c.content['entityKey'].as_string()==entity_key).order_by(requisitions.c.created_at)
+        if lock:query=query.with_for_update()
+        return conn.execute(query).mappings().all()
+    def _guard_operation(self,conn,actor,report_id,report,mapping):
+        rows=self._business_rows(conn,actor,mapping.entity['entityKey'],lock=True)
+        if any(r['report_id']!=report_id and self._blocks(r) for r in rows):
+            raise TaskError('BUSINESS_OBJECT_REQUISITION_EXISTS',409)
+    def read(self,actor,report_id):
+        report=self._source(actor,report_id)
+        with self.engine.connect() as conn:
+            own=self._row(conn,actor,report_id)
+            if own:return self.view(own)
+            rows=self._business_rows(conn,actor,report['dataReport']['item']['entityKey'])
+            row=next((r for r in rows if self._blocks(r)),None)
+            return dict(self.view(row),blockedByOtherAnalysis=True) if row else None
     def _source(self,actor,report_id):
         report=self.tasks.read_report(actor,report_id)
         if report['scenarioId']!='S01_V2_SINGLE':raise TaskError('REQUISITION_SOURCE_NOT_ELIGIBLE',422)

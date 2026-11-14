@@ -196,7 +196,7 @@ def analyze(catalog,entity,reader,*,opening_binding=None,requisition_authorized=
 def priority(item):
     if item.get('decisionVersion')=='s01-product-demand-v1':
         d=item['decision'];rank=0 if d['stockoutRisk'] and d['status']=='REPLENISH' else 1 if d['status']=='REPLENISH' else 2 if d['status']=='NEEDS_REVIEW' else 3
-        return rank,d.get('firstShortageDate') or '9999-12-31',item.get('sku',''),item['entityKey']
+        return rank,0,d.get('firstShortageDate') or '9999-12-31',item.get('sku',''),item['entityKey']
     group={'RULE_CONFIRMED':0,'ERP_SOURCE':1,'UNVERIFIED':2,'NO_REPLENISHMENT':3}.get(item.get('riskGroup'),2)
     urgency={'最急':0,'急':1,'一般':2}.get(item.get('sourceUrgency'),3) if group==1 else 0
     return group,urgency,item.get('riskDate') or '9999-12-31',item.get('sku',''),item['entityKey']

@@ -48,7 +48,7 @@ def collect_registered(reader,tenant,mappings,entity=None):
             if cap['complete'] and {str(r['id']) for r in cap['rows']}!=set(selected):cap=dict(cap,complete=False,error='REGISTERED_RECORD_MISSING')
             parts.append(cap)
         catalog[name]=combine(parts)
-    quotes=[];suggestions=[];formal=[]
+    quotes=[];suggestions=[];formal=[];pending=[]
     for i,m in enumerate(members):
         cap=reader.resource('quote-'+str(i),'/api/v1/supplier-quotes',dict(quote_no=m['quoteNo']))
         if any(str(q.get('product_id'))!=m['productId'] or q.get('sku')!=m['sku'] or str(q['id'])!=m['quoteId'] for q in cap['rows']):raise ERPError('V2_REGISTERED_RESOURCE_MISMATCH')
@@ -57,11 +57,12 @@ def collect_registered(reader,tenant,mappings,entity=None):
         if any(str(r.get('tenant_id'))!=tenant or r.get('sku')!=m['sku'] or r.get('store_name')!=m['storeName'] for r in cap['rows']):raise ERPError('V2_REGISTERED_RESOURCE_MISMATCH')
         suggestions.append(cap)
     for i,warehouse in enumerate(sorted({m['warehouseName'] for m in members})):
-        for j,status in enumerate(FORMAL_STATES):
+        for j,status in enumerate((*FORMAL_STATES,'待审核')):
             cap=reader.resource('formal-'+str(i)+'-'+str(j),'/api/v1/purchase-orders',dict(warehouse_name=warehouse,field='status_text',q=status,match='exact'))
             if any(str(r.get('tenant_id'))!=tenant or r.get('warehouse_name')!=warehouse or r.get('status_text')!=status for r in cap['rows']):raise ERPError('V2_FORMAL_STATE_FILTER_MISMATCH')
-            formal.append(cap)
+            (pending if status=='待审核' else formal).append(cap)
     catalog.update(quotes=combine(quotes),suggestions=combine(suggestions),formalPurchases=combine(formal),
+        pendingPurchases=combine(pending),
         businessDate=business_date(reader.state['startedAt']).isoformat(),monitoring=monitoring,
         admissionVersion='s01-runtime-v1',timeBasis=dict(timezone='UTC+08:00',complete=True,startedAt=reader.state['startedAt'],completedAt=reader.receipt()['completedAt']))
     return catalog

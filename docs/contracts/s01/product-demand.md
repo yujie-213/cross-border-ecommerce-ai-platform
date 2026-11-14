@@ -33,3 +33,11 @@ ERP 对比始终独立生成，明确唯一匹配/多条冲突/无建议/仓库�
 ## 当前HTTP与恢复增量
 
 生产装配固定 owned_only=true；options.analysisRange=OWNED_REGISTERED，batch/single dataReport 同值，monitoring 保留成员ID/数据集/批次/范围版本/摘要。历史progress/history标明OWNED_REGISTERED或LEGACY_SHARED，未开始为NOT_STARTED；前端默认只自动选自有批次。items支持group=sku与decision=REPLENISH/NO_REPLENISHMENT/NEEDS_REVIEW/RISK/DIFFERENCE/FORECAST，业务筛选在商品聚合后执行；detail.relatedScopes为同SKU逐店仓。POST singles.explainAI默认为false，只有显式true尝试A01；旧已存直接任务缺字段保持旧语义。旧封存AI事实文本/摘要兼容保留，不重写旧报告。无数据库迁移；产品Worker work kind独立，避免旧实例领取新任务。
+
+## 产品体验版增量（2026-11-14）
+
+本轮负责人明确授权约8—12个自有教学SKU及多店仓受控场景，覆盖前文“不扩8SKU”的旧停止点。仅正式API创建独立批次，真实回读验证后发布登记新版本；既有两SKU及历史保留，不扫描共享历史。缺采购条件/缺销售样本的合法成员可以登记，业务能力仍按事实判断。平台首页为已接入能力/近期任务/重要事项入口，补货统计只在独立工作区。
+
+请购状态必须成功回读才允许新提交；读取中、失败、结果未知均关闭。后端同租户/源店仓商品/销售备货用途跨报告统一保护，并发在短事务内串行占位，网络不持锁；原报告原key可核对，换分析不可绕过。ERP同范围待审批请购及正式采购有界精确查询，状态/用途/归属无法确定则采购阻断、需求分析继续；不确定在途不抵扣。本轮不实际提交请购或审批/收货。少量模型调用仅现有配置/额度，经A01审计实际Token；不建设新平台。
+
+负责人后续明确授权本轮模型“实际需要用多少就用多少”。独立授权 `s01-product-experience-20261114-r1` 按实际必要调用，不重置旧4次/8308Token/$0.20未知费用预约；仍经A01、单并发、每任务1次/24000Token/$0.05预估、30秒请求/600秒任务、不确定不盲重发。优先验证2例并记录真实usage；仅本机显式选择该授权，默认旧配置不变。

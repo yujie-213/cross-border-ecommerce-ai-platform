@@ -33,6 +33,7 @@ def configure(config=None):
         COMMERCE_BROWSER_ORIGIN='http://localhost:'+str(config['webPort']),COMMERCE_LOCAL_API_PORT=str(config['apiPort']),
         COMMERCE_S01_V2_ENABLED='true',COMMERCE_S01_V2_APP_TENANT='s01-v2-teaching-local',COMMERCE_S01_V2_SOURCE_TENANT='1',
         COMMERCE_S01_V2_MODEL_ENABLED=str(config['modelEnabled']).lower(),COMMERCE_S01_V2_REQUISITION_ENABLED=str(config['requisitionEnabled']).lower(),
+        COMMERCE_S01_V2_MODEL_AUTHORIZATION=config.get('modelAuthorization','s01-v2-20261113-r1'),
         COMMERCE_MODEL_PROVIDER='deepseek' if config['modelEnabled'] else 'mock',COMMERCE_MODEL_NETWORK_ENABLED=str(config['modelEnabled']).lower(),
         COMMERCE_MODEL_MAX_OUTPUT_TOKENS='1024',COMMERCE_MODEL_MAX_CONCURRENT='1',COMMERCE_MODEL_TIMEOUT_SECONDS='30',COMMERCE_TASK_DEADLINE_SECONDS='600')
     from commerce_hub.bootstrap.settings import load_settings

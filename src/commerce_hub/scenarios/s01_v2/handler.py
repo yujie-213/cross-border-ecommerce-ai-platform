@@ -1,5 +1,6 @@
 """S01 scenarios reuse O01 task lifecycle, I01 leases, G01 and D01-D03 ownership."""
 from copy import deepcopy
+from math import isclose
 from commerce_hub.adapters.erp import ERPError
 from commerce_hub.data.contracts import fingerprint
 from commerce_hub.data.sync.v2_catalog import collect_catalog
@@ -15,6 +16,15 @@ from .explanation import explain,validate_ai
 
 def collection_scope(tenant):
     return dict(tenantId=tenant,storeIds=['s01-v2-authorized-stores'],warehouseIds=['s01-v2-authorized-warehouses'],canonicalSkuIds=['s01-v2-catalog'],fields=['quantity'])
+
+
+def summary_matches(saved,expected):
+    """Only display ratios tolerate persistence rounding; counts remain exact."""
+    if saved.keys()!=expected.keys():return False
+    ratios={'coverage','processingCoverage','forecastCoverage','decisionCoverage'}
+    return all(isclose(v,expected[k],rel_tol=0,abs_tol=5e-13)
+        if k in ratios and type(v) in (int,float) and type(expected[k]) in (int,float)
+        else v==expected[k] for k,v in saved.items())
 
 
 class V2Handler:
@@ -87,6 +97,9 @@ class V2Handler:
             resultDigest=fingerprint(rows),sourceLimits={n:{k:v for k,v in cap.items() if k!='rows'} for n,cap in catalog.items() if isinstance(cap,dict) and 'rows' in cap},
             analysisRange='OWNED_REGISTERED' if members is not None else 'LEGACY_SHARED',monitoring=catalog.get('monitoring'),
             actionMeaning='HUMAN_CONFIRMED_ERP_REQUISITION_ONLY',batchModelCalls=0,batchBusinessMutations=0)
+        # Hash stable display ratios before MySQL JSON serialization.
+        for key,value in data['summary'].items():
+            if type(value) is float:data['summary'][key]=round(value,12)
         ai=dict(status='NOT_ATTEMPTED',reason='BATCH_ZERO_AI',explanation=None)
         if self.single:
             data['item']=next(iter(rows.values()))
@@ -102,7 +115,7 @@ class V2Handler:
         with self.engine.connect() as conn:rows=ItemStore.read(conn,task_ref['tenantId'],task_ref['taskId'])
         expected_summary=statistics(rows.values(),result.dataReport.get('statisticsVersion','v2-counts-v1'))
         if self.single:expected_summary.pop('modelCalls',None)
-        if result.dataReport['resultDigest']!=fingerprint(rows) or result.dataReport['summary']!=expected_summary:raise ValueError('V2_RESULT_BINDING_INVALID')
+        if result.dataReport['resultDigest']!=fingerprint(rows) or not summary_matches(result.dataReport['summary'],expected_summary):raise ValueError('V2_RESULT_BINDING_INVALID')
         with self.engine.connect() as conn:
             checked=set()
             for row in rows.values():

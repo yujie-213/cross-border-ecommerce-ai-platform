@@ -49,6 +49,10 @@ class RequisitionService:
     def _confirmation_metadata(self, report, mapping):
         return {}
 
+    def _guard_operation(self, conn, actor, report_id, report, mapping):
+        """Scenario-specific durable business-object exclusion, inside the short transaction."""
+        return None
+
     def _row(self, conn, actor, report_id, *, lock=False):
         query = select(requisitions).filter_by(tenant_id=actor.tenant_id, report_id=report_id)
         if lock:
@@ -199,6 +203,7 @@ class RequisitionService:
         try:
             with self.engine.begin() as conn:
                 self.tasks.access.authorize(conn, actor, 's01:requisition', scope)
+                self._guard_operation(conn, actor, report_id, report, mapping)
                 row = self._row(conn, actor, report_id, lock=True)
                 now = conn.scalar(select(func.utc_timestamp(6)))
                 if row:

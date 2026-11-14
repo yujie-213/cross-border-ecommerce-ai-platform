@@ -88,7 +88,7 @@ watch(() => route.value.query, (query, previous) => {
     <header class="page-head">
       <div>
         <h1>商品与补货建议</h1>
-        <p class="page-sub">当前检查仅登记自有商品；进入商品查看全部获准店仓，各店仓独立判断</p>
+        <p class="page-sub">查看自有商品的分仓建议</p>
       </div>
       <div class="head-actions">
         <label class="select-wrap">
@@ -147,8 +147,7 @@ watch(() => route.value.query, (query, previous) => {
     <section class="panel">
       <div class="panel-head">
         <h2>结果</h2>
-        <small>{{ state.list.total }} 个不同 SKU{{ state.listLoading ? ' · 读取中…' : '' }}</small>
-        <span v-if="summary" class="head-note">目录 {{ summary.discoveredSkuCount }} SKU / {{ summary.scopeObjectCount }} 店仓 · 需补 {{ summary.replenishScopeCount ?? summary.ruleCalculated }} 店仓</span>
+        <small>{{ state.list.total }} 款商品{{ state.listLoading ? ' · 读取中…' : '' }}</small>
       </div>
       <div class="table-scroll">
         <table class="ltable">

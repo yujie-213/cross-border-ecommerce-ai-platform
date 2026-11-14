@@ -103,7 +103,20 @@ def test_unknown_in_transit_not_deducted_and_moq_stays_enforced(tmp_path):
     r=analyze(c,e,reader)
     assert r['decision']['referenceReplenishmentQuantity']==30 and r['decision']['confirmedSupplyQuantity'] is None
     with pytest.raises(TaskError):V2RequisitionService.validate_quantity(dict(dataReport=dict(item=r)),30,'')
-    assert V2RequisitionService.validate_quantity(dict(dataReport=dict(item=r)),32,'')=='32'
+    assert 'SAME_SCOPE_FORMAL_PURCHASE_REQUIRES_REVIEW' in r['procurementEligibility']['hardBlocks']
+    with pytest.raises(TaskError):V2RequisitionService.validate_quantity(dict(dataReport=dict(item=r)),32,'')
+
+
+@pytest.mark.parametrize('complete',[True,False])
+def test_pending_purchase_blocks_duplicate_without_erasing_reference_demand(tmp_path,complete):
+    _,reader,c,e=fixture(tmp_path)
+    c['pendingPurchases']=dict(complete=complete,rows=[dict(id=88,status_text='待审核',order_sn='fixture-pending',
+        warehouse_name='Synthetic Warehouse',item_list=[dict(sku=e['sku'],quantity=32)])] if complete else [])
+    r=analyze(c,e,reader)
+    code='SAME_SCOPE_PENDING_REQUISITION' if complete else 'PENDING_PURCHASE_QUERY_INCOMPLETE'
+    assert code in r['procurementEligibility']['hardBlocks']
+    assert r['decision']['referenceReplenishmentQuantity']==30 and r['decision']['forecast']['available']
+    assert r['decision']['confirmedSupplyQuantity'] is None and not r['procurementEligibility']['eligible']
 
 
 def test_comparison_ambiguous_and_revalidation_ignores_observation_identity(tmp_path):
@@ -114,10 +127,28 @@ def test_comparison_ambiguous_and_revalidation_ignores_observation_identity(tmp_
     assert analyze(c,e,reader)['erpComparison']['difference'] is None
 
 
+def test_report_ratio_accepts_mysql_double_rounding_but_rejects_changed_counts():
+    from commerce_hub.scenarios.s01_v2.handler import summary_matches
+    expected=dict(coverage=10/11,decisionCoverage=10/11,processedCount=11)
+    saved=dict(expected,coverage=0.9090909090909092,decisionCoverage=0.9090909090909092)
+    assert summary_matches(saved,expected)
+    assert not summary_matches(dict(saved,processedCount=12),expected)
+    assert not summary_matches(dict(saved,coverage=0.9091),expected)
+    assert not summary_matches(dict(saved,extra=0),expected)
+
+
+def test_partial_product_batch_can_sort_pending_and_review_rows(tmp_path):
+    from commerce_hub.scenarios.s01_v2.analysis import priority
+    _,reader,c,e=fixture(tmp_path);r=analyze(c,e,reader)
+    r['decision']['status']='NEEDS_REVIEW';r['decision']['stockoutRisk']=False
+    pending=dict(entityKey='pending',sku='PENDING',sourceGrade='UNAVAILABLE',analysisState='PENDING')
+    assert len(sorted([pending,r],key=priority))==2
+
+
 def test_legacy_zero_quantity_ai_facts_remain_compatible_with_sealed_reports(tmp_path):
     from commerce_hub.scenarios.s01_v2.explanation import bundle
     _,reader,c,e=fixture(tmp_path);item=analyze(c,e,reader)
-    item.pop('decisionVersion');item.pop('decision');item['quantity']=None
+    item.pop('decisionVersion');item.pop('decision');item.pop('explanationVersion');item['quantity']=None
     binding=dict(taskRef=dict(tenantId='fixture',taskId='old-task'),planVersion='1',snapshotId=item['ruleResult']['snapshotId'],participantId='s01')
     fact=next(f for f in bundle(item,binding).context.facts if f.ref=='quantity')
     assert fact.allowedPhrases==['当前没有可靠的正数量建议，不能将零值或缺失解释为无需补货']

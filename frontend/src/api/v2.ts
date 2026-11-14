@@ -17,6 +17,7 @@ export interface V2Admission {
   }
 }
 export interface V2Item extends V2Admission {
+  pendingPurchases?: { erpId: string; erpNumber: string; status: string; warehouseName: string; purpose: string }[]
   decisionVersion?: string; decision?: ProductDecision; erpComparison?: ERPComparison; relatedScopes?: V2Item[]
   productSummary?: { scopeCount: number; storeCount: number; warehouseCount: number; referencePlanTotal: number | null; replenishScopeCount: number; judgedScopeCount: number; riskScopeCount: number; analyzedSkuCount: number; productIds: string[] }
   entityKey: string; sourceTenant: string; productId: string | null; sku: string; name: string
@@ -62,8 +63,12 @@ export function quantityError(item: V2Item, quantity: number, reason: string) {
   if (quantity !== item.quantity && !reason.trim()) return '调整数量时请填写原因。'
   return ''
 }
-export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[] }
+export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[]; blockedByOtherAnalysis?: boolean }
 const issueLabels: Record<string, string> = {
+  SAME_SCOPE_PENDING_REQUISITION: '该商品同仓已有待审批采购，请先核对原单',
+  SAME_SCOPE_FORMAL_PURCHASE_REQUIRES_REVIEW: '该商品同仓已有正式采购，请先核对未收数量与用途',
+  PENDING_PURCHASE_QUERY_INCOMPLETE: '待审批采购未读取完整，核对完成前不能重复申请',
+  BUSINESS_OBJECT_REQUISITION_EXISTS: '该商品已有请购记录，请核对原单',
   PROCUREMENT_LEAD_UNCONFIRMED: '采购交期未确认；当前需求采用明确规划假设', REGISTERED_RECORD_MISSING: '登记记录未返回，请核对源数据',
   REGISTERED_RELATION_MISSING: '登记店仓关系未完整回读', V2_REGISTERED_SCOPE_CHANGED: '登记范围已改变，请重新检查自有商品',
   V2_BUSINESS_SCOPE_NOT_REGISTERED: '该商品店仓未登记为本项目成员', SALES_ENUMERATION_INCOMPLETE: '登记销售未完整读取，当前仅部分样本',

@@ -76,10 +76,10 @@ const failureText = computed(() => {
           <ul><li v-for="(item, index) in column.list" :key="index">{{ item.text }}</li></ul>
         </div>
       </div>
-      <details v-if="reasons.length" class="ai-more">
-        <summary>完整建议依据（{{ reasons.length }} 条）</summary>
+      <div v-if="reasons.length" class="ai-more">
+        <h4>建议与 ERP 对比</h4>
         <ul><li v-for="(item, index) in reasons" :key="index">{{ item.text }}</li></ul>
-      </details>
+      </div>
       <footer class="ai-meta">
         <span>来源：本次单品分析</span>
         <span v-if="tokens !== null">Token {{ tokens }}</span>

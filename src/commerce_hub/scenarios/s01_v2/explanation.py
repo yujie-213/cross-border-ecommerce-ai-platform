@@ -7,7 +7,56 @@ from commerce_hub.scenarios.s01.natural_explanation import NaturalFact,NaturalEx
 from commerce_hub.orchestration.budget import BudgetError
 
 
+def product_bundle(item,binding):
+    """Concise operator advice, each proposition grounded and machine validated."""
+    import re
+    d=item['decision'];f=d['forecast'];facts=[]
+    def add(ref,text,section,unknown=False,required=True):
+        facts.append(NaturalFact(ref=ref,kind='limitation' if unknown else 'evidence',text=text,allowedPhrases=[text],
+            sections=[section],requiredSections=[section] if required else [],certainty='UNKNOWN' if unknown else 'KNOWN',
+            allowedNumbers=re.findall(r'-?\d+(?:\.\d+)?',text),allowedDates=re.findall(r'\d{4}-\d{2}-\d{2}',text)))
+    label='建议补货' if d['status']=='REPLENISH' else '暂不补货' if d['status']=='NO_REPLENISHMENT' else '依据不足，先核实销量或库存'
+    add('scope',f"{item['warehouseName']}：{label}。仅限当前店铺，其他仓分别判断",'recommendationReasons')
+    if f.get('available'):
+        add('demand',f"{f['sampleStart']}至{f['sampleEnd']}的{f['observedDays']}个有记录日期共售{f['totalSales']}件，未来{d['horizonDays']}天参考需求约{Decimal(d['forecastQuantity']):.1f}件",'keyEvidence')
+        days=f.get('dailySales',[])
+        if len(days)>=3 and days[0]['quantity']!=days[-1]['quantity']:
+            add('recent-sales',f"首日{days[0]['day']}售{days[0]['quantity']}件，最近{days[-1]['day']}售{days[-1]['quantity']}件；未来走势未知，核对近期活动，均值不保证未来销量",'majorRisks',True)
+    else:add('demand','可信销售需求尚未确认，未支付或未发货订单不能当作有效销量，也不能把缺少样本当作零需求','keyEvidence',True)
+    available=item['inventory']['available'];ref=d['referenceReplenishmentQuantity']
+    if available is not None and ref is not None:
+        add('stock',f"当前库存{available}件，参考补充{ref}件；该数量未扣尚未核实的在途",'keyEvidence')
+    else:add('stock','库存缺口尚未确认，不能据此确定采购数量','keyEvidence',True)
+    if d['stockoutRisk']:
+        add('priority','有缺货风险：先核对已有采购及到货日期；若交期赶不上缺货，再评估加急或调拨','recommendationReasons')
+    elif d['status']=='NO_REPLENISHMENT':
+        add('priority','当前库存能够覆盖本次参考周期，暂不追加采购，继续观察销售变化','recommendationReasons')
+    else:add('priority','先补齐可信销售或库存依据，再决定是否采购','recommendationReasons')
+    compare=item['erpComparison']
+    if compare['difference'] is not None:
+        add('erp',f"平台参考补充{compare['platformQuantity']}件，ERP建议{compare['erpQuantity']}件，差{compare['difference']}件；ERP口径未知，先核对再决定",'recommendationReasons',True)
+    else:add('erp',compare['explanation'],'recommendationReasons',compare['recordCount']>0)
+    risks=f.get('risks',[])
+    risk='未来需求是否延续历史尚未确认，参考预测不保证销量；'
+    if 'STALE_SALES_SAMPLES' in risks:risk+='最近样本偏旧，应核实近期是否仍有需求'
+    elif 'LOW_SALES_SAMPLE' in risks:risk+='样本较少，先观察新增销售再提高采购承诺'
+    elif 'HISTORY_DATES_WITHOUT_RECORDS_UNKNOWN' in risks:risk+='未记录日期实际需求未知，应同时查看有记录日均情景'
+    else:risk+='若近期销售突然变化，应结合逐日销量核对，避免均值掩盖变化'
+    add('uncertainty',risk,'majorRisks',True)
+    if item.get('pendingPurchases') or any(p.get('warehouseMatch') for p in item.get('formalPurchases',[])):
+        add('duplicate','同商品同仓已有待审批申请或正式采购，店铺归属及可售日期尚未确认；暂停重复申请，先核对原单和实际未收数量，不将它们直接抵扣库存','majorRisks',True)
+    else:add('supply','已有采购的归属和实际可售日期仍需确认；未知在途未抵扣，不能把参考补充直接当成最终采购量','majorRisks',True)
+    c=item['constraints']
+    if c['moq'] and c['orderMultiple'] and d['purchasableQuantity']:
+        add('purchase',f"采购候选{d['purchasableQuantity']}件，起订{c['moq']}件、每箱{c['orderMultiple']}件；核对报价与已有采购，人工确认不代替ERP审批",'humanConfirmations')
+    else:add('purchase','正数量采购条件尚未确认；先核实有效供应商、报价、起订量与整箱条件，需求分析仍可查看','humanConfirmations',True)
+    context=NaturalExplanationContext(ref=dict(tenantId=binding['taskRef']['tenantId'],id='v2-facts-'+digest(dict(item=item,binding=binding))[:48],version='s01-product-experience-v1'),
+        **binding,facts=facts,sourceNature='SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP',trust='AUTHORIZED_FACTS_ONLY',sensitivity='MINIMIZED_BUSINESS_FACTS',omissions=['raw-source-response','procurement-authorization'])
+    return NaturalExplanationBundle(context)
+
+
 def bundle(item,binding):
+    if item.get('explanationVersion')=='s01-product-experience-v1':return product_bundle(item,binding)
     facts=[]
     def add(ref,text,section,*,numbers=(),dates=(),unknown=False):
         facts.append(NaturalFact(ref=ref,kind='limitation' if unknown else 'evidence',text=text,allowedPhrases=[text],

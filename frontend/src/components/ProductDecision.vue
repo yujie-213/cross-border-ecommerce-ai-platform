@@ -12,7 +12,6 @@ const forecast = computed(() => decision.value.forecast)
 const scopes = computed(() => (props.scopes.length ? props.scopes : [props.item]).map(r => r.entityKey === props.item.entityKey ? props.item : r))
 const label = (r: V2Item) => ({ REPLENISH: '建议补货', NO_REPLENISHMENT: '暂不补货', NEEDS_REVIEW: '依据不足' }[r.decision?.status || 'NEEDS_REVIEW'])
 const needed = computed(() => scopes.value.filter(r => r.decision?.status === 'REPLENISH').length)
-const judged = computed(() => scopes.value.filter(r => r.decision && r.decision.status !== 'NEEDS_REVIEW').length)
 const risks: Record<string, string> = {
   HISTORY_DATES_WITHOUT_RECORDS_UNKNOWN: '部分日期没有销售记录，实际需求未知', STALE_SALES_SAMPLES: '历史样本较旧，请核实近期需求变化',
   LOW_SALES_SAMPLE: '销售记录日期较少，建议谨慎使用', SALES_ENUMERATION_INCOMPLETE: '销售接口未完整读取，当前仅部分样本',
@@ -23,14 +22,7 @@ const risks: Record<string, string> = {
 <template>
   <div class="decision-product">
     <section class="panel overall">
-      <div class="panel-head"><h2>商品整体判断</h2><small>不混加不同店仓库存与销量</small></div>
-      <div class="overall-grid">
-        <div><b>{{ scopes.length }}</b><span>相关店仓对象</span></div>
-        <div><b>{{ judged }}</b><span>可给出补货判断</span></div>
-        <div><b class="teal">{{ needed }}</b><span>建议补货店仓</span></div>
-        <div><b>{{ scopes.filter(r => r.decision?.stockoutRisk).length }}</b><span>参考缺货风险店仓</span></div>
-      </div>
-      <p class="muted small">优先查看需补仓库与预计短缺日期。下表各行独立计算；点选店仓后查看其销量、预测、ERP 对比和采购资格。</p>
+      <div class="panel-head"><h2>分仓建议</h2><small>{{ scopes.length }} 个店仓 · {{ needed }} 个需补货</small></div>
       <div class="table-scroll"><table class="ltable compact" aria-label="逐店仓补货判断">
         <thead><tr><th>店铺 / 仓库</th><th>历史参考日均</th><th class="r">可用库存</th><th class="r">周期需求</th><th class="r">参考补充</th><th>判断 / 风险</th><th></th></tr></thead>
         <tbody><tr v-for="r in scopes" :key="r.entityKey" :class="{ chosen: r.entityKey === item.entityKey }">

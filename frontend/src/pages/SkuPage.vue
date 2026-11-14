@@ -63,9 +63,10 @@ const blocked = computed(() => {
   return blocks.filter(code => !(requisition.value && ['KNOWN_FORMAL_PURCHASE_FOR_SOURCE_PLAN'].includes(code)))
 })
 
+const pendingBusiness = computed(() => state.pending?.entityKey === item.value?.entityKey ? state.pending : null)
 const canSubmit = computed(() =>
   !!single.value && !!eligibility.value?.eligible && eligibility.value.scopeAuthorized === true &&
-  state.options?.canSubmit === true && !requisition.value)
+  state.options?.canSubmit === true && !requisition.value && !pendingBusiness.value && state.requisitionReadState === 'ready' && !state.requisitionLoading)
 
 const validation = computed(() => (item.value ? quantityError(item.value, quantity.value, reason.value) : '数量不可用'))
 const submitDisabled = computed(() => !canSubmit.value || !!validation.value || !acknowledged.value || state.busy)
@@ -186,12 +187,12 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
       </section>
 
       <p v-if="single" class="banner plain analysis-note">
-        当前显示该对象一次单品分析的结果（{{ item.observedAt?.slice(0, 16).replace('T', ' ') || '时点未知' }}），它重新读取了事实，可能与本批次结论不同。
+        当前显示该对象一次单品分析的结果（{{ item.observedAt ? new Date(item.observedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }) + '，北京时间' : '时点未知' }}），它重新读取了事实，可能与本批次结论不同。
         <a :href="'#/sku/' + item.entityKey + '?batch=' + state.batchId">只看本批次结论</a>
       </p>
 
       <p v-if="pendingElsewhere" class="banner plain small">
-        另一个 SKU（{{ pendingElsewhere.sku }}）有一笔结果未确认的请购提交，只能在其详情页用原命令核对；本页不会使用该命令。
+        {{ pendingElsewhere.sku }} 有一笔请购结果未确认，请返回原分析核对。
         <a :href="'#/sku/' + pendingElsewhere.entityKey + '?batch=' + state.batchId + '&single=' + pendingElsewhere.singleId">前往核对</a>
       </p>
 
@@ -269,6 +270,8 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
               <dt>报价有效期</dt><dd>{{ constraints?.quoteValidFrom || '未知' }} 至 {{ constraints?.quoteValidTo || '未知' }}</dd>
             </dl>
           </div>
+          <h4 v-if="item.pendingPurchases?.length" class="sub-head">已有待审批请购</h4>
+          <p v-for="po in item.pendingPurchases || []" :key="po.erpId" class="banner warning">{{ po.erpNumber }} · {{ po.status }} · 同商品同仓已有申请，暂停重复提交；不抵扣库存。</p>
           <h4 class="sub-head">已有正式采购</h4>
           <div class="table-scroll">
             <table class="ltable compact">
@@ -350,14 +353,20 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
       </section>
 
       <div class="actionbar">
-        <template v-if="requisition">
+        <template v-if="single && state.options?.canSubmit && ['idle','loading','error'].includes(state.requisitionReadState)">
+          <span class="chip warning">{{ state.requisitionReadState === 'error' ? '请购状态读取失败' : '正在核对已有请购' }}</span>
+          <span class="ab-note">核对完成前不可提交</span><span class="grow" />
+          <button v-if="state.requisitionReadState === 'error'" class="button" :disabled="state.requisitionLoading" @click="readRequisition">重新读取</button>
+        </template>
+        <template v-else-if="requisition">
           <span class="chip" :class="requisition.state === 'SUBMITTED' ? 'info' : 'warning'">
-            {{ requisition.state === 'SUBMITTED' ? '已提交 · 待 ERP 审批' : requisition.state }}
+            {{ requisition.state === 'SUBMITTED' ? '已提交 · 待 ERP 审批' : unresolvedState ? '请购结果待核对' : requisition.state === 'BLOCKED' ? '请购已暂停' : '请购处理中' }}
           </span>
           <span class="ab-meta"><b>{{ requisition.finalQuantity }}</b> {{ unitOf(item) }}<small>原建议 {{ requisition.aiQuantity }}</small></span>
           <span class="ab-meta"><small>ERP 单号</small>{{ requisition.erpNumber || '待回读' }}</span>
           <span class="ab-meta"><small>ERP 状态</small>{{ requisition.erpStatus || '未知' }}</span>
           <span class="grow" />
+          <span v-if="requisition.blockedByOtherAnalysis" class="ab-note">该商品在原分析中已有请购</span>
           <a class="button small" href="#/requisitions">查看请购</a>
           <button v-if="requisition.state !== 'SUBMITTED' && requisition.state !== 'BLOCKED'" class="button small" :disabled="state.busy" @click="readRequisition">核对状态</button>
         </template>
@@ -369,14 +378,6 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           <button class="button primary" :disabled="state.busy" @click="replayPending">
             {{ state.busy ? '核对中…' : '使用原命令核对' }}
           </button>
-        </template>
-
-        <template v-else-if="unresolvedState">
-          <span class="chip danger">提交结果未确认</span>
-          <span class="ab-note">ERP 可能已建单，只能核对这张单据，不能再发起提交</span>
-          <span class="grow" />
-          <a class="button small" href="#/requisitions">查看请购</a>
-          <button class="button" :disabled="state.busy" @click="readRequisition">重新核对状态</button>
         </template>
 
         <template v-else-if="state.singleTask?.state === 'FAILED' && !single">

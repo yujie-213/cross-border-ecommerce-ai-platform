@@ -72,6 +72,7 @@ export const state = reactive({
   singleHistory: [] as SingleRow[],
   requisition: null as V2Requisition | null,
   requisitionLoading: false,
+  requisitionReadState: 'idle' as 'idle' | 'loading' | 'ready' | 'error',
 
   busy: false,
   /** A command whose outcome is unknown: it must only be replayed with its own key. */
@@ -299,7 +300,7 @@ export async function openItem(key: string, singleId?: string) {
   state.itemKey = key
   state.item = null
   state.itemLoading = true
-  state.singleId = ''; state.singleReport = null; state.singleTask = null; state.requisition = null
+  state.singleId = ''; state.singleReport = null; state.singleTask = null; state.requisition = null; state.requisitionReadState = 'idle'
   try {
     const item = await request<V2Item>(`/s01/v2/batches/${state.batchId}/items/${key}`)
     if (mine !== detailEpoch) return
@@ -324,6 +325,7 @@ export async function openSingle(id: string) {
   clearTimeout(singleTimer)
   const mine = ++detailEpoch
   state.singleId = id
+  state.requisition = null; state.requisitionReadState = 'idle'
   state.singleReport = null
   state.singleTask = null
   state.singleLoading = true
@@ -371,21 +373,27 @@ export async function createSingle(explainAI = false) {
   } finally { state.busy = false }
 }
 
+let requisitionEpoch = 0
 export async function readRequisition() {
-  if (!state.singleId || !state.options?.canSubmit) { state.requisition = null; return }
-  state.requisitionLoading = true
+  const epoch = ++requisitionEpoch
+  const id = state.singleId
+  if (!id || !state.options?.canSubmit) { state.requisitionReadState = 'idle'; return }
+  state.requisitionLoading = true; state.requisitionReadState = 'loading'
   try {
-    state.requisition = await request<V2Requisition | null>(`/s01/v2/singles/${state.singleId}/requisition`)
+    const value = await request<V2Requisition | null>(`/s01/v2/singles/${id}/requisition`)
+    if (id !== state.singleId || epoch !== requisitionEpoch) return
+    state.requisition = value; state.requisitionReadState = 'ready'
   } catch (e) {
-    if (e instanceof ApiError && [404, 409].includes(e.status)) state.requisition = null
-    else fail(e)
-  } finally { state.requisitionLoading = false }
+    if (id !== state.singleId || epoch !== requisitionEpoch) return
+    state.requisitionReadState = 'error'
+    fail(e)
+  } finally { if (id === state.singleId && epoch === requisitionEpoch) state.requisitionLoading = false }
 }
 
 export async function submitRequisition(finalQuantity: number, adjustmentReason: string) {
   if (!state.singleId || state.busy || !state.item?.procurementEligibility?.eligible) return
   // Safety: never start a second requisition while one exists or its outcome is unknown.
-  if (state.requisition || pendingFor(state.singleId)) {
+  if (state.requisitionReadState !== 'ready' || state.requisitionLoading || state.requisition || (state.pending && state.pending.entityKey === state.item.entityKey)) {
     state.note = '该分析已有请购单或结果未确认，请先核对原命令，不能重复提交。'
     return
   }
@@ -394,12 +402,14 @@ export async function submitRequisition(finalQuantity: number, adjustmentReason:
   const sku = state.item.sku
   state.busy = true; state.error = ''; state.note = ''
   const key = crypto.randomUUID()
+  savePending({ key, kind:'requisition', createdAt:new Date().toISOString(), path:`/s01/v2/singles/${singleId}/requisition`, body:{finalQuantity, adjustmentReason, sourceAcknowledged:true}, singleId, entityKey, sku })
   try {
     state.requisition = await request<V2Requisition>(`/s01/v2/singles/${state.singleId}/requisition`, {
       method: 'POST',
       headers: { 'Idempotency-Key': key },
       body: JSON.stringify({ finalQuantity, adjustmentReason, sourceAcknowledged: true })
     }, undefined, 90000)
+    savePending(null)
     state.note = '请购已提交 ERP，等待独立回读审批状态。'
   } catch (e) {
     // Transport failure after send: keep the key bound to this analysis and SKU.
@@ -414,6 +424,8 @@ export async function submitRequisition(finalQuantity: number, adjustmentReason:
       })
       state.error = ''
     } else {
+      if (e.status < 500) savePending(null)
+      state.requisitionReadState = 'error'
       fail(e)
     }
   } finally { state.busy = false }

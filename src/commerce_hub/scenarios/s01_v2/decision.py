@@ -92,6 +92,15 @@ def analyze_decision(catalog,entity,reader,*,requisition_authorized=None):
     if not purchase:hard.append('NO_POSITIVE_RECOMMENDATION_BASIS')
     if not lead_known:hard.append('PROCUREMENT_LEAD_UNCONFIRMED')
     formal=formal_purchases(catalog,entity)
+    pending=[]
+    for p in catalog.get('pendingPurchases',{}).get('rows',[]):
+        if p.get('warehouse_name')==entity['warehouseName'] and any(l.get('sku')==entity['sku'] for l in p.get('item_list',[])):
+            pending.append(dict(erpId=str(p['id']),erpNumber=p.get('order_sn'),status=p.get('status_text'),
+                warehouseName=p.get('warehouse_name'),purpose='SALES_REPLENISHMENT' if 'SALES_REPLENISHMENT' in (p.get('remark') or '') else 'UNCONFIRMED',
+                includedInCalculation=False))
+    if catalog.get('pendingPurchases',{}).get('complete') is False:hard.append('PENDING_PURCHASE_QUERY_INCOMPLETE')
+    if pending:hard.append('SAME_SCOPE_PENDING_REQUISITION')
+    if any(p['warehouseMatch'] for p in formal):hard.append('SAME_SCOPE_FORMAL_PURCHASE_REQUIRES_REVIEW')
     if source and any(p.get('sourcePlanNumber')==source.get('recommendation_no') and p['warehouseMatch'] for p in formal):hard.append('KNOWN_FORMAL_PURCHASE_FOR_SOURCE_PLAN')
     # Preserve Scheme B for an independently matched positive ERP suggestion;
     # it is a procurement source, never the platform's own demand forecast.
@@ -106,14 +115,14 @@ def analyze_decision(catalog,entity,reader,*,requisition_authorized=None):
     if compare['recordCount']:warnings+=['ERP_ALGORITHM_UNKNOWN','ERP_DAILY_SALES_WINDOW_UNKNOWN','ERP_GENERATION_TIME_UNVERIFIED','ERP_PURCHASE_NETTING_UNKNOWN']
     if any(not p['warehouseMatch'] for p in formal):warnings.append('RELATED_PURCHASE_TARGETS_DIFFERENT_WAREHOUSE')
     eligible=not hard
-    result.update(decisionVersion=VERSION,decision=dict(status=status,forecast=history,horizonDays=horizon,leadDays=lead if lead_known else None,
+    result.update(explanationVersion='s01-product-experience-v1',decisionVersion=VERSION,decision=dict(status=status,forecast=history,horizonDays=horizon,leadDays=lead if lead_known else None,
         horizonBasis='QUOTE_LEAD_PLUS_7' if lead_known else 'ASSUMED_14_DAY_PLANNING',forecastQuantity=next((s['forecastQuantity'] for s in scenarios if s['days']==horizon),None),
         referenceReplenishmentQuantity=ref,purchasableQuantity=purchase,confirmedSupplyQuantity=None,
         supplyBasis='UNVERIFIED_SUPPLY_NOT_DEDUCTED',stockoutRisk=risk,coverageDays=baseline['coverageDays'] if baseline else None,
         firstShortageDate=baseline['firstShortageDate'] if baseline else None,confidence=history.get('confidence','INSUFFICIENT'),
         assumptions=assumption,explanation=explanation,scenarios=scenarios,baseline=baseline),erpComparison=compare,
         analysisState='ANALYZED' if status=='REPLENISH' else 'NO_REPLENISHMENT' if status=='NO_REPLENISHMENT' else 'ERP_REFERENCE' if quantity else 'HISTORICAL_REFERENCE' if history.get('available') else 'NEEDS_REVIEW',
-        sourceGrade=grade,quantity=quantity,sourceQuantity=n,unit=c['unit'],constraints=c,formalPurchases=formal,
+        sourceGrade=grade,quantity=quantity,sourceQuantity=n,unit=c['unit'],constraints=c,formalPurchases=formal,pendingPurchases=pending,
         inventory=dict(available=available,inventoryIds=entity['inventoryIds'],warehouseId=entity['warehouseId'],
             sourceUpdatedAt=stock[0].get('updated_at') if len(stock)==1 else None,basis='CURRENT_ERP_AVAILABLE_FIELD',historicalReconciliation='NOT_ASSERTED'),
         uncertainties=warnings,ruleFailureCodes=[],ruleResult=rules,sourceSuggestion=source,sourceSuggestionCount=compare['recordCount'],sourceSuggestions=compare['records'],
