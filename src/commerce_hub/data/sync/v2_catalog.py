@@ -16,6 +16,10 @@ def collect_catalog(reader,tenant,entity=None,*,policy=None):
     resources=[('stores','store-authorizations',{}),('warehouses','warehouses',{}),('products','products',{}),
         ('inventory','inventory',dict(view='full')),('suggestions','replenishment',{}),('quotes','supplier-quotes',{}),
         ('listings','listings',{}),('sales','sales-orders',dict(view='full',date_from=(day-timedelta(days=window)).isoformat(),date_to=day.isoformat()))]
+    if reader.state.get('decisionVersion')=='s01-product-demand-v1':
+        # All source-accessible history, once per task. A complete page set is
+        # never interpreted as proof that dates without records had zero demand.
+        resources=[(n,r,dict(view='full') if n=='sales' else p) for n,r,p in resources]
     if entity:
         exact=dict(field='sku',q=entity['sku'],match='exact')
         filters=dict(stores=dict(ids=entity['storeId']),warehouses={},products=exact,

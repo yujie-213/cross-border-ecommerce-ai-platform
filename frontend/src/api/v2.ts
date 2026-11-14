@@ -17,6 +17,8 @@ export interface V2Admission {
   }
 }
 export interface V2Item extends V2Admission {
+  decisionVersion?: string; decision?: ProductDecision; erpComparison?: ERPComparison; relatedScopes?: V2Item[]
+  productSummary?: { scopeCount: number; storeCount: number; warehouseCount: number; referencePlanTotal: number | null; replenishScopeCount: number; judgedScopeCount: number; riskScopeCount: number; analyzedSkuCount: number; productIds: string[] }
   entityKey: string; sourceTenant: string; productId: string | null; sku: string; name: string
   storeId: string | null; warehouseId: string | null; storeName: string | null; warehouseName: string | null
   identityVerified: boolean; identityIssues: string[]; analysisState: string; sourceGrade: string; quantity: number | null; sourceQuantity?: number | null; unit?: string | null
@@ -32,13 +34,27 @@ export interface V2Item extends V2Admission {
   inventoryBasis?: { status: string; observedAt?: string | null; rowUpdatedAt?: string | null; residual?: unknown; issues?: string[]; checkpoint?: { version?: string; evidenceDigest?: string } } | null
   recoveryHints?: { code: string; message: string; action: string }[]
 }
-export interface V2Options { enabled: boolean; sourceTenant: string; singleAIEnabled: boolean; canSubmit: boolean; principalRef: { tenantId: string; principalId: string } }
-export interface V2Summary { discoveredSkuCount: number; scopeObjectCount: number; processedCount: number; ruleCalculated: number; erpReference: number; historicalReference?: number; noReplenishment: number; unanalyzable: number; failed: number; unfinished: number; coverage: number; processingCoverage: number; modelCalls: number; businessMutations: number }
-export interface V2Progress { task: Task; summary: V2Summary; statisticsVersion?: string; enumerationComplete: boolean | null; sourceLimits?: Record<string, { complete: boolean; total?: number; error?: string }> }
+export interface ProductForecast {
+  available: boolean; reason?: string; sampleStart?: string; sampleEnd?: string; sampleAgeDays?: number
+  observedDays?: number; spanDays?: number; unknownDays?: number; orderCount?: number; totalSales?: string
+  averageDailyDemand?: string; salesRecordDayAverage?: string; confidence?: string; risks?: string[]; assumption?: string
+  dailySales?: { day: string; quantity: string }[]; excluded?: Record<string, number>
+}
+export interface ProductDecision {
+  status: 'REPLENISH' | 'NO_REPLENISHMENT' | 'NEEDS_REVIEW'; forecast: ProductForecast; horizonDays: number; leadDays: number | null
+  horizonBasis: string; forecastQuantity: string | null; referenceReplenishmentQuantity: number | null; purchasableQuantity: number | null
+  confirmedSupplyQuantity: number | null; coverageDays: string | null; firstShortageDate: string | null; stockoutRisk: boolean
+  confidence: string; assumptions: string[]; explanation: string[]; baseline: Evaluation | null
+  scenarios: { days: number; forecastQuantity: string; recordDayScenarioQuantity: string; referenceReplenishmentQuantity: number | null }[]
+}
+export interface ERPComparison { status: string; platformQuantity: number | null; erpQuantity: number | null; difference: number | null; significant: boolean; recordCount: number; explanation: string }
+export interface V2Options { enabled: boolean; analysisRange?: string; sourceTenant: string; singleAIEnabled: boolean; canSubmit: boolean; principalRef: { tenantId: string; principalId: string } }
+export interface V2Summary { forecastScopeCount?: number; analyzedSkuCount?: number; judgedSkuCount?: number; judgedScopeCount?: number; replenishSkuCount?: number; replenishScopeCount?: number; noReplenishmentSkuCount?: number; noReplenishmentScopeCount?: number; reviewSkuCount?: number; reviewScopeCount?: number; riskSkuCount?: number; riskScopeCount?: number; erpDifferenceSkuCount?: number; erpDifferenceScopeCount?: number; forecastCoverage?: number; decisionCoverage?: number; discoveredSkuCount: number; scopeObjectCount: number; processedCount: number; ruleCalculated: number; erpReference: number; historicalReference?: number; noReplenishment: number; unanalyzable: number; failed: number; unfinished: number; coverage: number; processingCoverage: number; modelCalls: number; businessMutations: number }
+export interface V2Progress { analysisRange?: string; task: Task; summary: V2Summary; statisticsVersion?: string; enumerationComplete: boolean | null; sourceLimits?: Record<string, { complete: boolean; total?: number; error?: string }> }
 export interface V2List { total: number; items: V2Item[]; stores: [string, string][]; warehouses: [string, string][] }
 export interface V2Single { task: Task; report: { dataReport: { item: V2Item }; analysisReport: { ai: AI } } | null }
 export interface PendingV2 { key: string; path: string; body: object; kind: 'batch' | 'single' | 'requisition' | 'cancel'; createdAt: string; displayHint?: string }
-export const sourceLabel = (v: string) => ({ RULE_CALCULATED: '平台规则计算', REFERENCE_ONLY: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史销量参考', USABLE_FALLBACK: '已核验降级来源', UNAVAILABLE: '无可用来源', UNVERIFIED: '来源待核实' }[v] || v)
+export const sourceLabel = (v: string) => ({ PLATFORM_REFERENCE: '平台独立试算', DEMAND_REFERENCE: '独立需求预测', RULE_CALCULATED: '平台规则计算', REFERENCE_ONLY: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史销量参考', USABLE_FALLBACK: '已核验降级来源', UNAVAILABLE: '无可用来源', UNVERIFIED: '来源待核实' }[v] || v)
 export const stateLabel = (v: string) => ({ PENDING: '等待处理', ANALYZED: '规则建议', ERP_REFERENCE: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史参考分析', NO_REPLENISHMENT: '规则判断无需补货', NEEDS_REVIEW: '需要核实', UNANALYZABLE: '无法分析', FAILED: '分析失败' }[v] || v)
 export function quantityError(item: V2Item, quantity: number, reason: string) {
   const c = item.constraints
@@ -48,6 +64,11 @@ export function quantityError(item: V2Item, quantity: number, reason: string) {
 }
 export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[] }
 const issueLabels: Record<string, string> = {
+  PROCUREMENT_LEAD_UNCONFIRMED: '采购交期未确认；当前需求采用明确规划假设', REGISTERED_RECORD_MISSING: '登记记录未返回，请核对源数据',
+  REGISTERED_RELATION_MISSING: '登记店仓关系未完整回读', V2_REGISTERED_SCOPE_CHANGED: '登记范围已改变，请重新检查自有商品',
+  V2_BUSINESS_SCOPE_NOT_REGISTERED: '该商品店仓未登记为本项目成员', SALES_ENUMERATION_INCOMPLETE: '登记销售未完整读取，当前仅部分样本',
+  AI_FACT_CONTEXT_INVALID: '解释事实校验未通过，规则结论仍可查看',
+
   DEMAND_DAY_COVERAGE_INCOMPLETE: '部分日期尚不能作为完整预测样本，当前提供历史参考', STOCK_MOVEMENT_COVERAGE_INCOMPLETE: '库存流水未完整读取，当前库存仅为ERP读取值',
   INVENTORY_BUCKET_RELATION_UNCONFIRMED: '存在多条库存记录，未证明可相加；库存总量待核实', INVENTORY_QUANTITY_UNCONFIRMED: '库存数量未满足有效非负整数要求',
   NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT: '各接口分时读取，可能存在数据时差', SELLABLE_ETA_UNKNOWN: '实际到货可售日期未确认',

@@ -13,8 +13,10 @@ from commerce_hub.scenarios.s01_v2.analysis import analyze
 
 
 def comparable(item):
+    decision=item.get('decision')
+    stable_decision={k:decision.get(k) for k in ['status','horizonDays','leadDays','referenceReplenishmentQuantity','purchasableQuantity','forecastQuantity','horizonBasis']} if decision else None
     result={k:item.get(k) for k in ['sourceTenant','storeId','warehouseId','productId','sku','sourceGrade','quantity',
-        'inventory','constraints','formalPurchases','sourceSuggestion']}|dict(forecast=(item.get('ruleResult') or {}).get('forecast'))
+        'inventory','constraints','formalPurchases','sourceSuggestion']}|dict(forecast=(item.get('ruleResult') or {}).get('forecast'),decision=stable_decision)
     if item.get('admissionVersion'):
         basis=item.get('inventoryBasis') or {};cp=basis.get('checkpoint') or {}
         result['admissionBasis']=dict(version=item['admissionVersion'],status=basis.get('status'),residual=basis.get('residual'),
@@ -51,7 +53,7 @@ class V2RequisitionService(RequisitionService):
     @staticmethod
     def validate_quantity(report,quantity,reason):
         item=report['dataReport']['item'];c=item['constraints']
-        if not item['procurementEligibility']['eligible'] or item['sourceGrade'] not in {'RULE_CALCULATED','USABLE_FALLBACK','REFERENCE_ONLY'}:
+        if not item['procurementEligibility']['eligible'] or item['sourceGrade'] not in {'RULE_CALCULATED','USABLE_FALLBACK','REFERENCE_ONLY','PLATFORM_REFERENCE'}:
             raise TaskError('REQUISITION_SOURCE_NOT_ELIGIBLE',422)
         if type(quantity) is not int or not 1<=quantity<=100000 or not isinstance(reason,str) or len(reason)>1000:raise TaskError('INVALID_REQUISITION_FIELDS',422)
         if quantity<c['moq'] or quantity%c['orderMultiple']:raise TaskError('MOQ_OR_CARTON_VIOLATION',422)
@@ -71,8 +73,13 @@ class V2RequisitionService(RequisitionService):
                 temporary.write_text(json.dumps(dict(requestCount=value['requestCount'])),encoding='utf-8')
                 temporary.replace(budget)
         reader=V2Reader(client.config,root,BudgetCheckpoint(),lambda:service._authorize_operation(actor,mapping.scope,mapping),transport=client.transport,request_limit=120)
-        catalog=collect_catalog(reader,mapping.sourceTenant,mapping.entity)
-        fresh=[e for e in entities(catalog,mapping.sourceTenant) if e['entityKey']==mapping.entity['entityKey']]
+        if self.registry.owned_only:
+            from commerce_hub.data.sync.registered_catalog import collect_registered,registered_entities
+            catalog=collect_registered(reader,mapping.sourceTenant,self.registry.read_members(),mapping.entity)
+        else:catalog=collect_catalog(reader,mapping.sourceTenant,mapping.entity)
+        candidates=entities(catalog,mapping.sourceTenant)
+        if self.registry.owned_only:candidates=registered_entities(catalog,candidates)
+        fresh=[e for e in candidates if e['entityKey']==mapping.entity['entityKey']]
         if len(fresh)!=1:raise TaskError('V2_LATEST_ENTITY_RELATION_UNRESOLVED',409)
         item=analyze(catalog,fresh[0],reader,opening_binding=self.registry.opening_binding(fresh[0]),requisition_authorized=self.registry.can_write(fresh[0]))
         if comparable(item)!=comparable(mapping.entity):raise TaskError('ANALYSIS_CHANGED_REANALYZE',409)

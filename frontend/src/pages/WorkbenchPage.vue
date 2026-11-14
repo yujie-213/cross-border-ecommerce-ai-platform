@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
 import { route, navigate } from '../router'
-import { init, openBatch, startBatch, state, summary, grouped, stageOf, latestBatchId, STAGE_LABEL, unitOf, PRIORITY_LIMIT } from '../s01'
+import { init, openBatch, startBatch, cancelBatch, state, summary, grouped, stageOf, latestBatchId, STAGE_LABEL, unitOf, PRIORITY_LIMIT } from '../s01'
 import DonutChart from '../components/charts/DonutChart.vue'
 
 const batches = computed(() => state.batches)
@@ -11,6 +11,13 @@ const running = computed(() => !!state.progress && !['SUCCEEDED', 'FAILED', 'CAN
 
 const kpis = computed(() => {
   const s = current.value
+  if (s?.judgedScopeCount !== undefined) return [
+    { label: '不同 SKU', value: s.discoveredSkuCount, filter: {} },
+    { label: '已预测 SKU', value: s.analyzedSkuCount || 0, filter: { decision: 'FORECAST' } },
+    { label: '需补货 SKU', value: s.replenishSkuCount || 0, filter: { decision: 'REPLENISH' } },
+    { label: '暂不补货 SKU', value: s.noReplenishmentSkuCount || 0, filter: { decision: 'NO_REPLENISHMENT' } },
+    { label: '缺货风险 SKU', value: s.riskSkuCount || 0, filter: { decision: 'RISK' } }
+  ]
   return [
     { label: '规则建议', value: s?.ruleCalculated ?? 0, filter: { state: 'ANALYZED' } },
     { label: 'ERP 参考', value: s?.erpReference ?? 0, filter: { state: 'ERP_REFERENCE' } },
@@ -29,6 +36,10 @@ const sourceRows = computed(() => {
   const s = current.value
   if (!s) return []
   const total = Math.max(1, s.scopeObjectCount)
+  if (s.forecastScopeCount !== undefined) return [
+    { label: '独立需求预测', count: s.forecastScopeCount, color: '#0f6b64' },
+    { label: '尚无可信需求样本', count: s.scopeObjectCount - s.forecastScopeCount, color: '#c9812f' }
+  ].filter(r => r.count > 0).map(r => ({ ...r, percent: Math.round(r.count / total * 100) }))
   const uncovered = Math.max(0, s.scopeObjectCount - s.ruleCalculated - s.erpReference - (s.historicalReference || 0) - s.noReplenishment)
   return [
     { label: '规则计算', count: s.ruleCalculated, color: '#0f6b64' },
@@ -65,15 +76,15 @@ async function rerun() {
   if (id && route.value.path === '/workbench') navigate('/workbench', { batch: id })
 }
 
-function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch: state.batchId, ...filter }) }
+function kpi(filter: Record<string, string | undefined>) { navigate('/suggestions', { batch: state.batchId, ...filter }) }
 </script>
 
 <template>
   <div class="page">
     <header class="page-head">
       <div>
-        <h1>采购运营工作台</h1>
-        <p class="page-sub">来源可追溯 · 规则算数量 · 人工确认后再提交 ERP</p>
+        <h1>补货决策工作台</h1>
+        <p class="page-sub">登记自有商品 · 全部获准店仓分别预测与判断 · 不扫描共享商品</p>
       </div>
       <div class="head-actions">
         <label class="select-wrap">
@@ -85,7 +96,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
             <option v-if="!batches.length" value="">尚无检查批次</option>
           </select>
         </label>
-        <button class="button primary" :disabled="state.busy" @click="rerun">{{ state.busy ? '已受理…' : '重新检查全部 SKU' }}</button>
+        <button class="button primary" :disabled="state.busy" @click="rerun">{{ state.busy ? '已受理…' : '重新检查自有商品' }}</button>
       </div>
     </header>
 
@@ -93,7 +104,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
 
     <section v-if="!state.batchId && !loading" class="panel empty-state">
       <h2>还没有检查批次</h2>
-      <p>点击“重新检查全部 SKU”读取授权店仓的当前事实。批量检查只读，不调用模型，也不创建采购单据。</p>
+      <p>点击“重新检查自有商品”读取已登记自有商品及店仓的当前事实。批量检查只读，不调用模型，也不创建采购单据。</p>
       <button class="button primary" :disabled="state.busy" @click="rerun">开始首次检查</button>
     </section>
 
@@ -102,11 +113,17 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
     </section>
 
     <template v-else-if="current">
+      <p v-if="state.progress?.analysisRange !== 'OWNED_REGISTERED'" class="banner warning">当前为历史共享目录批次，保留原始结果。点击重新检查自有商品，生成当前登记范围的分析。</p>
       <div v-if="running" class="run-strip">
         <span class="pulse" />正在检查 · 已处理 {{ current.processedCount }} / {{ current.scopeObjectCount || '—' }}
-        <span class="run-note">结果持续保存，可离开本页</span>
+        <span class="run-note">结果持续保存，可离开本页</span><button class="button small" :disabled="state.busy" @click="cancelBatch">停止本次分析</button>
       </div>
+      <p v-if="['CANCELLED', 'FAILED'].includes(state.progress?.task.state || '')" class="banner warning">
+        本次分析{{ state.progress?.task.state === 'CANCELLED' ? '已停止' : '失败' }}，不能视为已完成。重新检查将读取当前登记自有商品的最新事实。
+      </p>
 
+      <p v-if="current.judgedScopeCount !== undefined" class="banner plain">已识别 <b>{{ current.discoveredSkuCount }}</b> 个自有 SKU、{{ current.scopeObjectCount }} 个店仓对象；可判断 {{ current.judgedSkuCount }} 个 SKU / {{ current.judgedScopeCount }} 个店仓。需补货 {{ current.replenishScopeCount }} 个店仓，ERP 明显差异 {{ current.erpDifferenceSkuCount }} 个 SKU。<br>预测覆盖 {{ ((current.forecastCoverage || 0) * 100).toFixed(1) }}%；无可信销量的对象明确待核实，不拿 ERP 建议冒充独立分析。</p>
+      <p v-if="current.erpDifferenceSkuCount" class="banner plain"><a :href="'#/suggestions?batch=' + state.batchId + '&decision=DIFFERENCE'">查看 {{ current.erpDifferenceSkuCount }} 个与 ERP 明显不同的商品</a></p>
       <div class="top-split">
         <section class="panel kpi-panel">
           <div class="kpi-row">
@@ -140,7 +157,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
         <section class="panel">
           <div class="panel-head">
             <h2>优先处理</h2>
-            <small>批次排序前 {{ PRIORITY_LIMIT }} 项中的待处理 · 规则风险 → ERP 源风险 → 缺货日期</small>
+            <small>优先查看缺货风险和需补仓库 · 前 {{ PRIORITY_LIMIT }} 个店仓中的重点</small>
             <a class="button small" :href="'#/suggestions?batch=' + state.batchId">全部 {{ current.scopeObjectCount }} 项</a>
           </div>
           <div class="qhead"><span>商品 / SKU</span><span>来源 · 状态</span><span class="r">可用</span><span class="r">建议</span><span>缺货日</span></div>
@@ -148,10 +165,10 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
             <div class="qname"><span>{{ item.name || item.sku }}</span><small>{{ item.sku }} · {{ item.storeName || '店铺待核实' }} / {{ item.warehouseName || '仓库待核实' }}</small></div>
             <div class="qmid">
               <span class="chip" :class="stageOf(item)">{{ STAGE_LABEL[stageOf(item)] }}</span>
-              <small>{{ item.sourceGrade === 'RULE_CALCULATED' ? '平台规则' : item.sourceGrade === 'REFERENCE_ONLY' ? 'ERP 源' : item.sourceGrade === 'HISTORICAL_REFERENCE' ? '历史参考' : '待核实' }}</small>
+              <small>{{ item.decision ? '平台独立试算' : item.sourceGrade === 'RULE_CALCULATED' ? '平台规则' : item.sourceGrade === 'REFERENCE_ONLY' ? 'ERP 源' : item.sourceGrade === 'HISTORICAL_REFERENCE' ? '历史参考' : '待核实' }}</small>
             </div>
             <div class="qnum">{{ item.inventory?.available ?? '—' }}</div>
-            <div class="qnum strong">{{ item.quantity ?? '—' }}<small v-if="item.quantity">{{ unitOf(item) }}</small></div>
+            <div class="qnum strong">{{ item.decision?.referenceReplenishmentQuantity ?? item.quantity ?? '—' }}<small v-if="item.quantity">{{ unitOf(item) }}</small></div>
             <div class="qdate">{{ item.riskDate ? item.riskDate.slice(5) : '—' }}</div>
           </a>
           <div v-if="!queue.length && state.priorityLoading" class="empty-inline">正在读取结果…</div>
@@ -160,7 +177,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
 
         <div class="side-stack">
           <section class="panel">
-            <div class="panel-head"><h2>建议来源</h2><small>占全部对象</small></div>
+            <div class="panel-head"><h2>辅助 · 数据来源</h2><small>占全部对象</small></div>
             <div class="mini">
               <div v-for="row in sourceRows" :key="row.label" class="mini-row">
                 <i class="dot" :style="{ background: row.color }" /><span>{{ row.label }}</span><b>{{ row.count }}</b><small>{{ row.percent }}%</small>
@@ -179,7 +196,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
           </section>
 
           <section class="panel">
-            <div class="panel-head"><h2>本次检查</h2><small>{{ running ? '进行中' : '已完成' }}</small></div>
+            <div class="panel-head"><h2>本次检查</h2><small>{{ running ? '进行中' : state.progress?.task.state === 'SUCCEEDED' ? '已完成' : '未完成' }}</small></div>
             <dl class="kv">
               <dt>对象 / 已处理</dt><dd>{{ current.scopeObjectCount }} / {{ current.processedCount }}</dd>
               <dt>有可查看结论</dt><dd>{{ (current.coverage * 100).toFixed(0) }}%</dd>

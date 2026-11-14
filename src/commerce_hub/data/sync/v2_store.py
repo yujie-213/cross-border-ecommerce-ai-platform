@@ -9,6 +9,10 @@ acquisitions=Table('d01_v2_acquisitions',metadata,
 
 
 class AcquisitionCheckpoint:
+    @staticmethod
+    def public_ranges(conn,tenant,task_ids):
+        values=conn.execute(select(acquisitions.c.task_id,acquisitions.c.content).where(acquisitions.c.tenant_id==tenant,acquisitions.c.task_id.in_(task_ids))).all()
+        return {key:'OWNED_REGISTERED' if value.get('monitoring',{}).get('mode')=='OWNED_REGISTERED' else 'LEGACY_SHARED' for key,value in values}
     def __init__(self,context):self.context=context
     def load(self):
         def op(c):

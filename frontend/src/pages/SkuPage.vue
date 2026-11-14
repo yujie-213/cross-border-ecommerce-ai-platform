@@ -6,6 +6,7 @@ import {
   state, summary, stageOf, STAGE_LABEL, unitOf, dash, fmt, latestBatchId
 } from '../s01'
 import { quantityError, issueLabel } from '../api/v2'
+import ProductDecision from '../components/ProductDecision.vue'
 import AiAnalysis from '../components/AiAnalysis.vue'
 import BalanceChart from '../components/charts/BalanceChart.vue'
 import SalesBars from '../components/charts/SalesBars.vue'
@@ -84,9 +85,9 @@ function step(delta: number) {
   quantity.value = next
 }
 
-async function generate() {
+async function generate(withAI = true) {
   const key = item.value?.entityKey || state.itemKey
-  await createSingle()
+  await createSingle(withAI)
   const singleId = state.singleId
   if (!singleId) return
   // Keep the URL authoritative so refresh / back / forward restore this exact analysis.
@@ -165,7 +166,8 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
         </div>
       </header>
 
-      <section class="verdict" aria-label="规则结论">
+      <ProductDecision v-if="item.decision" :item="item" :scopes="state.item?.relatedScopes || []" @select="key => navigate('/sku/' + key, { batch: state.batchId })" />
+      <section v-if="!item.decision" class="verdict" aria-label="规则结论">
         <div class="accent">
           <small>{{ stage === 'history' ? '历史参考' : '规则建议' }}</small>
           <b v-if="item.quantity !== null && item.quantity !== undefined && item.sourceGrade !== 'HISTORICAL_REFERENCE'">{{ item.quantity }}<span>{{ unitOf(item) }}</span></b>
@@ -193,15 +195,16 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
         <a :href="'#/sku/' + pendingElsewhere.entityKey + '?batch=' + state.batchId + '&single=' + pendingElsewhere.singleId">前往核对</a>
       </p>
 
-      <p v-if="blocked.length" class="banner warning">
+      <p v-if="blocked.length && !item.decision" class="banner warning">
         <strong>当前不可提交：</strong>{{ blocked.map(issueLabel).join('；') }}
         <a href="#" @click.prevent="tab = 'quality'">查看依据</a>
       </p>
 
+      <button v-if="item.decision" class="button" :disabled="state.busy || state.singleLoading" @click="generate(false)">刷新当前店仓分析（不调用 AI）</button>
       <AiAnalysis :ai="ai" :task-state="state.singleTask?.state || null" :loading="state.singleLoading"
-                  :error-code="state.singleTask?.errorCode || null" @generate="generate" />
+                  :error-code="state.singleTask?.errorCode || null" @generate="generate(true)" />
 
-      <section v-if="forecast || series.length" class="panel">
+      <section v-if="!item.decision && (forecast || series.length)" class="panel">
         <div class="panel-head">
           <h2>库存与销量</h2>
           <small>{{ series.length ? '按当前可用库存与日均需求推算的结存' : '本次没有可用于预测的完整窗口' }}</small>
@@ -226,7 +229,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
         </div>
       </section>
 
-      <section v-else class="panel">
+      <section v-else-if="!item.decision" class="panel">
         <div class="panel-head"><h2>库存与销量</h2><small>缺少可计算依据</small></div>
         <div class="chart-fallback">
           <ul v-if="uniqueHints.length" class="reason-list">
@@ -284,6 +287,13 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           <p v-if="!item.formalPurchases?.length" class="muted small">本次未取得该店仓的正式采购单据。</p>
         </div>
 
+        <div v-else-if="tab === 'quality' && item.decision" class="tab-body">
+          <h4>预测依据与采购限制</h4>
+          <p class="muted small">需求采用已登记销售记录的首末日期区间参考，不要求连续到昨天。未知日不补零，当前库存独立读取。</p>
+          <ul class="reason-list"><li v-for="line in item.decision.assumptions" :key="line">{{ line }}</li><li v-for="code in blocked" :key="code">{{ issueLabel(code) }}</li></ul>
+          <p v-if="!blocked.length" class="muted small">当前采购字段校验通过，仍须重新读取事实、人工确认及独立 ERP 审批。</p>
+          <dl class="kv"><dt>历史覆盖</dt><dd>{{ item.decision.forecast.observedDays || 0 }} 个有记录日；仅当前登记销售ID</dd><dt>快照</dt><dd class="mono small">{{ item.snapshotRef }}</dd></dl>
+        </div>
         <div v-else-if="tab === 'quality'" class="tab-body">
           <div class="quality-grid">
             <div v-for="entry in qualityEntries" :key="entry.name" class="quality-cell">
@@ -323,7 +333,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
                 <tr v-for="row in historyRows" :key="row.taskRef.taskId">
                   <td class="mono">{{ row.taskRef.taskId.slice(0, 10) }}</td>
                   <td>{{ row.state }}</td>
-                  <td>{{ row.sourceGrade === 'RULE_CALCULATED' ? '规则计算' : row.sourceGrade === 'REFERENCE_ONLY' ? 'ERP 参考' : row.sourceGrade === 'HISTORICAL_REFERENCE' ? '历史参考' : '—' }}</td>
+                  <td>{{ row.sourceGrade === 'PLATFORM_REFERENCE' ? '独立补货试算' : row.sourceGrade === 'DEMAND_REFERENCE' ? '需求预测' : row.sourceGrade === 'RULE_CALCULATED' ? '规则计算' : row.sourceGrade === 'REFERENCE_ONLY' ? 'ERP 参考' : row.sourceGrade === 'HISTORICAL_REFERENCE' ? '历史参考' : '—' }}</td>
                   <td>{{ row.state === 'SUCCEEDED' ? '已生成报告' : '—' }}</td>
                   <td class="r">
                     <a v-if="row.state === 'SUCCEEDED'" class="button small"
@@ -373,7 +383,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           <span class="chip danger">单品分析失败</span>
           <span class="ab-note">{{ state.singleTask.errorCode ? issueLabel(state.singleTask.errorCode) : '服务端未返回错误原因' }}</span>
           <span class="grow" />
-          <button class="button primary" :disabled="state.busy || state.singleLoading" @click="generate">
+          <button class="button primary" :disabled="state.busy || state.singleLoading" @click="generate(false)">
             {{ state.singleLoading ? '正在重试…' : '重试单品分析' }}
           </button>
         </template>
@@ -390,7 +400,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
             {{ item.quantity === null ? '该对象尚未形成可提交的补货数量' : '提交前需先生成单品分析，读取该店仓最新事实与采购条件' }}
           </span>
           <span class="grow" />
-          <button class="button primary" :disabled="state.busy || state.singleLoading" @click="generate">
+          <button class="button primary" :disabled="state.busy || state.singleLoading" @click="generate(false)">
             {{ state.singleLoading ? '正在读取…' : state.singleTask?.state === 'FAILED' ? '重试单品分析' : '生成单品分析' }}
           </button>
         </template>

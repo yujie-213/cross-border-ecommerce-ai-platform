@@ -13,7 +13,21 @@ def bundle(item,binding):
         facts.append(NaturalFact(ref=ref,kind='limitation' if unknown else 'evidence',text=text,allowedPhrases=[text],
             sections=[section],requiredSections=[section],certainty='UNKNOWN' if unknown else 'KNOWN',
             allowedNumbers=list(map(str,numbers)),allowedDates=list(dates)))
-    if item['sourceGrade']=='RULE_CALCULATED':
+    if item.get('decisionVersion'):
+        decision=item['decision'];f=decision['forecast']
+        add('source','本次需求与库存补充来自平台独立参考试算，ERP建议仅作比较，人工确认数量另行校验','recommendationReasons')
+        for i,text in enumerate(decision['explanation']):
+            import re
+            add('business-'+str(i),text,'keyEvidence',numbers=re.findall(r'\d+(?:\.\d+)?',text))
+        for i,text in enumerate(decision['assumptions']):
+            import re
+            add('assumption-'+str(i),'以下为未确认的试算假设：'+text,'majorRisks',numbers=re.findall(r'\d+(?:\.\d+)?',text),unknown=True)
+        compare=item['erpComparison']
+        add('erp-basis',compare['explanation'],'recommendationReasons',unknown=bool(compare['recordCount']))
+        if compare['difference'] is not None:
+            n=compare['difference'];text=f"平台参考补充量与ERP建议相差 {n} 件，ERP算法未知，无法确认具体成因"
+            add('erp-difference',text,'keyEvidence',numbers=[n],unknown=True)
+    elif item['sourceGrade']=='RULE_CALCULATED':
         add('source','本次数量来自平台规则计算，库存与销量经过质量核验','recommendationReasons')
     elif item['sourceGrade']=='REFERENCE_ONLY':
         add('source','本次结果来自 ERP 参考建议，内部计算依据仍未确认','recommendationReasons',unknown=True)
@@ -21,7 +35,9 @@ def bundle(item,binding):
     if item['quantity']:
         text=f"当前建议数量为 {item['quantity']} 件，最终数量仍由业务人员确认" if item['unit']=='EA' else f"当前源建议数量为 {item['quantity']}，计量单位仍未确认"
         add('quantity',text,'keyEvidence',numbers=[item['quantity']],unknown=item['unit']!='EA')
-    else:add('quantity','当前没有可靠的正数量建议，不能将零值或缺失解释为无需补货','keyEvidence',unknown=True)
+    elif item.get('decision',{}).get('status')=='NO_REPLENISHMENT':
+        add('quantity','当前参考试算判断暂不补货；最终采购数量尚未确认','keyEvidence',unknown=True)
+    else:add('quantity','正数量采购依据尚未确认；参考需求与采购候选应分开查看','keyEvidence',unknown=True)
     available=item['inventory']['available']
     if available is not None:add('inventory',f'本次读取的可用库存为 {available} 件' if item['unit']=='EA' else f'源库存值为 {available}，计量单位仍未确认','keyEvidence',numbers=[available],unknown=item['unit']!='EA')
     else:add('inventory','当前库存数量或业务归属未确认','keyEvidence',unknown=True)
@@ -31,7 +47,7 @@ def bundle(item,binding):
     if item.get('formalPurchases'):
         count=len(item['formalPurchases'])
         add('formal-purchases',f'已读取 {count} 条同 SKU 正式采购明细，可售日期和店铺归属仍未确认，未作为有效供给抵扣','majorRisks',numbers=[count],unknown=True)
-    if item.get('ruleResult'):
+    if item.get('ruleResult') and not item.get('decisionVersion'):
         f=item['ruleResult']['forecast']
         add('sales-window',f"最近 {f['observationDays']} 个完整业务日的已核验销量为 {f['totalSales']} 件，需求采用简单移动平均",'keyEvidence',numbers=[f['observationDays'],f['totalSales']])
     elif item.get('sourceSuggestion') and item['sourceSuggestion'].get('daily_sales') is not None:

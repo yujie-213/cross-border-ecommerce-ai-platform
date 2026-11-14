@@ -3,17 +3,17 @@ import { onMounted, ref, watch } from 'vue'
 import { route, navigate, setQuery } from '../router'
 import { init, openBatch, loadList, startBatch, state, summary, stageOf, latestBatchId, STAGE_LABEL, unitOf } from '../s01'
 
-const q = ref(''), store = ref(''), warehouse = ref(''), source = ref(''), stateFilter = ref('')
+const q = ref(''), store = ref(''), warehouse = ref(''), source = ref(''), stateFilter = ref(''), decision = ref('')
 let textTimer: ReturnType<typeof setTimeout> | undefined
 
-const SOURCES = ['RULE_CALCULATED', 'REFERENCE_ONLY', 'HISTORICAL_REFERENCE', 'UNVERIFIED', 'UNAVAILABLE']
+const SOURCES = ['PLATFORM_REFERENCE', 'DEMAND_REFERENCE', 'RULE_CALCULATED', 'REFERENCE_ONLY', 'HISTORICAL_REFERENCE', 'UNVERIFIED', 'UNAVAILABLE']
 const STATES = ['ANALYZED', 'ERP_REFERENCE', 'HISTORICAL_REFERENCE', 'NO_REPLENISHMENT', 'NEEDS_REVIEW', 'UNANALYZABLE', 'FAILED', 'PENDING']
 const sourceName: Record<string, string> = {
-  RULE_CALCULATED: '规则计算', REFERENCE_ONLY: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史销量参考',
+  PLATFORM_REFERENCE: '平台独立试算', DEMAND_REFERENCE: '独立需求预测', RULE_CALCULATED: '规则计算', REFERENCE_ONLY: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史销量参考',
   USABLE_FALLBACK: '已核验降级来源', UNVERIFIED: '来源待核实', UNAVAILABLE: '无可用来源'
 }
 const stateName: Record<string, string> = {
-  ANALYZED: '规则建议', ERP_REFERENCE: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史参考分析', NO_REPLENISHMENT: '无需补货',
+  ANALYZED: '建议补货', ERP_REFERENCE: 'ERP 参考建议', HISTORICAL_REFERENCE: '历史参考分析', NO_REPLENISHMENT: '无需补货',
   NEEDS_REVIEW: '需要核实', UNANALYZABLE: '无法分析', FAILED: '分析失败', PENDING: '等待处理'
 }
 
@@ -25,7 +25,8 @@ function readQuery() {
   warehouse.value = query.warehouse || ''
   source.value = query.source || ''
   stateFilter.value = query.state || ''
-  state.filters = { q: q.value, store: store.value, warehouse: warehouse.value, source: source.value, state: stateFilter.value }
+  decision.value = query.decision || ''
+  state.filters = { q: q.value, store: store.value, warehouse: warehouse.value, source: source.value, state: stateFilter.value, decision: decision.value }
   state.offset = Math.max(0, Number(query.offset || 0) || 0)
 }
 
@@ -34,7 +35,7 @@ const sameAsState = () => {
   return (query.batch || '') === state.batchId &&
     (query.q || '') === state.filters.q && (query.store || '') === state.filters.store &&
     (query.warehouse || '') === state.filters.warehouse && (query.source || '') === state.filters.source &&
-    (query.state || '') === state.filters.state && (Number(query.offset || 0) || 0) === state.offset
+    (query.state || '') === state.filters.state && (query.decision || '') === state.filters.decision && (Number(query.offset || 0) || 0) === state.offset
 }
 
 /** Uses the already-open batch when possible; the list still reloads for the new query. */
@@ -58,7 +59,7 @@ function onText() {
   textTimer = setTimeout(() => apply({ q: q.value }), 320)
 }
 
-function clearAll() { apply({ q: '', store: '', warehouse: '', source: '', state: '' }) }
+function clearAll() { apply({ q: '', store: '', warehouse: '', source: '', state: '', decision: '' }) }
 
 const page = () => Math.floor(state.offset / state.limit) + 1
 const pages = () => Math.max(1, Math.ceil(state.list.total / state.limit))
@@ -86,8 +87,8 @@ watch(() => route.value.query, (query, previous) => {
   <div class="page">
     <header class="page-head">
       <div>
-        <h1>补货建议</h1>
-        <p class="page-sub">同 SKU 的不同店仓分开展示；来源与状态分别标注，不合并计算</p>
+        <h1>商品与补货建议</h1>
+        <p class="page-sub">当前检查仅登记自有商品；进入商品查看全部获准店仓，各店仓独立判断</p>
       </div>
       <div class="head-actions">
         <label class="select-wrap">
@@ -106,6 +107,7 @@ watch(() => route.value.query, (query, previous) => {
 
     <section class="panel filters-panel">
       <div class="filters">
+        <label class="field"><span>业务判断</span><select :value="decision" @change="apply({ decision: ($event.target as HTMLSelectElement).value })"><option value="">全部判断</option><option value="REPLENISH">建议补货</option><option value="NO_REPLENISHMENT">暂不补货</option><option value="NEEDS_REVIEW">依据不足</option><option value="RISK">缺货风险</option><option value="DIFFERENCE">ERP 明显差异</option></select></label>
         <label class="field grow">
           <span>SKU / 商品</span>
           <input v-model="q" type="search" placeholder="搜索 SKU 或商品名称" @input="onText" @keyup.enter="apply({ q })">
@@ -145,22 +147,22 @@ watch(() => route.value.query, (query, previous) => {
     <section class="panel">
       <div class="panel-head">
         <h2>结果</h2>
-        <small>{{ state.list.total }} 个店仓对象{{ state.listLoading ? ' · 读取中…' : '' }}</small>
-        <span v-if="summary" class="head-note">规则 {{ summary.ruleCalculated }} · ERP 参考 {{ summary.erpReference }} · 历史参考 {{ summary.historicalReference || 0 }}</span>
+        <small>{{ state.list.total }} 个不同 SKU{{ state.listLoading ? ' · 读取中…' : '' }}</small>
+        <span v-if="summary" class="head-note">目录 {{ summary.discoveredSkuCount }} SKU / {{ summary.scopeObjectCount }} 店仓 · 需补 {{ summary.replenishScopeCount ?? summary.ruleCalculated }} 店仓</span>
       </div>
       <div class="table-scroll">
         <table class="ltable">
           <thead>
-            <tr><th>商品 / SKU</th><th>店铺 / 仓库</th><th>来源</th><th>状态</th><th class="r">可用</th><th class="r">建议</th><th>缺货日</th><th></th></tr>
+            <tr><th>商品 / SKU</th><th>业务范围</th><th>需求依据</th><th>补货判断</th><th class="r">库存概况</th><th class="r">各仓参考计划合计</th><th>最早缺货</th><th></th></tr>
           </thead>
           <tbody>
             <tr v-for="item in state.list.items" :key="item.entityKey" @click="navigate('/sku/' + item.entityKey, { batch: state.batchId })">
               <td><span class="cell-title">{{ item.name || item.sku }}</span><small class="mono">{{ item.sku }}</small></td>
-              <td><span class="cell-title">{{ item.storeName || '店铺待核实' }}</span><small>{{ item.warehouseName || '仓库待核实' }}</small></td>
-              <td><span class="chip plain">{{ sourceName[item.sourceGrade] || item.sourceGrade }}</span></td>
+              <td><span class="cell-title">{{ item.productSummary?.storeCount || 0 }} 店铺 / {{ item.productSummary?.warehouseCount || 0 }} 仓库</span><small>{{ item.productSummary?.scopeCount || 1 }} 个店仓 · 进入逐仓查看</small></td>
+              <td><span class="chip plain">{{ item.decision?.forecast.available ? '可信历史独立预测' : sourceName[item.sourceGrade] || item.sourceGrade }}</span><small v-if="item.decision?.forecast.available">{{ item.decision.forecast.observedDays }} 有记录日 / {{ item.decision.forecast.spanDays }} 天跨度</small></td>
               <td><span class="chip" :class="stageOf(item)">{{ STAGE_LABEL[stageOf(item)] }}</span></td>
-              <td class="r num">{{ item.inventory?.available ?? '—' }}</td>
-              <td class="r num strong">{{ item.quantity ?? '—' }}<small v-if="item.quantity"> {{ unitOf(item) }}</small></td>
+              <td class="r num">{{ (item.productSummary?.scopeCount || 1) > 1 ? '按仓查看' : item.inventory?.available ?? '—' }}</td>
+              <td class="r num strong">{{ item.productSummary?.referencePlanTotal ?? item.decision?.referenceReplenishmentQuantity ?? item.quantity ?? '—' }}<small v-if="item.quantity"> {{ unitOf(item) }}</small></td>
               <td class="num">{{ item.riskDate ? item.riskDate.slice(5) : '—' }}</td>
               <td class="r"><a class="button small" :href="'#/sku/' + item.entityKey + '?batch=' + state.batchId" @click.stop>查看</a></td>
             </tr>

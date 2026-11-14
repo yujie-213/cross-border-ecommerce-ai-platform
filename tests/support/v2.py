@@ -59,5 +59,8 @@ class SyntheticERP:
         total=len(rows);offset=int(params.get('offset',0));limit=int(params.get('limit',200))
         return out(dict(items=rows[offset:offset+limit],total=total))
     def reader(self,root,checkpoint=None,check=lambda:None,**kwargs):
-        return V2Reader(ERPConfig(access_token='synthetic-source-token'),root,checkpoint or MemoryCheckpoint(),check,
+        reader=V2Reader(ERPConfig(access_token='synthetic-source-token'),root,checkpoint or MemoryCheckpoint(),check,
             transport=self.transport,sleeper=lambda _:None,**kwargs)
+        if getattr(self,'legacy_runtime',False):
+            reader.state.pop('decisionVersion',None);reader.checkpoint.save(reader.state)
+        return reader

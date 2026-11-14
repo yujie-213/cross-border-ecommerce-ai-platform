@@ -126,6 +126,9 @@ def rule_result(catalog,entity,reader,*,opening_binding=None):
 
 
 def analyze(catalog,entity,reader,*,opening_binding=None,requisition_authorized=None):
+    if reader.state.get('decisionVersion')=='s01-product-demand-v1':
+        from .decision import analyze_decision
+        return analyze_decision(catalog,entity,reader,requisition_authorized=requisition_authorized)
     if reader.state.get('admissionVersion')=='s01-runtime-v1' and getattr(getattr(opening_binding,'monitor',None),'policy',None):
         from commerce_hub.data.projection.runtime import business_date
         catalog=dict(catalog,businessDate=business_date(reader.state['startedAt'],opening_binding.monitor.policy.timezone).isoformat())
@@ -191,6 +194,9 @@ def analyze(catalog,entity,reader,*,opening_binding=None,requisition_authorized=
 
 
 def priority(item):
+    if item.get('decisionVersion')=='s01-product-demand-v1':
+        d=item['decision'];rank=0 if d['stockoutRisk'] and d['status']=='REPLENISH' else 1 if d['status']=='REPLENISH' else 2 if d['status']=='NEEDS_REVIEW' else 3
+        return rank,d.get('firstShortageDate') or '9999-12-31',item.get('sku',''),item['entityKey']
     group={'RULE_CONFIRMED':0,'ERP_SOURCE':1,'UNVERIFIED':2,'NO_REPLENISHMENT':3}.get(item.get('riskGroup'),2)
     urgency={'最急':0,'急':1,'一般':2}.get(item.get('sourceUrgency'),3) if group==1 else 0
     return group,urgency,item.get('riskDate') or '9999-12-31',item.get('sku',''),item['entityKey']
@@ -200,12 +206,15 @@ def statistics(values,version='v2-counts-v2'):
     values=list(values);states=[r.get('analysisState') for r in values]
     done=sum(s!='PENDING' for s in states)
     available=sum(s in {'ANALYZED','ERP_REFERENCE','NO_REPLENISHMENT','HISTORICAL_REFERENCE'} for s in states)
-    result=dict(discoveredSkuCount=len({r['sku'] for r in values}) if version=='v2-counts-v2' else len({(r.get('productId'),r['sku']) for r in values}),scopeObjectCount=len(values),processedCount=done,
+    result=dict(discoveredSkuCount=len({r['sku'] for r in values}) if version in {'v2-counts-v2','product-counts-v1'} else len({(r.get('productId'),r['sku']) for r in values}),scopeObjectCount=len(values),processedCount=done,
         ruleCalculated=sum(r.get('sourceGrade')=='RULE_CALCULATED' and r.get('analysisState')=='ANALYZED' for r in values),erpReference=states.count('ERP_REFERENCE'),
         noReplenishment=states.count('NO_REPLENISHMENT'),unanalyzable=states.count('UNANALYZABLE')+states.count('NEEDS_REVIEW'),failed=states.count('FAILED'),
         unfinished=states.count('PENDING'),coverage=available/len(values) if values else 0,processingCoverage=done/len(values) if values else 0,
         ruleSourceCount=sum(r.get('sourceGrade')=='RULE_CALCULATED' for r in values),erpSourceRecordCount=sum(r.get('sourceGrade')=='REFERENCE_ONLY' for r in values),modelCalls=0,businessMutations=0)
-    if version=='v2-counts-v2':result['productIdentityCount']=len({r['productId'] for r in values if r.get('productId')})
+    if version in {'v2-counts-v2','product-counts-v1'}:result['productIdentityCount']=len({r['productId'] for r in values if r.get('productId')})
+    if version=='product-counts-v1':
+        from .products import decision_counts
+        result.update(decision_counts(values))
     # Do not add a zero-valued field when validating older immutable reports.
     if 'HISTORICAL_REFERENCE' in states:result['historicalReference']=states.count('HISTORICAL_REFERENCE')
     return result

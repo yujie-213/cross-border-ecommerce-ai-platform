@@ -49,7 +49,7 @@ def test_checkpoint_rejects_invalid_revision_without_mutating_active_scope(datab
 
 
 def test_runtime_report_persistence_and_new_failure_does_not_overwrite_history(make_s01,tmp_path):
-    e=environment(make_s01,tmp_path,2);first,report=run(e)
+    e=environment(make_s01,tmp_path,2);e.erp.legacy_runtime=True;first,report=run(e)
     with e.database.engine.connect() as c:items=ItemStore.read(c,e.tenant,first)
     assert all(r['admissionVersion']=='s01-runtime-v1' for r in items.values())
     assert all(r['capabilities']['requisition']['enabled']==(r['productId']=='1') for r in items.values())
@@ -78,7 +78,7 @@ def admitted_environment(make_s01,tmp_path,monkeypatch):
     from tests.support.admission_runtime import AdmissionERP
     import commerce_hub.data.sync.v2 as v2
     monkeypatch.setattr(v2,'now',lambda:'2026-11-13T06:00:05+00:00')
-    e=environment(make_s01,tmp_path,1);e.erp=AdmissionERP();e.policy.owned_mappings=[]
+    e=environment(make_s01,tmp_path,1);e.erp=AdmissionERP();e.erp.legacy_runtime=True;e.policy.owned_mappings=[]
     return e
 
 

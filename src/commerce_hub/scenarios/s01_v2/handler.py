@@ -23,7 +23,7 @@ class V2Handler:
         self.single,self.provider=single,provider
         if not single and provider is not None:raise ValueError('BATCH_MODEL_FORBIDDEN')
     def validate(self,p):
-        if not isinstance(p,dict) or set(p)!=({'entity'} if self.single else set()):raise ValueError('V2_PARAMETERS_INVALID')
+        if not isinstance(p,dict) or (not self.single and p) or (self.single and (not {'entity'}<=set(p)<= {'entity','explainAI'} or 'explainAI' in p and type(p['explainAI']) is not bool)):raise ValueError('V2_PARAMETERS_INVALID')
         if self.single:
             e=p['entity']
             required={'entityKey','sourceTenant','storeId','warehouseId','productId','sku','storeName','warehouseName'}
@@ -35,9 +35,17 @@ class V2Handler:
     def run(self,context,parameters):
         self.validate_scope(parameters,context.task['scope'])
         reader=self.reader_factory(context)
-        try:catalog=collect_catalog(reader,self.policy.source_tenant,parameters['entity'] if self.single else None)
+        try:
+            members=self.policy.read_members() if self.policy.owned_only else None
+            if members is not None:
+                from commerce_hub.data.sync.registered_catalog import collect_registered
+                catalog=collect_registered(reader,self.policy.source_tenant,members,parameters.get('entity'))
+            else:catalog=collect_catalog(reader,self.policy.source_tenant,parameters['entity'] if self.single else None)
         except ERPError as exc:raise TaskError(exc.code,503) from None
         candidates=entities(catalog,self.policy.source_tenant)
+        if members is not None:
+            from commerce_hub.data.sync.registered_catalog import registered_entities
+            candidates=registered_entities(catalog,candidates)
         if self.single:
             e=parameters['entity']
             candidates=[r for r in candidates if all(r[k]==e[k] for k in ['sourceTenant','storeId','warehouseId','productId','sku'])]
@@ -73,16 +81,19 @@ class V2Handler:
         complete=all(catalog[n]['complete'] for n in ['products','stores','warehouses','inventory'])
         manifest=manifest_for()
         context.commit_data(lambda c:ManifestStore.save(c,tenant,task,manifest))
-        data=dict(version='s01-v2-v1',statisticsVersion='v2-counts-v2',summary=statistics(rows.values()),enumerationComplete=complete,
+        stat_version='product-counts-v1' if reader.state.get('decisionVersion') else 'v2-counts-v2'
+        data=dict(version='s01-v2-v1',statisticsVersion=stat_version,summary=statistics(rows.values(),stat_version),enumerationComplete=complete,
             sourceTenant=self.policy.source_tenant,catalogManifest=manifest,
-            resultDigest=fingerprint(rows),sourceLimits={n:{k:v for k,v in cap.items() if k!='rows'} for n,cap in catalog.items() if isinstance(cap,dict)},
+            resultDigest=fingerprint(rows),sourceLimits={n:{k:v for k,v in cap.items() if k!='rows'} for n,cap in catalog.items() if isinstance(cap,dict) and 'rows' in cap},
+            analysisRange='OWNED_REGISTERED' if members is not None else 'LEGACY_SHARED',monitoring=catalog.get('monitoring'),
             actionMeaning='HUMAN_CONFIRMED_ERP_REQUISITION_ONLY',batchModelCalls=0,batchBusinessMutations=0)
         ai=dict(status='NOT_ATTEMPTED',reason='BATCH_ZERO_AI',explanation=None)
         if self.single:
             data['item']=next(iter(rows.values()))
             data['summary'].pop('modelCalls',None)
-            if data['item']['analysisState']!='FAILED':ai=explain(data['item'],context,self.provider)
-        limited=not complete or any(not cap.get('complete') for cap in catalog.values() if isinstance(cap,dict)) or data['summary']['unanalyzable'] or data['summary']['failed']
+            if data['item']['analysisState']!='FAILED':
+                ai=explain(data['item'],context,self.provider if parameters.get('explainAI',True) else None)
+        limited=not complete or any(not cap.get('complete') for cap in catalog.values() if isinstance(cap,dict) and 'rows' in cap) or data['summary']['unanalyzable'] or data['summary']['failed']
         return DomainResult(contractVersion='0.1.0',sourceNature='SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP',
             completeness='PARTIAL' if limited else 'RULES_ONLY',scope=context.task['scope'],snapshotRef=data['catalogManifest']['snapshotRef'],
             dataReport=data,analysisReport=dict(ai=ai))

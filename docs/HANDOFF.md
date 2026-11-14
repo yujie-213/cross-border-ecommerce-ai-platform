@@ -1,3 +1,5 @@
+本轮范围收缩（2026-11-14）：负责人明确改为自有商品。D-S01-PRODUCT-01继续同分支，默认仅版本化登记并核验通过的自有商品/店仓/销售ID；当前2SKU，不扫描共享百万历史、不自动纳入未登记仓/销售。旧采集99e37f81已CANCELLED，271请求/48600销售捕获/零模型零业务写保留；候选全目录恢复与多批次合并WIP已撤除。本轮继续真实只读/API/Worker/浏览器及隔离多仓验证，最终REVIEW、不合main。
+
 本轮产品重构领取（2026-11-14）：Codex单人，从远端main f9bc45f建立codex/s01-product-demand-rebuild。原跟踪区干净，未知docs/ERP-openapi.yaml保留；已读取附件完整任务、V3与准入交接。实施范围D01/D02/D03/V2/API/Vue/测试/文档，需求与采购执行解耦，全历史/商品聚合/分仓/ERP对比；正常提交推送，最终REVIEW，不合main，不ERP业务写。契约contracts/s01/product-demand.md，实际验收见TASKS，不使用旧历史PASS代替本轮。
 
 S01 前端 V3 已合并 main（2026-11-14）：workbuddy/s01-frontend-v3 → main，快进至 479c7d1。合并前修复换行符污染（22 文件 CRLF→LF，纯终止符变更，内容与行为不变），并在合并前重跑 typecheck/build/51 单测/7 项浏览器用例全通过。当前 main 上四页前端可直接用 Start-Platform.cmd 或 uvicorn+worker+vite 启动。后续接手注意：.gitattributes 为 `* -text` 逐字节存储，脚本改文件务必用二进制或 newline='' 写入，否则整篇变 CRLF。

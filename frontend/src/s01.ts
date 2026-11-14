@@ -44,7 +44,7 @@ export const state = reactive({
   error: '',
   note: '',
 
-  batches: [] as Task[],
+  batches: [] as (Task & { analysisRange?: string })[],
   batchCursor: null as string | null,
   batchId: '',
   progress: null as V2Progress | null,
@@ -55,7 +55,7 @@ export const state = reactive({
   /** Unfiltered top of the batch order, owned by the workbench (never the list page's query). */
   priority: [] as V2Item[],
   priorityLoading: false,
-  filters: { q: '', store: '', warehouse: '', source: '', state: '' },
+  filters: { q: '', store: '', warehouse: '', source: '', state: '', decision: '' },
   offset: 0,
   limit: 50,
 
@@ -94,6 +94,11 @@ export const summary = computed(() => state.progress?.summary || null)
 export const grouped = computed(() => {
   const s = summary.value
   if (!s) return []
+  if (s.judgedScopeCount !== undefined) return [
+    { key: 'confirm', label: '建议补货', count: s.replenishScopeCount || 0, color: '#0f6b64' },
+    { key: 'none', label: '暂不补货', count: s.noReplenishmentScopeCount || 0, color: '#8baaa0' },
+    { key: 'review', label: '依据不足', count: s.reviewScopeCount || 0, color: '#c9812f' }
+  ].filter(x => x.count > 0)
   return [
     { key: 'confirm', label: '有建议数量', count: s.ruleCalculated + s.erpReference, color: '#0f6b64' },
     { key: 'history', label: '历史参考', count: s.historicalReference || 0, color: '#7a8fa6' },
@@ -108,6 +113,12 @@ export const grouped = computed(() => {
 export type Stage = 'confirm' | 'history' | 'review' | 'none' | 'broken' | 'pending'
 
 export function stageOf(item: V2Item): Stage {
+  if (item.productSummary) {
+    if (item.productSummary.replenishScopeCount) return 'confirm'
+    if (item.productSummary.judgedScopeCount < item.productSummary.scopeCount) return 'review'
+    return 'none'
+  }
+  if (item.decision) return item.decision.status === 'REPLENISH' ? 'confirm' : item.decision.status === 'NO_REPLENISHMENT' ? 'none' : 'review'
   switch (item.analysisState) {
     case 'ANALYZED':
     case 'ERP_REFERENCE': return 'confirm'
@@ -122,7 +133,7 @@ export function stageOf(item: V2Item): Stage {
 }
 
 export const STAGE_LABEL: Record<Stage, string> = {
-  confirm: '有建议数量', history: '历史参考', review: '需核实', none: '无需补货', broken: '分析失败', pending: '等待处理'
+  confirm: '建议补货', history: '历史参考', review: '需核实', none: '无需补货', broken: '分析失败', pending: '等待处理'
 }
 export const STAGE_TONE: Record<Stage, string> = {
   confirm: 'primary', history: 'info', review: 'warning', none: 'muted', broken: 'danger', pending: 'muted'
@@ -142,7 +153,7 @@ export function fmt(value: unknown, digits = 1): string {
 
 /** Rule coverage is only meaningful when the rule engine produced a baseline. */
 export function coverage(item: V2Item) {
-  return item.ruleResult?.supplyDemand?.baseline?.coverageDays ?? null
+  return item.decision?.coverageDays ?? item.ruleResult?.supplyDemand?.baseline?.coverageDays ?? null
 }
 
 export function leadDays(item: V2Item) {
@@ -250,7 +261,7 @@ export async function loadList() {
   if (!state.batchId) return
   const mine = ++listEpoch
   state.listLoading = true
-  const params = new URLSearchParams({ limit: String(state.limit), offset: String(state.offset) })
+  const params = new URLSearchParams({ limit: String(state.limit), offset: String(state.offset), group: 'sku' })
   Object.entries(state.filters).forEach(([key, value]) => { if (value) params.set(key, value) })
   try {
     const data = await request<V2List>(`/s01/v2/batches/${state.batchId}/items?${params}`)
@@ -325,7 +336,7 @@ async function pollSingle(id: string, mine: number, count = 0) {
     state.singleTask = data.task
     if (data.report) {
       state.singleReport = data.report
-      state.item = data.report.dataReport.item
+      state.item = { ...data.report.dataReport.item, relatedScopes: state.item?.relatedScopes }
       state.singleLoading = false
       await readRequisition()
       await loadSingleHistory()
@@ -338,7 +349,7 @@ async function pollSingle(id: string, mine: number, count = 0) {
   } catch (e) { if (mine === detailEpoch) fail(e) }
 }
 
-export async function createSingle() {
+export async function createSingle(explainAI = false) {
   const item = state.item
   if (!item || state.busy || !state.batchId) return
   state.busy = true; state.error = ''; state.note = ''
@@ -348,7 +359,7 @@ export async function createSingle() {
     const task = await request<Task>('/s01/v2/singles', {
       method: 'POST',
       headers: { 'Idempotency-Key': key },
-      body: JSON.stringify({ batchId: state.batchId, entityKey: item.entityKey })
+      body: JSON.stringify({ batchId: state.batchId, entityKey: item.entityKey, explainAI })
     })
     await openSingle(task.taskRef.taskId)
   } catch (e) {
@@ -438,10 +449,20 @@ export async function startBatch() {
   finally { state.busy = false }
 }
 
+export async function cancelBatch() {
+  if (!state.progress || state.busy) return
+  state.busy = true
+  try {
+    await request(`/s01/v2/batches/${state.batchId}/cancel`, { method: 'POST', headers: { 'Idempotency-Key': crypto.randomUUID() }, body: JSON.stringify({ expectedRevision: state.progress.task.revision }) })
+    await refreshBatch()
+  } catch (e) { fail(e) } finally { state.busy = false }
+}
+
 /** Latest finished batch, used to give the workbench content on first visit. */
 export function latestBatchId() {
-  const done = state.batches.find(t => t.state === 'SUCCEEDED')
-  return (done || state.batches[0])?.taskRef.taskId || ''
+  const available = state.options?.analysisRange === 'OWNED_REGISTERED' ? state.batches.filter(t => t.analysisRange === 'OWNED_REGISTERED') : state.batches
+  const done = available.find(t => t.state === 'SUCCEEDED')
+  return (done || available[0])?.taskRef.taskId || ''
 }
 
 export type RequisitionCategory = 'pending' | 'approved' | 'unknown' | 'blocked' | 'draft'

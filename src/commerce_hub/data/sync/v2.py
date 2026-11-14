@@ -18,6 +18,7 @@ class V2Reader:
         self.state=checkpoint.load()
         if 'startedAt' not in self.state and not self.state.get('resources'):
             self.state['admissionVersion']='s01-runtime-v1'
+            self.state['decisionVersion']='s01-product-demand-v1'
         self.state.setdefault('resources',{});self.state.setdefault('events',[])
         self.state.setdefault('startedAt',now());self.root.mkdir(parents=True,exist_ok=True)
         self.token=config.access_token
@@ -126,4 +127,4 @@ class V2Reader:
     def receipt(self):
         return dict(startedAt=self.state['startedAt'],completedAt=(self.state['events'][-1].get('completedAt') or self.state['events'][-1]['at']) if self.state['events'] else self.state['startedAt'],requestCount=self.state['requestCount'],requestLimit=self.limit,
             resources={k:{p:v for p,v in e.items() if p!='binding'} for k,e in self.state['resources'].items()},events=self.state['events'],
-            atomicAcrossInterfaces=False,businessMutations=0)
+            atomicAcrossInterfaces=False,businessMutations=0,**({'monitoring':self.state['monitoring']} if self.state.get('monitoring') else {}))

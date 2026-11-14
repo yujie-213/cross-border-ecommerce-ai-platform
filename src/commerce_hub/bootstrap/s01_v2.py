@@ -32,7 +32,7 @@ def registry(settings):
     policy=V2Policy(app_tenant,os.environ.get('COMMERCE_S01_V2_SOURCE_TENANT','1'),
         owned_mappings=MonitorRegistry(db.engine,'s01-owned-teaching-local').mappings(),
         owned_provider=lambda:MonitorRegistry(db.engine,'s01-owned-teaching-local').mappings(),
-        requisition_enabled=os.environ.get('COMMERCE_S01_V2_REQUISITION_ENABLED')=='true')
+        requisition_enabled=os.environ.get('COMMERCE_S01_V2_REQUISITION_ENABLED')=='true',owned_only=True)
     def reader_factory(context):
         root=ROOT/'data/private/s01-v2'/context.task['tenant_id']/context.task['task_id']
         return V2Reader(erp_config(),root,AcquisitionCheckpoint(context),context.check,
@@ -60,8 +60,8 @@ def registry(settings):
             return TeachingRequisitionClient(erp_config(),transport=transport)
         single.requisition_client_factory=client_factory
         single.requisition_private_root=ROOT/'data/private/s01-v2-requisitions'
-    return dict(S01_V2_BATCH=HandlerSpec('S01_V2_BATCH','0.1.0','s01.v2.batch.v1',batch),
-        S01_V2_SINGLE=HandlerSpec('S01_V2_SINGLE','0.1.0','s01.v2.single.v1',single,
+    return dict(S01_V2_BATCH=HandlerSpec('S01_V2_BATCH','0.1.0','s01.product.batch.v1',batch),
+        S01_V2_SINGLE=HandlerSpec('S01_V2_SINGLE','0.1.0','s01.product.single.v1',single,
             max_calls=1 if provider else 0,max_tokens=24000 if provider else 0,max_cost=Decimal('.05') if provider else Decimal('0'),
             policy_version=shared.authorization_id if shared else 's01-v2-no-model-v1',cost_currency='USD' if provider else None,shared_model_authorization=shared))
 
