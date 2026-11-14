@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "mode": "EXPLICIT_CHANGED_PATHS_PATTERN_AND_LOCAL_CREDENTIAL_EXACT_MATCH",
+  "scannedFiles": 15,
+  "findings": [],
+  "rawResponsesIncluded": false,
+  "unknownOpenAPIIncluded": false,
+  "limitations": "Heuristic and exact local credential checks; private ERP and provider records excluded; teaching summaries only."
+}

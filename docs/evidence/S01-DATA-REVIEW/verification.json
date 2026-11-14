@@ -1,0 +1,78 @@
+{
+  "status": "REVIEW",
+  "result": "PASS_REVIEW_VERIFICATION_ONLY",
+  "testedCommit": "b6b395681762d88827bfef37cec0b7eb9e200e93",
+  "baseline": "ece11160ecd0e820153a1c58128657a2f8788884",
+  "branch": "codex/s01-data-admission-review",
+  "productionCodeChanges": 0,
+  "newModels": 0,
+  "businessWrites": 0,
+  "historicalAudit": {
+    "command": ".venv/Scripts/python.exe tools/review_s01_admission.py",
+    "exitCode": 0,
+    "environment": "Windows/Python3.13; existing approved local MySQL SELECT only; original private captures",
+    "sample": "2 owned captures + 3 V2 acquisitions; 975 sealed results per acquisition; SHA256 raw pages and original capture fingerprints verified",
+    "artifactRef": "docs/evidence/S01-DATA-REVIEW/forensics.json"
+  },
+  "liveRead": {
+    "command": ".venv/Scripts/python.exe tools/review_s01_admission.py --live",
+    "exitCode": 0,
+    "runTiming": "Before fixed diagnostic commit; no post-commit ERP repetition",
+    "sample": "2 inventory IDs + same 7 dual-SKU registered order IDs, authentication/me; 6 HTTP all200",
+    "artifactRef": "docs/evidence/S01-DATA-REVIEW/current-read.json",
+    "limit": "not all-history/movement discovery; no fresh workflow/ledger full reread"
+  },
+  "replay": {
+    "command": ".venv/Scripts/python.exe tools/replay_s01_admission.py",
+    "exitCode": 0,
+    "sample": "16 checks; actual production functions unchanged, synthetic fixture + unapproved window prototype; 30 explicit asOf dates",
+    "artifactRef": "docs/evidence/S01-DATA-REVIEW/replay.json"
+  },
+  "relatedTests": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/unit/data/test_owned.py tests/unit/data/test_v2_projection.py tests/unit/data/test_online_calculation.py tests/unit/data/test_online.py tests/unit/metrics/s01/test_daily.py tests/unit/forecasting/s01/test_candidates.py tests/unit/models/test_snapshot_binding.py -q -p no:cacheprovider --basetemp=data/private/s01-data-review/pytest-temp-r3 --junitxml=data/private/s01-data-review/related-tests-r3.xml --tb=short",
+    "exitCode": 0,
+    "tests": 101,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junitSha256": "ce06608a8795f35cd82c62cc36f784408e7d99fa4d77c6a2caf826e1d91a79d6"
+  },
+  "retainedFailures": [
+    {
+      "result": "ERROR",
+      "tests": 101,
+      "passed": 82,
+      "setupErrors": 19,
+      "reason": "Windows sandbox tmp .lock permission",
+      "artifact": "data/private/s01-data-review/related-tests.xml",
+      "sha256": "df3d08cf0647f9efed91fd5650142eaf98101c78612927f4879fcd9431ef43e0"
+    },
+    {
+      "result": "ERROR",
+      "reason": "r2 workspace basetemp permission and session cleanup; no XML completed",
+      "resolution": "same 101 tests passed r3 via reviewed elevation; no test/product edits"
+    }
+  ],
+  "notRun": [
+    "30-day live ERP continuous observation",
+    "new browser/UI acceptance",
+    "paid model",
+    "purchase writes",
+    "production admission redesign"
+  ],
+  "documents": {
+    "command": "python docs/planning/build_docs.py; python docs/planning/check_plan.py",
+    "exitCode": 0,
+    "checks": 18,
+    "artifactRef": "docs/planning/validation-report.json"
+  },
+  "factBoundaries": [
+    "Original and current registered facts identical; unknown outside this scope not asserted absent",
+    "Candidate policy conservation/zero-day/freshness checks are offline prototypes",
+    "Observed current defect remains in main and review branch production source"
+  ],
+  "publication": {
+    "status": "PENDING_NORMAL_BRANCH_SYNC",
+    "mainMerged": false
+  }
+}

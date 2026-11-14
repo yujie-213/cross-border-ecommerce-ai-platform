@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`b9c2392dc8a9df265cfcc88b641efc38d5bc0ab96a80e62861216656ff5cd329`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`8c3927ef719a036b655d746b2364abeaaac536cdf86ebe9f4417bcdd6010f922`。不要手工编辑；候选不是执行授权。
 
-任务 48 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 19；ACCEPTED 20。
+任务 49 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 20；ACCEPTED 20。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 31 | 2 | 0 | 4 | 17 | 8 |
+| D | 32 | 2 | 0 | 4 | 18 | 8 |
 
 ## 当前活动记录
 
@@ -37,6 +37,7 @@
 - D-S01-P3-PREP-01 P3采购审核与执行流程开发准备（无业务执行）：REVIEW；实际执行者=Codex。
 - D-S01-P3-ERP-SURVEY-01 ERP采购全链路只读能力验证与P2/P3可行性调查：REVIEW；实际执行者=Codex。
 - D-S01-REPLENISHMENT-SURVEY-01 ERP现有补货建议真实只读验证及S01 V2可行性评估：REVIEW；实际执行者=Codex。
+- D-S01-DATA-REVIEW-01 S01 V2数据准入与长期可用性独立专项评审：REVIEW；实际执行者=Codex（单人）。
 
 ## 全部近期记录
 
@@ -90,5 +91,6 @@
 | D-S01-REPLENISHMENT-SURVEY-01 | ERP现有补货建议真实只读验证及S01 V2可行性评估 | REVIEW | D-S01-P3-MIN-01 |
 | D-S01-V2-01 | S01 V2完整补货工作台：动态全范围/双通道/方案B请购 | ACCEPTED | D-S01-P3-MIN-01 |
 | D-S01-LOCAL-01 | S01 V2本地一键启动/单管理员登录及main发布 | ACCEPTED | D-S01-V2-01 |
+| D-S01-DATA-REVIEW-01 | S01 V2数据准入与长期可用性独立专项评审 | REVIEW | D-S01-V2-01, D-S01-LOCAL-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

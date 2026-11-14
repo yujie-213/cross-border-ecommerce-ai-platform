@@ -8907,10 +8907,51 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DOCUMENT_CHECK",
     "REPOSITORY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "b6b395681762d88827bfef37cec0b7eb9e200e93"
+  ],
+  "testedCommit": "b6b395681762d88827bfef37cec0b7eb9e200e93",
+  "evidence": [
+    {
+      "kind": "ERP_API",
+      "command": "tools/review_s01_admission.py --live (before fixed commit)",
+      "environment": "Teaching ERP formal read-only API",
+      "sample": "6HTTP all200; same inventory and registered sales; no business writes/models",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-DATA-REVIEW/current-read.json",
+      "acceptanceIds": [
+        "D-S01-DATA-REVIEW-01/AC1"
+      ]
+    },
+    {
+      "kind": "UNIT_TEST",
+      "command": "tools/review_s01_admission.py; tools/replay_s01_admission.py; related pytest101",
+      "environment": "Windows/Python3.13; local MySQL SELECT and synthetic offline",
+      "sample": "3x975 sealed result audit; 16 replay checks; 101PASS, 0FAIL/ERROR/SKIP; initial permission errors retained",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-DATA-REVIEW/verification.json",
+      "acceptanceIds": [
+        "D-S01-DATA-REVIEW-01/AC1",
+        "D-S01-DATA-REVIEW-01/AC3"
+      ]
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "build_docs/check_plan and report/secret review",
+      "environment": "Windows/Python docs only",
+      "sample": "18checks PASS; matrix/A-E/plan/frontend/607char summary; no formal behavior changes",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/S01_数据准入长期方案与验收_20261114.md",
+      "acceptanceIds": [
+        "D-S01-DATA-REVIEW-01/AC2",
+        "D-S01-DATA-REVIEW-01/AC4"
+      ]
+    }
+  ],
   "review": null,
   "branch": "codex/s01-data-admission-review",
   "observedHead": "ece11160ecd0e820153a1c58128657a2f8788884",
@@ -8924,7 +8965,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "IN_PROGRESS",
       "reason": "从fetch核实最新main ece11160建立独立评审分支，仅工具/材料/台账。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "真实集合差定位4/2；固定工具后3历史任务/16离线/101相关单测通过；三报告与607字总结交审；main/正式行为不改。"
     }
-  ]
+  ],
+  "reportRef": "docs/reports/S01_数据准入长期方案与验收_20261114.md"
 }
 ```

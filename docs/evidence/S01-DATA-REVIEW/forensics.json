@@ -1,0 +1,1359 @@
+{
+  "nature": "READ_ONLY_HISTORICAL_CAPTURE_AND_LOCAL_DB_SELECT",
+  "observedAt": "2026-11-14T01:55:04.541159+00:00",
+  "baseline": "ece11160ecd0e820153a1c58128657a2f8788884",
+  "old": [
+    {
+      "sku": "HL-CBL100-2M",
+      "startedAt": "2026-11-13T06:19:58.334140+00:00",
+      "completedAt": "2026-11-13T06:20:08.074614+00:00",
+      "snapshotId": "snapshot-439991565f0421bcc49818c884a602d8e440b94cc9dfd80513958d43485a98af",
+      "policy": {
+        "version": "s01-sma-mvp-v1",
+        "timezone": "UTC+08:00",
+        "observationDays": 7,
+        "forecastDays": 7,
+        "coverageDays": 7
+      },
+      "window": [
+        "2026-11-06",
+        "2026-11-12"
+      ],
+      "stock": {
+        "openingQuantity": "45",
+        "fulfilledQuantity": "39",
+        "availableQuantity": "6",
+        "status": "PASS"
+      },
+      "sales": [
+        {
+          "id": 1153929,
+          "date": "2026-11-10 12:00:00",
+          "quantity": "9",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T04:51:02+00:00",
+          "updatedAt": "2026-11-13T05:22:40+00:00",
+          "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+        },
+        {
+          "id": 1153930,
+          "date": "2026-11-06 12:00:00",
+          "quantity": "4",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:00+00:00",
+          "updatedAt": "2026-11-13T06:07:04+00:00",
+          "recordDigest": "be1c717a74c2b8127cd2f304e331326dfaae24eab40bf05164f0b30bc13c128a"
+        },
+        {
+          "id": 1153931,
+          "date": "2026-11-07 12:00:00",
+          "quantity": "5",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:08+00:00",
+          "updatedAt": "2026-11-13T06:07:11+00:00",
+          "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+        },
+        {
+          "id": 1153932,
+          "date": "2026-11-08 12:00:00",
+          "quantity": "4",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:15+00:00",
+          "updatedAt": "2026-11-13T06:07:18+00:00",
+          "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+        },
+        {
+          "id": 1153933,
+          "date": "2026-11-09 12:00:00",
+          "quantity": "6",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:23+00:00",
+          "updatedAt": "2026-11-13T06:07:26+00:00",
+          "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+        },
+        {
+          "id": 1153934,
+          "date": "2026-11-11 12:00:00",
+          "quantity": "5",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:30+00:00",
+          "updatedAt": "2026-11-13T06:07:33+00:00",
+          "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+        },
+        {
+          "id": 1153935,
+          "date": "2026-11-12 12:00:00",
+          "quantity": "6",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:37+00:00",
+          "updatedAt": "2026-11-13T06:07:41+00:00",
+          "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+        }
+      ],
+      "ledgers": [
+        {
+          "id": 1268669,
+          "resource": "outbound-orders",
+          "record_id": 1135474,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 45,
+          "delta_quantity": -9,
+          "after_quantity": 36,
+          "created_at": "2026-11-13T05:22:40+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268671,
+          "resource": "outbound-orders",
+          "record_id": 1135475,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 36,
+          "delta_quantity": -4,
+          "after_quantity": 32,
+          "created_at": "2026-11-13T06:07:04+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268673,
+          "resource": "outbound-orders",
+          "record_id": 1135476,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 32,
+          "delta_quantity": -5,
+          "after_quantity": 27,
+          "created_at": "2026-11-13T06:07:11+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268675,
+          "resource": "outbound-orders",
+          "record_id": 1135477,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 27,
+          "delta_quantity": -4,
+          "after_quantity": 23,
+          "created_at": "2026-11-13T06:07:18+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268677,
+          "resource": "outbound-orders",
+          "record_id": 1135478,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 23,
+          "delta_quantity": -6,
+          "after_quantity": 17,
+          "created_at": "2026-11-13T06:07:26+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268679,
+          "resource": "outbound-orders",
+          "record_id": 1135479,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 17,
+          "delta_quantity": -5,
+          "after_quantity": 12,
+          "created_at": "2026-11-13T06:07:33+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268681,
+          "resource": "outbound-orders",
+          "record_id": 1135480,
+          "inventory_id": 1137,
+          "sku": "HL-CBL100-2M",
+          "before_quantity": 12,
+          "delta_quantity": -6,
+          "after_quantity": 6,
+          "created_at": "2026-11-13T06:07:41+00:00",
+          "operation": "post",
+          "reverses_id": null
+        }
+      ],
+      "captureFiles": {
+        "captures.json": "b12d38917bd813b0152a5394bbd6a77206a12e376f03990698348f4374bd2cba",
+        "receipt.json": "68a72b5d582f9750afd0345c84c491ea528f2a8c91ace18f5b14bdc0a8047ace",
+        "asset.json": "2942095e1302dc750ffc0f3419d93a35e9f0011be6d2fb1858d286c0bddad0e3"
+      }
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "startedAt": "2026-11-13T06:20:08.091465+00:00",
+      "completedAt": "2026-11-13T06:20:17.445363+00:00",
+      "snapshotId": "snapshot-9d36475a5ef6789473dedc177fded68cd897f690cc6ff1534924a8d9490c47c8",
+      "policy": {
+        "version": "s01-sma-mvp-v1",
+        "timezone": "UTC+08:00",
+        "observationDays": 7,
+        "forecastDays": 7,
+        "coverageDays": 7
+      },
+      "window": [
+        "2026-11-06",
+        "2026-11-12"
+      ],
+      "stock": {
+        "openingQuantity": "100",
+        "fulfilledQuantity": "19",
+        "availableQuantity": "81",
+        "status": "PASS"
+      },
+      "sales": [
+        {
+          "id": 1153929,
+          "date": "2026-11-10 12:00:00",
+          "quantity": "4",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T04:51:02+00:00",
+          "updatedAt": "2026-11-13T05:22:40+00:00",
+          "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+        },
+        {
+          "id": 1153930,
+          "date": "2026-11-06 12:00:00",
+          "quantity": "2",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:00+00:00",
+          "updatedAt": "2026-11-13T06:07:04+00:00",
+          "recordDigest": "be1c717a74c2b8127cd2f304e331326dfaae24eab40bf05164f0b30bc13c128a"
+        },
+        {
+          "id": 1153931,
+          "date": "2026-11-07 12:00:00",
+          "quantity": "3",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:08+00:00",
+          "updatedAt": "2026-11-13T06:07:11+00:00",
+          "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+        },
+        {
+          "id": 1153932,
+          "date": "2026-11-08 12:00:00",
+          "quantity": "2",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:15+00:00",
+          "updatedAt": "2026-11-13T06:07:18+00:00",
+          "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+        },
+        {
+          "id": 1153933,
+          "date": "2026-11-09 12:00:00",
+          "quantity": "3",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:23+00:00",
+          "updatedAt": "2026-11-13T06:07:26+00:00",
+          "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+        },
+        {
+          "id": 1153934,
+          "date": "2026-11-11 12:00:00",
+          "quantity": "2",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:30+00:00",
+          "updatedAt": "2026-11-13T06:07:33+00:00",
+          "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+        },
+        {
+          "id": 1153935,
+          "date": "2026-11-12 12:00:00",
+          "quantity": "3",
+          "status": [
+            "已支付",
+            "已发货",
+            "无退款"
+          ],
+          "createdAt": "2026-11-13T06:07:37+00:00",
+          "updatedAt": "2026-11-13T06:07:41+00:00",
+          "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+        }
+      ],
+      "ledgers": [
+        {
+          "id": 1268670,
+          "resource": "outbound-orders",
+          "record_id": 1135474,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 100,
+          "delta_quantity": -4,
+          "after_quantity": 96,
+          "created_at": "2026-11-13T05:22:40+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268672,
+          "resource": "outbound-orders",
+          "record_id": 1135475,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 96,
+          "delta_quantity": -2,
+          "after_quantity": 94,
+          "created_at": "2026-11-13T06:07:04+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268674,
+          "resource": "outbound-orders",
+          "record_id": 1135476,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 94,
+          "delta_quantity": -3,
+          "after_quantity": 91,
+          "created_at": "2026-11-13T06:07:11+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268676,
+          "resource": "outbound-orders",
+          "record_id": 1135477,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 91,
+          "delta_quantity": -2,
+          "after_quantity": 89,
+          "created_at": "2026-11-13T06:07:18+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268678,
+          "resource": "outbound-orders",
+          "record_id": 1135478,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 89,
+          "delta_quantity": -3,
+          "after_quantity": 86,
+          "created_at": "2026-11-13T06:07:26+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268680,
+          "resource": "outbound-orders",
+          "record_id": 1135479,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 86,
+          "delta_quantity": -2,
+          "after_quantity": 84,
+          "created_at": "2026-11-13T06:07:33+00:00",
+          "operation": "post",
+          "reverses_id": null
+        },
+        {
+          "id": 1268682,
+          "resource": "outbound-orders",
+          "record_id": 1135480,
+          "inventory_id": 1138,
+          "sku": "HL-MUG350-WH",
+          "before_quantity": 84,
+          "delta_quantity": -3,
+          "after_quantity": 81,
+          "created_at": "2026-11-13T06:07:41+00:00",
+          "operation": "post",
+          "reverses_id": null
+        }
+      ],
+      "captureFiles": {
+        "captures.json": "6ee5ea58e36b7244d665b92f1fb3ce2c2c38ff41fb6c7952c6f56d09b568b2b8",
+        "receipt.json": "c5e562e8125fbd92f716c89e9a75435ce17dbc50ad4795a4d48b2a3c73626dbb",
+        "asset.json": "de4df92edec8954a0389ea678231b628fd54f5916d076e4ab0135167c1ffa00d"
+      }
+    }
+  ],
+  "v2": [
+    {
+      "taskId": "7463f8f27ccb4915900f4f2a2541a4e1",
+      "startedAt": "2026-11-13T14:21:51.705922+00:00",
+      "sealedResultsVerified": 975,
+      "salesQuery": {
+        "view": "full",
+        "date_to": "2026-11-13",
+        "date_from": "2026-11-06"
+      },
+      "salesComplete": true,
+      "verifiedFiles": [
+        "05105c5fba35928214156973be6159bed085c8a1a685ec98cb4ed0c3a70b08bf",
+        "0892e4afa892f5b0bc5fb4625ad6d9ba8037ceef0b9d4b0ed8aa0783f1654452",
+        "0a55be299cdbd3589bb6c1368e541d40963aaa1c04e71a45de61d20631abd5f8",
+        "16fac4460bca735281e75cd23e85355f5023daa1ad10a6d69ca8677c3c1c0b25",
+        "18949f1706c32b9ef2a39d82f3138adf12bdb0f93a891cd362fe7f85da1734ec",
+        "1f02944e37f3c28644fdfdd0a69fd8d0693e57f13d853241a6546379ff3cc56e",
+        "29f1e70f6e1f5397e59f265224a97e7b4e27cbcdceafa767510e55ff5aad0434",
+        "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03",
+        "4d0def959e75f00b13ddc0cadebcc514000a05d5501fbb59476452e974748409",
+        "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1",
+        "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b",
+        "73c472b014c01c2894a82903560f75d8a468cc9bebc8f0651c5b9002a4c72029",
+        "79affdbce7ea62ff272291591b53de5074d8de8d85d43b0b59e66293e4b485e3",
+        "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e",
+        "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef",
+        "88d1207b0d5ae79fd25704c0bf0326542b426dade48075a89d49d111f0cce253",
+        "892e2921777b673e9824924fa82b3a0300586affc3f3f0c119fabff1b3f9b003",
+        "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04",
+        "961997cf4e9334ff54c3f7aa51382be1f99ca2b9b25e4751835f0768da1e6fcd",
+        "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c",
+        "994c60c814807ce061185e07826472fd046db9a653f1071a7660f0047aceb74b",
+        "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05",
+        "a10f7591324c009a7858ed810e83760c304a0c20d00b392caa7711c952a1a1be",
+        "aa1f9035310691bdd917dd3ef1e3f38047081d60e05ff6ef48ecac67a391218b",
+        "b226ec1348e8ed47ae2dc79d3e1fc191bd8ca326de21eae66531a4c47e44834a",
+        "b240d96b9eead810a853473396e1f350f511e86de74b05769d0e063691d28f1f",
+        "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6",
+        "bf43181f0cef10e7db1a1ef67cb16c50064d9dcfc680ba555d9e52ab4a2f7909",
+        "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448",
+        "d788ce603e7bf9c1a0f9ed4b032cace9431e6cafb329475d77de9e08e2468d35",
+        "d924d1aff198adbe9f650d2b29a924f9867e1446fd3ea3d37508f6f5bf4db4e9",
+        "da0cf0e17f9add6f69c7ecb1cf19677ac69b18c2c4d4daeba31ce55cbd7cbf3b",
+        "df2dab425e396cf3852f2a7688c859adfed67851ea21dd09f85868f7bb67b52e",
+        "e443e3a7c5b8f7d348a42cc17028c1d1c14c857520f2471a4c9f9f7c8ffd65d6",
+        "eacfeacde571f5c134813fc898718ee1f01b91116aab6a72f3e6d47783c6ebbc",
+        "f108eb45cac47d475ff1f6fd81a1341552f425dd162734fa4e1ac72030deb3ff",
+        "f472caf97c0d3a6714e086ec4c1ac15211103df6c22f921b503aba9a107d04cd",
+        "f68e435c74bd1e464e7063bf6efc8891950959408ef4a280e1ab10da8b29267a",
+        "f6df613fc688a4fca095d6ab12ffaa09109b9b2d5ade39b94a1ade954c7e1546",
+        "f6fc793814dc523103ca127c51ffc73e02e60a5494b1ffbccc3fc58499588f36",
+        "fa3457fd04127f14d8caecf4e60c51771789118138438c7bf505ae8b0cbe9825",
+        "fac5065666b1d9176e549cc31abde0f8614f2c52d26fad66711920ae9dc5033d",
+        "ff96a55db1d4b364ecc4dd2f415f331b079d74427c1ce58d61da3a5bd54f828e"
+      ],
+      "targets": [
+        {
+          "sku": "HL-CBL100-2M",
+          "inventory": [
+            {
+              "id": 1137,
+              "quantity": 6,
+              "available": 6,
+              "updated_at": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "inventoryIdenticalToOld": true,
+          "sales": [
+            {
+              "id": 1153929,
+              "date": "2026-11-10 12:00:00",
+              "quantity": "9",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T04:51:02+00:00",
+              "updatedAt": "2026-11-13T05:22:40+00:00",
+              "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+            },
+            {
+              "id": 1153930,
+              "date": "2026-11-06 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:00+00:00",
+              "updatedAt": "2026-11-13T06:07:04+00:00",
+              "recordDigest": "be1c717a74c2b8127cd2f304e331326dfaae24eab40bf05164f0b30bc13c128a"
+            },
+            {
+              "id": 1153931,
+              "date": "2026-11-07 12:00:00",
+              "quantity": "5",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:08+00:00",
+              "updatedAt": "2026-11-13T06:07:11+00:00",
+              "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+            },
+            {
+              "id": 1153932,
+              "date": "2026-11-08 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:15+00:00",
+              "updatedAt": "2026-11-13T06:07:18+00:00",
+              "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+            },
+            {
+              "id": 1153933,
+              "date": "2026-11-09 12:00:00",
+              "quantity": "6",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:23+00:00",
+              "updatedAt": "2026-11-13T06:07:26+00:00",
+              "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+            },
+            {
+              "id": 1153934,
+              "date": "2026-11-11 12:00:00",
+              "quantity": "5",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:30+00:00",
+              "updatedAt": "2026-11-13T06:07:33+00:00",
+              "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+            },
+            {
+              "id": 1153935,
+              "date": "2026-11-12 12:00:00",
+              "quantity": "6",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:37+00:00",
+              "updatedAt": "2026-11-13T06:07:41+00:00",
+              "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+            }
+          ],
+          "salesRowsIdenticalToOld": true,
+          "includedLedgerRowsIdenticalToOld": true,
+          "omittedRegisteredSales": [],
+          "opening": "45",
+          "selectedSold": "39",
+          "physical": "6",
+          "expected": "6",
+          "difference": "0",
+          "storedResult": [
+            {
+              "sourceGrade": "RULE_CALCULATED",
+              "analysisState": "ANALYZED",
+              "quantity": 48,
+              "ruleFailureCodes": [],
+              "snapshotRef": "snapshot-7001ff71f7701965a59fcc717fc95f98292cb91d3fd1fb97534e14ae1ecf3724",
+              "snapshotManifest": {
+                "version": "s01-v2-result-v1",
+                "entityKey": "36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30",
+                "resultDigest": "d4d02a6436207fefdb0f64e002f4fe68285e7216aeefd520c67b63395b8e5843",
+                "inputSnapshotRef": "snapshot-23d0cd9204c5f21f9cd71d3161c22171eae177262d22f9244b04bbedb32435df"
+              }
+            }
+          ],
+          "ruleSnapshots": [
+            "snapshot-4ef95efd0038a8ed1b05434670cf16ee93467596a73b8a4694e69ddb6fd4eadc"
+          ]
+        },
+        {
+          "sku": "HL-MUG350-WH",
+          "inventory": [
+            {
+              "id": 1138,
+              "quantity": 81,
+              "available": 81,
+              "updated_at": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "inventoryIdenticalToOld": true,
+          "sales": [
+            {
+              "id": 1153929,
+              "date": "2026-11-10 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T04:51:02+00:00",
+              "updatedAt": "2026-11-13T05:22:40+00:00",
+              "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+            },
+            {
+              "id": 1153930,
+              "date": "2026-11-06 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:00+00:00",
+              "updatedAt": "2026-11-13T06:07:04+00:00",
+              "recordDigest": "be1c717a74c2b8127cd2f304e331326dfaae24eab40bf05164f0b30bc13c128a"
+            },
+            {
+              "id": 1153931,
+              "date": "2026-11-07 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:08+00:00",
+              "updatedAt": "2026-11-13T06:07:11+00:00",
+              "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+            },
+            {
+              "id": 1153932,
+              "date": "2026-11-08 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:15+00:00",
+              "updatedAt": "2026-11-13T06:07:18+00:00",
+              "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+            },
+            {
+              "id": 1153933,
+              "date": "2026-11-09 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:23+00:00",
+              "updatedAt": "2026-11-13T06:07:26+00:00",
+              "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+            },
+            {
+              "id": 1153934,
+              "date": "2026-11-11 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:30+00:00",
+              "updatedAt": "2026-11-13T06:07:33+00:00",
+              "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+            },
+            {
+              "id": 1153935,
+              "date": "2026-11-12 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:37+00:00",
+              "updatedAt": "2026-11-13T06:07:41+00:00",
+              "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+            }
+          ],
+          "salesRowsIdenticalToOld": true,
+          "includedLedgerRowsIdenticalToOld": true,
+          "omittedRegisteredSales": [],
+          "opening": "100",
+          "selectedSold": "19",
+          "physical": "81",
+          "expected": "81",
+          "difference": "0",
+          "storedResult": [
+            {
+              "sourceGrade": "RULE_CALCULATED",
+              "analysisState": "NO_REPLENISHMENT",
+              "quantity": null,
+              "ruleFailureCodes": [],
+              "snapshotRef": "snapshot-3d1812b08f8a2d2e4090f5be420aba49aaafea2c68af18d18b6cc0ae650a946a",
+              "snapshotManifest": {
+                "version": "s01-v2-result-v1",
+                "entityKey": "e44cc17da2d8e711ebec134b38dfad9e0b1aa91513d5cbbca5b524e4b46972be",
+                "resultDigest": "6233c295f21b38c5afbe9018832b0788a6721f29a740a825e07a39d49e093066",
+                "inputSnapshotRef": "snapshot-23d0cd9204c5f21f9cd71d3161c22171eae177262d22f9244b04bbedb32435df"
+              }
+            }
+          ],
+          "ruleSnapshots": [
+            "snapshot-76dfeb1af0a5087de489193e561fd99aa5919230a0547456a3f61d1877d41794"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "b3eb6b413fd84de7a4cce2b4ac80e4bf",
+      "startedAt": "2026-11-13T18:07:24.286406+00:00",
+      "sealedResultsVerified": 975,
+      "salesQuery": {
+        "view": "full",
+        "date_to": "2026-11-14",
+        "date_from": "2026-11-07"
+      },
+      "salesComplete": true,
+      "verifiedFiles": [
+        "05105c5fba35928214156973be6159bed085c8a1a685ec98cb4ed0c3a70b08bf",
+        "0892e4afa892f5b0bc5fb4625ad6d9ba8037ceef0b9d4b0ed8aa0783f1654452",
+        "16fac4460bca735281e75cd23e85355f5023daa1ad10a6d69ca8677c3c1c0b25",
+        "18949f1706c32b9ef2a39d82f3138adf12bdb0f93a891cd362fe7f85da1734ec",
+        "1f02944e37f3c28644fdfdd0a69fd8d0693e57f13d853241a6546379ff3cc56e",
+        "29f1e70f6e1f5397e59f265224a97e7b4e27cbcdceafa767510e55ff5aad0434",
+        "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03",
+        "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1",
+        "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b",
+        "73c472b014c01c2894a82903560f75d8a468cc9bebc8f0651c5b9002a4c72029",
+        "79affdbce7ea62ff272291591b53de5074d8de8d85d43b0b59e66293e4b485e3",
+        "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e",
+        "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef",
+        "88d1207b0d5ae79fd25704c0bf0326542b426dade48075a89d49d111f0cce253",
+        "892e2921777b673e9824924fa82b3a0300586affc3f3f0c119fabff1b3f9b003",
+        "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04",
+        "961997cf4e9334ff54c3f7aa51382be1f99ca2b9b25e4751835f0768da1e6fcd",
+        "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c",
+        "994c60c814807ce061185e07826472fd046db9a653f1071a7660f0047aceb74b",
+        "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05",
+        "a10f7591324c009a7858ed810e83760c304a0c20d00b392caa7711c952a1a1be",
+        "aa1f9035310691bdd917dd3ef1e3f38047081d60e05ff6ef48ecac67a391218b",
+        "b226ec1348e8ed47ae2dc79d3e1fc191bd8ca326de21eae66531a4c47e44834a",
+        "b240d96b9eead810a853473396e1f350f511e86de74b05769d0e063691d28f1f",
+        "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6",
+        "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448",
+        "d788ce603e7bf9c1a0f9ed4b032cace9431e6cafb329475d77de9e08e2468d35",
+        "d924d1aff198adbe9f650d2b29a924f9867e1446fd3ea3d37508f6f5bf4db4e9",
+        "da0cf0e17f9add6f69c7ecb1cf19677ac69b18c2c4d4daeba31ce55cbd7cbf3b",
+        "df2dab425e396cf3852f2a7688c859adfed67851ea21dd09f85868f7bb67b52e",
+        "e443e3a7c5b8f7d348a42cc17028c1d1c14c857520f2471a4c9f9f7c8ffd65d6",
+        "eacfeacde571f5c134813fc898718ee1f01b91116aab6a72f3e6d47783c6ebbc",
+        "f108eb45cac47d475ff1f6fd81a1341552f425dd162734fa4e1ac72030deb3ff",
+        "f25d90fd04bd20c52f6c5dae4d1984aa9f8aaa2d6272b9bb742baf4a62f67f25",
+        "f472caf97c0d3a6714e086ec4c1ac15211103df6c22f921b503aba9a107d04cd",
+        "f68e435c74bd1e464e7063bf6efc8891950959408ef4a280e1ab10da8b29267a",
+        "f6df613fc688a4fca095d6ab12ffaa09109b9b2d5ade39b94a1ade954c7e1546",
+        "f6fc793814dc523103ca127c51ffc73e02e60a5494b1ffbccc3fc58499588f36",
+        "fa3457fd04127f14d8caecf4e60c51771789118138438c7bf505ae8b0cbe9825",
+        "fac5065666b1d9176e549cc31abde0f8614f2c52d26fad66711920ae9dc5033d",
+        "ff96a55db1d4b364ecc4dd2f415f331b079d74427c1ce58d61da3a5bd54f828e"
+      ],
+      "targets": [
+        {
+          "sku": "HL-CBL100-2M",
+          "inventory": [
+            {
+              "id": 1137,
+              "quantity": 6,
+              "available": 6,
+              "updated_at": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "inventoryIdenticalToOld": true,
+          "sales": [
+            {
+              "id": 1153929,
+              "date": "2026-11-10 12:00:00",
+              "quantity": "9",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T04:51:02+00:00",
+              "updatedAt": "2026-11-13T05:22:40+00:00",
+              "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+            },
+            {
+              "id": 1153931,
+              "date": "2026-11-07 12:00:00",
+              "quantity": "5",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:08+00:00",
+              "updatedAt": "2026-11-13T06:07:11+00:00",
+              "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+            },
+            {
+              "id": 1153932,
+              "date": "2026-11-08 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:15+00:00",
+              "updatedAt": "2026-11-13T06:07:18+00:00",
+              "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+            },
+            {
+              "id": 1153933,
+              "date": "2026-11-09 12:00:00",
+              "quantity": "6",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:23+00:00",
+              "updatedAt": "2026-11-13T06:07:26+00:00",
+              "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+            },
+            {
+              "id": 1153934,
+              "date": "2026-11-11 12:00:00",
+              "quantity": "5",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:30+00:00",
+              "updatedAt": "2026-11-13T06:07:33+00:00",
+              "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+            },
+            {
+              "id": 1153935,
+              "date": "2026-11-12 12:00:00",
+              "quantity": "6",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:37+00:00",
+              "updatedAt": "2026-11-13T06:07:41+00:00",
+              "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+            }
+          ],
+          "salesRowsIdenticalToOld": true,
+          "includedLedgerRowsIdenticalToOld": true,
+          "omittedRegisteredSales": [
+            "1153930"
+          ],
+          "opening": "45",
+          "selectedSold": "35",
+          "physical": "6",
+          "expected": "10",
+          "difference": "4",
+          "storedResult": [
+            {
+              "sourceGrade": "UNAVAILABLE",
+              "analysisState": "UNANALYZABLE",
+              "quantity": null,
+              "ruleFailureCodes": [
+                "STOCK_SALES_RECONCILIATION_FAILED"
+              ],
+              "snapshotRef": "snapshot-9d3bbb42e7933e89674ef050c6798aba312e73b51564725bce74b0011813f57e",
+              "snapshotManifest": {
+                "version": "s01-v2-result-v1",
+                "entityKey": "36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30",
+                "resultDigest": "5d7b6f82aa46703dff3eae02acb930d412529f38d4039cd72162d05870fc497d",
+                "inputSnapshotRef": "snapshot-58c0c5bb3e9fa049cdb0f337b6fe3e06a221be62ca01f2208ebbe0fe91eda1db"
+              }
+            }
+          ],
+          "ruleSnapshots": [
+            null
+          ]
+        },
+        {
+          "sku": "HL-MUG350-WH",
+          "inventory": [
+            {
+              "id": 1138,
+              "quantity": 81,
+              "available": 81,
+              "updated_at": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "inventoryIdenticalToOld": true,
+          "sales": [
+            {
+              "id": 1153929,
+              "date": "2026-11-10 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T04:51:02+00:00",
+              "updatedAt": "2026-11-13T05:22:40+00:00",
+              "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+            },
+            {
+              "id": 1153931,
+              "date": "2026-11-07 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:08+00:00",
+              "updatedAt": "2026-11-13T06:07:11+00:00",
+              "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+            },
+            {
+              "id": 1153932,
+              "date": "2026-11-08 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:15+00:00",
+              "updatedAt": "2026-11-13T06:07:18+00:00",
+              "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+            },
+            {
+              "id": 1153933,
+              "date": "2026-11-09 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:23+00:00",
+              "updatedAt": "2026-11-13T06:07:26+00:00",
+              "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+            },
+            {
+              "id": 1153934,
+              "date": "2026-11-11 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:30+00:00",
+              "updatedAt": "2026-11-13T06:07:33+00:00",
+              "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+            },
+            {
+              "id": 1153935,
+              "date": "2026-11-12 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:37+00:00",
+              "updatedAt": "2026-11-13T06:07:41+00:00",
+              "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+            }
+          ],
+          "salesRowsIdenticalToOld": true,
+          "includedLedgerRowsIdenticalToOld": true,
+          "omittedRegisteredSales": [
+            "1153930"
+          ],
+          "opening": "100",
+          "selectedSold": "17",
+          "physical": "81",
+          "expected": "83",
+          "difference": "2",
+          "storedResult": [
+            {
+              "sourceGrade": "UNAVAILABLE",
+              "analysisState": "UNANALYZABLE",
+              "quantity": null,
+              "ruleFailureCodes": [
+                "STOCK_SALES_RECONCILIATION_FAILED"
+              ],
+              "snapshotRef": "snapshot-4f22f326ab744cff550c4745c4dc1dde00fa08f9b5f1a262d30b21e3d3a57bd6",
+              "snapshotManifest": {
+                "version": "s01-v2-result-v1",
+                "entityKey": "e44cc17da2d8e711ebec134b38dfad9e0b1aa91513d5cbbca5b524e4b46972be",
+                "resultDigest": "a8c0d9ac117fb8e8ab8af251d8b4bc73e8dcd989a86f71c9b0bd53a7a3b8a71b",
+                "inputSnapshotRef": "snapshot-58c0c5bb3e9fa049cdb0f337b6fe3e06a221be62ca01f2208ebbe0fe91eda1db"
+              }
+            }
+          ],
+          "ruleSnapshots": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "86af50d1d0814c81a1713e792fa8a267",
+      "startedAt": "2026-11-14T01:19:39.403963+00:00",
+      "sealedResultsVerified": 975,
+      "salesQuery": {
+        "view": "full",
+        "date_to": "2026-11-14",
+        "date_from": "2026-11-07"
+      },
+      "salesComplete": true,
+      "verifiedFiles": [
+        "05105c5fba35928214156973be6159bed085c8a1a685ec98cb4ed0c3a70b08bf",
+        "0892e4afa892f5b0bc5fb4625ad6d9ba8037ceef0b9d4b0ed8aa0783f1654452",
+        "16fac4460bca735281e75cd23e85355f5023daa1ad10a6d69ca8677c3c1c0b25",
+        "18949f1706c32b9ef2a39d82f3138adf12bdb0f93a891cd362fe7f85da1734ec",
+        "1f02944e37f3c28644fdfdd0a69fd8d0693e57f13d853241a6546379ff3cc56e",
+        "29f1e70f6e1f5397e59f265224a97e7b4e27cbcdceafa767510e55ff5aad0434",
+        "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03",
+        "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1",
+        "677c9340dcb8dbbd145fab8c1e8c4604faf41f4fbc7a3e931dbf181f01e37a5b",
+        "73c472b014c01c2894a82903560f75d8a468cc9bebc8f0651c5b9002a4c72029",
+        "79affdbce7ea62ff272291591b53de5074d8de8d85d43b0b59e66293e4b485e3",
+        "7f651a072e90908ba41d697ff85f3ec456b7850dbb955ca27b1bb5609813060e",
+        "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef",
+        "88d1207b0d5ae79fd25704c0bf0326542b426dade48075a89d49d111f0cce253",
+        "892e2921777b673e9824924fa82b3a0300586affc3f3f0c119fabff1b3f9b003",
+        "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04",
+        "961997cf4e9334ff54c3f7aa51382be1f99ca2b9b25e4751835f0768da1e6fcd",
+        "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c",
+        "994c60c814807ce061185e07826472fd046db9a653f1071a7660f0047aceb74b",
+        "9d785daac2a1d4bf291f98fc72283fc2177679a6023663450cd161db2de96b05",
+        "a10f7591324c009a7858ed810e83760c304a0c20d00b392caa7711c952a1a1be",
+        "aa1f9035310691bdd917dd3ef1e3f38047081d60e05ff6ef48ecac67a391218b",
+        "b226ec1348e8ed47ae2dc79d3e1fc191bd8ca326de21eae66531a4c47e44834a",
+        "b240d96b9eead810a853473396e1f350f511e86de74b05769d0e063691d28f1f",
+        "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6",
+        "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448",
+        "d788ce603e7bf9c1a0f9ed4b032cace9431e6cafb329475d77de9e08e2468d35",
+        "d924d1aff198adbe9f650d2b29a924f9867e1446fd3ea3d37508f6f5bf4db4e9",
+        "da0cf0e17f9add6f69c7ecb1cf19677ac69b18c2c4d4daeba31ce55cbd7cbf3b",
+        "df2dab425e396cf3852f2a7688c859adfed67851ea21dd09f85868f7bb67b52e",
+        "e443e3a7c5b8f7d348a42cc17028c1d1c14c857520f2471a4c9f9f7c8ffd65d6",
+        "eacfeacde571f5c134813fc898718ee1f01b91116aab6a72f3e6d47783c6ebbc",
+        "f108eb45cac47d475ff1f6fd81a1341552f425dd162734fa4e1ac72030deb3ff",
+        "f25d90fd04bd20c52f6c5dae4d1984aa9f8aaa2d6272b9bb742baf4a62f67f25",
+        "f472caf97c0d3a6714e086ec4c1ac15211103df6c22f921b503aba9a107d04cd",
+        "f68e435c74bd1e464e7063bf6efc8891950959408ef4a280e1ab10da8b29267a",
+        "f6df613fc688a4fca095d6ab12ffaa09109b9b2d5ade39b94a1ade954c7e1546",
+        "f6fc793814dc523103ca127c51ffc73e02e60a5494b1ffbccc3fc58499588f36",
+        "fa3457fd04127f14d8caecf4e60c51771789118138438c7bf505ae8b0cbe9825",
+        "fac5065666b1d9176e549cc31abde0f8614f2c52d26fad66711920ae9dc5033d",
+        "ff96a55db1d4b364ecc4dd2f415f331b079d74427c1ce58d61da3a5bd54f828e"
+      ],
+      "targets": [
+        {
+          "sku": "HL-CBL100-2M",
+          "inventory": [
+            {
+              "id": 1137,
+              "quantity": 6,
+              "available": 6,
+              "updated_at": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "inventoryIdenticalToOld": true,
+          "sales": [
+            {
+              "id": 1153929,
+              "date": "2026-11-10 12:00:00",
+              "quantity": "9",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T04:51:02+00:00",
+              "updatedAt": "2026-11-13T05:22:40+00:00",
+              "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+            },
+            {
+              "id": 1153931,
+              "date": "2026-11-07 12:00:00",
+              "quantity": "5",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:08+00:00",
+              "updatedAt": "2026-11-13T06:07:11+00:00",
+              "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+            },
+            {
+              "id": 1153932,
+              "date": "2026-11-08 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:15+00:00",
+              "updatedAt": "2026-11-13T06:07:18+00:00",
+              "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+            },
+            {
+              "id": 1153933,
+              "date": "2026-11-09 12:00:00",
+              "quantity": "6",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:23+00:00",
+              "updatedAt": "2026-11-13T06:07:26+00:00",
+              "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+            },
+            {
+              "id": 1153934,
+              "date": "2026-11-11 12:00:00",
+              "quantity": "5",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:30+00:00",
+              "updatedAt": "2026-11-13T06:07:33+00:00",
+              "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+            },
+            {
+              "id": 1153935,
+              "date": "2026-11-12 12:00:00",
+              "quantity": "6",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:37+00:00",
+              "updatedAt": "2026-11-13T06:07:41+00:00",
+              "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+            }
+          ],
+          "salesRowsIdenticalToOld": true,
+          "includedLedgerRowsIdenticalToOld": true,
+          "omittedRegisteredSales": [
+            "1153930"
+          ],
+          "opening": "45",
+          "selectedSold": "35",
+          "physical": "6",
+          "expected": "10",
+          "difference": "4",
+          "storedResult": [
+            {
+              "sourceGrade": "UNAVAILABLE",
+              "analysisState": "UNANALYZABLE",
+              "quantity": null,
+              "ruleFailureCodes": [
+                "STOCK_SALES_RECONCILIATION_FAILED"
+              ],
+              "snapshotRef": "snapshot-e68b8450ecca7cfd9d84a5f9d34eb5be140cb855c67d99d685d82f31b4081965",
+              "snapshotManifest": {
+                "version": "s01-v2-result-v1",
+                "entityKey": "36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30",
+                "resultDigest": "063e3e6b91bf1f4bbc90850747b3282a4dcd62d9a66b139bd2b7df78a90a1166",
+                "inputSnapshotRef": "snapshot-afe60f06da7ae2f533b256fa561f45930049d89a339b7f0c9576a124369c5352"
+              }
+            }
+          ],
+          "ruleSnapshots": [
+            null
+          ]
+        },
+        {
+          "sku": "HL-MUG350-WH",
+          "inventory": [
+            {
+              "id": 1138,
+              "quantity": 81,
+              "available": 81,
+              "updated_at": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "inventoryIdenticalToOld": true,
+          "sales": [
+            {
+              "id": 1153929,
+              "date": "2026-11-10 12:00:00",
+              "quantity": "4",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T04:51:02+00:00",
+              "updatedAt": "2026-11-13T05:22:40+00:00",
+              "recordDigest": "db8c40449c6d9ba4e0a0e90484087469598ac558b056c7867858d3c4b406ca71"
+            },
+            {
+              "id": 1153931,
+              "date": "2026-11-07 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:08+00:00",
+              "updatedAt": "2026-11-13T06:07:11+00:00",
+              "recordDigest": "5501f7163fb4dc9707a7d57ca98578eea32ae8fcbcbcee60fe0000057b000bbd"
+            },
+            {
+              "id": 1153932,
+              "date": "2026-11-08 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:15+00:00",
+              "updatedAt": "2026-11-13T06:07:18+00:00",
+              "recordDigest": "516ebd0a0dbc7d7a194bc63f30e3890c566c0aafb6c5e4e39c4c190f74827d9c"
+            },
+            {
+              "id": 1153933,
+              "date": "2026-11-09 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:23+00:00",
+              "updatedAt": "2026-11-13T06:07:26+00:00",
+              "recordDigest": "781ad4b43a8a44adbd3cabe45ae7b3f96a1eba9115e83f68d75680b999532ded"
+            },
+            {
+              "id": 1153934,
+              "date": "2026-11-11 12:00:00",
+              "quantity": "2",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:30+00:00",
+              "updatedAt": "2026-11-13T06:07:33+00:00",
+              "recordDigest": "0528f8cf9e52fec78778bb9bcbe8e18aae255ab2e4a28a4a5b6b9932f68a0d48"
+            },
+            {
+              "id": 1153935,
+              "date": "2026-11-12 12:00:00",
+              "quantity": "3",
+              "status": [
+                "已支付",
+                "已发货",
+                "无退款"
+              ],
+              "createdAt": "2026-11-13T06:07:37+00:00",
+              "updatedAt": "2026-11-13T06:07:41+00:00",
+              "recordDigest": "6446f4d449db7325b4384d35251f370ab7c1a020ca8dc302df2d424c19c8cfe2"
+            }
+          ],
+          "salesRowsIdenticalToOld": true,
+          "includedLedgerRowsIdenticalToOld": true,
+          "omittedRegisteredSales": [
+            "1153930"
+          ],
+          "opening": "100",
+          "selectedSold": "17",
+          "physical": "81",
+          "expected": "83",
+          "difference": "2",
+          "storedResult": [
+            {
+              "sourceGrade": "UNAVAILABLE",
+              "analysisState": "UNANALYZABLE",
+              "quantity": null,
+              "ruleFailureCodes": [
+                "STOCK_SALES_RECONCILIATION_FAILED"
+              ],
+              "snapshotRef": "snapshot-398e67a89ae09bcaeade051ab3f9e45c87698247dbbdd57207292d95e2b85044",
+              "snapshotManifest": {
+                "version": "s01-v2-result-v1",
+                "entityKey": "e44cc17da2d8e711ebec134b38dfad9e0b1aa91513d5cbbca5b524e4b46972be",
+                "resultDigest": "849b2431f65679eac6931c22f4dff5959c84e0e0efbe998e4075a73a116d473c",
+                "inputSnapshotRef": "snapshot-afe60f06da7ae2f533b256fa561f45930049d89a339b7f0c9576a124369c5352"
+              }
+            }
+          ],
+          "ruleSnapshots": [
+            null
+          ]
+        }
+      ]
+    }
+  ],
+  "newModelCalls": 0,
+  "businessWrites": 0
+}

@@ -1,0 +1,738 @@
+{
+  "nature": "OFFLINE_SYNTHETIC_PRODUCTION_REPLAY_AND_UNAPPROVED_POLICY_COMPARISON",
+  "result": "PASS",
+  "scenarios": [
+    {
+      "scenario": "7 complete days / unchanged B01 B02",
+      "result": "PASS",
+      "total": "39",
+      "candidate": "48"
+    },
+    {
+      "scenario": "fixed ERP / date alone / V2 fails",
+      "result": "PASS",
+      "v2Failures": [
+        "STOCK_SALES_RECONCILIATION_FAILED"
+      ],
+      "fullRegisteredForecast": "35"
+    },
+    {
+      "scenario": "same full capture tomorrow / V2 passes",
+      "result": "PASS"
+    },
+    {
+      "scenario": "15 days / 7 proven / eight unknown",
+      "result": "PASS",
+      "comparison": {
+        "validDays": 7,
+        "missingDays": 8,
+        "latestAgeDays": 1,
+        "A_latest7Mean": "9",
+        "B_allValidMean": "9",
+        "E_level": "REFERENCE_ONLY",
+        "E_mean": "9",
+        "windowDays": 15
+      }
+    },
+    {
+      "scenario": "15 days / 10 proven / different means",
+      "result": "PASS",
+      "comparison": {
+        "validDays": 10,
+        "missingDays": 5,
+        "latestAgeDays": 1,
+        "A_latest7Mean": "4",
+        "B_allValidMean": "5.5",
+        "E_level": "REFERENCE_ONLY",
+        "E_mean": "5.5",
+        "windowDays": 15
+      }
+    },
+    {
+      "scenario": "15 days / fewer than 7",
+      "result": "PASS",
+      "comparison": {
+        "validDays": 6,
+        "missingDays": 9,
+        "latestAgeDays": 1,
+        "A_latest7Mean": null,
+        "B_allValidMean": "3",
+        "E_level": "REFERENCE_ONLY",
+        "E_mean": "3",
+        "windowDays": 15
+      }
+    },
+    {
+      "scenario": "three true zero days",
+      "result": "PASS",
+      "comparison": {
+        "validDays": 15,
+        "missingDays": 0,
+        "latestAgeDays": 1,
+        "A_latest7Mean": "2.285714285714285714285714286",
+        "B_allValidMean": "3.2",
+        "E_level": "QUANTIFIED_CONDITIONAL",
+        "E_mean": "3.2",
+        "windowDays": 15
+      }
+    },
+    {
+      "scenario": "recent missing / freshness fails",
+      "result": "PASS",
+      "comparison": {
+        "validDays": 12,
+        "missingDays": 3,
+        "latestAgeDays": 4,
+        "A_latest7Mean": "4",
+        "B_allValidMean": "4",
+        "E_level": "REFERENCE_ONLY",
+        "E_mean": "4",
+        "windowDays": 15
+      }
+    },
+    {
+      "scenario": "stock changes / sales unchanged",
+      "result": "PASS",
+      "currentFailure": "STOCK_SALES_RECONCILIATION_FAILED",
+      "checkpointPrototype": {
+        "old": 6,
+        "verifiedInbound": 10,
+        "current": 16,
+        "residual": 0
+      }
+    },
+    {
+      "scenario": "real-style approved PO / sellable date unknown",
+      "result": "PASS",
+      "projection": [
+        {
+          "erpId": "900",
+          "erpNumber": null,
+          "lineIndex": 0,
+          "sku": "fixture-sku",
+          "status": "待到货",
+          "orderedQuantity": 48,
+          "receivedQuantity": 0,
+          "unreceivedQuantity": 48,
+          "plannedArrival": "2026-11-20",
+          "sellableDate": null,
+          "includedInCalculation": false,
+          "effectiveSupplyQuantity": null,
+          "warehouseName": "Fixture Warehouse",
+          "warehouseMatch": true,
+          "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+          "sourcePlanNumber": null
+        }
+      ]
+    },
+    {
+      "scenario": "expired quote blocks current entire normalization",
+      "result": "PASS",
+      "currentFailure": "QUOTE_NOT_EFFECTIVE_OR_RELATED",
+      "proposal": "retain demand/risk facts; require effective quote at purchase"
+    },
+    {
+      "scenario": "existing B01 risk without purchase constraints",
+      "result": "PASS",
+      "gap": "44.14285722",
+      "candidates": [],
+      "limitation": [
+        "CANDIDATE_RULES_OR_QUALITY_BLOCKED"
+      ]
+    },
+    {
+      "scenario": "old report retained after new failure",
+      "result": "PASS",
+      "limitation": "object-level offline replay only; no new browser/history API acceptance"
+    },
+    {
+      "scenario": "30 day fixed-source / continuing proven observation",
+      "result": "PASS",
+      "timeline": [
+        {
+          "day": "2026-11-13",
+          "currentV2": [],
+          "ownedAllowed": true,
+          "ownedTotal": "39",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "5.571428571428571428571428571",
+            "B_allValidMean": "5.571428571428571428571428571",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "5.571428571428571428571428571",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-14",
+          "currentV2": [
+            "STOCK_SALES_RECONCILIATION_FAILED"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "35",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "5",
+            "B_allValidMean": "5",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "5",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-15",
+          "currentV2": [
+            "STOCK_SALES_RECONCILIATION_FAILED"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "30",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "4.285714285714285714285714286",
+            "B_allValidMean": "4.285714285714285714285714286",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "4.285714285714285714285714286",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-16",
+          "currentV2": [
+            "STOCK_SALES_RECONCILIATION_FAILED"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "26",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "3.714285714285714285714285714",
+            "B_allValidMean": "3.714285714285714285714285714",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "3.714285714285714285714285714",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-17",
+          "currentV2": [
+            "STOCK_SALES_RECONCILIATION_FAILED"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "20",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "2.857142857142857142857142857",
+            "B_allValidMean": "2.857142857142857142857142857",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "2.857142857142857142857142857",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-18",
+          "currentV2": [
+            "STOCK_SALES_RECONCILIATION_FAILED"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "11",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "1.571428571428571428571428571",
+            "B_allValidMean": "1.571428571428571428571428571",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "1.571428571428571428571428571",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-19",
+          "currentV2": [
+            "STOCK_SALES_RECONCILIATION_FAILED"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "6",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0.8571428571428571428571428571",
+            "B_allValidMean": "0.8571428571428571428571428571",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0.8571428571428571428571428571",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-20",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-21",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-22",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-23",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-24",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-25",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-26",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-27",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-28",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-29",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-11-30",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-01",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-02",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-03",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-04",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-05",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-06",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-07",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-08",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-09",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-10",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-11",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        },
+        {
+          "day": "2026-12-12",
+          "currentV2": [
+            "FULFILLED_SALES_HISTORY_UNPROVEN"
+          ],
+          "ownedAllowed": true,
+          "ownedTotal": "0",
+          "proposal": {
+            "validDays": 7,
+            "missingDays": 0,
+            "latestAgeDays": 1,
+            "A_latest7Mean": "0",
+            "B_allValidMean": "0",
+            "E_level": "QUANTIFIED_CONDITIONAL",
+            "E_mean": "0",
+            "windowDays": 7
+          }
+        }
+      ]
+    },
+    {
+      "scenario": "old sales beyond 15 days",
+      "result": "PASS",
+      "comparison": {
+        "validDays": 0,
+        "missingDays": 15,
+        "latestAgeDays": null,
+        "A_latest7Mean": null,
+        "B_allValidMean": null,
+        "E_level": "FACTS_ONLY",
+        "E_mean": null,
+        "windowDays": 15
+      },
+      "legacyReference": "separate labeled historical rate may be displayed; never current recommendation"
+    },
+    {
+      "scenario": "return inbound adjustment / checkpoint conservation",
+      "result": "PASS",
+      "events": [
+        {
+          "kind": "return_sellable",
+          "delta": 2
+        },
+        {
+          "kind": "inbound",
+          "delta": 10
+        },
+        {
+          "kind": "adjustment",
+          "delta": -1
+        },
+        {
+          "kind": "new_shipment",
+          "delta": -3
+        }
+      ],
+      "checkpoint": 6,
+      "current": 14,
+      "residual": 0,
+      "warning": "refund without sellable return adds no stock; duplicated event rejected by ID"
+    }
+  ],
+  "checks": 16,
+  "newERPRequests": 0,
+  "newModels": 0,
+  "productionChanges": 0
+}
