@@ -125,7 +125,7 @@ def rule_result(catalog,entity,reader,*,opening_binding=None):
         fieldProvenance=normalized['fieldProvenance'],snapshotId=snapshot.snapshotId,quality=[i.model_dump() for i in snapshot.issues]),[]
 
 
-def analyze(catalog,entity,reader,*,opening_binding=None):
+def analyze(catalog,entity,reader,*,opening_binding=None,requisition_authorized=None):
     if reader.state.get('admissionVersion')=='s01-runtime-v1' and getattr(getattr(opening_binding,'monitor',None),'policy',None):
         from commerce_hub.data.projection.runtime import business_date
         catalog=dict(catalog,businessDate=business_date(reader.state['startedAt'],opening_binding.monitor.policy.timezone).isoformat())
@@ -182,7 +182,7 @@ def analyze(catalog,entity,reader,*,opening_binding=None):
     result['procurementEligibility']['eligible']=not hard
     if admission is not None:
         from commerce_hub.data.quality.runtime import public_admission
-        result.update(public_admission(admission,result))
+        result.update(public_admission(admission,result,requisition_authorized=requisition_authorized))
     return result
 
 

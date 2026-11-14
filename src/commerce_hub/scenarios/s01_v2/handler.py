@@ -51,7 +51,12 @@ class V2Handler:
             context.check()
             if previous.get(entity['entityKey'],{}).get('analysisState') not in {None,'PENDING'}:continue
             try:
-                result=analyze(catalog,entity,reader,opening_binding=self.policy.opening_binding(entity))
+                binding=self.policy.opening_binding(entity)
+                # Advisory capability uses this task's registered scope. The
+                # submit service still rereads current authorization; avoid a
+                # per-catalog-SKU registry query merely to render an indicator.
+                result=analyze(catalog,entity,reader,opening_binding=binding,
+                    requisition_authorized=bool(self.policy.requisition_enabled and binding is not None))
             except (ERPError,ValueError,KeyError,ArithmeticError,TypeError) as exc:
                 if isinstance(exc,ERPError) and exc.code=='ERP_AUTH_REJECTED':raise
                 result=dict(entity,analysisState='FAILED',sourceGrade='UNAVAILABLE',quantity=None,

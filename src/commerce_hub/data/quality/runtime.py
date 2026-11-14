@@ -23,7 +23,7 @@ def failed_admission(code):
         recoveryHints=[dict(code=code,message='本次数据处理未完成，历史报告仍可查看。',action='核对失败原因后重新分析')])
 
 
-def public_admission(admission,item):
+def public_admission(admission,item,*,requisition_authorized=None):
     rules=admission['ruleResult'];risk=(rules or {}).get('supplyDemand',{}).get('baseline')
     window=admission['demandWindow'];basis=admission['inventoryBasis']
     def capability(enabled,reasons):return dict(enabled=bool(enabled),reasons=[] if enabled else reasons)
@@ -31,11 +31,14 @@ def public_admission(admission,item):
     codes=sorted(set(failures+item['procurementEligibility']['hardBlocks']))
     hints=[dict(code=code,message=MESSAGES.get(code,('相关业务条件尚未核实，当前能力受到限制。','核对相关业务条件后重新分析'))[0],
                 action=MESSAGES.get(code,('','核对相关业务条件后重新分析'))[1]) for code in codes]
+    write_reasons=item['procurementEligibility']['hardBlocks'][:]
+    if requisition_authorized is not True:write_reasons.append('WRITE_SCOPE_NOT_EVALUATED' if requisition_authorized is None else 'WRITE_SCOPE_NOT_AUTHORIZED')
     return dict(admissionVersion=admission['admissionVersion'],dataQuality=quality,demandWindow=window,inventoryBasis=basis,
         riskResult=risk,capabilities=dict(
             facts=capability(quality['identity']['status']=='VERIFIED',['IDENTITY_OR_UNIT_UNVERIFIED']),
             reference=capability(bool(window['observedHistory']) or item['sourceSuggestion'] is not None,['NO_OBSERVED_REFERENCE_SAMPLE']),
             risk=capability(risk is not None,failures),
             rules=capability(rules is not None and not admission['riskOnly'],failures or item['constraints']['hardBlocks']),
-            requisition=capability(item['procurementEligibility']['eligible'],item['procurementEligibility']['hardBlocks'])),
+            requisition=dict(capability(item['procurementEligibility']['eligible'] and requisition_authorized is True,write_reasons),
+                permissionCheck='G01_RECHECK_REQUIRED_AT_SUBMISSION')),
         recoveryHints=hints,observedAt=basis.get('observedAt') or item['observedAt'])

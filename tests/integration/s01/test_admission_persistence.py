@@ -52,7 +52,7 @@ def test_runtime_report_persistence_and_new_failure_does_not_overwrite_history(m
     e=environment(make_s01,tmp_path,2);first,report=run(e)
     with e.database.engine.connect() as c:items=ItemStore.read(c,e.tenant,first)
     assert all(r['admissionVersion']=='s01-runtime-v1' for r in items.values())
-    assert all(r['capabilities']['requisition']['enabled'] for r in items.values())
+    assert all(r['capabilities']['requisition']['enabled']==(r['productId']=='1') for r in items.values())
     e.erp.data['quotes'][0]['status']='expired'
     second=e.service.create(e.principal,'next','S01_V2_BATCH',e.scope,{},'synthetic')['taskRef']['taskId']
     assert Worker(e.service).once()

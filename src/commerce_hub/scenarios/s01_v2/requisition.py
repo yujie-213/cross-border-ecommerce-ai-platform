@@ -13,8 +13,13 @@ from commerce_hub.scenarios.s01_v2.analysis import analyze
 
 
 def comparable(item):
-    return {k:item.get(k) for k in ['sourceTenant','storeId','warehouseId','productId','sku','sourceGrade','quantity',
+    result={k:item.get(k) for k in ['sourceTenant','storeId','warehouseId','productId','sku','sourceGrade','quantity',
         'inventory','constraints','formalPurchases','sourceSuggestion']}|dict(forecast=(item.get('ruleResult') or {}).get('forecast'))
+    if item.get('admissionVersion'):
+        basis=item.get('inventoryBasis') or {};cp=basis.get('checkpoint') or {}
+        result['admissionBasis']=dict(version=item['admissionVersion'],status=basis.get('status'),residual=basis.get('residual'),
+            issues=basis.get('issues'),checkpointVersion=cp.get('version'),checkpointDigest=cp.get('evidenceDigest'))
+    return result
 
 
 class V2RequisitionService(RequisitionService):
@@ -69,7 +74,7 @@ class V2RequisitionService(RequisitionService):
         catalog=collect_catalog(reader,mapping.sourceTenant,mapping.entity)
         fresh=[e for e in entities(catalog,mapping.sourceTenant) if e['entityKey']==mapping.entity['entityKey']]
         if len(fresh)!=1:raise TaskError('V2_LATEST_ENTITY_RELATION_UNRESOLVED',409)
-        item=analyze(catalog,fresh[0],reader,opening_binding=self.registry.opening_binding(fresh[0]))
+        item=analyze(catalog,fresh[0],reader,opening_binding=self.registry.opening_binding(fresh[0]),requisition_authorized=self.registry.can_write(fresh[0]))
         if comparable(item)!=comparable(mapping.entity):raise TaskError('ANALYSIS_CHANGED_REANALYZE',409)
         current=dict(dataReport=dict(item=item));self.validate_quantity(current,quantity,reason)
         c=item['constraints']
