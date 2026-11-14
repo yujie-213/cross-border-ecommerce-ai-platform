@@ -8964,6 +8964,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-ADMISSION-01/AC4"
       ]
+    },
+    {
+      "kind": "REPOSITORY",
+      "command": "git push -u origin HEAD:refs/heads/codex/s01-admission-runtime-fix; independent git ls-remote; main/source diff checks",
+      "environment": "Windows Git/GitHub; explicit formal task push authorization",
+      "sample": "Review branch 3f4cac7 verified, main ece11160 unchanged; no force; exact safe payload/history scan; no Vue/B01/B02 or old report changes",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ADMISSION/verification.json",
+      "acceptanceIds": [
+        "D-S01-ADMISSION-01/AC4"
+      ]
     }
   ],
   "review": null,
@@ -8986,10 +8998,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "reportRef": "docs/reports/S01_数据准入与库存对账改造报告_20261114.md",
   "publication": {
-    "status": "PENDING_NORMAL_REVIEW_BRANCH_PUSH",
+    "status": "PASS",
     "mainMerged": false,
     "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
-    "authorization": "Owner pasted formal task section10 explicitly requires commit/push independent development branch; no main merge"
+    "authorization": "Owner pasted formal task section10 explicitly requires commit/push independent development branch; no main merge",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "verifiedRemoteHead": "3f4cac721db41f4817fc0a73be828d618427ec5b",
+    "verifiedRemoteMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "verifiedAt": "2026-11-14T03:08:09.244988+00:00",
+    "noForce": true,
+    "receipt": "Subsequent documentation-only receipt synchronized normally; final HEAD returned by independent Git readback, not prewritten."
   },
   "retainedLimits": [
     "30-day real ERP continuous operation",

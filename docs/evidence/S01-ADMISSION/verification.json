@@ -138,10 +138,17 @@
     "sourceAndHistoricalGuards": "B01/B02 and old admission fixture Git bytes retained; prior48 task JSON unchanged; no frontend source/lock changes; original capture SHA256 retained"
   },
   "publication": {
-    "status": "PENDING_NORMAL_REVIEW_BRANCH_PUSH",
+    "status": "PASS",
     "mainMerged": false,
     "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
-    "authorization": "Owner pasted formal task section10 explicitly requires commit/push independent development branch; no main merge"
+    "authorization": "Owner pasted formal task section10 explicitly requires commit/push independent development branch; no main merge",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "verifiedRemoteHead": "3f4cac721db41f4817fc0a73be828d618427ec5b",
+    "verifiedRemoteMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "verifiedAt": "2026-11-14T03:08:09.244988+00:00",
+    "noForce": true,
+    "receipt": "Subsequent documentation-only receipt synchronized normally; final HEAD returned by independent Git readback, not prewritten."
   },
   "scope": "BACKEND_RUNTIME_ENGINEERING_REVIEW_ONLY_ENTERPRISE_GATES_RETAINED",
   "result": "PASS_BACKEND_ENGINEERING_WITH_RETAINED_REAL_ERP_LIMITS",

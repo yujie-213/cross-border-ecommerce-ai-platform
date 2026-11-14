@@ -1,3 +1,5 @@
+本轮运行改造推送回执（2026-11-14）：独立codex/s01-admission-runtime-fix普通push成功，独立ls-remote核实3f4cac721db41f4817fc0a73be828d618427ec5b，远端main仍ece11160ecd0e820153a1c58128657a2f8788884；没有合main或force。最终测试提交d919fb5、831/43/类型构建/18文档校验不变。后续仅本回执/台账及派生文档同步，最终HEAD按Git回读；任务保持REVIEW，停止开发，等待负责人和星星独立评审。
+
 本轮数据准入后端交付（2026-11-14）：D-S01-ADMISSION-01 REVIEW、review=null，独立worktree/分支codex/s01-admission-runtime-fix，main基线ece11160。实现a48699c/4d656c1/d919fb5；最终冻结d919fb5后831完整后端全PASS（原787逐名保留、新44、0失败错误跳过）、43前端/类型构建/18文档/compileall/pip check通过。Vue/B01B02公式/旧48任务/旧夹具/原始captures及历史报告保全；无新ERP业务写或付费模型。
 
 库存全链与滚动SMA独立，基点originAt/observedAt/源更新时间区分，版本复用monitor content显式CAS，无新迁移/自动重置。新API质量/日覆盖/基点/能力/恢复提示兼容增量，ERP方案B和P3安全门保留。两SKU原始11/13结果保持、11/14不再虚假差4/2，但11/13零日证据不足不补0。真实47次只读尝试：线宽流水两次超时降级，杯重试成功库存81核验；最终代码只离线重放这些捕获响应，未冒称固定后新联网。入库内核仅隔离验证，真实入库/退货/调整/调拨/预留/有效在途正向净扣仍未签认；30日仅模拟。
