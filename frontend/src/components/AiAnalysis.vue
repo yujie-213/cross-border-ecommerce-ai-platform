@@ -64,7 +64,7 @@ const failureText = computed(() => {
     </header>
 
     <div v-if="status.key === 'running'" class="ai-body">
-      <p class="ai-note">正在重新读取该店仓的最新事实并请求模型解释；规则结论不受影响。</p>
+      <p class="ai-note">正在读取该店仓最新事实并生成单品分析；仅显式请求 AI 解读时才调用模型。</p>
       <div class="skeleton w80" /><div class="skeleton w95" /><div class="skeleton w60" />
     </div>
 

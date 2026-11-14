@@ -160,7 +160,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
             <span>{{ item.storeName || '店铺待核实' }} / {{ item.warehouseName || '仓库待核实' }}</span><span class="sep">·</span>
             <span class="chip" :class="stage">{{ STAGE_LABEL[stage] }}</span>
             <span class="chip plain">{{ unitOf(item) }}</span>
-            <span class="muted small">数据时点 {{ item.observedAt?.slice(0, 16).replace('T', ' ') || '未记录' }}</span>
+            <span class="muted small">数据时点 {{ item.observedAt ? new Date(item.observedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }) + '（北京时间）' : '未记录' }}</span>
             <span v-if="single" class="chip info">含单品分析结果</span>
           </div>
         </div>
@@ -407,7 +407,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
 
         <template v-else>
           <span class="chip" :class="item.sourceGrade === 'REFERENCE_ONLY' ? 'review' : 'confirm'">
-            {{ item.sourceGrade === 'RULE_CALCULATED' ? '规则建议' : item.sourceGrade === 'REFERENCE_ONLY' ? 'ERP 参考' : '已核验来源' }}
+            {{ item.sourceGrade === 'RULE_CALCULATED' ? '规则建议' : item.sourceGrade === 'PLATFORM_REFERENCE' ? '平台参考候选' : item.sourceGrade === 'REFERENCE_ONLY' ? 'ERP 参考' : '已核验来源' }}
           </span>
           <span class="ab-meta">建议 <b>{{ item.quantity ?? '—' }}</b> {{ unitOf(item) }}</span>
           <div class="stepper">
