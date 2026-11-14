@@ -9096,7 +9096,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "previousMain": "ece11160ecd0e820153a1c58128657a2f8788884",
     "method": "fast-forward",
     "localMerge": "PASS",
-    "remotePublication": "PENDING_PUSH",
+    "remotePublication": "PASS",
+    "verifiedRemoteMain": "139f7407d2cf9a582f0ff0999d868ac3f22e55be",
+    "receipt": "普通push及独立ls-remote已通过；随后仅同步本回执，最终HEAD以Git回读为准。",
     "acceptance": "REVIEW保留；合并授权不冒充独立业务验收",
     "validation": "沿用已提交测试证据；无冲突，无新增业务代码，不重跑831或全目录，不再调用ERP/模型。",
     "performance": "负责人反馈批量卡住且ERP网页不可访问，主动停止排查；上游负载仅为推测，未认定根因。"
@@ -9269,7 +9271,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "previousMain": "ece11160ecd0e820153a1c58128657a2f8788884",
     "method": "fast-forward",
     "localMerge": "PASS",
-    "remotePublication": "PENDING_PUSH",
+    "remotePublication": "PASS",
+    "verifiedRemoteMain": "139f7407d2cf9a582f0ff0999d868ac3f22e55be",
+    "receipt": "普通push及独立ls-remote已通过；随后仅同步本回执，最终HEAD以Git回读为准。",
     "acceptance": "REVIEW保留；合并授权不冒充独立业务验收",
     "validation": "沿用已提交测试证据；无冲突，无新增业务代码，不重跑831或全目录，不再调用ERP/模型。",
     "performance": "负责人反馈批量卡住且ERP网页不可访问，主动停止排查；上游负载仅为推测，未认定根因。"
