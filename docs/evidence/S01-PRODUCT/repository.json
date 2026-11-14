@@ -84,6 +84,16 @@
     "findings": [],
     "limitations": "Known local values and heuristic patterns only; reviewed teaching projections/screenshots. Ignored private data and unknown OpenAPI excluded."
   },
-  "push": "PENDING",
+  "push": {
+    "status": "PASS",
+    "command": "git push -u origin codex/s01-product-demand-rebuild",
+    "exitCode": 0,
+    "pushedCommit": "0a4ddec5352df48d725f65f7f7224b089134e5dc",
+    "independentReadbackCommand": "git ls-remote --heads origin refs/heads/codex/s01-product-demand-rebuild refs/heads/main",
+    "readbackExitCode": 0,
+    "remoteBranchCommit": "0a4ddec5352df48d725f65f7f7224b089134e5dc",
+    "remoteMainCommit": "f9bc45f721c961774bbc40bad19f8786519ad449",
+    "recordedAt": "2026-11-14T07:58:12.847482+00:00"
+  },
   "mergedMain": false
 }

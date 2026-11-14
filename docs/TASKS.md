@@ -9451,9 +9451,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "kind": "REPOSITORY",
-      "command": "Implementation commits, diff/secret/document checks; ordinary review branch publication",
+      "command": "git push -u origin codex/s01-product-demand-rebuild; independent git ls-remote --heads",
       "environment": "Git branch codex/s01-product-demand-rebuild; main unchanged",
-      "sample": "Local implementation fixed; publication result recorded separately after actual push",
+      "sample": "Ordinary push/readback PASS; evidence commit 0a4ddec5352df48d725f65f7f7224b089134e5dc; remote main f9bc45f721c961774bbc40bad19f8786519ad449 unchanged; no merge/force",
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/S01-PRODUCT/repository.json",
@@ -9485,6 +9485,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "REVIEW",
       "reason": "自有2SKU真实只读/单品/浏览器收口；全量860项1基础瞬时FAIL和原样40项复验分别保留，不代签负责人验收；不合main。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "证据提交0a4ddec5352df48d725f65f7f7224b089134e5dc已普通推送并独立ls-remote核对；远端main仍f9bc45f721c961774bbc40bad19f8786519ad449，未合并/force；最终仅回执同步，HEAD按Git回读。"
     }
   ],
   "testedCommit": "679a846f42b14321a33ff7277843bb3099234be3",
