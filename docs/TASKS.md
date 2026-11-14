@@ -8950,6 +8950,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-DATA-REVIEW-01/AC2",
         "D-S01-DATA-REVIEW-01/AC4"
       ]
+    },
+    {
+      "kind": "REPOSITORY",
+      "command": "git commit (local only); git rev-parse; git status; git diff baseline -- src frontend migrations",
+      "environment": "Windows Git; no main merge or push",
+      "sample": "diagnostic b6b3956; evidence a335fb2; only authorized docs/tools; unknown OpenAPI preserved",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-DATA-REVIEW/verification.json",
+      "acceptanceIds": [
+        "D-S01-DATA-REVIEW-01/AC4"
+      ]
     }
   ],
   "review": null,
@@ -8972,6 +8984,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "reason": "真实集合差定位4/2；固定工具后3历史任务/16离线/101相关单测通过；三报告与607字总结交审；main/正式行为不改。"
     }
   ],
-  "reportRef": "docs/reports/S01_数据准入长期方案与验收_20261114.md"
+  "reportRef": "docs/reports/S01_数据准入长期方案与验收_20261114.md",
+  "publication": {
+    "status": "NOT_RUN_AUTO_REVIEW_REJECTED",
+    "localEvidenceCommit": "a335fb2bc84332b6978ff301fceb39061243a16c",
+    "mainMerged": false,
+    "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
+    "reason": "Automatic approval rejected the combined local commit/push command before execution: publication of ERP review evidence to this destination requires explicit target/payload approval. Local-only commit then succeeded. No push retry or workaround.",
+    "approvalNeeded": "Only if owner wants remote synchronization of the whitelisted code/docs and teaching summaries on codex/s01-data-admission-review; no raw responses or credentials."
+  }
 }
 ```

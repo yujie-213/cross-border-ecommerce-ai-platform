@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "mode": "EXPLICIT_CHANGED_PATHS_PATTERN_AND_LOCAL_CREDENTIAL_EXACT_MATCH",
-  "scannedFiles": 15,
+  "scannedFiles": 16,
   "findings": [],
   "rawResponsesIncluded": false,
   "unknownOpenAPIIncluded": false,

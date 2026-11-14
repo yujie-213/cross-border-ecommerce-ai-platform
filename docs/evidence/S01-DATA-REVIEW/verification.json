@@ -72,7 +72,11 @@
     "Observed current defect remains in main and review branch production source"
   ],
   "publication": {
-    "status": "PENDING_NORMAL_BRANCH_SYNC",
-    "mainMerged": false
+    "status": "NOT_RUN_AUTO_REVIEW_REJECTED",
+    "localEvidenceCommit": "a335fb2bc84332b6978ff301fceb39061243a16c",
+    "mainMerged": false,
+    "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
+    "reason": "Automatic approval rejected the combined local commit/push command before execution: publication of ERP review evidence to this destination requires explicit target/payload approval. Local-only commit then succeeded. No push retry or workaround.",
+    "approvalNeeded": "Only if owner wants remote synchronization of the whitelisted code/docs and teaching summaries on codex/s01-data-admission-review; no raw responses or credentials."
   }
 }
