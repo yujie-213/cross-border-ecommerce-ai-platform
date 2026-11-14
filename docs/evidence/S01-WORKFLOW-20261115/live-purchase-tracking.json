@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "erpId": "1398",
+      "erpNumber": "HL-S01-P1-20261113-PO-CABLE",
+      "skus": [
+        "HL-CBL100-2M"
+      ],
+      "warehouseName": "海岚洛杉矶现货仓",
+      "status": "待审核",
+      "previousStatus": "待审核",
+      "verifiedAt": "2026-11-14T17:08:57.608480+00:00",
+      "verified": true,
+      "error": null,
+      "quantities": [
+        {
+          "sku": "HL-CBL100-2M",
+          "ordered": 36,
+          "received": null,
+          "pending": null
+        }
+      ],
+      "erpUpdatedAt": "2026-11-13T05:23:17+00:00",
+      "receivedQuantity": 0,
+      "pendingQuantity": 36
+    },
+    {
+      "erpId": "1406",
+      "erpNumber": "S01-RQ-31d1cf789b276beb43772c35fe244375",
+      "skus": [
+        "HL-CBL100-2M"
+      ],
+      "warehouseName": "海岚洛杉矶现货仓",
+      "status": "待下单",
+      "previousStatus": "待下单",
+      "verifiedAt": "2026-11-14T17:08:58.389157+00:00",
+      "verified": true,
+      "error": null,
+      "quantities": [
+        {
+          "sku": "HL-CBL100-2M",
+          "ordered": 48,
+          "received": null,
+          "pending": null
+        }
+      ],
+      "erpUpdatedAt": "2026-11-13T13:10:43+00:00",
+      "receivedQuantity": 0,
+      "pendingQuantity": 48
+    },
+    {
+      "erpId": "1426",
+      "erpNumber": "S01-RQ-86ec2fc73d58a246f3fa30736a6dc1f9",
+      "skus": [
+        "HL-CBL100-2M"
+      ],
+      "warehouseName": "海岚洛杉矶现货仓",
+      "status": "待下单",
+      "previousStatus": "待下单",
+      "verifiedAt": "2026-11-14T17:08:59.165893+00:00",
+      "verified": true,
+      "error": null,
+      "quantities": [
+        {
+          "sku": "HL-CBL100-2M",
+          "ordered": 40,
+          "received": null,
+          "pending": null
+        }
+      ],
+      "erpUpdatedAt": "2026-11-14T09:58:23+00:00",
+      "receivedQuantity": 0,
+      "pendingQuantity": 40
+    }
+  ],
+  "failedCount": 0,
+  "checkedAt": "2026-11-14T17:08:59.165911+00:00",
+  "source": "LIVE_ERP_EXACT_REGISTERED_IDS",
+  "coverage": "当前登记商品已关联的采购单据；不等于 ERP 全量台账",
+  "businessWrites": 0
+}

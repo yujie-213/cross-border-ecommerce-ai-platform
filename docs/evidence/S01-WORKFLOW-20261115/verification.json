@@ -1,0 +1,102 @@
+{
+  "status": "REVIEW",
+  "implementationCommit": "ccac0ac410942b2c9803bc75a06a33912350c00e",
+  "branch": "codex/alienware-local-deployment",
+  "actualBusinessScope": "10 registered teaching SKUs / 11 store-warehouse objects",
+  "buyerFlow": "home -> risk queue -> product list -> warehouse -> analysis -> AI advice -> evidence -> human procurement conditions",
+  "realBrowser": {
+    "result": "PASS",
+    "specifications": 5,
+    "pageErrors": [],
+    "viewports": [
+      1440,
+      1024,
+      820
+    ],
+    "newERPBusinessWrites": 0
+  },
+  "realModels": {
+    "successfulCalls": 2,
+    "totalTokens": 4857,
+    "actualModel": "deepseek-flash",
+    "costStatus": "UNKNOWN",
+    "reservedRiskUSD": "0.10",
+    "paidCallsRepeatedDuringFinalVerification": 0
+  },
+  "liveERPTracking": {
+    "result": "PASS",
+    "knownOrderCount": 3,
+    "source": "EXACT_REGISTERED_IDS",
+    "refresh": "on open, manual, visible-page 60 seconds",
+    "approvalPerformedByAgent": false
+  },
+  "controlledFailureChecks": "PASS; response injection clearly separate from real source validation",
+  "tests": {
+    "frontend": 65,
+    "backendTargeted": 9,
+    "typecheck": "PASS",
+    "build": "PASS"
+  },
+  "limitations": [
+    "Human final product acceptance pending",
+    "Old computer report/command history not restored",
+    "Only known associated order IDs are tracked",
+    "Model actual price not returned",
+    "Procurement capability enabled after explicit user confirmation; no actual ERP submission performed by the agent"
+  ],
+  "screenshots": [
+    "01-platform-home.png",
+    "02-workbench.png",
+    "03-product-list.png",
+    "04-usb-east.png",
+    "05-usb-west.png",
+    "06-surge-before-ai.png",
+    "07-ai-running.png",
+    "08-surge-ai-result.png",
+    "09-no-quote-analysis.png",
+    "10-no-quote-ai.png",
+    "11-sparse-history.png",
+    "12-detail-1024.png",
+    "13-erp-purchase-tracking.png",
+    "14-injected-analysis-failure.png",
+    "15-injected-ai-unavailable.png",
+    "16-injected-erp-read-failure.png",
+    "17-detail-820.png",
+    "18-decision-first-screen.png",
+    "19-editable-reference-proposal.png",
+    "20-manual-quantity-reason.png",
+    "21-authorized-human-confirmation.png"
+  ],
+  "implementationCommits": [
+    "2b3dd0f527c04de50fafb7fff6b7c0034d2bac3c",
+    "ccac0ac410942b2c9803bc75a06a33912350c00e"
+  ],
+  "quantityFeedback": {
+    "result": "PASS",
+    "noQuoteReferenceDefault": 53,
+    "constrainedCandidateDefault": 56,
+    "editableWithoutSubmitPermission": true,
+    "reasonOnlyWhenChanged": true,
+    "reasonHidesAfterRestore": true,
+    "submitStillDisabled": true,
+    "erpWrites": 0
+  },
+  "verifiedCommit": "45062dc18e5e5ca2884f64cdb9981e4aa688f34b",
+  "permissionCheck": {
+    "result": "PASS",
+    "localCapabilityEnabled": true,
+    "manualAcknowledgementRequired": true,
+    "changeReasonRequired": true,
+    "cartonMultipleEnforced": true,
+    "missingQuoteStillBlocked": true,
+    "erpSubmissions": 0
+  },
+  "currentLocalProcurementEnabled": true,
+  "currentModelPolicySnapshot": {
+    "usedCalls": 3,
+    "usedTokens": 7162,
+    "reservedRiskUSD": "0.15",
+    "maximumCalls": 4,
+    "actualCost": "UNKNOWN"
+  }
+}

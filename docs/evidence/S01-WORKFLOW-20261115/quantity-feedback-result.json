@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "noQuoteReferenceDefault": 53,
+  "constrainedCandidateDefault": 56,
+  "editableWithoutSubmitPermission": true,
+  "reasonOnlyWhenChanged": true,
+  "reasonHidesAfterRestore": true,
+  "submitStillDisabled": true,
+  "erpWrites": 0
+}

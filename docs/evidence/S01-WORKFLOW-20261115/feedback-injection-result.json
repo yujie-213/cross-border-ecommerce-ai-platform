@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "nature": "CONTROLLED_BROWSER_RESPONSE_INJECTION_NOT_REAL_ERP_FAILURE",
+  "databaseWrites": 0,
+  "modelCalls": 0,
+  "coverage": [
+    "analysis retry visible",
+    "AI unavailable reason",
+    "ERP previous status explicitly stale"
+  ]
+}

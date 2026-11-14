@@ -1,0 +1,43 @@
+{
+  "authorization": "s01-business-ui-20261115-r1",
+  "results": [
+    {
+      "taskId": "492f30066de04fa38a5b17ca18bfbfee",
+      "sku": "HLX-CASE-NOQUOTE",
+      "entityKey": "1ea1d881f3ba8507d99fe3210f6feed16740670069529d5db23932a5b8bdbbd4",
+      "aiStatus": "AVAILABLE",
+      "model": "deepseek-flash",
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 1984,
+        "totalTokens": 2302,
+        "outputTokens": 318,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1472
+      },
+      "costStatus": "UNKNOWN"
+    },
+    {
+      "taskId": "863602c444274a4e9505510586dc5995",
+      "sku": "HLX-LAMP-SURGE",
+      "entityKey": "098bc6a87407098e484099b45ebccdaea1f1eafd2335039ac3e22ba6e60afd69",
+      "aiStatus": "AVAILABLE",
+      "model": "deepseek-flash",
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 2186,
+        "totalTokens": 2555,
+        "outputTokens": 369,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1674
+      },
+      "costStatus": "UNKNOWN"
+    }
+  ],
+  "paidModelCalls": 2,
+  "businessWrites": 0
+}

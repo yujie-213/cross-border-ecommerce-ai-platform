@@ -1,0 +1,24 @@
+{
+  "screens": [
+    "01-platform-home",
+    "02-workbench",
+    "03-product-list",
+    "04-usb-east",
+    "05-usb-west",
+    "06-surge-before-ai",
+    "09-no-quote-analysis",
+    "11-sparse-history",
+    "12-detail-1024",
+    "13-erp-purchase-tracking"
+  ],
+  "newPurchaseWrites": 0,
+  "modelRequests": 0,
+  "warehouseNavigation": "PASS",
+  "crossSkuAI": "PASS",
+  "purchaseTracking": [
+    "HL-S01-P1-20261113-PO-CABLE\nHL-CBL100-2M\n\t海岚洛杉矶现货仓\t待审核\t\n36 件\n\t等待 ERP 审批\t11/15 01:02",
+    "S01-RQ-31d1cf789b276beb43772c35fe244375\nHL-CBL100-2M\n\t海岚洛杉矶现货仓\t待下单\t\n48 件\n\t已进入待下单阶段，请在 ERP 核对后续安排\t11/15 01:02",
+    "S01-RQ-86ec2fc73d58a246f3fa30736a6dc1f9\nHL-CBL100-2M\n\t海岚洛杉矶现货仓\t待下单\t\n40 件\n\t已进入待下单阶段，请在 ERP 核对后续安排\t11/15 01:02"
+  ],
+  "pageErrors": []
+}

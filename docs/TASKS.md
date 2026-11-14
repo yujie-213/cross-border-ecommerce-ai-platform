@@ -1,3 +1,9 @@
+采购权限最新状态（2026-11-15）：用户已明确确认允许本机登记10款教学商品创建并提交请购至ERP审批。requisitionEnabled已开启，admin原采购授权生效；报价/MOQ/整箱/已有单/幂等/人工确认继续强制。浏览器验证条件满足且人工勾选后可提交、缺报价/改量缺原因/不合整箱仍阻断，实际采购POST0；不开放自动审批/下单/收货。模型策略当前累计3次7162Token、费用UNKNOWN，REVIEW不合main。
+
+数量交互补充（2026-11-15）：用户截图反馈已按ccac0ac修复；拟采购量默认候选、缺候选时使用参考量，允许先编辑，改量后展开必填原因，恢复建议收起；仅限制最终提交。真实53/56默认量及原因/勾选通过，最终仍REVIEW。
+
+采购工作流重构（2026-11-15）：实现2b3dd0f，当前codex/alienware-local-deployment。重构平台与Agent层级、风险队列、商品分仓、AI行动建议与采购决策；修复分析入口/即时反馈/跨对象竞态，ERP已关联单据按真实ID在打开/刷新/可见页60秒回读。现有10SKU/11店仓真实浏览器与两次模型成功，4857Token/费用UNKNOWN；受控失败独立标明，未ERP业务写、不合main。D-S01-PRODUCT-01 REVIEW，待负责人最终体验；详见reports/S01_采购工作流重构_20261115.md。
+
 Alienware请购只读修复附记（2026-11-14）：禁用本机采购提交时，GET本地已保存状态不再返回REQUISITION_NOT_ENABLED；权限及POST禁用不变。定向测试覆盖本地有/无记录与提交关闭，用户确认原失败提示消失。本机本地请购0条，旧机历史未迁移，不等于ERP无单据；最新批次线缆SKU详情可显示同仓待审核与正式采购快照。请购管理仍限本机最近20条单品分析，不是ERP全量台账。未做ERP写入，REVIEW保留。
 
 Alienware商品恢复附记（2026-11-14，不改变产品验收状态）：用户授权在旧电脑暂不可用时恢复10款体验商品。真实ERP账号密码认证/身份通过，失效Token已从当前本机配置清空。旧回执与精确ERP只读回读核验10 SKU/11店仓、30登记销售及关联出库流水/库存收支后，以独立新数据集在本机登记11对象。用户发起批次efbb02ab91134b0d97b095822e91257a成功，42次请求、10 SKU/11结果，6分析/4暂不补/1待核实，用户确认页面显示，单品任务有成功；无模型/ERP业务写。旧报告与采购历史未恢复，不冒充原历史；原失败任务保留。私有核查回执在data/private/local-platform/。D-S01-PRODUCT-01仍REVIEW。
@@ -9314,7 +9320,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-V2-01",
     "D-S01-LOCAL-01"
   ],
-  "entryCondition": "2026-11-14负责人产品体验版连续授权；同分支、单人、自主工程决策、仅自有登记范围；允许受控教学数据创建及少量当前配置模型；不提交请购/审批/收货、不合main",
+  "entryCondition": "2026-11-14负责人产品体验版连续授权；同分支、单人、自主工程决策、仅自有登记范围；允许受控教学数据创建及少量当前配置模型；不提交请购/审批/收货、不合main 2026-11-15负责人实际体验不通过后授权业务工作流产品级前端重构、必要后端交互修复、现有10款真实浏览器及必要模型验证；不新增ERP仿真数据或业务写，不合main。",
   "ownerRole": "技术负责人/主集成人",
   "assignee": "Codex（单人）",
   "allowedPaths": [
@@ -9330,7 +9336,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "商品聚合/全店仓详情/ERP比较与业务解读",
     "自有登记清单全量只读/两SKU/隔离代表场景/浏览器验证与报告",
     "简洁平台首页与独立补货工作区；真实10商品/11店仓；新增8款完整教学商品及关联数据",
-    "跨报告请购保护及待审/正式采购核对；真实AI3次7225Token；使用指南与真实截图"
+    "跨报告请购保护及待审/正式采购核对；真实AI3次7225Token；使用指南与真实截图",
+    "采购工作流重构：风险队列/商品分仓/AI行动建议/业务证据/人工采购；ERP按真实ID最新状态追踪；真实截图交付。"
   ],
   "acceptance": [
     {
@@ -9351,7 +9358,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     }
   ],
   "plannedTests": [
-    "需求/库存/采购边界、历史恢复、真实ERP全量一次、真实浏览器、适用回归"
+    "需求/库存/采购边界、历史恢复、真实ERP全量一次、真实浏览器、适用回归",
+    "本轮现有10SKU/11店仓真实浏览器、两次真实模型、跨对象与反馈定向验证；不做ERP写入。"
   ],
   "requiredEvidenceKinds": [
     "UNIT_TEST",
@@ -9366,7 +9374,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "617fee365cf27a3c29fd48b0240fd8d201bd8f50",
     "3219ce0215ab1766d2b19a72e0a1de95144c8380",
     "679a846f42b14321a33ff7277843bb3099234be3",
-    "6679d4eaceda30d57ae7fd26fe33ec1029fbc122"
+    "6679d4eaceda30d57ae7fd26fe33ec1029fbc122",
+    "2b3dd0f527c04de50fafb7fff6b7c0034d2bac3c",
+    "ccac0ac410942b2c9803bc75a06a33912350c00e",
+    "45062dc18e5e5ca2884f64cdb9981e4aa688f34b"
   ],
   "evidence": [
     {
@@ -9543,14 +9554,94 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "UNIT_TEST",
+      "command": "npm test; targeted pytest; npm build",
+      "environment": "Alienware Windows10 / real registered teaching ERP / local MySQL; injected failures labeled separately",
+      "sample": "64 frontend and 9 backend targeted checks; type/build PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/verification.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "S01_WORKFLOW_LIVE=1 playwright test workflow",
+      "environment": "Alienware Windows10 / real registered teaching ERP / local MySQL; injected failures labeled separately",
+      "sample": "3 final specs PASS; desktop/1024/820; user login followed by actual browser clicks",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/final-browser-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "GET known purchase order IDs via authenticated tracking endpoint",
+      "environment": "Alienware Windows10 / real registered teaching ERP / local MySQL; injected failures labeled separately",
+      "sample": "3 real linked ERP orders read fresh; no ERP mutations",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/live-purchase-tracking.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "MODEL",
+      "command": "Actual browser clicks for reading lamp and no-quote product",
+      "environment": "Alienware Windows10 / real registered teaching ERP / local MySQL; injected failures labeled separately",
+      "sample": "2 successful deepseek-flash calls,4857Token; cost UNKNOWN",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/models.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "playwright test workflow-quantity.spec.ts",
+      "environment": "Real saved teaching reports / Edge / local session",
+      "sample": "53-reference and56-candidate defaults; edits reveal reason, restore hides; submit remains blocked",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/quantity-feedback-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "S01_REQUISITION_ENABLED_CHECK=1 playwright test workflow-permission.spec.ts",
+      "environment": "Real local admin, registered teaching scope, submission POST intercepted as safety guard",
+      "sample": "canSubmit true; candidate56 and acknowledgement enable submit; missing reason/carton/missing quote block; actual ERP writes0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/permission-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
   "review": null,
-  "branch": "codex/s01-product-demand-rebuild",
-  "observedHead": "d40e9ab2c71f2008f1cbb9d326426af459024c8f",
-  "dirtyPaths": [
-    "docs/ERP-openapi.yaml（未知未跟踪，保留）"
-  ],
+  "branch": "codex/alienware-local-deployment",
+  "observedHead": "474cc6957c803a1893ad49a7018963e090f73448",
+  "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -9588,10 +9679,30 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "REVIEW",
       "reason": "Product experience evidence8369968 ordinary push and independent remote readback PASS; main remains f9bc45f; final receipt-only documentation sync follows, no implementation/ERP/model changes."
+    },
+    {
+      "date": "2026-11-15",
+      "to": "IN_PROGRESS",
+      "reason": "负责人实际体验未通过，明确要求业务驱动前端产品重构与ERP实时请购状态追踪；沿当前本地评审分支实施。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "实现2b3dd0f；真实采购流程/分仓/无报价分析AI/ERP当前状态/返回刷新切换及受控失败反馈完成。真实AI2次4857Token，费用UNKNOWN；3浏览器用例/64前端/9后端定向/类型构建通过。未采购写入、不合main，待负责人体验。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "用户截图指出数量不可编辑及默认0。修复ccac0ac：候选/参考量预填、可先改量、改后展开原因、恢复建议收起；只限制最终提交。真实浏览器验证53参考/56候选、原因和勾选，65前端/4浏览器，无ERP写。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "用户再次明确授权开启已登记教学范围的请购创建/提交ERP审批。仅本机requisitionEnabled启用，admin原授权/报价/MOQ/整箱/幂等/已有单/人工确认保留。真实浏览器permission验证PASS，未发送采购POST；当前本轮模型策略累计3次7162Token/费用UNKNOWN。"
     }
   ],
-  "testedCommit": "6679d4eaceda30d57ae7fd26fe33ec1029fbc122",
-  "parallelCondition": "Codex单人，未启用子代理；保留未知OpenAPI。",
+  "testedCommit": "45062dc18e5e5ca2884f64cdb9981e4aa688f34b",
+  "parallelCondition": "Codex单人，无子代理；当前工作区接手干净。",
   "risks": [
     "共享教学租户不保证ERP侧独占；新销售仍经登记核验，不扫描共享历史",
     "未知在途不抵扣；UNKNOWN/并发以隔离ERP+真实MySQL验证，本轮未制造真实未知采购",

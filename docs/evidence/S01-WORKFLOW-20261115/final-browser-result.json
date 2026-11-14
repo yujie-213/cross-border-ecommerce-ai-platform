@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "realModelsViewed": [
+    "HLX-CASE-NOQUOTE",
+    "HLX-LAMP-SURGE"
+  ],
+  "newModelCalls": 0,
+  "erpBusinessWrites": 0,
+  "livePurchaseStates": [
+    {
+      "id": "1398",
+      "status": "待审核",
+      "verifiedAt": "2026-11-14T17:08:57.608480+00:00"
+    },
+    {
+      "id": "1406",
+      "status": "待下单",
+      "verifiedAt": "2026-11-14T17:08:58.389157+00:00"
+    },
+    {
+      "id": "1426",
+      "status": "待下单",
+      "verifiedAt": "2026-11-14T17:08:59.165893+00:00"
+    }
+  ],
+  "pageErrors": []
+}

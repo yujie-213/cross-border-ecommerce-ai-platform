@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "localCapabilityEnabled": true,
+  "manualAcknowledgementRequired": true,
+  "changeReasonRequired": true,
+  "cartonMultipleEnforced": true,
+  "missingQuoteStillBlocked": true,
+  "erpSubmissions": 0
+}
