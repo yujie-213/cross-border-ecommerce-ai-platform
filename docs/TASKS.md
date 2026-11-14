@@ -1,3 +1,5 @@
+当前前端 V3 交付（2026-11-14）：D-S01-UI-V3-01 REVIEW，分支 workbuddy/s01-frontend-v3，独立 worktree，基点 origin/main eceef8c（已核实含 codex/s01-admission-runtime-fix d47d497 与 codex/s01-two-sku-usability-fix 080f171）。四页（工作台/补货建议/SKU 详情/请购管理）接真实 V2 API；路由 URL 为真源，筛选/返回/刷新可恢复；AI 前置分区复用既有单品分析，覆盖未生成/生成中/已生成/未调用/失败；HISTORICAL_REFERENCE 单独成阶段且不可提交；ERP 参考保持方案 B。未改后端计算/DB/ERP 适配/采购规则。类型检查、生产构建、50 项前端单测、V3 真实浏览器验收（1 spec，1440/1024/820，零页面错误、零提交、零模型调用）通过。缺口：请购列表接口未实现，台账按最近 20 条单品分析逐条回读并在页面标注；旧真实流程 spec 选择器仅做文案对齐，需下次真实环境重新基线。REVIEW，不合 main。
+
 当前本地教学产品交付（2026-11-14）：D-S01-LOCAL-01与S01 V2在本地教学适用范围ACCEPTED，main正常合并4103861b70a3ef8806949c7c61576d3cd8c39bb4、合后787/43/类型构建与实际运行通过，普通远端dbcf556已核对。企业门及新业务日对账限制保留；本轮完成后停止。
 
 当前V2交付（2026-11-13）：D-S01-V2-01 REVIEW，Codex单人，codex/s01-v2-full-replenishment；固定实现/完整复验f82d95977367e578229cdf51df6e74dce4330f58，基点main e3591aac不变。全授权只读目录及完整前后端/单品AI/方案B/P3能力已交付；自有教学真实请购1426，等待负责人独立验收，不合main。

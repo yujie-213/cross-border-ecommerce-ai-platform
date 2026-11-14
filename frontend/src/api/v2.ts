@@ -1,5 +1,22 @@
 import type { AI, Task, Requisition, Forecast, Evaluation } from './types'
-export interface V2Item {
+/** D03 public admission projection, sealed in the immutable result manifest. */
+export interface QualityEntry { status: string; reasons: string[] }
+export interface Capability { enabled: boolean; reasons: string[] }
+export interface V2DemandWindow {
+  windowStart: string; windowEnd: string; validDays: number; missingDays: number
+  referenceAverage: string | null; referenceDays: number; sampleStart: string | null; sampleEnd: string | null
+  referenceGrade: string; observedHistory: { businessDate: string; quantity: string; orderRef: string }[]
+}
+export interface V2Admission {
+  admissionVersion?: string
+  dataQuality?: Record<'identity' | 'demand' | 'inventory' | 'procurement', QualityEntry>
+  riskResult?: Evaluation | null
+  capabilities?: {
+    facts: Capability; reference: Capability; risk: Capability; rules: Capability
+    requisition: Capability & { permissionCheck?: string }
+  }
+}
+export interface V2Item extends V2Admission {
   entityKey: string; sourceTenant: string; productId: string | null; sku: string; name: string
   storeId: string | null; warehouseId: string | null; storeName: string | null; warehouseName: string | null
   identityVerified: boolean; identityIssues: string[]; analysisState: string; sourceGrade: string; quantity: number | null; sourceQuantity?: number | null; unit?: string | null
@@ -11,8 +28,8 @@ export interface V2Item {
   sourceSuggestion?: Record<string, unknown> | null
   sourceSuggestions?: Record<string, unknown>[]; sourceSuggestionCount?: number
   ruleResult?: { forecast: Forecast; supplyDemand: { baseline: Evaluation | null } } | null
-  demandWindow?: { windowStart: string; windowEnd: string; validDays: number; missingDays: number; referenceAverage: string | null; referenceDays: number; sampleStart: string | null; sampleEnd: string | null; referenceGrade: string; observedHistory: { businessDate: string; quantity: string; orderRef: string }[] } | null
-  inventoryBasis?: { status: string; observedAt?: string | null; rowUpdatedAt?: string | null } | null
+  demandWindow?: V2DemandWindow | null
+  inventoryBasis?: { status: string; observedAt?: string | null; rowUpdatedAt?: string | null; residual?: unknown; issues?: string[]; checkpoint?: { version?: string; evidenceDigest?: string } } | null
   recoveryHints?: { code: string; message: string; action: string }[]
 }
 export interface V2Options { enabled: boolean; sourceTenant: string; singleAIEnabled: boolean; canSubmit: boolean; principalRef: { tenantId: string; principalId: string } }

@@ -32,7 +32,7 @@ test('P3 REAL: owned analysis, human confirmation, ERP submit, lost browser resp
   const quantity = page.getByLabel('确认采购数量 / 件', { exact: true })
   await expect(quantity).toHaveValue('48')
   await quantity.fill('36')
-  await expect(page.getByRole('button', { name: '确认并提交 ERP 请购', exact: true })).toBeDisabled()
+  await expect(page.getByRole('button', { name: '提交请购', exact: true })).toBeDisabled()
   await quantity.fill('56')
   await expect(page.getByText('调整数量时请填写原因。', { exact: true })).toBeVisible()
   await quantity.fill('48')
@@ -48,7 +48,7 @@ test('P3 REAL: owned analysis, human confirmation, ERP submit, lost browser resp
     expect(response.status()).toBe(200)
     await route.abort('connectionreset')
   })
-  await page.getByRole('button', { name: '确认并提交 ERP 请购', exact: true }).click()
+  await page.getByRole('button', { name: '提交请购', exact: true }).click()
   let saved: any
   await expect.poll(async () => {
     const response = await page.request.get(endpoint)
@@ -119,7 +119,7 @@ test('P3 RECOVERY: restart, original-operation replay, review page and mug no-re
   expect(mug.dataReport.forecast.constraints.orderMultiple).toBe('12')
   expect(mug.dataReport.forecast.excludedSupply).toEqual([])
   await expect(page.getByText('本报告没有可提交的当前补货候选，请先重新分析。', { exact: true })).toBeVisible()
-  await expect(page.getByRole('button', { name: '确认并提交 ERP 请购', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: '提交请购', exact: true })).toHaveCount(0)
   expect(errors).toEqual([])
   writeFileSync(path.join(out, 'recovery-check.json'), JSON.stringify({ result: 'PASS', repeated: await repeated.json(), mugReport: mug, pageErrors: errors }, null, 2))
 })
