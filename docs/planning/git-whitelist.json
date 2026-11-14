@@ -1090,6 +1090,16 @@
     "docs/evidence/S01-WORKFLOW-20261115/refresh-ai-result.json",
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/29-ai-idle-clean.png",
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/30-refresh-ai-running.png",
-    "docs/evidence/S01-WORKFLOW-20261115/screenshots/31-refresh-ai-ready.png"
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/31-refresh-ai-ready.png",
+    "src/commerce_hub/scenarios/s01_v2/purchase_advice.py",
+    "tests/unit/s01/test_purchase_advice.py",
+    "tests/browser/s01/buyer-advice.spec.ts",
+    "docs/evidence/S01-WORKFLOW-20261115/buyer-advice-result.json",
+    "docs/evidence/S01-WORKFLOW-20261115/first-update-audit.json",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/32-buyer-advice-HLX-STAND-NEW.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/33-buyer-advice-HLX-CASE-NOQUOTE.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/34-buyer-advice-HLX-LAMP-SURGE.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/35-buyer-ai-partial-failure.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/36-buyer-advice-820.png"
   ]
 }

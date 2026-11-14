@@ -76,7 +76,12 @@ const issueLabels: Record<string, string> = {
   PROCUREMENT_LEAD_UNCONFIRMED: '采购交期未确认；当前需求采用明确规划假设', REGISTERED_RECORD_MISSING: '登记记录未返回，请核对源数据',
   REGISTERED_RELATION_MISSING: '登记店仓关系未完整回读', V2_REGISTERED_SCOPE_CHANGED: '登记范围已改变，请重新检查自有商品',
   V2_BUSINESS_SCOPE_NOT_REGISTERED: '该商品店仓未登记为本项目成员', SALES_ENUMERATION_INCOMPLETE: '登记销售未完整读取，当前仅部分样本',
-  AI_FACT_CONTEXT_INVALID: '解释事实校验未通过，规则结论仍可查看',
+  AI_FACT_CONTEXT_INVALID: 'AI 分析依据校验未通过，补货结果已保留，请重试',
+  ANALYSIS_ONLY_REQUEST: '本次只更新了补货分析，未请求 AI 建议',
+  TIMEOUT: 'AI 响应超时，补货结果已保留，可稍后重试',
+  TRUNCATED: 'AI 返回内容不完整，补货结果已保留，请重试',
+  CONCURRENCY_DENIED: '另一项 AI 分析正在进行，请稍后重试',
+  INVALID_OUTPUT: 'AI 返回内容未通过校验，补货结果已保留，请重试',
 
   DEMAND_DAY_COVERAGE_INCOMPLETE: '部分日期尚不能作为完整预测样本，当前提供历史参考', STOCK_MOVEMENT_COVERAGE_INCOMPLETE: '库存流水未完整读取，当前库存仅为ERP读取值',
   INVENTORY_BUCKET_RELATION_UNCONFIRMED: '存在多条库存记录，未证明可相加；库存总量待核实', INVENTORY_QUANTITY_UNCONFIRMED: '库存数量未满足有效非负整数要求',

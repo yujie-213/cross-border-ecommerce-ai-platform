@@ -31,6 +31,18 @@ it('gives failed and unavailable AI a visible retry action',async()=>{
  const html=await renderToString(createSSRApp({render:()=>h(AiAnalysis,{ai:null,taskState:'FAILED',errorCode:'ERP_AUTH_REJECTED'})}))
  expect(html).toContain('重试 AI 建议');expect(html).toContain('这次没有生成 AI 建议')
 })
+it('keeps completed replenishment separate from an AI failure and gives its actual cause',async()=>{
+ const html=await renderToString(createSSRApp({render:()=>h(AiAnalysis,{ai:{status:'UNAVAILABLE',reason:'INVALID_OUTPUT'},taskState:'SUCCEEDED'})}))
+ expect(html).toContain('补货分析已更新，AI 建议未生成');expect(html).toContain('返回内容未通过校验');expect(html).toContain('重试 AI 建议')
+})
+it('uses the explicit conclusion, evidence and real actions instead of matching generic keywords',async()=>{
+ const entry=(text:string,ref:string)=>({text,supportRefs:[ref]})
+ const html=await renderToString(createSSRApp({render:()=>h(AiAnalysis,{ai:{status:'AVAILABLE',adviceVersion:'s01-purchase-advice-v2',explanation:{
+  recommendationReasons:[entry('本仓缺货早于正常到货','conclusion')],keyEvidence:[entry('参考17件，按整箱候选20件','quantity-basis')],
+  majorRisks:[entry('只有2个销售记录日，需求持续性尚未确认','sample-risk')],humanConfirmations:[entry('确认能否赶上缺货前到货','next-step')]}}})}))
+ expect(html).toContain('本仓缺货早于正常到货');expect(html).toContain('参考17件，按整箱候选20件');expect(html).toContain('确认能否赶上缺货前到货')
+ expect(html).not.toContain('建议先做');expect(html).not.toContain('接下来');expect(html).not.toContain('重点留意')
+})
 it('defaults a local proposal to the constrained candidate, then the reference demand when no candidate exists',()=>{
  const item={quantity:56,decision:{purchasableQuantity:56,referenceReplenishmentQuantity:53}} as never
  expect(suggestedPurchaseQuantity(item)).toBe(56)

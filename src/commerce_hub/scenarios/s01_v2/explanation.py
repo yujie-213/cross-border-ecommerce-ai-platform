@@ -56,6 +56,9 @@ def product_bundle(item,binding):
 
 
 def bundle(item,binding):
+    if item.get('explanationVersion')=='s01-purchase-advice-v2':
+        from .purchase_advice import purchase_advice_bundle
+        return purchase_advice_bundle(item,binding)
     if item.get('explanationVersion')=='s01-product-experience-v1':return product_bundle(item,binding)
     facts=[]
     def add(ref,text,section,*,numbers=(),dates=(),unknown=False):
@@ -119,6 +122,7 @@ def explain(item,context,provider):
         logical='s01-v2-'+digest(binding)[:32]
         request=reserve_request(context,b,logical_call_id=logical,attempt_id=logical+'-1',max_tokens=24000,max_cost=Decimal('.05'),trace_id=digest(binding)[:32])
         response=ModelGateway(provider,timeout_seconds=30).invoke(request,context,b)
+        ai['adviceVersion']=item.get('explanationVersion')
         ai.update(status='AVAILABLE' if response.status=='SUCCESS' else 'UNAVAILABLE',reason=response.code,
             explanation=response.validatedObject if response.status=='SUCCESS' else None,provider='AUTHORIZED_PROVIDER',
             usageStatus=response.usageStatus,tokenUsageStatus=response.tokenUsageStatus,costStatus=response.costStatus,
@@ -131,7 +135,7 @@ def explain(item,context,provider):
 
 def validate_ai(ai,item):
     if ai.get('status')=='NOT_ATTEMPTED':
-        if ai.get('reason')!='MODEL_NOT_ENABLED' or ai.get('explanation') is not None:raise ValueError('V2_AI_INVALID')
+        if ai.get('reason') not in {'MODEL_NOT_ENABLED','ANALYSIS_ONLY_REQUEST'} or ai.get('explanation') is not None:raise ValueError('V2_AI_INVALID')
         return
     if ai.get('status') not in {'AVAILABLE','UNAVAILABLE'}:raise ValueError('V2_AI_INVALID')
     if ai.get('status')=='AVAILABLE':

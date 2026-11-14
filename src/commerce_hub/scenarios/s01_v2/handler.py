@@ -106,6 +106,7 @@ class V2Handler:
             data['summary'].pop('modelCalls',None)
             if data['item']['analysisState']!='FAILED':
                 ai=explain(data['item'],context,self.provider if parameters.get('explainAI',True) else None)
+                if not parameters.get('explainAI',True):ai['reason']='ANALYSIS_ONLY_REQUEST'
         limited=not complete or any(not cap.get('complete') for cap in catalog.values() if isinstance(cap,dict) and 'rows' in cap) or data['summary']['unanalyzable'] or data['summary']['failed']
         return DomainResult(contractVersion='0.1.0',sourceNature='SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP',
             completeness='PARTIAL' if limited else 'RULES_ONLY',scope=context.task['scope'],snapshotRef=data['catalogManifest']['snapshotRef'],
