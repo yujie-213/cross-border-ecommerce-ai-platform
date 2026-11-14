@@ -55,6 +55,9 @@ nav a.active .nav-count{background:#cfe4e0}
 .crumb i{color:#aab3bd;font-style:normal}
 .crumb b{color:var(--ink);font-weight:600}
 .top-right{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--muted)}
+.seg-mini{border-radius:4px}
+.seg-mini button{padding:3px 7px;min-height:22px;font-size:10.5px;line-height:1}
+.seg-mini button[aria-pressed=true]{background:var(--ink);color:#fff}
 .demo-chip{display:inline-flex;align-items:center;gap:4px;background:#f3f5f7;color:#6c7a88;border:1px solid var(--line);border-radius:10px;padding:1px 8px;font-size:10.5px;cursor:help}
 .who{display:flex;align-items:center;gap:6px}
 .avatar{width:22px;height:22px;border-radius:50%;background:#e8eef0;display:grid;place-items:center;color:#3c5a6b;font-size:10px}
@@ -101,9 +104,9 @@ footer{padding:0 22px 14px;font-size:10px;color:var(--subtle);display:flex;justi
 .cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px;align-items:start;margin-top:12px}
 .cols>*{min-width:0}
 .queue{display:grid}
-.qhead{display:grid;grid-template-columns:minmax(0,1fr) 128px 96px 108px 22px;gap:10px;padding:6px 14px;font-size:10.5px;color:var(--subtle);background:#fbfcfd;border-bottom:1px solid var(--line)}
+.qhead{display:grid;grid-template-columns:minmax(0,1fr) 176px 84px 104px 18px;gap:10px;padding:6px 14px;font-size:10.5px;color:var(--subtle);background:#fbfcfd;border-bottom:1px solid var(--line)}
 .qhead span:nth-child(3){padding-left:2px}
-.qrow{display:grid;grid-template-columns:minmax(0,1fr) 128px 96px 108px 22px;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid #eef1f4;text-decoration:none;color:inherit}
+.qrow{display:grid;grid-template-columns:minmax(0,1fr) 176px 84px 104px 18px;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid #eef1f4;text-decoration:none;color:inherit}
 .qrow:last-child{border-bottom:0}
 .qrow:hover{background:#f8fbfa;text-decoration:none}
 .prod{font-weight:600;font-size:12.5px;line-height:1.35;display:block}
@@ -145,7 +148,11 @@ td.r,th.r{text-align:right}
 .ltable th,.ltable td:nth-child(4),.ltable td:nth-child(5),.ltable td:nth-child(6),.ltable td:nth-child(7),.ltable td:nth-child(8){white-space:nowrap}
 .ltable th:last-child,.ltable td:last-child{position:sticky;right:0;background:#fff;box-shadow:-6px 0 6px -6px #0000001a}
 .ltable th:last-child{background:#f8fafb}
-.stockcell{display:flex;align-items:center;gap:7px;min-width:112px}
+.covline{display:block;font-size:10.5px;color:var(--muted);margin-top:1px}
+.covline .risk{margin-left:5px;font-style:normal;font-weight:600}
+.covline .risk.short{color:var(--bad)}
+.covline .risk.tight{color:var(--warn)}
+.covline .risk.ok{color:var(--ok)}
 .stockcell .cov{width:52px;margin-top:0;flex:none}
 .stockcell span{font-variant-numeric:tabular-nums;font-size:11.5px}
 .empty{padding:30px 18px;text-align:center;color:var(--muted);font-size:12px}
@@ -174,6 +181,7 @@ td.r,th.r{text-align:right}
 .chart-legend i.area{height:9px;border-radius:2px;background:#fbeceb}
 .two{display:grid;grid-template-columns:minmax(0,1fr) 236px;gap:16px;padding:0 14px 12px;align-items:start}
 .two .bars{max-width:264px}
+.two.narrow{grid-template-columns:264px minmax(0,320px);justify-content:start}
 .formula{border:1px solid var(--line);border-radius:6px;background:#fbfcfd;padding:9px 11px;font-size:11.5px;line-height:1.9;color:#43505d}
 .formula b{font-variant-numeric:tabular-nums;color:var(--ink)}
 .formula .op{color:var(--subtle);padding:0 4px}
@@ -232,6 +240,66 @@ dialog::backdrop{background:#12283b55}
 .dlg-foot{padding:11px 16px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:7px}
 .close{border:0;background:none;font-size:19px;color:var(--muted);line-height:1}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#16293a;color:#fff;padding:9px 15px;border-radius:5px;font-size:11.5px;z-index:50;max-width:calc(100vw - 24px)}
+/* ---------- v3.2 新增：环形图 / 排行榜 / AI 分区 / 底部操作条 ---------- */
+.wb-top{display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:12px;margin-bottom:12px;align-items:stretch}
+.wb-top>.panel{margin:0;display:flex;flex-direction:column}
+.wb-top .kpis{height:100%;align-content:center}
+.donut{display:flex;align-items:center;gap:14px}
+.donut svg{flex:none}
+.dlegend{display:grid;grid-template-columns:1fr;gap:3px;font-size:10.5px;color:var(--muted);min-width:0;flex:1}
+.dlegend span{display:flex;align-items:center;gap:4px;white-space:nowrap;min-width:0}
+.dlegend b{color:var(--ink);font-weight:600;margin-left:auto;padding-left:6px}
+.rank{display:grid}
+.rank-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid #f2f4f6;font-size:11.5px}
+.rank-row:last-child{border-bottom:0}
+.rank-row .num{font-variant-numeric:tabular-nums}
+.src-row{display:flex;align-items:center;gap:7px;font-size:11.5px;padding:4px 0}
+.src-row .pct{margin-left:auto;color:var(--subtle);font-variant-numeric:tabular-nums;font-size:10.5px}
+.src-row b{font-weight:600;min-width:16px;text-align:right}
+/* AI 分区 */
+.ai-panel{border-top:2px solid var(--nav)}
+.ai-head{display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.ai-head h2{font-size:13px}
+.ai-badge{display:inline-grid;place-items:center;height:18px;padding:0 6px;border-radius:4px;background:var(--nav);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.6px}
+.ai-body{padding:14px}
+.ai-lead{font-size:13px;line-height:1.7;color:#22303e;margin-bottom:12px}
+.ai-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ai-col h4{margin:0 0 4px;font-size:10.5px;font-weight:600;color:var(--subtle);letter-spacing:.4px}
+.ai-col ul{margin:0;padding-left:13px;font-size:11.5px;line-height:1.7;color:#3b4a58}
+.ai-col li{margin-bottom:3px}
+.ai-meta{font-size:10px;color:var(--subtle);display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed #eef1f4}
+.ai-skel{height:8px;border-radius:4px;background:#eef2f4;margin:6px 0;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.45}}
+.ai-cta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ai-panel.compact .ai-grid{grid-template-columns:1fr;gap:10px}
+.ai-panel.compact .ai-lead{font-size:12px}
+.ai-panel.compact .ai-meta{flex-direction:column;gap:2px}
+/* 底部操作条 */
+.actionbar{position:sticky;bottom:0;z-index:19;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 18px -14px #16293a66;
+  padding:9px 22px;margin:14px -22px 0}
+.actionbar .ab-info{display:flex;align-items:center;gap:8px;font-size:11.5px}
+.actionbar .ab-info b{font-size:15px;font-variant-numeric:tabular-nums}
+.actionbar .grow{flex:1}
+.actionbar .stepper input{width:76px;flex:none}
+.actionbar .hint{margin:0}
+.actionbar .check{margin:0}
+/* 单列详情（方案C） */
+.detail.one{grid-template-columns:minmax(0,1fr)}
+@media (max-width:1280px){
+  .wb-top{grid-template-columns:1fr}
+  .ai-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:1000px){
+  .actionbar{padding:9px 14px;margin:12px -14px 0}
+  .actionbar .ab-note,.actionbar .ab-moq{display:none}
+  .ai-grid{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .ai-grid{grid-template-columns:1fr}
+  .actionbar .ab-info{font-size:11px}
+  .actionbar .ab-optional{display:none}
+}
 /* responsive */
 @media (max-width:1280px){
   .cols,.detail{grid-template-columns:1fr}
@@ -287,6 +355,9 @@ dialog::backdrop{background:#12283b55}
   <header class="topbar">
     <div class="crumb" id="crumb"></div>
     <div class="top-right">
+      <span class="seg seg-mini" role="group" aria-label="AI 模块布局对比（原型专用）" title="AI 模块布局对比，仅原型使用">
+        <button data-act="variant" data-v="a">A</button><button data-act="variant" data-v="b">B</button><button data-act="variant" data-v="c">C</button>
+      </span>
       <span class="demo-chip" title="本地演示：脱敏模拟数据，不连接 ERP、不调用模型、不写入任何系统">演示数据</span>
       <span class="who"><span class="avatar">林</span>林予 · 采购运营</span>
     </div>
@@ -305,13 +376,13 @@ dialog::backdrop{background:#12283b55}
 const POLICY={version:'v0-draft',status:'DRAFT',windowDays:15,requiredSalesDays:7};
 
 const BATCHES=[
-  {id:'b1114',at:'11-14 08:02',full:'2026-11-14 08:02',objects:11,done:11,complete:true,over:{}},
-  {id:'b1113',at:'11-13 07:58',full:'2026-11-13 07:58',objects:11,done:11,complete:true,over:{
+  {id:'b1114',at:'11-14 08:02',full:'2026-11-14 08:02',objects:12,done:12,complete:true,over:{}},
+  {id:'b1113',at:'11-13 07:58',full:'2026-11-13 07:58',objects:12,done:12,complete:true,over:{
     'CB-1001':{available:43,suggest:40,firstShortage:'2026-11-15'},
     'BT-2003':{available:40,suggest:42,firstShortage:'2026-11-18'},
     'CB-1023':{available:80,suggest:40,firstShortage:'2026-11-23'}
   }},
-  {id:'b1112',at:'11-12 20:10',full:'2026-11-12 20:10',objects:10,done:10,complete:false,over:{
+  {id:'b1112',at:'11-12 20:10',full:'2026-11-12 20:10',objects:11,done:11,complete:false,over:{
     'CB-1001':{available:71,suggest:10,firstShortage:'2026-11-20'},
     'BT-2003':{available:66,suggest:12,firstShortage:'2026-11-25'},
     'KT-4022':{missing:true}
@@ -341,8 +412,12 @@ const SKUS=[
     {d:'11-14',dem:8,arr:0,close:10},{d:'11-15',dem:10,arr:0,close:0},{d:'11-16',dem:9,arr:0,close:-9},
     {d:'11-17',dem:11,arr:0,close:-20},{d:'11-18',dem:9,arr:0,close:-29},{d:'11-19',dem:10,arr:0,close:-39}],
   checks:[],
-  ai:{status:'OK',bullets:['日均 9.6 件，可用 48 件覆盖约 5 天，早于在途 36 件的到货日 11-25。','在途属待到货单据，无已承诺可售日，本次未抵扣。'],
-    risk:'首次短缺发生在到货前 5 天，存在断货风险。',ask:'建议确认 30 件，并核对在途未被其他渠道占用。',tokens:1842,cost:'¥0.02'},
+  ai:{status:'OK',
+    conclusion:'可用 48 件仅覆盖约 5 天；在途 36 件预计 11-25 到货，晚于首次短缺日，期间存在断货窗口。',
+    facts:['最近 7 个业务日销量 67 件，日均 9.6 件，波动 8–11 件。','PO-2026-2211：采购 60 / 已收 24 / 待收 36，状态待到货。','报价有效期至 12-15，参考交期 15 天。'],
+    risks:['待到货单据无已承诺可售日，本次未计入有效在途；若 11-25 延误，缺口扩大。','在途 36 件可能被其他渠道占用，需业务侧确认。'],
+    checks:['确认在途到货前是否存在调拨或替代供给。','确认在途 36 件的实际可售时间能否提前。'],
+    tokens:1842,cost:'¥0.02',at:'11-14 08:02'},
   hist:[{at:'11-14 08:02',src:'规则建议',qty:30,res:'当前'},{at:'11-12 20:10',src:'规则建议',qty:24,res:'已取代'}],req:null
 },
 {
@@ -425,6 +500,17 @@ const SKUS=[
   req:{no:'RQ-2026-0012',plat:'UNKNOWN',erp:'UNKNOWN',finalQty:30,sugQty:30,reason:'',at:'2026-11-14 09:41',by:'林予',readback:null,reads:1,step:1}
 },
 {
+  key:'CB-1040',sku:'CB-1040',name:'折叠衣架 · 米白',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'RULE',
+  plan:{available:0,target:40,suggest:40,firstShortage:'2026-11-14',avgDaily:5.2,salesDays:7,totalSales:36,window:'11-07 — 11-13'},
+  constraints:{moq:20,mult:20,price:'12.50',cur:'CNY',supplier:'示例供应商 B',quote:'QT-2026-0935',validTo:'2026-12-10',lead:12},
+  purchases:[],sales:[5,4,6,5,6,4,6],
+  daily:[{d:'11-14',dem:5,arr:0,close:-5},{d:'11-15',dem:5,arr:0,close:-10},{d:'11-16',dem:6,arr:0,close:-16},
+    {d:'11-17',dem:5,arr:0,close:-21},{d:'11-18',dem:5,arr:0,close:-26},{d:'11-19',dem:5,arr:0,close:-31},
+    {d:'11-20',dem:5,arr:40,close:4},{d:'11-21',dem:5,arr:0,close:-1},{d:'11-22',dem:5,arr:0,close:-6}],
+  checks:[],ai:{status:'NONE'},
+  hist:[{at:'11-14 08:02',src:'规则建议',qty:40,res:'当前'}],req:null
+},
+{
   key:'CB-1008',sku:'CB-1008',name:'数码配件包 · 深蓝',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'RULE',
   plan:{available:72,target:60,suggest:0,firstShortage:null,avgDaily:6,salesDays:7,totalSales:42,window:'11-04 — 11-10'},
   constraints:{moq:10,mult:10,price:'34.00',cur:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0901',validTo:'2026-12-31',lead:12},
@@ -436,12 +522,44 @@ const SKUS=[
 }
 ];
 
+/* AI 解读内容（演示值；每条都能追溯到 SKU 的已读取事实，不含推测结论） */
+const AI_CONTENT={
+  'CB-1001':{status:'NONE',draft:{
+    conclusion:'需求平稳（日均 11.3 件），可用 55 件仅覆盖 4.9 天，短于 12 天交期；首次短缺出现在到货之前，现有供给无法闭合缺口。',
+    facts:['最近 7 个完整业务日销量 79 件，波动 8–15 件，无断崖或脉冲。','可用 55 件来自单一仓库记录，目标库存 75 件。','报价有效期至 12-31，参考交期 12 天。'],
+    risks:['各接口分时读取，库存与销量间隔约 4 分钟，极端波动下缺口可能被低估。','尚无已承诺的采购到货日，实际到货可能晚于推算。'],
+    checks:['确认 11-15 至 11-17 是否有促销计划（当前销量窗口未包含）。','确认该仓库是否存在未登记的其他渠道占用。'],
+    tokens:1520,cost:'¥0.02'}},
+  'CB-1040':{status:'NONE',draft:{
+    conclusion:'可用库存为 0，已处于缺货状态；按日均 5.2 件计算，交期 12 天内缺口将持续扩大。',
+    facts:['可用库存 0 件（已读取，明确为 0，非缺失）。','最近 7 个业务日销量 36 件，日均 5.2 件。','目标 40 件，MOQ 20 / 整箱 20，报价 12.50 CNY。'],
+    risks:['当前无可用库存，新订单履约将立即延迟。','交期 12 天，期间无供给缓冲。'],
+    checks:['确认是否存在可立即补位的在途或调拨。','确认近 3 日已接订单是否需要延期通知。'],
+    tokens:1486,cost:'¥0.02'}},
+  'LT-3012':{status:'OK',
+    conclusion:'数量来自 ERP 建议记录，平台无法复算；可用 31 件、报价 11-20 到期，交期 10 天。',
+    facts:['ERP 建议 30 件，销量窗口与净额规则未知。','MOQ 5 / 整箱 5，报价 26.00 CNY，有效期至 11-20。','可用 31 件来自单次读取，未与出入库流水对账。'],
+    risks:['ERP 若采用不同销量窗口，数量可能与平台口径偏离。','报价 11-20 到期，交期 10 天，下单越晚价格风险越高。'],
+    checks:['向 ERP 侧确认建议所用的销量窗口与净额规则。','确认 11-20 前能否完成报价续期。'],
+    tokens:1610,cost:'¥0.02',at:'11-14 08:02'},
+  'CB-1023':{status:'FAILED',error:'生成超时（30 秒），未返回内容',
+    factCount:3,retry:true,draft:{
+    conclusion:'可用 66 件覆盖 7 天，短于 20 天交期；11-18 的 50 件到货可暂时缓解，但报价 11-30 到期。',
+    facts:['最近 7 个业务日销量 66 件，日均 9.4 件。','可用 66 件，目标 116 件。','报价 61.00 CNY，有效期至 11-30，交期 20 天。'],
+    risks:['报价即将到期，跨期下单需重新取价。','交期 20 天，若 11-18 到货延误，缺口无法在窗口内闭合。'],
+    checks:['下单前确认报价仍有效或已完成续期。','确认 11-18 到货计划是否已锁定。'],
+    tokens:null,cost:null}},
+  'LT-3021':{status:'NOFACTS',reason:'仅 4 个完整业务日销量（11-07 至 11-10），缺少可用需求窗口；库存未与流水对账。'},
+  'KT-4010':{status:'NOFACTS',reason:'质量调查结论未出具，补货建议尚不存在，暂无可解读的业务结论。'}
+};
+SKUS.forEach(s=>{const a=AI_CONTENT[s.key];if(a)s.ai=Object.assign({},s.ai,a);});
+
 /* ================= 状态 ================= */
 const saved=(()=>{try{return JSON.parse(sessionStorage.getItem('ux3.filters')||'{}')}catch(e){return {}}})();
 const state={
   route:{page:'workbench',id:null,tab:null},
   filters:{q:saved.q||'',store:saved.store||'',wh:saved.wh||'',source:saved.source||'',stage:saved.stage||''},
-  reqTab:'all',batchId:'b1114',
+  reqTab:'all',batchId:'b1114',variant:(new URLSearchParams(location.search).get('v')||sessionStorage.getItem('ux3.variant')||'c'),
   qty:{},reason:{},ack:{},
   lastSku:sessionStorage.getItem('ux3.lastSku')||'',
   listScroll:0
@@ -458,10 +576,29 @@ function items(){
   return SKUS.map(s=>{
     const o=over[s.key]||{};
     if(o.missing)return Object.assign({},s,{missing:true});
-    return Object.assign({},s,{plan:Object.assign({},s.plan,o)});
+    const v=Object.assign({},s,{plan:Object.assign({},s.plan,o)});
+    v.plan.firstShortage=firstShort(v);
+    return v;
   });
 }
 const byKey=k=>items().find(s=>s.key===k);
+
+/* 结存序列：以当前批次可用库存为起点，按每日需求与到货推算。
+   批次切换或库存变化都会反映到曲线与"首次短缺"，日期不再写死。 */
+function series(s){
+  const p=s.plan;
+  if(!s.daily||!s.daily.length||p.available===null||p.available===undefined)return [];
+  let close=p.available;
+  return s.daily.map(d=>{
+    close=close-d.dem+(d.arr||0);
+    return {d:d.d,dem:d.dem,arr:d.arr||0,close:Math.round(close)};
+  });
+}
+/* 首次短缺：曲线中第一个结存 ≤0 的业务日 */
+function firstShort(s){
+  const f=series(s).find(x=>x.close<=0);
+  return f?('2026-'+f.d):null;
+}
 
 function stageOf(s){
   if(s.missing)return 'missing';
@@ -502,11 +639,27 @@ function counts(){
   c.actionable=c.confirm+c.blocked+c.failed+c.unknown+c.missing;
   return c;
 }
+/* 覆盖天数：0 库存必须返回 0（缺货），不能与"未知"混为一谈 */
 const covDays=s=>{
   const p=s.plan;
-  if(!p.available||!p.avgDaily)return null;
+  if(p.available===null||p.available===undefined)return null;      // 库存未读取
+  if(p.avgDaily===null||p.avgDaily===undefined)return null;        // 日均无有效样本
+  if(p.avgDaily===0)return p.available>0?Infinity:null;            // 无需求：有货=无限期，无货=无法判断
   return +(p.available/p.avgDaily).toFixed(1);
 };
+const covText=s=>{
+  const v=covDays(s);
+  if(v===null)return '—';
+  if(v===Infinity)return '无需求';
+  return v+' 天';
+};
+/* 覆盖是否短于采购交期：交期未知时不判定，避免用颜色冒充结论 */
+const covRisk=s=>{
+  const v=covDays(s),lead=s.constraints.lead;
+  if(v===null||v===Infinity||!lead)return null;
+  return v<lead?'short':v<lead*1.5?'tight':'ok';
+};
+const RISK_TEXT={short:'低于交期',tight:'接近交期',ok:'覆盖充足'};
 
 /* ================= 图形 ================= */
 function chartBalance(daily){
@@ -537,7 +690,7 @@ function chartBalance(daily){
     ${arrivals}${dots}${xlab}</svg>`;
 }
 
-function chartSales(sales,total){
+function chartSales(sales,avgDaily){
   const W=228,H=80,L=2,R=2,T=8,B=15;
   if(!sales||!sales.length)return '<div class="muted" style="font-size:10.5px;padding:8px 0">本次未取得已核对销量</div>';
   const max=Math.max(...sales),col=(W-L-R)/7,bw=col-4;
@@ -546,10 +699,11 @@ function chartSales(sales,total){
     return `<rect x="${x.toFixed(1)}" y="${(H-B-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="#9dc0bb"/>
       <text x="${(x+bw/2).toFixed(1)}" y="${H-3}" text-anchor="middle">${['04','05','06','07','08','09','10'][i]}</text>`;
   }).join('');
-  const avg=total?total/sales.length:0,ay=H-B-(avg/max)*(H-T-B);
   const base=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#dde3e8"/>`;
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="最近 ${sales.length} 个业务日销量 ${sales.join('、')} 件">${base}${bars}
-    <line x1="${L}" y1="${ay.toFixed(1)}" x2="${W-R}" y2="${ay.toFixed(1)}" stroke="#c9812f" stroke-dasharray="4 3"/></svg>`;
+  const avgLine=(avgDaily&&avgDaily>0)
+    ? `<line x1="${L}" y1="${(H-B-(avgDaily/max)*(H-T-B)).toFixed(1)}" x2="${W-R}" y2="${(H-B-(avgDaily/max)*(H-T-B)).toFixed(1)}" stroke="#c9812f" stroke-dasharray="4 3"><title>日均 ${avgDaily} 件</title></line>`
+    : '';
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="最近 ${sales.length} 个业务日销量 ${sales.join('、')} 件${avgDaily?'，日均 '+avgDaily+' 件':'，日均未取得'}">${base}${bars}${avgLine}</svg>`;
 }
 
 /* ================= 路由 ================= */
@@ -596,44 +750,62 @@ function crumb(){
 }
 
 /* ================= 工作台 ================= */
+function donutSvg(segs,total){
+  const cx=52,cy=52,rad=37,sw=15,C=2*Math.PI*rad;
+  let off=0;
+  const arcs=segs.map(x=>{
+    const len=x[1]/total*C;
+    const el=`<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="${x[2]}" stroke-width="${sw}"
+      stroke-dasharray="${len.toFixed(2)} ${(C-len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}"
+      transform="rotate(-90 ${cx} ${cy})"><title>${esc(x[0])} ${x[1]} 项${x[3]?'（'+esc(x[3])+'）':''}</title></circle>`;
+    off+=len;return el;
+  }).join('');
+  return `<svg width="104" height="104" viewBox="0 0 104 104" role="img" aria-label="对象构成：${segs.map(x=>x[0]+' '+x[1]).join('，')}">
+    <circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef1f4" stroke-width="${sw}"/>${arcs}
+    <text x="${cx}" y="${cy-1}" text-anchor="middle" style="font:600 21px/1 'Segoe UI',sans-serif;fill:#1b2836">${total}</text>
+    <text x="${cx}" y="${cy+15}" text-anchor="middle" style="font:10px 'Segoe UI',sans-serif;fill:#7c8896">对象</text></svg>`;
+}
+
 function pageWorkbench(){
   const c=counts();
-  const rank=s=>({req_unknown:0,failed:1,blocked:2,confirm:3})[stageOf(s)]||9;
-  const list=items().filter(s=>['confirm','blocked','failed','req_unknown'].includes(stageOf(s)))
+  const RANK={req_unknown:0,missing:0,failed:1,blocked:2,confirm:3};
+  const rank=s=>{const v=RANK[stageOf(s)];return v===undefined?9:v;};
+  const list=items().filter(s=>['confirm','blocked','failed','req_unknown','missing'].includes(stageOf(s)))
     .sort((a,b)=>rank(a)-rank(b)||String(a.plan.firstShortage||'9999').localeCompare(String(b.plan.firstShortage||'9999'))).slice(0,6);
+
   const rows=list.map(s=>{
-    const cov=covDays(s),pct=cov!==null&&s.plan.target?Math.min(100,s.plan.available/s.plan.target*100):0;
-    const cls=cov===null?'':cov<4?'out':cov<8?'low':'';
+    const risk=covRisk(s);
     return `<a class="qrow" href="#/sku/${encodeURIComponent(s.key)}">
       <div><span class="prod">${esc(s.name)}</span><span class="prod-sub"><span class="mono">${esc(s.sku)}</span> · ${esc(s.store)} / ${esc(s.wh)}</span></div>
-      <div class="qmid">${cov===null
-        ?`<div class="cov-num"><span class="muted">无库存数据</span></div>`
-        :`<div class="cov-num"><span>可用 ${s.plan.available}</span><span>${cov} 天</span></div><div class="cov ${cls}"><i style="width:${pct}%"></i></div>`}</div>
-      <div class="qmid"><span class="bignum">${s.plan.suggest?s.plan.suggest:dash(s.plan.suggest)}<small>${s.plan.suggest?s.unit:''}</small></span></div>
+      <div>${covDays(s)===null?'<span class="muted">—</span>':`<span class="num" style="font-size:12.5px">${covText(s)}</span>`}
+        ${risk?`<span class="chip ${risk==='short'?'bad':risk==='tight'?'warn':'ok'}" style="margin-left:6px">${RISK_TEXT[risk]}</span>`:''}</div>
+      <div><span class="bignum">${s.plan.suggest?s.plan.suggest:'—'}<small>${s.plan.suggest?s.unit:''}</small></span></div>
       <div>${stageBadge(s)}</div>
       <div class="muted" aria-hidden="true">›</div>
     </a>`;
   }).join('');
 
   const total=items().length;
+  /* 7 个状态在 104px 内不可辨：按"处置动作"归为 4 组，明细放图例提示 */
   const segs=[
-    ['待确认',c.confirm,'#0f6b64'],['需补证',c.blocked,'#c9812f'],['待核对',c.unknown,'#a8382f'],
-    ['待审批',c.waiting,'#4a7fa8'],['已审批',c.approved,'#6f9a86'],['无需补货',c.no_need,'#c3ccd4'],
-    ['失败',c.failed+c.missing,'#6b7785']
+    ['待人工处理',c.confirm+c.blocked+c.unknown,'#0f6b64',`待确认 ${c.confirm} · 需补证 ${c.blocked}${c.unknown?' · 待核对 '+c.unknown:''}`],
+    ['已提交待批',c.waiting+c.approved,'#4a7fa8',`待审批 ${c.waiting}${c.approved?' · 已审批 '+c.approved:''}`],
+    ['无需补货',c.no_need,'#c3ccd4','规则判断可覆盖'],
+    ['分析失败',c.failed+c.missing,'#6f7c8a','需重新分析']
   ].filter(x=>x[1]>0);
-  const segSum=segs.reduce((a,x)=>a+x[1],0);
 
   const src=items().reduce((a,s)=>{a[s.source]=(a[s.source]||0)+1;return a;},{});
-  const srcRows=[['RULE','规则建议','#0f6b64'],['ERP','ERP 参考','#c9812f'],['NONE','无来源','#b4483d']]
-    .map(([k,l,col])=>`<div class="mini-row"><span class="t">${l}</span>
-      <span class="track"><i style="width:${(src[k]||0)/total*100}%;background:${col}"></i></span>
-      <span class="v">${src[k]||0}</span></div>`).join('');
+  const srcRows=[['RULE','规则建议','#0f6b64'],['ERP','ERP 参考','#c9812f'],['NONE','无来源','#a8382f']]
+    .map(([k,l,col])=>`<div class="src-row"><i class="dot" style="background:${col}"></i>${l}
+      <b>${src[k]||0}</b><span class="pct">${Math.round((src[k]||0)/total*100)}%</span></div>`).join('');
 
-  const risk=items().filter(s=>covDays(s)!==null).sort((a,b)=>covDays(a)-covDays(b)).slice(0,4)
-    .map(s=>{const cov=covDays(s),p=Math.min(100,cov/12*100);
-      return `<div class="mini-row"><span class="t">${esc(s.sku)}</span>
-        <span class="track"><i style="width:${p}%;background:${cov<4?'#b4483d':cov<8?'#c9812f':'#0f6b64'}"></i></span>
-        <span class="v">${cov}天</span></div>`;}).join('');
+  const riskList=items().filter(s=>covDays(s)!==null&&covDays(s)!==Infinity)
+    .sort((a,b)=>covDays(a)-covDays(b)).slice(0,4)
+    .map(s=>{const r=covRisk(s);
+      return `<div class="rank-row" title="可用 ${s.plan.available} ÷ 日均 ${s.plan.avgDaily} = ${covText(s)}；交期 ${s.constraints.lead} 天">
+        <span class="mono">${esc(s.sku)}</span>
+        <span class="num" style="${r==='short'?'color:var(--bad);font-weight:600':r==='tight'?'color:var(--warn)':''}">${covText(s)}</span>
+        <span class="muted" style="font-size:10.5px">/ ${s.constraints.lead} 天</span></div>`;}).join('');
 
   return `
   <div class="page-head">
@@ -644,22 +816,24 @@ function pageWorkbench(){
     </div>
   </div>
 
-  <section class="panel overview">
-    <div>
+  <div class="wb-top">
+    <section class="panel">
       <div class="kpis">
         <button class="kpi" data-act="stage" data-group="待确认"><span class="n">${c.confirm}<em>项</em></span><span class="l">待确认数量</span></button>
         <button class="kpi" data-act="stage" data-group="需补证"><span class="n">${c.blocked}<em>项</em></span><span class="l">需补证</span></button>
         <button class="kpi" data-act="stage" data-group="已请购"><span class="n">${c.inreq}<em>项</em></span><span class="l">请购待跟进${c.unknown?` · 含 ${c.unknown} 待核对`:''}</span></button>
         <button class="kpi" data-act="stage" data-group="失败"><span class="n">${c.failed+c.missing}<em>项</em></span><span class="l">需重新分析</span></button>
       </div>
-    </div>
-    <div class="dist">
-      <div class="distbar" role="img" aria-label="共 ${total} 个对象：${segs.map(x=>x[0]+' '+x[1]).join('，')}">
-        ${segs.map(s=>`<i style="flex:${s[1]};background:${s[2]}"></i>`).join('')}
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>对象构成</h2><span class="sub">${total} 个店仓对象</span></div>
+      <div class="panel-body" style="padding:10px 14px">
+        <div class="donut">${donutSvg(segs,total)}
+          <div class="dlegend">${segs.map(x=>`<span title="${esc(x[3]||'')}"><i class="dot" style="background:${x[2]}"></i>${x[0]}<b>${x[1]}</b></span>`).join('')}</div>
+        </div>
       </div>
-      <div class="legend">${segs.map(s=>`<span><i class="dot" style="background:${s[2]}"></i>${s[0]} <b>${s[1]}</b></span>`).join('')}</div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <div class="cols">
     <section class="panel">
@@ -670,12 +844,14 @@ function pageWorkbench(){
     </section>
     <div class="side">
       <section class="panel">
-        <div class="panel-head"><h2>建议来源</h2></div>
-        <div class="panel-body">${srcRows}</div>
+        <div class="panel-head"><h2>建议来源</h2><span class="sub">占比</span></div>
+        <div class="panel-body" style="padding:8px 14px">${srcRows}</div>
       </section>
       <section class="panel">
-        <div class="panel-head"><h2>库存覆盖最低</h2><span class="sub">可用 ÷ 日均</span></div>
-        <div class="panel-body">${risk||'<div class="muted">—</div>'}</div>
+        <div class="panel-head"><h2>覆盖最短</h2><span class="sub">可用 ÷ 日均</span></div>
+        <div class="panel-body" style="padding:8px 14px">
+          <div class="rank">${riskList||'<div class="muted" style="font-size:11px">无可比数据</div>'}</div>
+        </div>
       </section>
       <section class="panel">
         <div class="panel-head"><h2>本次检查</h2><span class="sub">${batch().at}</span></div>
@@ -728,7 +904,7 @@ function pageList(){
     <div class="panel-head"><h2>结果</h2><span class="sub" id="res-count"></span></div>
     <div class="tw"><table class="ltable">
       <caption class="sr-only">补货建议，同 SKU 不同店仓分开展示</caption>
-      <thead><tr><th style="min-width:180px">商品 / SKU</th><th>店铺 · 仓</th><th>来源</th><th>库存 / 目标</th><th class="r">建议</th><th>首次短缺</th><th>状态</th><th></th></tr></thead>
+      <thead><tr><th style="min-width:180px">商品 / SKU</th><th>店铺 · 仓</th><th>来源</th><th>库存 · 覆盖</th><th class="r">建议</th><th>首次短缺</th><th>状态</th><th></th></tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
     <div id="empty-box" hidden></div>
@@ -737,15 +913,18 @@ function pageList(){
 }
 
 function rowHtml(s){
-  const st=stageOf(s),p=s.plan,cov=covDays(s),pct=cov!==null&&p.target?Math.min(100,p.available/p.target*100):0;
-  const cls=cov===null?'':cov<4?'out':cov<8?'low':'';
+  const st=stageOf(s),p=s.plan,risk=covRisk(s);
   const qty=st==='no_need'?'<span class="muted">无需</span>':(p.suggest===null||p.suggest===undefined)?'<span class="muted">—</span>':`<b class="num">${p.suggest}</b> <span class="muted" style="font-size:10.5px">${esc(s.unit)}</span>`;
+  const cov=covDays(s);
+  const covLine=cov===null
+    ? '<span class="covline muted">覆盖 —</span>'
+    : `<span class="covline">覆盖 ${covText(s)}${risk?`<em class="risk ${risk}">${RISK_TEXT[risk]}</em>`:''}</span>`;
   return `<tr>
     <td><a class="prod" href="#/sku/${encodeURIComponent(s.key)}" style="color:var(--ink)">${esc(s.name)}</a>
       <span class="prod-sub"><span class="mono">${esc(s.sku)}</span>${s.ai.status==='OK'?' · <span class="chip info" style="font-size:9.5px">AI</span>':''}</span></td>
     <td>${esc(s.store)}<span class="prod-sub">${esc(s.wh)}</span></td>
     <td><span class="chip ${s.source==='RULE'?'ok':s.source==='ERP'?'warn':''}">${SOURCE[s.source]}</span></td>
-    <td><div class="stockcell"><span class="cov ${cls}"><i style="width:${pct}%"></i></span><span>${dash(p.available)}${p.target?' / '+p.target:''}</span></div></td>
+    <td><span class="num">${dash(p.available)}${p.target?' / '+p.target:''}</span>${covLine}</td>
     <td class="r">${qty}</td>
     <td class="num">${p.firstShortage?p.firstShortage.slice(5):'<span class="muted">—</span>'}</td>
     <td>${stageBadge(s)}</td>
@@ -773,9 +952,8 @@ function saveFilters(){
 /* ================= SKU 详情 ================= */
 const TABS=[['conditions','采购条件'],['quality','依据与限制'],['history','历史分析']];
 
-function pageDetail(key){
-  const s=byKey(key),p=s.plan,cov=covDays(s);
-  const blk=s.checks.find(c=>c.level==='BLOCK'),warn=s.checks.find(c=>c.level==='WARN');
+/* ---------- 详情：头部 / 结论条 / 风险提示 ---------- */
+function detailHead(s){
   return `
   <a class="back" href="#/suggestions" data-act="back">← 补货建议</a>
   <div class="detail-head">
@@ -785,45 +963,170 @@ function pageDetail(key){
         ${stageBadge(s)}<span class="chip line">${esc(s.unit)}</span><span class="muted">数据时点 ${batch().at}</span></div>
     </div>
     <button class="btn sm" data-act="rerun">重新分析</button>
-  </div>
-
-  <div class="verdict">
-    <div class="accent"><small>建议数量</small><b>${p.suggest===null||p.suggest===undefined?'<span style="font-size:15px">未形成</span>':p.suggest}${p.suggest?`<span>${esc(s.unit)}</span>`:''}</b></div>
-    <div><small>可用库存</small><b>${dash(p.available)}${p.available!==null?`<span>${esc(s.unit)}</span>`:''}</b></div>
-    <div><small>目标库存</small><b>${dash(p.target)}</b></div>
-    <div><small>覆盖天数</small><b>${cov===null?'—':cov}<span>${cov===null?'':'天'}</span></b></div>
-    <div><small>首次短缺</small><b style="font-size:15px">${p.firstShortage?p.firstShortage.slice(5):'—'}</b></div>
-  </div>
-
-  ${blk?`<div class="hint bad" style="margin:-4px 0 10px;font-size:11px">${esc(blk.title)} · 责任方 ${esc(blk.owner)}${blk.draft?' · <span title="'+esc(blk.draft)+'">政策草案未生效</span>':''} · <a href="#/sku/${encodeURIComponent(s.key)}/quality">查看依据</a></div>`
-   :warn?`<div class="hint" style="margin:-4px 0 10px;font-size:11px">${esc(warn.title)}${s.checks.length>1?` 等 ${s.checks.length} 项`:''} · <a href="#/sku/${encodeURIComponent(s.key)}/quality">查看依据</a></div>`:''}
-
-  <div class="detail">
-    <section class="panel">
-      <div class="panel-head"><h2>库存与销量</h2><span class="sub">${s.daily.length?'未来 9 个业务日结存预测':'本次无预测数据'}</span></div>
-      <div class="chart-wrap">${s.daily.length?chartBalance(s.daily):'<div class="muted" style="padding:16px 0;font-size:11.5px">缺少销量窗口与库存流水，未生成结存预测。</div>'}</div>
-      ${s.daily.length?`<div class="chart-legend">
-        <span><i class="area"></i>负结存区间</span><span><i class="dash"></i>到货日</span>
-        <span style="margin-left:auto">${p.firstShortage?'最短缺 '+p.firstShortage.slice(5):'窗口内无短缺'}</span>
-      </div>`:''}
-      <div class="two">
-        <div>
-          <div style="font-size:10.5px;color:var(--muted);margin-bottom:2px">最近${s.sales.length?' '+s.sales.length+' ':''}个业务日销量</div>
-          <div class="bars">${chartSales(s.sales,p.totalSales)}</div>
-          <div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.avgDaily?`日均 ${p.avgDaily} 件 · ${p.window.replace(' — ',' 至 ')}`:'本次未取得日均'}</div>
-        </div>
-        <div>
-          <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">建议口径</div>
-          ${formula(s)}
-        </div>
-      </div>
-      <div class="tabs" role="tablist">${TABS.map(([id,l])=>`<button role="tab" aria-selected="${state.tab===id}" data-act="tab" data-tab="${id}">${l}${id==='quality'&&s.checks.length?` <span class="chip ${blk?'bad':'warn'}" style="font-size:9.5px">${s.checks.length}</span>`:''}</button>`).join('')}</div>
-      <div class="tab-body">${tabBody(s)}</div>
-    </section>
-    <aside class="rail">${rail(s)}${aiCard(s)}</aside>
   </div>`;
 }
 
+function verdictStrip(s){
+  const p=s.plan,risk=covRisk(s),cov=covDays(s);
+  return `<div class="verdict">
+    <div class="accent"><small>规则建议</small><b>${p.suggest===null||p.suggest===undefined?'<span style="font-size:15px">未形成</span>':p.suggest}${p.suggest?`<span>${esc(s.unit)}</span>`:''}</b></div>
+    <div><small>可用库存</small><b>${dash(p.available)}${p.available!==null?`<span>${esc(s.unit)}</span>`:''}</b></div>
+    <div><small>目标库存</small><b>${dash(p.target)}</b></div>
+    <div><small>库存覆盖</small><b>${cov===null?'—':cov===Infinity?'<span style="font-size:15px">无需求</span>':cov}<span>${cov===null||cov===Infinity?'':'天'}</span></b>
+      ${risk?`<small style="color:${risk==='short'?'var(--bad)':risk==='tight'?'var(--warn)':'var(--ok)'}">${RISK_TEXT[risk]}（交期 ${s.constraints.lead} 天）</small>`:''}</div>
+    <div><small>首次短缺</small><b style="font-size:15px">${p.firstShortage?p.firstShortage.slice(5):'—'}</b>
+      ${p.firstShortage?'<small>按当前需求推算</small>':''}</div>
+  </div>`;
+}
+
+function riskLine(s){
+  const blk=s.checks.find(c=>c.level==='BLOCK'),warn=s.checks.find(c=>c.level==='WARN');
+  if(blk) return `<div class="hint bad" style="margin:-4px 0 10px;font-size:11px">${esc(blk.title)} · 责任方 ${esc(blk.owner)}${blk.draft?' · <span title="'+esc(blk.draft)+'">政策草案未生效</span>':''} · <a href="#/sku/${encodeURIComponent(s.key)}/quality">查看依据</a></div>`;
+  if(warn) return `<div class="hint" style="margin:-4px 0 10px;font-size:11px">${esc(warn.title)}${s.checks.length>1?` 等 ${s.checks.length} 项`:''} · <a href="#/sku/${encodeURIComponent(s.key)}/quality">查看依据</a></div>`;
+  return '';
+}
+
+/* ---------- 详情：库存与销量图 ---------- */
+function chartsPanel(s){
+  const p=s.plan;
+  return `<section class="panel">
+    <div class="panel-head"><h2>库存与销量</h2><span class="sub">${s.daily.length?'未来 9 个业务日结存预测':'本次无预测数据'}</span></div>
+    <div class="chart-wrap">${s.daily.length?chartBalance(series(s)):'<div class="muted" style="padding:16px 0;font-size:11.5px">缺少销量窗口与库存流水，未生成结存预测。</div>'}</div>
+    ${s.daily.length?`<div class="chart-legend">
+      <span><i class="area"></i>负结存区间</span><span><i class="dash"></i>到货日</span>
+      <span style="margin-left:auto">${p.firstShortage?'最短缺 '+p.firstShortage.slice(5):'窗口内无短缺'}</span>
+    </div>`:''}
+    <div class="two${s.daily.length?'':' narrow'}">
+      <div>
+        <div style="font-size:10.5px;color:var(--muted);margin-bottom:2px">最近${s.sales.length?' '+s.sales.length+' ':''}个业务日销量</div>
+        <div class="bars">${chartSales(s.sales,p.avgDaily)}</div>
+        <div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.avgDaily?`日均 ${p.avgDaily} 件 · ${p.window.replace(' — ',' 至 ')}`:'本次未取得日均'}</div>
+      </div>
+      <div>
+        <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">建议口径</div>
+        ${formula(s)}
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ---------- 详情：AI 智能分析 ---------- */
+const AI_STATE={OK:['已生成','ok'],LOADING:['生成中','info'],FAILED:['生成失败','bad'],NOFACTS:['无可用事实',''],NONE:['未生成','']};
+function aiPanel(s,mode){
+  const a=s.ai||{status:'NONE'},st=AI_STATE[a.status]||AI_STATE.NONE,rail=mode==='rail';
+  let body='';
+  if(a.status==='OK'){
+    body=`<div class="ai-lead">${esc(a.conclusion)}</div>
+      <div class="ai-grid">
+        <div class="ai-col"><h4>关键事实</h4><ul>${a.facts.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+        <div class="ai-col"><h4>风险与不确定</h4><ul>${a.risks.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+        <div class="ai-col"><h4>建议人工核实</h4><ul>${a.checks.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+      </div>
+      <div class="ai-meta"><span>来源 本次单品分析</span><span>时点 ${esc(a.at||batch().at)}</span>${a.tokens?`<span>Token ${a.tokens}</span><span>${esc(a.cost||'')}</span>`:''}<span style="margin-left:auto">仅解读，不改动规则建议数量</span></div>`;
+  } else if(a.status==='LOADING'){
+    body=`<div class="muted" style="font-size:11.5px;margin-bottom:6px">正在基于本次已读取事实生成解读…</div>
+      <div class="ai-skel" style="width:82%"></div><div class="ai-skel" style="width:94%"></div><div class="ai-skel" style="width:64%"></div>`;
+  } else if(a.status==='FAILED'){
+    body=`<div class="hint bad" style="margin:0 0 8px">${esc(a.error||'生成失败')}</div>
+      <div class="ai-cta"><button class="btn sm" data-act="ai-gen">重试</button>
+      <span class="muted" style="font-size:11px">规则结论与建议数量不受影响</span></div>`;
+  } else if(a.status==='NOFACTS'){
+    body=`<div class="muted" style="font-size:11.5px;line-height:1.7">${esc(a.reason||'缺少可用事实')}</div>
+      <div class="ai-cta" style="margin-top:8px"><a class="btn sm" href="#/sku/${encodeURIComponent(s.key)}/quality">查看缺失项</a></div>`;
+  } else {
+    body=`<div class="ai-cta"><button class="btn" data-act="ai-gen">生成 AI 解读</button>
+      <span class="muted" style="font-size:11px">基于本次已读取的库存、销量与采购条件，不重新读取 ERP，不改变建议数量</span></div>`;
+  }
+  return `<section class="panel ai-panel${rail?' compact':''}">
+    <div class="ai-head"><span class="ai-badge">AI</span><h2>智能分析</h2><span class="chip ${st[1]}">${st[0]}</span>
+      ${a.status==='OK'&&!rail?'<span class="muted" style="font-size:10.5px">基于规则结果与已读取事实</span>':''}</div>
+    <div class="ai-body">${body}</div>
+  </section>`;
+}
+
+/* ---------- 详情：分区 ---------- */
+function tabsPanel(s){
+  const blk=s.checks.some(c=>c.level==='BLOCK');
+  return `<section class="panel">
+    <div class="tabs" role="tablist">${TABS.map(([id,l])=>`<button role="tab" aria-selected="${state.tab===id}" data-act="tab" data-tab="${id}">${l}${id==='quality'&&s.checks.length?` <span class="chip ${blk?'bad':'warn'}" style="font-size:9.5px">${s.checks.length}</span>`:''}</button>`).join('')}</div>
+    <div class="tab-body">${tabBody(s)}</div>
+  </section>`;
+}
+
+/* ---------- 详情：请购操作 ---------- */
+function actionPanel(s,mode){
+  const st=stageOf(s),p=s.plan,c=s.constraints,bar=mode==='bar';
+  if(st==='req_waiting'||st==='req_approved'||st==='req_unknown'){
+    const r=s.req,tone=r.plat==='UNKNOWN'?'bad':r.erp==='APPROVED'?'ok':'info';
+    const label=r.plat==='UNKNOWN'?'提交待核对':r.erp==='APPROVED'?'ERP 已审批':'待 ERP 审批';
+    const inner=`<div class="ab-info"><span class="chip ${tone}">${label}</span>
+        <span class="mono" style="font-size:11px">${esc(r.no)}</span>
+        <span>最终 <b style="font-size:14px">${r.finalQty}</b> ${esc(s.unit)}</span>
+        <span class="muted">建议 ${r.sugQty}</span></div>
+      <div class="grow"></div>
+      ${r.plat==='UNKNOWN'?'<button class="btn sm" data-act="recheck">原单核对</button>':''}
+      <a class="btn sm" href="#/requisitions/${encodeURIComponent(r.no)}">查看请购单</a>`;
+    return bar?`<div class="actionbar">${inner}</div>`
+      :`<section class="panel"><div class="panel-head"><h2>请购单</h2><span class="chip ${tone}">${label}</span></div>
+        <div class="panel-body">
+          <div class="qty-now"><span>最终数量</span><b>${r.finalQty} <span style="font-size:11px;color:var(--muted)">${esc(s.unit)}</span></b></div>
+          <dl class="meta-list"><dt>单据号</dt><dd class="mono">${esc(r.no)}</dd>
+            <dt>平台状态</dt><dd>${r.plat==='UNKNOWN'?'已提交·未确认':'已提交'}</dd>
+            <dt>ERP 状态</dt><dd>${r.erp==='APPROVED'?'已审批':r.erp==='UNKNOWN'?'未知':'待审批'}</dd>
+            <dt>建议 / 最终</dt><dd>${r.sugQty} / ${r.finalQty}</dd></dl>
+          ${r.plat==='UNKNOWN'?'<button class="btn" style="width:100%;margin-top:8px" data-act="recheck">原单核对</button>':''}
+          <a class="btn" style="width:100%;margin-top:8px;justify-content:center" href="#/requisitions/${encodeURIComponent(r.no)}">查看请购单</a>
+        </div></section>`;
+  }
+  if(st==='no_need'||st==='blocked'||st==='failed'||st==='missing'){
+    const b=s.checks.find(x=>x.level==='BLOCK')||s.checks[0];
+    const title=st==='no_need'?'无需补货':(b?b.title:'本批次未包含该对象');
+    const sub=st==='no_need'?`可用 ${p.available} 件覆盖 ${covText(s)}，未生成采购建议。`:(b?`责任方 ${b.owner} · ${b.action}`:'切换到最新批次后重试。');
+    const inner=`<div class="ab-info"><span class="chip ${st==='no_need'?'':'bad'}">${st==='no_need'?'无需补货':'暂不可提交'}</span>
+        <span class="muted" style="font-size:11px">${esc(title)} · ${esc(sub)}</span></div>
+      <div class="grow"></div><button class="btn sm" data-act="rerun">重新分析</button>`;
+    return bar?`<div class="actionbar">${inner}</div>`
+      :`<section class="panel"><div class="panel-head"><h2>${st==='no_need'?'无需补货':'暂不可提交'}</h2></div>
+        <div class="panel-body">${st==='no_need'?`<div class="muted" style="font-size:11.5px">${esc(sub)}</div>`:`<div class="hint bad">${esc(title)}</div><div class="muted" style="font-size:11px;margin-top:6px">${esc(sub)}</div>`}
+        <button class="btn" style="width:100%;margin-top:10px" data-act="rerun">重新分析</button></div></section>`;
+  }
+  const qty=state.qty[s.key];
+  const stepper=`<div class="stepper">
+      <button type="button" data-act="step" data-v="-${c.mult}">−</button>
+      <input id="qty" type="number" min="1" step="${c.mult}" value="${qty}" inputmode="numeric" aria-label="最终数量">
+      <button type="button" data-act="step" data-v="${c.mult}">+</button></div>`;
+  const ack=`<label class="check"><input type="checkbox" id="ack" ${state.ack[s.key]?'checked':''}><span>已核对采购条件与在途</span></label>`;
+  const submit=`<button class="btn primary" id="submit" data-act="confirm" ${railValid(s,qty)?'':'disabled'}>提交请购</button>`;
+  const reason=`<div id="reason-wrap" ${String(qty)===String(p.suggest)?'hidden':''} style="${bar?'width:100%;margin-top:6px':'margin-top:6px'}">
+      <textarea id="reason" maxlength="200" placeholder="调整原因（必填）" style="width:100%;min-height:${bar?'40':'46'}px;border:1px solid var(--control);border-radius:5px;padding:5px 8px;font-size:11.5px">${esc(state.reason[s.key]||'')}</textarea></div>`;
+  if(bar){
+    return `<div class="actionbar">
+      <div class="ab-info"><span class="chip ${s.source==='ERP'?'warn':'ok'}">${s.source==='ERP'?'ERP 参考':'规则建议'}</span>
+        <span>建议 <b>${p.suggest}</b> ${esc(s.unit)}</span>
+        <span class="muted ab-moq">MOQ ${c.moq} · 整箱 ${c.mult}</span></div>
+      <div class="ab-qty">${stepper}</div>
+      <div id="rail-check">${railCheck(s,qty)}</div>
+      <span class="ab-optional">${ack}</span>
+      <div class="grow"></div>
+      <span class="micro muted ab-note" style="font-size:10px">提交后进入 ERP 审批</span>
+      ${submit}
+      ${reason}
+    </div>`;
+  }
+  return `<section class="panel">
+    <div class="panel-head"><h2>请购</h2><span class="chip ${s.source==='ERP'?'warn':'ok'}">${s.source==='ERP'?'ERP 参考':'规则建议'}</span></div>
+    <div class="panel-body">
+      <div class="qty-now"><span>建议数量</span><b>${p.suggest} <span style="font-size:11px;color:var(--muted)">${esc(s.unit)}</span></b></div>
+      ${stepper}
+      <div class="muted" style="font-size:10.5px;margin-top:4px">MOQ ${c.moq} · 整箱 ${c.mult}${s.source==='ERP'?' · 依据未核实':''}</div>
+      <div id="rail-check">${railCheck(s,qty)}</div>
+      ${reason}${ack}${submit}
+      <p class="rail-note">提交后进入 ERP 审批，平台只读回读状态。</p>
+    </div></section>`;
+}
+
+/* ---------- 详情：三种布局 ---------- */
+/* 计算口径与分区内容（沿用 v3.1，行为不变） */
 function formula(s){
   const p=s.plan,c=s.constraints,st=stageOf(s);
   if(st==='blocked'||st==='failed')return '<div class="formula muted">阻断未解除，不计算建议数量。</div>';
@@ -840,6 +1143,7 @@ function tabBody(s){
   if(state.tab==='history')return histTab(s);
   return conditionsTab(s);
 }
+
 function conditionsTab(s){
   const c=s.constraints;
   const po=s.purchases.length?`<div class="tw" style="margin-top:10px"><table>
@@ -860,6 +1164,7 @@ function conditionsTab(s){
   </dl>
   <h3 style="margin:12px 0 0;font-size:11.5px;color:var(--muted);font-weight:500">已有正式采购</h3>${po}`;
 }
+
 function qualityTab(s){
   const html=s.checks.length?s.checks.map(c=>`
     <div class="qitem"><div class="qt"><span class="chip ${c.level==='BLOCK'?'bad':'warn'}">${c.level==='BLOCK'?'阻断':'提示'}</span>${esc(c.title)}</div>
@@ -876,6 +1181,7 @@ function qualityTab(s){
     <div class="mono muted" style="margin-top:5px;font-size:10.5px">快照 snapshot-${batch().id}-${s.sku.toLowerCase()} · 租户 teaching-tenant · 口径 v2</div>
   </details>`;
 }
+
 function histTab(s){
   return `<div class="tw"><table><caption class="sr-only">历史分析</caption>
     <thead><tr><th>时间</th><th>来源</th><th class="r">建议</th><th>结果</th><th></th></tr></thead>
@@ -884,40 +1190,8 @@ function histTab(s){
       <td class="r"><button class="btn sm" data-act="hist">查看</button></td></tr>`).join('')}</tbody></table></div>`;
 }
 
-function rail(s){
-  const st=stageOf(s),p=s.plan,c=s.constraints;
-  if(st==='req_waiting'||st==='req_approved'||st==='req_unknown')return railReq(s);
-  if(st==='no_need')return `<section class="panel"><div class="panel-head"><h2>无需补货</h2></div><div class="panel-body">
-    <div class="muted" style="font-size:11.5px">可用 ${p.available} 件覆盖 ${covDays(s)} 天，未生成采购建议。</div>
-    <button class="btn" style="width:100%;margin-top:10px" data-act="rerun">重新分析</button></div></section>`;
-  if(st==='blocked'||st==='failed'||st==='missing'){
-    const b=s.checks.find(x=>x.level==='BLOCK')||s.checks[0]||{title:'本批次未包含该对象',owner:'—',action:'切换到最新批次'};
-    return `<section class="panel"><div class="panel-head"><h2>暂不可提交</h2></div><div class="panel-body">
-      <div class="hint bad">${esc(b.title)}</div>
-      <div class="muted" style="font-size:11px;margin-top:6px">责任方 ${esc(b.owner)} · ${esc(b.action)}</div>
-      <button class="btn" style="width:100%;margin-top:10px" data-act="rerun">重新分析</button></div></section>`;
-  }
-  const qty=state.qty[s.key];
-  return `<section class="panel">
-    <div class="panel-head"><h2>请购</h2><span class="chip ${s.source==='ERP'?'warn':'ok'}">${s.source==='ERP'?'ERP 参考':'规则建议'}</span></div>
-    <div class="panel-body">
-      <div class="qty-now"><span>建议数量</span><b>${p.suggest} <span style="font-size:11px;color:var(--muted)">${esc(s.unit)}</span></b></div>
-      <div class="stepper">
-        <button type="button" data-act="step" data-v="-${c.mult}">−</button>
-        <input id="qty" type="number" min="1" step="${c.mult}" value="${qty}" inputmode="numeric" aria-label="最终数量">
-        <button type="button" data-act="step" data-v="${c.mult}">+</button>
-      </div>
-      <div class="muted" style="font-size:10.5px;margin-top:4px">MOQ ${c.moq} · 整箱 ${c.mult}${s.source==='ERP'?' · 依据未核实':''}</div>
-      <div id="rail-check">${railCheck(s,qty)}</div>
-      <div id="reason-wrap" ${String(qty)===String(p.suggest)?'hidden':''} style="margin-top:6px">
-        <textarea id="reason" maxlength="200" placeholder="调整原因（必填）" style="width:100%;min-height:46px;border:1px solid var(--control);border-radius:5px;padding:5px 8px;font-size:11.5px">${esc(state.reason[s.key]||'')}</textarea>
-      </div>
-      <label class="check"><input type="checkbox" id="ack" ${state.ack[s.key]?'checked':''}><span>已核对采购条件与在途</span></label>
-      <button class="btn primary" id="submit" style="width:100%" data-act="confirm" ${railValid(s,qty)?'':'disabled'}>提交请购</button>
-      <p class="rail-note">提交后进入 ERP 审批，平台只读回读状态。</p>
-    </div></section>`;
-}
 function railValid(s,q){return !railError(s,q)&&!!state.ack[s.key];}
+
 function railError(s,q){
   const c=s.constraints;
   if(!q||!Number.isInteger(Number(q)))return '请填写整数数量';
@@ -926,39 +1200,33 @@ function railError(s,q){
   if(Number(q)!==s.plan.suggest&&!(state.reason[s.key]||'').trim())return '调整数量需填写原因';
   return '';
 }
+
 function railCheck(s,q){
   const e=railError(s,q);
   return e?`<div class="hint">${esc(e)}</div>`:'<div class="hint ok">数量符合约束</div>';
 }
-function railReq(s){
-  const r=s.req,tone=r.plat==='UNKNOWN'?'bad':r.erp==='APPROVED'?'ok':'info';
-  const label=r.plat==='UNKNOWN'?'提交待核对':r.erp==='APPROVED'?'ERP 已审批':'待 ERP 审批';
-  return `<section class="panel"><div class="panel-head"><h2>请购单</h2><span class="chip ${tone}">${label}</span></div>
-    <div class="panel-body">
-      <div class="qty-now"><span>最终数量</span><b>${r.finalQty} <span style="font-size:11px;color:var(--muted)">${esc(s.unit)}</span></b></div>
-      <dl class="meta-list">
-        <dt>单据号</dt><dd class="mono">${esc(r.no)}</dd>
-        <dt>平台状态</dt><dd>${r.plat==='UNKNOWN'?'已提交·未确认':'已提交'}</dd>
-        <dt>ERP 状态</dt><dd>${r.erp==='APPROVED'?'已审批':r.erp==='UNKNOWN'?'未知':'待审批'}</dd>
-        <dt>建议 / 最终</dt><dd>${r.sugQty} / ${r.finalQty}</dd>
-      </dl>
-      ${r.plat==='UNKNOWN'?'<button class="btn" style="width:100%;margin-top:8px" data-act="recheck">原单核对</button>':''}
-      <a class="btn" style="width:100%;margin-top:8px;justify-content:center" href="#/requisitions/${encodeURIComponent(r.no)}">查看请购单</a>
-    </div></section>`;
-}
-function aiCard(s){
-  if(s.ai.status==='OK'){
-    return `<section class="panel"><div class="panel-head"><h2>AI 解读</h2><span class="chip info">本次分析</span></div>
-      <div class="panel-body" style="font-size:11.5px;line-height:1.6;color:#41505f">
-        <ul style="margin:0;padding-left:15px">${s.ai.bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
-        <div class="hint" style="margin-top:7px">${esc(s.ai.risk)}</div>
-        <div style="margin-top:6px;font-size:11px">${esc(s.ai.ask)}</div>
-        <div class="rail-note">Token ${s.ai.tokens} · ${esc(s.ai.cost)}</div>
-      </div></section>`;
+
+const aiEligible=s=>['confirm','req_waiting','req_approved','req_unknown','blocked'].includes(stageOf(s));
+function pageDetail(key){
+  const s=byKey(key),v=state.variant;
+  const head=detailHead(s)+verdictStrip(s)+riskLine(s);
+  const ai=aiEligible(s)?aiPanel(s,v==='b'?'rail':'wide'):'';
+  if(v==='b'){
+    return head+`<div class="detail">
+      <div class="main-col">${chartsPanel(s)}${tabsPanel(s)}</div>
+      <aside class="rail">${ai}${actionPanel(s,'card')}</aside>
+    </div>`;
   }
-  return `<section class="panel"><div class="panel-head"><h2>AI 解读</h2><span class="chip">未生成</span></div>
-    <div class="panel-body"><button class="btn" style="width:100%" data-act="single">新建单品分析</button>
-    <p class="rail-note">新建分析会重新读取 ERP 事实，并可按需生成解读。</p></div></section>`;
+  if(v==='a'){
+    return head+`<div class="detail">
+      <div class="main-col">${chartsPanel(s)}${ai}${tabsPanel(s)}</div>
+      <aside class="rail">${actionPanel(s,'card')}</aside>
+    </div>`;
+  }
+  /* 方案C：AI 紧贴结论条，图表作为证据在其后，操作常驻底部 */
+  return head+`<div class="detail one">
+      ${ai}${chartsPanel(s)}${tabsPanel(s)}
+    </div>${actionPanel(s,'bar')}`;
 }
 
 /* ================= 请购管理 ================= */
@@ -983,26 +1251,8 @@ function pageReqs(){
     </div>
     <span class="muted" style="font-size:10.5px;margin-left:auto">仅含本平台提交的请购单</span>
   </div>
-  <div class="cols" style="margin-bottom:10px;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)">
-    <section class="panel">
-      <div class="panel-head"><h2>状态分布</h2><span class="sub">${all.length} 单</span></div>
-      <div class="panel-body">
-        <div class="distbar" role="img" aria-label="待审批 ${cnt.pending}，已审批 ${cnt.approved}，待核对 ${cnt.check}">
-          ${segs.map(x=>`<i style="flex:${x[1]};background:${x[2]}"></i>`).join('')}
-        </div>
-        <div class="legend">${segs.map(x=>`<span><i class="dot" style="background:${x[2]}"></i>${x[0]} <b>${x[1]}</b></span>`).join('')}
-          <span style="margin-left:auto">进度：提交 → ERP 受理 → ERP 审批</span></div>
-      </div>
-    </section>
-    <section class="panel">
-      <div class="panel-head"><h2>最近回读</h2></div>
-      <div class="panel-body" style="padding-top:4px">
-        ${all.filter(r=>r.readback).sort((a,b)=>a.readback<b.readback?1:-1).slice(0,3).map(r=>`<div class="tl"><time>${esc(r.readback.slice(5,16))}</time><p>${esc(r.no)} ${r.erp==='APPROVED'?'已审批':'待审批'}</p></div>`).join('')||'<div class="muted" style="font-size:11px">暂无</div>'}
-      </div>
-    </section>
-  </div>
   <section class="panel">
-    <div class="panel-head"><h2>请购单据</h2><span class="sub">${rows.length} 单</span></div>
+    <div class="panel-head"><h2>请购单据</h2><span class="sub">${rows.length} 单 · 最近回读 ${all.filter(r=>r.readback).length?all.filter(r=>r.readback).sort((a,b)=>a.readback<b.readback?1:-1)[0].readback.slice(5):'—'}</span></div>
     ${rows.length?`<div class="tw"><table><caption class="sr-only">本平台提交的请购单</caption>
       <thead><tr><th>单据号</th><th>商品 / SKU</th><th class="r">建议 → 最终</th><th>平台状态</th><th>ERP 状态</th><th title="提交 → ERP 受理 → ERP 审批">进度</th><th>回读</th><th></th></tr></thead>
       <tbody>${rows.map(r=>`<tr>
@@ -1078,8 +1328,11 @@ function pageReq(no){
 }
 
 /* ================= 渲染 ================= */
+function syncVariant(){
+  document.querySelectorAll('.seg-mini button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===state.variant)));
+}
 function render(){
-  const r=state.route;
+  const r=state.route;syncVariant();
   sidebar();crumb();
   const main=document.getElementById('main');
   if(r.page==='sku')main.innerHTML=pageDetail(r.id);
@@ -1154,7 +1407,8 @@ document.addEventListener('click',ev=>{
     ev.preventDefault();
     const q=Number(state.qty[s.key]);
     if(railError(s,q)||!state.ack[s.key])return;
-    const rec={no:'RQ-2026-0014',plat:'SUBMITTED',erp:'PENDING',finalQty:q,sugQty:s.plan.suggest,
+    const seq=Math.max(0,...SKUS.filter(x=>x.req).map(x=>+x.req.no.slice(-4)))+1;
+    const rec={no:'RQ-2026-'+String(seq).padStart(4,'0'),plat:'SUBMITTED',erp:'PENDING',finalQty:q,sugQty:s.plan.suggest,
       reason:(state.reason[s.key]||'').trim(),at:'2026-11-14 10:20',by:'林予',readback:'2026-11-14 10:20',reads:1,step:1};
     SKUS.find(x=>x.key===s.key).req=rec;   /* 写入源数据，派生视图下次渲染仍可见 */
     state.ack[s.key]=false;state.reason[s.key]='';
@@ -1186,10 +1440,37 @@ document.addEventListener('click',ev=>{
   if(act==='recheck'){dialog('使用原单核对',`<p>按原业务号查询 ERP 是否已建单，不创建第二张申请。</p>
     <dl class="meta-list"><dt>核对对象</dt><dd class="mono">RQ-2026-0012</dd><dt>已核对</dt><dd>1 次</dd></dl>`,
     '<button class="btn" data-act="x">取消</button><button class="btn primary" data-act="x">开始核对</button>');return;}
+  if(act==='variant'){
+    state.variant=el.dataset.v;sessionStorage.setItem('ux3.variant',state.variant);
+    render();return;}
+  if(act==='ai-gen'){
+    const base=SKUS.find(x=>x.key===s.key);
+    base.ai=Object.assign({},base.ai,{status:'LOADING'});
+    render();
+    setTimeout(()=>{
+      const d=(AI_CONTENT[s.key]&&AI_CONTENT[s.key].draft)||null;
+      base.ai=d?Object.assign({status:'OK',at:batch().at},d):Object.assign({},base.ai,{status:'FAILED',error:'未取得可解读的事实'});
+      if(state.route.page==='sku')render();
+    },1200);
+    return;}
   if(act==='x'){dlgClose();return;}
 });
 document.getElementById('dialog').addEventListener('click',e=>{if(e.target.id==='dialog')dlgClose();});
 /* 诊断钩子：校验每个批次的建议数量是否等于 目标-可用 经 MOQ/整箱取整后的值 */
+window.__ux3check2=()=>{
+  const bad=[];
+  BATCHES.forEach(b=>{
+    SKUS.forEach(s0=>{
+      const o=b.over[s0.key]||{};if(o.missing)return;
+      const v=Object.assign({},s0,{plan:Object.assign({},s0.plan,o)});
+      if(!v.daily||!v.daily.length||v.plan.available===null)return;
+      const f=series(v).find(x=>x.close<=0);
+      const want=f?('2026-'+f.d):null;
+      if(want!==firstShort(v))bad.push(b.id+'/'+s0.sku+' '+want+' != '+firstShort(v));
+    });
+  });
+  return bad;
+};
 window.__ux3check=()=>{
   const bad=[];
   BATCHES.forEach(b=>{

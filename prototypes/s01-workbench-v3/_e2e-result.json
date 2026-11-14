@@ -10,14 +10,34 @@
   "extra": ""
  },
  {
-  "name": "状态分布条有分段",
+  "name": "环形图已渲染（1 底环 + 4 组）",
   "pass": true,
-  "extra": "7"
+  "extra": "5"
  },
  {
-  "name": "分布条合计等于对象总数",
+  "name": "环形分段数与图例一致",
   "pass": true,
-  "extra": "11/11"
+  "extra": ""
+ },
+ {
+  "name": "环形图合计=对象总数",
+  "pass": true,
+  "extra": "12"
+ },
+ {
+  "name": "环形图支持悬停数值",
+  "pass": true,
+  "extra": "4"
+ },
+ {
+  "name": "页面已无堆叠条",
+  "pass": true,
+  "extra": "0"
+ },
+ {
+  "name": "队列无横向条形",
+  "pass": true,
+  "extra": "0"
  },
  {
   "name": "待处理队列有行",
@@ -25,44 +45,54 @@
   "extra": "6"
  },
  {
-  "name": "队列含库存覆盖条",
+  "name": "待核对对象排在最前（排序缺陷）",
   "pass": true,
-  "extra": "3"
+  "extra": "行李箱束带 · 石墨"
  },
  {
-  "name": "无库存数据行不画空条",
-  "pass": true,
-  "extra": "3"
- },
- {
-  "name": "首屏无演示横幅",
+  "name": "零库存显示 0 天而非未知",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "首屏无长说明段落",
+  "name": "覆盖最短卡展示 0 天",
   "pass": true,
-  "extra": "0"
+  "extra": ""
  },
  {
-  "name": "点击待办跳到补货建议",
+  "name": "待办跳转到列表",
   "pass": true,
   "extra": "#/suggestions"
  },
  {
-  "name": "状态筛选已应用",
+  "name": "列表行数=待确认 5",
+  "pass": true,
+  "extra": "5"
+ },
+ {
+  "name": "清空后 12 行",
+  "pass": true,
+  "extra": "12"
+ },
+ {
+  "name": "列表无条形图",
+  "pass": true,
+  "extra": "0"
+ },
+ {
+  "name": "列表显示覆盖天数",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "列表行数=待确认数 4",
+  "name": "零库存行显示 0 天",
   "pass": true,
-  "extra": "4"
+  "extra": ""
  },
  {
-  "name": "清空状态后 11 行",
+  "name": "风险标签存在",
   "pass": true,
-  "extra": "11"
+  "extra": ""
  },
  {
   "name": "搜索收敛到 3 行",
@@ -70,37 +100,62 @@
   "extra": "3"
  },
  {
-  "name": "搜索显示行数文案",
-  "pass": true,
-  "extra": "3 项 / 共 11"
- },
- {
-  "name": "进入 SKU 详情路由",
-  "pass": true,
-  "extra": "#/sku/CB-1001"
- },
- {
-  "name": "详情含结存预测图",
+  "name": "详情进入",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "详情含销量柱状图",
+  "name": "AI 分区存在",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "详情含建议口径",
+  "name": "AI 位于结论条与图表之间",
+  "pass": true,
+  "extra": "281/448"
+ },
+ {
+  "name": "AI 未生成显示入口",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "右侧请购栏存在",
+  "name": "AI 状态为未生成",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "目标库存与建议数量自洽（75/20）",
+  "name": "AI 入口在首屏内",
+  "pass": true,
+  "extra": "382/940"
+ },
+ {
+  "name": "底部操作条存在",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "首次短缺与曲线一致（11-15）",
+  "pass": true,
+  "extra": "规则建议 20件 可用库存 55件 目标库存 75 库存覆盖 4.9天 低于交期（交期 12 天） 首次短缺 11-15 按当前需求推算"
+ },
+ {
+  "name": "生成中状态出现",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "生成完成后出现四段结构",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "AI 元信息含 Token 与边界说明",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "AI 未改写建议数量",
   "pass": true,
   "extra": ""
  },
@@ -110,22 +165,27 @@
   "extra": "#/sku/CB-1001/quality"
  },
  {
-  "name": "依据页有检查项",
-  "pass": true,
-  "extra": ""
- },
- {
-  "name": "Tab 返回采购条件（默认路由不带后缀）",
+  "name": "Tab 返回默认路由",
   "pass": true,
   "extra": "#/sku/CB-1001"
  },
  {
-  "name": "采购条件 Tab 处于选中态",
+  "name": "方案A：右栏操作卡、无底部条",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "采购条件含 MOQ",
+  "name": "方案A：AI 在图表之后",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "方案B：右栏 AI 单列",
+  "pass": true,
+  "extra": "288px"
+ },
+ {
+  "name": "方案C：AI 前置 + 底部操作条",
   "pass": true,
   "extra": ""
  },
@@ -135,104 +195,79 @@
   "extra": ""
  },
  {
-  "name": "25 件提交禁用",
+  "name": "25 件禁用提交",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "30 件出现原因输入",
+  "name": "改量出现原因输入",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "未填原因仍禁用",
+  "name": "未填原因禁用",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "填原因+勾选后可提交",
+  "name": "校验通过后可提交",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "提交后右栏切换为请购单",
+  "name": "提交后操作条转为请购状态",
   "pass": true,
-  "extra": "请购单"
+  "extra": "待 ERP 审批 RQ-2026-0013 最终 30 件 建议 20 查看请购单"
  },
  {
-  "name": "提交后显示待 ERP 审批",
+  "name": "ERP 参考可进入待确认",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "提交后右栏显示单据号",
+  "name": "ERP 参考标注来源",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "提交后表单不再出现数量输入",
+  "name": "ERP 参考带 AI 解读",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "提交后工作台计数同步",
+  "name": "来源限制可见（ERP 计算依据未核实）",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "返回到列表",
+  "name": "采购条件含最小起订量 5",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "返回后搜索词保留",
-  "pass": true,
-  "extra": "收纳"
- },
- {
-  "name": "返回后行数仍为筛选结果",
-  "pass": true,
-  "extra": "3"
- },
- {
-  "name": "批次弹层打开",
+  "name": "ERP 参考核对后可提交",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "批次已切换",
+  "name": "ERP 参考提交成功并生成新单",
   "pass": true,
-  "extra": "数据时点 2026-11-13 07:58 · 演示数据"
+  "extra": "待 ERP 审批 RQ-2026-0014 最终 30 件 建议 30 查看请购单"
  },
  {
-  "name": "旧批次数值生效（可用 43）",
+  "name": "台账 5 行",
   "pass": true,
-  "extra": "43 / 75"
+  "extra": "5"
  },
  {
-  "name": "各批次建议数量自洽（目标-可用→取整）",
+  "name": "台账单条警示",
   "pass": true,
-  "extra": "[]"
+  "extra": "1"
  },
  {
-  "name": "进入请购管理",
+  "name": "台账无装饰性分布图",
   "pass": true,
   "extra": ""
- },
- {
-  "name": "请购表含新提交单据（4 行）",
-  "pass": true,
-  "extra": "4"
- },
- {
-  "name": "新单据已进入台账",
-  "pass": true,
-  "extra": ""
- },
- {
-  "name": "请购页状态分布图存在",
-  "pass": true,
-  "extra": "3"
  },
  {
   "name": "双状态列存在",
@@ -240,74 +275,104 @@
   "extra": ""
  },
  {
-  "name": "无大段蓝色说明框",
-  "pass": true,
-  "extra": "1"
- },
- {
-  "name": "进入请购单详情",
+  "name": "进入待核对单据",
   "pass": true,
   "extra": "#/requisitions/RQ-2026-0012"
  },
  {
-  "name": "步骤条 4 段",
-  "pass": true,
-  "extra": ""
- },
- {
-  "name": "UNKNOWN 仅一块警示",
+  "name": "待核对仅一处警示",
   "pass": true,
   "extra": "1"
  },
  {
-  "name": "1024 无横向溢出",
+  "name": "第二步为待核对状态",
+  "pass": true,
+  "extra": "step wait"
+ },
+ {
+  "name": "建议数量与目标库存自洽",
+  "pass": true,
+  "extra": "[]"
+ },
+ {
+  "name": "首次短缺与结存曲线自洽",
+  "pass": true,
+  "extra": "[]"
+ },
+ {
+  "name": "1024 工作台无横向溢出",
   "pass": true,
   "extra": "1024 vs 1024"
  },
  {
-  "name": "1024 详情操作栏在内容下",
+  "name": "1024 AI 两列",
   "pass": true,
-  "extra": "768px"
+  "extra": "361px 361px"
  },
  {
-  "name": "1024 详情无横向溢出",
-  "pass": true,
-  "extra": ""
- },
- {
-  "name": "820 导航转为顶部",
+  "name": "1024 操作条主按钮在首行",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "820 列表无页面级横向溢出",
+  "name": "1024 详情无溢出",
   "pass": true,
-  "extra": "820 vs 820"
+  "extra": ""
  },
  {
-  "name": "820 操作列未被裁切",
+  "name": "820 导航转顶部",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "820 列表操作列可见",
   "pass": true,
   "extra": "793/820"
  },
  {
-  "name": "820 进入数据不足 SKU",
+  "name": "820 AI 单列",
   "pass": true,
-  "extra": "折叠桌面灯 · 墨黑"
+  "extra": "762px"
  },
  {
-  "name": "820 数据不足不显示数量",
+  "name": "820 提交按钮完整可见",
+  "pass": true,
+  "extra": "806/820"
+ },
+ {
+  "name": "820 详情无溢出",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "820 草案标注未生效",
+  "name": "820 台账无溢出",
   "pass": true,
   "extra": ""
  },
  {
-  "name": "820 台账无横向溢出",
+  "name": "数据不足不形成数量",
   "pass": true,
-  "extra": "820 vs 820"
+  "extra": ""
+ },
+ {
+  "name": "数据不足 AI 为无可用事实",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "草案标注未生效",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "AI 失败态可重试",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "失败不影响规则结论",
+  "pass": true,
+  "extra": ""
  },
  {
   "name": "无脚本异常",
