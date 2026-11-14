@@ -41,14 +41,23 @@ const rows = computed(() => filter.value === 'all'
 
 const visibleTabs = computed(() => CATEGORIES.filter(category => counts.value[category.key] > 0))
 const unknownCount = computed(() => counts.value.unknown || 0)
+const failedReads = computed(() => requisitionRows.failed)
 const shortNumber = (value?: string | null) => value ? (value.length > 18 ? value.slice(0, 9) + '…' + value.slice(-6) : value) : '—'
+
+/** Opens the analysis this requisition belongs to; the batch is optional context. */
+const skuHref = (row: { task: { entityKey?: string; taskRef: { taskId: string } } }) => {
+  const params = new URLSearchParams({ single: row.task.taskRef.taskId })
+  if (state.batchId) params.set('batch', state.batchId)
+  return `#/sku/${row.task.entityKey || ''}?${params}`
+}
 
 const coverage = computed(() => {
   if (requisitionRows.loading || (!state.singleHistory.length && !requisitionRows.loaded)) return '正在回读最近的单品分析与请购记录…'
   const scanned = state.singleHistory.length
   const saved = withRequisition.value.length
   const capped = scanned >= 20 ? '（已达最近 20 条上限，更早记录未包含）' : ''
-  return `覆盖范围：本次读取最近 ${scanned} 条单品分析，其中 ${saved} 条有已保存请购记录${capped}。`
+  const failed = failedReads.value ? `，另有 ${failedReads.value} 条读取失败、未计入` : ''
+  return `覆盖范围：本次读取最近 ${scanned} 条单品分析，其中 ${saved} 条有已保存请购记录${failed}${capped}。`
 })
 
 async function refresh() {
@@ -77,6 +86,13 @@ onMounted(async () => {
     </header>
 
     <p v-if="state.error" class="banner danger" role="alert">{{ state.error }}</p>
+
+    <div v-if="failedReads" class="banner danger">
+      <strong>{{ failedReads }} 条请购状态读取失败。</strong>
+      这些记录未计入统计，也不能据此认为"没有单据"。
+      <span v-if="requisitionRows.error" class="muted">（{{ requisitionRows.error }}）</span>
+      <button class="button small" :disabled="requisitionRows.loading" @click="refresh">重新回读</button>
+    </div>
 
     <div v-if="unknownCount" class="banner danger">
       <strong>{{ unknownCount }} 单提交结果未确认。</strong>ERP 可能已经建单，请先在对应 SKU 详情用原命令核对，不要重复提交。
@@ -116,7 +132,7 @@ onMounted(async () => {
               <td class="r num">{{ row.requisition ? `${row.requisition.aiQuantity} → ${row.requisition.finalQuantity}` : '—' }}</td>
               <td class="mono" :title="row.requisition?.erpNumber || ''">{{ shortNumber(row.requisition?.erpNumber) }}</td>
               <td class="num">{{ row.requisition?.verifiedAt?.slice(5, 16).replace('T', ' ') || '—' }}</td>
-              <td class="r"><a class="button small" :href="'#/sku/' + (row.task.entityKey || '') + '?batch=' + state.batchId + '&single=' + row.task.taskRef.taskId">查看 SKU</a></td>
+              <td class="r"><a class="button small" :href="skuHref(row)">查看 SKU</a></td>
             </tr>
           </tbody>
         </table>
@@ -125,7 +141,9 @@ onMounted(async () => {
         <span>另有 {{ withoutRequisition }} 条单品分析没有已保存的请购记录（未提交或分析未完成），不计入本页统计</span>
       </div>
       <div v-if="!rows.length" class="empty-inline">
-        {{ requisitionRows.loading ? '正在回读已保存的请购记录…' : '当前范围内没有已保存的请购记录。' }}
+        <template v-if="requisitionRows.loading">正在回读已保存的请购记录…</template>
+        <template v-else-if="failedReads">读取失败：{{ failedReads }} 条记录无法确认状态，不能判定为没有单据。</template>
+        <template v-else>当前范围内没有已保存的请购记录。</template>
       </div>
     </section>
   </div>

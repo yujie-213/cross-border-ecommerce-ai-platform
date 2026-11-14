@@ -199,11 +199,18 @@
 .nav-count{font-size:10px;background:#e4eeeb;border-radius:8px;padding:0 6px;color:var(--primary)}
 
 @media (max-width:1180px){
-  .top-split{grid-template-columns:1fr}
   .main-split{grid-template-columns:1fr}
   .side-stack{grid-template-columns:repeat(3,minmax(0,1fr))}
   .side-stack>.panel{min-width:0}
-  /* Stacked composition card: keep the donut left and spread the counts across the free width. */
+  /* KPI and composition stay on one row down to 1000px: that is the reviewed prototype layout. */
+  .top-split{grid-template-columns:minmax(0,1fr) 320px}
+  .kpi{padding:14px 12px}
+  .kpi b{font-size:22px}
+  .kpi span{font-size:11px}
+}
+@media (max-width:1000px){
+  .top-split{grid-template-columns:1fr}
+  /* Stacked composition card: donut left, counts spread across the free width. */
   .compose{grid-template-columns:auto minmax(0,1fr);column-gap:24px}
   .compose-donut{padding-right:0;border-right:0}
   .compose-list{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);column-gap:18px;padding-left:0}

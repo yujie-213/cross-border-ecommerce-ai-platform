@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { route, navigate, back } from '../router'
 import {
-  init, openBatch, openItem, createSingle, readRequisition, submitRequisition, replayPending,
+  init, openBatch, openItem, openSingle, createSingle, readRequisition, submitRequisition, replayPending, pendingFor,
   state, summary, stageOf, STAGE_LABEL, unitOf, dash, fmt, latestBatchId
 } from '../s01'
 import { quantityError, issueLabel } from '../api/v2'
@@ -24,6 +24,10 @@ const stage = computed(() => (item.value ? stageOf(item.value) : 'review'))
 const single = computed(() => state.singleReport)
 const ai = computed(() => single.value?.analysisReport?.ai || null)
 const requisition = computed(() => state.requisition)
+/** Unknown outcome for THIS analysis: blocks any new submission until replayed. */
+const pendingHere = computed(() => pendingFor(state.singleId))
+const pendingElsewhere = computed(() => (state.pending && state.pending.singleId !== state.singleId) ? state.pending : null)
+const unresolvedState = computed(() => ['SUBMIT_UNKNOWN', 'CREATE_UNKNOWN'].includes(requisition.value?.state || ''))
 const constraints = computed(() => item.value?.constraints || null)
 const eligibility = computed(() => item.value?.procurementEligibility || null)
 const quality = computed(() => item.value?.dataQuality || null)
@@ -81,8 +85,15 @@ function step(delta: number) {
 }
 
 async function generate() {
+  const key = item.value?.entityKey || state.itemKey
   await createSingle()
-  if (item.value) quantity.value = item.value.quantity || 0
+  const singleId = state.singleId
+  if (!singleId) return
+  // Keep the URL authoritative so refresh / back / forward restore this exact analysis.
+  if (route.value.query.single !== singleId) navigate(`/sku/${key}`, { batch: state.batchId, single: singleId })
+  quantity.value = item.value?.quantity || 0
+  reason.value = ''
+  acknowledged.value = false
 }
 
 async function submit() {
@@ -175,6 +186,11 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
       <p v-if="single" class="banner plain analysis-note">
         当前显示该对象一次单品分析的结果（{{ item.observedAt?.slice(0, 16).replace('T', ' ') || '时点未知' }}），它重新读取了事实，可能与本批次结论不同。
         <a :href="'#/sku/' + item.entityKey + '?batch=' + state.batchId">只看本批次结论</a>
+      </p>
+
+      <p v-if="pendingElsewhere" class="banner plain small">
+        另一个 SKU（{{ pendingElsewhere.sku }}）有一笔结果未确认的请购提交，只能在其详情页用原命令核对；本页不会使用该命令。
+        <a :href="'#/sku/' + pendingElsewhere.entityKey + '?batch=' + state.batchId + '&single=' + pendingElsewhere.singleId">前往核对</a>
       </p>
 
       <p v-if="blocked.length" class="banner warning">
@@ -336,6 +352,23 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           <button v-if="requisition.state !== 'SUBMITTED' && requisition.state !== 'BLOCKED'" class="button small" :disabled="state.busy" @click="readRequisition">核对状态</button>
         </template>
 
+        <template v-else-if="pendingHere">
+          <span class="chip danger">上一笔结果未确认</span>
+          <span class="ab-note">该分析在 {{ pendingHere.createdAt.slice(11, 16) }} 提交后未收到回执，禁止重复提交</span>
+          <span class="grow" />
+          <button class="button primary" :disabled="state.busy" @click="replayPending">
+            {{ state.busy ? '核对中…' : '使用原命令核对' }}
+          </button>
+        </template>
+
+        <template v-else-if="unresolvedState">
+          <span class="chip danger">提交结果未确认</span>
+          <span class="ab-note">ERP 可能已建单，只能核对这张单据，不能再发起提交</span>
+          <span class="grow" />
+          <a class="button small" href="#/requisitions">查看请购</a>
+          <button class="button" :disabled="state.busy" @click="readRequisition">重新核对状态</button>
+        </template>
+
         <template v-else-if="state.singleTask?.state === 'FAILED' && !single">
           <span class="chip danger">单品分析失败</span>
           <span class="ab-note">{{ state.singleTask.errorCode ? issueLabel(state.singleTask.errorCode) : '服务端未返回错误原因' }}</span>
@@ -381,10 +414,6 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           <button class="button primary" :disabled="submitDisabled" @click="submit">{{ state.busy ? '提交中…' : '提交请购' }}</button>
         </template>
       </div>
-      <p v-if="state.pending" class="banner warning">
-        上一次提交的结果未确认，可能已受理。请使用原命令核对，不要重复提交。
-        <button class="button small" :disabled="state.busy" @click="replayPending">使用原命令核对</button>
-      </p>
       <p v-if="state.note" class="muted small">{{ state.note }}</p>
     </template>
   </div>

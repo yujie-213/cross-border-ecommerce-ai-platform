@@ -12,6 +12,31 @@ import { terminal } from './domain'
 type SingleRow = Task & { sku?: string; entityKey?: string; sourceGrade?: string }
 
 const emptyList = (): V2List => ({ total: 0, items: [], stores: [], warehouses: [] })
+/** The backend returns its own priority order; the workbench shows the head of it. */
+export const PRIORITY_LIMIT = 50
+const PENDING_KEY = 'xuheng.s01.v3.pending'
+
+function savePending(value: PendingCommand | null) {
+  state.pending = value
+  try {
+    if (value) sessionStorage.setItem(PENDING_KEY, JSON.stringify(value))
+    else sessionStorage.removeItem(PENDING_KEY)
+  } catch { /* storage unavailable: keep the in-memory value */ }
+}
+
+function restorePending() {
+  try {
+    const raw = sessionStorage.getItem(PENDING_KEY)
+    if (!raw) return
+    const value = JSON.parse(raw) as PendingCommand
+    if (value && value.key && value.path && value.singleId) state.pending = value
+  } catch { /* ignore malformed leftovers */ }
+}
+
+/** The pending command belongs to the analysis currently on screen, if any. */
+export function pendingFor(singleId: string) {
+  return state.pending && state.pending.singleId === singleId ? state.pending : null
+}
 
 export const state = reactive({
   options: null as V2Options | null,
@@ -27,6 +52,9 @@ export const state = reactive({
 
   list: emptyList(),
   listLoading: false,
+  /** Unfiltered top of the batch order, owned by the workbench (never the list page's query). */
+  priority: [] as V2Item[],
+  priorityLoading: false,
   filters: { q: '', store: '', warehouse: '', source: '', state: '' },
   offset: 0,
   limit: 50,
@@ -46,8 +74,20 @@ export const state = reactive({
   requisitionLoading: false,
 
   busy: false,
-  pending: null as { key: string; path: string; body: object; kind: string; createdAt: string } | null
+  /** A command whose outcome is unknown: it must only be replayed with its own key. */
+  pending: null as PendingCommand | null
 })
+
+export interface PendingCommand {
+  key: string
+  path: string
+  body: object
+  kind: string
+  createdAt: string
+  singleId: string
+  entityKey: string
+  sku: string
+}
 
 export const summary = computed(() => state.progress?.summary || null)
 
@@ -130,6 +170,7 @@ export async function init() {
   if (initPromise) return initPromise
   initPromise = (async () => {
     try {
+      restorePending()
       state.options = await request<V2Options>('/s01/v2/options')
       await Promise.all([loadHistory(), loadSingleHistory()])
       state.ready = true
@@ -146,7 +187,7 @@ export function reset() {
   state.batches = []; state.batchId = ''; state.progress = null
   state.list = emptyList(); state.item = null; state.itemKey = ''
   state.singleId = ''; state.singleReport = null; state.singleTask = null
-  state.singleHistory = []; state.requisition = null; state.pending = null
+  state.singleHistory = []; state.requisition = null; savePending(null)
 }
 
 export async function loadHistory(before?: string) {
@@ -190,7 +231,7 @@ async function pollBatch(mine: number, count = 0) {
     const data = await request<V2Progress>(`/s01/v2/batches/${state.batchId}`)
     if (mine !== epoch) return
     state.progress = data
-    await loadList()
+    await Promise.all([loadList(), loadPriority()])
     if (!terminal(data.task.state) && count < 300) {
       pollTimer = setTimeout(() => void pollBatch(mine, count + 1), 2000)
     } else if (!terminal(data.task.state)) {
@@ -218,6 +259,17 @@ export async function loadList() {
   finally { if (mine === listEpoch) state.listLoading = false }
 }
 
+export async function loadPriority() {
+  if (!state.batchId) return
+  const batch = state.batchId
+  state.priorityLoading = true
+  try {
+    const data = await request<V2List>(`/s01/v2/batches/${batch}/items?limit=${PRIORITY_LIMIT}&offset=0`)
+    if (batch === state.batchId) state.priority = data.items
+  } catch (e) { fail(e) }
+  finally { if (batch === state.batchId) state.priorityLoading = false }
+}
+
 export function setFilters(next: Partial<typeof state.filters>) {
   state.filters = { ...state.filters, ...next }
   state.offset = 0
@@ -242,7 +294,16 @@ export async function openItem(key: string, singleId?: string) {
     // Only an explicitly referenced analysis is opened: an older single must never
     // silently replace the current batch conclusion.
     if (singleId) await openSingle(singleId)
-  } catch (e) { if (mine === detailEpoch) fail(e) }
+  } catch (e) {
+    // Opened from somewhere without a batch context (e.g. the requisition ledger):
+    // the referenced analysis is still valid even if this batch lacks the entity.
+    if (mine === detailEpoch && singleId) {
+      state.itemLoading = false
+      await openSingle(singleId)
+      if (state.singleReport) { state.error = ''; return }
+    }
+    if (mine === detailEpoch) fail(e)
+  }
   finally { if (mine === detailEpoch) state.itemLoading = false }
 }
 
@@ -310,6 +371,14 @@ export async function readRequisition() {
 
 export async function submitRequisition(finalQuantity: number, adjustmentReason: string) {
   if (!state.singleId || state.busy || !state.item?.procurementEligibility?.eligible) return
+  // Safety: never start a second requisition while one exists or its outcome is unknown.
+  if (state.requisition || pendingFor(state.singleId)) {
+    state.note = '该分析已有请购单或结果未确认，请先核对原命令，不能重复提交。'
+    return
+  }
+  const singleId = state.singleId
+  const entityKey = state.item.entityKey
+  const sku = state.item.sku
   state.busy = true; state.error = ''; state.note = ''
   const key = crypto.randomUUID()
   try {
@@ -320,28 +389,35 @@ export async function submitRequisition(finalQuantity: number, adjustmentReason:
     }, undefined, 90000)
     state.note = '请购已提交 ERP，等待独立回读审批状态。'
   } catch (e) {
-    // Transport failure after send: keep the key as an explicit pending command.
+    // Transport failure after send: keep the key bound to this analysis and SKU.
     if (!(e instanceof ApiError)) {
-      state.pending = {
+      // A transport failure is represented by the pending command itself; a second
+      // generic banner would say exactly the same thing again.
+      savePending({
         key, kind: 'requisition', createdAt: new Date().toISOString(),
-        path: `/s01/v2/singles/${state.singleId}/requisition`,
-        body: { finalQuantity, adjustmentReason, sourceAcknowledged: true }
-      }
+        path: `/s01/v2/singles/${singleId}/requisition`,
+        body: { finalQuantity, adjustmentReason, sourceAcknowledged: true },
+        singleId, entityKey, sku
+      })
+      state.error = ''
+    } else {
+      fail(e)
     }
-    fail(e)
   } finally { state.busy = false }
 }
 
 /** Replays the exact pending requisition command with its original idempotency key. */
 export async function replayPending() {
   const pending = state.pending
-  if (!pending || state.busy) return
+  // Only the analysis the command belongs to may replay it.
+  if (!pending || state.busy || pending.singleId !== state.singleId) return
   state.busy = true; state.error = ''
   try {
-    state.requisition = await request<V2Requisition>(pending.path, {
+    const value = await request<V2Requisition>(pending.path, {
       method: 'POST', headers: { 'Idempotency-Key': pending.key }, body: JSON.stringify(pending.body)
     }, undefined, 90000)
-    state.pending = null
+    if (pending.singleId === state.singleId) state.requisition = value
+    savePending(null)
     state.note = '已用原命令核对，未创建第二张单据。'
   } catch (e) { fail(e) }
   finally { state.busy = false }
@@ -383,11 +459,13 @@ export function requisitionCategory(requisition: V2Requisition | null): Requisit
 }
 
 export interface RequisitionRow { task: SingleRow; requisition: V2Requisition | null }
-export const requisitionRows = reactive({ items: [] as RequisitionRow[], loading: false, loaded: false })
+export const requisitionRows = reactive({ items: [] as RequisitionRow[], loading: false, loaded: false, failed: 0, error: '' })
 
 export async function loadRequisitions() {
   if (requisitionRows.loading) return
   requisitionRows.loading = true
+  requisitionRows.failed = 0
+  requisitionRows.error = ''
   try {
     const rows = state.singleHistory.filter(row => row.state === 'SUCCEEDED')
     const result: RequisitionRow[] = []
@@ -397,10 +475,15 @@ export async function loadRequisitions() {
       const chunk = await Promise.all(rows.slice(i, i + 4).map(async row => {
         try {
           const value = await request<V2Requisition | null>(`/s01/v2/singles/${row.taskRef.taskId}/requisition`)
-          return { task: row, requisition: value }
-        } catch { return { task: row, requisition: null } }
+          return { task: row, requisition: value, failed: false }
+        } catch (error) {
+          // A read failure is not "no requisition": keep them apart.
+          requisitionRows.failed++
+          if (!requisitionRows.error) requisitionRows.error = errorText(error)
+          return { task: row, requisition: null, failed: true }
+        }
       }))
-      result.push(...chunk)
+      chunk.forEach(row => { if (!row.failed) result.push({ task: row.task, requisition: row.requisition }) })
     }
     requisitionRows.items = result
     requisitionRows.loaded = true

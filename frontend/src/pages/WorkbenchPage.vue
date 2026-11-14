@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
 import { route, navigate } from '../router'
-import { init, openBatch, startBatch, state, summary, grouped, stageOf, latestBatchId, STAGE_LABEL, unitOf } from '../s01'
+import { init, openBatch, startBatch, state, summary, grouped, stageOf, latestBatchId, STAGE_LABEL, unitOf, PRIORITY_LIMIT } from '../s01'
 import DonutChart from '../components/charts/DonutChart.vue'
 
 const batches = computed(() => state.batches)
@@ -20,7 +20,8 @@ const kpis = computed(() => {
   ]
 })
 
-const queue = computed(() => state.list.items
+// Owned dataset: the batch's own priority order, never the list page's filtered query.
+const queue = computed(() => state.priority
   .filter(item => !['none', 'pending', 'history'].includes(stageOf(item)))
   .slice(0, 6))
 
@@ -37,7 +38,7 @@ const sourceRows = computed(() => {
   ].filter(row => row.count > 0).map(row => ({ ...row, percent: Math.round(row.count / total * 100) }))
 })
 
-const shortest = computed(() => state.list.items
+const shortest = computed(() => state.priority
   .filter(item => item.riskDate && !['none', 'pending'].includes(stageOf(item)))
   .slice()
   .sort((a, b) => String(a.riskDate).localeCompare(String(b.riskDate)))
@@ -139,7 +140,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
         <section class="panel">
           <div class="panel-head">
             <h2>优先处理</h2>
-            <small>按规则风险 → ERP 源风险 → 缺货日期排序</small>
+            <small>批次排序前 {{ PRIORITY_LIMIT }} 项中的待处理 · 规则风险 → ERP 源风险 → 缺货日期</small>
             <a class="button small" :href="'#/suggestions?batch=' + state.batchId">全部 {{ current.scopeObjectCount }} 项</a>
           </div>
           <div class="qhead"><span>商品 / SKU</span><span>来源 · 状态</span><span class="r">可用</span><span class="r">建议</span><span>缺货日</span></div>
@@ -153,7 +154,7 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
             <div class="qnum strong">{{ item.quantity ?? '—' }}<small v-if="item.quantity">{{ unitOf(item) }}</small></div>
             <div class="qdate">{{ item.riskDate ? item.riskDate.slice(5) : '—' }}</div>
           </a>
-          <div v-if="!queue.length && state.listLoading" class="empty-inline">正在读取结果…</div>
+          <div v-if="!queue.length && state.priorityLoading" class="empty-inline">正在读取结果…</div>
           <div v-else-if="!queue.length" class="empty-inline">当前批次没有待处理对象。</div>
         </section>
 
@@ -168,12 +169,12 @@ function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch:
           </section>
 
           <section class="panel">
-            <div class="panel-head"><h2>最早缺货</h2><small>按缺货日期</small></div>
+            <div class="panel-head"><h2>较早缺货</h2><small>前 {{ PRIORITY_LIMIT }} 项内</small></div>
             <div class="mini">
               <a v-for="item in shortest" :key="item.entityKey" class="mini-row link" :href="'#/sku/' + item.entityKey + '?batch=' + state.batchId">
                 <span class="mono">{{ item.sku }}</span><b>{{ item.riskDate?.slice(5) }}</b>
               </a>
-              <p v-if="!shortest.length" class="mini-empty">当前结果没有可用缺货日期</p>
+              <p v-if="!shortest.length" class="mini-empty">前 {{ PRIORITY_LIMIT }} 项没有可用缺货日期</p>
             </div>
           </section>
 
