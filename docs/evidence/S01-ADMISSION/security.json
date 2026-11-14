@@ -2,10 +2,12 @@
   "result": "PASS",
   "mode": "EXPLICIT_REVIEW_PAYLOAD_AND_ALL_INTRODUCED_HISTORY_BLOBS",
   "scannedFiles": 35,
-  "historyBlobs": 25,
+  "historyBlobs": 52,
   "findings": [],
   "rawERPResponsesIncluded": false,
   "credentialsIncluded": false,
   "limitations": "Heuristic patterns plus exact local secret values; initial private environment copies remain Git-ignored; existing main history is not reclassified.",
-  "finalPayloadReviewed": true
+  "finalPayloadReviewed": true,
+  "historyAuditedThrough": "f171661aef92de42cb2d30499a15b0ae69771af7",
+  "gitFilenameDecoding": "UTF8_NUL_DELIMITED"
 }

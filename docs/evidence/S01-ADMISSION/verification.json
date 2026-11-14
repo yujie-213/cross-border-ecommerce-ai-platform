@@ -120,6 +120,11 @@
       "reason": "Windows 294-character path raises FileNotFoundError, surfaced as PREPARING",
       "failed": 3,
       "resolution": "same3 original assertions passed with task-specific short private path, no product workaround"
+    },
+    {
+      "stage": "final publication audit wrapper",
+      "reason": "initial default GBK decoding rejected UTF8 Chinese git filenames",
+      "resolution": "UTF8 NUL-delimited history path audit passed; no credential finding; no product changes"
     }
   ],
   "notRun": [
