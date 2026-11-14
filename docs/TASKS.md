@@ -1,3 +1,5 @@
+本轮自有商品产品交付（2026-11-14）：D-S01-PRODUCT-01 REVIEW，codex/s01-product-demand-rebuild；实现ce50e51/617fee3，UI3219ce0及显式AI测试679a846。真实登记2SKU/2店仓对象（同1店1仓），最终批次40b8f761为15HTTP全200/11.76秒采集；线缆45参考/48候选、杯81库存/参考0，ERP均未提供建议。无AI单品559bcb30为13HTTP/零模型零ERP写；Edge1440/1024、会话重启/URL恢复、整箱约束与人工确认门通过。全量860项859PASS/1基础队列瞬时FAIL，随后该组原样40PASS，未声称一次全绿；新增产品25PASS/前端53及类型构建PASS。真实多仓/新增付费AI/ERP采购写未验收，四企业门BLOCKED。报告reports/S01_自有商品补货决策产品交付_20261114.md；最终普通推送回读另记，保持REVIEW、不合main。
+
 S01 前端 V3 合并 main（2026-11-14）：分支 workbuddy/s01-frontend-v3 经阶段审查通过，以快进方式并入 main（eceef8c..479c7d1，4 个提交）。内容为四页采购运营前端（工作台/补货建议/SKU 详情/请购管理）接真实 V2 API、AI 前置分区、P0 请购提交安全与工作台数据隔离；未改后端计算/DB/ERP 适配/采购规则。合并前修正了脚本编辑造成的 CRLF 污染（22 个文件还原为 LF），真实变更由 13709/11068 行收敛为 2855/214 行。验证：typecheck、build、51 项单测、7 项浏览器定向用例（v3 + v3-safety）全部通过。保留缺口：请购列表接口未实现（台账逐条回读、最近 20 条上限）、977 对象下批次统计 3–6 秒、旧真实流程 spec 待按新 UI 重新基线。
 
 前端 V3 评审后定向修复（2026-11-14，同分支，保持 REVIEW）：完成 P0 请购提交安全、工作台与列表状态隔离、单品分析 URL 同步、1080 布局、台账读取失败与跳转五项；typecheck/build/51 单测与 7 项浏览器定向用例通过；未改后端、未调用模型/ERP、未写采购、未合 main。
@@ -9346,9 +9348,120 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER",
     "REPOSITORY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "ce50e511c95fab35bac68eef95df4c984e3b8081",
+    "617fee365cf27a3c29fd48b0240fd8d201bd8f50",
+    "3219ce0215ab1766d2b19a72e0a1de95144c8380",
+    "679a846f42b14321a33ff7277843bb3099234be3"
+  ],
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "command": "pytest product_demand/registered_product + owned workflow; npm build/test",
+      "environment": "Windows; isolated fixtures; final UI3219ce0/tests679a846",
+      "sample": "25 product tests PASS; frontend53/type/build PASS; no live mutation",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/verification.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC4"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "pytest full suite --junitxml=backend-tests.xml",
+      "environment": "Real isolated MySQL; mock models/ERP; backend617fee3",
+      "sample": "860 run:859 PASS/1 FAIL/0ERROR/0SKIP; transient foundation claim returned None, original failure retained",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/S01-PRODUCT/backend-tests.xml",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "pytest test_engineering_foundation.py",
+      "environment": "Same code and database; no assertion edits",
+      "sample": "Original failing group rerun40 PASS; full run not relabeled all-green; 1000 synthetic/crash cases passed in full run",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/foundation-recheck.xml",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "pytest test_registered_product_workflow.py + product unit tests",
+      "environment": "Real isolated MySQL/API/Worker + synthetic ERP/provider",
+      "sample": "25 PASS; owned exact history, API groups, explicit AI, no-AI with configured provider, safe Mock submit/replay/drift",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/product-tests.xml",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "UI owned batch + tools/verify_product_demand.py --task 40b8f761dbb44fa997b0d842c5a598d7",
+      "environment": "Real teaching ERP/API/independentWorker/MySQL; 15HTTP all200",
+      "sample": "2SKU/2scope/1store/1warehouse; history7 orders complete;45reference/48candidate and mug0;11.76s acquisition;0model/0write",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/live-batch.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "UI single refresh + independent capture/database audit",
+      "environment": "Real owned teaching single;13HTTP;explainAI=false",
+      "sample": "Single559bcb30 persisted/reloaded; reference45/candidate48;0model/0businessWrite",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/live-single.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "Edge persistent session: workbench/list/two details/ERP/refresh/qualification/reload",
+      "environment": "Actual frontend5175/API8768;1440x900 and1024x768",
+      "sample": "Existing session restore; no password retyped;49 fails carton/submit disabled;0consoleError;no new paidAI/ERPwrite",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/verification.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "REPOSITORY",
+      "command": "Implementation commits, diff/secret/document checks; ordinary review branch publication",
+      "environment": "Git branch codex/s01-product-demand-rebuild; main unchanged",
+      "sample": "Local implementation fixed; publication result recorded separately after actual push",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT/repository.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC4"
+      ]
+    }
+  ],
   "review": null,
   "branch": "codex/s01-product-demand-rebuild",
   "observedHead": "f9bc45f721c961774bbc40bad19f8786519ad449",
@@ -9367,7 +9480,19 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "IN_PROGRESS",
       "reason": "负责人明确收窄为自有商品；仅登记核验成员及其全部获准店仓，旧共享采集取消并保留。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "自有2SKU真实只读/单品/浏览器收口；全量860项1基础瞬时FAIL和原样40项复验分别保留，不代签负责人验收；不合main。"
     }
+  ],
+  "testedCommit": "679a846f42b14321a33ff7277843bb3099234be3",
+  "parallelCondition": "Codex单人，未启用子代理；保留未知OpenAPI。",
+  "risks": [
+    "真实仅一个登记仓，工程多仓不代替真实验收",
+    "新增销售必须登记；未核实在途不抵扣",
+    "全量860项1基础队列瞬时FAIL，原样40项复验PASS，根因未证明"
   ]
 }
 ```

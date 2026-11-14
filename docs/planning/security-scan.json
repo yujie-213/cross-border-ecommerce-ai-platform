@@ -1,8 +1,10 @@
 {
   "status": "PASS",
-  "mode": "WHITELIST_WORKTREE",
-  "scannedFiles": 366,
+  "scope": "NEW_PRODUCT_COMMITS_AND_CHANGED_PUBLIC_FILES",
+  "scannedFiles": 64,
+  "historyCommits": 5,
+  "knownCredentialCount": 2,
+  "syntheticFixtureMatchesExcluded": 7,
   "findings": [],
-  "sensitiveNamesAcrossWorkspace": [],
-  "limitations": "启发式模式/文件名检查，不保证全部秘密/个人信息均可识别；白名单均获准设计/管理材料，无真实ERP数据。"
+  "limitations": "Known local values and heuristic patterns only; reviewed teaching projections/screenshots. Ignored private data and unknown OpenAPI excluded."
 }

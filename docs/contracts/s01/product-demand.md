@@ -29,3 +29,7 @@ ERP 对比始终独立生成，明确唯一匹配/多条冲突/无建议/仓库�
 ## 验证与停止
 
 新真实只读自有清单批次一次；两自有 SKU 与隔离代表场景、跨店仓、ERP有无/冲突、缺采购条件、历史稀疏/陈旧、缺库存、恢复、权限和提交边界分别验证。真实浏览器从持续启动、admin登录到工作台/商品/全店仓详情/ERP对比/规则或AI解读/资格检查。模型仅少量显式调用并记录 usage；不得为验收新建 ERP 业务单据。真实与合成标签分开，旧 FAIL 不改写。没有30天实测不声明有。提交推送评审分支后停止。
+
+## 当前HTTP与恢复增量
+
+生产装配固定 owned_only=true；options.analysisRange=OWNED_REGISTERED，batch/single dataReport 同值，monitoring 保留成员ID/数据集/批次/范围版本/摘要。历史progress/history标明OWNED_REGISTERED或LEGACY_SHARED，未开始为NOT_STARTED；前端默认只自动选自有批次。items支持group=sku与decision=REPLENISH/NO_REPLENISHMENT/NEEDS_REVIEW/RISK/DIFFERENCE/FORECAST，业务筛选在商品聚合后执行；detail.relatedScopes为同SKU逐店仓。POST singles.explainAI默认为false，只有显式true尝试A01；旧已存直接任务缺字段保持旧语义。旧封存AI事实文本/摘要兼容保留，不重写旧报告。无数据库迁移；产品Worker work kind独立，避免旧实例领取新任务。

@@ -1,0 +1,26 @@
+{
+  "result": "PASS_READONLY_SINGLE_NO_AI",
+  "taskId": "559bcb30d0234a258f5e39b29f3d940f",
+  "taskState": "SUCCEEDED",
+  "explainAI": false,
+  "analysisRange": "OWNED_REGISTERED",
+  "requestCount": 13,
+  "verifiedResponseFiles": 9,
+  "modelAttempts": 0,
+  "businessWrites": 0,
+  "aiStatus": "NOT_ATTEMPTED",
+  "sku": "HL-CBL100-2M",
+  "referenceQuantity": 45,
+  "purchaseCandidate": 48,
+  "procurementEligibility": {
+    "eligible": true,
+    "warnings": [
+      "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+      "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+    ],
+    "hardBlocks": [],
+    "policyVersion": "s01-product-procurement-v1",
+    "scopeAuthorized": true
+  },
+  "reportFingerprint": "12dcd3d557169c63c48e9cfc855888121bf55e2f6f6f9c506a821347d3cbb096"
+}

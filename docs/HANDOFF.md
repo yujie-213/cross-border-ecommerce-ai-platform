@@ -1,3 +1,5 @@
+本轮自有商品产品交付（2026-11-14）：D-S01-PRODUCT-01 REVIEW，codex/s01-product-demand-rebuild；实现ce50e51/617fee3，UI3219ce0及显式AI测试679a846。真实登记2SKU/2店仓对象（同1店1仓），最终批次40b8f761为15HTTP全200/11.76秒采集；线缆45参考/48候选、杯81库存/参考0，ERP均未提供建议。无AI单品559bcb30为13HTTP/零模型零ERP写；Edge1440/1024、会话重启/URL恢复、整箱约束与人工确认门通过。全量860项859PASS/1基础队列瞬时FAIL，随后该组原样40PASS，未声称一次全绿；新增产品25PASS/前端53及类型构建PASS。真实多仓/新增付费AI/ERP采购写未验收，四企业门BLOCKED。报告reports/S01_自有商品补货决策产品交付_20261114.md；最终普通推送回读另记，保持REVIEW、不合main。
+
 本轮范围收缩（2026-11-14）：负责人明确改为自有商品。D-S01-PRODUCT-01继续同分支，默认仅版本化登记并核验通过的自有商品/店仓/销售ID；当前2SKU，不扫描共享百万历史、不自动纳入未登记仓/销售。旧采集99e37f81已CANCELLED，271请求/48600销售捕获/零模型零业务写保留；候选全目录恢复与多批次合并WIP已撤除。本轮继续真实只读/API/Worker/浏览器及隔离多仓验证，最终REVIEW、不合main。
 
 本轮产品重构领取（2026-11-14）：Codex单人，从远端main f9bc45f建立codex/s01-product-demand-rebuild。原跟踪区干净，未知docs/ERP-openapi.yaml保留；已读取附件完整任务、V3与准入交接。实施范围D01/D02/D03/V2/API/Vue/测试/文档，需求与采购执行解耦，全历史/商品聚合/分仓/ERP对比；正常提交推送，最终REVIEW，不合main，不ERP业务写。契约contracts/s01/product-demand.md，实际验收见TASKS，不使用旧历史PASS代替本轮。

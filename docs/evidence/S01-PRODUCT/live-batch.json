@@ -1,0 +1,836 @@
+{
+  "result": "PASS_READONLY_PRODUCT_BATCH",
+  "taskId": "40b8f761dbb44fa997b0d842c5a598d7",
+  "taskState": "SUCCEEDED",
+  "observedAt": "2026-11-14T07:39:53.718141+00:00",
+  "decisionVersion": "s01-product-demand-v1",
+  "summary": {
+    "discoveredSkuCount": 2,
+    "scopeObjectCount": 2,
+    "processedCount": 2,
+    "ruleCalculated": 0,
+    "erpReference": 0,
+    "noReplenishment": 1,
+    "unanalyzable": 0,
+    "failed": 0,
+    "unfinished": 0,
+    "coverage": 1.0,
+    "processingCoverage": 1.0,
+    "ruleSourceCount": 0,
+    "erpSourceRecordCount": 0,
+    "modelCalls": 0,
+    "businessMutations": 0,
+    "productIdentityCount": 2,
+    "analyzedSkuCount": 2,
+    "forecastScopeCount": 2,
+    "judgedSkuCount": 2,
+    "judgedScopeCount": 2,
+    "replenishSkuCount": 1,
+    "replenishScopeCount": 1,
+    "noReplenishmentSkuCount": 1,
+    "noReplenishmentScopeCount": 1,
+    "reviewSkuCount": 0,
+    "reviewScopeCount": 0,
+    "riskSkuCount": 1,
+    "riskScopeCount": 1,
+    "erpDifferenceSkuCount": 0,
+    "erpDifferenceScopeCount": 0,
+    "forecastCoverage": 1.0,
+    "decisionCoverage": 1.0
+  },
+  "monitoring": {
+    "mode": "OWNED_REGISTERED",
+    "members": [
+      {
+        "sku": "HL-CBL100-2M",
+        "quoteId": "878",
+        "quoteNo": "HL-S01-P1-20261113-Q-CBL",
+        "storeId": "3",
+        "salesIds": [
+          "1153929",
+          "1153930",
+          "1153931",
+          "1153932",
+          "1153933",
+          "1153934",
+          "1153935"
+        ],
+        "datasetId": "hailan-s01-pilot-20261113-v1",
+        "listingId": "362",
+        "productId": "218",
+        "storeName": "海岚家居美国站",
+        "warehouseId": "308",
+        "inventoryIds": [
+          "1137"
+        ],
+        "scopeVersion": 1,
+        "sourceTenant": "1",
+        "importBatchId": "s01-mvp-history-20261113-v1",
+        "warehouseName": "海岚洛杉矶现货仓",
+        "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50"
+      },
+      {
+        "sku": "HL-MUG350-WH",
+        "quoteId": "879",
+        "quoteNo": "HL-S01-P1-20261113-Q-MUG",
+        "storeId": "3",
+        "salesIds": [
+          "1153929",
+          "1153930",
+          "1153931",
+          "1153932",
+          "1153933",
+          "1153934",
+          "1153935"
+        ],
+        "datasetId": "hailan-s01-pilot-20261113-v1",
+        "listingId": "363",
+        "productId": "219",
+        "storeName": "海岚家居美国站",
+        "warehouseId": "308",
+        "inventoryIds": [
+          "1138"
+        ],
+        "scopeVersion": 1,
+        "sourceTenant": "1",
+        "importBatchId": "s01-mvp-history-20261113-v1",
+        "warehouseName": "海岚洛杉矶现货仓",
+        "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50"
+      }
+    ],
+    "salesCoverage": "ALL_REGISTERED_SALES_IDS_NO_DATE_CUTOFF",
+    "membershipDigest": "ec9100b79c8f5cacdf2c80e03bf3187f2289cdf02e8e3c3937ae883c87065f27",
+    "unregisteredObjects": "EXCLUDED"
+  },
+  "startedAt": "2026-11-14T07:37:54.901994+00:00",
+  "acquisitionElapsedSeconds": 11.764013,
+  "requestCount": 15,
+  "verifiedResponseFiles": 10,
+  "httpStatuses": {
+    "200": 15
+  },
+  "resourceCounts": {
+    "sales": {
+      "rows": 7
+    },
+    "stores": {
+      "rows": 1
+    },
+    "quotes": {
+      "rows": 2
+    },
+    "listings": {
+      "rows": 2
+    },
+    "products": {
+      "rows": 2
+    },
+    "inventory": {
+      "rows": 2
+    },
+    "formal-0-0": {
+      "rows": 1
+    },
+    "formal-0-1": {
+      "rows": 0
+    },
+    "formal-0-2": {
+      "rows": 0
+    },
+    "warehouses": {
+      "rows": 1
+    },
+    "suggestions": {
+      "rows": 0
+    }
+  },
+  "resourcesComplete": {
+    "sales": true,
+    "stores": true,
+    "quote-0": true,
+    "quote-1": true,
+    "listings": true,
+    "products": true,
+    "inventory": true,
+    "formal-0-0": true,
+    "formal-0-1": true,
+    "formal-0-2": true,
+    "warehouses": true,
+    "suggestion-0": true,
+    "suggestion-1": true
+  },
+  "salesStateCounts": [
+    {
+      "payment": "已支付",
+      "fulfillment": "已发货",
+      "refund": "无退款",
+      "count": 7
+    }
+  ],
+  "ownedTwo": [
+    {
+      "sku": "HL-CBL100-2M",
+      "storeId": "3",
+      "warehouseId": "308",
+      "analysisState": "ANALYZED",
+      "sourceGrade": "PLATFORM_REFERENCE",
+      "inventory": {
+        "basis": "CURRENT_ERP_AVAILABLE_FIELD",
+        "available": 6,
+        "warehouseId": "308",
+        "inventoryIds": [
+          "1137"
+        ],
+        "sourceUpdatedAt": "2026-11-13T06:07:41+00:00",
+        "historicalReconciliation": "NOT_ASSERTED"
+      },
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "0.42857143"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-5.14285714"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-10.71428571"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "5.57142858",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-16.28571429"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-21.85714286"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-27.42857143"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-33.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-38.57142857"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-44.14285714"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "44.14285714",
+          "snapshotRef": "snapshot-8253539cced99a1d271532509848fd6f160f995bcda09ab4dca3e8169e107b34",
+          "coverageDays": "1.0769230769844400613666347613314321801328451384691",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-44.14285714",
+          "targetQuantity": "50.14285714",
+          "metricResultRef": "metric-e8b6d2ebd62bbaf029ad5f1b9c4a5785445c65ccfa7c4909ff87c109eda74713",
+          "availableQuantity": "6",
+          "firstShortageDate": "2026-11-16",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "5.5714285711111111111111111111111111111111111111111"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153935",
+              "quantity": "6",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153934",
+              "quantity": "5",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153933",
+              "quantity": "6",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153932",
+              "quantity": "4",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153931",
+              "quantity": "5",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "orderRef": "erp-order-1153930",
+              "quantity": "4",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "orderRef": "erp-order-1153929",
+              "quantity": "9",
+              "businessDate": "2026-11-10"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-12",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-06",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-07",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "6"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "9"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "6"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "39",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-06",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "e8d383e3103505534973df3bd8c8eb9e775985db01196e62ce02b242a6895619",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 2,
+          "averageDailyDemand": "5.571428571428571428571428571",
+          "salesRecordDayAverage": "5.571428571428571428571428571",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "39.00000000000000000000000000",
+            "recordDayScenarioQuantity": "39.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 33
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "50.14285714285714285714285714",
+            "recordDayScenarioQuantity": "50.14285714285714285714285714",
+            "referenceReplenishmentQuantity": 45
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "77.99999999999999999999999999",
+            "recordDayScenarioQuantity": "77.99999999999999999999999999",
+            "referenceReplenishmentQuantity": 72
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "167.1428571428571428571428571",
+            "recordDayScenarioQuantity": "167.1428571428571428571428571",
+            "referenceReplenishmentQuantity": 162
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共39件；首末记录跨度7天。",
+          "区间参考需求约5.57件/天；仅有销售记录日均5.57件/天，两者口径不同。",
+          "当前可用库存6件，按9天周期需求约50.14件，参考补充45件，未扣未核实在途。",
+          "库存覆盖短于报价交期，普通到货可能无法消除提前缺货，应优先核实加急或调拨条件。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "1.0769230769844400613666347613314321801328451384691",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": true,
+        "forecastQuantity": "50.14285714285714285714285714",
+        "firstShortageDate": "2026-11-16",
+        "purchasableQuantity": 48,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 45
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 45
+      },
+      "procurementEligibility": {
+        "eligible": true,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      }
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "storeId": "3",
+      "warehouseId": "308",
+      "analysisState": "NO_REPLENISHMENT",
+      "sourceGrade": "PLATFORM_REFERENCE",
+      "inventory": {
+        "basis": "CURRENT_ERP_AVAILABLE_FIELD",
+        "available": 81,
+        "warehouseId": "308",
+        "inventoryIds": [
+          "1138"
+        ],
+        "sourceUpdatedAt": "2026-11-13T06:07:41+00:00",
+        "historicalReconciliation": "NOT_ASSERTED"
+      },
+      "decision": {
+        "status": "NO_REPLENISHMENT",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "78.28571429"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "75.57142857"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "72.85714286"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "70.14285714"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "67.42857143"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "64.71428571"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "62.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "59.28571429"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "56.57142857"
+            },
+            {
+              "day": "2026-11-24",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "53.85714286"
+            },
+            {
+              "day": "2026-11-25",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "51.14285714"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "0",
+          "snapshotRef": "snapshot-94621adab3e0269a58842c0a4d1bd4d483c4c955618b61c2e410b03f0cc182fc",
+          "coverageDays": "29.842105260302190884181608527829511145662247737257",
+          "stockoutRisk": false,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": true,
+          "closingBalance": "51.14285714",
+          "targetQuantity": "29.85714286",
+          "metricResultRef": "metric-edc29994c4f3d20fc098e9b64e4bc05d08ec0fb1f0590998ad3f779979a0fc6f",
+          "availableQuantity": "81",
+          "firstShortageDate": null,
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "2.7142857145454545454545454545454545454545454545455"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153935",
+              "quantity": "3",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153934",
+              "quantity": "2",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153933",
+              "quantity": "3",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153932",
+              "quantity": "2",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153931",
+              "quantity": "3",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "orderRef": "erp-order-1153930",
+              "quantity": "2",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "orderRef": "erp-order-1153929",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-12",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-06",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-07",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "3"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "19",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-06",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "0d9805a1a02db26eebc0e408e66806eb2d2aeef0ebdaafbc0dbd23c438823655",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 2,
+          "averageDailyDemand": "2.714285714285714285714285714",
+          "salesRecordDayAverage": "2.714285714285714285714285714",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 4,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "19.00000000000000000000000000",
+            "recordDayScenarioQuantity": "19.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 11,
+            "forecastQuantity": "29.85714285714285714285714285",
+            "recordDayScenarioQuantity": "29.85714285714285714285714285",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "38.00000000000000000000000000",
+            "recordDayScenarioQuantity": "38.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "81.42857142857142857142857142",
+            "recordDayScenarioQuantity": "81.42857142857142857142857142",
+            "referenceReplenishmentQuantity": 1
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共19件；首末记录跨度7天。",
+          "区间参考需求约2.71件/天；仅有销售记录日均2.71件/天，两者口径不同。",
+          "当前可用库存81件覆盖11天参考需求，暂不补货；仍需关注需求变化。"
+        ],
+        "horizonDays": 11,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "29.842105260302190884181608527829511145662247737257",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": false,
+        "forecastQuantity": "29.85714285714285714285714285",
+        "firstShortageDate": null,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 0
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 0
+      },
+      "procurementEligibility": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [
+          "NO_POSITIVE_RECOMMENDATION_BASIS"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      }
+    }
+  ],
+  "independentSourceSkuCount": 2,
+  "modelAttempts": 0,
+  "businessWrites": 0,
+  "resultDigest": "ad662a6d282e2915f31339ed8da2da6445a226e69c94dead3a9ec34f38cbc9b3",
+  "events": [
+    {
+      "method": "POST",
+      "path": "/api/auth-server/oauth/access-token",
+      "at": "2026-11-14T07:37:54.933766+00:00",
+      "completedAt": "2026-11-14T07:37:55.829577+00:00",
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "at": "2026-11-14T07:37:55.870540+00:00",
+      "completedAt": "2026-11-14T07:37:56.585642+00:00",
+      "httpStatus": 200,
+      "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "at": "2026-11-14T07:37:56.640112+00:00",
+      "completedAt": "2026-11-14T07:37:57.368969+00:00",
+      "httpStatus": 200,
+      "sha256": "e33e61b2b3c29920bd3e4b7b8e0da799d2dd02e2d6d3d096b8692f3e0d940cbb"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/store-authorizations",
+      "at": "2026-11-14T07:37:57.416979+00:00",
+      "completedAt": "2026-11-14T07:37:58.125996+00:00",
+      "httpStatus": 200,
+      "sha256": "845262ae81031b1b4e8cd284d7624a441f240c157a7f48af3d82821228eca722"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "at": "2026-11-14T07:37:58.188988+00:00",
+      "completedAt": "2026-11-14T07:37:58.913615+00:00",
+      "httpStatus": 200,
+      "sha256": "ccc2776e0a6bb2bb733f0c88c603486d624b2b92de14216fe0ba6af52cb9ce85"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/inventory",
+      "at": "2026-11-14T07:37:58.965642+00:00",
+      "completedAt": "2026-11-14T07:37:59.687335+00:00",
+      "httpStatus": 200,
+      "sha256": "84bcb7cd221023f3691970afec1bfa1c221ec879309bce00465549f9f5bc7d04"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/listings",
+      "at": "2026-11-14T07:37:59.736581+00:00",
+      "completedAt": "2026-11-14T07:38:00.465812+00:00",
+      "httpStatus": 200,
+      "sha256": "07d1ffb5594dd5cfe7befefbc7d5a136ce4b1d401d937b639a0c5e0bb0d77e1d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sales-orders",
+      "at": "2026-11-14T07:38:00.519396+00:00",
+      "completedAt": "2026-11-14T07:38:01.226538+00:00",
+      "httpStatus": 200,
+      "sha256": "f99548be1fb7f429c4ce95770e3c2171076a81bac3a872a0a651d3fdc496b0a6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/supplier-quotes",
+      "at": "2026-11-14T07:38:01.277671+00:00",
+      "completedAt": "2026-11-14T07:38:02.004733+00:00",
+      "httpStatus": 200,
+      "sha256": "d5a1d1a5f449017c4cb101d4375a3b6e1a292eaa53ccc525aa97f607edab979a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "at": "2026-11-14T07:38:02.060346+00:00",
+      "completedAt": "2026-11-14T07:38:02.781325+00:00",
+      "httpStatus": 200,
+      "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/supplier-quotes",
+      "at": "2026-11-14T07:38:02.832721+00:00",
+      "completedAt": "2026-11-14T07:38:03.554801+00:00",
+      "httpStatus": 200,
+      "sha256": "9b5d59827e87a970892b80459b0d506b012f988e6ca3d7c5853ec78d4d896acd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replenishment",
+      "at": "2026-11-14T07:38:03.605876+00:00",
+      "completedAt": "2026-11-14T07:38:04.329279+00:00",
+      "httpStatus": 200,
+      "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-14T07:38:04.380596+00:00",
+      "completedAt": "2026-11-14T07:38:05.110162+00:00",
+      "httpStatus": 200,
+      "sha256": "1f90fb0a3390ac1d7da1db400d56c9efca245554f5aafe067d3c73c51283212a"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-14T07:38:05.160871+00:00",
+      "completedAt": "2026-11-14T07:38:05.888329+00:00",
+      "httpStatus": 200,
+      "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "at": "2026-11-14T07:38:05.941177+00:00",
+      "completedAt": "2026-11-14T07:38:06.666007+00:00",
+      "httpStatus": 200,
+      "sha256": "3300bd06b0490c8575c51e4549c614d667834e28149854263f5a14d045148a03"
+    }
+  ]
+}

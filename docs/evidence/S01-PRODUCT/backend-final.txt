@@ -1,0 +1,27 @@
+..........................................F............................. [  8%]
+........................................................................ [ 16%]
+........................................................................ [ 25%]
+........................................................................ [ 33%]
+........................................................................ [ 41%]
+........................................................................ [ 50%]
+........................................................................ [ 58%]
+........................................................................ [ 66%]
+........................................................................ [ 75%]
+........................................................................ [ 83%]
+........................................................................ [ 92%]
+....................................................................     [100%]
+================================== FAILURES ===================================
+__ test_explicit_new_owner_version_can_start_without_old_delivery_rebinding ___
+tests\integration\orchestration\test_engineering_foundation.py:350: in test_explicit_new_owner_version_can_start_without_old_delivery_rebinding
+    assert lease.owner_version == 2
+           ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NoneType' object has no attribute 'owner_version'
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\������Ŀ\�羳�����ǻ�AIƽ̨\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/orchestration/test_engineering_foundation.py::test_explicit_new_owner_version_can_start_without_old_delivery_rebinding
+1 failed, 859 passed, 1 warning in 350.37s (0:05:50)

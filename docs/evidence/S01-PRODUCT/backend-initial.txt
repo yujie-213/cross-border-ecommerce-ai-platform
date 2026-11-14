@@ -1,0 +1,57 @@
+................................F....................................... [  8%]
+........................................................................ [ 16%]
+........................................................................ [ 25%]
+..................F..................................................... [ 33%]
+........................................................................ [ 41%]
+........................................................................ [ 50%]
+........................................................................ [ 58%]
+........................................................................ [ 67%]
+.....................FFF................................................ [ 75%]
+........................................................................ [ 83%]
+........................................................................ [ 92%]
+...................................................................      [100%]
+================================== FAILURES ===================================
+________________ test_exhausted_delivery_reconciles_owner_once ________________
+tests\integration\orchestration\test_engineering_foundation.py:223: in test_exhausted_delivery_reconciles_owner_once
+    assert owned_row(env, work_items)["state"] == "DEAD"
+E   AssertionError: assert 'LEASED' == 'DEAD'
+E     
+E     - DEAD
+E     + LEASED
+_______ test_reference_survives_worker_api_history_and_cannot_purchase ________
+tests\integration\s01\test_two_sku_usability.py:23: in test_reference_survives_worker_api_history_and_cannot_purchase
+    assert report['dataReport']['summary']['historicalReference']==1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'historicalReference'
+______ test_reference_is_useful_but_never_a_procurement_quantity[False] _______
+tests\unit\data\test_two_sku_reference.py:28: in test_reference_is_useful_but_never_a_procurement_quantity
+    assert r['analysisState']==r['sourceGrade']=='HISTORICAL_REFERENCE'
+E   AssertionError: assert 'ANALYZED' == 'PLATFORM_REFERENCE'
+E     
+E     - PLATFORM_REFERENCE
+E     + ANALYZED
+_______ test_reference_is_useful_but_never_a_procurement_quantity[True] _______
+tests\unit\data\test_two_sku_reference.py:28: in test_reference_is_useful_but_never_a_procurement_quantity
+    assert r['analysisState']==r['sourceGrade']=='HISTORICAL_REFERENCE'
+E   AssertionError: assert 'ANALYZED' == 'PLATFORM_REFERENCE'
+E     
+E     - PLATFORM_REFERENCE
+E     + ANALYZED
+___________ test_reference_counts_do_not_rewrite_old_report_summary ___________
+tests\unit\data\test_two_sku_reference.py:39: in test_reference_counts_do_not_rewrite_old_report_summary
+    assert s['historicalReference']==1 and s['coverage']==1 and s['unanalyzable']==0
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'historicalReference'
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\������Ŀ\�羳�����ǻ�AIƽ̨\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/orchestration/test_engineering_foundation.py::test_exhausted_delivery_reconciles_owner_once
+FAILED tests/integration/s01/test_two_sku_usability.py::test_reference_survives_worker_api_history_and_cannot_purchase
+FAILED tests/unit/data/test_two_sku_reference.py::test_reference_is_useful_but_never_a_procurement_quantity[False]
+FAILED tests/unit/data/test_two_sku_reference.py::test_reference_is_useful_but_never_a_procurement_quantity[True]
+FAILED tests/unit/data/test_two_sku_reference.py::test_reference_counts_do_not_rewrite_old_report_summary
+5 failed, 854 passed, 1 warning in 354.20s (0:05:54)

@@ -1,0 +1,241 @@
+- complementary:
+  - link "序 序衡 COMMERCE OPERATIONS":
+    - /url: "#/workbench"
+    - generic: 序
+    - text: 序衡
+    - generic: COMMERCE OPERATIONS
+  - generic: 跨
+  - text: 跨境电商智慧中台
+  - generic: 采购运营空间
+  - generic: 采购业务
+  - navigation "主要导航":
+    - link "▦ 工作台":
+      - /url: "#/workbench"
+      - generic: ▦
+      - text: 工作台
+    - link "≡ 补货建议 2":
+      - /url: "#/suggestions"
+      - generic: ≡
+      - text: 补货建议
+      - generic: "2"
+    - link "☑ 请购管理":
+      - /url: "#/requisitions"
+      - generic: ☑
+      - text: 请购管理
+  - text: S01 · 供需与库存分析
+  - generic: 规则算数量 · 人工确认 · ERP 审批
+  - text: WORKSPACE
+  - generic: v0.2
+- banner:
+  - text: 采购运营 /
+  - generic: 补货建议 /
+  - generic: SKU 详情
+  - generic "本地教学环境：数据来自教学 ERP 的仿真业务数据，采购提交仅创建申请单": 教学数据
+  - generic: 可信会话 · 已连接
+  - button "退出会话"
+- main:
+  - navigation:
+    - link "← 返回补货建议":
+      - /url: "#"
+    - generic: 2 个对象 · 批次 40b8f761
+  - heading "北欧风陶瓷马克杯 350ml" [level=1]
+  - generic: HL-MUG350-WH
+  - generic: ·
+  - generic: 海岚家居美国站 / 海岚洛杉矶现货仓
+  - generic: ·
+  - generic: 无需补货
+  - generic: 件
+  - generic: 数据时点 2026-11-14 07:37
+  - heading "商品整体判断" [level=2]
+  - generic: 不混加不同店仓库存与销量
+  - generic: "1"
+  - generic: 相关店仓对象
+  - generic: "1"
+  - generic: 可给出补货判断
+  - generic: "0"
+  - generic: 建议补货店仓
+  - generic: "0"
+  - generic: 参考缺货风险店仓
+  - paragraph: 优先查看需补仓库与预计短缺日期。下表各行独立计算；点选店仓后查看其销量、预测、ERP 对比和采购资格。
+  - table "逐店仓补货判断":
+    - rowgroup:
+      - row "店铺 / 仓库 历史参考日均 可用库存 周期需求 参考补充 判断 / 风险":
+        - columnheader "店铺 / 仓库"
+        - columnheader "历史参考日均"
+        - columnheader "可用库存"
+        - columnheader "周期需求"
+        - columnheader "参考补充"
+        - columnheader "判断 / 风险"
+        - columnheader
+    - rowgroup:
+      - row "海岚家居美国站 海岚洛杉矶现货仓 2.71 7 个有记录日 81 29.9 11 天周期 0 暂不补货 当前店仓":
+        - cell "海岚家居美国站 海岚洛杉矶现货仓":
+          - text: 海岚家居美国站
+          - generic: 海岚洛杉矶现货仓
+        - cell "2.71 7 个有记录日":
+          - text: "2.71"
+          - generic: 7 个有记录日
+        - cell "81"
+        - cell "29.9 11 天周期":
+          - text: "29.9"
+          - generic: 11 天周期
+        - cell "0"
+        - cell "暂不补货":
+          - generic: 暂不补货
+        - cell "当前店仓":
+          - button "当前店仓" [disabled]
+  - heading "海岚洛杉矶现货仓 · 补货决策" [level=2]
+  - generic: 暂不补货
+  - generic: 未来 11 天参考需求
+  - generic: 29.9件
+  - generic: 需补充的库存
+  - generic: 0件
+  - generic: 满足 MOQ / 整箱的可采购量
+  - generic: —件
+  - generic: 当前库存预计覆盖
+  - generic: 29.8天
+  - paragraph: 报价交期 4 天 + 7天覆盖 · 未扣未核实在途 · 参考可信度中等 · 不代表已确认采购数量
+  - list:
+    - listitem: 已读取7条可信销售记录，7个有记录日期共19件；首末记录跨度7天。
+    - listitem: 区间参考需求约2.71件/天；仅有销售记录日均2.71件/天，两者口径不同。
+    - listitem: 当前可用库存81件覆盖11天参考需求，暂不补货；仍需关注需求变化。
+  - generic "试算假设与供给范围"
+  - heading "可信历史与未来需求" [level=2]
+  - generic: 已采集的全日期历史 · 当前店仓
+  - paragraph: 2026-11-06 至 2026-11-12 · 7 条记录 / 19 件 · 7 个有记录日 / 7 天跨度 · 最近样本距今 2 天
+  - img "有记录日期销量，7 个日期，合计 19":
+    - generic: "0"
+    - generic: "4"
+    - generic "2026-11-06：2 件"
+    - generic "2026-11-07：3 件"
+    - generic "2026-11-08：2 件"
+    - generic "2026-11-09：3 件"
+    - generic "2026-11-10：4 件"
+    - generic "2026-11-11：2 件"
+    - generic "2026-11-12：3 件"
+    - generic "日均 2.71 件"
+    - generic: 11-06
+    - generic: 11-07
+    - generic: 11-08
+    - generic: 11-09
+    - generic: 11-10
+    - generic: 11-11
+    - generic: 11-12
+  - paragraph: 图中仅展示有记录日期；空缺日期不补零。区间参考 2.71 件/天；销售记录日均 2.71 件/天。两者均不冒充已核验完整自然日均。
+  - table "需求周期情景":
+    - rowgroup:
+      - row "规划周期 区间参考需求 记录日均情景需求 区间参考补充库存":
+        - columnheader "规划周期"
+        - columnheader "区间参考需求"
+        - columnheader "记录日均情景需求"
+        - columnheader "区间参考补充库存"
+    - rowgroup:
+      - row "7 天 19 19 0":
+        - cell "7 天"
+        - cell "19"
+        - cell "19"
+        - cell "0"
+      - row "11 天 · 主周期 29.9 29.9 0":
+        - cell "11 天 · 主周期"
+        - cell "29.9"
+        - cell "29.9"
+        - cell "0"
+      - row "14 天 38 38 0":
+        - cell "14 天"
+        - cell "38"
+        - cell "38"
+        - cell "0"
+      - row "30 天 81.4 81.4 1":
+        - cell "30 天"
+        - cell "81.4"
+        - cell "81.4"
+        - cell "1"
+  - paragraph: 两种需求是假设情景，不是统计置信区间。真实大单保留；已排除不可信状态和重复记录，不以删除异常销量调结果。
+  - img "结存预测，最低结存 51.14285714，日期 2026-11-25":
+    - generic: "78"
+    - generic: "39"
+    - generic: "0"
+    - generic "2026-11-15：需求 2.71428571，到货 0，结存 78.28571429"
+    - generic "2026-11-16：需求 2.71428572，到货 0，结存 75.57142857"
+    - generic "2026-11-17：需求 2.71428571，到货 0，结存 72.85714286"
+    - generic "2026-11-18：需求 2.71428572，到货 0，结存 70.14285714"
+    - generic "2026-11-19：需求 2.71428571，到货 0，结存 67.42857143"
+    - generic "2026-11-20：需求 2.71428572，到货 0，结存 64.71428571"
+    - generic "2026-11-21：需求 2.71428571，到货 0，结存 62"
+    - generic "2026-11-22：需求 2.71428571，到货 0，结存 59.28571429"
+    - generic "2026-11-23：需求 2.71428572，到货 0，结存 56.57142857"
+    - generic "2026-11-24：需求 2.71428571，到货 0，结存 53.85714286"
+    - generic "2026-11-25：需求 2.71428572，到货 0，结存 51.14285714"
+    - generic: 11-15
+    - generic: 11-17
+    - generic: 11-19
+    - generic: 11-21
+    - generic: 11-23
+    - generic: 11-25
+  - generic: 结存
+  - generic: 负结存
+  - generic: 到货日
+  - generic: 最低 51.14285714 · 11-25
+  - heading "平台与 ERP 建议对比" [level=2]
+  - generic: 同业务范围 · 参考补充量口径
+  - table "ERP建议对比":
+    - rowgroup:
+      - row "仓库 平台参考补充 ERP 原有建议 平台减 ERP 说明":
+        - columnheader "仓库"
+        - columnheader "平台参考补充"
+        - columnheader "ERP 原有建议"
+        - columnheader "平台减 ERP"
+        - columnheader "说明"
+    - rowgroup:
+      - row "海岚洛杉矶现货仓 0 ERP 未提供 — 不强行比较":
+        - cell "海岚洛杉矶现货仓"
+        - cell "0"
+        - cell "ERP 未提供"
+        - cell "—"
+        - cell "不强行比较"
+  - paragraph: ERP 未提供适用建议，平台分析独立进行。
+  - heading "分析建议与请购资格" [level=2]
+  - generic: 采购条件待核实
+  - paragraph: 需求预测 → 参考补充库存 → 满足采购约束的候选 → 人工确认最终数量。当前分析不创建 ERP 单据。
+  - generic "查看采购限制（不影响上方需求试算）"
+  - button "刷新当前店仓分析（不调用 AI）"
+  - region "智能分析":
+    - generic: AI
+    - heading "智能分析" [level=2]
+    - generic: 未生成
+    - button "生成 AI 解读"
+    - paragraph: 尚未生成解读。生成时会重新读取该店仓的最新库存、销量与采购条件，并按需调用模型；不会修改规则建议数量，也不创建任何单据。
+  - tablist:
+    - tab "采购条件" [selected]
+    - tab "依据与限制"
+    - tab "历史分析"
+  - term: MOQ / 整箱倍数
+  - definition: 12 / 12 件
+  - term: 报价 / 币种
+  - definition: 3.20 USD
+  - term: 最低采购金额
+  - definition: "38.40"
+  - term: 供应商
+  - definition: 海岚北美生活用品供应
+  - term: 有效报价
+  - definition: HL-S01-P1-20261113-Q-MUG
+  - term: 报价有效期
+  - definition: 2026-11-10 至 2026-12-13
+  - heading "已有正式采购" [level=4]
+  - table:
+    - rowgroup:
+      - row "单据 状态 采购 / 已收 / 待收 计划到货 可售日期":
+        - columnheader "单据"
+        - columnheader "状态"
+        - columnheader "采购 / 已收 / 待收"
+        - columnheader "计划到货"
+        - columnheader "可售日期"
+    - rowgroup
+  - paragraph: 本次未取得该店仓的正式采购单据。
+  - generic: 暂不可提交
+  - generic: 该对象没有可提交的补货数量
+  - link "查看依据":
+    - /url: "#"
+- contentinfo:
+  - generic: 序衡 / S01 采购补货分析
+  - generic: 规则计算数量 · AI 辅助理解 · 人工确认提交

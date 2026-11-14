@@ -1,0 +1,128 @@
+- complementary:
+  - link "序 序衡 COMMERCE OPERATIONS":
+    - /url: "#/workbench"
+    - generic: 序
+    - text: 序衡
+    - generic: COMMERCE OPERATIONS
+  - generic: 跨
+  - text: 跨境电商智慧中台
+  - generic: 采购运营空间
+  - generic: 采购业务
+  - navigation "主要导航":
+    - link "▦ 工作台":
+      - /url: "#/workbench"
+      - generic: ▦
+      - text: 工作台
+    - link "≡ 补货建议 2":
+      - /url: "#/suggestions"
+      - generic: ≡
+      - text: 补货建议
+      - generic: "2"
+    - link "☑ 请购管理":
+      - /url: "#/requisitions"
+      - generic: ☑
+      - text: 请购管理
+  - text: S01 · 供需与库存分析
+  - generic: 规则算数量 · 人工确认 · ERP 审批
+  - text: WORKSPACE
+  - generic: v0.2
+- banner:
+  - text: 采购运营 /
+  - generic: 工作台
+  - generic "本地教学环境：数据来自教学 ERP 的仿真业务数据，采购提交仅创建申请单": 教学数据
+  - generic: 可信会话 · 已连接
+  - button "退出会话"
+- main:
+  - heading "补货决策工作台" [level=1]
+  - paragraph: 登记自有商品 · 全部获准店仓分别预测与判断 · 不扫描共享商品
+  - generic: 检查批次
+  - combobox "检查批次":
+    - option "11/14 15:47 · 已完成" [selected]
+    - option "11/14 15:39 · 已完成"
+    - option "11/14 14:54 · 未完成"
+    - option "11/14 12:57 · 已完成"
+    - option "11/14 12:13 · 已完成"
+    - option "11/14 12:01 · 已完成"
+    - option "11/14 11:31 · 已完成"
+    - option "11/14 11:27 · 未完成"
+    - option "11/14 11:23 · 已完成"
+    - option "11/14 09:29 · 已完成"
+    - option "11/14 02:17 · 已完成"
+    - option "11/13 22:45 · 已完成"
+    - option "11/13 22:34 · 已完成"
+    - option "11/13 22:31 · 已完成"
+    - option "11/13 21:52 · 已完成"
+    - option "11/13 21:46 · 已完成"
+  - button "重新检查自有商品"
+  - paragraph:
+    - text: 已识别 2 个自有 SKU、2 个店仓对象；可判断 2 个 SKU / 2 个店仓。需补货 1 个店仓，ERP 明显差异 0 个 SKU。
+    - text: 预测覆盖 100.0%；无可信销量的对象明确待核实，不拿 ERP 建议冒充独立分析。
+  - button "2 不同 SKU":
+    - generic: "2"
+    - generic: 不同 SKU
+  - button "2 已预测 SKU":
+    - generic: "2"
+    - generic: 已预测 SKU
+  - button "1 需补货 SKU":
+    - generic: "1"
+    - generic: 需补货 SKU
+  - button "1 暂不补货 SKU":
+    - generic: "1"
+    - generic: 暂不补货 SKU
+  - button "1 缺货风险 SKU":
+    - generic: "1"
+    - generic: 缺货风险 SKU
+  - heading "对象构成" [level=2]
+  - generic: 2 个店仓对象
+  - img "建议补货 1，暂不补货 1，共 2":
+    - generic "建议补货 1 项"
+    - generic "暂不补货 1 项"
+    - generic: "2"
+  - generic: 建议补货
+  - generic: "1"
+  - generic: 暂不补货
+  - generic: "1"
+  - heading "优先处理" [level=2]
+  - generic: 优先查看缺货风险和需补仓库 · 前 50 个店仓中的重点
+  - link "全部 2 项":
+    - /url: "#/suggestions?batch=40b8f761dbb44fa997b0d842c5a598d7"
+  - generic: 商品 / SKU
+  - generic: 来源 · 状态
+  - generic: 可用
+  - generic: 建议
+  - generic: 缺货日
+  - link "USB-C 100W 编织快充线 2m HL-CBL100-2M · 海岚家居美国站 / 海岚洛杉矶现货仓 建议补货 平台独立试算 6 45件 11-16":
+    - /url: "#/sku/36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30?batch=40b8f761dbb44fa997b0d842c5a598d7"
+    - generic: USB-C 100W 编织快充线 2m
+    - generic: HL-CBL100-2M · 海岚家居美国站 / 海岚洛杉矶现货仓
+    - generic: 建议补货
+    - generic: 平台独立试算
+    - generic: "6"
+    - generic: 45件
+    - generic: 11-16
+  - heading "辅助 · 数据来源" [level=2]
+  - generic: 占全部对象
+  - generic: 独立需求预测
+  - generic: "2"
+  - generic: 100%
+  - heading "较早缺货" [level=2]
+  - generic: 前 50 项内
+  - link "HL-CBL100-2M 11-16":
+    - /url: "#/sku/36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30?batch=40b8f761dbb44fa997b0d842c5a598d7"
+    - generic: HL-CBL100-2M
+    - generic: 11-16
+  - heading "本次检查" [level=2]
+  - generic: 已完成
+  - term: 对象 / 已处理
+  - definition: 2 / 2
+  - term: 有可查看结论
+  - definition: 100%
+  - term: 模型调用 / 业务写入
+  - definition: 0 / 0
+  - term: 枚举完整
+  - definition: 是
+  - term: 统计口径
+  - definition: product-counts-v1
+- contentinfo:
+  - generic: 序衡 / S01 采购补货分析
+  - generic: 规则计算数量 · AI 辅助理解 · 人工确认提交

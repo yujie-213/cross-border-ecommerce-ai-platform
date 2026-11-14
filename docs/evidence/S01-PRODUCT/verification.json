@@ -1,0 +1,92 @@
+{
+  "observedAt": "2026-11-14T07:45:56.534120+00:00",
+  "implementationCommit": "617fee365cf27a3c29fd48b0240fd8d201bd8f50",
+  "uiCommit": "3219ce0215ab1766d2b19a72e0a1de95144c8380",
+  "classifications": {
+    "live": "Teaching ERP read-only via real API/independent Worker/MySQL and Edge",
+    "synthetic": "Isolated fixtures; not live multiwarehouse or procurement acceptance"
+  },
+  "backendFull": {
+    "tests": "860",
+    "failures": "1",
+    "errors": "0",
+    "skipped": "0",
+    "time": "350.379"
+  },
+  "backendInitial": {
+    "tests": "859",
+    "failures": "5",
+    "errors": "0",
+    "skipped": "0",
+    "time": "354.197"
+  },
+  "foundationRecheck": {
+    "tests": "40",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "5.850"
+  },
+  "backendConclusion": "FULL_RUN_859_PASS_1_TRANSIENT_FAIL_THEN_UNCHANGED_FOUNDATION_40_PASS; NOT_SINGLE_ALL_GREEN_RUN",
+  "frontend": {
+    "build": "PASS",
+    "typecheck": "PASS",
+    "tests": 53,
+    "failed": 0
+  },
+  "liveBatchTask": "40b8f761dbb44fa997b0d842c5a598d7",
+  "liveSingleTask": "559bcb30d0234a258f5e39b29f3d940f",
+  "browser": {
+    "result": "PASS",
+    "desktopViewports": [
+      "1440x900",
+      "1024x768"
+    ],
+    "consoleErrors": 0,
+    "sharedScan": false,
+    "actions": [
+      "Existing admin session recovery after service restart",
+      "Owned batch from UI",
+      "Workbench and SKU filter counts agree",
+      "Cable and mug per-scope demand and decisions",
+      "ERP not provided independent comparison",
+      "Single refresh with explainAI false",
+      "Single URL reload restored",
+      "49 units fails MOQ/carton and submit remains disabled",
+      "No submit click"
+    ],
+    "limitations": [
+      "No retyping real admin password; existing authenticated session reused",
+      "No new paid provider call",
+      "No live ERP mutation",
+      "Full-page screenshot timeout; viewport screenshots saved"
+    ]
+  },
+  "artifacts": {
+    "cable-1024.jpg": "d1f9fa700bba99b434980e662183e74e48d4cfc855a2b172cfd89fdfb9e8aa17",
+    "cable-1440.jpg": "bd15c2251505c269ad6f41f701b476a572d2edc64d85b5dabda4356c2ec6cb96",
+    "cable-dom.txt": "2dfcb747ee0f1bc00377866bc4341e310a517ef5d74c62291261ca6907672711",
+    "erp-comparison.jpg": "ef6ddf3961b3788202307eead71b7720f86c93348bb78cfc3d03947f821a25b6",
+    "mug-1440.jpg": "f780159419320a1c45f9fe2b07214258445fe33f38ca36b7a14a148bcc4157ce",
+    "mug-dom.txt": "29cb96910a9a2aa21cda2e8b9cd1c9dccc056d46635599cadac66c0e6b59d43b",
+    "procurement-boundary.jpg": "1eb3f9d1d86186c7f28966749a39fb94bed091464aa1ea62e9d2c97fe9a31708",
+    "workbench-1440.jpg": "1cdcc8f693ee6727551c747b7ab7c884cb1222158dee45d9bc9fa4f201c912a7",
+    "workbench-dom.txt": "7e4d5b7a00af842368be4e062b89015c39e51c0259610cafe434e71ae583e813"
+  },
+  "enterpriseGates": "BLOCKED",
+  "finalStatus": "REVIEW",
+  "mergedMain": false,
+  "testCommit": "679a846f42b14321a33ff7277843bb3099234be3",
+  "productTests": {
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "artifact": "product-tests.xml",
+    "provider": "SYNTHETIC_ONLY"
+  },
+  "commands": {
+    "backend": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python -m pytest -p no:cacheprovider --basetemp=.tmp/pd-final --junitxml=docs/evidence/S01-PRODUCT/backend-tests.xml",
+    "frontend": "npm run build; npm test -- --reporter=dot"
+  }
+}
