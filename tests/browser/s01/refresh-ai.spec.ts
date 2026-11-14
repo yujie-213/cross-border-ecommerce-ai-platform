@@ -33,7 +33,7 @@ test('顶部更新补货分析实际生成AI，空状态不重复，刷新保留
  await page.screenshot({path:path.join(out,'screenshots/30-refresh-ai-running.png'),fullPage:true})
  await expect(ai).toHaveAttribute('data-state','ready',{timeout:240000})
  await expect(page.getByRole('button',{name:'更新补货分析',exact:true})).toBeEnabled()
- await expect(page.getByRole('button',{name:'人工确认并提交请购'})).toBeDisabled()
+ await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled()
  const taskId=new URLSearchParams(page.url().split('?')[1]).get('single')
  expect(taskId).toBeTruthy()
  const response=await page.request.get('/api/v1/s01/v2/singles/'+taskId)

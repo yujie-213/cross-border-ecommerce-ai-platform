@@ -24,7 +24,7 @@ test('日常AI策略：真实点击生成建议并刷新保留结果',async({pag
  await page.getByRole('button',{name:/生成 AI 建议|重试 AI 建议|重新生成 AI 建议/,exact:true}).click()
  await expect(ai).toHaveAttribute('data-state','running')
  await expect(ai).toHaveAttribute('data-state','ready',{timeout:240000})
- await expect(page.getByRole('button',{name:'人工确认并提交请购'})).toBeDisabled()
+ await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled()
  const taskId=new URLSearchParams(page.url().split('?')[1]).get('single')
  expect(taskId).toBeTruthy()
  const response=await page.request.get('/api/v1/s01/v2/singles/'+taskId)

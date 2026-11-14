@@ -1107,6 +1107,13 @@
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/38-buyer-advice-final-HLX-CASE-NOQUOTE.png",
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/39-buyer-advice-final-HLX-LAMP-SURGE.png",
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/40-buyer-ai-final-partial-failure.png",
-    "docs/evidence/S01-WORKFLOW-20261115/screenshots/41-buyer-advice-final-820.png"
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/41-buyer-advice-final-820.png",
+    "src/commerce_hub/scenarios/s01_v2/plan_preview.py",
+    "tests/unit/s01/test_plan_preview.py",
+    "tests/browser/s01/plan-preview.spec.ts",
+    "docs/evidence/S01-WORKFLOW-20261115/plan-preview-result.json",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/42-plan-known-arrival.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/43-plan-assumed-arrival.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/44-plan-mobile.png"
   ]
 }

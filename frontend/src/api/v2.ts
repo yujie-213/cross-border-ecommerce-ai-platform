@@ -35,6 +35,7 @@ export interface V2Item extends V2Admission {
   inventoryBasis?: { status: string; observedAt?: string | null; rowUpdatedAt?: string | null; residual?: unknown; issues?: string[]; checkpoint?: { version?: string; evidenceDigest?: string } } | null
   recoveryHints?: { code: string; message: string; action: string }[]
 }
+export interface PlanPreview { entityKey: string; sourceTaskId: string; observedAt: string; quantity: number; availableDate: string; windowStart: string; windowEnd: string; evaluation: Evaluation; semantics: 'HYPOTHETICAL_PLAN_NOT_CONFIRMED_SUPPLY' }
 export interface ProductForecast {
   available: boolean; reason?: string; sampleStart?: string; sampleEnd?: string; sampleAgeDays?: number
   observedDays?: number; spanDays?: number; unknownDays?: number; orderCount?: number; totalSales?: string
@@ -65,6 +66,10 @@ export function quantityError(item: V2Item, quantity: number, reason: string) {
 }
 export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[]; blockedByOtherAnalysis?: boolean }
 const issueLabels: Record<string, string> = {
+  PLAN_BASELINE_UNAVAILABLE: '当前依据不足，暂不能试算补货计划',
+  PLAN_QUANTITY_INVALID: '请输入 1 至 100000 的整数数量',
+  PLAN_DATE_OUTSIDE_WINDOW: '到货日期须在当前预测周期内',
+  PLAN_BASELINE_VERSION_MISMATCH: '这份历史分析暂不支持计划试算，请更新补货分析',
   ERP_AUTH_REJECTED: 'ERP 身份验证失败，请核对本机 ERP 凭据',
   ERP_TIMEOUT: 'ERP 读取超时，请稍后重新分析', ERP_TRANSPORT_FAILURE: '暂时无法连接 ERP，请检查网络后重试',
   MODEL_TIMEOUT: 'AI 服务响应超时，可稍后重试', MODEL_NOT_ENABLED: 'AI 服务未启用，请核对本机模型配置',

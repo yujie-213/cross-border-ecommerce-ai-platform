@@ -26,11 +26,11 @@ test('采购人员真实流程：发现风险、分仓分析、AI建议、ERP跟
   result.surgeAI=await page.getByRole('region',{name:'AI 行动建议'}).getAttribute('data-state');await shot('08-surge-ai-result')
   expect(result.surgeAI).toBe('ready')
  }
- await find('HLX-CASE-NOQUOTE');await expect(page.getByRole('button',{name:'更新补货分析',exact:true})).toBeEnabled();await expect(page.getByRole('button',{name:'人工确认并提交请购'})).toBeDisabled();await page.getByRole('button',{name:'更新补货分析',exact:true}).click();await expect(page.getByRole('region',{name:'AI 行动建议'})).toHaveAttribute('data-state','running');await expect(page.locator('.product-actions button')).toHaveText('更新补货分析',{timeout:240000});await shot('09-no-quote-analysis')
+ await find('HLX-CASE-NOQUOTE');await expect(page.getByRole('button',{name:'更新补货分析',exact:true})).toBeEnabled();await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled();await page.getByRole('button',{name:'更新补货分析',exact:true}).click();await expect(page.getByRole('region',{name:'AI 行动建议'})).toHaveAttribute('data-state','running');await expect(page.locator('.product-actions button')).toHaveText('更新补货分析',{timeout:240000});await shot('09-no-quote-analysis')
  if(process.env.S01_WORKFLOW_MODELS==='1'){
   await page.getByRole('button',{name:/生成 AI 建议|重试 AI 建议/,exact:true}).click();result.modelRequests++
   await expect(page.getByRole('region',{name:'AI 行动建议'})).toHaveAttribute('data-state','running');await expect(page.getByRole('region',{name:'AI 行动建议'})).not.toHaveAttribute('data-state','running',{timeout:240000})
-  result.noQuoteSingle=page.url().split('single=')[1];result.noQuoteAI=await page.getByRole('region',{name:'AI 行动建议'}).getAttribute('data-state');await shot('10-no-quote-ai');expect(result.noQuoteAI).toBe('ready');await expect(page.getByRole('button',{name:'人工确认并提交请购'})).toBeDisabled()
+  result.noQuoteSingle=page.url().split('single=')[1];result.noQuoteAI=await page.getByRole('region',{name:'AI 行动建议'}).getAttribute('data-state');await shot('10-no-quote-ai');expect(result.noQuoteAI).toBe('ready');await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled()
  }
  await find('HLX-MAT-SPARSE');await expect(page.getByRole('region',{name:'AI 行动建议'})).not.toHaveAttribute('data-state','ready');await expect(page.getByRole('region',{name:'AI 行动建议'})).toContainText('HLX-MAT-SPARSE');await shot('11-sparse-history');result.crossSkuAI='PASS'
  await page.setViewportSize({width:1024,height:900});await shot('12-detail-1024');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true)

@@ -17,7 +17,7 @@ test('读取已完成真实AI结果、最终布局与刷新后的ERP状态，不
   await expect(page.getByRole('region',{name:'AI 行动建议'})).toContainText(model.sku)
   const name=model.sku==='HLX-LAMP-SURGE'?'08-surge-ai-result':'10-no-quote-ai'
   await page.screenshot({path:path.join(out,'screenshots/'+name+'.png'),fullPage:true})
-  if(model.sku==='HLX-CASE-NOQUOTE')await expect(page.getByRole('button',{name:'人工确认并提交请购'})).toBeDisabled()
+  if(model.sku==='HLX-CASE-NOQUOTE')await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled()
  }
  await page.setViewportSize({width:820,height:1000});await page.screenshot({path:path.join(out,'screenshots/17-detail-820.png'),fullPage:true});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true)
  await page.setViewportSize({width:1440,height:1000});await page.goto('/#/requisitions')

@@ -38,7 +38,7 @@ test('采购建议按商品解释数量与交期，并区分补货成功和AI失
   expect(model.usage.totalTokens).toBeGreaterThan(0)
   if(sku==='HLX-CASE-NOQUOTE'){
    await expect(ai.locator('h3')).toContainText('报价')
-   await expect(page.getByRole('button',{name:'人工确认并提交请购'})).toBeDisabled()
+   await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled()
   }
   await page.reload();await expect(ai).toHaveAttribute('data-state','ready',{timeout:30000})
   await expect(ai).toContainText(sku)

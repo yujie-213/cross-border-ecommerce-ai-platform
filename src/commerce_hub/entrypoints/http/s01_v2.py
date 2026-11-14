@@ -1,4 +1,5 @@
 """V2 HTTP uses the same trusted principal/CSRF dependency as existing tasks."""
+from datetime import date
 from typing import Annotated
 from fastapi import Depends,Header,Request,Query
 from pydantic import BaseModel,ConfigDict,Field
@@ -17,6 +18,9 @@ class Single(Empty):
     batchId:str=Field(min_length=1,max_length=64)
     entityKey:str=Field(pattern=r'^[0-9a-f]{64}$')
     explainAI:bool=Field(default=False,strict=True)
+class PlanPreview(Empty):
+    quantity:int=Field(ge=1,le=100000,strict=True)
+    availableDate:date
 class Confirm(Empty):
     finalQuantity:int=Field(ge=1,le=100000,strict=True)
     adjustmentReason:str=Field(default='',max_length=1000)
@@ -102,6 +106,15 @@ def register_v2_routes(app,principal):
         result=dict(row)
         result['relatedScopes']=[{k:v for k,v in r.items() if k not in {'ruleResult','snapshotManifest'}} for r in sorted(rows.values(),key=priority) if r['sku']==row['sku']]
         return result
+    @app.post('/api/v1/s01/v2/batches/{task_id}/items/{entity_key}/plan-preview')
+    def plan_preview(task_id:str,entity_key:str,body:PlanPreview,request:Request,actor=Depends(principal)):
+        s,p,view,rows=data(request,actor,task_id)
+        if entity_key not in rows:raise TaskError('NOT_FOUND',404)
+        item=rows[entity_key]
+        if p.owned_only and p.opening_binding(item) is None:raise TaskError('V2_BUSINESS_SCOPE_NOT_REGISTERED',403)
+        from commerce_hub.scenarios.s01_v2.plan_preview import preview_plan
+        try:return dict(preview_plan(item,body.quantity,body.availableDate),sourceTaskId=task_id)
+        except ValueError as exc:raise TaskError(str(exc),422) from None
     @app.post('/api/v1/s01/v2/batches/{task_id}/cancel')
     def cancel(task_id:str,body:Cancel,request:Request,key:Annotated[str,Header(alias='Idempotency-Key',min_length=1,max_length=128)],actor=Depends(principal)):
         s,p,view,rows=data(request,actor,task_id)
