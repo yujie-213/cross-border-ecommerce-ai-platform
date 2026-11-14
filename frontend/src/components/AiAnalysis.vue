@@ -2,136 +2,25 @@
 import { computed } from 'vue'
 import type { AI, ExplanationItem, TaskState } from '../api/types'
 import { issueLabel } from '../api/v2'
-
-const props = defineProps<{
-  ai: AI | null
-  taskState?: TaskState | null
-  loading?: boolean
-  error?: string
-  errorCode?: string | null
-}>()
-const emit = defineEmits<{ generate: [] }>()
-
-const SECTIONS: { key: string; label: string }[] = [
-  { key: 'keyEvidence', label: '关键事实' },
-  { key: 'majorRisks', label: '风险提醒' },
-  { key: 'humanConfirmations', label: '建议人工核实' }
-]
-
-const items = (key: string): ExplanationItem[] => {
-  const value = props.ai?.explanation?.[key]
-  return Array.isArray(value) ? value : []
-}
-
-const singleRunning = computed(() => !!props.taskState && ['QUEUED', 'RUNNING'].includes(props.taskState))
-
-const running = computed(() => !!props.loading || singleRunning.value)
-
-const taskFailed = computed(() => props.taskState === 'FAILED' && !props.ai && !running.value)
-
-const status = computed(() => {
-  if (running.value) return { key: 'running', label: '生成中', tone: 'info' }
-  if (taskFailed.value) return { key: 'task-failed', label: '分析失败', tone: 'danger' }
-  if (!props.ai) return { key: 'none', label: '未生成', tone: 'muted' }
-  if (props.ai.status === 'AVAILABLE') return { key: 'ok', label: '已生成', tone: 'success' }
-  if (props.ai.status === 'NOT_ATTEMPTED') return { key: 'none', label: '未调用', tone: 'muted' }
-  return { key: 'failed', label: '未生成', tone: 'danger' }
-})
-
-const conclusion = computed(() => items('recommendationReasons')[0]?.text || '')
-const reasons = computed(() => items('recommendationReasons').slice(1))
-const columns = computed(() => SECTIONS.map(section => ({ ...section, list: items(section.key) })).filter(section => section.list.length))
-const tokens = computed(() => props.ai?.usage?.totalTokens ?? null)
-const reason = computed(() => props.ai?.reason || props.error || '')
-const failureText = computed(() => {
-  const code = props.errorCode
-  if (!code) return props.error || '服务端未返回错误码'
-  return issueLabel(code) + '（' + code + '）'
-})
+const props = defineProps<{ ai: AI | null; taskState?: TaskState | null; loading?: boolean; error?: string; errorCode?: string | null; context?: string; enabled?: boolean; analysisOnly?: boolean }>()
+const emit = defineEmits<{ generate: []; refresh: [] }>()
+const items = (key: string): ExplanationItem[] => Array.isArray(props.ai?.explanation?.[key]) ? props.ai!.explanation![key] : []
+const running = computed(() => !!props.loading || ['QUEUED','RUNNING'].includes(props.taskState || ''))
+const ready = computed(() => !running.value && props.ai?.status === 'AVAILABLE')
+const failed = computed(() => !running.value && (!!props.error || props.taskState === 'FAILED' || props.ai?.status === 'UNAVAILABLE' || (props.ai?.status === 'NOT_ATTEMPTED' && !props.analysisOnly)))
+const label = computed(() => running.value ? (props.analysisOnly ? '更新分析中' : '生成建议中') : ready.value ? '建议已就绪' : failed.value ? '本次未生成' : '等待你的分析请求')
+const failure = computed(() => props.errorCode ? issueLabel(props.errorCode) : props.ai?.reason ? issueLabel(props.ai.reason) : props.error || '本次 AI 暂不可用，补货判断仍可查看。')
+const actions = computed(() => items('recommendationReasons'))
+const primaryIndex = computed(() => Math.max(0, actions.value.findIndex(item => /先|加急|调拨|补齐|核实/.test(item.text))))
+const primary = computed(() => actions.value[primaryIndex.value])
+const secondary = computed(() => actions.value.filter((_,index) => index !== primaryIndex.value)[0])
 </script>
-
 <template>
-  <section class="ai-panel" aria-label="智能分析">
-    <header class="ai-head">
-      <span class="ai-badge">AI</span>
-      <h2>智能分析</h2>
-      <span class="chip" :class="status.tone">{{ status.label }}</span>
-      <span v-if="status.key === 'ok'" class="ai-scope">基于本次已读取的库存、销量与采购条件</span>
-      <button v-if="['none', 'failed'].includes(status.key)" class="button small ai-cta"
-              :disabled="running" @click="emit('generate')">
-        {{ status.key === 'failed' ? '重新生成' : '生成 AI 解读' }}
-      </button>
-    </header>
-
-    <div v-if="status.key === 'running'" class="ai-body">
-      <p class="ai-note">正在读取该店仓最新事实并生成单品分析；仅显式请求 AI 解读时才调用模型。</p>
-      <div class="skeleton w80" /><div class="skeleton w95" /><div class="skeleton w60" />
-    </div>
-
-    <div v-else-if="status.key === 'ok'" class="ai-body">
-      <p class="ai-lead">{{ conclusion }}</p>
-      <div class="ai-grid" :style="{ gridTemplateColumns: `repeat(${Math.max(1, columns.length)}, minmax(0, 1fr))` }">
-        <div v-for="column in columns" :key="column.key" class="ai-col">
-          <h4>{{ column.label }}</h4>
-          <ul><li v-for="(item, index) in column.list" :key="index">{{ item.text }}</li></ul>
-        </div>
-      </div>
-      <div v-if="reasons.length" class="ai-more">
-        <h4>建议与 ERP 对比</h4>
-        <ul><li v-for="(item, index) in reasons" :key="index">{{ item.text }}</li></ul>
-      </div>
-      <footer class="ai-meta">
-        <span>来源：本次单品分析</span>
-        <span v-if="tokens !== null">Token {{ tokens }}</span>
-        <span class="ai-boundary">AI 仅解释，不计算补货数量</span>
-      </footer>
-    </div>
-
-    <div v-else-if="status.key === 'task-failed'" class="ai-body">
-      <p class="ai-note strong">单品分析任务失败，未生成结论</p>
-      <p class="ai-reason">{{ failureText }}</p>
-      <p class="ai-hint">失败原因来自服务端任务回执；规则建议与批次结论不受影响，可重试或改看批次结果。</p>
-      <button class="button small" style="margin-top:8px" @click="emit('generate')">重试单品分析</button>
-    </div>
-
-    <div v-else-if="status.key === 'failed'" class="ai-body">
-      <p class="ai-note strong">本次未生成解释</p>
-      <p class="ai-reason">{{ reason || '模型未返回内容，可重新尝试。' }}</p>
-      <p class="ai-hint">规则建议数量与采购条件仍然有效；AI 不可用不影响人工判断。</p>
-    </div>
-
-    <div v-else class="ai-body">
-      <p class="ai-note">尚未生成解读。生成时会重新读取该店仓的最新库存、销量与采购条件，并按需调用模型；不会修改规则建议数量，也不创建任何单据。</p>
-    </div>
+  <section class="agent-advice" aria-label="AI 行动建议" :data-state="running ? 'running' : ready ? 'ready' : failed ? 'failed' : 'idle'" aria-live="polite">
+    <header class="advice-header"><div class="advice-mark">AI</div><div><h2>AI 行动建议</h2><p>{{ context || '针对当前商品与店仓' }}</p></div><span class="advice-status">{{ label }}</span><button class="button primary" :disabled="running" @click="emit('generate')">{{ running ? '正在处理…' : ready ? '重新生成 AI 建议' : failed ? '重试 AI 建议' : '生成 AI 建议' }}</button></header>
+    <div v-if="running" class="advice-running" role="status"><span class="spinner" /><div><b>{{ analysisOnly ? '正在读取最新销量、库存与采购条件' : taskState === 'RUNNING' ? '正在分析当前店仓，完成后会在这里展示建议' : '请求已受理，正在准备分析' }}</b><p>{{ analysisOnly ? '本次只更新补货分析，不调用 AI。' : '先核实 ERP 事实，再生成有依据的行动建议。你可以离开，结果会保存。' }}</p></div></div>
+    <template v-else-if="ready"><div class="advice-conclusion"><span>建议先做</span><h3>{{ primary?.text || '请核实下方建议与业务事实后行动' }}</h3></div><div class="advice-support"><div v-if="secondary"><h4>接下来</h4><p>{{ secondary.text }}</p></div><div v-if="items('majorRisks')[0]"><h4>重点留意</h4><p>{{ items('majorRisks')[0].text }}</p></div></div><details class="advice-details"><summary>查看建议依据与完整解读</summary><div v-for="section in [{key:'recommendationReasons',label:'行动建议'},{key:'keyEvidence',label:'判断依据'},{key:'majorRisks',label:'风险'},{key:'humanConfirmations',label:'人工核实'}]" :key="section.key"><h4>{{ section.label }}</h4><ul><li v-for="(entry,index) in items(section.key)" :key="index">{{ entry.text }}</li></ul></div><small>模型 {{ ai?.actualModelRevision || ai?.provider || '未记录' }} · Token {{ ai?.usage?.totalTokens ?? '未返回' }} · 费用 {{ ai?.costStatus || '未确认' }}</small></details><p class="advice-boundary">AI 辅助解释与行动判断；数量由补货规则计算，采购须人工确认。</p></template>
+    <div v-else-if="failed" class="advice-empty"><b>这次没有生成 AI 建议</b><p>{{ failure }}</p><p>下方已完成的销量、库存和补货结果不会丢失。可点击上方按钮重试。</p><button v-if="taskState && !['FAILED','CANCELLED','SUCCEEDED'].includes(taskState)" class="button" @click="emit('refresh')">重新读取状态</button></div>
+    <div v-else class="advice-empty"><h3>让 AI 帮你判断下一步</h3><p>综合销量变化、各仓库存、ERP 建议差异和采购限制，形成可执行的建议。</p><p class="muted small">{{ enabled === false ? '当前 AI 服务未启用；仍可正常更新补货分析。' : '仅点击“生成 AI 建议”时调用模型；缺少报价也可分析。' }}</p></div>
   </section>
 </template>
-
-<style scoped>
-.ai-panel { background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--nav); border-radius: 8px; overflow: hidden }
-.ai-head { display: flex; align-items: center; gap: 10px; padding: 11px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap }
-.ai-head h2 { font-size: 14px }
-.ai-badge { display: grid; place-items: center; height: 19px; padding: 0 6px; border-radius: 4px; background: var(--nav); color: #fff; font-size: 9.5px; font-weight: 700; letter-spacing: .6px }
-.ai-scope { font-size: 10.5px; color: var(--subtle) }
-.ai-cta { margin-left: auto }
-.ai-body { padding: 16px 18px }
-.ai-lead { font-size: 14px; line-height: 1.75; color: #22303e; margin-bottom: 14px }
-.ai-grid { display: grid; gap: 20px }
-.ai-col h4 { margin: 0 0 5px; font-size: 10.5px; font-weight: 600; color: var(--subtle); letter-spacing: .4px }
-.ai-col ul, .ai-more ul { margin: 0; padding-left: 15px; font-size: 12px; line-height: 1.75; color: #3b4a58 }
-.ai-col li { margin-bottom: 4px }
-.ai-more { margin-top: 12px; border-top: 1px dashed #eef1f4; padding-top: 8px; font-size: 11.5px; color: var(--muted) }
-.ai-more summary { cursor: pointer; color: var(--primary) }
-.ai-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; padding-top: 9px; border-top: 1px solid #f2f4f6; font-size: 10.5px; color: var(--subtle) }
-.ai-boundary { margin-left: auto; color: var(--muted) }
-.ai-note { font-size: 12px; line-height: 1.75; color: var(--muted) }
-.ai-note.strong { color: var(--ink); font-weight: 600; margin-bottom: 4px }
-.ai-reason { font-size: 12px; color: var(--danger); margin-bottom: 6px }
-.ai-hint { font-size: 11px; color: var(--subtle) }
-.chip { font-size: 10px; padding: 1px 7px; border-radius: 4px; background: #eef1f4; color: #556575; white-space: nowrap }
-.chip.success { background: var(--success-bg); color: var(--success) }
-.chip.info { background: var(--info-bg); color: var(--info) }
-.chip.danger { background: var(--danger-bg); color: var(--danger) }
-.skeleton { height: 9px; border-radius: 4px; background: #eef2f4; margin: 8px 0; animation: pulse 1.4s infinite }
-.w80 { width: 80% } .w95 { width: 95% } .w60 { width: 60% }
-@keyframes pulse { 50% { opacity: .45 } }
-</style>

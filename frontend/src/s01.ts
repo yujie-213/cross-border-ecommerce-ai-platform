@@ -9,7 +9,7 @@ import { terminal } from './domain'
  * Everything here is read from the real API; nothing is derived by the client
  * except pure grouping of server-returned counts.
  */
-type SingleRow = Task & { sku?: string; entityKey?: string; sourceGrade?: string }
+type SingleRow = Task & { sku?: string; entityKey?: string; sourceGrade?: string; aiStatus?: string; observedAt?: string }
 
 const emptyList = (): V2List => ({ total: 0, items: [], stores: [], warehouses: [] })
 /** The backend returns its own priority order; the workbench shows the head of it. */
@@ -68,6 +68,8 @@ export const state = reactive({
   singleReport: null as V2Single['report'],
   singleLoading: false,
   singlePolling: false,
+  singleMode: null as 'analysis' | 'ai' | null,
+  singleError: '',
 
   singleHistory: [] as SingleRow[],
   requisition: null as V2Requisition | null,
@@ -199,6 +201,7 @@ export function reset() {
   state.batches = []; state.batchId = ''; state.progress = null
   state.list = emptyList(); state.item = null; state.itemKey = ''
   state.singleId = ''; state.singleReport = null; state.singleTask = null
+  state.singleMode = null; state.singleError = ''; state.singleLoading = false; state.singlePolling = false
   state.singleHistory = []; state.requisition = null; savePending(null)
 }
 
@@ -226,6 +229,9 @@ export async function openBatch(id: string) {
   if (state.batchId === id && state.progress) return
   clearTimeout(pollTimer)
   const mine = ++epoch
+  detailEpoch++; clearTimeout(singleTimer)
+  state.item = null; state.itemKey = ''; state.singleReport = null; state.singleTask = null; state.singleId = ''
+  state.singleLoading = false; state.singlePolling = false; state.singleError = ''; state.singleMode = null
   state.batchId = id
   state.progress = null
   state.progressLoading = true
@@ -297,16 +303,19 @@ export function setOffset(offset: number) {
 
 export async function openItem(key: string, singleId?: string) {
   const mine = ++detailEpoch
+  clearTimeout(singleTimer)
   state.itemKey = key
   state.item = null
   state.itemLoading = true
   state.singleId = ''; state.singleReport = null; state.singleTask = null; state.requisition = null; state.requisitionReadState = 'idle'
+  state.singleMode = null; state.singleError = ''; state.singleLoading = false; state.singlePolling = false; state.error = ''
   try {
     const item = await request<V2Item>(`/s01/v2/batches/${state.batchId}/items/${key}`)
     if (mine !== detailEpoch) return
     state.item = item
     // Only an explicitly referenced analysis is opened: an older single must never
     // silently replace the current batch conclusion.
+    state.itemLoading = false
     if (singleId) await openSingle(singleId)
   } catch (e) {
     // Opened from somewhere without a batch context (e.g. the requisition ledger):
@@ -321,16 +330,17 @@ export async function openItem(key: string, singleId?: string) {
   finally { if (mine === detailEpoch) state.itemLoading = false }
 }
 
-export async function openSingle(id: string) {
+export async function openSingle(id: string, mode: 'analysis' | 'ai' | null = null) {
   clearTimeout(singleTimer)
   const mine = ++detailEpoch
   state.singleId = id
   state.requisition = null; state.requisitionReadState = 'idle'
   state.singleReport = null
   state.singleTask = null
+  state.singleMode = mode; state.singleError = ''; state.singlePolling = false
   state.singleLoading = true
   await pollSingle(id, mine)
-  state.singleLoading = false
+  if (mine === detailEpoch) state.singleLoading = false
 }
 
 async function pollSingle(id: string, mine: number, count = 0) {
@@ -339,9 +349,15 @@ async function pollSingle(id: string, mine: number, count = 0) {
     if (mine !== detailEpoch || state.singleId !== id) return
     state.singleTask = data.task
     if (data.report) {
+      if (data.report.dataReport.item.entityKey !== state.itemKey) {
+        state.singleError = '这份分析不属于当前店仓，请返回该商品重新分析。'
+        state.singleReport = null; state.singleTask = null; state.singlePolling = false; state.singleLoading = false
+        return
+      }
       state.singleReport = data.report
       state.item = { ...data.report.dataReport.item, relatedScopes: state.item?.relatedScopes }
       state.singleLoading = false
+      state.singlePolling = false
       await readRequisition()
       await loadSingleHistory()
     } else if (!terminal(data.task.state) && count < 300) {
@@ -349,8 +365,12 @@ async function pollSingle(id: string, mine: number, count = 0) {
       singleTimer = setTimeout(() => void pollSingle(id, mine, count + 1), 2000)
     } else {
       state.singlePolling = false
+      state.singleLoading = false
+      if (data.task.state === 'FAILED') state.singleError = data.task.errorCode || '分析未完成，请重试。'
+      if (data.task.state === 'CANCELLED') state.singleError = '本次分析已停止，可重新分析。'
+      if (!terminal(data.task.state)) state.singleError = '本次分析仍在处理中，请重新读取状态；不要重复创建。'
     }
-  } catch (e) { if (mine === detailEpoch) fail(e) }
+  } catch (e) { if (mine === detailEpoch) { state.singleError = errorText(e); state.singlePolling = false; state.singleLoading = false } }
 }
 
 export async function createSingle(explainAI = false) {
@@ -358,6 +378,9 @@ export async function createSingle(explainAI = false) {
   if (!item || state.busy || !state.batchId) return
   state.busy = true; state.error = ''; state.note = ''
   state.singleLoading = true
+  state.singleMode = explainAI ? 'ai' : 'analysis'; state.singleError = ''
+  state.singleReport = null; state.singleTask = null; state.singleId = ''; state.singlePolling = false
+  const mine = detailEpoch, batch = state.batchId, entityKey = item.entityKey
   const key = crypto.randomUUID()
   try {
     const task = await request<Task>('/s01/v2/singles', {
@@ -365,11 +388,12 @@ export async function createSingle(explainAI = false) {
       headers: { 'Idempotency-Key': key },
       body: JSON.stringify({ batchId: state.batchId, entityKey: item.entityKey, explainAI })
     })
-    await openSingle(task.taskRef.taskId)
+    if (mine !== detailEpoch || state.itemKey !== entityKey || state.batchId !== batch) return
+    await openSingle(task.taskRef.taskId, explainAI ? 'ai' : 'analysis')
+    return task.taskRef.taskId
   } catch (e) {
     // A definite rejection is not an unknown outcome; never silently retry it.
-    fail(e)
-    state.singleLoading = false
+    if (mine === detailEpoch) { state.singleError = errorText(e); state.singleLoading = false }
   } finally { state.busy = false }
 }
 
@@ -377,7 +401,7 @@ let requisitionEpoch = 0
 export async function readRequisition() {
   const epoch = ++requisitionEpoch
   const id = state.singleId
-  if (!id || !state.options?.canSubmit) { state.requisitionReadState = 'idle'; return }
+  if (!id) { state.requisitionReadState = 'idle'; return }
   state.requisitionLoading = true; state.requisitionReadState = 'loading'
   try {
     const value = await request<V2Requisition | null>(`/s01/v2/singles/${id}/requisition`)

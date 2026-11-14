@@ -1,150 +1,35 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { init, loadRequisitions, requisitionRows, state, loadSingleHistory, requisitionCategory } from '../s01'
-import type { RequisitionCategory as Category } from '../s01'
-
-const filter = ref<'all' | Category>('all')
-
-const PLATFORM: Record<string, { label: string; tone: string }> = {
-  SUBMITTED: { label: '已提交', tone: 'info' },
-  CREATED: { label: '已创建 · 待提交', tone: 'info' },
-  SUBMITTING: { label: '提交中', tone: 'info' },
-  CREATING: { label: '创建中', tone: 'info' },
-  PREPARING: { label: '准备中', tone: 'info' },
-  SUBMIT_UNKNOWN: { label: '提交结果未确认', tone: 'danger' },
-  CREATE_UNKNOWN: { label: '创建结果未确认', tone: 'danger' },
-  BLOCKED: { label: '已阻断', tone: 'warning' }
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { request, errorText } from '../api/client'
+import { init, openBatch, latestBatchId, state, loadRequisitions, requisitionRows } from '../s01'
+import { resultDate } from '../business'
+type Row = {erpId:string;erpNumber:string;skus:string[];warehouseName:string;status:string|null;previousStatus:string|null;verified:boolean;verifiedAt:string|null;error:string|null;receivedQuantity:number|null;pendingQuantity:number|null;quantities:{sku:string;ordered:number|null}[]}
+type Tracking = {items:Row[];failedCount:number;checkedAt:string;coverage:string}
+const tracking = ref<Tracking|null>(null), loading=ref(false), error=ref(''), filter=ref('all')
+let timer:ReturnType<typeof setTimeout>|undefined, alive=true, sequence=0
+const rows=computed(()=> (tracking.value?.items || []).filter(r=>filter.value==='all' || filter.value==='unverified' ? filter.value==='all' || !r.verified : r.verified && r.status===filter.value))
+const statuses=computed(()=> [...new Set((tracking.value?.items || []).filter(r=>r.verified).map(r=>r.status!))])
+function action(row:Row){if(!row.verified)return '重新回读后再判断';if(row.status==='待审核')return '等待 ERP 审批';if(row.status==='待下单')return '已进入待下单阶段，请在 ERP 核对后续安排';if(row.status==='已取消')return '核对是否仍有补货需要';return '按 ERP 当前状态跟进'}
+async function refresh(){
+ if(loading.value)return
+ clearTimeout(timer);loading.value=true;error.value='';const mine=++sequence
+ try{await init();const id=latestBatchId();if(!id)throw new Error('NO_BATCH');const next=await request<Tracking>('/s01/v2/purchase-status?batchId='+encodeURIComponent(id),{},undefined,90000);if(alive && mine===sequence)tracking.value=next}
+ catch(e){if(alive && mine===sequence)error.value=e instanceof Error && e.message==='NO_BATCH' ? '先在智能补货工作区完成一次商品检查，才能核对关联采购。' : errorText(e)}
+ finally{if(alive && mine===sequence){loading.value=false;timer=setTimeout(()=>{if(document.visibilityState==='visible')void refresh();else schedule()},60000)}}
 }
-
-const CATEGORIES: { key: Category; label: string }[] = [
-  { key: 'pending', label: '待 ERP 结果' },
-  { key: 'approved', label: 'ERP 已审批' },
-  { key: 'unknown', label: '待核对' },
-  { key: 'blocked', label: '已阻断' },
-  { key: 'draft', label: '流程未完成' }
-]
-
-const withRequisition = computed(() => requisitionRows.items.filter(row => !!row.requisition))
-const withoutRequisition = computed(() => requisitionRows.items.length - withRequisition.value.length)
-
-/** 行筛选与计数共用同一个分类函数，避免"数字与列表对不上"。 */
-const counts = computed(() => {
-  const result = { all: withRequisition.value.length } as Record<string, number>
-  for (const category of CATEGORIES) result[category.key] = 0
-  for (const row of withRequisition.value) result[requisitionCategory(row.requisition)]++
-  return result
-})
-
-const rows = computed(() => filter.value === 'all'
-  ? withRequisition.value
-  : withRequisition.value.filter(row => requisitionCategory(row.requisition) === filter.value))
-
-const visibleTabs = computed(() => CATEGORIES.filter(category => counts.value[category.key] > 0))
-const unknownCount = computed(() => counts.value.unknown || 0)
-const failedReads = computed(() => requisitionRows.failed)
-const shortNumber = (value?: string | null) => value ? (value.length > 18 ? value.slice(0, 9) + '…' + value.slice(-6) : value) : '—'
-
-/** Opens the analysis this requisition belongs to; the batch is optional context. */
-const skuHref = (row: { task: { entityKey?: string; taskRef: { taskId: string } } }) => {
-  const params = new URLSearchParams({ single: row.task.taskRef.taskId })
-  if (state.batchId) params.set('batch', state.batchId)
-  return `#/sku/${row.task.entityKey || ''}?${params}`
-}
-
-const coverage = computed(() => {
-  if (requisitionRows.loading || (!state.singleHistory.length && !requisitionRows.loaded)) return '正在回读最近的单品分析与请购记录…'
-  const scanned = state.singleHistory.length
-  const saved = withRequisition.value.length
-  const capped = scanned >= 20 ? '（已达最近 20 条上限，更早记录未包含）' : ''
-  const failed = failedReads.value ? `，另有 ${failedReads.value} 条读取失败、未计入` : ''
-  return `覆盖范围：本次读取最近 ${scanned} 条单品分析，其中 ${saved} 条有已保存请购记录${failed}${capped}。`
-})
-
-async function refresh() {
-  await loadSingleHistory()
-  await loadRequisitions()
-}
-
-onMounted(async () => {
-  await init()
-  await refresh()
-})
+function schedule(){clearTimeout(timer);timer=setTimeout(()=>{if(document.visibilityState==='visible')void refresh();else schedule()},60000)}
+function foreground(){if(document.visibilityState==='visible')void refresh()}
+onMounted(()=>{void refresh();document.addEventListener('visibilitychange',foreground)})
+onUnmounted(()=>{alive=false;sequence++;clearTimeout(timer);document.removeEventListener('visibilitychange',foreground)})
 </script>
-
 <template>
-  <div class="page">
-    <header class="page-head">
-      <div>
-        <h1>请购管理</h1>
-        <p class="page-sub">平台提交与 ERP 审批分开记录；ERP 状态为回读原文，不代替领导审批</p>
-      </div>
-      <div class="head-actions">
-        <button class="button" :disabled="requisitionRows.loading" @click="refresh">
-          {{ requisitionRows.loading ? '回读中…' : '重新回读' }}
-        </button>
-      </div>
-    </header>
-
-    <p v-if="state.error" class="banner danger" role="alert">{{ state.error }}</p>
-
-    <div v-if="failedReads" class="banner danger">
-      <strong>{{ failedReads }} 条请购状态读取失败。</strong>
-      这些记录未计入统计，也不能据此认为"没有单据"。
-      <span v-if="requisitionRows.error" class="muted">（{{ requisitionRows.error }}）</span>
-      <button class="button small" :disabled="requisitionRows.loading" @click="refresh">重新回读</button>
-    </div>
-
-    <div v-if="unknownCount" class="banner danger">
-      <strong>{{ unknownCount }} 单提交结果未确认。</strong>ERP 可能已经建单，请先在对应 SKU 详情用原命令核对，不要重复提交。
-    </div>
-
-    <p class="banner plain">
-      {{ coverage }}
-      <strong>后端尚未提供请购列表接口</strong>，本页按单品分析逐条回读已保存的单据，不是全平台台账。
-    </p>
-    <p class="banner plain small">
-      分类口径：平台状态由本平台记录；ERP 状态为回读原文，只有明确写明“通过 / 已审批”才计入已审批，其余一律归入待 ERP 结果，不做推断。
-    </p>
-
-    <div class="seg" role="group" aria-label="请购状态">
-      <button :aria-pressed="filter === 'all'" @click="filter = 'all'">全部<em>{{ counts.all }}</em></button>
-      <button v-for="category in visibleTabs" :key="category.key"
-              :aria-pressed="filter === category.key" @click="filter = category.key">
-        {{ category.label }}<em>{{ counts[category.key] }}</em>
-      </button>
-    </div>
-
-    <section class="panel">
-      <div class="panel-head"><h2>请购记录</h2><small>{{ rows.length }} 条</small></div>
-      <div class="table-scroll">
-        <table class="ltable">
-          <thead>
-            <tr><th>SKU / 对象</th><th>平台状态</th><th>ERP 状态（回读原文）</th><th class="r">建议 → 最终</th><th>ERP 单号</th><th>回读时间</th><th></th></tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in rows" :key="row.task.taskRef.taskId">
-              <td><span class="cell-title">{{ row.task.sku || '单品分析' }}</span><small class="mono">{{ row.task.taskRef.taskId.slice(0, 10) }}</small></td>
-              <td>
-                <span class="chip" :class="PLATFORM[row.requisition?.state || '']?.tone || 'muted'">{{ PLATFORM[row.requisition?.state || '']?.label || row.requisition?.state || '未提交' }}</span>
-                <small v-if="row.requisition?.errorCode" class="err">{{ row.requisition.errorCode }}</small>
-              </td>
-              <td>{{ row.requisition?.erpStatus || '未回读' }}</td>
-              <td class="r num">{{ row.requisition ? `${row.requisition.aiQuantity} → ${row.requisition.finalQuantity}` : '—' }}</td>
-              <td class="mono" :title="row.requisition?.erpNumber || ''">{{ shortNumber(row.requisition?.erpNumber) }}</td>
-              <td class="num">{{ row.requisition?.verifiedAt?.slice(5, 16).replace('T', ' ') || '—' }}</td>
-              <td class="r"><a class="button small" :href="skuHref(row)">查看 SKU</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-if="withoutRequisition" class="table-foot">
-        <span>另有 {{ withoutRequisition }} 条单品分析没有已保存的请购记录（未提交或分析未完成），不计入本页统计</span>
-      </div>
-      <div v-if="!rows.length" class="empty-inline">
-        <template v-if="requisitionRows.loading">正在回读已保存的请购记录…</template>
-        <template v-else-if="failedReads">读取失败：{{ failedReads }} 条记录无法确认状态，不能判定为没有单据。</template>
-        <template v-else>当前范围内没有已保存的请购记录。</template>
-      </div>
-    </section>
-  </div>
+ <div class="page purchase-tracking"><header class="page-head"><div><span class="eyebrow">智能补货 / 执行跟进</span><h1>请购与采购跟进</h1><p class="page-sub">直接核对 ERP 当前状态，跟进审批与后续采购。</p></div><div class="head-actions"><span class="check-time">{{ tracking ? '最近核对 '+resultDate(tracking.checkedAt) : '尚未核对' }}</span><button class="button primary" :disabled="loading" @click="refresh">{{ loading ? '正在回读 ERP…' : '刷新 ERP 状态' }}</button></div></header>
+ <div v-if="loading" class="run-strip" role="status"><span class="spinner" /><b>正在按真实单号核对 ERP 最新状态</b><span class="small muted">不创建或修改单据</span></div>
+ <p v-if="error" class="banner danger" role="alert">{{ error }}<span v-if="tracking"> · 当前显示上次结果，不能视为最新状态。</span></p>
+ <p v-if="tracking?.failedCount" class="banner warning">{{ tracking.failedCount }} 条单据未核对成功，旧状态已标记，不能据此认为没有单据。可点击“刷新 ERP 状态”重试。</p>
+ <div class="tracking-scope"><span class="live-dot" />页面可见时每 60 秒核对一次 · 仅跟进当前登记商品已关联的单据<span v-if="tracking">{{ tracking.items.length }} 张关联单据</span></div>
+ <section class="panel"><div class="tracking-tabs"><button :class="{active:filter==='all'}" @click="filter='all'">全部</button><button v-for="status in statuses" :key="status" :class="{active:filter===status}" @click="filter=status">{{ status }}</button><button v-if="tracking?.failedCount" :class="{active:filter==='unverified'}" @click="filter='unverified'">待核对</button></div><div class="table-scroll"><table class="ltable"><thead><tr><th>ERP 单据 / 商品</th><th>仓库</th><th>ERP 最新状态</th><th>采购数量</th><th>下一步</th><th>核对时间</th></tr></thead><tbody><tr v-for="row in rows" :key="row.erpId"><td><b class="cell-title">{{ row.erpNumber }}</b><small>{{ row.skus.join(' / ') }}</small></td><td>{{ row.warehouseName }}</td><td><span class="chip" :class="row.verified && !error ? 'confirm' : 'review'">{{ row.verified && !error ? row.status : '状态待核对' }}</span><small v-if="!row.verified">上次记录 {{ row.previousStatus || '未知' }}</small><small v-if="error && row.status">上次核对 {{ row.status }}</small></td><td><span v-for="line in row.quantities" :key="line.sku" class="tracking-quantity">{{ line.ordered ?? '—' }} 件</span></td><td>{{ error ? '重新核对后再判断' : action(row) }}</td><td>{{ row.verifiedAt ? resultDate(row.verifiedAt) : '未核对成功' }}</td></tr></tbody></table></div><div v-if="!rows.length && !loading" class="empty-state"><h3>{{ error ? '暂时无法取得 ERP 状态' : '当前没有关联采购单据' }}</h3><p>此范围不等于 ERP 全量台账。新申请仍须人工核对、确认与 ERP 审批。</p></div></section>
+ <details class="panel secondary-details"><summary @click="loadRequisitions()">本平台的提交记录 <span>与 ERP 当前状态分开保存</span></summary><div class="details-content"><p v-if="requisitionRows.loading">正在读取本地提交回执…</p><p v-if="requisitionRows.failed">部分提交记录读取失败，请核对原分析。</p><div v-for="row in requisitionRows.items.filter(r=>r.requisition)" :key="row.task.taskRef.taskId"><b>{{ row.task.sku }}</b> · {{ row.requisition?.erpNumber || '单号待核对' }} · 本地流程 {{ row.requisition?.state }}</div><p v-if="requisitionRows.loaded && !requisitionRows.items.some(r=>r.requisition)">本机尚无已保存的提交记录；上方仍会核对 ERP 中已关联的单据。</p></div></details>
+ </div>
 </template>
+<style scoped>.tracking-scope{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px;margin:20px 0}.tracking-scope>span:last-child{margin-left:auto}.live-dot{height:6px;width:6px;border-radius:50%;background:#1b8171}.tracking-tabs{display:flex;gap:8px;padding:18px;border-bottom:1px solid var(--line)}.tracking-tabs button{border:0;background:#f1f4f3;color:#6b7b76;padding:8px 15px;border-radius:6px;cursor:pointer}.tracking-tabs button.active{background:#e4f1ec;color:#126b65;font-weight:600}td small{display:block;margin-top:7px;color:var(--subtle);font-size:11px}.ltable td{padding:23px 18px}.tracking-quantity{display:block}.secondary-details{margin-top:24px}</style>

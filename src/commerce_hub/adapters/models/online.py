@@ -12,15 +12,16 @@ AUTHORIZATION_ID='s01-online-20261113-r1'
 MVP_AUTHORIZATION_ID='s01-mvp-20261113-p1p2'
 V2_AUTHORIZATION_ID='s01-v2-20261113-r1'
 EXPERIENCE_AUTHORIZATION_ID='s01-product-experience-20261114-r1'
+WORKFLOW_AUTHORIZATION_ID='s01-business-ui-20261115-r1'
 
 class OnlineDeepSeekProvider:
     def __init__(self,settings,private_root, *, authorization_id=AUTHORIZATION_ID):
-        if authorization_id not in {AUTHORIZATION_ID, MVP_AUTHORIZATION_ID, V2_AUTHORIZATION_ID, EXPERIENCE_AUTHORIZATION_ID}:
+        if authorization_id not in {AUTHORIZATION_ID, MVP_AUTHORIZATION_ID, V2_AUTHORIZATION_ID, EXPERIENCE_AUTHORIZATION_ID, WORKFLOW_AUTHORIZATION_ID}:
             raise ValueError('UNKNOWN_ONLINE_MODEL_AUTHORIZATION')
         owned = authorization_id in {MVP_AUTHORIZATION_ID, EXPERIENCE_AUTHORIZATION_ID}
         self.delegate=EvaluationProvider(settings,authorization=EvaluationAuthorization(authorization_id,
-            None if owned else 4 if authorization_id==V2_AUTHORIZATION_ID else 10,
-            None if owned else Decimal('.20') if authorization_id==V2_AUTHORIZATION_ID else Decimal('1'),Decimal('.05')))
+            None if owned else 4 if authorization_id in {V2_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID} else 10,
+            None if owned else Decimal('.20') if authorization_id in {V2_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID} else Decimal('1'),Decimal('.05')))
         self.private_root=Path(private_root)
 
     def describe_capabilities(self):return self.delegate.describe_capabilities()

@@ -58,10 +58,10 @@ describe('platform and business workspace separation',()=>{
     expect(html).toContain('业务能力');expect(html).toContain('智能补货');expect(html).toContain('近期任务')
     expect(html).not.toContain('补货概览');expect(html).not.toContain('已预测 SKU')
   })
-  it('uses one graphic and plain business labels instead of repeated KPI rows',async()=>{
+  it('shows an actionable risk queue and one set of business counts',async()=>{
     state.batchId='owned';state.progress={task:{state:'SUCCEEDED'},summary:{discoveredSkuCount:2,scopeObjectCount:2,replenishSkuCount:1,noReplenishmentSkuCount:1}} as never
     const html=await renderToString(createSSRApp({render:()=>h(WorkbenchPage)}))
-    expect(html).toContain('需补货');expect(html).toContain('暂不补货');expect(html).not.toContain('不同 SKU');expect(html).not.toContain('已预测 SKU')
-    expect((html.match(/class="donut"/g)||[]).length).toBe(1)
+    expect(html).toContain('需要补货');expect(html).toContain('暂不补货');expect(html).not.toContain('不同 SKU');expect(html).not.toContain('已预测 SKU')
+    expect(html).toContain('从风险最高的店仓开始');expect((html.match(/class="attention-summary"/g)||[]).length).toBe(1)
   })
 })

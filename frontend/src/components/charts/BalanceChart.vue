@@ -4,7 +4,7 @@ import type { SeriesRow } from '../../api/types'
 
 const props = defineProps<{ series: SeriesRow[] }>()
 
-const W = 720, H = 200, L = 40, R = 14, T = 16, B = 26
+const W = 480, H = 200, L = 40, R = 14, T = 20, B = 26
 
 const points = computed(() => props.series.map((row, index) => ({
   index,
@@ -38,7 +38,8 @@ const model = computed(() => {
     .filter((_, i) => i % 2 === 0 || i === values.length - 1)
   const arrivals = values.filter(p => p.arrivals > 0).map(p => ({ x: x(p.index), value: p.arrivals, day: p.day }))
   const lowest = values.reduce((a, b) => (b.close < a.close ? b : a), values[0])
-  return { values, x, y, line, runs, ticks, labels, arrivals, lowest, zero: y(0) }
+  const shortage = values.find(p => p.close < 0)
+  return { values, x, y, line, runs, ticks, labels, arrivals, lowest, shortage, zero: y(0) }
 })
 </script>
 
@@ -58,6 +59,7 @@ const model = computed(() => {
         </line>
       </g>
       <path :d="model.line" class="line" />
+      <g v-if="model.shortage" class="shortage-marker"><line :x1="model.x(model.shortage.index)" :x2="model.x(model.shortage.index)" :y1="T" :y2="H-B" /><text :x="Math.min(W-120,model.x(model.shortage.index)+6)" :y="T+9">{{ model.shortage.day.slice(5) }} 起短缺</text></g>
       <circle v-for="p in model.values" :key="p.day" :cx="model.x(p.index)" :cy="model.y(p.close)"
               :r="p === model.lowest ? 4 : 2.4" :class="['dot', { low: p.close <= 0 }]">
         <title>{{ p.day }}：需求 {{ p.demand }}，到货 {{ p.arrivals }}，结存 {{ p.close }}</title>
@@ -70,7 +72,7 @@ const model = computed(() => {
       <span><i class="line-key" />结存</span>
       <span><i class="area-key" />负结存</span>
       <span><i class="dash-key" />到货日</span>
-      <span class="legend-note">最低 {{ model.lowest.close }} · {{ model.lowest.day.slice(5) }}</span>
+      <span class="legend-note">最低 {{ Number(model.lowest.close.toFixed(1)) }} 件 · {{ model.lowest.day.slice(5) }}</span>
     </div>
   </div>
 </template>
@@ -81,6 +83,7 @@ const model = computed(() => {
 .grid text { font-size: 9.5px; fill: var(--subtle) }
 .zero { stroke: #c3ccd4; stroke-width: 1 }
 .line { fill: none; stroke: var(--primary); stroke-width: 2; stroke-linejoin: round }
+.shortage-marker line{stroke:#af4940;stroke-dasharray:3 4;opacity:.65}.shortage-marker text{fill:#a4443a;font-size:10px}
 .negative { fill: #fcefee; opacity: .9 }
 .arrivals line { stroke: #c9812f; stroke-dasharray: 4 3; stroke-width: 1 }
 .dot { fill: #fff; stroke: var(--primary); stroke-width: 1.8 }

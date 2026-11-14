@@ -149,6 +149,7 @@ class TaskService:
         return {"taskRef": {"tenantId": row["tenant_id"], "taskId": row["task_id"]}, "state": row["state"],
                 "revision": row["revision"], "planVersion": str(row["plan_version"]), "reportRef": None,
                 "scenarioId": row["scenario_id"], "deadline": row["deadline"].isoformat() + "Z",
+                "createdAt": row["created_at"].isoformat() + "Z",
                 "errorCode": row["error_code"], "sourceNature": "SIMULATED_ENGINEERING" if row["scenario_id"].startswith("ENGINEERING_") else "NOT_YET_EVALUATED"}
 
     def read(self, principal, task_id):

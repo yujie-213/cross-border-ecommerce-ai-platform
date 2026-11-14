@@ -110,6 +110,17 @@ def register_v2_routes(app,principal):
     def retry(task_id:str,body:Empty,request:Request,key:Annotated[str,Header(alias='Idempotency-Key',min_length=1,max_length=128)],actor=Depends(principal)):
         s,p,view,rows=data(request,actor,task_id)
         return s.create(actor,key,'S01_V2_BATCH',collection_scope(actor.tenant_id),{},trace_id.get())
+    @app.get('/api/v1/s01/v2/purchase-status')
+    def purchase_status(request:Request,batchId:str=Query(min_length=1,max_length=64),actor=Depends(principal)):
+        s,p,view,rows=data(request,actor,batchId)
+        if view['scenarioId']!='S01_V2_BATCH' or view['state']!='SUCCEEDED':raise TaskError('PURCHASE_TRACKING_BATCH_REQUIRED',409)
+        factory=getattr(s.registry['S01_V2_BATCH'].handler,'purchase_reader_factory',None)
+        if factory is None:raise TaskError('PURCHASE_TRACKING_NOT_AVAILABLE',409)
+        from commerce_hub.scenarios.s01_v2.tracking import track_purchases
+        from commerce_hub.scenarios.s01_backend.requisition_store import saved_tracking_references
+        try:return track_purchases(rows.values(),p,factory(),saved_tracking_references(s.engine,actor.tenant_id))
+        except ValueError as exc:raise TaskError(str(exc),409) from None
+
     @app.post('/api/v1/s01/v2/singles',status_code=202)
     def single(body:Single,request:Request,key:Annotated[str,Header(alias='Idempotency-Key',min_length=1,max_length=128)],actor=Depends(principal)):
         s,p,view,rows=data(request,actor,body.batchId)
@@ -134,7 +145,8 @@ def register_v2_routes(app,principal):
         for row in history['items']:
             if row['state']=='SUCCEEDED':
                 report=s.read_report(actor,row['taskRef']['taskId']);item=report['dataReport']['item']
-                row.update(sku=item['sku'],entityKey=item['entityKey'],sourceGrade=item['sourceGrade'])
+                row.update(sku=item['sku'],entityKey=item['entityKey'],sourceGrade=item['sourceGrade'],
+                    aiStatus=report.get('analysisReport',{}).get('ai',{}).get('status'),observedAt=item.get('observedAt'))
         return history
     @app.post('/api/v1/s01/v2/singles/{task_id}/requisition')
     def confirm(task_id:str,body:Confirm,request:Request,key:Annotated[str,Header(alias='Idempotency-Key',min_length=1,max_length=128)],actor=Depends(principal)):
@@ -152,4 +164,17 @@ def register_v2_routes(app,principal):
             # Keep the submit endpoint disabled when the requisition feature is off.
             from commerce_hub.scenarios.s01_v2.requisition import V2RequisitionService
             rq=V2RequisitionService(s,p,None,'.')
-        return rq.read(actor,task_id)
+        value=rq.read(actor,task_id)
+        if value and value.get('erpId'):
+            # Display fresh source status without rewriting the durable command outcome.
+            factory=getattr(s.registry['S01_V2_BATCH'].handler,'purchase_reader_factory',None)
+            report=s.read_report(actor,task_id)
+            item=report['dataReport']['item']
+            if factory:
+                from commerce_hub.scenarios.s01_v2.tracking import track_purchases
+                tracked=track_purchases([item],p,factory(),[dict(value,entityKey=item['entityKey'])])
+                current=next((r for r in tracked['items'] if r['erpId']==str(value['erpId'])),None)
+                value=dict(value,previousErpStatus=value.get('erpStatus'),erpStatus=current['status'] if current and current['verified'] else None,
+                    verifiedAt=current['verifiedAt'] if current else None,liveVerified=bool(current and current['verified']),
+                    liveError=current['error'] if current else 'PURCHASE_TRACKING_NOT_AVAILABLE')
+        return value

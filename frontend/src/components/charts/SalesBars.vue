@@ -3,24 +3,26 @@ import { computed } from 'vue'
 
 const props = defineProps<{ days: { day: string; quantity: string }[]; average?: string | null; total?: string | null; recordDatesOnly?: boolean }>()
 
-const W = 720, H = 140, L = 34, R = 10, T = 12, B = 24
+const W = 480, H = 170, L = 34, R = 10, T = 12, B = 24
 
 const model = computed(() => {
   const rows = props.days.map(d => ({ day: d.day, quantity: Number(d.quantity) }))
   if (!rows.length) return null
   const max = Math.max(1, ...rows.map(r => r.quantity))
-  const slot = (W - L - R) / rows.length
+  const first = Date.parse(rows[0].day), last = Date.parse(rows[rows.length-1].day)
+  const calendarDays = Math.max(1,Math.round((last-first)/86400000)+1)
+  const slot = (W - L - R) / calendarDays
   const barWidth = Math.min(38, slot * 0.52)
   const y = (v: number) => T + (H - T - B) * (1 - v / max)
   const average = props.average === null || props.average === undefined ? null : Number(props.average)
   return {
     rows: rows.map((r, i) => ({
       ...r,
-      x: L + slot * i + (slot - barWidth) / 2,
+      x: L + slot * Math.round((Date.parse(r.day)-first)/86400000) + (slot - barWidth) / 2,
       width: barWidth,
       y: y(r.quantity),
       height: Math.max(1, H - B - y(r.quantity)),
-      labelX: L + slot * i + slot / 2
+      labelX: L + slot * Math.round((Date.parse(r.day)-first)/86400000) + slot / 2
     })),
     average: average && average > 0 ? { y: y(average), value: average } : null,
     baseline: H - B,

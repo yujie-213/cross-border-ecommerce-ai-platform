@@ -65,6 +65,10 @@ export function quantityError(item: V2Item, quantity: number, reason: string) {
 }
 export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[]; blockedByOtherAnalysis?: boolean }
 const issueLabels: Record<string, string> = {
+  ERP_AUTH_REJECTED: 'ERP 身份验证失败，请核对本机 ERP 凭据',
+  ERP_TIMEOUT: 'ERP 读取超时，请稍后重新分析', ERP_TRANSPORT_FAILURE: '暂时无法连接 ERP，请检查网络后重试',
+  MODEL_TIMEOUT: 'AI 服务响应超时，可稍后重试', MODEL_NOT_ENABLED: 'AI 服务未启用，请核对本机模型配置',
+  MODEL_ALLOWANCE_UNAVAILABLE: '本次 AI 验证额度不可用，补货分析仍可使用',
   SAME_SCOPE_PENDING_REQUISITION: '该商品同仓已有待审批采购，请先核对原单',
   SAME_SCOPE_FORMAL_PURCHASE_REQUIRES_REVIEW: '该商品同仓已有正式采购，请先核对未收数量与用途',
   PENDING_PURCHASE_QUERY_INCOMPLETE: '待审批采购未读取完整，核对完成前不能重复申请',
@@ -91,7 +95,7 @@ const issueLabels: Record<string, string> = {
   SUGGESTION_AMBIGUOUS_OR_QUERY_INCOMPLETE: '建议存在多条冲突记录或读取不完整', SUGGESTION_WAREHOUSE_OR_PRODUCT_UNRESOLVED: '建议无法唯一关联商品或仓库',
   PRODUCT_IDENTITY_AMBIGUOUS: '商品标识存在歧义', STORE_IDENTITY_AMBIGUOUS: '店铺归属存在歧义', WAREHOUSE_IDENTITY_AMBIGUOUS: '仓库归属存在歧义',
   NO_UNIQUE_STORE_WAREHOUSE_RELATION: '未建立唯一店仓业务关系', OPENING_AND_LEDGER_COVERAGE_UNPROVEN: '期初库存与完整流水未核验',
-  SOURCE_FIELDS_INVALID: '源数据字段不符合约定', MODEL_NOT_ENABLED: '模型未启用', MODEL_ALLOWANCE_UNAVAILABLE: '当前模型额度不可用',
+  SOURCE_FIELDS_INVALID: '源数据字段不符合约定',
 }
 export const issueLabel = (code: string) => issueLabels[code] || (code.startsWith('IDENTITY_ENUMERATION_INCOMPLETE:') ? '身份目录未完整读取' : `资料待核实（${code}）`)
 export const unitLabel = (unit?: string | null) => unit === 'EA' ? '件' : '单位未确认'

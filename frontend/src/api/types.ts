@@ -3,7 +3,7 @@ export interface Ref { tenantId: string; reportId: string }
 export interface Choice { requisitionAllowed?: boolean; packageRef?: string; choiceRef?: string; displayLabels?: { sku: string; store: string; warehouse: string }; inputMode?: 'ONLINE_TEACHING_ERP'; sourceMode: string; scope: Scope; asOf: string | null; sourceNature: string }
 export interface Options { scenarioId: 'S01_BACKEND'; mappedChoices: Choice[]; limitations: string[]; v2Enabled?: boolean }
 export type TaskState = 'QUEUED' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'CANCELLED'
-export interface Task { taskRef: { tenantId: string; taskId: string }; state: TaskState; revision: number; planVersion: string; reportRef: Ref | null; scenarioId: string; deadline: string; errorCode: string | null; sourceNature: string }
+export interface Task { createdAt?: string; taskRef: { tenantId: string; taskId: string }; state: TaskState; revision: number; planVersion: string; reportRef: Ref | null; scenarioId: string; deadline: string; errorCode: string | null; sourceNature: string }
 export interface SeriesRow { day: string; demand: string; arrivals: string; closingBalance: string; inBuffer: boolean }
 export interface Evaluation { availableQuantity: string; inTransitQuantity: string; averageDailyDemand: string; targetQuantity: string; gapQuantity: string; coverageDays: string | null; firstShortageDate: string | null; closingBalance: string; stockoutRisk: boolean; metricVersion: string; series: SeriesRow[] }
 export interface Candidate { candidateId: string; quantity: string; availableDate: string; constraintVersion: string; constraintRefs: string[]; evaluation: Evaluation; procurementEligible: boolean }

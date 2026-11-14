@@ -6,20 +6,20 @@ import { href } from '../router'
 const labels: Record<string,string> = { SUCCEEDED:'已完成', RUNNING:'进行中', CREATED:'等待开始', QUEUED:'排队中', FAILED:'需处理', CANCELLED:'已停止' }
 const recent = computed(() => [
   ...state.batches.filter(t => t.analysisRange === 'OWNED_REGISTERED').map(t => ({ task:t, name:'自有商品补货检查', url:href('/workbench',{batch:t.taskRef.taskId}) })),
-  ...state.singleHistory.map(t => ({ task:t, name:t.sku ? `${t.sku} · 单品分析` : '单品分析', url:t.entityKey ? href('/sku/'+t.entityKey,{single:t.taskRef.taskId}) : href('/workbench') }))
-].sort((a,b) => b.task.deadline.localeCompare(a.task.deadline)).slice(0,5))
+  ...state.singleHistory.map(t => ({ task:t, name:t.sku ? `${t.sku} · ${t.aiStatus === 'AVAILABLE' ? 'AI 行动建议' : '补货分析'}` : '单品分析', url:t.entityKey ? href('/sku/'+t.entityKey,{single:t.taskRef.taskId}) : href('/workbench') }))
+].sort((a,b) => (b.task.createdAt || b.task.deadline).localeCompare(a.task.createdAt || a.task.deadline)).slice(0,5))
 const attention = computed(() => recent.value.filter(r => r.task.state === 'FAILED'))
 onMounted(init)
 </script>
 
 <template>
   <div class="page platform-home">
-    <header class="page-head"><div><h1>工作首页</h1><p class="page-sub">从业务问题出发，进入你的 AI 工作区。</p></div></header>
+    <header class="page-head"><div><span class="eyebrow">跨境电商智慧 AI 中台</span><h1>工作首页</h1><p class="page-sub">让业务问题找到合适的 AI 工作伙伴。</p></div></header>
     <p v-if="state.error" class="banner danger" role="alert">{{ state.error }}</p>
     <section aria-labelledby="capabilities-title">
       <h2 id="capabilities-title" class="home-title">业务能力</h2>
       <a class="panel agent-entry" :href="href('/workbench', {batch:latestBatchId() || undefined})">
-        <span class="agent-mark">补</span><div><span class="chip primary">已接入</span><h2>智能补货</h2><p>看需求、查库存，判断各仓该不该补货。</p><small>自有商品 · 分仓建议 · ERP 对比 · AI 解读</small></div><span class="agent-arrow">进入工作区 →</span>
+        <span class="agent-mark">补</span><div><span class="chip primary">已接入</span><h2>智能补货</h2><p>找到缺货风险，理解分仓建议，核实后人工请购。</p><small>自有商品分析 / AI 行动建议 / 采购状态追踪</small></div><span class="agent-arrow">进入工作区 →</span>
       </a>
     </section>
     <div class="home-lower">

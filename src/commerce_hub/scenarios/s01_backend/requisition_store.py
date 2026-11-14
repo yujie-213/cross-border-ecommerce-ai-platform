@@ -26,3 +26,9 @@ def verified_purchase_proofs(engine, scope):
         rows = conn.execute(select(requisitions.c.content).filter_by(tenant_id=scope['tenantId'], state='SUBMITTED')).scalars().all()
     return [dict(erpId=r['erpId'], erpNumber=r['erpNumber'], scope=r['scope'], datasetId=r['datasetId'], purpose=r['purpose'])
         for r in rows if r.get('scope') == scope and r.get('erpId')]
+
+
+def saved_tracking_references(engine, tenant):
+    with engine.connect() as conn:
+        rows = conn.execute(select(requisitions.c.content).filter_by(tenant_id=tenant)).scalars().all()
+    return [{k: r.get(k) for k in ['erpId','erpNumber','entityKey','erpStatus']} for r in rows if r.get('erpId')]
