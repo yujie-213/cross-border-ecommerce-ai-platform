@@ -1,0 +1,317 @@
+[
+ {
+  "name": "工作台标题",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "四个待办指标",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "状态分布条有分段",
+  "pass": true,
+  "extra": "7"
+ },
+ {
+  "name": "分布条合计等于对象总数",
+  "pass": true,
+  "extra": "11/11"
+ },
+ {
+  "name": "待处理队列有行",
+  "pass": true,
+  "extra": "6"
+ },
+ {
+  "name": "队列含库存覆盖条",
+  "pass": true,
+  "extra": "3"
+ },
+ {
+  "name": "无库存数据行不画空条",
+  "pass": true,
+  "extra": "3"
+ },
+ {
+  "name": "首屏无演示横幅",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "首屏无长说明段落",
+  "pass": true,
+  "extra": "0"
+ },
+ {
+  "name": "点击待办跳到补货建议",
+  "pass": true,
+  "extra": "#/suggestions"
+ },
+ {
+  "name": "状态筛选已应用",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "列表行数=待确认数 4",
+  "pass": true,
+  "extra": "4"
+ },
+ {
+  "name": "清空状态后 11 行",
+  "pass": true,
+  "extra": "11"
+ },
+ {
+  "name": "搜索收敛到 3 行",
+  "pass": true,
+  "extra": "3"
+ },
+ {
+  "name": "搜索显示行数文案",
+  "pass": true,
+  "extra": "3 项 / 共 11"
+ },
+ {
+  "name": "进入 SKU 详情路由",
+  "pass": true,
+  "extra": "#/sku/CB-1001"
+ },
+ {
+  "name": "详情含结存预测图",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "详情含销量柱状图",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "详情含建议口径",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "右侧请购栏存在",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "目标库存与建议数量自洽（75/20）",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "Tab 写入 URL",
+  "pass": true,
+  "extra": "#/sku/CB-1001/quality"
+ },
+ {
+  "name": "依据页有检查项",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "Tab 返回采购条件（默认路由不带后缀）",
+  "pass": true,
+  "extra": "#/sku/CB-1001"
+ },
+ {
+  "name": "采购条件 Tab 处于选中态",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "采购条件含 MOQ",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "25 件提示整箱约束",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "25 件提交禁用",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "30 件出现原因输入",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "未填原因仍禁用",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "填原因+勾选后可提交",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "提交后右栏切换为请购单",
+  "pass": true,
+  "extra": "请购单"
+ },
+ {
+  "name": "提交后显示待 ERP 审批",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "提交后右栏显示单据号",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "提交后表单不再出现数量输入",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "提交后工作台计数同步",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "返回到列表",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "返回后搜索词保留",
+  "pass": true,
+  "extra": "收纳"
+ },
+ {
+  "name": "返回后行数仍为筛选结果",
+  "pass": true,
+  "extra": "3"
+ },
+ {
+  "name": "批次弹层打开",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "批次已切换",
+  "pass": true,
+  "extra": "数据时点 2026-11-13 07:58 · 演示数据"
+ },
+ {
+  "name": "旧批次数值生效（可用 43）",
+  "pass": true,
+  "extra": "43 / 75"
+ },
+ {
+  "name": "各批次建议数量自洽（目标-可用→取整）",
+  "pass": true,
+  "extra": "[]"
+ },
+ {
+  "name": "进入请购管理",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "请购表含新提交单据（4 行）",
+  "pass": true,
+  "extra": "4"
+ },
+ {
+  "name": "新单据已进入台账",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "请购页状态分布图存在",
+  "pass": true,
+  "extra": "3"
+ },
+ {
+  "name": "双状态列存在",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "无大段蓝色说明框",
+  "pass": true,
+  "extra": "1"
+ },
+ {
+  "name": "进入请购单详情",
+  "pass": true,
+  "extra": "#/requisitions/RQ-2026-0012"
+ },
+ {
+  "name": "步骤条 4 段",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "UNKNOWN 仅一块警示",
+  "pass": true,
+  "extra": "1"
+ },
+ {
+  "name": "1024 无横向溢出",
+  "pass": true,
+  "extra": "1024 vs 1024"
+ },
+ {
+  "name": "1024 详情操作栏在内容下",
+  "pass": true,
+  "extra": "768px"
+ },
+ {
+  "name": "1024 详情无横向溢出",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "820 导航转为顶部",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "820 列表无页面级横向溢出",
+  "pass": true,
+  "extra": "820 vs 820"
+ },
+ {
+  "name": "820 操作列未被裁切",
+  "pass": true,
+  "extra": "793/820"
+ },
+ {
+  "name": "820 进入数据不足 SKU",
+  "pass": true,
+  "extra": "折叠桌面灯 · 墨黑"
+ },
+ {
+  "name": "820 数据不足不显示数量",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "820 草案标注未生效",
+  "pass": true,
+  "extra": ""
+ },
+ {
+  "name": "820 台账无横向溢出",
+  "pass": true,
+  "extra": "820 vs 820"
+ },
+ {
+  "name": "无脚本异常",
+  "pass": true,
+  "extra": "0"
+ }
+]

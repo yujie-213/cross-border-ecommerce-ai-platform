@@ -3,256 +3,279 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>序衡 S01 · 采购补货工作台（UX v3 原型）</title>
+<title>序衡 · S01 采购补货工作台</title>
 <style>
 :root{
-  --canvas:#f4f6f8;--surface:#fff;--ink:#202d3a;--muted:#5c6b79;--subtle:#71808e;--line:#e0e5eb;
-  --control:#8996a3;--primary:#126b65;--primary-hover:#0b5651;--primary-active:#08443f;--selected:#e9f3f1;
-  --nav:#172c3c;--success:#24664b;--success-bg:#edf6ef;--warning:#8a510b;--warning-bg:#fff4e2;
-  --danger:#ad3733;--danger-bg:#fcefee;--info:#315e8f;--info-bg:#eef4fb;--radius:8px;
+  --canvas:#f2f4f7;--surface:#fff;--ink:#1b2836;--muted:#5d6b7a;--subtle:#7c8896;--line:#e2e7ec;
+  --control:#8b97a4;--primary:#0f6b64;--primary-dark:#0a5751;--sel:#e8f2f0;--nav:#16293a;
+  --ok:#1f6a4a;--ok-bg:#eaf4ee;--warn:#8a5a0d;--warn-bg:#fdf3e2;--bad:#a8382f;--bad-bg:#fbeeec;
+  --info:#2f5c8a;--info-bg:#eef3fa;--r:7px;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.6 "Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--canvas);color:var(--ink);font:13px/1.55 "Segoe UI","Microsoft YaHei","PingFang SC",sans-serif}
 button,input,select,textarea{font:inherit}
 h1,h2,h3,p{margin:0}
-h1{font-size:25px;line-height:1.4;letter-spacing:-.4px;font-weight:650}
-h2{font-size:15px;font-weight:600}
-h3{font-size:13px;font-weight:600}
+h1{font-size:21px;line-height:1.3;font-weight:650;letter-spacing:-.2px}
+h2{font-size:13.5px;font-weight:600}
+h3{font-size:12.5px;font-weight:600}
 a{color:var(--primary);text-decoration:none;cursor:pointer}
 a:hover{text-decoration:underline}
-button{cursor:pointer;transition:background .12s}
-button:disabled{cursor:not-allowed;background:#f0f2f4!important;color:#667380!important;border-color:#d6dde3!important}
-:focus-visible{outline:2px solid #276aaf;outline-offset:2px}
+button{cursor:pointer;transition:background .12s,border-color .12s}
+button:disabled{cursor:not-allowed;background:#f1f3f5!important;color:#8b959f!important;border-color:#dde2e7!important}
+:focus-visible{outline:2px solid #2563a8;outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-.skip{position:fixed;top:-80px;left:8px;z-index:60;background:#fff;padding:10px 14px;border:1px solid var(--line)}
+.skip{position:fixed;top:-70px;left:8px;z-index:60;background:#fff;padding:8px 12px;border:1px solid var(--line)}
 .skip:focus{top:8px}
-.mono{font-family:Consolas,monospace;font-size:12px}
+.mono{font-family:Consolas,monospace;font-size:11.5px}
 .muted{color:var(--muted)}
 .num{font-variant-numeric:tabular-nums}
-/* ---------- shell ---------- */
-.sidebar{position:fixed;inset:0 auto 0 0;width:220px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:22px 14px 16px;z-index:20}
-.brand{display:flex;gap:10px;align-items:center;color:var(--nav);font-size:21px;font-weight:650;padding:0 8px;text-decoration:none}
+/* shell */
+.sidebar{position:fixed;inset:0 auto 0 0;width:212px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 12px 14px;z-index:20}
+.brand{display:flex;gap:9px;align-items:center;padding:0 6px;text-decoration:none;color:var(--nav)}
 .brand:hover{text-decoration:none}
-.brand-symbol{display:grid;place-items:center;width:34px;height:38px;background:var(--nav);color:#fff;font-size:19px;border-radius:9px 3px 9px 3px}
-.brand small{display:block;font-size:8px;letter-spacing:1.1px;color:var(--muted);font-weight:600}
-.workspace{display:flex;align-items:center;gap:8px;background:#f7f9fa;border:1px solid var(--line);border-radius:6px;padding:9px 8px;margin:24px 0 20px;font-size:12px;font-weight:600}
-.workspace small{display:block;color:var(--muted);font-size:10px;font-weight:400}
-.workspace-icon{width:26px;height:26px;flex:none;display:grid;place-items:center;background:#e8edf0;border-radius:5px;font-weight:400}
-.nav-label{font-size:11px;color:var(--muted);padding:0 10px 6px}
-nav a{display:flex;align-items:center;gap:9px;min-height:42px;padding:8px 10px;margin:3px 0;border-radius:6px;color:#465665;font-size:13px;text-decoration:none}
-nav a:hover{background:#f5f7f9;text-decoration:none}
-nav a.active{color:var(--primary);background:var(--selected);font-weight:600}
-nav a.sub{padding-left:32px;font-size:12px;min-height:34px}
-.nav-icon{font-size:16px;width:18px;text-align:center;flex:none}
-.nav-count{margin-left:auto;font-size:11px;background:#e0ebe8;color:#1d5d57;border-radius:9px;padding:0 7px;font-weight:600}
-nav a.active .nav-count{background:#cfe4df}
-.sidebar-note{margin:auto 8px 0;border-top:1px solid var(--line);padding-top:14px;font-size:10px;color:var(--muted);line-height:1.7}
-.dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--primary);margin-right:5px}
-.shell{margin-left:220px;min-width:0;display:flex;flex-direction:column;min-height:100vh}
-.topbar{height:60px;padding:0 28px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:15}
-.crumb{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;min-width:0}
-.crumb i{color:#a5b0ba;font-style:normal}
+.brand-symbol{display:grid;place-items:center;width:30px;height:34px;background:var(--nav);color:#fff;font-size:17px;border-radius:8px 3px 8px 3px}
+.brand b{font-size:18px;font-weight:650;letter-spacing:.5px}
+.brand small{display:block;font-size:7.5px;letter-spacing:1px;color:var(--muted);font-weight:600}
+.workspace{display:flex;align-items:center;gap:7px;background:#f7f9fa;border:1px solid var(--line);border-radius:6px;padding:8px;margin:16px 0 14px;font-size:11.5px;font-weight:600}
+.workspace small{display:block;font-size:9.5px;font-weight:400;color:var(--muted)}
+.ws-icon{width:22px;height:22px;flex:none;display:grid;place-items:center;background:#e9eef1;border-radius:4px;font-weight:400;font-size:11px}
+.nav-label{font-size:10.5px;color:var(--subtle);padding:0 8px 4px;letter-spacing:.3px}
+nav a{display:flex;align-items:center;gap:8px;min-height:36px;padding:6px 8px;margin:1px 0;border-radius:5px;color:#41505f;font-size:12.5px;text-decoration:none}
+nav a:hover{background:#f4f6f8;text-decoration:none}
+nav a.active{color:var(--primary);background:var(--sel);font-weight:600}
+nav a.sub{padding-left:30px;font-size:11.5px;min-height:30px;color:var(--muted)}
+nav a.sub.active{color:var(--primary)}
+.nav-icon{width:16px;text-align:center;flex:none;opacity:.75;font-size:13px}
+.nav-count{margin-left:auto;font-size:10.5px;background:#e6edec;color:#1c5a55;border-radius:8px;padding:0 6px;font-weight:600}
+nav a.active .nav-count{background:#cfe4e0}
+.sidebar-foot{margin-top:auto;border-top:1px solid var(--line);padding:10px 8px 0;font-size:9.5px;color:var(--subtle);line-height:1.6;letter-spacing:.2px}
+.shell{margin-left:212px;min-width:0;display:flex;flex-direction:column;min-height:100vh}
+.topbar{height:54px;padding:0 22px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:15}
+.crumb{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px;min-width:0}
+.crumb i{color:#aab3bd;font-style:normal}
 .crumb b{color:var(--ink);font-weight:600}
-.session{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted)}
-.chip-live{display:inline-flex;align-items:center;gap:6px;background:var(--success-bg);color:var(--success);border-radius:12px;padding:2px 10px;font-size:11px}
-.demobar{padding:7px 28px;background:#edf3f5;border-bottom:1px solid #dce6eb;color:#476173;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.demobar b{color:#2c4a5c}
-main{padding:24px 28px 36px;max-width:1680px;width:100%;flex:1}
-footer{padding:0 28px 18px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
-/* ---------- primitives ---------- */
-.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:6px 13px;background:#fff;border:1px solid var(--control);border-radius:6px;font-size:12px;color:var(--ink);white-space:nowrap;text-decoration:none}
-.button:hover{background:#f5f8f9;text-decoration:none}
-.button.primary{background:var(--primary);border-color:var(--primary);color:#fff}
-.button.primary:hover{background:var(--primary-hover)}
-.button.primary:active{background:var(--primary-active)}
-.button.small{min-height:28px;font-size:11px;padding:3px 9px}
-.button.link{border-color:transparent;background:none;color:var(--primary);padding:2px 0;min-height:24px}
-.button.danger{color:var(--danger);border-color:#c67875}
-.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:20px}
-.eyebrow{font-size:10px;letter-spacing:1.4px;color:var(--primary);font-weight:600;margin-bottom:4px}
-.subtitle{color:var(--muted);font-size:12px;margin-top:5px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.panel+.panel{margin-top:16px}
-.panel-head{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.panel-head small{font-size:11px;color:var(--muted);font-weight:400}
-.panel-body{padding:18px}
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1.5;padding:2px 7px;border-radius:4px;font-weight:500;background:#eef1f4;color:#556575;white-space:nowrap}
-.badge.success{color:var(--success);background:var(--success-bg)}
-.badge.warning{color:var(--warning);background:var(--warning-bg)}
-.badge.danger{color:var(--danger);background:var(--danger-bg)}
-.badge.info{color:var(--info);background:var(--info-bg)}
-.badge.plain{background:#f4f6f8;color:var(--muted);border:1px solid var(--line)}
-.note{border:1px solid #d7e5ee;border-left:3px solid var(--info);background:var(--info-bg);padding:11px 14px;border-radius:5px;font-size:12px;color:#2c4a63}
-.note.warn{border-color:#e9d3aa;border-left-color:var(--warning);background:#fff8ed;color:#794c12}
-.note.bad{border-color:#eac6c3;border-left-color:var(--danger);background:var(--danger-bg);color:#923632}
-.note.ok{border-color:#c7ddcf;border-left-color:var(--success);background:var(--success-bg);color:var(--success)}
-.note strong{display:block;font-size:12px;margin-bottom:2px}
-.note p{font-size:11px;line-height:1.75}
-.note .row{margin-top:8px}
-.micro{font-size:11px;color:var(--muted);line-height:1.75}
-.table-wrap{overflow:auto;max-width:100%}
-.list-table{min-width:760px}
-/* 只对数字、日期、状态与操作列禁止换行；店铺/商品列允许折行，避免窄窗下横向裁切 */
-.list-table th,.list-table td:nth-child(4),.list-table td:nth-child(5),
-.list-table td:nth-child(6),.list-table td:nth-child(7),.list-table td:nth-child(8){white-space:nowrap}
-.scroll-hint{display:none}
-@media (max-width:1000px){.scroll-hint{display:inline}}
-table{border-collapse:collapse;width:100%;font-size:12px}
-th{text-align:left;font-size:11px;font-weight:500;color:var(--muted);background:#f8fafb;padding:9px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:10px 14px;border-bottom:1px solid #edf0f3;vertical-align:middle}
-tr:last-child td{border-bottom:0}
-tbody tr:hover{background:#f8fbfa}
-td.r,th.r{text-align:right}
-.prod{font-weight:600;font-size:12.5px;line-height:1.4}
-.prod-sub{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:1px}
-.empty{padding:36px 20px;text-align:center;color:var(--muted);font-size:12px}
-.empty h3{color:var(--ink);margin-bottom:6px;font-size:14px}
-.field{display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--muted)}
-.field input,.field select,.field textarea{border:1px solid var(--control);border-radius:5px;padding:6px 9px;font-size:12px;color:var(--ink);background:#fff;min-height:32px}
-.field textarea{min-height:62px;resize:vertical;width:100%}
-.filters{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
-.filters .field{flex:0 1 auto}
-.filters input[type=search]{min-width:200px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;background:#fff;overflow:hidden;flex-wrap:wrap}
-.seg button{border:0;background:none;font-size:12px;padding:7px 12px;color:var(--muted);min-height:34px;border-right:1px solid var(--line)}
-.seg button:last-child{border-right:0}
-.seg button[aria-pressed=true]{background:var(--selected);color:var(--primary);font-weight:600}
-.seg em{font-style:normal;font-size:10px;margin-left:4px;color:var(--subtle)}
-.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);overflow-x:auto;margin:0 -18px;padding:0 18px}
-.tabs button{border:0;border-bottom:2px solid transparent;background:none;font-size:12.5px;color:var(--muted);min-height:42px;padding:6px 0;white-space:nowrap}
-.tabs button[aria-selected=true]{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
-.kv{margin:0;font-size:12px}
-.kv dt{color:var(--muted);font-size:11px;margin-top:10px}
-.kv dd{margin:2px 0 0}
-.kv.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
-.details summary{cursor:pointer;font-size:11px;color:var(--primary);padding:4px 0}
-pre{background:var(--canvas);border:1px solid var(--line);border-radius:5px;padding:12px;font-size:11px;overflow:auto;max-height:320px;white-space:pre-wrap;word-break:break-word;margin:8px 0 0}
-/* ---------- workbench ---------- */
-.gate{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--primary);border-radius:6px;padding:11px 16px;margin-bottom:16px;font-size:12px;flex-wrap:wrap}
-.gate.warn{border-left-color:var(--warning)}
-.gate .gate-main{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
-.gate .spacer{flex:1}
-.todo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
-.todo-card{text-align:left;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:grid;gap:2px;color:var(--ink)}
-.todo-card:hover{border-color:#8fb6b0;background:#fcfefd}
-.todo-card .n{font-size:26px;font-weight:600;line-height:1.35;letter-spacing:-.5px}
-.todo-card .l{font-size:12px;font-weight:600}
-.todo-card .h{font-size:11px;color:var(--muted);line-height:1.6}
-.todo-card.zero .n{color:var(--subtle)}
-.split{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+.top-right{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--muted)}
+.demo-chip{display:inline-flex;align-items:center;gap:4px;background:#f3f5f7;color:#6c7a88;border:1px solid var(--line);border-radius:10px;padding:1px 8px;font-size:10.5px;cursor:help}
+.who{display:flex;align-items:center;gap:6px}
+.avatar{width:22px;height:22px;border-radius:50%;background:#e8eef0;display:grid;place-items:center;color:#3c5a6b;font-size:10px}
+main{padding:18px 22px 30px;max-width:1640px;width:100%;flex:1}
+footer{padding:0 22px 14px;font-size:10px;color:var(--subtle);display:flex;justify-content:space-between;gap:10px}
+/* primitives */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:30px;padding:5px 11px;background:#fff;border:1px solid var(--control);border-radius:5px;font-size:11.5px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.btn:hover{background:#f5f8f9;text-decoration:none}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn.primary:hover{background:var(--primary-dark)}
+.btn.sm{min-height:26px;font-size:11px;padding:3px 8px}
+.btn.ghost{border-color:transparent;background:none;color:var(--primary);padding:2px 0;min-height:22px}
+.row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.page-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.panel+.panel{margin-top:12px}
+.panel-head{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;min-height:41px}
+.panel-head h2{font-size:13px}
+.panel-head .sub{font-size:10.5px;color:var(--subtle);font-weight:400}
+.panel-body{padding:14px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;line-height:1.5;padding:1.5px 7px;border-radius:4px;font-weight:500;background:#eff2f5;color:#52616f;white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.bad{background:var(--bad-bg);color:var(--bad)}
+.chip.info{background:var(--info-bg);color:var(--info)}
+.chip.line{background:#fff;border:1px solid var(--line);color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex:none}
+/* workbench */
+.overview{display:block}
+.kpis{border-bottom:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:4px 0 12px}
+.kpi{padding:10px 14px;border-right:1px solid var(--line);text-align:left;background:none;border-top:0;border-bottom:0;border-left:0;color:var(--ink);display:block}
+.kpi:last-child{border-right:0}
+.kpi:hover{background:#fafcfc}
+.kpi .n{font-size:24px;font-weight:650;line-height:1.25;letter-spacing:-.5px;display:flex;align-items:baseline;gap:5px}
+.kpi .n em{font-style:normal;font-size:10.5px;font-weight:400;color:var(--muted)}
+.kpi .l{font-size:11.5px;color:var(--muted);margin-top:1px}
+.dist{padding:6px 14px 14px}
+.distbar{display:flex;height:14px;border-radius:3px;overflow:hidden;background:#eef1f4;margin-bottom:8px}
+.distbar i{display:block;min-width:3px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:10.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend b{font-weight:600;color:var(--ink)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px;align-items:start;margin-top:12px}
+.cols>*{min-width:0}
 .queue{display:grid}
-.qrow{display:grid;grid-template-columns:minmax(0,1fr) 132px 108px auto;gap:14px;align-items:center;padding:12px 18px;border-bottom:1px solid #edf0f3}
+.qhead{display:grid;grid-template-columns:minmax(0,1fr) 128px 96px 108px 22px;gap:10px;padding:6px 14px;font-size:10.5px;color:var(--subtle);background:#fbfcfd;border-bottom:1px solid var(--line)}
+.qhead span:nth-child(3){padding-left:2px}
+.qrow{display:grid;grid-template-columns:minmax(0,1fr) 128px 96px 108px 22px;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid #eef1f4;text-decoration:none;color:inherit}
 .qrow:last-child{border-bottom:0}
-.qrow:hover{background:#f8fbfa}
-.qnum{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);text-align:right}
-.qnum b{display:block;font-size:15px;color:var(--ink);font-weight:600}
-.qnum .micro{display:block;line-height:1.5}
-.timeline{display:grid;gap:0}
-.tl{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:8px 0;font-size:11.5px;border-bottom:1px dashed #edf0f3}
-.tl:last-child{border-bottom:0}
-.tl time{color:var(--muted);font-variant-numeric:tabular-nums}
-.tl p{line-height:1.6}
-/* ---------- detail ---------- */
-.back{font-size:12px;display:inline-flex;align-items:center;gap:6px;margin-bottom:12px}
-.detail{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:18px;align-items:start}
-.sku-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:14px}
-.sku-head h1{font-size:22px}
-.sku-meta{font-size:12px;color:var(--muted);margin-top:5px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.verdict{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden}
-.verdict>div{padding:13px 16px;border-right:1px solid var(--line)}
+.qrow:hover{background:#f8fbfa;text-decoration:none}
+.prod{font-weight:600;font-size:12.5px;line-height:1.35;display:block}
+.prod-sub{display:block;font-size:10.5px;color:var(--subtle);font-weight:400;margin-top:1px}
+.cov{height:5px;background:#edf0f3;border-radius:3px;overflow:hidden;margin-top:4px}
+.cov i{display:block;height:100%;background:var(--primary);border-radius:3px}
+.cov.low i{background:#c9812f}
+.cov.out i{background:#b4483d}
+.cov-num{font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;gap:6px;font-variant-numeric:tabular-nums}
+.bignum{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.3}
+.bignum small{font-size:10px;font-weight:400;color:var(--muted);margin-left:2px}
+.mini-row{display:grid;grid-template-columns:96px minmax(0,1fr) 34px;gap:8px;align-items:center;font-size:11px;padding:5px 0}
+.mini-row .t{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-row .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.mini-row .track{height:6px;background:#eef1f4;border-radius:3px;overflow:hidden}
+.mini-row .track i{display:block;height:100%;background:#7fa8a2}
+.meta-list{display:grid;grid-template-columns:1fr auto;gap:5px 10px;font-size:11.5px;margin:0}
+.meta-list dt{color:var(--muted)}
+.meta-list dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+/* filters */
+.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px}
+.filters input[type=search],.filters select{border:1px solid var(--control);border-radius:5px;padding:5px 8px;font-size:11.5px;background:#fff;min-height:29px;color:var(--ink)}
+.filters input[type=search]{width:210px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#fff}
+.seg button{border:0;border-right:1px solid var(--line);background:none;font-size:11.5px;padding:6px 10px;color:var(--muted);min-height:29px}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--sel);color:var(--primary);font-weight:600}
+.seg em{font-style:normal;font-size:10px;margin-left:4px;color:var(--subtle)}
+.seg button[aria-pressed=true] em{color:var(--primary)}
+/* tables */
+.tw{overflow:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th{text-align:left;font-size:10.5px;font-weight:500;color:var(--muted);background:#f8fafb;padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 12px;border-bottom:1px solid #eef1f4;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#f9fbfb}
+td.r,th.r{text-align:right}
+.ltable{min-width:820px}
+.ltable th,.ltable td:nth-child(4),.ltable td:nth-child(5),.ltable td:nth-child(6),.ltable td:nth-child(7),.ltable td:nth-child(8){white-space:nowrap}
+.ltable th:last-child,.ltable td:last-child{position:sticky;right:0;background:#fff;box-shadow:-6px 0 6px -6px #0000001a}
+.ltable th:last-child{background:#f8fafb}
+.stockcell{display:flex;align-items:center;gap:7px;min-width:112px}
+.stockcell .cov{width:52px;margin-top:0;flex:none}
+.stockcell span{font-variant-numeric:tabular-nums;font-size:11.5px}
+.empty{padding:30px 18px;text-align:center;color:var(--muted);font-size:12px}
+.empty h3{color:var(--ink);margin-bottom:5px}
+/* detail */
+.back{font-size:11.5px;display:inline-flex;align-items:center;gap:5px;margin-bottom:8px;color:var(--muted)}
+.detail-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
+.detail-head h1{font-size:19px}
+.sku-meta{font-size:11.5px;color:var(--muted);margin-top:4px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.verdict{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr 1fr;border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden;margin-bottom:12px}
+.verdict>div{padding:9px 14px;border-right:1px solid var(--line);min-width:0}
 .verdict>div:last-child{border-right:0}
-.verdict small{display:block;font-size:11px;color:var(--muted)}
-.verdict b{font-size:21px;font-weight:600;line-height:1.45;font-variant-numeric:tabular-nums}
-.verdict b span{font-size:11px;font-weight:400;color:var(--muted);margin-left:3px}
+.verdict small{display:block;font-size:10.5px;color:var(--muted)}
+.verdict b{font-size:18px;font-weight:650;line-height:1.4;font-variant-numeric:tabular-nums}
+.verdict b span{font-size:10.5px;font-weight:400;color:var(--muted);margin-left:2px}
 .verdict .accent b{color:var(--primary)}
-.rail{position:sticky;top:76px;display:grid;gap:14px}
-.rail .panel-head{padding:12px 16px}
-.rail .panel-body{padding:16px}
-.rail-num{display:flex;align-items:baseline;justify-content:space-between;gap:10px;background:var(--canvas);border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:12px}
-.rail-num b{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
-.stepper{display:flex;gap:6px}
-.stepper input{flex:1;min-width:0;border:1px solid var(--control);border-radius:5px;padding:7px 9px;font-size:14px;font-variant-numeric:tabular-nums;text-align:center}
-.stepper button{width:34px;min-height:36px;border:1px solid var(--control);background:#fff;border-radius:5px;color:var(--ink);font-size:15px}
-.check{display:flex;gap:8px;align-items:flex-start;font-size:11px;line-height:1.6;margin:10px 0;color:#46525d}
-.check input{margin-top:3px;accent-color:var(--primary);flex:none}
-.hint{font-size:11px;line-height:1.7;color:var(--warning);background:var(--warning-bg);border-radius:4px;padding:6px 8px;margin-top:6px}
-.hint.bad{color:var(--danger);background:var(--danger-bg)}
-.quality{display:grid;gap:0}
-.qitem{padding:11px 0;border-bottom:1px solid #edf0f3;font-size:12px}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) 318px;gap:12px;align-items:start}
+.rail{position:sticky;top:66px;display:grid;gap:12px}
+.chart-wrap{padding:10px 14px 4px}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font:10px "Segoe UI","Microsoft YaHei",sans-serif;fill:#6b7885}
+.chart .lbl-strong{font-weight:600;fill:#41505f}
+.chart-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10.5px;color:var(--muted);padding:2px 14px 10px}
+.chart-legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:4px}
+.chart-legend i.dash{background:repeating-linear-gradient(to right,#9aa7b3 0 3px,transparent 3px 6px)}
+.chart-legend i.area{height:9px;border-radius:2px;background:#fbeceb}
+.two{display:grid;grid-template-columns:minmax(0,1fr) 236px;gap:16px;padding:0 14px 12px;align-items:start}
+.two .bars{max-width:264px}
+.formula{border:1px solid var(--line);border-radius:6px;background:#fbfcfd;padding:9px 11px;font-size:11.5px;line-height:1.9;color:#43505d}
+.formula b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.formula .op{color:var(--subtle);padding:0 4px}
+.tabs{display:flex;gap:16px;border-bottom:1px solid var(--line);padding:0 14px;overflow-x:auto}
+.tabs button{border:0;border-bottom:2px solid transparent;background:none;font-size:12px;color:var(--muted);min-height:38px;padding:4px 0;white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
+.tab-body{padding:14px}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;margin:0}
+.kv>div{padding:6px 0;border-bottom:1px solid #f1f3f5;font-size:12px;display:flex;justify-content:space-between;gap:10px}
+.kv dt{color:var(--muted);font-size:11.5px}
+.kv dd{margin:0;font-variant-numeric:tabular-nums;text-align:right}
+.stack{display:flex;height:9px;border-radius:3px;overflow:hidden;background:#eef1f4;margin-top:5px}
+.stack i{display:block;height:100%}
+.check{display:flex;gap:7px;align-items:flex-start;font-size:11px;line-height:1.55;margin:8px 0;color:#45525f}
+.check input{margin-top:2px;accent-color:var(--primary);flex:none}
+.qitem{padding:8px 0;border-bottom:1px solid #f1f3f5}
 .qitem:last-child{border-bottom:0}
-.qitem .qt{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:600;font-size:12px}
-.qitem p{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:3px}
-.qitem .own{font-size:11px;color:#46525d;margin-top:3px}
-.facts3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
-.facts3>div{border:1px solid var(--line);border-radius:6px;padding:9px 12px;background:#fcfdfd;min-width:0}
-.facts3 small{display:block;font-size:10.5px;color:var(--muted)}
-.facts3 b{display:block;font-size:13px;font-weight:600;margin-top:1px;line-height:1.5}
-.facts3 span{display:block;font-size:10.5px;color:var(--muted);line-height:1.6;overflow-wrap:anywhere}
-.bar{height:6px;background:#eef2f4;border-radius:3px;overflow:hidden;min-width:60px}.bar span{display:block;height:100%;background:var(--primary)}
-.bar.neg span{background:#c9a08d}
-/* ---------- requisition ---------- */
-.req-state{font-size:11px;color:var(--muted)}
-.steps{display:flex;gap:0;border:1px solid var(--line);border-radius:6px;background:#fff;overflow:auto;margin-bottom:18px}
-.step{flex:1;min-width:150px;padding:11px 14px;font-size:11.5px;color:var(--muted);border-right:1px solid var(--line)}
+.qitem .qt{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-weight:600;font-size:12px}
+.qitem p{font-size:11px;color:var(--muted);line-height:1.65;margin-top:2px}
+/* rail */
+.rail .panel-head{padding:9px 13px}
+.rail .panel-body{padding:13px}
+.qty-now{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px}
+.qty-now span{font-size:11px;color:var(--muted)}
+.qty-now b{font-size:22px;font-weight:650;font-variant-numeric:tabular-nums}
+.stepper{display:flex;gap:5px}
+.stepper button{width:30px;min-height:32px;border:1px solid var(--control);background:#fff;border-radius:5px;font-size:14px;color:var(--ink)}
+.stepper input{flex:1;min-width:0;border:1px solid var(--control);border-radius:5px;padding:5px 8px;font-size:13px;text-align:center;font-variant-numeric:tabular-nums}
+.hint{font-size:10.5px;color:var(--warn);background:var(--warn-bg);border-radius:4px;padding:4px 7px;margin-top:5px;line-height:1.5}
+.hint.bad{color:var(--bad);background:var(--bad-bg)}
+.hint.ok{color:var(--ok);background:var(--ok-bg)}
+.rail-note{font-size:10px;color:var(--subtle);margin-top:7px;line-height:1.5}
+/* requisitions */
+.steps{display:flex;border:1px solid var(--line);border-radius:6px;background:#fff;overflow:auto;margin-bottom:14px}
+.step{flex:1;min-width:132px;padding:8px 12px;font-size:11px;color:var(--muted);border-right:1px solid var(--line)}
 .step:last-child{border-right:0}
-.step b{display:block;font-size:12px;color:var(--ink);font-weight:600;margin-bottom:1px}
-.step.done{background:#f4faf7;color:var(--success)}
-.step.done b{color:var(--success)}
-.step.now{background:var(--selected);color:var(--primary)}
-.step.now b{color:var(--primary)}
-.step.todo{opacity:.65}
-/* ---------- dialog / toast ---------- */
-dialog{border:0;padding:0;border-radius:10px;width:min(620px,calc(100vw - 32px));max-height:84vh;color:var(--ink);box-shadow:0 18px 50px #172c3c30}
-dialog::backdrop{background:#142a3b66}
-.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
-.dlg-head h2{font-size:16px}
-.dlg-body{padding:18px 20px;font-size:12px;line-height:1.8}
-.dlg-body p{margin-bottom:10px}
-.dlg-foot{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
-.close{border:0;background:none;font-size:20px;color:var(--muted);padding:0 4px;line-height:1}
-#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--nav);color:#fff;padding:11px 18px;border-radius:6px;font-size:12px;z-index:50;max-width:calc(100vw - 32px);box-shadow:0 10px 30px #172c3c33}
-/* ---------- responsive ---------- */
-@media (max-width:1240px){
-  .detail{grid-template-columns:1fr}
+.step b{display:block;font-size:11.5px;font-weight:600;color:#44515e;margin-bottom:1px}
+.step.done{background:#f5faf7}.step.done b{color:var(--ok)}
+.step.now{background:var(--sel)}.step.now b{color:var(--primary)}
+.step.wait{background:var(--warn-bg)}.step.wait b{color:var(--warn)}
+.step.todo{opacity:.55}
+.prog{display:flex;align-items:center;gap:3px}
+.prog i{width:16px;height:3px;border-radius:2px;background:#e2e7ec;display:block}
+.prog i.on{background:var(--primary)}
+.prog i.warn{background:#c9812f}
+.alert-row{display:flex;align-items:center;gap:10px;border:1px solid #ecc9c5;border-left:3px solid var(--bad);background:#fdf1f0;border-radius:5px;padding:7px 12px;font-size:11.5px;margin-bottom:10px;color:#83342c}
+.tl{display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;font-size:11px;padding:6px 0;border-bottom:1px dashed #eef1f4}
+.tl:last-child{border-bottom:0}
+.tl time{color:var(--subtle);font-variant-numeric:tabular-nums}
+/* dialog */
+dialog{border:0;padding:0;border-radius:8px;width:min(560px,calc(100vw - 28px));max-height:82vh;color:var(--ink);box-shadow:0 16px 44px #16293a2e}
+dialog::backdrop{background:#12283b55}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line)}
+.dlg-head h2{font-size:14px}
+.dlg-body{padding:14px 16px;font-size:11.5px;line-height:1.75}
+.dlg-foot{padding:11px 16px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:7px}
+.close{border:0;background:none;font-size:19px;color:var(--muted);line-height:1}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#16293a;color:#fff;padding:9px 15px;border-radius:5px;font-size:11.5px;z-index:50;max-width:calc(100vw - 24px)}
+/* responsive */
+@media (max-width:1280px){
+  .cols,.detail{grid-template-columns:1fr}
+  .cols>.side{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:start}
+  .cols>.side>.panel+.panel{margin-top:0}
+  .cols>.side>.panel{min-width:0}
   .rail{position:static;grid-template-columns:1fr 1fr;align-items:start}
-  .todo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .split{grid-template-columns:1fr}
-  .qrow{grid-template-columns:minmax(0,1fr) 120px auto}
+  .qrow{grid-template-columns:minmax(0,1fr) 118px 96px 100px 20px}
+}
+@media (max-width:1000px){
+  .sidebar{position:static;width:auto;flex-direction:row;align-items:center;padding:8px 12px;border-right:0;border-bottom:1px solid var(--line);gap:4px;overflow-x:auto}
+  .brand b{font-size:16px}.brand-symbol{width:26px;height:29px;font-size:15px}
+  .workspace,.nav-label,.sidebar-foot{display:none}
+  nav{display:flex;gap:2px;flex:none}
+  nav a{min-height:32px;padding:5px 9px;font-size:11.5px;margin:0}
+  nav a.sub{display:none}.nav-icon{display:none}
+  .shell{margin-left:0}
+  .topbar{position:static;height:46px;padding:0 14px}
+  main{padding:14px 14px 24px}
+  footer{padding:0 14px 12px}
+  .kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .verdict{grid-template-columns:repeat(3,1fr)}
+  .verdict>div:nth-child(3){border-right:0}
+  .verdict>div:nth-child(4),.verdict>div:nth-child(5){border-top:1px solid var(--line)}
+  .verdict>div:nth-child(5){border-right:0}
+  .rail{grid-template-columns:1fr}
+  .ltable{min-width:700px}
+  .ltable th:nth-child(6),.ltable td:nth-child(6){display:none}
+  .qrow{grid-template-columns:minmax(0,1fr) 110px 96px 18px}
   .qrow .qhide{display:none}
 }
-@media (max-width:980px){
-  .sidebar{position:static;width:auto;flex-direction:row;align-items:center;padding:10px 14px;border-right:0;border-bottom:1px solid var(--line);gap:6px;overflow-x:auto}
-  .brand{font-size:18px;padding:0;flex:none}
-  .brand-symbol{width:28px;height:31px;font-size:16px}
-  .workspace,.nav-label,.sidebar-note{display:none}
-  nav{display:flex;gap:2px;flex:none}
-  nav a{min-height:36px;padding:6px 10px;font-size:12px;margin:0}
-  nav a.sub{display:none}
-  .nav-icon{display:none}
-  .shell{margin-left:0}
-  .topbar{position:static;height:54px;padding:0 16px}
-  .demobar{padding:6px 16px}
-  main{padding:18px 16px 28px}
-  footer{padding:0 16px 14px}
-  .rail{grid-template-columns:1fr}
-  .verdict{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .verdict>div:nth-child(2){border-right:0}
-  .verdict>div:nth-child(1),.verdict>div:nth-child(2){border-bottom:1px solid var(--line)}
-  .sku-head{flex-direction:column;gap:10px}
-}
-@media (max-width:620px){
-  .page-head{flex-direction:column;align-items:flex-start}
-  .todo-grid{grid-template-columns:1fr}
-  .qrow{grid-template-columns:1fr auto;gap:8px}
+@media (max-width:680px){
+  .page-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .kpi:nth-child(2){border-right:0}
+  .kpi:nth-child(1),.kpi:nth-child(2){border-bottom:1px solid var(--line)}
+  .verdict{grid-template-columns:repeat(2,1fr)}
+  .verdict>div:nth-child(2n){border-right:0}
+  .verdict>div:nth-child(n+3){border-top:1px solid var(--line)}
+  .filters{width:100%}.filters input[type=search]{width:100%}
+  .two{grid-template-columns:1fr}
+  .kv{grid-template-columns:1fr}
+  .qrow{grid-template-columns:1fr auto;gap:6px}
   .qrow .qmid{display:none}
-  .filters{width:100%}
-  .filters .field{flex:1 1 100%}
-  .filters input[type=search]{min-width:0;width:100%}
-  .kv.grid2{grid-template-columns:1fr}
-  .facts3{grid-template-columns:1fr}
-  .verdict b{font-size:18px}
-  .step{min-width:130px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -263,14 +286,13 @@ dialog::backdrop{background:#142a3b66}
 <div class="shell">
   <header class="topbar">
     <div class="crumb" id="crumb"></div>
-    <div class="session"><span class="chip-live"><span class="dot"></span>演示会话</span><span>采购运营 · 林予</span></div>
+    <div class="top-right">
+      <span class="demo-chip" title="本地演示：脱敏模拟数据，不连接 ERP、不调用模型、不写入任何系统">演示数据</span>
+      <span class="who"><span class="avatar">林</span>林予 · 采购运营</span>
+    </div>
   </header>
-  <div class="demobar">
-    <span><b>UX v3 交互原型</b> · 全部为脱敏模拟数据，未连接 ERP、未调用模型、未读取本机密钥</span>
-    <span id="demobar-right"></span>
-  </div>
   <main id="main" tabindex="-1"></main>
-  <footer><span>序衡 / S01 采购补货分析 · 原型不代表真实业务结果</span><span>人工确认 ≠ ERP 领导审批</span></footer>
+  <footer><span>序衡 · S01 采购补货</span><span id="foot-right"></span></footer>
 </div>
 <dialog id="dialog"><div id="dialog-inner"></div></dialog>
 <div id="toast" hidden role="status"></div>
@@ -279,1173 +301,913 @@ dialog::backdrop{background:#142a3b66}
 (function(){
 'use strict';
 
-/* =====================================================================
-   1. 演示数据（脱敏模拟，全部为构造值）
-   ===================================================================== */
-const POLICY = {
-  id:'s01-admission', version:'v0-draft', status:'DRAFT',
-  title:'数据准入政策草案',
-  note:'销售窗口与有效业务日要求仍在调查中；草案参数仅作展示，未参与任何判定。',
-  draft:{ windowDays:15, requiredSalesDays:7 }
-};
+/* ================= 数据（脱敏模拟，字段与现实契约一致） ================= */
+const POLICY={version:'v0-draft',status:'DRAFT',windowDays:15,requiredSalesDays:7};
 
-const SOURCES = { RULE:'平台规则计算', ERP_REF:'ERP 参考建议', NONE:'无可用来源' };
-const STAGE_GROUP = {
-  pending_confirm:'待人工确认', need_evidence:'依据待核实', no_need:'无需补货',
-  requisition_waiting:'已请购', requisition_approved:'已请购', requisition_check:'已请购',
-  failed:'分析失败'
-};
-const STAGE_LABEL = {
-  pending_confirm:'待人工确认', need_evidence:'依据待核实', no_need:'无需补货',
-  requisition_waiting:'已提交 · 待ERP审批', requisition_approved:'ERP 已审批',
-  requisition_check:'提交结果待核对', failed:'分析失败'
-};
-const STAGE_TONE = {
-  pending_confirm:'info', need_evidence:'warning', no_need:'plain',
-  requisition_waiting:'info', requisition_approved:'success', requisition_check:'danger', failed:'danger'
-};
+const BATCHES=[
+  {id:'b1114',at:'11-14 08:02',full:'2026-11-14 08:02',objects:11,done:11,complete:true,over:{}},
+  {id:'b1113',at:'11-13 07:58',full:'2026-11-13 07:58',objects:11,done:11,complete:true,over:{
+    'CB-1001':{available:43,suggest:40,firstShortage:'2026-11-15'},
+    'BT-2003':{available:40,suggest:42,firstShortage:'2026-11-18'},
+    'CB-1023':{available:80,suggest:40,firstShortage:'2026-11-23'}
+  }},
+  {id:'b1112',at:'11-12 20:10',full:'2026-11-12 20:10',objects:10,done:10,complete:false,over:{
+    'CB-1001':{available:71,suggest:10,firstShortage:'2026-11-20'},
+    'BT-2003':{available:66,suggest:12,firstShortage:'2026-11-25'},
+    'KT-4022':{missing:true}
+  }}
+];
+const SOURCE={RULE:'规则建议',ERP:'ERP 参考',NONE:'无来源'};
 
-function q(code,level,title,detail,owner,action,extra){
-  return Object.assign({code:code,level:level,title:title,detail:detail,owner:owner,action:action},extra||{});
+const SKUS=[
+{
+  key:'CB-1001',sku:'CB-1001',name:'旅行收纳包 · 雾灰',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'RULE',
+  plan:{available:55,target:75,suggest:20,firstShortage:'2026-11-18',avgDaily:11.3,salesDays:7,totalSales:79,window:'11-04 — 11-10'},
+  constraints:{moq:10,mult:10,price:'38.00',cur:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0912',validTo:'2026-12-31',lead:12},
+  purchases:[],sales:[12,9,15,11,8,14,10],
+  daily:[{d:'11-11',dem:12,arr:0,close:43},{d:'11-12',dem:11,arr:0,close:32},{d:'11-13',dem:14,arr:0,close:18},
+    {d:'11-14',dem:9,arr:0,close:9},{d:'11-15',dem:13,arr:0,close:-4},{d:'11-16',dem:11,arr:0,close:-15},
+    {d:'11-17',dem:12,arr:0,close:-27},{d:'11-18',dem:10,arr:20,close:-17},{d:'11-19',dem:12,arr:0,close:-29}],
+  checks:[{code:'NO_ATOMIC',level:'WARN',title:'接口分时读取，存在 4 分钟时差',detail:'库存、销量、采购条件分别读取；不影响数量结论，精确时点不可复原。',owner:'数据负责人',action:'无需处理'}],
+  ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'规则建议',qty:20,res:'当前'},{at:'11-11 08:01',src:'规则建议',qty:30,res:'已取代'},{at:'11-08 08:00',src:'ERP 参考',qty:30,res:'历史'}],req:null
+},
+{
+  key:'BT-2003',sku:'BT-2003',name:'保温随行杯 · 松绿',store:'Amazon 美国站',wh:'美东仓',unit:'件',source:'RULE',
+  plan:{available:48,target:78,suggest:30,firstShortage:'2026-11-20',avgDaily:9.6,salesDays:7,totalSales:67,window:'11-04 — 11-10'},
+  constraints:{moq:6,mult:6,price:'52.50',cur:'CNY',supplier:'示例供应商 B',quote:'QT-2026-0931',validTo:'2026-12-15',lead:15},
+  purchases:[{no:'PO-2026-2211',status:'待到货',ordered:60,recv:24,unrecv:36,eta:'2026-11-25'}],
+  sales:[9,10,11,8,10,9,10],
+  daily:[{d:'11-11',dem:9,arr:0,close:39},{d:'11-12',dem:10,arr:0,close:29},{d:'11-13',dem:11,arr:0,close:18},
+    {d:'11-14',dem:8,arr:0,close:10},{d:'11-15',dem:10,arr:0,close:0},{d:'11-16',dem:9,arr:0,close:-9},
+    {d:'11-17',dem:11,arr:0,close:-20},{d:'11-18',dem:9,arr:0,close:-29},{d:'11-19',dem:10,arr:0,close:-39}],
+  checks:[],
+  ai:{status:'OK',bullets:['日均 9.6 件，可用 48 件覆盖约 5 天，早于在途 36 件的到货日 11-25。','在途属待到货单据，无已承诺可售日，本次未抵扣。'],
+    risk:'首次短缺发生在到货前 5 天，存在断货风险。',ask:'建议确认 30 件，并核对在途未被其他渠道占用。',tokens:1842,cost:'¥0.02'},
+  hist:[{at:'11-14 08:02',src:'规则建议',qty:30,res:'当前'},{at:'11-12 20:10',src:'规则建议',qty:24,res:'已取代'}],req:null
+},
+{
+  key:'CB-1023',sku:'CB-1023',name:'打包收纳三件套 · 燕麦',store:'Shopify 独立站',wh:'美西仓',unit:'件',source:'RULE',
+  plan:{available:66,target:116,suggest:50,firstShortage:'2026-11-21',avgDaily:9.4,salesDays:7,totalSales:66,window:'11-04 — 11-10'},
+  constraints:{moq:20,mult:10,price:'61.00',cur:'CNY',supplier:'示例供应商 C',quote:'QT-2026-0877',validTo:'2026-11-30',lead:20},
+  purchases:[],sales:[9,10,9,11,8,9,10],
+  daily:[{d:'11-11',dem:9,arr:0,close:57},{d:'11-12',dem:10,arr:0,close:47},{d:'11-13',dem:9,arr:0,close:38},
+    {d:'11-14',dem:11,arr:0,close:27},{d:'11-15',dem:8,arr:0,close:19},{d:'11-16',dem:9,arr:0,close:10},
+    {d:'11-17',dem:10,arr:0,close:0},{d:'11-18',dem:9,arr:50,close:41},{d:'11-19',dem:10,arr:0,close:31}],
+  checks:[{code:'QUOTE_EXPIRING',level:'WARN',title:'报价 11-30 到期，交期 20 天',detail:'11-30 后下单需重新取价。',owner:'采购负责人',action:'下单前确认报价有效'}],
+  ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'规则建议',qty:50,res:'当前'}],req:null
+},
+{
+  key:'LT-3012',sku:'LT-3012',name:'便携阅读灯 · 米白',store:'Shopify 独立站',wh:'美东仓',unit:'件',source:'ERP',
+  plan:{available:31,target:null,suggest:30,firstShortage:null,avgDaily:null,salesDays:null,totalSales:null,window:null},
+  constraints:{moq:5,mult:5,price:'26.00',cur:'CNY',supplier:'示例供应商 D',quote:'QT-2026-0802',validTo:'2026-11-20',lead:10},
+  purchases:[],sales:[],daily:[],
+  checks:[{code:'ERP_ALGO',level:'WARN',title:'ERP 计算依据未核实',detail:'数量来自 ERP 建议记录，销量窗口与净额规则未知。',owner:'数据负责人',action:'可先核对采购条件后人工确认'},
+    {code:'ERP_WINDOW',level:'WARN',title:'ERP 日均统计窗口未知',detail:'无法确认与平台口径一致。',owner:'数据负责人',action:'补充统计口径'}],
+  ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'ERP 参考',qty:30,res:'当前'}],req:null
+},
+{
+  key:'LT-3021',sku:'LT-3021',name:'折叠桌面灯 · 墨黑',store:'Shopify 独立站',wh:'美东仓',unit:'件',source:'NONE',
+  plan:{available:27,target:null,suggest:null,firstShortage:null,avgDaily:null,salesDays:4,totalSales:19,window:'11-07 — 11-10'},
+  constraints:{moq:6,mult:6,price:'44.00',cur:'CNY',supplier:'示例供应商 C',quote:'QT-2026-0918',validTo:'2026-12-20',lead:14},
+  purchases:[],sales:[6,5,4,4],daily:[],
+  checks:[{code:'SALES_DAYS',level:'BLOCK',title:'完整业务日不足，无法计算日均',detail:'仅 4 个完整业务日（11-07 至 11-10）的已核对销量。',owner:'数据负责人',action:'补采销售历史后重新分析',draft:'草案要求 7 个（未生效）'},
+    {code:'LEDGER',level:'WARN',title:'期初库存与流水未对账',detail:'可用 27 件来自单一读取，未与出入库流水核对。',owner:'数据负责人',action:'补齐流水对账'}],
+  ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'无来源',qty:null,res:'当前'}],req:null
+},
+{
+  key:'KT-4010',sku:'KT-4010',name:'硅胶折叠碗 · 沙色',store:'Shopify 独立站',wh:'美东仓',unit:'件',source:'NONE',
+  plan:{available:36,target:null,suggest:null,firstShortage:null,avgDaily:null,salesDays:null,totalSales:null,window:null},
+  constraints:{moq:12,mult:12,price:'19.50',cur:'CNY',supplier:'示例供应商 D',quote:'QT-2026-0755',validTo:'2026-11-15',lead:9},
+  purchases:[],sales:[],daily:[],
+  checks:[{code:'QUALITY',level:'BLOCK',title:'质量调查进行中',detail:'成熟签收群组 100 单中 12 单投诉（占比 12%，非缺陷率）。结论出具前不生成补货建议。',owner:'质量负责人',action:'完成调查并登记结论'}],
+  ai:{status:'NONE'},hist:[{at:'11-13 09:40',src:'无来源',qty:null,res:'当前'}],req:null
+},
+{
+  key:'KT-4022',sku:'KT-4022',name:'户外折叠餐具 · 卡其',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'NONE',
+  plan:{available:null,target:null,suggest:null,firstShortage:null,avgDaily:null,salesDays:null,totalSales:null,window:null},
+  constraints:{moq:null,mult:null,price:null,cur:null,supplier:null,quote:null,validTo:null,lead:null},
+  purchases:[],sales:[],daily:[],
+  checks:[{code:'FAILED',level:'BLOCK',title:'读取中断，本次无结论',detail:'商品目录读取超时，未取得库存与销量。',owner:'系统',action:'重新分析'}],
+  ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'无来源',qty:null,res:'失败'}],req:null
+},
+{
+  key:'CB-1015',sku:'CB-1015',name:'鞋履收纳袋 · 炭灰',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'RULE',
+  plan:{available:95,target:130,suggest:40,firstShortage:'2026-11-18',avgDaily:10.5,salesDays:7,totalSales:74,window:'11-04 — 11-10'},
+  constraints:{moq:20,mult:10,price:'41.00',cur:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0915',validTo:'2026-12-31',lead:12},
+  purchases:[],sales:[10,11,10,12,9,11,11],
+  daily:[{d:'11-11',dem:10,arr:0,close:85},{d:'11-12',dem:11,arr:0,close:74},{d:'11-13',dem:10,arr:0,close:64},
+    {d:'11-14',dem:12,arr:0,close:52},{d:'11-15',dem:9,arr:0,close:43},{d:'11-16',dem:11,arr:0,close:32},
+    {d:'11-17',dem:11,arr:0,close:21},{d:'11-18',dem:10,arr:0,close:11},{d:'11-19',dem:11,arr:0,close:0}],
+  checks:[],ai:{status:'NONE'},
+  hist:[{at:'11-14 08:02',src:'规则建议',qty:40,res:'当前'},{at:'11-13 07:58',src:'规则建议',qty:40,res:'已取代'}],
+  req:{no:'RQ-2026-0011',plat:'SUBMITTED',erp:'PENDING',finalQty:40,sugQty:40,reason:'',at:'2026-11-14 09:12',by:'林予',readback:'2026-11-14 09:12',reads:2,step:1}
+},
+{
+  key:'BT-2020',sku:'BT-2020',name:'轻量运动瓶 · 岩白',store:'Amazon 美国站',wh:'美东仓',unit:'件',source:'RULE',
+  plan:{available:64,target:84,suggest:20,firstShortage:'2026-11-22',avgDaily:7.8,salesDays:7,totalSales:55,window:'11-04 — 11-10'},
+  constraints:{moq:10,mult:10,price:'29.00',cur:'CNY',supplier:'示例供应商 B',quote:'QT-2026-0908',validTo:'2026-12-01',lead:15},
+  purchases:[],sales:[8,7,8,8,7,8,9],
+  daily:[{d:'11-11',dem:8,arr:0,close:56},{d:'11-12',dem:7,arr:0,close:49},{d:'11-13',dem:8,arr:0,close:41},
+    {d:'11-14',dem:8,arr:0,close:33},{d:'11-15',dem:7,arr:0,close:26},{d:'11-16',dem:8,arr:0,close:18},
+    {d:'11-17',dem:8,arr:0,close:10},{d:'11-18',dem:7,arr:0,close:3},{d:'11-19',dem:8,arr:0,close:-5}],
+  checks:[],ai:{status:'NONE'},hist:[{at:'11-13 07:58',src:'规则建议',qty:20,res:'当前'}],
+  req:{no:'RQ-2026-0009',plat:'SUBMITTED',erp:'APPROVED',finalQty:20,sugQty:20,reason:'',at:'2026-11-13 10:05',by:'林予',readback:'2026-11-13 16:20',reads:3,step:2,approver:'ERP 采购主管'}
+},
+{
+  key:'CB-1030',sku:'CB-1030',name:'行李箱束带 · 石墨',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'RULE',
+  plan:{available:88,target:118,suggest:30,firstShortage:'2026-11-19',avgDaily:11,salesDays:7,totalSales:77,window:'11-04 — 11-10'},
+  constraints:{moq:10,mult:10,price:'22.00',cur:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0922',validTo:'2026-12-31',lead:12},
+  purchases:[],sales:[11,12,10,11,12,10,11],
+  daily:[{d:'11-11',dem:11,arr:0,close:77},{d:'11-12',dem:12,arr:0,close:65},{d:'11-13',dem:10,arr:0,close:55},
+    {d:'11-14',dem:11,arr:0,close:44},{d:'11-15',dem:12,arr:0,close:32},{d:'11-16',dem:10,arr:0,close:22},
+    {d:'11-17',dem:11,arr:0,close:11},{d:'11-18',dem:10,arr:0,close:1},{d:'11-19',dem:11,arr:0,close:-10}],
+  checks:[],ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'规则建议',qty:30,res:'当前'}],
+  req:{no:'RQ-2026-0012',plat:'UNKNOWN',erp:'UNKNOWN',finalQty:30,sugQty:30,reason:'',at:'2026-11-14 09:41',by:'林予',readback:null,reads:1,step:1}
+},
+{
+  key:'CB-1008',sku:'CB-1008',name:'数码配件包 · 深蓝',store:'Amazon 美国站',wh:'美西仓',unit:'件',source:'RULE',
+  plan:{available:72,target:60,suggest:0,firstShortage:null,avgDaily:6,salesDays:7,totalSales:42,window:'11-04 — 11-10'},
+  constraints:{moq:10,mult:10,price:'34.00',cur:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0901',validTo:'2026-12-31',lead:12},
+  purchases:[],sales:[6,6,6,6,6,6,6],
+  daily:[{d:'11-11',dem:6,arr:0,close:66},{d:'11-12',dem:6,arr:0,close:60},{d:'11-13',dem:6,arr:0,close:54},
+    {d:'11-14',dem:6,arr:0,close:48},{d:'11-15',dem:6,arr:0,close:42},{d:'11-16',dem:6,arr:0,close:36},
+    {d:'11-17',dem:6,arr:0,close:30},{d:'11-18',dem:6,arr:0,close:24},{d:'11-19',dem:6,arr:0,close:18}],
+  checks:[],ai:{status:'NONE'},hist:[{at:'11-14 08:02',src:'规则建议',qty:0,res:'当前'}],req:null
 }
-
-const SKUS = [
-  {
-    key:'CB-1001', sku:'CB-1001', name:'旅行收纳包 · 雾灰', store:'Amazon 美国站', warehouse:'美西仓', unit:'件',
-    source:'RULE',
-    plan:{available:55,target:90,gap:15,suggest:20,firstShortage:'2026-11-18',coverageDays:6,avgDaily:11.3,window:'2026-11-04 — 11-10',salesDays:7,totalSales:79},
-    constraints:{moq:10,multiple:10,price:'38.00',currency:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0912',quoteValid:'2026-10-01 — 2026-12-31',minAmount:'500.00',leadDays:12},
-    purchases:[],
-    quality:[
-      q('NO_ATOMIC_SNAPSHOT','WARN','各接口分时读取，可能存在数据时差','库存、销量与采购条件分别读取，最大间隔 4 分钟；不影响数量结论，但精确到秒的时点不可复原。','数据负责人','无需处理，知悉即可',{affects:['证据时点']})
-    ],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[
-      {day:'11-11',demand:12,arrive:0,close:43,src:'实际'},
-      {day:'11-12',demand:11,arrive:0,close:32,src:'预测'},
-      {day:'11-13',demand:14,arrive:0,close:18,src:'预测'},
-      {day:'11-14',demand:9,arrive:0,close:9,src:'预测'},
-      {day:'11-15',demand:13,arrive:0,close:-4,src:'预测'},
-      {day:'11-16',demand:11,arrive:0,close:-15,src:'预测'},
-      {day:'11-17',demand:12,arrive:0,close:-27,src:'预测'},
-      {day:'11-18',demand:10,arrive:20,close:-17,src:'预测'},
-      {day:'11-19',demand:12,arrive:0,close:-29,src:'预测'}
-    ],
-    history:[
-      {at:'2026-11-14 08:02',source:'平台规则',qty:20,result:'当前版本'},
-      {at:'2026-11-11 08:01',source:'平台规则',qty:30,result:'已被新版本取代'},
-      {at:'2026-11-08 08:00',source:'ERP 参考',qty:30,result:'历史记录'}
-    ],
-    requisition:null
-  },
-  {
-    key:'BT-2003', sku:'BT-2003', name:'保温随行杯 · 松绿', store:'Amazon 美国站', warehouse:'美东仓', unit:'件',
-    source:'RULE',
-    plan:{available:48,target:72,gap:24,suggest:30,firstShortage:'2026-11-20',coverageDays:5,avgDaily:9.6,window:'2026-11-04 — 11-10',salesDays:7,totalSales:67},
-    constraints:{moq:6,multiple:6,price:'52.50',currency:'CNY',supplier:'示例供应商 B',quote:'QT-2026-0931',quoteValid:'2026-09-15 — 2026-12-15',minAmount:'300.00',leadDays:15},
-    purchases:[{no:'PO-2026-2211',status:'已审核 · 待到货',ordered:60,received:24,unreceived:36,eta:'2026-11-25',note:'采购仓与本次分析仓一致'}],
-    quality:[],
-    ai:{status:'AVAILABLE',
-      usage:{tokens:1842,cost:'约 ¥0.02（演示值）'},
-      sections:{
-        '建议依据':['最近 7 个完整业务日需求稳定，日均 9.6 件，当前可用 48 件约覆盖 5 天。','已有 36 件在途预计 11-25 到货，仍晚于首次短缺日 11-20。'],
-        '关键事实':['可用库存 48 件来自唯一仓库记录，未发现分桶重复。','供应商报价有效期至 12-15，交期 15 天。'],
-        '风险提醒':['到货日期为报价推算，尚无已承诺的采购到货日。','首次短缺发生在到货前 5 天，存在断货风险。'],
-        '人工确认':['请确认是否接受 30 件（满足 MOQ 6 / 整箱 6）。','请确认在途 36 件未被其他渠道占用。']
-      }
-    },
-    daily:[
-      {day:'11-11',demand:9,arrive:0,close:39,src:'实际'},
-      {day:'11-12',demand:10,arrive:0,close:29,src:'预测'},
-      {day:'11-13',demand:11,arrive:0,close:18,src:'预测'},
-      {day:'11-14',demand:8,arrive:0,close:10,src:'预测'},
-      {day:'11-15',demand:10,arrive:0,close:0,src:'预测'},
-      {day:'11-16',demand:9,arrive:0,close:-9,src:'预测'},
-      {day:'11-17',demand:11,arrive:0,close:-20,src:'预测'},
-      {day:'11-18',demand:9,arrive:0,close:-29,src:'预测'},
-      {day:'11-19',demand:10,arrive:0,close:-39,src:'预测'}
-    ],
-    history:[
-      {at:'2026-11-14 08:02',source:'平台规则',qty:30,result:'当前版本'},
-      {at:'2026-11-12 20:10',source:'平台规则',qty:24,result:'已被新版本取代'}
-    ],
-    requisition:null
-  },
-  {
-    key:'CB-1023', sku:'CB-1023', name:'打包收纳三件套 · 燕麦', store:'Shopify 独立站', warehouse:'美西仓', unit:'件',
-    source:'RULE',
-    plan:{available:66,target:100,gap:34,suggest:50,firstShortage:'2026-11-21',coverageDays:7,avgDaily:9.4,window:'2026-11-04 — 11-10',salesDays:7,totalSales:66},
-    constraints:{moq:20,multiple:10,price:'61.00',currency:'CNY',supplier:'示例供应商 C',quote:'QT-2026-0877',quoteValid:'2026-08-01 — 2026-11-30',minAmount:'800.00',leadDays:20},
-    purchases:[],
-    quality:[
-      q('QUOTE_EXPIRING','WARN','报价 11-30 到期，交期 20 天','若 11-30 后下单需重新取价；本建议数量未受价格影响。','采购负责人','下单前确认报价仍有效',{affects:['采购条件']})
-    ],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[
-      {day:'11-11',demand:9,arrive:0,close:57,src:'实际'},
-      {day:'11-12',demand:10,arrive:0,close:47,src:'预测'},
-      {day:'11-13',demand:9,arrive:0,close:38,src:'预测'},
-      {day:'11-14',demand:11,arrive:0,close:27,src:'预测'},
-      {day:'11-15',demand:8,arrive:0,close:19,src:'预测'},
-      {day:'11-16',demand:9,arrive:0,close:10,src:'预测'},
-      {day:'11-17',demand:10,arrive:0,close:0,src:'预测'},
-      {day:'11-18',demand:9,arrive:50,close:41,src:'预测'},
-      {day:'11-19',demand:10,arrive:0,close:31,src:'预测'}
-    ],
-    history:[{at:'2026-11-14 08:02',source:'平台规则',qty:50,result:'当前版本'}],
-    requisition:null
-  },
-  {
-    key:'CB-1008', sku:'CB-1008', name:'数码配件包 · 深蓝', store:'Amazon 美国站', warehouse:'美西仓', unit:'件',
-    source:'RULE',
-    plan:{available:72,target:60,gap:0,suggest:0,firstShortage:null,coverageDays:12,avgDaily:6.0,window:'2026-11-04 — 11-10',salesDays:7,totalSales:42},
-    constraints:{moq:10,multiple:10,price:'34.00',currency:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0901',quoteValid:'2026-10-01 — 2026-12-31',minAmount:'500.00',leadDays:12},
-    purchases:[],
-    quality:[],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[
-      {day:'11-11',demand:6,arrive:0,close:66,src:'实际'},
-      {day:'11-12',demand:6,arrive:0,close:60,src:'预测'},
-      {day:'11-13',demand:6,arrive:0,close:54,src:'预测'},
-      {day:'11-14',demand:6,arrive:0,close:48,src:'预测'},
-      {day:'11-15',demand:6,arrive:0,close:42,src:'预测'},
-      {day:'11-16',demand:6,arrive:0,close:36,src:'预测'},
-      {day:'11-17',demand:6,arrive:0,close:30,src:'预测'},
-      {day:'11-18',demand:6,arrive:0,close:24,src:'预测'},
-      {day:'11-19',demand:6,arrive:0,close:18,src:'预测'}
-    ],
-    history:[{at:'2026-11-14 08:02',source:'平台规则',qty:0,result:'当前版本'}],
-    requisition:null
-  },
-  {
-    key:'LT-3012', sku:'LT-3012', name:'便携阅读灯 · 米白', store:'Shopify 独立站', warehouse:'美东仓', unit:'件',
-    source:'ERP_REF',
-    plan:{available:31,target:null,gap:null,suggest:30,firstShortage:null,coverageDays:null,avgDaily:null,window:'未知',salesDays:null,totalSales:null},
-    constraints:{moq:5,multiple:5,price:'26.00',currency:'CNY',supplier:'示例供应商 D',quote:'QT-2026-0802',quoteValid:'2026-07-01 — 2026-11-20',minAmount:null,leadDays:10},
-    purchases:[],
-    quality:[
-      q('ERP_ALGORITHM_UNKNOWN','WARN','ERP 建议数量的计算依据未知','该数量来自 ERP 现有建议记录，平台无法复算其销量窗口、安全库存与净额规则。','数据负责人','核对 ERP 参数或改用平台规则分析',{affects:['建议数量']}),
-      q('ERP_DAILY_WINDOW_UNKNOWN','WARN','ERP 日均销量统计窗口未知','无法确认 ERP 使用的统计区间是否与平台口径一致。','数据负责人','补充统计口径说明',{affects:['建议数量']})
-    ],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[{at:'2026-11-14 08:02',source:'ERP 参考',qty:30,result:'当前版本'}],
-    requisition:null
-  },
-  {
-    key:'LT-3021', sku:'LT-3021', name:'折叠桌面灯 · 墨黑', store:'Shopify 独立站', warehouse:'美东仓', unit:'件',
-    source:'NONE',
-    plan:{available:27,target:null,gap:null,suggest:null,firstShortage:null,coverageDays:null,avgDaily:null,window:'2026-11-07 — 11-10',salesDays:4,totalSales:19},
-    constraints:{moq:6,multiple:6,price:'44.00',currency:'CNY',supplier:'示例供应商 C',quote:'QT-2026-0918',quoteValid:'2026-09-20 — 2026-12-20',minAmount:null,leadDays:14},
-    purchases:[],
-    quality:[
-      q('SALES_DAYS_INSUFFICIENT','BLOCK','可用于计算的完整业务日不足','当前仅取得 4 个完整业务日的已核对销量，无法形成稳定的日均需求，因此未给出建议数量。','数据负责人','补采最近销售历史后重新分析',{affects:['建议数量'],draft:'草案要求 7 个有效业务日（未生效）'}),
-      q('INVENTORY_LEDGER_UNPROVEN','WARN','期初库存与完整流水未核验','可用库存 27 件来自单一读取，未能与出入库流水对账。','数据负责人','补齐流水对账',{affects:['可用库存']})
-    ],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[{at:'2026-11-14 08:02',source:'无可用来源',qty:null,result:'当前版本'}],
-    requisition:null
-  },
-  {
-    key:'KT-4010', sku:'KT-4010', name:'硅胶折叠碗 · 沙色', store:'Shopify 独立站', warehouse:'美东仓', unit:'件',
-    source:'NONE',
-    plan:{available:36,target:null,gap:null,suggest:null,firstShortage:null,coverageDays:null,avgDaily:null,window:'未知',salesDays:null,totalSales:null},
-    constraints:{moq:12,multiple:12,price:'19.50',currency:'CNY',supplier:'示例供应商 D',quote:'QT-2026-0755',quoteValid:'2026-06-01 — 2026-11-15',minAmount:null,leadDays:9},
-    purchases:[],
-    quality:[
-      q('QUALITY_INVESTIGATION','BLOCK','质量调查进行中','成熟签收群组 100 单中有 12 单投诉（占比 12%，不能解释为缺陷率）。调查结论出具前不生成补货建议。','质量负责人','完成调查并登记结论后重新分析',{affects:['补货建议','请购']})
-    ],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[{at:'2026-11-13 09:40',source:'无可用来源',qty:null,result:'当前版本'}],
-    requisition:null
-  },
-  {
-    key:'KT-4022', sku:'KT-4022', name:'户外折叠餐具 · 卡其', store:'Amazon 美国站', warehouse:'美西仓', unit:'件',
-    source:'NONE',
-    plan:{available:null,target:null,gap:null,suggest:null,firstShortage:null,coverageDays:null,avgDaily:null,window:'未知',salesDays:null,totalSales:null},
-    constraints:{moq:null,multiple:null,price:null,currency:null,supplier:null,quote:null,quoteValid:null,minAmount:null,leadDays:null},
-    purchases:[],
-    quality:[
-      q('ANALYSIS_FAILED','BLOCK','本次分析未完成','读取 ERP 商品目录时连接中断，未取得库存与销量事实；本次没有产生任何结论。','系统','重新分析（可安全重试）',{affects:['全部']})
-    ],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[{at:'2026-11-14 08:02',source:'无可用来源',qty:null,result:'失败，无报告'}],
-    requisition:null
-  },
-  {
-    key:'CB-1015', sku:'CB-1015', name:'鞋履收纳袋 · 炭灰', store:'Amazon 美国站', warehouse:'美西仓', unit:'件',
-    source:'RULE',
-    plan:{available:95,target:120,gap:25,suggest:40,firstShortage:'2026-11-18',coverageDays:9,avgDaily:10.5,window:'2026-11-04 — 11-10',salesDays:7,totalSales:74},
-    constraints:{moq:20,multiple:10,price:'41.00',currency:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0915',quoteValid:'2026-10-10 — 2026-12-31',minAmount:'500.00',leadDays:12},
-    purchases:[],
-    quality:[],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[
-      {at:'2026-11-14 08:02',source:'平台规则',qty:40,result:'当前版本'},
-      {at:'2026-11-13 07:58',source:'平台规则',qty:40,result:'已被新版本取代'}
-    ],
-    requisition:{no:'RQ-2026-0011',state:'SUBMITTED',erpStatus:'待审批',finalQty:40,suggestQty:40,reason:'',submittedAt:'2026-11-14 09:12',confirmBy:'林予',verifiedAt:'2026-11-14 09:12',readbacks:2}
-  },
-  {
-    key:'BT-2020', sku:'BT-2020', name:'轻量运动瓶 · 岩白', store:'Amazon 美国站', warehouse:'美东仓', unit:'件',
-    source:'RULE',
-    plan:{available:64,target:84,gap:20,suggest:20,firstShortage:'2026-11-22',coverageDays:8,avgDaily:7.8,window:'2026-11-04 — 11-10',salesDays:7,totalSales:55},
-    constraints:{moq:10,multiple:10,price:'29.00',currency:'CNY',supplier:'示例供应商 B',quote:'QT-2026-0908',quoteValid:'2026-09-01 — 2026-12-01',minAmount:'300.00',leadDays:15},
-    purchases:[],
-    quality:[],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[{at:'2026-11-13 07:58',source:'平台规则',qty:20,result:'当前版本'}],
-    requisition:{no:'RQ-2026-0009',state:'APPROVED',erpStatus:'已审批',finalQty:20,suggestQty:20,reason:'',submittedAt:'2026-11-13 10:05',confirmBy:'林予',verifiedAt:'2026-11-13 16:20',readbacks:3,approver:'ERP 采购主管（外部系统）'}
-  },
-  {
-    key:'CB-1030', sku:'CB-1030', name:'行李箱束带 · 石墨', store:'Amazon 美国站', warehouse:'美西仓', unit:'件',
-    source:'RULE',
-    plan:{available:88,target:118,gap:30,suggest:30,firstShortage:'2026-11-19',coverageDays:7,avgDaily:11.0,window:'2026-11-04 — 11-10',salesDays:7,totalSales:77},
-    constraints:{moq:10,multiple:10,price:'22.00',currency:'CNY',supplier:'示例供应商 A',quote:'QT-2026-0922',quoteValid:'2026-10-05 — 2026-12-31',minAmount:'500.00',leadDays:12},
-    purchases:[],
-    quality:[],
-    ai:{status:'NOT_ATTEMPTED'},
-    daily:[],
-    history:[{at:'2026-11-14 08:02',source:'平台规则',qty:30,result:'当前版本'}],
-    requisition:{no:'RQ-2026-0012',state:'UNKNOWN',erpStatus:'未知',finalQty:30,suggestQty:30,reason:'',submittedAt:'2026-11-14 09:41',confirmBy:'林予',verifiedAt:'尚未确认',readbacks:1,errorCode:'SUBMIT_RESULT_UNKNOWN'}
-  }
 ];
 
-const BATCH = {
-  id:'batch-2026-11-14-0802',
-  at:'2026-11-14 08:02', scopeObjects:11, processed:11, coverage:'100%',
-  policyStatus:'DRAFT', modelCalls:0, businessWrites:0,
-  history:[
-    {id:'batch-2026-11-14-0802',at:'2026-11-14 08:02',objects:11,complete:true},
-    {id:'batch-2026-11-13-0758',at:'2026-11-13 07:58',objects:11,complete:true},
-    {id:'batch-2026-11-12-2010',at:'2026-11-12 20:10',objects:10,complete:false}
-  ]
-};
-
-const STORE_OPTIONS = [...new Set(SKUS.map(s=>s.store))];
-const WH_OPTIONS = [...new Set(SKUS.map(s=>s.warehouse))];
-
-/* =====================================================================
-   2. 状态
-   ===================================================================== */
-const savedFilters = (function(){
-  try { return JSON.parse(sessionStorage.getItem('ux3.filters')||'{}'); } catch(e){ return {}; }
-})();
-
-const state = {
-  route:{page:'workbench',id:null},
-  filters:{q:savedFilters.q||'',store:savedFilters.store||'',warehouse:savedFilters.warehouse||'',source:savedFilters.source||'',stage:savedFilters.stage||''},
-  tab:'overview',
-  reqTab:'all',
-  qty:{},
-  reason:{},
-  ack:{},
+/* ================= 状态 ================= */
+const saved=(()=>{try{return JSON.parse(sessionStorage.getItem('ux3.filters')||'{}')}catch(e){return {}}})();
+const state={
+  route:{page:'workbench',id:null,tab:null},
+  filters:{q:saved.q||'',store:saved.store||'',wh:saved.wh||'',source:saved.source||'',stage:saved.stage||''},
+  reqTab:'all',batchId:'b1114',
+  qty:{},reason:{},ack:{},
   lastSku:sessionStorage.getItem('ux3.lastSku')||'',
-  listScroll:0,
-  batchId:BATCH.id
+  listScroll:0
 };
+SKUS.forEach(s=>{state.qty[s.key]=s.plan.suggest||0;});
 
-function stage(sku){
-  const r = sku.requisition;
-  if (r) {
-    if (r.state==='UNKNOWN') return 'requisition_check';
-    if (r.state==='APPROVED') return 'requisition_approved';
-    return 'requisition_waiting';
-  }
-  if (sku.quality.some(c=>c.code==='ANALYSIS_FAILED')) return 'failed';
-  if (sku.source==='NONE') return 'need_evidence';
-  if (sku.source==='ERP_REF') return 'need_evidence';
-  if (!sku.plan.suggest) return 'no_need';
-  return 'pending_confirm';
-}
+const esc=v=>String(v===null||v===undefined?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dash=v=>v===null||v===undefined||v===''?'—':String(v);
+const money=(v,c)=>v===null||v===undefined?'—':v+' '+(c||'');
+const batch=()=>BATCHES.find(b=>b.id===state.batchId)||BATCHES[0];
 
-const esc = v => String(v===null||v===undefined?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const num = v => v===null||v===undefined ? '—' : String(v);
-const badge = (t,tone)=>`<span class="badge ${tone||''}">${esc(t)}</span>`;
-const stageBadge = sku => badge(STAGE_LABEL[stage(sku)], STAGE_TONE[stage(sku)]);
-const byKey = k => SKUS.find(s=>s.key===k);
-const blocking = sku => sku.quality.filter(c=>c.level==='BLOCK');
-const groupOf = sku => STAGE_GROUP[stage(sku)];
-
-function money(v,c){ return v===null||v===undefined ? '未知' : `${v} ${c||''}`.trim(); }
-
-/* =====================================================================
-   3. 路由
-   ===================================================================== */
-function parseHash(){
-  const parts = location.hash.replace(/^#\/?/,'').split('/');
-  const page = parts[0]||'workbench';
-  return {page:page, id: decodeURIComponent(parts[1]||'')||null, tab: parts[2]||null};
-}
-function go(path){
-  if (location.hash === '#'+path) render();
-  else location.hash = path;
-}
-function navigatePath(){
-  const r = parseHash();
-  if (r.page==='sku' && !byKey(r.id)) { location.replace('#/suggestions'); return; }
-  state.route = r;
-  if (r.page==='sku'){
-    state.lastSku = r.id;
-    state.tab = ['overview','sales','procurement','quality','history'].includes(r.tab) ? r.tab : 'overview';
-    sessionStorage.setItem('ux3.lastSku',r.id);
-  }
-  render();
-  window.scrollTo(0,0);
-  document.getElementById('main').focus({preventScroll:true});
-}
-
-/* =====================================================================
-   4. 侧栏与面包屑
-   ===================================================================== */
-function counts(){
-  const c = {pending_confirm:0,need_evidence:0,no_need:0,requisition:0,failed:0};
-  SKUS.forEach(s=>{
-    const st = stage(s);
-    if (st==='pending_confirm') c.pending_confirm++;
-    else if (st==='need_evidence') c.need_evidence++;
-    else if (st==='no_need') c.no_need++;
-    else if (st==='failed') c.failed++;
-    else c.requisition++;
+function items(){
+  const over=batch().over;
+  return SKUS.map(s=>{
+    const o=over[s.key]||{};
+    if(o.missing)return Object.assign({},s,{missing:true});
+    return Object.assign({},s,{plan:Object.assign({},s.plan,o)});
   });
-  c.active = c.pending_confirm + c.need_evidence;
-  c.reqAttention = SKUS.filter(s=>s.requisition && s.requisition.state!=='APPROVED').length;
+}
+const byKey=k=>items().find(s=>s.key===k);
+
+function stageOf(s){
+  if(s.missing)return 'missing';
+  if(s.checks.some(c=>c.code==='FAILED'))return 'failed';
+  if(s.checks.some(c=>c.level==='BLOCK'))return 'blocked';
+  if(s.req){
+    if(s.req.plat==='UNKNOWN')return 'req_unknown';
+    if(s.req.erp==='APPROVED')return 'req_approved';
+    return 'req_waiting';
+  }
+  if(s.source==='NONE')return 'blocked';
+  if(!s.plan.suggest)return 'no_need';
+  return 'confirm';
+}
+const STAGE={
+  confirm:{l:'待确认',tone:'info',g:'待确认'},
+  blocked:{l:'需补证',tone:'warn',g:'需补证'},
+  no_need:{l:'无需补货',tone:'',g:'无需补货'},
+  req_waiting:{l:'待 ERP 审批',tone:'info',g:'已请购'},
+  req_approved:{l:'ERP 已审批',tone:'ok',g:'已请购'},
+  req_unknown:{l:'提交待核对',tone:'bad',g:'已请购'},
+  failed:{l:'分析失败',tone:'bad',g:'失败'},
+  missing:{l:'本批次未含',tone:'',g:'未分析'}
+};
+const stageBadge=s=>{const x=STAGE[stageOf(s)];return `<span class="chip ${x.tone}">${x.l}</span>`;};
+const groupOf=s=>STAGE[stageOf(s)].g;
+
+function counts(){
+  const c={confirm:0,blocked:0,no_need:0,waiting:0,approved:0,unknown:0,failed:0,missing:0};
+  items().forEach(s=>{
+    const st=stageOf(s);
+    if(st==='req_waiting')c.waiting++;
+    else if(st==='req_approved')c.approved++;
+    else if(st==='req_unknown')c.unknown++;
+    else c[st]++;
+  });
+  c.inreq=c.waiting+c.unknown;
+  c.actionable=c.confirm+c.blocked+c.failed+c.unknown+c.missing;
   return c;
 }
+const covDays=s=>{
+  const p=s.plan;
+  if(!p.available||!p.avgDaily)return null;
+  return +(p.available/p.avgDaily).toFixed(1);
+};
 
+/* ================= 图形 ================= */
+function chartBalance(daily){
+  if(!daily||!daily.length)return '';
+  const W=720,H=190,L=34,R=12,T=18,B=28;
+  const vals=daily.map(d=>d.close);
+  const max=Math.max(10,...vals),min=Math.min(-5,...vals);
+  const pad=(max-min)*0.12,hi=max+pad,lo=Math.min(0,min)-pad;
+  const x=i=>L+i*(W-L-R)/(daily.length-1);
+  const y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  const y0=y(0);
+  const line=daily.map((d,i)=>`${i?'L':'M'}${x(i).toFixed(1)},${y(d.close).toFixed(1)}`).join(' ');
+  const area=`${line} L${x(daily.length-1).toFixed(1)},${y0.toFixed(1)} L${x(0).toFixed(1)},${y0.toFixed(1)} Z`;
+  const fs=daily.findIndex(d=>d.close<0);
+  const shortRect=fs<0?'':`<rect x="${x(fs).toFixed(1)}" y="${T}" width="${(W-R-x(fs)).toFixed(1)}" height="${(H-T-B).toFixed(1)}" fill="#fdf0ee"/>`;
+  const arrivals=daily.map((d,i)=>d.arr>0?`
+    <line x1="${x(i).toFixed(1)}" y1="${T}" x2="${x(i).toFixed(1)}" y2="${H-B}" stroke="#b9c7cf" stroke-dasharray="3 3"/>
+    <circle cx="${x(i).toFixed(1)}" cy="${y(d.close).toFixed(1)}" r="3.4" fill="#fff" stroke="#0f6b64" stroke-width="1.6"/>
+    <text x="${x(i).toFixed(1)}" y="${T-5}" text-anchor="middle" class="lbl-strong">+${d.arr}</text>`:'').join('');
+  const dots=daily.map((d,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(d.close).toFixed(1)}" r="2.6" fill="${d.close<0?'#b4483d':'#0f6b64'}"/>`).join('');
+  const xlab=daily.map((d,i)=>i%2===0?`<text x="${x(i).toFixed(1)}" y="${H-6}" text-anchor="middle">${d.d}</text>`:'').join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="预计结存：${daily.map(d=>d.d+' '+d.close).join('，')}">${shortRect}
+    <line x1="${L}" y1="${y0}" x2="${W-R}" y2="${y0}" stroke="#c9d3da"/>
+    <text x="${L-6}" y="${y0+3}" text-anchor="end">0</text>
+    <text x="${L-6}" y="${y(hi)+3}" text-anchor="end">${Math.round(hi)}</text>
+    ${(H-B)-y(lo)>12?`<text x="${L-6}" y="${y(lo)+3}" text-anchor="end">${Math.round(lo)}</text>`:''}
+    <path d="${area}" fill="#e8f2f0"/><path d="${line}" fill="none" stroke="#0f6b64" stroke-width="2"/>
+    ${arrivals}${dots}${xlab}</svg>`;
+}
+
+function chartSales(sales,total){
+  const W=228,H=80,L=2,R=2,T=8,B=15;
+  if(!sales||!sales.length)return '<div class="muted" style="font-size:10.5px;padding:8px 0">本次未取得已核对销量</div>';
+  const max=Math.max(...sales),col=(W-L-R)/7,bw=col-4;
+  const bars=sales.map((q,i)=>{
+    const h=(q/max)*(H-T-B),x=L+i*col+2;
+    return `<rect x="${x.toFixed(1)}" y="${(H-B-h).toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="#9dc0bb"/>
+      <text x="${(x+bw/2).toFixed(1)}" y="${H-3}" text-anchor="middle">${['04','05','06','07','08','09','10'][i]}</text>`;
+  }).join('');
+  const avg=total?total/sales.length:0,ay=H-B-(avg/max)*(H-T-B);
+  const base=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#dde3e8"/>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="最近 ${sales.length} 个业务日销量 ${sales.join('、')} 件">${base}${bars}
+    <line x1="${L}" y1="${ay.toFixed(1)}" x2="${W-R}" y2="${ay.toFixed(1)}" stroke="#c9812f" stroke-dasharray="4 3"/></svg>`;
+}
+
+/* ================= 路由 ================= */
+function parse(){
+  const p=location.hash.replace(/^#\/?/,'').split('/');
+  return {page:p[0]||'workbench',id:decodeURIComponent(p[1]||'')||null,tab:p[2]||null};
+}
+function go(path){location.hash===path?render():(location.hash=path);}
+function onRoute(){
+  const r=parse();
+  if(r.page==='sku'&&!byKey(r.id)){location.replace('#/suggestions');return;}
+  state.route=r;
+  if(r.page==='sku'){
+    state.lastSku=r.id;sessionStorage.setItem('ux3.lastSku',r.id);
+    state.tab=['conditions','quality','history'].includes(r.tab)?r.tab:'conditions';
+  }
+  render();window.scrollTo(0,0);document.getElementById('main').focus({preventScroll:true});
+}
+
+/* ================= 侧栏 / 面包屑 ================= */
 function sidebar(){
-  const c = counts(), r = state.route;
-  const active = (p)=> r.page===p ? 'active' : '';
-  const sku = state.lastSku && byKey(state.lastSku);
-  const subActive = r.page==='sku';
-  document.getElementById('sidebar').innerHTML = `
-    <a class="brand" href="#/workbench" aria-label="返回工作台"><span class="brand-symbol">序</span><span>序衡<small>COMMERCE OPERATIONS</small></span></a>
-    <div class="workspace"><span class="workspace-icon">跨</span><div>跨境电商智慧中台<small>采购运营空间</small></div></div>
-    <div class="nav-label">补货业务</div>
-    <nav aria-label="主要导航">
-      <a href="#/workbench" class="${active('workbench')}" ${r.page==='workbench'?'aria-current="page"':''}><span class="nav-icon">▦</span>工作台</a>
-      <a href="#/suggestions" class="${active('suggestions')}" ${r.page==='suggestions'?'aria-current="page"':''}><span class="nav-icon">≡</span>补货建议${c.active?`<span class="nav-count">${c.active}</span>`:''}</a>
-      ${sku?`<a href="#/sku/${encodeURIComponent(sku.key)}" class="sub ${subActive?'active':''}" ${subActive?'aria-current="page"':''}>SKU 详情 · ${esc(sku.sku)}</a>`:''}
-      <a href="#/requisitions" class="${active('requisitions')}" ${r.page==='requisitions'?'aria-current="page"':''}><span class="nav-icon">☑</span>请购管理${c.reqAttention?`<span class="nav-count">${c.reqAttention}</span>`:''}</a>
-    </nav>
-    <div class="sidebar-note"><span class="dot"></span>S01 · 供需与库存分析<br><span style="margin-left:10px">数据准入政策：草案（未生效）</span></div>
-    <div class="sidebar-note" style="border:0;padding-top:8px;margin-top:0"><span style="font-size:9px;letter-spacing:1px">WORKSPACE v3 PROTOTYPE</span></div>`;
+  const c=counts(),r=state.route,on=p=>r.page===p?'active':'';
+  const sku=state.lastSku&&byKey(state.lastSku);
+  document.getElementById('sidebar').innerHTML=`
+  <a class="brand" href="#/workbench"><span class="brand-symbol">序</span><span><b>序衡</b><small>COMMERCE OPS</small></span></a>
+  <div class="workspace"><span class="ws-icon">跨</span><div>跨境电商中台<small>采购运营</small></div></div>
+  <div class="nav-label">补货业务</div>
+  <nav aria-label="主要导航">
+    <a href="#/workbench" class="${on('workbench')}" ${r.page==='workbench'?'aria-current="page"':''}><span class="nav-icon">▤</span>工作台</a>
+    <a href="#/suggestions" class="${on('suggestions')}" ${r.page==='suggestions'?'aria-current="page"':''}><span class="nav-icon">≡</span>补货建议${c.actionable?`<span class="nav-count">${c.actionable}</span>`:''}</a>
+    ${sku?`<a href="#/sku/${encodeURIComponent(sku.key)}" class="sub ${r.page==='sku'?'active':''}" ${r.page==='sku'?'aria-current="page"':''}>SKU 详情 · ${esc(sku.sku)}</a>`:''}
+    <a href="#/requisitions" class="${on('requisitions')}" ${r.page==='requisitions'?'aria-current="page"':''}><span class="nav-icon">☑</span>请购管理${c.inreq?`<span class="nav-count">${c.inreq}</span>`:''}</a>
+  </nav>
+  <div class="sidebar-foot">S01 供需与库存分析<br>准入政策 ${POLICY.version} · 草案，未生效</div>`;
 }
-
 function crumb(){
-  const r = state.route;
-  let parts = ['<a href="#/workbench">采购运营</a>'];
-  if (r.page==='workbench') parts.push('<b>工作台</b>');
-  else if (r.page==='suggestions') parts.push('<b>补货建议</b>');
-  else if (r.page==='sku'){ parts.push('<a href="#/suggestions">补货建议</a>'); parts.push(`<b>${esc(r.id)}</b>`); }
-  else if (r.page==='requisitions'){ parts.push('<b>请购管理</b>'); if (r.id) parts.push(`<b>${esc(r.id)}</b>`); }
-  document.getElementById('crumb').innerHTML = parts.join('<i>/</i>');
-  document.getElementById('demobar-right').textContent = `本次检查 ${BATCH.at} · 模拟 ${SKUS.length} 个店仓对象`;
+  const r=state.route,p=['<a href="#/workbench">采购运营</a>'];
+  if(r.page==='workbench')p.push('<b>工作台</b>');
+  else if(r.page==='suggestions')p.push('<b>补货建议</b>');
+  else if(r.page==='sku')p.push('<a href="#/suggestions">补货建议</a>',`<b>${esc(r.id)}</b>`);
+  else if(r.page==='requisitions'){p.push('<b>请购管理</b>');if(r.id)p.push(`<b>${esc(r.id)}</b>`);}
+  document.getElementById('crumb').innerHTML=p.join('<i>/</i>');
+  document.getElementById('foot-right').textContent=`数据时点 ${batch().full} · 演示数据`;
 }
 
-/* =====================================================================
-   5. 页面：工作台
-   ===================================================================== */
-function filteredSkuIds(group){
-  return SKUS.filter(s=>groupOf(s)===group).map(s=>s.sku);
-}
+/* ================= 工作台 ================= */
+function pageWorkbench(){
+  const c=counts();
+  const rank=s=>({req_unknown:0,failed:1,blocked:2,confirm:3})[stageOf(s)]||9;
+  const list=items().filter(s=>['confirm','blocked','failed','req_unknown'].includes(stageOf(s)))
+    .sort((a,b)=>rank(a)-rank(b)||String(a.plan.firstShortage||'9999').localeCompare(String(b.plan.firstShortage||'9999'))).slice(0,6);
+  const rows=list.map(s=>{
+    const cov=covDays(s),pct=cov!==null&&s.plan.target?Math.min(100,s.plan.available/s.plan.target*100):0;
+    const cls=cov===null?'':cov<4?'out':cov<8?'low':'';
+    return `<a class="qrow" href="#/sku/${encodeURIComponent(s.key)}">
+      <div><span class="prod">${esc(s.name)}</span><span class="prod-sub"><span class="mono">${esc(s.sku)}</span> · ${esc(s.store)} / ${esc(s.wh)}</span></div>
+      <div class="qmid">${cov===null
+        ?`<div class="cov-num"><span class="muted">无库存数据</span></div>`
+        :`<div class="cov-num"><span>可用 ${s.plan.available}</span><span>${cov} 天</span></div><div class="cov ${cls}"><i style="width:${pct}%"></i></div>`}</div>
+      <div class="qmid"><span class="bignum">${s.plan.suggest?s.plan.suggest:dash(s.plan.suggest)}<small>${s.plan.suggest?s.unit:''}</small></span></div>
+      <div>${stageBadge(s)}</div>
+      <div class="muted" aria-hidden="true">›</div>
+    </a>`;
+  }).join('');
 
-function pWorkbench(){
-  const c = counts();
-  const rank = st => st==='requisition_check'?0 : st==='pending_confirm'?1 : st==='need_evidence'?2 : 3;
-  const pendingList = SKUS.filter(s=>['pending_confirm','need_evidence','requisition_check'].includes(stage(s)))
-    .sort((a,b)=> rank(stage(a))-rank(stage(b))
-      || String(a.plan.firstShortage||'9999').localeCompare(String(b.plan.firstShortage||'9999')))
-    .slice(0,6);
+  const total=items().length;
+  const segs=[
+    ['待确认',c.confirm,'#0f6b64'],['需补证',c.blocked,'#c9812f'],['待核对',c.unknown,'#a8382f'],
+    ['待审批',c.waiting,'#4a7fa8'],['已审批',c.approved,'#6f9a86'],['无需补货',c.no_need,'#c3ccd4'],
+    ['失败',c.failed+c.missing,'#6b7785']
+  ].filter(x=>x[1]>0);
+  const segSum=segs.reduce((a,x)=>a+x[1],0);
 
-  const rows = pendingList.map(s=>`
-    <div class="qrow">
-      <div><span class="prod">${esc(s.name)}</span><span class="prod-sub"><span class="mono">${esc(s.sku)}</span> · ${esc(s.store)} / ${esc(s.warehouse)}</span></div>
-      <div class="qmid qnum">${s.plan.available===null?'<b>—</b><span class="micro">可用未知</span>':`<b>${s.plan.available}</b><span class="micro">${esc(s.unit)}可用</span>`}${s.plan.firstShortage?`<span class="micro">短缺 ${esc(s.plan.firstShortage.slice(5))}</span>`:''}</div>
-      <div class="qmid">${stageBadge(s)}</div>
-      <div class="row"><a class="button small" href="#/sku/${encodeURIComponent(s.key)}">打开</a></div>
-    </div>`).join('');
+  const src=items().reduce((a,s)=>{a[s.source]=(a[s.source]||0)+1;return a;},{});
+  const srcRows=[['RULE','规则建议','#0f6b64'],['ERP','ERP 参考','#c9812f'],['NONE','无来源','#b4483d']]
+    .map(([k,l,col])=>`<div class="mini-row"><span class="t">${l}</span>
+      <span class="track"><i style="width:${(src[k]||0)/total*100}%;background:${col}"></i></span>
+      <span class="v">${src[k]||0}</span></div>`).join('');
 
-  const timeline = [
-    {t:'09:41',p:'CB-1030 请购提交后结果未确认，等待按原单核对。'},
-    {t:'09:12',p:'CB-1015 请购已提交 ERP，正在等待领导审批。'},
-    {t:'08:02',p:'完成本次全量检查：11 个店仓对象，10 个形成结论。'},
-    {t:'08:00',p:'LT-3021 销售历史仅 4 个完整业务日，未生成建议数量。'}
-  ].map(x=>`<div class="tl"><time>${x.t}</time><p>${esc(x.p)}</p></div>`).join('');
+  const risk=items().filter(s=>covDays(s)!==null).sort((a,b)=>covDays(a)-covDays(b)).slice(0,4)
+    .map(s=>{const cov=covDays(s),p=Math.min(100,cov/12*100);
+      return `<div class="mini-row"><span class="t">${esc(s.sku)}</span>
+        <span class="track"><i style="width:${p}%;background:${cov<4?'#b4483d':cov<8?'#c9812f':'#0f6b64'}"></i></span>
+        <span class="v">${cov}天</span></div>`;}).join('');
 
   return `
   <div class="page-head">
-    <div><div class="eyebrow">OPERATIONS / WORKBENCH</div><h1>采购运营工作台</h1>
-      <p class="subtitle">今天需要你处理的补货判断，以及本次检查的数据状态。</p></div>
-    <div class="row"><button class="button" data-act="batch-dialog">切换检查批次</button><button class="button primary" data-act="rerun">重新检查全部 SKU</button></div>
-  </div>
-
-  <div class="gate ${POLICY.status==='DRAFT'?'warn':''}">
-    <div class="gate-main">
-      <span class="badge ${c.need_evidence?'warning':'success'}">${c.need_evidence?c.need_evidence+' 项依据待核实':'数据完整'}</span>
-      <span>本次检查 <b>${BATCH.at}</b> · 覆盖 ${BATCH.processed}/${BATCH.scopeObjects} 个店仓对象 · 可分析数据覆盖率 ${BATCH.coverage}</span>
+    <h1>采购运营工作台</h1>
+    <div class="row">
+      <button class="btn" data-act="batch">${batch().at} · 本次检查</button>
+      <button class="btn primary" data-act="rerun">重新检查</button>
     </div>
-    <span class="spacer"></span>
-    <span class="micro">批量检查不调用模型、不创建采购</span>
-    <a class="button small" href="#/suggestions" data-act="open-list-all">查看全部结果</a>
   </div>
 
-  <div class="todo-grid" role="group" aria-label="待办分组">
-    <button class="todo-card ${c.pending_confirm?'':'zero'}" data-act="stage" data-group="待人工确认">
-      <span class="n">${c.pending_confirm}</span><span class="l">待人工确认</span><span class="h">规则建议已就绪，等待你确认数量并提交请购</span></button>
-    <button class="todo-card ${c.need_evidence?'':'zero'}" data-act="stage" data-group="依据待核实">
-      <span class="n">${c.need_evidence}</span><span class="l">依据待核实</span><span class="h">数据不足、ERP 参考或质量调查，暂不形成补货结论</span></button>
-    <button class="todo-card ${c.requisition?'':'zero'}" data-act="go-req">
-      <span class="n">${c.requisition}</span><span class="l">请购跟进</span><span class="h">已提交待 ERP 审批、已审批或提交结果待核对</span></button>
-    <button class="todo-card ${c.no_need?'':'zero'}" data-act="stage" data-group="无需补货">
-      <span class="n">${c.no_need}</span><span class="l">无需补货</span><span class="h">规则判断当前库存可覆盖，仅作记录</span></button>
-  </div>
-
-  <div class="split">
-    <section class="panel">
-      <div class="panel-head"><h2>优先处理</h2><small>按处理状态、再按首次短缺日排序 · 最多 6 项</small>
-        <a class="button small" href="#/suggestions">全部 ${SKUS.length} 项</a></div>
-      <div class="queue">${rows || '<div class="empty"><h3>当前没有待处理项</h3><p>全部建议已完成确认或无需补货。</p></div>'}</div>
-    </section>
+  <section class="panel overview">
     <div>
+      <div class="kpis">
+        <button class="kpi" data-act="stage" data-group="待确认"><span class="n">${c.confirm}<em>项</em></span><span class="l">待确认数量</span></button>
+        <button class="kpi" data-act="stage" data-group="需补证"><span class="n">${c.blocked}<em>项</em></span><span class="l">需补证</span></button>
+        <button class="kpi" data-act="stage" data-group="已请购"><span class="n">${c.inreq}<em>项</em></span><span class="l">请购待跟进${c.unknown?` · 含 ${c.unknown} 待核对`:''}</span></button>
+        <button class="kpi" data-act="stage" data-group="失败"><span class="n">${c.failed+c.missing}<em>项</em></span><span class="l">需重新分析</span></button>
+      </div>
+    </div>
+    <div class="dist">
+      <div class="distbar" role="img" aria-label="共 ${total} 个对象：${segs.map(x=>x[0]+' '+x[1]).join('，')}">
+        ${segs.map(s=>`<i style="flex:${s[1]};background:${s[2]}"></i>`).join('')}
+      </div>
+      <div class="legend">${segs.map(s=>`<span><i class="dot" style="background:${s[2]}"></i>${s[0]} <b>${s[1]}</b></span>`).join('')}</div>
+    </div>
+  </section>
+
+  <div class="cols">
+    <section class="panel">
+      <div class="panel-head"><h2>待处理</h2><span class="sub">按紧迫度排序 · ${list.length}/${c.actionable} 项</span>
+        <a class="btn sm" href="#/suggestions">全部 ${total} 项</a></div>
+      <div class="qhead"><span>商品 / SKU</span><span>库存覆盖</span><span>建议</span><span>状态</span><span></span></div>
+      <div class="queue">${rows||'<div class="empty"><h3>当前无待处理项</h3></div>'}</div>
+    </section>
+    <div class="side">
       <section class="panel">
-        <div class="panel-head"><h2>数据范围与政策</h2></div>
-        <div class="panel-body">
-          <dl class="kv">
-            <dt>可分析范围</dt><dd>${SKUS.length} 个店仓对象 · 2 店铺 / 2 仓库</dd>
-            <dt>准入政策</dt><dd>${badge('草案 · 未生效','warning')}<div class="micro" style="margin-top:4px">${esc(POLICY.note)}</div></dd>
-            <dt>政策草案参数</dt><dd class="micro">窗口 ${POLICY.draft.windowDays} 天 / 有效业务日 ${POLICY.draft.requiredSalesDays} 天<span class="badge plain" style="margin-left:6px">未参与判定</span></dd>
-          </dl>
-        </div>
+        <div class="panel-head"><h2>建议来源</h2></div>
+        <div class="panel-body">${srcRows}</div>
       </section>
       <section class="panel">
-        <div class="panel-head"><h2>最近操作</h2><small>演示会话</small></div>
-        <div class="panel-body" style="padding-top:6px"><div class="timeline">${timeline}</div></div>
+        <div class="panel-head"><h2>库存覆盖最低</h2><span class="sub">可用 ÷ 日均</span></div>
+        <div class="panel-body">${risk||'<div class="muted">—</div>'}</div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h2>本次检查</h2><span class="sub">${batch().at}</span></div>
+        <div class="panel-body">
+          <dl class="meta-list">
+            <dt>对象 / 完成</dt><dd>${batch().objects} / ${batch().done}</dd>
+            <dt>失败</dt><dd>${c.failed}</dd>
+            <dt>准入政策</dt><dd><span class="chip warn">草案未生效</span></dd>
+          </dl>
+        </div>
       </section>
     </div>
   </div>`;
 }
 
-/* =====================================================================
-   6. 页面：补货建议
-   ===================================================================== */
-function matchFilters(s){
-  const f = state.filters, t = f.q.trim().toLowerCase();
-  if (t && !(s.sku.toLowerCase().includes(t) || s.name.toLowerCase().includes(t))) return false;
-  if (f.store && s.store!==f.store) return false;
-  if (f.warehouse && s.warehouse!==f.warehouse) return false;
-  if (f.source && s.source!==f.source) return false;
-  if (f.stage && groupOf(s)!==f.stage) return false;
+/* ================= 补货建议 ================= */
+function match(s){
+  const f=state.filters,t=f.q.trim().toLowerCase();
+  if(t&&!(s.sku.toLowerCase().includes(t)||s.name.toLowerCase().includes(t)))return false;
+  if(f.store&&s.store!==f.store)return false;
+  if(f.wh&&s.wh!==f.wh)return false;
+  if(f.source&&s.source!==f.source)return false;
+  if(f.stage&&groupOf(s)!==f.stage)return false;
   return true;
 }
+const stores=[...new Set(SKUS.map(s=>s.store))],whs=[...new Set(SKUS.map(s=>s.wh))];
 
-function pSuggestions(){
-  const total = SKUS.length;
+function pageList(){
+  const c=counts();
   return `
   <div class="page-head">
-    <div><div class="eyebrow">S01 / REPLENISHMENT</div><h1>补货建议</h1>
-      <p class="subtitle">扫描全部授权对象，按建议来源和处理状态筛选；打开 SKU 进入独立详情页。</p></div>
-    <div class="row"><button class="button" data-act="batch-dialog">本次检查 ${BATCH.at}</button><button class="button primary" data-act="rerun">重新检查全部 SKU</button></div>
+    <h1>补货建议</h1>
+    <div class="row"><button class="btn" data-act="batch">${batch().at} · 本次检查</button><button class="btn primary" data-act="rerun">重新检查</button></div>
   </div>
-  ${filterBar()}
+  <section class="panel" style="margin-bottom:10px">
+    <div class="filters">
+      <input type="search" id="f-q" value="${esc(state.filters.q)}" placeholder="搜索商品或 SKU" autocomplete="off">
+      <select id="f-store"><option value="">全部店铺</option>${stores.map(o=>`<option ${state.filters.store===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
+      <select id="f-wh"><option value="">全部仓库</option>${whs.map(o=>`<option ${state.filters.wh===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
+      <select id="f-source"><option value="">全部来源</option>${Object.entries(SOURCE).map(([k,v])=>`<option value="${k}" ${state.filters.source===k?'selected':''}>${v}</option>`).join('')}</select>
+      <button class="btn sm" data-act="clear">清空</button>
+      <span style="flex:1"></span>
+      <div class="seg" role="group" aria-label="按处理状态筛选">
+        ${[['','全部',items().length],['待确认','待确认',c.confirm],['需补证','需补证',c.blocked],['已请购','已请购',c.waiting+c.approved+c.unknown],['无需补货','无需补货',c.no_need],['失败','失败',c.failed+c.missing]]
+          .map(([v,l,n])=>`<button data-act="seg" data-val="${v}" aria-pressed="${state.filters.stage===v}">${l}<em>${n}</em></button>`).join('')}
+      </div>
+    </div>
+  </section>
   <section class="panel">
-    <div class="panel-head">
-      <h2>补货建议结果</h2><small id="res-count"></small>
-    </div>
-    <div class="table-wrap">
-      <table class="list-table">
-        <caption class="sr-only">补货建议列表，同 SKU 的不同店仓分开展示</caption>
-        <thead><tr>
-          <th style="min-width:210px">商品 / SKU</th><th>店铺 · 仓库</th><th>建议来源</th>
-          <th class="r">可用 / 目标</th><th class="r">建议数量</th><th>首次短缺</th><th>处理状态</th><th></th>
-        </tr></thead>
-        <tbody id="rows"></tbody>
-      </table>
-    </div>
-    <div class="panel-body" id="empty-box" hidden></div>
-    <div class="panel-head" style="border-top:1px solid var(--line);border-bottom:0">
-      <small id="page-info"></small><span class="micro"><span class="scroll-hint">窗口较窄，表格可横向滚动 · </span>同 SKU 不同店仓分开展示</span>
-    </div>
+    <div class="panel-head"><h2>结果</h2><span class="sub" id="res-count"></span></div>
+    <div class="tw"><table class="ltable">
+      <caption class="sr-only">补货建议，同 SKU 不同店仓分开展示</caption>
+      <thead><tr><th style="min-width:180px">商品 / SKU</th><th>店铺 · 仓</th><th>来源</th><th>库存 / 目标</th><th class="r">建议</th><th>首次短缺</th><th>状态</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <div id="empty-box" hidden></div>
+    <div class="panel-head" style="border-top:1px solid var(--line);border-bottom:0"><span class="sub" id="page-info"></span></div>
   </section>`;
 }
 
-function filterBar(){
-  const f = state.filters;
-  const c = counts();
-  return `
-  <div class="panel" style="margin-bottom:16px"><div class="panel-body" style="padding:14px 18px">
-    <div class="filters">
-      <label class="field">搜索商品或 SKU
-        <input type="search" id="f-q" value="${esc(f.q)}" placeholder="如 收纳包 / CB-1001" autocomplete="off"></label>
-      <label class="field">店铺<select id="f-store"><option value="">全部店铺</option>${STORE_OPTIONS.map(o=>`<option ${f.store===o?'selected':''}>${esc(o)}</option>`).join('')}</select></label>
-      <label class="field">仓库<select id="f-warehouse"><option value="">全部仓库</option>${WH_OPTIONS.map(o=>`<option ${f.warehouse===o?'selected':''}>${esc(o)}</option>`).join('')}</select></label>
-      <label class="field">建议来源<select id="f-source"><option value="">全部来源</option>
-        ${Object.entries(SOURCES).map(([k,v])=>`<option value="${k}" ${f.source===k?'selected':''}>${v}</option>`).join('')}</select></label>
-      <button class="button small" data-act="clear" style="margin-bottom:1px">清空</button>
-    </div>
-    <div class="row" style="margin-top:12px">
-      <div class="seg" role="group" aria-label="按处理状态筛选">
-        ${segBtn('','全部',SKUS.length,f.stage)}
-        ${segBtn('待人工确认','待人工确认',c.pending_confirm,f.stage)}
-        ${segBtn('依据待核实','依据待核实',c.need_evidence,f.stage)}
-        ${segBtn('无需补货','无需补货',c.no_need,f.stage)}
-        ${segBtn('已请购','已请购',c.requisition,f.stage)}
-        ${segBtn('分析失败','分析失败',c.failed,f.stage)}
-      </div>
-    </div>
-  </div></div>`;
-}
-function segBtn(val,label,n,cur){
-  return `<button data-act="seg" data-val="${esc(val)}" aria-pressed="${cur===val}">${label}<em>${n}</em></button>`;
-}
-
 function rowHtml(s){
-  const st = stage(s);
-  const avail = s.plan.available===null ? '<span class="muted">未知</span>' : `${s.plan.available}`;
-  const target = s.plan.target===null ? '<span class="muted">—</span>' : `${s.plan.target}`;
-  const qty = st==='no_need' ? '<span class="muted">无需补货</span>'
-    : (s.plan.suggest===null||s.plan.suggest===undefined) ? '<span class="muted">未形成</span>'
-    : `<b class="num">${s.plan.suggest}</b> <span class="muted" style="font-size:11px">${esc(s.unit)}</span>`;
-  const short = s.plan.firstShortage ? `<span class="num">${s.plan.firstShortage}</span>` : '<span class="muted">—</span>';
+  const st=stageOf(s),p=s.plan,cov=covDays(s),pct=cov!==null&&p.target?Math.min(100,p.available/p.target*100):0;
+  const cls=cov===null?'':cov<4?'out':cov<8?'low':'';
+  const qty=st==='no_need'?'<span class="muted">无需</span>':(p.suggest===null||p.suggest===undefined)?'<span class="muted">—</span>':`<b class="num">${p.suggest}</b> <span class="muted" style="font-size:10.5px">${esc(s.unit)}</span>`;
   return `<tr>
     <td><a class="prod" href="#/sku/${encodeURIComponent(s.key)}" style="color:var(--ink)">${esc(s.name)}</a>
-        <span class="prod-sub"><span class="mono">${esc(s.sku)}</span>${s.ai.status==='AVAILABLE'?' · <span class="badge info" style="font-size:10px">AI 已解读</span>':''}</span></td>
-    <td>${esc(s.store)}<span class="prod-sub">${esc(s.warehouse)}</span></td>
-    <td><span class="badge ${s.source==='RULE'?'success':s.source==='ERP_REF'?'warning':'plain'}">${SOURCES[s.source]}</span></td>
-    <td class="r num">${avail} / ${target}</td>
+      <span class="prod-sub"><span class="mono">${esc(s.sku)}</span>${s.ai.status==='OK'?' · <span class="chip info" style="font-size:9.5px">AI</span>':''}</span></td>
+    <td>${esc(s.store)}<span class="prod-sub">${esc(s.wh)}</span></td>
+    <td><span class="chip ${s.source==='RULE'?'ok':s.source==='ERP'?'warn':''}">${SOURCE[s.source]}</span></td>
+    <td><div class="stockcell"><span class="cov ${cls}"><i style="width:${pct}%"></i></span><span>${dash(p.available)}${p.target?' / '+p.target:''}</span></div></td>
     <td class="r">${qty}</td>
-    <td>${short}</td>
+    <td class="num">${p.firstShortage?p.firstShortage.slice(5):'<span class="muted">—</span>'}</td>
     <td>${stageBadge(s)}</td>
-    <td class="r"><a class="button small" href="#/sku/${encodeURIComponent(s.key)}">${st==='pending_confirm'?'确认数量':st.startsWith('requisition')?'查看请购':'查看依据'}</a></td>
+    <td class="r"><a class="btn sm" href="#/sku/${encodeURIComponent(s.key)}">${st==='confirm'?'确认数量':(st.startsWith('req')||st==='no_need')?'查看':'查看依据'}</a></td>
   </tr>`;
 }
-
-function refreshRows(){
-  const rows = SKUS.filter(matchFilters);
-  const tb = document.getElementById('rows');
-  if (!tb) return;
-  tb.innerHTML = rows.map(rowHtml).join('');
-  const empty = document.getElementById('empty-box'), tableWrap = tb.closest('.table-wrap');
-  if (!rows.length){
-    tableWrap.hidden = true; empty.hidden = false;
-    empty.innerHTML = `<div class="empty"><h3>没有符合条件的建议</h3><p>当前筛选条件与 ${SKUS.length} 个店仓对象均不匹配。</p><button class="button" data-act="clear">清空筛选</button></div>`;
-  } else { tableWrap.hidden = false; empty.hidden = true; }
-  const cnt = document.getElementById('res-count');
-  if (cnt) cnt.textContent = `共 ${rows.length} 项${rows.length!==SKUS.length?`（全部 ${SKUS.length} 项）`:' · 全部'}`;
-  const info = document.getElementById('page-info');
-  if (info) info.textContent = `显示 ${rows.length} 项 · 全部筛选结果在同一页`;
-  const sku = state.lastSku && byKey(state.lastSku);
-  if (sku) sidebar();
+function paintRows(){
+  const rows=items().filter(match),tb=document.getElementById('rows');
+  if(!tb)return;
+  tb.innerHTML=rows.map(rowHtml).join('');
+  const tw=tb.closest('.tw'),box=document.getElementById('empty-box');
+  if(!rows.length){tw.hidden=true;box.hidden=false;
+    box.innerHTML='<div class="empty"><h3>没有符合条件的对象</h3><button class="btn" data-act="clear">清空筛选</button></div>';}
+  else{tw.hidden=false;box.hidden=true;}
+  const cnt=document.getElementById('res-count');if(cnt)cnt.textContent=`${rows.length} 项 / 共 ${items().length}`;
+  const info=document.getElementById('page-info');if(info)info.textContent=`显示 ${rows.length} 项`;
+}
+function saveFilters(){
+  const f=state.filters;
+  sessionStorage.setItem('ux3.filters',JSON.stringify(f));
+  const seg=document.querySelector('.seg');
+  if(seg)[...seg.querySelectorAll('button')].forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.val||'')===f.stage)));
 }
 
-/* =====================================================================
-   7. 页面：SKU 详情
-   ===================================================================== */
-function pSku(key){
-  const s = byKey(key);
-  const st = stage(s);
-  const tab = state.tab;
+/* ================= SKU 详情 ================= */
+const TABS=[['conditions','采购条件'],['quality','依据与限制'],['history','历史分析']];
+
+function pageDetail(key){
+  const s=byKey(key),p=s.plan,cov=covDays(s);
+  const blk=s.checks.find(c=>c.level==='BLOCK'),warn=s.checks.find(c=>c.level==='WARN');
   return `
-  <a class="back" href="#/suggestions" data-act="back-list">← 返回补货建议</a>
-  <div class="sku-head">
+  <a class="back" href="#/suggestions" data-act="back">← 补货建议</a>
+  <div class="detail-head">
     <div>
       <h1>${esc(s.name)}</h1>
-      <div class="sku-meta">
-        <span class="mono">${esc(s.sku)}</span><i>·</i><span>${esc(s.store)} / ${esc(s.warehouse)}</span>
-        <i>·</i>${stageBadge(s)}<span class="badge plain">单位：${esc(s.unit)}</span>
-      </div>
+      <div class="sku-meta"><span class="mono">${esc(s.sku)}</span><span>·</span><span>${esc(s.store)} / ${esc(s.wh)}</span><span>·</span>
+        ${stageBadge(s)}<span class="chip line">${esc(s.unit)}</span><span class="muted">数据时点 ${batch().at}</span></div>
     </div>
-    <div class="row">
-      <button class="button small" data-act="history-open">历史分析</button>
-      <button class="button small" data-act="rerun-single">重新分析此 SKU</button>
-    </div>
+    <button class="btn sm" data-act="rerun">重新分析</button>
   </div>
 
-  ${verdictStrip(s)}
+  <div class="verdict">
+    <div class="accent"><small>建议数量</small><b>${p.suggest===null||p.suggest===undefined?'<span style="font-size:15px">未形成</span>':p.suggest}${p.suggest?`<span>${esc(s.unit)}</span>`:''}</b></div>
+    <div><small>可用库存</small><b>${dash(p.available)}${p.available!==null?`<span>${esc(s.unit)}</span>`:''}</b></div>
+    <div><small>目标库存</small><b>${dash(p.target)}</b></div>
+    <div><small>覆盖天数</small><b>${cov===null?'—':cov}<span>${cov===null?'':'天'}</span></b></div>
+    <div><small>首次短缺</small><b style="font-size:15px">${p.firstShortage?p.firstShortage.slice(5):'—'}</b></div>
+  </div>
+
+  ${blk?`<div class="hint bad" style="margin:-4px 0 10px;font-size:11px">${esc(blk.title)} · 责任方 ${esc(blk.owner)}${blk.draft?' · <span title="'+esc(blk.draft)+'">政策草案未生效</span>':''} · <a href="#/sku/${encodeURIComponent(s.key)}/quality">查看依据</a></div>`
+   :warn?`<div class="hint" style="margin:-4px 0 10px;font-size:11px">${esc(warn.title)}${s.checks.length>1?` 等 ${s.checks.length} 项`:''} · <a href="#/sku/${encodeURIComponent(s.key)}/quality">查看依据</a></div>`:''}
 
   <div class="detail">
     <section class="panel">
-      <div class="panel-head" style="padding-bottom:0;border-bottom:0">
-        <div class="tabs" role="tablist" aria-label="SKU 详情分区">
-          ${tabBtn('overview','概览',tab)}
-          ${tabBtn('sales','销售与库存',tab)}
-          ${tabBtn('procurement','采购条件',tab)}
-          ${tabBtn('quality','依据与限制',tab,blocking(s).length)}
-          ${tabBtn('history','历史分析',tab)}
+      <div class="panel-head"><h2>库存与销量</h2><span class="sub">${s.daily.length?'未来 9 个业务日结存预测':'本次无预测数据'}</span></div>
+      <div class="chart-wrap">${s.daily.length?chartBalance(s.daily):'<div class="muted" style="padding:16px 0;font-size:11.5px">缺少销量窗口与库存流水，未生成结存预测。</div>'}</div>
+      ${s.daily.length?`<div class="chart-legend">
+        <span><i class="area"></i>负结存区间</span><span><i class="dash"></i>到货日</span>
+        <span style="margin-left:auto">${p.firstShortage?'最短缺 '+p.firstShortage.slice(5):'窗口内无短缺'}</span>
+      </div>`:''}
+      <div class="two">
+        <div>
+          <div style="font-size:10.5px;color:var(--muted);margin-bottom:2px">最近${s.sales.length?' '+s.sales.length+' ':''}个业务日销量</div>
+          <div class="bars">${chartSales(s.sales,p.totalSales)}</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.avgDaily?`日均 ${p.avgDaily} 件 · ${p.window.replace(' — ',' 至 ')}`:'本次未取得日均'}</div>
+        </div>
+        <div>
+          <div style="font-size:10.5px;color:var(--muted);margin-bottom:4px">建议口径</div>
+          ${formula(s)}
         </div>
       </div>
-      <div class="panel-body">${tabBody(s,tab)}</div>
+      <div class="tabs" role="tablist">${TABS.map(([id,l])=>`<button role="tab" aria-selected="${state.tab===id}" data-act="tab" data-tab="${id}">${l}${id==='quality'&&s.checks.length?` <span class="chip ${blk?'bad':'warn'}" style="font-size:9.5px">${s.checks.length}</span>`:''}</button>`).join('')}</div>
+      <div class="tab-body">${tabBody(s)}</div>
     </section>
     <aside class="rail">${rail(s)}${aiCard(s)}</aside>
   </div>`;
 }
-function tabBtn(id,label,cur,count){
-  return `<button role="tab" aria-selected="${cur===id}" data-act="tab" data-tab="${id}">${label}${count?` <span class="badge warning" style="font-size:10px">${count}</span>`:''}</button>`;
+
+function formula(s){
+  const p=s.plan,c=s.constraints,st=stageOf(s);
+  if(st==='blocked'||st==='failed')return '<div class="formula muted">阻断未解除，不计算建议数量。</div>';
+  if(s.source==='ERP')return `<div class="formula"><b>ERP 建议 ${p.suggest} ${esc(s.unit)}</b><div style="font-size:10.5px;color:var(--muted)">依据未核实，核对采购条件后确认</div></div>`;
+  if(!p.suggest)return `<div class="formula">目标 <b>${p.target}</b><span class="op">−</span>可用 <b>${p.available}</b><span class="op">=</span><b>0</b> 缺口</div>`;
+  const need=Math.max(0,p.target-p.available);
+  const up=Math.ceil(need/(c.mult||1))*(c.mult||1);
+  const qty=Math.max(up,c.moq||0);
+  return `<div class="formula">目标 <b>${p.target}</b><span class="op">−</span>可用 <b>${p.available}</b><span class="op">−</span>在途 <b>0</b><span class="op">=</span>缺口 <b>${need}</b><br>MOQ <b>${c.moq}</b> / 整箱 <b>${c.mult}</b><span class="op">→</span><b>${qty} ${esc(s.unit)}</b></div>`;
 }
 
-function verdictStrip(s){
-  const st = stage(s);
-  const cells = [];
-  if (st==='no_need'){
-    cells.push(['规则结论','无需补货','可覆盖至 11-23'],['当前可用',s.plan.available,'件'],['日均需求',s.plan.avgDaily,'件 / 天'],['下次复核','自动','每日检查']);
-  } else if (s.plan.suggest===null){
-    cells.push(['建议数量','—','数据不足，未形成'],['当前可用',num(s.plan.available),'件'],['缺失项',blocking(s).length,'项阻断'],['责任方',blocking(s)[0]?blocking(s)[0].owner:'—','']);
-  } else {
-    cells.push(['建议数量',s.plan.suggest,s.unit],['当前可用',num(s.plan.available),s.unit],
-      ['目标库存',num(s.plan.target),s.unit],['首次短缺',s.plan.firstShortage||'—','']);
-  }
-  return `<div class="verdict">${cells.map((c,i)=>`<div class="${i===0?'accent':''}"><small>${esc(c[0])}</small><b>${esc(c[1])}${c[2]?`<span>${esc(c[2])}</span>`:''}</b></div>`).join('')}</div>`;
+function tabBody(s){
+  if(state.tab==='quality')return qualityTab(s);
+  if(state.tab==='history')return histTab(s);
+  return conditionsTab(s);
 }
-
-function tabBody(s,tab){
-  if (tab==='sales') return salesTab(s);
-  if (tab==='procurement') return procurementTab(s);
-  if (tab==='quality') return qualityTab(s);
-  if (tab==='history') return historyTab(s);
-  return overviewTab(s);
+function conditionsTab(s){
+  const c=s.constraints;
+  const po=s.purchases.length?`<div class="tw" style="margin-top:10px"><table>
+    <thead><tr><th>单据</th><th>状态</th><th class="r">采购</th><th class="r">已收</th><th class="r">待收</th><th>预计到货</th></tr></thead>
+    <tbody>${s.purchases.map(p=>`<tr><td class="mono">${esc(p.no)}</td><td>${esc(p.status)}</td>
+      <td class="r num">${p.ordered}</td><td class="r num">${p.recv}</td><td class="r num">${p.unrecv}</td><td class="num">${esc(p.eta)}</td></tr>`).join('')}</tbody></table></div>
+    <div class="stack"><i style="width:${s.purchases[0].recv/s.purchases[0].ordered*100}%;background:#0f6b64"></i><i style="width:${s.purchases[0].unrecv/s.purchases[0].ordered*100}%;background:#c9d6d3"></i></div>
+    <div class="cov-num" style="margin-top:3px"><span>已收 ${s.purchases[0].recv}</span><span>待收 ${s.purchases[0].unrecv}</span></div>
+    <div class="rail-note">待到货单据无已承诺可售日，未计入有效在途。</div>`
+    :'<div class="muted" style="font-size:11px;margin-top:8px">本次未取得该店仓正式采购单。</div>';
+  return `<dl class="kv">
+    <div><dt>最小起订量</dt><dd>${dash(c.moq)}${c.moq?' '+esc(s.unit):''}</dd></div>
+    <div><dt>整箱倍数</dt><dd>${dash(c.mult)}${c.mult?' '+esc(s.unit):''}</dd></div>
+    <div><dt>报价单价</dt><dd>${money(c.price,c.cur)}</dd></div>
+    <div><dt>报价有效期</dt><dd>${c.validTo?'至 '+c.validTo:'—'}</dd></div>
+    <div><dt>供应商</dt><dd>${esc(c.supplier||'—')}</dd></div>
+    <div><dt>参考交期</dt><dd>${c.lead?c.lead+' 天':'—'}</dd></div>
+  </dl>
+  <h3 style="margin:12px 0 0;font-size:11.5px;color:var(--muted);font-weight:500">已有正式采购</h3>${po}`;
 }
-
-function overviewTab(s){
-  const st = stage(s);
-  const blocks = blocking(s);
-  const hints = [];
-  if (st==='pending_confirm') hints.push(`规则建议 ${s.plan.suggest} ${s.unit} 满足最小起订量 ${s.constraints.moq} 与整箱倍数 ${s.constraints.multiple}；确认后进入请购。`);
-  if (st==='need_evidence') hints.push(blocks.length?blocks[0].title+'：'+blocks[0].detail: '来源依据不足，暂不形成补货数量。');
-  if (st==='no_need') hints.push('规则判断当前可用库存足以覆盖需求窗口，未生成采购建议。');
-  if (st==='requisition_waiting'||st==='requisition_approved'||st==='requisition_check') hints.push('该 SKU 已有人工确认的请购记录，数量调整需在请购管理中核对。');
-
-  const purch = s.purchases.length
-    ? `<div class="note ok" style="margin-top:14px"><strong>已有正式采购在途</strong><p>${s.purchases.map(p=>`${esc(p.no)}：未收 ${p.unreceived} 件，预计 ${esc(p.eta)} 到货`).join('；')}。平台未把未承诺到货日当作可售供给。</p></div>`
-    : '';
-
-  return `
-    <div class="note ${st==='need_evidence'?'warn':'ok'}"><strong>${st==='need_evidence'?'未形成补货结论':'判定结论'}</strong>
-      <p>${esc(hints.join(' '))}</p></div>
-    <h3 style="margin:16px 0 6px">为什么是这个数字</h3>
-    <p class="micro">${s.plan.suggest===null?'缺少可用销量窗口，未计算日均需求与目标库存，因此不给出建议数量。':
-      `最近 ${s.plan.salesDays} 个完整业务日销量 ${s.plan.totalSales} 件，日均 ${s.plan.avgDaily} 件；按覆盖天数与目标库存 ${s.plan.target} 件计算缺口 ${s.plan.gap} 件，取满足最小起订量 ${s.constraints.moq} 与整箱倍数 ${s.constraints.multiple} 的最小可行量 ${s.plan.suggest} 件。`}</p>
-    <p class="micro" style="margin-top:8px">上述为平台规则结果，数量由人工最终确认；确认不等于 ERP 审批。</p>
-    <div class="facts3">
-      <div><small>销量窗口</small><b>${s.plan.salesDays?s.plan.salesDays+' 个业务日':'未取得'}</b><span>${esc(s.plan.window)}${s.plan.avgDaily?` · 日均 ${s.plan.avgDaily} 件`:''}</span></div>
-      <div><small>采购条件</small><b>${s.constraints.moq?`MOQ ${s.constraints.moq} / 倍数 ${s.constraints.multiple}`:'未取得'}</b><span>${esc(s.constraints.supplier||'供应商未确认')}${s.constraints.quoteValid?` · 报价至 ${esc(s.constraints.quoteValid.split('—')[1]||'')}`:''}</span></div>
-      <div><small>已有正式采购</small><b>${s.purchases.length?s.purchases.length+' 张单据':'无'}</b><span>${s.purchases.length?'在途 '+s.purchases.reduce((a,p)=>a+p.unreceived,0)+' 件':'本次未取得该店仓采购单'}</span></div>
-    </div>
-    ${purch}
-    ${s.quality.length?`<div class="note warn" style="margin-top:12px"><strong>${s.quality.length} 项限制需要知悉</strong><p>${esc(s.quality.slice(0,2).map(c=>c.title).join('；'))}${s.quality.length>2?` 等 ${s.quality.length} 项`:''}。可展开「依据与限制」查看责任方与下一步。</p></div>`:''}
-    ${draftNote(s)}
-    <p class="micro" style="margin-top:12px">数据时点 ${BATCH.at} · 结论按本次快照保留，重新分析会生成新版本。</p>`;
-}
-
-/* 政策草案只在有对应检查项时出现，明确标注未生效，不与已实施规则混排 */
-function draftNote(s){
-  const d = s.quality.find(c=>c.draft);
-  if (!d) return '';
-  return `<p class="micro" style="margin-top:10px"><span class="badge plain">政策草案 · 未生效</span> ${esc(d.draft)}，仅作提示，未参与本次判定。</p>`;
-}
-
-function salesTab(s){
-  if (!s.daily.length) return `<div class="empty" style="padding:28px 8px"><h3>没有可展示的逐日数据</h3><p>${blocking(s).length?esc(blocking(s)[0].detail):'本次分析未取得库存与销量时间序列。'}</p></div>`;
-  const rows = s.daily.map(d=>{
-    const bad = d.close<0, w = Math.min(100,Math.abs(d.close)/60*100);
-    return `<tr><td class="num">${d.day}</td><td class="r num">${d.demand}</td><td class="r num">${d.arrive||'—'}</td>
-      <td style="width:120px"><div class="bar ${d.close<0?'neg':''}"><span style="width:${Math.max(4,w)}%"></span></div></td>
-      <td class="r num" style="color:${bad?'var(--danger)':'inherit'}">${d.close}</td>
-      <td>${d.close<0?badge('预计短缺','warning'):badge(d.src,'plain')}</td></tr>`;
-  }).join('');
-  return `
-    <h3>有效销量窗口</h3>
-    <p class="micro">统计区间 ${esc(s.plan.window)} · 计入 ${s.plan.salesDays||0} 个完整业务日${s.plan.salesDays&&s.plan.salesDays<7?'（少于草案要求，草案未生效）':''}</p>
-    <div class="table-wrap" style="margin-top:12px">
-      <table><caption class="sr-only">逐日库存预测</caption>
-        <thead><tr><th>业务日</th><th class="r">需求量</th><th class="r">到货</th><th>结存趋势</th><th class="r">预计结存</th><th>说明</th></tr></thead>
-        <tbody>${rows}</tbody></table>
-    </div>
-    <p class="micro" style="margin-top:10px">到货只计入已确认的采购计划；未承诺到货日不抵扣。结存为平台规则推算，不是 ERP 实际库存。</p>`;
-}
-
-function procurementTab(s){
-  const c = s.constraints;
-  const po = s.purchases.length ? `<div class="table-wrap" style="margin-top:14px"><table>
-      <thead><tr><th>正式单据</th><th>状态</th><th class="r">采购 / 已收 / 待收</th><th>预计到货</th></tr></thead>
-      <tbody>${s.purchases.map(p=>`<tr><td class="mono">${esc(p.no)}</td><td>${esc(p.status)}<span class="prod-sub">${esc(p.note||'')}</span></td>
-        <td class="r num">${p.ordered} / ${p.received} / ${p.unreceived}</td><td class="num">${esc(p.eta)}</td></tr>`).join('')}</tbody></table></div>`
-    : '<p class="micro" style="margin-top:10px">本次未取得正式采购单据。查询范围与完整性限制见「依据与限制」。</p>';
-  return `<dl class="kv grid2">
-      <div><dt>最小起订量（MOQ）</dt><dd class="num">${num(c.moq)} ${esc(s.unit)}</dd></div>
-      <div><dt>整箱倍数</dt><dd class="num">${num(c.multiple)} ${esc(s.unit)}</dd></div>
-      <div><dt>报价单价</dt><dd class="num">${money(c.price,c.currency)}</dd></div>
-      <div><dt>报价有效期</dt><dd>${esc(c.quoteValid||'未知')}</dd></div>
-      <div><dt>供应商</dt><dd>${esc(c.supplier||'未确认')}</dd></div>
-      <div><dt>报价号</dt><dd class="mono">${esc(c.quote||'未确认')}</dd></div>
-      <div><dt>最低采购金额</dt><dd class="num">${money(c.minAmount,c.currency)}</dd></div>
-      <div><dt>参考交期</dt><dd class="num">${c.leadDays?c.leadDays+' 天':'未知'}</dd></div>
-    </dl>
-    <h3 style="margin-top:18px">已有正式采购</h3>${po}`;
-}
-
 function qualityTab(s){
-  const items = s.quality.length ? s.quality.map(c=>`
-    <div class="qitem">
-      <div class="qt">${badge(c.level==='BLOCK'?'阻断':'提示', c.level==='BLOCK'?'danger':'warning')}${esc(c.title)}</div>
+  const html=s.checks.length?s.checks.map(c=>`
+    <div class="qitem"><div class="qt"><span class="chip ${c.level==='BLOCK'?'bad':'warn'}">${c.level==='BLOCK'?'阻断':'提示'}</span>${esc(c.title)}</div>
       <p>${esc(c.detail)}</p>
-      ${c.draft?`<p><span class="badge plain">政策草案 · 未生效</span> ${esc(c.draft)}</p>`:''}
-      <p class="own">责任方：${esc(c.owner)} · 下一步：${esc(c.action)}${c.affects?` · 影响：${esc(c.affects.join('、'))}`:''}</p>
-    </div>`).join('')
-    : '<div class="empty" style="padding:24px 8px"><h3>本次没有未解决的数据或规则限制</h3><p>仍不代表企业正式业务准入已通过。</p></div>';
-  return `<h3>数据准入状态</h3>
-    <p class="micro">政策版本 ${esc(POLICY.version)} · ${badge('草案 · 未生效','warning')} · ${esc(POLICY.note)}</p>
-    <div class="quality" style="margin-top:12px">${items}</div>
-    <h3 style="margin-top:18px">数据来源与证据定位</h3>
-    <p class="micro">每项事实可单独核对；不提供 ERP 原始响应，只展示本次判定实际使用的字段值。</p>
-    <div class="table-wrap" style="margin-top:10px"><table>
-      <caption class="sr-only">本次判定使用的数据来源</caption>
-      <thead><tr><th>事实</th><th>读取状态</th><th>时点</th><th>范围</th><th></th></tr></thead>
-      <tbody>${sourceRows(s)}</tbody></table></div>
-    <details class="details" style="margin-top:16px"><summary>技术信息与快照引用</summary>
-      <pre>任务：task-s01-v2-demo-0007（演示）
-快照：snapshot-2026-11-14-0802-${esc(s.sku.toLowerCase())}
-来源租户：teaching-tenant-demo
-统计口径：v2-counts-v2
-说明：原型不展示真实任务号与快照标识，正式页面在「技术信息」折叠区提供可追溯引用。</pre>
-    </details>`;
+      ${c.draft?`<p><span class="chip line">政策草案 · 未生效</span> ${esc(c.draft)}</p>`:''}
+      <p>责任方 ${esc(c.owner)} · 下一步 ${esc(c.action)}</p></div>`).join('')
+    :'<div class="muted" style="font-size:11.5px;padding:6px 0">本次无未解决的数据或规则限制。</div>';
+  return `${html}
+  <div style="margin-top:12px;font-size:11px;color:var(--muted)">
+    数据来源：库存 ${dash(s.plan.available)} · 销量 ${s.plan.salesDays?s.plan.salesDays+' 个业务日':'未取得'} · 采购条件 ${s.constraints.quote?'已读取':'未取得'}
+    <button class="btn ghost" data-act="evidence">查看字段</button>
+  </div>
+  <details style="margin-top:8px"><summary style="font-size:10.5px;color:var(--muted);cursor:pointer">技术信息</summary>
+    <div class="mono muted" style="margin-top:5px;font-size:10.5px">快照 snapshot-${batch().id}-${s.sku.toLowerCase()} · 租户 teaching-tenant · 口径 v2</div>
+  </details>`;
 }
-
-function sourceRows(s){
-  const rows = [
-    ['可用库存', s.plan.available===null?'未取得':'已读取', s.plan.available===null?'warning':'success', '08:01', `${esc(s.warehouse)} · 唯一仓库记录`, 'inv'],
-    ['已核对销量', s.plan.salesDays?'已读取':'不足', s.plan.salesDays?'success':'danger', '08:02', `${esc(s.plan.window)} · ${s.plan.salesDays||0} 个业务日`, 'sales'],
-    ['正式采购', s.purchases.length?'已查询 · 有单据':'已查询 · 无记录', 'plain', '08:02', `租户 / SKU / 仓库`, 'po'],
-    ['供应商报价', s.constraints.quote?'已读取 · 有效':'未取得', s.constraints.quote?'success':'warning', '07:58', `${esc(s.constraints.supplier||'—')}`, 'quote']
-  ];
-  return rows.map(r=>`<tr><td>${r[0]}</td><td>${badge(r[1],r[2])}</td><td class="num">${r[3]}</td>
-    <td class="micro" style="color:var(--muted)">${r[4]}</td>
-    <td class="r"><button class="button small" data-act="evidence" data-kind="${r[5]}">查看依据</button></td></tr>`).join('');
-}
-
-function historyTab(s){
-  return `<div class="table-wrap"><table><caption class="sr-only">该 SKU 的历史分析</caption>
-    <thead><tr><th>分析时间</th><th>建议来源</th><th class="r">建议数量</th><th>结果</th><th></th></tr></thead>
-    <tbody>${s.history.map(h=>`<tr><td class="num">${esc(h.at)}</td><td>${esc(h.source)}</td>
-      <td class="r num">${h.qty===null?'—':h.qty+' '+esc(s.unit)}</td><td>${esc(h.result)}</td>
-      <td class="r"><button class="button small" data-act="history-detail" data-at="${esc(h.at)}">查看</button></td></tr>`).join('')}</tbody></table></div>
-    <p class="micro" style="margin-top:10px">历史分析按当时快照保留，不复用旧结论；重新分析会生成新版本。</p>`;
+function histTab(s){
+  return `<div class="tw"><table><caption class="sr-only">历史分析</caption>
+    <thead><tr><th>时间</th><th>来源</th><th class="r">建议</th><th>结果</th><th></th></tr></thead>
+    <tbody>${s.hist.map(h=>`<tr><td class="num">${esc(h.at)}</td><td>${esc(h.src)}</td>
+      <td class="r num">${h.qty===null?'—':h.qty+' '+esc(s.unit)}</td><td>${esc(h.res)}</td>
+      <td class="r"><button class="btn sm" data-act="hist">查看</button></td></tr>`).join('')}</tbody></table></div>`;
 }
 
 function rail(s){
-  const st = stage(s);
-  const qty = state.qty[s.key];
-  const sug = s.plan.suggest;
-
-  if (st==='no_need')
-    return `<section class="panel"><div class="panel-head"><h2>不需要请购</h2></div><div class="panel-body">
-      <p class="micro">规则判断当前库存可覆盖需求窗口，平台不生成采购建议，也不允许在此提交请购。</p>
-      <div class="note ok" style="margin-top:12px"><strong>下次自动复核</strong><p>每日检查时会重新计算；如需立即复核可点「重新分析此 SKU」。</p></div></div></section>`;
-
-  if (st==='need_evidence')
-    return `<section class="panel"><div class="panel-head"><h2>暂不可提交请购</h2></div><div class="panel-body">
-      <p class="micro">存在 ${blocking(s).length} 项阻断，补货数量尚未形成。请先按责任方补证后重新分析。</p>
-      <div class="note warn" style="margin-top:12px"><strong>${esc(blocking(s)[0]?blocking(s)[0].title:'依据不足')}</strong><p>${esc(blocking(s)[0]?blocking(s)[0].action:'补充依据后重新分析')}</p></div>
-      <button class="button" style="width:100%;margin-top:12px" data-act="rerun-single">重新分析此 SKU</button></div></section>`;
-
-  if (st==='failed')
-    return `<section class="panel"><div class="panel-head"><h2>本次分析失败</h2></div><div class="panel-body">
-      <p class="micro">读取中断，未产生任何结论。可安全重试；不会重复创建采购或调用模型。</p>
-      <button class="button primary" style="width:100%;margin-top:12px" data-act="rerun-single">重新分析此 SKU</button></div></section>`;
-
-  if (st.startsWith('requisition')){
-    const r = s.requisition;
-    const tone = r.state==='APPROVED'?'ok':r.state==='UNKNOWN'?'bad':'';
-    const title = r.state==='APPROVED'?'ERP 已审批':r.state==='UNKNOWN'?'提交结果待核对':'已提交 · 待 ERP 审批';
-    return `<section class="panel"><div class="panel-head"><h2>请购状态</h2><small>${esc(r.no)}</small></div><div class="panel-body">
-      <div class="note ${tone}"><strong>${title}</strong>
-        <p>人工最终 ${r.finalQty} ${esc(s.unit)} / 平台建议 ${r.suggestQty} ${esc(s.unit)}${r.reason?' · 原因：'+esc(r.reason):''}</p></div>
-      <dl class="kv"><dt>ERP 单据号 / 状态</dt><dd class="mono">${esc(r.no)} · ${esc(r.erpStatus)}</dd>
-        <dt>最近独立回读</dt><dd>${esc(r.verifiedAt)}</dd></dl>
-      ${r.state==='UNKNOWN'?`<button class="button" style="width:100%;margin-top:12px" data-act="req-check">使用原单核对</button>`:''}
-      <a class="button" style="width:100%;margin-top:10px;justify-content:center" href="#/requisitions/${encodeURIComponent(r.no)}">查看请购单</a>
-      <p class="micro" style="margin-top:10px">本平台只创建并提交请购，ERP 领导审批、下单与收货在 ERP 中完成。</p>
-    </div></section>`;
+  const st=stageOf(s),p=s.plan,c=s.constraints;
+  if(st==='req_waiting'||st==='req_approved'||st==='req_unknown')return railReq(s);
+  if(st==='no_need')return `<section class="panel"><div class="panel-head"><h2>无需补货</h2></div><div class="panel-body">
+    <div class="muted" style="font-size:11.5px">可用 ${p.available} 件覆盖 ${covDays(s)} 天，未生成采购建议。</div>
+    <button class="btn" style="width:100%;margin-top:10px" data-act="rerun">重新分析</button></div></section>`;
+  if(st==='blocked'||st==='failed'||st==='missing'){
+    const b=s.checks.find(x=>x.level==='BLOCK')||s.checks[0]||{title:'本批次未包含该对象',owner:'—',action:'切换到最新批次'};
+    return `<section class="panel"><div class="panel-head"><h2>暂不可提交</h2></div><div class="panel-body">
+      <div class="hint bad">${esc(b.title)}</div>
+      <div class="muted" style="font-size:11px;margin-top:6px">责任方 ${esc(b.owner)} · ${esc(b.action)}</div>
+      <button class="btn" style="width:100%;margin-top:10px" data-act="rerun">重新分析</button></div></section>`;
   }
-
-  // pending_confirm
-  const valid = validate(s, qty);
-  return `<section class="panel"><div class="panel-head"><h2>人工确认</h2><small>确认数量，提交 ERP 请购</small></div>
+  const qty=state.qty[s.key];
+  return `<section class="panel">
+    <div class="panel-head"><h2>请购</h2><span class="chip ${s.source==='ERP'?'warn':'ok'}">${s.source==='ERP'?'ERP 参考':'规则建议'}</span></div>
     <div class="panel-body">
-      <div class="rail-num"><span class="micro">平台建议数量</span><span><b>${sug}</b> <span class="micro">${esc(s.unit)}</span></span></div>
-      <label class="field">人工最终数量
-        <div class="stepper">
-          <button type="button" data-act="qty-step" data-step="-${s.constraints.multiple}">−</button>
-          <input id="qty-input" type="number" min="1" step="${s.constraints.multiple}" value="${qty}" inputmode="numeric">
-          <button type="button" data-act="qty-step" data-step="${s.constraints.multiple}">+</button>
-        </div>
-      </label>
-      <p class="micro" style="margin-top:6px">MOQ ${s.constraints.moq} · 整箱倍数 ${s.constraints.multiple}</p>
-      <div id="rail-check">${railCheck(s,qty)}</div>
-      <div id="reason-wrap" ${String(qty)===String(sug)?'hidden':''} style="margin-top:8px">
-        <label class="field">减少或增加数量的原因（必填）<textarea id="reason-input" maxlength="200" placeholder="例如：考虑已有在途 36 件，本次只补一半">${esc(state.reason[s.key]||'')}</textarea></label>
+      <div class="qty-now"><span>建议数量</span><b>${p.suggest} <span style="font-size:11px;color:var(--muted)">${esc(s.unit)}</span></b></div>
+      <div class="stepper">
+        <button type="button" data-act="step" data-v="-${c.mult}">−</button>
+        <input id="qty" type="number" min="1" step="${c.mult}" value="${qty}" inputmode="numeric" aria-label="最终数量">
+        <button type="button" data-act="step" data-v="${c.mult}">+</button>
       </div>
-      <label class="check"><input type="checkbox" id="ack" ${state.ack[s.key]?'checked':''}>
-        <span>我已知悉该建议的来源与未验证事项，确认数量用于销售备货。</span></label>
-      <button class="button primary" id="submit-btn" style="width:100%;margin-top:6px" data-act="confirm" ${valid||!state.ack[s.key]?'disabled':''}>确认并提交 ERP 请购</button>
-      <p class="micro" style="margin-top:10px">提交后进入 ERP 审批，本平台不代替领导审批，也不会自动下单。</p>
+      <div class="muted" style="font-size:10.5px;margin-top:4px">MOQ ${c.moq} · 整箱 ${c.mult}${s.source==='ERP'?' · 依据未核实':''}</div>
+      <div id="rail-check">${railCheck(s,qty)}</div>
+      <div id="reason-wrap" ${String(qty)===String(p.suggest)?'hidden':''} style="margin-top:6px">
+        <textarea id="reason" maxlength="200" placeholder="调整原因（必填）" style="width:100%;min-height:46px;border:1px solid var(--control);border-radius:5px;padding:5px 8px;font-size:11.5px">${esc(state.reason[s.key]||'')}</textarea>
+      </div>
+      <label class="check"><input type="checkbox" id="ack" ${state.ack[s.key]?'checked':''}><span>已核对采购条件与在途</span></label>
+      <button class="btn primary" id="submit" style="width:100%" data-act="confirm" ${railValid(s,qty)?'':'disabled'}>提交请购</button>
+      <p class="rail-note">提交后进入 ERP 审批，平台只读回读状态。</p>
     </div></section>`;
 }
-
-function validate(s,qty){
-  const c = s.constraints;
-  if (!qty || !Number.isInteger(Number(qty))) return '请填写整数数量';
-  if (Number(qty) < c.moq) return `少于最小起订量 ${c.moq} ${s.unit}`;
-  if (Number(qty) % c.multiple) return `必须是整箱倍数 ${c.multiple} 的整数倍`;
-  if (Number(qty) !== s.plan.suggest && !(state.reason[s.key]||'').trim()) return '调整了建议数量，请填写原因';
+function railValid(s,q){return !railError(s,q)&&!!state.ack[s.key];}
+function railError(s,q){
+  const c=s.constraints;
+  if(!q||!Number.isInteger(Number(q)))return '请填写整数数量';
+  if(Number(q)<c.moq)return `低于 MOQ ${c.moq}`;
+  if(Number(q)%c.mult)return `须为整箱 ${c.mult} 的整数倍`;
+  if(Number(q)!==s.plan.suggest&&!(state.reason[s.key]||'').trim())return '调整数量需填写原因';
   return '';
 }
-function railCheck(s,qty){
-  const err = validate(s,qty);
-  if (!err) return `<p class="micro" style="color:var(--success);margin-top:6px">数量符合约束${Number(qty)!==s.plan.suggest?'，已记录调整原因':''}。</p>`;
-  return `<p class="hint">${esc(err)}</p>`;
+function railCheck(s,q){
+  const e=railError(s,q);
+  return e?`<div class="hint">${esc(e)}</div>`:'<div class="hint ok">数量符合约束</div>';
 }
-
-function aiCard(s){
-  const a = s.ai;
-  if (a.status==='AVAILABLE'){
-    const secs = Object.entries(a.sections).map(([k,v])=>`<div style="margin-top:10px"><h3>${esc(k)}</h3>
-      <ul style="margin:4px 0 0;padding-left:18px;font-size:12px;line-height:1.75">${v.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('');
-    return `<section class="panel"><div class="panel-head"><h2>AI 解读</h2>${badge('已生成','info')}</div><div class="panel-body">
-      ${secs}<p class="micro" style="margin-top:12px">模型仅解释已有事实，不计算库存与金额。Token ${a.usage.tokens} · ${esc(a.usage.cost)}。最终决定由人工做出。</p></div></section>`;
-  }
-  return `<section class="panel"><div class="panel-head"><h2>AI 解读</h2>${badge('未调用','plain')}</div><div class="panel-body">
-    <p class="micro">本次查看未调用模型。需要时可对当前 SKU 单独发起一次解读，仅解释已有事实。</p>
-    <button class="button small" style="width:100%;margin-top:10px" data-act="ai-run">按需生成解读</button></div></section>`;
-}
-
-/* =====================================================================
-   8. 页面：请购管理
-   ===================================================================== */
-const REQS = () => SKUS.filter(s=>s.requisition).map(s=>Object.assign({skuRef:s}, s.requisition))
-  .sort((a,b)=> a.submittedAt < b.submittedAt ? 1 : -1);
-
-function reqTone(r){ return r.state==='APPROVED'?'success':r.state==='UNKNOWN'?'danger':'info'; }
-function reqLabel(r){ return r.state==='APPROVED'?'ERP 已审批':r.state==='UNKNOWN'?'提交结果待核对':'待 ERP 审批'; }
-
-function pRequisitions(){
-  const all = REQS();
-  const f = state.reqTab;
-  const rows = all.filter(r=>{
-    if (f==='waiting') return r.state==='SUBMITTED';
-    if (f==='approved') return r.state==='APPROVED';
-    if (f==='check') return r.state==='UNKNOWN';
-    return true;
-  });
-  return `
-  <div class="page-head">
-    <div><div class="eyebrow">S01 / REQUISITION</div><h1>请购管理</h1>
-      <p class="subtitle">查看本平台创建并提交的请购单，以及 ERP 侧的真实审批状态。</p></div>
-    <div class="row"><button class="button small" data-act="req-refresh">刷新 ERP 状态</button></div>
-  </div>
-  <div class="note" style="margin-bottom:16px"><strong>平台人工确认 ≠ ERP 领导审批</strong>
-    <p>这里列出的是运营人员确认数量后提交给 ERP 的采购申请。审批、下单、收货在 ERP 中由对应角色完成，本平台只做独立回读并如实显示状态。</p></div>
-  ${all.filter(r=>r.state==='UNKNOWN').length?`<div class="note bad" style="margin-bottom:16px"><strong>${all.filter(r=>r.state==='UNKNOWN').length} 张请购提交结果待核对</strong>
-    <p>提交请求返回结果不明确，ERP 侧可能已生成单据。请按原单号核对，不要重复提交。</p>
-    <div class="row"><button class="button small" data-act="req-tab" data-val="check">只看待核对</button></div></div>`:''}
-  <div class="row" style="margin-bottom:14px"><div class="seg" role="group" aria-label="请购状态筛选">
-    ${['all','等待审批','已审批','待核对'].map(()=>'').join('')}
-    <button data-act="req-tab" data-val="all" aria-pressed="${f==='all'}">全部<em>${all.length}</em></button>
-    <button data-act="req-tab" data-val="waiting" aria-pressed="${f==='waiting'}">待 ERP 审批<em>${all.filter(r=>r.state==='SUBMITTED').length}</em></button>
-    <button data-act="req-tab" data-val="approved" aria-pressed="${f==='approved'}">ERP 已审批<em>${all.filter(r=>r.state==='APPROVED').length}</em></button>
-    <button data-act="req-tab" data-val="check" aria-pressed="${f==='check'}">待核对<em>${all.filter(r=>r.state==='UNKNOWN').length}</em></button>
-  </div></div>
-  <section class="panel">
-    ${rows.length?`<div class="table-wrap"><table>
-      <caption class="sr-only">请购单列表</caption>
-      <thead><tr><th>ERP 单据号</th><th>商品 / SKU</th><th class="r">人工最终 / 平台建议</th><th>提交时间</th><th>确认人</th><th>ERP 状态</th><th></th></tr></thead>
-      <tbody>${rows.map(r=>`<tr>
-        <td class="mono">${esc(r.no)}<span class="prod-sub">最近回读 ${esc(r.verifiedAt)}</span></td>
-        <td><span class="prod">${esc(r.skuRef.name)}</span><span class="prod-sub"><span class="mono">${esc(r.skuRef.sku)}</span> · ${esc(r.skuRef.warehouse)}</span></td>
-        <td class="r num">${r.finalQty} / ${r.suggestQty} ${esc(r.skuRef.unit)}</td>
-        <td class="num">${esc(r.submittedAt)}</td>
-        <td>${esc(r.confirmBy)}</td>
-        <td>${badge(reqLabel(r),reqTone(r))}</td>
-        <td class="r"><a class="button small" href="#/requisitions/${encodeURIComponent(r.no)}">查看</a></td></tr>`).join('')}</tbody></table></div>`
-      :`<div class="empty"><h3>该状态下没有请购单</h3><p>换个状态查看，或从补货建议中确认数量后提交。</p></div>`}
-  </section>
-  <p class="micro" style="margin-top:12px">列表仅包含本平台创建的请购；ERP 中由其他系统创建的单据不在范围内。</p>`;
-}
-
-function pRequisition(no){
-  const r = REQS().find(x=>x.no===no);
-  if (!r) return `<div class="empty"><h3>没有这张请购单</h3><p><a href="#/requisitions">返回请购管理</a></p></div>`;
-  const stepState = r.state==='APPROVED' ? 3 : r.state==='UNKNOWN' ? 1 : 2;
-  const steps = [
-    ['平台人工确认','数量由运营人员确认',0],
-    ['提交至 ERP','生成采购申请并提交审批',1],
-    ['ERP 领导审批','由 ERP 侧角色决定，本平台只读回读',2],
-    ['下单与收货','不在本平台范围',3]
-  ];
-  return `
-  <a class="back" href="#/requisitions">← 返回请购管理</a>
-  <div class="page-head"><div>
-    <div class="eyebrow">REQUISITION / ${esc(r.no)}</div>
-    <h1>${esc(r.skuRef.name)}</h1>
-    <p class="subtitle"><span class="mono">${esc(r.skuRef.sku)}</span> · ${esc(r.skuRef.store)} / ${esc(r.skuRef.warehouse)} · 提交于 ${esc(r.submittedAt)}</p>
-  </div><div class="row">${badge(reqLabel(r),reqTone(r))}</div></div>
-
-  <div class="steps">${steps.map((s,i)=>{
-    const cls = i<stepState?'done':i===stepState?'now':'todo';
-    return `<div class="step ${cls}"><b>${s[0]}</b>${s[1]}</div>`;}).join('')}</div>
-
-  ${r.state==='UNKNOWN'?`<div class="note bad" style="margin-bottom:16px"><strong>提交结果未确认</strong>
-    <p>提交请求返回结果不明确，ERP 侧可能已生成单据。请使用原单号核对，不要新建第二张申请。核对次数 ${r.readbacks}。</p>
-    <div class="row"><button class="button small" data-act="req-check">使用原单核对</button></div></div>`:''}
-
-  <div class="split">
-    <section class="panel"><div class="panel-head"><h2>数量与依据</h2></div><div class="panel-body">
-      <div class="verdict" style="grid-template-columns:repeat(3,1fr)">
-        <div><small>平台建议数量</small><b>${r.suggestQty}<span>${esc(r.skuRef.unit)}</span></b></div>
-        <div class="accent"><small>人工最终数量</small><b>${r.finalQty}<span>${esc(r.skuRef.unit)}</span></b></div>
-        <div><small>调整</small><b>${r.finalQty-r.suggestQty>=0?'+':''}${r.finalQty-r.suggestQty}<span>${esc(r.skuRef.unit)}</span></b></div>
-      </div>
-      <dl class="kv" style="margin-top:14px">
-        <dt>调整原因</dt><dd>${r.reason?esc(r.reason):'原样确认，未调整'}</dd>
-        <dt>确认人</dt><dd>${esc(r.confirmBy)}（采购运营）</dd>
-        <dt>来源建议</dt><dd>${esc(SOURCES[r.skuRef.source])} · ${esc(r.skuRef.plan.firstShortage?'首次短缺 '+r.skuRef.plan.firstShortage:'—')}</dd>
+function railReq(s){
+  const r=s.req,tone=r.plat==='UNKNOWN'?'bad':r.erp==='APPROVED'?'ok':'info';
+  const label=r.plat==='UNKNOWN'?'提交待核对':r.erp==='APPROVED'?'ERP 已审批':'待 ERP 审批';
+  return `<section class="panel"><div class="panel-head"><h2>请购单</h2><span class="chip ${tone}">${label}</span></div>
+    <div class="panel-body">
+      <div class="qty-now"><span>最终数量</span><b>${r.finalQty} <span style="font-size:11px;color:var(--muted)">${esc(s.unit)}</span></b></div>
+      <dl class="meta-list">
+        <dt>单据号</dt><dd class="mono">${esc(r.no)}</dd>
+        <dt>平台状态</dt><dd>${r.plat==='UNKNOWN'?'已提交·未确认':'已提交'}</dd>
+        <dt>ERP 状态</dt><dd>${r.erp==='APPROVED'?'已审批':r.erp==='UNKNOWN'?'未知':'待审批'}</dd>
+        <dt>建议 / 最终</dt><dd>${r.sugQty} / ${r.finalQty}</dd>
       </dl>
-      <a class="button small" style="margin-top:14px" href="#/sku/${encodeURIComponent(r.skuRef.key)}">回到 SKU 详情查看依据</a>
-    </div></section>
+      ${r.plat==='UNKNOWN'?'<button class="btn" style="width:100%;margin-top:8px" data-act="recheck">原单核对</button>':''}
+      <a class="btn" style="width:100%;margin-top:8px;justify-content:center" href="#/requisitions/${encodeURIComponent(r.no)}">查看请购单</a>
+    </div></section>`;
+}
+function aiCard(s){
+  if(s.ai.status==='OK'){
+    return `<section class="panel"><div class="panel-head"><h2>AI 解读</h2><span class="chip info">本次分析</span></div>
+      <div class="panel-body" style="font-size:11.5px;line-height:1.6;color:#41505f">
+        <ul style="margin:0;padding-left:15px">${s.ai.bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
+        <div class="hint" style="margin-top:7px">${esc(s.ai.risk)}</div>
+        <div style="margin-top:6px;font-size:11px">${esc(s.ai.ask)}</div>
+        <div class="rail-note">Token ${s.ai.tokens} · ${esc(s.ai.cost)}</div>
+      </div></section>`;
+  }
+  return `<section class="panel"><div class="panel-head"><h2>AI 解读</h2><span class="chip">未生成</span></div>
+    <div class="panel-body"><button class="btn" style="width:100%" data-act="single">新建单品分析</button>
+    <p class="rail-note">新建分析会重新读取 ERP 事实，并可按需生成解读。</p></div></section>`;
+}
+
+/* ================= 请购管理 ================= */
+function reqs(){return SKUS.filter(s=>s.req).map(s=>Object.assign({k:s},s.req)).sort((a,b)=>a.at<b.at?1:-1);}
+function pageReqs(){
+  const all=reqs(),f=state.reqTab;
+  const rows=all.filter(r=>f==='all'||(f==='waiting'&&r.erp==='PENDING'&&r.plat!=='UNKNOWN')||(f==='approved'&&r.erp==='APPROVED')||(f==='check'&&r.plat==='UNKNOWN'));
+  const unk=all.filter(r=>r.plat==='UNKNOWN').length;
+  const cnt={pending:all.filter(r=>r.erp==='PENDING'&&r.plat!=='UNKNOWN').length,approved:all.filter(r=>r.erp==='APPROVED').length,check:unk};
+  const platLabel=r=>r.plat==='UNKNOWN'?'已提交 · 未确认':'已提交';
+  const erpLabel=r=>r.erp==='APPROVED'?'已审批':r.erp==='UNKNOWN'?'未知':'待审批';
+  const segs=[['待审批',cnt.pending,'#4a7fa8'],['已审批',cnt.approved,'#6f9a86'],['待核对',cnt.check,'#b4483d']].filter(x=>x[1]>0);
+  return `
+  <div class="page-head"><h1>请购管理</h1><button class="btn sm" data-act="refresh">刷新 ERP 状态</button></div>
+  ${unk?`<div class="alert-row"><span class="chip bad">${unk} 单待核对</span><span>提交结果未确认，ERP 可能已建单。</span><a class="btn sm" style="margin-left:auto" data-act="reqtab" data-v="check">查看</a></div>`:''}
+  <div class="row" style="margin-bottom:10px">
+    <div class="seg" role="group" aria-label="请购状态">
+      <button data-act="reqtab" data-v="all" aria-pressed="${f==='all'}">全部<em>${all.length}</em></button>
+      <button data-act="reqtab" data-v="waiting" aria-pressed="${f==='waiting'}">待审批<em>${cnt.pending}</em></button>
+      <button data-act="reqtab" data-v="approved" aria-pressed="${f==='approved'}">已审批<em>${cnt.approved}</em></button>
+      <button data-act="reqtab" data-v="check" aria-pressed="${f==='check'}">待核对<em>${cnt.check}</em></button>
+    </div>
+    <span class="muted" style="font-size:10.5px;margin-left:auto">仅含本平台提交的请购单</span>
+  </div>
+  <div class="cols" style="margin-bottom:10px;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)">
+    <section class="panel">
+      <div class="panel-head"><h2>状态分布</h2><span class="sub">${all.length} 单</span></div>
+      <div class="panel-body">
+        <div class="distbar" role="img" aria-label="待审批 ${cnt.pending}，已审批 ${cnt.approved}，待核对 ${cnt.check}">
+          ${segs.map(x=>`<i style="flex:${x[1]};background:${x[2]}"></i>`).join('')}
+        </div>
+        <div class="legend">${segs.map(x=>`<span><i class="dot" style="background:${x[2]}"></i>${x[0]} <b>${x[1]}</b></span>`).join('')}
+          <span style="margin-left:auto">进度：提交 → ERP 受理 → ERP 审批</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>最近回读</h2></div>
+      <div class="panel-body" style="padding-top:4px">
+        ${all.filter(r=>r.readback).sort((a,b)=>a.readback<b.readback?1:-1).slice(0,3).map(r=>`<div class="tl"><time>${esc(r.readback.slice(5,16))}</time><p>${esc(r.no)} ${r.erp==='APPROVED'?'已审批':'待审批'}</p></div>`).join('')||'<div class="muted" style="font-size:11px">暂无</div>'}
+      </div>
+    </section>
+  </div>
+  <section class="panel">
+    <div class="panel-head"><h2>请购单据</h2><span class="sub">${rows.length} 单</span></div>
+    ${rows.length?`<div class="tw"><table><caption class="sr-only">本平台提交的请购单</caption>
+      <thead><tr><th>单据号</th><th>商品 / SKU</th><th class="r">建议 → 最终</th><th>平台状态</th><th>ERP 状态</th><th title="提交 → ERP 受理 → ERP 审批">进度</th><th>回读</th><th></th></tr></thead>
+      <tbody>${rows.map(r=>`<tr>
+        <td class="mono">${esc(r.no)}<span class="prod-sub">${esc(r.at.slice(5,16))}</span></td>
+        <td><span class="prod">${esc(r.k.name)}</span><span class="prod-sub"><span class="mono">${esc(r.k.sku)}</span> · ${esc(r.k.wh)}</span></td>
+        <td class="r num">${r.sugQty} → <b>${r.finalQty}</b></td>
+        <td><span class="chip">${platLabel(r)}</span></td>
+        <td><span class="chip ${r.erp==='APPROVED'?'ok':r.erp==='UNKNOWN'?'bad':'info'}">${erpLabel(r)}</span></td>
+        <td><div class="prog" title="提交 → ERP 受理 → ERP 审批"><i class="on"></i><i class="${r.plat==='UNKNOWN'?'warn':'on'}"></i><i class="${r.erp==='APPROVED'?'on':''}"></i></div></td>
+        <td class="num muted" style="font-size:10.5px">${r.readback?esc(r.readback.slice(5)):'—'}</td>
+        <td class="r"><a class="btn sm" href="#/requisitions/${encodeURIComponent(r.no)}">${r.plat==='UNKNOWN'?'核对':'查看'}</a></td></tr>`).join('')}</tbody></table></div>`
+    :'<div class="empty"><h3>该状态下没有单据</h3></div>'}
+  </section>
+`;
+}
+function pageReq(no){
+  const r=reqs().find(x=>x.no===no);
+  if(!r)return '<div class="empty"><h3>没有该单据</h3><a class="btn" style="margin-top:8px" href="#/requisitions">返回请购管理</a></div>';
+  const done=r.plat==='UNKNOWN'?1:r.erp==='APPROVED'?3:2;
+  const steps=[['平台提交','数量确认并提交'],
+    ['ERP 受理',r.plat==='UNKNOWN'?'结果待核对':'生成采购申请'],
+    ['ERP 审批','由 ERP 角色决定'],
+    ['下单收货','不在本平台']];
+  const stepCls=i=>i<done?'done':(i===done&&done<3?(r.plat==='UNKNOWN'?'wait':'now'):'todo');
+  const plat=r.plat==='UNKNOWN'?'已提交 · 未确认':'已提交';
+  return `
+  <a class="back" href="#/requisitions">← 请购管理</a>
+  <div class="detail-head">
+    <div><h1>${esc(r.k.name)}</h1>
+      <div class="sku-meta"><span class="mono">${esc(r.no)}</span><span>·</span><span class="mono">${esc(r.k.sku)}</span>
+        <span>·</span>${esc(r.k.store)} / ${esc(r.k.wh)}<span>·</span><span class="muted">提交 ${esc(r.at)}</span></div></div>
+    <div class="row"><span class="chip">${plat}</span><span class="chip ${r.erp==='APPROVED'?'ok':r.erp==='UNKNOWN'?'bad':'info'}">ERP ${r.erp==='APPROVED'?'已审批':r.erp==='UNKNOWN'?'未知':'待审批'}</span></div>
+  </div>
+  <div class="steps">${steps.map((s,i)=>`<div class="step ${stepCls(i)}"><b>${s[0]}</b>${s[1]}</div>`).join('')}</div>
+  ${r.plat==='UNKNOWN'?'<div class="alert-row"><span class="chip bad">结果未确认</span><span>提交返回不明确，ERP 可能已建单，请按原单核对，勿重复提交。</span><button class="btn sm" style="margin-left:auto" data-act="recheck">原单核对</button></div>':''}
+  <div class="detail">
+    <section class="panel"><div class="panel-head"><h2>数量与依据</h2></div>
+      <div class="panel-body">
+        <div class="verdict" style="grid-template-columns:repeat(3,1fr);margin-bottom:0">
+          <div><small>建议数量</small><b>${r.sugQty}${r.sugQty?`<span>${esc(r.k.unit)}</span>`:''}</b></div>
+          <div class="accent"><small>最终数量</small><b>${r.finalQty}<span>${esc(r.k.unit)}</span></b></div>
+          <div><small>调整</small><b>${r.finalQty-r.sugQty>0?'+':''}${r.finalQty-r.sugQty}</b></div>
+        </div>
+        <dl class="kv" style="margin-top:10px">
+          <div><dt>调整原因</dt><dd>${r.reason?esc(r.reason):'原样确认'}</dd></div>
+          <div><dt>确认人</dt><dd>${esc(r.by)}</dd></div>
+          <div><dt>建议来源</dt><dd>${SOURCE[r.k.source]}</dd></div>
+          <div><dt>首次短缺</dt><dd>${r.k.plan.firstShortage?r.k.plan.firstShortage.slice(5):'—'}</dd></div>
+        </dl>
+        <a class="btn sm" style="margin-top:10px" href="#/sku/${encodeURIComponent(r.k.key)}">查看 SKU 依据</a>
+      </div></section>
     <div>
-      <section class="panel"><div class="panel-head"><h2>ERP 单据</h2></div><div class="panel-body">
-        <dl class="kv">
+      <section class="panel"><div class="panel-head"><h2>单据</h2></div>
+        <div class="panel-body"><dl class="meta-list">
           <dt>单据号</dt><dd class="mono">${esc(r.no)}</dd>
-          <dt>ERP 状态</dt><dd>${badge(esc(r.erpStatus), r.state==='APPROVED'?'success':'warning')}</dd>
-          <dt>最近独立回读</dt><dd>${esc(r.verifiedAt)} · 共 ${r.readbacks} 次</dd>
+          <dt>平台状态</dt><dd>${plat}</dd>
+          <dt>ERP 状态</dt><dd>${r.erp==='APPROVED'?'已审批':r.erp==='UNKNOWN'?'未知':'待审批'}</dd>
+          <dt>独立回读</dt><dd>${r.readback?esc(r.readback.slice(5)):'未确认'} · ${r.reads} 次</dd>
           ${r.approver?`<dt>审批角色</dt><dd>${esc(r.approver)}</dd>`:''}
         </dl>
-        ${r.state!=='UNKNOWN'?`<button class="button small" style="width:100%;margin-top:12px" data-act="req-refresh-one">重新回读 ERP 状态</button>`:''}
-        <p class="micro" style="margin-top:10px">状态来自提交后的独立回读，不代表平台已执行审批。</p>
+        ${r.plat!=='UNKNOWN'?'<button class="btn sm" style="width:100%;margin-top:8px" data-act="refresh">重新回读</button>':''}
+        <div class="rail-note">状态来自提交后的独立回读，平台不执行审批。</div>
       </div></section>
-      <section class="panel"><div class="panel-head"><h2>操作记录</h2></div><div class="panel-body" style="padding-top:4px">
-        <div class="timeline">
-          <div class="tl"><time>${esc(r.submittedAt.slice(11))}</time><p>${esc(r.confirmBy)} 确认数量 ${r.finalQty} ${esc(r.skuRef.unit)} 并提交。</p></div>
-          ${r.state!=='UNKNOWN'?`<div class="tl"><time>${esc(r.submittedAt.slice(11))}</time><p>已提交 ERP，进入审批流程。</p></div>`:''}
-          ${r.state==='APPROVED'?`<div class="tl"><time>${esc(r.verifiedAt.slice(11))}</time><p>回读确认 ERP 状态为已审批。</p></div>`:''}
-          ${r.state==='UNKNOWN'?`<div class="tl"><time>09:41</time><p>提交结果未确认，等待原单核对。</p></div>`:''}
-        </div>
-      </div></section>
+      <section class="panel"><div class="panel-head"><h2>记录</h2></div>
+        <div class="panel-body" style="padding-top:4px">
+          <div class="tl"><time>${esc(r.at.slice(11))}</time><p>${esc(r.by)} 确认 ${r.finalQty} ${esc(r.k.unit)} 并提交</p></div>
+          ${r.plat!=='UNKNOWN'?`<div class="tl"><time>${esc(r.at.slice(11))}</time><p>已提交 ERP，进入审批</p></div>`:''}
+          ${r.erp==='APPROVED'?`<div class="tl"><time>${esc(r.readback.slice(11))}</time><p>回读确认为已审批</p></div>`:''}
+          ${r.plat==='UNKNOWN'?`<div class="tl"><time>${esc(r.at.slice(11))}</time><p>提交结果未确认，待原单核对</p></div>`:''}
+        </div></section>
     </div>
   </div>`;
 }
 
-/* =====================================================================
-   9. 渲染与事件
-   ===================================================================== */
-const PAGES = { workbench:pWorkbench, suggestions:pSuggestions, requisitions:pRequisitions };
-
+/* ================= 渲染 ================= */
 function render(){
-  const r = state.route;
-  sidebar(); crumb();
-  const main = document.getElementById('main');
-  if (r.page==='sku') main.innerHTML = pSku(r.id);
-  else if (r.page==='requisitions' && r.id) main.innerHTML = pRequisition(r.id);
-  else main.innerHTML = (PAGES[r.page]||pWorkbench)();
-  if (r.page==='suggestions'){ refreshRows(); bindFilters(); restoreListScroll(); }
-  if (r.page==='sku') bindDetail();
+  const r=state.route;
+  sidebar();crumb();
+  const main=document.getElementById('main');
+  if(r.page==='sku')main.innerHTML=pageDetail(r.id);
+  else if(r.page==='requisitions'&&r.id)main.innerHTML=pageReq(r.id);
+  else if(r.page==='suggestions')main.innerHTML=pageList();
+  else if(r.page==='requisitions')main.innerHTML=pageReqs();
+  else main.innerHTML=pageWorkbench();
+  if(r.page==='suggestions'){paintRows();bindFilters();restoreScroll();}
+  if(r.page==='sku')bindDetail();
 }
-
 function bindFilters(){
-  const q = document.getElementById('f-q');
-  if (!q) return;
-  q.addEventListener('input', ()=>{
-    state.filters.q = q.value; persistFilters(); refreshRows();
-  });
-  ['store','warehouse','source'].forEach(k=>{
-    const el = document.getElementById('f-'+k);
-    el.addEventListener('change', ()=>{ state.filters[k]=el.value; persistFilters(); refreshRows(); });
+  const q=document.getElementById('f-q');if(!q)return;
+  q.addEventListener('input',()=>{state.filters.q=q.value;saveFilters();paintRows();});
+  ['store','wh','source'].forEach(k=>{
+    const el=document.getElementById('f-'+k);
+    if(el)el.addEventListener('change',()=>{state.filters[k]=el.value;saveFilters();paintRows();});
   });
 }
-function persistFilters(){
-  const f = state.filters;
-  sessionStorage.setItem('ux3.filters', JSON.stringify({q:f.q,store:f.store,warehouse:f.warehouse,source:f.source,stage:f.stage}));
-  const tag = document.querySelector('.seg');
-  if (tag) [...tag.querySelectorAll('button')].forEach(b=>b.setAttribute('aria-pressed', String((b.dataset.val||'')===f.stage)));
-}
-function restoreListScroll(){
-  if (state.listScroll>0){ window.scrollTo(0,state.listScroll); state.listScroll=0; }
-}
-
 function bindDetail(){
-  const input = document.getElementById('qty-input');
-  if (!input) return;
-  const s = byKey(state.route.id);
-  input.addEventListener('input', ()=>{
-    state.qty[s.key] = input.value;
-    refreshRail(s);
-  });
-  const reason = document.getElementById('reason-input');
-  if (reason) reason.addEventListener('input', ()=>{ state.reason[s.key]=reason.value; refreshRail(s); });
-  const ack = document.getElementById('ack');
-  if (ack) ack.addEventListener('change', ()=>{ state.ack[s.key]=ack.checked; refreshRail(s); });
+  const s=byKey(state.route.id);if(!s)return;
+  const q=document.getElementById('qty');
+  if(q)q.addEventListener('input',()=>{state.qty[s.key]=q.value;refreshRail(s);});
+  const r=document.getElementById('reason');
+  if(r)r.addEventListener('input',()=>{state.reason[s.key]=r.value;refreshRail(s);});
+  const a=document.getElementById('ack');
+  if(a)a.addEventListener('change',()=>{state.ack[s.key]=a.checked;refreshRail(s);});
 }
 function refreshRail(s){
-  const qty = state.qty[s.key];
-  const box = document.getElementById('rail-check');
-  if (box) box.innerHTML = railCheck(s,qty);
-  const wrap = document.getElementById('reason-wrap');
-  if (wrap) wrap.hidden = String(qty)===String(s.plan.suggest);
-  const btn = document.getElementById('submit-btn');
-  if (btn) btn.disabled = !!validate(s,qty) || !state.ack[s.key];
+  const q=state.qty[s.key];
+  const c=document.getElementById('rail-check');if(c)c.innerHTML=railCheck(s,q);
+  const w=document.getElementById('reason-wrap');if(w)w.hidden=String(q)===String(s.plan.suggest);
+  const b=document.getElementById('submit');if(b)b.disabled=!railValid(s,q);
 }
-
-function toast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.hidden = false;
-  clearTimeout(toast._t); toast._t = setTimeout(()=>{ t.hidden = true; }, 4200);
-}
-function dialog(title, body, foot){
-  const d = document.getElementById('dialog');
-  document.getElementById('dialog-inner').innerHTML =
-    `<div class="dlg-head"><h2>${esc(title)}</h2><button class="close" data-act="dlg-close" aria-label="关闭">×</button></div>
+function restoreScroll(){if(state.listScroll>0){window.scrollTo(0,state.listScroll);state.listScroll=0;}}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toast._);toast._=setTimeout(()=>t.hidden=true,3800);}
+function dialog(title,body,foot){
+  document.getElementById('dialog-inner').innerHTML=
+    `<div class="dlg-head"><h2>${esc(title)}</h2><button class="close" data-act="x" aria-label="关闭">×</button></div>
      <div class="dlg-body">${body}</div>${foot?`<div class="dlg-foot">${foot}</div>`:''}`;
-  if (!d.open) d.showModal();
+  const d=document.getElementById('dialog');if(!d.open)d.showModal();
 }
-function closeDialog(){ const d=document.getElementById('dialog'); if (d.open) d.close(); }
+function dlgClose(){const d=document.getElementById('dialog');if(d.open)d.close();}
 
-document.addEventListener('click', function(ev){
-  const el = ev.target.closest('[data-act]');
-  if (!el) return;
-  const act = el.dataset.act;
-  const s = state.route.page==='sku' ? byKey(state.route.id) : null;
-
-  switch(act){
-    case 'stage': {
-      state.filters.stage = el.dataset.group; persistFilters();
-      if (state.route.page!=='suggestions') go('/suggestions'); else render();
-      break;
-    }
-    case 'go-req': go('/requisitions'); break;
-    case 'open-list-all': state.filters = {q:'',store:'',warehouse:'',source:'',stage:''}; persistFilters(); break;
-    case 'seg': {
-      state.filters.stage = el.dataset.val||'';
-      persistFilters();
-      [...el.parentElement.querySelectorAll('button')].forEach(b=>b.setAttribute('aria-pressed',String(b===el)));
-      refreshRows();
-      break;
-    }
-    case 'clear': {
-      state.filters = {q:'',store:'',warehouse:'',source:'',stage:''}; persistFilters(); render(); break;
-    }
-    case 'back-list': {
-      state.listScroll = window.scrollY; break;
-    }
-    case 'tab': {
-      state.tab = el.dataset.tab;
-      const main = document.getElementById('main');
-      const scroll = window.scrollY;
-      main.innerHTML = pSku(s.key); bindDetail(); window.scrollTo(0,scroll);
-      break;
-    }
-    case 'qty-step': {
-      const step = Number(el.dataset.step);
-      const cur = Number(state.qty[s.key]||s.plan.suggest);
-      let next = cur + step;
-      if (next < s.constraints.moq) next = s.constraints.moq;
-      state.qty[s.key] = next;
-      const input = document.getElementById('qty-input');
-      if (input) input.value = next;
-      refreshRail(s);
-      break;
-    }
-    case 'confirm': {
-      ev.preventDefault();
-      const qty = Number(state.qty[s.key]);
-      if (validate(s,qty) || !state.ack[s.key]) return;
-      s.requisition = {
-        no:'RQ-2026-0014', state:'SUBMITTED', erpStatus:'待审批',
-        finalQty:qty, suggestQty:s.plan.suggest, reason:(state.reason[s.key]||'').trim(),
-        submittedAt:'2026-11-14 09:58', confirmBy:'林予', verifiedAt:'2026-11-14 09:58', readbacks:1
-      };
-      render();
-      toast(`已提交 ERP 请购 ${s.requisition.no} · 等待 ERP 领导审批`);
-      break;
-    }
-    case 'ai-run': {
-      dialog('按需生成 AI 解读',
-        `<p>将对当前 SKU 已保存的事实生成一次解释，不重新读取 ERP、不计算库存与金额。</p>
-         <dl class="kv"><dt>预计调用</dt><dd>1 次模型调用 · 预计 1.5k Token</dd><dt>失败影响</dt><dd>规则结果与建议数量保留，可稍后重试</dd></dl>
-         <p class="micro" style="margin-top:10px">本原型不发起真实调用；正式页面需后端显式开启模型能力。</p>`,
-        `<button class="button" data-act="dlg-close">取消</button><button class="button primary" data-act="dlg-close">确认生成（演示）</button>`);
-      break;
-    }
-    case 'rerun': case 'rerun-single': {
-      dialog('重新检查',
-        `<p>${act==='rerun'?'将重新读取全部授权店仓对象的库存、销量与采购条件。':'将重新读取该 SKU 的最新事实并重算建议。'}</p>
-         <p class="micro">只读操作：不调用模型、不创建采购、不修改 ERP。原报告按快照保留。</p>`,
-        `<button class="button" data-act="dlg-close">取消</button><button class="button primary" data-act="dlg-close">开始检查（演示）</button>`);
-      break;
-    }
-    case 'batch-dialog': {
-      dialog('检查批次历史',
-        `<p class="micro">本次检查结果按批次保留；切换后列表显示该批次的结果。</p>
-         <div class="table-wrap"><table><thead><tr><th>检查时间</th><th class="r">对象数</th><th>状态</th><th></th></tr></thead><tbody>
-         ${BATCH.history.map(b=>`<tr><td class="num">${esc(b.at)}</td><td class="r num">${b.objects}</td>
-           <td>${b.complete?badge('完整','success'):badge('部分完成','warning')}</td>
-           <td class="r">${b.id===state.batchId?badge('当前','plain'):`<button class="button small" data-act="dlg-close">切换</button>`}</td></tr>`).join('')}
-         </tbody></table></div>`,
-        `<button class="button" data-act="dlg-close">关闭</button>`);
-      break;
-    }
-    case 'history-open': state.tab='history'; {
-      const main = document.getElementById('main'); main.innerHTML = pSku(s.key); bindDetail(); break;
-    }
-    case 'history-detail': {
-      dialog('历史分析快照',
-        `<p>${esc(el.dataset.at)} 的分析结果按当时快照保留，仅可查看，不能直接复用为当前结论。</p>
-         <p class="micro">如需按最新事实补货，请重新分析生成新版本。</p>`,
-        `<button class="button primary" data-act="dlg-close">知道了</button>`);
-      break;
-    }
-    case 'req-tab': state.reqTab = el.dataset.val; render(); break;
-    case 'req-refresh': case 'req-refresh-one': {
-      el.disabled = true; el.textContent = '正在回读…';
-      setTimeout(()=>{ render(); toast('已重新回读 ERP 状态（演示，未连接真实 ERP）'); }, 700);
-      break;
-    }
-    case 'req-check': {
-      dialog('使用原单核对',
-        `<p>不会创建第二张申请。系统将按原业务号查询 ERP 侧是否已生成单据，并核对其状态。</p>
-         <dl class="kv"><dt>核对对象</dt><dd class="mono">RQ-2026-0012</dd><dt>已核对次数</dt><dd>1 次</dd><dt>若仍无法确认</dt><dd>保持「待核对」并转人工处理，不重复提交</dd></dl>`,
-        `<button class="button" data-act="dlg-close">取消</button><button class="button primary" data-act="dlg-close">开始核对（演示）</button>`);
-      break;
-    }
-    case 'evidence': {
-      const k = el.dataset.kind;
-      const map = {
-        inv: ['可用库存', [['可用数量', num(s.plan.available)+' '+s.unit], ['仓库', s.warehouse], ['仓库匹配', '唯一记录，未发现分桶重复'], ['读取时点', '2026-11-14 08:01']]],
-        sales: ['已核对销量', [['统计窗口', s.plan.window], ['完整业务日', (s.plan.salesDays||0)+' 天'], ['销量合计', (s.plan.totalSales||0)+' 件'], ['日均', (s.plan.avgDaily||'—')+' 件']]],
-        po: ['正式采购', [['查询范围', '租户 / SKU / 仓库精确匹配'], ['单据数', s.purchases.length+' 张'], ['可售日期', 'ERP 未提供已承诺可售日'], ['读取时点', '2026-11-14 08:02']]],
-        quote: ['供应商报价', [['供应商', s.constraints.supplier||'未确认'], ['报价号', s.constraints.quote||'未确认'], ['单价', money(s.constraints.price,s.constraints.currency)], ['有效期', s.constraints.quoteValid||'未知'], ['MOQ / 倍数', `${num(s.constraints.moq)} / ${num(s.constraints.multiple)}`]]]
-      };
-      const item = map[k];
-      dialog('依据：' + item[0],
-        `<dl class="kv">${item[1].map(r=>`<dt>${esc(r[0])}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>
-         <p class="micro" style="margin-top:12px">仅展示本次判定实际使用的字段值，可追溯到本次快照；不提供 ERP 原始响应。</p>`,
-        `<button class="button primary" data-act="dlg-close">关闭</button>`);
-      break;
-    }
-    case 'dlg-close': closeDialog(); break;
+/* ================= 事件 ================= */
+document.addEventListener('click',ev=>{
+  const el=ev.target.closest('[data-act]');if(!el)return;
+  const act=el.dataset.act,s=state.route.page==='sku'?byKey(state.route.id):null;
+  if(act==='back'){state.listScroll=window.scrollY;return;}
+  if(act==='stage'){
+    state.filters.stage=el.dataset.group;saveFilters();
+    if(state.route.page!=='suggestions')go('/suggestions');else render();return;
   }
+  if(act==='seg'){
+    state.filters.stage=el.dataset.val||'';saveFilters();
+    [...el.parentElement.querySelectorAll('button')].forEach(b=>b.setAttribute('aria-pressed',String(b===el)));
+    paintRows();return;
+  }
+  if(act==='clear'){state.filters={q:'',store:'',wh:'',source:'',stage:''};saveFilters();render();return;}
+  if(act==='tab'){
+    const t=el.dataset.tab;state.tab=t;
+    history.replaceState(null,'','#/sku/'+encodeURIComponent(s.key)+(t==='conditions'?'':'/'+t));
+    const y=window.scrollY;render();window.scrollTo(0,y);return;
+  }
+  if(act==='step'){
+    const inc=Number(el.dataset.v),cur=Number(state.qty[s.key]||s.plan.suggest);
+    let n=cur+inc;if(n<s.constraints.moq)n=s.constraints.moq;
+    state.qty[s.key]=n;
+    const q=document.getElementById('qty');if(q)q.value=n;
+    refreshRail(s);return;
+  }
+  if(act==='confirm'){
+    ev.preventDefault();
+    const q=Number(state.qty[s.key]);
+    if(railError(s,q)||!state.ack[s.key])return;
+    const rec={no:'RQ-2026-0014',plat:'SUBMITTED',erp:'PENDING',finalQty:q,sugQty:s.plan.suggest,
+      reason:(state.reason[s.key]||'').trim(),at:'2026-11-14 10:20',by:'林予',readback:'2026-11-14 10:20',reads:1,step:1};
+    SKUS.find(x=>x.key===s.key).req=rec;   /* 写入源数据，派生视图下次渲染仍可见 */
+    state.ack[s.key]=false;state.reason[s.key]='';
+    render();toast(`已提交 ${rec.no}，等待 ERP 审批`);return;
+  }
+  if(act==='batch'){
+    dialog('检查批次',`<div class="tw"><table><thead><tr><th>时间</th><th class="r">对象</th><th>状态</th><th></th></tr></thead><tbody>
+      ${BATCHES.map(b=>`<tr><td class="num">${b.at}</td><td class="r num">${b.objects}</td>
+        <td>${b.complete?'<span class="chip ok">完整</span>':'<span class="chip warn">部分完成</span>'}</td>
+        <td class="r">${b.id===state.batchId?'<span class="chip line">当前</span>':`<button class="btn sm" data-act="switch" data-id="${b.id}">切换</button>`}</td></tr>`).join('')}
+      </tbody></table></div>`,'<button class="btn" data-act="x">关闭</button>');return;
+  }
+  if(act==='switch'){state.batchId=el.dataset.id;dlgClose();render();toast(`已切换到 ${batch().at} 批次`);return;}
+  if(act==='rerun'){dialog('重新检查',`<p>重新读取该范围的库存、销量与采购条件并重算建议。只读，不创建采购。</p>`,
+    '<button class="btn" data-act="x">取消</button><button class="btn primary" data-act="x">开始</button>');return;}
+  if(act==='single'){dialog('新建单品分析',`<p>将重新读取该 SKU 的 ERP 事实，并按需生成 AI 解读。查看详情本身不读取 ERP。</p>`,
+    '<button class="btn" data-act="x">取消</button><button class="btn primary" data-act="x">开始</button>');return;}
+  if(act==='evidence'){
+    dialog('本次判定使用的字段',`<dl class="meta-list">
+      <dt>可用库存</dt><dd>${dash(s.plan.available)} ${esc(s.unit)}</dd>
+      <dt>仓库</dt><dd>${esc(s.wh)}</dd>
+      <dt>销量窗口</dt><dd>${s.plan.window||'—'}</dd>
+      <dt>完整业务日</dt><dd>${s.plan.salesDays||0}</dd>
+      <dt>报价</dt><dd>${esc(s.constraints.quote||'—')}</dd>
+      <dt>读取时点</dt><dd>${batch().at}</dd></dl>`,'<button class="btn primary" data-act="x">关闭</button>');return;}
+  if(act==='hist'){dialog('历史分析','<p>历史版本按当时快照保留，不能直接复用为当前结论。</p>','<button class="btn primary" data-act="x">知道了</button>');return;}
+  if(act==='reqtab'){state.reqTab=el.dataset.v;render();return;}
+  if(act==='refresh'){el.disabled=true;el.textContent='回读中…';setTimeout(()=>{render();toast('已回读 ERP 状态');},600);return;}
+  if(act==='recheck'){dialog('使用原单核对',`<p>按原业务号查询 ERP 是否已建单，不创建第二张申请。</p>
+    <dl class="meta-list"><dt>核对对象</dt><dd class="mono">RQ-2026-0012</dd><dt>已核对</dt><dd>1 次</dd></dl>`,
+    '<button class="btn" data-act="x">取消</button><button class="btn primary" data-act="x">开始核对</button>');return;}
+  if(act==='x'){dlgClose();return;}
 });
-
-document.getElementById('dialog').addEventListener('click', e=>{ if (e.target.id==='dialog') closeDialog(); });
-window.addEventListener('hashchange', navigatePath);
-
-/* 初始进入 */
-SKUS.forEach(s=>{ state.qty[s.key]=s.plan.suggest||0; });
-if (!location.hash) location.replace('#/workbench');
-navigatePath();
+document.getElementById('dialog').addEventListener('click',e=>{if(e.target.id==='dialog')dlgClose();});
+/* 诊断钩子：校验每个批次的建议数量是否等于 目标-可用 经 MOQ/整箱取整后的值 */
+window.__ux3check=()=>{
+  const bad=[];
+  BATCHES.forEach(b=>{
+    SKUS.forEach(s0=>{
+      if(s0.source!=='RULE')return;
+      const o=b.over[s0.key]||{};if(o.missing)return;
+      const s=Object.assign({},s0,{plan:Object.assign({},s0.plan,o)});
+      if(!s.plan.suggest)return;
+      const c=s.constraints,gap=Math.max(0,(s.plan.target||0)-s.plan.available);
+      const qty=Math.max(Math.ceil(gap/(c.mult||1))*(c.mult||1),c.moq||0);
+      if(qty!==s.plan.suggest)bad.push(b.id+'/'+s.sku+' expect '+qty+' got '+s.plan.suggest);
+    });
+  });
+  return bad;
+};
+window.addEventListener('hashchange',onRoute);
+if(!location.hash)location.replace('#/workbench');
+onRoute();
 })();
 </script>
 </body>
