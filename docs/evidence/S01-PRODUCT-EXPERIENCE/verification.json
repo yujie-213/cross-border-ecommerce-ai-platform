@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-14",
+  "status": "REVIEW",
+  "implementationCommit": "6679d4eaceda30d57ae7fd26fe33ec1029fbc122",
+  "branch": "codex/s01-product-demand-rebuild",
+  "mainMerged": false,
+  "entry": "http://localhost:5175/#/home",
+  "tests": [
+    {
+      "kind": "REAL_MYSQL_SYNTHETIC_ERP_MODEL",
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider tests/unit/data/test_product_demand.py tests/unit/data/test_registered_product.py tests/unit/data/test_experience_import.py tests/unit/models/test_experience_authorization.py tests/integration/s01/test_registered_product_workflow.py tests/integration/s01/test_experience_safety.py tests/integration/s01/test_requisition.py --basetemp=.tmp/experience-fixed --junitxml=.tmp/experience-fixed.xml",
+      "environment": {
+        "COMMERCE_RUN_MYSQL_TESTS": "1",
+        "COMMERCE_MODEL_PROVIDER": "mock",
+        "COMMERCE_MODEL_NETWORK_ENABLED": "false"
+      },
+      "result": "PASS",
+      "exitCode": 0,
+      "tests": 65,
+      "artifact": "backend-tests.xml",
+      "afterImplementationCommit": true
+    },
+    {
+      "kind": "FRONTEND_UNIT",
+      "command": "npm test -- --reporter=junit --outputFile=../.tmp/experience-frontend.xml",
+      "cwd": "frontend",
+      "result": "PASS",
+      "exitCode": 0,
+      "tests": 60,
+      "artifact": "frontend-tests.xml",
+      "afterImplementationCommit": true
+    },
+    {
+      "kind": "FRONTEND_BUILD",
+      "command": "npm run build",
+      "cwd": "frontend",
+      "result": "PASS",
+      "exitCode": 0,
+      "includes": "vue-tsc --noEmit; vite build",
+      "afterImplementationCommit": true
+    },
+    {
+      "kind": "COMPATIBILITY",
+      "tests": 39,
+      "artifact": "compat-before-final.xml",
+      "result": "PASS",
+      "afterImplementationCommit": false,
+      "limitation": "Before final summary ratio and pending priority fixes; final 65 cases include targeted regressions."
+    }
+  ],
+  "liveERP": {
+    "artifact": "live-verification.json",
+    "batchId": "1c7487f5868040099b2d2a32b309e867",
+    "httpRequests": 42,
+    "allHTTP200": true,
+    "skuCount": 10,
+    "scopeCount": 11,
+    "modelCalls": 0,
+    "businessWrites": 0,
+    "reportFingerprintAndPublicationVerified": true
+  },
+  "dataset": {
+    "artifact": "dataset.json",
+    "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+    "newProducts": 8,
+    "newScopes": 9,
+    "paidAndShippedSales": 22,
+    "verifiedMovements": 47,
+    "existingProductsPreserved": true,
+    "purchaseWrites": 0,
+    "erpRecommendations": "706/707/708 manually created controlled scenarios; not ERP algorithm validation"
+  },
+  "models": {
+    "artifact": "models.json",
+    "actualCalls": 3,
+    "totalTokens": 7225,
+    "actualCost": "UNKNOWN",
+    "reservedRiskUSD": "0.15",
+    "oldBudgetPreserved": true,
+    "model": "deepseek-flash"
+  },
+  "browser": {
+    "type": "MANUAL_REAL_BROWSER",
+    "url": "http://localhost:5175",
+    "path": "home -> workbench -> 10 products -> warehouse detail -> AI -> ERP comparison -> procurement conditions",
+    "result": "PASS",
+    "scenarioSnapshots": "browser-scenarios.json",
+    "screenshots": [
+      "ai-erp.jpg",
+      "ai-surge.jpg",
+      "dual-warehouse.jpg",
+      "existing-purchases.jpg",
+      "home.jpg",
+      "products.jpg",
+      "purchase-unavailable.jpg",
+      "workbench.jpg"
+    ],
+    "notes": [
+      "Actual current viewport screenshots; no image fabrication.",
+      "Final home screenshot refreshed after all 3 AI tasks.",
+      "Real existing cable pending/formal purchases block duplicate action; no submit clicked.",
+      "UNKNOWN/write-loss/concurrency cases are isolated ERP fixtures with real MySQL, not newly sent ERP purchases."
+    ]
+  },
+  "historicalFailuresPreserved": [
+    "initial-ai-failure.xml: missing unknown phrase fixed, ai-fix-recheck.xml and final65 PASS",
+    "Old frozen batch 55872f187ae14d079e8ac5b16eac3759 fails summary floating point roundtrip validation; retained unchanged; final batch fingerprint verified.",
+    "Prior full860:859PASS/1 queue FAIL; original foundation40 recheckPASS remains separate."
+  ],
+  "guide": "docs/reports/S01_产品体验版使用与评审_20261114.md",
+  "repository": "Publication receipt recorded only after actual push and independent remote readback.",
+  "documentation": {
+    "commands": [
+      "python docs/planning/build_docs.py",
+      "python docs/planning/check_plan.py"
+    ],
+    "result": "PASS",
+    "checks": 18,
+    "note": "Initial tracked-whitelist failure resolved by registering exact authorized new files; unknown OpenAPI excluded."
+  },
+  "serviceReadiness": {
+    "frontend5175": 200,
+    "api8768": 200,
+    "continuouslyRunning": true
+  }
+}

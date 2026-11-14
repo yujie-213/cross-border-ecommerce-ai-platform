@@ -1,3 +1,5 @@
+产品体验版最终评审（2026-11-14）：D-S01-PRODUCT-01 REVIEW，固定实现6679d4e；平台简洁首页/补货独立工作区，真实自有10SKU/11店仓（新增8款/9关系）、22已支付发货销售及47库存流水核验；批次1c7487f5为42HTTP全200、零模型零业务写。真实AI3次7225Token，费用UNKNOWN/$0.15预约保留。固定后65后端/60前端/类型构建PASS，真实浏览器逐场景完成；既有待审/正式采购防重复，UNKNOWN跨报告以隔离ERP+真实MySQL验证。未新增采购写/未合main，未知OpenAPI保留。指南reports/S01_产品体验版使用与评审_20261114.md，证据evidence/S01-PRODUCT-EXPERIENCE；普通推送回执待实际独立回读，不预写SHA。
+
 本轮自有商品产品交付（2026-11-14）：D-S01-PRODUCT-01 REVIEW，codex/s01-product-demand-rebuild；实现ce50e51/617fee3，UI3219ce0及显式AI测试679a846。真实登记2SKU/2店仓对象（同1店1仓），最终批次40b8f761为15HTTP全200/11.76秒采集；线缆45参考/48候选、杯81库存/参考0，ERP均未提供建议。无AI单品559bcb30为13HTTP/零模型零ERP写；Edge1440/1024、会话重启/URL恢复、整箱约束与人工确认门通过。全量860项859PASS/1基础队列瞬时FAIL，随后该组原样40PASS，未声称一次全绿；新增产品25PASS/前端53及类型构建PASS。真实多仓/新增付费AI/ERP采购写未验收，四企业门BLOCKED。报告reports/S01_自有商品补货决策产品交付_20261114.md；最终普通推送回读另记，保持REVIEW、不合main。
 
 S01 前端 V3 合并 main（2026-11-14）：分支 workbuddy/s01-frontend-v3 经阶段审查通过，以快进方式并入 main（eceef8c..479c7d1，4 个提交）。内容为四页采购运营前端（工作台/补货建议/SKU 详情/请购管理）接真实 V2 API、AI 前置分区、P0 请购提交安全与工作台数据隔离；未改后端计算/DB/ERP 适配/采购规则。合并前修正了脚本编辑造成的 CRLF 污染（22 个文件还原为 LF），真实变更由 13709/11068 行收敛为 2855/214 行。验证：typecheck、build、51 项单测、7 项浏览器定向用例（v3 + v3-safety）全部通过。保留缺口：请购列表接口未实现（台账逐条回读、最近 20 条上限）、977 对象下批次统计 3–6 秒、旧真实流程 spec 待按新 UI 重新基线。
@@ -9304,7 +9306,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-V2-01",
     "D-S01-LOCAL-01"
   ],
-  "entryCondition": "2026-11-14负责人完整产品长任务授权；自主技术决策/只读ERP/少量模型/正常推送，最终REVIEW不合main",
+  "entryCondition": "2026-11-14负责人产品体验版连续授权；同分支、单人、自主工程决策、仅自有登记范围；允许受控教学数据创建及少量当前配置模型；不提交请购/审批/收货、不合main",
   "ownerRole": "技术负责人/主集成人",
   "assignee": "Codex（单人）",
   "allowedPaths": [
@@ -9318,7 +9320,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "deliverables": [
     "独立需求预测与参考库存补充、采购候选分离",
     "商品聚合/全店仓详情/ERP比较与业务解读",
-    "自有登记清单全量只读/两SKU/隔离代表场景/浏览器验证与报告"
+    "自有登记清单全量只读/两SKU/隔离代表场景/浏览器验证与报告",
+    "简洁平台首页与独立补货工作区；真实10商品/11店仓；新增8款完整教学商品及关联数据",
+    "跨报告请购保护及待审/正式采购核对；真实AI3次7225Token；使用指南与真实截图"
   ],
   "acceptance": [
     {
@@ -9331,7 +9335,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "D-S01-PRODUCT-01/AC3",
-      "text": "真实自有登记清单全量/两SKU/隔离多仓及异常场景/浏览器与采购安全验证"
+      "text": "真实自有10SKU/11店仓及8款新增场景、真实浏览器与模型；UNKNOWN和并发采用隔离ERP+真实MySQL安全验证"
     },
     {
       "id": "D-S01-PRODUCT-01/AC4",
@@ -9353,7 +9357,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "ce50e511c95fab35bac68eef95df4c984e3b8081",
     "617fee365cf27a3c29fd48b0240fd8d201bd8f50",
     "3219ce0215ab1766d2b19a72e0a1de95144c8380",
-    "679a846f42b14321a33ff7277843bb3099234be3"
+    "679a846f42b14321a33ff7277843bb3099234be3",
+    "6679d4eaceda30d57ae7fd26fe33ec1029fbc122"
   ],
   "evidence": [
     {
@@ -9460,11 +9465,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider tests/unit/data/test_product_demand.py tests/unit/data/test_registered_product.py tests/unit/data/test_experience_import.py tests/unit/models/test_experience_authorization.py tests/integration/s01/test_registered_product_workflow.py tests/integration/s01/test_experience_safety.py tests/integration/s01/test_requisition.py --basetemp=.tmp/experience-fixed --junitxml=.tmp/experience-fixed.xml",
+      "environment": "Fixed6679d4e; real isolated MySQL; synthetic ERP/provider; model network disabled",
+      "sample": "65PASS/0FAIL/0ERROR/0SKIP; cross-report UNKNOWN and concurrency guards;11-scope report roundtrip; frontend60 and production build PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT-EXPERIENCE/verification.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "Formal teaching API import/finalize plus independent readback; final owned batch",
+      "environment": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP; new8SKU/9scope; old2 preserved",
+      "sample": "22paid/shipped orders/47movements reconciled; final42HTTP all200;10SKU/11scope;0batch model/0batch writes;0purchase writes",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT-EXPERIENCE/dataset.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "Final batch report fingerprint/publication and model receipts independently checked",
+      "environment": "Real API/Worker/MySQL + teaching ERP + actual deepseek-flash",
+      "sample": "3AVAILABLE model calls;7225Token;costUNKNOWN/$0.15 retained; warehouse/ERP difference/trend/missing quote explained",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT-EXPERIENCE/models.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "Manual actual UI home/workbench/list/warehouse/AI/ERP/procurement conditions",
+      "environment": "Persistent review frontend5175/API8768; actual viewport screenshots",
+      "sample": "10SKU/11scope; dual warehouse independent; stale/sparse/new/missing quote/insufficient evidence; existing pending/formal purchases block; no procurement submit",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-PRODUCT-EXPERIENCE/verification.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
   "review": null,
   "branch": "codex/s01-product-demand-rebuild",
-  "observedHead": "f9bc45f721c961774bbc40bad19f8786519ad449",
+  "observedHead": "d40e9ab2c71f2008f1cbb9d326426af459024c8f",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml（未知未跟踪，保留）"
   ],
@@ -9490,14 +9553,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "REVIEW",
       "reason": "证据提交0a4ddec5352df48d725f65f7f7224b089134e5dc已普通推送并独立ls-remote核对；远端main仍f9bc45f721c961774bbc40bad19f8786519ad449，未合并/force；最终仅回执同步，HEAD按Git回读。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "负责人连续授权产品体验版：首页与补货工作区分离、同业务对象重复请购保护、有界真实模型验证、通过正式API增加约8—12个代表性自有教学SKU并独立回读登记；禁止真实请购提交/审批/收货；最终REVIEW不合main。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "Fixed6679d4e product experience complete: real10SKU/11scope, full teaching links,3AI/7225Token,65backend/60frontend/build and browserPASS; prior FAIL kept; no purchase writes/main merge. Publication receipt follows actual remote readback."
     }
   ],
-  "testedCommit": "679a846f42b14321a33ff7277843bb3099234be3",
+  "testedCommit": "6679d4eaceda30d57ae7fd26fe33ec1029fbc122",
   "parallelCondition": "Codex单人，未启用子代理；保留未知OpenAPI。",
   "risks": [
-    "真实仅一个登记仓，工程多仓不代替真实验收",
-    "新增销售必须登记；未核实在途不抵扣",
-    "全量860项1基础队列瞬时FAIL，原样40项复验PASS，根因未证明"
+    "共享教学租户不保证ERP侧独占；新销售仍经登记核验，不扫描共享历史",
+    "未知在途不抵扣；UNKNOWN/并发以隔离ERP+真实MySQL验证，本轮未制造真实未知采购",
+    "旧55872f18封存浮点校验失败保留，使用最终1c7487f5批次；历史860项1基础队列FAIL及原样40PASS保留",
+    "请购列表仍最近20单品逐条回读；企业门和有效在途真实正向净扣未签认"
   ]
 }
 ```

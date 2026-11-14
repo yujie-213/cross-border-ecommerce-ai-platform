@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="60" failures="0" errors="0" time="0.4610101">
+    <testsuite name="tests/unit/api.test.ts" timestamp="2026-11-14T09:29:40.251Z" hostname="DESKTOP-DKO2LI9" tests="19" failures="0" errors="0" skipped="0" time="0.1303801">
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; submits exact scope without tenant and binds only explicit previous report" time="0.0063952">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; gates report publication independently for QUEUED" time="0.0013978">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; gates report publication independently for RUNNING" time="0.0007659">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; gates report publication independently for SUCCEEDED" time="0.0007667">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; gates report publication independently for FAILED" time="0.0007699">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; gates report publication independently for CANCELLED" time="0.0006139">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; preserves missing usage as unknown (null)" time="0.0006119">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; preserves missing usage as unknown (undefined)" time="0.0004301">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; preserves missing usage as unknown ()" time="0.0006161">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; preserves a genuine zero token value" time="0.0008102">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; renders actual HTTP 401 without inventing success" time="0.07755">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; renders actual HTTP 403 without inventing success" time="0.0017182">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; renders actual HTTP 404 without inventing success" time="0.001831">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; renders actual HTTP 409 without inventing success" time="0.0067723">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; renders actual HTTP 422 without inventing success" time="0.0077161">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; renders actual HTTP 503 without inventing success" time="0.0016705">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; sends same idempotency key and exact body on replay, with Cookie CSRF" time="0.0090526">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; queries one exact history scope with a bounded cursor, never scans catalog" time="0.0035463">
+        </testcase>
+        <testcase classname="tests/unit/api.test.ts" name="S01 HTTP consumer contract &gt; preserves network uncertainty" time="0.0014221">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/carton-report.test.ts" timestamp="2026-11-14T09:29:40.263Z" hostname="DESKTOP-DKO2LI9" tests="3" failures="0" errors="0" skipped="0" time="0.0464857">
+        <testcase classname="tests/unit/carton-report.test.ts" name="whole-carton report presentation &gt; shows 48 pieces as six cartons with both ERP constraint sources and remaining conditions" time="0.0354808">
+        </testcase>
+        <testcase classname="tests/unit/carton-report.test.ts" name="whole-carton report presentation &gt; marks pre-rule history obsolete and removes its 45-piece candidate card" time="0.0042791">
+        </testcase>
+        <testcase classname="tests/unit/carton-report.test.ts" name="whole-carton report presentation &gt; does not invent a zero or MOQ order when there is no candidate" time="0.0035385">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/evidence-race.test.ts" timestamp="2026-11-14T09:29:40.264Z" hostname="DESKTOP-DKO2LI9" tests="12" failures="0" errors="0" skipped="0" time="0.0574355">
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; reads normal evidence without persisting it" time="0.0195258">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; ignores late A resolve after switching to B, including finally" time="0.0047752">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; ignores late A reject after switching to B, including finally" time="0.0039454">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; invalidates protected evidence immediately on close even if transport ignores abort" time="0.0032719">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; invalidates protected evidence immediately on logout even if transport ignores abort" time="0.0036361">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; invalidates protected evidence immediately on identity even if transport ignores abort" time="0.0040051">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; invalidates protected evidence immediately on denied even if transport ignores abort" time="0.0023063">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; invalidates protected evidence immediately on expired even if transport ignores abort" time="0.0014315">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; invalidates protected evidence immediately on dispose even if transport ignores abort" time="0.0021508">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; does not accept a response from an earlier read of the same task after reopening" time="0.0035769">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; rejects late evidence when the task report reference changes" time="0.0021457">
+        </testcase>
+        <testcase classname="tests/unit/evidence-race.test.ts" name="evidence response is bound to the open task, report and read generation &gt; clears protected data on an active permission denial" time="0.0027726">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/experience-safety.test.ts" timestamp="2026-11-14T09:29:40.269Z" hostname="DESKTOP-DKO2LI9" tests="7" failures="0" errors="0" skipped="0" time="0.0263215">
+        <testcase classname="tests/unit/experience-safety.test.ts" name="experience procurement exclusion &gt; blocks POST until a successful read, including slow and failed reads" time="0.0069959">
+        </testcase>
+        <testcase classname="tests/unit/experience-safety.test.ts" name="experience procurement exclusion &gt; ignores a late empty read for the previous analysis" time="0.0010357">
+        </testcase>
+        <testcase classname="tests/unit/experience-safety.test.ts" name="experience procurement exclusion &gt; ignores an older empty read for the same analysis" time="0.0008659">
+        </testcase>
+        <testcase classname="tests/unit/experience-safety.test.ts" name="experience procurement exclusion &gt; cannot bypass a pending command with a new analysis of the same object" time="0.0010067">
+        </testcase>
+        <testcase classname="tests/unit/experience-safety.test.ts" name="experience procurement exclusion &gt; keeps a conflicting operation returned from another report" time="0.0006558">
+        </testcase>
+        <testcase classname="tests/unit/experience-safety.test.ts" name="platform and business workspace separation &gt; shows only the available agent and actual recent tasks on the homepage" time="0.0087836">
+        </testcase>
+        <testcase classname="tests/unit/experience-safety.test.ts" name="platform and business workspace separation &gt; uses one graphic and plain business labels instead of repeated KPI rows" time="0.0045152">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/historical-reference.test.ts" timestamp="2026-11-14T09:29:40.272Z" hostname="DESKTOP-DKO2LI9" tests="3" failures="0" errors="0" skipped="0" time="0.0273071">
+        <testcase classname="tests/unit/historical-reference.test.ts" name="usable historical reference without a purchase quantity &gt; shows HL-CBL100-2M current stock and explicitly historical sales" time="0.0202841">
+        </testcase>
+        <testcase classname="tests/unit/historical-reference.test.ts" name="usable historical reference without a purchase quantity &gt; shows HL-MUG350-WH current stock and explicitly historical sales" time="0.0026285">
+        </testcase>
+        <testcase classname="tests/unit/historical-reference.test.ts" name="usable historical reference without a purchase quantity &gt; distinguishes history from ERP reference and old unavailable reports" time="0.001037">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/local-auth.test.ts" timestamp="2026-11-14T09:29:40.274Z" hostname="DESKTOP-DKO2LI9" tests="2" failures="0" errors="0" skipped="0" time="0.0940265">
+        <testcase classname="tests/unit/local-auth.test.ts" name="local session errors &gt; notifies the login gate on expired sessions without exposing response input" time="0.0881703">
+        </testcase>
+        <testcase classname="tests/unit/local-auth.test.ts" name="local session errors &gt; does not mistake backend outage for an expired session" time="0.0022577">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/online.test.ts" timestamp="2026-11-14T09:29:40.275Z" hostname="DESKTOP-DKO2LI9" tests="2" failures="0" errors="0" skipped="0" time="0.0111577">
+        <testcase classname="tests/unit/online.test.ts" name="online commands and historical scope &gt; creates an authorized online command without a catalog, source facts or tenant supplied by the browser" time="0.0061985">
+        </testcase>
+        <testcase classname="tests/unit/online.test.ts" name="online commands and historical scope &gt; matches a report after MySQL reorders JSON keys and rejects a different SKU" time="0.0009166">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/owned-product.test.ts" timestamp="2026-11-14T09:29:40.277Z" hostname="DESKTOP-DKO2LI9" tests="2" failures="0" errors="0" skipped="0" time="0.0096139">
+        <testcase classname="tests/unit/owned-product.test.ts" name="registered owned product navigation &gt; never auto-opens old shared reports when no owned report exists" time="0.0059167">
+        </testcase>
+        <testcase classname="tests/unit/owned-product.test.ts" name="registered owned product navigation &gt; presents a positive reference gap even without a purchasable candidate" time="0.0010204">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/requisition.test.ts" timestamp="2026-11-14T09:29:40.278Z" hostname="DESKTOP-DKO2LI9" tests="2" failures="0" errors="0" skipped="0" time="0.031501">
+        <testcase classname="tests/unit/requisition.test.ts" name="formal purchases and narrow teaching request UI &gt; shows per-line receipts and unknown sellable time without treating remaining as transit" time="0.0230422">
+        </testcase>
+        <testcase classname="tests/unit/requisition.test.ts" name="formal purchases and narrow teaching request UI &gt; does not render a submit button or issue reads without explicit current capability" time="0.0061656">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/v2.test.ts" timestamp="2026-11-14T09:29:40.279Z" hostname="DESKTOP-DKO2LI9" tests="3" failures="0" errors="0" skipped="0" time="0.0130425">
+        <testcase classname="tests/unit/v2.test.ts" name="V2 source and human quantity policy &gt; keeps ERP reference distinct and permits compliant human quantities" time="0.0052113">
+        </testcase>
+        <testcase classname="tests/unit/v2.test.ts" name="V2 source and human quantity policy &gt; requires MOQ, whole cartons and an adjustment reason" time="0.0027907">
+        </testcase>
+        <testcase classname="tests/unit/v2.test.ts" name="V2 source and human quantity policy &gt; does not label unresolved or zero-source records as no replenishment" time="0.000882">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/v3.test.ts" timestamp="2026-11-14T09:29:40.281Z" hostname="DESKTOP-DKO2LI9" tests="5" failures="0" errors="0" skipped="0" time="0.0137386">
+        <testcase classname="tests/unit/v3.test.ts" name="S01 V3 presentation rules &gt; maps every analysis state to a stage without inventing a new one" time="0.006462">
+        </testcase>
+        <testcase classname="tests/unit/v3.test.ts" name="S01 V3 presentation rules &gt; never presents a historical reference as a replenishment quantity" time="0.0006186">
+        </testcase>
+        <testcase classname="tests/unit/v3.test.ts" name="S01 V3 presentation rules &gt; formats exact backend decimals for operators" time="0.0008304">
+        </testcase>
+        <testcase classname="tests/unit/v3.test.ts" name="S01 V3 presentation rules &gt; keeps zero stock as a number and unknown stock as a dash" time="0.0006989">
+        </testcase>
+        <testcase classname="tests/unit/v3.test.ts" name="S01 V3 presentation rules &gt; classifies requisitions by platform state, never guessing ERP approval" time="0.0015735">
+        </testcase>
+    </testsuite>
+</testsuites>

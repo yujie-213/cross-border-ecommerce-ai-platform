@@ -1,0 +1,331 @@
+{
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "batch": "HLX-S01-20261114",
+  "registration": {
+    "contentDigest": "73c48884f4747729febfd1564b608ecb8e906a23aa50deb69d13a006dcefe4a0",
+    "datasetId": "hailan-s01-experience-20261114",
+    "memberCount": 9,
+    "scopeVersion": 1
+  },
+  "newProducts": 8,
+  "newScopes": 9,
+  "verifiedSales": 22,
+  "verifiedMovements": 47,
+  "purchaseWrites": 0,
+  "existingProductsPreserved": true,
+  "journalDigest": "4b397fb159b7220e8bb983d8514830f9328599cf639b9ed0a21f6631359a39cb",
+  "members": [
+    {
+      "sku": "HLX-USB-STABLE",
+      "productId": 230,
+      "name": "USB-C 编织充电线 1m 深灰",
+      "brand": "海岚优选",
+      "model": "HC60-1M-GY",
+      "category": "数码配件",
+      "inventoryId": 1159,
+      "listingId": 365,
+      "quoteId": 898,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153964",
+        "1153965",
+        "1153966",
+        "1153967",
+        "1153968",
+        "1153969",
+        "1153970"
+      ],
+      "reconciliation": {
+        "closing": 6,
+        "eventIds": [
+          1268715,
+          1268719,
+          1268724,
+          1268728,
+          1268732,
+          1268737,
+          1268742
+        ],
+        "movementCount": 7,
+        "opening": 41,
+        "relationVerified": true,
+        "sales": 35
+      }
+    },
+    {
+      "sku": "HLX-USB-STABLE",
+      "productId": 230,
+      "name": "USB-C 编织充电线 1m 深灰",
+      "brand": "海岚优选",
+      "model": "HC60-1M-GY",
+      "category": "数码配件",
+      "inventoryId": 1160,
+      "listingId": 366,
+      "quoteId": 898,
+      "storeId": 7,
+      "warehouseId": 312,
+      "salesIds": [
+        "1153971",
+        "1153972",
+        "1153973",
+        "1153974",
+        "1153975",
+        "1153976",
+        "1153977"
+      ],
+      "reconciliation": {
+        "closing": 120,
+        "eventIds": [
+          1268743,
+          1268744,
+          1268745,
+          1268746,
+          1268747,
+          1268748,
+          1268749
+        ],
+        "movementCount": 7,
+        "opening": 155,
+        "relationVerified": true,
+        "sales": 35
+      }
+    },
+    {
+      "sku": "HLX-TOTE-SAFE",
+      "productId": 231,
+      "name": "帆布拉链收纳袋 米白色",
+      "brand": "海岚优选",
+      "model": "CT28-IV",
+      "category": "家居收纳",
+      "inventoryId": 1161,
+      "listingId": 367,
+      "quoteId": 899,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153964",
+        "1153965",
+        "1153966",
+        "1153967",
+        "1153968",
+        "1153969",
+        "1153970"
+      ],
+      "reconciliation": {
+        "closing": 180,
+        "eventIds": [
+          1268714,
+          1268718,
+          1268723,
+          1268727,
+          1268731,
+          1268736,
+          1268741
+        ],
+        "movementCount": 7,
+        "opening": 208,
+        "relationVerified": true,
+        "sales": 28
+      }
+    },
+    {
+      "sku": "HLX-LAMP-SURGE",
+      "productId": 232,
+      "name": "USB 调光阅读灯 暖白色",
+      "brand": "海岚优选",
+      "model": "DL5-WH",
+      "category": "家居照明",
+      "inventoryId": 1162,
+      "listingId": 368,
+      "quoteId": 900,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153964",
+        "1153965",
+        "1153966",
+        "1153967",
+        "1153968",
+        "1153969",
+        "1153970"
+      ],
+      "reconciliation": {
+        "closing": 8,
+        "eventIds": [
+          1268713,
+          1268717,
+          1268721,
+          1268726,
+          1268730,
+          1268734,
+          1268739
+        ],
+        "movementCount": 7,
+        "opening": 55,
+        "relationVerified": true,
+        "sales": 47
+      }
+    },
+    {
+      "sku": "HLX-CUP-SLOW",
+      "productId": 233,
+      "name": "304不锈钢随行杯 420ml 森林绿",
+      "brand": "海岚优选",
+      "model": "TC420-GN",
+      "category": "家居生活",
+      "inventoryId": 1163,
+      "listingId": 369,
+      "quoteId": 901,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153956",
+        "1153957",
+        "1153958",
+        "1153959",
+        "1153960",
+        "1153961",
+        "1153962"
+      ],
+      "reconciliation": {
+        "closing": 60,
+        "eventIds": [
+          1268703,
+          1268704,
+          1268705,
+          1268706,
+          1268707,
+          1268709,
+          1268710
+        ],
+        "movementCount": 7,
+        "opening": 85,
+        "relationVerified": true,
+        "sales": 25
+      }
+    },
+    {
+      "sku": "HLX-MAT-SPARSE",
+      "productId": 234,
+      "name": "软木双面桌垫 60×30cm 原木色",
+      "brand": "海岚优选",
+      "model": "DM6030-NT",
+      "category": "办公用品",
+      "inventoryId": 1164,
+      "listingId": 370,
+      "quoteId": 902,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153960",
+        "1153963",
+        "1153966",
+        "1153969"
+      ],
+      "reconciliation": {
+        "closing": 4,
+        "eventIds": [
+          1268708,
+          1268711,
+          1268722,
+          1268735
+        ],
+        "movementCount": 4,
+        "opening": 16,
+        "relationVerified": true,
+        "sales": 12
+      }
+    },
+    {
+      "sku": "HLX-STAND-NEW",
+      "productId": 235,
+      "name": "铝合金折叠手机支架 银色",
+      "brand": "海岚优选",
+      "model": "PS90-SL",
+      "category": "数码配件",
+      "inventoryId": 1165,
+      "listingId": 371,
+      "quoteId": 903,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153970"
+      ],
+      "reconciliation": {
+        "closing": 1,
+        "eventIds": [
+          1268740
+        ],
+        "movementCount": 1,
+        "opening": 3,
+        "relationVerified": true,
+        "sales": 2
+      }
+    },
+    {
+      "sku": "HLX-CASE-NOQUOTE",
+      "productId": 236,
+      "name": "双层数码收纳包 藏蓝色",
+      "brand": "海岚优选",
+      "model": "EC22-NV",
+      "category": "箱包配件",
+      "inventoryId": 1166,
+      "listingId": 372,
+      "quoteId": 904,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153964",
+        "1153965",
+        "1153966",
+        "1153967",
+        "1153968",
+        "1153969",
+        "1153970"
+      ],
+      "reconciliation": {
+        "closing": 3,
+        "eventIds": [
+          1268712,
+          1268716,
+          1268720,
+          1268725,
+          1268729,
+          1268733,
+          1268738
+        ],
+        "movementCount": 7,
+        "opening": 31,
+        "relationVerified": true,
+        "sales": 28
+      }
+    },
+    {
+      "sku": "HLX-HUB-PENDING",
+      "productId": 237,
+      "name": "USB-C 四口扩展坞 太空灰",
+      "brand": "海岚优选",
+      "model": "UH4-GY",
+      "category": "电脑配件",
+      "inventoryId": 1167,
+      "listingId": 373,
+      "quoteId": 905,
+      "storeId": 6,
+      "warehouseId": 311,
+      "salesIds": [
+        "1153978"
+      ],
+      "reconciliation": {
+        "closing": 10,
+        "eventIds": [],
+        "movementCount": 0,
+        "opening": 10,
+        "relationVerified": true,
+        "sales": 0
+      }
+    }
+  ],
+  "erpRecommendations": "Controlled simulation records 706/707/708; not ERP algorithm validation",
+  "historyPrice": "Posted historical simulation promotion USD10; current retail and quote prices updated without changing posted sales"
+}

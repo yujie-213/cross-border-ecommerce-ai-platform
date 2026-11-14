@@ -1,0 +1,2712 @@
+{
+  "batchId": "1c7487f5868040099b2d2a32b309e867",
+  "status": "SUCCEEDED",
+  "summary": {
+    "failed": 0,
+    "coverage": 0.909090909091,
+    "modelCalls": 0,
+    "unfinished": 0,
+    "erpReference": 0,
+    "riskSkuCount": 6,
+    "unanalyzable": 1,
+    "judgedSkuCount": 9,
+    "processedCount": 11,
+    "reviewSkuCount": 1,
+    "riskScopeCount": 6,
+    "ruleCalculated": 0,
+    "noReplenishment": 4,
+    "ruleSourceCount": 0,
+    "analyzedSkuCount": 9,
+    "decisionCoverage": 0.909090909091,
+    "forecastCoverage": 0.9,
+    "judgedScopeCount": 10,
+    "reviewScopeCount": 1,
+    "scopeObjectCount": 11,
+    "businessMutations": 0,
+    "replenishSkuCount": 6,
+    "discoveredSkuCount": 10,
+    "forecastScopeCount": 10,
+    "processingCoverage": 1.0,
+    "replenishScopeCount": 6,
+    "erpSourceRecordCount": 0,
+    "productIdentityCount": 10,
+    "erpDifferenceSkuCount": 1,
+    "erpDifferenceScopeCount": 1,
+    "noReplenishmentSkuCount": 3,
+    "noReplenishmentScopeCount": 4
+  },
+  "requestCount": 42,
+  "httpStatuses": {
+    "200": 42
+  },
+  "models": 0,
+  "businessWrites": 0,
+  "reportFingerprintAndPublicationVerified": true,
+  "scenarios": [
+    {
+      "sku": "HLX-LAMP-SURGE",
+      "name": "USB 调光阅读灯 暖白色",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 8,
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "6.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "1.28571429"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "6.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-5.42857143"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "6.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-12.14285714"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "6.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-18.85714286"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "6.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-25.57142857"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "6.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-32.28571429"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "6.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-39.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "6.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-45.71428571"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "6.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-52.42857143"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "52.42857143",
+          "snapshotRef": "snapshot-f0d512cce8ac504bda811c84034c9a4224d559d5eb3c603a82f0c298ba4d7c0f",
+          "coverageDays": "1.1914893616739600623717739937973575887991168418724",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-52.42857143",
+          "targetQuantity": "60.42857143",
+          "metricResultRef": "metric-220c49ac536f0be60f4088aabe511fc3fc9e2e87192b86e789f8de238591d071",
+          "availableQuantity": "8",
+          "firstShortageDate": "2026-11-16",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "6.7142857144444444444444444444444444444444444444444"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153970",
+              "quantity": "16",
+              "businessDate": "2026-11-13"
+            },
+            {
+              "orderRef": "erp-order-1153969",
+              "quantity": "12",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153968",
+              "quantity": "8",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153967",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153966",
+              "quantity": "3",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153965",
+              "quantity": "2",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153964",
+              "quantity": "2",
+              "businessDate": "2026-11-07"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-13",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "8"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "12"
+            },
+            {
+              "day": "2026-11-13",
+              "quantity": "16"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "47",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-07",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "5dc6d9b0bb944113af742c6e23a735cddff4c7e4d3c5247e49470303cef6595f",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 1,
+          "averageDailyDemand": "6.714285714285714285714285714",
+          "salesRecordDayAverage": "6.714285714285714285714285714",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "47.00000000000000000000000000",
+            "recordDayScenarioQuantity": "47.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 39
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "60.42857142857142857142857143",
+            "recordDayScenarioQuantity": "60.42857142857142857142857143",
+            "referenceReplenishmentQuantity": 53
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "94.00000000000000000000000000",
+            "recordDayScenarioQuantity": "94.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 86
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "201.4285714285714285714285714",
+            "recordDayScenarioQuantity": "201.4285714285714285714285714",
+            "referenceReplenishmentQuantity": 194
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共47件；首末记录跨度7天。",
+          "区间参考需求约6.71件/天；仅有销售记录日均6.71件/天，两者口径不同。",
+          "当前可用库存8件，按9天周期需求约60.43件，参考补充53件，未扣未核实在途。",
+          "库存覆盖短于报价交期，普通到货可能无法消除提前缺货，应优先核实加急或调拨条件。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "1.1914893616739600623717739937973575887991168418724",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": true,
+        "forecastQuantity": "60.42857142857142857142857143",
+        "firstShortageDate": "2026-11-16",
+        "purchasableQuantity": 56,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 53
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 53
+      },
+      "procurement": {
+        "eligible": true,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-CASE-NOQUOTE",
+      "name": "双层数码收纳包 藏蓝色",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 3,
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-1.00000000"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-5.00000000"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-9.00000000"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-13.00000000"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-17.00000000"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-21.00000000"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-25.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-29.00000000"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-33.00000000"
+            },
+            {
+              "day": "2026-11-24",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-37.00000000"
+            },
+            {
+              "day": "2026-11-25",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-41.00000000"
+            },
+            {
+              "day": "2026-11-26",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-45.00000000"
+            },
+            {
+              "day": "2026-11-27",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-49.00000000"
+            },
+            {
+              "day": "2026-11-28",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-53.00000000"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "53.00000000",
+          "snapshotRef": "snapshot-7af753599f30d281330f9b28e8eeb52f4861f506385a7f78755db6b86a839083",
+          "coverageDays": "0.75",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-53.00000000",
+          "targetQuantity": "56.00000000",
+          "metricResultRef": "metric-249941c8860bb808d487a0c40e9d477b1ff0b06675972e0f1fc44272180db17b",
+          "availableQuantity": "3",
+          "firstShortageDate": "2026-11-15",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "4.00000000"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153970",
+              "quantity": "4",
+              "businessDate": "2026-11-13"
+            },
+            {
+              "orderRef": "erp-order-1153969",
+              "quantity": "4",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153968",
+              "quantity": "4",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153967",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153966",
+              "quantity": "4",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153965",
+              "quantity": "4",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153964",
+              "quantity": "4",
+              "businessDate": "2026-11-07"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-13",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-13",
+              "quantity": "4"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "28",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-07",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "0b7f79545adf72d2be503fb2e9ad2f85b293c598658147eb6bab03d600ba218d",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 1,
+          "averageDailyDemand": "4",
+          "salesRecordDayAverage": "4",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": null,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "28",
+            "recordDayScenarioQuantity": "28",
+            "referenceReplenishmentQuantity": 25
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "56",
+            "recordDayScenarioQuantity": "56",
+            "referenceReplenishmentQuantity": 53
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "120",
+            "recordDayScenarioQuantity": "120",
+            "referenceReplenishmentQuantity": 117
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "未获可靠交期，主试算采用14天规划周期；不是已确认交期。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共28件；首末记录跨度7天。",
+          "区间参考需求约4.00件/天；仅有销售记录日均4.00件/天，两者口径不同。",
+          "当前可用库存3件，按14天周期需求约56.00件，参考补充53件，未扣未核实在途。"
+        ],
+        "horizonDays": 14,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "0.75",
+        "horizonBasis": "ASSUMED_14_DAY_PLANNING",
+        "stockoutRisk": true,
+        "forecastQuantity": "56",
+        "firstShortageDate": "2026-11-15",
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 53
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 53
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [
+          "EFFECTIVE_QUOTE_MISSING_OR_AMBIGUOUS",
+          "NO_POSITIVE_RECOMMENDATION_BASIS",
+          "PROCUREMENT_LEAD_UNCONFIRMED"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HL-CBL100-2M",
+      "name": "USB-C 100W 编织快充线 2m",
+      "store": "海岚家居美国站",
+      "warehouse": "海岚洛杉矶现货仓",
+      "inventory": 6,
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "0.42857143"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-5.14285714"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-10.71428571"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "5.57142858",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-16.28571429"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-21.85714286"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-27.42857143"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-33.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-38.57142857"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "5.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-44.14285714"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "44.14285714",
+          "snapshotRef": "snapshot-8a12216c6b45d509c93326d7ecb429336b5adbb03337e324b75793b968a07c81",
+          "coverageDays": "1.0769230769844400613666347613314321801328451384691",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-44.14285714",
+          "targetQuantity": "50.14285714",
+          "metricResultRef": "metric-056c200c22ae1a967ba0b33b7bb015d4f7f2d956283332b4f8d53d39c65c5571",
+          "availableQuantity": "6",
+          "firstShortageDate": "2026-11-16",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "5.5714285711111111111111111111111111111111111111111"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153935",
+              "quantity": "6",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153934",
+              "quantity": "5",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153933",
+              "quantity": "6",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153932",
+              "quantity": "4",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153931",
+              "quantity": "5",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "orderRef": "erp-order-1153930",
+              "quantity": "4",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "orderRef": "erp-order-1153929",
+              "quantity": "9",
+              "businessDate": "2026-11-10"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-12",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-06",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-07",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "6"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "9"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "6"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "39",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-06",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "e8d383e3103505534973df3bd8c8eb9e775985db01196e62ce02b242a6895619",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 2,
+          "averageDailyDemand": "5.571428571428571428571428571",
+          "salesRecordDayAverage": "5.571428571428571428571428571",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "39.00000000000000000000000000",
+            "recordDayScenarioQuantity": "39.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 33
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "50.14285714285714285714285714",
+            "recordDayScenarioQuantity": "50.14285714285714285714285714",
+            "referenceReplenishmentQuantity": 45
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "77.99999999999999999999999999",
+            "recordDayScenarioQuantity": "77.99999999999999999999999999",
+            "referenceReplenishmentQuantity": 72
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "167.1428571428571428571428571",
+            "recordDayScenarioQuantity": "167.1428571428571428571428571",
+            "referenceReplenishmentQuantity": 162
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共39件；首末记录跨度7天。",
+          "区间参考需求约5.57件/天；仅有销售记录日均5.57件/天，两者口径不同。",
+          "当前可用库存6件，按9天周期需求约50.14件，参考补充45件，未扣未核实在途。",
+          "库存覆盖短于报价交期，普通到货可能无法消除提前缺货，应优先核实加急或调拨条件。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "1.0769230769844400613666347613314321801328451384691",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": true,
+        "forecastQuantity": "50.14285714285714285714285714",
+        "firstShortageDate": "2026-11-16",
+        "purchasableQuantity": 48,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 45
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 45
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [
+          "SAME_SCOPE_FORMAL_PURCHASE_REQUIRES_REVIEW",
+          "SAME_SCOPE_PENDING_REQUISITION"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [
+        {
+          "erpId": "1426",
+          "status": "待审核",
+          "purpose": "SALES_REPLENISHMENT",
+          "erpNumber": "S01-RQ-86ec2fc73d58a246f3fa30736a6dc1f9",
+          "warehouseName": "海岚洛杉矶现货仓",
+          "includedInCalculation": false
+        },
+        {
+          "erpId": "1398",
+          "status": "待审核",
+          "purpose": "UNCONFIRMED",
+          "erpNumber": "HL-S01-P1-20261113-PO-CABLE",
+          "warehouseName": "海岚洛杉矶现货仓",
+          "includedInCalculation": false
+        }
+      ],
+      "formalPurchases": [
+        {
+          "sku": "HL-CBL100-2M",
+          "erpId": "1406",
+          "status": "待下单",
+          "erpNumber": "S01-RQ-31d1cf789b276beb43772c35fe244375",
+          "lineIndex": 0,
+          "sellableDate": null,
+          "warehouseName": "海岚洛杉矶现货仓",
+          "plannedArrival": null,
+          "warehouseMatch": true,
+          "orderedQuantity": 48,
+          "receivedQuantity": 0,
+          "sourcePlanNumber": "31d1cf789b276beb43772c35fe244375d14d9167d562abda5e526ae7a8f5c0f4",
+          "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+          "unreceivedQuantity": 48,
+          "includedInCalculation": false,
+          "effectiveSupplyQuantity": null
+        }
+      ]
+    },
+    {
+      "sku": "HLX-TOTE-SAFE",
+      "name": "帆布拉链收纳袋 米白色",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 180,
+      "decision": {
+        "status": "NO_REPLENISHMENT",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "176.00000000"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "172.00000000"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "168.00000000"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "164.00000000"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "160.00000000"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "156.00000000"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "152.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "148.00000000"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "4.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "144.00000000"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "0",
+          "snapshotRef": "snapshot-81fbf82c4324c8a5d98576a8343cbb43c60e5e8f8fb38514cac1cdba377ebdfe",
+          "coverageDays": "45",
+          "stockoutRisk": false,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": true,
+          "closingBalance": "144.00000000",
+          "targetQuantity": "36.00000000",
+          "metricResultRef": "metric-eb8b7f6010b2fd7fa983128cb4453adf67590f103e5f4a7b9659bb86829ffefb",
+          "availableQuantity": "180",
+          "firstShortageDate": null,
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "4.00000000"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153970",
+              "quantity": "4",
+              "businessDate": "2026-11-13"
+            },
+            {
+              "orderRef": "erp-order-1153969",
+              "quantity": "4",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153968",
+              "quantity": "4",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153967",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153966",
+              "quantity": "4",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153965",
+              "quantity": "4",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153964",
+              "quantity": "4",
+              "businessDate": "2026-11-07"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-13",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-13",
+              "quantity": "4"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "28",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-07",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "0b7f79545adf72d2be503fb2e9ad2f85b293c598658147eb6bab03d600ba218d",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 1,
+          "averageDailyDemand": "4",
+          "salesRecordDayAverage": "4",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "28",
+            "recordDayScenarioQuantity": "28",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "36",
+            "recordDayScenarioQuantity": "36",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "56",
+            "recordDayScenarioQuantity": "56",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "120",
+            "recordDayScenarioQuantity": "120",
+            "referenceReplenishmentQuantity": 0
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共28件；首末记录跨度7天。",
+          "区间参考需求约4.00件/天；仅有销售记录日均4.00件/天，两者口径不同。",
+          "当前可用库存180件覆盖9天参考需求，暂不补货；仍需关注需求变化。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "45",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": false,
+        "forecastQuantity": "36",
+        "firstShortageDate": null,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 0
+      },
+      "erpComparison": {
+        "status": "COMPARABLE",
+        "records": [
+          {
+            "id": 707,
+            "urgency": null,
+            "updated_at": "2026-11-14T08:33:16+00:00",
+            "daily_sales": 0.0,
+            "stockout_date": null,
+            "suggested_qty": 0,
+            "recommendation_no": "HLX-S01-20261114-R-HLX-TOTE-SAFE-0"
+          }
+        ],
+        "difference": 0,
+        "erpQuantity": 0,
+        "explanation": "平台按已披露历史样本、当前可用库存及规划周期独立试算；ERP算法、窗口和在途抵扣口径未知，无法确认差异成因。",
+        "recordCount": 1,
+        "significant": false,
+        "platformQuantity": 0
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+          "ERP_ALGORITHM_UNKNOWN",
+          "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+          "ERP_GENERATION_TIME_UNVERIFIED",
+          "ERP_PURCHASE_NETTING_UNKNOWN"
+        ],
+        "hardBlocks": [
+          "NO_POSITIVE_RECOMMENDATION_BASIS"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-USB-STABLE",
+      "name": "USB-C 编织充电线 1m 深灰",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 6,
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "1.00000000"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-4.00000000"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-9.00000000"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-14.00000000"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-19.00000000"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-24.00000000"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-29.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-34.00000000"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-39.00000000"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "39.00000000",
+          "snapshotRef": "snapshot-52f6ce0fabcfb67748aa5897f54cc7f383f2b70b81a48c9bda46504062cafe06",
+          "coverageDays": "1.2",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-39.00000000",
+          "targetQuantity": "45.00000000",
+          "metricResultRef": "metric-4f0bbb41be0746b9cb26d2fbdc4ae0d38db55988e276180ad9c8399c2b6a1fab",
+          "availableQuantity": "6",
+          "firstShortageDate": "2026-11-16",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "5.00000000"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153970",
+              "quantity": "5",
+              "businessDate": "2026-11-13"
+            },
+            {
+              "orderRef": "erp-order-1153969",
+              "quantity": "5",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153968",
+              "quantity": "5",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153967",
+              "quantity": "5",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153966",
+              "quantity": "5",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153965",
+              "quantity": "5",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153964",
+              "quantity": "5",
+              "businessDate": "2026-11-07"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-13",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-13",
+              "quantity": "5"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "35",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-07",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "e3c16fd8bd0c5a20a6f8c23d348ea55bd5628c9f55b6a183ed84b018686c871a",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 1,
+          "averageDailyDemand": "5",
+          "salesRecordDayAverage": "5",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "35",
+            "recordDayScenarioQuantity": "35",
+            "referenceReplenishmentQuantity": 29
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "45",
+            "recordDayScenarioQuantity": "45",
+            "referenceReplenishmentQuantity": 39
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "70",
+            "recordDayScenarioQuantity": "70",
+            "referenceReplenishmentQuantity": 64
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "150",
+            "recordDayScenarioQuantity": "150",
+            "referenceReplenishmentQuantity": 144
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共35件；首末记录跨度7天。",
+          "区间参考需求约5.00件/天；仅有销售记录日均5.00件/天，两者口径不同。",
+          "当前可用库存6件，按9天周期需求约45.00件，参考补充39件，未扣未核实在途。",
+          "库存覆盖短于报价交期，普通到货可能无法消除提前缺货，应优先核实加急或调拨条件。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "1.2",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": true,
+        "forecastQuantity": "45",
+        "firstShortageDate": "2026-11-16",
+        "purchasableQuantity": 40,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 39
+      },
+      "erpComparison": {
+        "status": "COMPARABLE",
+        "records": [
+          {
+            "id": 706,
+            "urgency": null,
+            "updated_at": "2026-11-14T08:33:15+00:00",
+            "daily_sales": 0.0,
+            "stockout_date": null,
+            "suggested_qty": 16,
+            "recommendation_no": "HLX-S01-20261114-R-HLX-USB-STABLE-0"
+          }
+        ],
+        "difference": 23,
+        "erpQuantity": 16,
+        "explanation": "平台按已披露历史样本、当前可用库存及规划周期独立试算；ERP算法、窗口和在途抵扣口径未知，无法确认差异成因。",
+        "recordCount": 1,
+        "significant": true,
+        "platformQuantity": 39
+      },
+      "procurement": {
+        "eligible": true,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+          "ERP_ALGORITHM_UNKNOWN",
+          "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+          "ERP_GENERATION_TIME_UNVERIFIED",
+          "ERP_PURCHASE_NETTING_UNKNOWN"
+        ],
+        "hardBlocks": [],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-HUB-PENDING",
+      "name": "USB-C 四口扩展坞 太空灰",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 10,
+      "decision": {
+        "status": "NEEDS_REVIEW",
+        "baseline": null,
+        "forecast": {
+          "reason": "NO_TRUSTED_SALES_SAMPLES",
+          "history": [],
+          "excluded": {
+            "SALES_NOT_NET_FULFILLED": 1
+          },
+          "available": false
+        },
+        "leadDays": 2,
+        "scenarios": [],
+        "confidence": "INSUFFICIENT",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。"
+        ],
+        "explanation": [
+          "缺少可归属该店仓的可信已支付、已发货、无退款历史，暂不能预测需求。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": null,
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": false,
+        "forecastQuantity": null,
+        "firstShortageDate": null,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": null
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": null
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [
+          "NO_POSITIVE_RECOMMENDATION_BASIS"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-USB-STABLE",
+      "name": "USB-C 编织充电线 1m 深灰",
+      "store": "HLX-S01-20261114-WEST",
+      "warehouse": "海岚体验西部仓",
+      "inventory": 120,
+      "decision": {
+        "status": "NO_REPLENISHMENT",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "115.00000000"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "110.00000000"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "105.00000000"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "100.00000000"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "95.00000000"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "90.00000000"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "85.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "80.00000000"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "5.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "75.00000000"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "0",
+          "snapshotRef": "snapshot-2f12bbaa497b64da0e27f05ab2a5d6c02e99025f14b3ba7dcb2459a404f37802",
+          "coverageDays": "24",
+          "stockoutRisk": false,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": true,
+          "closingBalance": "75.00000000",
+          "targetQuantity": "45.00000000",
+          "metricResultRef": "metric-3810273cd55a85019d4d5b192464f2a69934fdcefd5b81b9d5e359352a9a8457",
+          "availableQuantity": "120",
+          "firstShortageDate": null,
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "5.00000000"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153977",
+              "quantity": "5",
+              "businessDate": "2026-11-13"
+            },
+            {
+              "orderRef": "erp-order-1153976",
+              "quantity": "5",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153975",
+              "quantity": "5",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153974",
+              "quantity": "5",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153973",
+              "quantity": "5",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153972",
+              "quantity": "5",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153971",
+              "quantity": "5",
+              "businessDate": "2026-11-07"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-13",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-13",
+              "quantity": "5"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "35",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-07",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "d267c28ad74501d329936eff611e40fa3f2318b5780e76cd43317b74cff5d743",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 1,
+          "averageDailyDemand": "5",
+          "salesRecordDayAverage": "5",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "35",
+            "recordDayScenarioQuantity": "35",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "45",
+            "recordDayScenarioQuantity": "45",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "70",
+            "recordDayScenarioQuantity": "70",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "150",
+            "recordDayScenarioQuantity": "150",
+            "referenceReplenishmentQuantity": 30
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共35件；首末记录跨度7天。",
+          "区间参考需求约5.00件/天；仅有销售记录日均5.00件/天，两者口径不同。",
+          "当前可用库存120件覆盖9天参考需求，暂不补货；仍需关注需求变化。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "24",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": false,
+        "forecastQuantity": "45",
+        "firstShortageDate": null,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 0
+      },
+      "erpComparison": {
+        "status": "COMPARABLE",
+        "records": [
+          {
+            "id": 708,
+            "urgency": null,
+            "updated_at": "2026-11-14T08:33:17+00:00",
+            "daily_sales": 0.0,
+            "stockout_date": null,
+            "suggested_qty": 0,
+            "recommendation_no": "HLX-S01-20261114-R-HLX-USB-STABLE-1"
+          }
+        ],
+        "difference": 0,
+        "erpQuantity": 0,
+        "explanation": "平台按已披露历史样本、当前可用库存及规划周期独立试算；ERP算法、窗口和在途抵扣口径未知，无法确认差异成因。",
+        "recordCount": 1,
+        "significant": false,
+        "platformQuantity": 0
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+          "ERP_ALGORITHM_UNKNOWN",
+          "ERP_DAILY_SALES_WINDOW_UNKNOWN",
+          "ERP_GENERATION_TIME_UNVERIFIED",
+          "ERP_PURCHASE_NETTING_UNKNOWN"
+        ],
+        "hardBlocks": [
+          "NO_POSITIVE_RECOMMENDATION_BASIS"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-STAND-NEW",
+      "name": "铝合金折叠手机支架 银色",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 1,
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-1.00000000"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-3.00000000"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-5.00000000"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-7.00000000"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-9.00000000"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-11.00000000"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-13.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-15.00000000"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "2.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-17.00000000"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "17.00000000",
+          "snapshotRef": "snapshot-4c83ddcc08a1f54b16c5c3422f39616f2b28fa43b9d776e31b107cc36c0bf06a",
+          "coverageDays": "0.5",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-17.00000000",
+          "targetQuantity": "18.00000000",
+          "metricResultRef": "metric-beb91d1f40d222708a4feb9737f4b29125353160201e42f25a0121696e038c59",
+          "availableQuantity": "1",
+          "firstShortageDate": "2026-11-15",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "2.00000000"
+        },
+        "forecast": {
+          "risks": [
+            "LOW_SALES_SAMPLE",
+            "SALES_CONCENTRATED_IN_ONE_DAY"
+          ],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153970",
+              "quantity": "2",
+              "businessDate": "2026-11-13"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 1,
+          "available": true,
+          "sampleEnd": "2026-11-13",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "LOW",
+          "dailySales": [
+            {
+              "day": "2026-11-13",
+              "quantity": "2"
+            }
+          ],
+          "orderCount": 1,
+          "totalSales": "2",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-13",
+          "unknownDays": 0,
+          "observedDays": 1,
+          "sampleDigest": "34ff6b4687e337906078138b8391df628e6d8b13196426278d6a3ee6f5bd575a",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 1,
+          "averageDailyDemand": "2",
+          "salesRecordDayAverage": "2",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "14",
+            "recordDayScenarioQuantity": "14",
+            "referenceReplenishmentQuantity": 13
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "18",
+            "recordDayScenarioQuantity": "18",
+            "referenceReplenishmentQuantity": 17
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "28",
+            "recordDayScenarioQuantity": "28",
+            "referenceReplenishmentQuantity": 27
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "60",
+            "recordDayScenarioQuantity": "60",
+            "referenceReplenishmentQuantity": 59
+          }
+        ],
+        "confidence": "LOW",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取1条可信销售记录，1个有记录日期共2件；首末记录跨度1天。",
+          "区间参考需求约2.00件/天；仅有销售记录日均2.00件/天，两者口径不同。",
+          "当前可用库存1件，按9天周期需求约18.00件，参考补充17件，未扣未核实在途。",
+          "库存覆盖短于报价交期，普通到货可能无法消除提前缺货，应优先核实加急或调拨条件。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "0.5",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": true,
+        "forecastQuantity": "18",
+        "firstShortageDate": "2026-11-15",
+        "purchasableQuantity": 20,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 17
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 17
+      },
+      "procurement": {
+        "eligible": true,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+          "LOW_SALES_SAMPLE",
+          "SALES_CONCENTRATED_IN_ONE_DAY"
+        ],
+        "hardBlocks": [],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-MAT-SPARSE",
+      "name": "软木双面桌垫 60×30cm 原木色",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 4,
+      "decision": {
+        "status": "REPLENISH",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "3.00000000"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "2.00000000"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "1.00000000"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "0E-8"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-1.00000000"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-2.00000000"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-3.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-4.00000000"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "1.00000000",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "-5.00000000"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "5.00000000",
+          "snapshotRef": "snapshot-b19f2c123064bab4e2a37afdf1ad25af67d6a6a2d8773b5ad11ad8f9fa78f1ab",
+          "coverageDays": "4",
+          "stockoutRisk": true,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "-5.00000000",
+          "targetQuantity": "9.00000000",
+          "metricResultRef": "metric-291b08c774a679b44e763e144ebca64fa362243752a88e63d7b63ab07c42cfe0",
+          "availableQuantity": "4",
+          "firstShortageDate": "2026-11-19",
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "1.00000000"
+        },
+        "forecast": {
+          "risks": [
+            "HISTORY_DATES_WITHOUT_RECORDS_UNKNOWN"
+          ],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153969",
+              "quantity": "3",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153966",
+              "quantity": "2",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153963",
+              "quantity": "4",
+              "businessDate": "2026-11-05"
+            },
+            {
+              "orderRef": "erp-order-1153960",
+              "quantity": "3",
+              "businessDate": "2026-11-01"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 12,
+          "available": true,
+          "sampleEnd": "2026-11-12",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "LOW",
+          "dailySales": [
+            {
+              "day": "2026-11-01",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-05",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "3"
+            }
+          ],
+          "orderCount": 4,
+          "totalSales": "12",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-01",
+          "unknownDays": 8,
+          "observedDays": 4,
+          "sampleDigest": "9109c79d62db6c3eb0abc5665139fd0fcfb13c7ecebb1f962ebdaa1576054518",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 2,
+          "averageDailyDemand": "1",
+          "salesRecordDayAverage": "3",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "7",
+            "recordDayScenarioQuantity": "21",
+            "referenceReplenishmentQuantity": 3
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "9",
+            "recordDayScenarioQuantity": "27",
+            "referenceReplenishmentQuantity": 5
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "14",
+            "recordDayScenarioQuantity": "42",
+            "referenceReplenishmentQuantity": 10
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "30",
+            "recordDayScenarioQuantity": "90",
+            "referenceReplenishmentQuantity": 26
+          }
+        ],
+        "confidence": "LOW",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取4条可信销售记录，4个有记录日期共12件；首末记录跨度12天。",
+          "区间参考需求约1.00件/天；仅有销售记录日均3.00件/天，两者口径不同。",
+          "当前可用库存4件，按9天周期需求约9.00件，参考补充5件，未扣未核实在途。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "4",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": true,
+        "forecastQuantity": "9",
+        "firstShortageDate": "2026-11-19",
+        "purchasableQuantity": 8,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 5
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 5
+      },
+      "procurement": {
+        "eligible": true,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+          "HISTORY_DATES_WITHOUT_RECORDS_UNKNOWN"
+        ],
+        "hardBlocks": [],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "name": "北欧风陶瓷马克杯 350ml",
+      "store": "海岚家居美国站",
+      "warehouse": "海岚洛杉矶现货仓",
+      "inventory": 81,
+      "decision": {
+        "status": "NO_REPLENISHMENT",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "78.28571429"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "75.57142857"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "72.85714286"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "70.14285714"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "67.42857143"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "64.71428571"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "62.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "59.28571429"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "56.57142857"
+            },
+            {
+              "day": "2026-11-24",
+              "demand": "2.71428571",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "53.85714286"
+            },
+            {
+              "day": "2026-11-25",
+              "demand": "2.71428572",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "51.14285714"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "0",
+          "snapshotRef": "snapshot-073f9070bb898098a5a28fed3ec87c616362178f1c47639ea26e6dc2d0763b8f",
+          "coverageDays": "29.842105260302190884181608527829511145662247737257",
+          "stockoutRisk": false,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": true,
+          "closingBalance": "51.14285714",
+          "targetQuantity": "29.85714286",
+          "metricResultRef": "metric-516043c1ce3afa087f8f85eeeac05d189729f5fe59c621853e91209b75f78553",
+          "availableQuantity": "81",
+          "firstShortageDate": null,
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "2.7142857145454545454545454545454545454545454545455"
+        },
+        "forecast": {
+          "risks": [],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153935",
+              "quantity": "3",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "orderRef": "erp-order-1153934",
+              "quantity": "2",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153933",
+              "quantity": "3",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153932",
+              "quantity": "2",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153931",
+              "quantity": "3",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "orderRef": "erp-order-1153930",
+              "quantity": "2",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "orderRef": "erp-order-1153929",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-12",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "MEDIUM",
+          "dailySales": [
+            {
+              "day": "2026-11-06",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-07",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-08",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-09",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-10",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-11",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-12",
+              "quantity": "3"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "19",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-11-06",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "0d9805a1a02db26eebc0e408e66806eb2d2aeef0ebdaafbc0dbd23c438823655",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 2,
+          "averageDailyDemand": "2.714285714285714285714285714",
+          "salesRecordDayAverage": "2.714285714285714285714285714",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 4,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "19.00000000000000000000000000",
+            "recordDayScenarioQuantity": "19.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 11,
+            "forecastQuantity": "29.85714285714285714285714285",
+            "recordDayScenarioQuantity": "29.85714285714285714285714285",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "38.00000000000000000000000000",
+            "recordDayScenarioQuantity": "38.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "81.42857142857142857142857142",
+            "recordDayScenarioQuantity": "81.42857142857142857142857142",
+            "referenceReplenishmentQuantity": 1
+          }
+        ],
+        "confidence": "MEDIUM",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共19件；首末记录跨度7天。",
+          "区间参考需求约2.71件/天；仅有销售记录日均2.71件/天，两者口径不同。",
+          "当前可用库存81件覆盖11天参考需求，暂不补货；仍需关注需求变化。"
+        ],
+        "horizonDays": 11,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "29.842105260302190884181608527829511145662247737257",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": false,
+        "forecastQuantity": "29.85714285714285714285714285",
+        "firstShortageDate": null,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 0
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 0
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "hardBlocks": [
+          "NO_POSITIVE_RECOMMENDATION_BASIS"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    },
+    {
+      "sku": "HLX-CUP-SLOW",
+      "name": "304不锈钢随行杯 420ml 森林绿",
+      "store": "HLX-S01-20261114-EAST",
+      "warehouse": "海岚体验东部仓",
+      "inventory": 60,
+      "decision": {
+        "status": "NO_REPLENISHMENT",
+        "baseline": {
+          "series": [
+            {
+              "day": "2026-11-15",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "56.42857143"
+            },
+            {
+              "day": "2026-11-16",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "52.85714286"
+            },
+            {
+              "day": "2026-11-17",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "49.28571429"
+            },
+            {
+              "day": "2026-11-18",
+              "demand": "3.57142858",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "45.71428571"
+            },
+            {
+              "day": "2026-11-19",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "42.14285714"
+            },
+            {
+              "day": "2026-11-20",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "38.57142857"
+            },
+            {
+              "day": "2026-11-21",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "35.00000000"
+            },
+            {
+              "day": "2026-11-22",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "31.42857143"
+            },
+            {
+              "day": "2026-11-23",
+              "demand": "3.57142857",
+              "arrivals": "0",
+              "inBuffer": false,
+              "closingBalance": "27.85714286"
+            }
+          ],
+          "scenario": "BASELINE",
+          "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+          "gapQuantity": "0",
+          "snapshotRef": "snapshot-698ce1635ad2aaf30412fa7c47113e2ed1cd4de8e7437eb93b78fe4ad8cf825b",
+          "coverageDays": "16.800000001493333333466074074085873251029855400092",
+          "stockoutRisk": false,
+          "metricVersion": "s01-engineering-daily-v1",
+          "overstockRisk": false,
+          "closingBalance": "27.85714286",
+          "targetQuantity": "32.14285714",
+          "metricResultRef": "metric-f251d71a9d27aeccfcdf6cb22db1bef5f6bf717a0f419991e6484ad62c13743f",
+          "availableQuantity": "60",
+          "firstShortageDate": null,
+          "inTransitQuantity": "0",
+          "averageDailyDemand": "3.5714285711111111111111111111111111111111111111111"
+        },
+        "forecast": {
+          "risks": [
+            "STALE_SALES_SAMPLES"
+          ],
+          "method": "OBSERVED_INTERVAL_REFERENCE",
+          "reason": null,
+          "history": [
+            {
+              "orderRef": "erp-order-1153962",
+              "quantity": "1",
+              "businessDate": "2026-11-03"
+            },
+            {
+              "orderRef": "erp-order-1153961",
+              "quantity": "1",
+              "businessDate": "2026-11-02"
+            },
+            {
+              "orderRef": "erp-order-1153960",
+              "quantity": "2",
+              "businessDate": "2026-11-01"
+            },
+            {
+              "orderRef": "erp-order-1153959",
+              "quantity": "3",
+              "businessDate": "2026-10-31"
+            },
+            {
+              "orderRef": "erp-order-1153958",
+              "quantity": "4",
+              "businessDate": "2026-10-30"
+            },
+            {
+              "orderRef": "erp-order-1153957",
+              "quantity": "6",
+              "businessDate": "2026-10-29"
+            },
+            {
+              "orderRef": "erp-order-1153956",
+              "quantity": "8",
+              "businessDate": "2026-10-28"
+            }
+          ],
+          "excluded": {},
+          "spanDays": 7,
+          "available": true,
+          "sampleEnd": "2026-11-03",
+          "assumption": "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。",
+          "confidence": "LOW",
+          "dailySales": [
+            {
+              "day": "2026-10-28",
+              "quantity": "8"
+            },
+            {
+              "day": "2026-10-29",
+              "quantity": "6"
+            },
+            {
+              "day": "2026-10-30",
+              "quantity": "4"
+            },
+            {
+              "day": "2026-10-31",
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-01",
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-02",
+              "quantity": "1"
+            },
+            {
+              "day": "2026-11-03",
+              "quantity": "1"
+            }
+          ],
+          "orderCount": 7,
+          "totalSales": "25",
+          "denominator": "FIRST_TO_LAST_OBSERVED_DATE_INCLUSIVE",
+          "sampleStart": "2026-10-28",
+          "unknownDays": 0,
+          "observedDays": 7,
+          "sampleDigest": "6d55f384b40c6d7f8864d6ad158d6c1aac65473f92bf9199141296a4e07ad634",
+          "policyVersion": "s01-product-demand-v1",
+          "sampleAgeDays": 11,
+          "averageDailyDemand": "3.571428571428571428571428571",
+          "salesRecordDayAverage": "3.571428571428571428571428571",
+          "sourceEnumerationComplete": true
+        },
+        "leadDays": 2,
+        "scenarios": [
+          {
+            "days": 7,
+            "forecastQuantity": "25.00000000000000000000000000",
+            "recordDayScenarioQuantity": "25.00000000000000000000000000",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 9,
+            "forecastQuantity": "32.14285714285714285714285714",
+            "recordDayScenarioQuantity": "32.14285714285714285714285714",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 14,
+            "forecastQuantity": "49.99999999999999999999999999",
+            "recordDayScenarioQuantity": "49.99999999999999999999999999",
+            "referenceReplenishmentQuantity": 0
+          },
+          {
+            "days": 30,
+            "forecastQuantity": "107.1428571428571428571428571",
+            "recordDayScenarioQuantity": "107.1428571428571428571428571",
+            "referenceReplenishmentQuantity": 48
+          }
+        ],
+        "confidence": "LOW",
+        "assumptions": [
+          "未来需求延续已观察历史，参考估计不能保证未来销量。",
+          "各店仓独立计算；未知在途未抵扣，正式采购需人工核对。",
+          "主规划周期为有效报价交期加7天补货覆盖。",
+          "区间参考以首末记录之间未记录日期无额外需求作保守试算，不声明这些日期实际销量为零；记录日均作为另一情景。"
+        ],
+        "explanation": [
+          "已读取7条可信销售记录，7个有记录日期共25件；首末记录跨度7天。",
+          "区间参考需求约3.57件/天；仅有销售记录日均3.57件/天，两者口径不同。",
+          "当前可用库存60件覆盖9天参考需求，暂不补货；仍需关注需求变化。",
+          "最近可信销量距今11天，历史偏旧，请核实近期需求是否变化。"
+        ],
+        "horizonDays": 9,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "coverageDays": "16.800000001493333333466074074085873251029855400092",
+        "horizonBasis": "QUOTE_LEAD_PLUS_7",
+        "stockoutRisk": false,
+        "forecastQuantity": "32.14285714285714285714285714",
+        "firstShortageDate": null,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "referenceReplenishmentQuantity": 0
+      },
+      "erpComparison": {
+        "status": "ERP_NOT_PROVIDED",
+        "records": [],
+        "difference": null,
+        "erpQuantity": null,
+        "explanation": "ERP 未提供适用建议，平台分析独立进行。",
+        "recordCount": 0,
+        "significant": false,
+        "platformQuantity": 0
+      },
+      "procurement": {
+        "eligible": false,
+        "warnings": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED",
+          "STALE_SALES_SAMPLES"
+        ],
+        "hardBlocks": [
+          "NO_POSITIVE_RECOMMENDATION_BASIS"
+        ],
+        "policyVersion": "s01-product-procurement-v1",
+        "scopeAuthorized": true
+      },
+      "pendingPurchases": [],
+      "formalPurchases": []
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "authorization": "s01-product-experience-20261114-r1",
+  "actualCalls": 3,
+  "totalTokens": 7225,
+  "actualCost": "UNKNOWN",
+  "previousAuthorizationPreserved": true,
+  "verified": [
+    {
+      "taskId": "be803db4cd5b4664a4cd05675c163b32",
+      "sku": "HLX-USB-STABLE",
+      "model": "deepseek-flash",
+      "status": "AVAILABLE",
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 2032,
+        "totalTokens": 2362,
+        "outputTokens": 330,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1520
+      },
+      "costStatus": "UNKNOWN",
+      "reservedCost": "0.05000000",
+      "usedCost": "0E-8",
+      "usedCalls": 1,
+      "explanation": {
+        "majorRisks": [
+          {
+            "text": "未来需求是否延续历史尚未确认，参考预测不保证销量；若近期销售突然变化，应结合逐日销量核对，避免均值掩盖变化",
+            "supportRefs": [
+              "uncertainty"
+            ]
+          },
+          {
+            "text": "已有采购的归属和实际可售日期仍需确认；未知在途未抵扣，不能把参考补充直接当成最终采购量",
+            "supportRefs": [
+              "supply"
+            ]
+          }
+        ],
+        "keyEvidence": [
+          {
+            "text": "2026-11-07至2026-11-13的7个有记录日期共售35件，未来9天参考需求约45.0件",
+            "supportRefs": [
+              "demand"
+            ]
+          },
+          {
+            "text": "当前库存6件，参考补充39件；该数量未扣尚未核实的在途",
+            "supportRefs": [
+              "stock"
+            ]
+          }
+        ],
+        "humanConfirmations": [
+          {
+            "text": "采购候选40件，起订8件、每箱4件；核对报价与已有采购，人工确认不代替ERP审批",
+            "supportRefs": [
+              "purchase"
+            ]
+          }
+        ],
+        "recommendationReasons": [
+          {
+            "text": "海岚体验东部仓：建议补货。仅限当前店铺，其他仓分别判断",
+            "supportRefs": [
+              "scope"
+            ]
+          },
+          {
+            "text": "有缺货风险：先核对已有采购及到货日期；若交期赶不上缺货，再评估加急或调拨",
+            "supportRefs": [
+              "priority"
+            ]
+          },
+          {
+            "text": "平台参考补充39件，ERP建议16件，差23件；ERP口径未知，先核对再决定",
+            "supportRefs": [
+              "erp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "taskId": "48fbda01cdc448029504fb846d4ee7ea",
+      "sku": "HLX-CASE-NOQUOTE",
+      "model": "deepseek-flash",
+      "status": "AVAILABLE",
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 1981,
+        "totalTokens": 2299,
+        "outputTokens": 318,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1469
+      },
+      "costStatus": "UNKNOWN",
+      "reservedCost": "0.05000000",
+      "usedCost": "0E-8",
+      "usedCalls": 1,
+      "explanation": {
+        "majorRisks": [
+          {
+            "text": "未来需求是否延续历史尚未确认，参考预测不保证销量；若近期销售突然变化，应结合逐日销量核对，避免均值掩盖变化",
+            "supportRefs": [
+              "uncertainty"
+            ]
+          },
+          {
+            "text": "已有采购的归属和实际可售日期仍需确认；未知在途未抵扣，不能把参考补充直接当成最终采购量",
+            "supportRefs": [
+              "supply"
+            ]
+          }
+        ],
+        "keyEvidence": [
+          {
+            "text": "2026-11-07至2026-11-13的7个有记录日期共售28件，未来14天参考需求约56.0件",
+            "supportRefs": [
+              "demand"
+            ]
+          },
+          {
+            "text": "当前库存3件，参考补充53件；该数量未扣尚未核实的在途",
+            "supportRefs": [
+              "stock"
+            ]
+          }
+        ],
+        "humanConfirmations": [
+          {
+            "text": "正数量采购条件尚未确认；先核实有效供应商、报价、起订量与整箱条件，需求分析仍可查看",
+            "supportRefs": [
+              "purchase"
+            ]
+          }
+        ],
+        "recommendationReasons": [
+          {
+            "text": "海岚体验东部仓：建议补货。仅限当前店铺，其他仓分别判断",
+            "supportRefs": [
+              "scope"
+            ]
+          },
+          {
+            "text": "有缺货风险：先核对已有采购及到货日期；若交期赶不上缺货，再评估加急或调拨",
+            "supportRefs": [
+              "priority"
+            ]
+          },
+          {
+            "text": "ERP 未提供适用建议，平台分析独立进行。",
+            "supportRefs": [
+              "erp"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "taskId": "72b88e0144c542018bd7a804f9f7d3b0",
+      "sku": "HLX-LAMP-SURGE",
+      "model": "deepseek-flash",
+      "status": "AVAILABLE",
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 2195,
+        "totalTokens": 2564,
+        "outputTokens": 369,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1683
+      },
+      "costStatus": "UNKNOWN",
+      "reservedCost": "0.05000000",
+      "usedCost": "0E-8",
+      "usedCalls": 1,
+      "explanation": {
+        "majorRisks": [
+          {
+            "text": "首日2026-11-07售2件，最近2026-11-13售16件；未来走势未知，核对近期活动，均值不保证未来销量",
+            "supportRefs": [
+              "recent-sales"
+            ]
+          },
+          {
+            "text": "未来需求是否延续历史尚未确认，参考预测不保证销量；若近期销售突然变化，应结合逐日销量核对，避免均值掩盖变化",
+            "supportRefs": [
+              "uncertainty"
+            ]
+          },
+          {
+            "text": "已有采购的归属和实际可售日期仍需确认；未知在途未抵扣，不能把参考补充直接当成最终采购量",
+            "supportRefs": [
+              "supply"
+            ]
+          }
+        ],
+        "keyEvidence": [
+          {
+            "text": "2026-11-07至2026-11-13的7个有记录日期共售47件，未来9天参考需求约60.4件",
+            "supportRefs": [
+              "demand"
+            ]
+          },
+          {
+            "text": "当前库存8件，参考补充53件；该数量未扣尚未核实的在途",
+            "supportRefs": [
+              "stock"
+            ]
+          }
+        ],
+        "humanConfirmations": [
+          {
+            "text": "采购候选56件，起订8件、每箱4件；核对报价与已有采购，人工确认不代替ERP审批",
+            "supportRefs": [
+              "purchase"
+            ]
+          }
+        ],
+        "recommendationReasons": [
+          {
+            "text": "海岚体验东部仓：建议补货。仅限当前店铺，其他仓分别判断",
+            "supportRefs": [
+              "scope"
+            ]
+          },
+          {
+            "text": "有缺货风险：先核对已有采购及到货日期；若交期赶不上缺货，再评估加急或调拨",
+            "supportRefs": [
+              "priority"
+            ]
+          },
+          {
+            "text": "ERP 未提供适用建议，平台分析独立进行。",
+            "supportRefs": [
+              "erp"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
