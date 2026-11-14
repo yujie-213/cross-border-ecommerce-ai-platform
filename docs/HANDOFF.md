@@ -1,3 +1,5 @@
+Alienware新电脑部署（2026-11-14）：产品基点2b89b18，独立本地分支codex/alienware-local-deployment，启动兼容修复c663615；Python3.13.3独立venv/Node24.21.0/npm11.19.0/MySQL8.4.7原生服务已就绪，原迁移至0011_local_admin。用户选择独立空库并自行初始化admin，确认登录及首页/智能补货/建议/请购管理正常；API8765/前端5173/独立Worker持续运行，Stop与MySQL/平台重启保留数据通过。任务/报告/采购/监控登记均0，未恢复旧数据，真实SKU详情未验证。ERP凭据待补，模型及请购关闭，无ERP/付费模型/采购写入；浏览器工具URL识别阻断，页面由用户手工确认。5项针对性测试/前端类型构建/pip check通过。所有本机秘密和产物Git忽略，main与产品分支未修改、不推送。详见runbooks/local-platform.md部署回执；后续补配置/安全恢复历史后体验，产品仍REVIEW，本轮停止。
+
 产品体验版推送回执（2026-11-14）：实现6679d4e、证据8369968e79a21b1f33f9136aeecfa66ac434198f已普通推送并独立ls-remote核对，远端main仍f9bc45f721c961774bbc40bad19f8786519ad449，未合并/force。随后仅补齐当前10款说明入口及本回执/台账/派生文档，最终HEAD以Git回读为准。D-S01-PRODUCT-01保持REVIEW，5175/API8768持续运行；本轮不再增加ERP/模型请求，未知OpenAPI保留，等待产品负责人评审。
 
 产品体验版最终评审（2026-11-14）：D-S01-PRODUCT-01 REVIEW，固定实现6679d4e；平台简洁首页/补货独立工作区，真实自有10SKU/11店仓（新增8款/9关系）、22已支付发货销售及47库存流水核验；批次1c7487f5为42HTTP全200、零模型零业务写。真实AI3次7225Token，费用UNKNOWN/$0.15预约保留。固定后65后端/60前端/类型构建PASS，真实浏览器逐场景完成；既有待审/正式采购防重复，UNKNOWN跨报告以隔离ERP+真实MySQL验证。未新增采购写/未合main，未知OpenAPI保留。指南reports/S01_产品体验版使用与评审_20261114.md，证据evidence/S01-PRODUCT-EXPERIENCE；普通推送回执待实际独立回读，不预写SHA。
