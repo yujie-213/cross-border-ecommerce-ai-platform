@@ -9088,6 +9088,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "data/private/review-bootstrap"
     ],
     "productCodeAndBusinessHistoryPreserved": true
+  },
+  "mainMerge": {
+    "authorization": "2026-11-14负责人明确要求：先合并main；覆盖本轮旧不合main停止点。未声明星星独立验收完成。",
+    "sourceBranch": "codex/s01-two-sku-usability-fix",
+    "sourceHead": "080f17150972ddfbae046ccad0202984a6e599b1",
+    "previousMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "method": "fast-forward",
+    "localMerge": "PASS",
+    "remotePublication": "PENDING_PUSH",
+    "acceptance": "REVIEW保留；合并授权不冒充独立业务验收",
+    "validation": "沿用已提交测试证据；无冲突，无新增业务代码，不重跑831或全目录，不再调用ERP/模型。",
+    "performance": "负责人反馈批量卡住且ERP网页不可访问，主动停止排查；上游负载仅为推测，未认定根因。"
   }
 }
 ```
@@ -9249,6 +9261,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "mainMerged": false,
     "verifiedAt": "2026-11-14T03:49:59.252567+00:00",
     "receipt": "Following documentation-only receipt synchronized normally; final SHA returned by Git, not prewritten."
+  },
+  "mainMerge": {
+    "authorization": "2026-11-14负责人明确要求：先合并main；覆盖本轮旧不合main停止点。未声明星星独立验收完成。",
+    "sourceBranch": "codex/s01-two-sku-usability-fix",
+    "sourceHead": "080f17150972ddfbae046ccad0202984a6e599b1",
+    "previousMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "method": "fast-forward",
+    "localMerge": "PASS",
+    "remotePublication": "PENDING_PUSH",
+    "acceptance": "REVIEW保留；合并授权不冒充独立业务验收",
+    "validation": "沿用已提交测试证据；无冲突，无新增业务代码，不重跑831或全目录，不再调用ERP/模型。",
+    "performance": "负责人反馈批量卡住且ERP网页不可访问，主动停止排查；上游负载仅为推测，未认定根因。"
   }
 }
 ```
