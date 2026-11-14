@@ -1,0 +1,21 @@
+{
+  "sku": "HLX-STAND-NEW",
+  "readOnly": true,
+  "modelCalls": 0,
+  "purchaseWrites": 0,
+  "tasks": [
+    {
+      "taskId": "05094ba62f3c417d8edcfbb0444a3922",
+      "createdAtUTC": "2026-11-14T17:57:11.510882",
+      "state": "SUCCEEDED",
+      "explainAI": true
+    },
+    {
+      "taskId": "186bf7932b604749afa7ce970d3cb1bf",
+      "createdAtUTC": "2026-11-14T17:56:28.691590",
+      "state": "SUCCEEDED",
+      "explainAI": false
+    }
+  ],
+  "finding": "First request explicitly disabled AI; second requested AI and returned AVAILABLE. Not a provider timeout. Screenshot retains the removed status label, consistent with an already-open old frontend; browser asset identity at that past moment cannot be recovered."
+}

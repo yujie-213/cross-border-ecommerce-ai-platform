@@ -1,0 +1,218 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "sku": "HLX-STAND-NEW",
+      "taskId": "48d9c003959e40c3aee9461848bd2c8d",
+      "url": "http://localhost:5173/#/sku/c95b898669912fcd5980184de958a2ce5cc812291f1e2276618803d4f8b88c4a?batch=2b725fd3a08e43588613617e8fce5f98&single=48d9c003959e40c3aee9461848bd2c8d",
+      "screenshot": "37-buyer-advice-final-HLX-STAND-NEW.png",
+      "conclusion": "本仓存在近期断货风险，普通采购可能赶不上",
+      "explanation": {
+        "majorRisks": [
+          {
+            "text": "仅1个有记录日，需求持续性尚未确认；本次按试销规模复核，新增可信销量后再决定是否加量",
+            "supportRefs": [
+              "sample-risk"
+            ]
+          }
+        ],
+        "keyEvidence": [
+          {
+            "text": "可用库存1件，未来9天参考需求约18.0件，参考需补17件；未扣未核实在途",
+            "supportRefs": [
+              "stock-basis"
+            ]
+          },
+          {
+            "text": "参考补充17件，为满足每箱4件的要求，采购候选调整为20件",
+            "supportRefs": [
+              "quantity-basis"
+            ]
+          },
+          {
+            "text": "预计2026-11-16起有缺货风险，报价交期2天；正常采购不能证明已覆盖到货前缺口",
+            "supportRefs": [
+              "arrival-basis"
+            ]
+          }
+        ],
+        "humanConfirmations": [
+          {
+            "text": "向供应商确认最早可售日期；若无法赶上缺货，再核实加急或调拨是否可行",
+            "supportRefs": [
+              "next-step"
+            ]
+          }
+        ],
+        "recommendationReasons": [
+          {
+            "text": "本仓存在近期断货风险，普通采购可能赶不上",
+            "supportRefs": [
+              "conclusion"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 1825,
+        "totalTokens": 2066,
+        "outputTokens": 241,
+        "pricingVersion": null,
+        "cachedInputTokens": 0,
+        "uncachedInputTokens": 1825
+      },
+      "costStatus": "UNKNOWN",
+      "model": "deepseek-flash",
+      "reference": 17,
+      "candidate": 20,
+      "purchaseEligible": true,
+      "refreshRetained": true,
+      "actionFocus": true
+    },
+    {
+      "sku": "HLX-CASE-NOQUOTE",
+      "taskId": "f12f2cb6e4ce4a9aa42a63d43aa0c9d4",
+      "url": "http://localhost:5173/#/sku/1ea1d881f3ba8507d99fe3210f6feed16740670069529d5db23932a5b8bdbbd4?batch=2b725fd3a08e43588613617e8fce5f98&single=f12f2cb6e4ce4a9aa42a63d43aa0c9d4",
+      "screenshot": "38-buyer-advice-final-HLX-CASE-NOQUOTE.png",
+      "conclusion": "本仓有补货需求，先补齐有效报价再确定采购量",
+      "explanation": {
+        "majorRisks": [
+          {
+            "text": "采购交期尚未确认；当前采用14天规划假设，不能据此承诺赶上缺货前到货",
+            "supportRefs": [
+              "lead-unknown"
+            ]
+          }
+        ],
+        "keyEvidence": [
+          {
+            "text": "可用库存3件，未来14天参考需求约56.0件，参考需补53件；未扣未核实在途",
+            "supportRefs": [
+              "stock-basis"
+            ]
+          },
+          {
+            "text": "2026-11-07至2026-11-13，7个有记录日共售28件；未记录日期不代表没有需求",
+            "supportRefs": [
+              "sales-basis"
+            ]
+          }
+        ],
+        "humanConfirmations": [
+          {
+            "text": "先为本商品确认唯一有效供应商报价及交期，再核对起订量和整箱要求；当前仍可评估需求",
+            "supportRefs": [
+              "next-step"
+            ]
+          }
+        ],
+        "recommendationReasons": [
+          {
+            "text": "本仓有补货需求，先补齐有效报价再确定采购量",
+            "supportRefs": [
+              "conclusion"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 1567,
+        "totalTokens": 1778,
+        "outputTokens": 211,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1055
+      },
+      "costStatus": "UNKNOWN",
+      "model": "deepseek-flash",
+      "reference": 53,
+      "candidate": null,
+      "purchaseEligible": false,
+      "refreshRetained": true,
+      "actionFocus": true
+    },
+    {
+      "sku": "HLX-LAMP-SURGE",
+      "taskId": "732850dd4ce942bcb5d6236bbdb52bbe",
+      "url": "http://localhost:5173/#/sku/098bc6a87407098e484099b45ebccdaea1f1eafd2335039ac3e22ba6e60afd69?batch=2b725fd3a08e43588613617e8fce5f98&single=732850dd4ce942bcb5d6236bbdb52bbe",
+      "screenshot": "39-buyer-advice-final-HLX-LAMP-SURGE.png",
+      "conclusion": "本仓存在近期断货风险，普通采购可能赶不上",
+      "explanation": {
+        "majorRisks": [
+          {
+            "text": "首个记录日售2件，最近记录日售16件；区间均值可能掩盖近期变化，后续走势尚未确认，先核对促销或异常订单",
+            "supportRefs": [
+              "sales-change"
+            ]
+          }
+        ],
+        "keyEvidence": [
+          {
+            "text": "可用库存8件，未来9天参考需求约60.4件，参考需补53件；未扣未核实在途",
+            "supportRefs": [
+              "stock-basis"
+            ]
+          },
+          {
+            "text": "参考补充53件，为满足每箱4件的要求，采购候选调整为56件",
+            "supportRefs": [
+              "quantity-basis"
+            ]
+          },
+          {
+            "text": "预计2026-11-17起有缺货风险，报价交期2天；正常采购不能证明已覆盖到货前缺口",
+            "supportRefs": [
+              "arrival-basis"
+            ]
+          }
+        ],
+        "humanConfirmations": [
+          {
+            "text": "向供应商确认最早可售日期；若无法赶上缺货，再核实加急或调拨是否可行",
+            "supportRefs": [
+              "next-step"
+            ]
+          }
+        ],
+        "recommendationReasons": [
+          {
+            "text": "本仓存在近期断货风险，普通采购可能赶不上",
+            "supportRefs": [
+              "conclusion"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "currency": null,
+        "actualCost": null,
+        "inputTokens": 1832,
+        "totalTokens": 2078,
+        "outputTokens": 246,
+        "pricingVersion": null,
+        "cachedInputTokens": 512,
+        "uncachedInputTokens": 1320
+      },
+      "costStatus": "UNKNOWN",
+      "model": "deepseek-flash",
+      "reference": 53,
+      "candidate": 56,
+      "purchaseEligible": true,
+      "refreshRetained": true,
+      "actionFocus": true
+    }
+  ],
+  "newModelRequests": 3,
+  "explainAI": true,
+  "purchaseWrites": 0,
+  "pageErrors": [],
+  "controlledResponseChecks": [
+    "AI timeout after successful replenishment retains facts and retry"
+  ],
+  "mobile820": true,
+  "notes": "Three real model calls; failure branch is explicitly injected, not a real provider timeout."
+}

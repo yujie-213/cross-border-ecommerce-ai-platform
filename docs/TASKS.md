@@ -9380,7 +9380,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "45062dc18e5e5ca2884f64cdb9981e4aa688f34b",
     "dae733b04f3b08dd0a4321f6ce82f9351bf7fe14",
     "a4c5e906bbe299c28f918daaad73fcaae2fcbdf5",
-    "8edb8e86e3f1c565c0b25c9dda2342265b9278f3"
+    "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
+    "f84dda54993ca78b55c714bb08d554240c47c959",
+    "9206aed750dc347f3788f57e19e8d240f4a494ce"
   ],
   "evidence": [
     {
@@ -9680,11 +9682,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-PRODUCT-01/AC3",
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "S01_BUYER_ADVICE_LIVE=1 npm --prefix frontend run test:browser -- buyer-advice.spec.ts",
+      "environment": "Real Edge/local API/Worker/MySQL and three registered teaching SKUs; official DeepSeek; injected failure separately labeled",
+      "sample": "Final3 AVAILABLE, six real calls across two revisions/12859Token/UNKNOWN cost. New17-to20 carton reasoning, no-quote restriction, sales-change evidence, one true request per click/reload/action focus/820px PASS. No purchase writes/page errors.50backend/67frontend/build PASS.",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/buyer-advice-final-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
   "review": null,
   "branch": "codex/alienware-local-deployment",
-  "observedHead": "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
+  "observedHead": "9206aed750dc347f3788f57e19e8d240f4a494ce",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -9753,9 +9769,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-15",
       "to": "REVIEW",
       "reason": "User feedback implemented in 8edb8e86e3f1c565c0b25c9dda2342265b9278f3: top refresh now actually requests AI instead of analysis-only with misleading AI animation; removed duplicate idle/status text. Real browser1/model1 AVAILABLE2310Token, costUNKNOWN, reload retained.65frontend/type/build PASS; no ERP writes/main merge/push."
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "Buyer advice implementation9206aed750dc347f3788f57e19e8d240f4a494ce: conclusion/evidence/next action replaces keyword-selected slots; relevant constraints and sales changes grounded; prior versions preserved. First user request confirmed explainAI=false, not provider failure.6real calls/12859Token UNKNOWN; final browser and50backend/67frontend/build PASS, no ERP writes/main merge/push."
     }
   ],
-  "testedCommit": "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
+  "testedCommit": "9206aed750dc347f3788f57e19e8d240f4a494ce",
   "parallelCondition": "Codex单人，无子代理；当前工作区接手干净。",
   "risks": [
     "共享教学租户不保证ERP侧独占；新销售仍经登记核验，不扫描共享历史",
