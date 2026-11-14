@@ -183,6 +183,10 @@ def analyze(catalog,entity,reader,*,opening_binding=None,requisition_authorized=
     if admission is not None:
         from commerce_hub.data.quality.runtime import public_admission
         result.update(public_admission(admission,result,requisition_authorized=requisition_authorized))
+        if result['analysisState']=='UNANALYZABLE' and result['sourceGrade']=='UNAVAILABLE' and result['capabilities']['reference']['enabled']:
+            # A useful historical reference is a separate result, never a
+            # current recommendation or an ERP suggestion with invented qty.
+            result.update(analysisState='HISTORICAL_REFERENCE',sourceGrade='HISTORICAL_REFERENCE')
     return result
 
 
@@ -195,11 +199,13 @@ def priority(item):
 def statistics(values,version='v2-counts-v2'):
     values=list(values);states=[r.get('analysisState') for r in values]
     done=sum(s!='PENDING' for s in states)
-    available=sum(s in {'ANALYZED','ERP_REFERENCE','NO_REPLENISHMENT'} for s in states)
+    available=sum(s in {'ANALYZED','ERP_REFERENCE','NO_REPLENISHMENT','HISTORICAL_REFERENCE'} for s in states)
     result=dict(discoveredSkuCount=len({r['sku'] for r in values}) if version=='v2-counts-v2' else len({(r.get('productId'),r['sku']) for r in values}),scopeObjectCount=len(values),processedCount=done,
         ruleCalculated=sum(r.get('sourceGrade')=='RULE_CALCULATED' and r.get('analysisState')=='ANALYZED' for r in values),erpReference=states.count('ERP_REFERENCE'),
         noReplenishment=states.count('NO_REPLENISHMENT'),unanalyzable=states.count('UNANALYZABLE')+states.count('NEEDS_REVIEW'),failed=states.count('FAILED'),
         unfinished=states.count('PENDING'),coverage=available/len(values) if values else 0,processingCoverage=done/len(values) if values else 0,
         ruleSourceCount=sum(r.get('sourceGrade')=='RULE_CALCULATED' for r in values),erpSourceRecordCount=sum(r.get('sourceGrade')=='REFERENCE_ONLY' for r in values),modelCalls=0,businessMutations=0)
     if version=='v2-counts-v2':result['productIdentityCount']=len({r['productId'] for r in values if r.get('productId')})
+    # Do not add a zero-valued field when validating older immutable reports.
+    if 'HISTORICAL_REFERENCE' in states:result['historicalReference']=states.count('HISTORICAL_REFERENCE')
     return result

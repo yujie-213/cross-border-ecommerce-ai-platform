@@ -25,3 +25,7 @@ D01有界完整集合与恢复、D02基点/守恒/日覆盖、D03不可变质量
 ## 字段边界补充
 
 自动来源基点的originAt为原登记/首条ERP过账前值的事实起点，checkpoint.observedAt为本次独立读取时间；显式新基点使用其已登记的observedAt/postedAt水位。二者不可互换，源行rowUpdatedAt也不是采集时间。零日只能在该有据起点之后按完整范围与未缺货条件证明。capabilities.requisition是任务自有部署范围和业务条件的指示，不取代当前会话的G01重新鉴权。riskResult.inTransitQuantity仅统计已确认可售供给；未证实采购分别在formalPurchases和uncertainties显示，不能把0解释为无任何采购。
+
+## 两SKU可用性定向修复增量（2026-11-14）
+
+新增HISTORICAL_REFERENCE状态/来源：仅当原结果无规则/ERP建议，但既有capabilities.reference=true时使用。quantity/sourceQuantity仍null，采购资格仍按原门检查，历史参考不能提交请购。现有API继续返回库存/历史日期与记录日期均值；最小Vue面板消费既有demandWindow/inventoryBasis/recoveryHints，不改WorkBuddy原型。summary仅当有新历史参考结果时增加historicalReference计数并计入可查看分析覆盖；旧报告字段及统计校验保持原样。新采集的stock/ledger请求每页最多25，预算/完整性/去重/原任务恢复不变，不把小页成功解释为永久无超时。11/13零订单已由正负日期查询对照证实，但当日中午建档、无整日可售证据，仍不补为有效零预测样本。

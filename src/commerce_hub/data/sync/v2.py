@@ -102,6 +102,8 @@ class V2Reader:
         try:
             while len(rows)<=self.max_records:
                 size=min(self.page_size,100) if path=='/api/v1/supplier-quotes' else self.page_size
+                if path=='/api/v1/stock/ledger' and self.state.get('admissionVersion')=='s01-runtime-v1':
+                    size=min(size,25)
                 query={} if detail else dict(parameters,limit=size,offset=len(rows))
                 data,event=self.request(path,query)
                 values,total=([data],1) if detail else (data.get('items'),data.get('total'))
