@@ -1,3 +1,5 @@
+本轮远端同步回执（2026-11-14）：负责人明确允许远端推送后，普通push独立分支codex/s01-data-admission-review成功，独立ls-remote确认520cc6c7e56abea76d6c9a4da0475b1aad14986b；远端main仍ece11160ecd0e820153a1c58128657a2f8788884，未合并/强推。原自动审批拒绝作为历史保留，当前publication=PASS、任务REVIEW、review=null。后续仅本回执/台账/派生文档普通同步，最终HEAD按Git回读；无新增ERP/模型/采购调用或业务代码修改。结束后停止，等待负责人评审及后续指令。
+
 本轮本地提交回执（2026-11-14）：诊断/方案b6b3956、证据a335fb2均真实存在，main未合并。自动审批在执行前拒绝含push的组合命令，理由为ERP评审摘要远端目的地与载荷需明确公开授权；随后仅本地提交成功，未重试或绕过推送。REVIEW不变，publication=NOT_RUN_AUTO_REVIEW_REJECTED。若需远端同步，负责人确认目标GitHub/yujie-213/cross-border-ecommerce-ai-platform及本轮白名单教学摘要后才执行；原始响应/凭据不上传。最终HEAD按Git回读。
 
 ## 2026-11-14 数据准入专项评审交付

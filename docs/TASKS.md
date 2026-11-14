@@ -8962,6 +8962,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-DATA-REVIEW-01/AC4"
       ]
+    },
+    {
+      "kind": "REPOSITORY",
+      "command": "git push -u origin HEAD:refs/heads/codex/s01-data-admission-review; git ls-remote origin review-branch main",
+      "environment": "Windows Git/GitHub; explicit owner remote-push approval",
+      "sample": "Remote review branch 520cc6c verified; main ece11160 unchanged; no force/no merge; teaching summaries only",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-DATA-REVIEW/verification.json",
+      "acceptanceIds": [
+        "D-S01-DATA-REVIEW-01/AC4"
+      ]
     }
   ],
   "review": null,
@@ -8986,12 +8998,26 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "reportRef": "docs/reports/S01_数据准入长期方案与验收_20261114.md",
   "publication": {
-    "status": "NOT_RUN_AUTO_REVIEW_REJECTED",
-    "localEvidenceCommit": "a335fb2bc84332b6978ff301fceb39061243a16c",
-    "mainMerged": false,
+    "status": "PASS",
+    "authorization": "2026-11-14负责人明确回复：允许远端推送",
     "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
-    "reason": "Automatic approval rejected the combined local commit/push command before execution: publication of ERP review evidence to this destination requires explicit target/payload approval. Local-only commit then succeeded. No push retry or workaround.",
-    "approvalNeeded": "Only if owner wants remote synchronization of the whitelisted code/docs and teaching summaries on codex/s01-data-admission-review; no raw responses or credentials."
+    "branch": "codex/s01-data-admission-review",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "verifiedRemoteHead": "520cc6c7e56abea76d6c9a4da0475b1aad14986b",
+    "verifiedRemoteMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "verifiedAt": "2026-11-14T02:00:50.021914+00:00",
+    "mainMerged": false,
+    "noForce": true,
+    "priorPublication": {
+      "status": "NOT_RUN_AUTO_REVIEW_REJECTED",
+      "localEvidenceCommit": "a335fb2bc84332b6978ff301fceb39061243a16c",
+      "mainMerged": false,
+      "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
+      "reason": "Automatic approval rejected the combined local commit/push command before execution: publication of ERP review evidence to this destination requires explicit target/payload approval. Local-only commit then succeeded. No push retry or workaround.",
+      "approvalNeeded": "Only if owner wants remote synchronization of the whitelisted code/docs and teaching summaries on codex/s01-data-admission-review; no raw responses or credentials."
+    },
+    "receipt": "Subsequent documentation-only receipt will be synchronized normally; final HEAD is independently read, not prewritten."
   }
 }
 ```
