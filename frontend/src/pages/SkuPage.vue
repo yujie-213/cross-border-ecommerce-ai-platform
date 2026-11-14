@@ -101,13 +101,25 @@ onMounted(async () => {
   }
 })
 
-watch(() => route.value.path, async path => {
-  if (!path.startsWith('/sku/')) return
-  const key = route.value.segments[1]
-  if (key && (key !== state.itemKey || route.value.query.single !== state.singleId)) {
-    await openItem(key, route.value.query.single); quantity.value = state.item?.quantity || 0
+watch(
+  [() => route.value.path, () => route.value.query.single || '', () => route.value.query.batch || ''],
+  async ([path]) => {
+    if (!path.startsWith('/sku/')) return
+    const key = route.value.segments[1]
+    if (!key) return
+    const batch = route.value.query.batch
+    const single = route.value.query.single
+    if (batch && batch !== state.batchId) await openBatch(batch)
+    // A single analysis and the batch conclusion are two different datasets:
+    // switching between them (either direction) must refetch, not reuse stale state.
+    if (key !== state.itemKey || (single || '') !== state.singleId) {
+      await openItem(key, single)
+      quantity.value = state.item?.quantity || 0
+      reason.value = ''
+      acknowledged.value = false
+    }
   }
-})
+)
 
 watch(() => item.value?.quantity, value => { if (value !== null && value !== undefined) quantity.value = value })
 </script>
@@ -171,7 +183,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
       </p>
 
       <AiAnalysis :ai="ai" :task-state="state.singleTask?.state || null" :loading="state.singleLoading"
-                  @generate="generate" />
+                  :error-code="state.singleTask?.errorCode || null" @generate="generate" />
 
       <section v-if="forecast || series.length" class="panel">
         <div class="panel-head">
@@ -324,6 +336,15 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           <button v-if="requisition.state !== 'SUBMITTED' && requisition.state !== 'BLOCKED'" class="button small" :disabled="state.busy" @click="readRequisition">核对状态</button>
         </template>
 
+        <template v-else-if="state.singleTask?.state === 'FAILED' && !single">
+          <span class="chip danger">单品分析失败</span>
+          <span class="ab-note">{{ state.singleTask.errorCode ? issueLabel(state.singleTask.errorCode) : '服务端未返回错误原因' }}</span>
+          <span class="grow" />
+          <button class="button primary" :disabled="state.busy || state.singleLoading" @click="generate">
+            {{ state.singleLoading ? '正在重试…' : '重试单品分析' }}
+          </button>
+        </template>
+
         <template v-else-if="!eligibility?.eligible || item.quantity === null">
           <span class="chip danger">暂不可提交</span>
           <span class="ab-note">{{ item.quantity === null ? '该对象没有可提交的补货数量' : (blocked.length ? blocked.slice(0, 2).map(issueLabel).join('；') : '采购资格尚未通过') }}</span>
@@ -337,7 +358,7 @@ watch(() => item.value?.quantity, value => { if (value !== null && value !== und
           </span>
           <span class="grow" />
           <button class="button primary" :disabled="state.busy || state.singleLoading" @click="generate">
-            {{ state.singleLoading ? '正在读取…' : '生成单品分析' }}
+            {{ state.singleLoading ? '正在读取…' : state.singleTask?.state === 'FAILED' ? '重试单品分析' : '生成单品分析' }}
           </button>
         </template>
 

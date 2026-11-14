@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { route, navigate, setQuery } from '../router'
-import { init, openBatch, loadList, setFilters, setOffset, startBatch, state, summary, stageOf, latestBatchId, STAGE_LABEL, unitOf } from '../s01'
+import { init, openBatch, loadList, startBatch, state, summary, stageOf, latestBatchId, STAGE_LABEL, unitOf } from '../s01'
 
 const q = ref(''), store = ref(''), warehouse = ref(''), source = ref(''), stateFilter = ref('')
 let textTimer: ReturnType<typeof setTimeout> | undefined
@@ -17,16 +17,36 @@ const stateName: Record<string, string> = {
   NEEDS_REVIEW: '需要核实', UNANALYZABLE: '无法分析', FAILED: '分析失败', PENDING: '等待处理'
 }
 
-function syncFromRoute() {
+/** URL is the single source of truth for filters and paging. */
+function readQuery() {
   const query = route.value.query
   q.value = query.q || ''
   store.value = query.store || ''
   warehouse.value = query.warehouse || ''
   source.value = query.source || ''
   stateFilter.value = query.state || ''
-  void setFilters({ q: q.value, store: store.value, warehouse: warehouse.value, source: source.value, state: stateFilter.value })
-  const offset = Number(query.offset || 0)
-  if (offset !== state.offset) void setOffset(offset)
+  state.filters = { q: q.value, store: store.value, warehouse: warehouse.value, source: source.value, state: stateFilter.value }
+  state.offset = Math.max(0, Number(query.offset || 0) || 0)
+}
+
+const sameAsState = () => {
+  const query = route.value.query
+  return (query.batch || '') === state.batchId &&
+    (query.q || '') === state.filters.q && (query.store || '') === state.filters.store &&
+    (query.warehouse || '') === state.filters.warehouse && (query.source || '') === state.filters.source &&
+    (query.state || '') === state.filters.state && (Number(query.offset || 0) || 0) === state.offset
+}
+
+/** Uses the already-open batch when possible; the list still reloads for the new query. */
+async function loadForRoute() {
+  const batch = route.value.query.batch
+  if (batch && (batch !== state.batchId || !state.progress)) await openBatch(batch)
+  else await loadList()
+}
+
+async function syncFromRoute() {
+  readQuery()
+  await loadForRoute()
 }
 
 function apply(patch: Record<string, string>) {
@@ -45,22 +65,20 @@ const pages = () => Math.max(1, Math.ceil(state.list.total / state.limit))
 
 onMounted(async () => {
   await init()
-  // Apply the URL filters before the first list request so a page entry costs one round trip, not two.
-  const query = route.value.query
-  q.value = query.q || ''; store.value = query.store || ''; warehouse.value = query.warehouse || ''
-  source.value = query.source || ''; stateFilter.value = query.state || ''
-  state.filters = { q: query.q || '', store: query.store || '', warehouse: query.warehouse || '', source: query.source || '', state: query.state || '' }
-  state.offset = Number(query.offset || 0)
-  const id = query.batch || latestBatchId()
-  if (!id) return
-  await openBatch(id)
-  if (query.batch !== id) navigate('/suggestions', { batch: id, ...query })
+  readQuery()
+  const batch = route.value.query.batch || latestBatchId()
+  if (!batch) { await loadList(); return }
+  // One list request per entry, already carrying the URL filters and offset.
+  if (batch !== state.batchId || !state.progress) await openBatch(batch)
+  else await loadList()
+  if (route.value.path === '/suggestions' && route.value.query.batch !== batch) navigate('/suggestions', { batch, ...route.value.query })
 })
 
-watch(() => route.value.query.batch, async id => { if (id && id !== state.batchId) { await openBatch(id); syncFromRoute() } })
-watch(() => route.value.query, (query, prev) => {
+watch(() => route.value.query, (query, previous) => {
   if (route.value.path !== '/suggestions') return
-  if (JSON.stringify(query) !== JSON.stringify(prev)) syncFromRoute()
+  if (JSON.stringify(query) === JSON.stringify(previous)) return
+  if (sameAsState()) return
+  void syncFromRoute()
 })
 </script>
 

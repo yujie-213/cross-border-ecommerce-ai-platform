@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { AI, ExplanationItem, TaskState } from '../api/types'
+import { issueLabel } from '../api/v2'
 
-const props = defineProps<{ ai: AI | null; taskState?: TaskState | null; loading?: boolean; error?: string }>()
+const props = defineProps<{
+  ai: AI | null
+  taskState?: TaskState | null
+  loading?: boolean
+  error?: string
+  errorCode?: string | null
+}>()
 const emit = defineEmits<{ generate: [] }>()
 
 const SECTIONS: { key: string; label: string }[] = [
@@ -20,8 +27,11 @@ const singleRunning = computed(() => !!props.taskState && ['QUEUED', 'RUNNING'].
 
 const running = computed(() => !!props.loading || singleRunning.value)
 
+const taskFailed = computed(() => props.taskState === 'FAILED' && !props.ai && !running.value)
+
 const status = computed(() => {
   if (running.value) return { key: 'running', label: '生成中', tone: 'info' }
+  if (taskFailed.value) return { key: 'task-failed', label: '分析失败', tone: 'danger' }
   if (!props.ai) return { key: 'none', label: '未生成', tone: 'muted' }
   if (props.ai.status === 'AVAILABLE') return { key: 'ok', label: '已生成', tone: 'success' }
   if (props.ai.status === 'NOT_ATTEMPTED') return { key: 'none', label: '未调用', tone: 'muted' }
@@ -33,6 +43,11 @@ const reasons = computed(() => items('recommendationReasons').slice(1))
 const columns = computed(() => SECTIONS.map(section => ({ ...section, list: items(section.key) })).filter(section => section.list.length))
 const tokens = computed(() => props.ai?.usage?.totalTokens ?? null)
 const reason = computed(() => props.ai?.reason || props.error || '')
+const failureText = computed(() => {
+  const code = props.errorCode
+  if (!code) return props.error || '服务端未返回错误码'
+  return issueLabel(code) + '（' + code + '）'
+})
 </script>
 
 <template>
@@ -42,7 +57,7 @@ const reason = computed(() => props.ai?.reason || props.error || '')
       <h2>智能分析</h2>
       <span class="chip" :class="status.tone">{{ status.label }}</span>
       <span v-if="status.key === 'ok'" class="ai-scope">基于本次已读取的库存、销量与采购条件</span>
-      <button v-if="status.key === 'none' || status.key === 'failed'" class="button small ai-cta"
+      <button v-if="['none', 'failed'].includes(status.key)" class="button small ai-cta"
               :disabled="running" @click="emit('generate')">
         {{ status.key === 'failed' ? '重新生成' : '生成 AI 解读' }}
       </button>
@@ -70,6 +85,13 @@ const reason = computed(() => props.ai?.reason || props.error || '')
         <span v-if="tokens !== null">Token {{ tokens }}</span>
         <span class="ai-boundary">AI 仅解释，不计算补货数量</span>
       </footer>
+    </div>
+
+    <div v-else-if="status.key === 'task-failed'" class="ai-body">
+      <p class="ai-note strong">单品分析任务失败，未生成结论</p>
+      <p class="ai-reason">{{ failureText }}</p>
+      <p class="ai-hint">失败原因来自服务端任务回执；规则建议与批次结论不受影响，可重试或改看批次结果。</p>
+      <button class="button small" style="margin-top:8px" @click="emit('generate')">重试单品分析</button>
     </div>
 
     <div v-else-if="status.key === 'failed'" class="ai-body">

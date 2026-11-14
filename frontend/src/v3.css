@@ -11,6 +11,7 @@
 .banner.danger{background:var(--danger-bg);border-color:#f2d3d0;color:#8d2c28}
 .banner.warning{background:var(--warning-bg);border-color:#f0dfc0;color:#7a4a0a}
 .banner.plain{background:#f7f9fa}
+.banner.small{font-size:11px;padding:7px 13px}
 .banner a{color:inherit;text-decoration:underline}
 .banner .button{margin-left:8px}
 .empty-state{padding:34px 24px;text-align:center}

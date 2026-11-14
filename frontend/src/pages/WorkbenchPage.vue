@@ -45,7 +45,11 @@ const shortest = computed(() => state.list.items
 
 const incomplete = computed(() => Object.entries(state.progress?.sourceLimits || {}).filter(([, value]) => !value.complete))
 
-async function open(id: string) { await openBatch(id); if (route.value.query.batch !== id) navigate('/workbench', { batch: id }) }
+async function open(id: string) {
+  await openBatch(id)
+  // The user may have navigated away while the batch was loading; never steal their route.
+  if (route.value.path === '/workbench' && route.value.query.batch !== id) navigate('/workbench', { batch: id })
+}
 
 onMounted(async () => {
   await init()
@@ -57,7 +61,7 @@ watch(() => route.value.query.batch, async id => { if (id && id !== state.batchI
 
 async function rerun() {
   const id = await startBatch()
-  if (id) navigate('/workbench', { batch: id })
+  if (id && route.value.path === '/workbench') navigate('/workbench', { batch: id })
 }
 
 function kpi(filter: Record<string, string>) { navigate('/suggestions', { batch: state.batchId, ...filter }) }

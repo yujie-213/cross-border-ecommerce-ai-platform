@@ -83,8 +83,9 @@ test('V3 WORKSPACE: four pages, real facts, AI states, filter restore and three 
   await page.getByRole('link', { name: /请购管理/ }).click()
   await expect(page.getByRole('heading', { name: '请购管理', exact: true })).toBeVisible()
   await expect(page.getByText('后端尚未提供请购列表接口')).toBeVisible()
+  // The ledger reads each saved single serially in small batches; wait until it settles.
+  await expect(page.getByRole('button', { name: '重新回读' })).toBeEnabled({ timeout: 30000 })
   await page.screenshot({ path: path.join(screenshots, '06-requisitions-1440.png'), fullPage: true })
-  await page.waitForTimeout(4000)
 
   // 7. A saved requisition opens the analysis it was confirmed against (single id in the URL).
   const ledgerRows = page.locator('tbody tr')
@@ -118,4 +119,47 @@ test('V3 WORKSPACE: four pages, real facts, AI states, filter restore and three 
   expect(errors).toEqual([])
   writeFileSync(path.join(root, 'docs/evidence/S01-V3/browser-result.json'),
     JSON.stringify({ result: 'PASS', pageErrors: errors, viewports: [1440, 1024, 820], submitted: 0, modelCalls: 0 }, null, 2))
+})
+
+test('V3 FAILED SINGLE: a failed single task shows FAILED with its real error code, not "not generated"', async ({ page }) => {
+  test.skip(process.env.S01_V3_BROWSER !== 'true', 'Explicit local platform + password required')
+  test.setTimeout(90000)
+
+  await page.goto('/')
+  await page.getByLabel('账号').fill('admin')
+  await page.getByLabel('密码').fill(password)
+  await page.getByRole('button', { name: '登录', exact: true }).click()
+  await expect(page.locator('.kpi-row')).toBeVisible({ timeout: 45000 })
+
+  await page.goto('/#/suggestions')
+  await expect(page.locator('tbody tr').first()).toBeVisible({ timeout: 30000 })
+  await page.locator('tbody tr').first().click()
+  await expect(page.locator('.verdict')).toBeVisible()
+  const url = page.url()
+  const key = url.split('#/sku/')[1].split('?')[0]
+
+  // Only the single-analysis read is stubbed: no ERP call, no model call, no writes.
+  await page.route('**/api/v1/s01/v2/singles/mock-failed-task', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      task: {
+        taskRef: { tenantId: 's01-v2-teaching-local', taskId: 'mock-failed-task' },
+        state: 'FAILED', revision: 3, planVersion: 's01-v2', reportRef: null,
+        scenarioId: 'S01_V2_SINGLE', deadline: new Date().toISOString(),
+        errorCode: 'MODEL_NOT_ENABLED', sourceNature: 'SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP'
+      },
+      report: null
+    })
+  }))
+
+  await page.evaluate(next => { location.hash = next }, `/sku/${key}?batch=${new URL(url).hash.split('batch=')[1]}&single=mock-failed-task`)
+  await expect(page.locator('.ai-head')).toContainText('分析失败', { timeout: 20000 })
+  await expect(page.locator('.ai-body')).toContainText('模型未启用')
+  await expect(page.locator('.ai-body')).toContainText('MODEL_NOT_ENABLED')
+  await expect(page.locator('.actionbar')).toContainText('重试单品分析')
+  await expect(page.locator('.verdict')).not.toContainText('分析失败')
+  await page.screenshot({ path: path.join(screenshots, '10-sku-failed-1440.png'), fullPage: false })
+
+  await page.unroute('**/api/v1/s01/v2/singles/mock-failed-task')
 })

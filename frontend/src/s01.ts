@@ -55,7 +55,7 @@ export const grouped = computed(() => {
   const s = summary.value
   if (!s) return []
   return [
-    { key: 'confirm', label: '待确认', count: s.ruleCalculated + s.erpReference, color: '#0f6b64' },
+    { key: 'confirm', label: '有建议数量', count: s.ruleCalculated + s.erpReference, color: '#0f6b64' },
     { key: 'history', label: '历史参考', count: s.historicalReference || 0, color: '#7a8fa6' },
     { key: 'review', label: '需核实', count: s.unanalyzable, color: '#c9812f' },
     { key: 'none', label: '无需补货', count: s.noReplenishment, color: '#c3ccd4' },
@@ -82,7 +82,7 @@ export function stageOf(item: V2Item): Stage {
 }
 
 export const STAGE_LABEL: Record<Stage, string> = {
-  confirm: '待确认', history: '历史参考', review: '需核实', none: '无需补货', broken: '分析失败', pending: '等待处理'
+  confirm: '有建议数量', history: '历史参考', review: '需核实', none: '无需补货', broken: '分析失败', pending: '等待处理'
 }
 export const STAGE_TONE: Record<Stage, string> = {
   confirm: 'primary', history: 'info', review: 'warning', none: 'muted', broken: 'danger', pending: 'muted'
@@ -366,6 +366,20 @@ export async function startBatch() {
 export function latestBatchId() {
   const done = state.batches.find(t => t.state === 'SUCCEEDED')
   return (done || state.batches[0])?.taskRef.taskId || ''
+}
+
+export type RequisitionCategory = 'pending' | 'approved' | 'unknown' | 'blocked' | 'draft'
+
+/** ERP text is returned by an external system: only an explicit approval counts as approved. */
+const APPROVED_TEXT = /(审批通过|审核通过|已审批|已批准|已通过)/
+const UNKNOWN_STATES = ['SUBMIT_UNKNOWN', 'CREATE_UNKNOWN']
+
+export function requisitionCategory(requisition: V2Requisition | null): RequisitionCategory {
+  const platform = requisition?.state || ''
+  if (UNKNOWN_STATES.includes(platform)) return 'unknown'
+  if (platform === 'BLOCKED') return 'blocked'
+  if (platform !== 'SUBMITTED') return 'draft'
+  return APPROVED_TEXT.test(String(requisition?.erpStatus || '')) ? 'approved' : 'pending'
 }
 
 export interface RequisitionRow { task: SingleRow; requisition: V2Requisition | null }

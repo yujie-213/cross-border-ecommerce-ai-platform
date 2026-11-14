@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { fmt, stageOf, STAGE_LABEL, unitOf } from '../../src/s01'
+import { fmt, stageOf, STAGE_LABEL, unitOf, requisitionCategory } from '../../src/s01'
 import type { V2Item } from '../../src/api/v2'
 
 const base = (over: Partial<V2Item>): V2Item => ({
@@ -43,5 +43,19 @@ describe('S01 V3 presentation rules', () => {
   it('keeps zero stock as a number and unknown stock as a dash', () => {
     expect(unitOf(base({ unit: 'EA' }))).toBe('件')
     expect(unitOf(base({ unit: null }))).toBe('件')
+  })
+
+  it('classifies requisitions by platform state, never guessing ERP approval', () => {
+    const rq = (state: string, erpStatus: string | null = null) => ({ state, erpStatus } as never)
+    expect(requisitionCategory(null)).toBe('draft')
+    expect(requisitionCategory(rq('CREATED'))).toBe('draft')
+    expect(requisitionCategory(rq('SUBMITTED', '待审核'))).toBe('pending')
+    expect(requisitionCategory(rq('SUBMITTED', null))).toBe('pending')
+    expect(requisitionCategory(rq('SUBMITTED', '审批通过'))).toBe('approved')
+    expect(requisitionCategory(rq('SUBMITTED', '已审批'))).toBe('approved')
+    expect(requisitionCategory(rq('SUBMITTED', '审核中'))).toBe('pending')
+    expect(requisitionCategory(rq('SUBMIT_UNKNOWN', '待审核'))).toBe('unknown')
+    expect(requisitionCategory(rq('CREATE_UNKNOWN'))).toBe('unknown')
+    expect(requisitionCategory(rq('BLOCKED'))).toBe('blocked')
   })
 })
