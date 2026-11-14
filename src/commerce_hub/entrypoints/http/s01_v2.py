@@ -147,5 +147,9 @@ def register_v2_routes(app,principal):
     def saved(task_id:str,request:Request,actor=Depends(principal)):
         s,p,scope=services(request,actor)
         rq=getattr(s,'v2_requisitions',None)
-        if rq is None:raise TaskError('REQUISITION_NOT_ENABLED',409)
+        if rq is None:
+            # Local saved-state reads do not need an ERP client or write permission.
+            # Keep the submit endpoint disabled when the requisition feature is off.
+            from commerce_hub.scenarios.s01_v2.requisition import V2RequisitionService
+            rq=V2RequisitionService(s,p,None,'.')
         return rq.read(actor,task_id)
