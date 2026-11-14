@@ -11,14 +11,14 @@ from commerce_hub.entrypoints.http.app import create_app
 from commerce_hub.orchestration.worker import Worker
 from commerce_hub.scenarios.s01_v2.requisition import V2RequisitionService
 from tests.integration.orchestration.test_s01_reports import make_s01
-from tests.integration.s01.test_v2_workflow import environment,run,single
+from tests.integration.s01.test_v2_workflow import environment,run,single,SyntheticModel
 from tests.support.admission_runtime import AdmissionERP
 
 pytestmark=pytest.mark.mysql
 
 
-def owned_environment(make_s01,tmp_path):
-    e=environment(make_s01,tmp_path,0)
+def owned_environment(make_s01,tmp_path,model=None):
+    e=environment(make_s01,tmp_path,0,model=model)
     e.erp=AdmissionERP()
     e.policy.owned_only=True;e.policy.owned_mappings=[e.erp.mapping]
     return e
@@ -34,6 +34,20 @@ def test_owned_worker_captures_exact_members_and_retains_reference_after_new_day
     assert item['registeredMembership']['datasetId']==e.erp.mapping.monitor.datasetId
     assert item['decision']['forecast']['orderCount']==7 and e.erp.mutations==0
     assert all('ids' in p and 'date_from' not in p for _,path,p in e.erp.calls if path=='/api/v1/sales-orders')
+
+
+def test_owned_business_ai_is_explicit_and_keeps_reference_numbers(make_s01,tmp_path):
+    model=SyntheticModel();e=owned_environment(make_s01,tmp_path,model=model);tid,_=run(e)
+    sid=single(e,tid);report=e.service.read_report(e.principal,sid)
+    assert report['analysisReport']['ai']['status']=='AVAILABLE' and model.calls==1
+    assert report['dataReport']['item']['decision']['referenceReplenishmentQuantity']==45
+    assert any('39' in f['text'] for f in report['analysisReport']['ai']['explanation']['keyEvidence'])
+    original=e.service.read(e.principal,sid)['parameters'] if 'parameters' in e.service.read(e.principal,sid) else None
+    entity={k:report['dataReport']['item'][k] for k in ['entityKey','sourceTenant','storeId','warehouseId','productId','sku','storeName','warehouseName']}
+    view=e.service.create(e.principal,'no-ai-with-provider','S01_V2_SINGLE',e.scope,dict(entity=entity,explainAI=False),'synthetic')
+    assert Worker(e.service).once()
+    assert e.service.read_report(e.principal,view['taskRef']['taskId'])['analysisReport']['ai']['status']=='NOT_ATTEMPTED'
+    assert model.calls==1 and e.erp.mutations==0
 
 
 @pytest.mark.parametrize('drift',[False,True])
