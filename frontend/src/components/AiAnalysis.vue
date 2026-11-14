@@ -15,7 +15,7 @@ const conclusion = computed(() => items('recommendationReasons').find(item => it
 const evidence = computed(() => unique(items('keyEvidence')).slice(0,3))
 const steps = computed(() => unique(items('humanConfirmations')).slice(0,2))
 const risks = computed(() => unique(items('majorRisks')).slice(0,2))
-const older = computed(() => props.ai?.adviceVersion !== 's01-purchase-advice-v2')
+const older = computed(() => !['s01-purchase-advice-v2','s01-purchase-advice-v3'].includes(props.ai?.adviceVersion || ''))
 </script>
 <template>
   <section class="agent-advice" aria-label="AI 行动建议" :data-state="running ? 'running' : ready ? 'ready' : failed ? 'failed' : 'idle'" aria-live="polite">

@@ -57,6 +57,9 @@ def product_bundle(item,binding):
 
 def bundle(item,binding):
     if item.get('explanationVersion')=='s01-purchase-advice-v2':
+        from .purchase_advice_v2 import purchase_advice_bundle
+        return purchase_advice_bundle(item,binding)
+    if item.get('explanationVersion')=='s01-purchase-advice-v3':
         from .purchase_advice import purchase_advice_bundle
         return purchase_advice_bundle(item,binding)
     if item.get('explanationVersion')=='s01-product-experience-v1':return product_bundle(item,binding)

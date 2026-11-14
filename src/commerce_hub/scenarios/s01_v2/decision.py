@@ -115,7 +115,7 @@ def analyze_decision(catalog,entity,reader,*,requisition_authorized=None):
     if compare['recordCount']:warnings+=['ERP_ALGORITHM_UNKNOWN','ERP_DAILY_SALES_WINDOW_UNKNOWN','ERP_GENERATION_TIME_UNVERIFIED','ERP_PURCHASE_NETTING_UNKNOWN']
     if any(not p['warehouseMatch'] for p in formal):warnings.append('RELATED_PURCHASE_TARGETS_DIFFERENT_WAREHOUSE')
     eligible=not hard
-    result.update(explanationVersion='s01-purchase-advice-v2',decisionVersion=VERSION,decision=dict(status=status,forecast=history,horizonDays=horizon,leadDays=lead if lead_known else None,
+    result.update(explanationVersion='s01-purchase-advice-v3',decisionVersion=VERSION,decision=dict(status=status,forecast=history,horizonDays=horizon,leadDays=lead if lead_known else None,
         horizonBasis='QUOTE_LEAD_PLUS_7' if lead_known else 'ASSUMED_14_DAY_PLANNING',forecastQuantity=next((s['forecastQuantity'] for s in scenarios if s['days']==horizon),None),
         referenceReplenishmentQuantity=ref,purchasableQuantity=purchase,confirmedSupplyQuantity=None,
         supplyBasis='UNVERIFIED_SUPPLY_NOT_DEDUCTED',stockoutRisk=risk,coverageDays=baseline['coverageDays'] if baseline else None,

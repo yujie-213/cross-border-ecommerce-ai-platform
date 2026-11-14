@@ -26,8 +26,10 @@ test('采购建议按商品解释数量与交期，并区分补货成功和AI失
   const response=await page.request.get('/api/v1/s01/v2/singles/'+taskId)
   expect(response.ok()).toBe(true)
   const report=(await response.json()).report,model=report.analysisReport.ai,item=report.dataReport.item
-  expect(model.adviceVersion).toBe('s01-purchase-advice-v2');expect(model.status).toBe('AVAILABLE')
+  expect(model.adviceVersion).toBe('s01-purchase-advice-v3');expect(model.status).toBe('AVAILABLE')
   expect(model.explanation.recommendationReasons).toHaveLength(1)
+  if(sku==='HLX-LAMP-SURGE')expect(model.explanation.majorRisks.flatMap((x:any)=>x.supportRefs)).toContain('sales-change')
+  expect(model.explanation.majorRisks.flatMap((x:any)=>x.supportRefs)).not.toContain('arrival-risk')
   const refs=model.explanation.keyEvidence.flatMap((x:any)=>x.supportRefs)
   expect(refs).toContain('stock-basis')
   if(item.decision.purchasableQuantity!==null&&item.decision.purchasableQuantity!==item.decision.referenceReplenishmentQuantity)expect(refs).toContain('quantity-basis')
@@ -40,7 +42,7 @@ test('采购建议按商品解释数量与交期，并区分补货成功和AI失
   }
   await page.reload();await expect(ai).toHaveAttribute('data-state','ready',{timeout:30000})
   await expect(ai).toContainText(sku)
-  const screenshot=`${32+index}-buyer-advice-${sku}.png`
+  const screenshot=`${37+index}-buyer-advice-final-${sku}.png`
   await page.screenshot({path:path.join(out,'screenshots',screenshot),fullPage:true})
   await ai.getByRole('button',{name:'核对采购条件 →'}).click()
   await expect(page.getByLabel('最终采购数量',{exact:true})).toBeFocused()
@@ -60,15 +62,15 @@ test('采购建议按商品解释数量与交期，并区分补货成功和AI失
  await expect(ai).toContainText('超时')
  await expect(ai.getByRole('button',{name:'重试 AI 建议'})).toBeEnabled()
  await expect(page.getByRole('region',{name:'各仓补货判断'})).toBeVisible()
- await page.screenshot({path:path.join(out,'screenshots/35-buyer-ai-partial-failure.png'),fullPage:true})
+ await page.screenshot({path:path.join(out,'screenshots/40-buyer-ai-final-partial-failure.png'),fullPage:true})
  await page.unroute('**/api/v1/s01/v2/singles/'+first.taskId)
  await page.reload();await expect(ai).toHaveAttribute('data-state','ready',{timeout:30000})
  await page.setViewportSize({width:820,height:1000})
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true)
- await page.screenshot({path:path.join(out,'screenshots/36-buyer-advice-820.png'),fullPage:true})
+ await page.screenshot({path:path.join(out,'screenshots/41-buyer-advice-final-820.png'),fullPage:true})
  expect(requests).toHaveLength(3);for(const body of requests)expect(body.explainAI).toBe(true)
  expect(purchaseWrites).toBe(0);expect(errors).toEqual([])
- writeFileSync(path.join(out,'buyer-advice-result.json'),JSON.stringify({result:'PASS',results,newModelRequests:requests.length,
+ writeFileSync(path.join(out,'buyer-advice-final-result.json'),JSON.stringify({result:'PASS',results,newModelRequests:requests.length,
   explainAI:true,purchaseWrites,pageErrors:errors,controlledResponseChecks:['AI timeout after successful replenishment retains facts and retry'],
   mobile820:true,notes:'Three real model calls; failure branch is explicitly injected, not a real provider timeout.'},null,2))
 })

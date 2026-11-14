@@ -28,11 +28,11 @@ def test_buyer_advice_explains_quantity_rounding_and_arrival_gap(tmp_path):
     text={f.ref:f.text for f in b.context.facts}
     assert '普通采购可能赶不上' in text['conclusion']
     assert '参考补充30件' in text['quantity-basis'] and '32件' in text['quantity-basis']
-    assert '整箱倍数8件' in text['quantity-basis']
-    assert item['decision']['firstShortageDate'] in text['next-step']
+    assert '每箱8件' in text['quantity-basis']
+    assert item['decision']['firstShortageDate'] in text['arrival-basis']
     value=output(b)
     assert b.validate_output(json.dumps(value,ensure_ascii=False))==value
-    assert b.refs()['promptRef']['version']=='buyer-2'
+    assert b.refs()['promptRef']['version']=='buyer-3'
 
 
 def test_missing_quote_and_sufficient_stock_have_different_decisions(tmp_path):
@@ -44,6 +44,8 @@ def test_missing_quote_and_sufficient_stock_have_different_decisions(tmp_path):
     enough=analyze(c,e,reader);text={f.ref:f.text for f in advice(enough).context.facts}
     assert '无需追加采购' in text['conclusion'] and '暂不新增' in text['next-step']
     assert '调拨' not in text['next-step']
+    b=advice(enough)
+    assert b.validate_output(json.dumps(output(b),ensure_ascii=False))
 
 
 def test_existing_purchases_take_priority_over_new_procurement(tmp_path):
@@ -74,3 +76,20 @@ def test_sealed_legacy_bundle_keeps_original_versions_and_text(tmp_path):
     assert legacy.refs()['promptRef']['version']=='controlled-2'
     assert any(f.ref=='scope' for f in legacy.context.facts)
     assert not any(f.ref=='conclusion' for f in legacy.context.facts)
+
+
+def test_first_buyer_version_keeps_its_published_fact_phrases(tmp_path):
+    _,reader,c,e=fixture(tmp_path);item=analyze(c,e,reader)
+    item['explanationVersion']='s01-purchase-advice-v2'
+    legacy=advice(item)
+    assert legacy.refs()['promptRef']['version']=='buyer-2'
+    assert '整箱倍数8件' in next(f.text for f in legacy.context.facts if f.ref=='quantity-basis')
+
+
+def test_growing_sales_are_mandatory_evidence_instead_of_a_generic_warning(tmp_path):
+    _,reader,c,e=fixture(tmp_path);item=analyze(c,e,reader)
+    item['decision']['forecast'].update(dailySales=[dict(day='2026-11-01',quantity='2'),dict(day='2026-11-02',quantity='4'),dict(day='2026-11-03',quantity='16')],risks=[])
+    b=advice(item);fact=next(f for f in b.context.facts if f.ref=='sales-change')
+    assert fact.requiredSections==['majorRisks']
+    assert '2件' in fact.text and '16件' in fact.text
+    assert not any(f.ref=='arrival-risk' for f in b.context.facts)
