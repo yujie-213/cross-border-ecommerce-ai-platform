@@ -9288,3 +9288,81 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   }
 }
 ```
+
+
+## D-S01-PRODUCT-01 商品补货决策产品
+
+```json
+{
+  "id": "D-S01-PRODUCT-01",
+  "stage": "D",
+  "title": "S01 商品与分仓补货决策产品重构",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-V2-01",
+    "D-S01-LOCAL-01"
+  ],
+  "entryCondition": "2026-11-14负责人完整产品长任务授权；自主技术决策/只读ERP/少量模型/正常推送，最终REVIEW不合main",
+  "ownerRole": "技术负责人/主集成人",
+  "assignee": "Codex（单人）",
+  "allowedPaths": [
+    "src/commerce_hub/",
+    "frontend/",
+    "tests/",
+    "tools/",
+    "docs/",
+    "README.md"
+  ],
+  "deliverables": [
+    "独立需求预测与参考库存补充、采购候选分离",
+    "商品聚合/全店仓详情/ERP比较与业务解读",
+    "真实全量只读/两SKU/代表SKU/浏览器验收与报告"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-PRODUCT-01/AC1",
+      "text": "全部可信历史独立预测，未知日不补零，无采购条件仍可分析"
+    },
+    {
+      "id": "D-S01-PRODUCT-01/AC2",
+      "text": "SKU/店仓统计一致，逐仓结论、ERP对比及规则/AI解释可使用"
+    },
+    {
+      "id": "D-S01-PRODUCT-01/AC3",
+      "text": "真实全量/两SKU/代表场景/登录浏览器与采购安全验证"
+    },
+    {
+      "id": "D-S01-PRODUCT-01/AC4",
+      "text": "真实提交/回归/证据/说明/普通分支推送，最终REVIEW不合main"
+    }
+  ],
+  "plannedTests": [
+    "需求/库存/采购边界、历史恢复、真实ERP全量一次、真实浏览器、适用回归"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "BROWSER",
+    "REPOSITORY"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-product-demand-rebuild",
+  "observedHead": "f9bc45f721c961774bbc40bad19f8786519ad449",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml（未知未跟踪，保留）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "附件完整产品重构授权；从已核实最新GitHub main领取。"
+    }
+  ]
+}
+```

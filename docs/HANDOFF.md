@@ -1,3 +1,5 @@
+本轮产品重构领取（2026-11-14）：Codex单人，从远端main f9bc45f建立codex/s01-product-demand-rebuild。原跟踪区干净，未知docs/ERP-openapi.yaml保留；已读取附件完整任务、V3与准入交接。实施范围D01/D02/D03/V2/API/Vue/测试/文档，需求与采购执行解耦，全历史/商品聚合/分仓/ERP对比；正常提交推送，最终REVIEW，不合main，不ERP业务写。契约contracts/s01/product-demand.md，实际验收见TASKS，不使用旧历史PASS代替本轮。
+
 S01 前端 V3 已合并 main（2026-11-14）：workbuddy/s01-frontend-v3 → main，快进至 479c7d1。合并前修复换行符污染（22 文件 CRLF→LF，纯终止符变更，内容与行为不变），并在合并前重跑 typecheck/build/51 单测/7 项浏览器用例全通过。当前 main 上四页前端可直接用 Start-Platform.cmd 或 uvicorn+worker+vite 启动。后续接手注意：.gitattributes 为 `* -text` 逐字节存储，脚本改文件务必用二进制或 newline='' 写入，否则整篇变 CRLF。
 
 前端 V3 评审后定向修复（2026-11-14）：同分支。P0 请购安全（UNKNOWN/已有单据禁止再提交、pending 绑定 single+SKU 并持久化、只允许原 key 核对、跨 SKU 不误用）；工作台改用独立 priority 数据不再复用列表筛选；单品分析创建后写 `single` 到 URL，切换重置人工输入；1080 顶部 KPI 与构成同排（≤1000 才堆叠）；台账区分读取失败与无记录，直接打开后 查看 SKU 走单品回落。验证：typecheck/build/51 单测；v3-safety.spec.ts 5 项 + v3.spec.ts 2 项通过，均为 Mock 或只读，无 ERP/模型/采购写。
