@@ -118,7 +118,7 @@ def register_v2_routes(app,principal):
         if factory is None:raise TaskError('PURCHASE_TRACKING_NOT_AVAILABLE',409)
         from commerce_hub.scenarios.s01_v2.tracking import track_purchases
         from commerce_hub.scenarios.s01_backend.requisition_store import saved_tracking_references
-        try:return track_purchases(rows.values(),p,factory(),saved_tracking_references(s.engine,actor.tenant_id))
+        try:return track_purchases(rows.values(),p,factory(),saved_tracking_references(s.engine,actor.tenant_id),discover=True)
         except ValueError as exc:raise TaskError(str(exc),409) from None
 
     @app.post('/api/v1/s01/v2/singles',status_code=202)

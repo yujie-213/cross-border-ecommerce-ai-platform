@@ -6,6 +6,7 @@ export const quantityOf = (item: V2Item) => item.decision?.referenceReplenishmen
 /** A local editable proposal, not a grant to submit. Prefer the server's constrained candidate. */
 export const suggestedPurchaseQuantity = (item: V2Item) => item.decision?.purchasableQuantity ?? item.quantity ?? item.decision?.referenceReplenishmentQuantity ?? null
 export const shortageOf = (item: V2Item) => item.decision?.firstShortageDate || item.riskDate
+export const purchaseStatusTone = (status?: string | null) => status === '待审核' ? 'purchase-review' : status === '待下单' ? 'purchase-order' : status === '已取消' ? 'plain' : 'confirm'
 export function nextAction(item: V2Item): string {
   if (item.analysisState === 'FAILED') return '重新分析，核实读取失败的资料'
   if (!item.decision?.forecast.available) return '核实有效销售记录，再判断需求'

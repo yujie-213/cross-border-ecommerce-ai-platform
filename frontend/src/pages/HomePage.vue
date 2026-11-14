@@ -14,12 +14,12 @@ onMounted(init)
 
 <template>
   <div class="page platform-home">
-    <header class="page-head"><div><span class="eyebrow">跨境电商智慧 AI 中台</span><h1>工作首页</h1><p class="page-sub">让业务问题找到合适的 AI 工作伙伴。</p></div></header>
+    <header class="page-head"><div><span class="eyebrow">跨境电商智慧 AI 中台</span><h1>工作首页</h1></div></header>
     <p v-if="state.error" class="banner danger" role="alert">{{ state.error }}</p>
     <section aria-labelledby="capabilities-title">
       <h2 id="capabilities-title" class="home-title">业务能力</h2>
       <a class="panel agent-entry" :href="href('/workbench', {batch:latestBatchId() || undefined})">
-        <span class="agent-mark">补</span><div><span class="chip primary">已接入</span><h2>智能补货</h2><p>找到缺货风险，理解分仓建议，核实后人工请购。</p><small>自有商品分析 / AI 行动建议 / 采购状态追踪</small></div><span class="agent-arrow">进入工作区 →</span>
+        <span class="agent-mark">补</span><div><span class="chip primary">已接入</span><h2>智能补货</h2><small>自有商品分析 / AI 行动建议 / 采购状态追踪</small></div><span class="agent-arrow">进入工作区 →</span>
       </a>
     </section>
     <div class="home-lower">
@@ -31,7 +31,6 @@ onMounted(init)
         <div class="home-notes"><p v-if="state.pending"><b>有一笔请购结果待核对</b><br>请进入原分析核对，避免重复提交。<a :href="href('/sku/'+state.pending.entityKey,{single:state.pending.singleId})">查看 →</a></p>
           <p v-for="row in attention" :key="row.task.taskRef.taskId"><a :href="row.url">{{ row.name }}需要处理 →</a></p>
           <p v-if="!state.pending && !attention.length" class="muted">暂无需要处理的任务异常。</p>
-          <small class="muted">当前为教学环境。采购申请须人工确认，并由 ERP 完成审批。</small>
         </div>
       </section>
     </div>

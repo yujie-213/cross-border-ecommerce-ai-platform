@@ -10,3 +10,5 @@ body{font-size:14px}.page{max-width:1600px;margin:0 auto}.page h1{font-size:28px
 .back-link{margin-bottom:15px}.product-header{margin-bottom:22px}.warehouse-quantity{margin:15px 0 12px}.warehouse-section{margin-bottom:22px}.agent-sidebar .platform-return{color:#627e78}.product-table a[aria-disabled="true"]{opacity:.5;pointer-events:none}
 
 .advice-history-link{font-size:12px;color:var(--muted);padding:0 4px;line-height:1.8}.advice-history-link>span{display:block;font-size:10px;color:var(--subtle)}
+
+.chip.purchase-review{color:#8a540d;background:#fff1dc}.chip.purchase-order{color:#245b9c;background:#e8f1ff}

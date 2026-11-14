@@ -71,7 +71,6 @@ watch(() => route.value.path, path => {
         <span v-if="item.key === 'suggestions' && navCount" class="nav-count">{{ navCount }}</span>
       </a>
     </nav>
-    <div class="sidebar-note"><span class="tiny-dot" /> 自有业务 · 教学环境<small>只分析登记核验的商品</small></div>
     <div class="sidebar-bottom"><div class="version">WORKSPACE <span>v0.2</span></div></div>
   </aside>
 
@@ -80,7 +79,6 @@ watch(() => route.value.path, path => {
       <div class="breadcrumb"><a href="#/home">序衡 · 智慧中台</a> <span>/</span> <span v-for="(name, index) in crumb" :key="name">{{ name }}<template v-if="index < crumb.length - 1"> / </template></span></div>
       <div class="top-actions">
         <span class="demo-chip" title="本地教学环境：数据来自教学 ERP 的仿真业务数据，采购提交仅创建申请单">教学数据</span>
-        <span class="tenant">可信会话 · 已连接</span>
         <button class="button small" @click="emit('logout')">退出会话</button>
       </div>
     </header>
@@ -89,7 +87,6 @@ watch(() => route.value.path, path => {
     </main>
     <footer class="page-footer">
       <span>序衡 / 跨境电商智慧 AI 中台</span>
-      <span>业务事实为依据 · AI 辅助决策</span>
     </footer>
   </div>
 </template>

@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from commerce_hub.adapters.erp import ERPError
 
 
-def track_purchases(items, policy, reader, saved=()):
+def track_purchases(items, policy, reader, saved=(), *, discover=False):
     eligible = {item['entityKey']: item for item in items if policy.opening_binding(item) is not None}
     references = {}
     for item in eligible.values():
@@ -14,6 +14,27 @@ def track_purchases(items, policy, reader, saved=()):
         item = eligible.get(row.get('entityKey'))
         if item and row.get('erpId'):
             references.setdefault(str(row['erpId']), []).append((item, row))
+    discovery_errors = []
+    if discover:
+        # Search only registered warehouses; never enumerate the shared tenant.
+        # New IDs require exact SKU + product ID. Legacy IDs retain their existing
+        # independent binding checks below, even when discovery is unavailable.
+        for warehouse in sorted({item['warehouseName'] for item in eligible.values()}):
+            members = [item for item in eligible.values() if item['warehouseName'] == warehouse]
+            try:
+                page = reader.read('/api/v1/purchase-orders', dict(warehouse_name=warehouse), page_size=50, max_pages=2)
+                if not page.complete:
+                    raise ERPError('PURCHASE_TRACKING_DISCOVERY_INCOMPLETE')
+                if any(str(row.get('tenant_id')) != policy.source_tenant or row.get('warehouse_name') != warehouse for row in page.records):
+                    raise ERPError('PURCHASE_TRACKING_RELATION_CHANGED')
+                for row in page.records:
+                    for member in members:
+                        if any(line.get('sku') == member['sku'] and str(line.get('product_id')) == str(member['productId']) for line in row.get('item_list', [])):
+                            key = str(row['id'])
+                            if not any(m['entityKey'] == member['entityKey'] for m, _ in references.get(key, [])):
+                                references.setdefault(key, []).append((member, dict(erpNumber=row['order_sn'], status=row.get('status_text'))))
+            except (ERPError, OSError, ValueError, TypeError, KeyError) as exc:
+                discovery_errors.append(dict(warehouseName=warehouse, code=exc.code if isinstance(exc, ERPError) else 'PURCHASE_TRACKING_DISCOVERY_UNAVAILABLE'))
     if len(references) > 50:
         raise ValueError('PURCHASE_TRACKING_SCOPE_LIMIT')
     result = []
@@ -48,5 +69,7 @@ def track_purchases(items, policy, reader, saved=()):
             view['error'] = exc.code if isinstance(exc, ERPError) else 'PURCHASE_TRACKING_UNAVAILABLE'
         result.append(view)
     return dict(items=result, failedCount=sum(not r['verified'] for r in result),
+        registeredSkuCount=len({item['sku'] for item in eligible.values()}), registeredScopeCount=len(eligible),
+        discoveryErrors=discovery_errors, discoveryComplete=discover and not discovery_errors,
         checkedAt=datetime.now(timezone.utc).isoformat(), source='LIVE_ERP_EXACT_REGISTERED_IDS',
         coverage='当前登记商品已关联的采购单据；不等于 ERP 全量台账', businessWrites=0)

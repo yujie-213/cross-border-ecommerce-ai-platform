@@ -32,14 +32,13 @@ onUnmounted(() => window.removeEventListener('commerce:unauthenticated', expired
   <main v-else class="login-shell">
     <section class="login-card" aria-label="平台登录">
       <div class="eyebrow">序衡 · COMMERCE OPERATIONS</div><h1>登录智慧电商平台</h1>
-      <p class="muted">本地教学工作台 · 超级管理员</p>
+      <p class="muted">本地教学工作台</p>
       <p v-if="checking" role="status">正在核对服务与会话…</p>
       <p v-if="error" class="login-error" role="alert">{{ error }}</p>
       <form v-if="!checking && mode === 'PASSWORD'" @submit.prevent="login">
         <label class="field">账号<input v-model="username" autocomplete="username" maxlength="64" required :disabled="busy"></label>
         <label class="field">密码<input v-model="password" type="password" autocomplete="current-password" maxlength="256" required :disabled="busy"></label>
         <button class="button primary" :disabled="busy">{{ busy ? '正在登录…' : '登录' }}</button>
-        <p class="micro-note">首次使用或忘记密码，请使用本机初始化 / 重置入口。登录不会自动开始业务分析。</p>
       </form>
       <button v-if="!checking && !mode" class="button" @click="restore">重新连接服务</button>
     </section>
