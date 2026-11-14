@@ -5,6 +5,7 @@ import { request } from '../../src/api/client'
 import { state,reset,createSingle,openItem,openSingle } from '../../src/s01'
 import AiAnalysis from '../../src/components/AiAnalysis.vue'
 import SkuPage from '../../src/pages/SkuPage.vue'
+import { suggestedPurchaseQuantity } from '../../src/business'
 vi.mock('../../src/api/client',async original=>({...await original<typeof import('../../src/api/client')>(),request:vi.fn()}))
 const req=vi.mocked(request)
 beforeEach(()=>{reset();req.mockReset();state.busy=false;state.batchId='batch';state.itemKey='a';state.item={entityKey:'a',sku:'one',name:'商品',identityVerified:true,quantity:null,analysisState:'NEEDS_REVIEW',procurementEligibility:{eligible:false,hardBlocks:[]},uncertainties:[]} as never})
@@ -28,4 +29,10 @@ it('always renders an analysis entry for a registered product without purchasing
 it('gives failed and unavailable AI a visible retry action',async()=>{
  const html=await renderToString(createSSRApp({render:()=>h(AiAnalysis,{ai:null,taskState:'FAILED',errorCode:'ERP_AUTH_REJECTED'})}))
  expect(html).toContain('重试 AI 建议');expect(html).toContain('这次没有生成 AI 建议')
+})
+it('defaults a local proposal to the constrained candidate, then the reference demand when no candidate exists',()=>{
+ const item={quantity:56,decision:{purchasableQuantity:56,referenceReplenishmentQuantity:53}} as never
+ expect(suggestedPurchaseQuantity(item)).toBe(56)
+ expect(suggestedPurchaseQuantity({quantity:null,decision:{purchasableQuantity:null,referenceReplenishmentQuantity:53}} as never)).toBe(53)
+ expect(suggestedPurchaseQuantity({quantity:0,decision:{purchasableQuantity:0,referenceReplenishmentQuantity:0}} as never)).toBe(0)
 })

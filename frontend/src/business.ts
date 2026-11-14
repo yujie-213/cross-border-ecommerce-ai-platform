@@ -3,6 +3,8 @@ export const displayDate = (value?: string | null) => value ? value.slice(5, 10)
 export const resultDate = (value?: string | null) => value ? new Date(value).toLocaleString('zh-CN', { month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Shanghai' }) : '时间未记录'
 export const forecastOf = (item: V2Item) => item.decision?.forecast
 export const quantityOf = (item: V2Item) => item.decision?.referenceReplenishmentQuantity ?? item.quantity
+/** A local editable proposal, not a grant to submit. Prefer the server's constrained candidate. */
+export const suggestedPurchaseQuantity = (item: V2Item) => item.decision?.purchasableQuantity ?? item.quantity ?? item.decision?.referenceReplenishmentQuantity ?? null
 export const shortageOf = (item: V2Item) => item.decision?.firstShortageDate || item.riskDate
 export function nextAction(item: V2Item): string {
   if (item.analysisState === 'FAILED') return '重新分析，核实读取失败的资料'

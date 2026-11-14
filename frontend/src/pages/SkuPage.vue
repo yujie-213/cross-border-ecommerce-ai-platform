@@ -3,7 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { route, navigate, back } from '../router'
 import { init, openBatch, openItem, openSingle, createSingle, readRequisition, submitRequisition, replayPending, pendingFor, state, stageOf, STAGE_LABEL, dash, fmt, latestBatchId } from '../s01'
 import { quantityError, issueLabel } from '../api/v2'
-import { displayDate, resultDate, quantityOf, shortageOf, nextAction, confidenceNote } from '../business'
+import { displayDate, resultDate, quantityOf, shortageOf, nextAction, confidenceNote, suggestedPurchaseQuantity } from '../business'
 import AiAnalysis from '../components/AiAnalysis.vue'
 import BusinessEvidence from '../components/BusinessEvidence.vue'
 const quantity = ref(0), reason = ref(''), acknowledged = ref(false)
@@ -18,6 +18,8 @@ const single = computed(() => state.singleReport)
 const history = computed(() => state.singleHistory.filter(row => row.entityKey === item.value?.entityKey))
 const recentAI = computed(() => history.value.find(row => row.aiStatus === 'AVAILABLE' && row.taskRef.taskId !== state.singleId))
 const constraints = computed(() => item.value?.constraints)
+const suggestedQuantity = computed(() => item.value ? suggestedPurchaseQuantity(item.value) : null)
+const adjusted = computed(() => suggestedQuantity.value !== null && Number(quantity.value) !== suggestedQuantity.value)
 const blocks = computed(() => item.value?.procurementEligibility?.hardBlocks || [])
 const requisition = computed(() => state.requisition)
 const pending = computed(() => pendingFor(state.singleId))
@@ -35,11 +37,12 @@ async function load() {
   const key = route.value.segments[1], batch = route.value.query.batch || state.batchId || latestBatchId(), selected = route.value.query.single
   if (batch && batch !== state.batchId) await openBatch(batch)
   if (key && (key !== state.itemKey || (selected || '') !== state.singleId || !state.item)) await openItem(key, selected)
-  quantity.value = state.item?.quantity || 0; reason.value = ''; acknowledged.value = false
+  quantity.value = state.item ? suggestedPurchaseQuantity(state.item) ?? 0 : 0; reason.value = ''; acknowledged.value = false
 }
 onMounted(load)
 watch(() => [route.value.path,route.value.query.batch,route.value.query.single], () => { if (route.value.path.startsWith('/sku/')) void load() })
-watch(() => item.value?.quantity, value => { quantity.value = value || 0; acknowledged.value = false })
+watch(() => [item.value?.entityKey,item.value?.observedAt,suggestedQuantity.value], () => { quantity.value = suggestedQuantity.value ?? 0; reason.value = ''; acknowledged.value = false })
+watch(quantity, () => { acknowledged.value = false; if (!adjusted.value) reason.value = '' })
 async function submit() { if (canSubmit.value && !validation.value && acknowledged.value && !state.busy) await submitRequisition(quantity.value,reason.value.trim()) }
 </script>
 <template>
@@ -59,7 +62,7 @@ async function submit() { if (canSubmit.value && !validation.value && acknowledg
         <details class="panel secondary-details"><summary>查看该店仓的历史分析 <span>{{ history.length }} 次</span></summary><div class="details-content"><a v-for="row in history" :key="row.taskRef.taskId" class="history-entry" :href="'#/sku/'+item.entityKey+'?batch='+state.batchId+'&single='+row.taskRef.taskId"><span>{{ resultDate(row.observedAt || row.createdAt) }}</span><b>{{ row.state === 'SUCCEEDED' ? '查看分析结果' : row.state === 'FAILED' ? '分析失败，查看原因' : '处理中' }}</b></a><p v-if="!history.length">暂无该店仓的单品分析。</p></div></details>
       </div><aside class="purchase-rail" aria-label="人工采购决策"><section class="panel purchase-panel"><span class="eyebrow">最后一步 · 人工决策</span><h2>采购前再核实</h2><div class="quantity-bridge"><div><span>参考补充库存</span><strong>{{ dash(quantityOf(item)) }}<small>件</small></strong></div><span>→</span><div><span>满足采购约束的候选</span><strong>{{ dash(item.decision?.purchasableQuantity ?? item.quantity) }}<small v-if="item.quantity != null">件</small></strong></div></div><p class="purchase-hint">参考补充量是库存需求；采购候选还需满足有效报价、MOQ 与整箱。</p><div class="purchase-state" :class="{blocked:!canSubmit}"><b>{{ canSubmit ? '可继续人工确认' : '提交前仍需核实' }}</b><p>{{ purchaseReason }}</p></div><details v-if="blocks.length > 1"><summary>查看全部待办条件（{{ blocks.length }}）</summary><ul><li v-for="code in blocks" :key="code">{{ issueLabel(code) }}</li></ul></details><dl class="purchase-facts"><dt>供应商</dt><dd>{{ constraints?.supplierName || '未确认' }}</dd><dt>MOQ / 整箱</dt><dd>{{ dash(constraints?.moq) }} / {{ dash(constraints?.orderMultiple) }} 件</dd><dt>采购单价</dt><dd>{{ dash(constraints?.unitPrice) }} {{ constraints?.currency }}</dd><dt>规划交期</dt><dd>{{ item.decision?.leadDays != null ? item.decision.leadDays+' 天' : '未确认' }}</dd></dl>
         <div v-if="pending" class="banner danger"><b>原请购结果未确认</b><p>请使用原命令核对，不要重复提交。</p><button class="button" :disabled="state.busy" @click="replayPending">使用原命令核对</button></div><div v-else-if="pendingBusiness" class="banner warning">同商品已有操作待确认，请返回原分析核对。</div><div v-else-if="requisition" class="saved-purchase"><b>{{ requisition.erpNumber || '已有请购记录' }}</b><p>{{ requisition.erpStatus || '状态待核对' }}</p><a href="#/requisitions">查看 ERP 最新状态 →</a></div>
-        <template v-else><label class="field">最终采购数量<input v-model.number="quantity" aria-label="最终采购数量" type="number" :min="constraints?.moq || 1" :step="constraints?.orderMultiple || 1" :disabled="!canSubmit || state.busy" /></label><label v-if="item.quantity !== null && quantity !== item.quantity" class="field">调整原因<input v-model="reason" aria-label="调整原因" maxlength="1000" :disabled="!canSubmit || state.busy" /></label><label class="check purchase-check"><input v-model="acknowledged" type="checkbox" :disabled="!canSubmit || state.busy">已核对当前店仓、数量、已有采购和来源限制</label><p v-if="canSubmit && validation" class="small danger">{{ validation }}</p><button class="button primary full-button" :disabled="!canSubmit || !!validation || !acknowledged || state.busy" @click="submit">{{ state.busy ? '正在提交…' : '人工确认并提交请购' }}</button><p class="small muted">提交后进入 ERP 审批，不代表已下单或已到货。</p></template>
+        <template v-else><label class="field">拟采购数量<input v-model.number="quantity" aria-label="最终采购数量" type="number" :min="constraints?.moq || 1" :step="constraints?.orderMultiple || 1" :disabled="state.busy || running" /></label><label v-if="adjusted" class="field adjustment-reason" aria-live="polite">调整原因（必填）<input v-model="reason" aria-label="调整原因" maxlength="1000" :disabled="state.busy || running" /></label><p v-if="item.quantity == null && suggestedQuantity != null" class="small draft-note">当前填入 {{ suggestedQuantity }} 件参考需求，尚未形成可采购候选；补齐采购条件后仍须更新分析核实。</p><label class="check purchase-check"><input v-model="acknowledged" type="checkbox" :disabled="state.busy || running">已核对当前店仓、数量、已有采购和来源限制</label><p v-if="canSubmit && validation" class="small danger">{{ validation }}</p><button class="button primary full-button" :disabled="!canSubmit || !!validation || !acknowledged || state.busy" @click="submit">{{ state.busy ? '正在提交…' : '人工确认并提交请购' }}</button><p class="small muted">提交后进入 ERP 审批，不代表已下单或已到货。</p></template>
         <details class="existing-purchases"><summary>已有采购（分析时快照，{{ (item.formalPurchases?.length || 0)+(item.pendingPurchases?.length || 0) }} 条）</summary><div v-for="po in [...(item.pendingPurchases || []),...(item.formalPurchases || [])]" :key="po.erpId"><b>{{ po.erpNumber }}</b><span>{{ po.status }}</span></div><a href="#/requisitions">进入请购管理核对最新状态 →</a></details>
       </section></aside></div>
       <p v-if="state.note" role="status" class="banner plain">{{ state.note }}</p>
