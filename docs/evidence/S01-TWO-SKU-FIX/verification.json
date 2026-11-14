@@ -60,7 +60,14 @@
     "main merge"
   ],
   "publication": {
-    "status": "PENDING_NORMAL_BRANCH_PUSH",
-    "mainMerged": false
-  }
+    "status": "PASS",
+    "verifiedRemoteHead": "d8a4e88044c3cf3ecb1a98108e31b167fcddae5d",
+    "verifiedRemoteMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "mainMerged": false,
+    "verifiedAt": "2026-11-14T03:49:59.252567+00:00",
+    "receipt": "Following documentation-only receipt synchronized normally; final SHA returned by Git, not prewritten."
+  },
+  "startupEntryCommit": "d8a4e88044c3cf3ecb1a98108e31b167fcddae5d"
 }

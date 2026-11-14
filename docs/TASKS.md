@@ -9158,7 +9158,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "7869ce38fe299135b2fb62fb86250cfbd1eb557d"
+    "7869ce38fe299135b2fb62fb86250cfbd1eb557d",
+    "d8a4e88044c3cf3ecb1a98108e31b167fcddae5d"
   ],
   "testedCommit": "7869ce38fe299135b2fb62fb86250cfbd1eb557d",
   "evidence": [
@@ -9201,6 +9202,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-TWO-SKU-01/AC1",
         "D-S01-TWO-SKU-01/AC2"
       ]
+    },
+    {
+      "kind": "REPOSITORY",
+      "command": "normal push and independent ls-remote; actual current-worktree startup health/static bundle",
+      "environment": "Windows/GitHub/localAPI8767/frontend5174",
+      "sample": "d8a4e88 remote verified; main ece11160 unchanged; actual historical-reference JS served, no WorkBuddy change",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-TWO-SKU-FIX/startup.json",
+      "acceptanceIds": [
+        "D-S01-TWO-SKU-01/AC4"
+      ]
     }
   ],
   "review": null,
@@ -9228,8 +9241,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "reportRef": "docs/reports/S01_两SKU可用性定向修复_20261114.md",
   "publication": {
-    "status": "PENDING_NORMAL_BRANCH_PUSH",
-    "mainMerged": false
+    "status": "PASS",
+    "verifiedRemoteHead": "d8a4e88044c3cf3ecb1a98108e31b167fcddae5d",
+    "verifiedRemoteMain": "ece11160ecd0e820153a1c58128657a2f8788884",
+    "normalPushExitCode": 0,
+    "independentLsRemoteExitCode": 0,
+    "mainMerged": false,
+    "verifiedAt": "2026-11-14T03:49:59.252567+00:00",
+    "receipt": "Following documentation-only receipt synchronized normally; final SHA returned by Git, not prewritten."
   }
 }
 ```

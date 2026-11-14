@@ -1,3 +1,5 @@
+两SKU修复推送回执（2026-11-14）：codex/s01-two-sku-usability-fix普通push与独立ls-remote均0，分支d8a4e88、main仍ece11160，未合并/force。核心7869ce3、启动修复d8a4e88；后续仅回执同步，最终HEAD按Git回读。当前5174为该worktree新版，实际JS已含历史参考面板，模型/采购写关闭，admin原密码；用户须新建单品读取当前结果，旧报告不重写。8后端6前端定向/类型构建通过，无831/全目录/30日。保持REVIEW，停止开发等待验收。
+
 两SKU定向修复交付（2026-11-14）：D-S01-TWO-SKU-01 REVIEW，codex/s01-two-sku-usability-fix，核心7869ce3。已证实用户最近运行新版，库存已通过但参考字段未呈现；新增HISTORICAL_REFERENCE和最小Vue参考面板，数量仍null，不放宽采购。最新两SKU48只读全200，库存6/81；11/13零订单已证实但中午创建、无整日需求证据，不补有效零。真实API/MySQL/Worker仅2单品均参考分析成功、旧用户报告指纹不变；8后端6前端/类型构建针对验证通过，未跑831/全SKU/30日。当前本worktree5174/API8767可测试，admin原密码，模型/采购写关闭；.venv为本机依赖链接，Start-Platform确保本src，原目录仍旧版，勿误用其入口。未改WorkBuddy/main/B01B02/ERP事实。报告reports/S01_两SKU可用性定向修复_20261114.md；证据evidence/S01-TWO-SKU-FIX。仅普通提交推送后停止，等独立评审。
 
 本轮两SKU定向修复领取（2026-11-14）：从d47d497在当前隔离worktree新建codex/s01-two-sku-usability-fix，前次本地测试开关4份文档diff已识别保留。D目录仍ad82ac8旧源码；本轮检查时无存活API/Worker，仅8766其他监听未触碰。数据库证明11:13旧任务LEGACY/对账失败，11:21批量及11:22线单品runtime-v1、两SKU库存核验通过、仅缺11/13有效日。新版仍标UNANALYZABLE且原Vue不消费参考字段，确认为最小修复点；正做新两SKU只读与日期对照，禁止全量回归/全目录/模型或采购写，不改WorkBuddy分支。
