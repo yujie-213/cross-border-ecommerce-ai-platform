@@ -1,0 +1,884 @@
+{
+  "nature": "ORIGINAL_ERP_FACTS_OFFLINE_REPLAY_EXPLICIT_ASOF",
+  "businessWrites": 0,
+  "models": 0,
+  "targets": [
+    {
+      "sku": "HL-CBL100-2M",
+      "sourceFiles": {
+        "captures.json": "b12d38917bd813b0152a5394bbd6a77206a12e376f03990698348f4374bd2cba",
+        "receipt.json": "68a72b5d582f9750afd0345c84c491ea528f2a8c91ace18f5b14bdc0a8047ace",
+        "asset.json": "2942095e1302dc750ffc0f3419d93a35e9f0011be6d2fb1858d286c0bddad0e3"
+      },
+      "replays": [
+        {
+          "day": "2026-11-13",
+          "inventoryBasis": {
+            "status": "VERIFIED",
+            "checkpoint": {
+              "version": 1,
+              "quantity": "45",
+              "available": "45",
+              "inventoryId": "1137",
+              "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50",
+              "source": "REGISTERED_OPENING",
+              "postedAt": null,
+              "lastEventId": null,
+              "originAt": "2026-11-13T05:22:40+00:00",
+              "observedAt": "2026-11-13T06:20:30+00:00"
+            },
+            "physical": "6",
+            "available": "6",
+            "observedAt": "2026-11-13T06:20:30+00:00",
+            "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+            "residual": "0",
+            "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+            "unsupportedEvents": [],
+            "issues": [],
+            "expectedPhysical": "6",
+            "censoredAt": [],
+            "zeroIntervals": [],
+            "eventCount": 7,
+            "lastEventId": "1268681",
+            "lastPostedAt": "2026-11-13T06:07:41+00:00"
+          },
+          "demandWindow": {
+            "method": "SIMPLE_MOVING_AVERAGE",
+            "policyVersion": "s01-sma-mvp-v1",
+            "timezone": "UTC+08:00",
+            "windowStart": "2026-11-06",
+            "windowEnd": "2026-11-12",
+            "observationDays": 7,
+            "dailySales": [
+              {
+                "day": "2026-11-06",
+                "status": "KNOWN_SALES",
+                "quantity": "4",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-07",
+                "status": "KNOWN_SALES",
+                "quantity": "5",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-08",
+                "status": "KNOWN_SALES",
+                "quantity": "4",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-09",
+                "status": "KNOWN_SALES",
+                "quantity": "6",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-10",
+                "status": "KNOWN_SALES",
+                "quantity": "9",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-11",
+                "status": "KNOWN_SALES",
+                "quantity": "5",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-12",
+                "status": "KNOWN_SALES",
+                "quantity": "6",
+                "reasons": []
+              }
+            ],
+            "validDays": 7,
+            "zeroDays": 0,
+            "missingDays": 0,
+            "totalSales": "39",
+            "averageDailyDemand": "5.571428571428571428571428571",
+            "referenceAverage": "5.571428571428571428571428571",
+            "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE",
+            "referenceDays": 7,
+            "referenceGrade": "OBSERVED_STATUS_ONLY",
+            "sampleAgeDays": 1,
+            "sampleStart": "2026-11-06",
+            "sampleEnd": "2026-11-12",
+            "complete": true,
+            "history": [
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "4",
+                "orderRef": "erp-order-1153930",
+                "postedAt": "2026-11-13T06:07:04+00:00"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "5",
+                "orderRef": "erp-order-1153931",
+                "postedAt": "2026-11-13T06:07:11+00:00"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "4",
+                "orderRef": "erp-order-1153932",
+                "postedAt": "2026-11-13T06:07:18+00:00"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "6",
+                "orderRef": "erp-order-1153933",
+                "postedAt": "2026-11-13T06:07:26+00:00"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "9",
+                "orderRef": "erp-order-1153929",
+                "postedAt": "2026-11-13T05:22:40+00:00"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "5",
+                "orderRef": "erp-order-1153934",
+                "postedAt": "2026-11-13T06:07:33+00:00"
+              },
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "6",
+                "orderRef": "erp-order-1153935",
+                "postedAt": "2026-11-13T06:07:41+00:00"
+              }
+            ],
+            "observedHistory": [
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "6",
+                "orderRef": "erp-order-1153935",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "5",
+                "orderRef": "erp-order-1153934",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "6",
+                "orderRef": "erp-order-1153933",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "4",
+                "orderRef": "erp-order-1153932",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "5",
+                "orderRef": "erp-order-1153931",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "4",
+                "orderRef": "erp-order-1153930",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "9",
+                "orderRef": "erp-order-1153929",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              }
+            ],
+            "excluded": [],
+            "issues": []
+          },
+          "failures": [],
+          "candidates": [
+            {
+              "candidateId": "candidate-8f72decd7dce5c4d5b581a98dc33c8bd1310b8cf59b4e5341c59f3a6424adb9d",
+              "quantity": "48",
+              "availableDate": "2026-11-15",
+              "constraintVersion": "s01-runtime-v1",
+              "constraintRefs": [
+                "snapshot-15baf9cf91873bb774180539d9d3ec450a67393f749b4fe50b6fece88075dbc9#/inputProjection/input/policy"
+              ],
+              "evaluation": {
+                "metricVersion": "s01-engineering-daily-v1",
+                "snapshotRef": "snapshot-15baf9cf91873bb774180539d9d3ec450a67393f749b4fe50b6fece88075dbc9",
+                "scenario": "candidate-8f72decd7dce5c4d5b581a98dc33c8bd1310b8cf59b4e5341c59f3a6424adb9d",
+                "availableQuantity": "6",
+                "inTransitQuantity": "0",
+                "averageDailyDemand": "5.57142858",
+                "coverageDays": "1.0769230752662721918980427816953187973918172347818",
+                "targetQuantity": "50.14285722",
+                "gapQuantity": "44.14285722",
+                "firstShortageDate": null,
+                "closingBalance": "3.85714278",
+                "stockoutRisk": false,
+                "overstockRisk": false,
+                "series": [
+                  {
+                    "day": "2026-11-14",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "0.42857142",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-15",
+                    "demand": "5.57142858",
+                    "arrivals": "48",
+                    "closingBalance": "42.85714284",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-16",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "37.28571426",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-17",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "31.71428568",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-18",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "26.14285710",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-19",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "20.57142852",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-20",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "14.99999994",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-21",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "9.42857136",
+                    "inBuffer": false
+                  },
+                  {
+                    "day": "2026-11-22",
+                    "demand": "5.57142858",
+                    "arrivals": "0",
+                    "closingBalance": "3.85714278",
+                    "inBuffer": false
+                  }
+                ],
+                "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+                "metricResultRef": "metric-8864b6f3765958e175f2588a054df93643bd9e83f72d7a685969f58911160cc7"
+              },
+              "procurementEligible": false
+            }
+          ]
+        },
+        {
+          "day": "2026-11-14",
+          "inventoryBasis": {
+            "status": "VERIFIED",
+            "checkpoint": {
+              "version": 1,
+              "quantity": "45",
+              "available": "45",
+              "inventoryId": "1137",
+              "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50",
+              "source": "REGISTERED_OPENING",
+              "postedAt": null,
+              "lastEventId": null,
+              "originAt": "2026-11-13T05:22:40+00:00",
+              "observedAt": "2026-11-14T06:20:30+00:00"
+            },
+            "physical": "6",
+            "available": "6",
+            "observedAt": "2026-11-14T06:20:30+00:00",
+            "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+            "residual": "0",
+            "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+            "unsupportedEvents": [],
+            "issues": [],
+            "expectedPhysical": "6",
+            "censoredAt": [],
+            "zeroIntervals": [],
+            "eventCount": 7,
+            "lastEventId": "1268681",
+            "lastPostedAt": "2026-11-13T06:07:41+00:00"
+          },
+          "demandWindow": {
+            "method": "SIMPLE_MOVING_AVERAGE",
+            "policyVersion": "s01-sma-mvp-v1",
+            "timezone": "UTC+08:00",
+            "windowStart": "2026-11-07",
+            "windowEnd": "2026-11-13",
+            "observationDays": 7,
+            "dailySales": [
+              {
+                "day": "2026-11-07",
+                "status": "KNOWN_SALES",
+                "quantity": "5",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-08",
+                "status": "KNOWN_SALES",
+                "quantity": "4",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-09",
+                "status": "KNOWN_SALES",
+                "quantity": "6",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-10",
+                "status": "KNOWN_SALES",
+                "quantity": "9",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-11",
+                "status": "KNOWN_SALES",
+                "quantity": "5",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-12",
+                "status": "KNOWN_SALES",
+                "quantity": "6",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-13",
+                "status": "UNKNOWN",
+                "quantity": null,
+                "reasons": [
+                  "DAY_COVERAGE_UNPROVEN"
+                ]
+              }
+            ],
+            "validDays": 6,
+            "zeroDays": 0,
+            "missingDays": 1,
+            "totalSales": "35",
+            "averageDailyDemand": null,
+            "referenceAverage": "5.571428571428571428571428571",
+            "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE",
+            "referenceDays": 7,
+            "referenceGrade": "OBSERVED_STATUS_ONLY",
+            "sampleAgeDays": 2,
+            "sampleStart": "2026-11-06",
+            "sampleEnd": "2026-11-12",
+            "complete": false,
+            "history": [
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "4",
+                "orderRef": "erp-order-1153930",
+                "postedAt": "2026-11-13T06:07:04+00:00"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "5",
+                "orderRef": "erp-order-1153931",
+                "postedAt": "2026-11-13T06:07:11+00:00"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "4",
+                "orderRef": "erp-order-1153932",
+                "postedAt": "2026-11-13T06:07:18+00:00"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "6",
+                "orderRef": "erp-order-1153933",
+                "postedAt": "2026-11-13T06:07:26+00:00"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "9",
+                "orderRef": "erp-order-1153929",
+                "postedAt": "2026-11-13T05:22:40+00:00"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "5",
+                "orderRef": "erp-order-1153934",
+                "postedAt": "2026-11-13T06:07:33+00:00"
+              },
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "6",
+                "orderRef": "erp-order-1153935",
+                "postedAt": "2026-11-13T06:07:41+00:00"
+              }
+            ],
+            "observedHistory": [
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "6",
+                "orderRef": "erp-order-1153935",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "5",
+                "orderRef": "erp-order-1153934",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "6",
+                "orderRef": "erp-order-1153933",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "4",
+                "orderRef": "erp-order-1153932",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "5",
+                "orderRef": "erp-order-1153931",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "4",
+                "orderRef": "erp-order-1153930",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "9",
+                "orderRef": "erp-order-1153929",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              }
+            ],
+            "excluded": [],
+            "issues": []
+          },
+          "failures": [
+            "DEMAND_DAY_COVERAGE_INCOMPLETE"
+          ],
+          "candidates": null
+        }
+      ]
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "sourceFiles": {
+        "captures.json": "6ee5ea58e36b7244d665b92f1fb3ce2c2c38ff41fb6c7952c6f56d09b568b2b8",
+        "receipt.json": "c5e562e8125fbd92f716c89e9a75435ce17dbc50ad4795a4d48b2a3c73626dbb",
+        "asset.json": "de4df92edec8954a0389ea678231b628fd54f5916d076e4ab0135167c1ffa00d"
+      },
+      "replays": [
+        {
+          "day": "2026-11-13",
+          "inventoryBasis": {
+            "status": "VERIFIED",
+            "checkpoint": {
+              "version": 1,
+              "quantity": "100",
+              "available": "100",
+              "inventoryId": "1138",
+              "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50",
+              "source": "REGISTERED_OPENING",
+              "postedAt": null,
+              "lastEventId": null,
+              "originAt": "2026-11-13T05:22:40+00:00",
+              "observedAt": "2026-11-13T06:20:30+00:00"
+            },
+            "physical": "81",
+            "available": "81",
+            "observedAt": "2026-11-13T06:20:30+00:00",
+            "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+            "residual": "0",
+            "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+            "unsupportedEvents": [],
+            "issues": [],
+            "expectedPhysical": "81",
+            "censoredAt": [],
+            "zeroIntervals": [],
+            "eventCount": 7,
+            "lastEventId": "1268682",
+            "lastPostedAt": "2026-11-13T06:07:41+00:00"
+          },
+          "demandWindow": {
+            "method": "SIMPLE_MOVING_AVERAGE",
+            "policyVersion": "s01-sma-mvp-v1",
+            "timezone": "UTC+08:00",
+            "windowStart": "2026-11-06",
+            "windowEnd": "2026-11-12",
+            "observationDays": 7,
+            "dailySales": [
+              {
+                "day": "2026-11-06",
+                "status": "KNOWN_SALES",
+                "quantity": "2",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-07",
+                "status": "KNOWN_SALES",
+                "quantity": "3",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-08",
+                "status": "KNOWN_SALES",
+                "quantity": "2",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-09",
+                "status": "KNOWN_SALES",
+                "quantity": "3",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-10",
+                "status": "KNOWN_SALES",
+                "quantity": "4",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-11",
+                "status": "KNOWN_SALES",
+                "quantity": "2",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-12",
+                "status": "KNOWN_SALES",
+                "quantity": "3",
+                "reasons": []
+              }
+            ],
+            "validDays": 7,
+            "zeroDays": 0,
+            "missingDays": 0,
+            "totalSales": "19",
+            "averageDailyDemand": "2.714285714285714285714285714",
+            "referenceAverage": "2.714285714285714285714285714",
+            "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE",
+            "referenceDays": 7,
+            "referenceGrade": "OBSERVED_STATUS_ONLY",
+            "sampleAgeDays": 1,
+            "sampleStart": "2026-11-06",
+            "sampleEnd": "2026-11-12",
+            "complete": true,
+            "history": [
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "2",
+                "orderRef": "erp-order-1153930",
+                "postedAt": "2026-11-13T06:07:04+00:00"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "3",
+                "orderRef": "erp-order-1153931",
+                "postedAt": "2026-11-13T06:07:11+00:00"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "2",
+                "orderRef": "erp-order-1153932",
+                "postedAt": "2026-11-13T06:07:18+00:00"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "3",
+                "orderRef": "erp-order-1153933",
+                "postedAt": "2026-11-13T06:07:26+00:00"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "4",
+                "orderRef": "erp-order-1153929",
+                "postedAt": "2026-11-13T05:22:40+00:00"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "2",
+                "orderRef": "erp-order-1153934",
+                "postedAt": "2026-11-13T06:07:33+00:00"
+              },
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "3",
+                "orderRef": "erp-order-1153935",
+                "postedAt": "2026-11-13T06:07:41+00:00"
+              }
+            ],
+            "observedHistory": [
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "3",
+                "orderRef": "erp-order-1153935",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "2",
+                "orderRef": "erp-order-1153934",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "3",
+                "orderRef": "erp-order-1153933",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "2",
+                "orderRef": "erp-order-1153932",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "3",
+                "orderRef": "erp-order-1153931",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "2",
+                "orderRef": "erp-order-1153930",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "4",
+                "orderRef": "erp-order-1153929",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              }
+            ],
+            "excluded": [],
+            "issues": []
+          },
+          "failures": [],
+          "candidates": []
+        },
+        {
+          "day": "2026-11-14",
+          "inventoryBasis": {
+            "status": "VERIFIED",
+            "checkpoint": {
+              "version": 1,
+              "quantity": "100",
+              "available": "100",
+              "inventoryId": "1138",
+              "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50",
+              "source": "REGISTERED_OPENING",
+              "postedAt": null,
+              "lastEventId": null,
+              "originAt": "2026-11-13T05:22:40+00:00",
+              "observedAt": "2026-11-14T06:20:30+00:00"
+            },
+            "physical": "81",
+            "available": "81",
+            "observedAt": "2026-11-14T06:20:30+00:00",
+            "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+            "residual": "0",
+            "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+            "unsupportedEvents": [],
+            "issues": [],
+            "expectedPhysical": "81",
+            "censoredAt": [],
+            "zeroIntervals": [],
+            "eventCount": 7,
+            "lastEventId": "1268682",
+            "lastPostedAt": "2026-11-13T06:07:41+00:00"
+          },
+          "demandWindow": {
+            "method": "SIMPLE_MOVING_AVERAGE",
+            "policyVersion": "s01-sma-mvp-v1",
+            "timezone": "UTC+08:00",
+            "windowStart": "2026-11-07",
+            "windowEnd": "2026-11-13",
+            "observationDays": 7,
+            "dailySales": [
+              {
+                "day": "2026-11-07",
+                "status": "KNOWN_SALES",
+                "quantity": "3",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-08",
+                "status": "KNOWN_SALES",
+                "quantity": "2",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-09",
+                "status": "KNOWN_SALES",
+                "quantity": "3",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-10",
+                "status": "KNOWN_SALES",
+                "quantity": "4",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-11",
+                "status": "KNOWN_SALES",
+                "quantity": "2",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-12",
+                "status": "KNOWN_SALES",
+                "quantity": "3",
+                "reasons": []
+              },
+              {
+                "day": "2026-11-13",
+                "status": "UNKNOWN",
+                "quantity": null,
+                "reasons": [
+                  "DAY_COVERAGE_UNPROVEN"
+                ]
+              }
+            ],
+            "validDays": 6,
+            "zeroDays": 0,
+            "missingDays": 1,
+            "totalSales": "17",
+            "averageDailyDemand": null,
+            "referenceAverage": "2.714285714285714285714285714",
+            "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE",
+            "referenceDays": 7,
+            "referenceGrade": "OBSERVED_STATUS_ONLY",
+            "sampleAgeDays": 2,
+            "sampleStart": "2026-11-06",
+            "sampleEnd": "2026-11-12",
+            "complete": false,
+            "history": [
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "2",
+                "orderRef": "erp-order-1153930",
+                "postedAt": "2026-11-13T06:07:04+00:00"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "3",
+                "orderRef": "erp-order-1153931",
+                "postedAt": "2026-11-13T06:07:11+00:00"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "2",
+                "orderRef": "erp-order-1153932",
+                "postedAt": "2026-11-13T06:07:18+00:00"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "3",
+                "orderRef": "erp-order-1153933",
+                "postedAt": "2026-11-13T06:07:26+00:00"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "4",
+                "orderRef": "erp-order-1153929",
+                "postedAt": "2026-11-13T05:22:40+00:00"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "2",
+                "orderRef": "erp-order-1153934",
+                "postedAt": "2026-11-13T06:07:33+00:00"
+              },
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "3",
+                "orderRef": "erp-order-1153935",
+                "postedAt": "2026-11-13T06:07:41+00:00"
+              }
+            ],
+            "observedHistory": [
+              {
+                "businessDate": "2026-11-12",
+                "quantity": "3",
+                "orderRef": "erp-order-1153935",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-11",
+                "quantity": "2",
+                "orderRef": "erp-order-1153934",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-09",
+                "quantity": "3",
+                "orderRef": "erp-order-1153933",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-08",
+                "quantity": "2",
+                "orderRef": "erp-order-1153932",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-07",
+                "quantity": "3",
+                "orderRef": "erp-order-1153931",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-06",
+                "quantity": "2",
+                "orderRef": "erp-order-1153930",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              },
+              {
+                "businessDate": "2026-11-10",
+                "quantity": "4",
+                "orderRef": "erp-order-1153929",
+                "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+              }
+            ],
+            "excluded": [],
+            "issues": []
+          },
+          "failures": [
+            "DEMAND_DAY_COVERAGE_INCOMPLETE"
+          ],
+          "candidates": null
+        }
+      ]
+    }
+  ]
+}

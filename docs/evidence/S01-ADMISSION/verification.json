@@ -1,0 +1,198 @@
+{
+  "status": "REVIEW",
+  "branch": "codex/s01-admission-runtime-fix",
+  "baseline": "ece11160ecd0e820153a1c58128657a2f8788884",
+  "testedCommit": "d919fb5afb357f5c2763a94a882c8f0f94aefb59",
+  "implementationCommits": [
+    "a48699cd4c6da40ca7e18aa2c648cfd10bf6f7aa",
+    "4d656c1c00675e604731cf20b1efec21387bd5f2",
+    "d919fb5afb357f5c2763a94a882c8f0f94aefb59"
+  ],
+  "environment": "Windows/Python3.13; existing pinned venv with PYTHONPATH=independent worktree/src; approved isolated MySQL s01_a01_test_20261112; mock provider and model network false",
+  "baselineTests": 787,
+  "currentTests": 831,
+  "addedTests": 44,
+  "removedTests": 0,
+  "frontend": {
+    "tests": 43,
+    "result": "PASS",
+    "typecheck": "PASS",
+    "build": "PASS",
+    "sourceChanged": false,
+    "commands": [
+      "npm ci --offline --ignore-scripts --no-audit --no-fund",
+      "npm test",
+      "npm run typecheck",
+      "npm run build"
+    ]
+  },
+  "intermediateRuns": [
+    {
+      "run": "full-r1",
+      "result": "PASS",
+      "tests": 831,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 303.91,
+      "sha256": "f7d6760df9d8642795bde18c5dd6fd3b33458dd46a865eedaa7e530924e18901",
+      "finalEvidence": false,
+      "purpose": "INTERMEDIATE_WORKTREE_REGRESSION_NOT_FINAL_FIXED_COMMIT"
+    },
+    {
+      "run": "full-r2",
+      "result": "PASS",
+      "tests": 831,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 314.76,
+      "sha256": "1f7eb711a3efb6f0c0aee248951afe800bb6cf2d615abc004fe4293dcd3651aa",
+      "finalEvidence": false,
+      "purpose": "INTERMEDIATE_WORKTREE_REGRESSION_NOT_FINAL_FIXED_COMMIT"
+    }
+  ],
+  "finalRun": {
+    "status": "PASS",
+    "command": "python -m pytest tests -q -p no:cacheprovider --basetemp=<task-specific short private path> --tb=short --junitxml=<private>/full-r3.xml",
+    "exitCode": 0,
+    "tests": 831,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 292.109,
+    "junitSha256": "81b22dfe68c826a5095ce090de81646e46562c3efba7baf5ff1a7e0e2afe7f91",
+    "testInventory": "docs/evidence/S01-ADMISSION/tests.json",
+    "sourceFrozenDuringFinalRun": true
+  },
+  "realERP": {
+    "nature": "REAL_READ_ONLY_BEFORE_IMPLEMENTATION_FREEZE",
+    "attempts": 47,
+    "http200": 43,
+    "http503": 1,
+    "timeouts": 3,
+    "businessWrites": 0,
+    "paidModels": 0,
+    "artifactRef": "docs/evidence/S01-ADMISSION/live.json",
+    "outcome": "Line movement scope incomplete after two timeouts; mug movement scope verified after one timeout; zero-day coverage remains incomplete"
+  },
+  "finalSourceReplay": {
+    "command": "tools/verify_admission_runtime.py --source-root <original read-only checkout>; direct runtime replay of captured scope pages",
+    "networkCalls": 0,
+    "artifactRefs": [
+      "docs/evidence/S01-ADMISSION/historical.json",
+      "docs/evidence/S01-ADMISSION/current-replay.json"
+    ],
+    "result": "PASS",
+    "sourceOriginalFilesUnchanged": true
+  },
+  "persistentCheckpoint": {
+    "storage": "existing d02_monitor_scopes.content; no migration",
+    "verified": "REAL_MYSQL_WITH_SYNTHETIC_CHECKPOINTS_ONLY",
+    "realTeachingScopeAutomaticallyRebased": false
+  },
+  "evidenceKinds": [
+    "real ERP read-only",
+    "real MySQL integration with synthetic ERP",
+    "offline 7/15/30-day simulation",
+    "original immutable capture replay",
+    "unit and existing frontend regression"
+  ],
+  "retainedFailures": [
+    {
+      "stage": "first targeted tests",
+      "reason": "private basetemp parent missing",
+      "setupErrors": 19,
+      "resolution": "parent created, same57 passed"
+    },
+    {
+      "stage": "new integration collection",
+      "reason": "duplicate pytest basename",
+      "resolution": "new file renamed test_admission_persistence.py; original test assertions retained"
+    },
+    {
+      "stage": "new helper name",
+      "reason": "collision with old tests/support/admission.py",
+      "resolution": "old fixture Git bytes restored; new helper admission_runtime.py; original787 names retained"
+    },
+    {
+      "stage": "P3 related",
+      "reason": "Windows 294-character path raises FileNotFoundError, surfaced as PREPARING",
+      "failed": 3,
+      "resolution": "same3 original assertions passed with task-specific short private path, no product workaround"
+    }
+  ],
+  "notRun": [
+    "30-day real ERP continuous operation",
+    "real positive inbound/return/adjustment/transfer/reservation semantics",
+    "new Vue/browser product change",
+    "paid AI calls",
+    "ERP procurement writes",
+    "main merge"
+  ],
+  "checks": {
+    "documentChecks": 18,
+    "documentResult": "PASS",
+    "compileall": "PASS",
+    "pipCheck": "PASS",
+    "sourceAndHistoricalGuards": "B01/B02 and old admission fixture Git bytes retained; prior48 task JSON unchanged; no frontend source/lock changes; original capture SHA256 retained"
+  },
+  "publication": {
+    "status": "PENDING_NORMAL_REVIEW_BRANCH_PUSH",
+    "mainMerged": false,
+    "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
+    "authorization": "Owner pasted formal task section10 explicitly requires commit/push independent development branch; no main merge"
+  },
+  "scope": "BACKEND_RUNTIME_ENGINEERING_REVIEW_ONLY_ENTERPRISE_GATES_RETAINED",
+  "result": "PASS_BACKEND_ENGINEERING_WITH_RETAINED_REAL_ERP_LIMITS",
+  "stages": [
+    {
+      "run": "stage1-existing",
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "68e595a566ebf962077899b28470cae674c58e3d6c02d9a728856d2a8f7b85c1"
+    },
+    {
+      "run": "runtime-r1",
+      "tests": 34,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "88bb64091e439c958b071dff21b21078f490c11d6dda386ad02ceff8a8ee451e"
+    },
+    {
+      "run": "stage2-r2",
+      "tests": 52,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "4222a342e188f3f032f1050966ba1dd55dcd87823ac8f149504911d4c0adb8e2"
+    },
+    {
+      "run": "p3-r3",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "bff055b7322feb02f805a959030bdb14af2128338d0c8105d92bb2be2f2b1cdc"
+    },
+    {
+      "run": "stage3-r1",
+      "tests": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "021acbf81acb7548d7f0c291b3c36d4baeb4a27a4f488f4bd1533dac7d72a520"
+    },
+    {
+      "run": "stage4-r1",
+      "tests": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "a69fe9492b863d17b17ca2f4cf839b2c5a177e4bd4ebedfd20dfd986c8743f53"
+    }
+  ]
+}

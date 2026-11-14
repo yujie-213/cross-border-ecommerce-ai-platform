@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "mode": "EXPLICIT_REVIEW_PAYLOAD_AND_ALL_INTRODUCED_HISTORY_BLOBS",
+  "scannedFiles": 35,
+  "historyBlobs": 25,
+  "findings": [],
+  "rawERPResponsesIncluded": false,
+  "credentialsIncluded": false,
+  "limitations": "Heuristic patterns plus exact local secret values; initial private environment copies remain Git-ignored; existing main history is not reclassified.",
+  "finalPayloadReviewed": true
+}

@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=b9c2392dc8a9df265cfcc88b641efc38d5bc0ab96a80e62861216656ff5cd329
+%% TASKS sourceSha256=e4496b2fb73894d161e00bc8893618473700ed32fa797da0316d65371e7ae2d0
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -48,6 +48,7 @@ flowchart TB
   D_S01_REPLENISHMENT_SURVEY_01["D-S01-REPLENISHMENT-SURVEY-01 ERP现有补货建议真实只读验证及S01 V2可行性评估"]
   D_S01_V2_01["D-S01-V2-01 S01 V2完整补货工作台：动态全范围/双通道/方案B请购"]
   D_S01_LOCAL_01["D-S01-LOCAL-01 S01 V2本地一键启动/单管理员登录及main发布"]
+  D_S01_ADMISSION_01["D-S01-ADMISSION-01 S01数据准入与长期可用性运行改造"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -122,3 +123,5 @@ flowchart TB
   D_S01_P3_MIN_01 --> D_S01_REPLENISHMENT_SURVEY_01
   D_S01_P3_MIN_01 --> D_S01_V2_01
   D_S01_V2_01 --> D_S01_LOCAL_01
+  D_S01_V2_01 --> D_S01_ADMISSION_01
+  D_S01_LOCAL_01 --> D_S01_ADMISSION_01

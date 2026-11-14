@@ -1,3 +1,9 @@
+本轮数据准入后端交付（2026-11-14）：D-S01-ADMISSION-01 REVIEW、review=null，独立worktree/分支codex/s01-admission-runtime-fix，main基线ece11160。实现a48699c/4d656c1/d919fb5；最终冻结d919fb5后831完整后端全PASS（原787逐名保留、新44、0失败错误跳过）、43前端/类型构建/18文档/compileall/pip check通过。Vue/B01B02公式/旧48任务/旧夹具/原始captures及历史报告保全；无新ERP业务写或付费模型。
+
+库存全链与滚动SMA独立，基点originAt/observedAt/源更新时间区分，版本复用monitor content显式CAS，无新迁移/自动重置。新API质量/日覆盖/基点/能力/恢复提示兼容增量，ERP方案B和P3安全门保留。两SKU原始11/13结果保持、11/14不再虚假差4/2，但11/13零日证据不足不补0。真实47次只读尝试：线宽流水两次超时降级，杯重试成功库存81核验；最终代码只离线重放这些捕获响应，未冒称固定后新联网。入库内核仅隔离验证，真实入库/退货/调整/调拨/预留/有效在途正向净扣仍未签认；30日仅模拟。
+
+四份交付入口：contracts/s01/admission-runtime.md、reports/S01_数据准入与库存对账改造报告_20261114.md、S01_跨日期及长期可用性验证报告_20261114.md、S01_后端API与WorkBuddy前端交接说明_20261114.md；完整证据evidence/S01-ADMISSION/含tests.json、API示例。Windows294字符测试路径问题及早期收集/临时目录错误均留证，原断言不删。当前只做文档提交/普通推送独立分支，结果以Git真实回读为准；不合main、不开始Vue，等待负责人和星星独立评审。
+
 本轮接续（2026-11-14）：负责人附件正式批准方案E后端改造，独立worktree s01-admission-runtime-fix，从最新origin/main ece11160建立codex/s01-admission-runtime-fix；旧评审ad82ac8只读参考，未混入旧代码。Codex单人；D01/D02/D03/V2/必要契约与测试，禁止Vue/B01B02公式/ERP业务写/付费模型/合main。当前契约与ADR-018冻结并进入分阶段实现。原目录未知ERP-openapi.yaml保留，原始私有数据仅作为只读回放来源。
 
 main已正式交付（2026-11-14）：正常两父合并4103861b70a3ef8806949c7c61576d3cd8c39bb4；普通push与独立ls-remote退出0，远端main截至本回执为dbcf55662d42e84a21318914b7332e8625d826c5，保留V2分支b8ef8cb4ef0ae28213e7879664af9ac14818f0d8。随后仅本回执/台账文档普通同步，最终HEAD按Git回读，不编造自身未来SHA。

@@ -1,0 +1,52 @@
+{
+  "baseline": "ece11160ecd0e820153a1c58128657a2f8788884",
+  "implementation": "d919fb5afb357f5c2763a94a882c8f0f94aefb59",
+  "paths": [
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/README.md",
+    "docs/TASKS.md",
+    "docs/architecture/S01_ADMISSION_RUNTIME.md",
+    "docs/contracts/s01/admission-runtime.md",
+    "docs/evidence/S01-ADMISSION/api-examples.json",
+    "docs/evidence/S01-ADMISSION/changed-files.json",
+    "docs/evidence/S01-ADMISSION/current-replay.json",
+    "docs/evidence/S01-ADMISSION/historical.json",
+    "docs/evidence/S01-ADMISSION/live.json",
+    "docs/evidence/S01-ADMISSION/security.json",
+    "docs/evidence/S01-ADMISSION/tests.json",
+    "docs/evidence/S01-ADMISSION/verification.json",
+    "docs/generated/DEPENDENCIES.mmd",
+    "docs/generated/STATUS.md",
+    "docs/planning/git-whitelist.json",
+    "docs/planning/validation-report.json",
+    "docs/reports/S01_后端API与WorkBuddy前端交接说明_20261114.md",
+    "docs/reports/S01_数据准入与库存对账改造报告_20261114.md",
+    "docs/reports/S01_跨日期及长期可用性验证报告_20261114.md",
+    "src/commerce_hub/data/projection/monitor.py",
+    "src/commerce_hub/data/projection/runtime.py",
+    "src/commerce_hub/data/projection/stock_basis.py",
+    "src/commerce_hub/data/quality/runtime.py",
+    "src/commerce_hub/data/sync/runtime.py",
+    "src/commerce_hub/data/sync/v2.py",
+    "src/commerce_hub/data/sync/v2_catalog.py",
+    "src/commerce_hub/scenarios/s01_v2/analysis.py",
+    "src/commerce_hub/scenarios/s01_v2/handler.py",
+    "src/commerce_hub/scenarios/s01_v2/requisition.py",
+    "tests/integration/s01/test_admission_persistence.py",
+    "tests/support/admission_runtime.py",
+    "tests/unit/data/test_admission_runtime.py",
+    "tools/verify_admission_runtime.py"
+  ],
+  "excluded": [
+    ".env",
+    ".env.erp",
+    "data/private/",
+    "docs/ERP-openapi.yaml"
+  ],
+  "unchanged": [
+    "B01/B02 formulas",
+    "frontend source and lock",
+    "historical reports/raw captures"
+  ]
+}

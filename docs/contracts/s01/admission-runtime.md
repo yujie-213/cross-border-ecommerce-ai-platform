@@ -21,3 +21,7 @@ L1已核实事实可展示；L2有效样本可作明确日期参考；L3a完整�
 ## 实施与验收
 
 D01有界完整集合与恢复、D02基点/守恒/日覆盖、D03不可变质量证据、V2能力及采购比较为消费者；旧normalizer用于历史重放，不静默重算旧报告。新契约随本轮提交REVIEW。必须完成两SKU原始证据/跨日/未知零/合法增量/错误与重复事件/过期报价/历史/恢复/P3及全量回归。真实ERP只读、真实MySQL、隔离仿真与30日模拟分开，不把接口缺失标PASS。
+
+## 字段边界补充
+
+自动来源基点的originAt为原登记/首条ERP过账前值的事实起点，checkpoint.observedAt为本次独立读取时间；显式新基点使用其已登记的observedAt/postedAt水位。二者不可互换，源行rowUpdatedAt也不是采集时间。零日只能在该有据起点之后按完整范围与未缺货条件证明。capabilities.requisition是任务自有部署范围和业务条件的指示，不取代当前会话的G01重新鉴权。riskResult.inTransitQuantity仅统计已确认可售供给；未证实采购分别在formalPurchases和uncertainties显示，不能把0解释为无任何采购。

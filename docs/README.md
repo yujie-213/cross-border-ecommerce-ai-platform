@@ -45,3 +45,5 @@
 [S01正式前端运行手册](runbooks/s01-frontend.md) · [本轮前端交付](evidence/D-S01-UI-01/report.md)
 
 S01 V2 增量入口：[需求/架构/API契约](contracts/s01/v2-full-replenishment.md) · [完整产品交付与五SKU实测](reports/S01_V2完整补货工作台交付_20261113.md) · [运行/操作/恢复手册](runbooks/s01-v2.md)。当前任务状态仍只读TASKS。
+
+本轮S01数据准入改造（独立分支REVIEW，未合main）：[质量与能力契约](contracts/s01/admission-runtime.md)、[增量架构](architecture/S01_ADMISSION_RUNTIME.md)、[改造报告](reports/S01_数据准入与库存对账改造报告_20261114.md)、[跨日期验证](reports/S01_跨日期及长期可用性验证报告_20261114.md)、[WorkBuddy交接](reports/S01_后端API与WorkBuddy前端交接说明_20261114.md)。状态只读TASKS。

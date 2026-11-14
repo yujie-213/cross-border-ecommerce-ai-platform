@@ -8903,10 +8903,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "DOCUMENT_CHECK",
     "REPOSITORY"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "a48699cd4c6da40ca7e18aa2c648cfd10bf6f7aa",
+    "4d656c1c00675e604731cf20b1efec21387bd5f2",
+    "d919fb5afb357f5c2763a94a882c8f0f94aefb59"
+  ],
+  "testedCommit": "d919fb5afb357f5c2763a94a882c8f0f94aefb59",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "command": "python -m pytest tests (full frozen final r3; COMMERCE_MODEL_PROVIDER=mock/MODEL_NETWORK_ENABLED=false)",
+      "environment": "Windows/Python3.13; isolated fixtures and approved real MySQL",
+      "sample": "831PASS/0FAIL/0ERROR/0SKIP; old787 names retained, new44; compileall/pip check",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ADMISSION/verification.json",
+      "acceptanceIds": [
+        "D-S01-ADMISSION-01/AC1",
+        "D-S01-ADMISSION-01/AC2",
+        "D-S01-ADMISSION-01/AC3",
+        "D-S01-ADMISSION-01/AC4"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "Full final pytest includes real MySQL/API/Worker/P3; explicit 7/15/30 asOf replay",
+      "environment": "Approved local MySQL only; synthetic ERP/models, no real writes",
+      "sample": "10 new persistence/API tests + all original; full conservation, CAS, original histories unchanged; source date simulations not 30-day live",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ADMISSION/tests.json",
+      "acceptanceIds": [
+        "D-S01-ADMISSION-01/AC1",
+        "D-S01-ADMISSION-01/AC2",
+        "D-S01-ADMISSION-01/AC3"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "tools/verify_admission_runtime.py --source-root <original> --live before freeze; final captured response offline replay",
+      "environment": "Real teaching ERP read-only; exact owned2; source responses private",
+      "sample": "47attempts 43HTTP200/1HTTP503/3timeouts; mug inventory verified, cable incomplete safely downgraded; zero real business writes/paid models; missing zero-day evidence retained",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-ADMISSION/current-replay.json",
+      "acceptanceIds": [
+        "D-S01-ADMISSION-01/AC1",
+        "D-S01-ADMISSION-01/AC2"
+      ]
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "npm test/typecheck/build; build_docs/check_plan; payload/history credential scan",
+      "environment": "Independent worktree; frontend source unchanged; docs tools",
+      "sample": "43 frontend PASS; types/build PASS;18 docs checks PASS; four deliverables +20case matrix/575char summary/WorkBuddy/API examples",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/S01_跨日期及长期可用性验证报告_20261114.md",
+      "acceptanceIds": [
+        "D-S01-ADMISSION-01/AC4"
+      ]
+    }
+  ],
   "review": null,
   "branch": "codex/s01-admission-runtime-fix",
   "observedHead": "ece11160ecd0e820153a1c58128657a2f8788884",
@@ -8918,6 +8977,76 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-14",
       "to": "IN_PROGRESS",
       "reason": "新建独立worktree并核实远端main；旧评审仅参考，不合入旧代码。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "最终d919fb5冻结后831完整后端/43前端/类型构建/18文档检查通过；真实ERP缺口保留；不合main，不继续业务写。"
+    }
+  ],
+  "reportRef": "docs/reports/S01_数据准入与库存对账改造报告_20261114.md",
+  "publication": {
+    "status": "PENDING_NORMAL_REVIEW_BRANCH_PUSH",
+    "mainMerged": false,
+    "remoteTarget": "https://github.com/yujie-213/cross-border-ecommerce-ai-platform",
+    "authorization": "Owner pasted formal task section10 explicitly requires commit/push independent development branch; no main merge"
+  },
+  "retainedLimits": [
+    "30-day real ERP continuous operation",
+    "real positive inbound/return/adjustment/transfer/reservation semantics",
+    "new Vue/browser product change",
+    "paid AI calls",
+    "ERP procurement writes",
+    "main merge"
+  ],
+  "stageRecords": [
+    {
+      "run": "stage1-existing",
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "68e595a566ebf962077899b28470cae674c58e3d6c02d9a728856d2a8f7b85c1"
+    },
+    {
+      "run": "runtime-r1",
+      "tests": 34,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "88bb64091e439c958b071dff21b21078f490c11d6dda386ad02ceff8a8ee451e"
+    },
+    {
+      "run": "stage2-r2",
+      "tests": 52,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "4222a342e188f3f032f1050966ba1dd55dcd87823ac8f149504911d4c0adb8e2"
+    },
+    {
+      "run": "p3-r3",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "bff055b7322feb02f805a959030bdb14af2128338d0c8105d92bb2be2f2b1cdc"
+    },
+    {
+      "run": "stage3-r1",
+      "tests": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "021acbf81acb7548d7f0c291b3c36d4baeb4a27a4f488f4bd1533dac7d72a520"
+    },
+    {
+      "run": "stage4-r1",
+      "tests": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "a69fe9492b863d17b17ca2f4cf839b2c5a177e4bd4ebedfd20dfd986c8743f53"
     }
   ]
 }
