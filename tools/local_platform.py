@@ -38,7 +38,8 @@ def preflight(settings,config):
     assert_migration_target(settings)
     if not (ROOT/'.env').is_file():raise ValueError('DATABASE_CONFIGURATION_MISSING')
     erp=erp_config()
-    if not (erp.access_token or erp.username and erp.password):raise ValueError('ERP_CONFIGURATION_MISSING')
+    if not (erp.access_token or erp.username and erp.password):
+        print('ERP 未配置：可登录查看本地历史；新分析需要真实 ERP 凭据，不使用模拟数据。',flush=True)
     if config['modelEnabled'] and not settings.model_api_key.get_secret_value():raise ValueError('MODEL_CONFIGURATION_MISSING')
     db=Database(settings)
     try:

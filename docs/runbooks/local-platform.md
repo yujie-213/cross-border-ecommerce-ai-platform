@@ -6,7 +6,7 @@
 
 启动器使用持久私有runtime.json和Windows文件锁，管理三个独立进程：API8765、Worker、前端资源及同源代理5173。默认打开http://localhost:5173；不需要开发Vite窗口、S01_API_TARGET或Token。服务无自动到期；关闭监督窗口或Stop入口仅结束同一Windows Job下的子进程，异常监督进程退出也由OS清理。不会按名字/端口扫描或终止其他服务。
 
-正常start先检查Python/依赖、.env/ERP配置、DB连接、迁移、admin和端口。前端构建源摘要改变才执行npm run build；依赖缺失请按README显式安装，不自动npm ci或pip。启动不创建业务任务/会话、不发ERP/AI/采购请求；Worker仍按O01处理用户已明确创建、当前授权有效的持久任务，恢复沿原预算/期限。失效会话的任务不能因重启取得新权限。
+正常start先检查Python/依赖、.env、DB连接、迁移、admin和端口。缺少ERP凭据时显示明确警告，仍可登录查看本地历史；新分析需要真实ERP凭据，不回退模拟数据。前端构建源摘要改变才执行npm run build；依赖缺失请按README显式安装，不自动npm ci或pip。启动不创建业务任务/会话、不发ERP/AI/采购请求；Worker仍按O01处理用户已明确创建、当前授权有效的持久任务，恢复沿原预算/期限。失效会话的任务不能因重启取得新权限。
 
 sessionSeconds默认28800（300—86400）；apiPort/webPort可调整；modelEnabled/requisitionEnabled保留V2受控装配，不额外授予源业务权限或模型预算。配置更改需停止重启；已有会话按签发截止过期，新配置影响后续登录。私有签名密钥不能每次启动再生成，丢失后旧Cookie无效，但数据库报告/密码哈希不消失。不要公开runtime.json、Cookie或.env。
 
