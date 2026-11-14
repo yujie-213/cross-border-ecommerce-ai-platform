@@ -1085,6 +1085,11 @@
     "tools/verify_s01_teaching_golden.py",
     "tools/verify_s01_v2.py",
     "tools/verify_two_sku_api_worker.py",
-    "tools/verify_two_sku_usability.py"
+    "tools/verify_two_sku_usability.py",
+    "tests/browser/s01/refresh-ai.spec.ts",
+    "docs/evidence/S01-WORKFLOW-20261115/refresh-ai-result.json",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/29-ai-idle-clean.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/30-refresh-ai-running.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/31-refresh-ai-ready.png"
   ]
 }

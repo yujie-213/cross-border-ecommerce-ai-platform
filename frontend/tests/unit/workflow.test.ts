@@ -25,6 +25,7 @@ it('rejects an analysis belonging to a different warehouse instead of displaying
 it('always renders an analysis entry for a registered product without purchasing eligibility',async()=>{
  const html=await renderToString(createSSRApp({render:()=>h(SkuPage)}))
  expect(html).toContain('更新补货分析');expect(html).toContain('生成 AI 建议');expect(html).toContain('采购确认')
+ expect(html).not.toContain('未生成');expect(html).not.toContain('暂无 AI 建议')
 })
 it('gives failed and unavailable AI a visible retry action',async()=>{
  const html=await renderToString(createSSRApp({render:()=>h(AiAnalysis,{ai:null,taskState:'FAILED',errorCode:'ERP_AUTH_REJECTED'})}))
