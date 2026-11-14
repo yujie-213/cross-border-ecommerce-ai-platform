@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import type { AI, ExplanationItem, TaskState } from '../api/types'
 import { issueLabel } from '../api/v2'
 const props = defineProps<{ ai: AI | null; taskState?: TaskState | null; loading?: boolean; error?: string; errorCode?: string | null; context?: string; enabled?: boolean; analysisOnly?: boolean }>()
-const emit = defineEmits<{ generate: []; refresh: []; purchase: [] }>()
+const emit = defineEmits<{ generate: []; refresh: [] }>()
 const items = (key: string): ExplanationItem[] => Array.isArray(props.ai?.explanation?.[key]) ? props.ai!.explanation![key] : []
 const running = computed(() => !!props.loading || ['QUEUED','RUNNING'].includes(props.taskState || ''))
 const ready = computed(() => !running.value && props.ai?.status === 'AVAILABLE')
@@ -26,7 +26,7 @@ const older = computed(() => !['s01-purchase-advice-v2','s01-purchase-advice-v3'
         <h3>{{ conclusion?.text }}</h3>
         <ul v-if="evidence.length" class="buyer-evidence" aria-label="判断依据"><li v-for="entry in evidence" :key="entry.text">{{ entry.text }}</li></ul>
         <div v-if="risks.length" class="buyer-caveats"><p v-for="entry in risks" :key="entry.text">{{ entry.text }}</p></div>
-        <div v-if="steps.length" class="buyer-next"><h4>下一步</h4><ol><li v-for="entry in steps" :key="entry.text">{{ entry.text }}</li></ol><button class="button small" @click="emit('purchase')">核对采购条件 →</button></div>
+        <div v-if="steps.length" class="buyer-next"><h4>下一步</h4><ol><li v-for="entry in steps" :key="entry.text">{{ entry.text }}</li></ol></div>
       </div>
       <details class="advice-details"><summary>{{ older ? '历史解读与生成信息' : '查看生成信息' }}</summary><p v-if="older">这是先前版本保存的解读，更新分析可生成新版建议。</p><template v-if="older"><div v-for="section in [{key:'recommendationReasons',label:'原建议'},{key:'keyEvidence',label:'原依据'},{key:'majorRisks',label:'原风险'},{key:'humanConfirmations',label:'原确认项'}]" :key="section.key"><h4>{{ section.label }}</h4><ul><li v-for="(entry,index) in items(section.key)" :key="index">{{ entry.text }}</li></ul></div></template><small>模型 {{ ai?.actualModelRevision || ai?.provider || '未记录' }} · Token {{ ai?.usage?.totalTokens ?? '未返回' }} · 费用 {{ ai?.costStatus || '未确认' }}</small></details>
     </template>

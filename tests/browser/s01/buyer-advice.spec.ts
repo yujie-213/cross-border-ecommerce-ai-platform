@@ -44,12 +44,12 @@ test('采购建议按商品解释数量与交期，并区分补货成功和AI失
   await expect(ai).toContainText(sku)
   const screenshot=`${37+index}-buyer-advice-final-${sku}.png`
   await page.screenshot({path:path.join(out,'screenshots',screenshot),fullPage:true})
-  await ai.getByRole('button',{name:'核对采购条件 →'}).click()
-  await expect(page.getByLabel('最终采购数量',{exact:true})).toBeFocused()
+  await expect(ai.getByRole('button',{name:'核对采购条件 →'})).toHaveCount(0)
+  await expect(page.getByLabel('最终采购数量',{exact:true})).toBeVisible()
   results.push({sku,taskId,url:page.url(),screenshot,conclusion:model.explanation.recommendationReasons[0].text,
    explanation:model.explanation,usage:model.usage,costStatus:model.costStatus,model:model.actualModelRevision,
    reference:item.decision.referenceReplenishmentQuantity,candidate:item.decision.purchasableQuantity,
-   purchaseEligible:item.procurementEligibility.eligible,refreshRetained:true,actionFocus:true})
+   purchaseEligible:item.procurementEligibility.eligible,refreshRetained:true,purchasePanelVisible:true})
  }
  expect(new Set(results.map(r=>r.conclusion)).size).toBeGreaterThan(1)
  const first=results[0],response=await page.request.get('/api/v1/s01/v2/singles/'+first.taskId),failure=await response.json()

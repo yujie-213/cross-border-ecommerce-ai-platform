@@ -27,11 +27,6 @@ const pendingBusiness = computed(() => state.pending?.entityKey === item.value?.
 const canSubmit = computed(() => !!single.value && item.value?.procurementEligibility?.eligible === true && item.value.procurementEligibility.scopeAuthorized === true && state.options?.canSubmit === true && !requisition.value && !pendingBusiness.value && state.requisitionReadState === 'ready' && !state.requisitionLoading)
 const validation = computed(() => item.value ? quantityError(item.value, quantity.value, reason.value) : '数量不可用')
 const purchaseReason = computed(() => requisition.value ? '本商品已有本平台请购，请核对原单' : blocks.value.length ? issueLabel(blocks.value[0]) : !state.options?.canSubmit ? '采购提交未启用' : !single.value ? '先更新当前店仓分析，再确认采购条件' : '核对数量与已有采购，确认后提交 ERP 审批')
-function focusPurchase() {
-  const panel = document.querySelector<HTMLElement>('.purchase-panel')
-  panel?.scrollIntoView({ behavior:'smooth', block:'start' })
-  panel?.querySelector<HTMLInputElement>('input[aria-label="最终采购数量"]')?.focus({preventScroll:true})
-}
 async function generate(ai = false) {
   const entity = item.value?.entityKey
   const id = await createSingle(ai)
@@ -60,7 +55,7 @@ async function submit() { if (canSubmit.value && !validation.value && acknowledg
       <section class="warehouse-section" aria-label="各仓补货判断"><div class="section-title"><h2>各仓补货建议</h2></div><div class="warehouse-options"><button v-for="row in scopes" :key="row.entityKey" class="warehouse-choice" :class="{selected:row.entityKey === item.entityKey}" :aria-pressed="row.entityKey === item.entityKey" @click="row.entityKey !== item.entityKey && navigate('/sku/'+row.entityKey,{batch:state.batchId})"><span class="warehouse-top"><b>{{ row.warehouseName || '仓库待核实' }}</b><span class="chip" :class="stageOf(row)">{{ STAGE_LABEL[stageOf(row)] }}</span></span><small>{{ row.storeName }}</small><div class="warehouse-quantity"><span>参考补充库存</span><strong>{{ dash(quantityOf(row)) }}<small>件</small></strong></div><span class="warehouse-foot">库存 {{ dash(row.inventory?.available) }} 件 <em>{{ shortageOf(row) ? displayDate(shortageOf(row))+' 起有缺货风险' : row.decision?.status === 'NO_REPLENISHMENT' ? '规划期内库存充足' : '缺货日期待核实' }}</em></span></button></div></section>
       <div class="decision-layout"><div class="decision-main">
         <div class="decision-caption"><span class="chip" :class="stageOf(item)">{{ STAGE_LABEL[stageOf(item)] }}</span><strong>{{ nextAction(item) }}</strong><span>{{ item.warehouseName }}</span></div>
-        <AiAnalysis :ai="single?.analysisReport.ai || null" :task-state="state.singleTask?.state" :loading="running" :error="state.singleError" :error-code="state.singleTask?.errorCode" :enabled="state.options?.singleAIEnabled" :analysis-only="state.singleMode === 'analysis'" :context="item.sku+' · '+item.warehouseName+' · '+resultDate(item.observedAt)" @purchase="focusPurchase" @generate="generate(true)" @refresh="state.singleId && openSingle(state.singleId,state.singleMode)" />
+        <AiAnalysis :ai="single?.analysisReport.ai || null" :task-state="state.singleTask?.state" :loading="running" :error="state.singleError" :error-code="state.singleTask?.errorCode" :enabled="state.options?.singleAIEnabled" :analysis-only="state.singleMode === 'analysis'" :context="item.sku+' · '+item.warehouseName+' · '+resultDate(item.observedAt)" @generate="generate(true)" @refresh="state.singleId && openSingle(state.singleId,state.singleMode)" />
         <p v-if="recentAI && !running && single?.analysisReport.ai.status !== 'AVAILABLE'" class="advice-history-link">历史 AI 建议：<a :href="'#/sku/'+item.entityKey+'?batch='+state.batchId+'&single='+recentAI.taskRef.taskId">查看 {{ resultDate(recentAI.observedAt) }} 的建议 →</a></p>
         <BusinessEvidence :item="item" />
         <details class="panel secondary-details"><summary>数据可信度与分析假设 <span>{{ confidenceNote(item) }}</span></summary><div class="details-content"><p v-for="line in item.decision?.assumptions || []" :key="line">{{ line }}</p><p v-for="hint in item.recoveryHints || []" :key="hint.code">{{ hint.message }}</p><small>数据快照 {{ item.snapshotRef || '未形成' }}</small></div></details>
