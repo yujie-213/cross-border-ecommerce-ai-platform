@@ -72,15 +72,15 @@ def verify_stock(entity, inventory, movements, *, opening_binding=None, checkpoi
             b=opening_binding.monitor; start=number(b.openingQuantity)
             cp=dict(version=b.scopeVersion,quantity=str(start),available=str(start),inventoryId=str(row['id']),
                 evidenceDigest=b.evidenceDigest,source='REGISTERED_OPENING',postedAt=None,lastEventId=None,
-                observedAt=events[0]['created_at'] if events else inventory.get('observedAt'))
+                originAt=events[0]['created_at'] if events else None,observedAt=inventory.get('observedAt'))
         else:
             require(bool(events), 'STOCK_CHECKPOINT_UNPROVEN')
             start=number(events[0]['before_quantity'])
             cp=dict(version=1,quantity=str(start),available=str(start),inventoryId=str(row['id']),
                 evidenceDigest=fingerprint(events[0]),source='ERP_FIRST_LEDGER_BEFORE',
-                postedAt=None,lastEventId=None,observedAt=events[0]['created_at'])
+                postedAt=None,lastEventId=None,originAt=events[0]['created_at'],observedAt=inventory.get('observedAt'))
         basis['checkpoint']=cp; running=start; censored=[];zero_intervals=[]
-        zero_start=cp.get('observedAt') if start==0 else None
+        zero_start=(cp.get('originAt') or cp.get('observedAt')) if start==0 else None
         inbound={str(p['id']):p for p in inbound_proofs}
         for r in events:
             require(r.get('operation')=='post' and not r.get('reverses_id'), 'STOCK_EVENT_REVERSAL_UNSUPPORTED')

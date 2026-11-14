@@ -14,6 +14,8 @@ def test_original_seven_day_sma_and_quantity_unchanged():
     assert r['demandWindow']['totalSales']=='39' and r['demandWindow']['validDays']==7
     assert s['baseline']['availableQuantity']=='6' and s['candidates'][0]['quantity']=='48'
     assert r['inventoryBasis']['residual']=='0' and r['inventoryBasis']['eventCount']==7
+    assert r['inventoryBasis']['checkpoint']['originAt']=='2026-11-13T05:00:00+00:00'
+    assert r['inventoryBasis']['checkpoint']['observedAt']=='2026-11-13T06:00:05+00:00'
 
 
 def test_old_order_leaves_window_not_conservation_and_zero_day_is_not_invented():

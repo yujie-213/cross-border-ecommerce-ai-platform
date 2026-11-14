@@ -105,8 +105,9 @@ def evaluate_runtime(entity,product,inventory,movements,sales,workflows,policy,r
     basis=verify_stock(entity,inventory,movements,opening_binding=opening_binding,checkpoint=cp,inbound_proofs=inbound_proofs)
     day=date.fromisoformat(receipt['businessDate']);zero_from=None
     checkpoint=basis.get('checkpoint') or {}
-    if checkpoint.get('observedAt'):
-        zero_from=business_date(checkpoint['observedAt'],policy.timezone)+timedelta(days=1)
+    origin=checkpoint.get('originAt') or checkpoint.get('observedAt')
+    if origin:
+        zero_from=business_date(origin,policy.timezone)+timedelta(days=1)
     window=demand_window(entity,sales,workflows,movements.get('rows',[]),day,policy,basis,scope_complete=scope_complete,zero_from=zero_from)
     valid=entity['identityVerified'] and product.get('unit') in {'piece','EA','件'}
     failures=[]
