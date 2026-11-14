@@ -9382,7 +9382,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "a4c5e906bbe299c28f918daaad73fcaae2fcbdf5",
     "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
     "f84dda54993ca78b55c714bb08d554240c47c959",
-    "9206aed750dc347f3788f57e19e8d240f4a494ce"
+    "9206aed750dc347f3788f57e19e8d240f4a494ce",
+    "e11d85cfb2a4e384903a46f585e0a08e2188194a"
   ],
   "evidence": [
     {
@@ -9696,11 +9697,24 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-PRODUCT-01/AC3",
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "npm --prefix frontend run build; node .tmp/purchase-shortcut-check.cjs",
+      "environment": "Current local frontend and headless Edge with existing local admin session; saved AI report only",
+      "sample": "1440/820 widths: misleading shortcut removed, next steps retained, quantity input clickable and focused, no overflow/page errors; zero write or model requests",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/S01_采购工作流重构_20261115.md",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
   "review": null,
   "branch": "codex/alienware-local-deployment",
-  "observedHead": "9206aed750dc347f3788f57e19e8d240f4a494ce",
+  "observedHead": "e11d85cfb2a4e384903a46f585e0a08e2188194a",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -9774,6 +9788,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-15",
       "to": "REVIEW",
       "reason": "Buyer advice implementation9206aed750dc347f3788f57e19e8d240f4a494ce: conclusion/evidence/next action replaces keyword-selected slots; relevant constraints and sales changes grounded; prior versions preserved. First user request confirmed explainAI=false, not provider failure.6real calls/12859Token UNKNOWN; final browser and50backend/67frontend/build PASS, no ERP writes/main merge/push."
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "负责人确认删除仅定位的核对采购条件按钮；实现e11d85cfb2a4e384903a46f585e0a08e2188194a，类型构建与桌面/窄屏只读浏览器检查通过；不新增模型或采购写入，刷新生效。"
     }
   ],
   "testedCommit": "9206aed750dc347f3788f57e19e8d240f4a494ce",
