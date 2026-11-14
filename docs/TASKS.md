@@ -9354,7 +9354,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     },
     {
       "id": "D-S01-PRODUCT-01/AC4",
-      "text": "真实提交/回归/证据/说明/普通分支推送，最终REVIEW不合main"
+      "text": "真实提交、回归、证据与操作说明齐全；负责人通过后普通合main并推送，历史REVIEW停止点保留。"
     }
   ],
   "plannedTests": [
@@ -9368,7 +9368,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER",
     "REPOSITORY"
   ],
-  "status": "REVIEW",
+  "status": "ACCEPTED",
   "implementationCommits": [
     "ce50e511c95fab35bac68eef95df4c984e3b8081",
     "617fee365cf27a3c29fd48b0240fd8d201bd8f50",
@@ -9400,19 +9400,6 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "acceptanceIds": [
         "D-S01-PRODUCT-01/AC1",
         "D-S01-PRODUCT-01/AC2",
-        "D-S01-PRODUCT-01/AC4"
-      ]
-    },
-    {
-      "kind": "INTEGRATION_TEST",
-      "command": "pytest full suite --junitxml=backend-tests.xml",
-      "environment": "Real isolated MySQL; mock models/ERP; backend617fee3",
-      "sample": "860 run:859 PASS/1 FAIL/0ERROR/0SKIP; transient foundation claim returned None, original failure retained",
-      "exitCode": 1,
-      "result": "FAIL",
-      "artifactRef": "docs/evidence/S01-PRODUCT/backend-tests.xml",
-      "acceptanceIds": [
-        "D-S01-PRODUCT-01/AC3",
         "D-S01-PRODUCT-01/AC4"
       ]
     },
@@ -9727,11 +9714,32 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-PRODUCT-01/AC2",
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "REPOSITORY",
+      "command": "pytest targeted merge checks; npm --prefix frontend test; npm --prefix frontend run build; outgoing commit secret scan",
+      "environment": "Final accepted implementation, native Python3.13.3/local project venv and Node; offline targeted regression, no ERP/model/business writes",
+      "sample": "49 backend targeted and 67 frontend PASS; type/build PASS; outgoing history credential scan PASS. Owner explicitly accepted product and authorized normal main merge/push. Remote main is ancestor; publication outcome recorded after execution.",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/main-acceptance.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "产品负责人：2026-11-15实际体验确认“通过”，明确授权更新文档、合入main并推送；Codex登记及工程复核（不冒称额外独立评审）",
+    "reviewedCommit": "75682a42fa518f16641e7f6f6782b247abbbac83",
+    "evidenceRef": "docs/reports/S01_采购工作流重构_20261115.md",
+    "scope": "REGISTERED_TEACHING_10_SKU_BUYER_WORKFLOW_AND_ALIENWARE_LOCAL_PRODUCT",
+    "decision": "接受本轮产品体验重构及后续反馈修复，允许普通合main/推送；企业正式业务四门及现有数据/采购安全边界保留，历史失败不改写。"
+  },
   "branch": "codex/alienware-local-deployment",
-  "observedHead": "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d",
+  "observedHead": "75682a42fa518f16641e7f6f6782b247abbbac83",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -9815,6 +9823,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-15",
       "to": "REVIEW",
       "reason": "恢复补货前后曲线，采购数量/到货日期与原B01只读试算联动；字段按负责人要求简化，删除多余短提示，按钮确认并提交。首轮浏览器发现异步加载重置日期，3dbdc74修复后最终浏览器PASS；无模型/ERP业务写，不合main、不推送。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "ACCEPTED",
+      "reason": "负责人实际体验后明确“通过，更新相关需要更新的文档，合并到main分支，提交远端仓库”。验收对象75682a42fa518f16641e7f6f6782b247abbbac83，测试实现1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d；本轮49后端/67前端/类型构建及发布秘密扫描通过，原历史失败移入historicalEvidence并保留原XML和重跑PASS，不伪造全量一次通过。最新授权覆盖旧REVIEW不合main停止点，企业准入仍独立。"
     }
   ],
   "testedCommit": "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d",
@@ -9824,6 +9837,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "未知在途不抵扣；UNKNOWN/并发以隔离ERP+真实MySQL验证，本轮未制造真实未知采购",
     "旧55872f18封存浮点校验失败保留，使用最终1c7487f5批次；历史860项1基础队列FAIL及原样40PASS保留",
     "单品分析历史仍最近20条；请购发现每登记仓最多100条，超限明确不完整；企业门和有效在途真实正向净扣未签认"
+  ],
+  "historicalEvidence": [
+    {
+      "evidence": {
+        "kind": "INTEGRATION_TEST",
+        "command": "pytest full suite --junitxml=backend-tests.xml",
+        "environment": "Real isolated MySQL; mock models/ERP; backend617fee3",
+        "sample": "860 run:859 PASS/1 FAIL/0ERROR/0SKIP; transient foundation claim returned None, original failure retained",
+        "exitCode": 1,
+        "result": "FAIL",
+        "artifactRef": "docs/evidence/S01-PRODUCT/backend-tests.xml",
+        "acceptanceIds": [
+          "D-S01-PRODUCT-01/AC3",
+          "D-S01-PRODUCT-01/AC4"
+        ]
+      },
+      "disposition": "历史全量860项859PASS/1瞬时队列FAIL，原XML及原结果保留；原样40项foundation重跑PASS，当前定向回归亦PASS。移入历史，不将失败改写为成功。",
+      "followupArtifactRef": "docs/evidence/S01-PRODUCT/foundation-recheck.xml"
+    }
   ]
 }
 ```

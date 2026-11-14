@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-15",
+  "scope": "REGISTERED_TEACHING_10_SKU_BUYER_WORKFLOW_AND_ALIENWARE_LOCAL_PRODUCT",
+  "ownerDecision": "Owner explicitly accepted product after actual use and authorized documentation/main merge/remote push. No independent review invented.",
+  "acceptedHead": "75682a42fa518f16641e7f6f6782b247abbbac83",
+  "testedImplementation": "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d",
+  "remoteMainBefore": "f9bc45f721c961774bbc40bad19f8786519ad449",
+  "backendTargeted": {
+    "result": "PASS",
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "rawLocalIgnoredArtifact": ".tmp/main-acceptance-backend.xml",
+    "sha256": "a02a41660ddc4ddf6de008feb2d30be70b2308b92e8a1313a99b8c9e3acba1d8"
+  },
+  "frontend": {
+    "unitTests": 67,
+    "result": "PASS",
+    "typecheck": "PASS",
+    "productionBuild": "PASS"
+  },
+  "browserEvidence": "docs/evidence/S01-WORKFLOW-20261115/plan-preview-result.json",
+  "historicalFailureDisposition": "Original 860-run 1 FAIL preserved in original XML and historicalEvidence; original unchanged foundation40 rerun PASS. Not rewritten as full-suite PASS.",
+  "securityScan": "docs/planning/security-scan.json",
+  "erpBusinessWrites": 0,
+  "newModelCalls": 0,
+  "publication": {
+    "state": "AUTHORIZED_PENDING_EXECUTION",
+    "expectedMode": "FAST_FORWARD_NO_FORCE",
+    "remoteVerification": "PENDING"
+  }
+}

@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`621366ff3c73ac5c164d201b11174dbbd145823828f74889f9350f7d0bd3b602`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`9b6aa2bb5b694dc613983f4c26b26c586d99d25cadd24a615f03164b97ceace9`。不要手工编辑；候选不是执行授权。
 
-任务 51 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 22；ACCEPTED 20。
+任务 51 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 21；ACCEPTED 21。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 34 | 2 | 0 | 4 | 20 | 8 |
+| D | 34 | 2 | 0 | 4 | 19 | 9 |
 
 ## 当前活动记录
 
@@ -39,7 +39,6 @@
 - D-S01-REPLENISHMENT-SURVEY-01 ERP现有补货建议真实只读验证及S01 V2可行性评估：REVIEW；实际执行者=Codex。
 - D-S01-ADMISSION-01 S01数据准入与长期可用性运行改造：REVIEW；实际执行者=Codex单人。
 - D-S01-TWO-SKU-01 两自有SKU实际可用性定向修复：REVIEW；实际执行者=Codex单人。
-- D-S01-PRODUCT-01 S01 商品与分仓补货决策产品重构：REVIEW；实际执行者=Codex（单人）。
 
 ## 全部近期记录
 
@@ -95,6 +94,6 @@
 | D-S01-LOCAL-01 | S01 V2本地一键启动/单管理员登录及main发布 | ACCEPTED | D-S01-V2-01 |
 | D-S01-ADMISSION-01 | S01数据准入与长期可用性运行改造 | REVIEW | D-S01-V2-01, D-S01-LOCAL-01 |
 | D-S01-TWO-SKU-01 | 两自有SKU实际可用性定向修复 | REVIEW | D-S01-ADMISSION-01 |
-| D-S01-PRODUCT-01 | S01 商品与分仓补货决策产品重构 | REVIEW | D-S01-V2-01, D-S01-LOCAL-01 |
+| D-S01-PRODUCT-01 | S01 商品与分仓补货决策产品重构 | ACCEPTED | D-S01-V2-01, D-S01-LOCAL-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

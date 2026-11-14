@@ -1,10 +1,11 @@
 {
   "status": "PASS",
-  "scope": "PRODUCT_EXPERIENCE_COMMITS_AND_CHANGED_PUBLIC_FILES",
-  "scannedFiles": 98,
-  "historyCommits": 9,
-  "knownCredentialCount": 2,
-  "syntheticFixtureMatchesExcluded": 9,
+  "scope": "ALL_OUTGOING_COMMIT_BLOBS_TO_ORIGIN_MAIN",
+  "baseCommit": "f9bc45f721c961774bbc40bad19f8786519ad449",
+  "reviewedHead": "75682a42fa518f16641e7f6f6782b247abbbac83",
+  "historyCommits": 31,
+  "scannedBlobs": 369,
+  "knownCredentialCount": 3,
   "findings": [],
-  "limitations": "Known local values and heuristic patterns only; reviewed teaching projections/screenshots. Ignored private data and unknown OpenAPI excluded."
+  "limitations": "Exact locally configured credentials and common secret patterns only; teaching evidence publication explicitly authorized. No private values emitted. Heuristic scan is not a security certification."
 }
