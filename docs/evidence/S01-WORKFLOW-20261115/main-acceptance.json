@@ -25,8 +25,31 @@
   "erpBusinessWrites": 0,
   "newModelCalls": 0,
   "publication": {
-    "state": "AUTHORIZED_PENDING_EXECUTION",
-    "expectedMode": "FAST_FORWARD_NO_FORCE",
-    "remoteVerification": "PENDING"
+    "state": "PUSHED_AND_INDEPENDENTLY_VERIFIED",
+    "mode": "FAST_FORWARD_NO_FORCE",
+    "mergedCommit": "01ae5d12fb61180fb9a71a0deeadf1243c8eb69c",
+    "verifiedRemoteMain": "01ae5d12fb61180fb9a71a0deeadf1243c8eb69c",
+    "remote": "origin",
+    "branch": "main",
+    "verification": "git ls-remote --heads origin main; exact equality with local HEAD",
+    "note": "This receipt is saved by a subsequent documentation-only commit; its final SHA is read from Git after push."
+  },
+  "postMergeHealth": {
+    "api": {
+      "httpStatus": 200,
+      "result": "PASS",
+      "status": "ready",
+      "components": {
+        "database": "available",
+        "persistence": "available",
+        "identity": "configured",
+        "worker": "independent_process",
+        "s01": "teaching_v2_replenishment"
+      }
+    },
+    "frontend": {
+      "httpStatus": 200,
+      "result": "PASS"
+    }
   }
 }

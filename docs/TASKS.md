@@ -9738,8 +9738,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "scope": "REGISTERED_TEACHING_10_SKU_BUYER_WORKFLOW_AND_ALIENWARE_LOCAL_PRODUCT",
     "decision": "接受本轮产品体验重构及后续反馈修复，允许普通合main/推送；企业正式业务四门及现有数据/采购安全边界保留，历史失败不改写。"
   },
-  "branch": "codex/alienware-local-deployment",
-  "observedHead": "75682a42fa518f16641e7f6f6782b247abbbac83",
+  "branch": "main",
+  "observedHead": "01ae5d12fb61180fb9a71a0deeadf1243c8eb69c",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -9828,6 +9828,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-15",
       "to": "ACCEPTED",
       "reason": "负责人实际体验后明确“通过，更新相关需要更新的文档，合并到main分支，提交远端仓库”。验收对象75682a42fa518f16641e7f6f6782b247abbbac83，测试实现1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d；本轮49后端/67前端/类型构建及发布秘密扫描通过，原历史失败移入historicalEvidence并保留原XML和重跑PASS，不伪造全量一次通过。最新授权覆盖旧REVIEW不合main停止点，企业准入仍独立。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "ACCEPTED",
+      "reason": "已快进合main并普通推送，远端独立ls-remote核对01ae5d12fb61180fb9a71a0deeadf1243c8eb69c一致；当前本机API ready/前端health均200，文档18项通过。随后仅保存发布回执，最终SHA以Git回读为准；无新功能、模型或ERP业务写，发布后停止。"
     }
   ],
   "testedCommit": "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d",
