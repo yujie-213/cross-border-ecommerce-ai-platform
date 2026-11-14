@@ -56,6 +56,9 @@ class V2Handler:
                 if isinstance(exc,ERPError) and exc.code=='ERP_AUTH_REJECTED':raise
                 result=dict(entity,analysisState='FAILED',sourceGrade='UNAVAILABLE',quantity=None,
                     uncertainties=[exc.code if isinstance(exc,ERPError) else 'SOURCE_FIELDS_INVALID'],riskGroup='UNVERIFIED',riskDate=None,modelCalls=0)
+                if reader.state.get('admissionVersion')=='s01-runtime-v1':
+                    from commerce_hub.data.quality.runtime import failed_admission
+                    result.update(failed_admission(result['uncertainties'][0]))
             manifest=manifest_for()
             context.commit_data(lambda c:ManifestStore.save(c,tenant,task,manifest))
             result=seal_result(result,manifest['snapshotRef'])

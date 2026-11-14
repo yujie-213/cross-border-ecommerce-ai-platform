@@ -126,6 +126,9 @@ def rule_result(catalog,entity,reader,*,opening_binding=None):
 
 
 def analyze(catalog,entity,reader,*,opening_binding=None):
+    if reader.state.get('admissionVersion')=='s01-runtime-v1' and getattr(getattr(opening_binding,'monitor',None),'policy',None):
+        from commerce_hub.data.projection.runtime import business_date
+        catalog=dict(catalog,businessDate=business_date(reader.state['startedAt'],opening_binding.monitor.policy.timezone).isoformat())
     result=deepcopy(entity);c,q,p=constraints(catalog,entity)
     stock=[r for r in catalog['inventory']['rows'] if str(r['id']) in entity['inventoryIds']]
     result.update(analysisState='UNANALYZABLE',sourceGrade='UNAVAILABLE',quantity=None,sourceQuantity=None,
@@ -136,7 +139,16 @@ def analyze(catalog,entity,reader,*,opening_binding=None):
         riskGroup='UNVERIFIED',riskDate=None,sourceUrgency=None,ruleFailureCodes=[],ruleResult=None,sourceSuggestion=None,
         procurementEligibility=dict(eligible=False,hardBlocks=c['hardBlocks'][:],warnings=[],policyVersion='s01-v2-scheme-b-v1'),
         observedAt=reader.state['startedAt'])
-    rules,failures=rule_result(catalog,entity,reader,opening_binding=opening_binding) if entity['identityVerified'] else (None,['IDENTITY_MAPPING_UNVERIFIED'])
+    admission=None
+    if reader.state.get('admissionVersion')=='s01-runtime-v1':
+        from commerce_hub.data.sync.runtime import collect_runtime
+        admission=collect_runtime(catalog,entity,reader,c,p,opening_binding=opening_binding)
+        rules,failures=admission['ruleResult'],admission['ruleFailureCodes']
+        # A baseline without purchase parameters is risk information. It must
+        # not displace a separately valid ERP reference or become a PO quantity.
+        if admission['riskOnly']:rules=None
+    else:
+        rules,failures=rule_result(catalog,entity,reader,opening_binding=opening_binding) if entity['identityVerified'] else (None,['IDENTITY_MAPPING_UNVERIFIED'])
     result['ruleFailureCodes']=failures
     if rules:
         supplied=rules['supplyDemand'];candidate=supplied['candidates'][0] if supplied['candidates'] else None
@@ -157,6 +169,10 @@ def analyze(catalog,entity,reader,*,opening_binding=None):
             if s.get('overseas_available') and s.get('overseas_available')==s.get('fba_available'):result['uncertainties'].append('OVERSEAS_FBA_BUCKETS_NOT_ADDED')
         elif suggestions:result.update(sourceGrade='UNVERIFIED',analysisState='NEEDS_REVIEW');result['uncertainties'].append('SUGGESTION_AMBIGUOUS_OR_QUERY_INCOMPLETE')
     hard=result['procurementEligibility']['hardBlocks']
+    if admission and set(admission['inventoryBasis']['issues']) & {
+        'STOCK_MOVEMENT_RECONCILIATION_FAILED','STOCK_EVENT_CHAIN_GAP','DUPLICATE_STOCK_EVENT',
+        'FOREIGN_STOCK_EVENT','LEDGER_ARITHMETIC_MISMATCH','RESERVATION_OR_STOCK_SEMANTICS_UNCONFIRMED'}:
+        hard.append('INVENTORY_BASIS_INCONSISTENT')
     if not result['quantity']:hard.append('NO_POSITIVE_RECOMMENDATION_BASIS')
     if any(not p['warehouseMatch'] for p in result['formalPurchases']):result['uncertainties'].append('RELATED_PURCHASE_TARGETS_DIFFERENT_WAREHOUSE')
     if result['sourceSuggestion'] and any(p.get('sourcePlanNumber')==result['sourceSuggestion']['recommendation_no'] and p['warehouseMatch'] for p in result['formalPurchases']):hard.append('KNOWN_FORMAL_PURCHASE_FOR_SOURCE_PLAN')
@@ -164,6 +180,9 @@ def analyze(catalog,entity,reader,*,opening_binding=None):
     result['procurementEligibility']['hardBlocks']=sorted(set(hard))
     result['procurementEligibility']['warnings']=result['uncertainties'][:]
     result['procurementEligibility']['eligible']=not hard
+    if admission is not None:
+        from commerce_hub.data.quality.runtime import public_admission
+        result.update(public_admission(admission,result))
     return result
 
 

@@ -8838,3 +8838,87 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   }
 }
 ```
+
+## D-S01-ADMISSION-01 数据准入运行改造
+
+```json
+{
+  "id": "D-S01-ADMISSION-01",
+  "stage": "D",
+  "title": "S01数据准入与长期可用性运行改造",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-V2-01",
+    "D-S01-LOCAL-01"
+  ],
+  "entryCondition": "负责人2026-11-14正式附件授权，E/7完整日/后端独立工作目录；推送REVIEW不合main",
+  "ownerRole": "Codex集成人",
+  "assignee": "Codex单人",
+  "allowedPaths": [
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/s01_v2/",
+    "tests/",
+    "tools/",
+    "docs/"
+  ],
+  "parallelCondition": "独立工作目录，不写Vue，不委派；公共契约台账单人",
+  "deliverables": [
+    "库存时间域与基点修复",
+    "分域能力兼容API",
+    "四份报告/WorkBuddy交接",
+    "完整回归与证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-ADMISSION-01/AC1",
+      "text": "两SKU原始/滚动与事件对账"
+    },
+    {
+      "id": "D-S01-ADMISSION-01/AC2",
+      "text": "日覆盖/零/缺失/参考/采购分离"
+    },
+    {
+      "id": "D-S01-ADMISSION-01/AC3",
+      "text": "持久基点/历史/恢复/API与P3兼容"
+    },
+    {
+      "id": "D-S01-ADMISSION-01/AC4",
+      "text": "完整后端前端回归/文档/推送REVIEW"
+    }
+  ],
+  "plannedTests": [
+    "20业务场景",
+    "main787后端/43前端基线逐名保全及全量回归",
+    "真实MySQL与有界ERP只读/历史重放/30日隔离分开"
+  ],
+  "risks": [
+    "ERP宽流水/入库语义未验证时降级",
+    "不能把固定ID覆盖当每日零销量",
+    "不修改ERP/公式/Vue/历史，不付费模型"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "DOCUMENT_CHECK",
+    "REPOSITORY"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/s01-admission-runtime-fix",
+  "observedHead": "ece11160ecd0e820153a1c58128657a2f8788884",
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "新建独立worktree并核实远端main；旧评审仅参考，不合入旧代码。"
+    }
+  ]
+}
+```

@@ -1,3 +1,5 @@
+本轮接续（2026-11-14）：负责人附件正式批准方案E后端改造，独立worktree s01-admission-runtime-fix，从最新origin/main ece11160建立codex/s01-admission-runtime-fix；旧评审ad82ac8只读参考，未混入旧代码。Codex单人；D01/D02/D03/V2/必要契约与测试，禁止Vue/B01B02公式/ERP业务写/付费模型/合main。当前契约与ADR-018冻结并进入分阶段实现。原目录未知ERP-openapi.yaml保留，原始私有数据仅作为只读回放来源。
+
 main已正式交付（2026-11-14）：正常两父合并4103861b70a3ef8806949c7c61576d3cd8c39bb4；普通push与独立ls-remote退出0，远端main截至本回执为dbcf55662d42e84a21318914b7332e8625d826c5，保留V2分支b8ef8cb4ef0ae28213e7879664af9ac14818f0d8。随后仅本回执/台账文档普通同步，最终HEAD按Git回读，不编造自身未来SHA。
 
 日常双击Start-Platform.cmd，自动打开http://localhost:5173，账号admin、密码仅本机已初始化；不再复制Token/配置动态端口。Initialize/Reset为显式本机操作，默认8小时有效会话、服务持续无900秒限制。787后端/43前端/类型构建合前后通过，本地真实浏览器4项、旧开发入口6项分别通过；原生Windows持续1167.10秒、重复启动/安全停止/外部端口/DB不可达均核对。所有自管测试服务已停止。

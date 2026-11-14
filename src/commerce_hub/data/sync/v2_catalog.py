@@ -4,13 +4,18 @@ from commerce_hub.adapters.erp import ERPError
 from commerce_hub.data.projection.purchases import FORMAL_STATES
 
 
-def collect_catalog(reader,tenant,entity=None):
+def collect_catalog(reader,tenant,entity=None,*,policy=None):
     reader.authenticate(tenant)
     anchor=datetime.fromisoformat(reader.state['startedAt'])
-    day=anchor.astimezone(timezone(timedelta(hours=8))).date()
+    from commerce_hub.data.projection.runtime import business_date
+    from commerce_hub.data.projection.monitor import ForecastPolicy
+    policy=policy or ForecastPolicy()
+    modern=reader.state.get('admissionVersion')=='s01-runtime-v1'
+    day=business_date(reader.state['startedAt'],policy.timezone) if modern else anchor.astimezone(timezone(timedelta(hours=8))).date()
+    window=policy.observationDays if modern else 7
     resources=[('stores','store-authorizations',{}),('warehouses','warehouses',{}),('products','products',{}),
         ('inventory','inventory',dict(view='full')),('suggestions','replenishment',{}),('quotes','supplier-quotes',{}),
-        ('listings','listings',{}),('sales','sales-orders',dict(view='full',date_from=(day-timedelta(days=7)).isoformat(),date_to=day.isoformat()))]
+        ('listings','listings',{}),('sales','sales-orders',dict(view='full',date_from=(day-timedelta(days=window)).isoformat(),date_to=day.isoformat()))]
     if entity:
         exact=dict(field='sku',q=entity['sku'],match='exact')
         filters=dict(stores=dict(ids=entity['storeId']),warehouses={},products=exact,
@@ -33,4 +38,8 @@ def collect_catalog(reader,tenant,entity=None):
     catalog['formalPurchases']=dict(rows=rows,complete=all(p['complete'] for p in parts),total=len(rows),
         errors=[p['error'] for p in parts if p.get('error')])
     catalog['businessDate']=day.isoformat()
+    if modern:
+        catalog['admissionVersion']='s01-runtime-v1'
+        catalog['timeBasis']=dict(complete=True,startedAt=reader.state['startedAt'],completedAt=reader.receipt()['completedAt'],
+            timezone=policy.timezone,businessDate=day.isoformat(),observationDays=window,windowStart=(day-timedelta(days=window)).isoformat(),windowEndExclusive=day.isoformat())
     return catalog

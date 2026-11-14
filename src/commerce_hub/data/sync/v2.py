@@ -15,7 +15,10 @@ class V2Reader:
         self.config,self.root,self.checkpoint,self.check=config,Path(root),checkpoint,check
         self.transport,self.sleeper=transport,sleeper
         self.limit,self.page_size,self.max_records=request_limit,page_size,max_records
-        self.state=checkpoint.load();self.state.setdefault('resources',{});self.state.setdefault('events',[])
+        self.state=checkpoint.load()
+        if 'startedAt' not in self.state and not self.state.get('resources'):
+            self.state['admissionVersion']='s01-runtime-v1'
+        self.state.setdefault('resources',{});self.state.setdefault('events',[])
         self.state.setdefault('startedAt',now());self.root.mkdir(parents=True,exist_ok=True)
         self.token=config.access_token
 
@@ -94,7 +97,7 @@ class V2Reader:
             key=str(r.get('id'))
             if key in ids:raise ERPError('ERP_DUPLICATE_RECORD')
             ids.add(key)
-        if entry['complete']:return dict(rows=rows,complete=True,total=entry['total'])
+        if entry['complete']:return dict(rows=rows,complete=True,total=entry['total'],observedAt=entry.get('observedAt'),bindingDigest=hashlib.sha256(json.dumps(binding,sort_keys=True).encode()).hexdigest())
         entry.pop('error',None)
         try:
             while len(rows)<=self.max_records:
@@ -109,13 +112,14 @@ class V2Reader:
                 if len(rows)+len(values)>total or not values and len(rows)<total:raise ERPError('ERP_PAGINATION_INCOMPLETE')
                 if len(rows)+len(values)>self.max_records:raise ERPError('V2_RECORD_LIMIT_REACHED')
                 rows.extend(values);ids.update(page_ids)
-                entry.update(total=total,complete=len(rows)==total)
+                entry.update(total=total,complete=len(rows)==total,observedAt=event['completedAt'])
                 entry['pages'].append({k:event[k] for k in ['sha256','file']});self.checkpoint.save(self.state)
                 if entry['complete']:break
         except ERPError as exc:
             if exc.code in {'ERP_AUTH_REJECTED','V2_CAPTURE_DIGEST_MISMATCH'}:raise
             entry.update(complete=False,error=exc.code,httpStatus=exc.status);self.checkpoint.save(self.state)
-        return dict(rows=rows,complete=entry['complete'],total=entry['total'],**{k:entry[k] for k in ['error','httpStatus'] if k in entry})
+        return dict(rows=rows,complete=entry['complete'],total=entry['total'],observedAt=entry.get('observedAt'),
+            bindingDigest=hashlib.sha256(json.dumps(binding,sort_keys=True).encode()).hexdigest(),**{k:entry[k] for k in ['error','httpStatus'] if k in entry})
 
     def receipt(self):
         return dict(startedAt=self.state['startedAt'],completedAt=(self.state['events'][-1].get('completedAt') or self.state['events'][-1]['at']) if self.state['events'] else self.state['startedAt'],requestCount=self.state['requestCount'],requestLimit=self.limit,

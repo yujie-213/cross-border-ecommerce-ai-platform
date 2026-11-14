@@ -2,6 +2,7 @@
 from datetime import datetime, timezone
 import json
 from pydantic import Field
+from commerce_hub.data.contracts import Quantity, UtcTimestamp
 from sqlalchemy import Table, Column, String, Integer, Boolean, JSON, DateTime, MetaData, select
 from commerce_hub.data.contracts import Contract, Identifier, fingerprint
 
@@ -12,6 +13,19 @@ class ForecastPolicy(Contract):
     observationDays: int = Field(default=7, ge=1, le=14, strict=True)
     forecastDays: int = Field(default=7, ge=1, le=14, strict=True)
     coverageDays: int = Field(default=7, ge=1, le=14, strict=True)
+
+
+class StockCheckpoint(Contract):
+    version: int = Field(ge=1, strict=True)
+    inventoryId: str = Field(pattern=r'^[1-9][0-9]{0,19}$')
+    quantity: Quantity = Field(ge=0)
+    available: Quantity = Field(ge=0)
+    observedAt: UtcTimestamp
+    sourceUpdatedAt: UtcTimestamp | None = None
+    postedAt: UtcTimestamp
+    lastEventId: str = Field(pattern=r'^[1-9][0-9]{0,19}$')
+    evidenceDigest: str = Field(pattern=r'^[0-9a-f]{64}$')
+    historyDisposition: str = Field(min_length=1,max_length=500)
 
 
 class MonitorBinding(Contract):
@@ -29,6 +43,7 @@ class MonitorBinding(Contract):
     openingQuantity: str
     evidenceDigest: str = Field(pattern=r'^[0-9a-f]{64}$')
     policy: ForecastPolicy = ForecastPolicy()
+    stockCheckpoint: StockCheckpoint | None = Field(default=None,exclude_if=lambda v:v is None)
 
 
 metadata = MetaData()
@@ -97,6 +112,39 @@ class MonitorRegistry:
                     raise ValueError('MONITOR_ROW_BINDING_MISMATCH')
                 result.append(m)
         return result
+
+    def revise_checkpoint(self, mappings, actor, expected_digest):
+        """Explicit importer only, after independently verified checkpoint readback.
+
+        No automatic recovery, HTTP endpoint, or implicit baseline reset. Same
+        members/permissions, version +1, CAS; prior content remains immutable.
+        """
+        from commerce_hub.data.sync.online import OnlineMapping
+        values=[OnlineMapping.model_validate(m).validate_scope() for m in mappings]
+        if not values or not actor or any(m.monitor is None or m.monitor.stockCheckpoint is None for m in values):
+            raise ValueError('VERIFIED_CHECKPOINT_REQUIRED')
+        first=values[0]; tenant=first.scope['tenantId'];dataset=first.monitor.datasetId;version=first.monitor.scopeVersion
+        if self.tenant_id is not None and tenant!=self.tenant_id:raise ValueError('MONITOR_TENANT_MISMATCH')
+        if any((m.scope['tenantId'],m.monitor.datasetId,m.monitor.scopeVersion)!=(tenant,dataset,version) for m in values):raise ValueError('MONITOR_SCOPE_CONFLICT')
+        with self.engine.begin() as conn:
+            old=conn.execute(select(monitor_scopes).filter_by(tenant_id=tenant,dataset_id=dataset,active=True).with_for_update()).mappings().one()
+            if old['content_digest']!=expected_digest or old['scope_version']+1!=version:raise ValueError('CHECKPOINT_REVISION_CONFLICT')
+            previous=[OnlineMapping.model_validate(m) for m in (json.loads(old['content']) if isinstance(old['content'],str) else old['content'])]
+            def member(m):
+                content=m.model_dump(mode='json');content['monitor'].pop('stockCheckpoint',None);content['monitor'].pop('scopeVersion')
+                return fingerprint(content)
+            if sorted(member(m) for m in values)!=sorted(member(m) for m in previous):raise ValueError('CHECKPOINT_MEMBERSHIP_DRIFT')
+            for m in values:
+                cp=m.monitor.stockCheckpoint
+                prior=next(p for p in previous if p.scope==m.scope).monitor.stockCheckpoint
+                if (cp.inventoryId not in m.monitor.inventoryIds or cp.quantity!=cp.available or cp.postedAt>cp.observedAt or cp.observedAt>datetime.now(timezone.utc)
+                    or cp.version!=(prior.version+1 if prior else 1) or prior and (cp.observedAt<=prior.observedAt or cp.postedAt<prior.postedAt)):
+                    raise ValueError('CHECKPOINT_EVIDENCE_INVALID')
+            payload=[m.model_dump(mode='json') for m in values];digest=fingerprint(payload)
+            conn.execute(monitor_scopes.update().filter_by(tenant_id=tenant,dataset_id=dataset,scope_version=old['scope_version']).values(active=False))
+            conn.execute(monitor_scopes.insert().values(tenant_id=tenant,dataset_id=dataset,scope_version=version,active=True,
+                content=payload,content_digest=digest,registered_by=actor,registered_at=datetime.now(timezone.utc)))
+        return digest
 
     def require(self, mapping):
         if not any(m == mapping for m in self.mappings()):
