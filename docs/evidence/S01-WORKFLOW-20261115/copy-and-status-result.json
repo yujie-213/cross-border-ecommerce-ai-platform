@@ -1,0 +1,38 @@
+{
+  "result": "PASS",
+  "screenshots": [
+    "23-trimmed-home",
+    "24-trimmed-workbench",
+    "25-trimmed-list",
+    "26-trimmed-sku-ai",
+    "27-trimmed-sku-820",
+    "28-purchase-status-colors"
+  ],
+  "colors": {
+    "review": {
+      "color": "rgb(138, 84, 13)",
+      "background": "rgb(255, 241, 220)"
+    },
+    "order": {
+      "color": "rgb(36, 91, 156)",
+      "background": "rgb(232, 241, 255)"
+    }
+  },
+  "pageErrors": [],
+  "newModelCalls": 0,
+  "purchaseWrites": 0,
+  "checked": [
+    "home",
+    "workbench",
+    "10-product list",
+    "AI ready and idle",
+    "quantity default and reason",
+    "820 width",
+    "purchase statuses",
+    "login"
+  ],
+  "controlledResponseChecks": [
+    "AI timeout retains retry",
+    "ERP error marks old statuses unverified"
+  ]
+}

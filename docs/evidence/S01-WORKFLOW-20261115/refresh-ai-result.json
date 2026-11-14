@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "taskId": "66859e4abd8842009c5925e4d6dcd0f2",
+  "sku": "HLX-CASE-NOQUOTE",
+  "trigger": "top-right update replenishment analysis",
+  "explainAI": true,
+  "newAnalysisRequests": 1,
+  "immediateRunning": true,
+  "duplicateIdleText": false,
+  "aiStatus": "AVAILABLE",
+  "model": "deepseek-flash",
+  "usage": {
+    "currency": null,
+    "actualCost": null,
+    "inputTokens": 1992,
+    "totalTokens": 2310,
+    "outputTokens": 318,
+    "pricingVersion": null,
+    "cachedInputTokens": 512,
+    "uncachedInputTokens": 1480
+  },
+  "costStatus": "UNKNOWN",
+  "refreshRetainsResult": true,
+  "purchaseWrites": 0,
+  "pageErrors": []
+}

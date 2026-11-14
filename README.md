@@ -35,7 +35,7 @@ npm --prefix frontend ci
 
 当前开发机启动器也兼容已有`.tmp/stage-a-clean`环境；新环境推荐`.venv`。不要提交本机配置或依赖目录。
 
-按[.env.example](.env.example)创建Git忽略的`.env`，填写负责人提供的获准MySQL连接；**当前迁移保护仅允许`s01_a01_test_20261112`，程序不自动建库或换库**。ERP凭据使用既有本机`.env.erp`字段`ERP_USERNAME`/`ERP_PASSWORD`或`ERP_ACCESS_TOKEN`。没有获准账号时应由负责人提供，不能借用其他项目库或绕过来源权限。AI密钥只放本机`.env`的`COMMERCE_MODEL_API_KEY`；配置密钥不增加模型预算。
+按[.env.example](.env.example)创建Git忽略的`.env`，填写负责人提供的获准MySQL连接；**当前迁移保护仅允许`s01_a01_test_20261112`，程序不自动建库或换库**。ERP凭据使用既有本机`.env.erp`字段`ERP_USERNAME`/`ERP_PASSWORD`或`ERP_ACCESS_TOKEN`。没有获准账号时应由负责人提供，不能借用其他项目库或绕过来源权限。AI密钥只放本机`.env`的`COMMERCE_MODEL_API_KEY`；本机日常使用不设累计次数、Token 或金额上限，仍记录实际用量；模型服务商余额和服务状态以实际响应为准。
 
 然后双击 **[Initialize-Platform.cmd](Initialize-Platform.cmd)**：
 

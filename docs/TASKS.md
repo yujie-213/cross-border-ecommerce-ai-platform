@@ -9320,7 +9320,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-S01-V2-01",
     "D-S01-LOCAL-01"
   ],
-  "entryCondition": "2026-11-14负责人产品体验版连续授权；同分支、单人、自主工程决策、仅自有登记范围；允许受控教学数据创建及少量当前配置模型；不提交请购/审批/收货、不合main 2026-11-15负责人实际体验不通过后授权业务工作流产品级前端重构、必要后端交互修复、现有10款真实浏览器及必要模型验证；不新增ERP仿真数据或业务写，不合main。",
+  "entryCondition": "2026-11-14负责人产品体验版连续授权；同分支、单人、自主工程决策、仅自有登记范围；允许受控教学数据创建及少量当前配置模型；不提交请购/审批/收货、不合main 2026-11-15负责人实际体验不通过后授权业务工作流产品级前端重构、必要后端交互修复、现有10款真实浏览器及必要模型验证；不新增ERP仿真数据或业务写，不合main。 2026-11-15后续明确授权日常AI不限次数、全站删除冗余说明、请购状态区分颜色及核对全部10SKU采购跟踪；只读发现修复，不新建ERP单据。",
   "ownerRole": "技术负责人/主集成人",
   "assignee": "Codex（单人）",
   "allowedPaths": [
@@ -9377,7 +9377,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "6679d4eaceda30d57ae7fd26fe33ec1029fbc122",
     "2b3dd0f527c04de50fafb7fff6b7c0034d2bac3c",
     "ccac0ac410942b2c9803bc75a06a33912350c00e",
-    "45062dc18e5e5ca2884f64cdb9981e4aa688f34b"
+    "45062dc18e5e5ca2884f64cdb9981e4aa688f34b",
+    "dae733b04f3b08dd0a4321f6ce82f9351bf7fe14",
+    "a4c5e906bbe299c28f918daaad73fcaae2fcbdf5",
+    "8edb8e86e3f1c565c0b25c9dda2342265b9278f3"
   ],
   "evidence": [
     {
@@ -9636,11 +9639,52 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-PRODUCT-01/AC2",
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "S01_DAILY_AI_LIVE=1 playwright test daily-ai.spec.ts; node .tmp/review-copy.cjs",
+      "environment": "Real local admin, registered ERP, one real daily AI request; controlled injected failures separately labeled",
+      "sample": "AI AVAILABLE 2309Token; all active pages/820px/quantity reason/status colors/10SKU discovery PASS; no purchase writes",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/daily-ai-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "registered warehouse bounded GET plus exact ID current state readback",
+      "environment": "Local teaching ERP, 10SKU/11scope/3warehouse; read-only",
+      "sample": "Other 9SKU no purchase orders; cable1398 pending36,1406/1426 approved awaiting order48/40. New reference discovery scoped by productID/SKU/warehouse/tenant; no writes",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/purchase-scope-audit.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC4"
+      ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "S01_REFRESH_AI_LIVE=1 npm --prefix frontend run test:browser -- refresh-ai.spec.ts; npm --prefix frontend test/build",
+      "environment": "Actual local Edge browser, registered no-quote SKU, real DeepSeek, API and independent Worker",
+      "sample": "Top update sends explainAI=true exactly once; immediate running then real AVAILABLE2310Token/UNKNOWN cost; reload retains result; no duplicate idle text;65frontend/type/build PASS; no purchase writes/page errors",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/refresh-ai-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC3",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
   "review": null,
   "branch": "codex/alienware-local-deployment",
-  "observedHead": "474cc6957c803a1893ad49a7018963e090f73448",
+  "observedHead": "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -9699,15 +9743,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-15",
       "to": "REVIEW",
       "reason": "用户再次明确授权开启已登记教学范围的请购创建/提交ERP审批。仅本机requisitionEnabled启用，admin原授权/报价/MOQ/整箱/幂等/已有单/人工确认保留。真实浏览器permission验证PASS，未发送采购POST；当前本轮模型策略累计3次7162Token/费用UNKNOWN。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "User daily AI unlimited implemented separately from old bounded authorization; one real call2309Token UNKNOWN cost. Redundant product instructions trimmed, pending approval orange/awaiting order blue, new ERP purchase discovery across registered10SKU fixed.75backend/65frontend/build and actual browser PASS; initial obsolete heading assertion64PASS1FAIL corrected. ERP business writes0, no main merge/push."
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "User feedback implemented in 8edb8e86e3f1c565c0b25c9dda2342265b9278f3: top refresh now actually requests AI instead of analysis-only with misleading AI animation; removed duplicate idle/status text. Real browser1/model1 AVAILABLE2310Token, costUNKNOWN, reload retained.65frontend/type/build PASS; no ERP writes/main merge/push."
     }
   ],
-  "testedCommit": "45062dc18e5e5ca2884f64cdb9981e4aa688f34b",
+  "testedCommit": "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
   "parallelCondition": "Codex单人，无子代理；当前工作区接手干净。",
   "risks": [
     "共享教学租户不保证ERP侧独占；新销售仍经登记核验，不扫描共享历史",
     "未知在途不抵扣；UNKNOWN/并发以隔离ERP+真实MySQL验证，本轮未制造真实未知采购",
     "旧55872f18封存浮点校验失败保留，使用最终1c7487f5批次；历史860项1基础队列FAIL及原样40PASS保留",
-    "请购列表仍最近20单品逐条回读；企业门和有效在途真实正向净扣未签认"
+    "单品分析历史仍最近20条；请购发现每登记仓最多100条，超限明确不完整；企业门和有效在途真实正向净扣未签认"
   ]
 }
 ```

@@ -1,0 +1,43 @@
+{
+  "result": "PASS",
+  "authorization": "s01-local-daily-use-20261115",
+  "taskId": "5226f2bd28da46e4818a929b9e30c7cd",
+  "sku": "HLX-CASE-NOQUOTE",
+  "aiStatus": "AVAILABLE",
+  "usage": {
+    "currency": null,
+    "actualCost": null,
+    "inputTokens": 1991,
+    "totalTokens": 2309,
+    "outputTokens": 318,
+    "pricingVersion": null,
+    "cachedInputTokens": 512,
+    "uncachedInputTokens": 1479
+  },
+  "costStatus": "UNKNOWN",
+  "newAnalysisRequests": 1,
+  "purchaseWrites": 0,
+  "pageErrors": [],
+  "refreshRetainsResult": true,
+  "runtimeVerification": {
+    "sharedPolicy": {
+      "authorization_id": "s01-local-daily-use-20261115",
+      "max_calls": null,
+      "max_tokens": null,
+      "max_cost": null,
+      "max_inflight": 1
+    },
+    "providerPolicy": {
+      "authorization_id": "s01-local-daily-use-20261115",
+      "max_requests": null,
+      "max_total_cost_usd": null,
+      "per_request_risk_usd": "0.05"
+    },
+    "actualTask": {
+      "policy": "s01-local-daily-use-20261115",
+      "usedCalls": 1,
+      "usedTokens": 2309,
+      "reservedCalls": 0
+    }
+  }
+}
