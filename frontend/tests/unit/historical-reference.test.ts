@@ -3,13 +3,15 @@ import { createSSRApp, h } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import HistoricalSalesReference from '../../src/components/HistoricalSalesReference.vue'
 import { stateLabel, sourceLabel, type V2Item } from '../../src/api/v2'
+import { readFileSync } from 'node:fs'
+
+// Whitelisted real read-only API captures, not fabricated business fixtures.
+const captured = JSON.parse(readFileSync(new URL('../../../docs/evidence/S01-TWO-SKU-FIX/api-worker.json', import.meta.url), 'utf8')) as { results: { sku: string; item: V2Item }[] }
 
 describe('usable historical reference without a purchase quantity', () => {
-  it.each([['HL-CBL100-2M', 6, '5.571428571', '39'], ['HL-MUG350-WH', 81, '2.714285714', '19']])('shows %s current stock and explicitly historical sales', async (sku, available, average, total) => {
-    const item = { sku, unit: 'EA', quantity: null, inventory: { available }, inventoryBasis: { status: 'VERIFIED' },
-      demandWindow: { sampleStart: '2026-11-06', sampleEnd: '2026-11-12', referenceDays: 7, referenceAverage: average,
-        windowStart: '2026-11-07', windowEnd: '2026-11-13', validDays: 6, missingDays: 1, referenceGrade: 'OBSERVED_STATUS_ONLY',
-        observedHistory: [{ businessDate: '2026-11-12', quantity: total, orderRef: 'synthetic' }] }, recoveryHints: [] } as unknown as V2Item
+  it.each(captured.results.map((r: { sku: string; item: V2Item }) => [r.sku, r.item] as const))('shows %s current stock and explicitly historical sales', async (_sku, item) => {
+    const available = item.inventory?.available
+    expect(item.quantity).toBeNull()
     const html = await renderToString(createSSRApp({ render: () => h(HistoricalSalesReference, { item }) }))
     expect(html).toContain('历史销量参考分析')
     expect(html).toContain(`当前ERP可用库存 ${available}`)

@@ -1,0 +1,716 @@
+{
+  "nature": "REAL_ERP_READONLY_THROUGH_REAL_MYSQL_API_AND_WORKER_ISOLATED_LOCAL_TENANT",
+  "results": [
+    {
+      "sku": "HL-CBL100-2M",
+      "taskRef": {
+        "tenantId": "two-sku-283342e876fd48d89f2fa625e22d1cf2",
+        "taskId": "9bcd8705e707419c9f7b714d7e2f2b43"
+      },
+      "apiStatus": 200,
+      "item": {
+        "sku": "HL-CBL100-2M",
+        "name": "USB-C 100W 编织快充线 2m",
+        "unit": "EA",
+        "storeId": "3",
+        "quantity": null,
+        "riskDate": null,
+        "entityKey": "36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30",
+        "inventory": {
+          "available": 6,
+          "warehouseId": "308",
+          "inventoryIds": [
+            "1137"
+          ]
+        },
+        "productId": "218",
+        "riskGroup": "UNVERIFIED",
+        "storeName": "海岚家居美国站",
+        "observedAt": "2026-11-14T03:40:49.859174+00:00",
+        "riskResult": null,
+        "ruleResult": null,
+        "constraints": {
+          "moq": 12,
+          "unit": "EA",
+          "quoteId": "878",
+          "quoteNo": "HL-S01-P1-20261113-Q-CBL",
+          "currency": "USD",
+          "leadDays": 2,
+          "unitPrice": "2.40",
+          "hardBlocks": [],
+          "supplierId": "4",
+          "quoteValidTo": "2026-12-13",
+          "quoteVersion": 1,
+          "supplierName": "海岚北美生活用品供应",
+          "minimumAmount": "28.80",
+          "orderMultiple": 8,
+          "quoteValidFrom": "2026-11-10"
+        },
+        "dataQuality": {
+          "demand": {
+            "status": "REFERENCE",
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "identity": {
+            "status": "VERIFIED",
+            "reasons": []
+          },
+          "inventory": {
+            "status": "VERIFIED",
+            "reasons": []
+          },
+          "procurement": {
+            "status": "READY_FOR_REVALIDATION",
+            "reasons": []
+          }
+        },
+        "snapshotRef": "snapshot-5fa85944bdf0f8b89908ecf5dcdb26dc217d42163c2ebab0a7c932eccdaea087",
+        "sourceGrade": "HISTORICAL_REFERENCE",
+        "warehouseId": "308",
+        "capabilities": {
+          "risk": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "facts": {
+            "enabled": true,
+            "reasons": []
+          },
+          "rules": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "reference": {
+            "enabled": true,
+            "reasons": []
+          },
+          "requisition": {
+            "enabled": false,
+            "reasons": [
+              "NO_POSITIVE_RECOMMENDATION_BASIS",
+              "WRITE_SCOPE_NOT_AUTHORIZED"
+            ],
+            "permissionCheck": "G01_RECHECK_REQUIRED_AT_SUBMISSION"
+          }
+        },
+        "demandWindow": {
+          "issues": [],
+          "method": "SIMPLE_MOVING_AVERAGE",
+          "history": [
+            {
+              "orderRef": "erp-order-1153930",
+              "postedAt": "2026-11-13T06:07:04+00:00",
+              "quantity": "4",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "orderRef": "erp-order-1153931",
+              "postedAt": "2026-11-13T06:07:11+00:00",
+              "quantity": "5",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "orderRef": "erp-order-1153932",
+              "postedAt": "2026-11-13T06:07:18+00:00",
+              "quantity": "4",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153933",
+              "postedAt": "2026-11-13T06:07:26+00:00",
+              "quantity": "6",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153929",
+              "postedAt": "2026-11-13T05:22:40+00:00",
+              "quantity": "9",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153934",
+              "postedAt": "2026-11-13T06:07:33+00:00",
+              "quantity": "5",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153935",
+              "postedAt": "2026-11-13T06:07:41+00:00",
+              "quantity": "6",
+              "businessDate": "2026-11-12"
+            }
+          ],
+          "complete": false,
+          "excluded": [],
+          "timezone": "UTC+08:00",
+          "zeroDays": 0,
+          "sampleEnd": "2026-11-12",
+          "validDays": 6,
+          "windowEnd": "2026-11-13",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-08",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-09",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "6"
+            },
+            {
+              "day": "2026-11-10",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "9"
+            },
+            {
+              "day": "2026-11-11",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "5"
+            },
+            {
+              "day": "2026-11-12",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "6"
+            },
+            {
+              "day": "2026-11-13",
+              "status": "UNKNOWN",
+              "reasons": [
+                "DAY_COVERAGE_UNPROVEN"
+              ],
+              "quantity": null
+            }
+          ],
+          "totalSales": "35",
+          "missingDays": 1,
+          "sampleStart": "2026-11-06",
+          "windowStart": "2026-11-07",
+          "policyVersion": "s01-sma-mvp-v1",
+          "referenceDays": 7,
+          "sampleAgeDays": 2,
+          "scopeCoverage": "COMPLETE_SCOPED_SOURCE",
+          "referenceGrade": "OBSERVED_STATUS_ONLY",
+          "observationDays": 7,
+          "observedHistory": [
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153935",
+              "quantity": "6",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153934",
+              "quantity": "5",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153933",
+              "quantity": "6",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153932",
+              "quantity": "4",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153931",
+              "quantity": "5",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153930",
+              "quantity": "4",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153929",
+              "quantity": "9",
+              "businessDate": "2026-11-10"
+            }
+          ],
+          "referenceAverage": "5.571428571428571428571428571",
+          "averageDailyDemand": null,
+          "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE"
+        },
+        "inventoryIds": [
+          "1137"
+        ],
+        "sourceTenant": "1",
+        "analysisState": "HISTORICAL_REFERENCE",
+        "recoveryHints": [
+          {
+            "code": "DEMAND_DAY_COVERAGE_INCOMPLETE",
+            "action": "核对每日销售覆盖后重新分析",
+            "message": "部分日期缺少完整销量证据，可查看历史趋势，暂不能计算当前规则数量。"
+          },
+          {
+            "code": "NO_POSITIVE_RECOMMENDATION_BASIS",
+            "action": "核对相关业务条件后重新分析",
+            "message": "相关业务条件尚未核实，当前能力受到限制。"
+          }
+        ],
+        "scopeEvidence": "ERP_PRODUCT_INVENTORY_IDS",
+        "sourceUrgency": null,
+        "suggestionIds": [],
+        "uncertainties": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "SELLABLE_ETA_UNKNOWN",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "warehouseName": "海岚洛杉矶现货仓",
+        "identityIssues": [],
+        "inventoryBasis": {
+          "issues": [],
+          "status": "VERIFIED",
+          "physical": "6",
+          "residual": "0",
+          "available": "6",
+          "censoredAt": [],
+          "checkpoint": {
+            "source": "REGISTERED_OPENING",
+            "version": 1,
+            "originAt": "2026-11-13T05:22:40+00:00",
+            "postedAt": null,
+            "quantity": "45",
+            "available": "45",
+            "observedAt": "2026-11-14T03:40:49.859174+00:00",
+            "inventoryId": "1137",
+            "lastEventId": null,
+            "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50"
+          },
+          "eventCount": 7,
+          "observedAt": "2026-11-14T03:40:49.859174+00:00",
+          "lastEventId": "1268681",
+          "lastPostedAt": "2026-11-13T06:07:41+00:00",
+          "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+          "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+          "zeroIntervals": [],
+          "expectedPhysical": "6",
+          "unsupportedEvents": []
+        },
+        "sourceQuantity": null,
+        "formalPurchases": [
+          {
+            "sku": "HL-CBL100-2M",
+            "erpId": "1406",
+            "status": "待下单",
+            "erpNumber": "S01-RQ-31d1cf789b276beb43772c35fe244375",
+            "lineIndex": 0,
+            "sellableDate": null,
+            "warehouseName": "海岚洛杉矶现货仓",
+            "plannedArrival": null,
+            "warehouseMatch": true,
+            "orderedQuantity": 48,
+            "receivedQuantity": 0,
+            "sourcePlanNumber": "31d1cf789b276beb43772c35fe244375d14d9167d562abda5e526ae7a8f5c0f4",
+            "storeAttribution": "UNKNOWN_SOURCE_HAS_NO_STORE_FK",
+            "unreceivedQuantity": 48,
+            "includedInCalculation": false,
+            "effectiveSupplyQuantity": null
+          }
+        ],
+        "admissionVersion": "s01-runtime-v1",
+        "identityVerified": true,
+        "ruleFailureCodes": [
+          "DEMAND_DAY_COVERAGE_INCOMPLETE"
+        ],
+        "snapshotManifest": {
+          "version": "s01-v2-result-v1",
+          "entityKey": "36765585f20eac8cca7e9348b63aa541dab464841d293e0322b88d2c12760c30",
+          "resultDigest": "4a53964a6a36ee19a23cb311d6c6021a5643b890fd974f34002d7ad4c648f1ca",
+          "inputSnapshotRef": "snapshot-903733e1e14c2d5f8774357b433dfc56c1485d767c637799a7865e027316d7ae"
+        },
+        "sourceSuggestion": null,
+        "sourceSuggestions": [],
+        "sourceSuggestionCount": 0,
+        "procurementEligibility": {
+          "eligible": false,
+          "warnings": [
+            "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+            "SELLABLE_ETA_UNKNOWN",
+            "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+          ],
+          "hardBlocks": [
+            "NO_POSITIVE_RECOMMENDATION_BASIS"
+          ],
+          "policyVersion": "s01-v2-scheme-b-v1",
+          "scopeAuthorized": false
+        },
+        "productSourceUpdatedAt": "2026-11-13T04:50:54+00:00"
+      }
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "taskRef": {
+        "tenantId": "two-sku-283342e876fd48d89f2fa625e22d1cf2",
+        "taskId": "20d8445f352743b7992ae66dda4afc0d"
+      },
+      "apiStatus": 200,
+      "item": {
+        "sku": "HL-MUG350-WH",
+        "name": "北欧风陶瓷马克杯 350ml",
+        "unit": "EA",
+        "storeId": "3",
+        "quantity": null,
+        "riskDate": null,
+        "entityKey": "e44cc17da2d8e711ebec134b38dfad9e0b1aa91513d5cbbca5b524e4b46972be",
+        "inventory": {
+          "available": 81,
+          "warehouseId": "308",
+          "inventoryIds": [
+            "1138"
+          ]
+        },
+        "productId": "219",
+        "riskGroup": "UNVERIFIED",
+        "storeName": "海岚家居美国站",
+        "observedAt": "2026-11-14T03:41:09.001782+00:00",
+        "riskResult": null,
+        "ruleResult": null,
+        "constraints": {
+          "moq": 12,
+          "unit": "EA",
+          "quoteId": "879",
+          "quoteNo": "HL-S01-P1-20261113-Q-MUG",
+          "currency": "USD",
+          "leadDays": 4,
+          "unitPrice": "3.20",
+          "hardBlocks": [],
+          "supplierId": "4",
+          "quoteValidTo": "2026-12-13",
+          "quoteVersion": 1,
+          "supplierName": "海岚北美生活用品供应",
+          "minimumAmount": "38.40",
+          "orderMultiple": 12,
+          "quoteValidFrom": "2026-11-10"
+        },
+        "dataQuality": {
+          "demand": {
+            "status": "REFERENCE",
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "identity": {
+            "status": "VERIFIED",
+            "reasons": []
+          },
+          "inventory": {
+            "status": "VERIFIED",
+            "reasons": []
+          },
+          "procurement": {
+            "status": "READY_FOR_REVALIDATION",
+            "reasons": []
+          }
+        },
+        "snapshotRef": "snapshot-51552db0597bb4591345462dbe177699ee9e0c16fcb707b993500433ecd631f6",
+        "sourceGrade": "HISTORICAL_REFERENCE",
+        "warehouseId": "308",
+        "capabilities": {
+          "risk": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "facts": {
+            "enabled": true,
+            "reasons": []
+          },
+          "rules": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "reference": {
+            "enabled": true,
+            "reasons": []
+          },
+          "requisition": {
+            "enabled": false,
+            "reasons": [
+              "NO_POSITIVE_RECOMMENDATION_BASIS",
+              "WRITE_SCOPE_NOT_AUTHORIZED"
+            ],
+            "permissionCheck": "G01_RECHECK_REQUIRED_AT_SUBMISSION"
+          }
+        },
+        "demandWindow": {
+          "issues": [],
+          "method": "SIMPLE_MOVING_AVERAGE",
+          "history": [
+            {
+              "orderRef": "erp-order-1153930",
+              "postedAt": "2026-11-13T06:07:04+00:00",
+              "quantity": "2",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "orderRef": "erp-order-1153931",
+              "postedAt": "2026-11-13T06:07:11+00:00",
+              "quantity": "3",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "orderRef": "erp-order-1153932",
+              "postedAt": "2026-11-13T06:07:18+00:00",
+              "quantity": "2",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "orderRef": "erp-order-1153933",
+              "postedAt": "2026-11-13T06:07:26+00:00",
+              "quantity": "3",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "orderRef": "erp-order-1153929",
+              "postedAt": "2026-11-13T05:22:40+00:00",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            },
+            {
+              "orderRef": "erp-order-1153934",
+              "postedAt": "2026-11-13T06:07:33+00:00",
+              "quantity": "2",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "orderRef": "erp-order-1153935",
+              "postedAt": "2026-11-13T06:07:41+00:00",
+              "quantity": "3",
+              "businessDate": "2026-11-12"
+            }
+          ],
+          "complete": false,
+          "excluded": [],
+          "timezone": "UTC+08:00",
+          "zeroDays": 0,
+          "sampleEnd": "2026-11-12",
+          "validDays": 6,
+          "windowEnd": "2026-11-13",
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-08",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-09",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-10",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "4"
+            },
+            {
+              "day": "2026-11-11",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "2"
+            },
+            {
+              "day": "2026-11-12",
+              "status": "KNOWN_SALES",
+              "reasons": [],
+              "quantity": "3"
+            },
+            {
+              "day": "2026-11-13",
+              "status": "UNKNOWN",
+              "reasons": [
+                "DAY_COVERAGE_UNPROVEN"
+              ],
+              "quantity": null
+            }
+          ],
+          "totalSales": "17",
+          "missingDays": 1,
+          "sampleStart": "2026-11-06",
+          "windowStart": "2026-11-07",
+          "policyVersion": "s01-sma-mvp-v1",
+          "referenceDays": 7,
+          "sampleAgeDays": 2,
+          "scopeCoverage": "COMPLETE_SCOPED_SOURCE",
+          "referenceGrade": "OBSERVED_STATUS_ONLY",
+          "observationDays": 7,
+          "observedHistory": [
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153935",
+              "quantity": "3",
+              "businessDate": "2026-11-12"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153934",
+              "quantity": "2",
+              "businessDate": "2026-11-11"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153933",
+              "quantity": "3",
+              "businessDate": "2026-11-09"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153932",
+              "quantity": "2",
+              "businessDate": "2026-11-08"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153931",
+              "quantity": "3",
+              "businessDate": "2026-11-07"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153930",
+              "quantity": "2",
+              "businessDate": "2026-11-06"
+            },
+            {
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION",
+              "orderRef": "erp-order-1153929",
+              "quantity": "4",
+              "businessDate": "2026-11-10"
+            }
+          ],
+          "referenceAverage": "2.714285714285714285714285714",
+          "averageDailyDemand": null,
+          "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE"
+        },
+        "inventoryIds": [
+          "1138"
+        ],
+        "sourceTenant": "1",
+        "analysisState": "HISTORICAL_REFERENCE",
+        "recoveryHints": [
+          {
+            "code": "DEMAND_DAY_COVERAGE_INCOMPLETE",
+            "action": "核对每日销售覆盖后重新分析",
+            "message": "部分日期缺少完整销量证据，可查看历史趋势，暂不能计算当前规则数量。"
+          },
+          {
+            "code": "NO_POSITIVE_RECOMMENDATION_BASIS",
+            "action": "核对相关业务条件后重新分析",
+            "message": "相关业务条件尚未核实，当前能力受到限制。"
+          }
+        ],
+        "scopeEvidence": "ERP_PRODUCT_INVENTORY_IDS",
+        "sourceUrgency": null,
+        "suggestionIds": [],
+        "uncertainties": [
+          "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+          "SELLABLE_ETA_UNKNOWN",
+          "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+        ],
+        "warehouseName": "海岚洛杉矶现货仓",
+        "identityIssues": [],
+        "inventoryBasis": {
+          "issues": [],
+          "status": "VERIFIED",
+          "physical": "81",
+          "residual": "0",
+          "available": "81",
+          "censoredAt": [],
+          "checkpoint": {
+            "source": "REGISTERED_OPENING",
+            "version": 1,
+            "originAt": "2026-11-13T05:22:40+00:00",
+            "postedAt": null,
+            "quantity": "100",
+            "available": "100",
+            "observedAt": "2026-11-14T03:41:09.001782+00:00",
+            "inventoryId": "1138",
+            "lastEventId": null,
+            "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50"
+          },
+          "eventCount": 7,
+          "observedAt": "2026-11-14T03:41:09.001782+00:00",
+          "lastEventId": "1268682",
+          "lastPostedAt": "2026-11-13T06:07:41+00:00",
+          "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+          "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+          "zeroIntervals": [],
+          "expectedPhysical": "81",
+          "unsupportedEvents": []
+        },
+        "sourceQuantity": null,
+        "formalPurchases": [],
+        "admissionVersion": "s01-runtime-v1",
+        "identityVerified": true,
+        "ruleFailureCodes": [
+          "DEMAND_DAY_COVERAGE_INCOMPLETE"
+        ],
+        "snapshotManifest": {
+          "version": "s01-v2-result-v1",
+          "entityKey": "e44cc17da2d8e711ebec134b38dfad9e0b1aa91513d5cbbca5b524e4b46972be",
+          "resultDigest": "58241152ffd9d3e944f7294cd69c0b5c76f7604bd5382dd00065bfda2d1cd7d5",
+          "inputSnapshotRef": "snapshot-c860b01c7f5e9015b415ad8a168a2ecabe0570c079ad595ceafa8ac0a1a640cf"
+        },
+        "sourceSuggestion": null,
+        "sourceSuggestions": [],
+        "sourceSuggestionCount": 0,
+        "procurementEligibility": {
+          "eligible": false,
+          "warnings": [
+            "NO_ATOMIC_CROSS_INTERFACE_SNAPSHOT",
+            "SELLABLE_ETA_UNKNOWN",
+            "FORMAL_PURCHASE_DEDUCTION_UNCONFIRMED"
+          ],
+          "hardBlocks": [
+            "NO_POSITIVE_RECOMMENDATION_BASIS"
+          ],
+          "policyVersion": "s01-v2-scheme-b-v1",
+          "scopeAuthorized": false
+        },
+        "productSourceUpdatedAt": "2026-11-13T04:50:55+00:00"
+      }
+    }
+  ],
+  "oldUserReportsUnchanged": true,
+  "paidModels": 0,
+  "erpBusinessWrites": 0,
+  "fullCatalogTasks": 0
+}

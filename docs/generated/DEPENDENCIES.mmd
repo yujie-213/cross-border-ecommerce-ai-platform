@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=be148fa0c1f09dc529b34617b099f1cb5d0adc772b47d1ebf0ed1851051f1113
+%% TASKS sourceSha256=091d1ec18de3b74844126f99ecf497f5db7b39c99671ea4facc0e1270c1df4ac
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -49,6 +49,7 @@ flowchart TB
   D_S01_V2_01["D-S01-V2-01 S01 V2完整补货工作台：动态全范围/双通道/方案B请购"]
   D_S01_LOCAL_01["D-S01-LOCAL-01 S01 V2本地一键启动/单管理员登录及main发布"]
   D_S01_ADMISSION_01["D-S01-ADMISSION-01 S01数据准入与长期可用性运行改造"]
+  D_S01_TWO_SKU_01["D-S01-TWO-SKU-01 两自有SKU实际可用性定向修复"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -125,3 +126,4 @@ flowchart TB
   D_S01_V2_01 --> D_S01_LOCAL_01
   D_S01_V2_01 --> D_S01_ADMISSION_01
   D_S01_LOCAL_01 --> D_S01_ADMISSION_01
+  D_S01_ADMISSION_01 --> D_S01_TWO_SKU_01

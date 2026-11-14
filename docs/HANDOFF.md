@@ -1,3 +1,11 @@
+两SKU定向修复交付（2026-11-14）：D-S01-TWO-SKU-01 REVIEW，codex/s01-two-sku-usability-fix，核心7869ce3。已证实用户最近运行新版，库存已通过但参考字段未呈现；新增HISTORICAL_REFERENCE和最小Vue参考面板，数量仍null，不放宽采购。最新两SKU48只读全200，库存6/81；11/13零订单已证实但中午创建、无整日需求证据，不补有效零。真实API/MySQL/Worker仅2单品均参考分析成功、旧用户报告指纹不变；8后端6前端/类型构建针对验证通过，未跑831/全SKU/30日。当前本worktree5174/API8767可测试，admin原密码，模型/采购写关闭；.venv为本机依赖链接，Start-Platform确保本src，原目录仍旧版，勿误用其入口。未改WorkBuddy/main/B01B02/ERP事实。报告reports/S01_两SKU可用性定向修复_20261114.md；证据evidence/S01-TWO-SKU-FIX。仅普通提交推送后停止，等独立评审。
+
+本轮两SKU定向修复领取（2026-11-14）：从d47d497在当前隔离worktree新建codex/s01-two-sku-usability-fix，前次本地测试开关4份文档diff已识别保留。D目录仍ad82ac8旧源码；本轮检查时无存活API/Worker，仅8766其他监听未触碰。数据库证明11:13旧任务LEGACY/对账失败，11:21批量及11:22线单品runtime-v1、两SKU库存核验通过、仅缺11/13有效日。新版仍标UNANALYZABLE且原Vue不消费参考字段，确认为最小修复点；正做新两SKU只读与日期对照，禁止全量回归/全目录/模型或采购写，不改WorkBuddy分支。
+
+手动测试实例已关闭并清理（2026-11-14）：负责人明确表示“关闭删除这个，不用了”，已通过本worktree停止入口关闭5174/API8767自管实例，并核对端口不监听；经绝对路径与非重解析目录检查，仅删除本次创建的data/private/local-platform（临时配置/日志）及data/private/review-bootstrap（本机队列隔离启动覆盖）。未删除项目代码、Git分支、MySQL业务历史或正式验收证据，未操作其他服务。手动测试补记保持本地，D-S01-ADMISSION-01仍REVIEW，不构成业务验收。
+
+负责人手动测试入口（2026-11-14）：应“打开改完系统前端”请求，已在本worktree启动d47d497产品代码，浏览器打开http://localhost:5174，API8767，admin沿用原密码；API/frontend/auth-config均HTTP200。原目录5173/8765旧实例保留未停止。为避免同库新旧Worker抢任务，Git忽略的私有review-bootstrap仅给本实例HandlerSpec.work_kind加.review.d47d497后缀，已核验实际API/Worker解释器加载，未改已评审源码或旧实例。测试配置付费AI及ERP采购写均关闭；本人未登录/新建分析/发ERP或模型请求，等待用户自行测试，不签新验收。当前服务持续运行，停止用本worktree Stop-Platform.cmd；REVIEW不变。该运行交接仅本地记录，未改main。
+
 本轮运行改造推送回执（2026-11-14）：独立codex/s01-admission-runtime-fix普通push成功，独立ls-remote核实3f4cac721db41f4817fc0a73be828d618427ec5b，远端main仍ece11160ecd0e820153a1c58128657a2f8788884；没有合main或force。最终测试提交d919fb5、831/43/类型构建/18文档校验不变。后续仅本回执/台账及派生文档同步，最终HEAD按Git回读；任务保持REVIEW，停止开发，等待负责人和星星独立评审。
 
 本轮数据准入后端交付（2026-11-14）：D-S01-ADMISSION-01 REVIEW、review=null，独立worktree/分支codex/s01-admission-runtime-fix，main基线ece11160。实现a48699c/4d656c1/d919fb5；最终冻结d919fb5后831完整后端全PASS（原787逐名保留、新44、0失败错误跳过）、43前端/类型构建/18文档/compileall/pip check通过。Vue/B01B02公式/旧48任务/旧夹具/原始captures及历史报告保全；无新ERP业务写或付费模型。

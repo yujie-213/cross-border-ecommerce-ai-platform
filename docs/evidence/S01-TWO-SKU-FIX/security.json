@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "scope": "EXACT_TWO_SKU_FIX_PAYLOAD",
+  "scannedFiles": 23,
+  "findings": [],
+  "rawERPResponses": false,
+  "localRuntimeOrCredentialsIncluded": false,
+  "gitPathDecoding": "UTF8_NUL"
+}

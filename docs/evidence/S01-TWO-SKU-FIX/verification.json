@@ -1,0 +1,66 @@
+{
+  "status": "REVIEW",
+  "baseline": "d47d49733774c43c9ab08797318da62aac7ade72",
+  "implementationCommit": "7869ce38fe299135b2fb62fb86250cfbd1eb557d",
+  "branch": "codex/s01-two-sku-usability-fix",
+  "backend": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xmlSha256": "5f8be48f6543fdf2d6e72153b84dc7836d16db714675217ec2c4a86606d4f53d",
+    "command": "pytest: test_two_sku_reference.py + test_two_sku_usability.py + original P3 restart/drift/CSRF cases only"
+  },
+  "frontend": {
+    "tests": 6,
+    "result": "PASS",
+    "realTwoSkuApiCapturesRendered": true,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "command": "vitest historical-reference.test.ts v2.test.ts; npm run build"
+  },
+  "realRead": {
+    "initialAttempts": 48,
+    "initialAllHTTP200": true,
+    "pageSize": 25,
+    "recordsLimit": 500,
+    "scope": "EXACT_TWO_OWNED_SKUS",
+    "dayControl": "11/12 exact known order, 11/13 complete empty order query",
+    "zeroPredictionDayStillUnproven": true
+  },
+  "apiWorker": {
+    "result": "PASS",
+    "singleTasks": 2,
+    "fullCatalogTasks": 0,
+    "oldUserReportsUnchanged": true,
+    "paidModels": 0,
+    "erpBusinessWrites": 0,
+    "artifact": "docs/evidence/S01-TWO-SKU-FIX/api-worker.json"
+  },
+  "actualUserVersions": {
+    "oldTask": "af8bb89eccf94f19aa956457fd8129cc",
+    "oldVersion": "LEGACY",
+    "newBatch": "e8da93a39f264e74a6d2f2ebd700d9f5",
+    "newSingle": "2d3980e196094482b7ed1e6a48a45fa3",
+    "newVersion": "s01-runtime-v1",
+    "confirmedNewCodeAlreadyRan": true
+  },
+  "retainedFailures": [
+    "Read-only process query denied until reviewed elevation",
+    "Initial reference panel missed shown/unitLabel imports; corrected and original targeted rendering/build passed",
+    "Live API validation tool initially used nonexistent /tasks route:404, no ERP call or analysis task; corrected to existing analysis-tasks",
+    "Capture tuple test lacked TypeScript type; declaration corrected, same6 tests/build passed"
+  ],
+  "notRun": [
+    "831 full regression intentionally not rerun",
+    "full SKU scan",
+    "30 day simulation",
+    "paid AI",
+    "ERP purchase writes",
+    "main merge"
+  ],
+  "publication": {
+    "status": "PENDING_NORMAL_BRANCH_PUSH",
+    "mainMerged": false
+  }
+}

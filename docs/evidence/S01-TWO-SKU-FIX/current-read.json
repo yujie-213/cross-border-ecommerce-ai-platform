@@ -1,0 +1,947 @@
+{
+  "nature": "CURRENT_REAL_ERP_READ_ONLY_TWO_OWNED_SKUS",
+  "runs": [
+    {
+      "sku": "HL-CBL100-2M",
+      "startedAt": "2026-11-14T03:31:26.160017+00:00",
+      "completedAt": "2026-11-14T03:31:45.291530+00:00",
+      "requests": 24,
+      "events": [
+        {
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "at": "2026-11-14T03:31:26.160598+00:00",
+          "completedAt": "2026-11-14T03:31:27.063281+00:00",
+          "httpStatus": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "at": "2026-11-14T03:31:27.064057+00:00",
+          "completedAt": "2026-11-14T03:31:27.780717+00:00",
+          "httpStatus": 200,
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/store-authorizations",
+          "at": "2026-11-14T03:31:27.786605+00:00",
+          "completedAt": "2026-11-14T03:31:28.523512+00:00",
+          "httpStatus": 200,
+          "sha256": "b168d963ce64fb413ab5b1cc4420cb9782814c7bdb68c18090ce6c0847399343"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/warehouses",
+          "at": "2026-11-14T03:31:28.527114+00:00",
+          "completedAt": "2026-11-14T03:31:29.249710+00:00",
+          "httpStatus": 200,
+          "sha256": "6a7c966c6e77ad3e09307ace24135d3e1e4f66b6df42f1b586eaac554679792f"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-14T03:31:29.254106+00:00",
+          "completedAt": "2026-11-14T03:31:30.009058+00:00",
+          "httpStatus": 200,
+          "sha256": "422f764e792e132670929d801e2b142806914eb1ec7c808d04bce379073076e0"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-14T03:31:30.011671+00:00",
+          "completedAt": "2026-11-14T03:31:30.741953+00:00",
+          "httpStatus": 200,
+          "sha256": "3a488d5750c1548ef88fd7b8fe341f962129128e3a54e26888dc28db08ac47d2"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-14T03:31:30.745858+00:00",
+          "completedAt": "2026-11-14T03:31:31.469880+00:00",
+          "httpStatus": 200,
+          "sha256": "9e9502afecbca25e0855c9355d473a0bc55a76efe9a756a2f412b0dc9900acf8"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-14T03:31:31.473649+00:00",
+          "completedAt": "2026-11-14T03:31:32.172581+00:00",
+          "httpStatus": 200,
+          "sha256": "f772564d92841c0470f3d91a3c6ef2cd56ecb26f4986a1274764ab25854b937d"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-14T03:31:32.175892+00:00",
+          "completedAt": "2026-11-14T03:31:32.902453+00:00",
+          "httpStatus": 200,
+          "sha256": "4e793ac4dcb0f45e2391a89b96588c8d09fa477921ac56405890ddd8e2965fe1"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:31:32.905488+00:00",
+          "completedAt": "2026-11-14T03:31:33.654787+00:00",
+          "httpStatus": 200,
+          "sha256": "80d9cdc9da9c1e6f7d3475c7d655abe0a670729d9b49b2694f6e06aeea31529c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-14T03:31:33.658028+00:00",
+          "completedAt": "2026-11-14T03:31:34.448645+00:00",
+          "httpStatus": 200,
+          "sha256": "5be595118a7a04679d18c201d9487f915fd2d3f1615b598785a06bccacd663c3"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-14T03:31:34.452081+00:00",
+          "completedAt": "2026-11-14T03:31:35.180799+00:00",
+          "httpStatus": 200,
+          "sha256": "4d4820ab296b082194a5c432c48cc1f25235c7fb699e9c9eafc146588e1123e0"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-14T03:31:35.184206+00:00",
+          "completedAt": "2026-11-14T03:31:35.912353+00:00",
+          "httpStatus": 200,
+          "sha256": "9e9502afecbca25e0855c9355d473a0bc55a76efe9a756a2f412b0dc9900acf8"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:31:35.923135+00:00",
+          "completedAt": "2026-11-14T03:31:36.702401+00:00",
+          "httpStatus": 200,
+          "sha256": "76b5f04d05b3770dad8520f7e1dd46a5a7287d15f0265a0134e7d32aa88a8bc0"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-14T03:31:36.705548+00:00",
+          "completedAt": "2026-11-14T03:31:38.724588+00:00",
+          "httpStatus": 200,
+          "sha256": "bcd2f400f958b8e81f2ee77b7e579bf6b4e8ec0a1587466fce0c4d582d084144"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153935",
+          "at": "2026-11-14T03:31:38.728286+00:00",
+          "completedAt": "2026-11-14T03:31:39.491140+00:00",
+          "httpStatus": 200,
+          "sha256": "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153934",
+          "at": "2026-11-14T03:31:39.494807+00:00",
+          "completedAt": "2026-11-14T03:31:40.212259+00:00",
+          "httpStatus": 200,
+          "sha256": "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153933",
+          "at": "2026-11-14T03:31:40.215315+00:00",
+          "completedAt": "2026-11-14T03:31:40.922741+00:00",
+          "httpStatus": 200,
+          "sha256": "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153932",
+          "at": "2026-11-14T03:31:40.925964+00:00",
+          "completedAt": "2026-11-14T03:31:41.659145+00:00",
+          "httpStatus": 200,
+          "sha256": "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153931",
+          "at": "2026-11-14T03:31:41.662662+00:00",
+          "completedAt": "2026-11-14T03:31:42.384526+00:00",
+          "httpStatus": 200,
+          "sha256": "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153930",
+          "at": "2026-11-14T03:31:42.389995+00:00",
+          "completedAt": "2026-11-14T03:31:43.112973+00:00",
+          "httpStatus": 200,
+          "sha256": "4d0def959e75f00b13ddc0cadebcc514000a05d5501fbb59476452e974748409"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153929",
+          "at": "2026-11-14T03:31:43.115833+00:00",
+          "completedAt": "2026-11-14T03:31:43.833325+00:00",
+          "httpStatus": 200,
+          "sha256": "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:31:43.844068+00:00",
+          "completedAt": "2026-11-14T03:31:44.566306+00:00",
+          "httpStatus": 200,
+          "sha256": "1c6c3b64388373814f9b07f3fa1d2cda1fff5e26acad817bf82dfe9281d3e397"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:31:44.571586+00:00",
+          "completedAt": "2026-11-14T03:31:45.291530+00:00",
+          "httpStatus": 200,
+          "sha256": "9e9502afecbca25e0855c9355d473a0bc55a76efe9a756a2f412b0dc9900acf8"
+        }
+      ],
+      "pageSize": 25,
+      "maxRecords": 500,
+      "dayProbes": [
+        {
+          "day": "2026-11-12",
+          "complete": true,
+          "returnedCount": 1,
+          "matchingOrderIds": [
+            "1153935"
+          ],
+          "allReturnedInRequestedDay": true,
+          "observedAt": "2026-11-14T03:31:44.566306+00:00"
+        },
+        {
+          "day": "2026-11-13",
+          "complete": true,
+          "returnedCount": 0,
+          "matchingOrderIds": [],
+          "allReturnedInRequestedDay": true,
+          "observedAt": "2026-11-14T03:31:45.291530+00:00"
+        }
+      ],
+      "result": {
+        "analysisState": "UNANALYZABLE",
+        "sourceGrade": "UNAVAILABLE",
+        "quantity": null,
+        "inventory": {
+          "available": 6,
+          "inventoryIds": [
+            "1137"
+          ],
+          "warehouseId": "308"
+        },
+        "inventoryBasis": {
+          "status": "VERIFIED",
+          "checkpoint": {
+            "version": 1,
+            "quantity": "45",
+            "available": "45",
+            "inventoryId": "1137",
+            "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50",
+            "source": "REGISTERED_OPENING",
+            "postedAt": null,
+            "lastEventId": null,
+            "originAt": "2026-11-13T05:22:40+00:00",
+            "observedAt": "2026-11-14T03:31:30.741953+00:00"
+          },
+          "physical": "6",
+          "available": "6",
+          "observedAt": "2026-11-14T03:31:30.741953+00:00",
+          "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+          "residual": "0",
+          "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+          "unsupportedEvents": [],
+          "issues": [],
+          "expectedPhysical": "6",
+          "censoredAt": [],
+          "zeroIntervals": [],
+          "eventCount": 7,
+          "lastEventId": "1268681",
+          "lastPostedAt": "2026-11-13T06:07:41+00:00"
+        },
+        "demandWindow": {
+          "method": "SIMPLE_MOVING_AVERAGE",
+          "policyVersion": "s01-sma-mvp-v1",
+          "timezone": "UTC+08:00",
+          "windowStart": "2026-11-07",
+          "windowEnd": "2026-11-13",
+          "observationDays": 7,
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "status": "KNOWN_SALES",
+              "quantity": "5",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-08",
+              "status": "KNOWN_SALES",
+              "quantity": "4",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-09",
+              "status": "KNOWN_SALES",
+              "quantity": "6",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-10",
+              "status": "KNOWN_SALES",
+              "quantity": "9",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-11",
+              "status": "KNOWN_SALES",
+              "quantity": "5",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-12",
+              "status": "KNOWN_SALES",
+              "quantity": "6",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-13",
+              "status": "UNKNOWN",
+              "quantity": null,
+              "reasons": [
+                "DAY_COVERAGE_UNPROVEN"
+              ]
+            }
+          ],
+          "validDays": 6,
+          "zeroDays": 0,
+          "missingDays": 1,
+          "totalSales": "35",
+          "averageDailyDemand": null,
+          "referenceAverage": "5.571428571428571428571428571",
+          "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE",
+          "referenceDays": 7,
+          "referenceGrade": "OBSERVED_STATUS_ONLY",
+          "sampleAgeDays": 2,
+          "sampleStart": "2026-11-06",
+          "sampleEnd": "2026-11-12",
+          "complete": false,
+          "history": [
+            {
+              "businessDate": "2026-11-06",
+              "quantity": "4",
+              "orderRef": "erp-order-1153930",
+              "postedAt": "2026-11-13T06:07:04+00:00"
+            },
+            {
+              "businessDate": "2026-11-07",
+              "quantity": "5",
+              "orderRef": "erp-order-1153931",
+              "postedAt": "2026-11-13T06:07:11+00:00"
+            },
+            {
+              "businessDate": "2026-11-08",
+              "quantity": "4",
+              "orderRef": "erp-order-1153932",
+              "postedAt": "2026-11-13T06:07:18+00:00"
+            },
+            {
+              "businessDate": "2026-11-09",
+              "quantity": "6",
+              "orderRef": "erp-order-1153933",
+              "postedAt": "2026-11-13T06:07:26+00:00"
+            },
+            {
+              "businessDate": "2026-11-10",
+              "quantity": "9",
+              "orderRef": "erp-order-1153929",
+              "postedAt": "2026-11-13T05:22:40+00:00"
+            },
+            {
+              "businessDate": "2026-11-11",
+              "quantity": "5",
+              "orderRef": "erp-order-1153934",
+              "postedAt": "2026-11-13T06:07:33+00:00"
+            },
+            {
+              "businessDate": "2026-11-12",
+              "quantity": "6",
+              "orderRef": "erp-order-1153935",
+              "postedAt": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "observedHistory": [
+            {
+              "businessDate": "2026-11-12",
+              "quantity": "6",
+              "orderRef": "erp-order-1153935",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-11",
+              "quantity": "5",
+              "orderRef": "erp-order-1153934",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-09",
+              "quantity": "6",
+              "orderRef": "erp-order-1153933",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-08",
+              "quantity": "4",
+              "orderRef": "erp-order-1153932",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-07",
+              "quantity": "5",
+              "orderRef": "erp-order-1153931",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-06",
+              "quantity": "4",
+              "orderRef": "erp-order-1153930",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-10",
+              "quantity": "9",
+              "orderRef": "erp-order-1153929",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            }
+          ],
+          "excluded": [],
+          "issues": [],
+          "scopeCoverage": "COMPLETE_SCOPED_SOURCE"
+        },
+        "capabilities": {
+          "facts": {
+            "enabled": true,
+            "reasons": []
+          },
+          "reference": {
+            "enabled": true,
+            "reasons": []
+          },
+          "risk": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "rules": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "requisition": {
+            "enabled": false,
+            "reasons": [
+              "NO_POSITIVE_RECOMMENDATION_BASIS",
+              "WRITE_SCOPE_NOT_AUTHORIZED"
+            ],
+            "permissionCheck": "G01_RECHECK_REQUIRED_AT_SUBMISSION"
+          }
+        },
+        "ruleFailureCodes": [
+          "DEMAND_DAY_COVERAGE_INCOMPLETE"
+        ],
+        "recoveryHints": [
+          {
+            "code": "DEMAND_DAY_COVERAGE_INCOMPLETE",
+            "message": "部分日期缺少完整销量证据，可查看历史趋势，暂不能计算当前规则数量。",
+            "action": "核对每日销售覆盖后重新分析"
+          },
+          {
+            "code": "NO_POSITIVE_RECOMMENDATION_BASIS",
+            "message": "相关业务条件尚未核实，当前能力受到限制。",
+            "action": "核对相关业务条件后重新分析"
+          }
+        ]
+      },
+      "sourceProductTimes": {
+        "created_at": "2026-11-13T04:50:54+00:00",
+        "updated_at": "2026-11-13T04:50:54+00:00"
+      },
+      "businessWrites": 0,
+      "paidModels": 0
+    },
+    {
+      "sku": "HL-MUG350-WH",
+      "startedAt": "2026-11-14T03:31:45.295549+00:00",
+      "completedAt": "2026-11-14T03:32:03.961445+00:00",
+      "requests": 24,
+      "events": [
+        {
+          "method": "POST",
+          "path": "/api/auth-server/oauth/access-token",
+          "at": "2026-11-14T03:31:45.295898+00:00",
+          "completedAt": "2026-11-14T03:31:46.170417+00:00",
+          "httpStatus": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "at": "2026-11-14T03:31:46.171115+00:00",
+          "completedAt": "2026-11-14T03:31:46.873339+00:00",
+          "httpStatus": 200,
+          "sha256": "258127303a3689070e1ad939e1405398853c6dfec28fc2a9cca0439e40ddc38b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/store-authorizations",
+          "at": "2026-11-14T03:31:46.876448+00:00",
+          "completedAt": "2026-11-14T03:31:47.582138+00:00",
+          "httpStatus": 200,
+          "sha256": "b168d963ce64fb413ab5b1cc4420cb9782814c7bdb68c18090ce6c0847399343"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/warehouses",
+          "at": "2026-11-14T03:31:47.585381+00:00",
+          "completedAt": "2026-11-14T03:31:48.296814+00:00",
+          "httpStatus": 200,
+          "sha256": "6a7c966c6e77ad3e09307ace24135d3e1e4f66b6df42f1b586eaac554679792f"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/products",
+          "at": "2026-11-14T03:31:48.300540+00:00",
+          "completedAt": "2026-11-14T03:31:48.997995+00:00",
+          "httpStatus": 200,
+          "sha256": "57601369e96e06f863ab0297bc872a2c583d2e862050dd3d76ec2f72e54daa01"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/inventory",
+          "at": "2026-11-14T03:31:49.001248+00:00",
+          "completedAt": "2026-11-14T03:31:49.738853+00:00",
+          "httpStatus": 200,
+          "sha256": "e75c3ce7236d2946ba20220fa4f8ea33aabf78dd54d63782135a0a98fe5ad283"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/replenishment",
+          "at": "2026-11-14T03:31:49.742067+00:00",
+          "completedAt": "2026-11-14T03:31:50.439359+00:00",
+          "httpStatus": 200,
+          "sha256": "9e9502afecbca25e0855c9355d473a0bc55a76efe9a756a2f412b0dc9900acf8"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/supplier-quotes",
+          "at": "2026-11-14T03:31:50.443294+00:00",
+          "completedAt": "2026-11-14T03:31:51.168717+00:00",
+          "httpStatus": 200,
+          "sha256": "48a43f1a06aeb2925869a4f81adc1b820c5ec15d4868d59508226463fd8e8ac5"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/listings",
+          "at": "2026-11-14T03:31:51.171386+00:00",
+          "completedAt": "2026-11-14T03:31:51.893208+00:00",
+          "httpStatus": 200,
+          "sha256": "e58c4aaa89b634f7346feff596cf71f63e0978290b381aa172a65382d9ecdfe3"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:31:51.896133+00:00",
+          "completedAt": "2026-11-14T03:31:52.631320+00:00",
+          "httpStatus": 200,
+          "sha256": "80d9cdc9da9c1e6f7d3475c7d655abe0a670729d9b49b2694f6e06aeea31529c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-14T03:31:52.634647+00:00",
+          "completedAt": "2026-11-14T03:31:53.391534+00:00",
+          "httpStatus": 200,
+          "sha256": "5be595118a7a04679d18c201d9487f915fd2d3f1615b598785a06bccacd663c3"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-14T03:31:53.394543+00:00",
+          "completedAt": "2026-11-14T03:31:54.136064+00:00",
+          "httpStatus": 200,
+          "sha256": "4d4820ab296b082194a5c432c48cc1f25235c7fb699e9c9eafc146588e1123e0"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/purchase-orders",
+          "at": "2026-11-14T03:31:54.139224+00:00",
+          "completedAt": "2026-11-14T03:31:54.856954+00:00",
+          "httpStatus": 200,
+          "sha256": "9e9502afecbca25e0855c9355d473a0bc55a76efe9a756a2f412b0dc9900acf8"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:31:54.860288+00:00",
+          "completedAt": "2026-11-14T03:31:55.570883+00:00",
+          "httpStatus": 200,
+          "sha256": "76b5f04d05b3770dad8520f7e1dd46a5a7287d15f0265a0134e7d32aa88a8bc0"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/stock/ledger",
+          "at": "2026-11-14T03:31:55.575076+00:00",
+          "completedAt": "2026-11-14T03:31:57.287308+00:00",
+          "httpStatus": 200,
+          "sha256": "cff3d4f99b9c872cfc51f90ab947e6248dd93d5761cd2806e6be6180c5b4eb2b"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153935",
+          "at": "2026-11-14T03:31:57.290771+00:00",
+          "completedAt": "2026-11-14T03:31:58.016755+00:00",
+          "httpStatus": 200,
+          "sha256": "c1cdf8fece863882a17536d8d3bd87f927921027aacfad870d8aabdd7f97b448"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153934",
+          "at": "2026-11-14T03:31:58.019992+00:00",
+          "completedAt": "2026-11-14T03:31:58.719267+00:00",
+          "httpStatus": 200,
+          "sha256": "98518fb3d56f37dab8ccc603022af48b8044a586c2c13877ba4390c04d14f41c"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153933",
+          "at": "2026-11-14T03:31:58.722814+00:00",
+          "completedAt": "2026-11-14T03:31:59.457209+00:00",
+          "httpStatus": 200,
+          "sha256": "4dbb1acb20fc2086a47e351ba1dbe38442169d34ffba599f6f38b3b8aca3e7b1"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153932",
+          "at": "2026-11-14T03:31:59.460511+00:00",
+          "completedAt": "2026-11-14T03:32:00.263442+00:00",
+          "httpStatus": 200,
+          "sha256": "b830028b2bec8b082c8ef115c107c77f68277b32e4c2f5359c8a93ac98d0ebe6"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153931",
+          "at": "2026-11-14T03:32:00.267088+00:00",
+          "completedAt": "2026-11-14T03:32:00.991070+00:00",
+          "httpStatus": 200,
+          "sha256": "8232853f44da93617444264888cd889284ff52168ca2505468ebd42b4326afef"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153930",
+          "at": "2026-11-14T03:32:00.997086+00:00",
+          "completedAt": "2026-11-14T03:32:01.726000+00:00",
+          "httpStatus": 200,
+          "sha256": "4d0def959e75f00b13ddc0cadebcc514000a05d5501fbb59476452e974748409"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-workflow/1153929",
+          "at": "2026-11-14T03:32:01.729095+00:00",
+          "completedAt": "2026-11-14T03:32:02.452144+00:00",
+          "httpStatus": 200,
+          "sha256": "925c492e1917e02bc110ce4b5d2f8c6de0459201c09fa9c1902613d7f5e98e04"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:32:02.456379+00:00",
+          "completedAt": "2026-11-14T03:32:03.243675+00:00",
+          "httpStatus": 200,
+          "sha256": "1c6c3b64388373814f9b07f3fa1d2cda1fff5e26acad817bf82dfe9281d3e397"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/sales-orders",
+          "at": "2026-11-14T03:32:03.246735+00:00",
+          "completedAt": "2026-11-14T03:32:03.961445+00:00",
+          "httpStatus": 200,
+          "sha256": "9e9502afecbca25e0855c9355d473a0bc55a76efe9a756a2f412b0dc9900acf8"
+        }
+      ],
+      "pageSize": 25,
+      "maxRecords": 500,
+      "dayProbes": [
+        {
+          "day": "2026-11-12",
+          "complete": true,
+          "returnedCount": 1,
+          "matchingOrderIds": [
+            "1153935"
+          ],
+          "allReturnedInRequestedDay": true,
+          "observedAt": "2026-11-14T03:32:03.243675+00:00"
+        },
+        {
+          "day": "2026-11-13",
+          "complete": true,
+          "returnedCount": 0,
+          "matchingOrderIds": [],
+          "allReturnedInRequestedDay": true,
+          "observedAt": "2026-11-14T03:32:03.961445+00:00"
+        }
+      ],
+      "result": {
+        "analysisState": "UNANALYZABLE",
+        "sourceGrade": "UNAVAILABLE",
+        "quantity": null,
+        "inventory": {
+          "available": 81,
+          "inventoryIds": [
+            "1138"
+          ],
+          "warehouseId": "308"
+        },
+        "inventoryBasis": {
+          "status": "VERIFIED",
+          "checkpoint": {
+            "version": 1,
+            "quantity": "100",
+            "available": "100",
+            "inventoryId": "1138",
+            "evidenceDigest": "8b374c9b5ebc3df407a039e90896377e94a35cfff3adec0b095e91b41f39bb50",
+            "source": "REGISTERED_OPENING",
+            "postedAt": null,
+            "lastEventId": null,
+            "originAt": "2026-11-13T05:22:40+00:00",
+            "observedAt": "2026-11-14T03:31:49.738853+00:00"
+          },
+          "physical": "81",
+          "available": "81",
+          "observedAt": "2026-11-14T03:31:49.738853+00:00",
+          "rowUpdatedAt": "2026-11-13T06:07:41+00:00",
+          "residual": "0",
+          "historyStatus": "FULL_SOURCE_CHAIN_VERIFIED",
+          "unsupportedEvents": [],
+          "issues": [],
+          "expectedPhysical": "81",
+          "censoredAt": [],
+          "zeroIntervals": [],
+          "eventCount": 7,
+          "lastEventId": "1268682",
+          "lastPostedAt": "2026-11-13T06:07:41+00:00"
+        },
+        "demandWindow": {
+          "method": "SIMPLE_MOVING_AVERAGE",
+          "policyVersion": "s01-sma-mvp-v1",
+          "timezone": "UTC+08:00",
+          "windowStart": "2026-11-07",
+          "windowEnd": "2026-11-13",
+          "observationDays": 7,
+          "dailySales": [
+            {
+              "day": "2026-11-07",
+              "status": "KNOWN_SALES",
+              "quantity": "3",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-08",
+              "status": "KNOWN_SALES",
+              "quantity": "2",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-09",
+              "status": "KNOWN_SALES",
+              "quantity": "3",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-10",
+              "status": "KNOWN_SALES",
+              "quantity": "4",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-11",
+              "status": "KNOWN_SALES",
+              "quantity": "2",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-12",
+              "status": "KNOWN_SALES",
+              "quantity": "3",
+              "reasons": []
+            },
+            {
+              "day": "2026-11-13",
+              "status": "UNKNOWN",
+              "quantity": null,
+              "reasons": [
+                "DAY_COVERAGE_UNPROVEN"
+              ]
+            }
+          ],
+          "validDays": 6,
+          "zeroDays": 0,
+          "missingDays": 1,
+          "totalSales": "17",
+          "averageDailyDemand": null,
+          "referenceAverage": "2.714285714285714285714285714",
+          "referenceDenominator": "OBSERVED_SALES_DATES_ONLY_NOT_CALENDAR_AVERAGE",
+          "referenceDays": 7,
+          "referenceGrade": "OBSERVED_STATUS_ONLY",
+          "sampleAgeDays": 2,
+          "sampleStart": "2026-11-06",
+          "sampleEnd": "2026-11-12",
+          "complete": false,
+          "history": [
+            {
+              "businessDate": "2026-11-06",
+              "quantity": "2",
+              "orderRef": "erp-order-1153930",
+              "postedAt": "2026-11-13T06:07:04+00:00"
+            },
+            {
+              "businessDate": "2026-11-07",
+              "quantity": "3",
+              "orderRef": "erp-order-1153931",
+              "postedAt": "2026-11-13T06:07:11+00:00"
+            },
+            {
+              "businessDate": "2026-11-08",
+              "quantity": "2",
+              "orderRef": "erp-order-1153932",
+              "postedAt": "2026-11-13T06:07:18+00:00"
+            },
+            {
+              "businessDate": "2026-11-09",
+              "quantity": "3",
+              "orderRef": "erp-order-1153933",
+              "postedAt": "2026-11-13T06:07:26+00:00"
+            },
+            {
+              "businessDate": "2026-11-10",
+              "quantity": "4",
+              "orderRef": "erp-order-1153929",
+              "postedAt": "2026-11-13T05:22:40+00:00"
+            },
+            {
+              "businessDate": "2026-11-11",
+              "quantity": "2",
+              "orderRef": "erp-order-1153934",
+              "postedAt": "2026-11-13T06:07:33+00:00"
+            },
+            {
+              "businessDate": "2026-11-12",
+              "quantity": "3",
+              "orderRef": "erp-order-1153935",
+              "postedAt": "2026-11-13T06:07:41+00:00"
+            }
+          ],
+          "observedHistory": [
+            {
+              "businessDate": "2026-11-12",
+              "quantity": "3",
+              "orderRef": "erp-order-1153935",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-11",
+              "quantity": "2",
+              "orderRef": "erp-order-1153934",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-09",
+              "quantity": "3",
+              "orderRef": "erp-order-1153933",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-08",
+              "quantity": "2",
+              "orderRef": "erp-order-1153932",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-07",
+              "quantity": "3",
+              "orderRef": "erp-order-1153931",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-06",
+              "quantity": "2",
+              "orderRef": "erp-order-1153930",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            },
+            {
+              "businessDate": "2026-11-10",
+              "quantity": "4",
+              "orderRef": "erp-order-1153929",
+              "basis": "ERP_PAID_SHIPPED_STATUS_ONLY_NOT_STOCK_RECONCILIATION"
+            }
+          ],
+          "excluded": [],
+          "issues": [],
+          "scopeCoverage": "COMPLETE_SCOPED_SOURCE"
+        },
+        "capabilities": {
+          "facts": {
+            "enabled": true,
+            "reasons": []
+          },
+          "reference": {
+            "enabled": true,
+            "reasons": []
+          },
+          "risk": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "rules": {
+            "enabled": false,
+            "reasons": [
+              "DEMAND_DAY_COVERAGE_INCOMPLETE"
+            ]
+          },
+          "requisition": {
+            "enabled": false,
+            "reasons": [
+              "NO_POSITIVE_RECOMMENDATION_BASIS",
+              "WRITE_SCOPE_NOT_AUTHORIZED"
+            ],
+            "permissionCheck": "G01_RECHECK_REQUIRED_AT_SUBMISSION"
+          }
+        },
+        "ruleFailureCodes": [
+          "DEMAND_DAY_COVERAGE_INCOMPLETE"
+        ],
+        "recoveryHints": [
+          {
+            "code": "DEMAND_DAY_COVERAGE_INCOMPLETE",
+            "message": "部分日期缺少完整销量证据，可查看历史趋势，暂不能计算当前规则数量。",
+            "action": "核对每日销售覆盖后重新分析"
+          },
+          {
+            "code": "NO_POSITIVE_RECOMMENDATION_BASIS",
+            "message": "相关业务条件尚未核实，当前能力受到限制。",
+            "action": "核对相关业务条件后重新分析"
+          }
+        ]
+      },
+      "sourceProductTimes": {
+        "created_at": "2026-11-13T04:50:55+00:00",
+        "updated_at": "2026-11-13T04:50:55+00:00"
+      },
+      "businessWrites": 0,
+      "paidModels": 0
+    }
+  ]
+}

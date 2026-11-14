@@ -9067,6 +9067,169 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "skipped": 0,
       "sha256": "a69fe9492b863d17b17ca2f4cf839b2c5a177e4bd4ebedfd20dfd986c8743f53"
     }
-  ]
+  ],
+  "manualTestSession": {
+    "date": "2026-11-14",
+    "status": "CLOSED_TEMP_RESOURCES_REMOVED",
+    "sourceCommit": "d47d49733774c43c9ab08797318da62aac7ade72",
+    "webUrl": "http://localhost:5174",
+    "apiPort": 8767,
+    "queueNamespace": "review.d47d497",
+    "startupMode": "PRIVATE_LOCAL_BOOTSTRAP_WORK_KIND_SUFFIX_ONLY_NO_PRODUCT_SOURCE_CHANGE",
+    "modelEnabled": false,
+    "requisitionEnabled": false,
+    "old5173InstanceUntouched": true,
+    "readiness": "STOPPED; ports5174/8767 not listening",
+    "newAnalysisByAssistant": false,
+    "closedDate": "2026-11-14",
+    "closeAuthorization": "Owner: 关闭删除这个吧，不用了",
+    "removed": [
+      "data/private/local-platform",
+      "data/private/review-bootstrap"
+    ],
+    "productCodeAndBusinessHistoryPreserved": true
+  }
+}
+```
+
+## D-S01-TWO-SKU-01 两SKU可用性定向修复
+
+```json
+{
+  "id": "D-S01-TWO-SKU-01",
+  "stage": "D",
+  "title": "两自有SKU实际可用性定向修复",
+  "kind": "development",
+  "dependsOn": [
+    "D-S01-ADMISSION-01"
+  ],
+  "entryCondition": "负责人2026-11-14定向任务：核实版本/真实两SKU只读/最小UI参考展示与针对测试；REVIEW不合main",
+  "ownerRole": "Codex集成人",
+  "assignee": "Codex单人",
+  "allowedPaths": [
+    "src/commerce_hub/data/sync/v2.py",
+    "src/commerce_hub/scenarios/s01_v2/analysis.py",
+    "frontend/src/api/v2.ts",
+    "frontend/src/components/V2Workbench.vue",
+    "tools/",
+    "tests/",
+    "frontend/tests/unit/",
+    "docs/"
+  ],
+  "parallelCondition": "复用当前隔离worktree；不触碰WorkBuddy独立原型目录；保留前次本地测试交接diff",
+  "deliverables": [
+    "实际使用版本/阻断证据",
+    "两SKU参考分析可见及小页请求修复（仅实证范围）",
+    "针对性测试/真实APIWorker验证/简短交接"
+  ],
+  "acceptance": [
+    {
+      "id": "D-S01-TWO-SKU-01/AC1",
+      "text": "核实旧/新版实际任务，不误归因"
+    },
+    {
+      "id": "D-S01-TWO-SKU-01/AC2",
+      "text": "两SKU新参考结果可用且不伪造零/采购量"
+    },
+    {
+      "id": "D-S01-TWO-SKU-01/AC3",
+      "text": "针对单测/APIWorker/旧报告及采购门保持"
+    },
+    {
+      "id": "D-S01-TWO-SKU-01/AC4",
+      "text": "独立分支推送REVIEW及最小证据"
+    }
+  ],
+  "plannedTests": [
+    "两自有SKU正式只读及日期正/零对照",
+    "相关状态/页面展示/采购负例测试",
+    "必要MySQL/API/Worker两SKU定向验证；不跑831/全目录/30日"
+  ],
+  "risks": [
+    "11/13零订单不必然证明整日未断货",
+    "范围流水可能间歇超时，失败安全降级",
+    "不修改B01B02/ERP业务事实/WorkBuddy原型，不付费模型采购"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "ERP_API",
+    "REPOSITORY"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "7869ce38fe299135b2fb62fb86250cfbd1eb557d"
+  ],
+  "testedCommit": "7869ce38fe299135b2fb62fb86250cfbd1eb557d",
+  "evidence": [
+    {
+      "kind": "UNIT_TEST",
+      "command": "Targeted pytest8; vitest historical-reference/v2 6; build",
+      "environment": "Windows; isolated fixtures/MySQL and real read-only API capture render",
+      "sample": "No831/fullSKU/30day; qty/permissions/quote/restart safety preserved",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-TWO-SKU-FIX/verification.json",
+      "acceptanceIds": [
+        "D-S01-TWO-SKU-01/AC2",
+        "D-S01-TWO-SKU-01/AC3"
+      ]
+    },
+    {
+      "kind": "INTEGRATION_TEST",
+      "command": "tools/verify_two_sku_api_worker.py",
+      "environment": "Real ERP read-only + actual local API/MySQL/O01 Worker; isolated engineering tenant",
+      "sample": "Only2 singles SUCCEEDED/HISTORICAL_REFERENCE; old real user reports unchanged; no ERP writes/models",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-TWO-SKU-FIX/api-worker.json",
+      "acceptanceIds": [
+        "D-S01-TWO-SKU-01/AC1",
+        "D-S01-TWO-SKU-01/AC2",
+        "D-S01-TWO-SKU-01/AC3"
+      ]
+    },
+    {
+      "kind": "ERP_API",
+      "command": "tools/verify_two_sku_usability.py --execute-readonly",
+      "environment": "Real teaching ERP exact owned2, page25/max500",
+      "sample": "48HTTP200; stock6/81 verified; known-day positive vs11/13 zero-order controls; no fake zero demand",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-TWO-SKU-FIX/current-read.json",
+      "acceptanceIds": [
+        "D-S01-TWO-SKU-01/AC1",
+        "D-S01-TWO-SKU-01/AC2"
+      ]
+    }
+  ],
+  "review": null,
+  "branch": "codex/s01-two-sku-usability-fix",
+  "observedHead": "d47d49733774c43c9ab08797318da62aac7ade72",
+  "dirtyPaths": [
+    "docs/HANDOFF.md",
+    "docs/TASKS.md",
+    "docs/generated/STATUS.md",
+    "docs/generated/DEPENDENCIES.mmd（前次手动测试开关本地补记）"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-14",
+      "to": "IN_PROGRESS",
+      "reason": "实际11:21/11:22任务已运行runtime-v1，库存已核验但状态仍UNANALYZABLE且Vue未消费参考字段；定向修复。"
+    },
+    {
+      "date": "2026-11-14",
+      "to": "REVIEW",
+      "reason": "确认新版真实运行/新状态面板已可见；2实际单品链路、8后端6前端针对验证通过；采购量留空，不合main。"
+    }
+  ],
+  "reportRef": "docs/reports/S01_两SKU可用性定向修复_20261114.md",
+  "publication": {
+    "status": "PENDING_NORMAL_BRANCH_PUSH",
+    "mainMerged": false
+  }
 }
 ```

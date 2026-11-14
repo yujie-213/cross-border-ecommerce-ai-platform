@@ -2,6 +2,7 @@
 chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
+set "PYTHONPATH=%~dp0src"
 set "PLATFORM_PY=.venv\Scripts\python.exe"
 if not exist "%PLATFORM_PY%" set "PLATFORM_PY=.tmp\stage-a-clean\Scripts\python.exe"
 if not exist "%PLATFORM_PY%" (

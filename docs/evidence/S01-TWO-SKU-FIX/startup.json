@@ -1,0 +1,17 @@
+{
+  "result": "PASS_CURRENT_WORKTREE",
+  "workspace": "C:\\Users\\Windows\\.codex\\worktrees\\s01-admission-runtime-fix\\跨境电商智慧AI平台",
+  "webUrl": "http://localhost:5174",
+  "apiPort": 8767,
+  "frontendBundle": "/assets/index-BpHl3Vcj.js",
+  "referenceUIConfirmed": true,
+  "modelEnabled": false,
+  "requisitionEnabled": false,
+  "sourcePythonPath": "current workspace/src",
+  "supervisorPid": 24640,
+  "pids": [
+    48052,
+    19116,
+    33484
+  ]
+}
