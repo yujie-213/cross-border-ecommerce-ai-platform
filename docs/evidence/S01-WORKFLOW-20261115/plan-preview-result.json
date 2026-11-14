@@ -1,0 +1,155 @@
+{
+  "result": "PASS",
+  "source": "Existing registered teaching reports and real local B01 preview API; no new ERP acquisition or models",
+  "knownDefault": {
+    "quantity": 56,
+    "date": "2026-11-17"
+  },
+  "changedQuantity": 60,
+  "changedDate": "2026-11-20",
+  "noquotePlan": {
+    "entityKey": "1ea1d881f3ba8507d99fe3210f6feed16740670069529d5db23932a5b8bdbbd4",
+    "observedAt": "2026-11-14T18:26:48.705364+00:00",
+    "quantity": 53,
+    "availableDate": "2026-11-20",
+    "windowStart": "2026-11-16",
+    "windowEnd": "2026-11-29",
+    "evaluation": {
+      "metricVersion": "s01-engineering-daily-v1",
+      "snapshotRef": "snapshot-e67fffe55e2b9c78260d6ebb1ed83b397a7c4401e4bde1cdb3c5654a73b18f4a",
+      "scenario": "preview-be3b68bead4e6705fb12498d0aa936828b3ff5ca1fa6237633fe33d7b7b98314",
+      "availableQuantity": "3",
+      "inTransitQuantity": "0",
+      "averageDailyDemand": "4.00000000",
+      "coverageDays": "0.75",
+      "targetQuantity": "56.00000000",
+      "gapQuantity": "53.00000000",
+      "firstShortageDate": "2026-11-16",
+      "closingBalance": "0E-8",
+      "stockoutRisk": true,
+      "overstockRisk": false,
+      "series": [
+        {
+          "day": "2026-11-16",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "-1.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-17",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "-5.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-18",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "-9.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-19",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "-13.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-20",
+          "demand": "4.00000000",
+          "arrivals": "53",
+          "closingBalance": "36.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-21",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "32.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-22",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "28.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-23",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "24.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-24",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "20.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-25",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "16.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-26",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "12.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-27",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "8.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-28",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "4.00000000",
+          "inBuffer": false
+        },
+        {
+          "day": "2026-11-29",
+          "demand": "4.00000000",
+          "arrivals": "0",
+          "closingBalance": "0E-8",
+          "inBuffer": false
+        }
+      ],
+      "semantics": "NET_AVAILABLE;INCREMENTAL_EXCLUDES_RESERVED;D1_AFTER_D0;SUPPLY_BEFORE_DEMAND;BACKLOG;BUFFER_INCLUDED",
+      "metricResultRef": "metric-9b2963deb4000af2c7d8e666f04cce18739524610657b98c77df8a13b35a8516"
+    },
+    "semantics": "HYPOTHETICAL_PLAN_NOT_CONFIRMED_SUPPLY",
+    "sourceTaskId": "f12f2cb6e4ce4a9aa42a63d43aa0c9d4"
+  },
+  "checks": [
+    "quantity changes curve",
+    "date changes shortage risk",
+    "restore quote date",
+    "missing quote preview without submit",
+    "removed redundant copy",
+    "controlled 503 clears old curve and retries",
+    "out-of-window rejected",
+    "820px no overflow",
+    "late response isolated across SKU",
+    "reload restores defaults"
+  ],
+  "controlledFailure": "503 explicitly injected; not a live ERP/model failure",
+  "previewRequests": 9,
+  "modelRequests": 0,
+  "purchaseWrites": 0,
+  "otherWrites": 0,
+  "pageErrors": []
+}

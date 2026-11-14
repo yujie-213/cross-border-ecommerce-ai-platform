@@ -9383,7 +9383,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "8edb8e86e3f1c565c0b25c9dda2342265b9278f3",
     "f84dda54993ca78b55c714bb08d554240c47c959",
     "9206aed750dc347f3788f57e19e8d240f4a494ce",
-    "e11d85cfb2a4e384903a46f585e0a08e2188194a"
+    "e11d85cfb2a4e384903a46f585e0a08e2188194a",
+    "57df81866c1f9264aab43e641f81afb96e82de3f",
+    "3dbdc7443da16556c7864f23d4aec080a8a2931d",
+    "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d"
   ],
   "evidence": [
     {
@@ -9710,11 +9713,25 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "D-S01-PRODUCT-01/AC2",
         "D-S01-PRODUCT-01/AC4"
       ]
+    },
+    {
+      "kind": "BROWSER",
+      "command": "S01_PLAN_PREVIEW_CHECK=1 npm --prefix frontend run test:browser -- plan-preview.spec.ts",
+      "environment": "Existing local Edge session/API/MySQL and saved registered teaching reports; real B01 preview; controlled 503 separately injected",
+      "sample": "Final implementation 1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d: quantity/date change plan curve, quote date restore, no-quote preview without submit, manual quantity reason, 503 retry clears stale curve, window bounds, 820px, cross-SKU late response, refresh defaults PASS. 9 preview requests, 0 model/purchase/other writes, 0 page errors. Earlier 27 backend/67 frontend/type/build PASS. Initial browser FAIL due to async load resetting date, fixed in 3dbdc74 and rerun PASS.",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-WORKFLOW-20261115/plan-preview-result.json",
+      "acceptanceIds": [
+        "D-S01-PRODUCT-01/AC1",
+        "D-S01-PRODUCT-01/AC2",
+        "D-S01-PRODUCT-01/AC4"
+      ]
     }
   ],
   "review": null,
   "branch": "codex/alienware-local-deployment",
-  "observedHead": "e11d85cfb2a4e384903a46f585e0a08e2188194a",
+  "observedHead": "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -9793,9 +9810,14 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-15",
       "to": "REVIEW",
       "reason": "负责人确认删除仅定位的核对采购条件按钮；实现e11d85cfb2a4e384903a46f585e0a08e2188194a，类型构建与桌面/窄屏只读浏览器检查通过；不新增模型或采购写入，刷新生效。"
+    },
+    {
+      "date": "2026-11-15",
+      "to": "REVIEW",
+      "reason": "恢复补货前后曲线，采购数量/到货日期与原B01只读试算联动；字段按负责人要求简化，删除多余短提示，按钮确认并提交。首轮浏览器发现异步加载重置日期，3dbdc74修复后最终浏览器PASS；无模型/ERP业务写，不合main、不推送。"
     }
   ],
-  "testedCommit": "9206aed750dc347f3788f57e19e8d240f4a494ce",
+  "testedCommit": "1a563cf21d74ba7c63e6ae42c3bbb32d81aa350d",
   "parallelCondition": "Codex单人，无子代理；当前工作区接手干净。",
   "risks": [
     "共享教学租户不保证ERP侧独占；新销售仍经登记核验，不扫描共享历史",
