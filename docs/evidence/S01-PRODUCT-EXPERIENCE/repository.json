@@ -2,6 +2,7 @@
   "status": "PASS",
   "branch": "codex/s01-product-demand-rebuild",
   "implementationHead": "6679d4eaceda30d57ae7fd26fe33ec1029fbc122",
+  "observedHead": "8369968e79a21b1f33f9136aeecfa66ac434198f",
   "baseMain": "f9bc45f721c961774bbc40bad19f8786519ad449",
   "remoteHost": "github.com",
   "unknownOpenapi": {
@@ -12,6 +13,7 @@
     "README.md",
     "docs/DECISIONS.md",
     "docs/HANDOFF.md",
+    "docs/README.md",
     "docs/TASKS.md",
     "docs/contracts/s01/product-demand.md",
     "docs/evidence/S01-PRODUCT-EXPERIENCE/ai-fix-recheck.xml",
@@ -110,13 +112,18 @@
   "security": {
     "status": "PASS",
     "scope": "PRODUCT_EXPERIENCE_COMMITS_AND_CHANGED_PUBLIC_FILES",
-    "scannedFiles": 97,
-    "historyCommits": 8,
+    "scannedFiles": 98,
+    "historyCommits": 9,
     "knownCredentialCount": 2,
     "syntheticFixtureMatchesExcluded": 9,
     "findings": [],
     "limitations": "Known local values and heuristic patterns only; reviewed teaching projections/screenshots. Ignored private data and unknown OpenAPI excluded."
   },
-  "push": "PENDING",
-  "mergedMain": false
+  "push": "PASS",
+  "mergedMain": false,
+  "independentRemoteReadback": "PASS",
+  "publishedEvidenceCommit": "8369968e79a21b1f33f9136aeecfa66ac434198f",
+  "remoteBranchHead": "8369968e79a21b1f33f9136aeecfa66ac434198f",
+  "remoteMain": "f9bc45f721c961774bbc40bad19f8786519ad449",
+  "finalHead": "Subsequent receipt-only commit; final SHA independently read from Git."
 }

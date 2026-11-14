@@ -1,8 +1,8 @@
 {
   "status": "PASS",
   "scope": "PRODUCT_EXPERIENCE_COMMITS_AND_CHANGED_PUBLIC_FILES",
-  "scannedFiles": 97,
-  "historyCommits": 8,
+  "scannedFiles": 98,
+  "historyCommits": 9,
   "knownCredentialCount": 2,
   "syntheticFixtureMatchesExcluded": 9,
   "findings": [],

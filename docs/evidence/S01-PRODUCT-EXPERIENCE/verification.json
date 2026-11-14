@@ -108,7 +108,13 @@
     "Prior full860:859PASS/1 queue FAIL; original foundation40 recheckPASS remains separate."
   ],
   "guide": "docs/reports/S01_产品体验版使用与评审_20261114.md",
-  "repository": "Publication receipt recorded only after actual push and independent remote readback.",
+  "repository": {
+    "artifact": "repository.json",
+    "publishedEvidenceCommit": "8369968e79a21b1f33f9136aeecfa66ac434198f",
+    "push": "PASS",
+    "independentRemoteReadback": "PASS",
+    "mainMerged": false
+  },
   "documentation": {
     "commands": [
       "python docs/planning/build_docs.py",
@@ -122,5 +128,9 @@
     "frontend5175": 200,
     "api8768": 200,
     "continuouslyRunning": true
+  },
+  "diffCheck": {
+    "implementationAndDocumentation": "PASS with core.whitespace=cr-at-eol",
+    "retainedRawEvidence": "initial-ai-failure.xml contains original pytest trailing whitespace; preserved as failure evidence"
   }
 }
