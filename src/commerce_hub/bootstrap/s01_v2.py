@@ -39,14 +39,14 @@ def registry(settings):
             request_limit=int(os.environ.get('COMMERCE_S01_V2_REQUEST_LIMIT','400')))
     provider=None;shared=None
     if os.environ.get('COMMERCE_S01_V2_MODEL_ENABLED')=='true':
-        from commerce_hub.adapters.models.online import OnlineDeepSeekProvider,V2_AUTHORIZATION_ID,EXPERIENCE_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID
+        from commerce_hub.adapters.models.online import OnlineDeepSeekProvider,V2_AUTHORIZATION_ID,EXPERIENCE_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID,DAILY_USE_AUTHORIZATION_ID
         if settings.model_provider!='deepseek' or not settings.model_network_enabled or settings.model_max_output_tokens!=1024:raise ValueError('V2_MODEL_CONFIGURATION_INVALID')
         authorization=os.environ.get('COMMERCE_S01_V2_MODEL_AUTHORIZATION',V2_AUTHORIZATION_ID)
-        if authorization not in {V2_AUTHORIZATION_ID,EXPERIENCE_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID}:raise ValueError('V2_MODEL_AUTHORIZATION_INVALID')
+        if authorization not in {V2_AUTHORIZATION_ID,EXPERIENCE_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID,DAILY_USE_AUTHORIZATION_ID}:raise ValueError('V2_MODEL_AUTHORIZATION_INVALID')
         provider=OnlineDeepSeekProvider(settings,ROOT/'data/private/s01-v2-model',authorization_id=authorization)
-        # Explicit owner authorization on 2026-11-14 permits necessary experience
-        # validation calls. Old usage/reservations remain on the original policy.
-        shared=SharedModelAuthorization(authorization,None,None,None) if authorization==EXPERIENCE_AUTHORIZATION_ID else SharedModelAuthorization(authorization,4,96000,Decimal('.20'))
+        # Daily use has no cumulative call/token/cost cap (owner request 2026-11-15).
+        # Old validation usage/reservations stay on their original policy.
+        shared=SharedModelAuthorization(authorization,None,None,None) if authorization in {EXPERIENCE_AUTHORIZATION_ID,DAILY_USE_AUTHORIZATION_ID} else SharedModelAuthorization(authorization,4,96000,Decimal('.20'))
     elif settings.model_network_enabled:raise ValueError('V2_MODEL_NOT_EXPLICITLY_ENABLED')
     batch=V2Handler(db.engine,policy,reader_factory)
     # Exact-ID purchase tracking is read-only and stays available with writes off.

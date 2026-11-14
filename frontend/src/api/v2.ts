@@ -68,7 +68,7 @@ const issueLabels: Record<string, string> = {
   ERP_AUTH_REJECTED: 'ERP 身份验证失败，请核对本机 ERP 凭据',
   ERP_TIMEOUT: 'ERP 读取超时，请稍后重新分析', ERP_TRANSPORT_FAILURE: '暂时无法连接 ERP，请检查网络后重试',
   MODEL_TIMEOUT: 'AI 服务响应超时，可稍后重试', MODEL_NOT_ENABLED: 'AI 服务未启用，请核对本机模型配置',
-  MODEL_ALLOWANCE_UNAVAILABLE: '本次 AI 验证额度不可用，补货分析仍可使用',
+  MODEL_ALLOWANCE_UNAVAILABLE: '本次 AI 调用未能执行，请重试；补货分析仍可使用',
   SAME_SCOPE_PENDING_REQUISITION: '该商品同仓已有待审批采购，请先核对原单',
   SAME_SCOPE_FORMAL_PURCHASE_REQUIRES_REVIEW: '该商品同仓已有正式采购，请先核对未收数量与用途',
   PENDING_PURCHASE_QUERY_INCOMPLETE: '待审批采购未读取完整，核对完成前不能重复申请',

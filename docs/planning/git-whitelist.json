@@ -1,5 +1,5 @@
 {
-  "authorization": "2026-11-13接续3a46fd4，本轮P1/P2自有两SKU监控、ERP正式API仿真经营历史、7日SMA和真实模型/前端闭环获准；仅本地提交评审，不扩8/30、不代签采购审批、不合main。此白名单不是公开发布许可，受限历史和原始私有证据不推送。 追加本轮两个自建SKU ERP未来销量接口只读补充核实及必要报告/台账/交接，禁止业务写入/模型/公式改动；仅本地保存。 追加2026-11-13 P1/P2补货计算与采购约束只读业务核查报告及脱敏证据/台账交接；不改业务代码、参数或结果，不业务写入、不模型，仅本地评审。 追加负责人确认MOQ及default_carton_qty整箱业务规则后的最小输入/来源/状态/AI/前端修复、必要回归和两SKU真实复验；采购写入仍禁止，仅本地REVIEW。 追加2026-11-13 P3采购能力只读调查、全局仿真规范与非敏感证据、本地提交REVIEW；不实施P3、不执行采购。 2026-11-13 P3 minimal loop: approved-only discovery, human-confirmed teaching requisition create/submit/readback, regression and normal review branch push authorized; no leadership decision/order/receipt/inbound/model or main merge. 2026-11-13本轮正式条件验收/main普通合并推送及只读补货建议调查；无V2开发或ERP业务写。 2026-11-14负责人正式任务明确授权S01数据准入运行改造、上述精确代码/测试/非敏感教学摘要/文档普通推送独立分支；不得合main或公开原始响应与凭据。 2026-11-14完整商品产品重构及自有范围收缩：批准相关代码/普通工程文档/教学脱敏证据和截图普通推送评审分支；不合main，禁止真实凭据。 2026-11-14产品体验版：自有登记10款/11店仓、正式教学API仿真数据、少量真实模型、受影响路径修复及非敏感截图/证据普通推送当前评审分支；不合main，禁止真实凭据。 2026-11-15 user-authorized buyer-workflow frontend reconstruction, exact-ID read-only ERP purchase tracking, necessary bounded model/browser validation, local REVIEW commit; no main merge or ERP writes.",
+  "authorization": "2026-11-13接续3a46fd4，本轮P1/P2自有两SKU监控、ERP正式API仿真经营历史、7日SMA和真实模型/前端闭环获准；仅本地提交评审，不扩8/30、不代签采购审批、不合main。此白名单不是公开发布许可，受限历史和原始私有证据不推送。 追加本轮两个自建SKU ERP未来销量接口只读补充核实及必要报告/台账/交接，禁止业务写入/模型/公式改动；仅本地保存。 追加2026-11-13 P1/P2补货计算与采购约束只读业务核查报告及脱敏证据/台账交接；不改业务代码、参数或结果，不业务写入、不模型，仅本地评审。 追加负责人确认MOQ及default_carton_qty整箱业务规则后的最小输入/来源/状态/AI/前端修复、必要回归和两SKU真实复验；采购写入仍禁止，仅本地REVIEW。 追加2026-11-13 P3采购能力只读调查、全局仿真规范与非敏感证据、本地提交REVIEW；不实施P3、不执行采购。 2026-11-13 P3 minimal loop: approved-only discovery, human-confirmed teaching requisition create/submit/readback, regression and normal review branch push authorized; no leadership decision/order/receipt/inbound/model or main merge. 2026-11-13本轮正式条件验收/main普通合并推送及只读补货建议调查；无V2开发或ERP业务写。 2026-11-14负责人正式任务明确授权S01数据准入运行改造、上述精确代码/测试/非敏感教学摘要/文档普通推送独立分支；不得合main或公开原始响应与凭据。 2026-11-14完整商品产品重构及自有范围收缩：批准相关代码/普通工程文档/教学脱敏证据和截图普通推送评审分支；不合main，禁止真实凭据。 2026-11-14产品体验版：自有登记10款/11店仓、正式教学API仿真数据、少量真实模型、受影响路径修复及非敏感截图/证据普通推送当前评审分支；不合main，禁止真实凭据。 2026-11-15 user-authorized buyer-workflow frontend reconstruction, exact-ID read-only ERP purchase tracking, necessary bounded model/browser validation, local REVIEW commit; no main merge or ERP writes. 2026-11-15负责人明确取消日常AI使用次数限制；新日常策略无累计调用/Token/金额硬上限，保留逐任务/并发/幂等与历史审计，允许必要真实单次验证；本地REVIEW不合main。",
   "policy": "Exact paths; no blanket add; no secrets, raw teaching responses or untracked OpenAPI; no history rewrite.",
   "paths": [
     ".env.example",
@@ -612,6 +612,7 @@
     "docs/evidence/S01-V3/screenshots/14-workbench-820.png",
     "docs/evidence/S01-V3/screenshots/15-ledger-read-failure-1440.png",
     "docs/evidence/S01-WORKFLOW-20261115/browser-result.json",
+    "docs/evidence/S01-WORKFLOW-20261115/daily-ai-result.json",
     "docs/evidence/S01-WORKFLOW-20261115/feedback-injection-result.json",
     "docs/evidence/S01-WORKFLOW-20261115/final-browser-result.json",
     "docs/evidence/S01-WORKFLOW-20261115/live-purchase-tracking.json",
@@ -639,6 +640,7 @@
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/19-editable-reference-proposal.png",
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/20-manual-quantity-reason.png",
     "docs/evidence/S01-WORKFLOW-20261115/screenshots/21-authorized-human-confirmation.png",
+    "docs/evidence/S01-WORKFLOW-20261115/screenshots/22-daily-ai-unlimited.png",
     "docs/evidence/S01-WORKFLOW-20261115/verification.json",
     "docs/evidence/ab-review-fix/verification.json",
     "docs/evidence/phase-b/verification.json",
@@ -940,6 +942,7 @@
     "src/commerce_hub/scenarios/s01_v2/store.py",
     "src/commerce_hub/scenarios/s01_v2/tracking.py",
     "tests/__init__.py",
+    "tests/browser/s01/daily-ai.spec.ts",
     "tests/browser/s01/local-platform.spec.ts",
     "tests/browser/s01/online.spec.ts",
     "tests/browser/s01/owned.spec.ts",
