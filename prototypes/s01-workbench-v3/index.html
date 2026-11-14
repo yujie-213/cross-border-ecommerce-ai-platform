@@ -241,14 +241,16 @@ dialog::backdrop{background:#12283b55}
 .close{border:0;background:none;font-size:19px;color:var(--muted);line-height:1}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#16293a;color:#fff;padding:9px 15px;border-radius:5px;font-size:11.5px;z-index:50;max-width:calc(100vw - 24px)}
 /* ---------- v3.2 新增：环形图 / 排行榜 / AI 分区 / 底部操作条 ---------- */
-.wb-top{display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:12px;margin-bottom:12px;align-items:stretch}
+.wb-top{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px;margin-bottom:12px;align-items:stretch}
 .wb-top>.panel{margin:0;display:flex;flex-direction:column}
 .wb-top .kpis{height:100%;align-content:center}
-.donut{display:flex;align-items:center;gap:14px}
-.donut svg{flex:none}
-.dlegend{display:grid;grid-template-columns:1fr;gap:3px;font-size:10.5px;color:var(--muted);min-width:0;flex:1}
-.dlegend span{display:flex;align-items:center;gap:4px;white-space:nowrap;min-width:0}
-.dlegend b{color:var(--ink);font-weight:600;margin-left:auto;padding-left:6px}
+.donut-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;max-width:440px;margin:0 auto;padding:12px 16px}
+.donut-side{display:flex;align-items:center;justify-content:center;padding-right:14px;border-right:1px solid #edf0f3}
+.donut-side svg{display:block}
+.dstats{display:grid;align-content:center;padding-left:14px;min-width:0}
+.dstat{display:grid;grid-template-columns:7px minmax(0,1fr) auto;align-items:center;gap:8px;padding:4px 0;font-size:11.5px;color:#54626f;min-width:0}
+.dstat span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dstat b{font-size:12.5px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}
 .rank{display:grid}
 .rank-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid #f2f4f6;font-size:11.5px}
 .rank-row:last-child{border-bottom:0}
@@ -287,8 +289,14 @@ dialog::backdrop{background:#12283b55}
 /* 单列详情（方案C） */
 .detail.one{grid-template-columns:minmax(0,1fr)}
 @media (max-width:1280px){
-  .wb-top{grid-template-columns:1fr}
   .ai-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .wb-top{grid-template-columns:1fr}
+  /* 栈叠时占满整行：饼图固定左侧，数字铺成 2×2，避免中间空一段 */
+  .donut-body{width:100%;max-width:none;grid-template-columns:auto minmax(0,1fr);column-gap:24px;padding:12px 14px}
+  .donut-side{padding-right:20px}
+  .dstats{grid-template-columns:repeat(2,minmax(0,190px));justify-content:center;column-gap:44px;row-gap:2px;padding-left:0}
 }
 @media (max-width:1000px){
   .actionbar{padding:9px 14px;margin:12px -14px 0}
@@ -751,7 +759,7 @@ function crumb(){
 
 /* ================= 工作台 ================= */
 function donutSvg(segs,total){
-  const cx=52,cy=52,rad=37,sw=15,C=2*Math.PI*rad;
+  const cx=60,cy=60,rad=44,sw=17,C=2*Math.PI*rad;
   let off=0;
   const arcs=segs.map(x=>{
     const len=x[1]/total*C;
@@ -760,10 +768,9 @@ function donutSvg(segs,total){
       transform="rotate(-90 ${cx} ${cy})"><title>${esc(x[0])} ${x[1]} 项${x[3]?'（'+esc(x[3])+'）':''}</title></circle>`;
     off+=len;return el;
   }).join('');
-  return `<svg width="104" height="104" viewBox="0 0 104 104" role="img" aria-label="对象构成：${segs.map(x=>x[0]+' '+x[1]).join('，')}">
+  return `<svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="对象构成：${segs.map(x=>x[0]+' '+x[1]).join('，')}">
     <circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef1f4" stroke-width="${sw}"/>${arcs}
-    <text x="${cx}" y="${cy-1}" text-anchor="middle" style="font:600 21px/1 'Segoe UI',sans-serif;fill:#1b2836">${total}</text>
-    <text x="${cx}" y="${cy+15}" text-anchor="middle" style="font:10px 'Segoe UI',sans-serif;fill:#7c8896">对象</text></svg>`;
+    <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" style="font:600 24px/1 'Segoe UI',sans-serif;fill:#1b2836">${total}</text></svg>`;
 }
 
 function pageWorkbench(){
@@ -827,10 +834,9 @@ function pageWorkbench(){
     </section>
     <section class="panel">
       <div class="panel-head"><h2>对象构成</h2><span class="sub">${total} 个店仓对象</span></div>
-      <div class="panel-body" style="padding:10px 14px">
-        <div class="donut">${donutSvg(segs,total)}
-          <div class="dlegend">${segs.map(x=>`<span title="${esc(x[3]||'')}"><i class="dot" style="background:${x[2]}"></i>${x[0]}<b>${x[1]}</b></span>`).join('')}</div>
-        </div>
+      <div class="panel-body donut-body">
+        <div class="donut-side">${donutSvg(segs,total)}</div>
+        <div class="dstats">${segs.map(x=>`<div class="dstat" title="${esc(x[3]||'')}"><i class="dot" style="background:${x[2]}"></i><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div>
       </div>
     </section>
   </div>

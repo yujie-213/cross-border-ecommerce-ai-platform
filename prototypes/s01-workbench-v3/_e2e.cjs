@@ -7,7 +7,7 @@ const os = require('os');
 
 const EDGE = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const PORT = 9333;
-const BASE = 'http://127.0.0.1:8766/prototypes/s01-workbench-v3/index.html';
+const BASE = 'file:///' + encodeURI(__dirname.replace(/\\/g,'/') + '/index.html');
 const OUT = path.join(__dirname, 'screenshots', 'after');
 
 const results = [];
@@ -32,7 +32,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   const send = (method, params = {}) => new Promise(res => { const i = ++id; pend.set(i, res); ws.send(JSON.stringify({ id: i, method, params })); });
   const js = async (expr) => {
     const r = await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true });
-    if (r.result && r.result.exceptionDetails) throw new Error(JSON.stringify(r.result.exceptionDetails).slice(0, 240));
+    if (r.result && r.result.exceptionDetails) throw new Error(JSON.stringify(r.result.exceptionDetails).slice(0, 900));
     return r.result && r.result.result ? r.result.result.value : undefined;
   };
   const metrics = (w, h) => send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile: false });
@@ -82,11 +82,14 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   ok('工作台标题', await js(`document.querySelector('h1').textContent.trim()==='采购运营工作台'`));
   ok('四个待办指标', await count('.kpi') === 4);
-  ok('环形图已渲染（1 底环 + 4 组）', await count('.donut svg circle') === 5, await count('.donut svg circle'));
-  ok('环形分段数与图例一致', await js(`document.querySelectorAll('.donut svg circle').length-1===document.querySelectorAll('.dlegend span').length && document.querySelectorAll('.dlegend span').length===4`));
-  ok('环形图合计=对象总数', await js(`[...document.querySelectorAll('.dlegend b')].reduce((a,b)=>a+Number(b.textContent),0)===12`),
-    await js(`[...document.querySelectorAll('.dlegend b')].reduce((a,b)=>a+Number(b.textContent),0)`));
-  ok('环形图支持悬停数值', await count('.donut svg title') >= 4, await count('.donut svg title'));
+  ok('环形图已渲染（1 底环 + 4 组）', await count('.donut-side svg circle') === 5, await count('.donut-side svg circle'));
+  ok('环形分段数与图例一致（4 组）', await js(`document.querySelectorAll('.donut-side svg circle').length-1===document.querySelectorAll('.dstat').length && document.querySelectorAll('.dstat').length===4`));
+  ok('环形图合计=圆心总数', await js(`[...document.querySelectorAll('.dstat b')].reduce((a,b)=>a+Number(b.textContent),0)===Number(document.querySelector('.donut-side svg text').textContent)`),
+    await js(`[...document.querySelectorAll('.dstat b')].reduce((a,b)=>a+Number(b.textContent),0)+' / '+document.querySelector('.donut-side svg text').textContent`));
+  ok('圆心不再显示“对象”二字', await js(`!document.querySelector('.donut-side svg').textContent.includes('对象')`));
+  ok('构成区为左饼右数（左右两列）', await js(`(()=>{const a=document.querySelector('.donut-side').getBoundingClientRect(),b=document.querySelector('.dstats').getBoundingClientRect();return a.right<=b.left+1 && Math.abs(a.width-b.width)<40})()`),
+     await js(`(()=>{const a=document.querySelector('.donut-side').getBoundingClientRect(),b=document.querySelector('.dstats').getBoundingClientRect();return Math.round(a.width)+'/'+Math.round(b.width)})()`));
+  ok('环形图支持悬停数值', await count('.donut-side svg title') >= 4, await count('.donut-side svg title'));
   ok('页面已无堆叠条', await count('.distbar') === 0, await count('.distbar'));
   ok('队列无横向条形', await count('.qrow .cov') === 0, await count('.qrow .cov'));
   ok('待处理队列有行', await count('.qrow') >= 5, await count('.qrow'));
@@ -195,7 +198,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await nav('#/requisitions');
   ok('台账 5 行', await count('#main tbody tr') === 5, await count('#main tbody tr'));
   ok('台账单条警示', await count('.alert-row') === 1, await count('.alert-row'));
-  ok('台账无装饰性分布图', await count('#main .distbar') === 0 && await count('#main .donut') === 0);
+  ok('台账无装饰性分布图', await count('#main .distbar') === 0 && await count('#main .donut-side') === 0);
   ok('双状态列存在', await mainHas('平台状态') && await mainHas('ERP 状态'));
   await shot('09-请购管理-1440');
 
