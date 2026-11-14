@@ -45,7 +45,7 @@ test('采购建议按商品解释数量与交期，并区分补货成功和AI失
   const screenshot=`${37+index}-buyer-advice-final-${sku}.png`
   await page.screenshot({path:path.join(out,'screenshots',screenshot),fullPage:true})
   await expect(ai.getByRole('button',{name:'核对采购条件 →'})).toHaveCount(0)
-  await expect(page.getByLabel('最终采购数量',{exact:true})).toBeVisible()
+  await expect(page.getByLabel('采购数量',{exact:true})).toBeVisible()
   results.push({sku,taskId,url:page.url(),screenshot,conclusion:model.explanation.recommendationReasons[0].text,
    explanation:model.explanation,usage:model.usage,costStatus:model.costStatus,model:model.actualModelRevision,
    reference:item.decision.referenceReplenishmentQuantity,candidate:item.decision.purchasableQuantity,

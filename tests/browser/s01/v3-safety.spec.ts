@@ -91,7 +91,7 @@ test('V3 SAFETY: an unknown requisition blocks new submissions and only its own 
   await page.goto(`/#/sku/mock-key-1?batch=${batch}&single=mock-single-1`)
   await expect(page.locator('.verdict')).toContainText('规则建议')
 
-  await expect(page.getByLabel('最终采购数量')).toHaveValue('48')
+  await expect(page.getByLabel('采购数量')).toHaveValue('48')
   await page.getByRole('checkbox').check()
   await expect(page.getByRole('button', { name: '提交请购', exact: true })).toBeEnabled()
   await page.getByRole('button', { name: '提交请购', exact: true }).click()

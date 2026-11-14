@@ -10,7 +10,7 @@ test('真实商品：预填建议数量、允许先调整、只在改量后显�
  await page.goto('/#/home');const all=await(await page.request.get('/api/v1/s01/v2/batches')).json();const batch=all.items.find((r:any)=>r.state==='SUCCEEDED'&&r.analysisRange==='OWNED_REGISTERED').taskRef.taskId
  const noquote=models.results.find((r:any)=>r.sku==='HLX-CASE-NOQUOTE')
  await page.goto(`/#/sku/${noquote.entityKey}?batch=${batch}&single=${noquote.taskId}`)
- const input=page.getByLabel('最终采购数量',{exact:true})
+ const input=page.getByLabel('采购数量',{exact:true})
  await expect(input).toHaveValue('53');await expect(input).toBeEnabled();await expect(page.getByLabel('调整原因',{exact:true})).toHaveCount(0)
  await input.fill('52');await expect(page.getByLabel('调整原因',{exact:true})).toBeVisible();await page.getByLabel('调整原因',{exact:true}).fill('先调整计划量，补齐有效报价后再核实')
  await expect(page.getByRole('button',{name:'确认并提交'})).toBeDisabled()

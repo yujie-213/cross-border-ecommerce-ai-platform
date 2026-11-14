@@ -11,7 +11,7 @@ test('获准开启采购后：人工确认与MOQ整箱仍强制，不执行提�
  const history=await(await page.request.get('/api/v1/s01/v2/batches')).json();const batch=history.items.find((r:any)=>r.state==='SUCCEEDED'&&r.analysisRange==='OWNED_REGISTERED').taskRef.taskId
  const models=JSON.parse(readFileSync(path.join(out,'models.json'),'utf8'));const lamp=models.results.find((r:any)=>r.sku==='HLX-LAMP-SURGE')
  await page.goto(`/#/sku/${lamp.entityKey}?batch=${batch}&single=${lamp.taskId}`)
- const quantity=page.getByLabel('最终采购数量',{exact:true}),check=page.getByRole('checkbox',{name:'已核对当前店仓、数量、已有采购和来源限制'}),submit=page.getByRole('button',{name:'确认并提交'})
+ const quantity=page.getByLabel('采购数量',{exact:true}),check=page.getByRole('checkbox',{name:'已核对当前店仓、数量、已有采购和来源限制'}),submit=page.getByRole('button',{name:'确认并提交'})
  await expect(quantity).toHaveValue('56');await expect(page.locator('.purchase-state')).toContainText('可继续人工确认');await expect(submit).toBeDisabled();await check.check();await expect(submit).toBeEnabled()
  await quantity.fill('60');await check.check();await expect(submit).toBeDisabled();await page.getByLabel('调整原因',{exact:true}).fill('验收：调整计划量，不执行提交');await expect(submit).toBeEnabled()
  await quantity.fill('58');await check.check();await expect(submit).toBeDisabled();await expect(page.locator('.purchase-panel')).toContainText('整箱倍数')

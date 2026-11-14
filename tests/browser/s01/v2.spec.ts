@@ -99,7 +99,7 @@ test('V2 FULL: manual entire catalog, fresh single AI, human adjustment and one 
   expect(detail.report.dataReport.item.procurementEligibility.scopeAuthorized).toBe(true)
   await expect(page.getByText('已生成', { exact: true })).toBeVisible({ timeout: 15000 })
   const submit = page.getByRole('button', { name: '提交请购', exact: true })
-  const quantity = page.getByLabel('最终采购数量', { exact: true })
+  const quantity = page.getByLabel('采购数量', { exact: true })
   await quantity.fill('13'); await expect(submit).toBeDisabled()
   await quantity.fill('40'); await expect(submit).toBeDisabled()
   const adjustmentReason = 'S01 V2 独立教学验收：原建议48件，人工调整为40件/5箱；已核对原正式采购1406，可售日期未知未抵扣。本次仅提交申请待ERP审批。'
