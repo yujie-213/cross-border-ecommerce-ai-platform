@@ -522,5 +522,16 @@
     "main commit or merge"
   ],
   "synchronization": "Git commit and independent remote verification occur after this check; actual SHA is reported from Git, not self-referentially embedded",
-  "formatting": "Staged generated views preserve existing CRLF; generated source hashes independently bind staged and working ledgers"
+  "formatting": "Staged generated views preserve existing CRLF; generated source hashes independently bind staged and working ledgers",
+  "publicationVerification": {
+    "observedAt": "2026-11-15T12:49:53.136Z",
+    "documentCommit": "33aa1923475043b5969d09f09f6fcfd9cd3a5b12",
+    "verifiedRemoteBranchHead": "33aa1923475043b5969d09f09f6fcfd9cd3a5b12",
+    "verifiedRemoteMain": "efa06985cc92aaf9e657af659a027dccd9d5fc97",
+    "method": "git ls-remote --heads origin main codex/b-after-sales-v1",
+    "ordinaryNewBranchPush": true,
+    "firstPush": "FAILED in sandbox: wincredman credential store unavailable",
+    "recovery": "Same normal push under approved ordinary host permissions; no credential/remote configuration change",
+    "finalReceiptCommit": "Read from Git after this receipt commit, not self-referentially embedded"
+  }
 }
