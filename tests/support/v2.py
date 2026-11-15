@@ -35,16 +35,18 @@ class SyntheticERP:
         if method=='POST':
             self.mutations+=1
             if path=='/api/v1/purchase-orders':
-                p=json.loads(body);row=dict(p,id=90001,tenant_id=1,status_text='待提交',received_qty=0)
+                p=json.loads(body);row=dict(p,id=90001+len(self.orders),tenant_id=1,status_text='待提交',received_qty=0)
                 self.orders[p['order_sn']]=row
                 if self.lost_create:raise TimeoutError()
                 return out(row,201)
-            if path=='/api/v1/workflows/purchase-orders/90001/submit':
-                next(iter(self.orders.values()))['status_text']='待审核';return out(dict(code=0))
+            if path.startswith('/api/v1/workflows/purchase-orders/') and path.endswith('/submit'):
+                order=next(row for row in self.orders.values() if str(row['id'])==path.split('/')[-2])
+                order['status_text']='待审核';return out(dict(code=0))
             raise AssertionError('Unexpected synthetic mutation')
         if path=='/api/v1/me':return out(dict(tenant_id=1,role='synthetic-test'))
         if path=='/api/v1/suppliers/5':return out(dict(id=5,tenant_id=1,name='Synthetic Supplier'))
-        if path=='/api/v1/purchase-orders/90001':return out(next(iter(self.orders.values())))
+        if path.startswith('/api/v1/purchase-orders/'):
+            return out(next(row for row in self.orders.values() if str(row['id'])==path.split('/')[-1]))
         resource=path.split('/')[-1]
         if resource==self.fail_resource:return out(dict(error='simulated service unavailable'),503)
         aliases={'store-authorizations':'stores','warehouses':'warehouses','products':'products','inventory':'inventory',

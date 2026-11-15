@@ -98,15 +98,15 @@ export const grouped = computed(() => {
   const s = summary.value
   if (!s) return []
   if (s.judgedScopeCount !== undefined) return [
-    { key: 'confirm', label: '建议补货', count: s.replenishScopeCount || 0, color: '#0f6b64' },
-    { key: 'none', label: '暂不补货', count: s.noReplenishmentScopeCount || 0, color: '#8baaa0' },
+    { key: 'confirm', label: '建议补货', count: s.replenishScopeCount || 0, color: '#a8382f' },
+    { key: 'none', label: '暂不补货', count: s.noReplenishmentScopeCount || 0, color: '#277356' },
     { key: 'review', label: '依据不足', count: s.reviewScopeCount || 0, color: '#c9812f' }
   ].filter(x => x.count > 0)
   return [
-    { key: 'confirm', label: '有建议数量', count: s.ruleCalculated + s.erpReference, color: '#0f6b64' },
+    { key: 'confirm', label: '有建议数量', count: s.ruleCalculated + s.erpReference, color: '#a8382f' },
     { key: 'history', label: '历史参考', count: s.historicalReference || 0, color: '#7a8fa6' },
     { key: 'review', label: '需核实', count: s.unanalyzable, color: '#c9812f' },
-    { key: 'none', label: '无需补货', count: s.noReplenishment, color: '#c3ccd4' },
+    { key: 'none', label: '无需补货', count: s.noReplenishment, color: '#277356' },
     { key: 'broken', label: '失败/未完成', count: s.failed + s.unfinished, color: '#a8382f' }
   ].filter(x => x.count > 0)
 })
@@ -139,7 +139,7 @@ export const STAGE_LABEL: Record<Stage, string> = {
   confirm: '建议补货', history: '历史参考', review: '需核实', none: '无需补货', broken: '分析失败', pending: '等待处理'
 }
 export const STAGE_TONE: Record<Stage, string> = {
-  confirm: 'primary', history: 'info', review: 'warning', none: 'muted', broken: 'danger', pending: 'muted'
+  confirm: 'danger', history: 'info', review: 'warning', none: 'success', broken: 'danger', pending: 'muted'
 }
 
 export const unitOf = (item: V2Item) => (item.unit === 'EA' ? '件' : item.unit || '件')

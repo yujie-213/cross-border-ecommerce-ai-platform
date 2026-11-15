@@ -1,5 +1,6 @@
 """Scheme B strategy over P3's existing durable create/submit/reconciliation state machine."""
 from datetime import datetime,timezone
+from contextvars import ContextVar
 from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
@@ -12,6 +13,17 @@ from commerce_hub.data.sync.v2 import V2Reader
 from commerce_hub.data.sync.v2_catalog import collect_catalog
 from commerce_hub.data.projection.v2 import entities
 from commerce_hub.scenarios.s01_v2.analysis import analyze
+from commerce_hub.adapters.erp import ERPError
+from commerce_hub.data.contracts import fingerprint
+
+
+# Proofs belong to one confirmation call, never to the shared service instance.
+_voided_operations = ContextVar('s01_v2_voided_operations', default=frozenset())
+
+
+def operation_version(row):
+    return fingerprint(dict(report=row['report_id'],operation=row['operation_id'],
+        state=row['state'],content=row['content']))
 
 
 def comparable(item):
@@ -34,7 +46,34 @@ class V2RequisitionService(RequisitionService):
     def _blocks(row):
         # A failure before ERP creation can be corrected with a new analysis.
         # All sent/possibly-sent operations retain their protection.
+        if operation_version(row) in _voided_operations.get():return False
         return row['state']!='BLOCKED' or bool(row['content'].get('erpId') or row['content'].get('payload'))
+    def _confirmed_voided(self,actor,row):
+        # Only an independently read, exact original order can release exclusion.
+        # UNKNOWN/BLOCKED phases and failed reads must keep their protection.
+        content=row['content']
+        if row['state']!='SUBMITTED' or not content.get('erpId') or not content.get('payload') or self.client_factory is None:return False
+        try:
+            report=self._source(actor,row['report_id'])
+            mapping=self._mapping(report['scope'],report)
+            client=self.client_factory(row['operation_id'],lambda:self._authorize(actor,report['scope'],write=False))
+            current=client.read_requisition(content['erpId'])
+            if str(current.get('id'))!=str(content['erpId']):return False
+            self._matches(current,content,mapping)
+            if str(current['item_list'][0].get('product_id'))!=str(content['payload']['item_list'][0]['product_id']):return False
+            return current.get('status_text')=='已作废'
+        except (ERPError,TaskError,OSError,ValueError,TypeError,KeyError):
+            return False
+    def confirm(self,actor,report_id,command_key,quantity,reason,trace_id):
+        report=self._source(actor,report_id)
+        with self.engine.connect() as conn:
+            rows=self._business_rows(conn,actor,report['dataReport']['item']['entityKey'])
+        # Network outside locks; the locked guard compares the entire operation
+        # version so a concurrent local change invalidates this readback proof.
+        released=frozenset(operation_version(r) for r in rows if r['report_id']!=report_id and self._confirmed_voided(actor,r))
+        token=_voided_operations.set(released)
+        try:return super().confirm(actor,report_id,command_key,quantity,reason,trace_id)
+        finally:_voided_operations.reset(token)
     def _business_rows(self,conn,actor,entity_key,*,lock=False):
         query=select(requisitions).where(requisitions.c.tenant_id==actor.tenant_id,
             requisitions.c.content['entityKey'].as_string()==entity_key).order_by(requisitions.c.created_at)
@@ -50,8 +89,8 @@ class V2RequisitionService(RequisitionService):
             own=self._row(conn,actor,report_id)
             if own:return self.view(own)
             rows=self._business_rows(conn,actor,report['dataReport']['item']['entityKey'])
-            row=next((r for r in rows if self._blocks(r)),None)
-            return dict(self.view(row),blockedByOtherAnalysis=True) if row else None
+        row=next((r for r in rows if self._blocks(r) and not self._confirmed_voided(actor,r)),None)
+        return dict(self.view(row),blockedByOtherAnalysis=True) if row else None
     def _source(self,actor,report_id):
         report=self.tasks.read_report(actor,report_id)
         if report['scenarioId']!='S01_V2_SINGLE':raise TaskError('REQUISITION_SOURCE_NOT_ELIGIBLE',422)

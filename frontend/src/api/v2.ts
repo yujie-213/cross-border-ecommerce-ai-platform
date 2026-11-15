@@ -64,7 +64,7 @@ export function quantityError(item: V2Item, quantity: number, reason: string) {
   if (quantity !== item.quantity && !reason.trim()) return '调整数量时请填写原因。'
   return ''
 }
-export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[]; blockedByOtherAnalysis?: boolean }
+export type V2Requisition = Requisition & { sourceGrade?: string; sourceAcknowledged?: boolean; sourceUncertainties?: string[]; blockedByOtherAnalysis?: boolean; reorderAllowed?: boolean }
 const issueLabels: Record<string, string> = {
   PLAN_BASELINE_UNAVAILABLE: '当前依据不足，暂不能试算补货计划',
   PLAN_QUANTITY_INVALID: '请输入 1 至 100000 的整数数量',

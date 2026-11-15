@@ -189,5 +189,6 @@ def register_v2_routes(app,principal):
                 current=next((r for r in tracked['items'] if r['erpId']==str(value['erpId'])),None)
                 value=dict(value,previousErpStatus=value.get('erpStatus'),erpStatus=current['status'] if current and current['verified'] else None,
                     verifiedAt=current['verifiedAt'] if current else None,liveVerified=bool(current and current['verified']),
-                    liveError=current['error'] if current else 'PURCHASE_TRACKING_NOT_AVAILABLE')
+                    liveError=current['error'] if current else 'PURCHASE_TRACKING_NOT_AVAILABLE',
+                    reorderAllowed=bool(value['state']=='SUBMITTED' and current and current['verified'] and current['status']=='已作废'))
         return value

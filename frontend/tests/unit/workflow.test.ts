@@ -49,3 +49,17 @@ it('defaults a local proposal to the constrained candidate, then the reference d
  expect(suggestedPurchaseQuantity({quantity:null,decision:{purchasableQuantity:null,referenceReplenishmentQuantity:53}} as never)).toBe(53)
  expect(suggestedPurchaseQuantity({quantity:0,decision:{purchasableQuantity:0,referenceReplenishmentQuantity:0}} as never)).toBe(0)
 })
+
+it('offers fresh analysis after a verified void while keeping the original order visible',async()=>{
+ state.requisition={state:'SUBMITTED',erpNumber:'old-order',erpStatus:'已作废',reorderAllowed:true} as never
+ const html=await renderToString(createSSRApp({render:()=>h(SkuPage)}))
+ expect(html).toContain('原采购单已作废，重新分析后可再次采购')
+ expect(html).toContain('重新分析并采购');expect(html).toContain('old-order')
+ expect(html).toContain('刷新 ERP 状态')
+ expect(html).not.toContain('本商品已有本平台请购，请核对原单')
+})
+it('keeps unknown or unverified voids protected',async()=>{
+ state.requisition={state:'SUBMIT_UNKNOWN',erpStatus:'已作废'} as never
+ const html=await renderToString(createSSRApp({render:()=>h(SkuPage)}))
+ expect(html).not.toContain('重新分析并采购');expect(html).toContain('本商品已有本平台请购')
+})

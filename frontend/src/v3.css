@@ -84,10 +84,10 @@
 
 /* chips */
 .chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;line-height:1.7;padding:1px 7px;border-radius:4px;background:#eef1f4;color:#556575;white-space:nowrap}
-.chip.confirm{background:var(--selected);color:var(--primary)}
+.chip.confirm{background:var(--danger-bg);color:var(--danger)}
 .chip.history{background:#eef2f7;color:#4a6b8a}
 .chip.review{background:var(--warning-bg);color:var(--warning)}
-.chip.none{background:#f1f4f6;color:#6b7885}
+.chip.none{background:var(--success-bg);color:var(--success)}
 .chip.broken{background:var(--danger-bg);color:var(--danger)}
 .chip.pending{background:#f1f4f6;color:#6b7885}
 .chip.info{background:var(--info-bg);color:var(--info)}
