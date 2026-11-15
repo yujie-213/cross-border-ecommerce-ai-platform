@@ -1,0 +1,526 @@
+{
+  "document": "B-REQ-001",
+  "version": "V1.0",
+  "freezeStatus": "FROZEN_BASELINE",
+  "artifactReview": "PENDING_OWNER_AND_XINGXING_DOCUMENT_REVIEW_NOT_PRODUCT_ACCEPTANCE",
+  "checkedAt": "2026-11-15T12:44:58.164Z",
+  "base": {
+    "fetchedOriginMain": "efa06985cc92aaf9e657af659a027dccd9d5fc97",
+    "branch": "codex/b-after-sales-v1",
+    "startSha": "efa06985cc92aaf9e657af659a027dccd9d5fc97",
+    "sourceDirtyPaths": 33,
+    "currentDirectoryReused": true,
+    "sourceChangesNotAutomaticallyCommitted": true
+  },
+  "requirements": {
+    "path": "docs/requirements/B_AFTER_SALES_V1.md",
+    "sha256": "d2c3c20057326600e141616fb6b244e676790e3f189f3e1b0f1ebb91659a4a86",
+    "definitionCount": 37
+  },
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "fresh-origin-main-base",
+      "result": "PASS",
+      "details": {
+        "fetched": "efa06985cc92aaf9e657af659a027dccd9d5fc97",
+        "independentLsRemoteVerified": true
+      }
+    },
+    {
+      "name": "independent-branch-current-directory",
+      "result": "PASS",
+      "details": {
+        "worktreeCreation": "cancelled; user instructed reuse current checkout",
+        "localAndRemoteBranchAbsentBeforeCreate": true
+      }
+    },
+    {
+      "name": "all-preexisting-dirty-content-preserved",
+      "result": "PASS",
+      "details": {
+        "paths": 33,
+        "unchangedUntracked": 29,
+        "notes": "Original ledger/handoff bytes preserved as suffix; generated content unchanged except authoritative source hash"
+      }
+    },
+    {
+      "name": "no-development-todo-or-status-changes",
+      "result": "PASS",
+      "details": {
+        "taskCount": 51
+      }
+    },
+    {
+      "name": "requirement-ids-unique",
+      "result": "PASS",
+      "details": {
+        "count": 37,
+        "ids": [
+          "B-SCP-01",
+          "B-SCP-02",
+          "B-DATA-01",
+          "B-DATA-02",
+          "B-DATA-03",
+          "B-DATA-04",
+          "B-CASE-01",
+          "B-CASE-02",
+          "B-CASE-03",
+          "B-CASE-04",
+          "B-CASE-05",
+          "B-STAT-01",
+          "B-STAT-02",
+          "B-STAT-03",
+          "B-STAT-04",
+          "B-STAT-05",
+          "B-STAT-06",
+          "B-STAT-07",
+          "B-POL-01",
+          "B-POL-02",
+          "B-POL-03",
+          "B-POL-04",
+          "B-RISK-01",
+          "B-RISK-02",
+          "B-RISK-03",
+          "B-RISK-04",
+          "B-ISO-01",
+          "B-ISO-02",
+          "B-RISK-05",
+          "B-ISO-03",
+          "B-EXP-01",
+          "B-EXP-02",
+          "B-FAIL-01",
+          "B-SEC-01",
+          "B-SEC-02",
+          "B-SEC-03",
+          "B-CHG-01"
+        ]
+      }
+    },
+    {
+      "name": "requirement-references-resolve",
+      "result": "PASS"
+    },
+    {
+      "name": "formal-version-and-frozen-status",
+      "result": "PASS"
+    },
+    {
+      "name": "fifteen-requested-topics-covered",
+      "result": "PASS",
+      "details": [
+        {
+          "topic": "背景目标定位及价值",
+          "anchor": "1. 背景"
+        },
+        {
+          "topic": "角色场景痛点",
+          "anchor": "2. 用户"
+        },
+        {
+          "topic": "范围四分区",
+          "anchor": "条件性能力"
+        },
+        {
+          "topic": "案件完整流程及异常",
+          "anchor": "B-CASE-05"
+        },
+        {
+          "topic": "体验分析及统计",
+          "anchor": "B-STAT-07"
+        },
+        {
+          "topic": "政策引用与人工审核",
+          "anchor": "B-POL-03"
+        },
+        {
+          "topic": "质量风险生命周期",
+          "anchor": "B-RISK-03"
+        },
+        {
+          "topic": "跨业务与服务端隔离",
+          "anchor": "B-ISO-02"
+        },
+        {
+          "topic": "统一中台用户路径",
+          "anchor": "B-EXP-02"
+        },
+        {
+          "topic": "数据来源与关联",
+          "anchor": "B-DATA-04"
+        },
+        {
+          "topic": "失败及权限",
+          "anchor": "B-FAIL-01"
+        },
+        {
+          "topic": "三场景可执行验收",
+          "anchor": "AC-03-N5"
+        },
+        {
+          "topic": "安全审计来源真实性",
+          "anchor": "B-SEC-03"
+        },
+        {
+          "topic": "D1至D5及两约束",
+          "anchor": "补充二：商品属性"
+        },
+        {
+          "topic": "版本冻结变更管理",
+          "anchor": "B-CHG-01"
+        }
+      ]
+    },
+    {
+      "name": "all-seven-decisions-traced",
+      "result": "PASS",
+      "details": {
+        "D1": [
+          "B-DATA-01",
+          "AC-02-N4"
+        ],
+        "D2": [
+          "B-STAT-02",
+          "B-STAT-06",
+          "AC-02-N1"
+        ],
+        "D3": [
+          "B-POL-01",
+          "B-POL-04",
+          "AC-01-N3"
+        ],
+        "D4": [
+          "B-RISK-01",
+          "B-RISK-02",
+          "AC-03-P"
+        ],
+        "D5": [
+          "B-RISK-03",
+          "B-RISK-05",
+          "AC-03-N5"
+        ],
+        "serverTeachingIsolation": [
+          "B-ISO-01",
+          "B-ISO-02",
+          "AC-03-N3"
+        ],
+        "productComplaintLogic": [
+          "B-DATA-03",
+          "AC-01-N2"
+        ]
+      }
+    },
+    {
+      "name": "three-core-acceptance-contracts",
+      "result": "PASS"
+    },
+    {
+      "name": "teaching-metric-defaults",
+      "result": "PASS"
+    },
+    {
+      "name": "golden-rate-arithmetic",
+      "result": "PASS",
+      "details": {
+        "previous": "1/40=2.5%",
+        "current": "12/40=30%",
+        "delta": "27.5 percentage points",
+        "testNature": "DOCUMENT_NUMERIC_CONSISTENCY_ONLY"
+      }
+    },
+    {
+      "name": "server-isolation-not-front-labels",
+      "result": "PASS"
+    },
+    {
+      "name": "usb-size-ticket-not-quality-positive",
+      "result": "PASS"
+    },
+    {
+      "name": "no-replenishment-rule-change",
+      "result": "PASS"
+    },
+    {
+      "name": "no-design-api-schema-or-task-artifacts",
+      "result": "PASS",
+      "details": {
+        "note": "Business identities and states retained; no implementation contract or developer task list"
+      }
+    },
+    {
+      "name": "existing-product-and-baselines-unchanged",
+      "result": "PASS",
+      "details": "No changes"
+    },
+    {
+      "name": "whitelist-only-two-specific-additions",
+      "result": "PASS"
+    },
+    {
+      "name": "local-links:docs/requirements/B_AFTER_SALES_V1.md",
+      "result": "PASS",
+      "details": {
+        "count": 5,
+        "missing": []
+      }
+    },
+    {
+      "name": "local-links:docs/README.md",
+      "result": "PASS",
+      "details": {
+        "count": 83,
+        "missing": []
+      }
+    },
+    {
+      "name": "local-links:docs/DECISIONS.md",
+      "result": "PASS",
+      "details": {
+        "count": 18,
+        "missing": []
+      }
+    },
+    {
+      "name": "targeted-staged-secrets-check",
+      "result": "PASS",
+      "details": {
+        "files": 8,
+        "findings": [],
+        "note": "Exact local secret values and token heuristic, not a universal privacy certification"
+      }
+    },
+    {
+      "name": "exact-nine-file-staging",
+      "result": "PASS",
+      "details": [
+        "docs/DECISIONS.md",
+        "docs/HANDOFF.md",
+        "docs/README.md",
+        "docs/TASKS.md",
+        "docs/evidence/B-REQUIREMENTS-FREEZE-20261115/validation.json",
+        "docs/generated/DEPENDENCIES.mmd",
+        "docs/generated/STATUS.md",
+        "docs/planning/git-whitelist.json",
+        "docs/requirements/B_AFTER_SALES_V1.md"
+      ]
+    },
+    {
+      "name": "preexisting-untracked-not-staged",
+      "result": "PASS"
+    },
+    {
+      "name": "staged-exact-own-increment:docs/TASKS.md",
+      "result": "PASS"
+    },
+    {
+      "name": "staged-exact-own-increment:docs/HANDOFF.md",
+      "result": "PASS"
+    },
+    {
+      "name": "staged-exact-own-increment:docs/generated/STATUS.md",
+      "result": "PASS"
+    },
+    {
+      "name": "staged-exact-own-increment:docs/generated/DEPENDENCIES.mmd",
+      "result": "PASS"
+    },
+    {
+      "name": "staged-whitespace",
+      "result": "PASS",
+      "details": {
+        "exitCode": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "tracked-whitelist",
+      "result": "PASS",
+      "details": {
+        "tracked": 1119,
+        "unlisted": []
+      }
+    },
+    {
+      "name": "derived-line-endings-preserved",
+      "result": "PASS",
+      "details": "Generated files retain HEAD CRLF and prior working-tree CRLF; staged semantic delta only source hash"
+    }
+  ],
+  "decisionCoverage": {
+    "D1": [
+      "B-DATA-01",
+      "AC-02-N4"
+    ],
+    "D2": [
+      "B-STAT-02",
+      "B-STAT-06",
+      "AC-02-N1"
+    ],
+    "D3": [
+      "B-POL-01",
+      "B-POL-04",
+      "AC-01-N3"
+    ],
+    "D4": [
+      "B-RISK-01",
+      "B-RISK-02",
+      "AC-03-P"
+    ],
+    "D5": [
+      "B-RISK-03",
+      "B-RISK-05",
+      "AC-03-N5"
+    ],
+    "serverTeachingIsolation": [
+      "B-ISO-01",
+      "B-ISO-02",
+      "AC-03-N3"
+    ],
+    "productComplaintLogic": [
+      "B-DATA-03",
+      "AC-01-N2"
+    ]
+  },
+  "conflictReview": [
+    {
+      "topic": "旧售后后置及A02/RAG/通用调度规划",
+      "resolution": "B三链V1必做；不以未实现规划当现有能力或框架重建前置",
+      "outstandingDecision": false
+    },
+    {
+      "topic": "旧成熟签收投诉订单率",
+      "resolution": "B使用已确认发货完成群组实收件数率，无签收不宣称签收口径",
+      "outstandingDecision": false
+    },
+    {
+      "topic": "旧质量阈值阻断采购",
+      "resolution": "B只提示；保留当前S01逻辑，不写入会影响采购的旧质量字段",
+      "outstandingDecision": false
+    },
+    {
+      "topic": "教学风险映射真实ERP商品",
+      "resolution": "服务端限定教学模式/授权数据集与商品店仓范围；正常模式不消费",
+      "outstandingDecision": false
+    },
+    {
+      "topic": "USB工单尺码主题",
+      "resolution": "原主题保留，仅关联/冲突负例；合理诉求经澄清与商品选择后进入正例",
+      "outstandingDecision": false
+    }
+  ],
+  "sources": [
+    {
+      "path": "../跨境电商项目/学生资料/01-课件/07-客服、退货与合规知识Agent.html",
+      "sha256": "b3bea9655ac5ded51679c1ebc7cdff60f0b19edd1e440254a10fbc1f543d410a",
+      "role": "TEACHER_REFERENCE_NOT_REPUBLISHED"
+    },
+    {
+      "path": "docs/reports/B赛道_ERP数据创建能力专项核查_20261115.md",
+      "sha256": "b34ffa756e83e667649ee84ce8f9ac5977e9f47a54ba4a506d0fff727038f407",
+      "role": "APPROVED_LOCAL_BACKGROUND_NOT_STAGED"
+    },
+    {
+      "path": "docs/reports/B赛道_V1.0产品目标对齐与数据可行性调查_20261115.md",
+      "sha256": "54ebbcb7984c8c6c376a06f2f7b50c714c9a3c06dce7ae2cb0c4f0ab7a6809fb",
+      "role": "APPROVED_LOCAL_BACKGROUND_NOT_STAGED"
+    },
+    {
+      "path": "docs/reports/B赛道_P0数据准入验证与需求冻结建议_20261115.md",
+      "sha256": "46bb6941f8af675568ccbe8f53aba44f1e0443c82380c8e25dc3126e8aa42335",
+      "role": "APPROVED_LOCAL_BACKGROUND_NOT_STAGED"
+    },
+    {
+      "path": "README.md",
+      "sha256": "f0b648922d1b1d843d646cc678e442812bb1d83a747673c5cc802b5232493065",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "docs/requirements/REQUIREMENTS.md",
+      "sha256": "01f97cbe093cdf643b6758417109cea5944ca2a07744b0c4790bc6a17674994b",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "f23218ba2b45b80b60184bf5caab5c7fae654071e733d1c6b8cc3e72ec2600c0",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "docs/architecture/LOCAL_RUNTIME.md",
+      "sha256": "ff5cbabf7994f6b85dfa9d49cdc8561c09bf2e3f3d314d358e74cb4b68a653c2",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "docs/contracts/s01/product-demand.md",
+      "sha256": "b5241aaa60864544298f1561f6bb094441d23e399872b85bfa3cedf38a2cd907",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "docs/standards/ERP_SIMULATION_DATA_POLICY.md",
+      "sha256": "7e5c7e86698e9f9fe6193e88f70987b6838e2f01d9f58d416dc09526d0b53ca9",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "DESIGN.md",
+      "sha256": "8700cd6353acabc9e6fe6a7f37a09daeb2151efb6a292f1eaf10da1692453d3f",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "src/commerce_hub/bootstrap/s01_v2.py",
+      "sha256": "2a843891c5c5b0e71715900b8d95215221dd272a284aa781db51d366f2de1124",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/s01_v2/handler.py",
+      "sha256": "ec625994c9f928b94bbbefa2c94d84a5726bcf85f8c22e314673dc745468f9fd",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/s01_v2/requisition.py",
+      "sha256": "ca0d06114db7c01b3c45d28eca143d760f08c7520d0f88aa9d3977dc3fd68b7d",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "src/commerce_hub/governance/access/service.py",
+      "sha256": "07378822ba6e43cf5682361158b90cdea856062f1f82baed8ba789c9260354ce",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    },
+    {
+      "path": "frontend/src/V2Shell.vue",
+      "sha256": "8c87e0a8fb764c3d032ade186ddd3929ba047920cc6e8fda59a27f1a85054bb9",
+      "role": "EXISTING_BASE_OR_NECESSARY_DECISION_INCREMENT"
+    }
+  ],
+  "publicationScope": [
+    "docs/DECISIONS.md",
+    "docs/HANDOFF.md",
+    "docs/README.md",
+    "docs/TASKS.md",
+    "docs/evidence/B-REQUIREMENTS-FREEZE-20261115/validation.json",
+    "docs/generated/DEPENDENCIES.mmd",
+    "docs/generated/STATUS.md",
+    "docs/planning/git-whitelist.json",
+    "docs/requirements/B_AFTER_SALES_V1.md"
+  ],
+  "backgroundReports": "Kept local exactly; no automatic staging of earlier uncommitted investigations or raw evidence",
+  "processHistory": [
+    {
+      "result": "FAIL",
+      "reason": "Initial temporary checker missed IDs ending before bold markers, matched metric text across Markdown markup incorrectly, and compared JavaScript floating point by an invalid strict expression; corrected checker only, no frozen business rule changed",
+      "receipt": ".tmp/b-freeze/first-validation.json"
+    }
+  ],
+  "toolLimitations": {
+    "originalPythonDocCommands": "NOT_RUN; recorded .venv Python home absent, --version exit 103; no environment repair",
+    "fallback": "Temporary Node requirement coverage/link/consistency/preservation checks and deterministic render_status.py-equivalent generation"
+  },
+  "notRun": [
+    "ERP requests or writes",
+    "model calls",
+    "business code or migrations",
+    "full regression",
+    "detailed design or development TODO",
+    "main commit or merge"
+  ],
+  "synchronization": "Git commit and independent remote verification occur after this check; actual SHA is reported from Git, not self-referentially embedded",
+  "formatting": "Staged generated views preserve existing CRLF; generated source hashes independently bind staged and working ledgers"
+}
