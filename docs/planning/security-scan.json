@@ -1,11 +1,10 @@
 {
   "status": "PASS",
-  "scope": "ALL_OUTGOING_COMMIT_BLOBS_TO_ORIGIN_MAIN",
-  "baseCommit": "f9bc45f721c961774bbc40bad19f8786519ad449",
-  "reviewedHead": "75682a42fa518f16641e7f6f6782b247abbbac83",
-  "historyCommits": 31,
-  "scannedBlobs": 369,
+  "scope": "OUTGOING_FINAL_INDEX_BLOBS_FROM_BASE",
+  "baseCommit": "00da72a9f3d9a457c177fe8975ef17100890b5ae",
+  "reviewedImplementation": "59431367f105c75449bbdaf14159f019be26cb9d",
+  "scannedBlobs": 19,
   "knownCredentialCount": 3,
   "findings": [],
-  "limitations": "Exact locally configured credentials and common secret patterns only; teaching evidence publication explicitly authorized. No private values emitted. Heuristic scan is not a security certification."
+  "limitations": "Exact configured credentials and common secret patterns; synthetic fixture credentials excluded; no private values emitted; not a security certification."
 }

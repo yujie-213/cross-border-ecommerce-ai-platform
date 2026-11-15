@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "testedCommit": "59431367f105c75449bbdaf14159f019be26cb9d",
+  "backend": {
+    "tests": 40,
+    "failures": 0,
+    "scope": "Isolated real MySQL and synthetic ERP"
+  },
+  "frontend": {
+    "tests": 69,
+    "typecheck": "PASS",
+    "build": "PASS"
+  },
+  "userAcceptance": "Owner checked the actual product and confirmed no issue on 2026-11-15",
+  "browserAutomation": "Prior session expired; subsequent Computer Use URL verification stopped; not rerun",
+  "erpBusinessWrites": 0,
+  "modelCalls": 0
+}
