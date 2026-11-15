@@ -2,7 +2,7 @@
   "document": "B-REQ-001",
   "version": "V1.0",
   "freezeStatus": "FROZEN_BASELINE",
-  "artifactReview": "PENDING_OWNER_AND_XINGXING_DOCUMENT_REVIEW_NOT_PRODUCT_ACCEPTANCE",
+  "artifactReview": "APPROVED_BY_OWNER_FOR_DEVELOPMENT",
   "checkedAt": "2026-11-15T12:44:58.164Z",
   "base": {
     "fetchedOriginMain": "efa06985cc92aaf9e657af659a027dccd9d5fc97",
@@ -14,7 +14,7 @@
   },
   "requirements": {
     "path": "docs/requirements/B_AFTER_SALES_V1.md",
-    "sha256": "d2c3c20057326600e141616fb6b244e676790e3f189f3e1b0f1ebb91659a4a86",
+    "sha256": "7ccf485ee9de5f3d5cb0d8dd89f534376abbe1ee9e7a007b41430f4f959d7937",
     "definitionCount": 37
   },
   "status": "PASS",
@@ -344,6 +344,11 @@
       "name": "derived-line-endings-preserved",
       "result": "PASS",
       "details": "Generated files retain HEAD CRLF and prior working-tree CRLF; staged semantic delta only source hash"
+    },
+    {
+      "name": "owner-approval-metadata-only",
+      "result": "PASS",
+      "details": "Requirement body from section 1 onward byte-identical to approved baseline; only metadata/decision/handoff changed"
     }
   ],
   "decisionCoverage": {
@@ -533,5 +538,17 @@
     "firstPush": "FAILED in sandbox: wincredman credential store unavailable",
     "recovery": "Same normal push under approved ordinary host permissions; no credential/remote configuration change",
     "finalReceiptCommit": "Read from Git after this receipt commit, not self-referentially embedded"
-  }
+  },
+  "ownerApproval": {
+    "date": "2026-11-15",
+    "timezone": "Asia/Shanghai",
+    "statement": "这份需求文档我批准作为后续开发依据",
+    "reviewedBranchHead": "7bc948a89381af88f28cb60077081bb97d019ca0",
+    "reviewedRequirementsSha256": "d2c3c20057326600e141616fb6b244e676790e3f189f3e1b0f1ebb91659a4a86",
+    "reviewer": "产品负责人（本次用户明确批准）",
+    "scope": "Requirements approval only; no additional design/development/ERP/model work started",
+    "independentNewXingxingReview": "NOT_CLAIMED",
+    "bodyUnchanged": true
+  },
+  "approvalCheckedAt": "2026-11-15T13:01:20.420Z"
 }
