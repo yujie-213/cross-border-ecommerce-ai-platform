@@ -11779,3 +11779,75 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
+
+
+## D-B-ERP-SIMULATION-01 独立ERP全仿真批次
+
+```json
+{
+  "id": "D-B-ERP-SIMULATION-01",
+  "stage": "D",
+  "title": "3SKU完整仿真ERP经营数据及双Agent可读验证",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-FOUNDATION-01",
+    "D-B-S01-01"
+  ],
+  "entryCondition": "2026-11-16负责人在本对话明确批准完全仿真3SKU/30销售/12售后及补货可分析数据，并指令立即插入。覆盖旧本轮不ERP写限制；只限独立教学批次，不扩采购/外部交易/退款/实物收货或人工风险确认。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "tools/b_erp_simulation_dataset.py",
+    "tests/",
+    "src/commerce_hub/scenarios/after_sales/source.py",
+    "docs/",
+    "AGENTS.md"
+  ],
+  "parallelCondition": "Codex单人；既有未知OpenAPI只读保留不暂存",
+  "deliverables": [
+    "独立仿真店仓供应商、3SKU/报价/库存/Listing、30销售本地仿真履约、12售后工单及7关联退货草稿",
+    "原键幂等日记/正式独立回读/库存与流水对账、登记同一补货监控范围及售后可读验证；人工决定不预置"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-ERP-SIMULATION-01/AC1",
+      "text": "正式API创建完全虚构且可追溯的独立范围；实际数量/时间/状态/余额/流水和父子关系独立核验"
+    },
+    {
+      "id": "D-B-ERP-SIMULATION-01/AC2",
+      "text": "补货当前规则输入可计算，售后读取12工单及3商品精确身份；保留已有成员、账号及授权，不提前伪造AI或人工风险确认"
+    }
+  ],
+  "plannedTests": [
+    "导入原键重复/未知恢复/越权路径拒绝单测；真实教学ERP预检和逐项独立回读",
+    "已有补货投影正式只读采集/确定性计算准入、售后正式读取/来源及店仓验证、针对性回归"
+  ],
+  "risks": [
+    "共享教学租户无源端独占隔离；不操作他人记录",
+    "ERP无评价正文新增API；不伪造评价/成熟退货总体；退货仅草稿",
+    "不调用付费模型、不代替人工确认风险、不采购或外发"
+  ],
+  "requiredEvidenceKinds": [
+    "INTEGRATION"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "34b6d8bca7dd7dc89d18e20eea52c18d21336f12",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确确认完全仿真且补货也能分析后批准立即插入。先预检正式接口，单人实施独立范围，不伪造人工决策。"
+    }
+  ]
+}
+```
