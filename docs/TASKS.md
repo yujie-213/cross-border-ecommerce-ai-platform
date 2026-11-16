@@ -1,3 +1,5 @@
+B详细设计领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / 2547d1e23ef8cbc991a6e238df9961c35a551696，起点跟踪区干净、未知docs/ERP-openapi.yaml保留未读未改。用户仅授权设计、计划、文档检查及普通提交推送，不编码/迁移/ERP写/付费模型/合main；D-B-DESIGN-01交付REVIEW，新增六项实施任务仅TODO，须后续明确开发授权。设计与检查见evidence/B-DESIGN-20261116/validation.json；实际最终提交由Git回读。
+
 B赛道V1.0需求批准登记（2026-11-15）：产品负责人明确表示“这份需求文档我批准作为后续开发依据”。批准对象为codex/b-after-sales-v1已发布需求基线（文档提交33aa1923475043b5969d09f09f6fcfd9cd3a5b12，审核时分支HEAD 7bc948a89381af88f28cb60077081bb97d019ca0）。B-REQ-001/V1.0保持FROZEN_BASELINE，并登记APPROVED_FOR_DEVELOPMENT；仅批准状态更新，D1—D5、两项补充约束、业务正文及AC合同不变，不代表功能已实现/业务验收通过，也不代记星星新一轮独立审核。本轮仅登记批准并同步原B分支，保留原未提交材料、不合main、不启动详细设计/开发/ERP或模型，等待负责人安排下一阶段。
 
 B赛道V1.0需求分支同步回执（2026-11-15）：正式需求提交33aa1923475043b5969d09f09f6fcfd9cd3a5b12已普通推送origin/codex/b-after-sales-v1，并以git ls-remote独立核对远端分支SHA一致；远端及本地main仍为efa06985cc92aaf9e657af659a027dccd9d5fc97，未合并/force。首次沙箱push因wincredman不可用失败，常规本机权限重试成功，未改remote/凭据配置。B-REQ-001/V1.0/FROZEN_BASELINE的D1—D5、两项补充约束及AC-01—AC-03完整，31项文档/范围检查通过；Python原文档工具因既有解释器缺失未运行，采用注明限制的临时Node检查。现有未提交材料继续保留，只有本轮9个文档/治理文件进入分支；本回执仅记录同步，不改需求正文或业务代码。最终回执提交SHA从Git查询，不自引用。已停止，等待负责人和星星审核文档，不自动进入设计开发。
@@ -9870,6 +9872,517 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       },
       "disposition": "历史全量860项859PASS/1瞬时队列FAIL，原XML及原结果保留；原样40项foundation重跑PASS，当前定向回归亦PASS。移入历史，不将失败改写为成功。",
       "followupArtifactRef": "docs/evidence/S01-PRODUCT/foundation-recheck.xml"
+    }
+  ]
+}
+```
+
+## D-B-DESIGN-01 详细产品技术设计与分阶段计划
+
+```json
+{
+  "id": "D-B-DESIGN-01",
+  "stage": "D",
+  "title": "详细产品技术设计与分阶段计划",
+  "kind": "design",
+  "dependsOn": [],
+  "entryCondition": "本轮设计授权",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "docs/agents/B_AFTER_SALES_DESIGN.md",
+    "docs/architecture/B_AFTER_SALES_REUSE.md",
+    "docs/ui/B_AFTER_SALES_PRODUCT.md",
+    "docs/planning/B_AFTER_SALES_PLAN.md",
+    "docs/evidence/B-DESIGN-20261116/",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md",
+    "docs/DECISIONS.md",
+    "docs/README.md",
+    "docs/PLAN.md",
+    "docs/generated/",
+    "docs/planning/plan-build.json",
+    "docs/PLAN.html",
+    "docs/planning/validation-report.json"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应阶段产物与操作文档"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-DESIGN-01/AC1",
+      "text": "冻结需求及三AC完整覆盖"
+    },
+    {
+      "id": "D-B-DESIGN-01/AC2",
+      "text": "代码依据真实、增量设计可执行"
+    }
+  ],
+  "plannedTests": [
+    "文档一致性、需求映射、DAG和diff检查"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "DOCUMENT_CHECK"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [
+    {
+      "kind": "DOCUMENT_CHECK",
+      "command": "python docs/evidence/B-DESIGN-20261116/check_design.py",
+      "environment": "Windows Python；文档静态检查",
+      "sample": "冻结需求逐条与18项AC、真实路径、任务依赖、来源及边界",
+      "exitCode": 0,
+      "result": "PASS",
+      "acceptanceIds": [
+        "D-B-DESIGN-01/AC1",
+        "D-B-DESIGN-01/AC2"
+      ],
+      "artifactRef": "docs/evidence/B-DESIGN-20261116/validation.json"
+    }
+  ],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "2547d1e23ef8cbc991a6e238df9961c35a551696",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    }
+  ]
+}
+```
+
+## D-B-FOUNDATION-01 来源可信的统一售后工作区及完整教学导入
+
+```json
+{
+  "id": "D-B-FOUNDATION-01",
+  "stage": "D",
+  "title": "来源可信的统一售后工作区及完整教学导入",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-DESIGN-01"
+  ],
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "src/commerce_hub/data/",
+    "src/commerce_hub/governance/access/",
+    "src/commerce_hub/orchestration/",
+    "src/commerce_hub/bootstrap/",
+    "src/commerce_hub/entrypoints/http/",
+    "migrations/versions/",
+    "frontend/src/App.vue",
+    "frontend/src/V2Shell.vue",
+    "frontend/src/pages/HomePage.vue",
+    "frontend/src/afterSales/",
+    "tests/",
+    "frontend/tests/",
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-FOUNDATION-01/AC1",
+      "text": "受控导入、校验、独立回读与隔离"
+    },
+    {
+      "id": "D-B-FOUNDATION-01/AC2",
+      "text": "现有登录、任务、来源契约兼容"
+    }
+  ],
+  "plannedTests": [
+    "MySQL迁移兼容、导入重放冲突、服务端隔离、页面与Worker恢复"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    }
+  ]
+}
+```
+
+## D-B-CASE-01 案件政策与人工审核完整闭环
+
+```json
+{
+  "id": "D-B-CASE-01",
+  "stage": "D",
+  "title": "案件政策与人工审核完整闭环",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-FOUNDATION-01"
+  ],
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/capabilities/understanding/",
+    "src/commerce_hub/capabilities/retrieval/",
+    "src/commerce_hub/adapters/erp.py",
+    "src/commerce_hub/entrypoints/http/",
+    "frontend/src/afterSales/",
+    "migrations/versions/",
+    "tests/",
+    "frontend/tests/",
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-CASE-01/AC1",
+      "text": "AC-01-P及N1—N5全部满足"
+    },
+    {
+      "id": "D-B-CASE-01/AC2",
+      "text": "四类政策审核发布、原稿人工版本独立回读"
+    }
+  ],
+  "plannedTests": [
+    "AC-01全矩阵、政策引用、注入、安全、并发和浏览器恢复"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    }
+  ]
+}
+```
+
+## D-B-EXPERIENCE-01 体验异常分析与证据调查闭环
+
+```json
+{
+  "id": "D-B-EXPERIENCE-01",
+  "stage": "D",
+  "title": "体验异常分析与证据调查闭环",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-FOUNDATION-01"
+  ],
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/capabilities/metrics/",
+    "src/commerce_hub/data/",
+    "src/commerce_hub/entrypoints/http/",
+    "frontend/src/afterSales/",
+    "migrations/versions/",
+    "tests/",
+    "frontend/tests/",
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-EXPERIENCE-01/AC1",
+      "text": "AC-02-P及N1—N5全部满足"
+    },
+    {
+      "id": "D-B-EXPERIENCE-01/AC2",
+      "text": "金样数量指标完全一致、主题人工基准核查"
+    }
+  ],
+  "plannedTests": [
+    "成熟群组金样、边界与去重、混源、规则和迟到版本、原文钻取"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    }
+  ]
+}
+```
+
+## D-B-RISK-01 质量调查风险生命周期及教学绑定
+
+```json
+{
+  "id": "D-B-RISK-01",
+  "stage": "D",
+  "title": "质量调查风险生命周期及教学绑定",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-CASE-01",
+    "D-B-EXPERIENCE-01"
+  ],
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/governance/access/",
+    "src/commerce_hub/entrypoints/http/",
+    "frontend/src/afterSales/",
+    "migrations/versions/",
+    "tests/",
+    "frontend/tests/",
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-RISK-01/AC1",
+      "text": "两类入口调查及人工决定可追溯"
+    },
+    {
+      "id": "D-B-RISK-01/AC2",
+      "text": "逐店仓范围、绑定隔离、失效和新版本确认"
+    }
+  ],
+  "plannedTests": [
+    "AC-03-P前半、N1—N3、授权及时间边界与CAS"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    }
+  ]
+}
+```
+
+## D-B-S01-01 补货单品批量风险提醒与原行为兼容
+
+```json
+{
+  "id": "D-B-S01-01",
+  "stage": "D",
+  "title": "补货单品批量风险提醒与原行为兼容",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-RISK-01"
+  ],
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/entrypoints/http/s01_v2.py",
+    "src/commerce_hub/bootstrap/",
+    "frontend/src/api/",
+    "frontend/src/pages/SkuPage.vue",
+    "frontend/src/pages/SuggestionsPage.vue",
+    "frontend/src/components/",
+    "tests/",
+    "frontend/tests/",
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-S01-01/AC1",
+      "text": "AC-03-P及N1—N5在单品和批量全部满足"
+    },
+    {
+      "id": "D-B-S01-01/AC2",
+      "text": "风险不改变原计算、候选和采购资格"
+    }
+  ],
+  "plannedTests": [
+    "同输入不变量、1000对象工程分块、部分失败、历史当前与浏览器返回"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    }
+  ]
+}
+```
+
+## D-B-ACCEPTANCE-01 三链整体集成与评审交付
+
+```json
+{
+  "id": "D-B-ACCEPTANCE-01",
+  "stage": "D",
+  "title": "三链整体集成与评审交付",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-CASE-01",
+    "D-B-EXPERIENCE-01",
+    "D-B-RISK-01",
+    "D-B-S01-01"
+  ],
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "docs/",
+    "tests/",
+    "frontend/tests/",
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-ACCEPTANCE-01/AC1",
+      "text": "AC-01—03全部正负例证据"
+    },
+    {
+      "id": "D-B-ACCEPTANCE-01/AC2",
+      "text": "真实、模拟、UNKNOWN、NOT_RUN分别登记"
+    }
+  ],
+  "plannedTests": [
+    "集成收口、恢复、审计权限、S01受影响回归与负责人体验"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
     }
   ]
 }

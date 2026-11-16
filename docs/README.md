@@ -1,3 +1,5 @@
+B V1详细设计评审入口：[复用差距](architecture/B_AFTER_SALES_REUSE.md) · [产品操作与页面](ui/B_AFTER_SALES_PRODUCT.md) · [技术详细设计](agents/B_AFTER_SALES_DESIGN.md) · [分阶段计划/需求与AC覆盖](planning/B_AFTER_SALES_PLAN.md)。仅设计REVIEW；开发未授权，状态唯一在TASKS。
+
 当前日常入口：[README](../README.md) · [本地运行/登录/恢复](runbooks/local-platform.md) · [本地认证/部署契约](contracts/local-platform.md) · [架构增量](architecture/LOCAL_RUNTIME.md)。旧临时Token工具仅开发测试。
 
 # 项目文档索引

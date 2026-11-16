@@ -377,3 +377,9 @@ ADR-S01-PRODUCT-019 范围补充（2026-11-14）：用户收缩为登记核验�
 ### B-REQ-001负责人文档批准（2026-11-15）
 
 产品负责人明确批准“这份需求文档”作为后续开发依据，审核对象为33aa192需求正文及7bc948a同步回执所在基线。V1.0状态登记为FROZEN_BASELINE／APPROVED_FOR_DEVELOPMENT；D1—D5、两项补充约束和AC-01—AC-03不变。此次只确认需求制品已批准，不扩产品范围、不等同业务验收，也不自动开启详细设计或编码。后续按本唯一需求正文及B-CHG-01管理变更，等待负责人安排下一阶段。
+
+## ADR-B-DES-001：售后三链增量设计（2026-11-16，设计待评审）
+
+依据本轮明确设计授权与B-REQ-001冻结合同，采用统一中台工作区、确定性Workflow及现有O01/A01/MySQL/Worker；新增B必需来源准入、授权证据解析、政策/分类/指标及领域对象。D1—D5和补充约束不变，不以旧S03/S05取代。详情见[设计](agents/B_AFTER_SALES_DESIGN.md)、[复用](architecture/B_AFTER_SALES_REUSE.md)、[操作](ui/B_AFTER_SALES_PRODUCT.md)、[计划与覆盖](planning/B_AFTER_SALES_PLAN.md)。
+
+消费者影响：DomainResult新增中台教学来源须版本分派兼容旧结果；G01显式增动作和来源绑定；B新增迁移单链、禁破坏性回退；API/Worker与导航增量装配。S01仅消费版本化QualityRiskReadPort及独立展示advisory，不能将风险写入原qualityDisposition/B01/B02或采购门。故障显示未核实，保留原计算与资格。安全影响涵盖来源/教师答案/客户脱敏和历史授权；契约、迁移兼容、三AC全部正负例及S01不变量列入计划。无新中间件或企业审批中心；本条非已批准公共契约、非实现/启用授权，待负责人评审后实施。

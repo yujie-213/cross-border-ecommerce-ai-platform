@@ -4,6 +4,8 @@
 
 2026-11-14实施增量：A—D所需工程与S01 V2已进入本地教学产品验收，本轮完成Windows持续一键启动/单admin登录/8小时会话及完整回归后普通合main。任务状态和实际合并提交唯一见TASKS；默认运行方式见README。后续先由负责人真实使用反馈确定前端优化范围，不自动整体重构或开始其他Agent，企业四门及独立MC范围保留。
 
+2026-11-16 B赛道增量：第二业务模块按[售后三链实施章节](planning/B_AFTER_SALES_PLAN.md)分阶段集成，属本A—D计划的D轨道展开；需求以B-REQ-001为准，不受旧S03/S05顺序覆盖。当前仅设计待评审、六项开发任务未开工，状态唯一在TASKS，不扩大ERP/模型授权。
+
 ## 1. 依据、顺序变更与唯一正文
 
 直接工程依据是[概要开发设计v0.2](architecture/DEVELOPMENT_DESIGN.md)及[AI详细开发设计v0.2](agents/AI_DETAILED_DESIGN.md)。正文保持原样。本次用户明确将实施顺序改为S01纵向切片；变更依据、影响及验收映射见[DECISIONS](DECISIONS.md)。旧96项草案原文/历史状态已[归档](archive/plan96-v0.1/README.md)，96个旧ID逐条见[TASK_MAPPING](TASK_MAPPING.md)，不是待逐项完成的路线。

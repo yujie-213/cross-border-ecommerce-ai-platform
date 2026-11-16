@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=4a23a57d6487d619958d51a5e352de77b10359f296e9fe81d2f0399edd404cc8
+%% TASKS sourceSha256=98c013d816c1b90ec7247bf2624f857334cb277278235fb36ce65d6b8e8d947d
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -51,6 +51,13 @@ flowchart TB
   D_S01_ADMISSION_01["D-S01-ADMISSION-01 S01数据准入与长期可用性运行改造"]
   D_S01_TWO_SKU_01["D-S01-TWO-SKU-01 两自有SKU实际可用性定向修复"]
   D_S01_PRODUCT_01["D-S01-PRODUCT-01 S01 商品与分仓补货决策产品重构"]
+  D_B_DESIGN_01["D-B-DESIGN-01 详细产品技术设计与分阶段计划"]
+  D_B_FOUNDATION_01["D-B-FOUNDATION-01 来源可信的统一售后工作区及完整教学导入"]
+  D_B_CASE_01["D-B-CASE-01 案件政策与人工审核完整闭环"]
+  D_B_EXPERIENCE_01["D-B-EXPERIENCE-01 体验异常分析与证据调查闭环"]
+  D_B_RISK_01["D-B-RISK-01 质量调查风险生命周期及教学绑定"]
+  D_B_S01_01["D-B-S01-01 补货单品批量风险提醒与原行为兼容"]
+  D_B_ACCEPTANCE_01["D-B-ACCEPTANCE-01 三链整体集成与评审交付"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -130,3 +137,13 @@ flowchart TB
   D_S01_ADMISSION_01 --> D_S01_TWO_SKU_01
   D_S01_V2_01 --> D_S01_PRODUCT_01
   D_S01_LOCAL_01 --> D_S01_PRODUCT_01
+  D_B_DESIGN_01 --> D_B_FOUNDATION_01
+  D_B_FOUNDATION_01 --> D_B_CASE_01
+  D_B_FOUNDATION_01 --> D_B_EXPERIENCE_01
+  D_B_CASE_01 --> D_B_RISK_01
+  D_B_EXPERIENCE_01 --> D_B_RISK_01
+  D_B_RISK_01 --> D_B_S01_01
+  D_B_CASE_01 --> D_B_ACCEPTANCE_01
+  D_B_EXPERIENCE_01 --> D_B_ACCEPTANCE_01
+  D_B_RISK_01 --> D_B_ACCEPTANCE_01
+  D_B_S01_01 --> D_B_ACCEPTANCE_01

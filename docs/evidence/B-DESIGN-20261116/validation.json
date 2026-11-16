@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-16",
+  "baseline": "2547d1e23ef8cbc991a6e238df9961c35a551696",
+  "scope": "DESIGN_DOCUMENTATION_ONLY",
+  "businessTests": "NOT_RUN",
+  "erpCalls": 0,
+  "modelCalls": 0,
+  "migrationExecution": "NOT_RUN",
+  "mermaidRendering": "NOT_RUN",
+  "checks": [
+    {
+      "check": "frozen-requirements-unchanged",
+      "result": "PASS",
+      "detail": "7ccf485ee9de5f3d5cb0d8dd89f534376abbe1ee9e7a007b41430f4f959d7937"
+    },
+    {
+      "check": "all-frozen-requirement-ids-mapped",
+      "result": "PASS",
+      "detail": {
+        "count": 37,
+        "missing": []
+      }
+    },
+    {
+      "check": "18-acceptance-cases-mapped",
+      "result": "PASS",
+      "detail": [
+        "AC-01-P",
+        "AC-01-N1",
+        "AC-01-N2",
+        "AC-01-N3",
+        "AC-01-N4",
+        "AC-01-N5",
+        "AC-02-P",
+        "AC-02-N1",
+        "AC-02-N2",
+        "AC-02-N3",
+        "AC-02-N4",
+        "AC-02-N5",
+        "AC-03-P",
+        "AC-03-N1",
+        "AC-03-N2",
+        "AC-03-N3",
+        "AC-03-N4",
+        "AC-03-N5"
+      ]
+    },
+    {
+      "check": "local-document-links",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "reuse-cited-file-paths-exist",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "seven-tasks-and-shape",
+      "result": "PASS",
+      "detail": [
+        "D-B-DESIGN-01",
+        "D-B-FOUNDATION-01",
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "D-B-RISK-01",
+        "D-B-S01-01",
+        "D-B-ACCEPTANCE-01"
+      ]
+    },
+    {
+      "check": "dag-valid",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "design-review-development-not-started",
+      "result": "PASS",
+      "detail": "No implementation or business acceptance claimed"
+    },
+    {
+      "check": "mermaid-fences-balanced",
+      "result": "PASS",
+      "detail": "Source syntax only; visual rendering NOT_RUN"
+    },
+    {
+      "check": "essential-design-boundaries-present",
+      "result": "PASS",
+      "detail": "Static markers plus manual semantic review; not business verification"
+    },
+    {
+      "check": "tracked-change-documentation-only",
+      "result": "PASS",
+      "detail": [
+        "docs/DECISIONS.md",
+        "docs/HANDOFF.md",
+        "docs/PLAN.html",
+        "docs/PLAN.md",
+        "docs/README.md",
+        "docs/TASKS.md",
+        "docs/generated/DEPENDENCIES.mmd",
+        "docs/generated/STATUS.md",
+        "docs/planning/browser-check.json",
+        "docs/planning/plan-build.json",
+        "docs/planning/validation-report.json"
+      ]
+    }
+  ],
+  "status": "PASS"
+}

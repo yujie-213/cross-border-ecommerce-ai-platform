@@ -1,6 +1,6 @@
 {
   "status": "pass",
-  "htmlSha256": "5689993029b779450bf2ae275d02459ca6e7c8f10a53ebc442554cafcabb0ac8",
+  "htmlSha256": "24abd3e44686b8c22351458538800118b7c64758a56e06bf2cc4f11704b280d0",
   "checks": [
     {
       "width": 1440,
@@ -27,25 +27,25 @@
       "pass": true
     },
     {
-      "width": 920,
-      "scrollWidth": 920,
+      "width": 1920,
+      "scrollWidth": 1920,
       "svg": 1,
       "sections": 11,
       "viewport": {
-        "width": 920,
-        "height": 900
+        "width": 1920,
+        "height": 1080
       },
       "theme": "light",
       "pass": true
     },
     {
-      "width": 920,
-      "scrollWidth": 920,
+      "width": 1920,
+      "scrollWidth": 1920,
       "svg": 1,
       "sections": 11,
       "viewport": {
-        "width": 920,
-        "height": 900
+        "width": 1920,
+        "height": 1080
       },
       "theme": "dark",
       "pass": true
@@ -57,7 +57,7 @@
       "sections": 11,
       "viewport": {
         "width": 390,
-        "height": 900
+        "height": 844
       },
       "theme": "light",
       "pass": true
@@ -69,11 +69,13 @@
       "sections": 11,
       "viewport": {
         "width": 390,
-        "height": 900
+        "height": 844
       },
       "theme": "dark",
       "pass": true
     }
   ],
-  "remoteRequests": []
+  "errors": [],
+  "remoteRequests": [],
+  "visualReview": "recorded separately"
 }
