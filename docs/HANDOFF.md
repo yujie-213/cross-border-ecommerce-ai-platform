@@ -1,3 +1,5 @@
+B设计针对性完善（2026-11-16）：接续329a6e64423453160660491515b19557c0e765bf，当前分支codex/b-after-sales-v1，Codex单人，起点跟踪区干净、未知docs/ERP-openapi.yaml保留未读未改。初评整体认可，设计仍REVIEW；只完善G01/LocalAdmin真实限制和既有admin幂等增量补权、最小FOUNDATION与完整DATASET解耦、正式Vue前原型阶段及按首次消费者建表。原型本轮只登记TODO，不实际制作；CASE无需等待教学全集，EXPERIENCE必须完整导入与独立回读，三AC不缩减。既有admin密码/主体revision/会话/S01 grant不改，未来补权不走initialize/reset。设计§8.1/§7.1、产品§7、计划及TASKS为接续入口。检查见原B-DESIGN-20261116/validation.json新增针对项；无业务测试/迁移/ERP/模型，不合main。提交普通推送后停止，实际SHA以Git回读，不预填自身提交。
+
 B设计普通同步回执（2026-11-16）：3444a20dc7afc50cb41e81115d896a4d0021f46a已普通push至origin/codex/b-after-sales-v1并独立ls-remote一致；未合main。随后只修正本轮新证据文件累计diff的LF换行并追加本回执；最终SHA以Git回读为准，设计仍REVIEW，六项实施TODO，结束等待负责人评审。
 
 B设计文档固定提交（2026-11-16）：162b98dec164f1cecaf05665e629fe82e3b61ebf，设计REVIEW；本次后续提交仅补证据生成换行修复与固定SHA/检查回执。首个暂存检查暴露新validation.json的CRLF，已修正生成器为LF并再次检查；保留初次事实，不改冻结需求或业务代码。最终远端同步由实际ls-remote回读，不预写成功。

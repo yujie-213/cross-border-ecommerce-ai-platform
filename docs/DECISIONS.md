@@ -383,3 +383,5 @@ ADR-S01-PRODUCT-019 范围补充（2026-11-14）：用户收缩为登记核验�
 依据本轮明确设计授权与B-REQ-001冻结合同，采用统一中台工作区、确定性Workflow及现有O01/A01/MySQL/Worker；新增B必需来源准入、授权证据解析、政策/分类/指标及领域对象。D1—D5和补充约束不变，不以旧S03/S05取代。详情见[设计](agents/B_AFTER_SALES_DESIGN.md)、[复用](architecture/B_AFTER_SALES_REUSE.md)、[操作](ui/B_AFTER_SALES_PRODUCT.md)、[计划与覆盖](planning/B_AFTER_SALES_PLAN.md)。
 
 消费者影响：DomainResult新增中台教学来源须版本分派兼容旧结果；G01显式增动作和来源绑定；B新增迁移单链、禁破坏性回退；API/Worker与导航增量装配。S01仅消费版本化QualityRiskReadPort及独立展示advisory，不能将风险写入原qualityDisposition/B01/B02或采购门。故障显示未核实，保留原计算与资格。安全影响涵盖来源/教师答案/客户脱敏和历史授权；契约、迁移兼容、三AC全部正负例及S01不变量列入计划。无新中间件或企业审批中心；本条非已批准公共契约、非实现/启用授权，待负责人评审后实施。
+
+ADR-B-DES-001针对性完善（2026-11-16，设计仍REVIEW）：复核_scope非空SKU限制、g01_grants每动作单行及LocalAdmin仅首次赋权事实。选择G01拥有的BResourceScope/B资源grant和受信场景taskAuthorization，不放宽旧S01_scope，不覆盖旧grant；通过显式幂等grant-after-sales为既有admin补权，密码/会话/主体revision和采购授权不变。最小FOUNDATION与完整DATASET分离，CASE不依赖教学全集；新增正式Vue前轻量PROTOTYPE审核阶段。最终逻辑数据约束保留，按设计§7.1实际消费者增量建表/扩契约。冻结需求/三AC不变，无新基础服务，本轮仅修改文档，不实际补权/原型实现/业务编码。

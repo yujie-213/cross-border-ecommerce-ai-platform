@@ -1,6 +1,6 @@
 # 智能售后与客户体验分析 Agent V1.0 详细开发设计
 
-B-DES-001 v0.1，2026-11-16，DESIGN_REVIEW；未编码、未迁移、未业务验收。唯一需求为[B-REQ-001/V1.0](../requirements/B_AFTER_SALES_V1.md)，D1—D5及AC不变。本次设计授权覆盖需求文件中历史“尚未授权详细设计”的停止点，但不授予实现。阅读顺序：[复用差距](../architecture/B_AFTER_SALES_REUSE.md)→[产品操作](../ui/B_AFTER_SALES_PRODUCT.md)→本设计→[阶段与覆盖](../planning/B_AFTER_SALES_PLAN.md)。
+B-DES-001 v0.2，2026-11-16，DESIGN_REVIEW；未编码、未迁移、未业务验收。唯一需求为[B-REQ-001/V1.0](../requirements/B_AFTER_SALES_V1.md)，D1—D5及AC不变。本次设计授权覆盖需求文件中历史“尚未授权详细设计”的停止点，但不授予实现。阅读顺序：[复用差距](../architecture/B_AFTER_SALES_REUSE.md)→[产品操作](../ui/B_AFTER_SALES_PRODUCT.md)→本设计→[阶段与覆盖](../planning/B_AFTER_SALES_PLAN.md)。
 
 ## 1. 产品与边界
 
@@ -29,7 +29,7 @@ flowchart LR
 
 同步API处理范围校验、消息追加、人工关联、审核、发布、调查、风险变更以及有界查询；外部ERP取数、资料导入校验、政策检索后的生成和体验分析走现有Worker。HTTP受理返回202 taskRef，前端沿公共任务接口轮询；参数只传对象／版本引用，不塞长正文。人工等待保存在B对象状态，不长时间持有Worker租约。
 
-场景注册 `B_CASE_EVIDENCE_V1`、`B_CASE_ADVICE_V1`、`B_DATASET_VALIDATE_V1`、`B_EXPERIENCE_V1`。证据／导入任务零模型；建议和主题按获准预算。ExecutionContext.check、commit_data、租约与原task预算沿用；网络在事务外，提交时再验actor、scope、对象版本。持久step记录仅保存完成产物引用；同(task,step,inputHash)唯一。恢复先读产物；模型发送UNKNOWN不自动再次发送，预算预约不释放冒充未调用。
+按§7.1首次消费者分阶段注册，最终场景为 `B_CASE_EVIDENCE_V1`、`B_CASE_ADVICE_V1`、`B_DATASET_VALIDATE_V1`、`B_EXPERIENCE_V1`。证据／导入任务零模型；建议和主题按获准预算。ExecutionContext.check、commit_data、租约与原task预算沿用；网络在事务外，提交时再验actor、scope、对象版本。持久step记录仅保存完成产物引用；同(task,step,inputHash)唯一。恢复先读产物；模型发送UNKNOWN不自动再次发送，预算预约不释放冒充未调用。
 
 公共DomainResult拟增0.2.0：保留原字段并新增来源 `MIDDLEWARE_TEACHING_DATA` 及结构化sourceBundleRef。旧0.1.0仍按原规则解析，未知版本拒绝；TaskService发布／读取、领域验证及前端types同时增量适配，不能只改Literal。completeness沿用RULES_ONLY/PARTIAL/BLOCKED，AI和证据完整性放领域字段；不把技术SUCCEEDED等同完整业务结论。现有发布验证中S01特定假设必须通过Handler扩展点隔离，兼容用例先行。
 
@@ -143,6 +143,22 @@ S01结果在展示组装层附加独立`qualityRiskAdvisory`，不混入原计�
 
 迁移按资料准入→案件政策→报告风险分批增表，单链由主集成人串行；无回填改写S01。新代码兼容旧数据无B行；先迁移后开flag。回退关闭B注册和导航，保留新表不执行破坏性downgrade；S01启动仅校验自己的必需能力，B readiness分离，避免B表缺失令S01全局503。数据库基础设施故障仍按原系统失败语义，不能承诺数据库坏时S01可用。
 
+### 7.1 按首次消费者增量落地，不一次性建表
+
+§7表格是V1最终领域约束清单，不是FOUNDATION建库清单。逻辑对象可合并在同一聚合的有约束JSON/子表中；以需查询、唯一约束、引用及独立版本为拆表依据，不能删来源/审计/版本约束来减少表数。
+
+| 首次使用阶段 | 需要落地的数据/契约 | 明确延后 |
+|---|---|---|
+| PROTOTYPE | 静态合成样例和交互状态，仅本地HTML预览，无表/后端接口 | 不建任何数据库结构或公共运行端口 |
+| FOUNDATION | g01_b_resource_grants及显式补权；O01的B任务授权适配、模块开关与壳；工作区固定配置无需专建表 | 不建完整教学交易投影、政策、报告或风险表；不预建通用D04台账、step表、所有B场景注册 |
+| CASE | 案件/消息/关联/建议/审核、四类政策版本和段落、B_CASE两场景；案件取证首次需要的D03 manifest、D04授权解析和生产者适配；复用G02 | 同步命令幂等优先复用现有能力，确无适用端口才增b_commands；需要恢复多个步骤才增b_step_results，不复制O01状态。A02/A03仅实现案件所用端口，仍不建教学订单全集或统计表 |
+| DATASET | dataset版本/导入块、完整订单行/发货/退货/反馈投影及回读验证；中台教学来源DomainResult兼容分派、B_DATASET场景；D03/D04追加教学资产适配 | 教学到ERP映射可在包内声明，独立核验及正式binding直到RISK消费才实现；不提前建风险状态表 |
+| EXPERIENCE | 分类版本、B01售后metric结果、分析报告、报告调查记录及B_EXPERIENCE场景 | b_investigations先支持报告，案件侧调查入口在RISK增量接入，不为未来其他业务创建调查平台 |
+| RISK | 案件调查入口、风险及不可变版本/逐店仓scope、b_subject_mappings的回读核验、b_teaching_bindings、G01对应动作 | 该阶段才实现QualityRiskReadPort v1供紧接S01阶段消费；无MQ/Outbox推送或通用跨Agent总线 |
+| S01 | RiskReadPort的单品/批量展示适配及已有报告内风险引用；历史/当前查询 | 不新建S01风险缓存表，不写原指标/候选/采购表；不单独造第二份报告权威 |
+
+迁移仅在对应消费者实现时增加，G01唯一写其授权表。CASE与DATASET可并行编写领域代码，公共manifest/解析器签名和迁移revision由主集成人串行协调；DATASET不迫使CASE产生虚假datasetRef，ERP案件清单可独立引用ERP来源/观测版本。公共契约版本化扩展及旧结果读取在首次消费者阶段一次验证，后续仅测新增分支，不反复重跑全平台。
+
 ## 8. API契约草案
 
 统一前缀 `/api/b/v1`（实施时与现有/api/v1路由核对并冻结，不修改旧URL）。JSON请求拒绝未知字段；actor和mode不接受客户端自授。GET做同范围过滤及游标分页默认20／最多100。写入要求CSRF、Idempotency-Key、expectedRevision；同键同payload返原结果，异payload 409；并发版本409并保留用户编辑。任务响应沿现有TaskRef，报告响应含schemaVersion、sourceBundleRef、snapshotRef、evidenceRefs、limitations。
@@ -165,7 +181,30 @@ S01结果在展示组装层附加独立`qualityRiskAdvisory`，不混入原计�
 | POST `/teaching-bindings`、`/{id}/revoke` | 精确mapping/dataset/version/principal/scope/有效期→binding版本；b:binding:manage，不能由分析请求隐式授予 |
 | POST `/risk-lookups`；GET `/evidence/{id}/versions/{v}` | 有界身份集合→RiskReadPort结果；b:risk:consume与对象范围；证据每次当前授权，无任意URL直通 |
 
-动作是新增白名单设计，现有admin不自动拥有所有B授权；本地初始化按已批准教学范围显式授予，保留真实actor。公共`tasks:*`只是任务权限，还必须叠加B动作／来源授权。读取不存在和无权目标统一404；401会话失效、403动作不允许、409版本／命令冲突、422身份／数据规则非法、503能力不可用。业务码包括SOURCE_MIXED、IDENTITY_UNRESOLVED、DATASET_NOT_VERIFIED、POLICY_NOT_APPLICABLE、INSUFFICIENT_MATURITY、RISK_SCOPE_INVALID。率UNKNOWN是有效受限报告字段而非HTTP伪成功数据；ERP超时按域保存原因，失败不推导为无记录。
+B动作及既有admin补权按§8.1执行；不能简单沿用非空SKU授权，也不能假定新增ALLOWED_ACTIONS会自动给旧账号补权。读取不存在和无权目标统一404；401会话失效、403动作不允许、409版本／命令冲突、422身份／数据规则非法、503能力不可用。业务码包括SOURCE_MIXED、IDENTITY_UNRESOLVED、DATASET_NOT_VERIFIED、POLICY_NOT_APPLICABLE、INSUFFICIENT_MATURITY、RISK_SCOPE_INVALID。率UNKNOWN是有效受限报告字段而非HTTP伪成功数据；ERP超时按域保存原因，失败不推导为无记录。
+
+### 8.1 G01资源范围与既有admin增量补权（本轮复核）
+
+真实限制：`governance/access/service.py::_scope`要求storeIds、warehouseIds、canonicalSkuIds、fields每项1—100条非空、禁通配；`g01_grants`主键只有(tenant,principal,action)，同一个tasks动作不能再插第二种scope覆盖原补货范围。`LocalAdmin.initialize`仅首次按ALLOWED_ACTIONS建grant，已有账号会报ADMIN_ALREADY_INITIALIZED；reset分支改密码、revision并作废会话，也不补grant；login只创建会话。因此不能用重登、重新initialize、reset或伪SKU解决B授权。
+
+保留现有S01 `_scope`、ALLOWED_ACTIONS、g01_grants语义不变。由G01增最小B资源授权端口 `authorize_b_resource(connection,principal,action,resourceScope)`，复用同一`_assert_current`、principal/session和撤销锁顺序，不建第二套身份。B独立动作白名单（b:read、案件/政策/数据集/风险动作及b:tasks:create/read/cancel/execute），使用G01所属拟表`g01_b_resource_grants`：主键(tenant,principal,action,workspaceId)，资源约束JSON及revision/active；资源集合为显式ID，不接受*。不是把新B动作加入LocalAdmin现有“遍历所有动作自动授予”的循环。
+
+BResourceScope v1必含schemaVersion、tenantId、workspaceId、resourceKind及资源ID或创建父资源；kind固定为CASE/POLICY/DATASET，资源ID由服务端查归属，不能由客户端声明拥有。授权覆盖三种情况：
+
+| 操作 | 服务端授权范围与升级条件 |
+|---|---|
+| 尚无订单/SKU的案件 | 创建/读取/追加消息在明确售后workspace内，caseId归属和b:case:*动作检查；商品未关联是真实状态，不填空数组绕过旧_scope、不借S01集合哨兵。录入客户主张不授予ERP读取权限 |
+| 政策编辑与发布 | workspace下POLICY资源及可管理policyIds/明确创建权限；不需仓/SKU。发布另外校验policy:publish、实际actor、适用范围、版本和原文；教师资料不可因工作区权限读出 |
+| 数据集创建、分块与激活 | workspace下DATASET资源，创建父权限与逐dataset/version访问分开；版本为精确集合，未发布版本只有管理权限可见。activate须验证和独立回读；数据集权限不等于ERP映射或教学风险绑定 |
+| 关联及取ERP证据 | 在案件权限之外叠加B sourceRead约束：sourceNature/sourceTenant、显式店及可读对象/字段。候选查找可用获准店级只读范围但不跨店全扫；选定后核真实productId/SKU/订单行和显式仓范围，按已核身份收紧。未映射canonicalSku时不假造该ID；不能借B读取扩大原S01范围 |
+
+resourceScope不含客户正文；来源、dataset/version、属性字段以及关联变更都经服务端资产解析再授权。创建权限仅限该工作区的新对象，不是读任意对象；未知对象和无权统一404，计数/证据/导出先过滤后汇总。B风险及调查的动作在RISK阶段扩展同一白名单/端口，不先搭通用资源授权框架。
+
+O01当前create/read/list/report/cancel均直接检查tasks:*，`_execution`用engineering:execute；仅增加B API授权不够。FOUNDATION给受信HandlerSpec增加可选taskAuthorization适配（BResourceScope v1），按注册scenario及持久化scope版本选择，不能由请求指定：B路径将创建、读取/列表、历史报告、取消、Worker start/checkpoint/commit、模型预算和发布复核映射到b:tasks:*及领域动作；旧场景未配置时保持原G01路径。混合任务列表逐行按各自策略过滤，不给客户端传入一个SKU scope就列所有B任务；未知版本/未注册策略拒绝，绝不回退legacy。首次消费者只有CASE，公共读取/恢复兼容检查随之交付，未消费的来源结果扩展留给DATASET。
+
+已有admin补权由FOUNDATION后续实现一次可重复执行的本地管理命令（拟名`grant-after-sales`），不在本轮运行，不在登录/启动自动扩大权限。流程：读取已初始化g01_local_admin的真实principal_id和tenant→读取本机明确的B工作区/动作/来源范围配置→dry-run展示仅B增量→短事务按principal→授权行顺序锁定，验证原账号active→对缺失B grant逐项插入并记录G02审计→独立读取核对。命令键由(installation,tenant,principal,B授权配置版本/hash)确定；同版本同内容重复执行无新增，已存在不同范围报冲突，不覆盖现有撤销或人工收紧；后续变更走显式B授权修订并审计，不靠重跑旧配置复活。新安装也先正常建立admin，再通过同一显式补权路径按获准范围赋权。
+
+该命令不调用initialize/reset/provision_fixture，不写password_hash、principal revision/active、sessions、原g01_grants及s01:requisition，不重建账户、不改签名密钥；现有会话继续有效，B权限来自每次当前grant核验，不需以登出代替授权刷新。失败整个B补权事务回滚，S01仍可用；B关闭或撤销不删除旧业务数据。必要定向验收：已有/新装admin、两次重跑/配置冲突/失败回滚、未关联案件与无SKU政策/数据集、跨工作区/数据版本/teacher负例；补权前后密码hash、principal revision、有效会话和全部S01 grant逐项不变，补货读取和请购资格不变。只在未来实现时测试，无需当前访问本机数据库。
 
 ## 9. AI上下文、校验和费用
 

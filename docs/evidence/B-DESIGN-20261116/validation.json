@@ -56,7 +56,7 @@
       "detail": []
     },
     {
-      "check": "seven-tasks-and-shape",
+      "check": "nine-tasks-and-shape",
       "result": "PASS",
       "detail": [
         "D-B-DESIGN-01",
@@ -65,7 +65,9 @@
         "D-B-EXPERIENCE-01",
         "D-B-RISK-01",
         "D-B-S01-01",
-        "D-B-ACCEPTANCE-01"
+        "D-B-ACCEPTANCE-01",
+        "D-B-PROTOTYPE-01",
+        "D-B-DATASET-01"
       ]
     },
     {
@@ -77,6 +79,26 @@
       "check": "design-review-development-not-started",
       "result": "PASS",
       "detail": "No implementation or business acceptance claimed"
+    },
+    {
+      "check": "case-does-not-wait-for-complete-dataset",
+      "result": "PASS",
+      "detail": "CASE and DATASET branch after minimal foundation; complete dataset remains mandatory"
+    },
+    {
+      "check": "g01-admin-revision-design",
+      "result": "PASS",
+      "detail": "Reviewed service.py, local.py, tables.py and O01 hard-coded authorization calls; implementation NOT_RUN"
+    },
+    {
+      "check": "prototype-before-vue-and-four-paths",
+      "result": "PASS",
+      "detail": "Prototype planned TODO; no prototype or Vue implementation this round"
+    },
+    {
+      "check": "tables-and-contracts-by-first-consumer",
+      "result": "PASS",
+      "detail": "Section 7.1 postpones unused capabilities without dropping final constraints"
     },
     {
       "check": "mermaid-fences-balanced",

@@ -49,9 +49,15 @@ tasks = read_tasks()
 new = [t for t in tasks if t['id'].startswith('D-B-')]
 allids = {t['id'] for t in tasks}
 required = ['stage','kind','dependsOn','entryCondition','ownerRole','assignee','allowedPaths','parallelCondition','deliverables','acceptance','plannedTests','risks','requiredEvidenceKinds','status','implementationCommits','testedCommit','evidence','review','branch','observedHead','dirtyPaths','latestHandoffRef','blocker','history']
-check('seven-tasks-and-shape', len(new) == 7 and all(all(k in t for k in required) for t in new), [t['id'] for t in new])
+check('nine-tasks-and-shape', len(new) == 9 and all(all(k in t for k in required) for t in new), [t['id'] for t in new])
 check('dag-valid', not cycles(tasks) and all(d in allids for t in tasks for d in t['dependsOn']), cycles(tasks))
-check('design-review-development-not-started', all(t['status'] == ('REVIEW' if t['kind'] == 'design' else 'TODO') and t['review'] is None and not t['implementationCommits'] for t in new), 'No implementation or business acceptance claimed')
+check('design-review-development-not-started', all(t['status'] == ('REVIEW' if t['id'] == 'D-B-DESIGN-01' else 'TODO') and t['review'] is None and not t['implementationCommits'] for t in new), 'No implementation or business acceptance claimed')
+by_id = {t['id']: t for t in new}
+check('case-does-not-wait-for-complete-dataset', by_id['D-B-CASE-01']['dependsOn'] == ['D-B-FOUNDATION-01', 'D-B-PROTOTYPE-01'] and by_id['D-B-EXPERIENCE-01']['dependsOn'] == ['D-B-DATASET-01', 'D-B-PROTOTYPE-01'] and by_id['D-B-DATASET-01']['dependsOn'] == ['D-B-FOUNDATION-01'], 'CASE and DATASET branch after minimal foundation; complete dataset remains mandatory')
+design = texts[paths[1]]
+check('g01-admin-revision-design', all(x in design for x in ['g01_b_resource_grants','authorize_b_resource','taskAuthorization','grant-after-sales','不写password_hash','重跑旧配置复活','engineering:execute','每项1—100条非空']), 'Reviewed service.py, local.py, tables.py and O01 hard-coded authorization calls; implementation NOT_RUN')
+check('prototype-before-vue-and-four-paths', 'D-B-PROTOTYPE-01' in plan and all(x in texts[paths[2]] for x in ['prototypes/b-after-sales/index.html','正式Vue','售后工作台','案件处理','体验分析','补货风险展示']), 'Prototype planned TODO; no prototype or Vue implementation this round')
+check('tables-and-contracts-by-first-consumer', all('| '+x+' |' in design for x in ['PROTOTYPE','FOUNDATION','CASE','DATASET','EXPERIENCE','RISK','S01']), 'Section 7.1 postpones unused capabilities without dropping final constraints')
 check('mermaid-fences-balanced', all(t.count('```') % 2 == 0 for t in texts.values()), 'Source syntax only; visual rendering NOT_RUN')
 combined = '\n'.join(texts.values())
 check('essential-design-boundaries-present', all(x in combined for x in ['QualityRiskReadPort', 'UNKNOWN', '1024', '30×24', '20', '10个百分点', '独立回读', '不进入', 'Idempotency-Key', '教师答案']), 'Static markers plus manual semantic review; not business verification')

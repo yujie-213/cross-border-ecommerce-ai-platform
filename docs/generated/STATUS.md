@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`ed292485ba8b9baff8f0142aaa77bbe5465e1e5d4823e4b89988eaaa78f0e5db`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`c7822ef11a1d3f55012d65f426012f8d5fef111c7f96ae697443bf174c48a860`。不要手工编辑；候选不是执行授权。
 
-任务 58 项；TODO 11；IN_PROGRESS 0；BLOCKED 4；REVIEW 22；ACCEPTED 21。
+任务 60 项；TODO 13；IN_PROGRESS 0；BLOCKED 4；REVIEW 22；ACCEPTED 21。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 41 | 8 | 0 | 4 | 20 | 9 |
+| D | 43 | 10 | 0 | 4 | 20 | 9 |
 
 ## 当前活动记录
 
@@ -97,11 +97,13 @@
 | D-S01-TWO-SKU-01 | 两自有SKU实际可用性定向修复 | REVIEW | D-S01-ADMISSION-01 |
 | D-S01-PRODUCT-01 | S01 商品与分仓补货决策产品重构 | ACCEPTED | D-S01-V2-01, D-S01-LOCAL-01 |
 | D-B-DESIGN-01 | 详细产品技术设计与分阶段计划 | REVIEW | 无；仍核对入口指令 |
-| D-B-FOUNDATION-01 | 来源可信的统一售后工作区及完整教学导入 | TODO | D-B-DESIGN-01 |
-| D-B-CASE-01 | 案件政策与人工审核完整闭环 | TODO | D-B-FOUNDATION-01 |
-| D-B-EXPERIENCE-01 | 体验异常分析与证据调查闭环 | TODO | D-B-FOUNDATION-01 |
+| D-B-FOUNDATION-01 | B资源授权、既有admin补权及最小公共接入 | TODO | D-B-DESIGN-01 |
+| D-B-CASE-01 | 案件政策与人工审核完整闭环 | TODO | D-B-FOUNDATION-01, D-B-PROTOTYPE-01 |
+| D-B-EXPERIENCE-01 | 体验异常分析与证据调查闭环 | TODO | D-B-DATASET-01, D-B-PROTOTYPE-01 |
 | D-B-RISK-01 | 质量调查风险生命周期及教学绑定 | TODO | D-B-CASE-01, D-B-EXPERIENCE-01 |
 | D-B-S01-01 | 补货单品批量风险提醒与原行为兼容 | TODO | D-B-RISK-01 |
 | D-B-ACCEPTANCE-01 | 三链整体集成与评审交付 | TODO | D-B-CASE-01, D-B-EXPERIENCE-01, D-B-RISK-01, D-B-S01-01 |
+| D-B-PROTOTYPE-01 | 正式Vue前的关键页面可预览原型 | TODO | D-B-DESIGN-01 |
+| D-B-DATASET-01 | 独立完整教学数据导入、校验及独立回读 | TODO | D-B-FOUNDATION-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

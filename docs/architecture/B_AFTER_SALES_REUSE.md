@@ -6,8 +6,8 @@
 
 | 能力／判断 | 实际依据（仓库相对路径） | 可用程度及B处理 |
 |---|---|---|
-| 登录／复用 | `src/commerce_hub/governance/access/local.py`、`entrypoints/http/local_auth.py`、`frontend/src/PlatformApp.vue` | 已有本地admin、Cookie会话及CSRF；沿用真实actor，不虚构岗位账号 |
-| 授权／扩展 | `governance/access/service.py` 的ALLOWED_ACTIONS、SCOPE_DIMENSIONS；`governance/access/tables.py` | 当前动作只有任务、工程及S01请购，维度为店仓／canonicalSku／fields；须新增B动作及来源版本授权，不能仅沿用tasks:read |
+| 登录／复用 | `src/commerce_hub/governance/access/local.py`、`entrypoints/http/local_auth.py`、`frontend/src/PlatformApp.vue` | 已有admin、Cookie/CSRF；initialize仅首次授全部旧动作，reset改密码/会话而不补grant，login不补权。后续独立幂等grant-after-sales补权，沿用actor/密码/会话 |
+| 授权／扩展 | `governance/access/service.py` 的ALLOWED_ACTIONS、SCOPE_DIMENSIONS；`governance/access/tables.py` | 四维每项必须非空、禁通配；g01_grants每动作仅一行。BResourceScope/G01专属B grant增量见设计§8.1，不伪造SKU、不覆盖S01 grant |
 | 异步任务／复用并扩展装配 | `orchestration/service.py` 的HandlerSpec、TaskService；`worker.py`；`infrastructure/work.py` | 已有命令指纹、领取租约、心跳、恢复、原任务预算和取消；新增B场景注册及版本化参数，不另建队列 |
 | 领域结果／扩展 | `orchestration/contracts.py` 的DomainResult | sourceNature只有工程模拟、教学ERP观测、ERP内仿真；不支持中台独立教学来源。新增兼容版本，旧0.1.0仍可读；不得冒标ERP内仿真 |
 | 模型控制／复用 | `capabilities/models/contracts.py`、`gateway.py`、`adapters/models/deepseek.py`、`orchestration/budget.py` | 已有结构化结果、预算预检、usage/UNKNOWN；网关拒绝queryRef，工具列表为空，输出上限1024 Token、两条system/user消息。B走任务，拆分有界分类批次，不默认开放工具或无限长上下文 |
@@ -34,3 +34,5 @@
 无需产品重新决定三链范围或统计默认值。后续开发必须验证ERP订单明细身份、发货全集与结束标记、退货收货事件、分页和时区；缺少任一要素时，ERP原生率保持UNKNOWN，同时完整中台教学金样仍是必做交付。工单115397的关联能力沿用需求中的历史证据，USB尺码仅作负例，本轮未重新取证。
 
 政策四类正文、发布责任人及教学商品精确映射是验收资料输入，不能由设计人员代签。接口不足不删功能：采用已冻结D1双源方案，ERP只展示已证实事实，教学包承载完整统计闭环。后续若仍无可核实的商品映射，AC-03正例必须标BLOCKED，不能用SKU文本绕过。
+
+本轮针对性复核（2026-11-16）：TaskService的create/read/list/report/cancel及_execution目前分别直调tasks:*和engineering:execute，须按受信场景适配B任务授权；不是只加HTTP路由检查。完整教学包移至DATASET阶段，CASE不依赖该包；表与公共端口按详细设计§7.1首次消费者落地。

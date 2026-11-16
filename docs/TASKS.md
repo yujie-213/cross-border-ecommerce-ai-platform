@@ -1,3 +1,5 @@
+B设计针对性完善（2026-11-16）：基点329a6e64423453160660491515b19557c0e765bf，Codex单人，跟踪区干净、未知OpenAPI保留未读未改；按初评四项反馈只更新G01资源授权/既有admin幂等补权、任务依赖、原型阶段及按消费者建表。D-B-DESIGN-01仍REVIEW，新增PROTOTYPE与DATASET为TODO；不制作正式页面、不实现原型/业务功能、不运行迁移/ERP/模型，不合main。
+
 B详细设计领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / 2547d1e23ef8cbc991a6e238df9961c35a551696，起点跟踪区干净、未知docs/ERP-openapi.yaml保留未读未改。用户仅授权设计、计划、文档检查及普通提交推送，不编码/迁移/ERP写/付费模型/合main；D-B-DESIGN-01交付REVIEW，新增六项实施任务仅TODO，须后续明确开发授权。设计与检查见evidence/B-DESIGN-20261116/validation.json；实际最终提交由Git回读。
 
 B赛道V1.0需求批准登记（2026-11-15）：产品负责人明确表示“这份需求文档我批准作为后续开发依据”。批准对象为codex/b-after-sales-v1已发布需求基线（文档提交33aa1923475043b5969d09f09f6fcfd9cd3a5b12，审核时分支HEAD 7bc948a89381af88f28cb60077081bb97d019ca0）。B-REQ-001/V1.0保持FROZEN_BASELINE，并登记APPROVED_FOR_DEVELOPMENT；仅批准状态更新，D1—D5、两项补充约束、业务正文及AC合同不变，不代表功能已实现/业务验收通过，也不代记星星新一轮独立审核。本轮仅登记批准并同步原B分支，保留原未提交材料、不合main、不启动详细设计/开发/ERP或模型，等待负责人安排下一阶段。
@@ -9948,7 +9950,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2547d1e23ef8cbc991a6e238df9961c35a551696",
+  "observedHead": "329a6e64423453160660491515b19557c0e765bf",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -9959,10 +9961,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "针对G01/既有admin、解耦教学包、原型门、按消费者增量建表完善；冻结需求及AC不变"
     }
   ],
   "documentationCommit": "162b98dec164f1cecaf05665e629fe82e3b61ebf",
-  "currentDeliveryScope": "DESIGN_REVIEW_ONLY；37需求及18AC已映射，开发及业务验收NOT_RUN；普通推送回读以Git及最终回复为准"
+  "currentDeliveryScope": "DESIGN_REVIEW_ONLY；37需求及18AC已映射，开发及业务验收NOT_RUN；普通推送回读以Git及最终回复为准",
+  "reviewContext": "本轮初步独立评审整体认可，按负责人四项反馈针对性完善；详细设计仍REVIEW，不代记正式验收"
 }
 ```
 
@@ -9972,12 +9980,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
 {
   "id": "D-B-FOUNDATION-01",
   "stage": "D",
-  "title": "来源可信的统一售后工作区及完整教学导入",
+  "title": "B资源授权、既有admin补权及最小公共接入",
   "kind": "development",
   "dependsOn": [
     "D-B-DESIGN-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入；可先做后端；正式Vue壳须D-B-PROTOTYPE-01相关流程完成产品体验审核",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -9997,20 +10005,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
   "deliverables": [
-    "docs/planning/B_AFTER_SALES_PLAN.md对应用户闭环、API/Worker/UI与适用证据；具体范围见设计及本任务allowedPaths"
+    "BResourceScope/G01专属资源grant、幂等grant-after-sales、O01全生命周期授权适配、模块开关；工作区壳不早于原型体验审核；不含完整教学导入"
   ],
   "acceptance": [
     {
       "id": "D-B-FOUNDATION-01/AC1",
-      "text": "受控导入、校验、独立回读与隔离"
+      "text": "未关联SKU案件、政策及数据集父资源具备显式B授权；既有admin幂等补权，密码/主体revision/会话/S01 grant不变"
     },
     {
       "id": "D-B-FOUNDATION-01/AC2",
-      "text": "现有登录、任务、来源契约兼容"
+      "text": "B任务创建/列表/读取/执行恢复/取消与旧S01权限兼容，最小公共接入不依赖完整教学包；正式Vue遵守原型门"
     }
   ],
   "plannedTests": [
-    "MySQL迁移兼容、导入重放冲突、服务端隔离、页面与Worker恢复"
+    "既有admin补权/重跑/冲突/回滚，原密码/主体revision/会话/S01全部grant不变",
+    "未关联SKU案件、无SKU政策/数据集授权，跨工作区/来源拒绝；任务创建/读取/执行/恢复/取消不旁路"
   ],
   "risks": [
     "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
@@ -10035,6 +10044,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅更新针对性设计和依赖，未授权实现"
     }
   ]
 }
@@ -10049,9 +10063,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "案件政策与人工审核完整闭环",
   "kind": "development",
   "dependsOn": [
-    "D-B-FOUNDATION-01"
+    "D-B-FOUNDATION-01",
+    "D-B-PROTOTYPE-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入；不等待完整教学数据集，ERP案件取证不虚填datasetRef",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10106,6 +10121,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅更新针对性设计和依赖，未授权实现"
     }
   ]
 }
@@ -10120,7 +10140,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "title": "体验异常分析与证据调查闭环",
   "kind": "development",
   "dependsOn": [
-    "D-B-FOUNDATION-01"
+    "D-B-DATASET-01",
+    "D-B-PROTOTYPE-01"
   ],
   "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
   "ownerRole": "主集成人",
@@ -10176,6 +10197,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅更新针对性设计和依赖，未授权实现"
     }
   ]
 }
@@ -10246,6 +10272,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅更新针对性设计和依赖，未授权实现"
     }
   ]
 }
@@ -10317,6 +10348,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅更新针对性设计和依赖，未授权实现"
     }
   ]
 }
@@ -10385,6 +10421,150 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "仅更新针对性设计和依赖，未授权实现"
+    }
+  ]
+}
+```
+
+## D-B-PROTOTYPE-01 正式Vue前的关键页面可预览原型
+
+```json
+{
+  "id": "D-B-PROTOTYPE-01",
+  "stage": "D",
+  "title": "正式Vue前的关键页面可预览原型",
+  "kind": "design",
+  "dependsOn": [
+    "D-B-DESIGN-01"
+  ],
+  "entryCondition": "本轮仅登记原型计划；下一步按负责人指令制作轻量静态原型，非业务编码",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "prototypes/b-after-sales/",
+    "docs/ui/B_AFTER_SALES_PRODUCT.md",
+    "docs/TASKS.md",
+    "docs/HANDOFF.md"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "本地可预览工作台/案件/体验分析/补货风险，覆盖关键正负状态及原上下文返回",
+    "产品审核关键路径后进入正式Vue，合成标识明确，不冒充后端或业务验收"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-PROTOTYPE-01/AC1",
+      "text": "本地可预览工作台/案件/体验分析/补货风险，覆盖关键正负状态及原上下文返回"
+    },
+    {
+      "id": "D-B-PROTOTYPE-01/AC2",
+      "text": "产品审核关键路径后进入正式Vue，合成标识明确，不冒充后端或业务验收"
+    }
+  ],
+  "plannedTests": [
+    "一次轻量预览与产品路径审核，键盘和1024/1440布局；不跑全量业务回归"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "按针对性评审新增实施阶段，未开工"
+    }
+  ]
+}
+```
+
+## D-B-DATASET-01 独立完整教学数据导入、校验及独立回读
+
+```json
+{
+  "id": "D-B-DATASET-01",
+  "stage": "D",
+  "title": "独立完整教学数据导入、校验及独立回读",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-FOUNDATION-01"
+  ],
+  "entryCondition": "设计/相关契约评审后明确实施授权；正式Vue前完成原型体验审核",
+  "ownerRole": "主集成人",
+  "assignee": null,
+  "allowedPaths": [
+    "src/commerce_hub/data/",
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/entrypoints/http/",
+    "src/commerce_hub/bootstrap/",
+    "src/commerce_hub/orchestration/contracts.py",
+    "frontend/src/afterSales/",
+    "migrations/versions/",
+    "tests/",
+    "frontend/tests/",
+    "docs/"
+  ],
+  "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
+  "deliverables": [
+    "完整固定总体教学金样、受控导入/校验/独立回读和激活，教师答案隔离",
+    "中台教学来源结果版本兼容，AC-02前置和AC-02-N2/N4不缩减；不阻挡ERP客服闭环"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-DATASET-01/AC1",
+      "text": "完整固定总体教学金样、受控导入/校验/独立回读和激活，教师答案隔离"
+    },
+    {
+      "id": "D-B-DATASET-01/AC2",
+      "text": "中台教学来源结果版本兼容，AC-02前置和AC-02-N2/N4不缩减；不阻挡ERP客服闭环"
+    }
+  ],
+  "plannedTests": [
+    "分块幂等/冲突、唯一性/守恒/阶段/时区/覆盖及独立回读",
+    "教学与ERP分源、版本及教师答案拒用，受影响契约与迁移兼容"
+  ],
+  "risks": [
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+  ],
+  "requiredEvidenceKinds": [
+    "CONTRACT",
+    "INTEGRATION",
+    "BROWSER"
+  ],
+  "status": "TODO",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": null,
+  "observedHead": null,
+  "dirtyPaths": [],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "按针对性评审新增实施阶段，未开工"
     }
   ]
 }
