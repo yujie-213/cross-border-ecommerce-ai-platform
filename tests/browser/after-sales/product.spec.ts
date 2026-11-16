@@ -59,7 +59,7 @@ test('three product chains, manual fallback, risk isolation and S01 reminder',as
   await page.getByRole('button',{name:'保存调查',exact:true}).click()
   await expect(page.getByRole('heading',{name:'质量风险',exact:true})).toBeVisible()
   await page.getByLabel('本次核实情况',{exact:true}).fill('核对反馈原文和实收记录，存在需跟进的描述问题')
-  await page.getByText('选择可追溯证据',{exact:true}).click();await page.getByRole('checkbox').first().check()
+  await page.getByText(/选择可追溯证据/).click();await page.getByRole('checkbox').first().check()
   await page.getByRole('combobox',{name:'人工结论',exact:true}).selectOption('SUPPORTED');await page.getByRole('button',{name:'保存调查结论',exact:true}).click()
   await page.getByRole('button',{name:'登记疑似风险',exact:true}).click()
   await page.getByRole('combobox',{name:'本次涉及商品',exact:true}).selectOption('0')
