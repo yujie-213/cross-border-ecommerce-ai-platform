@@ -1,0 +1,237 @@
+{
+  "date": "2026-11-16",
+  "branch": "codex/b-after-sales-v1",
+  "baseCommit": "511112be43afbe403bae3b181d05252f1823ba1c",
+  "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
+  "status": "REVIEW",
+  "backend": {
+    "result": "PASS",
+    "tests": 54,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "artifact": "backend.xml",
+    "environment": "Owned MySQL + API + independent Worker; explicitly synthetic ERP; model network off"
+  },
+  "frontend": {
+    "result": "PASS",
+    "tests": 69,
+    "build": "PASS",
+    "typecheck": "PASS"
+  },
+  "browser": {
+    "result": "PASS",
+    "tests": 1,
+    "artifact": "browser.txt",
+    "coverage": [
+      "ERP review entry and automatic association",
+      "teaching activation/deactivation/reactivation",
+      "case human fallback and persisted handling",
+      "return anomaly and investigation",
+      "human risk confirmation",
+      "exact mapping independent readback",
+      "S01 single and batch reminders",
+      "risk revocation and refresh",
+      "1024px layout"
+    ],
+    "businessSource": "SYNTHETIC_ERP",
+    "paidModel": "OFF"
+  },
+  "realERP": {
+    "result": "PARTIAL_PASS",
+    "businessWrites": 0,
+    "observed": [
+      "customer-tickets",
+      "customer-voice reviews",
+      "customer-voice feedback",
+      "sales-orders",
+      "products"
+    ],
+    "identity": "Unique tenant product + exact SKU for reviews; feedback order_id requires independent tenant/store/order readback; related_id/no never interpreted as order",
+    "limitations": [
+      "Bounded 10 voice / 20 ticket reads, no completeness claim outside filter",
+      "Review order and shipping warehouse UNKNOWN",
+      "Native complete mature return population not verified",
+      "Actual ERP risk mapping NOT_RUN; synthetic adapter positive only"
+    ]
+  },
+  "realAI": {
+    "result": "PASS_WITH_FAILURE_HISTORY",
+    "provider": "Official DeepSeek via A01",
+    "calls": 14,
+    "totalTokens": 19502,
+    "actualCostUSD": "UNKNOWN",
+    "reservedCostUSD": "0.70",
+    "validOutputs": 11,
+    "invalidOutputs": 3,
+    "taskReceipts": [
+      {
+        "task_id": "0cad9341019749bda76387eee1d59c1e",
+        "state": "SUCCEEDED",
+        "scenario_id": "B_CASE_ADVICE_V1",
+        "policy_version": "b-product-remediation-20261116-r1",
+        "used_calls": 2,
+        "used_tokens": 1216,
+        "reserved_cost": "0.10000000"
+      },
+      {
+        "task_id": "0e3a026a8d564842bbb8dfaeb763e950",
+        "state": "SUCCEEDED",
+        "scenario_id": "B_CASE_ADVICE_V1",
+        "policy_version": "b-product-remediation-20261116-r2",
+        "used_calls": 1,
+        "used_tokens": 2222,
+        "reserved_cost": "0.05000000"
+      },
+      {
+        "task_id": "30445dd7b79147ac85ad9ac4c0aec8df",
+        "state": "SUCCEEDED",
+        "scenario_id": "B_EXPERIENCE_V1",
+        "policy_version": "b-product-remediation-20261116-r2",
+        "used_calls": 3,
+        "used_tokens": 4739,
+        "reserved_cost": "0.15000000"
+      },
+      {
+        "task_id": "358cf54716ad4778b649d5c2488ba442",
+        "state": "SUCCEEDED",
+        "scenario_id": "B_CASE_ADVICE_V1",
+        "policy_version": "b-product-remediation-20261116-r1",
+        "used_calls": 2,
+        "used_tokens": 1224,
+        "reserved_cost": "0.10000000"
+      },
+      {
+        "task_id": "78f15d1f13f34623ab87498aa34bef34",
+        "state": "FAILED",
+        "scenario_id": "B_CASE_ADVICE_V1",
+        "policy_version": "b-product-remediation-20261116-r1",
+        "used_calls": 2,
+        "used_tokens": 1376,
+        "reserved_cost": "0.10000000"
+      },
+      {
+        "task_id": "a1188c2ac8824c68876d46c4bb0f4104",
+        "state": "SUCCEEDED",
+        "scenario_id": "B_CASE_ADVICE_V1",
+        "policy_version": "b-product-remediation-20261116-r1",
+        "used_calls": 1,
+        "used_tokens": 2338,
+        "reserved_cost": "0.05000000"
+      },
+      {
+        "task_id": "f3a308d75f304f10a754e29a5e005056",
+        "state": "SUCCEEDED",
+        "scenario_id": "B_EXPERIENCE_V1",
+        "policy_version": "b-product-remediation-20261116-r3",
+        "used_calls": 3,
+        "used_tokens": 6387,
+        "reserved_cost": "0.15000000"
+      }
+    ],
+    "finalPositive": [
+      "ERP review classification and evidence-constrained explanation",
+      "Teaching case policy-grounded draft and manual adoption",
+      "Teaching feedback classification and feedback-grounded return explanation"
+    ],
+    "failures": [
+      "First forged fact reference aborted task before fix",
+      "Second invalid explanation degraded while classification persisted",
+      "Draft repeated refund state and failed promise validation"
+    ],
+    "limits": "r1 8/$0.40, r2 6/$0.30, r3 4/$0.20 were agent-selected bounded validation configurations under user model permission, not user-imposed budgets. Historical unknown cost reservations remain.",
+    "reviewConfiguration": {
+      "authorizationId": "b-product-review-20261116",
+      "maxCalls": 10,
+      "maxTokens": 100000,
+      "maxCostUSD": "0.50",
+      "callsDuringDelivery": 0,
+      "basis": "Existing user permission to use models; conservative agent-selected review execution ceiling, not a new user-imposed restriction; r1/r2/r3 ledger and unknown costs preserved",
+      "preflight": "PASS: B_CASE_ADVICE_V1 and B_EXPERIENCE_V1 provider assembled, no model send",
+      "configurationCorrection": "Initial review maxCalls=20 rejected by existing shared-contract <=10; corrected before any new send."
+    }
+  },
+  "liveUI": {
+    "url": "http://localhost:5175",
+    "apiPort": 8768,
+    "result": "PASS",
+    "localTeachingStates": [
+      {
+        "id": "a69a7af890974a7784fade2e646e92c0",
+        "kind": "CASE",
+        "state": "HANDLED",
+        "revision": 7,
+        "sourceNature": "MIDDLEWARE_TEACHING_DATA"
+      },
+      {
+        "id": "e7c3eb78133e43d0a8e85094f29fb563",
+        "kind": "REPORT",
+        "state": "READY",
+        "revision": 1,
+        "sourceNature": "MIDDLEWARE_TEACHING_DATA"
+      },
+      {
+        "id": "72d30fdcee0347d58a73a98014b6f72e",
+        "kind": "RISK",
+        "state": "REVOKED",
+        "revision": 3,
+        "sourceNature": "MIDDLEWARE_TEACHING_DATA"
+      }
+    ],
+    "checks": [
+      "Existing admin session survived managed restarts",
+      "INACTIVE verified package reactivated via UI",
+      "Four teaching policies reviewed/published in UI",
+      "Real review automatically associated without manual relink",
+      "Actual AI draft adopted by human and survived refresh",
+      "Actual AI return explanation includes feedback evidence",
+      "Investigation and confirmed risk then revocation persisted",
+      "Existing S01 10 products / 11 store-warehouse objects and reports opened"
+    ],
+    "screenshots": "live-*.jpg use actual local Vue with independent teaching data and real AI; engineering-*.png use same compiled product with synthetic ERP",
+    "screenshotLimitation": "Full-page CUA capture timed out; delivered CUA screenshots are viewport captures, supplemented by engineering browser full-page captures."
+  },
+  "priorRuns": [
+    {
+      "artifact": ".tmp/b-remediation-first.xml",
+      "tests": 52,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "artifact": ".tmp/b-remediation-fixed.xml",
+      "tests": 53,
+      "failures": 0,
+      "errors": 9,
+      "skipped": 0
+    },
+    {
+      "artifact": ".tmp/b-remediation-final.xml",
+      "tests": 54,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "artifact": ".tmp/b-remediation-release.xml",
+      "tests": 54,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "artifact": ".tmp/b-remediation-fixed-release.xml",
+      "tests": 54,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "notRun": [
+    "New full-platform regression (unnecessary for scoped changes; previous 978 result remains historical)",
+    "Native ERP return-rate acceptance",
+    "Actual ERP risk binding positive"
+  ],
+  "finalReview": "Responsible owner and 星星; no main merge; final product acceptance not signed"
+}

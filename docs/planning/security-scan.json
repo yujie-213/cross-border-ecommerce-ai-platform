@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "scope": "B_V1_FINAL_DIFF_AND_SANITIZED_EVIDENCE",
-  "baseCommit": "f074803cc28590482cd9c4add861cf88b46f33e5",
-  "reviewedImplementation": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
-  "scannedBlobs": 87,
+  "scope": "B_PRODUCT_REMEDIATION_OUTGOING_HISTORY_AND_CURRENT_FILES",
+  "baseCommit": "511112be43afbe403bae3b181d05252f1823ba1c",
+  "reviewedImplementation": "49808a0d95c472ff908ddc37d162147e7346ec20",
+  "scannedBlobs": 54,
   "knownCredentialCount": 2,
   "findings": [],
   "excludedUnknownPath": "docs/ERP-openapi.yaml",
   "rawERPResponsesPublished": 0,
-  "limitations": "Exact configured secrets/common token and private-key patterns; synthetic fixture screenshots reviewed; not a security certification."
+  "limitations": "Exact local configured credential values and private key/model key patterns; live screenshots manually reviewed as independent teaching data, engineering screenshots explicitly synthetic. Not a security certification."
 }

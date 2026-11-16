@@ -11069,11 +11069,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+    "2943ca2251d497b85af951169e527f533d26afd8",
+    "81e001ea06bdb3f3159a9be0a53bd7dee65f1709",
+    "77eb560c56a28cb4eadc7ff28bfd31bf5b02618e",
+    "8485561cf6221e61dbc516a1e460489ddf1e05f4",
+    "c59685585bfcbbc920e5ba292a21e1df2d2eeec4",
+    "49808a0d95c472ff908ddc37d162147e7346ec20"
   ],
-  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -11127,6 +11133,59 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准MySQL/正式Vue/Edge；来源与实际模型分列",
+      "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "pytest tests/integration/after_sales tests/security/test_b_resources.py / MySQL=1 model=mock network=false",
+      "sample": "54 PASS；源关联/权限/去重/模型不合规降级/三链及独立Worker恢复",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PRODUCT-REMEDIATION-20261116/backend.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准MySQL/正式Vue/Edge；来源与实际模型分列",
+      "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "Edge正式编译Vue product.spec.ts；另本机CUA正式产品真实ERP/模型操作",
+      "sample": "工程三链1 PASS（合成ERP/off）；本机14真实模型，教学人工采纳与反馈解释/调查风险撤销，原S01历史与会话保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PRODUCT-REMEDIATION-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准MySQL/正式Vue/Edge；来源与实际模型分列",
+      "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "npm --prefix frontend test -- --run；npm --prefix frontend run build；冻结规则和来源边界核对",
+      "sample": "69 PASS / 类型构建PASS；不修改退货公式/补货算法/采购规则",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PRODUCT-REMEDIATION-20261116/build.txt"
+    },
+    {
+      "environment": "实际教学ERP只读",
+      "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "ERP完整成熟群组和真实商品风险映射验收",
+      "sample": "完整群组不可得；未把教学上衣风险任意配对其他ERP商品；工程映射和单品批量提醒通过",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-PRODUCT-REMEDIATION-20261116/validation.json"
     }
   ],
   "review": null,
@@ -11165,6 +11224,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人第一轮产品体验反馈后授权业务入口及三链体验整改；实际用户追加允许B模型调用，单独8次/100000Token/$0.40工程上限，不复用S01额度。最终REVIEW不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "产品体验整改固定实现49808a0；54后端/69前端/构建/Edge三链PASS，本机真实ERP评价自动关联、真实AI14次19502Token及教学三链/撤销/重启通过。实际费用UNKNOWN/$0.70预约保留；原生ERP完整退货群组/真实风险绑定NOT_RUN，最终产品体验待负责人和星星，不合main。"
     }
   ],
   "workItems": [
@@ -11209,7 +11273,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "ERP工单和评价作为入口、可信自动关联、人工审核与商品反馈调查、去技术输入、既有平台任务及风险提醒",
       "doneWhen": "正式Vue真实浏览器三链及定向回归、来源与模型实测边界、截图和普通分支推送后待最终产品体验",
       "testMethod": "受影响B/G01/前端与Edge独立Worker测试，实际只读ERP及获准少量真实A01调用",
-      "status": "IN_PROGRESS"
+      "status": "REVIEW"
     }
   ],
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
