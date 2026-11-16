@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount, computed } from 'vue'
+import { storeLabel } from './presentation'
 import { request, errorText } from '../api/client'
 const props=defineProps<{stores:string[]; initialKind?:string; disabled?:boolean; embedded?:boolean}>()
 const emit=defineEmits<{open:[record:any]}>()
@@ -27,15 +28,15 @@ onBeforeUnmount(()=>generation++)
 </script>
 <template>
  <section class="panel inbox" :class="{embedded}">
-  <div class="inbox-head"><div><h2>{{kind==='tickets'?'ERP 新到问题':'商品评价与客户反馈'}}</h2><p>仅本项目自建并登记的 ERP 商品与订单</p></div><button class="button small" :disabled="loading || disabled || !store" @click="load">更新 ERP 记录</button></div>
-  <div class="filters"><label>店铺<select v-model="store" :disabled="loading"><option v-for="s in stores" :key="s">{{s}}</option></select></label><label v-if="initialKind==='reviews'">业务记录<select v-model="kind"><option value="reviews">商品评价</option><option value="feedback">订单反馈</option></select></label><label>查找当前记录<input v-model="search" placeholder="商品、SKU 或问题关键词"></label></div>
+  <div class="inbox-head"><div><h2>{{kind==='tickets'?'新到客户问题':'商品评价与客户反馈'}}</h2></div><button class="button small" :disabled="loading || disabled || !store" @click="load">更新记录</button></div>
+  <div class="filters"><label>店铺<select v-model="store" :disabled="loading"><option v-for="s in stores" :key="s">{{storeLabel(s)}}</option></select></label><label v-if="initialKind==='reviews'">业务记录<select v-model="kind"><option value="reviews">商品评价</option><option value="feedback">订单反馈</option></select></label><label>查找当前记录<input v-model="search" placeholder="商品、SKU 或问题关键词"></label></div>
   <details v-if="kind!=='tickets'"><summary>按反馈日期筛选</summary><form class="filters" @submit.prevent="load"><label>开始日期<input type="date" v-model="from"></label><label>结束日期<input type="date" v-model="to" :min="from"></label><button class="button" :disabled="loading">查看这段时间</button></form></details>
-  <p v-if="!stores.length" class="banner warning">尚无已登记的自建 ERP 资源；可切换独立教学体验。</p>
-  <p v-if="loading" role="status">正在读取 ERP 记录并核实商品关联…</p>
-  <p v-if="error" class="banner danger" role="alert">{{error}}。本次记录未读取成功，请稍后更新；不代表没有业务问题。</p>
-  <template v-if="result"><p class="source-boundary">本次读取 {{result.items.length}} 条自建范围记录{{result.complete?'':' · 当前为部分查询'}} · {{new Date(result.observedAt).toLocaleString()}}</p>
-   <template v-if="kind==='reviews'"><div class="table-scroll"><table><thead><tr><th>商品</th><th>本次反馈</th><th>需要关注的问题</th><th></th></tr></thead><tbody><tr v-for="p in products" :key="p.key"><td><b>{{p.name}}</b><small>{{p.sku}}</small></td><td>{{p.items.length}} 条</td><td>{{p.items[0].title}}<small>{{p.items[0].text.slice(0,55)}}</small></td><td><button class="button small" @click="selectedProduct=selectedProduct===p.key?'':p.key">查看商品反馈</button></td></tr></tbody></table></div><div v-if="selectedProduct" class="product-voices"><h3>{{products.find(p=>p.key===selectedProduct)?.name}} · 客户反馈原文</h3><article v-for="r in products.find(p=>p.key===selectedProduct)?.items || []" :key="r.recordId" class="source-record"><div><p>{{r.text}}</p><small>{{r.rating==null?'未提供评分':r.rating+' / 5 分'}} · {{r.businessDate || '日期未提供'}}</small><small>{{r.association}}</small></div><button class="button small" :disabled="disabled" @click="emit('open',{...r,kind,storeName:store})">核实反馈并获取 AI 建议</button></article></div></template>
-   <div v-else class="table-scroll"><table><thead><tr><th>客户问题</th><th>业务关联</th><th>下一步</th></tr></thead><tbody><tr v-for="r in visibleRows" :key="r.ticketId || r.recordId"><td><b>{{r.title}}</b><small v-if="r.text">{{r.text.slice(0,80)}}</small></td><td><small>{{r.association || (r.orderLinked?'已有订单线索':'订单待核实')}}</small></td><td><button class="button small" :disabled="disabled || loading" @click="emit('open',{...r,kind,storeName:store})">打开处理 →</button></td></tr></tbody></table></div>
+  <p v-if="!stores.length" class="banner warning">暂无可用店铺。</p>
+  <p v-if="loading" role="status">正在读取客户问题…</p>
+  <p v-if="error" class="banner danger" role="alert">{{error}}，请稍后重试。</p>
+  <template v-if="result"><p class="source-boundary">本次读取 {{result.items.length}} 条记录{{result.complete?'':' · 当前为部分查询'}} · {{new Date(result.observedAt).toLocaleString()}}</p>
+   <template v-if="kind==='reviews'"><div class="table-scroll"><table><thead><tr><th>商品</th><th>本次反馈</th><th>需要关注的问题</th><th></th></tr></thead><tbody><tr v-for="p in products" :key="p.key"><td><b>{{p.name}}</b><small>{{p.sku}}</small></td><td>{{p.items.length}} 条</td><td>{{p.items[0].title}}<small>{{p.items[0].text.slice(0,55)}}</small></td><td><button class="button small" @click="selectedProduct=selectedProduct===p.key?'':p.key">查看商品反馈</button></td></tr></tbody></table></div><div v-if="selectedProduct" class="product-voices"><h3>{{products.find(p=>p.key===selectedProduct)?.name}} · 客户反馈原文</h3><article v-for="r in products.find(p=>p.key===selectedProduct)?.items || []" :key="r.recordId" class="source-record"><div><p>{{r.text}}</p><small>{{r.rating==null?'未提供评分':r.rating+' / 5 分'}} · {{r.businessDate || '日期未提供'}}</small></div><button class="button small" :disabled="disabled" @click="emit('open',{...r,kind,storeName:store})">打开处理</button></article></div></template>
+   <div v-else class="table-scroll"><table><thead><tr><th>客户问题</th><th>业务关联</th><th>下一步</th></tr></thead><tbody><tr v-for="r in visibleRows" :key="r.ticketId || r.recordId"><td><b>{{r.title}}</b><small v-if="r.text">{{r.text.slice(0,80)}}</small></td><td><small>{{r.association || (r.orderLinked?'已关联订单':'订单待核实')}}</small></td><td><button class="button small" :disabled="disabled || loading" @click="emit('open',{...r,kind,storeName:store})">打开处理 →</button></td></tr></tbody></table></div>
    <button v-if="rows.length>4" class="button small" @click="expanded=!expanded">{{expanded?'收起其他记录':'展开本次其余 '+(rows.length-4)+' 条记录'}}</button><p v-if="!rows.length" class="empty-inline">当前读取范围内没有符合条件的记录，可更换店铺或日期。</p>
   </template>
  </section>

@@ -89,18 +89,26 @@ class Handler:
                         evidence=dict(facts=previous.get('facts',[]),missing=[getattr(error,'code','ERP_READ_FAILED'),'本次读取未核实；已有事实仅保留原观察时间'],
                             observedAt=previous.get('observedAt'),latestUnverified=True,identity=None,identityCandidates=previous.get('identityCandidates',[]))
                     body['evidence']=dict(**evidence,snapshotRef=snapshot_id)
-                    body['identity']=body.get('identity') or evidence.get('identity')
+                    previous_identity=body.get('identity')
+                    refreshed=next((i for i in evidence.get('identityCandidates',[]) if previous_identity
+                        and i['lineId']==previous_identity['lineId'] and i['productId']==previous_identity['productId']),None)
+                    body['identity']=refreshed or previous_identity or evidence.get('identity')
                     if body['identity'] and not any(i['lineId']==body['identity']['lineId'] and i['productId']==body['identity']['productId'] for i in evidence.get('identityCandidates',[])):
                         body['evidence']['missing'].append('当前关联与最新ERP证据冲突，请重新核实')
                     if evidence.get('title'):body['title']=evidence['title']
                     if evidence.get('customerText'):
-                        ref='customer-voice:'+body['erpVoiceKind']+':'+body['erpVoiceId']
+                        ref=('customer-voice:'+body['erpVoiceKind']+':'+body['erpVoiceId'] if body.get('erpVoiceId')
+                            else 'customer-ticket:'+body['erpTicketId'])
                         if not any(m.get('sourceRef')==ref and m['text']==evidence['customerText'] for m in body['messages']):
                             body['messages'].append(dict(role='CUSTOMER',text=evidence['customerText'],source='OBSERVED',sourceRef=ref,at=evidence['observedAt']))
+                    for message in evidence.get('supplementalMessages',[]):
+                        if not any(m.get('sourceRef')==message['sourceRef'] and m['text']==message['text'] for m in body['messages']):
+                            body['messages'].append(message)
                     if evidence.get('businessDate'):
                         date=evidence['businessDate']
                         body['businessDate']=date+'T00:00:00+08:00' if len(date)==10 else date
                     if evidence.get('platform'):body['platform']=evidence['platform']
+                    if evidence.get('region'):body['region']=evidence['region']
                     state='EVIDENCE_PENDING' if not body['identity'] else 'OPEN'
             elif records is not None:
                 lines=[r for r in records if r['type']=='line' and (not body.get('orderId') or r['orderId']==body['orderId'])]
@@ -129,8 +137,10 @@ class Handler:
             require(body.get('identity') and body.get('evidence'),'IDENTITY_UNRESOLVED')
             require(not any('冲突' in x for x in body['evidence'].get('missing',[])),'CLAIM_ATTRIBUTE_CONFLICT')
             policies=store.list(actor,'POLICY',limit=100)['items']
-            selected=retrieve(policies,body,body.get('businessDate')) if body['identity'].get('category') in {'APPAREL','ELECTRONICS'} and body['messages'] and body['evidence']['facts'] and not body['evidence'].get('latestUnverified') else []
-            ai=dict(status='NOT_ATTEMPTED',reason='POLICY_NOT_APPLICABLE',output=None)
+            from .policies import advice_block_reason
+            blocked=advice_block_reason(body)
+            selected=retrieve(policies,body,body.get('businessDate')) if not blocked else []
+            ai=dict(status='NOT_ATTEMPTED',reason=blocked or 'POLICY_NOT_APPLICABLE',output=None)
             if selected:
                 data=dict(messages=[dict(role=m['role'],text=redacted(m['text'])) for m in body['messages'][-8:]],
                     identity={k:body['identity'].get(k) for k in ('category','attributes','name')},

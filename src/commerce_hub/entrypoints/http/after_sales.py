@@ -73,8 +73,15 @@ def register_b_routes(app,principal):
                     stores.append(name)
                 except AccessDenied:continue
         members=d.source_reader.members() if d.source_reader and hasattr(d.source_reader,'members') else []
+        capabilities={}
+        for name,action,kind in [('policyWrite','b:policy:write','POLICY'),('policyPublish','b:policy:publish','POLICY'),
+                                 ('datasetManage','b:dataset:manage','DATASET'),('bindingManage','b:binding:manage','DATASET')]:
+            try:
+                with d.store.engine.begin() as conn:d.store.authorize(conn,actor,action,scope(actor.tenant_id,kind))
+                capabilities[name]=True
+            except AccessDenied:capabilities[name]=False
         return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='MIDDLEWARE_TEACHING_DATA',
-            trackingScope='PROJECT_OWNED_ERP',trackedProducts=len({(m.sourceTenant,m.monitor.productId) for m in members}) if members is not None else None)
+            capabilities=capabilities,trackingScope='PROJECT_OWNED_ERP',trackedProducts=len({(m.sourceTenant,m.monitor.productId) for m in members}) if members is not None else None)
 
     @app.get(prefix+'/source-inbox')
     def source_inbox(request:Request,store:str=Query(min_length=1,max_length=128),kind:Literal['tickets','reviews','feedback']='tickets',

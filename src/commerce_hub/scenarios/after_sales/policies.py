@@ -2,6 +2,18 @@
 from .common import digest, timestamp, require
 
 
+def advice_block_reason(case):
+    """Explain the first unmet prerequisite without widening policy applicability."""
+    evidence=case.get('evidence') or {}
+    if not case.get('messages'):return 'CUSTOMER_MESSAGE_REQUIRED'
+    if evidence.get('latestUnverified'):return 'EVIDENCE_UNVERIFIED'
+    if not evidence.get('facts'):return 'EVIDENCE_REQUIRED'
+    if (case.get('identity') or {}).get('category') not in {'APPAREL','ELECTRONICS'}:return 'CATEGORY_UNSUPPORTED'
+    if not case.get('businessDate'):return 'BUSINESS_DATE_REQUIRED'
+    if any(case.get(k) in (None,'','UNKNOWN') for k in ('region','platform','language')):return 'POLICY_SCOPE_INCOMPLETE'
+    return None
+
+
 def validate_policy(body):
     required={'title','category','topics','sections','region','platform','language','effectiveFrom','effectiveUntil','source','terms'}
     require(isinstance(body,dict) and set(body)==required,'POLICY_INVALID')

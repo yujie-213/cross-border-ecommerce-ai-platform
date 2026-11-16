@@ -22,7 +22,8 @@ def source_reader(settings):
         for m in registry.mappings() if m.monitor}
     from commerce_hub.adapters.erp import TeachingERPReader
     from commerce_hub.bootstrap.s01_v2 import erp_config
-    return SourceReader(lambda:TeachingERPReader(erp_config()),stores,PRIVATE/'source-evidence',owned_provider=registry.mappings)
+    return SourceReader(lambda:TeachingERPReader(erp_config()),stores,PRIVATE/'source-evidence',owned_provider=registry.mappings,
+        supplemental_context=PRIVATE/'customer-context.json')
 
 
 def registry(settings):

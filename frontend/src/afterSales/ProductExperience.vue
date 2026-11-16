@@ -24,18 +24,18 @@ function investigate(){emit('investigate',{text:ai.value?.output?.nextSteps?.joi
 
 <template>
   <section class="panel product-table">
-    <div class="section-head"><h2>哪些商品需要优先关注？</h2><small>相同来源与口径 · 异常优先</small></div>
+    <div class="section-head"><h2>商品退货分析</h2><small>异常优先</small></div>
     <div class="table-scroll"><table><thead><tr><th>商品</th><th>本期退货率</th><th>上期退货率</th><th>变化</th><th>建议关注程度</th></tr></thead>
       <tbody><tr v-for="p in products" :key="p.productId+p.storeId" :class="{selected:selected===p.productId}"><td><button class="text-button" @click="selected=p.productId;evidenceView=null">{{p.name}}</button><small>{{p.sku}}</small></td><td><b>{{rate(p.groups[1].ratePercent)}}</b></td><td>{{rate(p.groups[0].ratePercent)}}</td><td>{{delta(p.deltaPercentagePoints)}}</td><td><span class="chip" :class="p.finding==='NEEDS_INVESTIGATION'?'warning':'plain'">{{p.finding==='NEEDS_INVESTIGATION'?'优先调查':p.finding==='UNKNOWN'?'待补数据':'常规观察'}}</span></td></tr></tbody>
     </table></div>
   </section>
   <section v-if="product" class="panel product-focus">
-    <div class="section-head"><div><h2>{{product.name}} · {{product.finding==='NEEDS_INVESTIGATION'?'退货明显上升，建议优先调查':product.finding==='UNKNOWN'?'数据不足，先核实证据':'未触发退货异常'}}</h2><p>退货率{{Number(product.deltaPercentagePoints)===0 || product.deltaPercentagePoints==null?'':'较上期'}}{{delta(product.deltaPercentagePoints)}}；异常是调查线索。</p></div><span class="chip plain">{{ai?.status==='AVAILABLE'?'AI 已分析':'事实与反馈'}}</span></div>
+    <div class="section-head"><div><h2>{{product.name}} · {{product.finding==='NEEDS_INVESTIGATION'?'退货明显上升，建议优先调查':product.finding==='UNKNOWN'?'数据不足，先核实证据':'未触发退货异常'}}</h2><p>退货率{{Number(product.deltaPercentagePoints)===0 || product.deltaPercentagePoints==null?'':'较上期'}}{{delta(product.deltaPercentagePoints)}}。</p></div><span class="chip plain">{{ai?.status==='AVAILABLE'?'AI 已分析':'事实与反馈'}}</span></div>
     <div class="focus-grid">
       <div>
         <h3>客户主要反馈什么？</h3>
         <div class="insight"><template v-if="counts.length"><p v-for="[label,count] in counts.slice(0,3)" :key="label">{{labelNames[label] || label}}：{{count}} / {{feedback.length}} 条商品反馈</p></template><p v-else>当前没有已定位到此商品的反馈。</p></div>
-        <small>主题来自反馈分类，可多选；反馈条数不计入退货件数。</small>
+
         <div class="actions"><button class="button small" @click="evidenceView=evidenceView==='feedback'?null:'feedback'">查看评价与反馈原文</button><button class="button small" @click="emit('correct')">修订反馈主题</button></div>
         <details v-if="related.length"><summary>相关售后记录（{{related.length}}）</summary><a v-for="c in related" :key="c.id" :href="href('/after-sales/cases',{id:c.id})">{{c.body.title}}</a></details>
         <h3>已核实的事实</h3>
@@ -47,7 +47,7 @@ function investigate(){emit('investigate',{text:ai.value?.output?.nextSteps?.joi
         <h3>可能原因与待核实信息</h3>
         <template v-if="ai?.status==='AVAILABLE'"><div class="insight"><p v-for="line in ai.output.hypotheses.slice(0,3)" :key="line">{{line}}</p></div><h3>建议下一步</h3><p v-for="line in ai.output.nextSteps.slice(0,3)" :key="line">{{line}}</p><details><summary>其他解释与待补证</summary><p v-for="line in [...ai.output.alternativeExplanations,...ai.output.missingEvidence]" :key="line">{{line}}</p></details></template>
         <p v-else class="gap">{{ai?'本次 AI 建议未生成，已核事实仍可使用。':'此历史报告尚无逐商品原因分析，可调整分析范围后更新；当前保留原始统计和反馈。'}}</p>
-        <button class="button primary" :disabled="busy || !feedback.length" @click="investigate">发起调查</button><small class="action-note">调查后由人工确认风险，才会形成补货提醒。</small>
+        <button class="button primary" :disabled="busy || !feedback.length" @click="investigate">发起调查</button>
         <ModelUsage v-if="ai" :ai="ai" />
       </div>
     </div>

@@ -10,9 +10,10 @@ from .common import require,now,redacted
 
 
 class SourceReader:
-    def __init__(self,factory,allowed_stores,private_root,*,owned_provider=None):
+    def __init__(self,factory,allowed_stores,private_root,*,owned_provider=None,supplemental_context=None):
         self.factory=factory;self.stores=allowed_stores;self.root=Path(private_root)
         self.owned_provider=owned_provider
+        self.supplemental_context=supplemental_context
 
     def members(self,store=None):
         if self.owned_provider is None:return None  # Explicit synthetic test adapters.
@@ -253,7 +254,14 @@ class SourceReader:
         (root/'ticket.json').write_text(json.dumps(response,ensure_ascii=False),encoding='utf-8')
         facts=[dict(id='ticket-title',domain='TICKET',kind='OBSERVED',text=redacted(ticket.get('subject','')),sourceRef='customer-tickets:'+str(ticket_id),observedAt=now())]
         missing=['完整客户会话未由工单标题证明','退货申请、实收和退款事实未由工单状态证明','物流追踪号不证明签收']
-        order_sn=ticket.get('order_sn');identities=[];business_date=None;association_complete=False
+        # A ticket timestamp is the complaint business time, never the sale or
+        # observation time. Ambiguous timezone-less ERP timestamps stay unknown.
+        from .common import timestamp
+        business_date=None
+        if ticket.get('created_time'):
+            try:business_date=timestamp(ticket['created_time']).isoformat()
+            except Exception:missing.append('客户问题日期的时区待核实')
+        order_sn=ticket.get('order_sn');identities=[];region=None;association_complete=False
         if order_sn:
             check();batch=reader.read('/api/v1/sales-orders',dict(field='order_sn',q=order_sn),page_size=20,max_pages=2)
             require(batch.complete,'OWNED_ORDER_COVERAGE_INCOMPLETE')
@@ -263,6 +271,9 @@ class SourceReader:
             (root/'orders.json').write_text(json.dumps(orders,ensure_ascii=False),encoding='utf-8')
             if orders:
                 order=orders[0]
+                # Only a source country code is evidence; store names are not.
+                country=order.get('country')
+                if isinstance(country,str) and len(country)==2 and country.isascii() and country.isalpha():region=country.upper()
                 for k in ['payment_status','fulfillment_status','refund_status']:
                     if order.get(k) is not None:facts.append(dict(id='order-'+k,domain=k,kind='OBSERVED',value=order[k],sourceRef='sales-orders:'+str(order['id']),observedAt=now()))
                 lines=order.get('item_list') or [];require(isinstance(lines,list),'ORDER_LINES_INVALID')
@@ -281,7 +292,7 @@ class SourceReader:
                     products=products_by_sku[line['sku']]
                     if len(products)!=1:missing.append('商品真实ID无法唯一核实：'+line['sku']);continue
                     product=products[0]
-                    identities.append(dict(lineId=str(order['id'])+':'+str(index),orderId=str(order['id']),productId=str(product['id']),sku=line['sku'],
+                    identities.append(dict(lineId=str(order['id'])+':'+str(index),orderId=str(order['id']),orderNumber=order_sn,productId=str(product['id']),sku=line['sku'],
                         storeId=expected['storeId'],warehouseId=str(expected.get('warehouseId','UNKNOWN')),name=product.get('product_name') or product.get('name') or line['sku'],
                         category=self.product_attributes(product)[0],attributes=self.product_attributes(product)[1],source='OBSERVED',sourceTenant=expected['sourceTenant']))
                 try:
@@ -304,6 +315,12 @@ class SourceReader:
         else:missing.append('工单缺订单号')
         identities=[i for i in identities if self.allows_identity(i,order=True)]
         require(owned is None or identities,'SOURCE_NOT_OWNED',403)
+        from .customer_context import supplemental_messages
+        supplements=supplemental_messages(self.supplemental_context,ticket,identities,store,expected)
+        for item in supplements:
+            facts.append(dict(id='customer-statement-'+str(ticket_id),domain='CUSTOMER_STATEMENT',kind='SIMULATED',text=item['text'],
+                sourceRef=item['sourceRef'],sourceNature=item['sourceNature'],observedAt=now(),manifestHash=item['manifestHash']))
+        if supplements:missing=[m for m in missing if m!='完整客户会话未由工单标题证明']
         return dict(facts=facts,missing=missing,identityCandidates=identities,identity=identities[0] if association_complete and len(identities)==1 else None,
-            businessDate=business_date,title=redacted(ticket.get('subject','')),platform=ticket.get('platform'),observedAt=now(),sourceNature='TEACHING_ERP_OBSERVED',
+            supplementalMessages=supplements,businessDate=business_date,region=region,title=redacted(ticket.get('subject','')),platform=ticket.get('platform'),observedAt=now(),sourceNature='TEACHING_ERP_OBSERVED',
             sourceRef=dict(ticketId=str(ticket_id),sourceTenant=expected['sourceTenant'],storeId=expected['storeId']))
