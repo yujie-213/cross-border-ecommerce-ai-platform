@@ -10872,7 +10872,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "frontend/src/components/",
     "tests/",
     "frontend/tests/",
-    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）",
+    "frontend/src/pages/WorkbenchPage.vue",
+    "frontend/src/afterSales/RiskNotice.vue"
   ],
   "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
   "deliverables": [
@@ -10899,7 +10901,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
   ],
@@ -10961,8 +10963,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
-  "dirtyPaths": [],
+  "observedHead": "9861eb3eb3ff88a687d566a328dd1fd788e6a0ed",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -10990,6 +10994,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人明确要求修改：工作台操作区只保留分析商品，商品列表移除逐项售后风险提示，当前风险集中在单品分析且查询状态与业务风险分开。Codex单人，基点9861eb3；不改补货/采购规则，不ERP/模型调用，不合main。"
     }
   ],
   "workItems": [
