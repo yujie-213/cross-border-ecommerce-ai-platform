@@ -12,21 +12,22 @@ ROOT=Path(__file__).resolve().parents[3]
 PRIVATE=ROOT/'data/private/b-after-sales'
 
 
-def source_reader():
-    path=PRIVATE/'source-scope.json'
-    if not path.exists():return None
-    stores=json.loads(path.read_text(encoding='utf-8'))
-    if (not isinstance(stores,dict) or len(stores)>100 or any(not isinstance(k,str) or not k or not isinstance(v,dict)
-        or not {'storeId','sourceTenant'}<=set(v) or any(not isinstance(v[f],str) or not v[f] for f in ('storeId','sourceTenant')) for k,v in stores.items())):
-        raise ValueError('B_SOURCE_SCOPE_INVALID')
+def source_reader(settings):
+    from commerce_hub.infrastructure.database import Database
+    from commerce_hub.data.projection.monitor import MonitorRegistry
+    registry=MonitorRegistry(Database(settings).engine,'s01-owned-teaching-local')
+    # Consume the same verified, versioned membership as replenishment. A store
+    # grant, a readable catalog or a SKU prefix cannot admit another resource.
+    stores={m.storeName:dict(storeId=m.sourceStore,sourceTenant=m.sourceTenant)
+        for m in registry.mappings() if m.monitor}
     from commerce_hub.adapters.erp import TeachingERPReader
     from commerce_hub.bootstrap.s01_v2 import erp_config
-    return SourceReader(lambda:TeachingERPReader(erp_config()),stores,PRIVATE/'source-evidence')
+    return SourceReader(lambda:TeachingERPReader(erp_config()),stores,PRIVATE/'source-evidence',owned_provider=registry.mappings)
 
 
 def registry(settings):
     if not settings.after_sales_enabled:return {}
-    try:reader=source_reader()
+    try:reader=source_reader(settings)
     except (OSError,ValueError,TypeError):reader=None
     provider=None;shared=None
     path=PRIVATE/'model-authorization.json'

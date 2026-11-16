@@ -49,12 +49,14 @@ class QualityRiskReadPort:
                 for identity in identities:
                     refs=[];visible=False
                     for risk in risks:
+                        if not store.source_visible(conn,risk):continue
                         try:store.authorize(conn,principal,'b:risk:consume',risk['scope'])
                         except AccessDenied:continue
                         b=risk['body'];candidate=identity
                         if risk['scope']['sourceNature']==SOURCE:
                             valid=[]
                             for binding in bindings:
+                                if not store.source_visible(conn,binding):continue
                                 bb=binding['body']
                                 if (binding['state']!='ACTIVE' or bb['principalId']!=principal.principal_id or bb['datasetId']!=b.get('datasetId')
                                     or not timestamp(bb['validFrom'])<=stamp<timestamp(bb['validUntil'])

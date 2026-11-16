@@ -11,7 +11,12 @@ import AfterSalesPage from './afterSales/AfterSalesPage.vue'
 
 const emit = defineEmits<{ logout: []; loggedOut: [] }>()
 
-const sections = computed(() => current.value === 'after-sales' ? [{key:'after-sales',path:'/after-sales/workbench',label:'售后与客户体验'}] : [
+const sections = computed(() => current.value === 'after-sales' ? [
+  {key:'after-workbench',path:'/after-sales/workbench',label:'售后工作台'},
+  {key:'after-experience',path:'/after-sales/experience',label:'体验与退货分析'},
+  {key:'after-risks',path:'/after-sales/risks',label:'质量风险'},
+  {key:'after-materials',path:'/after-sales/materials',label:'知识与资料'}
+] : [
 
   { key: 'workbench', path: '/workbench', label: '智能补货' },
   { key: 'suggestions', path: '/suggestions', label: '商品分析' },
@@ -49,6 +54,10 @@ const crumb = computed(() => {
 })
 
 const navCount = computed(() => summary.value?.discoveredSkuCount ?? null)
+function navActive(key:string){
+  if(current.value==='after-sales')return key==='after-'+(route.value.segments[1]==='cases'?'workbench':route.value.segments[1] || 'workbench')
+  return current.value===key || (key==='suggestions' && current.value==='sku')
+}
 
 onMounted(async () => {
   if (!route.value.segments.length) navigate('/home')
@@ -68,8 +77,8 @@ watch(() => route.value.path, path => {
     <div class="nav-label">业务工作区</div>
     <nav aria-label="主要导航">
       <a v-for="item in sections" :key="item.key" :href="'#' + item.path"
-         :class="{ active: current === item.key || (item.key === 'suggestions' && current === 'sku') }"
-         :aria-current="current === item.key || (item.key === 'suggestions' && current === 'sku') ? 'page' : undefined">
+         :class="{ active: navActive(item.key) }"
+         :aria-current="navActive(item.key) ? 'page' : undefined">
         <span class="nav-icon">{{ item.key === 'home' ? '⌂' : item.key === 'workbench' ? '▦' : item.key === 'suggestions' ? '≡' : '☑' }}</span>
         {{ item.label }}
         <span v-if="item.key === 'suggestions' && navCount" class="nav-count">{{ navCount }}</span>

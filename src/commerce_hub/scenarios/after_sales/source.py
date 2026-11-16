@@ -9,19 +9,55 @@ from .common import require,now,redacted
 
 
 class SourceReader:
-    def __init__(self,factory,allowed_stores,private_root):
+    def __init__(self,factory,allowed_stores,private_root,*,owned_provider=None):
         self.factory=factory;self.stores=allowed_stores;self.root=Path(private_root)
+        self.owned_provider=owned_provider
+
+    def members(self,store=None):
+        if self.owned_provider is None:return None  # Explicit synthetic test adapters.
+        return [m for m in self.owned_provider() if m.monitor and (store is None or m.storeName==store)]
+
+    def allows_identity(self,identity,*,order=False):
+        members=self.members()
+        if members is None:return True
+        if not identity:return False
+        return any(str(identity.get('sourceTenant'))==m.sourceTenant and str(identity.get('storeId'))==m.sourceStore
+            and str(identity.get('productId'))==m.monitor.productId and identity.get('sku')==m.sku
+            and (not order or str(identity.get('orderId')) in m.monitor.salesIds)
+            and (identity.get('warehouseId') in (None,'UNKNOWN') or str(identity['warehouseId'])==m.sourceWarehouse)
+            and (not identity.get('warehouseIds') or all(str(w)==m.sourceWarehouse for w in identity['warehouseIds'])) for m in members)
+
+    def allows_case(self,body):
+        if self.owned_provider is None:return True
+        candidates=([body['identity']] if body.get('identity') else [])+(body.get('sourceMembership') or [])+(body.get('evidence') or {}).get('identityCandidates',[])
+        return any(self.allows_identity(i,order=body.get('erpVoiceKind')!='reviews') for i in candidates)
+
+    def _owned_orders(self,reader,store,check):
+        members=self.members(store)
+        if members is None:return None
+        ids=sorted({sid for m in members for sid in m.monitor.salesIds})
+        orders=[]
+        for start in range(0,len(ids),40):
+            check();batch=reader.read('/api/v1/sales-orders',dict(ids=','.join(ids[start:start+40])),page_size=50,max_pages=2)
+            require(batch.complete,'OWNED_ORDER_COVERAGE_INCOMPLETE')
+            expected=self._store(store)
+            orders.extend(o for o in batch.records if str(o.get('id')) in ids and str(o.get('tenant_id'))==expected['sourceTenant'] and o.get('store_name')==store)
+        return orders
 
     def _store(self,name):
         require(name in self.stores,'SOURCE_SCOPE_DENIED',403)
+        require(self.members(name) is None or bool(self.members(name)),'SOURCE_SCOPE_DENIED',403)
         return self.stores[name]
 
     def discover(self,store,check):
         expected=self._store(store);check();reader=self.factory()
         batch=reader.discover('/api/v1/customer-tickets',dict(store_name=store),page_size=20)
+        owned=self._owned_orders(reader,store,check)
+        order_numbers=None if owned is None else {o.get('order_sn') for o in owned if o.get('order_sn')}
         return dict(items=[dict(ticketId=str(r['id']),ticketNumber=r.get('ticket_no'),title=redacted(r.get('subject','')),
             storeName=store,sourceTenant=str(r['tenant_id']),orderLinked=bool(r.get('order_sn')))
-            for r in batch.records if str(r.get('tenant_id'))==expected['sourceTenant'] and r.get('store_name')==store],
+            for r in batch.records if str(r.get('tenant_id'))==expected['sourceTenant'] and r.get('store_name')==store
+                and (order_numbers is None or r.get('order_sn') in order_numbers)],
             complete=batch.complete,observedAt=batch.observed_at,sourceNature='TEACHING_ERP_OBSERVED')
 
     @staticmethod
@@ -42,8 +78,12 @@ class SourceReader:
         if date_to:params['date_to']=date_to
         batch=reader.discover('/api/v1/customer-voice',params,page_size=10)
         items=[];products={}
+        members=self.members(store)
+        owned_skus=None if members is None else {m.sku for m in members}
+        owned_orders=None if members is None else {sid for m in members for sid in m.monitor.salesIds}
         for r in batch.records:
             require(str(r.get('store_id'))==expected['storeId'] and r.get('store_name')==store,'SOURCE_IDENTITY_MISMATCH')
+            if owned_skus is not None and (kind=='reviews' and r.get('sku') not in owned_skus or kind=='feedback' and str(r.get('order_id')) not in owned_orders):continue
             sku=r.get('sku') if kind=='reviews' else None
             identity=None;association='评价未提供可核实商品，需补证'
             if sku:
@@ -62,6 +102,7 @@ class SourceReader:
                     association='已按店铺、SKU与唯一商品记录关联；订单未核实'
                 else:association='商品记录缺失或不唯一，需补证'
             if kind=='feedback':association='订单反馈；需独立核实订单及受影响商品'
+            if identity and not self.allows_identity(identity):continue
             items.append(dict(recordId=str(r['id']),kind=kind,title=redacted(r.get('title') or '客户反馈'),text=redacted(r.get('body') or ''),
                 rating=r.get('rating'),businessDate=r.get('business_date'),platform=r.get('platform'),storeName=store,
                 identity=identity,association=association,orderId='UNKNOWN',sourceRef='customer-voice:'+kind+':'+str(r['id'])))
@@ -75,6 +116,8 @@ class SourceReader:
         require(batch.complete and len(batch.records)==1,'SOURCE_RECORD_UNAVAILABLE')
         r=batch.records[0]
         require(str(r.get('id'))==record_id and str(r.get('store_id'))==expected['storeId'] and r.get('store_name')==store,'SOURCE_IDENTITY_MISMATCH')
+        members=self.members(store)
+        require(members is None or any(r.get('sku')==m.sku if kind=='reviews' else str(r.get('order_id')) in m.monitor.salesIds for m in members),'SOURCE_NOT_OWNED',403)
         root=self.root/task_id;root.mkdir(parents=True,exist_ok=True)
         (root/'voice.json').write_text(json.dumps(r,ensure_ascii=False),encoding='utf-8')
         text=redacted(r.get('body') or '')
@@ -111,6 +154,8 @@ class SourceReader:
                 if len(o.get('item_list') or [])!=1:missing.append('订单包含多件商品，请核实受影响明细；仅列本次核实的前10行')
             else:missing.append('反馈订单无法唯一核实')
         else:missing.append('来源缺少可靠商品或订单关联')
+        identities=[i for i in identities if self.allows_identity(i,order=kind!='reviews')]
+        require(members is None or identities,'SOURCE_NOT_OWNED',403)
         automatic=identities[0] if len(identities)==1 and (kind=='reviews' or len(orders[0].get('item_list') or [])==1) else None
         return dict(facts=facts,missing=missing,identityCandidates=identities,identity=automatic,businessDate=r.get('business_date'),
             title=redacted(r.get('title') or '客户反馈'),customerText=text,platform=r.get('platform'),observedAt=batch.observed_at,
@@ -128,11 +173,13 @@ class SourceReader:
         for r in ib.records:
             if str(r.get('tenant_id'))!=expected['sourceTenant'] or str(r.get('store_id'))!=expected['storeId'] or str(r.get('product_id'))!=str(product['id']) or r.get('sku')!=sku or not r.get('wid'):continue
             identity=dict(sourceTenant=expected['sourceTenant'],productId=str(product['id']),sku=sku,storeId=expected['storeId'],warehouseMode='EXPLICIT_IDS',warehouseIds=[str(r['wid'])])
+            if not self.allows_identity(identity):continue
             if any(i['identity']==identity for i in items):continue
             items.append(dict(name=(product.get('name') or sku)+' · '+store+' · '+str(r.get('warehouse_name') or r.get('wid')),identity=identity))
         return dict(items=items,observedAt=ib.observed_at)
 
     def verify_mapping(self,identity,check):
+        require(self.allows_identity(identity),'SOURCE_NOT_OWNED',403)
         store=next((v for v in self.stores.values() if v['storeId']==identity['storeId'] and v['sourceTenant']==identity['sourceTenant']),None)
         require(store is not None and identity['warehouseMode']=='EXPLICIT_IDS','SOURCE_SCOPE_DENIED',403)
         reader=self.factory();check()
@@ -155,6 +202,8 @@ class SourceReader:
         if isinstance(ticket,dict) and 'record' in ticket:ticket=ticket['record']
         require(isinstance(ticket,dict) and str(ticket.get('id'))==str(ticket_id) and ticket.get('store_name')==store
             and str(ticket.get('tenant_id'))==expected['sourceTenant'],'SOURCE_IDENTITY_MISMATCH')
+        owned=self._owned_orders(reader,store,check)
+        require(owned is None or any(o.get('order_sn') and o.get('order_sn')==ticket.get('order_sn') for o in owned),'SOURCE_NOT_OWNED',403)
         root=self.root/task_id;root.mkdir(parents=True,exist_ok=True)
         (root/'ticket.json').write_text(json.dumps(response,ensure_ascii=False),encoding='utf-8')
         facts=[dict(id='ticket-title',domain='TICKET',kind='OBSERVED',text=redacted(ticket.get('subject','')),sourceRef='customer-tickets:'+str(ticket_id),observedAt=now())]
@@ -162,7 +211,9 @@ class SourceReader:
         order_sn=ticket.get('order_sn');identities=[];business_date=None;association_complete=False
         if order_sn:
             check();batch=reader.read('/api/v1/sales-orders',dict(field='order_sn',q=order_sn),page_size=20,max_pages=2)
-            orders=[r for r in batch.records if r.get('order_sn')==order_sn and r.get('store_name')==store and str(r.get('tenant_id'))==expected['sourceTenant']]
+            require(batch.complete,'OWNED_ORDER_COVERAGE_INCOMPLETE')
+            orders=[r for r in batch.records if r.get('order_sn')==order_sn and r.get('store_name')==store and str(r.get('tenant_id'))==expected['sourceTenant']
+                and (owned is None or str(r.get('id')) in {str(o['id']) for o in owned})]
             require(len(orders)<=1,'ORDER_AMBIGUOUS')
             (root/'orders.json').write_text(json.dumps(orders,ensure_ascii=False),encoding='utf-8')
             if orders:
@@ -197,6 +248,8 @@ class SourceReader:
                 except Exception as error:missing.append('履约域不可用：'+getattr(error,'code','READ_FAILED'))
             else:missing.append('订单精确匹配未找到')
         else:missing.append('工单缺订单号')
+        identities=[i for i in identities if self.allows_identity(i,order=True)]
+        require(owned is None or identities,'SOURCE_NOT_OWNED',403)
         return dict(facts=facts,missing=missing,identityCandidates=identities,identity=identities[0] if association_complete and len(identities)==1 else None,
             businessDate=business_date,title=redacted(ticket.get('subject','')),platform=ticket.get('platform'),observedAt=now(),sourceNature='TEACHING_ERP_OBSERVED',
             sourceRef=dict(ticketId=str(ticket_id),sourceTenant=expected['sourceTenant'],storeId=expected['storeId']))

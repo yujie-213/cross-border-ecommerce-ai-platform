@@ -64,6 +64,7 @@ def register_b_routes(app,principal):
         stores=[]
         if d.source_reader:
             for name,item in d.source_reader.stores.items():
+                if hasattr(d.source_reader,'members') and d.source_reader.members(name)==[]:continue
                 try:
                     with d.store.engine.begin() as conn:
                         resource=scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=item['sourceTenant'])
@@ -71,7 +72,9 @@ def register_b_routes(app,principal):
                         d.store.authorize(conn,actor,'b:case:write',resource)
                     stores.append(name)
                 except AccessDenied:continue
-        return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='MIDDLEWARE_TEACHING_DATA')
+        members=d.source_reader.members() if d.source_reader and hasattr(d.source_reader,'members') else []
+        return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='MIDDLEWARE_TEACHING_DATA',
+            trackingScope='PROJECT_OWNED_ERP',trackedProducts=len({(m.sourceTenant,m.monitor.productId) for m in members}) if members is not None else None)
 
     @app.get(prefix+'/source-inbox')
     def source_inbox(request:Request,store:str=Query(min_length=1,max_length=128),kind:Literal['tickets','reviews','feedback']='tickets',

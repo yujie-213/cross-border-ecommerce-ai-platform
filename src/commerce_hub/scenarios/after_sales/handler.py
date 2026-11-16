@@ -135,7 +135,7 @@ class Handler:
                 data=dict(messages=[dict(role=m['role'],text=redacted(m['text'])) for m in body['messages'][-8:]],
                     identity={k:body['identity'].get(k) for k in ('category','attributes','name')},
                     facts=[dict(ref=f['id'],kind=f['kind'],value=f.get('value'),text=f.get('text')) for f in body['evidence']['facts']],
-                    missing=body['evidence']['missing'],safetySignal=safety(' '.join(m['text'] for m in body['messages'])),policies=selected,omissions=['客户身份与地址','可复用订单号','较早非安全消息'])
+                    orderLinked=body['identity'].get('orderId') not in (None,'','UNKNOWN'),missing=body['evidence']['missing'],safetySignal=safety(' '.join(m['text'] for m in body['messages'])),policies=selected,omissions=['客户身份与地址','可复用订单号','较早非安全消息'])
                 ai=invoke(context,self.provider,'b.case.advice.v1',data,Advice,'advice',snapshot_id=body['evidence']['snapshotRef'])
             feedback_ai=None
             if body.get('erpVoiceId'):
@@ -166,10 +166,22 @@ class Handler:
                 receipts.append(ai)
                 classifications.extend(ai['output']['items'] if ai['status']=='AVAILABLE' else [dict(feedbackId=f['feedbackId'],labels=['UNKNOWN'],span='',reason=ai['reason']) for f in batch])
             fact_refs=[f"metric:{item['productId']}:{i}:{g['numerator']}/{g['denominator']}" for item in metrics['items'] for i,g in enumerate(item['groups'])]
-            explanation=invoke(context,self.provider if options.get('ai') else None,'b.experience.explain.v1',dict(metrics=metrics,feedback=feedback,classifications=classifications,factRefs=fact_refs+[f['feedbackId'] for f in feedback]),Explanation,'explain',snapshot_id=snapshot_id)
+            explanations={}
+            for item in metrics['items']:
+                context.check()
+                relevant=[f for f in feedback if f['productId']==item['productId']]
+                refs={f['feedbackId'] for f in relevant}
+                # Keep product evidence separate; order-level unknown feedback is
+                # never copied to every product or used to explain its returns.
+                explanations[item['productId']]=invoke(context,self.provider if options.get('ai') else None,'b.experience.explain.v1',
+                    dict(metrics=dict(items=[item],rule=metrics['rule']),feedback=relevant,
+                        classifications=[c for c in classifications if c['feedbackId'] in refs],
+                        factRefs=[ref for ref in fact_refs if ref.split(':')[1]==item['productId']]+[f['feedbackId'] for f in relevant]),
+                    Explanation,'explain-'+item['productId'],snapshot_id=snapshot_id)
+            explanation=next(iter(explanations.values()))
             created_report=dict(datasetId=row['id'],datasetVersion=manifest['version'],snapshotRef=snapshot_id,
                 metrics=metrics,feedback=feedback,classifications=classifications,classificationCorrections=[],classificationVersion='taxonomy-v1',
-                ai=explanation,classificationReceipts=receipts,limitations=['中台独立教学数据，不是ERP原生交易','异常阈值仅为待调查线索'],
+                ai=explanation,productAI=explanations,classificationReceipts=receipts,limitations=['中台独立教学数据，不是ERP原生交易','异常阈值仅为待调查线索'],
                 ruleVersion=metrics['rule']['version'],inputHash=digest(records),createdAt=now())
             if previous:
                 old=previous['body'];old_items={(i['productId'],i['sku'],i['storeId']):i for i in old['metrics']['items']}
@@ -200,7 +212,7 @@ class Handler:
             result=DomainResult(contractVersion='0.2.0',sourceNature=row['scope']['sourceNature'],completeness='PARTIAL',scope=context.task['scope'],snapshotRef=snapshot_id,
                 sourceBundleRef=dict(kind='B_INPUT_MANIFEST',id=snapshot_id,version='1',hash=digest(manifest_body)),
                 dataReport=dict(manifest=manifest_body),analysisReport=dict(domainKind='BINDING' if created_binding else 'REPORT' if created_report else row['kind'],domainRef=reference,modelStatus=(created_report['ai']['status'] if created_report else body['advice'][-1]['ai']['status'] if self.job=='advice' else 'NOT_REQUESTED')))
-            receipts=([created_report['ai']]+created_report['classificationReceipts'] if created_report else [body['advice'][-1]['ai']] if self.job=='advice' else [])
+            receipts=(list(created_report['productAI'].values())+created_report['classificationReceipts'] if created_report else [body['advice'][-1]['ai']] if self.job=='advice' else [])
             result.analysisReport['modelReceipts']=[r for r in receipts if r.get('auditRef')]
             conn.execute(insert(steps).values(**key,input_hash=fp,result=result.model_dump(mode='json')))
             return result

@@ -15,6 +15,24 @@ from .policies import applicable,validate_policy
 class AfterSales:
     def __init__(self,tasks,source_reader=None,provider=None):
         self.tasks=tasks;self.store=Store(tasks);self.source_reader=source_reader;self.provider=provider
+        self.store.source_visible=self.source_visible
+
+    def source_visible(self,conn,row):
+        if row['scope']['sourceNature']!= 'TEACHING_ERP_OBSERVED':
+            if row['kind']=='BINDING' and self.source_reader and hasattr(self.source_reader,'allows_identity'):
+                return self.source_reader.allows_identity(row['body']['erpIdentity'])
+            return True
+        if not self.source_reader:return False
+        if not hasattr(self.source_reader,'allows_case'):return True
+        b=row['body']
+        if row['kind']=='CASE':return self.source_reader.allows_case(b)
+        if row['kind']=='RISK':
+            if not self.source_reader.allows_identity(b['identity']):return False
+            kind,rid='INVESTIGATION',b['investigationId']
+        elif row['kind']=='INVESTIGATION':kind,rid=b['origin']['kind'],b['origin']['id']
+        else:return False
+        origin=conn.execute(select(assets).filter_by(tenant_id=row['tenant_id'],kind=kind,id=rid)).mappings().first()
+        return bool(origin and self.source_visible(conn,origin))
 
     def source_inbox(self,actor,store,kind,date_from=None,date_to=None):
         require(self.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
@@ -32,11 +50,23 @@ class AfterSales:
     def create_case(self,actor,key,data):
         require(data['message'] or data.get('erpStoreName'),'CUSTOMER_MESSAGE_REQUIRED')
         if data.get('businessDate'):timestamp(data['businessDate'])
+        membership=[]
+        if data.get('erpStoreName') and self.source_reader and getattr(self.source_reader,'owned_provider',None) is not None:
+            require(data.get('erpTicketId') or data.get('erpVoiceId'),'OWNED_SOURCE_RECORD_REQUIRED')
+            expected=self.source_reader._store(data['erpStoreName'])
+            def check_source():
+                with self.store.engine.begin() as conn:
+                    self.store.authorize(conn,actor,'b:case:write',scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=expected['sourceTenant']))
+            check_source()
+            proof=(self.source_reader.voice_evidence(data['erpVoiceId'],data['erpVoiceKind'],data['erpStoreName'],check_source,'admission-'+uuid4().hex)
+                if data.get('erpVoiceId') else self.source_reader.evidence(data['erpTicketId'],data['erpStoreName'],check_source,'admission-'+uuid4().hex))
+            membership=proof['identityCandidates']
         def operation(conn):
             body=dict(title=data['title'],messages=[dict(role='CUSTOMER',text=data['message'],source='CLAIM',at=now(),actor=actor.principal_id)] if data['message'] else [],
                 region=data['region'],platform=data['platform'],language=data['language'],businessDate=data.get('businessDate'),
                 datasetId=data.get('datasetId'),identity=None,linkHistory=[],evidence=None,advice=[],reviews=[])
             body['orderId']=data.get('orderId')
+            if membership:body['sourceMembership']=membership
             body['erpTicketId']=data.get('erpTicketId');body['erpStoreName']=data.get('erpStoreName')
             body['erpVoiceId']=data.get('erpVoiceId');body['erpVoiceKind']=data.get('erpVoiceKind')
             require(not body['erpVoiceId'] or body['erpVoiceKind'] in {'reviews','feedback'} and body['erpStoreName'] and not body['erpTicketId'],'SOURCE_MIXED')

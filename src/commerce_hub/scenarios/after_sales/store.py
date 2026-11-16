@@ -14,6 +14,7 @@ class Store:
     def __init__(self, tasks):
         self.tasks = tasks
         self.engine, self.access, self.audit = tasks.engine, tasks.access, tasks.audit
+        self.source_visible=lambda conn,row:True
 
     def authorize(self, conn, actor, action, resource):
         require(self.tasks.after_sales_enabled, 'B_NOT_ENABLED', 503)
@@ -23,6 +24,7 @@ class Store:
         q=select(assets).filter_by(tenant_id=actor.tenant_id,kind=kind,id=rid,workspace=WORKSPACE)
         row=conn.execute(q.with_for_update() if lock else q).mappings().first()
         require(row is not None,'NOT_FOUND',404)
+        require(self.source_visible(conn,row),'NOT_FOUND',404)
         try: self.authorize(conn,actor,action,row['scope'])
         except AccessDenied: require(False,'NOT_FOUND',404)
         return dict(row)
@@ -54,6 +56,7 @@ class Store:
                 last=row['id']
                 try:self.authorize(conn,actor,'b:read',row['scope'])
                 except AccessDenied:continue
+                if not self.source_visible(conn,row):continue
                 result.append(self.view(row))
                 if len(result)==limit: break
             return dict(items=result,nextCursor=last if len(rows)>0 and (len(result)==limit or len(rows)>200) else None)
