@@ -1,0 +1,47 @@
+<testsuites id="" name="" tests="5" failures="1" skipped="0" errors="0" time="7.456402">
+<testsuite name="b-after-sales-prototype.spec.ts" timestamp="2026-11-16T07:30:28.859Z" hostname="" tests="5" failures="1" skipped="0" time="6.135" errors="0">
+<testcase name="ERP mock: reliable association opens directly, human review and stale draft retain history" classname="b-after-sales-prototype.spec.ts" time="2.374">
+</testcase>
+<testcase name="ambiguity uses only this order; first selection needs no reason, correction requires reason and history" classname="b-after-sales-prototype.spec.ts" time="0.86">
+</testcase>
+<testcase name="feedback and business analysis distinguish product, unknown order, evidence and investigation" classname="b-after-sales-prototype.spec.ts" time="1.141">
+</testcase>
+<testcase name="risk confirm and revoke preserve single/batch quantity, scope failure and history" classname="b-after-sales-prototype.spec.ts" time="1.149">
+</testcase>
+<testcase name="isolated teaching exceptions, understandable missing data, keyboard and responsive layouts" classname="b-after-sales-prototype.spec.ts" time="0.611">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|b-prototype\b-after-sales-prototype-is-1ed09-oard-and-responsive-layouts\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  b-after-sales-prototype.spec.ts:165:1 › isolated teaching exceptions, understandable missing data, keyboard and responsive layouts
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('无适用政策', { exact: true })
+    Expected: visible
+    Error: strict mode violation: getByText('无适用政策', { exact: true }) resolved to 2 elements:
+        1) <strong>无适用政策</strong> aka locator('#main').getByText('无适用政策')
+        2) <option value="no-policy">无适用政策</option> aka getByLabel('案件情形').getByText('无适用政策')
+
+    Call log:
+      - Expect "toBeVisible" getByText('无适用政策', { exact: true }) with timeout 5000ms
+      - waiting for getByText('无适用政策', { exact: true })
+
+
+      173 |   await lab(page, '案件情形', 'no-policy')
+      174 |   await page.getByText('查看适用政策与原文', { exact: true }).click()
+    > 175 |   await expect(page.getByText('无适用政策', { exact: true })).toBeVisible()
+          |                                                          ^
+      176 |   await lab(page, '案件情形', 'failure')
+      177 |   await expect(page.getByText('业务资料核查失败', { exact: true })).toBeVisible()
+      178 |   await page.setViewportSize({ width: 1024, height: 768 })
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:175:58
+
+    Error Context: ..\..\..\.tmp\b-prototype\b-after-sales-prototype-is-1ed09-oard-and-responsive-layouts\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>

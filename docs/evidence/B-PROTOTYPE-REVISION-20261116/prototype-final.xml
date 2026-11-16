@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="5" failures="0" skipped="0" errors="0" time="8.189997">
+<testsuite name="b-after-sales-prototype.spec.ts" timestamp="2026-11-16T07:32:49.131Z" hostname="" tests="5" failures="0" skipped="0" time="7.038" errors="0">
+<testcase name="ERP mock: reliable association opens directly, human review and stale draft retain history" classname="b-after-sales-prototype.spec.ts" time="2.441">
+</testcase>
+<testcase name="ambiguity uses only this order; first selection needs no reason, correction requires reason and history" classname="b-after-sales-prototype.spec.ts" time="0.83">
+</testcase>
+<testcase name="feedback and business analysis distinguish product, unknown order, evidence and investigation" classname="b-after-sales-prototype.spec.ts" time="1.139">
+</testcase>
+<testcase name="risk confirm and revoke preserve single/batch quantity, scope failure and history" classname="b-after-sales-prototype.spec.ts" time="1.299">
+</testcase>
+<testcase name="isolated teaching exceptions, understandable missing data, keyboard and responsive layouts" classname="b-after-sales-prototype.spec.ts" time="1.329">
+</testcase>
+</testsuite>
+</testsuites>

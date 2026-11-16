@@ -1,0 +1,176 @@
+{
+  "scope": "HTML_PRODUCT_CORRECTION_ONLY",
+  "date": "2026-11-16",
+  "baseCommit": "73e07159dd363bbbb444be1c74bb648c8bff7bfe",
+  "implementationCommits": [
+    "9c77877e63d92ebfc5872cf9f7824098fa5dbccc"
+  ],
+  "testedCommit": "9c77877e63d92ebfc5872cf9f7824098fa5dbccc",
+  "command": "cd frontend; node node_modules/@playwright/test/cli.js test --config playwright.b-prototype.config.ts",
+  "exitCode": 0,
+  "result": "PASS",
+  "environment": "Windows / Microsoft Edge / Playwright / file:// local HTML",
+  "businessInputs": "SYNTHETIC ERP workflow examples and independent middleware teaching fixtures; no live data loaded",
+  "browserResults": {
+    "prototype-final.xml": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "prototype-first-fail.xml": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 2,
+      "skipped": 0
+    },
+    "prototype-second-fail.xml": {
+      "tests": 5,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "externalRequests": 0,
+  "newErpCalls": 0,
+  "realModelCalls": 0,
+  "unchangedFrozenDocuments": {
+    "docs/requirements/B_AFTER_SALES_V1.md": true,
+    "docs/agents/B_AFTER_SALES_DESIGN.md": true
+  },
+  "backendOrVueChangedPaths": [],
+  "failuresRetained": [
+    {
+      "artifact": "prototype-first-fail.xml",
+      "result": "3 PASS / 2 timeout errors",
+      "cause": "New isolated demonstration selects lacked explicit label-for association; fixed HTML labels."
+    },
+    {
+      "artifact": "prototype-second-fail.xml",
+      "result": "4 PASS / 1 FAIL",
+      "cause": "Test text matched main notice and hidden demo option; scoped assertion to actual visible main notice."
+    },
+    {
+      "phase": "node --check while editing",
+      "result": "FAIL",
+      "cause": "Two template expressions had misplaced ternary parentheses; corrected before browser execution."
+    },
+    {
+      "phase": "local edit command",
+      "result": "FAIL",
+      "cause": "PowerShell quoting rejected one Python inline edit; no files changed by that failed command, file-based edit used."
+    }
+  ],
+  "pathsVerified": [
+    "ERP-style linked ticket directly shows product and advice; no repeated selection",
+    "Only current multi-product order candidates; initial selection without reason, correction requires reason and retains old link",
+    "Missing identity explains required evidence and blocks AI product determination",
+    "Product feedback has product but unknown order; middleware simulation label, separate order feedback",
+    "Return anomaly -> simulated AI summary/facts/hypotheses -> original feedback and return evidence -> investigation",
+    "Theme manual correction with original classification retained",
+    "Risk human confirmation/revocation/expiration/version trace; single/batch return context and fixed100 unchanged",
+    "Incomplete maturity/sample, AI failure, no-policy, safety, USB conflict, no-permission, internal teaching creation",
+    "1440/1024/820 layouts, keyboard focus and no JS/CSP errors"
+  ],
+  "notRun": [
+    "Formal Vue business implementation",
+    "ERP current data availability or new order/review relation validation",
+    "Live model or refund/customer-send/purchase operations",
+    "Owner prototype direction confirmation / complete B acceptance"
+  ],
+  "productConflict": "No material change to frozen business scope needed; only presentation and interaction corrected",
+  "evidenceFormatting": [
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-final.txt",
+      "rawSha256": "33decf697d9475edb1797781e6aa9c37e35c244d765c9439d1fbb0fc95e2cad0",
+      "archivedSha256": "d634f124bf29f0ae9b78f3ea9c11637129056a4f2a55f84c0b54e34e9225fa6a"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-first-fail.txt",
+      "rawSha256": "467b9c68c05db8af7a761d74c9f5fd58d0f402c937240891da38bc8b085b6227",
+      "archivedSha256": "3ea9b3507b719391164d0fbfa9554e73f5b136130e39e280e85d753478e64e41"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-first-fail.xml",
+      "rawSha256": "7a7ccb408a13223fd38a7746b3f5b70f2d3ac5eb25b8b6bf59fbf2914e2e8b9c",
+      "archivedSha256": "b0bce6cbedbf295fccc525ef22b763d7a18fc1cb25a36409f90bcac22b5436c8"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-second-fail.txt",
+      "rawSha256": "f254089ef92b58f7b4f69ff6479b6180252c6597cc3f5fca14d64bccae7ec361",
+      "archivedSha256": "c03b4428079b0aa6d9ee4dee9b3ed2d607a9f5bf4d6ed701dfc0a0b7060c2cc0"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-second-fail.xml",
+      "rawSha256": "29a0206fe903dcfb43d1340c35bb5d9b4b0bb116b285ef5e1547a4cea1150ac3",
+      "archivedSha256": "263553b400d052f926bb40ec1f216d8114b3be957e985d31fc5ead1b385b3f27"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-third-pass.txt",
+      "rawSha256": "5a6b197303b9c58a2d96e70fb51a3d41b0a572bac651a62d64b2d3dc8a294996",
+      "archivedSha256": "af2c979e9767c1fb44f19f24267edd47889fa9aa0462a9161ff1dc0fbc04144f"
+    }
+  ],
+  "sourceReviewRef": "docs/evidence/B-PROTOTYPE-REVISION-20261116/source-review.json",
+  "documentationChecks": {
+    "buildCommand": "python docs/planning/build_docs.py",
+    "planCommand": "python docs/planning/check_plan.py",
+    "checks": 18,
+    "result": "PASS",
+    "whitespace": "git diff 73e0715 --check PASS"
+  },
+  "artifacts": [
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-final.txt",
+      "sha256": "d634f124bf29f0ae9b78f3ea9c11637129056a4f2a55f84c0b54e34e9225fa6a"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-final.xml",
+      "sha256": "e9d3a79e8341d292fe7d5ef672f7d04d1fad7bb62691ba6c49326a2c8da7c532"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-first-fail.txt",
+      "sha256": "3ea9b3507b719391164d0fbfa9554e73f5b136130e39e280e85d753478e64e41"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-first-fail.xml",
+      "sha256": "b0bce6cbedbf295fccc525ef22b763d7a18fc1cb25a36409f90bcac22b5436c8"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-second-fail.txt",
+      "sha256": "c03b4428079b0aa6d9ee4dee9b3ed2d607a9f5bf4d6ed701dfc0a0b7060c2cc0"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-second-fail.xml",
+      "sha256": "263553b400d052f926bb40ec1f216d8114b3be957e985d31fc5ead1b385b3f27"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-third-pass.txt",
+      "sha256": "af2c979e9767c1fb44f19f24267edd47889fa9aa0462a9161ff1dc0fbc04144f"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/screenshots/01-workbench-1440.png",
+      "sha256": "99819e8ed8e5b130293e48fb00e3f3a4b952db65d53b78f568f0a4d81e6c88b1"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/screenshots/02-case-1440.png",
+      "sha256": "44c0f403579d8c7c0047581b0a23ba6ac5c4637a97dbaecb3715bdd5f85e8a88"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/screenshots/03-analysis-1440.png",
+      "sha256": "9b9d10f521f532eeb60e89cae98e7e6c1134b2c319e00549858cf5ed752ae580"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/screenshots/04-risk-purchase-1440.png",
+      "sha256": "bdbfc4355ee6f76a0c6d93e62abfca33964a39468c80916ad1bd15cdc978ca65"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/screenshots/05-case-1024.png",
+      "sha256": "c283279954595ca654c54274e81776b32036f6646b44274a36ddc99f212a306f"
+    },
+    {
+      "path": "docs/evidence/B-PROTOTYPE-REVISION-20261116/source-review.json",
+      "sha256": "0c53dbf2c9743d71bbbb5294b6c433b2e344cfb755e4d252029c96c018bc0f16"
+    }
+  ]
+}

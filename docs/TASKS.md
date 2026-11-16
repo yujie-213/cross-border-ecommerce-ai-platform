@@ -1,3 +1,5 @@
+B原型纠偏交付（2026-11-16）：负责人体验未通过原版方向，已按意见定向修改；PROTOTYPE.F1回REVIEW、F2仍TODO，未代签方向。固定实现9c77877e63d92ebfc5872cf9f7824098fa5dbccc，Edge5条PASS；前两轮3PASS/2超时及4PASS/1歧义FAIL均保留。数据来源事实/未知与操作路径见产品说明§8，证据B-PROTOTYPE-REVISION-20261116。冻结需求/技术设计/F1/F2后端/Vue无改动，无ERP/模型新调用；仅产品原型纠偏，提交普通推送当前分支、不合main，停在方向确认。
+
 B本轮工程交付（2026-11-16）：HTML交互原型PROTOTYPE.F1及最小后端FOUNDATION.F1/F2记REVIEW；FOUNDATION因F3待开发整体仍IN_PROGRESS，PROTOTYPE方向确认F2仍TODO。实现6a591b9/a587284，最终被测a587284；后端166/Edge4通过，首次环境及浏览器FAIL原始证据保留于evidence/B-START-20261116。ERP/真实模型0，B默认off、本机实际admin未补权、未注册业务Handler；正式Vue/三AC业务验收NOT_RUN，无技术阻断。负责人一次方向确认后，下一连续授权从F3/CASE/DATASET接续，三链及补货联动不缩减。普通提交推送当前分支，不合main，最终HEAD/远端回执以Git独立回读为准。
 
 B最终执行准备（2026-11-16）：负责人明确详细设计及89c2a2d修订通过，D-B-DESIGN-01仅设计ACCEPTED。九个阶段保留，八个待实施阶段共23个功能级TODO登记在各阶段workItems中，状态仍由本TASKS唯一维护。仅一次原型方向确认；后续按工程完成/必要测试连续推进，不以各阶段REVIEW/未ACCEPTED阻塞；最终三链由负责人和星星统一体验验收。本轮仅准备不编码，统一开发启动仍待下一指令；未知OpenAPI保留，提交推送当前分支，不合main。
@@ -10841,12 +10843,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "6a591b9359ed29c918834e60bbdd1ea96c2f9455",
-    "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+    "9c77877e63d92ebfc5872cf9f7824098fa5dbccc"
   ],
-  "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "testedCommit": "9c77877e63d92ebfc5872cf9f7824098fa5dbccc",
   "evidence": [
     {
       "kind": "BROWSER",
@@ -10898,6 +10901,55 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-START-20261116/review.md",
       "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-PROTOTYPE-01/AC1"
+      ],
+      "command": "cd frontend; node node_modules/@playwright/test/cli.js test --config playwright.b-prototype.config.ts",
+      "environment": "Windows/Edge，本地file原型；全部合成数据，外部请求0",
+      "sample": "修订后5条定向路径；正常关联、多商品歧义、纠正、反馈分析、调查、风险及补货、异常/布局/键盘",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-final.xml",
+      "testedCommit": "9c77877e63d92ebfc5872cf9f7824098fa5dbccc"
+    },
+    {
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-PROTOTYPE-01/AC1"
+      ],
+      "command": "已有ERP资料/历史字段与冻结需求核对；git diff 73e0715 -- src migrations frontend/src；node --check prototypes/b-after-sales/prototype.js",
+      "environment": "本机静态核对，无ERP/真实模型调用",
+      "sample": "工单及评价已知/未知分开；冻结需求/技术设计/后端/正式Vue无改动",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PROTOTYPE-REVISION-20261116/validation.json",
+      "testedCommit": "9c77877e63d92ebfc5872cf9f7824098fa5dbccc"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [],
+      "command": "cd frontend; node node_modules/@playwright/test/cli.js test --config playwright.b-prototype.config.ts",
+      "environment": "同上，前两轮编辑中验证",
+      "sample": "3通过/2超时，随后4通过/1选择器歧义；修复后固定提交5通过",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/B-PROTOTYPE-REVISION-20261116/prototype-first-fail.xml"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-PROTOTYPE-01/AC2"
+      ],
+      "command": "负责人体验修订原型并作一次方向确认",
+      "environment": "原型交付，等待负责人体验",
+      "sample": "本轮不代签；正式Vue和后续开发未启动",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/ui/B_AFTER_SALES_PRODUCT.md",
+      "testedCommit": "9c77877e63d92ebfc5872cf9f7824098fa5dbccc"
     }
   ],
   "review": {
@@ -10905,7 +10957,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "reviewedCommit": "73e07159dd363bbbb444be1c74bb648c8bff7bfe",
     "decision": "REQUESTED_PROTOTYPE_CORRECTIONS",
     "evidenceRef": "本轮负责人原型纠偏指令；docs/ui/B_AFTER_SALES_PRODUCT.md §8",
-    "reason": "原版强制重复选商品、跨订单候选和技术视角分析不合理，未通过方向确认；需按正常ERP业务路径纠正。"
+    "reason": "原版强制重复选商品、跨订单候选和技术视角分析不合理，未通过方向确认；需按正常ERP业务路径纠正。",
+    "followup": "按本轮意见完成定向修订，工程5条通过；方向仍待负责人确认，不视为已通过。"
   },
   "branch": "codex/b-after-sales-v1",
   "observedHead": "73e07159dd363bbbb444be1c74bb648c8bff7bfe",
@@ -10939,6 +10992,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人体验后要求定向纠偏，不启动Vue或后端；原型方向未通过。原测试仅工程可点击，不代替产品方向。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "修订实现9c77877固定后Edge5条PASS；正常已有工单直接查看，歧义仅同订单，纠正才强制理由；业务分析优先、技术口径折叠；原型待一次方向确认。"
     }
   ],
   "workItems": [
@@ -10951,7 +11009,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "制作工作台、案件、体验分析和补货风险四条合成样例路径，呈现正常、缺证据、失败与历史状态",
       "doneWhen": "一份本地可预览原型，数量/风险边界及返回上下文可体验",
       "testMethod": "复用本地文档/浏览器预览，检查关键路径、键盘和1024/1440布局",
-      "status": "IN_PROGRESS"
+      "status": "REVIEW"
     },
     {
       "id": "PROTOTYPE.F2",

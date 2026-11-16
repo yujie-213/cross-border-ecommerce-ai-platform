@@ -1,0 +1,70 @@
+<testsuites id="" name="" tests="5" failures="0" skipped="0" errors="2" time="67.01120499999999">
+<testsuite name="b-after-sales-prototype.spec.ts" timestamp="2026-11-16T07:27:46.132Z" hostname="" tests="5" failures="0" skipped="0" time="64.666" errors="2">
+<testcase name="ERP mock: reliable association opens directly, human review and stale draft retain history" classname="b-after-sales-prototype.spec.ts" time="2.56">
+</testcase>
+<testcase name="ambiguity uses only this order; first selection needs no reason, correction requires reason and history" classname="b-after-sales-prototype.spec.ts" time="0.891">
+</testcase>
+<testcase name="feedback and business analysis distinguish product, unknown order, evidence and investigation" classname="b-after-sales-prototype.spec.ts" time="1.122">
+</testcase>
+<testcase name="risk confirm and revoke preserve single/batch quantity, scope failure and history" classname="b-after-sales-prototype.spec.ts" time="30.05">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|b-prototype\b-after-sales-prototype-ri-79901-y-scope-failure-and-history\error-context.md]]
+]]>
+</system-out>
+<error message="Test timeout of 30000ms exceeded." type="Error">
+<![CDATA[  b-after-sales-prototype.spec.ts:131:1 › risk confirm and revoke preserve single/batch quantity, scope failure and history
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog').getByLabel('风险查询', { exact: true })
+
+
+      23 | async function lab(page, label: string, value: string) {
+      24 |   await page.getByRole('button', { name: '教学与异常演示', exact: true }).click()
+    > 25 |   await page.getByRole('dialog').getByLabel(label, { exact: true }).selectOption(value)
+         |                                                                     ^
+      26 | }
+      27 |
+      28 | test('ERP mock: reliable association opens directly, human review and stale draft retain history', async ({ page }) => {
+        at lab (D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:25:69)
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:155:3
+
+    Error Context: ..\..\..\.tmp\b-prototype\b-after-sales-prototype-ri-79901-y-scope-failure-and-history\error-context.md
+]]>
+</error>
+</testcase>
+<testcase name="isolated teaching exceptions, understandable missing data, keyboard and responsive layouts" classname="b-after-sales-prototype.spec.ts" time="30.043">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|b-prototype\b-after-sales-prototype-is-1ed09-oard-and-responsive-layouts\error-context.md]]
+]]>
+</system-out>
+<error message="Test timeout of 30000ms exceeded." type="Error">
+<![CDATA[  b-after-sales-prototype.spec.ts:165:1 › isolated teaching exceptions, understandable missing data, keyboard and responsive layouts
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog').getByLabel('案件情形', { exact: true })
+
+
+      23 | async function lab(page, label: string, value: string) {
+      24 |   await page.getByRole('button', { name: '教学与异常演示', exact: true }).click()
+    > 25 |   await page.getByRole('dialog').getByLabel(label, { exact: true }).selectOption(value)
+         |                                                                     ^
+      26 | }
+      27 |
+      28 | test('ERP mock: reliable association opens directly, human review and stale draft retain history', async ({ page }) => {
+        at lab (D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:25:69)
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:171:3
+
+    Error Context: ..\..\..\.tmp\b-prototype\b-after-sales-prototype-is-1ed09-oard-and-responsive-layouts\error-context.md
+]]>
+</error>
+</testcase>
+</testsuite>
+</testsuites>

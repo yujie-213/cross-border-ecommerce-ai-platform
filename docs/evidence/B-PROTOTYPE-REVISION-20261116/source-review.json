@@ -1,0 +1,47 @@
+{
+  "scope": "LOCAL_EXISTING_EVIDENCE_REVIEW_ONLY",
+  "newErpCalls": 0,
+  "sources": [
+    {
+      "path": "docs/requirements/B_AFTER_SALES_V1.md",
+      "sha256": "7ccf485ee9de5f3d5cb0d8dd89f534376abbe1ee9e7a007b41430f4f959d7937",
+      "publishedRaw": true
+    },
+    {
+      "path": "docs/evidence/B-REQUIREMENTS-FREEZE-20261115/validation.json",
+      "sha256": "0cb6e2b91d64b4afc76cc5e7ef8bff959e588efaa34c23e111ae2eb56c50f9ae",
+      "publishedRaw": true
+    },
+    {
+      "path": "docs/evidence/D-S01-LIVE-01/source-index.json",
+      "sha256": "84ab2b49496dc37a08509aff12db9527d6dfe03e8cfb8d4b1ba94ec5a2d795a3",
+      "publishedRaw": true
+    },
+    {
+      "path": "docs/evidence/D-S01-LIVE-01/api-report.md",
+      "sha256": "875fe854af8686c2d0fa76381d61e469706c31c3e5e6bd53faab57989f5f5347",
+      "publishedRaw": true
+    },
+    {
+      "path": "docs/evidence/D-S01-LIVE-01/data-matrix.json",
+      "sha256": "7725fef6f6878bc7f332fe296fe74feb6f67a3bbcf5d9b9407946ea1cb53c89b",
+      "publishedRaw": true
+    },
+    {
+      "path": "docs/ERP-openapi.yaml",
+      "sha256": "15f7fd5da950860d1a84cb4dda038b7165fa493914c5eb42dd7b265f18b8e128",
+      "publishedRaw": false
+    },
+    {
+      "path": "data/private/s01-erp-20261112/fixed-observation-capture.json",
+      "sha256": "2ce424b9ee9b38661c0ed816e0c2add5b0795e747f6b8c117e2abc00c8c12c67",
+      "publishedRaw": false
+    }
+  ],
+  "missingBackgroundReports": [
+    "docs/reports/B赛道_ERP数据创建能力专项核查_20261115.md",
+    "docs/reports/B赛道_V1.0产品目标对齐与数据可行性调查_20261115.md",
+    "docs/reports/B赛道_P0数据准入验证与需求冻结建议_20261115.md"
+  ],
+  "limits": "Three background reports referenced by freeze manifest are absent in current checkout; rely on frozen requirement and available historical evidence, no reconstructed claims. Unknown OpenAPI remains untracked; private source fingerprints only, no raw rows."
+}
