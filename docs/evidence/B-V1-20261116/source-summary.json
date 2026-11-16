@@ -1,0 +1,13 @@
+{
+  "status": "OBSERVED",
+  "sourceNature": "TEACHING_ERP_OBSERVED",
+  "facts": 6,
+  "identityCandidates": 10,
+  "uniqueAssociation": false,
+  "missingCount": 4,
+  "categoryKnown": false,
+  "erpMutations": 0,
+  "modelCalls": 0,
+  "httpRequests": 14,
+  "classification": "BOUNDED_REAL_TEACHING_ERP_READ_NOT_COMPLETE_COHORT"
+}

@@ -1,3 +1,5 @@
+B V1.0最终工程交付（2026-11-16）：固定实现2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7，Codex单人，codex/b-after-sales-v1。正式Vue三链/公共权限任务/教学资料/政策/风险与补货联动交付REVIEW；978后端、69前端、类型构建、Edge实际三链及独立Worker恢复PASS。PROTOTYPE.F2仅方向ACCEPTED，ACCEPTANCE.F2留待负责人和星星。实际一键启动5175/API8768、原账号会话/S01授权及33任务31报告保持；B真实模型NOT_RUN/原生ERP完整群组未验证/真实风险绑定NOT_RUN，ERP业务写0。首次失败及修复复测保全于evidence/B-V1-20261116；最终提交普通推送当前B分支，不合main，未知OpenAPI未改未暂存。结束停在最终产品体验。
+
 B连续开发领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / f074803cc28590482cd9c4add861cf88b46f33e5，跟踪区干净，未知docs/ERP-openapi.yaml保留。本轮负责人确认PROTOTYPE.F2方向通过，仅原型方向ACCEPTED；授权全部剩余B V1.0连续实施、必要测试及普通提交推送，最终REVIEW不合main。文件范围沿各B任务allowedPaths；公共契约/迁移/组合根/台账由Codex串行。无B独立真实模型用途/额度则不联网，其他可实施能力继续。不得重置admin/S01 grant，不ERP业务写/退款/外发/采购操作。
 
 B原型纠偏交付（2026-11-16）：负责人体验未通过原版方向，已按意见定向修改；PROTOTYPE.F1回REVIEW、F2仍TODO，未代签方向。固定实现9c77877e63d92ebfc5872cf9f7824098fa5dbccc，Edge5条PASS；前两轮3PASS/2超时及4PASS/1歧义FAIL均保留。数据来源事实/未知与操作路径见产品说明§8，证据B-PROTOTYPE-REVISION-20261116。冻结需求/技术设计/F1/F2后端/Vue无改动，无ERP/模型新调用；仅产品原型纠偏，提交普通推送当前分支、不合main，停在方向确认。
@@ -10055,12 +10057,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "6a591b9359ed29c918834e60bbdd1ea96c2f9455",
-    "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
   ],
-  "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "evidence": [
     {
       "kind": "INTEGRATION",
@@ -10111,11 +10114,64 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-START-20261116/review.md",
       "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-FOUNDATION-01/AC1",
+        "D-B-FOUNDATION-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-FOUNDATION-01/AC1",
+        "D-B-FOUNDATION-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-FOUNDATION-01/AC1",
+        "D-B-FOUNDATION-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml（接手未知，保留未读未改）"
   ],
@@ -10151,6 +10207,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [
@@ -10247,13 +10308,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+  ],
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -10277,6 +10394,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [
@@ -10387,13 +10509,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+  ],
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-EXPERIENCE-01/AC1",
+        "D-B-EXPERIENCE-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-EXPERIENCE-01/AC1",
+        "D-B-EXPERIENCE-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-EXPERIENCE-01/AC1",
+        "D-B-EXPERIENCE-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -10417,6 +10595,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [
@@ -10526,13 +10709,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+  ],
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-RISK-01/AC1",
+        "D-B-RISK-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-RISK-01/AC1",
+        "D-B-RISK-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-RISK-01/AC1",
+        "D-B-RISK-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -10556,6 +10795,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [
@@ -10653,13 +10897,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+  ],
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-S01-01/AC1",
+        "D-B-S01-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-S01-01/AC1",
+        "D-B-S01-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-S01-01/AC1",
+        "D-B-S01-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -10683,6 +10983,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [
@@ -10762,13 +11067,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+  ],
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -10792,6 +11153,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [
@@ -11136,13 +11502,69 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+  ],
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-DATASET-01/AC1",
+        "D-B-DATASET-01/AC2"
+      ],
+      "command": "git -c core.whitespace=cr-at-eol diff --check；固定版本兼容/来源/人工门与冻结需求核对",
+      "sample": "DomainResult0.1历史可读；0.2新增教学来源与manifest；风险仅展示，原补货/采购数值与权限保持",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-DATASET-01/AC1",
+        "D-B-DATASET-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 / provider=mock / network=false；.venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "sample": "978 PASS / 0 FAIL / 0 SKIP；包含原补货1000SKU/采购安全/登录/任务预算恢复及B三链",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-DATASET-01/AC1",
+        "D-B-DATASET-01/AC2"
+      ],
+      "command": "全量回归内test_process_product启动实际编译Vue/API/独立Worker并执行Edge product.spec.ts",
+      "sample": "三链人工流程/教学绑定/单品批量提醒/撤销/刷新；实际MySQL/API/Worker，业务ERP合成、B模型off；前端69项与类型构建另通过",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-V1-20261116/browser-final.json"
+    },
+    {
+      "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
+      "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "B独立真实模型、ERP完整成熟退货群组及真实ERP风险绑定",
+      "sample": "真实模型无B用途预算许可；ERP完整分析数据不足；真实绑定未运行；不使用合成工程证据代替",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -11161,6 +11583,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人确认原型方向并授权连续开发全部剩余B V1.0；最终产品验收不代签，真实模型另需B用途许可。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
     }
   ],
   "workItems": [

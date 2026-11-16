@@ -4,7 +4,7 @@
 
 ## 启动与首次启用
 
-当前开发机已显式完成 B 迁移及 admin 增量授权。直接双击根目录 `Start-Platform.cmd`，用原 admin 密码登录，从首页进入「智能售后与客户体验」。默认地址 `http://localhost:5173`。停止使用 `Stop-Platform.cmd`。密码、既有会话及 S01 授权不需要重置。
+当前开发机已显式完成 B 迁移及 admin 增量授权。直接双击根目录 `Start-Platform.cmd`，用原 admin 密码登录，从首页进入「智能售后与客户体验」。默认地址 `http://localhost:5173`；本次开发机保留原有端口配置，实际为 `http://localhost:5175`、API8768，以启动器显示为准。停止使用 `Stop-Platform.cmd`。密码、既有会话及 S01 授权不需要重置。
 
 新环境先按 [README](../../README.md) 完成已有本地平台配置，然后显式执行：
 

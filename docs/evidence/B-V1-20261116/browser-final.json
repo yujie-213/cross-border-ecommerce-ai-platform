@@ -1,0 +1,24 @@
+{
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "classification": "ACTUAL_VUE_HTTP_MYSQL_INDEPENDENT_WORKER_WITH_SYNTHETIC_ERP_MODEL_OFF",
+  "stats": {
+    "startTime": "2026-11-16T09:48:13.003Z",
+    "duration": 24555.588,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "errors": [],
+  "erpBusinessWrites": 0,
+  "realModelCalls": 0,
+  "checks": [
+    "dataset chunks/readback/activation",
+    "policy human publication",
+    "case exact linkage/evidence/manual review/history",
+    "analysis 27.50 percentage points/evidence investigation",
+    "human risk confirmation/independent synthetic ERP binding",
+    "S01 batch/detail current reminders/withdrawal",
+    "page refresh/session restoration/1440 and 1024/zero page errors"
+  ]
+}

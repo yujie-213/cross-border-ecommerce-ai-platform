@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "classification": "ACTUAL_LOCAL_MANAGED_PLATFORM_READ_ONLY",
+  "webPort": 5175,
+  "apiPort": 8768,
+  "checks": {
+    "apiReady": 200,
+    "frontendReady": 200,
+    "loginConfig": 200,
+    "loginPage": 200,
+    "bUnauthorized": 401
+  },
+  "afterSalesEnabled": true,
+  "legacyAccountUnchanged": true,
+  "legacyTaskCount": 33,
+  "legacyReportCount": 31,
+  "erpCalls": 0,
+  "realModelCalls": 0,
+  "erpWrites": 0
+}

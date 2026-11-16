@@ -1,0 +1,86 @@
+{
+  "status": "PASS_ENGINEERING_FINAL_PRODUCT_REVIEW_PENDING",
+  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "baseCommit": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "branch": "codex/b-after-sales-v1",
+  "environment": "Windows/Python3.13/MySQL approved isolated DB/Vue3/Edge; engineering synthetic business providers",
+  "checks": [
+    {
+      "kind": "BACKEND_INTEGRATION",
+      "command": "$env:COMMERCE_RUN_MYSQL_TESTS='1'; $env:COMMERCE_MODEL_PROVIDER='mock'; $env:COMMERCE_MODEL_NETWORK_ENABLED='false'; .venv/Scripts/python.exe -m pytest tests --basetemp=.tmp/b-final-fixed --tb=short --junitxml=.tmp/b-full-final.xml",
+      "result": "PASS",
+      "exitCode": 0,
+      "tests": 978,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "artifactRef": "backend-final.xml"
+    },
+    {
+      "kind": "FRONTEND_UNIT",
+      "command": "npm --prefix frontend test",
+      "result": "PASS",
+      "exitCode": 0,
+      "tests": 69,
+      "artifactRef": "frontend-final.txt"
+    },
+    {
+      "kind": "FRONTEND_BUILD",
+      "command": "npm --prefix frontend run build",
+      "result": "PASS",
+      "exitCode": 0,
+      "artifactRef": "build-final.txt"
+    },
+    {
+      "kind": "PROCESS_AND_BROWSER",
+      "command": "tests/integration/after_sales/test_process_product.py within fixed-commit full suite",
+      "result": "PASS",
+      "exitCode": 0,
+      "tests": 1,
+      "artifactRef": "browser-final.json"
+    },
+    {
+      "kind": "LOCAL_START",
+      "command": "tools/local_platform.py start --no-browser + independent HTTP/account/history reads",
+      "result": "PASS",
+      "exitCode": 0,
+      "artifactRef": "local-start-final.json"
+    }
+  ],
+  "retainedFailures": {
+    "backendFirst": {
+      "tests": 965,
+      "failures": 6,
+      "artifactRef": "backend-first-fail.xml"
+    },
+    "browserProcessFirstSix": "process-browser-first.xml through process-browser-sixth.xml",
+    "disposition": "Fixed fixtures/selectors and actual routing/deadlock/compatibility defects; original failure evidence retained. Initial errors were not erased."
+  },
+  "external": [
+    {
+      "kind": "LIVE_B_MODEL",
+      "result": "NOT_RUN",
+      "reason": "No independent B purposes/budget authorization; actual A01 path tested with synthetic transport and errors. No S01 allowance reused."
+    },
+    {
+      "kind": "LIVE_ERP_COMPLETE_COHORT",
+      "result": "NOT_VERIFIED",
+      "reason": "Bounded source evidence observed; complete mature returns and feedback population unavailable."
+    },
+    {
+      "kind": "LIVE_TEACHING_RISK_MAPPING",
+      "result": "NOT_RUN",
+      "reason": "Independent synthetic ERP mapping verified; no live risk binding was created."
+    },
+    {
+      "kind": "EXTERNAL_BUSINESS_ACTIONS",
+      "result": "NOT_RUN",
+      "reason": "No ERP writes, customer messages, refunds or purchases authorized/executed."
+    }
+  ],
+  "realModelCalls": 0,
+  "erpBusinessWrites": 0,
+  "prototypeDirection": "ACCEPTED_ONLY_DIRECTION",
+  "finalAcceptance": "PENDING_OWNER_AND_XINGXING",
+  "mainMerged": false
+}

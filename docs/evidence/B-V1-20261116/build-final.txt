@@ -1,0 +1,14 @@
+
+> xuheng-s01-workspace@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 75 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.71 kB │ gzip:  0.51 kB
+dist/assets/index-CaGsOZ4w.css   64.77 kB │ gzip: 13.45 kB
+dist/assets/index-BxQNBkz_.js   255.07 kB │ gzip: 88.42 kB
+
+✓ built in 738ms
