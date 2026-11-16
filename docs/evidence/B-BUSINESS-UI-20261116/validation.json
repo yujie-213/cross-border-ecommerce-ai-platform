@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-16",
+  "branch": "codex/b-after-sales-v1",
+  "baseCommit": "8111eb15fe7e8db7ca5985d58f3ad4e0f3b0ffbf",
+  "implementationCommits": [
+    "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
+  ],
+  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "status": "REVIEW",
+  "review": null,
+  "scope": "B four business entries, customer reply workflow and existing simulated batch text; S01 implementation unchanged",
+  "checks": {
+    "backend": {
+      "result": "PASS",
+      "tests": 71,
+      "failed": 0,
+      "skipped": 0,
+      "warnings": 1,
+      "seconds": 91.22,
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/test_b_simulation_copy_update.py --tb=short --junitxml=.tmp/b-business-final-r2.xml",
+      "environment": "Windows/Python3.13; actual authorized isolated MySQL, API and independent Worker; synthetic business ERP; no paid provider",
+      "artifacts": [
+        "backend-final.xml",
+        "backend-final.txt"
+      ]
+    },
+    "frontend": {
+      "result": "PASS",
+      "tests": 86,
+      "files": 14,
+      "build": "vue-tsc --noEmit && vite build PASS",
+      "testedCommit": "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+      "sourceEquivalentAt": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "sourceDifference": "21b7018 changes only browser route matcher; frontend source unchanged",
+      "command": "npm --prefix frontend test -- --run; npm --prefix frontend run build",
+      "artifact": "frontend-final.txt"
+    },
+    "browser": {
+      "result": "PASS",
+      "tests": 2,
+      "seconds": 30.9,
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "command": "test_process_product starts compiled Vue/API/independent Worker and runs Edge product.spec.ts",
+      "scenarios": [
+        "three product chains; manual fallback; policy and dataset management; risk lifecycle; existing S01 compatibility",
+        "reply no-op reason; explicit mocked task/domain success populates draft; save audit; regular role has no maintenance entrance"
+      ],
+      "classification": "actual compiled UI and platform processes; synthetic ERP; second scenario explicitly mocks B transport; not live paid AI",
+      "artifact": "browser-final.txt"
+    },
+    "visual": {
+      "result": "PASS",
+      "widths": [
+        1440,
+        1024
+      ],
+      "files": [
+        "reply.png",
+        "reply-1024.png",
+        "materials-management.png",
+        "risk-lifecycle.png"
+      ],
+      "scope": "synthetic engineering fixtures; manual image review; no customer production data"
+    },
+    "erpCopyAudit": {
+      "result": "PASS",
+      "artifact": "erp-copy-summary.json",
+      "classification": "official teaching ERP API writes and independent GET readbacks, not mock; original business data synthetic",
+      "verifiedUpdates": 18,
+      "rejectedConfirmedUnchanged": 1,
+      "supplementalStatements": 12,
+      "paidModelCalls": 0,
+      "rawEvidence": "private only"
+    },
+    "s01Isolation": {
+      "result": "PASS",
+      "command": "git diff --name-only 8111eb1..21b7018",
+      "changedS01ImplementationFiles": 0,
+      "scope": "S01 pages/store/calculation/purchasing/risk consumer unchanged; existing browser compatibility also passed"
+    },
+    "localService": {
+      "result": "PASS",
+      "frontendHttp": 200,
+      "apiReadyHttp": 200,
+      "originalAdminPasswordReset": false,
+      "s01AuthorizationChanged": false,
+      "serviceRestart": "standard local-platform launcher; original configuration retained"
+    },
+    "liveNewBatchAiAndRisk": {
+      "result": "NOT_RUN",
+      "reason": "saved browser state expired; no login bypass/password reset; no automatic policy publication or human risk confirmation; new batch live paid reply and human risk-to-replenishment not reverified",
+      "paidModelCalls": 0,
+      "liveHumanRiskDecisions": 0
+    }
+  },
+  "failureHistory": [
+    {
+      "artifact": "capability-first-fail.xml",
+      "reason": "binding capability incorrectly checked BINDING rather than parent DATASET resource; implementation corrected and final tests pass"
+    },
+    {
+      "artifact": "backend-precommit-fail.xml",
+      "reason": "invalid policy test payload included id; test negative case corrected without policy relaxation"
+    },
+    {
+      "artifact": "backend-first-fixed-fail.xml",
+      "reason": "fixed 511cfc2 regression 70 PASS/1 FAIL: added browser route glob missed /report; test corrected in 21b7018"
+    },
+    {
+      "artifact": "browser-first-fixed-fail.txt",
+      "reason": "original browser failure retained; final run 2 PASS"
+    }
+  ],
+  "publication": {
+    "rawErpResponses": false,
+    "credentials": false,
+    "browserState": false,
+    "unknownOpenapiIncluded": false,
+    "mergeMain": false,
+    "normalBranchPushOnly": true
+  },
+  "textLogs": "Line endings normalized; two trailing spaces trimmed in the published first browser failure log for Git whitespace checks. Test messages and original failures retained; private originals untouched.",
+  "documentationChecks": {
+    "buildDocs": "PASS",
+    "checkPlan": {
+      "result": "PASS",
+      "checks": 18
+    },
+    "firstWhitespaceCheck": "FAIL: two trailing spaces in original browser failure log; trimmed only whitespace and rerun",
+    "finalWhitespaceCheck": "PASS"
+  }
+}

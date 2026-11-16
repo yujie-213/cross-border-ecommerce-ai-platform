@@ -10312,9 +10312,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+    "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
   ],
-  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -10368,12 +10370,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "CONTRACT",
+      "command": "git diff --name-only 8111eb1..21b7018; exact source/policy/capability and audit boundary review",
+      "sample": "B-only remediation; S01 implementation zero diff; no policy category or authorization relaxation",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/test_b_simulation_copy_update.py --tb=short --junitxml=.tmp/b-business-final-r2.xml",
+      "sample": "71 PASS; frontend86/typecheck/build PASS on identical frontend source; truthful generation states, source context identity and capability boundary",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "BROWSER",
+      "command": "test_process_product -> compiled Vue/API/Worker -> Edge product.spec.ts",
+      "sample": "2 PASS; three chains and S01 compatibility; reply UI transport success explicitly mocked, no live paid AI claim",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/browser-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "kind": "INTEGRATION",
+      "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
+      "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
-  "dirtyPaths": [],
+  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -10401,6 +10458,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人要求综合整改售后四入口、客户会话与回复处理、AI真实结果反馈和已登记仿真资料自然名称；仅B及3SKU/12工单资料，不改补货Agent。起点仅未知docs/ERP-openapi.yaml，保留。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
     }
   ],
   "workItems": [
@@ -10513,9 +10580,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+    "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
   ],
-  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -10569,12 +10638,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-EXPERIENCE-01/AC1",
+        "D-B-EXPERIENCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "CONTRACT",
+      "command": "git diff --name-only 8111eb1..21b7018; exact source/policy/capability and audit boundary review",
+      "sample": "B-only remediation; S01 implementation zero diff; no policy category or authorization relaxation",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-EXPERIENCE-01/AC1",
+        "D-B-EXPERIENCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/test_b_simulation_copy_update.py --tb=short --junitxml=.tmp/b-business-final-r2.xml",
+      "sample": "71 PASS; frontend86/typecheck/build PASS on identical frontend source; truthful generation states, source context identity and capability boundary",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-EXPERIENCE-01/AC1",
+        "D-B-EXPERIENCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "BROWSER",
+      "command": "test_process_product -> compiled Vue/API/Worker -> Edge product.spec.ts",
+      "sample": "2 PASS; three chains and S01 compatibility; reply UI transport success explicitly mocked, no live paid AI claim",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/browser-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "kind": "INTEGRATION",
+      "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
+      "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
-  "dirtyPaths": [],
+  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -10602,6 +10726,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人要求综合整改售后四入口、客户会话与回复处理、AI真实结果反馈和已登记仿真资料自然名称；仅B及3SKU/12工单资料，不改补货Agent。起点仅未知docs/ERP-openapi.yaml，保留。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
     }
   ],
   "workItems": [
@@ -10713,9 +10847,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [
-    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+    "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
   ],
-  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -10769,12 +10905,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-RISK-01/AC1",
+        "D-B-RISK-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "CONTRACT",
+      "command": "git diff --name-only 8111eb1..21b7018; exact source/policy/capability and audit boundary review",
+      "sample": "B-only remediation; S01 implementation zero diff; no policy category or authorization relaxation",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-RISK-01/AC1",
+        "D-B-RISK-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/test_b_simulation_copy_update.py --tb=short --junitxml=.tmp/b-business-final-r2.xml",
+      "sample": "71 PASS; frontend86/typecheck/build PASS on identical frontend source; truthful generation states, source context identity and capability boundary",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-RISK-01/AC1",
+        "D-B-RISK-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "BROWSER",
+      "command": "test_process_product -> compiled Vue/API/Worker -> Edge product.spec.ts",
+      "sample": "2 PASS; three chains and S01 compatibility; reply UI transport success explicitly mocked, no live paid AI claim",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/browser-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "kind": "INTEGRATION",
+      "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
+      "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
-  "dirtyPaths": [],
+  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -10802,6 +10993,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人要求综合整改售后四入口、客户会话与回复处理、AI真实结果反馈和已登记仿真资料自然名称；仅B及3SKU/12工单资料，不改补货Agent。起点仅未知docs/ERP-openapi.yaml，保留。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
     }
   ],
   "workItems": [
@@ -11140,9 +11341,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "77eb560c56a28cb4eadc7ff28bfd31bf5b02618e",
     "8485561cf6221e61dbc516a1e460489ddf1e05f4",
     "c59685585bfcbbc920e5ba292a21e1df2d2eeec4",
-    "49808a0d95c472ff908ddc37d162147e7346ec20"
+    "49808a0d95c472ff908ddc37d162147e7346ec20",
+    "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
   ],
-  "testedCommit": "49808a0d95c472ff908ddc37d162147e7346ec20",
+  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -11277,12 +11480,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/evidence/B-PROTOTYPE-ALIGNMENT-20261116/browser.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "CONTRACT",
+      "command": "git diff --name-only 8111eb1..21b7018; exact source/policy/capability and audit boundary review",
+      "sample": "B-only remediation; S01 implementation zero diff; no policy category or authorization relaxation",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/test_b_simulation_copy_update.py --tb=short --junitxml=.tmp/b-business-final-r2.xml",
+      "sample": "71 PASS; frontend86/typecheck/build PASS on identical frontend source; truthful generation states, source context identity and capability boundary",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "BROWSER",
+      "command": "test_process_product -> compiled Vue/API/Worker -> Edge product.spec.ts",
+      "sample": "2 PASS; three chains and S01 compatibility; reply UI transport success explicitly mocked, no live paid AI claim",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/browser-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "kind": "INTEGRATION",
+      "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
+      "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "d474fa4310f5320e02b70f5f5527927eaa018544",
-  "dirtyPaths": [],
+  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -11335,6 +11593,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "按原型方向重整正式Vue并限定与补货相同自建登记ERP；后端权限58/前端69/类型构建/编译Vue三链及补货提醒PASS；真实教学模型6次11536Token，费用UNKNOWN。真实ERP完整退货总体及新风险绑定未验证，最终产品体验待负责人和星星，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人要求综合整改售后四入口、客户会话与回复处理、AI真实结果反馈和已登记仿真资料自然名称；仅B及3SKU/12工单资料，不改补货Agent。起点仅未知docs/ERP-openapi.yaml，保留。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
     }
   ],
   "workItems": [
@@ -11394,6 +11662,23 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "evidence": [
         "docs/reports/B_V1_原型方向整改_20261116.md",
         "docs/evidence/B-PROTOTYPE-ALIGNMENT-20261116/validation.json"
+      ]
+    },
+    {
+      "id": "ACCEPTANCE.R3",
+      "title": "售后四入口日常业务体验与仿真资料整改",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "D-B-RISK-01"
+      ],
+      "implement": "案件会话与回复主视图、准确AI状态、普通保存、主管维护折叠；限定已有批次补全文字并独立核对，补货零改动",
+      "doneWhen": "定向前后端和真实编译浏览器验证，业务数据/来源/人工确认不伪造",
+      "testMethod": "单元、MySQL/API/Worker、Edge、正式API资料更新及独立回读",
+      "status": "REVIEW",
+      "evidence": [
+        "docs/reports/B_售后日常工作区整改_20261116.md",
+        "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
       ]
     }
   ],
@@ -11859,7 +12144,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "tests/",
     "src/commerce_hub/scenarios/after_sales/source.py",
     "docs/",
-    "AGENTS.md"
+    "AGENTS.md",
+    "tools/b_simulation_copy_update.py",
+    "src/commerce_hub/scenarios/after_sales/customer_context.py"
   ],
   "parallelCondition": "Codex单人；既有未知OpenAPI只读保留不暂存",
   "deliverables": [
@@ -11891,9 +12178,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "status": "REVIEW",
   "implementationCommits": [
     "b2a4988c7239038b47ea0a0cb0c15711b9a2ed4d",
-    "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    "52006a83671499f8538747c0024b5b4b43e2c6d6",
+    "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
   ],
-  "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6",
+  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
   "evidence": [
     {
       "kind": "INTEGRATION",
@@ -11958,11 +12247,64 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "result": "NOT_RUN",
       "artifactRef": "docs/reports/B_ERP全仿真批次与双Agent读取_20261116.md",
       "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC1",
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/test_b_simulation_copy_update.py --tb=short --junitxml=.tmp/b-business-final-r2.xml",
+      "sample": "71 PASS; frontend86/typecheck/build PASS on identical frontend source; truthful generation states, source context identity and capability boundary",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/backend-final.xml"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC1",
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "BROWSER",
+      "command": "test_process_product -> compiled Vue/API/Worker -> Edge product.spec.ts",
+      "sample": "2 PASS; three chains and S01 compatibility; reply UI transport success explicitly mocked, no live paid AI claim",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/browser-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC1",
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "tools/b_simulation_copy_update.py official teaching ERP text-only update and independent GET; source readback audit",
+      "sample": "18 text updates verified; 1 paid sales buyer update rejected400 and unchanged independently confirmed; 12 versioned local simulated customer statements, exact ERP relation validation; original batch counts unchanged",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/erp-copy-summary.json"
+    },
+    {
+      "environment": "Windows/Python3.13/authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP and mock model explicitly separated from official teaching ERP copy audit",
+      "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "kind": "INTEGRATION",
+      "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
+      "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
+      "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "34b6d8bca7dd7dc89d18e20eea52c18d21336f12",
+  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml (untracked; preserved)"
   ],
@@ -11978,6 +12320,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "本轮批准的完全仿真ERP数据创建及双Agent读取/补货确定性计算完成；84定向回归、正式回读与托管重启通过。真实AI/人工确认/风险联动和成熟退货总体未本轮验收，不伪造结论，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人要求综合整改售后四入口、客户会话与回复处理、AI真实结果反馈和已登记仿真资料自然名称；仅B及3SKU/12工单资料，不改补货Agent。起点仅未知docs/ERP-openapi.yaml，保留。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
     }
   ]
 }

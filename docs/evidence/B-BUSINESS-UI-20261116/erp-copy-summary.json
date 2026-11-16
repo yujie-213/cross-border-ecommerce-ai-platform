@@ -1,0 +1,57 @@
+{
+  "batch": "SIM-AS-20261116-R1",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "dataset": "b-s01-simulated-20261116-r1",
+  "scopeUnchanged": {
+    "sku": 3,
+    "sales": 30,
+    "tickets": 12,
+    "returnDrafts": 7
+  },
+  "officialTextUpdates": {
+    "verified": 18,
+    "products": 3,
+    "listings": 3,
+    "tickets": 12,
+    "independentGetReadback": true
+  },
+  "rejectedUpdate": {
+    "objects": 1,
+    "httpStatus": 400,
+    "fieldGroup": "paid sales order buyer text",
+    "state": "REJECTED_CONFIRMED",
+    "independentReadbackUnchanged": true,
+    "retried": false
+  },
+  "supplementalContext": {
+    "statements": 12,
+    "versionedLocalFile": true,
+    "nativeErpConversation": false,
+    "source": "SIMULATED",
+    "requiresExactErpRelationship": true
+  },
+  "sourceReaderReadback": {
+    "erpObserved": true,
+    "productName": "澄屿圆领针织衫 M 藏青",
+    "sourceOrder": "1154067",
+    "region": "US",
+    "businessDate": "2026-11-16T04:00:00+00:00",
+    "supplementalMessages": 1,
+    "supplementalSource": "SIMULATED",
+    "factDomains": [
+      "TICKET",
+      "payment_status",
+      "fulfillment_status",
+      "refund_status",
+      "PAYMENT",
+      "SHIPMENT",
+      "WAREHOUSE",
+      "CUSTOMER_STATEMENT"
+    ],
+    "paidModelCalls": 0
+  },
+  "paidModelCalls": 0,
+  "newRiskConfirmed": false,
+  "rawResponses": "PRIVATE_NOT_PUBLISHED",
+  "journalSha256": "d1c98faca6239577e152a79a9eb1d856ae200b46f8bbba30c85fc3ba8e3e0d20"
+}

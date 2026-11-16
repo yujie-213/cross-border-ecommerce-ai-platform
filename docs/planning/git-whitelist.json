@@ -1289,6 +1289,21 @@
     "src/commerce_hub/scenarios/after_sales/customer_context.py",
     "tests/integration/after_sales/test_business_usability.py",
     "tests/unit/test_b_simulation_copy_update.py",
-    "tools/b_simulation_copy_update.py"
+    "tools/b_simulation_copy_update.py",
+    "docs/reports/B_售后日常工作区整改_20261116.md",
+    "docs/evidence/B-BUSINESS-UI-20261116/backend-final.txt",
+    "docs/evidence/B-BUSINESS-UI-20261116/backend-final.xml",
+    "docs/evidence/B-BUSINESS-UI-20261116/backend-first-fixed-fail.xml",
+    "docs/evidence/B-BUSINESS-UI-20261116/backend-precommit-fail.xml",
+    "docs/evidence/B-BUSINESS-UI-20261116/browser-final.txt",
+    "docs/evidence/B-BUSINESS-UI-20261116/browser-first-fixed-fail.txt",
+    "docs/evidence/B-BUSINESS-UI-20261116/capability-first-fail.xml",
+    "docs/evidence/B-BUSINESS-UI-20261116/erp-copy-summary.json",
+    "docs/evidence/B-BUSINESS-UI-20261116/frontend-final.txt",
+    "docs/evidence/B-BUSINESS-UI-20261116/materials-management.png",
+    "docs/evidence/B-BUSINESS-UI-20261116/reply-1024.png",
+    "docs/evidence/B-BUSINESS-UI-20261116/reply.png",
+    "docs/evidence/B-BUSINESS-UI-20261116/risk-lifecycle.png",
+    "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
   ]
 }

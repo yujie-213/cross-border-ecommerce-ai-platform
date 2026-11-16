@@ -1,0 +1,43 @@
+
+Running 2 tests using 1 worker
+
+(node:30900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder (27.4s)
+  x  2 ..\tests\browser\after-sales\product.spec.ts:116:1 › reply generation reports no-op accurately, fills a successful draft and saves without a second reason (13.4s)
+
+
+  1) ..\tests\browser\after-sales\product.spec.ts:116:1 › reply generation reports no-op accurately, fills a successful draft and saves without a second reason
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.b-page>.banner[role=status]')
+    Expected substring: "没有匹配"
+    Timeout: 12000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" locator('.b-page>.banner[role=status]') with timeout 12000ms
+      - waiting for locator('.b-page>.banner[role=status]')
+        2 × locator resolved to <p role="status" class="banner" data-v-e2d7b333="">正在生成 AI 回复…</p>
+          - unexpected value "正在生成 AI 回复…"
+
+
+      137 |   await page.goto('/#/after-sales/cases?id=ui-case&source=ERP')
+      138 |   await page.getByRole('button',{name:'生成 AI 回复',exact:true}).click()
+    > 139 |   await expect(page.locator('.b-page>.banner[role=status]')).toContainText('没有匹配')
+          |                                                              ^
+      140 |   await expect(page.getByText('处理完成，已保存到历史。',{exact:true})).toHaveCount(0)
+      141 |   await expect(page.getByLabel('回复稿',{exact:true})).toHaveValue('')
+      142 |   await page.getByRole('button',{name:'重新生成 AI 回复',exact:true}).click()
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:139:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-reply-generation-r-1b85d-ves-without-a-second-reason\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-reply-generation-r-1b85d-ves-without-a-second-reason\error-context.md
+
+  1 failed
+    ..\tests\browser\after-sales\product.spec.ts:116:1 › reply generation reports no-op accurately, fills a successful draft and saves without a second reason
+  1 passed (42.0s)

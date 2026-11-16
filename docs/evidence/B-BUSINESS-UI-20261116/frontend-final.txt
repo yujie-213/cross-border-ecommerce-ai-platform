@@ -1,0 +1,27 @@
+
+> xuheng-s01-workspace@0.1.0 test
+> vitest run --run
+
+
+ RUN  v5.1.0 D:/电商项目/跨境电商智慧AI平台/frontend
+
+
+ Test Files  14 passed (14)
+      Tests  86 passed (86)
+   Start at  22:50:13
+   Duration  1.28s (transform 58%, import 30%, tests 9%, worker 3%)
+
+
+> xuheng-s01-workspace@0.1.0 build
+> vue-tsc --noEmit && vite build
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 90 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.71 kB │ gzip:  0.51 kB
+dist/assets/index-B-RD0WOp.css   76.82 kB │ gzip: 15.41 kB
+dist/assets/index-0RPECoiZ.js   282.59 kB │ gzip: 96.01 kB
+
+✓ built in 593ms
