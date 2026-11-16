@@ -65,3 +65,25 @@ def test_source_open_dedup_first_association_ai_and_unknown_warehouse_risk(env,t
         assert client.get('/api/b/v1/source-inbox',params=dict(store='Synthetic Store',kind='reviews',dateFrom='2026-13-01')).status_code==422
         with e.database.engine.begin() as conn:conn.execute(update(b_resource_grants).filter_by(tenant_id=e.actor.tenant_id,action='b:case:write').values(active=False))
         assert client.get('/api/b/v1/source-inbox',params=dict(store='Synthetic Store',kind='reviews')).status_code==403
+
+
+@pytest.mark.mysql
+def test_invalid_model_references_preserve_partial_case_and_model_usage(env,tmp_path):
+    import json
+    e=env;r=reader(tmp_path);e.domain.source_reader=r
+    for spec in e.specs.values():spec.handler.source_reader=r
+    original=e.provider.invoke
+    def forged(request):
+        result=original(request)
+        if request.control.purpose=='b.experience.explain.v1':
+            output=json.loads(result.content);output['facts']=['made-up-reference']
+            result=result.model_copy(update=dict(content=json.dumps(output)))
+        return result
+    e.provider.invoke=forged
+    c=e.domain.create_case(e.actor,uuid4().hex,dict(title='ERP评价',message='',region='CN',platform='TEACHING',language='zh',erpStoreName='Synthetic Store',erpVoiceId='71',erpVoiceKind='reviews'))
+    run_job(e,'CASE',c['id'],'evidence');run_job(e,'CASE',c['id'],'advice')
+    case=read(e,'CASE',c['id']);result=case['body']['advice'][-1]['feedbackAI']
+    assert result['classifications']['status']=='AVAILABLE'
+    assert result['analysis']['status']=='UNAVAILABLE' and result['analysis']['reason']=='INVALID_OUTPUT'
+    assert result['analysis']['usage']['totalTokens']==150
+    assert case['body']['evidence']['facts'] and case['body']['messages']

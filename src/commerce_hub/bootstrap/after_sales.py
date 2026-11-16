@@ -30,7 +30,7 @@ def registry(settings):
     except (OSError,ValueError,TypeError):reader=None
     provider=None;shared=None
     path=PRIVATE/'model-authorization.json'
-    if path.exists():
+    if path.exists() and settings.model_network_enabled and settings.model_provider=='deepseek':
         try:
             auth=json.loads(path.read_text(encoding='utf-8'))
             if (set(auth)!={'authorizationId','maxCalls','maxTokens','maxCostUSD','approvedPurposes'}

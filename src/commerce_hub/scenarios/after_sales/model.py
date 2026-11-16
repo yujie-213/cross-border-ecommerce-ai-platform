@@ -58,7 +58,7 @@ class Bundle:
 
     def refs(self):
         return dict(purpose=self.purpose,deploymentRef=dict(id='b-deepseek',version='1'),
-            promptRef=dict(id=self.purpose,version='v1'),contextBundleRef=dict(tenantId=self.task['tenant_id'],id='bctx-'+digest(self.data)[:48],version='1'),
+            promptRef=dict(id=self.purpose,version='v2'),contextBundleRef=dict(tenantId=self.task['tenant_id'],id='bctx-'+digest(self.data)[:48],version='1'),
             outputSchemaRef=dict(id=self.purpose+'.schema',version='1'),parametersRef=dict(id='b.parameters',version='1'),cachePolicyRef=dict(id='cache-off',version='1'))
 
     def resolve(self,request):
@@ -68,12 +68,20 @@ class Bundle:
         data=self.data
         require(len(json.dumps(data,ensure_ascii=False).encode())<=14000,'CONTEXT_LIMIT')
         schema=self.schema.model_json_schema()
-        messages=[dict(role='system',content=PROMPT+'\nJSON Schema:'+json.dumps(schema)),dict(role='user',content=json.dumps(data,ensure_ascii=False))]
+        rules=('facts 数组只允许逐字复制 factRefs 中的引用字符串，不能写事实陈述或解释。hypotheses 是待验证原因；alternativeExplanations 是其他解释；missingEvidence 是待补证；nextSteps 是人工下一步。这四个数组禁止数字、金额、缺陷确认和退款承诺。'
+            if self.schema is Explanation else 'items 必须逐项对应 feedbackId；labels 从 taxonomy 选择；span 必须逐字来自相应反馈原文。' if self.schema is Classifications else
+            'adviceCode 只允许 CLARIFY、MANUAL_REVIEW、SAFETY_ESCALATE 且须获所引用政策 terms 允许；citations 逐字复制给定政策的 policyId/version/sectionId/hash。replyDraft 不得含数字、金额、到账/退款/补发/赔偿承诺。')
+        messages=[dict(role='system',content=PROMPT+'\n'+rules+'\nJSON Schema:'+json.dumps(schema)),dict(role='user',content=json.dumps(data,ensure_ascii=False))]
         parameters=dict(temperature=0,maxOutputTokens=1024)
         return dict(modelRevision='deepseek-flash',messages=messages,parameters=parameters,outputSchema=schema,toolSpecs=[]),dict(
             resolvedPromptDigest=digest(messages),contextDigest=digest(data),parametersDigest=digest(parameters),outputSchemaDigest=digest(schema),toolSpecsDigest=digest([]),promptContentHash=digest(PROMPT))
 
     def validate_output(self,content):
+        from commerce_hub.orchestration.service import TaskError
+        try:return self._validated_output(content)
+        except TaskError as error:raise ValueError(error.code) from None
+
+    def _validated_output(self,content):
         output=self.schema.model_validate_json(content).model_dump()
         if self.schema is Advice:
             validate_advice(output,self.data['policies'])

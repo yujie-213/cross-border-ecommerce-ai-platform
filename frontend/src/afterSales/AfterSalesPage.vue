@@ -108,13 +108,14 @@ async function command<T>(path:string,body:unknown):Promise<T> {
 async function perform(action:()=>Promise<void>) {
   if(busy.value)return
   busy.value=true;error.value='';note.value=''
-  try{await action()}catch(e){error.value=e instanceof Error && !(e instanceof ApiError) && e.message==='PENDING_COMMAND'?'请先核对上一笔结果不确定的操作。':e instanceof Error && !(e instanceof ApiError) && e.message.startsWith('TASK:')?'任务未完成：'+e.message.slice(5)+'，已保留已有事实和记录。':errorText(e)}finally{busy.value=false}
+  try{await action()}catch(e){note.value='';error.value=e instanceof Error && !(e instanceof ApiError) && e.message==='PENDING_COMMAND'?'请先核对上一笔结果不确定的操作。':e instanceof Error && !(e instanceof ApiError) && e.message.startsWith('TASK:')?'任务未完成：'+e.message.slice(5)+'，已保留已有事实和记录。':errorText(e)}finally{busy.value=false}
 }
 async function retry() { if(!pending.value)return;await perform(async()=>{const p=pending.value!;const result=await get<any>('/commands/'+p.key);pending.value=undefined;sessionStorage.removeItem('b-pending-command');await refresh();note.value='原命令已找到并核对。';if(result.result?.taskRef)taskId.value=result.result.taskRef.taskId}) }
 async function mutate(collection:string,asset:Asset,action:string,data:unknown) {
   await command('/'+collection+'/'+asset.id+'/'+action,{expectedRevision:asset.revision,data});await refresh()
 }
 async function job(asset:Asset,collection:string,action:string,data:unknown={}) {
+  activeTask.value=undefined
   const accepted=await command<{ taskRef:{taskId:string} }>('/'+collection+'/'+asset.id+'/'+action,{expectedRevision:asset.revision,data})
   taskId.value=accepted.taskRef.taskId
   const ownTask=accepted.taskRef.taskId, ownRoute=route.value.path+'?'+(route.value.query.id || '')
@@ -215,7 +216,7 @@ watch(()=>[route.value.path,route.value.query.id],()=>{void refresh()})
     <header class="page-head"><div><span class="eyebrow">智能售后与客户体验</span><h1>{{title}}</h1></div><button class="button" :disabled="busy || loading" @click="refresh">刷新</button></header>
     <a v-if="returnTo" class="back" :href="'#'+returnTo">← 返回原补货页面</a>
     <p v-if="error" class="banner danger" role="alert">{{error}}</p><p v-if="note" class="banner" role="status">{{note}}</p>
-    <p v-if="pending" class="banner warning">上一操作结果待核对。<button class="button small" :disabled="busy" @click="retry">核对原命令</button></p>
+    <p v-if="pending && !busy" class="banner warning">上一操作结果待核对。<button class="button small" :disabled="busy" @click="retry">核对原命令</button></p>
     <p v-if="loading" role="status">正在读取当前记录…</p><p v-if="activeTask && busy" class="banner" role="status"><StatusBadge :value="activeTask.state" /> {{activeTask.scenarioId.includes('EVIDENCE')?'正在核实 ERP 与商品证据':activeTask.scenarioId.includes('ADVICE')?'正在检索政策并生成建议':'正在处理分析资料'}}；可离开页面，稍后从任务历史继续查看。</p>
     <p v-if="workspace && !workspace.modelEnabled" class="b-model-note">AI 暂未启用：等待本模块独立调用授权。可先核实事实、查看统计并记录人工处理；页面不会显示模拟 AI 结论。</p>
 
