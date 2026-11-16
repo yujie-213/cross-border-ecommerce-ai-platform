@@ -4,6 +4,7 @@ Raw teaching ERP replies stay in ignored private artifacts. Titles remain titles
 missing conversation, delivery, RMA and product attributes stay unknown.
 """
 from pathlib import Path
+from decimal import Decimal
 import json
 from .common import require,now,redacted
 
@@ -195,6 +196,50 @@ class SourceReader:
                 and str(r.get('wid'))==wid for r in inventory.records),'MAPPING_RELATION_UNVERIFIED')
         return dict(independentReadback=True,productHash=products.fingerprint,relationVerified=True,observedAt=now())
 
+    def order_warehouse(self,reader,store,order,identity,workflow,check):
+        """Prove the case warehouse through registered inventory IDs and postings.
+
+        A warehouse name, catalog permission or SKU alone never supplies identity.
+        Missing, ambiguous, partial or reversed evidence leaves the case unknown.
+        """
+        members=self.members(store)
+        if (members is None or workflow.get('local_only') is not True
+            or workflow.get('order_id')!=order['id'] or workflow.get('state')!='shipped'):
+            return None
+        candidates=[m for m in members if m.sku==identity['sku'] and m.monitor.productId==identity['productId']
+            and m.sourceTenant==identity['sourceTenant'] and m.sourceStore==identity['storeId']
+            and str(order['id']) in m.monitor.salesIds and getattr(m,'warehouseName',None)==order.get('shipping_warehouse')]
+        if len(candidates)!=1:return None
+        member=candidates[0];inventory_ids=set(getattr(member.monitor,'inventoryIds',()))
+        shipments=workflow.get('shipments') or []
+        if not inventory_ids or not 0<len(shipments)<=20:return None
+        lines=[r for r in order.get('item_list',[]) if r.get('sku')==identity['sku']]
+        if len(lines)!=1:return None
+        quantity=Decimal(0);events=set();outbounds=set()
+        for shipment in shipments:
+            oid=shipment.get('outbound_id')
+            if type(oid) is not int or oid<=0 or oid in outbounds or shipment.get('order_id')!=order['id']:return None
+            outbounds.add(oid);check()
+            batch=reader.read('/api/v1/stock/ledger',dict(resource='outbound-orders',record_id=oid),page_size=50,max_pages=2)
+            if not batch.complete:return None
+            rows=[r for r in batch.records if r.get('sku')==identity['sku']]
+            if not rows:return None
+            for r in rows:
+                if (not r.get('id') or r['id'] in events or r.get('resource')!='outbound-orders' or r.get('record_id')!=oid
+                    or str(r.get('inventory_id')) not in inventory_ids or r.get('warehouse_name')!=member.warehouseName
+                    or r.get('operation')!='post' or r.get('reverses_id') is not None):return None
+                delta=Decimal(str(r['delta_quantity']))
+                if (delta>=0 or Decimal(str(r['delta_available']))!=delta
+                    or Decimal(str(r['after_quantity']))-Decimal(str(r['before_quantity']))!=delta
+                    or Decimal(str(r['after_available']))-Decimal(str(r['before_available']))!=delta):return None
+                quantity-=delta;events.add(r['id'])
+        if quantity!=Decimal(str(lines[0].get('quantity'))):return None
+        check()
+        proof=self.verify_mapping(dict(sourceTenant=member.sourceTenant,productId=member.monitor.productId,sku=member.sku,
+            storeId=member.sourceStore,warehouseMode='EXPLICIT_IDS',warehouseIds=[member.sourceWarehouse]),check)
+        return dict(warehouseId=member.sourceWarehouse,inventoryIds=sorted(inventory_ids),ledgerEventIds=sorted(events),
+            outboundIds=sorted(outbounds),**proof)
+
     def evidence(self,ticket_id,store,check,task_id):
         expected=self._store(store);reader=self.factory();check()
         response=reader.detail('customer-tickets',ticket_id)
@@ -245,6 +290,15 @@ class SourceReader:
                     if w.get('paid_at') and w.get('paid_amount') is not None:
                         facts.append(dict(id='paid',domain='PAYMENT',kind='OBSERVED',value=dict(at=w['paid_at'],amount=w['paid_amount'],currency=w.get('currency')),sourceRef='sales-workflow:'+str(order['id']),observedAt=now()))
                     if w.get('shipments'):facts.append(dict(id='shipments',domain='SHIPMENT',kind='OBSERVED',value=[dict(quantity=s.get('item_list'),at=s.get('created_at')) for s in w['shipments']],sourceRef='sales-workflow:'+str(order['id']),observedAt=now()))
+                    warehouse_proofs=[]
+                    for identity in identities:
+                        identity['warehouseId']='UNKNOWN'
+                        proof=self.order_warehouse(reader,store,order,identity,w,check)
+                        if proof:
+                            identity['warehouseId']=proof['warehouseId'];warehouse_proofs.append(proof)
+                            facts.append(dict(id='warehouse-'+identity['lineId'],domain='WAREHOUSE',kind='OBSERVED',value=proof,
+                                sourceRef='sales-workflow:'+str(order['id']),observedAt=proof['observedAt']))
+                    if warehouse_proofs:(root/'warehouse-proofs.json').write_text(json.dumps(warehouse_proofs,ensure_ascii=False),encoding='utf-8')
                 except Exception as error:missing.append('履约域不可用：'+getattr(error,'code','READ_FAILED'))
             else:missing.append('订单精确匹配未找到')
         else:missing.append('工单缺订单号')

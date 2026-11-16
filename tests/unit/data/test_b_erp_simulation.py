@@ -10,7 +10,7 @@ class MemoryClient:
     def __init__(self):
         self.rows=[];self.writes=[];self.lost_response=False
 
-    def exact(self,resource,key,value):
+    def exact(self,resource,key,value,**kwargs):
         return deepcopy(self.rows)
 
     def request(self,method,path,payload):
@@ -80,3 +80,12 @@ def test_dangerous_and_unowned_routes_denied(path):
     client=object.__new__(Client);client.owned_sales=set();client.owned_listing_paths=set()
     with pytest.raises(DatasetError,match='OPERATION_DENIED'):
         client._allow('POST',path,auth=False)
+
+
+def test_return_lookup_requires_exact_owned_order():
+    client=object.__new__(Client);calls=[]
+    client.request=lambda method,path,params:calls.append(params) or dict(items=[],total=0)
+    with pytest.raises(DatasetError,match='EXACT_RETURN_ORDER_REQUIRED'):
+        client.exact('sales-returns','return_no','SIM-RET')
+    assert client.exact('sales-returns','return_no','SIM-RET',order_id=10001)==[]
+    assert calls[0]['order_id']==10001 and 'q' not in calls[0]

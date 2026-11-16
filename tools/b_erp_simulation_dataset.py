@@ -131,9 +131,10 @@ class Client(TeachingDatasetClient):
         except Exception:raise
         return result
 
-    def exact(self,resource,key,value):
+    def exact(self,resource,key,value,*,order_id=None):
+        if resource=='sales-returns':check(type(order_id) is int and order_id>0,'EXACT_RETURN_ORDER_REQUIRED')
         params=dict(quote_no=value) if resource=='supplier-quotes' else (
-            dict(q=value) if resource=='sales-returns' else dict(field=key,q=value,match='exact'))
+            dict(order_id=order_id) if resource=='sales-returns' else dict(field=key,q=value,match='exact'))
         result=self.request('GET','/api/v1/'+resource,dict(params,offset=0,limit=50,
                             **({'view':'full'} if resource in {'inventory','sales-orders'} else {})))
         rows=result.get('items')
@@ -179,7 +180,8 @@ class Importer:
         name=resource+':'+str(value);ops=self.journal['operations'];prior=ops.get(name)
         fp=fingerprint(payload)
         check(prior is None or prior['fingerprint']==fp,'PAYLOAD_CHANGED')
-        found=self.client.exact(resource,key,value)
+        lookup=dict(order_id=payload['order_id']) if resource=='sales-returns' else {}
+        found=self.client.exact(resource,key,value,**lookup)
         if found:
             check(prior is not None,'EXISTING_RECORD_NOT_OWNED')
         else:
@@ -189,7 +191,7 @@ class Importer:
             try:self.client.request('POST','/api/v1/'+resource,payload)
             except Exception:
                 ops[name]['state']='UNKNOWN';self.save();raise
-            found=self.client.exact(resource,key,value)
+            found=self.client.exact(resource,key,value,**lookup)
             check(len(found)==1,'INDEPENDENT_READBACK_MISSING')
         actual=found[0]
         ignored={'expected_version','request_key','supplier_code'} if resource=='supplier-quotes' else set()
