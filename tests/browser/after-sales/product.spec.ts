@@ -132,7 +132,7 @@ test('reply generation reports no-op accurately, fills a successful draft and sa
     attempts++;asset.revision++;asset.body.advice.push({version:attempts,caseRevision:asset.revision,policies:[],ai:attempts===1?{status:'NOT_ATTEMPTED',reason:'POLICY_NOT_APPLICABLE',output:null}:{status:'AVAILABLE',output:{replyDraft:'您好，已记录袖口接缝松开的情况。请补充问题部位的清晰照片，便于我们核实并继续协助处理。'}}})
     await r.fulfill({status:202,json:{taskRef:{taskId:'ui-advice-'+attempts}}})
   })
-  await page.route('**/api/v1/analysis-tasks/ui-*',r=>r.fulfill({json:r.request().url().endsWith('/report')?{analysisReport:{domainKind:'CASE',domainRef:{id:'ui-case'}}}:{state:'SUCCEEDED'}}))
+  await page.route(/\/api\/v1\/analysis-tasks\/ui-(?:advice-\d+|evidence)(?:\/report)?$/,r=>r.fulfill({json:r.request().url().endsWith('/report')?{analysisReport:{domainKind:'CASE',domainRef:{id:'ui-case'}}}:{state:'SUCCEEDED'}}))
   await page.route('**/api/b/v1/cases/ui-case/reviews',async r=>{saved=r.request().postDataJSON().data;asset.revision++;asset.state='HANDLED';asset.body.reviews.push({...saved,at:'2026-11-16T12:10:00+08:00',actor:'客服'});await r.fulfill({json:asset})})
   await page.goto('/#/after-sales/cases?id=ui-case&source=ERP')
   await page.getByRole('button',{name:'生成 AI 回复',exact:true}).click()
