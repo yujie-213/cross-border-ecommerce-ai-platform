@@ -13,7 +13,7 @@ class BTaskAuthorization:
 
     def __post_init__(self):
         if (self.version != '1.0.0' or (self.resource_kind, self.domain_action) not in {
-                ('CASE', 'b:analyze'), ('DATASET', 'b:dataset:manage')}):
+                ('CASE', 'b:analyze'), ('DATASET', 'b:dataset:manage'), ('DATASET','b:analyze'), ('DATASET','b:binding:manage')}):
             raise ValueError('B_TASK_AUTHORIZATION_INVALID')
 
     def authorize(self, access, connection, principal, operation, scope):

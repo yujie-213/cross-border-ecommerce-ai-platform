@@ -6,7 +6,8 @@ permissions here. Source reads remain an additional explicit constraint.
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-from sqlalchemy import select
+from sqlalchemy import select, update
+from copy import deepcopy
 from sqlalchemy.exc import SQLAlchemyError
 
 from .service import AccessDenied
@@ -17,6 +18,7 @@ B_ACTIONS = frozenset({
     'b:read', 'b:case:write', 'b:case:review', 'b:analyze',
     'b:policy:write', 'b:policy:publish', 'b:dataset:manage',
     'b:tasks:create', 'b:tasks:read', 'b:tasks:cancel', 'b:tasks:execute',
+    'b:investigate', 'b:risk:confirm', 'b:risk:consume', 'b:binding:manage',
 })
 RESOURCE_KINDS = Literal['CASE', 'POLICY', 'DATASET']
 SOURCE_NATURES = Literal['TEACHING_ERP_OBSERVED', 'SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP', 'MIDDLEWARE_TEACHING_DATA']
@@ -117,3 +119,37 @@ def authorize_b_resource(access, connection, principal, action, resource_scope, 
         raise AccessDenied('AUTH_BACKEND_UNAVAILABLE') from None
     except (ValueError, TypeError, KeyError):
         raise AccessDenied() from None
+
+
+def register_created_resource(access, connection, principal, resource_scope, audit):
+    """G01 grants explicit IDs to a creator under existing create-parent grants.
+
+    Called atomically with asset creation. Never revives grants or grants new actions;
+    existing resources are not authorized by a create-parent permission.
+    """
+    scope = BResourceScope.model_validate(resource_scope)
+    if scope.createParent:
+        raise AccessDenied()
+    access._assert_current(connection, principal, lock=True)
+    rows = connection.execute(select(b_resource_grants).filter_by(tenant_id=principal.tenant_id,
+        principal_id=principal.principal_id, workspace_id=scope.workspaceId).order_by(b_resource_grants.c.action).with_for_update()).mappings().all()
+    for row in rows:
+        if not row['active'] or scope.resourceKind not in B_ACTION_KINDS.get(row['action'], set()):
+            continue
+        allowed = deepcopy(normalize_grant(row['scope'], principal.tenant_id, scope.workspaceId))
+        changed = False
+        for item in allowed['resources']:
+            if (item['resourceKind'],item['sourceNature'],item['sourceTenant']) != (scope.resourceKind,scope.sourceNature,scope.sourceTenant) or not item['allowCreate']:
+                continue
+            if scope.resourceId not in item['resourceIds']:
+                if len(item['resourceIds']) >= 100:
+                    raise ValueError('B_RESOURCE_GRANT_LIMIT')
+                item['resourceIds'].append(scope.resourceId); changed = True
+            if scope.resourceKind == 'DATASET' and scope.datasetVersion not in item['datasetVersions'].get(scope.resourceId, []):
+                item['datasetVersions'].setdefault(scope.resourceId, []).append(scope.datasetVersion); changed = True
+        if changed:
+            connection.execute(update(b_resource_grants).filter_by(tenant_id=principal.tenant_id,
+                principal_id=principal.principal_id, action=row['action'], workspace_id=scope.workspaceId)
+                .values(scope=allowed, revision=row['revision']+1))
+            audit.record(connection, tenant_id=principal.tenant_id, principal_id=principal.principal_id,
+                action='B_CREATED_RESOURCE_GRANTED', details=dict(resourceId=scope.resourceId, action=row['action'], scopeHash=__import__('hashlib').sha256(str(scope).encode()).hexdigest()))

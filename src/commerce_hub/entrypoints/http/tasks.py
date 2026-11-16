@@ -240,3 +240,6 @@ def register_task_routes(app):
         response.delete_cookie("commerce_session", secure=secure, httponly=True, samesite="strict")
         response.delete_cookie("commerce_csrf", secure=secure, samesite="strict")
         return response
+
+    from commerce_hub.entrypoints.http.after_sales import register_b_routes
+    register_b_routes(app,principal)

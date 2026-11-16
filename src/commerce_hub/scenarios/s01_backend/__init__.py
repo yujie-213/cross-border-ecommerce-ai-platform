@@ -280,7 +280,7 @@ class S01BackendHandler:
         return [ai] if ai.get("status") == "AVAILABLE" else []
 
     def report_view(self, report):
-        result = DomainResult.model_validate({key: report[key] for key in DomainResult.model_fields})
+        result = DomainResult.model_validate({key: report[key] for key in DomainResult.model_fields if key in report})
         entry = result.dataReport["sourcePackage"]
         historical = S01BackendHandler([entry])
         historical.validate_publication(result, report["taskRef"], report["planVersion"])

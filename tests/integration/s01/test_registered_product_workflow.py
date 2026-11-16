@@ -41,7 +41,9 @@ def test_owned_business_ai_is_explicit_and_keeps_reference_numbers(make_s01,tmp_
     sid=single(e,tid);report=e.service.read_report(e.principal,sid)
     assert report['analysisReport']['ai']['status']=='AVAILABLE' and model.calls==1
     assert report['dataReport']['item']['decision']['referenceReplenishmentQuantity']==45
-    assert any('39' in f['text'] for f in report['analysisReport']['ai']['explanation']['keyEvidence'])
+    assert report['dataReport']['item']['decision']['forecast']['totalSales']=='39'
+    assert report['analysisReport']['ai']['explanation']['keyEvidence']
+    assert all(f['supportRefs'] for f in report['analysisReport']['ai']['explanation']['keyEvidence'])
     original=e.service.read(e.principal,sid)['parameters'] if 'parameters' in e.service.read(e.principal,sid) else None
     entity={k:report['dataReport']['item'][k] for k in ['entityKey','sourceTenant','storeId','warehouseId','productId','sku','storeName','warehouseName']}
     view=e.service.create(e.principal,'no-ai-with-provider','S01_V2_SINGLE',e.scope,dict(entity=entity,explainAI=False),'synthetic')

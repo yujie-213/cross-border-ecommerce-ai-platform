@@ -216,7 +216,7 @@ class S01SupplyInventoryHandler:
             raise ValueError("BROKEN_S01_TASK_BINDING")
 
     def report_view(self, report):
-        result = DomainResult.model_validate({key: report[key] for key in DomainResult.model_fields})
+        result = DomainResult.model_validate({key: report[key] for key in DomainResult.model_fields if key in report})
         self.validate_publication(result, report["taskRef"], report["planVersion"])
         view = self.rules.report_view(report)
         # Every catalog value was selected from the same safe quantity facts.

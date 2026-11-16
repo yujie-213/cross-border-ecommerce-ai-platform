@@ -18,6 +18,14 @@ def task_service(database, settings, registry=None):
         from commerce_hub.scenarios.s01_backend.requisition import RequisitionService
         service.requisitions = RequisitionService(service, backend.handler.scope_registry, backend.handler.requisition_client_factory)
     service.v2_requisitions = None
+    from commerce_hub.scenarios.after_sales.service import AfterSales
+    bspec=(registry or {}).get('B_CASE_EVIDENCE_V1')
+    aspec=(registry or {}).get('B_CASE_ADVICE_V1')
+    service.after_sales=AfterSales(service,bspec.handler.source_reader if bspec else None,aspec.handler.provider if aspec else None)
+    from commerce_hub.scenarios.after_sales.risk import QualityRiskReadPort
+    for sid in ('S01_V2_SINGLE','S01_V2_BATCH'):
+        if sid in service.registry:
+            service.registry[sid].handler.quality_risk_port=QualityRiskReadPort(service.after_sales)
     v2 = (registry or {}).get('S01_V2_SINGLE')
     if v2 and getattr(v2.handler, 'requisition_client_factory', None):
         from commerce_hub.scenarios.s01_v2.requisition import V2RequisitionService

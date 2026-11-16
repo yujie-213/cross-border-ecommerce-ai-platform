@@ -17,6 +17,10 @@ export interface V2Admission {
   }
 }
 export interface V2Item extends V2Admission {
+  qualityRiskHistory?: QualityRiskAdvisory
+  qualityRiskAdvisory?: QualityRiskAdvisory
+  qualityRiskScopeAdvisories?: QualityRiskAdvisory[]
+  qualityRiskScopeHistories?: QualityRiskAdvisory[]
   pendingPurchases?: { erpId: string; erpNumber: string; status: string; warehouseName: string; purpose: string }[]
   decisionVersion?: string; decision?: ProductDecision; erpComparison?: ERPComparison; relatedScopes?: V2Item[]
   productSummary?: { scopeCount: number; storeCount: number; warehouseCount: number; referencePlanTotal: number | null; replenishScopeCount: number; judgedScopeCount: number; riskScopeCount: number; analyzedSkuCount: number; productIds: string[] }
@@ -35,6 +39,7 @@ export interface V2Item extends V2Admission {
   inventoryBasis?: { status: string; observedAt?: string | null; rowUpdatedAt?: string | null; residual?: unknown; issues?: string[]; checkpoint?: { version?: string; evidenceDigest?: string } } | null
   recoveryHints?: { code: string; message: string; action: string }[]
 }
+export interface QualityRiskAdvisory { status:string;checkedAt:string;reason:string;riskRefs:{riskId:string;version:number;reason:string;limitations:string;sourceNature:string;validUntil:string}[] }
 export interface PlanPreview { entityKey: string; sourceTaskId: string; observedAt: string; quantity: number; availableDate: string; windowStart: string; windowEnd: string; evaluation: Evaluation; semantics: 'HYPOTHETICAL_PLAN_NOT_CONFIRMED_SUPPLY' }
 export interface ProductForecast {
   available: boolean; reason?: string; sampleStart?: string; sampleEnd?: string; sampleAgeDays?: number

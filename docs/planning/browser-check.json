@@ -1,16 +1,12 @@
 {
   "status": "pass",
-  "htmlSha256": "24abd3e44686b8c22351458538800118b7c64758a56e06bf2cc4f11704b280d0",
+  "htmlSha256": "a19edab134d08423b4a1c6344eaf991e0602bd1ebd5a5e8dbdc767039b71fc41",
   "checks": [
     {
       "width": 1440,
       "scrollWidth": 1440,
       "svg": 1,
       "sections": 11,
-      "viewport": {
-        "width": 1440,
-        "height": 900
-      },
       "theme": "light",
       "pass": true
     },
@@ -19,10 +15,6 @@
       "scrollWidth": 1440,
       "svg": 1,
       "sections": 11,
-      "viewport": {
-        "width": 1440,
-        "height": 900
-      },
       "theme": "dark",
       "pass": true
     },
@@ -31,10 +23,6 @@
       "scrollWidth": 1920,
       "svg": 1,
       "sections": 11,
-      "viewport": {
-        "width": 1920,
-        "height": 1080
-      },
       "theme": "light",
       "pass": true
     },
@@ -43,10 +31,6 @@
       "scrollWidth": 1920,
       "svg": 1,
       "sections": 11,
-      "viewport": {
-        "width": 1920,
-        "height": 1080
-      },
       "theme": "dark",
       "pass": true
     },
@@ -55,10 +39,6 @@
       "scrollWidth": 390,
       "svg": 1,
       "sections": 11,
-      "viewport": {
-        "width": 390,
-        "height": 844
-      },
       "theme": "light",
       "pass": true
     },
@@ -67,15 +47,10 @@
       "scrollWidth": 390,
       "svg": 1,
       "sections": 11,
-      "viewport": {
-        "width": 390,
-        "height": 844
-      },
       "theme": "dark",
       "pass": true
     }
   ],
-  "errors": [],
   "remoteRequests": [],
-  "visualReview": "recorded separately"
+  "errors": []
 }

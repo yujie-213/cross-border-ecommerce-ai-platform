@@ -36,6 +36,7 @@ def configure(config=None):
         COMMERCE_S01_V2_MODEL_AUTHORIZATION=config.get('modelAuthorization','s01-local-daily-use-20261115'),
         COMMERCE_MODEL_PROVIDER='deepseek' if config['modelEnabled'] else 'mock',COMMERCE_MODEL_NETWORK_ENABLED=str(config['modelEnabled']).lower(),
         COMMERCE_MODEL_MAX_OUTPUT_TOKENS='1024',COMMERCE_MODEL_MAX_CONCURRENT='1',COMMERCE_MODEL_TIMEOUT_SECONDS='30',COMMERCE_TASK_DEADLINE_SECONDS='600')
+    os.environ['COMMERCE_B_ENABLED']=str(config.get('afterSalesEnabled',False)).lower()
     from commerce_hub.bootstrap.settings import load_settings
     return load_settings()
 
@@ -44,11 +45,13 @@ def create_app():
     from commerce_hub.bootstrap.s01_v2 import registry
     from commerce_hub.entrypoints.http.app import create_app as factory
     settings=configure()
-    return factory(settings,registry(settings))
+    from commerce_hub.bootstrap.after_sales import registry as b_registry
+    return factory(settings,{**registry(settings),**b_registry(settings)})
 
 
 if __name__=='__main__':
     if sys.argv[1:]!=['worker']:raise SystemExit('Explicit worker command required')
     from commerce_hub.bootstrap.s01_v2 import registry
     from commerce_hub.entrypoints.worker.__main__ import run
-    settings=configure();raise SystemExit(run(settings,registry(settings)))
+    from commerce_hub.bootstrap.after_sales import registry as b_registry
+    settings=configure();raise SystemExit(run(settings,{**registry(settings),**b_registry(settings)}))

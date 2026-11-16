@@ -107,6 +107,13 @@ class V2Handler:
             if data['item']['analysisState']!='FAILED':
                 ai=explain(data['item'],context,self.provider if parameters.get('explainAI',True) else None)
                 if not parameters.get('explainAI',True):ai['reason']='ANALYSIS_ONLY_REQUEST'
+        risk_port=getattr(self,'quality_risk_port',None)
+        if risk_port is not None:
+            risk_snapshot=[];objects=list(rows.values())
+            for offset in range(0,len(objects),100):
+                identities=[{k:r.get(k) for k in ('sourceTenant','productId','sku','storeId','warehouseId')} for r in objects[offset:offset+100]]
+                risk_snapshot.extend(r for r in risk_port.lookup(context.principal,identities) if r['riskRefs'])
+            data['qualityRiskSnapshot']=risk_snapshot
         limited=not complete or any(not cap.get('complete') for cap in catalog.values() if isinstance(cap,dict) and 'rows' in cap) or data['summary']['unanalyzable'] or data['summary']['failed']
         return DomainResult(contractVersion='0.1.0',sourceNature='SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP',
             completeness='PARTIAL' if limited else 'RULES_ONLY',scope=context.task['scope'],snapshotRef=data['catalogManifest']['snapshotRef'],
@@ -132,12 +139,22 @@ class V2Handler:
         self.validate(params)
         if self.single and report['dataReport']['item']['entityKey']!=params['entity']['entityKey']:raise ValueError('V2_ENTITY_BINDING_INVALID')
     def report_view(self,report):
-        result=DomainResult.model_validate({k:report[k] for k in DomainResult.model_fields})
+        result=DomainResult.model_validate({k:report[k] for k in DomainResult.model_fields if k in report})
         self.validate_publication(result,report['taskRef'],report['planVersion'])
         view=deepcopy(report)
+        # Historical risk references require current B access; generic report reads
+        # do not disclose saved teaching risk contents after binding revocation.
+        view['dataReport'].pop('qualityRiskSnapshot',None)
         if self.single and view['dataReport']['item'].get('ruleResult'):
             view['dataReport']['item']['ruleResult'].pop('input',None)
         return view
     def model_receipts(self,report):
         ai=report['analysisReport']['ai']
         return [ai] if ai.get('status')=='AVAILABLE' else []
+
+    def authorized_report_view(self,report,principal):
+        view=self.report_view(report)
+        port=getattr(self,'quality_risk_port',None)
+        if port and 'qualityRiskSnapshot' in report['dataReport']:
+            view['dataReport']['qualityRiskHistory']=port.historical(principal,report['dataReport']['qualityRiskSnapshot'])
+        return view

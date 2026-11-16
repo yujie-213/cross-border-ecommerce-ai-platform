@@ -67,7 +67,7 @@ class TeachingS01AdmissionHandler:
             raise ValueError("TEACHING_PUBLICATION_BINDING_REJECTED")
 
     def report_view(self, report):
-        result = DomainResult.model_validate({k:report[k] for k in DomainResult.model_fields})
+        result = DomainResult.model_validate({k:report[k] for k in DomainResult.model_fields if k in report})
         historical = TeachingS01AdmissionHandler(result.dataReport["observationProjection"])
         historical.validate_publication(result,report["taskRef"],report["planVersion"])
         view = {k:deepcopy(report[k]) for k in ("contractVersion","sourceNature","completeness","scope","snapshotRef",

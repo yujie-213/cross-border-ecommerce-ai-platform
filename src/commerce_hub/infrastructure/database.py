@@ -8,8 +8,8 @@ from sqlalchemy import create_engine, event, inspect, text
 
 from commerce_hub.bootstrap.settings import Settings
 
-SCHEMA_REVISION = '0012_b_resource_grants'
-COMPATIBLE_SCHEMA_REVISIONS = frozenset({'0011_local_admin', SCHEMA_REVISION})
+SCHEMA_REVISION = '0013_b_workflows'
+COMPATIBLE_SCHEMA_REVISIONS = frozenset({'0011_local_admin', '0012_b_resource_grants', SCHEMA_REVISION})
 AUTHORIZED_TEST_DATABASE = "s01_a01_test_20261112"
 ROOT = Path(__file__).resolve().parents[3]
 REQUIRED_TABLES = frozenset({

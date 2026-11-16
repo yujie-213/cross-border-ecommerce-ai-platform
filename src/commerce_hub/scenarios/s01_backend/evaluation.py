@@ -163,7 +163,7 @@ class S01ModelEvaluationHandler:
             if row["analysisReport"]["ai"]["status"] == "AVAILABLE"]
 
     def report_view(self, report):
-        result = DomainResult.model_validate({key: report[key] for key in DomainResult.model_fields})
+        result = DomainResult.model_validate({key: report[key] for key in DomainResult.model_fields if key in report})
         clean = self._validate_results(result, report["taskRef"], report["planVersion"])
         view = self.backend.report_view(dict(report, dataReport=clean.dataReport, analysisReport=clean.analysisReport))
         view["analysisReport"]["evaluation"] = deepcopy(result.analysisReport["evaluation"])

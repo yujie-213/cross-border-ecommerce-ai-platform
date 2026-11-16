@@ -191,7 +191,7 @@ class OnlineS01Handler:
         if report['dataReport']['scenarioSupplement'].get('inputMode') != MODE:
             if self.fixed is None: raise ValueError('FIXED_CATALOG_NOT_ENABLED')
             return self.fixed.report_view(report)
-        result=DomainResult.model_validate({k:report[k] for k in DomainResult.model_fields})
+        result=DomainResult.model_validate({k:report[k] for k in DomainResult.model_fields if k in report})
         if self.scope_registry:
             self.scope_registry.require_scope(result.scope)
         self.validate_publication(result,report['taskRef'],report['planVersion'])

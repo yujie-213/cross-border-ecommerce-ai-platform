@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { request } from '../api/client'
 import { init, state, latestBatchId } from '../s01'
 import { href } from '../router'
 
@@ -10,6 +11,8 @@ const recent = computed(() => [
 ].sort((a,b) => (b.task.createdAt || b.task.deadline).localeCompare(a.task.createdAt || a.task.deadline)).slice(0,5))
 const attention = computed(() => recent.value.filter(r => r.task.state === 'FAILED'))
 onMounted(init)
+const bEnabled=ref(false)
+onMounted(async()=>{try{const status=await request<{enabled:boolean}>('/status',{},undefined,15000,'/api/b/v1');bEnabled.value=status.enabled}catch{/* S01 remains usable when B is unavailable. */}})
 </script>
 
 <template>
@@ -21,6 +24,7 @@ onMounted(init)
       <a class="panel agent-entry" :href="href('/workbench', {batch:latestBatchId() || undefined})">
         <span class="agent-mark">补</span><div><span class="chip primary">已接入</span><h2>智能补货</h2><small>自有商品分析 / AI 行动建议 / 采购状态追踪</small></div><span class="agent-arrow">进入工作区 →</span>
       </a>
+      <a v-if="bEnabled" class="panel agent-entry" :href="href('/after-sales/workbench')"><span class="agent-mark">客</span><div><span class="chip primary">已接入</span><h2>智能售后与客户体验</h2><small>售后处理 / 体验与退货分析 / 质量风险协作</small></div><span class="agent-arrow">进入工作区 →</span></a>
     </section>
     <div class="home-lower">
       <section class="panel"><div class="panel-head"><h2>近期任务</h2></div>

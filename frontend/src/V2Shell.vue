@@ -7,18 +7,20 @@ import WorkbenchPage from './pages/WorkbenchPage.vue'
 import SuggestionsPage from './pages/SuggestionsPage.vue'
 import SkuPage from './pages/SkuPage.vue'
 import RequisitionsPage from './pages/RequisitionsPage.vue'
+import AfterSalesPage from './afterSales/AfterSalesPage.vue'
 
 const emit = defineEmits<{ logout: []; loggedOut: [] }>()
 
-const sections = [
+const sections = computed(() => current.value === 'after-sales' ? [{key:'after-sales',path:'/after-sales/workbench',label:'售后与客户体验'}] : [
 
   { key: 'workbench', path: '/workbench', label: '智能补货' },
   { key: 'suggestions', path: '/suggestions', label: '商品分析' },
   { key: 'requisitions', path: '/requisitions', label: '请购管理' }
-]
+])
 
 const current = computed(() => {
   const path = route.value.path
+  if(path.startsWith('/after-sales')) return 'after-sales'
   if (path === '/home' || path === '/') return 'home'
   if (path.startsWith('/sku/')) return 'sku'
   if (path.startsWith('/requisitions')) return 'requisitions'
@@ -29,6 +31,7 @@ const current = computed(() => {
 const page = computed(() => {
   switch (current.value) {
     case 'home': return HomePage
+    case 'after-sales': return AfterSalesPage
     case 'suggestions': return SuggestionsPage
     case 'sku': return SkuPage
     case 'requisitions': return RequisitionsPage
@@ -38,6 +41,7 @@ const page = computed(() => {
 
 const crumb = computed(() => {
   if (current.value === 'home') return ['首页']
+  if (current.value === 'after-sales') return ['智能售后与客户体验']
   if (current.value === 'sku') return ['智能补货', '商品分析']
   if (current.value === 'suggestions') return ['智能补货', '商品列表']
   if (current.value === 'requisitions') return ['请购管理']
@@ -60,8 +64,8 @@ watch(() => route.value.path, path => {
 <template>
   <aside v-if="current !== 'home'" class="sidebar agent-sidebar">
     <a class="brand" href="#/home"><span class="brand-symbol">序</span><span>序衡<small class="brand-en">COMMERCE OPERATIONS</small></span></a>
-    <a class="platform-return" href="#/home">← 返回平台首页</a><div class="workspace"><span class="workspace-icon">补</span><div>智能补货<small>采购工作区</small></div></div>
-    <div class="nav-label">智能补货 Agent</div>
+    <a class="platform-return" href="#/home">← 返回平台首页</a><div class="workspace"><span class="workspace-icon">{{current==='after-sales'?'客':'补'}}</span><div>{{current==='after-sales'?'售后与客户体验':'智能补货'}}<small>{{current==='after-sales'?'客户服务工作区':'采购工作区'}}</small></div></div>
+    <div class="nav-label">业务工作区</div>
     <nav aria-label="主要导航">
       <a v-for="item in sections" :key="item.key" :href="'#' + item.path"
          :class="{ active: current === item.key || (item.key === 'suggestions' && current === 'sku') }"

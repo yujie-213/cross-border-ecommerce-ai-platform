@@ -186,6 +186,15 @@ class TaskService:
                 raise TaskError("NOT_FOUND", 404) from None
             return self._view(conn, row)
 
+    def find_command(self,principal,command_key):
+        """Current authorized lookup; does not retry or create an asynchronous job."""
+        with self.engine.begin() as conn:
+            self.access._assert_current(conn,principal,lock=True)
+            row=conn.execute(select(tasks).filter_by(tenant_id=principal.tenant_id,principal_id=principal.principal_id,command_key=command_key)).mappings().first()
+            if row is None:raise TaskError('COMMAND_NOT_FOUND',404)
+            self.authorize_task(conn,principal,'read',row['scope'],task=row)
+            return dict(status='FOUND',result=self._view(conn,row))
+
     def history(self, principal, scope, *, scenario_id="S01_BACKEND", limit=20, before=None):
         """Bounded, currently authorized task/report index; no parameters or assets."""
         if type(limit) is not int or not 1 <= limit <= 50 or scenario_id not in self.registry:
@@ -333,9 +342,16 @@ class TaskService:
             try:
                 if report["payload"].get("scope") != row["scope"]:
                     raise ValueError("REPORT_SCOPE_MISMATCH")
-                return spec.handler.report_view(report["payload"])
+                view=getattr(spec.handler,'authorized_report_view',None)
+                if view is None:return spec.handler.report_view(report["payload"])
+                payload=report['payload']
             except (KeyError, TypeError, ValueError, IndexError):
                 raise TaskError("NOT_FOUND", 404) from None
+        # The scenario may reauthorize related B assets on its own connection.
+        # Release O01's principal lock first; nested lock-owning connections
+        # would otherwise wait on this very request and stall other sessions.
+        try:return view(payload,principal)
+        except (KeyError,TypeError,ValueError,IndexError):raise TaskError('NOT_FOUND',404) from None
 
     def cancel(self, principal, task_id, command_key, expected_revision, trace_id):
         fp = self.fingerprint(dict(task=task_id, expectedRevision=expected_revision))

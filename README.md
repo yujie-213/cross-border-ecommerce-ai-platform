@@ -4,6 +4,8 @@
 
 后端为FastAPI、独立Worker、SQLAlchemy/Alembic/MySQL；前端为Vue3/TypeScript生产资源。任务、报告、采集证据、模型用量及请购操作持久保存。当前只提供一个本地超级管理员账号，不建设企业账号中心。
 
+当前 B 开发分支还提供正式 **智能售后与客户体验** 工作区：案件与政策、教学退货分析、人工质量风险及补货提醒。用原账号登录后从首页进入；详见[售后使用与运行说明](docs/runbooks/b-after-sales-foundation.md)和[交付与限制](docs/reports/B_V1_产品交付与验证_20261116.md)。原型方向已通过，正式产品待统一验收；B 真实模型未获独立许可，当前可核实事实、统计和人工处理。
+
 ## 日常使用：双击即可启动
 
 已完成本机首次配置后，在仓库根目录：
@@ -39,7 +41,7 @@ npm --prefix frontend ci
 
 然后双击 **[Initialize-Platform.cmd](Initialize-Platform.cmd)**：
 
-- 显式核对隔离库并前向升级至`0011_local_admin`，旧表/任务/报告不重置；日常启动不会执行迁移。
+- 显式核对隔离库并前向升级至当前迁移`0013_b_workflows`，旧表/任务/报告不重置；日常启动不会执行迁移。
 - 首次以隐藏输入设置并确认admin密码。密码只以随机盐scrypt哈希保存于数据库，明文不写源码、README、Git或本地配置文件。已有账号不会被初始化命令覆盖。
 - 随机签名密钥和本机运行参数保存在Git忽略的`data/private/local-platform/runtime.json`，普通使用不需要复制其中内容或设置身份令牌。
 

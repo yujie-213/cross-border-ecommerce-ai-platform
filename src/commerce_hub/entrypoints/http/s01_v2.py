@@ -95,7 +95,17 @@ def register_v2_routes(app,principal):
                 return bool(p['replenishScopeCount']) if decision=='REPLENISH' else p['noReplenishmentScopeCount']==p['scopeCount'] if decision=='NO_REPLENISHMENT' else p['judgedScopeCount']==0 if decision=='NEEDS_REVIEW' else False
             return d.get('status')==decision
         values=[r for r in values if matches(r)]
-        return dict(total=len(values),offset=offset,limit=limit,items=[{k:v for k,v in r.items() if k not in {'ruleResult','sourceSuggestion','snapshotManifest'}} for r in values[offset:offset+limit]],
+        from commerce_hub.scenarios.after_sales.s01_advisory import attach
+        page=values[offset:offset+limit]
+        risk_history=s.read_report(actor,task_id)['dataReport'].get('qualityRiskHistory') if view['state']=='SUCCEEDED' else None
+        visible=attach(getattr(s,'after_sales',None),actor,page,risk_history)
+        if group=='sku':
+            for item in visible:
+                scope_keys=item.get('productSummary',{}).get('scopeKeys',[])
+                related=attach(getattr(s,'after_sales',None),actor,[rows[k] for k in scope_keys if k in rows],risk_history)
+                item['qualityRiskScopeAdvisories']=[r['qualityRiskAdvisory'] for r in related]
+                item['qualityRiskScopeHistories']=[r['qualityRiskHistory'] for r in related if r.get('qualityRiskHistory')]
+        return dict(total=len(values),offset=offset,limit=limit,items=[{k:v for k,v in r.items() if k not in {'ruleResult','sourceSuggestion','snapshotManifest'}} for r in visible],
             stores=sorted({(r.get('storeId') or '',r.get('storeName') or '') for r in rows.values()}),warehouses=sorted({(r.get('warehouseId') or '',r.get('warehouseName') or '') for r in rows.values()}))
     @app.get('/api/v1/s01/v2/batches/{task_id}/items/{entity_key}')
     def detail(task_id:str,entity_key:str,request:Request,actor=Depends(principal)):
@@ -105,6 +115,10 @@ def register_v2_routes(app,principal):
         if row.get('ruleResult'):row['ruleResult'].pop('input',None)
         result=dict(row)
         result['relatedScopes']=[{k:v for k,v in r.items() if k not in {'ruleResult','snapshotManifest'}} for r in sorted(rows.values(),key=priority) if r['sku']==row['sku']]
+        from commerce_hub.scenarios.after_sales.s01_advisory import attach
+        risk_history=s.read_report(actor,task_id)['dataReport'].get('qualityRiskHistory') if view['state']=='SUCCEEDED' else None
+        result=attach(getattr(s,'after_sales',None),actor,[result],risk_history)[0]
+        result['relatedScopes']=attach(getattr(s,'after_sales',None),actor,result['relatedScopes'],risk_history)
         return result
     @app.post('/api/v1/s01/v2/batches/{task_id}/items/{entity_key}/plan-preview')
     def plan_preview(task_id:str,entity_key:str,body:PlanPreview,request:Request,actor=Depends(principal)):
@@ -150,6 +164,8 @@ def register_v2_routes(app,principal):
         if report:
             item=report['dataReport']['item']
             item['procurementEligibility']['scopeAuthorized']=p.can_write(item)
+            from commerce_hub.scenarios.after_sales.s01_advisory import attach
+            report['dataReport']['item']=attach(getattr(s,'after_sales',None),actor,[item],report['dataReport'].get('qualityRiskHistory'))[0]
         return dict(task=view,report=report)
     @app.get('/api/v1/s01/v2/singles')
     def single_history(request:Request,before:str|None=None,actor=Depends(principal)):

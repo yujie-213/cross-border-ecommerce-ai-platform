@@ -1,12 +1,10 @@
 {
   "status": "PASS",
-  "scope": "B_PROTOTYPE_REVISION_OUTGOING_HISTORY_AND_EVIDENCE",
-  "baseCommit": "73e07159dd363bbbb444be1c74bb648c8bff7bfe",
-  "reviewedImplementation": "9c77877e63d92ebfc5872cf9f7824098fa5dbccc",
-  "scannedBlobs": 24,
+  "scope": "B_V1_CONTINUOUS_STAGED_FILES",
+  "baseCommit": "f074803cc28590482cd9c4add861cf88b46f33e5",
+  "scannedBlobs": 61,
   "knownCredentialCount": 2,
   "findings": [],
-  "reviewedCoincidences": [],
   "excludedUnknownPath": "docs/ERP-openapi.yaml",
-  "limitations": "Configured exact secrets and common secret patterns; synthetic fixtures remain engineering samples; no secret values emitted. Not a security certification."
+  "limitations": "Exact configured secrets and common private-key/token patterns; no secret values emitted. Synthetic fixtures reviewed separately; not security certification."
 }
