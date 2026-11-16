@@ -1,0 +1,99 @@
+{
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "kernel": "production S01 V2 collect_registered + analyze_decision",
+  "modelCalls": 0,
+  "businessMutations": 0,
+  "requestCount": 18,
+  "items": [
+    {
+      "sku": "SIM-AS-261116-CABLE",
+      "analysisState": "ANALYZED",
+      "inventoryAvailable": 4,
+      "decision": {
+        "status": "REPLENISH",
+        "horizonDays": 10,
+        "leadDays": 3,
+        "forecastQuantity": "28.57142857142857142857142857",
+        "referenceReplenishmentQuantity": 25,
+        "purchasableQuantity": 28,
+        "confirmedSupplyQuantity": null,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "stockoutRisk": true,
+        "confidence": "MEDIUM"
+      },
+      "salesEvidence": {
+        "method": "OBSERVED_INTERVAL_REFERENCE",
+        "sampleStart": "2026-11-09",
+        "sampleEnd": "2026-11-15",
+        "observedDays": 7,
+        "unknownDays": 0,
+        "orderCount": 10,
+        "totalSales": "20",
+        "averageDailyDemand": "2.857142857142857142857142857",
+        "sampleDigest": "4795baf4104f9954ec81dd92a3b73d33dbe8030e674638042245ab6e12cc86c8",
+        "sourceEnumerationComplete": true
+      },
+      "ruleFailureCodes": []
+    },
+    {
+      "sku": "SIM-AS-261116-KNIT-M",
+      "analysisState": "ANALYZED",
+      "inventoryAvailable": 3,
+      "decision": {
+        "status": "REPLENISH",
+        "horizonDays": 10,
+        "leadDays": 3,
+        "forecastQuantity": "57.14285714285714285714285714",
+        "referenceReplenishmentQuantity": 55,
+        "purchasableQuantity": 56,
+        "confirmedSupplyQuantity": null,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "stockoutRisk": true,
+        "confidence": "MEDIUM"
+      },
+      "salesEvidence": {
+        "method": "OBSERVED_INTERVAL_REFERENCE",
+        "sampleStart": "2026-11-09",
+        "sampleEnd": "2026-11-15",
+        "observedDays": 7,
+        "unknownDays": 0,
+        "orderCount": 10,
+        "totalSales": "40",
+        "averageDailyDemand": "5.714285714285714285714285714",
+        "sampleDigest": "e3380683b6906aecda0135ee57e7ba8e65cee3cd6f16ff3665a1b2aac47140a1",
+        "sourceEnumerationComplete": true
+      },
+      "ruleFailureCodes": []
+    },
+    {
+      "sku": "SIM-AS-261116-POUCH",
+      "analysisState": "NO_REPLENISHMENT",
+      "inventoryAvailable": 80,
+      "decision": {
+        "status": "NO_REPLENISHMENT",
+        "horizonDays": 10,
+        "leadDays": 3,
+        "forecastQuantity": "14.28571428571428571428571429",
+        "referenceReplenishmentQuantity": 0,
+        "purchasableQuantity": null,
+        "confirmedSupplyQuantity": null,
+        "supplyBasis": "UNVERIFIED_SUPPLY_NOT_DEDUCTED",
+        "stockoutRisk": false,
+        "confidence": "MEDIUM"
+      },
+      "salesEvidence": {
+        "method": "OBSERVED_INTERVAL_REFERENCE",
+        "sampleStart": "2026-11-09",
+        "sampleEnd": "2026-11-15",
+        "observedDays": 7,
+        "unknownDays": 0,
+        "orderCount": 10,
+        "totalSales": "10",
+        "averageDailyDemand": "1.428571428571428571428571429",
+        "sampleDigest": "097498440948d7fdd5b69b32bdc21406b4501da2a0927b252b519e50da488d70",
+        "sourceEnumerationComplete": true
+      },
+      "ruleFailureCodes": []
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "managedStatus": "RUNNING",
+  "configurationFilesUnchanged": true,
+  "accountSessionS01FingerprintsUnchanged": true,
+  "health": {
+    "api": 200,
+    "frontend": 200
+  },
+  "modelCalls": 0
+}

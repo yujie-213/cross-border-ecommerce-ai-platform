@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "scope": "B_PROTOTYPE_ALIGNMENT_OUTGOING_HISTORY_AND_CURRENT_FILES",
-  "baseCommit": "d474fa4310f5320e02b70f5f5527927eaa018544",
-  "reviewedImplementation": "c2816e89b051cae99a81a083dbd2ab279ecb5c86",
-  "scannedBlobs": 44,
+  "scope": "B_ERP_SIMULATION_CURRENT_AND_OUTGOING_HISTORY",
+  "baseCommit": "34b6d8bca7dd7dc89d18e20eea52c18d21336f12",
+  "reviewedImplementation": "52006a83671499f8538747c0024b5b4b43e2c6d6",
+  "scannedBlobs": 29,
   "knownCredentialCount": 2,
   "findings": [],
   "excludedUnknownPath": "docs/ERP-openapi.yaml",
   "rawERPResponsesPublished": 0,
-  "limitations": "Exact local configured credential values and private key/model key patterns; live screenshots manually reviewed as independent teaching data, engineering screenshots explicitly synthetic. Not a security certification."
+  "limitations": "Exact configured credential values and private-key/model-key patterns; only fictional teaching business summaries. Not a security certification."
 }

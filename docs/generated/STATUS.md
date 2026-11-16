@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`7380ea9b2028465f884179f960febc45592f4dde2f3b36c53be9a49050677773`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`849e4b14d397e77332c00281f145d1e7175107f37bd1c9ce5506f65ec45e0e42`。不要手工编辑；候选不是执行授权。
 
-任务 60 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 28；ACCEPTED 23。
+任务 61 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 29；ACCEPTED 23。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 43 | 2 | 0 | 4 | 26 | 11 |
+| D | 44 | 2 | 0 | 4 | 27 | 11 |
 
 ## 当前活动记录
 
@@ -46,6 +46,7 @@
 - D-B-S01-01 补货单品批量风险提醒与原行为兼容：REVIEW；实际执行者=Codex。
 - D-B-ACCEPTANCE-01 三链整体集成与评审交付：REVIEW；实际执行者=Codex。
 - D-B-DATASET-01 独立完整教学数据导入、校验及独立回读：REVIEW；实际执行者=Codex。
+- D-B-ERP-SIMULATION-01 3SKU完整仿真ERP经营数据及双Agent可读验证：REVIEW；实际执行者=Codex。
 
 ## 全部近期记录
 
@@ -111,5 +112,6 @@
 | D-B-ACCEPTANCE-01 | 三链整体集成与评审交付 | REVIEW | D-B-CASE-01, D-B-EXPERIENCE-01, D-B-RISK-01, D-B-S01-01 |
 | D-B-PROTOTYPE-01 | 正式Vue前的关键页面可预览原型 | ACCEPTED | D-B-DESIGN-01 |
 | D-B-DATASET-01 | 独立完整教学数据导入、校验及独立回读 | REVIEW | D-B-FOUNDATION-01 |
+| D-B-ERP-SIMULATION-01 | 3SKU完整仿真ERP经营数据及双Agent可读验证 | REVIEW | D-B-FOUNDATION-01, D-B-S01-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。

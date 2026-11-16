@@ -1,0 +1,236 @@
+{
+  "plan": {
+    "batch": "SIM-AS-20261116-R1",
+    "datasetId": "b-s01-simulated-20261116-r1",
+    "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+    "newSkus": 3,
+    "salesOrders": 30,
+    "customerTickets": 12,
+    "returnDrafts": 7,
+    "newStores": 1,
+    "newWarehouses": 1,
+    "newSuppliers": 1,
+    "supplierQuotes": 3,
+    "inventoryRows": 3,
+    "listings": 3,
+    "saleBusinessDates": [
+      "2026-11-09",
+      "2026-11-10",
+      "2026-11-11",
+      "2026-11-12",
+      "2026-11-13",
+      "2026-11-13",
+      "2026-11-14",
+      "2026-11-14",
+      "2026-11-15",
+      "2026-11-15"
+    ],
+    "maxMutationAttempts": 127,
+    "maxReadAttempts": 700,
+    "history": "FICTIONAL_BUSINESS_DATES_CURRENT_REAL_POSTING",
+    "noExternalTransactions": true,
+    "noModelCalls": true,
+    "noHumanRiskDecisions": true
+  },
+  "state": "REGISTERED_AND_READABLE",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "members": [
+    {
+      "sku": "SIM-AS-261116-KNIT-M",
+      "productId": 362,
+      "storeId": 13,
+      "warehouseId": 318,
+      "salesOrders": 10,
+      "soldQuantity": 40,
+      "opening": 43,
+      "closing": 3
+    },
+    {
+      "sku": "SIM-AS-261116-CABLE",
+      "productId": 363,
+      "storeId": 13,
+      "warehouseId": 318,
+      "salesOrders": 10,
+      "soldQuantity": 20,
+      "opening": 24,
+      "closing": 4
+    },
+    {
+      "sku": "SIM-AS-261116-POUCH",
+      "productId": 364,
+      "storeId": 13,
+      "warehouseId": 318,
+      "salesOrders": 10,
+      "soldQuantity": 10,
+      "opening": 90,
+      "closing": 80
+    }
+  ],
+  "ticketIds": [
+    115410,
+    115411,
+    115412,
+    115413,
+    115414,
+    115415,
+    115416,
+    115417,
+    115418,
+    115419,
+    115420,
+    115421
+  ],
+  "returnDraftIds": [
+    88580,
+    88581,
+    88582,
+    88583,
+    88584,
+    88585,
+    88586
+  ],
+  "registration": {
+    "contentDigest": "b6d67031968d25abbbb93439ae8535ac379a8d39dc60f46016bd87f9e5d31308",
+    "newScopes": 3,
+    "totalScopes": 14,
+    "previousMembersPreserved": true
+  },
+  "replenishmentChecks": [
+    {
+      "sku": "SIM-AS-261116-KNIT-M",
+      "mappingVerified": true,
+      "calculationAllowed": true,
+      "issues": [
+        {
+          "code": "OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED",
+          "severity": "WARN",
+          "path": "policy/otherConstraints",
+          "affects": "CANDIDATES",
+          "category": "BUSINESS_RULE"
+        }
+      ]
+    },
+    {
+      "sku": "SIM-AS-261116-CABLE",
+      "mappingVerified": true,
+      "calculationAllowed": true,
+      "issues": [
+        {
+          "code": "OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED",
+          "severity": "WARN",
+          "path": "policy/otherConstraints",
+          "affects": "CANDIDATES",
+          "category": "BUSINESS_RULE"
+        }
+      ]
+    },
+    {
+      "sku": "SIM-AS-261116-POUCH",
+      "mappingVerified": true,
+      "calculationAllowed": true,
+      "issues": [
+        {
+          "code": "OTHER_PROCUREMENT_CONDITIONS_UNCONFIRMED",
+          "severity": "WARN",
+          "path": "policy/otherConstraints",
+          "affects": "CANDIDATES",
+          "category": "BUSINESS_RULE"
+        }
+      ]
+    }
+  ],
+  "afterSalesChecks": {
+    "discoveredTickets": 12,
+    "identities": [
+      {
+        "ticketId": "115410",
+        "identity": {
+          "lineId": "1154067:0",
+          "orderId": "1154067",
+          "productId": "362",
+          "sku": "SIM-AS-261116-KNIT-M",
+          "storeId": "13",
+          "warehouseId": "318",
+          "name": "澄屿圆领针织衫 M 藏青（完全仿真）",
+          "category": "APPAREL",
+          "attributes": {
+            "material": "棉60% / 聚酯纤维40%",
+            "model": "CY-KNIT-M-NV"
+          },
+          "source": "OBSERVED",
+          "sourceTenant": "1"
+        },
+        "missing": [
+          "完整客户会话未由工单标题证明",
+          "退货申请、实收和退款事实未由工单状态证明",
+          "物流追踪号不证明签收"
+        ]
+      },
+      {
+        "ticketId": "115417",
+        "identity": {
+          "lineId": "1154077:0",
+          "orderId": "1154077",
+          "productId": "363",
+          "sku": "SIM-AS-261116-CABLE",
+          "storeId": "13",
+          "warehouseId": "318",
+          "name": "澄屿USB-C编织线 1m 灰（完全仿真）",
+          "category": "ELECTRONICS",
+          "attributes": {
+            "material": "尼龙编织 / 铝合金接头",
+            "model": "CY-C60-GY"
+          },
+          "source": "OBSERVED",
+          "sourceTenant": "1"
+        },
+        "missing": [
+          "完整客户会话未由工单标题证明",
+          "退货申请、实收和退款事实未由工单状态证明",
+          "物流追踪号不证明签收"
+        ]
+      },
+      {
+        "ticketId": "115420",
+        "identity": {
+          "lineId": "1154087:0",
+          "orderId": "1154087",
+          "productId": "364",
+          "sku": "SIM-AS-261116-POUCH",
+          "storeId": "13",
+          "warehouseId": "318",
+          "name": "澄屿帆布收纳袋 米白（完全仿真）",
+          "category": "UNKNOWN",
+          "attributes": {
+            "material": "棉帆布 / 金属拉链",
+            "model": "CY-P28-IV"
+          },
+          "source": "OBSERVED",
+          "sourceTenant": "1"
+        },
+        "missing": [
+          "完整客户会话未由工单标题证明",
+          "退货申请、实收和退款事实未由工单状态证明",
+          "物流追踪号不证明签收"
+        ]
+      }
+    ]
+  },
+  "calls": {
+    "GET": 413,
+    "POST": 124,
+    "PUT": 3
+  },
+  "actualModelCalls": 0,
+  "humanRiskDecisions": 0,
+  "limitations": [
+    "TEACHING_ONLY",
+    "SHARED_TENANT_NOT_SOURCE_ROW_ISOLATED",
+    "RETURN_DRAFTS_NOT_RECEIVED_OR_REFUNDED",
+    "NO_CUSTOMER_MESSAGES_SENT",
+    "CURRENT_POSTING_NOT_HISTORICAL_POSTING",
+    "NO_PURCHASE_WRITES",
+    "ERP_NATIVE_MATURE_RETURN_COHORT_NOT_VERIFIED",
+    "AI_AND_HUMAN_DECISIONS_NOT_PRESEEDED"
+  ]
+}

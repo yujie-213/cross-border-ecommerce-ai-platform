@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=7380ea9b2028465f884179f960febc45592f4dde2f3b36c53be9a49050677773
+%% TASKS sourceSha256=849e4b14d397e77332c00281f145d1e7175107f37bd1c9ce5506f65ec45e0e42
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -60,6 +60,7 @@ flowchart TB
   D_B_ACCEPTANCE_01["D-B-ACCEPTANCE-01 三链整体集成与评审交付"]
   D_B_PROTOTYPE_01["D-B-PROTOTYPE-01 正式Vue前的关键页面可预览原型"]
   D_B_DATASET_01["D-B-DATASET-01 独立完整教学数据导入、校验及独立回读"]
+  D_B_ERP_SIMULATION_01["D-B-ERP-SIMULATION-01 3SKU完整仿真ERP经营数据及双Agent可读验证"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -153,3 +154,5 @@ flowchart TB
   D_B_S01_01 --> D_B_ACCEPTANCE_01
   D_B_DESIGN_01 --> D_B_PROTOTYPE_01
   D_B_FOUNDATION_01 --> D_B_DATASET_01
+  D_B_FOUNDATION_01 --> D_B_ERP_SIMULATION_01
+  D_B_S01_01 --> D_B_ERP_SIMULATION_01

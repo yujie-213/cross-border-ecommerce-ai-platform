@@ -11830,10 +11830,78 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "INTEGRATION"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "b2a4988c7239038b47ea0a0cb0c15711b9a2ed4d",
+    "52006a83671499f8538747c0024b5b4b43e2c6d6"
+  ],
+  "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6",
+  "evidence": [
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC1",
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "command": ".venv/Scripts/python.exe tools/b_erp_simulation_dataset.py --execute-live",
+      "environment": "Windows/Python3.13；正式synthetic教学ERP；本机原监控注册库",
+      "sample": "3SKU/30本地履约销售/12工单/7退货草稿；127变更独立回读和库存流水核验；原成员保留/新增3店仓；3SKU计算准入/12工单可见/3精确仓库身份",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-ERP-SIMULATION-20261116/summary.json",
+      "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "command": ".venv/Scripts/python.exe data/private/b-erp-simulation-20261116-r1/verify_product_readonly.py",
+      "environment": "正式教学ERP/生产S01 V2读取与确定性决策内核；只读/零模型",
+      "sample": "18次正式只读请求；针织衫参考55/候选56，线缆参考25/候选28，收纳袋暂不补；没有把未知在途计零或采购",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-ERP-SIMULATION-20261116/product-readonly.json",
+      "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/unit/data/test_b_order_warehouse.py tests/unit/data/test_b_erp_simulation.py tests/integration/after_sales tests/security/test_b_resources.py",
+      "environment": "Windows/Python3.13/获准隔离真实MySQL；业务ERP和模型fixture明确合成",
+      "sample": "84 PASS/0 FAIL/0 SKIP；原键恢复/禁止动作/仓库流水正反例/售后权限及三链工程回归",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-ERP-SIMULATION-20261116/regression.xml",
+      "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ERP-SIMULATION-01/AC2"
+      ],
+      "command": "tools/local_platform.py stop/start --no-browser；/health/ready及/health/frontend；配置/账号/会话/S01指纹回读",
+      "environment": "本机既有正式平台/原admin及持久会话",
+      "sample": "托管重启RUNNING，API8768/前端5175均200，配置及账号/会话/S01指纹相同",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-ERP-SIMULATION-20261116/restart.json",
+      "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "本批次真实AI回复、人工调查/风险确认和实际补货风险联动；原生完整成熟退货统计",
+      "environment": "NOT_RUN；不自动创建AI结果或人类决定",
+      "sample": "ERP工单仅摘要/退货仅draft；US/Amazon适用政策及正文/业务日期仍需补证，收纳袋B类别UNKNOWN；不以旧中台教学或合成工程证据替代",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/reports/B_ERP全仿真批次与双Agent读取_20261116.md",
+      "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
   "observedHead": "34b6d8bca7dd7dc89d18e20eea52c18d21336f12",
@@ -11847,6 +11915,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人明确确认完全仿真且补货也能分析后批准立即插入。先预检正式接口，单人实施独立范围，不伪造人工决策。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "本轮批准的完全仿真ERP数据创建及双Agent读取/补货确定性计算完成；84定向回归、正式回读与托管重启通过。真实AI/人工确认/风险联动和成熟退货总体未本轮验收，不伪造结论，不合main。"
     }
   ]
 }

@@ -1,0 +1,81 @@
+{
+  "taskId": "D-B-ERP-SIMULATION-01",
+  "status": "REVIEW",
+  "testedCommit": "52006a83671499f8538747c0024b5b4b43e2c6d6",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "erpImport": "PASS",
+  "registration": "PASS",
+  "formalAfterSalesRead": "PASS",
+  "productionReplenishmentReadAndCalculation": "PASS",
+  "regression": {
+    "tests": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "restart": {
+    "managedStatus": "RUNNING",
+    "configurationFilesUnchanged": true,
+    "accountSessionS01FingerprintsUnchanged": true,
+    "health": {
+      "api": 200,
+      "frontend": 200
+    },
+    "modelCalls": 0
+  },
+  "sourceScope": {
+    "newSkus": 3,
+    "newStoreScopes": 3,
+    "totalSkus": 13,
+    "totalStoreScopes": 14,
+    "oldMembersPreserved": true
+  },
+  "actualMutations": {
+    "POST": 124,
+    "PUT": 3,
+    "DELETE": 0,
+    "procurement": 0,
+    "refund": 0,
+    "returnReceipt": 0,
+    "externalDeliveryOrNotification": 0
+  },
+  "nativeReturns": "7_DRAFTS_ONLY",
+  "newRealModelCalls": 0,
+  "humanRiskDecisions": 0,
+  "realBatchAiRiskToReplenishment": "NOT_RUN",
+  "matureReturnPopulation": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "limits": [
+    "ERP工单仅摘要，完整会话/日期地区及匹配的US/Amazon发布政策需补证",
+    "收纳袋B类别UNKNOWN；不伪映射",
+    "每SKU10销售和退货草稿不能冒充20订单门槛/成熟退货率统计",
+    "本轮仅完全仿真数据和读取/确定性计算；没有替人工确认风险"
+  ],
+  "recoveryHistory": [
+    {
+      "event": "QUOTE_TENANT_FIELD_ABSENT",
+      "action": "original business key readback; verify owned product/supplier parents; no duplicate create"
+    },
+    {
+      "event": "RETURN_QUERY_503",
+      "action": "read by exact owned order_id then bounded lookup; no write sent before recovery"
+    },
+    {
+      "event": "PLANNING_WHITELIST_FIRST_FAIL",
+      "action": "registered exact authorized new files; final document check18PASS"
+    },
+    {
+      "event": "SECURITY_SCAN_COMMAND_OPTION_ERROR",
+      "action": "reran with Git NUL path output; final credentials scanPASS"
+    }
+  ],
+  "evidenceRefs": [
+    "summary.json",
+    "product-readonly.json",
+    "regression.xml",
+    "restart.json",
+    "planning-first.json"
+  ],
+  "documentChecks": "18_PASS",
+  "secretScan": "PASS"
+}
