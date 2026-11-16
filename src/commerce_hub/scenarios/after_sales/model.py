@@ -68,6 +68,7 @@ class Bundle:
         data=self.data
         require(len(json.dumps(data,ensure_ascii=False).encode())<=14000,'CONTEXT_LIMIT')
         schema=self.schema.model_json_schema()
+        if self.schema is Explanation:schema['properties']['facts']['items']['enum']=self.data['factRefs']
         rules=('facts 数组只允许逐字复制 factRefs 中的引用字符串，不能写事实陈述或解释。hypotheses 是待验证原因；alternativeExplanations 是其他解释；missingEvidence 是待补证；nextSteps 是人工下一步。这四个数组禁止数字、金额、缺陷确认和退款承诺。'
             if self.schema is Explanation else 'items 必须逐项对应 feedbackId；labels 从 taxonomy 选择；span 必须逐字来自相应反馈原文。' if self.schema is Classifications else
             'adviceCode 只允许 CLARIFY、MANUAL_REVIEW、SAFETY_ESCALATE 且须获所引用政策 terms 允许；citations 逐字复制给定政策的 policyId/version/sectionId/hash。replyDraft 不得含数字、金额、到账/退款/补发/赔偿承诺。')
@@ -113,6 +114,20 @@ def invoke(context,provider,purpose,data,schema,call_id,*,snapshot_id):
             requiredCapabilities=['structured_output'],toolSpecRefs=[],allowanceRef=allowance['allowanceRef'],
             deadline=context.task['deadline'].isoformat()+'Z',traceId=digest(logical)[:32],parentSpanId='b-model',**bundle.refs())
         response=ModelGateway(provider,timeout_seconds=30).invoke(request,context,bundle)
+        # Optional provider diagnostics stay private; never publish customer/provider text.
+        exchange=provider.exchange(logical) if hasattr(provider,'exchange') else None
+        if exchange is not None:
+            from pathlib import Path
+            from dataclasses import asdict
+            trace=asdict(exchange)
+            if exchange.content:
+                try:bundle._validated_output(exchange.content)
+                except Exception as error:trace['validationFailure']=getattr(error,'code',type(error).__name__)
+            try:
+                root=Path(__file__).resolve().parents[4]/'data/private/b-after-sales/model-evidence'/context.task['task_id']
+                root.mkdir(parents=True,exist_ok=True)
+                (root/(logical+'.json')).write_text(json.dumps(trace,ensure_ascii=False,default=str),encoding='utf-8')
+            except OSError:pass
         return dict(status='AVAILABLE' if response.status=='SUCCESS' else 'UNAVAILABLE',reason=response.code,
             output=response.validatedObject if response.status=='SUCCESS' else None,usageStatus=response.usageStatus,costStatus=response.costStatus,tokenUsageStatus=response.tokenUsageStatus,
             usage=response.usage.model_dump(mode='json') if response.usage else None,
