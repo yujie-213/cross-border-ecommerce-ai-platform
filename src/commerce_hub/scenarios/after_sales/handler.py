@@ -166,7 +166,7 @@ class Handler:
                 receipts.append(ai)
                 classifications.extend(ai['output']['items'] if ai['status']=='AVAILABLE' else [dict(feedbackId=f['feedbackId'],labels=['UNKNOWN'],span='',reason=ai['reason']) for f in batch])
             fact_refs=[f"metric:{item['productId']}:{i}:{g['numerator']}/{g['denominator']}" for item in metrics['items'] for i,g in enumerate(item['groups'])]
-            explanation=invoke(context,self.provider if options.get('ai') else None,'b.experience.explain.v1',dict(metrics=metrics,factRefs=fact_refs),Explanation,'explain',snapshot_id=snapshot_id)
+            explanation=invoke(context,self.provider if options.get('ai') else None,'b.experience.explain.v1',dict(metrics=metrics,feedback=feedback,classifications=classifications,factRefs=fact_refs+[f['feedbackId'] for f in feedback]),Explanation,'explain',snapshot_id=snapshot_id)
             created_report=dict(datasetId=row['id'],datasetVersion=manifest['version'],snapshotRef=snapshot_id,
                 metrics=metrics,feedback=feedback,classifications=classifications,classificationCorrections=[],classificationVersion='taxonomy-v1',
                 ai=explanation,classificationReceipts=receipts,limitations=['中台独立教学数据，不是ERP原生交易','异常阈值仅为待调查线索'],

@@ -69,7 +69,7 @@ class Bundle:
         require(len(json.dumps(data,ensure_ascii=False).encode())<=14000,'CONTEXT_LIMIT')
         schema=self.schema.model_json_schema()
         if self.schema is Explanation:schema['properties']['facts']['items']['enum']=self.data['factRefs']
-        rules=('facts 数组只允许逐字复制 factRefs 中的引用字符串，不能写事实陈述或解释。hypotheses 是待验证原因；alternativeExplanations 是其他解释；missingEvidence 是待补证；nextSteps 是人工下一步。这四个数组禁止数字、金额、缺陷确认和退款承诺。'
+        rules=('facts 数组只允许逐字复制 factRefs 中的引用字符串，不能写事实陈述或解释。优先结合给定反馈原文和已校验主题解释异常，不把已给出的材料再次列为缺失；缺少批次、测量或检验时才建议补证，不用通用原因清单代替证据。对比期间统一称上期、本期，禁止前窗、后窗、观察窗等内部术语。hypotheses 是待验证原因；alternativeExplanations 是其他解释；missingEvidence 是待补证；nextSteps 是人工下一步。这四个数组禁止数字、金额、缺陷确认和退款承诺。'
             if self.schema is Explanation else 'items 必须逐项对应 feedbackId；labels 从 taxonomy 选择；span 必须逐字来自相应反馈原文。' if self.schema is Classifications else
             'adviceCode 只允许 CLARIFY、MANUAL_REVIEW、SAFETY_ESCALATE 且须获所引用政策 terms 允许；citations 逐字复制给定政策的 policyId/version/sectionId/hash。replyDraft 只写客户问题、核实方式和人工下一步，不复述付款或退货阶段。即使是否定句或引用，也不能出现以下校验禁词：保证、已经退款、已退款、到账、认证安全、拆机、guarantee、refund issued、已确认缺陷、确定质量问题、绝对安全、已补发、赔偿；禁止数字和货币符号。')
         messages=[dict(role='system',content=PROMPT+'\n'+rules+'\nJSON Schema:'+json.dumps(schema)),dict(role='user',content=json.dumps(data,ensure_ascii=False))]
