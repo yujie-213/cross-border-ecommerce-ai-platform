@@ -1,0 +1,80 @@
+{
+  "taskId": "D-B-S01-01",
+  "status": "REVIEW",
+  "testedCommit": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
+  "baseCommit": "9861eb3eb3ff88a687d566a328dd1fd788e6a0ed",
+  "date": "2026-11-16",
+  "changes": [
+    "工作台操作区仅保留分析商品入口，删除nextAction说明",
+    "商品列表不展示逐商品售后风险框，但保留服务端风险读取及字段",
+    "单品补货分析区显示有效匹配风险与证据入口；无风险不占位；未核查为普通查询状态",
+    "再次进入相同商品也重新读取最新风险，撤销不沿用旧结果；过期和无效核查时间不显示为当前风险"
+  ],
+  "environment": "Windows/Python3.13/Node/Vue/Edge/获准隔离MySQL；正式API与独立Worker；ERP业务夹具为合成、模型off/mock",
+  "frontend": {
+    "command": "cd frontend && npm.cmd test && npm.cmd run build",
+    "result": "PASS",
+    "tests": 80,
+    "files": 13,
+    "typecheck": "PASS",
+    "build": "PASS"
+  },
+  "integration": {
+    "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales/test_workflows.py tests/integration/after_sales/test_edges.py tests/integration/after_sales/test_process_product.py --tb=short --junitxml=.tmp/s01-risk-ui-backend-final.xml",
+    "result": "PASS",
+    "tests": 28,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "result": "PASS",
+    "tests": 1,
+    "embeddedInIntegrationCount": true,
+    "coverage": [
+      "三链原流程",
+      "工作台操作入口",
+      "商品列表无风险框",
+      "单品当前风险及证据入口",
+      "撤销后同商品重新打开不再显示当前提醒"
+    ],
+    "evidence": "browser-final.txt",
+    "visualQA": "view_image检查工作台/列表/1024宽分析页，未发现截断或布局异常；截图为隔离合成工程样本，不是新ERP批次实测"
+  },
+  "initialFailures": [
+    {
+      "kind": "TYPECHECK",
+      "result": "FAIL",
+      "detail": "新增测试fixture缺少V2Item字段导致TS2352；已补完整类型字段后80测试/类型构建通过"
+    },
+    {
+      "kind": "BROWSER",
+      "testedCommit": "72174bce9abd6e94f1d4624d4c50d3df5bf8e35b",
+      "result": "FAIL",
+      "tests": 28,
+      "passed": 27,
+      "failed": 1,
+      "detail": "风险撤销后重新打开同商品跳过openItem，沿用旧MATCHED；dd922c1改为每次进入重新读取，28项复测通过",
+      "artifactRef": "backend-first.xml"
+    }
+  ],
+  "runtime": {
+    "health": {
+      "frontend": 200,
+      "api": 200
+    },
+    "servedBuildMatches": true,
+    "restartRequired": false
+  },
+  "boundaries": {
+    "liveERPCalls": 0,
+    "liveModelCalls": 0,
+    "erpBusinessMutations": 0,
+    "procurementRulesChanged": false,
+    "inventoryDemandFormulasChanged": false,
+    "adminSessionsOrS01GrantsChanged": false,
+    "newDatasetAIRiskEndToEnd": "NOT_RUN",
+    "mergedMain": false
+  },
+  "review": "等待负责人体验；原需求/历史测试不改写，本轮明确UI指令覆盖列表风险展示位置约定，后台作用域/确认/有效期/来源隔离及批量读取保持。"
+}

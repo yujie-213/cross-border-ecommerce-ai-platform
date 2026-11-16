@@ -1274,11 +1274,11 @@
     "tools/verify_two_sku_api_worker.py",
     "tools/verify_two_sku_usability.py",
     "frontend/tests/unit/replenishment-risk-display.test.ts",
-    "docs/evidence/S01-RISK-UI-20261116/browser-first.log",
+    "docs/evidence/S01-RISK-UI-20261116/browser-first.txt",
     "docs/evidence/S01-RISK-UI-20261116/backend-first.xml",
     "docs/evidence/S01-RISK-UI-20261116/validation.json",
     "docs/evidence/S01-RISK-UI-20261116/backend-final.xml",
-    "docs/evidence/S01-RISK-UI-20261116/browser-final.log",
+    "docs/evidence/S01-RISK-UI-20261116/browser-final.txt",
     "docs/evidence/S01-RISK-UI-20261116/workbench.png",
     "docs/evidence/S01-RISK-UI-20261116/list.png",
     "docs/evidence/S01-RISK-UI-20261116/analysis.png"

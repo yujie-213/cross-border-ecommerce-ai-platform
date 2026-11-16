@@ -1,0 +1,41 @@
+
+Running 1 test using 1 worker
+
+(node:51068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder (41.2s)
+
+
+  1) ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('aside.quality-risk')
+    Expected: 0
+    Received: 1
+    Timeout:  12000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('aside.quality-risk') with timeout 12000ms
+      - waiting for locator('aside.quality-risk')
+        27 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      103 |   await page.goto('/#/suggestions?batch='+tid)
+      104 |   await page.locator('tbody tr').filter({hasText:'V2-SKU-0'}).first().getByRole('link',{name:'分析商品 →',exact:true}).click()
+    > 105 |   await expect(page.locator('aside.quality-risk')).toHaveCount(0)
+          |                                                    ^
+      106 |   await page.goto('/#/suggestions?batch='+tid);await expect(page.locator('.quality-risk a')).toHaveCount(0)
+      107 |   await page.reload();await expect(page.getByRole('heading',{name:'商品与补货建议',exact:true})).toBeVisible()
+      108 |   await expect(page.getByRole('alert')).toHaveCount(0)
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:105:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-three-product-chai-e26bc--isolation-and-S01-reminder\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-three-product-chai-e26bc--isolation-and-S01-reminder\error-context.md
+
+  1 failed
+    ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder 

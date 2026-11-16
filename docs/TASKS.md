@@ -10901,11 +10901,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
-    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
+    "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+    "72174bce9abd6e94f1d4624d4c50d3df5bf8e35b",
+    "dd922c1bfecac1caab912eca9f2a3ae41fdccc13"
   ],
-  "testedCommit": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "testedCommit": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -10959,11 +10961,53 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-V1-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/Node/Vue/Edge/获准隔离MySQL；正式API与独立Worker；ERP业务夹具为合成、模型off/mock",
+      "testedCommit": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-S01-01/AC1",
+        "D-B-S01-01/AC2"
+      ],
+      "command": "npm.cmd test && npm.cmd run build",
+      "sample": "80前端测试PASS；类型与构建PASS；列表不展示风险、单品当前/历史/查询状态分离；未变更后端/公式/采购规则",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-RISK-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/Node/Vue/Edge/获准隔离MySQL；正式API与独立Worker；ERP业务夹具为合成、模型off/mock",
+      "testedCommit": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-S01-01/AC1",
+        "D-B-S01-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 COMMERCE_MODEL_PROVIDER=mock COMMERCE_MODEL_NETWORK_ENABLED=false .venv/Scripts/python.exe -m pytest tests/integration/after_sales/test_workflows.py tests/integration/after_sales/test_edges.py tests/integration/after_sales/test_process_product.py --tb=short --junitxml=.tmp/s01-risk-ui-backend-final.xml",
+      "sample": "28 PASS，实际隔离MySQL/API/独立Worker；合成ERP业务及mock模型，不作为真实新ERP批次AI闭环验收",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-RISK-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/Node/Vue/Edge/获准隔离MySQL；正式API与独立Worker；ERP业务夹具为合成、模型off/mock",
+      "testedCommit": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-S01-01/AC1",
+        "D-B-S01-01/AC2"
+      ],
+      "command": "test_process_product内Edge product.spec.ts；view_image定向截图检查",
+      "sample": "1 PASS（已含28项中）：工作台仅分析入口/列表无卡/单品当前风险/撤销同商品重新打开均通过；初始FAIL保留",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/S01-RISK-UI-20261116/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "9861eb3eb3ff88a687d566a328dd1fd788e6a0ed",
+  "observedHead": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml"
   ],
@@ -10999,6 +11043,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人明确要求修改：工作台操作区只保留分析商品，商品列表移除逐项售后风险提示，当前风险集中在单品分析且查询状态与业务风险分开。Codex单人，基点9861eb3；不改补货/采购规则，不ERP/模型调用，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "负责人补货提示纠偏完成；工作台仅分析商品、商品列表零售后风险卡，单品分析集中有效提醒与查询状态分离。浏览器发现同商品缓存使撤销后旧风险残留，dd922c1修复每次入页重读。固定复验80前端/类型构建、28集成（内含1条实际Edge三链）PASS；首轮类型和撤销负例失败保留。无ERP/真实模型/业务写、不改补货采购规则、不合main，待产品体验。"
     }
   ],
   "workItems": [
