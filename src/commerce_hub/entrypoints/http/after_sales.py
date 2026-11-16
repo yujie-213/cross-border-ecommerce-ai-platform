@@ -20,6 +20,8 @@ class CaseCreate(Strict):
     datasetId:str|None=None
     orderId:str|None=None
     erpTicketId:str|None=Field(default=None,pattern=r'^[1-9][0-9]{0,19}$')
+    erpVoiceId:str|None=Field(default=None,pattern=r'^[1-9][0-9]{0,19}$')
+    erpVoiceKind:Literal['reviews','feedback']|None=None
     erpStoreName:str|None=Field(default=None,max_length=128)
 
 
@@ -58,8 +60,36 @@ def register_b_routes(app,principal):
         # Parent scopes only describe permitted creation, never reveal existing counts.
         from commerce_hub.scenarios.after_sales.common import scope
         with d.store.engine.begin() as conn:d.store.authorize(conn,actor,'b:read',scope(actor.tenant_id,'CASE'))
-        return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,
-            sourceStores=list(d.source_reader.stores) if d.source_reader else [],sourceNature='MIDDLEWARE_TEACHING_DATA')
+        from commerce_hub.governance.access.service import AccessDenied
+        stores=[]
+        if d.source_reader:
+            for name,item in d.source_reader.stores.items():
+                try:
+                    with d.store.engine.begin() as conn:
+                        resource=scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=item['sourceTenant'])
+                        d.store.authorize(conn,actor,'b:read',resource)
+                        d.store.authorize(conn,actor,'b:case:write',resource)
+                    stores.append(name)
+                except AccessDenied:continue
+        return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='MIDDLEWARE_TEACHING_DATA')
+
+    @app.get(prefix+'/source-inbox')
+    def source_inbox(request:Request,store:str=Query(min_length=1,max_length=128),kind:Literal['tickets','reviews','feedback']='tickets',
+                     dateFrom:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),dateTo:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),actor=Depends(principal)):
+        from datetime import date
+        try:
+            start=date.fromisoformat(dateFrom) if dateFrom else None
+            end=date.fromisoformat(dateTo) if dateTo else None
+            require(not start or not end or start<=end,'SOURCE_DATE_INVALID')
+        except ValueError:require(False,'SOURCE_DATE_INVALID')
+        return domain(request).source_inbox(actor,store,kind,dateFrom,dateTo)
+
+    @app.get(prefix+'/mapping-options')
+    def mapping_options(request:Request,datasetId:str,store:str=Query(min_length=1,max_length=128),sku:str=Query(min_length=1,max_length=128),actor=Depends(principal)):
+        d=domain(request);require(d.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
+        def check():
+            with d.store.engine.begin() as conn:d.store.get(conn,actor,'DATASET',datasetId,'b:binding:manage')
+        check();result=d.source_reader.mapping_options(store,sku,check);check();return result
 
     @app.get(prefix+'/workbench')
     def workbench(request:Request,actor=Depends(principal)):

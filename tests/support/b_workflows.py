@@ -18,14 +18,14 @@ from commerce_hub.scenarios.s01_v2.policy import V2Policy
 from commerce_hub.data.sync.v2_store import AcquisitionCheckpoint
 from commerce_hub.scenarios.after_sales.source import SourceReader
 from commerce_hub.adapters.erp import TeachingERPReader,ERPConfig
-from tests.support.v2 import SyntheticERP
+from tests.support.b_source import BSourceERP
 
 
 def registry(settings):
     if settings.environment!='test' or not os.environ.get('B_WORKFLOW_TEST_TENANT'):
         raise ValueError('EXPLICIT_TEST_ASSEMBLY_REQUIRED')
     specs=b_registry(settings)
-    source=SyntheticERP(3)
+    source=BSourceERP()
     reader=SourceReader(lambda:TeachingERPReader(ERPConfig(access_token='synthetic-source-token'),transport=source.transport),
         {'Synthetic Store':dict(sourceTenant='1',storeId='1')},Path('.tmp/b-process-private'))
     for sid,spec in list(specs.items()):

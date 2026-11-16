@@ -16,6 +16,19 @@ class AfterSales:
     def __init__(self,tasks,source_reader=None,provider=None):
         self.tasks=tasks;self.store=Store(tasks);self.source_reader=source_reader;self.provider=provider
 
+    def source_inbox(self,actor,store,kind,date_from=None,date_to=None):
+        require(self.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
+        expected=self.source_reader._store(store)
+        resource=scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=expected['sourceTenant'])
+        def check():
+            with self.store.engine.begin() as conn:
+                self.store.authorize(conn,actor,'b:read',resource)
+                self.store.authorize(conn,actor,'b:case:write',resource)
+        check()
+        result=self.source_reader.inbox(store,kind,check,date_from,date_to)
+        check()
+        return result
+
     def create_case(self,actor,key,data):
         require(data['message'] or data.get('erpStoreName'),'CUSTOMER_MESSAGE_REQUIRED')
         if data.get('businessDate'):timestamp(data['businessDate'])
@@ -25,15 +38,26 @@ class AfterSales:
                 datasetId=data.get('datasetId'),identity=None,linkHistory=[],evidence=None,advice=[],reviews=[])
             body['orderId']=data.get('orderId')
             body['erpTicketId']=data.get('erpTicketId');body['erpStoreName']=data.get('erpStoreName')
+            body['erpVoiceId']=data.get('erpVoiceId');body['erpVoiceKind']=data.get('erpVoiceKind')
+            require(not body['erpVoiceId'] or body['erpVoiceKind'] in {'reviews','feedback'} and body['erpStoreName'] and not body['erpTicketId'],'SOURCE_MIXED')
             source='TEACHING_ERP_OBSERVED' if body['erpStoreName'] else SOURCE
             if body['erpStoreName']:
                 require(not body['datasetId'] and self.source_reader is not None,'SOURCE_MIXED')
                 self.source_reader._store(body['erpStoreName'])
+            if body['erpStoreName'] and (body['erpTicketId'] or body['erpVoiceId']):
+                query=select(assets.c.id).filter_by(tenant_id=actor.tenant_id,kind='CASE',workspace=WORKSPACE).where(
+                    assets.c.body['erpStoreName'].as_string()==body['erpStoreName'])
+                if body['erpTicketId']:query=query.where(assets.c.body['erpTicketId'].as_string()==body['erpTicketId'])
+                else:query=query.where(assets.c.body['erpVoiceId'].as_string()==body['erpVoiceId'],assets.c.body['erpVoiceKind'].as_string()==body['erpVoiceKind'])
+                existing=conn.execute(query.limit(1)).scalar()
+                if existing:
+                    row=self.store.get(conn,actor,'CASE',existing)
+                    return dict(kind='CASE',id=existing,revision=row['revision'],state=row['state'])
             if data.get('datasetId'):
                 dataset=self.store.get(conn,actor,'DATASET',data['datasetId'])
                 require(dataset['state']=='ACTIVE','DATASET_NOT_VERIFIED')
                 body['datasetRevision']=dataset['revision'];body['datasetVersion']=dataset['body']['manifest']['version']
-            result=self.store.create(conn,actor,'CASE',body,scope(actor.tenant_id,'CASE',source=source,source_tenant='1' if source=='TEACHING_ERP_OBSERVED' else SOURCE_TENANT),state='ESCALATED' if safety(data['message']) else 'OPEN')
+            result=self.store.create(conn,actor,'CASE',body,scope(actor.tenant_id,'CASE',source=source,source_tenant=self.source_reader._store(body['erpStoreName'])['sourceTenant'] if source=='TEACHING_ERP_OBSERVED' else SOURCE_TENANT),state='ESCALATED' if safety(data['message']) else 'OPEN')
             return dict(kind='CASE',**result)
         return self.store.command(actor,key,'create-case',data,operation)
 
@@ -248,6 +272,8 @@ class AfterSales:
                 origin=investigation['body']['origin'];case=self.store.get(conn,actor,'CASE',origin['id'])
                 linked=case['body'].get('identity') or {}
                 require(all(str(linked.get(k))==str(identity[k]) for k in ('productId','sku','storeId'))
+                    and identity['warehouseMode']=='EXPLICIT_IDS' and linked.get('warehouseId') not in {None,'UNKNOWN'} and identity['warehouseIds']==[linked['warehouseId']]
+                    and not (case['body'].get('evidence') or {}).get('latestUnverified')
                     and identity['sourceTenant']==case['scope']['sourceTenant'] and linked.get('category') in {'APPAREL','ELECTRONICS'}
                     and not any('冲突' in gap for gap in (case['body'].get('evidence') or {}).get('missing',[])),'RISK_SOURCE_MISMATCH')
             body=dict(**data,createdBy=actor.principal_id,createdAt=now(),decisions=[],validFrom=None,validUntil=None)

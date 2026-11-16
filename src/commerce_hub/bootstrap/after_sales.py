@@ -49,7 +49,7 @@ def registry(settings):
         ('B_DATASET_VALIDATE_V1','validate','DATASET','b:dataset:manage'),('B_EXPERIENCE_V1','analysis','DATASET','b:analyze'),
         ('B_TEACHING_BINDING_V1','binding','DATASET','b:binding:manage')]:
         enabled=provider is not None and job in {'advice','analysis'}
-        calls=1 if job=='advice' else 10
+        calls=3 if job=='advice' else 10
         spec=HandlerSpec(scenario,'1.0.0','b.workflow.'+job+'.v1',Handler(job,source_reader=reader,provider=provider if enabled else None),
             task_authorization=BTaskAuthorization(kind,action),max_calls=calls if enabled else 0,max_tokens=24000*calls if enabled else 0,
             max_cost=Decimal('.05')*calls if enabled else Decimal('0'),policy_version=shared.authorization_id if enabled else 'b-no-model-v1',

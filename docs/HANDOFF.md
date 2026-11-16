@@ -1,3 +1,5 @@
+B产品体验整改领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / 511112be43afbe403bae3b181d05252f1823ba1c，跟踪区干净，未知docs/ERP-openapi.yaml保留。本轮按负责人新授权直接整改现有B正式产品：ERP工单/评价入口、可靠身份关联、案件审核、商品体验/调查及补货提醒；范围为既有B服务/API/Vue/相关测试与必要台账文档。不改冻结指标/采购规则，不ERP业务写/挪用S01模型授权。定向测试、实际Vue浏览器截图、普通提交推送当前分支，最终REVIEW，不合main。历史第一轮PASS不代表本轮产品验收。
+
 B V1.0最终工程交付（2026-11-16）：固定实现2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7，Codex单人，codex/b-after-sales-v1。正式Vue三链/公共权限任务/教学资料/政策/风险与补货联动交付REVIEW；978后端、69前端、类型构建、Edge实际三链及独立Worker恢复PASS。PROTOTYPE.F2仅方向ACCEPTED，ACCEPTANCE.F2留待负责人和星星。实际一键启动5175/API8768、原账号会话/S01授权及33任务31报告保持；B真实模型NOT_RUN/原生ERP完整群组未验证/真实风险绑定NOT_RUN，ERP业务写0。首次失败及修复复测保全于evidence/B-V1-20261116；最终提交普通推送当前B分支，不合main，未知OpenAPI未改未暂存。结束停在最终产品体验。
 
 B连续开发领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / f074803cc28590482cd9c4add861cf88b46f33e5，跟踪区干净，未知docs/ERP-openapi.yaml保留。本轮负责人确认PROTOTYPE.F2方向通过，仅原型方向ACCEPTED；授权全部剩余B V1.0连续实施、必要测试及普通提交推送，最终REVIEW不合main。文件范围沿各B任务allowedPaths；公共契约/迁移/组合根/台账由Codex串行。无B独立真实模型用途/额度则不联网，其他可实施能力继续。不得重置admin/S01 grant，不ERP业务写/退款/外发/采购操作。

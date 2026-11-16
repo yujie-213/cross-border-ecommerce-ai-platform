@@ -1,3 +1,5 @@
+B产品体验整改领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / 511112be43afbe403bae3b181d05252f1823ba1c，跟踪区干净，未知docs/ERP-openapi.yaml保留。本轮按负责人新授权直接整改现有B正式产品：ERP工单/评价入口、可靠身份关联、案件审核、商品体验/调查及补货提醒；范围为既有B服务/API/Vue/相关测试与必要台账文档。不改冻结指标/采购规则，不ERP业务写/挪用S01模型授权。定向测试、实际Vue浏览器截图、普通提交推送当前分支，最终REVIEW，不合main。历史第一轮PASS不代表本轮产品验收。
+
 B V1.0最终工程交付（2026-11-16）：固定实现2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7，Codex单人，codex/b-after-sales-v1。正式Vue三链/公共权限任务/教学资料/政策/风险与补货联动交付REVIEW；978后端、69前端、类型构建、Edge实际三链及独立Worker恢复PASS。PROTOTYPE.F2仅方向ACCEPTED，ACCEPTANCE.F2留待负责人和星星。实际一键启动5175/API8768、原账号会话/S01授权及33任务31报告保持；B真实模型NOT_RUN/原生ERP完整群组未验证/真实风险绑定NOT_RUN，ERP业务写0。首次失败及修复复测保全于evidence/B-V1-20261116；最终提交普通推送当前B分支，不合main，未知OpenAPI未改未暂存。结束停在最终产品体验。
 
 B连续开发领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / f074803cc28590482cd9c4add861cf88b46f33e5，跟踪区干净，未知docs/ERP-openapi.yaml保留。本轮负责人确认PROTOTYPE.F2方向通过，仅原型方向ACCEPTED；授权全部剩余B V1.0连续实施、必要测试及普通提交推送，最终REVIEW不合main。文件范围沿各B任务allowedPaths；公共契约/迁移/组合根/台账由Codex串行。无B独立真实模型用途/额度则不联网，其他可实施能力继续。不得重置admin/S01 grant，不ERP业务写/退款/外发/采购操作。
@@ -11067,7 +11069,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7"
   ],
@@ -11129,7 +11131,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
+  "observedHead": "511112be43afbe403bae3b181d05252f1823ba1c",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -11158,6 +11160,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "固定实现2d5eb50完整后端978/前端69/类型构建/正式Vue三链与进程恢复PASS；本机启动与原账号33任务31报告保持。可实施开发完成，B真实模型/完整ERP统计/真实风险绑定受外部限制，最终负责人及星星产品体验待审，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人第一轮产品体验反馈后授权业务入口及三链体验整改；实际用户追加允许B模型调用，单独8次/100000Token/$0.40工程上限，不复用S01额度。最终REVIEW不合main。"
     }
   ],
   "workItems": [
@@ -11189,6 +11196,20 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "doneWhen": "最终统一验收记录进入TASKS，未通过项保留；未经合并授权不合main",
       "testMethod": "沿实际产品操作和AC-01—03统一验收，普通缺陷自修复，结果不得代签",
       "status": "TODO"
+    },
+    {
+      "id": "ACCEPTANCE.R1",
+      "title": "按业务工作流程整改正式产品并实测ERP及AI",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "D-B-RISK-01",
+        "D-B-S01-01"
+      ],
+      "implement": "ERP工单和评价作为入口、可信自动关联、人工审核与商品反馈调查、去技术输入、既有平台任务及风险提醒",
+      "doneWhen": "正式Vue真实浏览器三链及定向回归、来源与模型实测边界、截图和普通分支推送后待最终产品体验",
+      "testMethod": "受影响B/G01/前端与Edge独立Worker测试，实际只读ERP及获准少量真实A01调用",
+      "status": "IN_PROGRESS"
     }
   ],
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"

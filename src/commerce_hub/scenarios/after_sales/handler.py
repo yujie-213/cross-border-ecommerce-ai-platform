@@ -77,12 +77,13 @@ class Handler:
         elif self.job=='evidence':
             if body.get('erpStoreName'):
                 require(self.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
-                if not body.get('erpTicketId'):
+                if not body.get('erpTicketId') and not body.get('erpVoiceId'):
                     body['erpDiscovery']=self.source_reader.discover(body['erpStoreName'],context.check)
                     state='OPEN'
                 else:
                     try:
-                        evidence=self.source_reader.evidence(body['erpTicketId'],body['erpStoreName'],context.check,tid)
+                        evidence=(self.source_reader.voice_evidence(body['erpVoiceId'],body['erpVoiceKind'],body['erpStoreName'],context.check,tid)
+                            if body.get('erpVoiceId') else self.source_reader.evidence(body['erpTicketId'],body['erpStoreName'],context.check,tid))
                     except Exception as error:
                         previous=body.get('evidence') or {}
                         evidence=dict(facts=previous.get('facts',[]),missing=[getattr(error,'code','ERP_READ_FAILED'),'本次读取未核实；已有事实仅保留原观察时间'],
@@ -92,6 +93,14 @@ class Handler:
                     if body['identity'] and not any(i['lineId']==body['identity']['lineId'] and i['productId']==body['identity']['productId'] for i in evidence.get('identityCandidates',[])):
                         body['evidence']['missing'].append('当前关联与最新ERP证据冲突，请重新核实')
                     if evidence.get('title'):body['title']=evidence['title']
+                    if evidence.get('customerText'):
+                        ref='customer-voice:'+body['erpVoiceKind']+':'+body['erpVoiceId']
+                        if not any(m.get('sourceRef')==ref and m['text']==evidence['customerText'] for m in body['messages']):
+                            body['messages'].append(dict(role='CUSTOMER',text=evidence['customerText'],source='OBSERVED',sourceRef=ref,at=evidence['observedAt']))
+                    if evidence.get('businessDate'):
+                        date=evidence['businessDate']
+                        body['businessDate']=date+'T00:00:00+08:00' if len(date)==10 else date
+                    if evidence.get('platform'):body['platform']=evidence['platform']
                     state='EVIDENCE_PENDING' if not body['identity'] else 'OPEN'
             elif records is not None:
                 lines=[r for r in records if r['type']=='line' and (not body.get('orderId') or r['orderId']==body['orderId'])]
@@ -128,13 +137,28 @@ class Handler:
                     facts=[dict(ref=f['id'],kind=f['kind'],value=f.get('value'),text=f.get('text')) for f in body['evidence']['facts']],
                     missing=body['evidence']['missing'],safetySignal=safety(' '.join(m['text'] for m in body['messages'])),policies=selected,omissions=['客户身份与地址','可复用订单号','较早非安全消息'])
                 ai=invoke(context,self.provider,'b.case.advice.v1',data,Advice,'advice',snapshot_id=body['evidence']['snapshotRef'])
+            feedback_ai=None
+            if body.get('erpVoiceId'):
+                feedback=[dict(feedbackId=f['id'],text=f['text']) for f in body['evidence']['facts'] if f['domain']=='feedback' and f.get('text')]
+                classifications=invoke(context,self.provider,'b.feedback.classify.v1',dict(feedback=feedback,taxonomy=sorted(__import__('commerce_hub.scenarios.after_sales.model',fromlist=['LABELS']).LABELS)),Classifications,'voice-classify',snapshot_id=body['evidence']['snapshotRef'])
+                explanation=invoke(context,self.provider,'b.experience.explain.v1',dict(feedback=feedback,identity=body['identity'],
+                    facts=body['evidence']['facts'],missing=body['evidence']['missing'],factRefs=[f['id'] for f in body['evidence']['facts']]),Explanation,'voice-explain',snapshot_id=body['evidence']['snapshotRef'])
+                feedback_ai=dict(classifications=classifications,analysis=explanation)
             advice=dict(version=len(body['advice'])+1,caseRevision=row['revision']+1,snapshotRef=body['evidence']['snapshotRef'],policies=selected,ai=ai,at=now())
+            if feedback_ai:advice['feedbackAI']=feedback_ai
             body['advice'].append(advice);state='REVIEW_PENDING' if ai['status']=='AVAILABLE' else 'EVIDENCE_PENDING'
             if safety(' '.join(m['text'] for m in body['messages'])):state='ESCALATED'
         else:
             options=parameters['options'];manifest=body['manifest']
             metrics=analyze(records,manifest,options.get('windows',manifest['windows']),options.get('asOf',manifest['asOf']),options.get('rule',DEFAULT_RULE))
-            feedback=[dict(feedbackId=r['id'],text=redacted(r['text']),lineId=r.get('lineId'),orderId=r['orderId'],channel=r.get('channel','UNKNOWN')) for r in records if r['type']=='feedback']
+            lines_by_id={r['id']:r for r in records if r['type']=='line'}
+            products_by_id={r['id']:r for r in records if r['type']=='product'}
+            feedback=[]
+            for r in records:
+                if r['type']!='feedback':continue
+                line=lines_by_id.get(r.get('lineId'));product=products_by_id.get(line['productId']) if line else None
+                feedback.append(dict(feedbackId=r['id'],text=redacted(r['text']),lineId=r.get('lineId'),orderId=r['orderId'],channel=r.get('channel','UNKNOWN'),
+                    productId=product['id'] if product else None,productName=product['name'] if product else None,sku=product['sku'] if product else None))
             classifications=[];receipts=[]
             for offset in range(0,len(feedback),5):
                 context.check();batch=feedback[offset:offset+5]

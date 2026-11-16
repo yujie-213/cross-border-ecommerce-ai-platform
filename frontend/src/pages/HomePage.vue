@@ -5,14 +5,16 @@ import { init, state, latestBatchId } from '../s01'
 import { href } from '../router'
 
 const labels: Record<string,string> = { SUCCEEDED:'已完成', RUNNING:'进行中', CREATED:'等待开始', QUEUED:'排队中', FAILED:'需处理', CANCELLED:'已停止' }
+const bTasks=ref<any[]>([])
 const recent = computed(() => [
+  ...bTasks.value.map(t=>({task:t,name:t.scenarioId.includes('CASE')?'售后问题处理':t.scenarioId.includes('EXPERIENCE')?'客户体验分析':'售后资料核验',url:href('/after-sales/workbench')})),
   ...state.batches.filter(t => t.analysisRange === 'OWNED_REGISTERED').map(t => ({ task:t, name:'自有商品补货检查', url:href('/workbench',{batch:t.taskRef.taskId}) })),
   ...state.singleHistory.map(t => ({ task:t, name:t.sku ? `${t.sku} · ${t.aiStatus === 'AVAILABLE' ? 'AI 行动建议' : '补货分析'}` : '单品分析', url:t.entityKey ? href('/sku/'+t.entityKey,{single:t.taskRef.taskId}) : href('/workbench') }))
 ].sort((a,b) => (b.task.createdAt || b.task.deadline).localeCompare(a.task.createdAt || a.task.deadline)).slice(0,5))
 const attention = computed(() => recent.value.filter(r => r.task.state === 'FAILED'))
 onMounted(init)
 const bEnabled=ref(false)
-onMounted(async()=>{try{const status=await request<{enabled:boolean}>('/status',{},undefined,15000,'/api/b/v1');bEnabled.value=status.enabled}catch{/* S01 remains usable when B is unavailable. */}})
+onMounted(async()=>{try{const status=await request<{enabled:boolean}>('/status',{},undefined,15000,'/api/b/v1');bEnabled.value=status.enabled;if(status.enabled){const result=await request<{items:any[]}>('/tasks?workspaceId=after-sales-v1&limit=5',{},undefined,15000,'/api/b/v1');bTasks.value=result.items}}catch{/* S01 remains usable when B is unavailable. */}})
 </script>
 
 <template>
@@ -28,7 +30,7 @@ onMounted(async()=>{try{const status=await request<{enabled:boolean}>('/status',
     </section>
     <div class="home-lower">
       <section class="panel"><div class="panel-head"><h2>近期任务</h2></div>
-        <a v-for="row in recent" :key="row.task.taskRef.taskId" class="task-entry" :href="row.url"><div><b>{{ row.name }}</b><small>智能补货</small></div><span class="chip" :class="row.task.state === 'FAILED' ? 'danger' : 'plain'">{{ labels[row.task.state] || '处理中' }}</span></a>
+        <a v-for="row in recent" :key="row.task.taskRef.taskId" class="task-entry" :href="row.url"><div><b>{{ row.name }}</b><small>{{row.task.scenarioId.startsWith('B_')?'智能售后':'智能补货'}}</small></div><span class="chip" :class="row.task.state === 'FAILED' ? 'danger' : 'plain'">{{ labels[row.task.state] || '处理中' }}</span></a>
         <p v-if="!recent.length" class="empty-inline">暂无任务，进入智能补货开始检查。</p>
       </section>
       <section class="panel"><div class="panel-head"><h2>重要事项</h2></div>

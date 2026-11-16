@@ -24,6 +24,114 @@ class SourceReader:
             for r in batch.records if str(r.get('tenant_id'))==expected['sourceTenant'] and r.get('store_name')==store],
             complete=batch.complete,observedAt=batch.observed_at,sourceNature='TEACHING_ERP_OBSERVED')
 
+    @staticmethod
+    def product_attributes(product):
+        # Explicit source vocabulary only. A title/SKU never supplies a category.
+        category=product.get('category') or ''
+        normalized=('APPAREL' if category=='APPAREL' or category.startswith('服装/') else
+            'ELECTRONICS' if category=='ELECTRONICS' or category.startswith(('电子/','数码/')) else 'UNKNOWN')
+        attributes={k:product[k] for k in ('size','color','material','model') if product.get(k)}
+        return normalized,attributes
+
+    def inbox(self,store,kind,check,date_from=None,date_to=None):
+        expected=self._store(store);require(kind in {'tickets','reviews','feedback'},'SOURCE_KIND_INVALID')
+        if kind=='tickets':return self.discover(store,check)
+        reader=self.factory();check()
+        params=dict(kind=kind,store_id=expected['storeId'],visibility='active')
+        if date_from:params['date_from']=date_from
+        if date_to:params['date_to']=date_to
+        batch=reader.discover('/api/v1/customer-voice',params,page_size=10)
+        items=[];products={}
+        for r in batch.records:
+            require(str(r.get('store_id'))==expected['storeId'] and r.get('store_name')==store,'SOURCE_IDENTITY_MISMATCH')
+            sku=r.get('sku') if kind=='reviews' else None
+            identity=None;association='评价未提供可核实商品，需补证'
+            if sku:
+                if sku not in products:
+                    check()
+                    try:
+                        pb=reader.read('/api/v1/products',dict(field='sku',q=sku),page_size=20,max_pages=2)
+                        products[sku]=[p for p in pb.records if pb.complete and p.get('sku')==sku and str(p.get('tenant_id'))==expected['sourceTenant']]
+                    except Exception:products[sku]=[]
+                matches=products[sku]
+                if len(matches)==1:
+                    product=matches[0];category,attributes=self.product_attributes(product)
+                    identity=dict(productId=str(product['id']),sku=sku,name=product.get('name') or sku,category=category,attributes=attributes,
+                        storeId=expected['storeId'],sourceTenant=expected['sourceTenant'],warehouseId='UNKNOWN',orderId='UNKNOWN',
+                        lineId='voice:'+kind+':'+str(r['id']),source='OBSERVED')
+                    association='已按店铺、SKU与唯一商品记录关联；订单未核实'
+                else:association='商品记录缺失或不唯一，需补证'
+            if kind=='feedback':association='订单反馈；需独立核实订单及受影响商品'
+            items.append(dict(recordId=str(r['id']),kind=kind,title=redacted(r.get('title') or '客户反馈'),text=redacted(r.get('body') or ''),
+                rating=r.get('rating'),businessDate=r.get('business_date'),platform=r.get('platform'),storeName=store,
+                identity=identity,association=association,orderId='UNKNOWN',sourceRef='customer-voice:'+kind+':'+str(r['id'])))
+        return dict(items=items,complete=batch.complete,observedAt=batch.observed_at,sourceNature='TEACHING_ERP_OBSERVED',
+            limitation='当前有界读取的反馈；不是完整评价总体，也不提供退货率分母')
+
+    def voice_evidence(self,record_id,kind,store,check,task_id):
+        expected=self._store(store);require(kind in {'reviews','feedback'},'SOURCE_KIND_INVALID')
+        reader=self.factory();check()
+        batch=reader.read('/api/v1/customer-voice',dict(kind=kind,store_id=expected['storeId'],record_id=record_id,visibility='active'),page_size=10,max_pages=1)
+        require(batch.complete and len(batch.records)==1,'SOURCE_RECORD_UNAVAILABLE')
+        r=batch.records[0]
+        require(str(r.get('id'))==record_id and str(r.get('store_id'))==expected['storeId'] and r.get('store_name')==store,'SOURCE_IDENTITY_MISMATCH')
+        root=self.root/task_id;root.mkdir(parents=True,exist_ok=True)
+        (root/'voice.json').write_text(json.dumps(r,ensure_ascii=False),encoding='utf-8')
+        text=redacted(r.get('body') or '')
+        facts=[dict(id='voice-'+kind+'-'+record_id,domain='feedback',kind='OBSERVED',text=text,sourceRef='customer-voice:'+kind+':'+record_id,observedAt=batch.observed_at)]
+        identities=[];missing=['未取得完整退货与退款事实；不能据评价推断退货率']
+        if kind=='reviews' and r.get('sku'):
+            check()
+            try:
+                pb=reader.read('/api/v1/products',dict(field='sku',q=r['sku']),page_size=20,max_pages=2)
+                products=[p for p in pb.records if pb.complete and p.get('sku')==r['sku'] and str(p.get('tenant_id'))==expected['sourceTenant']]
+            except Exception:
+                products=[];missing.append('商品域未读取成功；反馈原文保留，关联待核实')
+            if len(products)==1:
+                p=products[0];category,attributes=self.product_attributes(p)
+                identities=[dict(productId=str(p['id']),sku=p['sku'],name=p.get('name') or p['sku'],category=category,attributes=attributes,
+                    storeId=expected['storeId'],sourceTenant=expected['sourceTenant'],warehouseId='UNKNOWN',orderId='UNKNOWN',
+                    lineId='voice:'+kind+':'+record_id,source='OBSERVED')]
+            missing.append('评价未证明关联订单与发货仓；不从相关编号猜测')
+        elif kind=='feedback' and r.get('order_id'):
+            check();ob=reader.read('/api/v1/sales-orders',dict(ids=str(r['order_id'])),page_size=20,max_pages=1)
+            orders=[o for o in ob.records if ob.complete and str(o.get('id'))==str(r['order_id']) and o.get('store_name')==store and str(o.get('tenant_id'))==expected['sourceTenant']]
+            if len(orders)==1:
+                o=orders[0]
+                facts.append(dict(id='feedback-order',domain='ORDER',kind='OBSERVED',text='已独立核实反馈所属订单；商品诉求仍需按明细核实',sourceRef='sales-orders:'+str(o['id']),observedAt=ob.observed_at))
+                for index,line in enumerate((o.get('item_list') or [])[:10]):
+                    if not line.get('sku'):continue
+                    check();pb=reader.read('/api/v1/products',dict(field='sku',q=line['sku']),page_size=20,max_pages=2)
+                    products=[p for p in pb.records if pb.complete and p.get('sku')==line['sku'] and str(p.get('tenant_id'))==expected['sourceTenant']]
+                    if len(products)!=1:continue
+                    p=products[0];category,attributes=self.product_attributes(p)
+                    identities.append(dict(lineId=str(o['id'])+':'+str(index),orderId=str(o['id']),productId=str(p['id']),sku=p['sku'],name=p.get('name') or p['sku'],
+                        category=category,attributes=attributes,storeId=expected['storeId'],sourceTenant=expected['sourceTenant'],warehouseId='UNKNOWN',source='OBSERVED'))
+                # A multi-line order does not identify the subject of a complaint.
+                if len(o.get('item_list') or [])!=1:missing.append('订单包含多件商品，请核实受影响明细；仅列本次核实的前10行')
+            else:missing.append('反馈订单无法唯一核实')
+        else:missing.append('来源缺少可靠商品或订单关联')
+        automatic=identities[0] if len(identities)==1 and (kind=='reviews' or len(orders[0].get('item_list') or [])==1) else None
+        return dict(facts=facts,missing=missing,identityCandidates=identities,identity=automatic,businessDate=r.get('business_date'),
+            title=redacted(r.get('title') or '客户反馈'),customerText=text,platform=r.get('platform'),observedAt=batch.observed_at,
+            sourceNature='TEACHING_ERP_OBSERVED',sourceRef=dict(voiceId=record_id,kind=kind,sourceTenant=expected['sourceTenant'],storeId=expected['storeId']))
+
+    def mapping_options(self,store,sku,check):
+        expected=self._store(store);reader=self.factory();check()
+        pb=reader.read('/api/v1/products',dict(field='sku',q=sku),page_size=20,max_pages=2)
+        products=[p for p in pb.records if pb.complete and p.get('sku')==sku and str(p.get('tenant_id'))==expected['sourceTenant']]
+        require(len(products)==1,'MAPPING_IDENTITY_MISMATCH')
+        product=products[0];check()
+        ib=reader.read('/api/v1/inventory',dict(field='sku',q=sku,match='exact',store_id=expected['storeId']),page_size=50,max_pages=2)
+        require(ib.complete,'MAPPING_RELATION_UNVERIFIED')
+        items=[]
+        for r in ib.records:
+            if str(r.get('tenant_id'))!=expected['sourceTenant'] or str(r.get('store_id'))!=expected['storeId'] or str(r.get('product_id'))!=str(product['id']) or r.get('sku')!=sku or not r.get('wid'):continue
+            identity=dict(sourceTenant=expected['sourceTenant'],productId=str(product['id']),sku=sku,storeId=expected['storeId'],warehouseMode='EXPLICIT_IDS',warehouseIds=[str(r['wid'])])
+            if any(i['identity']==identity for i in items):continue
+            items.append(dict(name=(product.get('name') or sku)+' · '+store+' · '+str(r.get('warehouse_name') or r.get('wid')),identity=identity))
+        return dict(items=items,observedAt=ib.observed_at)
+
     def verify_mapping(self,identity,check):
         store=next((v for v in self.stores.values() if v['storeId']==identity['storeId'] and v['sourceTenant']==identity['sourceTenant']),None)
         require(store is not None and identity['warehouseMode']=='EXPLICIT_IDS','SOURCE_SCOPE_DENIED',403)
@@ -79,7 +187,7 @@ class SourceReader:
                     product=products[0]
                     identities.append(dict(lineId=str(order['id'])+':'+str(index),orderId=str(order['id']),productId=str(product['id']),sku=line['sku'],
                         storeId=expected['storeId'],warehouseId=str(expected.get('warehouseId','UNKNOWN')),name=product.get('product_name') or product.get('name') or line['sku'],
-                        category='UNKNOWN',attributes={},source='OBSERVED',sourceTenant=expected['sourceTenant']))
+                        category=self.product_attributes(product)[0],attributes=self.product_attributes(product)[1],source='OBSERVED',sourceTenant=expected['sourceTenant']))
                 try:
                     check();workflow=reader.detail('sales-workflow',order['id']);w=workflow.get('data',{})
                     (root/'workflow.json').write_text(json.dumps(workflow,ensure_ascii=False),encoding='utf-8')
