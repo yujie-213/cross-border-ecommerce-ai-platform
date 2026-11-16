@@ -35,3 +35,19 @@ sessions = Table(
                          ["g01_principals.tenant_id", "g01_principals.principal_id"], name="fk_g01_session_principal"),
     mysql_engine="InnoDB", mysql_charset="utf8mb4", mysql_collate="utf8mb4_bin",
 )
+
+b_resource_grants = Table(
+    'g01_b_resource_grants', metadata,
+    Column('tenant_id', String(64), primary_key=True),
+    Column('principal_id', String(64), primary_key=True),
+    Column('action', String(64), primary_key=True),
+    Column('workspace_id', String(64), primary_key=True),
+    Column('scope', JSON, nullable=False),
+    Column('revision', BigInteger, nullable=False),
+    Column('active', Boolean, nullable=False),
+    Column('configuration_hash', String(64), nullable=False),
+    Column('command_key', String(64), nullable=False),
+    ForeignKeyConstraint(['tenant_id', 'principal_id'],
+                         ['g01_principals.tenant_id', 'g01_principals.principal_id'], name='fk_g01_b_grant_principal'),
+    mysql_engine='InnoDB', mysql_charset='utf8mb4', mysql_collate='utf8mb4_bin',
+)

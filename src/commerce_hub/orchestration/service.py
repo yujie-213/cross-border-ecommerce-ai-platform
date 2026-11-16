@@ -11,6 +11,7 @@ from commerce_hub.governance.access.service import AccessDenied
 from commerce_hub.infrastructure.work import LeaseLost
 from .tables import tasks, commands, budgets, reports
 from .contracts import DomainResult
+from .b_authorization import BTaskAuthorization
 
 
 class TaskError(RuntimeError):
@@ -51,17 +52,36 @@ class HandlerSpec:
     # Optional for legacy assemblies. New fee-enabled policies bind their unit explicitly.
     cost_currency: str | None = None
     shared_model_authorization: SharedModelAuthorization | None = None
+    task_authorization: BTaskAuthorization | None = None
 
     def __post_init__(self):
         if self.shared_model_authorization and self.policy_version != self.shared_model_authorization.authorization_id:
             raise ValueError('SHARED_AUTHORIZATION_POLICY_MISMATCH')
+        if self.task_authorization is not None and not isinstance(self.task_authorization, BTaskAuthorization):
+            raise ValueError('INVALID_TASK_AUTHORIZATION')
 
 
 class TaskService:
-    def __init__(self, engine, access, queue, audit, registry=None, *, deadline_seconds=120, max_attempts=3):
+    def __init__(self, engine, access, queue, audit, registry=None, *, deadline_seconds=120, max_attempts=3, after_sales_enabled=False):
         self.engine, self.access, self.queue, self.audit = engine, access, queue, audit
         self.registry = registry or {}
         self.deadline_seconds, self.max_attempts = deadline_seconds, max_attempts
+        self.after_sales_enabled = after_sales_enabled
+
+    def authorize_task(self, conn, principal, operation, scope, *, spec=None, task=None):
+        """One dispatch for create/read/cancel/worker/budget/publication, fail closed for B."""
+        if task is not None:
+            spec = self.registry.get(task['scenario_id'])
+        adapter = spec.task_authorization if spec is not None else None
+        b_scope = isinstance(scope, dict) and ('workspaceId' in scope or 'resourceKind' in scope or 'schemaVersion' in scope)
+        b_scenario = (task['scenario_id'] if task is not None else spec.scenario_id if spec else '').startswith('B_')
+        if b_scope or b_scenario or adapter is not None:
+            if (not self.after_sales_enabled or adapter is None
+                    or task is not None and spec.version != task['scenario_version']):
+                raise AccessDenied()
+            return adapter.authorize(self.access, conn, principal, operation, scope)
+        legacy = {'create': 'tasks:create', 'read': 'tasks:read', 'cancel': 'tasks:cancel', 'execute': 'engineering:execute'}
+        return self.access.authorize(conn, principal, legacy[operation], scope)
 
     @staticmethod
     def fingerprint(value):
@@ -99,7 +119,7 @@ class TaskService:
             raise TaskError("PARAMETERS_TOO_LARGE", 422)
         request_fingerprint = self.fingerprint(dict(scenario=scenario_id, scope=scope, parameters=parameters))
         with self.engine.begin() as conn:
-            self.access.authorize(conn, principal, "tasks:create", scope)
+            self.authorize_task(conn, principal, 'create', scope, spec=spec)
             if previous_report_ref is not None:
                 # A relation never grants access to its target, nor revives a terminal task.
                 old = conn.execute(select(tasks).filter_by(tenant_id=principal.tenant_id,
@@ -110,7 +130,7 @@ class TaskService:
                         or old["scope"] != scope):
                     raise TaskError("NOT_FOUND", 404)
                 try:
-                    self.access.authorize(conn, principal, "tasks:read", old["scope"])
+                    self.authorize_task(conn, principal, 'read', old['scope'], task=old)
                 except AccessDenied:
                     raise TaskError("NOT_FOUND", 404) from None
                 published = conn.execute(select(reports).filter_by(
@@ -124,6 +144,8 @@ class TaskService:
             if existing:
                 if existing["fingerprint"] != request_fingerprint:
                     raise TaskError("COMMAND_CONFLICT")
+                if spec.task_authorization is not None:
+                    self.authorize_task(conn, principal, 'read', existing['scope'], task=existing)
                 return self._view(conn, existing)
             now = conn.scalar(select(func.utc_timestamp(6)))
             task_id, work_id = uuid4().hex, uuid4().hex
@@ -159,7 +181,7 @@ class TaskService:
             if not row:
                 raise TaskError("NOT_FOUND", 404)
             try:
-                self.access.authorize(conn, principal, "tasks:read", row["scope"])
+                self.authorize_task(conn, principal, 'read', row['scope'], task=row)
             except AccessDenied:
                 raise TaskError("NOT_FOUND", 404) from None
             return self._view(conn, row)
@@ -169,7 +191,7 @@ class TaskService:
         if type(limit) is not int or not 1 <= limit <= 50 or scenario_id not in self.registry:
             raise TaskError("INVALID_HISTORY_QUERY", 422)
         with self.engine.begin() as conn:
-            self.access.authorize(conn, principal, "tasks:read", scope)
+            self.authorize_task(conn, principal, 'read', scope, spec=self.registry[scenario_id])
             # MySQL must compare JSON objects, not a JSON column to serialized text.
             scope_match = tasks.c.scope == cast(literal(scope, type_=JSON), JSON)
             query = select(tasks).where(tasks.c.tenant_id == principal.tenant_id,
@@ -182,8 +204,75 @@ class TaskService:
                 query = query.where(or_(tasks.c.created_at < anchor["created_at"],
                     and_(tasks.c.created_at == anchor["created_at"], tasks.c.task_id < anchor["task_id"])))
             rows = conn.execute(query.order_by(tasks.c.created_at.desc(), tasks.c.task_id.desc()).limit(limit + 1)).mappings().all()
-            return dict(items=[self._view(conn, row) for row in rows[:limit]],
+            visible = []
+            for row in rows[:limit]:
+                try:
+                    self.authorize_task(conn, principal, 'read', row['scope'], task=row)
+                    visible.append(self._view(conn, row))
+                except AccessDenied as exc:
+                    if exc.code == 'AUTH_BACKEND_UNAVAILABLE':
+                        raise
+            return dict(items=visible,
                 nextCursor=rows[limit-1]["task_id"] if len(rows) > limit else None)
+
+    def mixed_history(self, principal, *, limit=20, before=None, workspace_id=None):
+        """Bounded mixed index, each row checked with its persisted scenario and scope.
+
+        The signed scan position carries a digest rather than an unauthorized task ID.
+        An empty page can still have a cursor when a bounded scan contained hidden rows.
+        """
+        import hmac
+        if type(limit) is not int or not 1 <= limit <= 50:
+            raise TaskError('INVALID_HISTORY_QUERY', 422)
+        from commerce_hub.governance.access.b_resources import identifier
+        if workspace_id is not None and (not identifier(workspace_id) or len(workspace_id) > 64):
+            raise TaskError('INVALID_HISTORY_QUERY', 422)
+        # AccessControl owns signing; no session secrets enter cursors or response DTOs.
+        with self.engine.begin() as conn:
+            self.access._assert_current(conn, principal, lock=True)
+            query = select(tasks).where(tasks.c.tenant_id == principal.tenant_id)
+            if before:
+                try:
+                    import base64
+                    raw, signature = before.split('.')
+                    expected = self.access.sign_task_cursor(principal, raw, workspace_id)
+                    if not hmac.compare_digest(signature, expected):
+                        raise ValueError()
+                    anchor = json.loads(base64.urlsafe_b64decode(raw + '=' * (-len(raw) % 4)))
+                    from datetime import datetime
+                    date, task_digest = datetime.fromisoformat(anchor[0]), anchor[1]
+                    import re
+                    if not isinstance(task_digest, str) or not re.fullmatch('[0-9a-f]{64}', task_digest):
+                        raise ValueError()
+                    task_id = conn.execute(select(tasks.c.task_id).where(tasks.c.tenant_id == principal.tenant_id,
+                        tasks.c.created_at == date, func.sha2(tasks.c.task_id, 256) == task_digest)).scalar_one_or_none()
+                    if task_id is None:
+                        raise ValueError()
+                    query = query.where(or_(tasks.c.created_at < date,
+                        and_(tasks.c.created_at == date, tasks.c.task_id < task_id)))
+                except (ValueError, TypeError, IndexError, KeyError):
+                    raise TaskError('INVALID_HISTORY_QUERY', 422) from None
+            rows = conn.execute(query.order_by(tasks.c.created_at.desc(), tasks.c.task_id.desc()).limit(201)).mappings().all()
+            items, scanned = [], None
+            for row in rows[:200]:
+                scanned = row
+                if workspace_id is not None and row['scope'].get('workspaceId') != workspace_id:
+                    continue
+                try:
+                    self.authorize_task(conn, principal, 'read', row['scope'], task=row)
+                except AccessDenied as exc:
+                    if exc.code == 'AUTH_BACKEND_UNAVAILABLE':
+                        raise
+                    continue
+                items.append(self._view(conn, row))
+                if len(items) == limit:
+                    break
+            cursor = None
+            if scanned is not None and (scanned != rows[-1] or len(rows) > 200):
+                import base64
+                raw = base64.urlsafe_b64encode(json.dumps([scanned['created_at'].isoformat(), hashlib.sha256(scanned['task_id'].encode()).hexdigest()]).encode()).decode().rstrip('=')
+                cursor = raw + '.' + self.access.sign_task_cursor(principal, raw, workspace_id)
+            return dict(items=items, nextCursor=cursor)
 
     def _view(self, conn, row):
         view = self.view(row)
@@ -229,7 +318,7 @@ class TaskService:
             if not row:
                 raise TaskError("NOT_FOUND", 404)
             try:
-                self.access.authorize(conn, principal, "tasks:read", row["scope"])
+                self.authorize_task(conn, principal, 'read', row['scope'], task=row)
             except AccessDenied:
                 raise TaskError("NOT_FOUND", 404) from None
             report = conn.execute(select(reports).filter_by(tenant_id=principal.tenant_id, task_id=task_id)).mappings().first()
@@ -255,7 +344,7 @@ class TaskService:
                                                    tasks.c.task_id == task_id)).mappings().first()
             if not row:
                 raise TaskError("NOT_FOUND", 404)
-            self.access.authorize(conn, principal, "tasks:cancel", row["scope"])
+            self.authorize_task(conn, principal, 'cancel', row['scope'], task=row)
             row = conn.execute(select(tasks).where(tasks.c.tenant_id == principal.tenant_id,
                 tasks.c.task_id == task_id).with_for_update()).mappings().one()
             key = dict(tenant_id=principal.tenant_id, principal_id=principal.principal_id, command_key=command_key)
@@ -282,7 +371,7 @@ class TaskService:
                                                tasks.c.task_id == lease.owner_id)).mappings().first()
         if not row:
             raise TaskError("NOT_FOUND", 404)
-        self.access.authorize(conn, principal, "engineering:execute", row["scope"])
+        self.authorize_task(conn, principal, 'execute', row['scope'], task=row)
         row = conn.execute(select(tasks).where(tasks.c.tenant_id == lease.tenant_id,
             tasks.c.task_id == lease.owner_id).with_for_update()).mappings().one()
         self.queue.validate(conn, lease)

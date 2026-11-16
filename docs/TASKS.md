@@ -10002,9 +10002,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-DESIGN-01"
   ],
-  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
+  "entryCondition": "2026-11-16负责人正式启动：本轮仅交互HTML原型及不依赖方向确认的FOUNDATION.F1/F2，必要测试、提交普通推送，不合main。正式Vue和剩余TODO等待下一次连续授权。",
   "ownerRole": "主集成人",
-  "assignee": null,
+  "assignee": "Codex",
   "allowedPaths": [
     "src/commerce_hub/data/",
     "src/commerce_hub/governance/access/",
@@ -10018,7 +10018,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "frontend/src/afterSales/",
     "tests/",
     "frontend/tests/",
-    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）",
+    "src/commerce_hub/infrastructure/database.py",
+    "src/commerce_hub/entrypoints/grant_after_sales.py",
+    "tools/verify_local_platform.py"
   ],
   "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
   "deliverables": [
@@ -10046,14 +10049,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml（接手未知，保留未读未改）"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -10071,6 +10076,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人正式开发启动；Codex单人交错推进原型及最小公共后端，保留未知文件；B默认关闭，无ERP业务写/真实模型。"
     }
   ],
   "workItems": [
@@ -10083,7 +10093,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "实现B资源范围及幂等grant-after-sales，覆盖未关联SKU案件、政策和数据集父资源",
       "doneWhen": "原账号密码/会话/补货grant不变，B范围精确且拒绝越权",
       "testMethod": "复用G01/LocalAdmin测试，补最少资源授权、补权重放/冲突/回滚用例",
-      "status": "TODO"
+      "status": "IN_PROGRESS"
     },
     {
       "id": "FOUNDATION.F2",
@@ -10095,7 +10105,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "按受信场景接入B任务授权全生命周期、预算/取消/恢复和模块开关",
       "doneWhen": "B任务不旁路授权，旧S01任务和启动不受影响",
       "testMethod": "复用任务/租约/预算测试，覆盖B授权分派、重启恢复与旧路径兼容",
-      "status": "TODO"
+      "status": "IN_PROGRESS"
     },
     {
       "id": "FOUNDATION.F3",
@@ -10735,9 +10745,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-DESIGN-01"
   ],
-  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
+  "entryCondition": "2026-11-16负责人正式启动：本轮仅交互HTML原型及不依赖方向确认的FOUNDATION.F1/F2，必要测试、提交普通推送，不合main。正式Vue和剩余TODO等待下一次连续授权。",
   "ownerRole": "主集成人",
-  "assignee": null,
+  "assignee": "Codex",
   "allowedPaths": [
     "prototypes/b-after-sales/",
     "docs/ui/B_AFTER_SALES_PRODUCT.md",
@@ -10770,14 +10780,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "TODO",
+  "status": "IN_PROGRESS",
   "implementationCommits": [],
   "testedCommit": null,
   "evidence": [],
   "review": null,
-  "branch": null,
-  "observedHead": null,
-  "dirtyPaths": [],
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml（接手未知，保留未读未改）"
+  ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -10790,6 +10802,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人正式开发启动；Codex单人交错推进原型及最小公共后端，保留未知文件；B默认关闭，无ERP业务写/真实模型。"
     }
   ],
   "workItems": [
@@ -10802,7 +10819,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "制作工作台、案件、体验分析和补货风险四条合成样例路径，呈现正常、缺证据、失败与历史状态",
       "doneWhen": "一份本地可预览原型，数量/风险边界及返回上下文可体验",
       "testMethod": "复用本地文档/浏览器预览，检查关键路径、键盘和1024/1440布局",
-      "status": "TODO"
+      "status": "IN_PROGRESS"
     },
     {
       "id": "PROTOTYPE.F2",

@@ -4,9 +4,9 @@ from datetime import datetime,timezone
 from collections import Counter
 import json,os,hashlib
 os.environ.update(COMMERCE_MODEL_PROVIDER='mock',COMMERCE_MODEL_NETWORK_ENABLED='false')
-from sqlalchemy import select,func
+from sqlalchemy import select,func,text
 from commerce_hub.bootstrap.settings import load_settings
-from commerce_hub.infrastructure.database import Database,assert_migration_target,SCHEMA_REVISION
+from commerce_hub.infrastructure.database import Database,assert_migration_target
 from commerce_hub.governance.access.local import admins
 from commerce_hub.data.sync.v2_store import acquisitions
 from commerce_hub.scenarios.s01_v2.store import ItemStore
@@ -19,6 +19,7 @@ ref=json.loads((private/'readonly-batch.json').read_text(encoding='utf-8'))['tas
 settings=load_settings();assert_migration_target(settings);db=Database(settings)
 try:
  with db.engine.connect() as c:
+  migration_head=c.execute(text('SELECT version_num FROM alembic_version')).scalar_one()
   rows=ItemStore.read(c,ref['tenantId'],ref['taskId']);a=c.execute(select(acquisitions).filter_by(**key)).mappings().one();b=c.execute(select(budgets).filter_by(**key)).mappings().one()
   model=c.scalar(select(func.count()).select_from(attempts).filter_by(**key));usage=c.scalar(select(func.count()).select_from(usage_facts).filter_by(**key))
   credential=c.execute(select(admins.c.password_hash).filter_by(tenant_id=ref['tenantId'])).scalars().all()
@@ -38,7 +39,7 @@ try:
  events=state['events'];assert len(events)==a['request_count'] and all(e['method']=='GET' or e['path']==AUTH_PATH for e in events)
  assert len(all_model)==2 and sum(all_model)==4389
  browser=json.loads((private/'browser-login-result.json').read_text(encoding='utf-8'))
- result=dict(result='PASS_LOCAL_PRODUCT_COMPATIBILITY',observedAt=datetime.now(timezone.utc).isoformat(),migrationHead=SCHEMA_REVISION,taskRef=ref,
+ result=dict(result='PASS_LOCAL_PRODUCT_COMPATIBILITY',observedAt=datetime.now(timezone.utc).isoformat(),migrationHead=migration_head,taskRef=ref,
   adminAccountsInConfiguredLocalTenant=1,passwordStorage='RANDOM_SALT_SCRYPT_N131072_R8_P1',passwordOrHashPublished=False,
   batch=dict(summary=browser['summary'],sourceLimits=browser['sourceLimits'],httpAttempts=a['request_count'],httpStatuses=dict(Counter(str(e.get('httpStatus',e.get('error','UNKNOWN'))) for e in events)),verifiedRawResponseFiles=len(verified),independentSourceSkuCount=len(source_skus),missingSkus=0,modelAttempts=model,usageFacts=usage,businessWrites=0),
   oldRealModels=dict(calls=len(all_model),tokens=sum(all_model),newPaidCalls=0,cost='UNKNOWN_UNCHANGED'),oldRequisition=dict(id='1426',savedStatus=previous[0]['content']['erpStatus'],quantity=40,rows=1,newBusinessWrites=0),

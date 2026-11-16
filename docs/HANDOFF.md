@@ -1,3 +1,5 @@
+B正式开发领取（2026-11-16）：Codex单人，codex/b-after-sales-v1，实际基点0191940b53957b5d8b7d430e7947f2841d3f3c6f，跟踪区起点干净；未知docs/ERP-openapi.yaml保留未读未改。负责人已授权本轮HTML交互原型和FOUNDATION.F1/F2最小后端、必要测试及普通提交推送，不合main。既有admin不重置，不增加ERP/模型业务动作，正式Vue等待一次原型方向确认及后续连续授权。最终固定实现、复验和交接由后续增量补齐，TASKS唯一维护状态。
+
 B最终执行准备（2026-11-16）：接续89c2a2d05fd67cfee2a35c1f02fa2e128eef28d2，codex/b-after-sales-v1，Codex单人，跟踪区干净/未知OpenAPI保留。负责人本轮明确详细设计与修订通过，仅设计D-B-DESIGN-01登记ACCEPTED，不代记产品验收。原九阶段保留；八个待实施阶段在TASKS内细化23个功能TODO，每项目标/依赖/结果/测试，未开工。后续统一启动后按工程完成与必要测试连续推进，阶段REVIEW不阻塞下一依赖；仅一次原型方向确认，普通问题自修复，三链完成后负责人和星星统一体验验收。仅四类暂停：需求冲突/重大架构变化/破坏性操作/扩大外部权限。执行准备不编码/不迁移/不联网ERP或模型/不合main，不新增测试脚本或验收文档。检查沿原专项脚本和派生状态，当前提交与推送SHA以Git回读；本轮提交普通推送后停止。
 
 B设计针对性完善（2026-11-16）：接续329a6e64423453160660491515b19557c0e765bf，当前分支codex/b-after-sales-v1，Codex单人，起点跟踪区干净、未知docs/ERP-openapi.yaml保留未读未改。初评整体认可，设计仍REVIEW；只完善G01/LocalAdmin真实限制和既有admin幂等增量补权、最小FOUNDATION与完整DATASET解耦、正式Vue前原型阶段及按首次消费者建表。原型本轮只登记TODO，不实际制作；CASE无需等待教学全集，EXPERIENCE必须完整导入与独立回读，三AC不缩减。既有admin密码/主体revision/会话/S01 grant不改，未来补权不走initialize/reset。设计§8.1/§7.1、产品§7、计划及TASKS为接续入口。检查见原B-DESIGN-20261116/validation.json新增针对项；无业务测试/迁移/ERP/模型，不合main。提交普通推送后停止，实际SHA以Git回读，不预填自身提交。

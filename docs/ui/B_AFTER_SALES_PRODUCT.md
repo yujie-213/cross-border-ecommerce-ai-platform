@@ -1,6 +1,6 @@
 # B V1.0 产品操作与界面设计
 
-2026-11-16，产品设计待评审，非已上线页面。需求：[B-REQ-001](../requirements/B_AFTER_SALES_V1.md)；实现细节：[B-DES-001](../agents/B_AFTER_SALES_DESIGN.md)。延续现有App/V2Shell/HomePage、hash路由和DESIGN.md，正式Vue页面不在本轮范围。
+2026-11-16，产品设计已批准；本轮交互 HTML 原型供一次方向确认，正式 Vue 尚未开发。需求：[B-REQ-001](../requirements/B_AFTER_SALES_V1.md)；实现细节：[B-DES-001](../agents/B_AFTER_SALES_DESIGN.md)。延续现有App/V2Shell/HomePage、hash路由和DESIGN.md，正式Vue页面不在本轮范围。
 
 ## 1. 使用者的一天
 
@@ -99,7 +99,7 @@ flowchart LR
 
 ## 7. 正式Vue前的轻量原型阶段
 
-新增D-B-PROTOTYPE-01，作为设计计划中的下一交付，不是本轮开始编写原型；本轮仅完善设计/任务。交付单份可双击预览的`prototypes/b-after-sales/index.html`（可配少量本地CSS/JS），使用现有视觉规范与合成标注样例，不建立独立网站、不接真实API、不读取客户记录、不持久写数据库；产品负责人可点选场景审核，正式Vue编码须在相关路径体验确认之后。无需再开展大规模视觉研究或创建一套组件库。
+2026-11-16 正式启动授权后，D-B-PROTOTYPE-01 本轮交付可点击原型，当前仅等负责人一次操作方向确认；不代记业务验收。入口与体验路径见[原型说明](../../prototypes/b-after-sales/README.md)，公共后端接续见[运行说明](../runbooks/b-after-sales-foundation.md)。原型为可双击预览的`prototypes/b-after-sales/index.html`（可配少量本地CSS/JS），使用现有视觉规范与合成标注样例，不建立独立网站、不接真实API、不读取客户记录、不持久写数据库；产品负责人可点选场景审核，正式Vue编码须在相关路径体验确认之后。无需再开展大规模视觉研究或创建一套组件库。
 
 | 必须可体验的页面 | 最小交互及正负状态 |
 |---|---|

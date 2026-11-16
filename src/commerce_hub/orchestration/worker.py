@@ -44,7 +44,8 @@ class Worker:
 
     def once(self):
         queue = self.service.queue
-        kinds = [spec.work_kind for spec in self.service.registry.values()]
+        kinds = [spec.work_kind for spec in self.service.registry.values()
+                 if spec.task_authorization is None or self.service.after_sales_enabled]
         if not kinds:
             return False
         queue.recover_expired(kinds)

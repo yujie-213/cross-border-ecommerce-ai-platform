@@ -10,7 +10,8 @@ def task_service(database, settings, registry=None):
     access = AccessControl(database.engine, settings.auth_issuer, settings.auth_audience,
                            settings.auth_signing_key.get_secret_value())
     service = TaskService(database.engine, access, WorkStore(database.engine, settings.lease_seconds), Audit(), registry,
-                       deadline_seconds=settings.task_deadline_seconds, max_attempts=settings.max_delivery_attempts)
+                       deadline_seconds=settings.task_deadline_seconds, max_attempts=settings.max_delivery_attempts,
+                       after_sales_enabled=settings.after_sales_enabled)
     service.requisitions = None
     backend = (registry or {}).get('S01_BACKEND')
     if backend and getattr(backend.handler, 'requisition_client_factory', None):

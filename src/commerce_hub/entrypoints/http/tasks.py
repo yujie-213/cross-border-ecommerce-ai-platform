@@ -155,6 +155,35 @@ def register_task_routes(app):
             canonicalSkuIds=[canonicalSkuId], fields=["quantity"])
         return request.app.state.tasks.history(actor, scope, scenario_id=scenarioId, limit=limit, before=before)
 
+    @app.get('/api/v1/task-history')
+    def mixed_history(request: Request, limit: int = Query(default=20, ge=1, le=50),
+                      before: str | None = Query(default=None, max_length=512), actor=Depends(principal)):
+        return request.app.state.tasks.mixed_history(actor, limit=limit, before=before)
+
+    @app.get('/api/b/v1/tasks')
+    def b_history(request: Request, workspaceId: str = Query(min_length=1, max_length=64),
+                  limit: int = Query(default=20, ge=1, le=50),
+                  before: str | None = Query(default=None, max_length=512), actor=Depends(principal)):
+        if not request.app.state.tasks.after_sales_enabled:
+            raise TaskError('B_NOT_ENABLED', 503)
+        return request.app.state.tasks.mixed_history(actor, limit=limit, before=before, workspace_id=workspaceId)
+
+    @app.get('/api/b/v1/status')
+    def b_status(request: Request, actor=Depends(principal)):
+        service = request.app.state.tasks
+        if not service.after_sales_enabled:
+            return dict(enabled=False, status='DISABLED', modelNetworkEnabled=False)
+        from sqlalchemy import inspect
+        try:
+            schema = inspect(service.engine)
+            ready = schema.has_table('g01_b_resource_grants') and {
+                'scope', 'revision', 'active', 'configuration_hash', 'command_key'
+            } <= {c['name'] for c in schema.get_columns('g01_b_resource_grants')}
+        except Exception:
+            ready = False
+        # B readiness is separate from S01's /health/ready and never migrates at startup.
+        return dict(enabled=True, status='FOUNDATION_READY' if ready else 'NOT_READY', modelNetworkEnabled=False)
+
     @app.get("/api/v1/analysis-tasks/{task_id}")
     def read(task_id: str, request: Request, actor=Depends(principal)):
         return request.app.state.tasks.read(actor, task_id)

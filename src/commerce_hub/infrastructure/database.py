@@ -8,7 +8,8 @@ from sqlalchemy import create_engine, event, inspect, text
 
 from commerce_hub.bootstrap.settings import Settings
 
-SCHEMA_REVISION = "0011_local_admin"
+SCHEMA_REVISION = '0012_b_resource_grants'
+COMPATIBLE_SCHEMA_REVISIONS = frozenset({'0011_local_admin', SCHEMA_REVISION})
 AUTHORIZED_TEST_DATABASE = "s01_a01_test_20261112"
 ROOT = Path(__file__).resolve().parents[3]
 REQUIRED_TABLES = frozenset({
@@ -58,7 +59,7 @@ class Database:
             with self.engine.connect() as connection:
                 versions = connection.execute(text("SELECT version_num FROM alembic_version")).scalars().all()
                 schema = inspect(connection)
-                if versions != [SCHEMA_REVISION] or not REQUIRED_TABLES <= set(schema.get_table_names()):
+                if len(versions) != 1 or versions[0] not in COMPATIBLE_SCHEMA_REVISIONS or not REQUIRED_TABLES <= set(schema.get_table_names()):
                     return False
                 return ({"principal_revision", "token_id"} <= {column["name"] for column in schema.get_columns("o01_tasks")}
                         and "owner_version" in {column["name"] for column in schema.get_columns("i01_work_items")}
@@ -91,6 +92,9 @@ def migrate(settings: Settings) -> str:
             command.upgrade(config, "head")
         if not database.schema_ready():
             raise MigrationError("Migration head verification failed")
+        with database.engine.connect() as connection:
+            if connection.execute(text('SELECT version_num FROM alembic_version')).scalars().all() != [SCHEMA_REVISION]:
+                raise MigrationError('Migration head verification failed')
         return SCHEMA_REVISION
     except MigrationError:
         raise

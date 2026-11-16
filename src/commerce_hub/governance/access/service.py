@@ -55,6 +55,15 @@ def _scope(scope, tenant_id):
 
 
 class AccessControl:
+    def sign_task_cursor(self, principal, payload, workspace_id):
+        message = json.dumps(['task-cursor-v1', principal.tenant_id, principal.principal_id,
+            principal.revision, principal.token_id, workspace_id, payload], separators=(',', ':')).encode()
+        return hmac.new(self._key, message, hashlib.sha256).hexdigest()
+
+    def authorize_b_resource(self, connection, principal, action, resource_scope, *, lock=True):
+        from .b_resources import authorize_b_resource
+        return authorize_b_resource(self, connection, principal, action, resource_scope, lock=lock)
+
     def __init__(self, engine, issuer: str, audience: str, signing_key: str | bytes):
         key = signing_key.encode("utf-8") if isinstance(signing_key, str) else signing_key
         if not issuer or not audience or not isinstance(key, bytes) or len(key) < 32:

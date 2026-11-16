@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     auth_signing_key: SecretStr = Field(default=SecretStr(""), validation_alias="COMMERCE_AUTH_SIGNING_KEY", repr=False)
     browser_origin: str = Field(default="https://localhost", validation_alias="COMMERCE_BROWSER_ORIGIN")
     local_admin_enabled: bool = Field(default=False, validation_alias="COMMERCE_LOCAL_ADMIN_ENABLED")
+    after_sales_enabled: bool = Field(default=False, validation_alias='COMMERCE_B_ENABLED')
     local_session_seconds: int = Field(default=28800, ge=300, le=86400, validation_alias="COMMERCE_LOCAL_SESSION_SECONDS")
     local_app_tenant: str = Field(default='s01-v2-teaching-local', min_length=1, max_length=64, validation_alias='COMMERCE_S01_V2_APP_TENANT')
     lease_seconds: int = Field(default=10, ge=1, le=120, validation_alias="COMMERCE_LEASE_SECONDS")
