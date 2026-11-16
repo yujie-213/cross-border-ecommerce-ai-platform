@@ -25,6 +25,8 @@ test('three product chains, manual fallback, risk isolation and S01 reminder',as
   const golden=page.locator('article.b-fact').filter({has:page.getByRole('heading',{name:'b-golden-20261116 / v1',exact:true})})
   await expect(golden.getByRole('button',{name:'启用资料',exact:true})).toBeVisible({timeout:30000})
   await golden.getByRole('button',{name:'启用资料',exact:true}).click()
+  await golden.getByRole('button',{name:'停用资料',exact:true}).click()
+  await golden.getByRole('button',{name:'启用资料',exact:true}).click()
   await page.getByRole('button',{name:'准备四类教学政策草稿',exact:true}).click()
   for(let i=0;i<4;i++){await page.getByRole('button',{name:'提交政策审核',exact:true}).first().click();await page.getByRole('button',{name:'确认并发布此政策',exact:true}).first().click()}
   await expect(page.getByText('已发布',{exact:true})).toHaveCount(4)

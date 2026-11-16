@@ -142,7 +142,7 @@ class AfterSales:
                     require(state=='DRAFT','DATASET_STATE_INVALID',409)
                     records=self.records(conn,row);body['sealedHash']=digest(records);state='SEALED'
                 elif action=='activate':
-                    require(state=='READBACK_VERIFIED' and body.get('readbackHash')==body.get('sealedHash'),'DATASET_NOT_VERIFIED',409)
+                    require(state in {'READBACK_VERIFIED','INACTIVE'} and body.get('readbackHash')==body.get('sealedHash'),'DATASET_NOT_VERIFIED',409)
                     body['activatedBy']=actor.principal_id;body['activatedAt']=now();state='ACTIVE'
                 else:require(state=='ACTIVE','DATASET_STATE_INVALID',409);state='INACTIVE'
             elif kind=='REPORT':
