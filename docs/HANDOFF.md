@@ -1,3 +1,5 @@
+B设计普通同步回执（2026-11-16）：3444a20dc7afc50cb41e81115d896a4d0021f46a已普通push至origin/codex/b-after-sales-v1并独立ls-remote一致；未合main。随后只修正本轮新证据文件累计diff的LF换行并追加本回执；最终SHA以Git回读为准，设计仍REVIEW，六项实施TODO，结束等待负责人评审。
+
 B设计文档固定提交（2026-11-16）：162b98dec164f1cecaf05665e629fe82e3b61ebf，设计REVIEW；本次后续提交仅补证据生成换行修复与固定SHA/检查回执。首个暂存检查暴露新validation.json的CRLF，已修正生成器为LF并再次检查；保留初次事实，不改冻结需求或业务代码。最终远端同步由实际ls-remote回读，不预写成功。
 
 B V1详细设计交付（2026-11-16）：起点codex/b-after-sales-v1 / 2547d1e23ef8cbc991a6e238df9961c35a551696，Codex单人，仅文档。复用/差距、三链详细设计、操作页面与分阶段计划见docs/README.md新增入口；D-B-DESIGN-01 REVIEW、六项开发TODO，未独立评审/未实现/未业务验收。提出DomainResult来源兼容、G01动作及教学绑定、D03/D04最小资产、A02/A03及B01售后指标增量；风险独立advisory不进入S01计算/采购门。四类政策正文/责任、精确映射绑定、B模型用途预算须后续准备；ERP完整成熟群组仍需验证。检查结果见evidence/B-DESIGN-20261116/validation.json；本轮无业务回归/迁移/ERP/模型，未知OpenAPI未读未改。普通推送当前分支后停止，不合main；最终SHA和推送结果以Git回读及最终回复为准，不虚填自身SHA。
