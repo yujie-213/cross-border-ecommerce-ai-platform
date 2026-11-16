@@ -1,0 +1,78 @@
+<testsuites id="" name="" tests="4" failures="2" skipped="0" errors="0" time="6.801349">
+<testsuite name="b-after-sales-prototype.spec.ts" timestamp="2026-11-16T05:16:18.494Z" hostname="" tests="4" failures="2" skipped="0" time="4.277" errors="0">
+<testcase name="case: explicit target, evidence, simulated AI, human review, stale draft and re-open history" classname="b-after-sales-prototype.spec.ts" time="1.338">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|b-prototype\b-after-sales-prototype-ca-0ae19-e-draft-and-re-open-history\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toContainText(expected) failed" type="expect.toContainText">
+<![CDATA[  b-after-sales-prototype.spec.ts:25:1 › case: explicit target, evidence, simulated AI, human review, stale draft and re-open history
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "显式选择目标行"
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <div role="alert" id="case-error" class="field-error"></div> aka locator('#case-error')
+        2) <div role="alert" id="modal-error" class="field-error">显式选择目标行并填写关联理由。</div> aka getByText('显式选择目标行并填写关联理由。')
+
+    Call log:
+      - Expect "toContainText" getByRole('alert') with timeout 5000ms
+      - waiting for getByRole('alert')
+
+
+      31 |   await page.getByRole('button', { name: '确认目标商品', exact: true }).click()
+      32 |   await page.getByRole('button', { name: '确认所选明细' }).click()
+    > 33 |   await expect(page.getByRole('alert')).toContainText('显式选择目标行')
+         |                                         ^
+      34 |   await page.getByRole('radio').first().check()
+      35 |   await page.getByLabel('关联 / 修订理由').fill('模拟：已向客户核实目标服装订单行')
+      36 |   await page.getByRole('button', { name: '确认所选明细' }).click()
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:33:41
+
+    Error Context: ..\..\..\.tmp\b-prototype\b-after-sales-prototype-ca-0ae19-e-draft-and-re-open-history\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="analysis: N/D evidence, original events, UNKNOWN and investigation" classname="b-after-sales-prototype.spec.ts" time="1.276">
+</testcase>
+<testcase name="risk: confirm, revoke and cross-module return preserve quantity, filter and batch view" classname="b-after-sales-prototype.spec.ts" time="1.155">
+</testcase>
+<testcase name="states and keyboard: conflict, no policy, safety, empty and 1024/820 layouts" classname="b-after-sales-prototype.spec.ts" time="0.508">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|b-prototype\b-after-sales-prototype-st-40c0d--empty-and-1024-820-layouts\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toBeVisible() failed" type="expect.toBeVisible">
+<![CDATA[  b-after-sales-prototype.spec.ts:113:1 › states and keyboard: conflict, no policy, safety, empty and 1024/820 layouts
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('无适用政策', { exact: true })
+    Expected: visible
+    Error: strict mode violation: getByText('无适用政策', { exact: true }) resolved to 2 elements:
+        1) <option selected value="no-policy">无适用政策</option> aka getByLabel('案件情形')
+        2) <strong>无适用政策</strong> aka getByRole('strong').filter({ hasText: '无适用政策' })
+
+    Call log:
+      - Expect "toBeVisible" getByText('无适用政策', { exact: true }) with timeout 5000ms
+      - waiting for getByText('无适用政策', { exact: true })
+
+
+      118 |   await expect(page.getByRole('button', { name: '生成建议（模拟）', exact: true })).toBeDisabled()
+      119 |   await page.getByLabel('案件情形').selectOption('no-policy')
+    > 120 |   await expect(page.getByText('无适用政策', { exact: true })).toBeVisible()
+          |                                                          ^
+      121 |   await page.getByLabel('案件情形').selectOption('failure')
+      122 |   await expect(page.getByText('取证失败 · 模拟超时', { exact: true })).toBeVisible()
+      123 |   await page.setViewportSize({ width: 1024, height: 768 })
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\s01\b-after-sales-prototype.spec.ts:120:58
+
+    Error Context: ..\..\..\.tmp\b-prototype\b-after-sales-prototype-st-40c0d--empty-and-1024-820-layouts\error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>

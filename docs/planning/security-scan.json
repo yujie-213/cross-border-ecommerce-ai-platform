@@ -1,10 +1,41 @@
 {
   "status": "PASS",
-  "scope": "OUTGOING_FINAL_INDEX_BLOBS_FROM_BASE",
-  "baseCommit": "00da72a9f3d9a457c177fe8975ef17100890b5ae",
-  "reviewedImplementation": "59431367f105c75449bbdaf14159f019be26cb9d",
-  "scannedBlobs": 19,
-  "knownCredentialCount": 3,
+  "scope": "B_OUTGOING_IMPLEMENTATION_HISTORY_AND_PENDING_EVIDENCE",
+  "baseCommit": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
+  "reviewedImplementation": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "scannedBlobs": 52,
+  "knownCredentialCount": 2,
   "findings": [],
-  "limitations": "Exact configured credentials and common secret patterns; synthetic fixture credentials excluded; no private values emitted; not a security certification."
+  "reviewedCoincidences": [
+    {
+      "artifact": "history:6a591b9359ed29c918834e60bbdd1ea96c2f9455:tests/integration/mysql/test_storage.py",
+      "rule": "KNOWN_LOCAL_SECRET",
+      "line": 86,
+      "decision": "FALSE_POSITIVE",
+      "reason": "Unchanged baseline numeric precision / datetime microsecond fixture; numeric coincidence, not credential configuration or authentication."
+    },
+    {
+      "artifact": "history:6a591b9359ed29c918834e60bbdd1ea96c2f9455:tests/integration/mysql/test_storage.py",
+      "rule": "KNOWN_LOCAL_SECRET",
+      "line": 86,
+      "decision": "FALSE_POSITIVE",
+      "reason": "Unchanged baseline numeric precision / datetime microsecond fixture; numeric coincidence, not credential configuration or authentication."
+    },
+    {
+      "artifact": "history:6a591b9359ed29c918834e60bbdd1ea96c2f9455:tests/integration/mysql/test_storage.py",
+      "rule": "KNOWN_LOCAL_SECRET",
+      "line": 86,
+      "decision": "FALSE_POSITIVE",
+      "reason": "Unchanged baseline numeric precision / datetime microsecond fixture; numeric coincidence, not credential configuration or authentication."
+    },
+    {
+      "artifact": "history:6a591b9359ed29c918834e60bbdd1ea96c2f9455:tests/integration/mysql/test_storage.py",
+      "rule": "KNOWN_LOCAL_SECRET",
+      "line": 87,
+      "decision": "FALSE_POSITIVE",
+      "reason": "Unchanged baseline numeric precision / datetime microsecond fixture; numeric coincidence, not credential configuration or authentication."
+    }
+  ],
+  "excludedUnknownPath": "docs/ERP-openapi.yaml",
+  "limitations": "Configured exact secrets and common secret patterns; synthetic fixtures remain engineering samples; no secret values emitted. Not a security certification."
 }

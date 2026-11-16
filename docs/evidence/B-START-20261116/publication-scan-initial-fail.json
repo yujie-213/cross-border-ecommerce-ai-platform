@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "scope": "B_OUTGOING_IMPLEMENTATION_HISTORY_AND_PENDING_EVIDENCE",
+  "baseCommit": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
+  "reviewedImplementation": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "scannedBlobs": 53,
+  "knownCredentialCount": 2,
+  "findings": [
+    {
+      "artifact": "history:6a591b9359ed29c918834e60bbdd1ea96c2f9455:tests/integration/mysql/test_storage.py",
+      "rule": "KNOWN_LOCAL_SECRET",
+      "line": 86
+    }
+  ],
+  "excludedUnknownPath": "docs/ERP-openapi.yaml",
+  "limitations": "Configured exact secrets and common secret patterns; synthetic fixtures remain engineering samples; no secret values emitted. Not a security certification."
+}

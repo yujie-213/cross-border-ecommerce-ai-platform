@@ -1,0 +1,11 @@
+
+Running 4 tests using 1 worker
+
+(node:1968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\tests\browser\s01\b-after-sales-prototype.spec.ts:25:1 › case: explicit target, evidence, simulated AI, human review, stale draft and re-open history (2.8s)
+  ok 2 ..\tests\browser\s01\b-after-sales-prototype.spec.ts:59:1 › analysis: N/D evidence, original events, UNKNOWN and investigation (846ms)
+  ok 3 ..\tests\browser\s01\b-after-sales-prototype.spec.ts:83:1 › risk: confirm, revoke and cross-module return preserve quantity, filter and batch view (1.2s)
+  ok 4 ..\tests\browser\s01\b-after-sales-prototype.spec.ts:113:1 › states and keyboard: conflict, no policy, safety, empty and 1024/820 layouts (741ms)
+
+  4 passed (6.9s)

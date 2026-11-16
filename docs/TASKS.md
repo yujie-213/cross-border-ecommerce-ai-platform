@@ -1,3 +1,5 @@
+B本轮工程交付（2026-11-16）：HTML交互原型PROTOTYPE.F1及最小后端FOUNDATION.F1/F2记REVIEW；FOUNDATION因F3待开发整体仍IN_PROGRESS，PROTOTYPE方向确认F2仍TODO。实现6a591b9/a587284，最终被测a587284；后端166/Edge4通过，首次环境及浏览器FAIL原始证据保留于evidence/B-START-20261116。ERP/真实模型0，B默认off、本机实际admin未补权、未注册业务Handler；正式Vue/三AC业务验收NOT_RUN，无技术阻断。负责人一次方向确认后，下一连续授权从F3/CASE/DATASET接续，三链及补货联动不缩减。普通提交推送当前分支，不合main，最终HEAD/远端回执以Git独立回读为准。
+
 B最终执行准备（2026-11-16）：负责人明确详细设计及89c2a2d修订通过，D-B-DESIGN-01仅设计ACCEPTED。九个阶段保留，八个待实施阶段共23个功能级TODO登记在各阶段workItems中，状态仍由本TASKS唯一维护。仅一次原型方向确认；后续按工程完成/必要测试连续推进，不以各阶段REVIEW/未ACCEPTED阻塞；最终三链由负责人和星星统一体验验收。本轮仅准备不编码，统一开发启动仍待下一指令；未知OpenAPI保留，提交推送当前分支，不合main。
 
 B设计针对性完善（2026-11-16）：基点329a6e64423453160660491515b19557c0e765bf，Codex单人，跟踪区干净、未知OpenAPI保留未读未改；按初评四项反馈只更新G01资源授权/既有admin幂等补权、任务依赖、原型阶段及按消费者建表。D-B-DESIGN-01仍REVIEW，新增PROTOTYPE与DATASET为TODO；不制作正式页面、不实现原型/业务功能、不运行迁移/ERP/模型，不合main。
@@ -10050,9 +10052,63 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "BROWSER"
   ],
   "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "implementationCommits": [
+    "6a591b9359ed29c918834e60bbdd1ea96c2f9455",
+    "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+  ],
+  "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "evidence": [
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-FOUNDATION-01/AC1",
+        "D-B-FOUNDATION-01/AC2"
+      ],
+      "command": "$env:COMMERCE_RUN_MYSQL_TESTS='1'; $env:COMMERCE_MODEL_PROVIDER='mock'; $env:COMMERCE_MODEL_NETWORK_ENABLED='false'; .venv/Scripts/python.exe -m pytest tests/security/test_b_resources.py tests/security/test_access_unit.py tests/security/test_access_mysql.py tests/integration/orchestration/test_engineering_foundation.py tests/integration/http/test_task_api.py tests/integration/mysql/test_storage.py tests/unit/bootstrap/test_foundation.py tests/integration/http/test_local_login.py tests/integration/http/test_session_recovery.py tests/integration/orchestration/test_s01_reports.py tests/integration/s01/test_v2_workflow.py::test_http_csrf_acknowledgement_and_write_permission_are_server_enforced tests/integration/s01/test_v2_workflow.py::test_reference_only_scheme_b_uses_p3_durable_create_submit_and_restart_replay tests/unit/test_local_launcher.py -q --tb=short --junitxml=.tmp/b-foundation-final.xml",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "真实工程隔离MySQL/API/Worker；合成业务fixture，166 PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-START-20261116/backend-final.xml",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-FOUNDATION-01/AC1",
+        "D-B-FOUNDATION-01/AC2"
+      ],
+      "command": "固定实现与冻结设计对照；git diff 0191940 --check",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "仅F1/F2工程范围；F3未开发",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-START-20261116/review.md",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "历史原始失败保留，不计最终通过",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "环境失败/两次浏览器失败；原因和修复见validation.json",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/B-START-20261116/validation.json",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [],
+      "command": "负责人原型方向确认 / 正式Vue / 完整售后业务验收",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "本轮不代签；真实ERP与模型业务NOT_RUN",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-START-20261116/review.md",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
   "observedHead": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
@@ -10081,6 +10137,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人正式开发启动；Codex单人交错推进原型及最小公共后端，保留未知文件；B默认关闭，无ERP业务写/真实模型。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "固定实现a587284：F1/F2工程166项通过，F3正式Vue未开发，阶段保留IN_PROGRESS。"
     }
   ],
   "workItems": [
@@ -10093,7 +10154,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "实现B资源范围及幂等grant-after-sales，覆盖未关联SKU案件、政策和数据集父资源",
       "doneWhen": "原账号密码/会话/补货grant不变，B范围精确且拒绝越权",
       "testMethod": "复用G01/LocalAdmin测试，补最少资源授权、补权重放/冲突/回滚用例",
-      "status": "IN_PROGRESS"
+      "status": "REVIEW"
     },
     {
       "id": "FOUNDATION.F2",
@@ -10105,7 +10166,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "按受信场景接入B任务授权全生命周期、预算/取消/恢复和模块开关",
       "doneWhen": "B任务不旁路授权，旧S01任务和启动不受影响",
       "testMethod": "复用任务/租约/预算测试，覆盖B授权分派、重启恢复与旧路径兼容",
-      "status": "IN_PROGRESS"
+      "status": "REVIEW"
     },
     {
       "id": "FOUNDATION.F3",
@@ -10780,10 +10841,65 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "6a591b9359ed29c918834e60bbdd1ea96c2f9455",
+    "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+  ],
+  "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "evidence": [
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-PROTOTYPE-01/AC1"
+      ],
+      "command": "cd frontend; node node_modules/@playwright/test/cli.js test --config playwright.b-prototype.config.ts",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "本地file HTML、合成状态/1440/1024/820/键盘/外部请求0，4 PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-START-20261116/prototype-final.xml",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-PROTOTYPE-01/AC1",
+        "D-B-PROTOTYPE-01/AC2"
+      ],
+      "command": "固定实现与冻结设计对照；git diff 0191940 --check",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "四页交互与边界，非正式Vue/非业务AC",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-START-20261116/review.md",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [],
+      "command": "历史原始失败保留，不计最终通过",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "环境失败/两次浏览器失败；原因和修复见validation.json",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/evidence/B-START-20261116/validation.json",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-PROTOTYPE-01/AC2"
+      ],
+      "command": "负责人原型方向确认 / 正式Vue / 完整售后业务验收",
+      "environment": "Windows；获准隔离MySQL / Edge；ERP与真实模型调用0",
+      "sample": "本轮不代签；真实ERP与模型业务NOT_RUN",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/evidence/B-START-20261116/review.md",
+      "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
   "observedHead": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
@@ -10807,6 +10923,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "IN_PROGRESS",
       "reason": "负责人正式开发启动；Codex单人交错推进原型及最小公共后端，保留未知文件；B默认关闭，无ERP业务写/真实模型。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "固定实现a587284：可点击四页原型，Edge4项通过；F1 REVIEW，F2一次负责人方向确认TODO，不代签产品验收。"
     }
   ],
   "workItems": [
@@ -10819,7 +10940,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "制作工作台、案件、体验分析和补货风险四条合成样例路径，呈现正常、缺证据、失败与历史状态",
       "doneWhen": "一份本地可预览原型，数量/风险边界及返回上下文可体验",
       "testMethod": "复用本地文档/浏览器预览，检查关键路径、键盘和1024/1440布局",
-      "status": "IN_PROGRESS"
+      "status": "REVIEW"
     },
     {
       "id": "PROTOTYPE.F2",

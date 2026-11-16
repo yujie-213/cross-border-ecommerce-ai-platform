@@ -1,0 +1,12 @@
+<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="6.9184920000000005">
+<testsuite name="b-after-sales-prototype.spec.ts" timestamp="2026-11-16T05:25:56.459Z" hostname="" tests="4" failures="0" skipped="0" time="5.555" errors="0">
+<testcase name="case: explicit target, evidence, simulated AI, human review, stale draft and re-open history" classname="b-after-sales-prototype.spec.ts" time="2.782">
+</testcase>
+<testcase name="analysis: N/D evidence, original events, UNKNOWN and investigation" classname="b-after-sales-prototype.spec.ts" time="0.846">
+</testcase>
+<testcase name="risk: confirm, revoke and cross-module return preserve quantity, filter and batch view" classname="b-after-sales-prototype.spec.ts" time="1.186">
+</testcase>
+<testcase name="states and keyboard: conflict, no policy, safety, empty and 1024/820 layouts" classname="b-after-sales-prototype.spec.ts" time="0.741">
+</testcase>
+</testsuite>
+</testsuites>

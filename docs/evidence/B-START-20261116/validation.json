@@ -1,0 +1,256 @@
+{
+  "date": "2026-11-16",
+  "scope": "B_PROTOTYPE_AND_FOUNDATION_F1_F2_ENGINEERING_ONLY",
+  "baseCommit": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
+  "implementationCommits": [
+    "6a591b9359ed29c918834e60bbdd1ea96c2f9455",
+    "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
+  ],
+  "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb",
+  "environment": {
+    "os": "Windows",
+    "python": "3.13.5",
+    "mysqlDatabase": "s01_a01_test_20261112",
+    "modelProvider": "mock",
+    "modelNetwork": false,
+    "browser": "Microsoft Edge / Playwright",
+    "businessData": "SYNTHETIC_FIXTURES"
+  },
+  "commands": {
+    "backend": "$env:COMMERCE_RUN_MYSQL_TESTS='1'; $env:COMMERCE_MODEL_PROVIDER='mock'; $env:COMMERCE_MODEL_NETWORK_ENABLED='false'; .venv/Scripts/python.exe -m pytest tests/security/test_b_resources.py tests/security/test_access_unit.py tests/security/test_access_mysql.py tests/integration/orchestration/test_engineering_foundation.py tests/integration/http/test_task_api.py tests/integration/mysql/test_storage.py tests/unit/bootstrap/test_foundation.py tests/integration/http/test_local_login.py tests/integration/http/test_session_recovery.py tests/integration/orchestration/test_s01_reports.py tests/integration/s01/test_v2_workflow.py::test_http_csrf_acknowledgement_and_write_permission_are_server_enforced tests/integration/s01/test_v2_workflow.py::test_reference_only_scheme_b_uses_p3_durable_create_submit_and_restart_replay tests/unit/test_local_launcher.py -q --tb=short --junitxml=.tmp/b-foundation-final.xml",
+    "prototype": "cd frontend; node node_modules/@playwright/test/cli.js test --config playwright.b-prototype.config.ts"
+  },
+  "results": {
+    "backend-final.xml": {
+      "tests": 166,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend-initial-fail.xml": {
+      "tests": 130,
+      "failures": 0,
+      "errors": 71,
+      "skipped": 0
+    },
+    "backend-intermediate-130.xml": {
+      "tests": 130,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend-intermediate-19.xml": {
+      "tests": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend-intermediate-21.xml": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend-process-first.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "prototype-final.xml": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "prototype-first-fail.xml": {
+      "tests": 4,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "prototype-second-fail.xml": {
+      "tests": 4,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "externalActivity": {
+    "erpCalls": 0,
+    "realModelCalls": 0,
+    "erpBusinessWrites": 0,
+    "actualLocalAdminGrantApplied": false
+  },
+  "retainedFailures": [
+    {
+      "artifact": "backend-initial-fail.xml",
+      "cause": "既有模型环境值不合法，配置读取失败；未进入数据库测试。仅测试进程显式mock/off后解决，本机.env未改。"
+    },
+    {
+      "artifact": "prototype-first-fail.xml",
+      "cause": "2 PASS/2 FAIL：新浏览器用例两个选择器歧义，精确选择后修复。"
+    },
+    {
+      "artifact": "prototype-second-fail.xml",
+      "cause": "3 PASS/1 FAIL：跳到主要内容链接与hash路由冲突及焦点检查，已修复。"
+    },
+    {
+      "artifact": "git commit history 6a591b9 -> a587284",
+      "cause": "首次暂存whitespace检查FAIL，PowerShell未因非零码停止而提交。后续普通提交统一prototype.js为LF；累计diff检查PASS，不改写历史。"
+    }
+  ],
+  "notRun": [
+    "真实售后ERP/模型业务验证",
+    "正式Vue构建/业务浏览器验收",
+    "负责人原型方向确认",
+    "完整B V1.0三AC验收"
+  ],
+  "limits": [
+    "B默认关闭，生产B Handler及领域创建API尚未注册",
+    "未向本机实际admin补权；测试独立验证真实持久化授权",
+    "F3/CASE/DATASET/EXPERIENCE/RISK/S01联动按原23项TODO接续，不缩减"
+  ],
+  "artifacts": [
+    {
+      "path": "docs/evidence/B-START-20261116/backend-final.txt",
+      "sha256": "ae3cd9411d9d9676dc29c403b08545d39d8400dd0f31c3608d943330713ee6d3"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/backend-final.xml",
+      "sha256": "d0e100dd3f3c24ae4dd2adef52761d7c42b38fe05da8cadd07ddc34918709c1b"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/backend-initial-fail.xml",
+      "sha256": "2ac4ad061de4202a0ee4256a9c306ce8bbb8fa55e0234bc4fbbfc2a82a8e56b7"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/backend-intermediate-130.xml",
+      "sha256": "5e4486a7be4085bab1723b3833cae9fa02ebb6c26b58fcb11833918193ad06c6"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/backend-intermediate-19.xml",
+      "sha256": "127bcd97528ed68d63515ecb733417420d6baef52019fe4892b6ef055e67db03"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/backend-intermediate-21.xml",
+      "sha256": "05daefaebe1f1f39d851e16624d54f680ae35eabd6cc3a252280ba27c720d943"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/backend-process-first.xml",
+      "sha256": "84f9d18857c910c8d7052628f9702adc31ddfb5fafd2717ad91c6ba12f75aff7"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/planning-final.json",
+      "sha256": "5ba656329d7c46cbae2924b32c639e6bed493c58306f2dc38c77383a4301b97d"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/planning-first-fail.json",
+      "sha256": "3bd6cde67faf087af1c4c1a30f1231d1180585f10fe7eeca467a28c66027e9dd"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/prototype-final.txt",
+      "sha256": "314d48c62bd59241802b695f271362b096be51babd54e7b456ffd5da473a1b0f"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/prototype-final.xml",
+      "sha256": "af09baa4bc11cb5d5e27982e6d56994070c85b5525b28160d68a7e1864feb95a"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/prototype-first-fail.xml",
+      "sha256": "8849795bcb51a75507f366f94b37e32259b9837615ee247f2fdcfce57586ff1d"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/prototype-second-fail.xml",
+      "sha256": "0e381d6fdcf3290ac9628f668deba9a5ba61a3d96efd6ee5a740e895257e7813"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/publication-scan-initial-fail.json",
+      "sha256": "0aaf000ded191459b1023041eb5d21db2e7066b79078b09edf2160c23aa70ab7"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/review.md",
+      "sha256": "ee808415e6fd463d556a4292947c7f0831f10fe88eda585eb7121bc8d820c70b"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/screenshots/01-workbench-1440.png",
+      "sha256": "80a532b7b8b1792dd83aaf40ca5b28fcb9e9e8cf3724fcf6c49a1985a50383b7"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/screenshots/02-case-1440.png",
+      "sha256": "c77c18f1ad3da10632b50b4d1690c129754247b45d90d355e38c5aa6c4a47fb6"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/screenshots/03-analysis-1440.png",
+      "sha256": "198c3d3727ea3f986719f0c42a4577f531f1be6b9f1e5041481cc99ef00e9d53"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/screenshots/04-risk-purchase-1440.png",
+      "sha256": "d0a691e6e4feb2d08246a0b501c24ce4ef806a363d4e9b436690b0a2260abde4"
+    },
+    {
+      "path": "docs/evidence/B-START-20261116/screenshots/05-case-1024.png",
+      "sha256": "16293bf694ebc1c0d90155aee7e872636e39d4ab8c36877a225889f63359a568"
+    }
+  ],
+  "documentationChecks": {
+    "build": {
+      "command": "python docs/planning/build_docs.py",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    "plan": {
+      "command": "python docs/planning/check_plan.py",
+      "exitCode": 0,
+      "result": "PASS",
+      "checks": 18
+    },
+    "initialBuildAttempt": {
+      "command": ".venv/Scripts/python.exe docs/planning/build_docs.py",
+      "exitCode": 1,
+      "result": "FAIL",
+      "reason": "业务venv未安装文档markdown；改用已安装文档依赖的本机python3.13.5成功，未修改业务依赖。"
+    },
+    "initialPublicationCheck": {
+      "result": "FAIL",
+      "reason": "既有精度/微秒数值夹具与6位本机密码偶合；逐行核对基线相同，最终显式FALSE_POSITIVE处置，无泄漏。",
+      "artifactRef": "docs/evidence/B-START-20261116/publication-scan-initial-fail.json"
+    },
+    "initialPlanCheck": {
+      "result": "FAIL",
+      "reason": "上述初次凭据扫描未通过，其他17项通过；完成核对后18项通过。",
+      "artifactRef": "docs/evidence/B-START-20261116/planning-first-fail.json"
+    }
+  },
+  "evidenceTextFormatting": {
+    "normalization": "LF and trailing whitespace only; test outcomes retained; original local .tmp outputs remain",
+    "originalFingerprints": [
+      {
+        "path": "docs/evidence/B-START-20261116/backend-initial-fail.xml",
+        "originalSha256": "79f59d0bf64b01c85be2867957f6511ed38e839d918432263721bbb5acf78007",
+        "normalizedSha256": "2ac4ad061de4202a0ee4256a9c306ce8bbb8fa55e0234bc4fbbfc2a82a8e56b7"
+      },
+      {
+        "path": "docs/evidence/B-START-20261116/planning-final.json",
+        "originalSha256": "b6940b458649fa27e55cd21b8e359fea937d0750115736bf05a093235351a98f",
+        "normalizedSha256": "5ba656329d7c46cbae2924b32c639e6bed493c58306f2dc38c77383a4301b97d"
+      },
+      {
+        "path": "docs/evidence/B-START-20261116/planning-first-fail.json",
+        "originalSha256": "0998cd57ea6bd2fbc33712f56485d09e5018d5f08f04b88a79cd4858dc36e7d7",
+        "normalizedSha256": "3bd6cde67faf087af1c4c1a30f1231d1180585f10fe7eeca467a28c66027e9dd"
+      },
+      {
+        "path": "docs/evidence/B-START-20261116/prototype-first-fail.xml",
+        "originalSha256": "99b3732b20972d75a61e379c056c0bf9c8dd118739f8ad3d22f24aa77c72f7a7",
+        "normalizedSha256": "8849795bcb51a75507f366f94b37e32259b9837615ee247f2fdcfce57586ff1d"
+      },
+      {
+        "path": "docs/evidence/B-START-20261116/prototype-second-fail.xml",
+        "originalSha256": "d136ffd44e60a71fad65993ea5fbd4f115024aba265c5bbe89841ae9ab83bdd7",
+        "normalizedSha256": "0e381d6fdcf3290ac9628f668deba9a5ba61a3d96efd6ee5a740e895257e7813"
+      }
+    ],
+    "initialStagedWhitespaceCheck": "FAIL: raw console/XML line endings and trailing whitespace; normalized before commit"
+  }
+}
