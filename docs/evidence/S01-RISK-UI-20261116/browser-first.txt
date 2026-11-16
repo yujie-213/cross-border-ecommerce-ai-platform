@@ -6,7 +6,7 @@ Running 1 test using 1 worker
   x  1 ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder (41.2s)
 
 
-  1) ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder 
+  1) ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder
 
     Error: expect(locator).toHaveCount(expected) failed
 
@@ -38,4 +38,4 @@ Running 1 test using 1 worker
     Error Context: ..\.tmp\b-browser\product-three-product-chai-e26bc--isolation-and-S01-reminder\error-context.md
 
   1 failed
-    ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder 
+    ..\tests\browser\after-sales\product.spec.ts:7:1 › three product chains, manual fallback, risk isolation and S01 reminder
