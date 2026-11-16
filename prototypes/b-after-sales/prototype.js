@@ -10,28 +10,36 @@ let state;
 let dialogReturn = null;
 let timer;
 function resetState() {
-  state = { queue: 'pending', search: '', workMode: 'normal', analysisMode: 'complete',
-    risk: 'suspected', riskVersion: 1, riskReason: '', riskHistory: [], riskTab: 'all',
-    purchaseView: 'single', purchaseFilter: '全部商品', quantity: '100', riskQuery: 'ok', returnTo: null,
-    cases: {
-      apparel: {id:'CASE-DEMO-001', title:'上衣尺码与描述不符', product:'棉质宽松上衣 / DEMO-TEE-M', status:'待处理', revision:1, linked:false,
-        messages:[{role:'客户主张', text:'收到的 M 码上衣比商品页面尺码表小，穿着偏紧。想确认如何处理。', time:'今天 09:12'}],
-        draft:'', original:'', draftRevision:0, reviews:[], evidence:false, scenario:'normal', note:''},
-      usb: {id:'CASE-DEMO-002', title:'USB 转接器诉求待澄清', product:'USB-C 转接器 / DEMO-USB-C', status:'待补证', revision:2, linked:false,
-        messages:[{role:'客户主张', text:'这件商品尺码太小，我想换大一码。', time:'今天 08:55'}],
-        draft:'', original:'', draftRevision:0, reviews:[], evidence:false, scenario:'conflict', note:''},
-      safety: {id:'CASE-DEMO-003', title:'充电时异常发热及异味', product:'便携充电器 / DEMO-CHARGER', status:'优先升级', revision:1, linked:true,
-        messages:[{role:'客户主张', text:'充电时闻到焦味，外壳也很烫，是否还能继续使用？', time:'今天 09:18'}],
-        draft:'', original:'', draftRevision:0, reviews:[], evidence:false, scenario:'safety', note:''},
-      review: {id:'CASE-DEMO-004', title:'包装破损，回复待审核', product:'棉质宽松上衣 / DEMO-TEE-M', status:'待审核', revision:3, linked:true,
-        messages:[{role:'客户主张', text:'外包装破了，衣服暂未发现破损，已补充包装照片。', time:'昨天 16:40'}],
-        draft:'感谢您补充包装照片。我们已记录包装破损情况，请再确认衣物是否有损坏，便于人工核实后续处理方案。',
-        original:'感谢您补充包装照片。我们已记录包装破损情况，请再确认衣物是否有损坏，便于人工核实后续处理方案。',
-        draftRevision:3, reviews:[], evidence:true, scenario:'normal', note:''}
+  const tee = {key:'tee', product:'棉质宽松上衣 · M 码', sku:'DEMO-TEE-M', productId:'DEMO-PRODUCT-TEE', line:'L1'};
+  const shirt = {key:'shirt', product:'棉质长袖衬衫 · M 码', sku:'DEMO-SHIRT-M', productId:'DEMO-PRODUCT-SHIRT', line:'L2'};
+  const socks = {key:'socks', product:'基础款棉袜', sku:'DEMO-SOCKS', productId:'DEMO-PRODUCT-SOCKS', line:'L2'};
+  const make = (v) => ({revision:1, linked:false, targetKey:null, lines:[], evidence:false, draft:'', original:'', draftRevision:0, reviews:[], linkHistory:[], scenario:'normal', note:'', source:'erp', store:'演示服饰店 US', warehouse:'演示仓 A', order:null, ...v});
+  state = {queue:'pending', search:'', sourceFilter:'erp', workMode:'normal', analysisMode:'complete', analysisProduct:'tee',
+    risk:'suspected', riskVersion:1, riskReason:'', riskHistory:[], riskTab:'all',
+    purchaseView:'single', purchaseFilter:'全部商品', quantity:'100', riskQuery:'ok', returnTo:null,
+    cases:{
+      apparel:make({id:'DEMO-TICKET-001', title:'上衣尺码与描述不符', product:tee.product, status:'待处理', linked:true, targetKey:'tee', lines:[tee,shirt], order:'DEMO-ORDER-101', evidence:true,
+        messages:[{role:'客户主张',text:'收到的 M 码上衣比商品页面尺码表小，穿着偏紧。想确认如何处理。',time:'今天 09:12'}]}),
+      multi:make({id:'DEMO-TICKET-002',title:'订单内有两件商品，退货目标待核实',product:'棉质宽松上衣 / 基础款棉袜',status:'待补证',order:'DEMO-ORDER-201',lines:[tee,socks],
+        messages:[{role:'客户主张',text:'这次订单里有件商品不合适，希望退货。',time:'今天 08:55'}]}),
+      missing:make({id:'DEMO-TICKET-003',title:'客户反馈缺少可靠订单信息',product:'商品尚未核实',status:'待补证',
+        messages:[{role:'客户主张',text:'上次收到的东西有问题，可以帮我查一下吗？',time:'今天 08:40'}]}),
+      review:make({id:'DEMO-TICKET-004',title:'包装破损，回复待审核',product:tee.product,status:'待审核',linked:true,targetKey:'tee',lines:[tee],order:'DEMO-ORDER-301',revision:3,evidence:true,
+        messages:[{role:'客户主张',text:'外包装破了，衣服暂未发现破损，已补充包装照片。',time:'昨天 16:40'}],
+        draft:'感谢您补充包装照片。我们已记录包装破损情况，请再确认衣物是否有损坏，便于人工核实后续处理方案。',original:'感谢您补充包装照片。我们已记录包装破损情况，请再确认衣物是否有损坏，便于人工核实后续处理方案。',draftRevision:3}),
+      usb:make({id:'TEACHING-CASE-USB',title:'USB 转接器诉求待澄清',source:'teaching',store:'演示数码店 US',order:'TEACHING-ORDER-USB',product:'USB-C 转接器',linked:true,targetKey:'usb',evidence:true,status:'待补证',scenario:'conflict',
+        lines:[{key:'usb',product:'USB-C 转接器',sku:'DEMO-USB-C',productId:'DEMO-PRODUCT-USB',line:'L1'}],messages:[{role:'客户主张',text:'这件商品尺码太小，我想换大一码。',time:'教学样例'}]}),
+      safety:make({id:'TEACHING-CASE-SAFETY',title:'充电时异常发热及异味',source:'teaching',store:'演示数码店 US',order:'TEACHING-ORDER-SAFETY',product:'便携充电器',linked:true,targetKey:'charger',evidence:true,status:'优先升级',scenario:'safety',
+        lines:[{key:'charger',product:'便携充电器',sku:'DEMO-CHARGER',productId:'DEMO-PRODUCT-CHARGER',line:'L1'}],messages:[{role:'客户主张',text:'充电时闻到焦味，外壳也很烫，是否还能继续使用？',time:'教学样例'}]})
     }
   };
 }
 resetState();
+function addTeachingCase() {
+  const c=state.cases.apparel;
+  state.cases.teachingTee={...c,id:'TEACHING-CASE-TEE',source:'teaching',order:'TEACHING-ORDER-101',messages:c.messages.map(m=>({...m})),reviews:[],linkHistory:[]};
+}
+addTeachingCase();
 function route() {
   const raw = location.hash.slice(1) || '/home';
   const [path, query = ''] = raw.split('?');
@@ -45,9 +53,20 @@ function panel(title, body, meta = '', action = '') {
 function head(title, subtitle, actions = '') { return `<div class="page-head"><div><div class="eyebrow">AFTER SALES / B V1.0</div><h1>${title}</h1><p class="subtitle">${subtitle}</p></div><div class="button-row">${actions}</div></div>`; }
 function scope(extra = '') { return `<div class="scope"><span>${tag('中台教学资料 · 模拟','blue')}</span><span>工作区 <b>售后演示</b></span><span>店铺 <b>演示服饰店 US</b></span>${extra}</div>`; }
 function notice(title, text, tone = 'amber') { return `<div class="notice ${tone}"><strong>${title}</strong><p>${text}</p></div>`; }
-function modeControl(label, value, options, id) {
-  return `<div class="demo-control"><span>原型状态演示</span><label for="${id}">${label}</label><select id="${id}" data-control="${id}">${options.map(([v,n])=>`<option value="${v}" ${value===v?'selected':''}>${n}</option>`).join('')}</select></div>`;
+function modeControl() { return ''; }
+function demoLab() {
+  const path=route().path, c=currentCase();
+  const select=(id,label,value,options)=>`<label class="field" for="demo-${id}">${label}</label><select id="demo-${id}" data-control="${id}">${options.map(([v,n])=>`<option value="${v}" ${v===value?'selected':''}>${n}</option>`).join('')}</select>`;
+  modal('教学与异常演示', `<p>此处仅切换原型测试状态，与正常业务操作分开。全部为合成数据，不会修改 ERP。</p><div class="button-row">${link('USB 尺码冲突案例','/after-sales/cases/usb')}${link('安全升级案例','/after-sales/cases/safety')}${button('创建内部教学案件','new-case')}${button('重置全部演示','reset')}</div><hr>`+
+    (path==='/after-sales'?select('workMode','工作区状态',state.workMode,[['normal','正常队列'],['empty','空队列'],['restricted','无权访问']]):'')+
+    (c?select('caseScenario','案件情形',c.scenario,[['normal','正常处理'],['conflict','商品诉求冲突'],['no-policy','无适用政策'],['failure','取证 / AI 失败'],['safety','安全升级']]):'')+
+    (path.includes('/analyses')?select('analysisMode','分析状态',state.analysisMode,[['complete','完整教学样例'],['immature','观察尚未完成'],['insufficient','可比较样本不足'],['failed','AI 分析失败'],['historical','历史版本']]):'')+
+    (path.includes('/risks')?select('riskStatus','生命周期',state.risk,Object.entries(riskNames)):'')+
+    (path.startsWith('/replenishment')?select('riskQuery','风险查询',state.riskQuery,[['ok','完整查询'],['failure','查询失败'],['wrong-store','错店范围'],['normal-mode','正常 ERP 模式排除教学风险']]):''));
 }
+function sourceLabel(c) { return c.source==='erp'?'ERP 已有工单 · 模拟':'中台内部教学案件'; }
+function selectedLine(c) { return c.lines.find(l=>l.key===c.targetKey); }
+
 function shell(path) {
   const purchase = path.startsWith('/replenishment');
   const home = path === '/home';
@@ -61,44 +80,52 @@ function homePage() {
   return `<div class="overview"><div class="eyebrow">COMMERCE OPERATIONS</div><h1>让每一次客户反馈，有据可循</h1><p>在同一中台处理售后、观察体验变化，并将经人工确认的质量风险带回采购工作区。</p><small>本次预览聚焦 B V1.0 操作方向；现有补货页面以模拟协作区呈现。</small></div><div class="two-col"><section class="panel"><a class="link-card" href="#/after-sales"><div class="split-title"><h2>智能售后与客户体验</h2><span class="feature-icon">售</span></div><p>客服案件 → 体验分析 → 质量调查，证据与人工决定逐步留存。</p><span class="text-button">进入售后工作台 →</span></a></section><section class="panel"><a class="link-card" href="#/replenishment"><div class="split-title"><h2>智能补货</h2><span class="feature-icon">补</span></div><p>查看单品与批量的质量风险提示，保留原补货数量和采购上下文。</p><span class="text-button">体验补货风险协作 →</span></a></section></div>`;
 }
 function workbench() {
-  const c = Object.entries(state.cases);
-  const queues = {pending:['待处理','优先升级'], evidence:['待补证'], review:['待审核'], handled:['已处理','已升级']};
-  const filtered = c.filter(([,v])=>queues[state.queue].includes(v.status) && `${v.title} ${v.product} ${v.id}`.toLowerCase().includes(state.search.toLowerCase()));
-  return head('售后工作台','先处理安全事项，再核实证据与回复。',button('＋ 新建案件','new-case','primary')) + scope() +
-    modeControl('工作区',state.workMode,[['normal','正常队列'],['empty','空队列'],['restricted','无权访问示例']],'workMode') +
-    (state.workMode==='restricted' ? notice('当前范围不可访问','本演示不展示受限案件、计数或原文。可切回正常队列继续体验。') :
-    `<div class="notice red split"><div><strong>优先处理 · 客户反馈充电器异常发热</strong><p>安全信号直接进入人工升级队列，不等待 AI 或统计门槛。</p></div>${link('立即核实 →','/after-sales/cases/safety','small')}</div><div class="columns"><section class="panel"><div class="tabs" role="group" aria-label="案件队列">${Object.entries({pending:'待处理',evidence:'待补证',review:'待审核',handled:'处理记录'}).map(([k,n])=>`<button class="tab ${state.queue===k?'active':''}" data-queue="${k}" aria-pressed="${state.queue===k}">${n}<span class="count">${state.workMode==='empty'?0:c.filter(([,v])=>queues[k].includes(v.status)).length}</span></button>`).join('')}</div><div class="toolbar"><label>搜索案件 <input id="case-search" value="${esc(state.search)}" placeholder="案件号 / 商品 / 问题" autocomplete="off"></label><small>按下一步责任动作组织</small></div>${state.workMode==='empty'||!filtered.length?'<div class="empty"><h2>当前队列没有案件</h2><p>可切换队列，或新建一条模拟案件。</p></div>':`<div class="table-scroll"><table><thead><tr><th>客户问题 / 目标商品</th><th>处理状态</th><th>下一步</th></tr></thead><tbody>${filtered.map(([id,v])=>`<tr><td><a href="#/after-sales/cases/${id}"><strong>${esc(v.title)}</strong></a><small>${esc(v.product)}</small><small class="mono">${v.id}</small></td><td>${tag(v.status,v.status==='优先升级'?'red':v.status==='待审核'?'blue':'amber')}<small>${v.linked?'已确认目标商品':'待确认订单及商品行'}</small></td><td class="nowrap">${link(v.status==='待审核'?'审核回复':'继续处理 →','/after-sales/cases/'+id,'small')}</td></tr>`).join('')}</tbody></table></div>`}<div class="table-foot"><span>当前授权范围 · 模拟案件</span><span>内容仅在本次页面会话中保留</span></div></section><aside class="side-stack">${panel('待调查线索',`<p>棉质上衣 · 实收退货率上升</p><p class="hint">2.5% → 30% · +27.5 个百分点<br>异常线索尚未确认质量缺陷。</p><div class="spaced">${link('查看同口径分析 →','/after-sales/analyses','small')}</div>`,'完整教学金样 v1 · 模拟')}${panel('采购协作',`<p class="muted">仅人工确认且在有效范围内的风险进入补货提醒。</p><div class="spaced">${link('查看质量风险','/after-sales/risks','small')}</div>`,'风险只提醒，不改补货量')}</aside></div>`);
+  const all=Object.entries(state.cases),c=all.filter(([,v])=>state.sourceFilter==='all'||v.source===state.sourceFilter);
+  const queues={pending:['待处理','优先升级'],evidence:['待补证'],review:['待审核'],handled:['已处理','已升级']};
+  const filtered=c.filter(([,v])=>queues[state.queue].includes(v.status)&&`${v.title} ${v.product} ${v.id} ${v.order||''}`.toLowerCase().includes(state.search.toLowerCase()));
+  const safety=c.find(([,v])=>v.status==='优先升级');
+  return head('售后工作台','从已有售后记录继续工作，优先处理需要判断和补证的事项。')+
+    `<div class="scope"><span>${tag('本页记录均为模拟','blue')}</span><label>记录来源 <select id="source-filter"><option value="erp" ${state.sourceFilter==='erp'?'selected':''}>ERP 已有工单（模拟）</option><option value="teaching" ${state.sourceFilter==='teaching'?'selected':''}>中台教学案件</option><option value="all" ${state.sourceFilter==='all'?'selected':''}>全部来源（分别标识）</option></select></label></div>`+
+    (state.workMode==='restricted'?notice('当前范围不可访问','请联系管理员核对授权。受限案件、计数和原文均不展示。'):
+    `${safety&&state.workMode!=='empty'?`<div class="notice red split"><div><strong>优先处理 · ${esc(safety[1].title)}</strong><p>安全反馈直接转人工核实。</p></div>${link('立即核实 →','/after-sales/cases/'+safety[0],'small')}</div>`:''}<div class="columns"><section class="panel"><div class="tabs" role="group" aria-label="案件队列">${Object.entries({pending:'待处理',evidence:'待补证',review:'待审核',handled:'处理记录'}).map(([k,n])=>`<button class="tab ${state.queue===k?'active':''}" data-queue="${k}" aria-pressed="${state.queue===k}">${n}<span class="count">${state.workMode==='empty'?0:c.filter(([,v])=>queues[k].includes(v.status)).length}</span></button>`).join('')}</div><div class="toolbar"><label>搜索售后记录 <input id="case-search" value="${esc(state.search)}" placeholder="工单 / 订单 / 商品 / 问题" autocomplete="off"></label></div>${state.workMode==='empty'||!filtered.length?'<div class="empty"><h2>当前队列没有售后记录</h2><p>可调整来源、筛选或查看其他处理队列。</p></div>':`<div class="table-scroll"><table><thead><tr><th>售后问题 / 商品</th><th>来源 / 订单</th><th>处理状态 / 下一步</th></tr></thead><tbody>${filtered.map(([id,v])=>`<tr><td><a href="#/after-sales/cases/${id}"><strong>${esc(v.title)}</strong></a><small>${esc(v.product)}</small></td><td>${tag(sourceLabel(v),'blue')}<small>${esc(v.store)}</small><small>${esc(v.order||'订单信息待补充')}</small></td><td>${tag(v.status,v.status==='优先升级'?'red':'amber')}<small>${v.linked?'查看事实和处理建议':v.lines.length?'核实本订单目标商品':'补充订单或可核查凭证'}</small></td></tr>`).join('')}</tbody></table></div>`}<div class="table-foot"><span>仅展示当前来源与权限范围</span><span>模拟处理结果仅在本次页面保留</span></div></section><aside class="side-stack">${panel('退货异常提醒','<strong>棉质宽松上衣</strong><p class="hint">本期退货率 30%，较上期上升 27.5 个百分点。优先核查尺码反馈。</p><div class="spaced">'+link('查看异常分析 →','/after-sales/analyses','small')+'</div>','中台教学样例')}${panel('商品评价与客户反馈','<p>商品评价用于体验分析；有可靠订单和明细时才进一步关联个案。</p><div class="spaced">'+link('查看商品反馈 →','/after-sales/feedback','small')+'</div>','本原型使用中台模拟资料')}</aside></div>`);
+}
+function feedbackPage() {
+  return `<a class="back" href="#/after-sales">← 返回售后工作台</a>`+head('商品评价与客户反馈','先看商品反馈，再按可靠关联深入分析。')+
+    notice('中台模拟反馈 · 未连接 ERP 评价接口','历史资料曾读到 ERP 评价样本；本页不使用该批业务数据，订单与商品的完整关联仍需核验。','blue')+
+    panel('商品评价',`<div class="message"><small>中台教学评价 · 演示服饰店 US</small><b>棉质宽松上衣 · DEMO-TEE-M</b><p>“收到的 M 码比页面尺码表小，穿着偏紧。”</p></div>${facts([['商品关联','教学 Listing / 商品 / SKU 已明确'],['订单关联','未知；不能据此查付款或归入某订单退货'],['用途','反馈主题分析；不作为退货件数']])}<div class="spaced">${link('分析该商品体验 →','/after-sales/analyses?from=feedback','primary')}</div>`)+
+    panel('订单级客户反馈',`<p>“这次订单有件商品不合适，希望退货。”</p>${facts([['订单关联','DEMO-ORDER-201 · 两件商品'],['目标商品','尚未明确，不能复制归因到每个商品']])}<div class="spaced">${link('核实关联售后记录 →','/after-sales/cases/multi')}</div>`,'模拟：仅此反馈有明确订单关联');
 }
 function currentCase() { return state.cases[route().path.split('/')[3]]; }
 function casePage(id) {
-  const c = state.cases[id];
-  if (!c) return '<div class="empty"><h1>案件不可访问</h1><p>返回工作台选择演示案件。</p></div>';
-  const stale = !!c.draft && c.draftRevision !== c.revision;
-  const blocked = !c.linked || !c.evidence || ['no-policy','failure','conflict','safety'].includes(c.scenario);
-  const identity = c.product.includes('USB') ? ['DEMO-ORDER-102 / L1','演示数码店 US / 演示仓 A'] : c.product.includes('CHARGER') ? ['DEMO-ORDER-103 / L1','演示数码店 US / 演示仓 A'] : ['DEMO-ORDER-101 / L1','演示服饰店 US / 演示仓 A'];
-  const title = head(c.title,`${c.id} · 本地合成样例`,button('查看处理历史','case-history'));
-  const warn = c.scenario==='safety' ? notice('安全信号 · 优先人工升级','客户陈述为异常发热及异味。请建议暂停使用并转专人核实，不提供拆机操作，不宣告商品安全。','red') : c.scenario==='conflict' ? notice('诉求与已核实属性冲突','USB 转接器没有服装尺码。保留客户原话，先澄清目标商品和具体问题，不能直接判断质量。') : '';
-  return `<a class="back" href="#/after-sales?queue=${state.queue}">← 返回原案件队列</a>` + title +
-    `<div class="case-meta">${tag(c.status,c.status==='优先升级'?'red':'amber')}${tag('模拟来源','blue')}<span>caseRevision <b>${c.revision}</b></span><span>操作者 <b>admin（模拟）</b></span><span>${c.linked?'已确认目标行':'未关联订单 / SKU'}</span></div>` +
-    modeControl('案件情形',c.scenario,[['normal','正常处理'],['conflict','商品诉求冲突'],['no-policy','无适用政策'],['failure','取证 / AI 失败'],['safety','安全升级']],'caseScenario') + warn +
-    `<div class="case-grid">${panel('客户会话',c.messages.map(m=>`<div class="message ${m.role==='内部澄清'?'internal':''}"><small>${esc(m.role)} · ${esc(m.time)}</small>${esc(m.text)}</div>`).join('') +
-      `<label class="label" for="new-message">追加客户信息 / 内部澄清</label><textarea id="new-message" rows="4" placeholder="追加新信息，保留原始记录"></textarea><label class="label spaced" for="message-kind">信息类型</label><select id="message-kind"><option>客户主张</option><option>内部澄清</option></select><div class="spaced">${button('追加记录','append-message')}</div>`, '原话与内部记录分别保留')}
-      ${panel('核实对象与证据',
-        (c.linked ? `${facts([['目标商品',esc(c.product)],['订单 / 明细',identity[0]],['店铺 / 仓库',identity[1]]])}<div class="spaced">${button('重新选择目标行','choose-target','small')}</div>` : `<p class="muted">此案件尚无已确认商品。录入主张不会自动关联第一条候选。</p><div class="spaced">${button('确认目标商品','choose-target','primary')}</div>`) +
-        `<hr><h3>付款、履约与售后</h3>${c.scenario==='failure'?notice('取证失败 · 模拟超时','付款域暂不可用；其余已保存事实仍保留。失败不表示没有付款。'):''}${c.evidence?facts([['付款','已付款 · USD 24.00（模拟）'],['发货','已发货 · 不证明签收'],['售后','客户申请已记录 · 未执行退款']]):'<p class="hint">尚未取得已核实事实。客户陈述不等于交易状态。</p>'}<div class="spaced">${button(c.evidence?'重新核查证据':'获取证据（模拟）','case-evidence','',c.linked?'':'disabled')}</div><hr><h3>适用政策</h3>${c.scenario==='no-policy'?notice('无适用政策','可继续记录澄清和转人工，不能承诺退款或退货资格。'):c.evidence?`<div class="policy"><b>尺码与描述处理 · v1 / §2</b>${tag('已发布 · 模拟','teal')}<p>核对商品实测尺寸、尺码表与目标订单明细；由人工按适用条款决定后续方案。</p><button class="text-button" data-action="policy-detail">查看政策原文与适用条件</button></div>`:'<p class="hint">核实商品和业务日期后匹配政策。</p>'}`, 'OBSERVED 与 CLAIM 在界面中分开')}
-      ${panel('回复草稿与人工审核',
-        (stale?notice('内容已更新 · 草稿已过期','新增消息改变了案件版本，请重新生成后再采纳。'):'') +
-        `${c.note?notice('本次操作',esc(c.note),c.note.includes('失败')?'amber':'green'):''}<div class="button-row">${button(c.generating?'正在生成模拟建议…':'生成建议（模拟）','generate','primary',blocked||c.generating?'disabled':'')}</div>${blocked?`<p class="hint">${!c.linked?'先确认目标商品。':!c.evidence?'先获取证据。':c.scenario==='safety'?'安全事项先升级人工。':c.scenario==='conflict'?'先澄清诉求冲突。':c.scenario==='failure'?'模拟能力失败，可保留手工记录。':'缺少适用政策，转人工核实。'}</p>`:''}<label class="label spaced" for="reply-draft">人工回复稿</label><textarea id="reply-draft" rows="7" placeholder="生成模拟草稿后可在此修订；也可记录人工澄清">${esc(c.draft)}</textarea><p class="hint">${c.original?`AI原稿基于 revision ${c.draftRevision} · <button class="text-button" data-action="original-draft">查看原稿</button>`:'AI 尚未生成建议'}</p><label class="label spaced" for="review-reason">审核 / 升级理由</label><textarea id="review-reason" rows="2" placeholder="说明核实依据或下一步动作"></textarea><div class="field-error" id="case-error" role="alert"></div><div class="button-row">${button('保存并采纳','save-review','primary',!c.draft||stale||blocked?'disabled':'')}${button('退回修改','return-review')}${button('升级人工','escalate','danger')}</div><p class="hint">仅保存内部处理记录。不会发送回复、退款或操作 ERP。</p>`, 'AI 原稿和人工决定分别留存')}
+  const c=state.cases[id]; if(!c)return '<div class="empty"><h1>案件不可访问</h1></div>';
+  const target=selectedLine(c),stale=!!c.draft&&c.draftRevision!==c.revision;
+  const blocked=!c.linked||!c.evidence||['no-policy','failure','conflict','safety'].includes(c.scenario);
+  const warn=c.scenario==='safety'?notice('安全信号 · 优先人工升级','先建议暂停使用并转专人核实，不提供拆机指引，不宣告商品安全。','red'):c.scenario==='conflict'?notice('诉求与已核实属性冲突','USB 转接器没有服装尺码。保留原话，请核实客户指的是哪件商品及具体问题；AI 不代选。'):'';
+  const garment=['tee','shirt'].includes(c.targetKey);
+  const gaps=!c.linked?(c.lines.length?'已找到订单，但无法确定反馈针对哪件商品。请向客户核实后选择本订单明细。':'没有可靠订单或商品凭证。请补充完整订单号、店铺和可核查材料，系统不会按文字猜测商品。'):c.scenario==='no-policy'?'未找到适用政策，请转人工核实处理资格。':c.scenario==='failure'?'业务资料核查失败，请稍后重试或保留人工记录，不能推导为无付款。':garment?'尚缺衣物平铺尺寸、标签照片及当时页面尺码表，暂不能确定问题原因。':'尚缺问题照片与具体情况，请补充可核查材料，暂不能确定原因。';
+  return `<a class="back" href="#/after-sales?queue=${state.queue}">← 返回原案件队列</a>`+head(c.title,'客户问题、业务事实与人工决定分别留存。',button('查看处理历史','case-history'))+
+    `<div class="case-meta">${tag(c.status,'amber')}${tag(sourceLabel(c),'blue')}<span>${esc(c.store)}</span><span>${esc(c.order||'订单待核实')}</span></div>`+warn+
+    `<div class="case-grid">${panel('客户反馈了什么',c.messages.map(m=>`<div class="message ${m.role==='内部澄清'?'internal':''}"><small>${esc(m.role)} · ${esc(m.time)}</small>${esc(m.text)}</div>`).join('')+`<details><summary>补充客户信息或内部记录</summary><div class="spaced"><label class="label" for="new-message">追加客户信息 / 内部澄清</label><textarea id="new-message" rows="3"></textarea><label class="label spaced" for="message-kind">信息类型</label><select id="message-kind"><option>客户主张</option><option>内部澄清</option></select><div class="spaced">${button('追加记录','append-message')}</div></div></details>`)}
+    ${panel('系统核实的业务事实',(c.linked&&target?`<div class="notice green"><strong>已核实关联商品</strong><p>受信来源中的订单和商品明细已匹配，无需重复选择。</p></div>${facts([['商品',esc(target.product)],['SKU',esc(target.sku)],['订单 / 明细',esc(c.order)+' / '+esc(target.line)],['店铺 / 仓库',esc(c.store)+' / '+esc(c.warehouse)]])}<details class="spaced"><summary>关联依据与人工纠正</summary><p class="hint">模拟服务端已核对来源租户、店铺、商品 ID、SKU 和订单明细。纠正只在当前订单已核实明细内进行，原关联和原因留存。</p><div class="spaced">${button('纠正商品关联','correct-target','small')}</div></details>`:
+      notice('商品关联待核实',gaps)+(c.lines.length?button('核实订单内商品','choose-target','primary'):'')+`<p class="hint">可在客户反馈区记录澄清或升级人工。</p>`)+
+      `<hr><h3>交易与处理状态</h3>${c.scenario==='failure'?notice('业务资料核查失败','部分资料暂不可用，已保存事实仍保留；请稍后核查。'):c.evidence?facts([['付款','已付款（模拟凭证）'],['履约','已发货；签收情况待核实'],[c.source==='erp'?'ERP 售后状态':'教学案件状态','处理中；没有退款执行记录']]):'<p class="hint">尚无可核查交易事实，客户主张不能替代业务凭证。</p>'}<details class="spaced"><summary>查看取证与来源明细</summary><p class="hint">${esc(c.id)} · ${c.source==='erp'?'模拟 ERP 工单及订单回读':'中台独立教学案件'} · 本次页面模拟观测</p><div class="spaced">${button('重新核查业务资料','case-evidence','',c.linked?'':'disabled')}</div></details>`, '以下为原型模拟的核查结果')}
+    ${panel('AI 处理建议与人工审核',(stale?notice('内容已更新 · 草稿已过期','请依据最新信息重新生成后再审核。'):'')+
+      `${c.note?notice('操作反馈',esc(c.note),'blue'):''}<div class="ai-block"><b>AI 建议 · 模拟</b><p>${blocked?'目前不宜生成具体商品处理方案。请先处理下列缺口或交由人工。':c.id==='DEMO-TICKET-004'?'先确认衣物本身是否损坏，包装照片不能直接证明商品破损。':garment?'先补充实测尺寸与标签照片，核对购买时的尺码表，再由人工决定处理方向。':'先补充具体问题与照片，核对商品信息，再由人工决定处理方向。'}</p><p class="hint">${blocked?esc(gaps):'依据：已核实订单商品、客户原话及适用的补证政策。客户主张尚不能证明商品缺陷。'}</p></div><details class="spaced"><summary>查看适用政策与原文</summary>${c.scenario==='no-policy'?notice('无适用政策','仅可澄清、补证或转人工，不能承诺退款资格。'):c.evidence?`<p class="hint">尺码与描述处理 · 模拟已发布政策，适用于演示服饰店 US 服饰商品；先补证，不承诺退款。</p>${button('查看政策原文与适用条件','policy-detail','small')}`:'<p>待核实商品与业务日期后匹配。</p>'}</details><div class="spaced">${button(c.generating?'正在整理建议…':'生成回复草稿（模拟）','generate','primary',blocked||c.generating?'disabled':'')}</div><label class="label spaced" for="reply-draft">人工回复稿</label><textarea id="reply-draft" rows="5" placeholder="审核 AI 草稿或记录人工澄清">${esc(c.draft)}</textarea>${c.original?'<button class="text-button" data-action="original-draft">查看 AI 原稿（模拟）</button>':''}<label class="label spaced" for="review-reason">审核 / 升级理由</label><textarea id="review-reason" rows="2"></textarea><div class="field-error" id="case-error" role="alert"></div><div class="button-row">${button('保存并采纳','save-review','primary',!c.draft||stale||blocked?'disabled':'')}${button('退回修改','return-review')}${button('升级人工','escalate','danger')}</div><p class="hint">人工决定仅保存为内部记录，不发送客户消息、不执行退款。</p>`, '重要决定由业务人员审核')}
     </div>`;
 }
-
 function analysesPage() {
-  const unknown = ['immature','insufficient'].includes(state.analysisMode);
-  return head('客户体验与退货分析','从同口径变化出发，回到真实构成它的证据。',button('新建分析','new-analysis','primary')) + scope('<span>资料版本 <b>完整教学金样 v1</b></span>') +
-    modeControl('分析状态',state.analysisMode,[['complete','完整成熟金样'],['immature','仅 29 天，群组未成熟'],['insufficient','19 订单，样本不足'],['failed','分析失败'],['historical','历史报告 / 新版本对比']],'analysisMode') +
-    (state.analysisMode==='failed'?notice('分析任务失败 · 模拟 Schema 不合法','确定性输入与原报告仍可读；本次 AI 解释不可用，未替换为正常结论。'):'') +
-    `<div class="panel"><div class="panel-head"><div><h2>两窗对比 · 服饰体验观察</h2><small>报告 DEMO-ANALYSIS-01 / v${state.analysisMode==='historical'?'1（历史）':'2'} · teaching-return-rules-v1 · 模拟统计</small></div>${tag(unknown?'受限报告':'确定性结果可用',unknown?'amber':'teal')}</div><div class="panel-body"><div class="report-summary"><div><small>前窗 / 后窗 · 实际末次发货入群</small><b>09.01–09.21 / 09.21–10.11</b><small>半开区间 [S,E) · Asia/Shanghai</small></div><div><small>观察截止 / 每群组观察期</small><b>${state.analysisMode==='immature'?'29 天 · 未成熟':'11.15 / 30 × 24h'}</b><small>固定目标集合，不剔除坏记录凑样本</small></div><div><small>异常判定门槛</small><b>≥ 10 个百分点</b><small>且后窗实收 ≥ 3 件；每窗 ≥20 订单-SKU / ≥20 件</small></div></div>${unknown?notice('UNKNOWN · '+({immature:'固定群组尚未满 30 天',insufficient:'成熟订单-SKU 仅 19，不足 20',historical:'这是历史版本，当前结论需重新核查',failed:'AI 解释失败，事实需单独核对'}[state.analysisMode]),'已知计数可追溯，但不能用 0% 或“无异常”代替缺证据结论。'):''}</div><div class="table-scroll"><table class="comparison"><thead><tr><th>商品 / 同一店仓</th><th>前窗 实收 / 实发</th><th>后窗 实收 / 实发</th><th>率变化</th><th>观察结论</th></tr></thead><tbody><tr class="highlight"><td><strong>棉质宽松上衣</strong><small>DEMO-TEE-M · 演示仓 A</small></td><td><button class="text-button" data-action="drill" data-drill="before">1 / 40 件</button><small>2.5% · 20 订单-SKU</small></td><td><button class="text-button" data-action="drill" data-drill="received">${state.analysisMode==='historical'?11:12} / 40 件</button><small>${unknown?'UNKNOWN':state.analysisMode==='historical'?'27.5%':'30%'} · ${state.analysisMode==='insufficient'?19:20} 订单-SKU</small></td><td><strong>${unknown?'UNKNOWN':state.analysisMode==='historical'?'+25 pp':'+27.5 pp'}</strong><small>百分点差，非相对增幅</small></td><td>${tag(unknown?'需补证':'待调查异常','amber')}<small>不等于质量缺陷</small></td></tr><tr><td><strong>基础款棉袜</strong><small>DEMO-SOCKS · 演示仓 A</small></td><td>1 / 40 件<small>2.5% · 20 订单-SKU</small></td><td>1 / 40 件<small>${unknown?'UNKNOWN':'2.5%'} · 20 订单-SKU</small></td><td><strong>${unknown?'UNKNOWN':'0 pp'}</strong></td><td>${tag(unknown?'未核实':'未达异常阈值',unknown?'amber':'teal')}</td></tr></tbody></table></div><div class="table-foot"><span>主指标按实收退货件数计算；申请与退款分别统计</span><button class="text-button" data-action="drill" data-drill="denominator">查看分母 / 发货群组</button></div></div>
-    <div class="two-col section-gap">${panel('退货阶段与客户主题',`<div class="table-scroll"><table><thead><tr><th>阶段</th><th>后窗件数</th><th>含义</th></tr></thead><tbody><tr><td>申请 / 有效授权</td><td>16 / 14</td><td>未等同实收</td></tr><tr><td>实收 / 已退款</td><td>12 / 8</td><td>阶段流转不重复计件</td></tr><tr><td>期外 / 已取消</td><td>2 / 2</td><td>单列，不计入主分子</td></tr></tbody></table></div><hr><button class="text-button" data-action="feedback">尺码诉求 · 8 / 12 条反馈 → 查看去重原文</button><p class="hint">主题分母为 12 条唯一反馈，不是退货件数；多标签可重叠。</p>`)}${panel('人工调查',`<p>上衣退货率上升与尺码反馈同时出现。</p><p class="hint">替代解释：尺码表调整、流量构成或批次差异。当前没有足够证据宣告商品缺陷。</p><label class="label spaced" for="investigation-note">调查记录</label><textarea id="investigation-note" rows="3" placeholder="核对实测尺寸、页面版本、批次与样本口径">${esc(state.investigation||'')}</textarea><div class="spaced">${button('保存调查，查看疑似风险','investigate','primary')}</div>`,'AI 假设与确定性指标分开')}</div>${state.analysisMode==='historical'?panel('版本差异','<p>v1 → v2：补入迟到的 1 件实收事件，后窗 11/40 → 12/40。旧报告不覆写，规则版本相同。</p>','模拟版本差异'):''}`;
+  const unknown=['immature','insufficient'].includes(state.analysisMode),historical=state.analysisMode==='historical',failed=state.analysisMode==='failed',normal=state.analysisProduct==='socks';
+  const count=historical?11:12,rate=historical?'27.5%':'30%',change=historical?'25':'27.5';
+  return (route().query.get('from')==='feedback'?'<a class="back" href="#/after-sales/feedback">← 返回商品反馈</a>':'')+
+    head('客户体验与退货分析','优先找到退货异常、客户关心的问题和下一步处理方向。',button('调整分析范围','new-analysis'))+
+    `<div class="scope"><span>${tag('中台教学资料 · 模拟','blue')}</span><span>演示服饰店 US · 演示仓 A</span><span>本期与上期同口径比较</span></div>`+
+    (historical?notice('正在查看历史分析','此版本尚未计入迟到的 1 件退货，旧结论保留；当前版本可在教学演示中切换。','blue'):'')+
+    `<section class="panel"><div class="panel-head"><div><h2>哪些商品需要优先关注？</h2><small>退货情况与异常优先级</small></div></div><div class="table-scroll"><table><thead><tr><th>商品</th><th>本期退货率</th><th>上期退货率</th><th>变化幅度</th><th>建议关注程度</th></tr></thead><tbody><tr class="highlight"><td><button class="text-button" data-action="analysis-product" data-product="tee">棉质宽松上衣</button><small>DEMO-TEE-M</small></td><td><strong>${unknown?'暂无法判断':rate}</strong></td><td>2.5%</td><td>${unknown?'暂无法比较':'上升 '+change+' 个百分点'}</td><td>${tag(unknown?'需要补充数据':'优先调查','amber')}</td></tr><tr><td><button class="text-button" data-action="analysis-product" data-product="socks">基础款棉袜</button><small>正常对照商品</small></td><td>${unknown?'暂无法判断':'2.5%'}</td><td>2.5%</td><td>${unknown?'暂无法比较':'无变化'}</td><td>${tag(unknown?'需要补充数据':'常规观察',unknown?'amber':'teal')}</td></tr></tbody></table></div></section>`+
+    `<section class="panel section-gap"><div class="panel-head"><div><h2>${normal?(unknown?'基础款棉袜 · 数据不足，暂时无法判断':'基础款棉袜 · 退货情况平稳'):'棉质宽松上衣 · '+(unknown?'数据不足，暂时无法判断':'退货明显上升，建议优先调查尺码问题')}</h2><small>${normal?'正常对照，不代表商品没有问题':'异常是调查线索，不是商品缺陷认定'}</small></div>${tag('AI 分析 · 模拟','blue')}</div><div class="panel-body">`+
+    (unknown?notice('数据不足，暂时无法判断',state.analysisMode==='immature'?(state.customWindow?'自选范围尚未取得完整可比较数据。请补齐来源、发货和退货证据后重新分析。':'这批订单还未完成规定的退货观察期，目前只有 29 天。请等待观察完成后重新分析。'):'可比较的成熟订单商品组合只有 19 个，未达到最低样本要求。请补充完整数据后重新分析。'):'')+
+    (failed?notice('AI 分析暂不可用','退货统计仍可查看。请稍后重试 AI 分析，或由运营人员查阅原文，不用正常结论填补失败。'):'')+
+    `<div class="two-col"><div><h3>客户主要反馈什么？</h3><div class="ai-block"><p>${failed?'本次反馈总结未生成。':normal?'反馈较分散，当前样本没有支持某一问题集中上升的证据。':'尺码偏紧、实测尺寸与页面说明不一致是主要反馈，另有少量包装与物流问题。'}</p>${!failed&&!normal?'<p class="hint">8 / 12 条唯一反馈涉及尺码；可多主题归类，不是退货率。</p>':''}</div><div class="button-row spaced">${button('查看评价与反馈原文','feedback')}${button('查看相关售后记录','related-tickets')}</div>${!normal&&!failed?button('修订反馈主题','edit-theme','small'):''}<h3 class="spaced">已核实的事实</h3><p>${normal?'同口径退货情况为 1/40 → 1/40。':`本期 ${count} 件退货已实际收到，对应同批订单实际发货 40 件；上期为 1/40。`}</p><p class="hint">评价和工单用于理解问题，不计入退货件数。</p><div class="button-row spaced">${button('查看本期退货证据','analysis-returns')}${button('查看上期退货证据','drill','', 'data-drill="before"')}</div></div><div><h3>可能原因与待核实信息</h3><div class="ai-block"><p>${failed?'AI 原因分析未生成，请查阅证据后人工判断。':normal?'暂不支持直接创建尺码质量结论。继续观察后续反馈。':'可能与尺码表版本或实测尺寸偏差有关；流量人群和批次差异也可能影响退货。以上均为假设。'}</p><p class="hint">还需购买时页面版本、平铺实测和批次资料；不能据此认定质量缺陷。</p></div><h3 class="spaced">建议下一步</h3><p>${unknown?'先完成观察或补齐样本，再判断变化；仍可记录人工调查。':normal?'持续观察，出现集中反馈时再核查。':'核对尺码表与实物，抽查相关批次，并联系运营检查商品描述。'}</p><label class="label spaced" for="investigation-note">调查记录</label><textarea id="investigation-note" rows="3" placeholder="记录已核事实、待补材料及下一步">${esc(state.investigation||'')}</textarea><div class="spaced">${button('创建调查','investigate','primary',normal?'disabled':'')}</div><p class="hint">创建后仍为待调查线索，风险发布需要人工确认。</p></div></div>`+
+    `<details class="section-gap" id="metric-details"><summary>指标说明 / 数据依据 / 高级详情</summary><div class="spaced">${facts([['主指标','同一发货完成群组：实际收到退货件数 ÷ 实际发货件数'],['本期构成',normal?'1 / 40 件':count+' / 40 件'],['上期构成','1 / 40 件'],['比较窗口','上期 [09.01,09.21) / 本期 [09.21,10.11) · Asia/Shanghai'],['成熟度','每个订单-SKU在末次实际发货t0后观察30×24小时'],['最低样本','每窗至少20成熟订单-SKU及20实际发货件'],['异常阈值','未舍入差值 ≥10个百分点且本期实收 ≥3件'],['来源与规则','完整教学金样 v1 / teaching-return-rules-v1'],['去重与覆盖','同来源事件去重；同键冲突、缺页、不可归属等不静默剔除，受影响率UNKNOWN']])}<div class="spaced">${button('查看实际发货构成','drill','', 'data-drill="denominator"')}</div><p class="hint">申请16 / 有效授权14 / 实收12 / 已退款8；期外2 / 已取消2（当前上衣教学样例）。阶段分开，退款不重复加退货件数。主题以唯一反馈为分母，多标签可重叠；不混用ERP与教学分子分母。历史版11/40与当前12/40分别留存。</p></div></details></div></section>`;
 }
 const riskNames = {suspected:'疑似待调查',confirmed:'当前有效',rejected:'已驳回',closed:'已关闭',revoked:'已撤销',expired:'已到期'};
 function risksPage() {
@@ -129,7 +156,7 @@ function render(focusMain = false) {
   const {path,query} = route();
   if (path==='/after-sales' && query.has('queue') && ['pending','evidence','review','handled'].includes(query.get('queue'))) state.queue=query.get('queue');
   shell(path);
-  const body = path==='/home'?homePage():path==='/after-sales'?workbench():path.startsWith('/after-sales/cases/')?casePage(path.split('/')[3]):path.startsWith('/after-sales/analyses')?analysesPage():path.startsWith('/after-sales/risks')?risksPage():path.startsWith('/after-sales/knowledge')?knowledgePage():path.startsWith('/replenishment')?purchasePage():`<div class="empty"><h1>此原型页面不存在</h1>${link('回到平台首页','/home')}</div>`;
+  const body = path==='/home'?homePage():path==='/after-sales'?workbench():path==='/after-sales/feedback'?feedbackPage():path.startsWith('/after-sales/cases/')?casePage(path.split('/')[3]):path.startsWith('/after-sales/analyses')?analysesPage():path.startsWith('/after-sales/risks')?risksPage():path.startsWith('/after-sales/knowledge')?knowledgePage():path.startsWith('/replenishment')?purchasePage():`<div class="empty"><h1>此原型页面不存在</h1>${link('回到平台首页','/home')}</div>`;
   $('#main').innerHTML = body;
   if (focusMain) $('#main').focus();
   else if (focusedId && document.getElementById(focusedId)) document.getElementById(focusedId).focus({preventScroll:true});
@@ -143,11 +170,11 @@ function modal(title, body, foot = '') {
 }
 function closeModal() { $('#modal').close(); if (dialogReturn?.isConnected) dialogReturn.focus(); }
 function receivedRows(n, window = 'after') {
-  return Array.from({length:n},(_,i)=>`<tr><td class="mono">DEMO-RET-${window==='before'?'B':'A'}-${String(i+1).padStart(2,'0')}</td><td>received</td><td>1 件</td><td class="mono">DEMO-ORDER-${101+i}/L1</td><td>${button('发货与原文','event-detail','small',`data-event="${i+1}" data-window="${window}"`)}</td></tr>`).join('');
+  return Array.from({length:n},(_,i)=>`<tr><td class="mono">DEMO-RET-${window==='before'?'B':'A'}-${String(i+1).padStart(2,'0')}</td><td>received</td><td>1 件</td><td class="mono">TEACHING-ORDER-${(window==='before'?1:101)+i}/${state.drillProduct==='socks'?'L2':'L1'}</td><td>${button('发货与原文','event-detail','small',`data-event="${i+1}" data-window="${window}"`)}</td></tr>`).join('');
 }
 function riskEvidence() {
   const fromPurchase=route().path.startsWith('/replenishment');
-  modal('质量风险证据',`${tag('全部为合成样例','blue')}<div class="spaced">${facts([['当前状态',state.riskQuery==='failure'&&fromPurchase?'未核实（模拟查询失败）':riskNames[state.risk]],['风险范围','DEMO-PRODUCT-TEE / DEMO-TEE-M / DEMO-STORE-US / DEMO-WH-A'],['来源','教学金样 v1 · 授权教学消费'],['统计证据','前窗 1/40；后窗 12/40；差 27.5 pp'],['调查结论',esc(state.investigation||'尺码一致性待补充实测，尚未宣告缺陷')]])}</div>${notice('历史与当前分开','历史报告引用的风险版本保留；当前失效或查询失败时不能沿用旧有效状态。')}<p>采购摘要只显示商品与调查证据，不带客户身份。参考补货量始终 100 件。</p>`,button('返回原页面','close-modal')+button('进入质量风险详情','to-risk','primary'));
+  modal('质量风险证据',`${tag('全部为合成样例','blue')}<div class="spaced">${facts([['当前状态',state.riskQuery==='failure'&&fromPurchase?'未核实（模拟查询失败）':riskNames[state.risk]],['风险范围','DEMO-PRODUCT-TEE / DEMO-TEE-M / DEMO-STORE-US / DEMO-WH-A'],['来源','教学金样 v1 · 授权教学消费'],['统计证据','上期 2.5%；本期 30%；上升 27.5 个百分点'],['调查结论',esc(state.investigation||'尺码一致性待补充实测，尚未宣告缺陷')]])}</div>${notice('历史与当前分开','历史报告引用的风险版本保留；当前失效或查询失败时不能沿用旧有效状态。')}<p>采购摘要只显示商品与调查证据，不带客户身份。参考补货量始终 100 件。</p>`,button('返回原页面','close-modal')+button('进入质量风险详情','to-risk','primary'));
 }
 function stashCase(c) { if ($('#reply-draft')) c.draft=$('#reply-draft').value; }
 document.addEventListener('input', e=>{
@@ -158,13 +185,15 @@ document.addEventListener('input', e=>{
 document.addEventListener('change',e=>{
   const key=e.target.dataset.control;
   if(key==='caseScenario') {const c=currentCase();stashCase(c);c.scenario=e.target.value;c.note='';if(c.scenario==='safety')c.status='优先升级';else if(c.status==='优先升级')c.status='待补证';render();}
-  else if(key==='riskStatus'){state.risk=e.target.value;render();}
-  else if(key){state[key]=e.target.value;render();}
+  else if(key==='riskStatus'){state.risk=e.target.value;state.riskHistory.push({version:state.riskVersion,status:riskNames[state.risk],reason:'教学演示状态切换；历史版本保留'});render();}
+  else if(key){if(key==='analysisMode')state.customWindow=false;state[key]=e.target.value;render();}
   if(e.target.id==='purchase-filter')state.purchaseFilter=e.target.value;
+  if(e.target.id==='source-filter'){state.sourceFilter=e.target.value;render();}
 });
 document.addEventListener('click',e=>{
   if(e.target.closest('a.skip')) {e.preventDefault();$('#main').focus();return;}
   const anchor=e.target.closest('a[href^="#/"]');
+  if(anchor && $('#modal').open) closeModal();
   if(anchor && currentCase()) {
     const c=currentCase(),saved=c.reviews.at(-1)?.text||c.original;
     if(c.draft && c.draft!==saved){
@@ -177,17 +206,23 @@ document.addEventListener('click',e=>{
   if(el.dataset.riskTab){state.riskTab=el.dataset.riskTab;render();return;}
   if(el.dataset.purchaseView){state.purchaseView=el.dataset.purchaseView;render();return;}
   const action=el.dataset.action; const c=currentCase();
+  if(action==='demo-lab'){demoLab();return;}
+  if(action==='analysis-product'){state.analysisProduct=el.dataset.product;render();return;}
+  if(action==='analysis-returns'){el.dataset.drill=state.analysisProduct==='socks'?'socks':'received';el.dataset.action='drill';el.click();return;}
+  if(action==='related-tickets'){modal('相关售后记录 · 模拟',state.analysisProduct==='socks'?'<p>当前样例没有可确认归属于棉袜的售后工单，不能从多商品订单复制归因。</p>':`<p>以下教学案件与本商品身份明确匹配；不作为退货率分子。</p>${link('打开上衣教学案件','/after-sales/cases/teachingTee')}`);return;}
+  if(action==='edit-theme'){modal('修订反馈主题（模拟）',`<p>保留原AI分类与人工修订理由，不改变退货数量。</p><label class="field">主题<select id="theme-name"><option>尺码</option><option>描述不符</option><option>待核实</option></select></label><label class="label spaced" for="theme-reason">修订理由</label><textarea id="theme-reason"></textarea><div id="modal-error" role="alert"></div>`,button('取消','close-modal')+button('保存主题修订','save-theme','primary'));return;}
+  if(action==='save-theme'){if(!$('#theme-reason').value.trim()){$('#modal-error').textContent='请填写修订依据。';return;}state.themeHistory={theme:$('#theme-name').value,reason:$('#theme-reason').value};closeModal();toast('已保存主题修订（模拟），原分类保留在反馈详情。');return;}
   if(action==='close-modal'){closeModal();return;}
   if(action==='leave-case'){closeModal();go(state.pendingNavigate);return;}
-  if(action==='reset'){resetState();render();toast('演示数据已重置；全部操作仍为模拟。');return;}
+  if(action==='reset'){resetState();addTeachingCase();render();toast('演示数据已重置；全部操作仍为模拟。');return;}
   if(action==='new-case'){
-    modal('新建售后案件（模拟）',`<label class="label" for="case-title">客户问题标题</label><input id="case-title" class="full" maxlength="120" placeholder="例如：收到商品后发现包装破损"><label class="label spaced" for="case-body">客户原话</label><textarea id="case-body" rows="4" maxlength="2000"></textarea><p class="hint">允许尚无订单与 SKU。此操作仅增加本次页面会话内的合成演示案件。</p><div id="modal-error" class="field-error" role="alert"></div>`,button('取消','close-modal')+button('创建模拟案件','create-case','primary'));return;
+    modal('创建内部教学案件（模拟）',`<label class="label" for="case-title">客户问题标题</label><input id="case-title" class="full" maxlength="120" placeholder="例如：收到商品后发现包装破损"><label class="label spaced" for="case-body">客户原话</label><textarea id="case-body" rows="4" maxlength="2000"></textarea><p class="hint">允许尚无订单与 SKU。此操作仅增加本次页面会话内的合成演示案件。</p><div id="modal-error" class="field-error" role="alert"></div>`,button('取消','close-modal')+button('创建模拟案件','create-case','primary'));return;
   }
   if(action==='create-case'){
     const title=$('#case-title').value.trim(),body=$('#case-body').value.trim();
     if(!title||!body){$('#modal-error').textContent='请填写标题与客户原话。';return;}
     const id='local'+Object.keys(state.cases).length;
-    state.cases[id]={id:'CASE-DEMO-'+id,title,product:'尚未确认',status:'待处理',revision:1,linked:false,messages:[{role:'客户主张',text:body,time:'本次会话'}],draft:'',original:'',draftRevision:0,reviews:[],evidence:false,scenario:'normal',note:''};
+    state.cases[id]={source:'teaching',store:'演示服饰店 US',warehouse:'演示仓 A',order:null,lines:[],targetKey:null,linkHistory:[],id:'TEACHING-CASE-'+id,title,product:'尚未确认',status:'待处理',revision:1,linked:false,messages:[{role:'客户主张',text:body,time:'本次会话'}],draft:'',original:'',draftRevision:0,reviews:[],evidence:false,scenario:'normal',note:''};
     closeModal();go('/after-sales/cases/'+id);return;
   }
   if(action==='append-message'){
@@ -196,23 +231,28 @@ document.addEventListener('click',e=>{
     if(/焦味|发热|起火|冒烟/.test(text)){c.scenario='safety';c.status='优先升级';}
     render();toast('模拟记录已追加。');return;
   }
-  if(action==='choose-target'){
-    modal('明确选择目标订单明细',`<p>下列是模拟候选，不会自动选择第一条。选择需与客户诉求核对。</p><label class="radio-card"><input type="radio" name="target" value="tee"><span>棉质宽松上衣 · M 码<small>DEMO-ORDER-101 / L1 · 演示服饰店 US / 演示仓 A</small></span></label><label class="radio-card"><input type="radio" name="target" value="usb"><span>USB-C 转接器 · 无服装尺码<small>DEMO-ORDER-102 / L1 · 演示数码店 US / 演示仓 A</small></span></label><label class="label spaced" for="link-reason">关联 / 修订理由</label><input id="link-reason" class="full" placeholder="记录如何核实目标商品"><div id="modal-error" class="field-error" role="alert"></div>`,button('取消','close-modal')+button('确认所选明细','link-target','primary'));return;
+  if(action==='choose-target'||action==='correct-target'){
+    if(!c.lines.length){toast('没有可靠订单明细，请先补证。');return;}
+    state.correcting=action==='correct-target';
+    modal(state.correcting?'纠正已有商品关联':'核实本订单目标商品',`<p>${esc(c.order)} · ${esc(c.store)}。仅展示此订单已核实明细，不包含其他店铺或订单。</p>${c.lines.map(l=>`<label class="radio-card"><input type="radio" name="target" value="${l.key}"><span>${esc(l.product)}<small>${esc(l.sku)} · ${esc(l.line)} ${l.key===c.targetKey?'· 当前关联':''}</small></span></label>`).join('')}${state.correcting?'<label class="label spaced" for="link-reason">修订原因（必填）</label><textarea id="link-reason" placeholder="说明原关联为何有误及核实依据"></textarea>':'<p class="hint">向客户核实后确认即可，首次确认不必填写原因。</p>'}<div id="modal-error" class="field-error" role="alert"></div>`,button('取消','close-modal')+button('确认所选商品','link-target','primary'));return;
   }
   if(action==='link-target'){
-    const selected=$('input[name=target]:checked'),reason=$('#link-reason').value.trim();
-    if(!selected||!reason){$('#modal-error').textContent='显式选择目标行并填写关联理由。';return;}
-    stashCase(c);c.linked=true;c.product=selected.value==='usb'?'USB-C 转接器 / DEMO-USB-C':'棉质宽松上衣 / DEMO-TEE-M';c.revision++;c.evidence=false;
-    if(selected.value==='usb')c.scenario='conflict';
-    else if(c.scenario==='conflict')c.scenario='normal';
-    c.reviews.push({decision:'修订目标商品',text:c.product,reason,revision:c.revision});c.note='已确认目标行，需重新取证。';closeModal();render();return;
+    const selected=$('input[name=target]:checked'),reason=$('#link-reason')?.value.trim()||'';
+    if(!selected){$('#modal-error').textContent='请选择客户已核实的商品明细。';return;}
+    if(state.correcting&&(!reason||selected.value===c.targetKey)){$('#modal-error').textContent=selected.value===c.targetKey?'所选仍是原商品，无需修订。':'纠正已有商品关联必须填写修订原因。';return;}
+    const target=c.lines.find(l=>l.key===selected.value);if(!target)return;
+    const original=selectedLine(c);stashCase(c);c.linked=true;c.targetKey=target.key;c.product=target.product;c.revision++;c.evidence=true;
+    const decision=state.correcting?'人工纠正商品关联':'首次核实目标商品';
+    c.linkHistory.push({original:original?.product||'订单级反馈，未定位商品',current:target.product,reason,revision:c.revision});
+    c.reviews.push({decision,text:(original?.product||'未定位商品')+' → '+target.product,reason:reason||'首次确认，无强制理由',revision:c.revision});
+    c.note=state.correcting?'商品关联已纠正，原关联和修订原因已保留。':'目标商品已核实，可继续查看建议。';closeModal();render();return;
   }
   if(action==='case-evidence'){
     if(c.scenario==='failure'){c.note='取证失败（模拟超时），保留已知事实与人工输入。';render();return;}
     c.evidence=true;c.revision++;c.note='模拟证据已核查，付款、发货及退款语义分别展示。';render();return;
   }
   if(action==='generate'){
-    c.generating=true;c.note='';const revision=c.revision;const original='感谢您反馈尺码问题。我们已记录您关于 M 码偏紧的描述，请补充衣物平铺尺寸和尺码标签照片。核对订单明细与适用政策后，将由人工确认后续处理方案。';
+    c.generating=true;c.note='';const revision=c.revision;const original=c.id==='DEMO-TICKET-004'?'感谢您补充包装照片。请进一步确认衣物是否损坏，核实后由人工确认处理方案。':`感谢您反馈${esc(selectedLine(c)?.product||'商品')}的问题。我们已记录您的描述，请补充商品照片及可核查材料。核对订单明细与适用政策后，由人工确认后续处理方案。`;
     render();setTimeout(()=>{c.generating=false;c.original=original;c.draft=original;c.draftRevision=revision;c.status='待审核';c.note='已生成模拟建议，尚未经人工采纳。';if(currentCase()===c)render();},350);return;
   }
   if(action==='save-review'||action==='return-review'||action==='escalate'){
@@ -229,26 +269,28 @@ document.addEventListener('click',e=>{
     modal('政策原文与适用性 · 模拟 v1',`${tag('演示政策，不是已批准业务条款','amber')}<h3 class="spaced">尺码与描述处理 / §2 先核事实</h3><p>核对目标订单行、商品类别、页面尺码表和实测记录；缺证据时仅请求补充材料，不承诺处理资格。</p>${facts([['适用条件','演示服饰店 US / 服饰 / 简体中文'],['版本与状态','v1 · 模拟已发布 · 2026-09-01 起生效'],['责任人','模拟政策管理员'],['撤销 / 过期','当前不可使用版本不得继续引用']])}<p class="hint">3C 安全事项优先人工升级，不等待本条款或模型。</p>`);return;
   }
   if(action==='drill'){
-    const denominator=el.dataset.drill==='denominator',before=el.dataset.drill==='before';state.drillCount=before?1:state.analysisMode==='historical'?11:12;state.drillWindow=before?'before':'after';
-    modal(denominator?'分母构成 · 唯一实际发货批次':before?'前窗实收证据 · 1 件':`后窗实收证据 · ${state.drillCount} 件`,`<p>${denominator?'20 个成熟订单-SKU，每单唯一发货批次 2 件，共 40 件；不是投诉条数。':'仅 received 阶段计入实收；转 refunded 不再次加件。各事件位于本对象 [t0,t0+30天) 内。'}</p>${tag('模拟证据 · 完整教学金样 v1','blue')}<div class="table-scroll spaced"><table><thead><tr><th>事件 / 批次 ID</th><th>阶段</th><th>数量</th><th>对象 / 订单行</th><th>追溯</th></tr></thead><tbody>${denominator?Array.from({length:20},(_,i)=>`<tr><td>DEMO-SHIP-${i+1}</td><td>shipped</td><td>2 件</td><td>DEMO-ORDER-${101+i}/L1</td><td>${button('发货与原文','event-detail','small',`data-event="${i+1}"`)}</td></tr>`).join(''):receivedRows(state.drillCount,state.drillWindow)}</tbody></table></div>`);return;
+    const denominator=el.dataset.drill==='denominator',before=el.dataset.drill==='before';state.drillProduct=el.dataset.drill==='socks'?'socks':state.analysisProduct;state.drillCount=before||state.drillProduct==='socks'?1:state.analysisMode==='historical'?11:12;state.drillWindow=before?'before':'after';state.drillDenominator=denominator;
+    modal(denominator?'实际发货构成':before?'上期退货收货证据 · 1 件':`本期退货收货证据 · ${state.drillCount} 件`,`<p>${denominator?'20 个成熟订单-SKU，每单唯一发货批次 2 件，共 40 件；不是投诉条数。':'仅 received 阶段计入实收；转 refunded 不再次加件。各事件位于本对象 [t0,t0+30天) 内。'}</p>${tag('模拟证据 · 完整教学金样 v1','blue')}<div class="table-scroll spaced"><table><thead><tr><th>事件 / 批次 ID</th><th>阶段</th><th>数量</th><th>对象 / 订单行</th><th>追溯</th></tr></thead><tbody>${denominator?Array.from({length:20},(_,i)=>`<tr><td>DEMO-SHIP-${i+1}</td><td>shipped</td><td>2 件</td><td>TEACHING-ORDER-${101+i}/${state.drillProduct==='socks'?'L2':'L1'}</td><td>${button('发货与原文','event-detail','small',`data-event="${i+1}"`)}</td></tr>`).join(''):receivedRows(state.drillCount,state.drillWindow)}</tbody></table></div>`);return;
   }
   if(action==='event-detail'){
     const n=Number(el.dataset.event);
-    modal('原始事件追溯（模拟）',facts([['订单-SKU',`DEMO-ORDER-${100+n}/L1 / DEMO-TEE-M`],['实际发货批次',`DEMO-SHIP-${n} / 2 件`],['末次实际发货 t0',el.dataset.window==='before'?'2026-09-05 10:00 +08:00':'2026-09-25 10:00 +08:00'],['实收事件',el.dataset.window==='before'?'received / 1 件 / 2026-09-12 10:00 +08:00':'received / 1 件 / 2026-10-02 10:00 +08:00'],['后续退款','退款单独记录，不再加实收件数']])+`<hr><h3>客户反馈原文 · CLAIM</h3><p>“衣服实际尺寸与页面尺码表不一致，希望进一步核实。”</p><p class="hint">这是合成示例，保留投诉与实收事件的不同语义。</p>`,button('关闭','close-modal')+button(`返回 ${state.drillCount||12} 件构成`,'return-drill','primary'));return;
+    modal('原始事件追溯（模拟）',facts([['订单-SKU',`TEACHING-ORDER-${(el.dataset.window==='before'?0:100)+n}/${state.drillProduct==='socks'?'L2':'L1'} / ${state.drillProduct==='socks'?'DEMO-SOCKS':'DEMO-TEE-M'}`],['实际发货批次',`DEMO-SHIP-${n} / 2 件`],['末次实际发货 t0',el.dataset.window==='before'?'2026-09-05 10:00 +08:00':'2026-09-25 10:00 +08:00'],['实收事件',state.drillDenominator&&n>(state.drillProduct==='socks'?1:state.analysisMode==='historical'?11:12)?'此发货明细在观察期内无实收退货事件':el.dataset.window==='before'?'received / 1 件 / 2026-09-12 10:00 +08:00':'received / 1 件 / 2026-10-02 10:00 +08:00'],['后续退款','退款单独记录，不再加实收件数']])+`<hr><h3>客户反馈原文 · CLAIM</h3><p>${state.drillDenominator&&n>(state.drillProduct==='socks'?1:12)?'此明细无已关联反馈原文，不能补造客户问题。':state.drillProduct==='socks'?'“袜子包装破损，希望核实。”':'“衣服实际尺寸与页面尺码表不一致，希望进一步核实。”'}</p><p class="hint">这是合成示例，保留投诉与实收事件的不同语义。</p>`,button('关闭','close-modal')+button(`返回 ${state.drillCount||12} 件构成`,'return-drill','primary'));return;
   }
   if(action==='return-drill'){modal(`${state.drillWindow==='before'?'前窗':'后窗'}实收证据 · ${state.drillCount||12} 件`,`<div class="table-scroll"><table><thead><tr><th>事件 ID</th><th>阶段</th><th>数量</th><th>订单行</th><th>追溯</th></tr></thead><tbody>${receivedRows(state.drillCount||12,state.drillWindow||'after')}</tbody></table></div>`);return;}
-  if(action==='feedback'){modal('尺码主题 · 唯一反馈原文',`<p>8 / 12 条唯一反馈被标记为尺码主题；这是多标签分类，比例不代表退货率。</p>${Array.from({length:8},(_,i)=>`<div class="message"><small>DEMO-FEEDBACK-${i+1} · DEMO-ORDER-${101+i}/L1 · 模拟原文</small>“${i%2?'尺码表与实测尺寸存在差异。':'收到的 M 码偏紧，请协助核对尺寸。'}”</div>`).join('')}`);return;}
+  if(action==='feedback'){
+    modal('商品评价与反馈依据 · 中台模拟',`<p>未连接 ERP 评价接口。评价可有商品而没有订单；订单级反馈未定位商品时不计入商品主题。评价与工单数不构成退货数量。</p>${state.themeHistory?`<div class="notice"><b>人工主题修订：${esc(state.themeHistory.theme)}</b><p>${esc(state.themeHistory.reason)}；原AI尺码分类保留。</p></div>`:''}${state.analysisProduct==='socks'?'<div class="message">中台模拟评价：袜子包装破损。商品已关联，订单未知。</div>':`<p>12 条唯一反馈中，8 条涉及尺码（多标签）。以下为可展开的原文样例：</p>${Array.from({length:8},(_,i)=>`<div class="message"><small>中台教学反馈 ${i+1} · ${i%2?'教学工单 / TEACHING-ORDER-'+(101+i)+'/L1':'商品评价 / DEMO-TEE-M · 订单未知'}</small>“${i%2?'尺码表与实测尺寸存在差异。':'收到的 M 码偏紧，请协助核对尺寸。'}”</div>`).join('')}`}`);return;
+  }
   if(action==='new-analysis'){
     modal('新建体验分析（模拟）',`<div class="form-grid"><label class="field">来源版本<select><option>完整教学金样 v1 · 模拟已回读</option></select></label><label class="field">店仓范围<select><option>演示服饰店 US / 演示仓 A</option></select></label><label class="field">前窗开始<input type="date" id="window-start" value="2026-09-01"></label><label class="field">相邻两窗边界<input type="date" id="window-middle" value="2026-09-21"></label><label class="field">后窗结束<input type="date" id="window-end" value="2026-10-11"></label><label class="field">截止时间<input type="date" id="window-cutoff" value="2026-11-15"></label></div><p class="hint">等长、不重叠半开窗，按实际末次发货入群。按钮仅模拟受理，不调用真实统计或模型。</p><div class="field-error" id="modal-error" role="alert"></div>`,button('取消','close-modal')+button('受理模拟分析','run-analysis','primary'));return;
   }
   if(action==='run-analysis'){
     const a=Date.parse($('#window-start').value),b=Date.parse($('#window-middle').value),d=Date.parse($('#window-end').value),t=Date.parse($('#window-cutoff').value);
     if(![a,b,d,t].every(Number.isFinite)||!(a<b&&b<d&&t>=d)||b-a!==d-b){$('#modal-error').textContent='请设置相邻等长两窗，并确保截止时间不早于后窗结束。';return;}
-    if(a!==Date.parse('2026-09-01')||b!==Date.parse('2026-09-21')||d!==Date.parse('2026-10-11')||t!==Date.parse('2026-11-15')){state.analysisMode='immature';toast('自选窗口仅演示受限状态；金样结果对应固定演示窗口。');}
-    else {state.analysisMode='complete';toast('模拟任务已完成，可钻取统计证据。');}
+    if(a!==Date.parse('2026-09-01')||b!==Date.parse('2026-09-21')||d!==Date.parse('2026-10-11')||t!==Date.parse('2026-11-15')){state.customWindow=true;state.analysisMode='immature';toast('自选窗口仅演示受限状态；金样结果对应固定演示窗口。');}
+    else {state.customWindow=false;state.analysisMode='complete';toast('模拟任务已完成，可钻取统计证据。');}
     closeModal();render();return;
   }
-  if(action==='investigate'){state.investigation=$('#investigation-note').value.trim();if(!state.investigation){toast('先填写调查依据或待补材料。');return;}go('/after-sales/risks');toast('调查已保存至本次演示会话，风险仍需人工确认。');return;}
+  if(action==='investigate'){state.investigation=$('#investigation-note').value.trim();if(!state.investigation){toast('先填写调查依据或待补材料。');return;}if(state.risk!=='suspected'){state.riskHistory.push({version:state.riskVersion,status:riskNames[state.risk],reason:'旧版本保留，新的调查另建待确认版本'});state.riskVersion++;}state.risk='suspected';go('/after-sales/risks');toast('调查已创建（模拟），风险仍需人工确认。');return;}
   if(action==='risk-evidence'){riskEvidence();return;}
   if(action==='to-risk'){if(route().path.startsWith('/replenishment'))state.returnTo='/replenishment';closeModal();go('/after-sales/risks');return;}
   if(action==='back-purchase'){state.returnTo=null;go('/replenishment');return;}

@@ -10806,7 +10806,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-DESIGN-01"
   ],
-  "entryCondition": "2026-11-16负责人正式启动：本轮仅交互HTML原型及不依赖方向确认的FOUNDATION.F1/F2，必要测试、提交普通推送，不合main。正式Vue和剩余TODO等待下一次连续授权。",
+  "entryCondition": "2026-11-16负责人实际体验后定向纠偏：仅HTML原型、产品说明、必要原型测试/台账交接、普通提交推送当前分支；冻结需求/技术设计/F1/F2后端不改，不开发Vue、不合main。",
   "ownerRole": "主集成人",
   "assignee": "Codex",
   "allowedPaths": [
@@ -10841,7 +10841,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "6a591b9359ed29c918834e60bbdd1ea96c2f9455",
     "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
@@ -10900,11 +10900,17 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "testedCommit": "a587284fe3846c5615ebfc0358e9ed2110ab61cb"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "产品负责人",
+    "reviewedCommit": "73e07159dd363bbbb444be1c74bb648c8bff7bfe",
+    "decision": "REQUESTED_PROTOTYPE_CORRECTIONS",
+    "evidenceRef": "本轮负责人原型纠偏指令；docs/ui/B_AFTER_SALES_PRODUCT.md §8",
+    "reason": "原版强制重复选商品、跨订单候选和技术视角分析不合理，未通过方向确认；需按正常ERP业务路径纠正。"
+  },
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "0191940b53957b5d8b7d430e7947f2841d3f3c6f",
+  "observedHead": "73e07159dd363bbbb444be1c74bb648c8bff7bfe",
   "dirtyPaths": [
-    "docs/ERP-openapi.yaml（接手未知，保留未读未改）"
+    "docs/ERP-openapi.yaml（接手未知，按本轮指令只读核对，未改未暂存）"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -10928,6 +10934,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "固定实现a587284：可点击四页原型，Edge4项通过；F1 REVIEW，F2一次负责人方向确认TODO，不代签产品验收。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人体验后要求定向纠偏，不启动Vue或后端；原型方向未通过。原测试仅工程可点击，不代替产品方向。"
     }
   ],
   "workItems": [
@@ -10940,7 +10951,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "制作工作台、案件、体验分析和补货风险四条合成样例路径，呈现正常、缺证据、失败与历史状态",
       "doneWhen": "一份本地可预览原型，数量/风险边界及返回上下文可体验",
       "testMethod": "复用本地文档/浏览器预览，检查关键路径、键盘和1024/1440布局",
-      "status": "REVIEW"
+      "status": "IN_PROGRESS"
     },
     {
       "id": "PROTOTYPE.F2",
