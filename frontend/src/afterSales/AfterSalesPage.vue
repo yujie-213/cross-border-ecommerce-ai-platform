@@ -71,14 +71,14 @@ const aiReason=(reason:string)=>({INVALID_OUTPUT:'模型结果未通过证据校
 const factNames:Record<string,string>={TICKET:'工单标题（不是完整会话）',ORDER:'关联订单',PAYMENT:'已核付款记录',SHIPMENT:'已核发货记录',feedback:'客户反馈原文',payment_status:'订单付款状态',fulfillment_status:'订单履约状态',refund_status:'订单退款状态'}
 function factText(f:any) {
   const r=f.value ?? f.record ?? f
-  if(r.type==='shipment')return `实际发货 ${r.quantity} 件，时间 ${r.at}`
-  if(r.type==='return')return `${stages[r.stage] || r.stage} ${r.quantity} 件，时间 ${r.at}`+(r.amount!=null?`；退款 ${r.amount} ${r.currency}`:'')
-  if(r.type==='order')return `订单${r.paid===true?'已记录支付':'支付状态待核实'}；业务时间 ${r.paidAt || '未提供'}`
+  if(r.type==='shipment')return `实际发货 ${r.quantity} 件，时间 ${formatDate(r.at)}`
+  if(r.type==='return')return `${stages[r.stage] || r.stage} ${r.quantity} 件，时间 ${formatDate(r.at)}`+(r.amount!=null?`；退款 ${r.amount} ${r.currency}`:'')
+  if(r.type==='order')return `订单${r.paid===true?'已记录支付':'支付状态待核实'}；业务时间 ${formatDate(r.paidAt)}`
   if(r.type==='feedback')return r.text
   if(f.text)return f.text
-  if(f.domain==='PAYMENT')return `已记录支付 ${r.amount} ${r.currency || ''}，时间 ${r.at}`
+  if(f.domain==='PAYMENT')return `已记录支付 ${r.amount} ${r.currency || ''}，时间 ${formatDate(r.at)}`
   if(typeof r==='string')return r
-  if(Array.isArray(r))return r.map(x=>`时间 ${x.at || '未提供'}；明细见证据来源`).join('；')
+  if(Array.isArray(r))return r.map(x=>`时间 ${formatDate(x.at)}；明细见证据来源`).join('；')
   return Object.entries(r).filter(([,v])=>typeof v!=='object').map(([k,v])=>`${factNames[k] || k}：${v}`).join('；')
 }
 watch([investigationId,all],async([id])=>{

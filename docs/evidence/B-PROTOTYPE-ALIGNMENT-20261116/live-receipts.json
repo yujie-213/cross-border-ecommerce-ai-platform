@@ -1,0 +1,110 @@
+{
+  "authorizationId": "b-product-review-20261116",
+  "calls": 6,
+  "totalTokens": 11536,
+  "reservedCostUSD": "0.30000000",
+  "actualCostUSD": "UNKNOWN",
+  "tasks": [
+    {
+      "task_id": "1188277782564990b816d1330164d306",
+      "state": "SUCCEEDED",
+      "scenario_id": "B_CASE_ADVICE_V1",
+      "used_calls": 1,
+      "used_tokens": 2342,
+      "reserved_cost": "0.05000000"
+    },
+    {
+      "task_id": "74c25465267346c08cd08cb31e262827",
+      "state": "SUCCEEDED",
+      "scenario_id": "B_EXPERIENCE_V1",
+      "used_calls": 4,
+      "used_tokens": 6854,
+      "reserved_cost": "0.20000000"
+    },
+    {
+      "task_id": "7b4034821fde43fdb161b2db47054027",
+      "state": "SUCCEEDED",
+      "scenario_id": "B_CASE_ADVICE_V1",
+      "used_calls": 0,
+      "used_tokens": 0,
+      "reserved_cost": "0E-8"
+    },
+    {
+      "task_id": "b67e270411cf4d3c844b0fd73a8ac42a",
+      "state": "SUCCEEDED",
+      "scenario_id": "B_CASE_ADVICE_V1",
+      "used_calls": 0,
+      "used_tokens": 0,
+      "reserved_cost": "0E-8"
+    },
+    {
+      "task_id": "bc281c366f0648ddbc346437ab32dccf",
+      "state": "SUCCEEDED",
+      "scenario_id": "B_CASE_ADVICE_V1",
+      "used_calls": 1,
+      "used_tokens": 2340,
+      "reserved_cost": "0.05000000"
+    },
+    {
+      "task_id": "eccf36e90d374a5a88e4c5beacb8adec",
+      "state": "SUCCEEDED",
+      "scenario_id": "B_CASE_ADVICE_V1",
+      "used_calls": 0,
+      "used_tokens": 0,
+      "reserved_cost": "0E-8"
+    }
+  ],
+  "records": [
+    {
+      "id": "814846ccb26e4f33ae2a93d5755d682b",
+      "kind": "CASE",
+      "state": "HANDLED",
+      "revision": 8,
+      "sourceNature": "MIDDLEWARE_TEACHING_DATA",
+      "AI": [
+        {
+          "status": "AVAILABLE",
+          "reason": "OK",
+          "tokens": 2342
+        }
+      ]
+    },
+    {
+      "id": "2125240691ee4d0d90dffb0ecb231781",
+      "kind": "REPORT",
+      "state": "READY",
+      "revision": 1,
+      "sourceNature": "MIDDLEWARE_TEACHING_DATA",
+      "AI": [
+        {
+          "status": "AVAILABLE",
+          "reason": "OK",
+          "tokens": 1940
+        },
+        {
+          "status": "AVAILABLE",
+          "reason": "OK",
+          "tokens": 3042
+        },
+        {
+          "status": "AVAILABLE",
+          "reason": "OK",
+          "tokens": 1009
+        },
+        {
+          "status": "AVAILABLE",
+          "reason": "OK",
+          "tokens": 863
+        }
+      ]
+    },
+    {
+      "id": "85a5f4dd78274782abc104ad2a16e329",
+      "kind": "RISK",
+      "state": "REVOKED",
+      "revision": 3,
+      "sourceNature": "MIDDLEWARE_TEACHING_DATA",
+      "AI": []
+    }
+  ]
+}

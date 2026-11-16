@@ -11039,10 +11039,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "ownerRole": "主集成人",
   "assignee": "Codex",
   "allowedPaths": [
+    "frontend/src/afterSales/",
+    "frontend/src/V2Shell.vue",
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/bootstrap/after_sales.py",
+    "src/commerce_hub/entrypoints/http/after_sales.py",
+    "tests/integration/after_sales/",
+    "tests/browser/after-sales/",
     "docs/",
-    "tests/",
-    "frontend/tests/",
-    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+    "README.md"
   ],
   "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
   "deliverables": [
@@ -11186,11 +11191,39 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "exitCode": null,
       "result": "NOT_RUN",
       "artifactRef": "docs/evidence/B-PRODUCT-REMEDIATION-20261116/validation.json"
+    },
+    {
+      "environment": "Windows / approved MySQL / Edge; explicitly synthetic business ERP",
+      "testedCommit": "84370cd",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "pytest tests/integration/after_sales tests/security/test_b_resources.py; MySQL=1 mock/network=false",
+      "sample": "58 PASS/0FAIL/0SKIP; exact owned membership, old direct links, per-product context and permissions",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PROTOTYPE-ALIGNMENT-20261116/backend.xml"
+    },
+    {
+      "environment": "Windows / approved MySQL / Edge; explicitly synthetic business ERP",
+      "testedCommit": "c2816e8",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "command": "compiled Vue + independent API/Worker/MySQL; product.spec.ts",
+      "sample": "1 PASS; three chains, persisted selected evidence, single/batch S01 reminders/revoke; synthetic ERP, model OFF",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/evidence/B-PROTOTYPE-ALIGNMENT-20261116/browser.xml"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "511112be43afbe403bae3b181d05252f1823ba1c",
+  "observedHead": "d474fa4310f5320e02b70f5f5527927eaa018544",
   "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -11234,6 +11267,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "45aebf734a5d73e4e0139f348402838a76382ac9普通推送并独立远端回读一致，main仍efa06985cc92aaf9e657af659a027dccd9d5fc97；API/Vue就绪200，最终产品验收F2待负责人和星星，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "IN_PROGRESS",
+      "reason": "负责人确认只跟踪与补货相同的自建ERP，授权按原型方向改一版；前版功能测试通过不代表产品体验通过。当前单人收紧服务端成员范围并重整正式Vue，不合main。"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "REVIEW",
+      "reason": "按原型方向重整正式Vue并限定与补货相同自建登记ERP；后端权限58/前端69/类型构建/编译Vue三链及补货提醒PASS；真实教学模型6次11536Token，费用UNKNOWN。真实ERP完整退货总体及新风险绑定未验证，最终产品体验待负责人和星星，不合main。"
     }
   ],
   "workItems": [
@@ -11279,6 +11322,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "doneWhen": "正式Vue真实浏览器三链及定向回归、来源与模型实测边界、截图和普通分支推送后待最终产品体验",
       "testMethod": "受影响B/G01/前端与Edge独立Worker测试，实际只读ERP及获准少量真实A01调用",
       "status": "REVIEW"
+    },
+    {
+      "id": "ACCEPTANCE.R2",
+      "title": "自建ERP范围与原型业务工作区整改",
+      "dependsOn": [
+        "ACCEPTANCE.R1"
+      ],
+      "implement": "复用补货登记清单限制读取、历史和风险；待办/三栏案件/逐商品分析/调查风险协作按原型方向重整",
+      "doneWhen": "正式Vue浏览器实际体验和必要相关测试完成，截图/提交推送，最终REVIEW",
+      "testMethod": "成员排除与直链隔离、逐商品AI证据、三链浏览器和受影响补货兼容",
+      "status": "REVIEW",
+      "evidence": [
+        "docs/reports/B_V1_原型方向整改_20261116.md",
+        "docs/evidence/B-PROTOTYPE-ALIGNMENT-20261116/validation.json"
+      ]
     }
   ],
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"

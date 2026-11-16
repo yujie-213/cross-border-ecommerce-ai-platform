@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-16",
+  "branch": "codex/b-after-sales-v1",
+  "baseCommit": "d474fa4310f5320e02b70f5f5527927eaa018544",
+  "backendTestedCommit": "84370cd",
+  "browserTestedCommit": "c2816e89b051cae99a81a083dbd2ab279ecb5c86",
+  "status": "REVIEW",
+  "backend": {
+    "result": "PASS",
+    "tests": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "artifact": "backend.xml",
+    "includesBrowserProcessTest": true
+  },
+  "frontend": {
+    "typecheck": "PASS",
+    "build": "PASS",
+    "tests": 69
+  },
+  "browser": {
+    "result": "PASS",
+    "tests": 1,
+    "artifact": "browser.xml",
+    "businessSource": "SYNTHETIC_ERP",
+    "paidModel": "OFF",
+    "includes": [
+      "three chains",
+      "independent Worker recovery",
+      "single/batch S01 reminders and revocation",
+      "retained investigation evidence",
+      "1024px layout"
+    ]
+  },
+  "liveERP": {
+    "result": "PARTIAL_PASS",
+    "scope": "Same MonitorRegistry as S01: verified project-created products and registered sales IDs",
+    "products": 10,
+    "storeWarehouseMappings": 11,
+    "observedTickets": 2,
+    "businessWrites": 0,
+    "limitations": [
+      "Bounded source reads: 20 tickets / 10 feedback items per discovery",
+      "No complete native mature return population",
+      "No new real ERP risk binding positive"
+    ]
+  },
+  "liveAI": {
+    "result": "PASS_WITH_MANUAL_REVIEW",
+    "calls": 6,
+    "totalTokens": 11536,
+    "actualCostUSD": "UNKNOWN",
+    "reservedCostUSD": "0.30",
+    "businessSource": "MIDDLEWARE_TEACHING_DATA",
+    "findings": [
+      "Initial draft redundantly requested known order reference; context and prompt fixed, subsequent real draft retained known association",
+      "Two classification and two per-product explanation calls available",
+      "Earlier 14 calls/19502 tokens and failure history remain separate"
+    ]
+  },
+  "priorRuns": {
+    "firstBrowser": "FAIL: stale labels; fixed",
+    "secondBrowser": "FAIL: investigation selection lost on navigation; fixed",
+    "manualInvestigation": "Rejected missing repeated evidence selection; selected evidence now retained; browser retest PASS",
+    "mysqlEnvironment": "Initial run skipped without opt-in, invalid provider env run failed; rerun with isolated mock environment PASS"
+  },
+  "notRun": [
+    "Native ERP return-rate acceptance",
+    "New real ERP risk binding positive",
+    "Final product acceptance by owner and 星星"
+  ],
+  "uiPresentationFollowup": "Dates formatted with existing local date formatter; typecheck/build PASS and final live screenshots; no new backend logic",
+  "startup": {
+    "accountSessionS01Unchanged": true,
+    "apiReady": 200,
+    "frontendReady": 200
+  },
+  "screenshots": "Actual CUA screenshots; full-page where available, viewport otherwise. Full-page CDP capture timed out once on final case; full review-state capture and final viewport both retained."
+}
