@@ -98,11 +98,19 @@
         "docs/PLAN.md",
         "docs/README.md",
         "docs/TASKS.md",
+        "docs/agents/B_AFTER_SALES_DESIGN.md",
+        "docs/architecture/B_AFTER_SALES_REUSE.md",
+        "docs/evidence/B-DESIGN-20261116/check_design.py",
+        "docs/evidence/B-DESIGN-20261116/review.md",
+        "docs/evidence/B-DESIGN-20261116/validation.json",
         "docs/generated/DEPENDENCIES.mmd",
         "docs/generated/STATUS.md",
+        "docs/planning/B_AFTER_SALES_PLAN.md",
         "docs/planning/browser-check.json",
+        "docs/planning/git-whitelist.json",
         "docs/planning/plan-build.json",
-        "docs/planning/validation-report.json"
+        "docs/planning/validation-report.json",
+        "docs/ui/B_AFTER_SALES_PRODUCT.md"
       ]
     }
   ],

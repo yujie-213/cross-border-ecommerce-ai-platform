@@ -1120,6 +1120,13 @@
     "tools/verify_two_sku_api_worker.py",
     "tools/verify_two_sku_usability.py",
     "docs/requirements/B_AFTER_SALES_V1.md",
-    "docs/evidence/B-REQUIREMENTS-FREEZE-20261115/validation.json"
+    "docs/evidence/B-REQUIREMENTS-FREEZE-20261115/validation.json",
+    "docs/agents/B_AFTER_SALES_DESIGN.md",
+    "docs/architecture/B_AFTER_SALES_REUSE.md",
+    "docs/evidence/B-DESIGN-20261116/check_design.py",
+    "docs/evidence/B-DESIGN-20261116/review.md",
+    "docs/evidence/B-DESIGN-20261116/validation.json",
+    "docs/planning/B_AFTER_SALES_PLAN.md",
+    "docs/ui/B_AFTER_SALES_PRODUCT.md"
   ]
 }

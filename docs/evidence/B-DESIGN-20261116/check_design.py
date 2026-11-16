@@ -61,6 +61,6 @@ report = dict(date='2026-11-16', baseline='2547d1e23ef8cbc991a6e238df9961c35a551
               scope='DESIGN_DOCUMENTATION_ONLY', businessTests='NOT_RUN', erpCalls=0, modelCalls=0,
               migrationExecution='NOT_RUN', mermaidRendering='NOT_RUN',
               checks=checks, status='PASS' if all(c['result']=='PASS' for c in checks) else 'FAIL')
-(Path(__file__).parent / 'validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+(Path(__file__).parent / 'validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
 print(json.dumps(dict(status=report['status'], checks=len(checks), failed=[c['check'] for c in checks if c['result']=='FAIL']),ensure_ascii=False))
 raise SystemExit(report['status'] != 'PASS')

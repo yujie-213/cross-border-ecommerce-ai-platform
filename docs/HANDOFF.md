@@ -1,3 +1,5 @@
+B设计文档固定提交（2026-11-16）：162b98dec164f1cecaf05665e629fe82e3b61ebf，设计REVIEW；本次后续提交仅补证据生成换行修复与固定SHA/检查回执。首个暂存检查暴露新validation.json的CRLF，已修正生成器为LF并再次检查；保留初次事实，不改冻结需求或业务代码。最终远端同步由实际ls-remote回读，不预写成功。
+
 B V1详细设计交付（2026-11-16）：起点codex/b-after-sales-v1 / 2547d1e23ef8cbc991a6e238df9961c35a551696，Codex单人，仅文档。复用/差距、三链详细设计、操作页面与分阶段计划见docs/README.md新增入口；D-B-DESIGN-01 REVIEW、六项开发TODO，未独立评审/未实现/未业务验收。提出DomainResult来源兼容、G01动作及教学绑定、D03/D04最小资产、A02/A03及B01售后指标增量；风险独立advisory不进入S01计算/采购门。四类政策正文/责任、精确映射绑定、B模型用途预算须后续准备；ERP完整成熟群组仍需验证。检查结果见evidence/B-DESIGN-20261116/validation.json；本轮无业务回归/迁移/ERP/模型，未知OpenAPI未读未改。普通推送当前分支后停止，不合main；最终SHA和推送结果以Git回读及最终回复为准，不虚填自身SHA。
 
 B赛道V1.0需求批准登记（2026-11-15）：产品负责人明确表示“这份需求文档我批准作为后续开发依据”。批准对象为codex/b-after-sales-v1已发布需求基线（文档提交33aa1923475043b5969d09f09f6fcfd9cd3a5b12，审核时分支HEAD 7bc948a89381af88f28cb60077081bb97d019ca0）。B-REQ-001/V1.0保持FROZEN_BASELINE，并登记APPROVED_FOR_DEVELOPMENT；仅批准状态更新，D1—D5、两项补充约束、业务正文及AC合同不变，不代表功能已实现/业务验收通过，也不代记星星新一轮独立审核。本轮仅登记批准并同步原B分支，保留原未提交材料、不合main、不启动详细设计/开发/ERP或模型，等待负责人安排下一阶段。

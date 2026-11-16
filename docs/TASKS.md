@@ -9930,7 +9930,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "status": "REVIEW",
   "implementationCommits": [],
-  "testedCommit": null,
+  "testedCommit": "162b98dec164f1cecaf05665e629fe82e3b61ebf",
   "evidence": [
     {
       "kind": "DOCUMENT_CHECK",
@@ -9960,7 +9960,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "to": "REVIEW",
       "reason": "仅文档设计待评审，开发与业务验收NOT_RUN"
     }
-  ]
+  ],
+  "documentationCommit": "162b98dec164f1cecaf05665e629fe82e3b61ebf",
+  "currentDeliveryScope": "DESIGN_REVIEW_ONLY；37需求及18AC已映射，开发及业务验收NOT_RUN；普通推送回读以Git及最终回复为准"
 }
 ```
 
