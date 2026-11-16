@@ -59,7 +59,8 @@ async function load() {
   const key = route.value.segments[1], batch = route.value.query.batch || state.batchId || latestBatchId(), selected = route.value.query.single
   if (batch && batch !== state.batchId) await openBatch(batch)
   if (sequence !== loadSequence) return
-  if (key && (key !== state.itemKey || (selected || '') !== state.singleId || !state.item)) await openItem(key, selected)
+  // Reopening the same product must recheck live risk state, including revocations.
+  if (key) await openItem(key, selected)
   if (sequence === loadSequence) mounted.value = true
 }
 let requisitionTimer: ReturnType<typeof setInterval> | undefined
