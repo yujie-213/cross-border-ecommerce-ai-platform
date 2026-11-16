@@ -76,9 +76,19 @@
       "detail": []
     },
     {
-      "check": "design-review-development-not-started",
+      "check": "approved-design-development-not-started",
       "result": "PASS",
-      "detail": "No implementation or business acceptance claimed"
+      "detail": "Owner explicitly accepted design; functionality and business acceptance NOT_RUN"
+    },
+    {
+      "check": "23-functional-todos-in-existing-ledger",
+      "result": "PASS",
+      "detail": "Nine stages retained; no separate task system or per-API task splitting"
+    },
+    {
+      "check": "continuous-execution-single-prototype-confirmation",
+      "result": "PASS",
+      "detail": "Engineering readiness permits continuation; final product acceptance remains human"
     },
     {
       "check": "case-does-not-wait-for-complete-dataset",

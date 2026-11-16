@@ -1,3 +1,5 @@
+B最终执行准备（2026-11-16）：负责人明确详细设计及89c2a2d修订通过，D-B-DESIGN-01仅设计ACCEPTED。九个阶段保留，八个待实施阶段共23个功能级TODO登记在各阶段workItems中，状态仍由本TASKS唯一维护。仅一次原型方向确认；后续按工程完成/必要测试连续推进，不以各阶段REVIEW/未ACCEPTED阻塞；最终三链由负责人和星星统一体验验收。本轮仅准备不编码，统一开发启动仍待下一指令；未知OpenAPI保留，提交推送当前分支，不合main。
+
 B设计针对性完善（2026-11-16）：基点329a6e64423453160660491515b19557c0e765bf，Codex单人，跟踪区干净、未知OpenAPI保留未读未改；按初评四项反馈只更新G01资源授权/既有admin幂等补权、任务依赖、原型阶段及按消费者建表。D-B-DESIGN-01仍REVIEW，新增PROTOTYPE与DATASET为TODO；不制作正式页面、不实现原型/业务功能、不运行迁移/ERP/模型，不合main。
 
 B详细设计领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / 2547d1e23ef8cbc991a6e238df9961c35a551696，起点跟踪区干净、未知docs/ERP-openapi.yaml保留未读未改。用户仅授权设计、计划、文档检查及普通提交推送，不编码/迁移/ERP写/付费模型/合main；D-B-DESIGN-01交付REVIEW，新增六项实施任务仅TODO，须后续明确开发授权。设计与检查见evidence/B-DESIGN-20261116/validation.json；实际最终提交由Git回读。
@@ -9930,9 +9932,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "DOCUMENT_CHECK"
   ],
-  "status": "REVIEW",
-  "implementationCommits": [],
-  "testedCommit": "162b98dec164f1cecaf05665e629fe82e3b61ebf",
+  "status": "ACCEPTED",
+  "implementationCommits": [
+    "162b98dec164f1cecaf05665e629fe82e3b61ebf",
+    "89c2a2d05fd67cfee2a35c1f02fa2e128eef28d2"
+  ],
+  "testedCommit": "89c2a2d05fd67cfee2a35c1f02fa2e128eef28d2",
   "evidence": [
     {
       "kind": "DOCUMENT_CHECK",
@@ -9948,7 +9953,13 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "artifactRef": "docs/evidence/B-DESIGN-20261116/validation.json"
     }
   ],
-  "review": null,
+  "review": {
+    "reviewer": "产品负责人（本轮明确批准详细设计及针对性修订）",
+    "reviewedCommit": "89c2a2d05fd67cfee2a35c1f02fa2e128eef28d2",
+    "evidenceRef": "docs/evidence/B-DESIGN-20261116/validation.json",
+    "scope": "B_V1_DESIGN_ONLY",
+    "decision": "ACCEPTED_DESIGN_NOT_IMPLEMENTATION"
+  },
   "branch": "codex/b-after-sales-v1",
   "observedHead": "329a6e64423453160660491515b19557c0e765bf",
   "dirtyPaths": [
@@ -9966,10 +9977,16 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "针对G01/既有admin、解耦教学包、原型门、按消费者增量建表完善；冻结需求及AC不变"
+    },
+    {
+      "date": "2026-11-16",
+      "fromStatus": "REVIEW",
+      "to": "ACCEPTED",
+      "reason": "负责人本轮明确设计及修订通过；不代签最终三链产品验收"
     }
   ],
   "documentationCommit": "162b98dec164f1cecaf05665e629fe82e3b61ebf",
-  "currentDeliveryScope": "DESIGN_REVIEW_ONLY；37需求及18AC已映射，开发及业务验收NOT_RUN；普通推送回读以Git及最终回复为准",
+  "currentDeliveryScope": "详细设计及针对性修订ACCEPTED；仅执行准备，功能未实现/未业务验收",
   "reviewContext": "本轮初步独立评审整体认可，按负责人四项反馈针对性完善；详细设计仍REVIEW，不代记正式验收"
 }
 ```
@@ -9985,7 +10002,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-DESIGN-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入；可先做后端；正式Vue壳须D-B-PROTOTYPE-01相关流程完成产品体验审核",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10049,8 +10066,52 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅更新针对性设计和依赖，未授权实现"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "FOUNDATION.F1",
+      "title": "既有admin售后增量授权",
+      "dependsOn": [
+        "D-B-DESIGN-01"
+      ],
+      "implement": "实现B资源范围及幂等grant-after-sales，覆盖未关联SKU案件、政策和数据集父资源",
+      "doneWhen": "原账号密码/会话/补货grant不变，B范围精确且拒绝越权",
+      "testMethod": "复用G01/LocalAdmin测试，补最少资源授权、补权重放/冲突/回滚用例",
+      "status": "TODO"
+    },
+    {
+      "id": "FOUNDATION.F2",
+      "title": "统一任务接入与恢复",
+      "dependsOn": [
+        "D-B-DESIGN-01",
+        "FOUNDATION.F1"
+      ],
+      "implement": "按受信场景接入B任务授权全生命周期、预算/取消/恢复和模块开关",
+      "doneWhen": "B任务不旁路授权，旧S01任务和启动不受影响",
+      "testMethod": "复用任务/租约/预算测试，覆盖B授权分派、重启恢复与旧路径兼容",
+      "status": "TODO"
+    },
+    {
+      "id": "FOUNDATION.F3",
+      "title": "统一工作区入口",
+      "dependsOn": [
+        "D-B-DESIGN-01",
+        "FOUNDATION.F1",
+        "PROTOTYPE.F2"
+      ],
+      "implement": "复用登录、首页、导航和视觉组件接入售后壳，隔离S01/B页面状态",
+      "doneWhen": "用户可进入售后并返回补货，关闭B仍可使用原模块",
+      "testMethod": "复用前端类型检查/构建及路由状态测试，定向浏览器入口检查",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10066,7 +10127,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-FOUNDATION-01",
     "D-B-PROTOTYPE-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入；不等待完整教学数据集，ERP案件取证不虚填datasetRef",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10126,8 +10187,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅更新针对性设计和依赖，未授权实现"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "CASE.F1",
+      "title": "多轮案件与精确关联",
+      "dependsOn": [
+        "D-B-FOUNDATION-01",
+        "D-B-PROTOTYPE-01"
+      ],
+      "implement": "持久保存客户原话、多轮消息、商品澄清和关联修订；未选SKU不生成确定质量结论",
+      "doneWhen": "客服可从未关联案件选正确订单行，USB尺码等冲突保留并澄清",
+      "testMethod": "现有API/数据库测试风格增量覆盖AC-01-N1/N2，保存后独立GET",
+      "status": "TODO"
+    },
+    {
+      "id": "CASE.F2",
+      "title": "受控政策与ERP证据",
+      "dependsOn": [
+        "D-B-FOUNDATION-01",
+        "D-B-PROTOTYPE-01",
+        "CASE.F1"
+      ],
+      "implement": "发布四类政策并实现适用检索；有界只读ERP取证，按首次消费者实现manifest/授权证据解析",
+      "doneWhen": "事实/主张/缺域分列，政策原文版本可查，无有效政策时转人工",
+      "testMethod": "复用ERP读取及证据测试，补AC-01-N3/N5和生效/撤销/权限边界",
+      "status": "TODO"
+    },
+    {
+      "id": "CASE.F3",
+      "title": "有依据建议与安全降级",
+      "dependsOn": [
+        "D-B-FOUNDATION-01",
+        "D-B-PROTOTYPE-01",
+        "CASE.F2"
+      ],
+      "implement": "通过现有A01生成结构化建议和回复草稿，核事实/引用/承诺；安全信号优先人工升级",
+      "doneWhen": "合理建议可审阅；模型/检索失败仍可人工处理，无退款/外发或注入授权",
+      "testMethod": "复用网关夹具与用途校验，覆盖AC-01-N3/N4/N5；获准真实模型独立登记，不借S01许可",
+      "status": "TODO"
+    },
+    {
+      "id": "CASE.F4",
+      "title": "人工修订审核和恢复",
+      "dependsOn": [
+        "D-B-FOUNDATION-01",
+        "D-B-PROTOTYPE-01",
+        "CASE.F3"
+      ],
+      "implement": "集成案件界面、原稿/人工稿、采纳/退回/升级及历史，防旧草稿覆盖新消息",
+      "doneWhen": "客服完整走通AC-01，刷新/重启后独立回读审核者和版本",
+      "testMethod": "定向前后端/浏览器覆盖AC-01-P、并发revision与失败重开",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10143,7 +10263,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-DATASET-01",
     "D-B-PROTOTYPE-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10202,8 +10322,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅更新针对性设计和依赖，未授权实现"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "EXPERIENCE.F1",
+      "title": "反馈主题归类与人工修订",
+      "dependsOn": [
+        "D-B-DATASET-01",
+        "D-B-PROTOTYPE-01"
+      ],
+      "implement": "实现多标签/UNKNOWN、去重分母、原文定位和分类版本，保留AI原始与人工修订",
+      "doneWhen": "运营看得懂主题构成，订单级未知反馈不被复制到全部SKU",
+      "testMethod": "复用模型结构化测试及人工主题金样，覆盖安全主题和未知/失败",
+      "status": "TODO"
+    },
+    {
+      "id": "EXPERIENCE.F2",
+      "title": "确定性成熟群组统计",
+      "dependsOn": [
+        "D-B-DATASET-01",
+        "D-B-PROTOTYPE-01"
+      ],
+      "implement": "实现同源两窗、完成t0、30×24小时、20/20、各阶段件数和精确异常阈值",
+      "doneWhen": "异常1/40到12/40、正常1/40到1/40正确；不足/冲突为UNKNOWN",
+      "testMethod": "人工金样及AC-02-P、N1—N4边界；整数/Decimal计算，不让模型计算",
+      "status": "TODO"
+    },
+    {
+      "id": "EXPERIENCE.F3",
+      "title": "分析解释与证据调查",
+      "dependsOn": [
+        "D-B-DATASET-01",
+        "D-B-PROTOTYPE-01",
+        "EXPERIENCE.F1",
+        "EXPERIENCE.F2"
+      ],
+      "implement": "生成受限解释及可检验假设，指标/原文/发货退货事件钻取并记录调查",
+      "doneWhen": "运营从异常追到证据，模型失败仍保留程序事实，不自动认定缺陷",
+      "testMethod": "复用报告/API/前端测试，定向浏览器异常→原文→调查路径",
+      "status": "TODO"
+    },
+    {
+      "id": "EXPERIENCE.F4",
+      "title": "报告版本和迟到变化",
+      "dependsOn": [
+        "D-B-DATASET-01",
+        "D-B-PROTOTYPE-01",
+        "EXPERIENCE.F3"
+      ],
+      "implement": "固定数据/规则/分类版本，重跑可比，迟到事件或阈值变化生成新版本差异",
+      "doneWhen": "旧报告不被覆盖，AC-02全矩阵可追溯",
+      "testMethod": "AC-02-N5及重开恢复，复用已有版本/报告测试结构",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10219,7 +10398,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-CASE-01",
     "D-B-EXPERIENCE-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10277,8 +10456,54 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅更新针对性设计和依赖，未授权实现"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "RISK.F1",
+      "title": "调查到人工风险决定",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01"
+      ],
+      "implement": "从案件及分析调查形成疑似，明确确认/驳回及逐店仓范围、证据和真实actor",
+      "doneWhen": "两链均可生成和调查风险，suspected不当当前有效，缺证据不得确认",
+      "testMethod": "覆盖AC-03-P前半/N2、AC-01安全升级及CAS冲突，复用审计/范围测试",
+      "status": "TODO"
+    },
+    {
+      "id": "RISK.F2",
+      "title": "生命周期与有效期",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "RISK.F1"
+      ],
+      "implement": "实现关闭/撤销/到期、默认30天可缩短、重新确认新版本和历史留痕",
+      "doneWhen": "失效不复活，旧版本与当前状态准确分列",
+      "testMethod": "AC-03-N1，半开边界和并发变更；复用时钟/版本测试方式",
+      "status": "TODO"
+    },
+    {
+      "id": "RISK.F3",
+      "title": "教学映射绑定与风险读端口",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "RISK.F1"
+      ],
+      "implement": "独立核验商品店仓映射、服务端绑定及撤销，提供最小QualityRiskReadPort",
+      "doneWhen": "正常模式拒绝教学风险，摘要/计数/证据与当前状态统一授权",
+      "testMethod": "AC-03-N2/N3，版本停用/绑定撤销/admin或模型绕过均拒绝",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10293,7 +10518,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-RISK-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10353,8 +10578,39 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅更新针对性设计和依赖，未授权实现"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "S01.F1",
+      "title": "单品与批量风险体验",
+      "dependsOn": [
+        "D-B-RISK-01"
+      ],
+      "implement": "在原补货结果展示风险和证据抽屉，区分历史/当前/未核实，返回不丢上下文",
+      "doneWhen": "单品和批量同规则，错店不串用，失败不显示无风险",
+      "testMethod": "复用S01前端/结果测试与浏览器，AC-03-P、N1—N4及1000对象分块",
+      "status": "TODO"
+    },
+    {
+      "id": "S01.F2",
+      "title": "原计算和采购行为不变",
+      "dependsOn": [
+        "D-B-RISK-01",
+        "S01.F1"
+      ],
+      "implement": "对风险发布/失效/错范围/查询失败验证旁路展示不影响原业务",
+      "doneWhen": "参考100仍100，库存销量/候选/采购准入保持，演练采购动作0",
+      "testMethod": "复用S01固定输入与请购安全回归，针对AC-03-N5逐字段比对，不新增无必要全量",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10372,7 +10628,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-RISK-01",
     "D-B-S01-01"
   ],
-  "entryCondition": "设计及所消费契约获评审、负责人明确授权开发；外部接口/模型另满足对应准入",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10426,8 +10682,45 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "仅更新针对性设计和依赖，未授权实现"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "ACCEPTANCE.F1",
+      "title": "三链集成及必要恢复复验",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "D-B-RISK-01",
+        "D-B-S01-01"
+      ],
+      "implement": "汇总已有各阶段测试，在实际集成环境补齐三AC剩余正负例和跨链恢复",
+      "doneWhen": "18个正负例及授权/审计/历史/UNKNOWN完整，事实和模拟分别登记",
+      "testMethod": "复用各阶段测试/浏览器与已有记录，仅补缺口或受影响回归，不重复全量和另造验收文档",
+      "status": "TODO"
+    },
+    {
+      "id": "ACCEPTANCE.F2",
+      "title": "统一实际产品体验验收",
+      "dependsOn": [
+        "D-B-CASE-01",
+        "D-B-EXPERIENCE-01",
+        "D-B-RISK-01",
+        "D-B-S01-01",
+        "ACCEPTANCE.F1"
+      ],
+      "implement": "负责人和星星最终体验三链及补货协作，Codex修复问题并完成必要复测",
+      "doneWhen": "最终统一验收记录进入TASKS，未通过项保留；未经合并授权不合main",
+      "testMethod": "沿实际产品操作和AC-01—03统一验收，普通缺陷自修复，结果不得代签",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10442,7 +10735,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-DESIGN-01"
   ],
-  "entryCondition": "本轮仅登记原型计划；下一步按负责人指令制作轻量静态原型，非业务编码",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10492,8 +10785,39 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "按针对性评审新增实施阶段，未开工"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "PROTOTYPE.F1",
+      "title": "关键路径可点击预览",
+      "dependsOn": [
+        "D-B-DESIGN-01"
+      ],
+      "implement": "制作工作台、案件、体验分析和补货风险四条合成样例路径，呈现正常、缺证据、失败与历史状态",
+      "doneWhen": "一份本地可预览原型，数量/风险边界及返回上下文可体验",
+      "testMethod": "复用本地文档/浏览器预览，检查关键路径、键盘和1024/1440布局",
+      "status": "TODO"
+    },
+    {
+      "id": "PROTOTYPE.F2",
+      "title": "一次产品方向确认",
+      "dependsOn": [
+        "D-B-DESIGN-01",
+        "PROTOTYPE.F1"
+      ],
+      "implement": "由负责人简短确认整体操作方向，普通字段及布局意见由Codex修订",
+      "doneWhen": "在原型任务内记录方向意见和修订；不再给后续普通阶段设人工关卡",
+      "testMethod": "一次简短路径演示；不作为三AC业务验收",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```
 
@@ -10508,7 +10832,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "dependsOn": [
     "D-B-FOUNDATION-01"
   ],
-  "entryCondition": "设计/相关契约评审后明确实施授权；正式Vue前完成原型体验审核",
+  "entryCondition": "统一开发启动指令后按已批准设计连续实施；本轮仅执行准备，不编码。dependsOn按工程交付与必要测试满足即继续，不等待阶段ACCEPTED或人工签审；正式Vue前保留一次原型方向确认。外部操作沿已获准范围，不默认增加ERP写/模型用途预算。",
   "ownerRole": "主集成人",
   "assignee": null,
   "allowedPaths": [
@@ -10565,7 +10889,51 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "TODO",
       "reason": "按针对性评审新增实施阶段，未开工"
+    },
+    {
+      "date": "2026-11-16",
+      "to": "TODO",
+      "reason": "执行准备：增加功能级workItems，移除普通阶段人工评审门，未开工"
     }
-  ]
+  ],
+  "workItems": [
+    {
+      "id": "DATASET.F1",
+      "title": "完整教学金样与受控分块导入",
+      "dependsOn": [
+        "D-B-FOUNDATION-01"
+      ],
+      "implement": "准备固定总体40逻辑订单各2SKU、完整发货/退货阶段/反馈证据，隔离教师答案",
+      "doneWhen": "正式导入中台独立教学版本，不冒充ERP事实，CASE无须等待",
+      "testMethod": "复用数据导入/质量测试形式，核清单count/hash、唯一性及跨源/teacher拒用",
+      "status": "TODO"
+    },
+    {
+      "id": "DATASET.F2",
+      "title": "校验、独立回读及激活",
+      "dependsOn": [
+        "D-B-FOUNDATION-01",
+        "DATASET.F1"
+      ],
+      "implement": "验证数量守恒、事件时间/覆盖并以独立事务回读核对后激活；坏包隔离",
+      "doneWhen": "金样可用于完整分析，缺页/冲突/不完整不能激活",
+      "testMethod": "金样与负例覆盖AC-02前置、N2/N4，分块重放/异内容冲突及重启",
+      "status": "TODO"
+    },
+    {
+      "id": "DATASET.F3",
+      "title": "资料管理与来源契约兼容",
+      "dependsOn": [
+        "D-B-FOUNDATION-01",
+        "DATASET.F2",
+        "PROTOTYPE.F2"
+      ],
+      "implement": "展示版本、校验问题和停用；按首次使用扩中台教学结果来源及资产解析",
+      "doneWhen": "业务人员可选择有效版本，旧ERP/S01结果仍可读取",
+      "testMethod": "复用结果契约/前端用例，定向覆盖旧版本兼容、版本失权和停用",
+      "status": "TODO"
+    }
+  ],
+  "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
 }
 ```

@@ -51,7 +51,12 @@ allids = {t['id'] for t in tasks}
 required = ['stage','kind','dependsOn','entryCondition','ownerRole','assignee','allowedPaths','parallelCondition','deliverables','acceptance','plannedTests','risks','requiredEvidenceKinds','status','implementationCommits','testedCommit','evidence','review','branch','observedHead','dirtyPaths','latestHandoffRef','blocker','history']
 check('nine-tasks-and-shape', len(new) == 9 and all(all(k in t for k in required) for t in new), [t['id'] for t in new])
 check('dag-valid', not cycles(tasks) and all(d in allids for t in tasks for d in t['dependsOn']), cycles(tasks))
-check('design-review-development-not-started', all(t['status'] == ('REVIEW' if t['id'] == 'D-B-DESIGN-01' else 'TODO') and t['review'] is None and not t['implementationCommits'] for t in new), 'No implementation or business acceptance claimed')
+approved = next(t for t in new if t['id'] == 'D-B-DESIGN-01')
+check('approved-design-development-not-started', approved['status'] == 'ACCEPTED' and approved['review']['reviewedCommit'] == '89c2a2d05fd67cfee2a35c1f02fa2e128eef28d2' and approved['review']['scope'] == 'B_V1_DESIGN_ONLY' and all(t['status'] == 'TODO' and t['review'] is None and not t['implementationCommits'] for t in new if t is not approved), 'Owner explicitly accepted design; functionality and business acceptance NOT_RUN')
+functional = [w for t in new for w in t.get('workItems', [])]
+node_ids = allids | {w['id'] for w in functional}
+check('23-functional-todos-in-existing-ledger', len(functional) == 23 and len({w['id'] for w in functional}) == 23 and all(w['status'] == 'TODO' and all(w.get(k) for k in ['title','implement','doneWhen','testMethod']) and all(d in node_ids for d in w['dependsOn']) for w in functional) and not cycles(tasks + functional), 'Nine stages retained; no separate task system or per-API task splitting')
+check('continuous-execution-single-prototype-confirmation', all(x in plan for x in ['一次简短产品方向确认','REVIEW','无需负责人逐阶段审批','暂停条件仅为','负责人和星星统一实际产品体验']) and '工程产物' in plan, 'Engineering readiness permits continuation; final product acceptance remains human')
 by_id = {t['id']: t for t in new}
 check('case-does-not-wait-for-complete-dataset', by_id['D-B-CASE-01']['dependsOn'] == ['D-B-FOUNDATION-01', 'D-B-PROTOTYPE-01'] and by_id['D-B-EXPERIENCE-01']['dependsOn'] == ['D-B-DATASET-01', 'D-B-PROTOTYPE-01'] and by_id['D-B-DATASET-01']['dependsOn'] == ['D-B-FOUNDATION-01'], 'CASE and DATASET branch after minimal foundation; complete dataset remains mandatory')
 design = texts[paths[1]]
