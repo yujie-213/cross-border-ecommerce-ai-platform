@@ -12618,17 +12618,76 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "INTEGRATION"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "86e09827edb9ecc5fa918e13c3fc95b5ea86e298",
+    "796dc44d463eabb1863e47c8f59c767fb7e1e2f6",
+    "7adbde4e1a846ddb1f6cbe3ab24d89cbb26eff19",
+    "55a3e6f53bc015d3d6e1366df6708b235201f729",
+    "382ea8519573a58faac7486f2d638ba46999391f",
+    "c509506fa10f7d442943056bc209cadae97553e1",
+    "4d1057e87adb620a66bc78af1b5095dff31f7983"
+  ],
+  "testedCommit": "4d1057e87adb620a66bc78af1b5095dff31f7983",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13 isolated MySQL/API/Worker, synthetic ERP/model; official teaching ERP separately",
+      "testedCommit": "4d1057e87adb620a66bc78af1b5095dff31f7983",
+      "acceptanceIds": [
+        "D-B-RETURNS-WORKFLOW-01/AC1",
+        "D-B-RETURNS-WORKFLOW-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1; mock model/network off; pytest selected B, permissions, monitor and importer regression",
+      "sample": "111 PASS; 87frontend/typecheck/build PASS",
+      "artifactRef": "docs/evidence/B-RETURNS-WORKFLOW-20261117/backend-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13 isolated MySQL/API/Worker, synthetic ERP/model; official teaching ERP separately",
+      "testedCommit": "4d1057e87adb620a66bc78af1b5095dff31f7983",
+      "acceptanceIds": [
+        "D-B-RETURNS-WORKFLOW-01/AC1",
+        "D-B-RETURNS-WORKFLOW-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "BROWSER",
+      "command": "test_process_product -> compiled Vue/API/Worker -> Playwright Edge product.spec.ts",
+      "sample": "4 PASS; return/trend UI explicitly API-fixtured",
+      "artifactRef": "docs/evidence/B-RETURNS-WORKFLOW-20261117/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13 isolated MySQL/API/Worker, synthetic ERP/model; official teaching ERP separately",
+      "testedCommit": "4d1057e87adb620a66bc78af1b5095dff31f7983",
+      "acceptanceIds": [
+        "D-B-RETURNS-WORKFLOW-01/AC3"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "command": "official API importer/readback; B source_reader.return_analysis; V2Reader/analyze",
+      "sample": "97 VERIFIED; 20sales/12tickets/8returns; inventory/26ledger; 5%to25%; sameSKU40/no replenishment; newSKU28",
+      "artifactRef": "docs/evidence/B-RETURNS-WORKFLOW-20261117/erp-summary.json"
+    },
+    {
+      "environment": "Windows/Python3.13 isolated MySQL/API/Worker, synthetic ERP/model; official teaching ERP separately",
+      "testedCommit": "4d1057e87adb620a66bc78af1b5095dff31f7983",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "kind": "INTEGRATION",
+      "command": "original-account product acceptance, new live AI and human risk confirmation",
+      "sample": "User logs in later; no fabricated risk decision/native reviews",
+      "artifactRef": "docs/evidence/B-RETURNS-WORKFLOW-20261117/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "8c439459ff3372993947b0cdfd952d07955b546c",
+  "observedHead": "4d1057e87adb620a66bc78af1b5095dff31f7983",
   "dirtyPaths": [
-    "frontend/src/afterSales/",
-    "src/commerce_hub/scenarios/after_sales/",
-    "tests/"
+    "docs/ERP-openapi.yaml (untracked; preserved)"
   ],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
@@ -12638,6 +12697,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "fromStatus": null,
       "toStatus": "IN_PROGRESS",
       "reason": "接续未提交修改，先修功能和工程复验，通过后再执行必要教学API数据。"
+    },
+    {
+      "at": "2026-11-17",
+      "fromStatus": "IN_PROGRESS",
+      "toStatus": "REVIEW",
+      "reason": "先完成页面流程，再补ERP数据；111后端/87前端/Edge4及正式回读通过。人工产品体验和新真实风险确认待负责人，不合main。"
     }
   ]
 }

@@ -1,0 +1,47 @@
+{
+  "testedCommit": "4d1057e87adb620a66bc78af1b5095dff31f7983",
+  "status": "REVIEW",
+  "backend": {
+    "result": "PASS",
+    "tests": 111,
+    "exitCode": 0,
+    "command": "COMMERCE_RUN_MYSQL_TESTS=1; mock model/network off; pytest selected B, permissions, monitor and importer regression",
+    "artifact": "backend-final.txt",
+    "scope": "Isolated MySQL, actual API/independent Worker; synthetic ERP/model"
+  },
+  "browser": {
+    "result": "PASS",
+    "tests": 4,
+    "command": "test_process_product -> compiled Vue/API/Worker -> Playwright Edge product.spec.ts",
+    "artifact": "browser-final.txt",
+    "scope": "Return/trend UI explicitly API-fixtured; actual domain and live ERP readback separate"
+  },
+  "frontend": {
+    "result": "PASS",
+    "tests": 87,
+    "typecheck": "PASS",
+    "build": "PASS"
+  },
+  "liveERP": {
+    "result": "PASS",
+    "artifact": "erp-summary.json"
+  },
+  "localService": {
+    "url": "http://localhost:5175",
+    "webStatus": 200,
+    "apiReadyStatus": 200,
+    "identitySessionGrantsFingerprintUnchanged": true
+  },
+  "notRun": [
+    "New paid AI calls",
+    "Original-account user browser acceptance",
+    "Human risk confirmation on new ERP SKU and real replenishment reminder",
+    "Native ERP review creation and review-growth live sample"
+  ],
+  "failures": [
+    "Initial fixture/test assertions and Windows timezone-data dependency corrected.",
+    "Inventory-ID filter ignored by ERP: broad query stopped; subsequent query timeout stopped.",
+    "Independent defective stock batches and store_id=0 provenance reconciled; resumed readback without replaying writes.",
+    "B read budget60 insufficient for registered sales/details: bounded100 fixed, live readback passed."
+  ]
+}

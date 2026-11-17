@@ -1,0 +1,83 @@
+{
+  "batch": "CY-AS-20261117-R2",
+  "state": "REGISTERED_AND_ANALYZED",
+  "sourceNature": "SIMULATED_BUSINESS_DATA_IN_TEACHING_ERP",
+  "reusedStoreId": 13,
+  "reusedWarehouseId": 318,
+  "reusedSupplierId": 6,
+  "newStores": 0,
+  "newWarehouses": 0,
+  "newSuppliers": 0,
+  "sku": "CY-KNIT-021-M",
+  "productId": 370,
+  "productName": "澄屿细针织开衫 M 雾蓝",
+  "newSalesOrders": 20,
+  "soldUnits": 40,
+  "newTickets": 12,
+  "newReturns": 8,
+  "receivedReturns": 6,
+  "draftReturns": 2,
+  "previous": {
+    "start": "2026-11-04",
+    "end": "2026-11-10",
+    "shipped": 20,
+    "received": 1,
+    "returnRatePercent": 5
+  },
+  "current": {
+    "start": "2026-11-11",
+    "end": "2026-11-17",
+    "shipped": 20,
+    "received": 5,
+    "returnRatePercent": 25
+  },
+  "inventory": {
+    "opening": 44,
+    "available": 4,
+    "quarantined": 6,
+    "physical": 10,
+    "reconciledLedgerRows": 26,
+    "listingAvailable": 4
+  },
+  "verifiedMutations": 97,
+  "importerSendAttempts": {
+    "GET": 590,
+    "POST": 96,
+    "PUT": 1
+  },
+  "sendLogMeaning": "Attempt counts, not success receipts; operation journal independently VERIFIED97; excludes authentication and later read-only validations",
+  "allRegisteredReturnRows": 28,
+  "newSkuReturnRows": 8,
+  "uniqueReturnIdSkuPairs": 28,
+  "replenishment": {
+    "results": [
+      {
+        "sku": "CY-KNIT-021-M",
+        "storeId": "13",
+        "warehouseId": "318",
+        "analysisState": "ANALYZED",
+        "quantity": 28,
+        "demandDecision": null
+      },
+      {
+        "sku": "HLX-USB-STABLE",
+        "storeId": "6",
+        "warehouseId": "311",
+        "analysisState": "ANALYZED",
+        "quantity": 40,
+        "demandDecision": null
+      },
+      {
+        "sku": "HLX-USB-STABLE",
+        "storeId": "7",
+        "warehouseId": "312",
+        "analysisState": "NO_REPLENISHMENT",
+        "quantity": null,
+        "demandDecision": null
+      }
+    ],
+    "requestCount": 26
+  },
+  "paidModelCallsThisRound": 0,
+  "humanRiskConfirmation": "NOT_RUN"
+}
