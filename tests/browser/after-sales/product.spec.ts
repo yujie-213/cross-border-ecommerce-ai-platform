@@ -6,8 +6,8 @@ test('workbench cards and ERP internal handling confirmation complete without su
   test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
   const failures:string[]=[];page.on('pageerror',e=>failures.push(e.message))
   await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
-  await page.getByRole('link',{name:/智能售后与客户体验/}).click()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
+  await page.locator('.home-modules').getByRole('link',{name:/售后与客户体验/}).click()
   await expect(page.locator('.desk-kpis')).toContainText('覆盖 SKU')
   await expect(page.locator('.desk-kpis')).toContainText('评价 1 · 反馈 1 · 工单 1',{timeout:30000})
   const shots=path.resolve(import.meta.dirname,'../../../.tmp/b-desk-screenshots');mkdirSync(shots,{recursive:true})
@@ -40,7 +40,7 @@ test('ERP only pages ignore old source links and keep policy maintenance',async(
   test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
   const failures:string[]=[];page.on('pageerror',e=>failures.push(e.message))
   await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
   await page.goto('/#/after-sales/workbench?source=TEACHING')
   await expect(page.locator('.desk-kpis')).toBeVisible()
   await expect(page.getByRole('combobox',{name:'记录来源',exact:true})).toHaveCount(0)
@@ -82,7 +82,7 @@ test('ERP only pages ignore old source links and keep policy maintenance',async(
 test('reply generation reports no-op accurately, fills a successful draft and saves without a second reason',async({page})=>{
   test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
   await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
   const asset:any={id:'ui-case',kind:'CASE',revision:2,state:'OPEN',sourceNature:'TEACHING_ERP_OBSERVED',scope:{sourceTenant:'1'},history:[],body:{
     title:'袖口接缝松开，咨询处理方式',erpStoreName:'SIM-AS-20261116-R1-SHOP',erpTicketId:'115410',businessDate:'2026-11-16T12:00:00+08:00',
     identity:{name:'澄屿圆领针织衫 M 藏青',sku:'SIM-AS-261116-KNIT-M',orderId:'1154067',orderNumber:'CY-1116-0182',productId:'362',storeId:'13',warehouseId:'318'},
@@ -130,7 +130,7 @@ test('populated return and SKU views open one investigation, accept evidence and
   test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
   const failures:string[]=[];page.on('pageerror',e=>failures.push(e.message))
   await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
   const identity={sourceTenant:'1',productId:'10',sku:'CY-KNIT-M',storeId:'2',warehouseId:'20',name:'澄屿圆领针织衫',category:'APPAREL'}
   const original={id:'ret-fact',domain:'RETURN',kind:'OBSERVED',text:'袖口接缝开线，希望换货',sourceRef:'sales-returns:902'}
   const origin:any={id:'return-case',kind:'CASE',revision:1,state:'OPEN',scope:{sourceTenant:'1'},body:{title:'接缝质量调查',identity,erpReturnId:'902',erpStoreName:'Owned Store',evidence:{facts:[original]},investigationAssists:[],messages:[],advice:[],reviews:[]}}
@@ -195,7 +195,7 @@ test('populated return and SKU views open one investigation, accept evidence and
 test('switching restores lists and filters, details open without analysis, and failed refresh keeps data',async({page})=>{
   test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
   await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
   const counts={inbox:0,analysis:0,investigation:0};let failRefresh=false
   await page.route('**/api/b/v1/workspace',r=>r.fulfill({json:{workspaceId:'after-sales-v1',modelEnabled:true,sourceStores:['Owned Store'],sourceProductCounts:{'Owned Store':1}}}))
   await page.route('**/api/b/v1/workbench',r=>r.fulfill({json:Object.fromEntries(['case','policy','investigation','risk'].map(k=>[k,{items:[],nextCursor:null}]))}))
@@ -217,7 +217,7 @@ test('switching restores lists and filters, details open without analysis, and f
   await page.evaluate(()=>window.scrollTo(0,700));await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(500)
   await page.getByRole('link',{name:/退货与商品分析$/}).click()
   await expect(page.getByText('正在读取退货记录…',{exact:true})).toBeVisible()
-  await page.getByRole('link',{name:/售后工作台$/}).click()
+  await page.getByRole('navigation',{name:'主要导航'}).getByRole('link',{name:/售后与客户体验/}).click()
   await expect(page.getByLabel('搜索客户问题')).toHaveValue('接缝');await expect(page.getByLabel('问题类型')).toHaveValue('tickets')
   await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(500)
   expect(counts.inbox).toBe(3)
@@ -236,7 +236,7 @@ test('switching restores lists and filters, details open without analysis, and f
   const shots=path.resolve(import.meta.dirname,'../../../.tmp/b-page-experience');mkdirSync(shots,{recursive:true})
   await page.screenshot({path:path.join(shots,'01-refresh-retains-list.png'),fullPage:true})
   await page.getByRole('button',{name:'退出会话',exact:true}).click();await page.goto('/#/home');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
   await page.goto('/#/after-sales/workbench');await expect(page.locator('.desk-queue tbody tr')).toHaveCount(35)
   await expect(page.getByLabel('搜索客户问题')).toHaveValue('');await expect(page.getByLabel('问题类型')).toHaveValue('ALL');expect(counts.inbox).toBe(6)
 })
@@ -244,7 +244,7 @@ test('switching restores lists and filters, details open without analysis, and f
 test('AI continues after leaving, double clicks submit once, and a late result does not replace another case',async({page})=>{
   test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
   await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
-  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
   const make=(id:string)=>({id,kind:'CASE',revision:1,state:'OPEN',sourceNature:'TEACHING_ERP_OBSERVED',scope:{},body:{title:id,erpStoreName:'Owned Store',identity:{name:'针织开衫',sku:'SKU'},evidence:{facts:[],missing:[]},messages:[{role:'CUSTOMER',text:'袖口开线 '+id}],advice:[],reviews:[]}})
   const a:any=make('case-a'),b:any=make('case-b');let complete=false,submits=0,evidenceCalls=0
   await page.route('**/api/b/v1/workspace',r=>r.fulfill({json:{workspaceId:'after-sales-v1',modelEnabled:true,sourceStores:['Owned Store']}}))
