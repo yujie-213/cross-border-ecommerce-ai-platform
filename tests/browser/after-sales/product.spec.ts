@@ -235,7 +235,7 @@ test('switching restores lists and filters, details open without analysis, and f
   await expect(page.locator('.monitor-table tbody tr')).toHaveCount(1);expect(counts.analysis).toBe(2)
   const shots=path.resolve(import.meta.dirname,'../../../.tmp/b-page-experience');mkdirSync(shots,{recursive:true})
   await page.screenshot({path:path.join(shots,'01-refresh-retains-list.png'),fullPage:true})
-  await page.getByRole('button',{name:'退出会话',exact:true}).click();await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
+  await page.getByRole('button',{name:'退出会话',exact:true}).click();await page.goto('/#/home');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
   await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
   await page.goto('/#/after-sales/workbench');await expect(page.locator('.desk-queue tbody tr')).toHaveCount(35)
   await expect(page.getByLabel('搜索客户问题')).toHaveValue('');await expect(page.getByLabel('问题类型')).toHaveValue('ALL');expect(counts.inbox).toBe(6)
