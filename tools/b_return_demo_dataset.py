@@ -145,15 +145,23 @@ class DemoImporter(Importer):
             rows.extend(ledger['items'])
         check(len(rows)==len({r['id'] for r in rows})==26,'LEDGER_EVENT_COUNT')
         check(all(s.get('payment_status')=='已支付' and s.get('fulfillment_status')=='已发货' and s.get('refund_status')=='无退款' for s in sales),'SALE_STATE_MISMATCH')
-        rows=sorted(rows,key=lambda r:r['id']);running=Decimal(str(rows[0]['before_quantity']));available=Decimal(str(rows[0]['before_available']))
-        for row in rows:
-            check(str(row['inventory_id'])==str(inv['id']) and Decimal(str(row['before_quantity']))==running and Decimal(str(row['before_available']))==available,'LEDGER_CONTINUITY_FAILED')
-            running+=Decimal(str(row['delta_quantity']));available+=Decimal(str(row['delta_available']))
-            check(running==Decimal(str(row['after_quantity'])) and available==Decimal(str(row['after_available'])),'LEDGER_ARITHMETIC_FAILED')
-        check(running==Decimal(str(final['quantity'])) and available==Decimal(str(final['available'])),'STOCK_READBACK_MISMATCH')
+        rows=sorted(rows,key=lambda r:r['id']);balances=[]
+        for inventory_id in sorted({r['inventory_id'] for r in rows}):
+            group=[r for r in rows if r['inventory_id']==inventory_id]
+            running=Decimal(str(group[0]['before_quantity']));available=Decimal(str(group[0]['before_available']))
+            check(running==(44 if str(inventory_id)==str(inv['id']) else 0),'OPENING_STOCK_MISMATCH')
+            for row in group:
+                check(row['sku']==SKU and Decimal(str(row['before_quantity']))==running and Decimal(str(row['before_available']))==available,'LEDGER_CONTINUITY_FAILED')
+                running+=Decimal(str(row['delta_quantity']));available+=Decimal(str(row['delta_available']))
+                check(running==Decimal(str(row['after_quantity'])) and available==Decimal(str(row['after_available'])),'LEDGER_ARITHMETIC_FAILED')
+            actual=record(self.client.request('GET','/api/v1/inventory/'+str(inventory_id)))
+            check(actual['sku']==SKU and str(actual['wid'])==str(warehouse['id']) and str(actual['store_id'])==str(store['id'])
+                and running==Decimal(str(actual['quantity'])) and available==Decimal(str(actual['available'])),'STOCK_READBACK_MISMATCH')
+            balances.append(actual)
+        check(sum(r['quantity'] for r in balances)==10 and sum(r['available'] for r in balances)==4,'RETURN_STOCK_DISPOSITION_MISMATCH')
         self.sync_listing(listing,int(final['available']))
         member=dict(product=p,store=store,warehouse=warehouse,supplier=supplier,quote=quote,inventory=final,listing=listing,sales=sales,ledger=rows,opening=44)
-        self.journal.update(member=member,tickets=tickets,returns=returns,state='ERP_VERIFIED');self.save()
+        self.journal.update(member=member,tickets=tickets,returns=returns,inventoryBalances=balances,state='ERP_VERIFIED');self.save()
         self.register_member(member)
         self.write_customer_context(member,tickets)
         from commerce_hub.bootstrap.after_sales import source_reader
