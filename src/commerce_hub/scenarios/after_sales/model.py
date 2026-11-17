@@ -72,6 +72,8 @@ class Bundle:
         rules=('facts 数组只允许逐字复制 factRefs 中的引用字符串，不能写事实陈述或解释。优先结合给定反馈原文和已校验主题解释异常，不把已给出的材料再次列为缺失；缺少批次、测量或检验时才建议补证，不用通用原因清单代替证据。对比期间统一称上期、本期，禁止前窗、后窗、观察窗等内部术语。hypotheses 是待验证原因；alternativeExplanations 是其他解释；missingEvidence 是待补证；nextSteps 是人工下一步。这四个数组禁止数字、金额、缺陷确认和退款承诺。'
             if self.schema is Explanation else 'items 必须逐项对应 feedbackId；labels 从 taxonomy 选择；span 必须逐字来自相应反馈原文。' if self.schema is Classifications else
             'adviceCode 只允许 CLARIFY、MANUAL_REVIEW、SAFETY_ESCALATE 且须获所引用政策 terms 允许；citations 逐字复制给定政策的 policyId/version/sectionId/hash。replyDraft 是直接对客户说的可发送回复正文：先回应具体诉求，再结合已核订单、付款、履约或退货阶段和所引政策给出可行选项。禁止写“建议客服”“客服应”“转人工核实后回复”等内部操作指导。不得把申请退货草稿说成已退款，不得把本次确认保存说成已向客户发送。政策明确允许退换货时，应写清适用条件和客户可申请的换货或退货退款方式；例如政策要求吊牌完整、未穿洗且在期限内，未知条件以“如果……”表达，并仅询问真正未知的条件，不能仅凭吊牌就断言资格。不再用“已记录，后续人工核实”代替具体答复；政策没有的期限、运费、金额、资格不得自行补充。orderLinked 为真时订单已经关联，脱敏省略订单号不代表缺失，不再向客户索取订单号；已知商品与订单信息不重复要求填写，只请求真正缺少的测量、照片或说明。即使是否定句或引用，也不能出现以下校验禁词：保证、已经退款、已退款、到账、认证安全、拆机、guarantee、refund issued、已确认缺陷、确定质量问题、绝对安全、已补发、赔偿；禁止数字和货币符号。')
+        if self.schema is Advice and not self.data.get('policies'):
+            rules+='未找到适用政策时仍须按客户评价和ERP事实写自然、直接、可发送的回复；只回应现有内容，不承诺退换、期限、赔偿或已执行动作；citations留空，adviceCode使用CLARIFY或MANUAL_REVIEW。'
         messages=[dict(role='system',content=PROMPT+'\n'+rules+'\nJSON Schema:'+json.dumps(schema)),dict(role='user',content=json.dumps(data,ensure_ascii=False))]
         parameters=dict(temperature=0,maxOutputTokens=1024)
         return dict(modelRevision='deepseek-flash',messages=messages,parameters=parameters,outputSchema=schema,toolSpecs=[]),dict(

@@ -8,9 +8,7 @@ def advice_block_reason(case):
     if not case.get('messages'):return 'CUSTOMER_MESSAGE_REQUIRED'
     if evidence.get('latestUnverified'):return 'EVIDENCE_UNVERIFIED'
     if not evidence.get('facts'):return 'EVIDENCE_REQUIRED'
-    if (case.get('identity') or {}).get('category') not in {'APPAREL','ELECTRONICS'}:return 'CATEGORY_UNSUPPORTED'
-    if not case.get('businessDate'):return 'BUSINESS_DATE_REQUIRED'
-    if any(case.get(k) in (None,'','UNKNOWN') for k in ('region','platform','language')):return 'POLICY_SCOPE_INCOMPLETE'
+    if not case.get('identity'):return 'IDENTITY_UNRESOLVED'
     return None
 
 
@@ -56,7 +54,8 @@ def validate_advice(output,refs):
     require(isinstance(output,dict) and set(output)=={'replyDraft','adviceCode','citations','missingEvidence','escalation'},'AI_SCHEMA_INVALID')
     require(output['adviceCode'] in {'CLARIFY','MANUAL_REVIEW','SAFETY_ESCALATE'},'UNSUPPORTED_PROMISE')
     allowed={(s['policyId'],s['version'],s['sectionId'],s['hash']):s for s in refs}
-    require(isinstance(output['citations'],list) and output['citations'],'CITATIONS_REQUIRED')
+    require(isinstance(output['citations'],list) and (bool(output['citations']) if refs else not output['citations']),'CITATIONS_REQUIRED')
+    if not refs:require(output['adviceCode'] in {'CLARIFY','MANUAL_REVIEW'},'UNSUPPORTED_PROMISE')
     for c in output['citations']:
         require(isinstance(c,dict) and set(c)=={'policyId','version','sectionId','hash'} and tuple(c[k] for k in ('policyId','version','sectionId','hash')) in allowed,'CITATION_FORGED')
         require(output['adviceCode'] in allowed[tuple(c[k] for k in ('policyId','version','sectionId','hash'))]['terms'],'UNSUPPORTED_PROMISE')

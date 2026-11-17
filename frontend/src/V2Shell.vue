@@ -13,9 +13,9 @@ const emit = defineEmits<{ logout: []; loggedOut: [] }>()
 
 const sections = computed(() => current.value === 'after-sales' ? [
   {key:'after-workbench',path:'/after-sales/workbench',label:'售后工作台'},
-  {key:'after-experience',path:'/after-sales/experience',label:'体验与退货分析'},
-  {key:'after-risks',path:'/after-sales/risks',label:'质量风险'},
-  {key:'after-materials',path:'/after-sales/materials',label:'知识与资料'}
+  {key:'after-experience',path:'/after-sales/experience',label:'退货与商品分析'},
+  {key:'after-risks',path:'/after-sales/risks',label:'调查与质量风险'},
+  {key:'after-materials',path:'/after-sales/materials',label:'知识与政策'}
 ] : [
 
   { key: 'workbench', path: '/workbench', label: '智能补货' },

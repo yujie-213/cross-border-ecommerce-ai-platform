@@ -32,7 +32,8 @@ class SourceReader:
     def allows_case(self,body):
         if self.owned_provider is None:return True
         candidates=([body['identity']] if body.get('identity') else [])+(body.get('sourceMembership') or [])+(body.get('evidence') or {}).get('identityCandidates',[])
-        return any(self.allows_identity(i,order=body.get('erpVoiceKind')!='reviews') for i in candidates)
+        order=bool(body.get('erpTicketId') or body.get('erpReturnId')) or body.get('erpVoiceKind')=='feedback'
+        return any(self.allows_identity(i,order=order) for i in candidates)
 
     def _owned_orders(self,reader,store,check):
         members=self.members(store)
@@ -113,6 +114,192 @@ class SourceReader:
                 identity=identity,association=association,orderId='UNKNOWN',sourceRef='customer-voice:'+kind+':'+str(r['id'])))
         return dict(items=items,complete=batch.complete,observedAt=batch.observed_at,sourceNature='TEACHING_ERP_OBSERVED',
             limitation='当前有界读取的反馈；不是完整评价总体，也不提供退货率分母')
+
+    @staticmethod
+    def _day(record):
+        from datetime import date
+        for key in ('business_date','order_date','order_time','created_at','created_time'):
+            value=record.get(key)
+            if isinstance(value,str) and len(value)>=10:
+                try:return date.fromisoformat(value[:10])
+                except ValueError:pass
+        return None
+
+    def return_analysis(self,store,check,*,end_date=None,window_days=7):
+        """Read returns only through project-owned orders and compare shipped cohorts."""
+        from datetime import date,timedelta,datetime,timezone
+        require(type(window_days) is int and 3<=window_days<=30,'WINDOW_INVALID')
+        try:end=date.fromisoformat(end_date) if end_date else datetime.now(timezone(timedelta(hours=8))).date()
+        except ValueError:require(False,'WINDOW_INVALID')
+        current_start=end-timedelta(days=window_days-1)
+        previous_start=current_start-timedelta(days=window_days)
+        expected=self._store(store);members=self.members(store)
+        require(members is not None,'OWNED_SCOPE_REQUIRED',503)
+        reader=self.factory();orders=self._owned_orders(reader,store,check)
+        product_info={}
+        for product_id in sorted({m.monitor.productId for m in members}):
+            check();page=reader.read('/api/v1/products',dict(ids=product_id),page_size=20,max_pages=2)
+            matches=[p for p in page.records if page.complete and str(p.get('id'))==product_id and str(p.get('tenant_id'))==expected['sourceTenant']]
+            if len(matches)==1:
+                product=matches[0];category,attributes=self.product_attributes(product)
+                product_info[product_id]=dict(name=product.get('product_name') or product.get('name'),category=category,attributes=attributes)
+        owned={str(o['id']):o for o in orders}
+        member_by_order={}
+        for member in members:
+            for order_id in member.monitor.salesIds:
+                member_by_order.setdefault(str(order_id),[]).append(member)
+        def exact_members(order_id,sku,order):
+            matches=[m for m in member_by_order.get(str(order_id),[]) if m.sku==sku]
+            if len(matches)>1:
+                warehouse=order.get('shipping_warehouse')
+                matches=[m for m in matches if warehouse and getattr(m,'warehouseName',None)==warehouse]
+            return matches
+        returns=[];complete=len(product_info)==len({m.monitor.productId for m in members})
+        if any(len({m.monitor.productId for m in members if m.sku==sku})!=1 for sku in {m.sku for m in members}):complete=False
+        expected_orders={str(sid) for m in members for sid in m.monitor.salesIds}
+        if set(owned)!=expected_orders:complete=False
+        for order_id,order in owned.items():
+            if not member_by_order.get(order_id):continue
+            check();page=reader.read('/api/v1/sales-returns',dict(order_id=int(order_id)),page_size=20,max_pages=2)
+            if not page.complete:complete=False;continue
+            for row in page.records:
+                if str(row.get('order_id'))!=order_id:continue
+                check();detail=reader.detail('sales-returns',row['id'])
+                record=detail.get('data',detail)
+                if str(record.get('id'))!=str(row.get('id')) or str(record.get('order_id'))!=order_id:
+                    complete=False;continue
+                items=record.get('item_list') or []
+                for line in items:
+                    sku=line.get('sku');matches=[m for m in exact_members(order_id,sku,order)
+                        if m.monitor.productId and m.sourceTenant==expected['sourceTenant'] and m.sourceStore==expected['storeId']]
+                    if len(matches)!=1:
+                        if any(m.sku==sku for m in member_by_order.get(order_id,[])):complete=False
+                        continue
+                    member=matches[0]
+                    order_lines=[(index,line_order) for index,line_order in enumerate(order.get('item_list',[])) if line_order.get('sku')==sku]
+                    if len(order_lines)!=1:
+                        complete=False
+                        continue
+                    line_index=order_lines[0][0]
+                    info=product_info.get(member.monitor.productId,{})
+                    returns.append(dict(id=str(record['id']),returnNo=record.get('return_no'),orderId=order_id,
+                        orderNumber=order.get('order_sn'),productId=member.monitor.productId,sku=sku,
+                        productName=info.get('name') or sku,
+                        quantity=int(line.get('quantity',0)),reason=record.get('reason') or '',state=record.get('state'),
+                        createdAt=record.get('created_at'),authorizedAt=record.get('authorized_at'),receivedAt=record.get('received_at'),
+                        refundedAt=record.get('refunded_at'),hasReceived=bool(record.get('received_at')) or record.get('state')=='received',
+                        quality=record.get('quality_list') or [],
+                        identity=dict(sourceTenant=member.sourceTenant,productId=member.monitor.productId,sku=sku,storeId=member.sourceStore,
+                            warehouseId=member.sourceWarehouse,orderId=order_id,lineId=order_id+':'+str(line_index),category=info.get('category','UNKNOWN'),attributes=info.get('attributes',{})),
+                        sourceRef='sales-returns:'+str(record['id']),
+                        orderDate=self._day(order).isoformat() if self._day(order) else None))
+        products={}
+        for member in members:
+            info=product_info.get(member.monitor.productId,{})
+            products.setdefault(member.sku,dict(productId=member.monitor.productId,sku=member.sku,
+                name=info.get('name') or member.sku,category=info.get('category','UNKNOWN'),
+                attributes=info.get('attributes',{})))
+        shipped_by_sku={}
+        for order_id,order in owned.items():
+            day=self._day(order)
+            if day is None or not previous_start<=day<=end:continue
+            if str(order.get('fulfillment_status','')).lower() not in {'shipped','已发货'}:continue
+            for line in order.get('item_list') or []:
+                sku=line.get('sku');matching=exact_members(order_id,sku,order)
+                if len(matching)!=1:
+                    if any(m.sku==sku for m in member_by_order.get(order_id,[])):complete=False
+                    continue
+                bucket=shipped_by_sku.setdefault(sku,{'previousOrders':set(),'currentOrders':set(),'previousUnits':0,'currentUnits':0,'evidenceRefs':[]})
+                if previous_start<=day<current_start:
+                    bucket['previousOrders'].add(order_id);bucket['previousUnits']+=int(line.get('quantity',0))
+                else:
+                    bucket['currentOrders'].add(order_id);bucket['currentUnits']+=int(line.get('quantity',0))
+                bucket['evidenceRefs'].append('sales-orders:'+order_id)
+                info=product_info.get(matching[0].monitor.productId,{})
+                products[sku]=dict(productId=matching[0].monitor.productId,sku=sku,name=info.get('name') or sku,
+                    category=info.get('category','UNKNOWN'),attributes=info.get('attributes',{}))
+        reviewed=self.inbox(store,'reviews',check,previous_start.isoformat(),end.isoformat(),full=True)
+        reviews_by_sku={};review_evidence_by_sku={}
+        for row in reviewed['items']:
+            sku=(row.get('identity') or {}).get('sku')
+            if not sku:continue
+            bucket=reviews_by_sku.setdefault(sku,{'previousCount':0,'currentCount':0,'previousLow':0,'currentLow':0,'items':[]})
+            day=None
+            try:day=date.fromisoformat(str(row.get('businessDate'))[:10])
+            except (ValueError,TypeError):pass
+            if day is None:
+                complete=False
+                continue
+            if not previous_start<=day<=end:continue
+            period='previous' if day<current_start else 'current'
+            bucket[period+'Count']+=1
+            if isinstance(row.get('rating'),int) and row['rating']<=2:bucket[period+'Low']+=1
+            bucket['items'].append(row)
+            shipped_by_sku.setdefault(sku,{'previousOrders':set(),'currentOrders':set(),'previousUnits':0,'currentUnits':0,'evidenceRefs':[]})['evidenceRefs'].append(row['sourceRef'])
+            review_evidence_by_sku.setdefault(sku,[]).append(dict(sourceRef=row['sourceRef'],kind='REVIEW',
+                text=f"{row.get('rating') if row.get('rating') is not None else '未评分'} 星评价：{row.get('text') or row.get('title') or '无正文'}",
+                businessDate=row.get('businessDate')))
+        return_periods={};return_evidence_by_sku={}
+        for item in returns:
+            day=date.fromisoformat(item['orderDate']) if item.get('orderDate') else None
+            if day is None:
+                if item['hasReceived']:complete=False
+                continue
+            if not previous_start<=day<=end:continue
+            order=owned[item['orderId']]
+            if str(order.get('fulfillment_status','')).lower() not in {'shipped','已发货'}:
+                if item['hasReceived']:complete=False
+                continue
+            period='previous' if day<current_start else 'current'
+            bucket=return_periods.setdefault(item['sku'],{'previous':0,'current':0,'previousActual':0,'currentActual':0})
+            bucket[period]+=item['quantity']
+            received_day=None
+            if item['hasReceived']:
+                try:received_day=date.fromisoformat(str(item.get('receivedAt'))[:10])
+                except (ValueError,TypeError):complete=False
+            count_received=bool(received_day and received_day<=end)
+            if count_received:bucket[period+'Actual']+=item['quantity']
+            if count_received:
+                shipped_by_sku.setdefault(item['sku'],{'previousOrders':set(),'currentOrders':set(),'previousUnits':0,'currentUnits':0,'evidenceRefs':[]})['evidenceRefs'].append(item['sourceRef'])
+                return_evidence_by_sku.setdefault(item['sku'],[]).append(dict(sourceRef=item['sourceRef'],kind='RETURN',
+                    text=f"{item['state']} · {item['quantity']} 件 · {item['reason'] or '未填写原因'}",businessDate=item['orderDate']))
+        monitor=[]
+        for sku,shipped in shipped_by_sku.items():
+            returned=return_periods.get(sku,{})
+            review=reviews_by_sku.get(sku,{})
+            prev=shipped['previousUnits'];cur=shipped['currentUnits']
+            prev_ret=returned.get('previousActual',0);cur_ret=returned.get('currentActual',0)
+            prev_rate=round(prev_ret/prev*100,1) if prev else None
+            cur_rate=round(cur_ret/cur*100,1) if cur else None
+            prev_reviews=review.get('previousCount',0);cur_reviews=review.get('currentCount',0)
+            prev_low=review.get('previousLow',0);cur_low=review.get('currentLow',0)
+            prev_low_rate=round(prev_low/prev_reviews*100,1) if prev_reviews else None
+            cur_low_rate=round(cur_low/cur_reviews*100,1) if cur_reviews else None
+            if prev_ret>prev or cur_ret>cur:complete=False
+            evaluated=prev>=20 and cur>=20 and reviewed.get('complete') and complete
+            reasons=[]
+            if evaluated and prev_rate is not None and cur_rate is not None and cur_rate-prev_rate>=10 and cur_ret>=3:
+                reasons.append('实收退货率明显上升')
+            if (evaluated and prev_low_rate is not None and cur_low_rate is not None and prev_reviews>=3 and cur_reviews>=3
+                and cur_low-prev_low>=2 and cur_low_rate-prev_low_rate>=20):
+                reasons.append('低星评价占比明显上升')
+            monitor.append(dict(**products[sku],previous=prev,current=cur,previousOrders=len(shipped['previousOrders']),
+                currentOrders=len(shipped['currentOrders']),previousReturns=prev_ret,currentReturns=cur_ret,
+                previousReturnRate=prev_rate,currentReturnRate=cur_rate,
+                previousReviews=prev_reviews,currentReviews=cur_reviews,
+                previousLowReviews=prev_low,currentLowReviews=cur_low,
+                previousLowReviewRate=prev_low_rate,currentLowReviewRate=cur_low_rate,
+                previousStart=previous_start.isoformat(),currentStart=current_start.isoformat(),endDate=end.isoformat(),windowDays=window_days,
+                evaluated=evaluated,anomalyReasons=reasons,
+                evidenceRefs=sorted(set(shipped['evidenceRefs'])),
+                evidenceItems=return_evidence_by_sku.get(sku,[])+review_evidence_by_sku.get(sku,[]),
+                reviewSampleComplete=reviewed.get('complete')))
+        if not complete:
+            for row in monitor:row.update(evaluated=False,anomalyReasons=[])
+        return dict(items=returns,monitor=sorted(monitor,key=lambda r:(r.get('currentReturnRate') or 0),reverse=True),
+            complete=complete and reviewed.get('complete',False),observedAt=now(),sourceNature='TEACHING_ERP_OBSERVED',
+            window=dict(previousStart=previous_start.isoformat(),currentStart=current_start.isoformat(),endDate=end.isoformat(),days=window_days),
+            limitation='退货率按原销售发货批次归组；仅有ERP实收记录的退货计入分子；评价样本独立统计。')
 
     def voice_evidence(self,record_id,kind,store,check,task_id):
         expected=self._store(store);require(kind in {'reviews','feedback'},'SOURCE_KIND_INVALID')

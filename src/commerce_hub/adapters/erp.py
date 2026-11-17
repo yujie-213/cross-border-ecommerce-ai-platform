@@ -13,7 +13,7 @@ BASE_URL = "https://47.107.76.124/lingxing-erp"
 READ_GET = frozenset({"/healthz", *["/api/v1/" + name for name in (
     "products", "warehouses", "store-authorizations", "listings", "inventory", "sales-orders",
     "purchase-orders", "supplier-deliveries", "inbound-orders", "supplier-quotes",
-    "customer-tickets", "customer-voice", "replenishment", "stock/ledger")]})
+    "customer-tickets", "customer-voice", "sales-returns", "replenishment", "stock/ledger")]})
 # Local OpenAPI descriptions explicitly declare these three POSTs as read-only queries.
 READ_POST = frozenset({"/erp/sc/data/mws/orders",
     "/erp/sc/routing/data/local_inventory/purchaseOrderList",
@@ -159,7 +159,7 @@ class TeachingERPReader:
 
     @staticmethod
     def _detail_path(path):
-        return bool(re.fullmatch(r'/api/v1/(sales-workflow|suppliers|purchase-orders|customer-tickets|sales-orders)/[1-9][0-9]{0,19}', path))
+        return bool(re.fullmatch(r'/api/v1/(sales-workflow|suppliers|purchase-orders|customer-tickets|sales-orders|sales-returns)/[1-9][0-9]{0,19}', path))
 
     def detail(self, resource, record_id):
         path = f'/api/v1/{resource}/{record_id}'

@@ -8,6 +8,7 @@ from commerce_hub.entrypoints.http.app import create_app
 from commerce_hub.governance.access.tables import b_resource_grants
 from commerce_hub.orchestration.service import TaskError
 from commerce_hub.scenarios.after_sales.policies import advice_block_reason
+from commerce_hub.scenarios.after_sales.policies import validate_advice
 from tests.integration.after_sales.test_workflows import env,read,run_job,mutate
 from tests.integration.after_sales.test_product_remediation import reader
 
@@ -16,13 +17,19 @@ from tests.integration.after_sales.test_product_remediation import reader
     ({'messages':[]},'CUSTOMER_MESSAGE_REQUIRED'),
     ({'evidence':{'latestUnverified':True}},'EVIDENCE_UNVERIFIED'),
     ({'evidence':{'facts':[]}},'EVIDENCE_REQUIRED'),
-    ({'identity':{'category':'UNKNOWN'}},'CATEGORY_UNSUPPORTED'),
-    ({'businessDate':None},'BUSINESS_DATE_REQUIRED'),
-    ({'region':'UNKNOWN'},'POLICY_SCOPE_INCOMPLETE'),
+    ({'identity':None},'IDENTITY_UNRESOLVED'),
 ])
 def test_specific_generation_block_reasons(change,reason):
     case=dict(messages=[dict(text='问题')],evidence=dict(facts=[{}]),identity=dict(category='APPAREL'),businessDate='2026-11-16T00:00:00Z',region='US',platform='Amazon',language='zh')
     assert advice_block_reason(case | change)==reason
+
+
+def test_generic_review_reply_does_not_require_policy_scope_or_policy_citation():
+    case=dict(messages=[dict(text='做工很好，颜色也喜欢。')],evidence=dict(facts=[{}]),identity=dict(category='UNKNOWN'),
+        businessDate=None,region='UNKNOWN',platform='UNKNOWN',language='zh')
+    assert advice_block_reason(case) is None
+    output=dict(replyDraft='感谢您的认可，很高兴商品符合您的期待。',adviceCode='CLARIFY',citations=[],missingEvidence=[],escalation=False)
+    assert validate_advice(output,[])==output
 
 
 def test_source_never_promotes_ticket_title_into_customer_conversation(tmp_path):

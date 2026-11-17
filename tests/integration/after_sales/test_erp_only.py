@@ -29,7 +29,7 @@ def legacy(e, kind, body, state='ACTIVE'):
 @pytest.mark.mysql
 def test_removed_collections_import_mapping_and_tasks_are_unavailable(env):
     e=env
-    assert set(e.specs)=={'B_CASE_EVIDENCE_V1','B_CASE_ADVICE_V1'}
+    assert set(e.specs)=={'B_CASE_EVIDENCE_V1','B_CASE_ADVICE_V1','B_INVESTIGATION_ASSIST_V1'}
     for job in ['validate','analysis','binding']:
         with pytest.raises(TaskError,match='ACTION_INVALID'):Handler(job)
         with pytest.raises(TaskError,match='ACTION_INVALID'):

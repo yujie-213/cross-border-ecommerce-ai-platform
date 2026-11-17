@@ -33,6 +33,19 @@ class Lookups(Strict):
     identities:list[dict]=Field(max_length=100)
 
 
+class ReturnCaseCreate(Strict):
+    store:str=Field(min_length=1,max_length=128)
+    returnId:str=Field(pattern=r'^[1-9][0-9]{0,19}$')
+    sku:str=Field(min_length=1,max_length=50)
+
+
+class MonitorCaseCreate(Strict):
+    store:str=Field(min_length=1,max_length=128)
+    sku:str=Field(min_length=1,max_length=50)
+    endDate:str|None=Field(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$')
+    windowDays:int=Field(default=7,ge=3,le=30)
+
+
 def register_b_routes(app,principal):
     prefix='/api/b/v1'
     command_key=Annotated[str,Header(alias='Idempotency-Key',min_length=1,max_length=128)]
@@ -82,6 +95,19 @@ def register_b_routes(app,principal):
         except ValueError:require(False,'SOURCE_DATE_INVALID')
         return domain(request).source_inbox(actor,store,kind,dateFrom,dateTo,full)
 
+    @app.get(prefix+'/return-analysis')
+    def return_analysis(request:Request,store:str=Query(min_length=1,max_length=128),endDate:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),
+                        windowDays:int=Query(default=7,ge=3,le=30),actor=Depends(principal)):
+        return domain(request).return_analysis(actor,store,endDate,windowDays)
+
+    @app.post(prefix+'/return-cases')
+    def create_return_case(body:ReturnCaseCreate,request:Request,key:command_key,actor=Depends(principal)):
+        return domain(request).create_return_case(actor,key,body.store,body.returnId,body.sku)
+
+    @app.post(prefix+'/monitor-cases')
+    def create_monitor_case(body:MonitorCaseCreate,request:Request,key:command_key,actor=Depends(principal)):
+        return domain(request).create_monitor_case(actor,key,body.store,body.sku,body.endDate,body.windowDays)
+
     @app.get(prefix+'/workbench')
     def workbench(request:Request,actor=Depends(principal)):
         d=domain(request)
@@ -99,9 +125,20 @@ def register_b_routes(app,principal):
     def investigation(body:dict,request:Request,key:command_key,actor=Depends(principal)):
         return domain(request).investigation(actor,key,body)
 
+    @app.get(prefix+'/investigations/{rid}/facts')
+    def investigation_facts(rid:str,request:Request,actor=Depends(principal)):
+        d=domain(request)
+        with d.store.engine.begin() as conn:
+            investigation=d.store.get(conn,actor,'INVESTIGATION',rid)
+            return dict(items=d.investigation_facts(conn,actor,investigation))
+
     @app.post(prefix+'/risks')
     def risk(body:dict,request:Request,key:command_key,actor=Depends(principal)):
         return domain(request).risk(actor,key,body)
+
+    @app.post(prefix+'/investigations/{rid}/confirm-risk')
+    def confirm_risk(rid:str,body:Change,request:Request,key:command_key,actor=Depends(principal)):
+        return domain(request).confirm_risk(actor,rid,key,body.expectedRevision,body.data)
 
     @app.get(prefix+'/policy-starters')
     def starters(request:Request,region:Literal['CN','US']='CN',platform:Literal['TEACHING','Amazon']='TEACHING',actor=Depends(principal)):
@@ -153,9 +190,9 @@ def register_b_routes(app,principal):
     @app.post(prefix+'/{collection}/{rid}/{action}')
     def change(collection:str,rid:str,action:str,body:Change,request:Request,key:command_key,actor=Depends(principal)):
         require(collection in names,'NOT_FOUND',404);d=domain(request);kind=names[collection]
-        job={'evidence-jobs':'evidence','advice-jobs':'advice'}.get(action)
+        job={'evidence-jobs':'evidence','advice-jobs':'advice','investigation-jobs':'investigation'}.get(action)
         if job:
-            require(kind=='CASE' and job in {'evidence','advice'},'ACTION_INVALID')
+            require(kind=='CASE' and job in {'evidence','advice','investigation'},'ACTION_INVALID')
             from starlette.responses import JSONResponse
             return JSONResponse(d.job(actor,kind,rid,job,key,body.expectedRevision,body.data),status_code=202)
         return d.mutate(actor,kind,rid,action,key,body.expectedRevision,body.data)

@@ -49,8 +49,9 @@ class SyntheticProvider:
         self.calls.append(request.control.logicalCallId)
         data=json.loads(request.payload.messages[1].content)
         if request.control.purpose=='b.case.advice.v1':
-            output=dict(replyDraft='我们已记录您的问题，请补充具体使用情况，后续由人工核实处理。',adviceCode='MANUAL_REVIEW',
-                citations=[{k:data['policies'][0][k] for k in ('policyId','version','sectionId','hash')}],missingEvidence=['请提供问题照片'],escalation=False)
+            output=dict(replyDraft='感谢您的反馈，收到后我们会协助核实，并根据核实结果告知可选处理方式。',adviceCode='MANUAL_REVIEW',
+                citations=([{k:data['policies'][0][k] for k in ('policyId','version','sectionId','hash')}] if data['policies'] else []),
+                missingEvidence=['请提供问题照片'],escalation=False)
         elif request.control.purpose=='b.feedback.classify.v1':
             output=dict(items=[dict(feedbackId=f['feedbackId'],labels=['SIZE' if '尺寸' in f['text'] else 'COMPATIBILITY'],span=f['text']) for f in data['feedback']])
         else:output=dict(facts=data['factRefs'],hypotheses=['需调查尺寸描述与客户预期是否一致'],alternativeExplanations=['也可能存在客户选码差异'],missingEvidence=['需核对商品尺码表'],nextSteps=['人工抽查反馈和商品描述'])
@@ -76,7 +77,7 @@ def env(database,mysql_settings):
         from tests.integration.after_sales.test_product_remediation import reader
         from pathlib import Path
         spec.handler.source_reader=reader(Path('.tmp/b-source')/tenant)
-        if spec.handler.job in {'analysis','advice'}:
+        if spec.handler.job in {'analysis','advice','investigation'}:
             spec.handler.provider=provider
             specs[scenario]=replace(spec,max_calls=10,max_tokens=240000,max_cost=Decimal('.5'),cost_currency='USD',policy_version='b-synthetic-model-test')
     tasks=task_service(database,settings,specs)

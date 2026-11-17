@@ -12559,3 +12559,86 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ]
 }
 ```
+
+
+## D-B-RETURNS-WORKFLOW-01 售后退货与商品调查流程
+
+```json
+{
+  "id": "D-B-RETURNS-WORKFLOW-01",
+  "stage": "D",
+  "title": "售后四入口与退货商品调查流程整改及ERP数据复验",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-ERP-SIMULATION-01",
+    "D-B-S01-01"
+  ],
+  "entryCondition": "2026-11-17负责人明确授权逐笔退货及批量SKU异常汇入同一人工调查，确认质量风险后仅在补货分析提醒；先完成页面与流程，再通过API补必要教学数据。复用已有店仓，不新建，不修改补货算法和采购。必要数据包括两期销售、本地教学退货授权和实收记录，不包含实际退款、外发、采购、模型新增许可或代签人工风险。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "frontend/src/afterSales/",
+    "frontend/src/V2Shell.vue",
+    "src/commerce_hub/scenarios/after_sales/",
+    "src/commerce_hub/entrypoints/http/after_sales.py",
+    "src/commerce_hub/adapters/erp.py",
+    "src/commerce_hub/bootstrap/after_sales.py",
+    "tools/b_return_demo_dataset.py",
+    "tests/",
+    "docs/"
+  ],
+  "parallelCondition": "Codex单人；用户OpenAPI只读保留，补货算法和采购实现不修改",
+  "deliverables": [
+    "卡片工作台、固定列宽、退货订单/商品监测、统一调查与人工证据、直接确认质量风险、政策列表维护",
+    "自然命名且登记的教学数据，正式API写后回读、库存流水、双Agent读取；原始响应留私有目录"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-RETURNS-WORKFLOW-01/AC1",
+      "text": "四入口符合业务操作，长文不挤掉操作，无主管审核或教学来源切换"
+    },
+    {
+      "id": "D-B-RETURNS-WORKFLOW-01/AC2",
+      "text": "退货和SKU两期趋势可追溯，同SKU复用调查；人工证据参与AI；人工确认后才提供风险提醒并可撤销"
+    },
+    {
+      "id": "D-B-RETURNS-WORKFLOW-01/AC3",
+      "text": "已有店仓教学数据独立回读和库存流水一致，区分草稿/实收/退款，真实验证与工程fixture分别记录"
+    }
+  ],
+  "plannedTests": [
+    "实际MySQL/API/独立Worker及编译Vue浏览器、前端类型构建和回归",
+    "正式ERP精确ID回读、两期分母/实收退货核验、原补货算法只读分析"
+  ],
+  "risks": [
+    "评价正文无新增API，不以工单冒充评价；完整差评增长样本尚缺",
+    "当前实际过账与虚构销售业务日期分开，观测退货率不代表成熟群组最终退货率",
+    "人工确认保留给用户验收；不重置原账号会话、不绕过认证"
+  ],
+  "requiredEvidenceKinds": [
+    "INTEGRATION"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "8c439459ff3372993947b0cdfd952d07955b546c",
+  "dirtyPaths": [
+    "frontend/src/afterSales/",
+    "src/commerce_hub/scenarios/after_sales/",
+    "tests/"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "at": "2026-11-17",
+      "fromStatus": null,
+      "toStatus": "IN_PROGRESS",
+      "reason": "接续未提交修改，先修功能和工程复验，通过后再执行必要教学API数据。"
+    }
+  ]
+}
+```
