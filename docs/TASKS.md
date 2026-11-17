@@ -11371,7 +11371,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-RISK-01",
     "D-B-S01-01"
   ],
-  "entryCondition": "2026-11-16负责人连续开发授权；按冻结需求设计完成剩余任务，阶段工程通过后直接继续，最终统一体验，不合main。；2026-11-17负责人授权售后概览、客户直接回复、客服确认后ERP处理追加/回读与中台已处理；取消客服主管审核，不改补货Agent。",
+  "entryCondition": "2026-11-16负责人连续开发授权；按冻结需求设计完成剩余任务，阶段工程通过后直接继续，最终统一体验，不合main。；2026-11-17负责人授权售后概览、客户直接回复、客服确认后ERP处理追加/回读与中台已处理；取消客服主管审核，不改补货Agent。；2026-11-17负责人明确要求彻底删除独立教学资料功能及记录来源切换，仅ERP业务入口。",
   "ownerRole": "主集成人",
   "assignee": "Codex",
   "allowedPaths": [
@@ -11405,14 +11405,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ],
   "risks": [
     "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据",
-    "本轮Codex单人codex/b-after-sales-v1，基点2be6a45；未知OpenAPI只读；工单不冒充评价。"
+    "本轮Codex单人codex/b-after-sales-v1，基点2be6a45；未知OpenAPI只读；工单不冒充评价。",
+    "本轮Codex单人，codex/b-after-sales-v1，基点5773d5b；范围B UI/HTTP/Handler/资料业务运行时/测试/文档，补货零改动；未知OpenAPI保留。"
   ],
   "requiredEvidenceKinds": [
     "CONTRACT",
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
     "2943ca2251d497b85af951169e527f533d26afd8",
@@ -11834,6 +11835,18 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
         "docs/reports/B_售后工作台与客服确认闭环_20261117.md",
         "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
       ]
+    },
+    {
+      "id": "ACCEPTANCE.R5",
+      "title": "删除独立教学资料及记录来源切换",
+      "dependsOn": [
+        "ACCEPTANCE.R4"
+      ],
+      "implement": "移除资料导入校验分析演示绑定、来源切换及活动API/任务，保留ERP客服与政策、历史审计",
+      "doneWhen": "ERP客服流程及政策回归、旧入口拒绝、编译浏览器验证",
+      "testMethod": "MySQL/API/Worker、前端、Edge、文档检查",
+      "status": "IN_PROGRESS",
+      "evidence": []
     }
   ],
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"

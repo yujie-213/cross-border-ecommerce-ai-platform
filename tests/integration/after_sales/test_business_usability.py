@@ -8,7 +8,7 @@ from commerce_hub.entrypoints.http.app import create_app
 from commerce_hub.governance.access.tables import b_resource_grants
 from commerce_hub.orchestration.service import TaskError
 from commerce_hub.scenarios.after_sales.policies import advice_block_reason
-from tests.integration.after_sales.test_workflows import env,read,run_job,mutate,dataset
+from tests.integration.after_sales.test_workflows import env,read,run_job,mutate
 from tests.integration.after_sales.test_product_remediation import reader
 
 
@@ -58,7 +58,7 @@ def test_workspace_management_capabilities_follow_server_grants(env):
             conn.execute(update(b_resource_grants).filter_by(tenant_id=e.actor.tenant_id).where(b_resource_grants.c.action.in_(['b:policy:write','b:policy:publish','b:dataset:manage','b:binding:manage'])).values(active=False))
         caps=client.get('/api/b/v1/workspace').json()['capabilities']
         assert not any(caps.values())
-        from commerce_hub.scenarios.after_sales.teaching import policy_starters
+        from commerce_hub.scenarios.after_sales.policy_templates import policy_starters
         assert client.post('/api/b/v1/policies',headers={'Idempotency-Key':uuid4().hex},json={k:v for k,v in policy_starters()[0].items() if k!='id'}).status_code==403
 
 

@@ -1,8 +1,8 @@
 import { request } from '../api/client'
 export interface Asset { id: string; kind: string; revision: number; state: string; sourceNature: string; scope: Record<string, any>; body: Record<string, any>; history?: { version: number; body: Record<string, any>; actor: string; createdAt: string; hash: string }[] }
 export interface Index { items: Asset[]; nextCursor: string | null }
-export interface Workbench { case: Index; dataset: Index; policy: Index; report: Index; investigation: Index; risk: Index; binding: Index }
-export interface Workspace { workspaceId: string; modelEnabled: boolean; sourceStores: string[]; trackedProducts?:number; sourceProductCounts?:Record<string,number>; trackingScope?:string; capabilities?:{policyWrite:boolean;policyPublish:boolean;datasetManage:boolean;bindingManage:boolean} }
+export interface Workbench { case: Index; policy: Index; investigation: Index; risk: Index }
+export interface Workspace { workspaceId: string; modelEnabled: boolean; sourceStores: string[]; trackedProducts?:number; sourceProductCounts?:Record<string,number>; trackingScope?:string; capabilities?:{policyWrite:boolean;policyPublish:boolean} }
 export function get<T>(path: string, signal?: AbortSignal) { return request<T>(path, {}, signal, 15000, '/api/b/v1') }
 export function post<T = Asset>(path: string, body: unknown, key: string) { return request<T>(path, { method: 'POST', headers: { 'Idempotency-Key': key }, body: JSON.stringify(body) }, undefined, 60000, '/api/b/v1') }
 export function change<T = Asset>(path: string, revision: number, data: unknown, key: string) { return post<T>(path, { expectedRevision: revision, data }, key) }

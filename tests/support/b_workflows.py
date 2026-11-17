@@ -36,7 +36,7 @@ def registry(settings):
         spec.handler.source_reader=reader
     delay=float(os.environ.get('B_WORKFLOW_TEST_DELAY','0'))
     if delay:
-        h=specs['B_DATASET_VALIDATE_V1'].handler;original=h.run
+        h=specs['B_CASE_EVIDENCE_V1'].handler;original=h.run
         def delayed(context,parameters):
             stop=time.monotonic()+delay
             while time.monotonic()<stop:context.check();time.sleep(.05)

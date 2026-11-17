@@ -166,23 +166,6 @@ class SourceReader:
             title=redacted(r.get('title') or '客户反馈'),customerText=text,platform=r.get('platform'),observedAt=batch.observed_at,
             sourceNature='TEACHING_ERP_OBSERVED',sourceRef=dict(voiceId=record_id,kind=kind,sourceTenant=expected['sourceTenant'],storeId=expected['storeId']))
 
-    def mapping_options(self,store,sku,check):
-        expected=self._store(store);reader=self.factory();check()
-        pb=reader.read('/api/v1/products',dict(field='sku',q=sku),page_size=20,max_pages=2)
-        products=[p for p in pb.records if pb.complete and p.get('sku')==sku and str(p.get('tenant_id'))==expected['sourceTenant']]
-        require(len(products)==1,'MAPPING_IDENTITY_MISMATCH')
-        product=products[0];check()
-        ib=reader.read('/api/v1/inventory',dict(field='sku',q=sku,match='exact',store_id=expected['storeId']),page_size=50,max_pages=2)
-        require(ib.complete,'MAPPING_RELATION_UNVERIFIED')
-        items=[]
-        for r in ib.records:
-            if str(r.get('tenant_id'))!=expected['sourceTenant'] or str(r.get('store_id'))!=expected['storeId'] or str(r.get('product_id'))!=str(product['id']) or r.get('sku')!=sku or not r.get('wid'):continue
-            identity=dict(sourceTenant=expected['sourceTenant'],productId=str(product['id']),sku=sku,storeId=expected['storeId'],warehouseMode='EXPLICIT_IDS',warehouseIds=[str(r['wid'])])
-            if not self.allows_identity(identity):continue
-            if any(i['identity']==identity for i in items):continue
-            items.append(dict(name=(product.get('name') or sku)+' · '+store+' · '+str(r.get('warehouse_name') or r.get('wid')),identity=identity))
-        return dict(items=items,observedAt=ib.observed_at)
-
     def verify_mapping(self,identity,check):
         require(self.allows_identity(identity),'SOURCE_NOT_OWNED',403)
         store=next((v for v in self.stores.values() if v['storeId']==identity['storeId'] and v['sourceTenant']==identity['sourceTenant']),None)

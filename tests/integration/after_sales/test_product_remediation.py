@@ -57,7 +57,7 @@ def test_source_open_dedup_first_association_ai_and_unknown_warehouse_risk(env,t
     assert case['body']['advice'][-1]['feedbackAI']['analysis']['status']=='AVAILABLE'
     inv=e.domain.investigation(e.actor,uuid4().hex,dict(kind='CASE',id=c['id'],text='调查反馈',evidenceRefs=['voice-reviews-71']))
     with pytest.raises(TaskError,match='RISK_SOURCE_MISMATCH'):
-        e.domain.risk(e.actor,uuid4().hex,dict(investigationId=inv['id'],reason='待调查',limitations='仓库未知',datasetId=None,
+        e.domain.risk(e.actor,uuid4().hex,dict(investigationId=inv['id'],reason='待调查',limitations='仓库未知',
             identity=dict(sourceTenant='1',productId='1',sku='V2-SKU-0',storeId='1',warehouseMode='EXPLICIT_IDS',warehouseIds=['UNKNOWN'])))
     with TestClient(create_app(e.settings,e.specs)) as client:
         client.headers['Authorization']='Bearer '+e.token

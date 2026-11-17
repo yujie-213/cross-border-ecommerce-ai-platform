@@ -5,7 +5,7 @@ import json
 import pytest
 from commerce_hub.orchestration.service import TaskError
 from tests.integration.after_sales.test_product_remediation import reader
-from tests.integration.after_sales.test_workflows import env,run_job,read,dataset
+from tests.integration.after_sales.test_workflows import env,run_job,read
 from tests.support.b_source import BSourceERP
 
 
@@ -57,18 +57,3 @@ def test_old_case_direct_links_lists_and_new_admission_follow_current_membership
     with pytest.raises(TaskError,match='SOURCE_SCOPE_DENIED'):e.domain.create_case(e.actor,uuid4().hex,data)
 
 
-@pytest.mark.mysql
-def test_product_ai_receives_only_its_feedback_and_metrics(env):
-    e=env;d=dataset(e);contexts=[];original=e.provider.invoke
-    def inspect(request):
-        if request.control.purpose=='b.experience.explain.v1':contexts.append(json.loads(request.payload.messages[1].content))
-        return original(request)
-    e.provider.invoke=inspect
-    result=run_job(e,'DATASET',d['id'],'analysis',dict(ai=True))
-    report=read(e,'REPORT',result['analysisReport']['domainRef']['id'])
-    assert len(contexts)==len(report['body']['metrics']['items'])
-    for context in contexts:
-        pid=context['metrics']['items'][0]['productId']
-        assert all(f['productId']==pid for f in context['feedback'])
-        assert all(not ref.startswith('metric:') or ref.split(':')[1]==pid for ref in context['factRefs'])
-        assert report['body']['productAI'][pid]['status']=='AVAILABLE'

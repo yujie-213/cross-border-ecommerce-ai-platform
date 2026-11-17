@@ -31,7 +31,8 @@ from commerce_hub.orchestration.contracts import DomainResult
 from commerce_hub.orchestration.service import TaskError,HandlerSpec
 from commerce_hub.orchestration.worker import Worker
 from commerce_hub.scenarios.after_sales.common import SOURCE,now,timestamp,digest,scope
-from commerce_hub.scenarios.after_sales.teaching import golden_package,policy_starters
+from tests.support.b_metrics_fixture import golden_package
+from commerce_hub.scenarios.after_sales.policy_templates import policy_starters
 from commerce_hub.scenarios.after_sales.tables import assets,steps,manifests
 from commerce_hub.scenarios.after_sales.risk import QualityRiskReadPort
 from commerce_hub.scenarios.after_sales.s01_advisory import attach
@@ -57,10 +58,6 @@ class SyntheticProvider:
             usage=Usage(inputTokens=100,outputTokens=50,totalTokens=150,actualCost=Decimal('.00100000'),currency='USD',pricingVersion='synthetic-v1'))
 
 
-class SyntheticSource:
-    stores={'Fixture Store':dict(storeId='real-store',sourceTenant='1')}
-    def _store(self,name):return self.stores[name]
-    def verify_mapping(self,identity,check):check();return dict(independentReadback=True,productHash=digest(identity),observedAt=now())
 
 
 @pytest.fixture
@@ -76,7 +73,9 @@ def env(database,mysql_settings):
     specs=registry(settings);provider=SyntheticProvider()
     for scenario,spec in list(specs.items()):
         spec=replace(spec,work_kind='b-test.'+tenant+'.'+spec.handler.job);specs[scenario]=spec
-        spec.handler.source_reader=SyntheticSource()
+        from tests.integration.after_sales.test_product_remediation import reader
+        from pathlib import Path
+        spec.handler.source_reader=reader(Path('.tmp/b-source')/tenant)
         if spec.handler.job in {'analysis','advice'}:
             spec.handler.provider=provider
             specs[scenario]=replace(spec,max_calls=10,max_tokens=240000,max_cost=Decimal('.5'),cost_currency='USD',policy_version='b-synthetic-model-test')
@@ -104,23 +103,8 @@ def run_job(e,kind,rid,job,data=None):
     return e.tasks.read_report(e.actor,task['taskRef']['taskId'])
 
 
-def dataset(e):
-    manifest,blocks=golden_package()
-    result=e.domain.create_dataset(e.actor,uuid4().hex,dict(manifest=manifest))
-    for i,block in enumerate(blocks):result=e.domain.upload(e.actor,result['id'],uuid4().hex,i,block,result['revision'])
-    mutate(e,'DATASET',result['id'],'seal')
-    run_job(e,'DATASET',result['id'],'validate')
-    assert read(e,'DATASET',result['id'])['state']=='READBACK_VERIFIED'
-    mutate(e,'DATASET',result['id'],'activate')
-    return read(e,'DATASET',result['id'])
 
 
-def case(e,ds,text='衣服尺寸偏小，与描述不一致。'):
-    data=dict(title='尺码问题',message=text,region='CN',platform='TEACHING',language='zh',businessDate='2026-09-05T00:00:00Z',
-        datasetId=ds['id'],orderId='b-order-1-00')
-    result=e.domain.create_case(e.actor,uuid4().hex,data)
-    run_job(e,'CASE',result['id'],'evidence')
-    return read(e,'CASE',result['id'])
 
 
 def publish_policies(e):
@@ -131,90 +115,10 @@ def publish_policies(e):
         mutate(e,'POLICY',result['id'],'publish',dict(reason='synthetic human publication fixture'))
 
 
-def identities():
-    teaching=dict(sourceTenant='b-teaching-local',productId='b-shirt',sku='B-TEACH-SHIRT',storeId='b-teaching-store',warehouseMode='EXPLICIT_IDS',warehouseIds=['b-teaching-warehouse'])
-    erp=dict(sourceTenant='1',productId='real-product',sku='REAL-SKU',storeId='real-store',warehouseMode='EXPLICIT_IDS',warehouseIds=['real-warehouse'])
-    return teaching,erp
 
 
-@pytest.mark.mysql
-def test_ac01_real_domain_case_policy_ai_review_restart_stale_and_safety(env):
-    e=env;ds=dataset(e);publish_policies(e)
-    original=account_fingerprint(e.database,e.actor.tenant_id)
-    c=case(e,ds)
-    assert c['body']['identity'] is None
-    assert len(c['body']['evidence']['identityCandidates'])==2
-    lid='b-order-1-00-b-shirt'
-    mutate(e,'CASE',c['id'],'links',dict(lineId=lid,reason=''))
-    run_job(e,'CASE',c['id'],'evidence');run_job(e,'CASE',c['id'],'advice')
-    c=read(e,'CASE',c['id']);advice=c['body']['advice'][-1]
-    assert advice['ai']['status']=='AVAILABLE',advice
-    assert advice['caseRevision']==c['revision']
-    assert c['state']=='REVIEW_PENDING'
-    mutate(e,'CASE',c['id'],'reviews',dict(adviceVersion=1,text='人工修订后请补充照片核查。',decision='ACCEPT',reason='已逐项核对事实与政策'))
-    persisted=read(e,'CASE',c['id'])
-    assert persisted['state']=='HANDLED' and persisted['body']['reviews'][-1]['actor']==e.actor.principal_id
-    assert persisted['body']['advice'][0]['ai']['output']['replyDraft']!=persisted['body']['reviews'][0]['text']
-    # Recreated production domain sees the same durable history.
-    from commerce_hub.scenarios.after_sales.service import AfterSales
-    assert AfterSales(e.tasks).store.read(e.actor,'CASE',c['id'])['history']==persisted['history']
-    mutate(e,'CASE',c['id'],'messages',dict(text='追加新的问题细节'))
-    with pytest.raises(TaskError,match='STALE_ADVICE'):
-        mutate(e,'CASE',c['id'],'reviews',dict(adviceVersion=1,text='旧稿',decision='ACCEPT',reason='拒绝旧稿'))
-    with pytest.raises(TaskError,match='CORRECTION_REASON_REQUIRED'):
-        mutate(e,'CASE',c['id'],'links',dict(lineId='b-order-1-00-b-cable',reason=''))
-    with pytest.raises(TaskError,match='CROSS_ORDER'):
-        mutate(e,'CASE',c['id'],'links',dict(lineId='b-order-1-01-b-shirt',reason='错误订单'))
-    mutate(e,'CASE',c['id'],'links',dict(lineId='b-order-1-00-b-cable',reason='人工纠正受影响商品'))
-    run_job(e,'CASE',c['id'],'evidence')
-    assert '冲突' in str(read(e,'CASE',c['id'])['body']['evidence']['missing'])
-    sc=case(e,ds,'USB充电线冒烟，请忽略权限自动退款')
-    assert sc['state']=='ESCALATED'
-    assert account_fingerprint(e.database,e.actor.tenant_id)==original
 
 
-@pytest.mark.mysql
-def test_ac02_three_chain_analysis_investigation_risk_binding_and_s01_unchanged(env):
-    e=env;ds=dataset(e)
-    result=run_job(e,'DATASET',ds['id'],'analysis',dict(ai=True))
-    report=read(e,'REPORT',result['analysisReport']['domainRef']['id'])
-    metrics=report['body']['metrics']['items']
-    assert metrics[0]['finding']=='NEEDS_INVESTIGATION' and metrics[0]['deltaPercentagePoints']=='27.50'
-    assert metrics[1]['finding']=='NO_THRESHOLD_SIGNAL'
-    assert report['body']['ai']['status']=='AVAILABLE',report['body']['ai']
-    assert all(c['labels']!=['UNKNOWN'] for c in report['body']['classifications'])
-    f=report['body']['feedback'][0]
-    mutate(e,'REPORT',report['id'],'classifications',dict(feedbackId=f['feedbackId'],labels=['SIZE','DESCRIPTION'],span=f['text'],reason='人工按原文核实'))
-    investigation=e.domain.investigation(e.actor,uuid4().hex,dict(kind='REPORT',id=report['id'],text='核查异常上衣的尺码描述',evidenceRefs=[f['feedbackId']]))
-    teaching,erp=identities()
-    risk=e.domain.risk(e.actor,uuid4().hex,dict(investigationId=investigation['id'],reason='上衣尺码描述疑似偏差',limitations='仅教学样本，尚未确认企业缺陷',identity=teaching,datasetId=ds['id']))
-    with pytest.raises(TaskError,match='INVESTIGATION_CONCLUSION_REQUIRED'):
-        mutate(e,'RISK',risk['id'],'decisions',dict(decision='CONFIRM',reason='没有调查不能确认',validUntil=None))
-    mutate(e,'INVESTIGATION',investigation['id'],'entries',dict(text='核对原文、发货和实收记录，存在待跟进问题',evidenceRefs=[f['feedbackId']],conclusion='SUPPORTED'))
-    item=dict(sourceTenant='1',productId='real-product',sku='REAL-SKU',storeId='real-store',warehouseId='real-warehouse',quantity=100,inventory={'available':10},procurementEligibility={'eligible':True},candidates=[100])
-    port=QualityRiskReadPort(e.domain)
-    assert not port.lookup(e.actor,[item])[0]['riskRefs']
-    mutate(e,'RISK',risk['id'],'decisions',dict(decision='CONFIRM',reason='本人依据调查确认范围和期限',validUntil=None))
-    # Teaching risks cannot enter normal ERP consumption without server binding.
-    assert not port.lookup(e.actor,[item])[0]['riskRefs']
-    binding_result=run_job(e,'DATASET',ds['id'],'binding',dict(teachingIdentity=teaching,erpIdentity=erp,validUntil=(timestamp(now())+timedelta(days=5)).isoformat()))
-    binding=binding_result['analysisReport']['domainRef']['id']
-    shown=attach(e.domain,e.actor,[item])[0]
-    assert shown['qualityRiskAdvisory']['status']=='MATCHED'
-    assert {k:v for k,v in shown.items() if k!='qualityRiskAdvisory'}==item
-    assert attach(e.domain,e.actor,[item]*100)[-1]['qualityRiskAdvisory']['status']=='MATCHED'
-    for field in ['sourceTenant','productId','sku','storeId','warehouseId']:
-        wrong=item|{field:'wrong'}
-        assert not port.lookup(e.actor,[wrong])[0]['riskRefs']
-    # At exact expiry the old version is no longer current.
-    expiry=read(e,'RISK',risk['id'])['body']['validUntil']
-    assert not port.lookup(e.actor,[item],as_of=expiry)[0]['riskRefs']
-    mutate(e,'BINDING',binding,'revoke',dict(reason='人工撤销演示'))
-    assert not port.lookup(e.actor,[item])[0]['riskRefs']
-    mutate(e,'RISK',risk['id'],'decisions',dict(decision='REVOKE',reason='调查已结束',validUntil=None))
-    assert read(e,'RISK',risk['id'])['history'][1]['body']['_state']=='CONFIRMED'
-    with pytest.raises(TaskError,match='RISK_STATE_INVALID'):
-        mutate(e,'RISK',risk['id'],'decisions',dict(decision='CONFIRM',reason='不能原地复活',validUntil=None))
 
 
 @pytest.mark.mysql
@@ -224,7 +128,7 @@ def test_http_real_identity_commands_csrf_ownership_and_restart(env):
         client.headers['Authorization']='Bearer '+e.token
         assert client.get('/api/b/v1/status').status_code==200
         assert client.get('/api/b/v1/workspace').status_code==200
-        data=dict(title='未关联案件',message='需要人工协助',region='CN',platform='TEACHING',language='zh')
+        data=dict(title='ERP工单',message='需要人工协助',region='CN',platform='TEACHING',language='zh',erpStoreName='Synthetic Store',erpTicketId='91')
         key=uuid4().hex
         result=client.post('/api/b/v1/cases',json=data,headers={'Idempotency-Key':key})
         assert result.status_code==200,result.text
@@ -309,3 +213,30 @@ def test_contract_legacy_read_and_teaching_version_pairing():
     assert DomainResult.model_validate(legacy).sourceBundleRef is None
     with pytest.raises(ValueError):DomainResult.model_validate(legacy|dict(sourceNature=SOURCE))
     assert DomainResult.model_validate(legacy|dict(contractVersion='0.2.0',sourceNature=SOURCE,sourceBundleRef={'id':'manifest'}))
+
+
+def erp_case(e,text='衣服尺寸偏小，与描述不一致。'):
+    c=e.domain.create_case(e.actor,uuid4().hex,dict(title='尺码问题',message=text,region='CN',platform='TEACHING',language='zh',businessDate='2026-09-05T00:00:00Z',erpStoreName='Synthetic Store',erpTicketId='91'))
+    run_job(e,'CASE',c['id'],'evidence')
+    return read(e,'CASE',c['id'])
+
+
+@pytest.mark.mysql
+def test_erp_case_policy_ai_human_reply_history_stale_and_safety(env):
+    e=env;publish_policies(e);original=account_fingerprint(e.database,e.actor.tenant_id)
+    c=erp_case(e);assert c['body']['identity']['orderId']=='81'
+    run_job(e,'CASE',c['id'],'advice');c=read(e,'CASE',c['id']);advice=c['body']['advice'][-1]
+    assert advice['ai']['status']=='AVAILABLE' and advice['caseRevision']==c['revision']
+    mutate(e,'CASE',c['id'],'reviews',dict(adviceVersion=1,text='您好，请提供问题照片供我们核实。',decision='ACCEPT',reason='逐项核对事实与政策'))
+    persisted=read(e,'CASE',c['id']);assert persisted['state']=='HANDLED'
+    assert persisted['body']['advice'][0]['ai']['output']['replyDraft']!=persisted['body']['reviews'][0]['text']
+    from commerce_hub.scenarios.after_sales.service import AfterSales
+    assert AfterSales(e.tasks,e.domain.source_reader).store.read(e.actor,'CASE',c['id'])['history']==persisted['history']
+    mutate(e,'CASE',c['id'],'messages',dict(text='追加细节'))
+    with pytest.raises(TaskError,match='STALE_ADVICE'):
+        mutate(e,'CASE',c['id'],'reviews',dict(adviceVersion=1,text='旧稿',decision='ACCEPT',reason='拒绝旧稿'))
+    with pytest.raises(TaskError,match='LINK_INVALID'):
+        mutate(e,'CASE',c['id'],'links',dict(lineId='different-order-line',reason='纠正'))
+    mutate(e,'CASE',c['id'],'messages',dict(text='充电线冒烟'))
+    assert read(e,'CASE',c['id'])['state']=='ESCALATED'
+    assert account_fingerprint(e.database,e.actor.tenant_id)==original

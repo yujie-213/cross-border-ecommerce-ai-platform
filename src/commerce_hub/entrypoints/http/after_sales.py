@@ -17,7 +17,6 @@ class CaseCreate(Strict):
     platform:str=Field(min_length=1,max_length=64)
     language:str=Field(min_length=1,max_length=16)
     businessDate:str|None=None
-    datasetId:str|None=None
     orderId:str|None=None
     erpTicketId:str|None=Field(default=None,pattern=r'^[1-9][0-9]{0,19}$')
     erpVoiceId:str|None=Field(default=None,pattern=r'^[1-9][0-9]{0,19}$')
@@ -25,19 +24,9 @@ class CaseCreate(Strict):
     erpStoreName:str|None=Field(default=None,max_length=128)
 
 
-class DatasetCreate(Strict):
-    manifest:dict
-
-
 class Change(Strict):
     expectedRevision:int=Field(ge=1)
     data:dict=Field(default_factory=dict)
-
-
-class Upload(Strict):
-    expectedRevision:int=Field(ge=1)
-    number:int=Field(ge=0,le=299)
-    records:list[dict]=Field(max_length=1000)
 
 
 class Lookups(Strict):
@@ -74,13 +63,12 @@ def register_b_routes(app,principal):
                 except AccessDenied:continue
         members=d.source_reader.members() if d.source_reader and hasattr(d.source_reader,'members') else []
         capabilities={}
-        for name,action,kind in [('policyWrite','b:policy:write','POLICY'),('policyPublish','b:policy:publish','POLICY'),
-                                 ('datasetManage','b:dataset:manage','DATASET'),('bindingManage','b:binding:manage','DATASET')]:
+        for name,action,kind in [('policyWrite','b:policy:write','POLICY'),('policyPublish','b:policy:publish','POLICY')]:
             try:
                 with d.store.engine.begin() as conn:d.store.authorize(conn,actor,action,scope(actor.tenant_id,kind))
                 capabilities[name]=True
             except AccessDenied:capabilities[name]=False
-        return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='MIDDLEWARE_TEACHING_DATA',
+        return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='TEACHING_ERP_OBSERVED',
             capabilities=capabilities,sourceProductCounts={name:len({m.sku for m in (members or []) if m.storeName==name}) for name in stores} if members is not None else {},trackingScope='PROJECT_OWNED_ERP',trackedProducts=len({(m.sourceTenant,m.monitor.productId) for m in members}) if members is not None else None)
 
     @app.get(prefix+'/source-inbox')
@@ -94,25 +82,14 @@ def register_b_routes(app,principal):
         except ValueError:require(False,'SOURCE_DATE_INVALID')
         return domain(request).source_inbox(actor,store,kind,dateFrom,dateTo,full)
 
-    @app.get(prefix+'/mapping-options')
-    def mapping_options(request:Request,datasetId:str,store:str=Query(min_length=1,max_length=128),sku:str=Query(min_length=1,max_length=128),actor=Depends(principal)):
-        d=domain(request);require(d.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
-        def check():
-            with d.store.engine.begin() as conn:d.store.get(conn,actor,'DATASET',datasetId,'b:binding:manage')
-        check();result=d.source_reader.mapping_options(store,sku,check);check();return result
-
     @app.get(prefix+'/workbench')
     def workbench(request:Request,actor=Depends(principal)):
         d=domain(request)
-        return {kind.lower():d.store.list(actor,kind,limit=100) for kind in ('CASE','DATASET','POLICY','REPORT','INVESTIGATION','RISK','BINDING')}
+        return {kind.lower():d.store.list(actor,kind,limit=100) for kind in ('CASE','POLICY','INVESTIGATION','RISK')}
 
     @app.post(prefix+'/cases')
     def create_case(body:CaseCreate,request:Request,key:command_key,actor=Depends(principal)):
         return domain(request).create_case(actor,key,body.model_dump())
-
-    @app.post(prefix+'/datasets')
-    def create_dataset(body:DatasetCreate,request:Request,key:command_key,actor=Depends(principal)):
-        return domain(request).create_dataset(actor,key,body.model_dump())
 
     @app.post(prefix+'/policies')
     def create_policy(body:dict,request:Request,key:command_key,actor=Depends(principal)):
@@ -126,24 +103,15 @@ def register_b_routes(app,principal):
     def risk(body:dict,request:Request,key:command_key,actor=Depends(principal)):
         return domain(request).risk(actor,key,body)
 
-    @app.get(prefix+'/teaching-package')
-    def package(request:Request,actor=Depends(principal)):
-        d=domain(request)
-        from commerce_hub.scenarios.after_sales.common import scope
-        with d.store.engine.begin() as conn:d.store.authorize(conn,actor,'b:dataset:manage',scope(actor.tenant_id,'DATASET'))
-        from commerce_hub.scenarios.after_sales.teaching import golden_package
-        manifest,blocks=golden_package()
-        return dict(manifest=manifest,chunks=blocks)
-
     @app.get(prefix+'/policy-starters')
     def starters(request:Request,region:Literal['CN','US']='CN',platform:Literal['TEACHING','Amazon']='TEACHING',actor=Depends(principal)):
         d=domain(request)
         from commerce_hub.scenarios.after_sales.common import scope
         with d.store.engine.begin() as conn:d.store.authorize(conn,actor,'b:policy:write',scope(actor.tenant_id,'POLICY'))
-        from commerce_hub.scenarios.after_sales.teaching import policy_starters
+        from commerce_hub.scenarios.after_sales.policy_templates import policy_starters
         return [dict((k,v) for k,v in p.items() if k!='id') for p in policy_starters(region,platform)]
 
-    names={'cases':'CASE','datasets':'DATASET','policies':'POLICY','analyses':'REPORT','investigations':'INVESTIGATION','risks':'RISK','teaching-bindings':'BINDING'}
+    names={'cases':'CASE','policies':'POLICY','investigations':'INVESTIGATION','risks':'RISK'}
 
     @app.get(prefix+'/commands/{key}')
     def command_result(key:str,request:Request,actor=Depends(principal)):
@@ -173,22 +141,10 @@ def register_b_routes(app,principal):
         require(collection in names,'NOT_FOUND',404)
         return domain(request).store.read(actor,names[collection],rid,version)
 
-    @app.get(prefix+'/datasets/{rid}/records')
-    def records(rid:str,request:Request,offset:int=Query(default=0,ge=0),actor=Depends(principal)):
-        d=domain(request)
-        with d.store.engine.begin() as conn:
-            row=d.store.get(conn,actor,'DATASET',rid)
-            values=d.records(conn,row)
-            return dict(items=values[offset:offset+100],total=len(values),nextOffset=offset+100 if offset+100<len(values) else None,sourceNature=row['scope']['sourceNature'])
-
     @app.get(prefix+'/{collection}/{rid}/evidence/{eid}')
     def evidence(collection:str,rid:str,eid:str,request:Request,actor=Depends(principal)):
-        require(collection in {'cases','analyses'},'NOT_FOUND',404)
+        require(collection=='cases','NOT_FOUND',404)
         return domain(request).evidence(actor,names[collection],rid,eid)
-
-    @app.post(prefix+'/datasets/{rid}/chunks')
-    def upload(rid:str,body:Upload,request:Request,key:command_key,actor=Depends(principal)):
-        return domain(request).upload(actor,rid,key,body.number,body.records,body.expectedRevision)
 
     @app.post(prefix+'/risk-lookups')
     def lookups(body:Lookups,request:Request,actor=Depends(principal)):
@@ -197,9 +153,9 @@ def register_b_routes(app,principal):
     @app.post(prefix+'/{collection}/{rid}/{action}')
     def change(collection:str,rid:str,action:str,body:Change,request:Request,key:command_key,actor=Depends(principal)):
         require(collection in names,'NOT_FOUND',404);d=domain(request);kind=names[collection]
-        job={'evidence-jobs':'evidence','advice-jobs':'advice','validation-jobs':'validate','analysis-jobs':'analysis','binding-jobs':'binding'}.get(action)
+        job={'evidence-jobs':'evidence','advice-jobs':'advice'}.get(action)
         if job:
-            require((kind=='CASE' and job in {'evidence','advice'}) or (kind=='DATASET' and job in {'validate','analysis','binding'}),'ACTION_INVALID')
+            require(kind=='CASE' and job in {'evidence','advice'},'ACTION_INVALID')
             from starlette.responses import JSONResponse
             return JSONResponse(d.job(actor,kind,rid,job,key,body.expectedRevision,body.data),status_code=202)
         return d.mutate(actor,kind,rid,action,key,body.expectedRevision,body.data)

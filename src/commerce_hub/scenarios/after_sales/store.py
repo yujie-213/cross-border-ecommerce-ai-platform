@@ -73,14 +73,14 @@ class Store:
         return dict(id=row['id'],revision=rev,state=state or row['state'])
 
     def create(self,conn,actor,kind,body,resource,state='OPEN',rid=None):
+        require(kind in {'CASE','POLICY','INVESTIGATION','RISK'},'ACTION_INVALID')
         rid=rid or uuid4().hex
         resource=deepcopy(resource)
         if resource['createParent']:
-            self.authorize(conn,actor,{'CASE':'b:case:write','POLICY':'b:policy:write','DATASET':'b:dataset:manage'}[kind],resource)
+            self.authorize(conn,actor,{'CASE':'b:case:write','POLICY':'b:policy:write'}[kind],resource)
             resource.update(resourceId=rid,createParent=False)
-            if kind=='DATASET':resource['datasetVersion']=body['manifest']['version']
             register_created_resource(self.access,conn,actor,resource,self.audit)
-        else:self.authorize(conn,actor,'b:binding:manage' if kind=='BINDING' else 'b:investigate' if kind in {'INVESTIGATION','RISK'} else 'b:analyze',resource)
+        else:self.authorize(conn,actor,'b:investigate' if kind in {'INVESTIGATION','RISK'} else 'b:analyze',resource)
         body=deepcopy(body);body['_state']=state
         values=dict(tenant_id=actor.tenant_id,kind=kind,id=rid,workspace=WORKSPACE,scope=resource,revision=1,state=state,
             body=body,created_by=actor.principal_id,created_at=func.utc_timestamp(6),updated_at=func.utc_timestamp(6))

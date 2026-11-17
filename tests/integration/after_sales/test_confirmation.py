@@ -139,7 +139,7 @@ def test_adapter_rejects_other_resource_and_oversized_payload():
 
 def test_direct_customer_reply_is_supported_but_internal_instructions_are_rejected():
     from commerce_hub.scenarios.after_sales.policies import validate_advice, retrieve
-    from commerce_hub.scenarios.after_sales.teaching import policy_starters
+    from commerce_hub.scenarios.after_sales.policy_templates import policy_starters
     policy=policy_starters('US','Amazon')[0]
     refs=retrieve([dict(id='policy',revision=3,state='PUBLISHED',body=policy)],dict(identity=dict(category='APPAREL'),region='US',platform='Amazon',language='zh',
         messages=[dict(text='尺码不合适，想退换')]),'2026-11-17T00:00:00Z')

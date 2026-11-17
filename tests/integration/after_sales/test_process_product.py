@@ -16,7 +16,6 @@ from tests.integration.after_sales.test_workflows import env,mutate,read
 from tests.integration.processes.test_foundation_processes import OwnedProcess
 from commerce_hub.governance.access.tables import grants
 from commerce_hub.scenarios.s01_v2.handler import collection_scope
-from commerce_hub.scenarios.after_sales.teaching import golden_package
 from commerce_hub.orchestration.tables import budgets
 
 
@@ -38,12 +37,8 @@ def test_independent_worker_crash_api_restart_and_actual_vue_product(env,tmp_pat
         COMMERCE_MODEL_PROVIDER='mock',COMMERCE_MODEL_NETWORK_ENABLED='false')
     with e.database.engine.begin() as conn:
         conn.execute(update(grants).filter_by(tenant_id=e.actor.tenant_id).values(scope=collection_scope(e.actor.tenant_id)))
-    m,blocks=golden_package();m['datasetId']='process-recovery-'+uuid4().hex
-    d=e.domain.create_dataset(e.actor,uuid4().hex,dict(manifest=m))
-    for i,b in enumerate(blocks):d=e.domain.upload(e.actor,d['id'],uuid4().hex,i,b,d['revision'])
-    mutate(e,'DATASET',d['id'],'seal')
-    d=read(e,'DATASET',d['id'])
-    task=e.domain.job(e.actor,'DATASET',d['id'],'validate',uuid4().hex,d['revision'],{})
+    d=e.domain.create_case(e.actor,uuid4().hex,dict(title='ERP恢复验证',message='',region='CN',platform='TEACHING',language='zh',erpStoreName='Synthetic Store',erpTicketId='91'))
+    task=e.domain.job(e.actor,'CASE',d['id'],'evidence',uuid4().hex,d['revision'],{})
     tid=task['taskRef']['taskId']
     processes=[]
     client=httpx.Client(base_url=f'http://127.0.0.1:{api_port}',cookies={'commerce_session':e.token},timeout=4,trust_env=False)
@@ -75,8 +70,9 @@ def test_independent_worker_crash_api_restart_and_actual_vue_product(env,tmp_pat
         state('RUNNING');worker.stop(crash=True)
         launch([sys.executable,'-m','tests.support.b_workflows','worker'])
         assert state('SUCCEEDED')['deadline']==task['deadline']
-        assert read(e,'DATASET',d['id'])['state']=='READBACK_VERIFIED'
+        assert read(e,'CASE',d['id'])['body']['evidence']['facts']
         with e.database.engine.connect() as conn:assert dict(conn.execute(select(budgets).filter_by(tenant_id=e.actor.tenant_id,task_id=tid)).mappings().one())==before
+        e.domain.mutate(e.actor,'CASE',d['id'],'messages',uuid4().hex,read(e,'CASE',d['id'])['revision'],dict(text='补充核实'))
         launch([sys.executable,'-m','uvicorn','commerce_hub.entrypoints.http.local_frontend:create_app','--factory','--host','127.0.0.1','--port',str(web_port),'--no-access-log'])
         ready(f'http://localhost:{web_port}/health/frontend')
         browser_env=dict(environment,B_BROWSER_URL=f'http://localhost:{web_port}',B_BROWSER_PASSWORD='synthetic-only-password')
