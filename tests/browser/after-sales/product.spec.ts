@@ -2,6 +2,38 @@ import { test, expect } from '../../../frontend/node_modules/@playwright/test/in
 import { mkdirSync } from 'node:fs'
 import path from 'node:path'
 
+test('workbench cards and ERP internal handling confirmation complete without supervisor review',async({page})=>{
+  test.skip(!process.env.B_BROWSER_URL,'Owned engineering server required')
+  const failures:string[]=[];page.on('pageerror',e=>failures.push(e.message))
+  await page.goto('/');await page.getByLabel('密码',{exact:true}).fill(process.env.B_BROWSER_PASSWORD!);await page.getByRole('button',{name:'登录',exact:true}).click()
+  await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+  await page.getByRole('link',{name:/智能售后与客户体验/}).click()
+  await expect(page.locator('.desk-kpis')).toContainText('覆盖 SKU')
+  await expect(page.locator('.desk-kpis')).toContainText('评价 1 · 反馈 1 · 工单 1',{timeout:30000})
+  const shots=path.resolve(import.meta.dirname,'../../../.tmp/b-desk-screenshots');mkdirSync(shots,{recursive:true})
+  await page.screenshot({path:path.join(shots,'01-workbench.png'),fullPage:true})
+  await page.setViewportSize({width:1024,height:900})
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true)
+  await page.screenshot({path:path.join(shots,'02-workbench-1024.png'),fullPage:true})
+  const row=page.locator('.desk-queue tbody tr').filter({hasText:'尺寸偏小，请核对描述'})
+  await row.getByRole('button',{name:'处理 →',exact:true}).click()
+  await expect(page.getByRole('heading',{name:'客户问题与诉求',exact:true})).toBeVisible({timeout:30000})
+  const reply='您好，如果吊牌完整、未穿洗且符合退换货期限，可以申请换货或退货退款。请问吊牌是否保留、衣服是否穿洗过呢？'
+  await page.getByLabel('回复稿',{exact:true}).fill(reply)
+  await page.getByRole('button',{name:'确认并保存',exact:true}).click()
+  await expect(page.getByText('ERP 处理记录已核验',{exact:true})).toBeVisible({timeout:30000})
+  await expect(page.getByRole('button',{name:'✓ 已处理',exact:true})).toBeDisabled()
+  await page.reload()
+  await expect(page.getByLabel('回复稿',{exact:true})).toHaveValue(reply)
+  await expect(page.getByLabel('回复稿',{exact:true})).toHaveAttribute('readonly','')
+  await page.screenshot({path:path.join(shots,'03-confirmed.png'),fullPage:true})
+  await page.getByRole('link',{name:'← 返回案件列表',exact:true}).click()
+  await expect(page.locator('.desk-kpis .done strong')).toHaveText('1',{timeout:30000})
+  await page.locator('.queue-tabs').getByRole('button',{name:'已处理',exact:true}).click()
+  await expect(page.locator('.desk-queue tbody tr')).toHaveCount(1)
+  expect(failures).toEqual([])
+})
+
 // Real compiled Vue + API + MySQL + independent Worker. ERP is explicitly synthetic;
 // B paid model remains disabled, which is also the delivered local default.
 test('three product chains, manual fallback, risk isolation and S01 reminder',async({page})=>{
@@ -49,8 +81,8 @@ test('three product chains, manual fallback, risk isolation and S01 reminder',as
   await expect(page.getByRole('button',{name:'生成 AI 回复',exact:true})).toBeDisabled()
   await expect(page.getByText('AI 暂不可用，请先人工填写回复。',{exact:true})).toBeVisible()
   await page.getByLabel('回复稿',{exact:true}).fill('已核对订单和上衣商品，继续补充尺码照片。')
-  await page.getByRole('button',{name:'保存处理',exact:true}).click()
-  await expect(page.getByText('内部处理完成',{exact:true}).first()).toBeVisible()
+  await page.getByRole('button',{name:'确认并保存',exact:true}).click()
+  await expect(page.getByText('已处理',{exact:true}).first()).toBeVisible()
   await page.reload();await page.getByText('消息、关联与处理历史',{exact:true}).click();await expect(page.getByText('已核对订单和上衣商品，继续补充尺码照片。',{exact:true}).first()).toBeVisible()
   await page.screenshot({path:path.join(shots,'02-case.png'),fullPage:true})
   await page.getByRole('link',{name:/体验与退货分析/,exact:true}).click();await page.getByRole('button',{name:'更新分析',exact:true}).click()
@@ -148,8 +180,8 @@ test('reply generation reports no-op accurately, fills a successful draft and sa
   await page.setViewportSize({width:1024,height:900})
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true)
   await page.screenshot({path:path.join(shots,'06-reply-1024.png'),fullPage:true})
-  await page.getByRole('button',{name:'保存处理',exact:true}).click()
-  await expect(page.getByText('处理记录已保存。',{exact:true})).toBeVisible()
+  await page.getByRole('button',{name:'确认并保存',exact:true}).click()
+  await expect(page.getByText('已确认保存，记录已处理。',{exact:true})).toBeVisible()
   expect(saved).toMatchObject({decision:'ACCEPT',reason:'人工核对当前AI建议及回复后保存'})
   await page.getByRole('link',{name:/知识与资料/,exact:true}).click()
   await expect(page.getByRole('heading',{name:'售后政策',exact:true})).toBeVisible()

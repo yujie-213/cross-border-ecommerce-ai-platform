@@ -51,9 +51,10 @@ class SourceReader:
         require(self.members(name) is None or bool(self.members(name)),'SOURCE_SCOPE_DENIED',403)
         return self.stores[name]
 
-    def discover(self,store,check):
+    def discover(self,store,check,*,full=False):
         expected=self._store(store);check();reader=self.factory()
-        batch=reader.discover('/api/v1/customer-tickets',dict(store_name=store),page_size=20)
+        batch=(reader.read('/api/v1/customer-tickets',dict(store_name=store),page_size=50,max_pages=5) if full
+            else reader.discover('/api/v1/customer-tickets',dict(store_name=store),page_size=20))
         owned=self._owned_orders(reader,store,check)
         order_numbers=None if owned is None else {o.get('order_sn') for o in owned if o.get('order_sn')}
         return dict(items=[dict(ticketId=str(r['id']),ticketNumber=r.get('ticket_no'),title=redacted(r.get('subject','')),
@@ -71,14 +72,15 @@ class SourceReader:
         attributes={k:product[k] for k in ('size','color','material','model') if product.get(k)}
         return normalized,attributes
 
-    def inbox(self,store,kind,check,date_from=None,date_to=None):
+    def inbox(self,store,kind,check,date_from=None,date_to=None,*,full=False):
         expected=self._store(store);require(kind in {'tickets','reviews','feedback'},'SOURCE_KIND_INVALID')
-        if kind=='tickets':return self.discover(store,check)
+        if kind=='tickets':return self.discover(store,check,full=full)
         reader=self.factory();check()
         params=dict(kind=kind,store_id=expected['storeId'],visibility='active')
         if date_from:params['date_from']=date_from
         if date_to:params['date_to']=date_to
-        batch=reader.discover('/api/v1/customer-voice',params,page_size=10)
+        batch=(reader.read('/api/v1/customer-voice',params,page_size=50,max_pages=5) if full
+            else reader.discover('/api/v1/customer-voice',params,page_size=10))
         items=[];products={}
         members=self.members(store)
         owned_skus=None if members is None else {m.sku for m in members}
@@ -107,6 +109,7 @@ class SourceReader:
             if identity and not self.allows_identity(identity):continue
             items.append(dict(recordId=str(r['id']),kind=kind,title=redacted(r.get('title') or '客户反馈'),text=redacted(r.get('body') or ''),
                 rating=r.get('rating'),businessDate=r.get('business_date'),platform=r.get('platform'),storeName=store,
+                handlingStatus=r.get('handling_status'),handlingVersion=r.get('version'),
                 identity=identity,association=association,orderId='UNKNOWN',sourceRef='customer-voice:'+kind+':'+str(r['id'])))
         return dict(items=items,complete=batch.complete,observedAt=batch.observed_at,sourceNature='TEACHING_ERP_OBSERVED',
             limitation='当前有界读取的反馈；不是完整评价总体，也不提供退货率分母')

@@ -28,6 +28,8 @@ def registry(settings):
     source=BSourceERP()
     reader=SourceReader(lambda:TeachingERPReader(ERPConfig(access_token='synthetic-source-token'),transport=source.transport),
         {'Synthetic Store':dict(sourceTenant='1',storeId='1')},Path('.tmp/b-process-private'))
+    from commerce_hub.adapters.erp_customer_voice import TeachingVoiceClient
+    reader.voice_client_factory=lambda:TeachingVoiceClient(ERPConfig(access_token='synthetic-source-token'),transport=source.transport,sleeper=lambda _:None)
     for sid,spec in list(specs.items()):
         specs[sid]=replace(spec,work_kind='b-test.'+settings.local_app_tenant+'.'+spec.handler.job)
         spec.handler.provider=None

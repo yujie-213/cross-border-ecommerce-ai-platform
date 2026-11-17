@@ -81,18 +81,18 @@ def register_b_routes(app,principal):
                 capabilities[name]=True
             except AccessDenied:capabilities[name]=False
         return dict(workspaceId=WORKSPACE,modelEnabled=d.provider is not None,sourceStores=stores,sourceNature='MIDDLEWARE_TEACHING_DATA',
-            capabilities=capabilities,trackingScope='PROJECT_OWNED_ERP',trackedProducts=len({(m.sourceTenant,m.monitor.productId) for m in members}) if members is not None else None)
+            capabilities=capabilities,sourceProductCounts={name:len({m.sku for m in (members or []) if m.storeName==name}) for name in stores} if members is not None else {},trackingScope='PROJECT_OWNED_ERP',trackedProducts=len({(m.sourceTenant,m.monitor.productId) for m in members}) if members is not None else None)
 
     @app.get(prefix+'/source-inbox')
     def source_inbox(request:Request,store:str=Query(min_length=1,max_length=128),kind:Literal['tickets','reviews','feedback']='tickets',
-                     dateFrom:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),dateTo:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),actor=Depends(principal)):
+                     dateFrom:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),dateTo:str|None=Query(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$'),full:bool=False,actor=Depends(principal)):
         from datetime import date
         try:
             start=date.fromisoformat(dateFrom) if dateFrom else None
             end=date.fromisoformat(dateTo) if dateTo else None
             require(not start or not end or start<=end,'SOURCE_DATE_INVALID')
         except ValueError:require(False,'SOURCE_DATE_INVALID')
-        return domain(request).source_inbox(actor,store,kind,dateFrom,dateTo)
+        return domain(request).source_inbox(actor,store,kind,dateFrom,dateTo,full)
 
     @app.get(prefix+'/mapping-options')
     def mapping_options(request:Request,datasetId:str,store:str=Query(min_length=1,max_length=128),sku:str=Query(min_length=1,max_length=128),actor=Depends(principal)):
@@ -136,12 +136,12 @@ def register_b_routes(app,principal):
         return dict(manifest=manifest,chunks=blocks)
 
     @app.get(prefix+'/policy-starters')
-    def starters(request:Request,actor=Depends(principal)):
+    def starters(request:Request,region:Literal['CN','US']='CN',platform:Literal['TEACHING','Amazon']='TEACHING',actor=Depends(principal)):
         d=domain(request)
         from commerce_hub.scenarios.after_sales.common import scope
         with d.store.engine.begin() as conn:d.store.authorize(conn,actor,'b:policy:write',scope(actor.tenant_id,'POLICY'))
         from commerce_hub.scenarios.after_sales.teaching import policy_starters
-        return [dict((k,v) for k,v in p.items() if k!='id') for p in policy_starters()]
+        return [dict((k,v) for k,v in p.items() if k!='id') for p in policy_starters(region,platform)]
 
     names={'cases':'CASE','datasets':'DATASET','policies':'POLICY','analyses':'REPORT','investigations':'INVESTIGATION','risks':'RISK','teaching-bindings':'BINDING'}
 
@@ -154,7 +154,12 @@ def register_b_routes(app,principal):
             d.store.access._assert_current(conn,actor,lock=True)
             row=conn.execute(select(commands).filter_by(tenant_id=actor.tenant_id,actor=actor.principal_id,command_key=key)).mappings().first()
             if row:
-                r=row['result'];d.store.get(conn,actor,r['kind'],r['id']);return dict(status='FOUND',result=r)
+                r=row['result'];d.store.get(conn,actor,r['kind'],r['id'])
+        if row:
+            if r.get('handlingStatus')=='PENDING':
+                from commerce_hub.scenarios.after_sales.confirmation import Confirmation
+                r=Confirmation(d).recover(actor,key,r['id'])
+            return dict(status='FOUND',result=r)
         # O01 owns asynchronous command lookup and its current task authorization.
         return d.tasks.find_command(actor,key)
 

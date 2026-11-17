@@ -11,7 +11,7 @@ const reasons:Record<string,string>={
   CATEGORY_UNSUPPORTED:'这类商品尚无可用的回复政策，请先人工处理或联系主管维护政策。',
   BUSINESS_DATE_REQUIRED:'客户问题的业务日期待核实，请先更新订单资料。',
   POLICY_SCOPE_INCOMPLETE:'地区或平台待核实，请先更新订单资料。',
-  POLICY_NOT_APPLICABLE:'没有匹配此商品、地区和日期的已发布政策，请联系主管维护政策，或先人工处理。',
+  POLICY_NOT_APPLICABLE:'没有匹配此商品、地区和日期的已发布政策，可补充政策或先填写回复。',
   B_MODEL_AUTHORIZATION_REQUIRED:'AI 暂不可用，请先人工填写回复。',
   B_MODEL_ALLOWANCE_UNAVAILABLE:'本次 AI 额度不足，请联系主管或先人工处理。',
   INVALID_OUTPUT:'AI 回复未通过校验，请重新生成或先人工填写。',

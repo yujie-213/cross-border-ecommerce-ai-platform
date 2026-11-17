@@ -11,8 +11,10 @@ const emit=defineEmits<{
 const body=computed(()=>props.asset.body), advice=computed(()=>body.value.advice?.at(-1))
 const candidates=computed(()=>body.value.evidence?.identityCandidates || [])
 const line=ref(''),linkReason=ref(''),moreActions=ref(false)
+const saving=computed(()=>['PREPARED','SENDING','PENDING'].includes(body.value.confirmation?.status))
+const finished=computed(()=>props.asset.state==='HANDLED')
 const currentAdvice=computed(()=>advice.value?.ai.status==='AVAILABLE' && advice.value.caseRevision===props.asset.revision)
-const date=(v:any)=>v?new Date(v).toLocaleString('zh-CN',{hour12:false}):'待核实'
+const date=(v:any)=>v?new Date(v).toLocaleString('zh-CN',{hour12:false,timeZone:'Asia/Shanghai'}):'待核实'
 const factNames:Record<string,string>={TICKET:'问题标题',PAYMENT:'付款',SHIPMENT:'发货',WAREHOUSE:'发货仓库',payment_status:'付款状态',fulfillment_status:'履约状态',refund_status:'退款状态',order:'订单',shipment:'发货',return:'退货'}
 function factText(f:any) {
   const v=f.value ?? f.record
@@ -30,23 +32,23 @@ function factText(f:any) {
 <template>
   <div class="case-layout">
     <div class="case-main">
-      <section class="panel conversation"><div class="section-title"><h2>客户会话</h2><button class="b-text-button" @click="emit('history')">处理历史</button></div>
+      <section class="panel conversation"><div class="section-title"><h2>客户问题与诉求</h2><button class="b-text-button" @click="emit('history')">处理历史</button></div>
         <article v-for="(m,i) in body.messages" :key="i" class="message"><div class="message-meta"><b>{{m.role==='CUSTOMER'?'客户':'客服'}}</b><time>{{date(m.at)}}</time><small v-if="m.source==='CLAIM'">客服补录</small></div><p>{{m.text}}</p></article>
         <div v-if="!body.messages.length" class="empty-message"><p>{{body.title}}</p><button class="b-text-button" @click="($refs.messageEntry as HTMLDetailsElement).open=true">补充客户消息</button></div>
-        <details ref="messageEntry"><summary>补充客户消息</summary><form @submit.prevent="emit('append')"><label>客户消息<textarea :value="message" @input="emit('update:message',($event.target as HTMLTextAreaElement).value)" required maxlength="6000"></textarea></label><label>附件线索（可选）<input :value="attachments" @input="emit('update:attachments',($event.target as HTMLInputElement).value)"></label><button class="button small" :disabled="busy || !message.trim()">保存消息</button></form></details>
+        <details v-if="!finished && !saving" ref="messageEntry"><summary>补充客户消息</summary><form @submit.prevent="emit('append')"><label>客户消息<textarea :value="message" @input="emit('update:message',($event.target as HTMLTextAreaElement).value)" required maxlength="6000"></textarea></label><label>附件线索（可选）<input :value="attachments" @input="emit('update:attachments',($event.target as HTMLInputElement).value)"></label><button class="button small" :disabled="busy || !message.trim()">保存消息</button></form></details>
       </section>
-      <section class="panel composer"><div class="section-title"><h2>回复客户</h2><button class="button" :disabled="busy || !body.identity || !body.evidence || !modelEnabled" @click="emit('generate')">{{busy?'正在处理…':advice?'重新生成 AI 回复':'生成 AI 回复'}}</button></div>
+      <section class="panel composer"><div class="section-title"><h2>回复客户</h2><button class="button" :disabled="busy || saving || finished || !body.identity || !body.evidence || !modelEnabled" @click="emit('generate')">{{busy?'正在处理…':advice?'重新生成 AI 回复':'生成 AI 回复'}}</button></div>
         <p v-if="!modelEnabled" class="muted">AI 暂不可用，请先人工填写回复。</p>
-        <p v-else-if="advice && advice.ai.status!=='AVAILABLE'" class="reply-status" role="status">{{adviceReason(advice.ai.reason)}}</p>
-        <p v-if="advice?.ai.status==='AVAILABLE' && !currentAdvice && asset.state!=='HANDLED'" class="reply-status">资料已有更新，请重新生成后再采纳 AI 回复；也可保存人工回复。</p>
-        <label class="reply-label">回复稿<textarea :value="draft" @input="emit('update:draft',($event.target as HTMLTextAreaElement).value)" maxlength="6000" placeholder="填写回复，或生成 AI 回复后核对修改。"></textarea></label>
-        <div class="compose-actions"><button class="button primary" :disabled="busy || !draft.trim()" @click="emit('save','SAVE')">保存处理</button><button class="b-text-button" @click="moreActions=!moreActions">更多处理</button><span>保存为内部处理记录</span></div>
-        <div v-if="moreActions" class="more-actions"><label>处理原因<input :value="reason" @input="emit('update:reason',($event.target as HTMLInputElement).value)" maxlength="1000"></label><div class="button-row"><button class="button small" :disabled="busy || !reason.trim() || !draft.trim()" @click="emit('save','ESCALATE')">升级处理</button><button class="button small" :disabled="busy || !reason.trim() || !draft.trim()" @click="emit('save','RETURN')">退回修改</button><button class="button small" :disabled="busy" @click="emit('investigate')">发起商品调查</button></div></div>
+        <p v-else-if="advice && advice.ai.status!=='AVAILABLE'" class="reply-status" role="status">{{adviceReason(advice.ai.reason)}}</p><a v-if="advice?.ai.reason==='POLICY_NOT_APPLICABLE'" class="b-text-button" :href="'#/after-sales/materials?scope='+(body.region==='US'?'AMAZON':'TEACHING')">补充适用政策 →</a>
+        <p v-if="advice?.ai.status==='AVAILABLE' && !currentAdvice && asset.state!=='HANDLED'" class="reply-status">资料已更新，可重新生成回复。</p>
+        <label class="reply-label">回复稿<textarea :value="draft" @input="emit('update:draft',($event.target as HTMLTextAreaElement).value)" :readonly="finished || saving" :maxlength="body.erpVoiceId?1900:6000" placeholder="生成回复后核对，也可直接填写。"></textarea></label>
+        <div class="compose-actions"><button class="button primary" :disabled="busy || saving || finished || !draft.trim()" @click="emit('save','SAVE')">{{finished?'✓ 已处理':saving?'保存待核验':'确认并保存'}}</button><button v-if="!finished && !saving" class="b-text-button" @click="moreActions=!moreActions">更多处理</button><span>{{body.erpVoiceId?(finished?'ERP 处理记录已核验':'保存至 ERP 处理记录'):finished?'中台处理记录已保存':'保存至中台处理记录'}}</span></div>
+        <div v-if="moreActions" class="more-actions"><label>处理原因<input :value="reason" @input="emit('update:reason',($event.target as HTMLInputElement).value)" maxlength="1000"></label><div class="button-row"><button class="button small" :disabled="busy || !reason.trim() || !draft.trim()" @click="emit('save','ESCALATE')">升级处理</button><button class="button small" :disabled="busy" @click="emit('investigate')">发起商品调查</button></div></div>
         <button v-if="currentAdvice && draft!==advice.ai.output.replyDraft" class="b-text-button" @click="emit('update:draft',advice.ai.output.replyDraft)">使用新草稿</button><details v-if="advice"><summary>AI 原稿与依据</summary><p v-if="advice.ai.output">{{advice.ai.output.replyDraft}}</p><article v-for="p in advice.policies" :key="p.policyId+p.sectionId"><b>{{p.title}}</b><p>{{p.text}}</p></article><p v-for="g in advice.ai.output?.missingEvidence || []" :key="g">{{g}}</p><ModelUsage :ai="advice.ai" /></details>
         <details v-if="advice?.feedbackAI?.analysis.status==='AVAILABLE'"><summary>客户反馈分析</summary><p v-for="p in advice.feedbackAI.analysis.output.hypotheses" :key="p">{{p}}</p><p v-for="p in advice.feedbackAI.analysis.output.nextSteps" :key="p">{{p}}</p></details>
       </section>
     </div>
-    <aside class="panel order-summary"><div class="section-title"><h2>订单摘要</h2><button class="b-text-button" :disabled="busy" @click="emit('evidence')">更新</button></div>
+    <aside class="panel order-summary"><div class="section-title"><h2>订单摘要</h2><button v-if="!finished && !saving" class="b-text-button" :disabled="busy" @click="emit('evidence')">更新</button></div>
       <template v-if="body.identity"><h3>{{body.identity.name}}</h3><p class="sku">{{body.identity.sku}}</p><dl><div><dt>订单</dt><dd>{{body.identity.orderId==='UNKNOWN'?'待核实':body.identity.orderNumber || body.identity.orderId}}</dd></div><div><dt>店铺</dt><dd>{{storeLabel(body.erpStoreName)}}</dd></div><div v-if="body.businessDate"><dt>问题日期</dt><dd>{{date(body.businessDate)}}</dd></div></dl></template>
       <p v-else class="reply-status">请选择本次问题对应的商品。</p>
       <form v-if="!body.identity && candidates.length" @submit.prevent="emit('link',line,'')"><label>选择本订单受影响商品<select v-model="line" required><option value="">请选择</option><option v-for="c in candidates" :key="c.lineId" :value="c.lineId">{{c.name}} · {{c.sku}}</option></select></label><button class="button small" :disabled="busy || !line">确认商品</button></form>

@@ -24,7 +24,7 @@ it('preserves review audit and records adoption only for the current available s
 })
 it('renders a conversation and editable reply beside a compact order summary',async()=>{
  const html=await renderToString(createSSRApp({render:()=>h(CaseWorkspace,{asset:asset('POLICY_NOT_APPLICABLE'),busy:false,modelEnabled:true,draft:'',message:'',attachments:'',reason:''})}))
- for(const text of ['客户会话','袖口开线，请帮我核实。','回复稿','保存处理','订单摘要','客服补录','没有匹配'])expect(html).toContain(text)
+ for(const text of ['客户问题与诉求','袖口开线，请帮我核实。','回复稿','确认并保存','订单摘要','客服补录','没有匹配'])expect(html).toContain(text)
  for(const text of ['ERP 仅提供工单标题','无需重复选择','审核 / 升级理由','b-case-grid'])expect(html).not.toContain(text)
  expect(html).toContain('更多处理');expect(html).not.toContain('升级处理</button>')
 })

@@ -144,7 +144,7 @@ class Handler:
             if selected:
                 data=dict(messages=[dict(role=m['role'],text=redacted(m['text'])) for m in body['messages'][-8:]],
                     identity={k:body['identity'].get(k) for k in ('category','attributes','name')},
-                    facts=[dict(ref=f['id'],kind=f['kind'],value=f.get('value'),text=f.get('text')) for f in body['evidence']['facts']],
+                    facts=[dict(ref=f['id'],kind=f['kind'],domain=f['domain'],value=f.get('value'),text=f.get('text')) for f in body['evidence']['facts']],
                     orderLinked=body['identity'].get('orderId') not in (None,'','UNKNOWN'),missing=body['evidence']['missing'],safetySignal=safety(' '.join(m['text'] for m in body['messages'])),policies=selected,omissions=['客户身份与地址','可复用订单号','较早非安全消息'])
                 ai=invoke(context,self.provider,'b.case.advice.v1',data,Advice,'advice',snapshot_id=body['evidence']['snapshotRef'])
             feedback_ai=None

@@ -10270,7 +10270,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-FOUNDATION-01",
     "D-B-PROTOTYPE-01"
   ],
-  "entryCondition": "2026-11-16负责人连续开发授权；按冻结需求设计完成剩余任务，阶段工程通过后直接继续，最终统一体验，不合main。",
+  "entryCondition": "2026-11-16负责人连续开发授权；按冻结需求设计完成剩余任务，阶段工程通过后直接继续，最终统一体验，不合main。；2026-11-17负责人授权售后概览、客户直接回复、客服确认后ERP处理追加/回读与中台已处理；取消客服主管审核，不改补货Agent。",
   "ownerRole": "主集成人",
   "assignee": "Codex",
   "allowedPaths": [
@@ -10303,14 +10303,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "AC-01全矩阵、政策引用、注入、安全、并发和浏览器恢复"
   ],
   "risks": [
-    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据",
+    "本轮Codex单人codex/b-after-sales-v1，基点2be6a45；未知OpenAPI只读；工单不冒充评价。"
   ],
   "requiredEvidenceKinds": [
     "CONTRACT",
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
     "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
@@ -11294,7 +11295,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "D-B-RISK-01",
     "D-B-S01-01"
   ],
-  "entryCondition": "2026-11-16负责人连续开发授权；按冻结需求设计完成剩余任务，阶段工程通过后直接继续，最终统一体验，不合main。",
+  "entryCondition": "2026-11-16负责人连续开发授权；按冻结需求设计完成剩余任务，阶段工程通过后直接继续，最终统一体验，不合main。；2026-11-17负责人授权售后概览、客户直接回复、客服确认后ERP处理追加/回读与中台已处理；取消客服主管审核，不改补货Agent。",
   "ownerRole": "主集成人",
   "assignee": "Codex",
   "allowedPaths": [
@@ -11326,14 +11327,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "集成收口、恢复、审计权限、S01受影响回归与负责人体验"
   ],
   "risks": [
-    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据"
+    "ERP完整成熟群组未知不伪造；风险只提醒；政策和映射及模型启用需实际证据",
+    "本轮Codex单人codex/b-after-sales-v1，基点2be6a45；未知OpenAPI只读；工单不冒充评价。"
   ],
   "requiredEvidenceKinds": [
     "CONTRACT",
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "REVIEW",
+  "status": "IN_PROGRESS",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
     "2943ca2251d497b85af951169e527f533d26afd8",

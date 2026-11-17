@@ -34,7 +34,7 @@ class AfterSales:
         origin=conn.execute(select(assets).filter_by(tenant_id=row['tenant_id'],kind=kind,id=rid)).mappings().first()
         return bool(origin and self.source_visible(conn,origin))
 
-    def source_inbox(self,actor,store,kind,date_from=None,date_to=None):
+    def source_inbox(self,actor,store,kind,date_from=None,date_to=None,full=False):
         require(self.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
         expected=self.source_reader._store(store)
         resource=scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=expected['sourceTenant'])
@@ -43,7 +43,7 @@ class AfterSales:
                 self.store.authorize(conn,actor,'b:read',resource)
                 self.store.authorize(conn,actor,'b:case:write',resource)
         check()
-        result=self.source_reader.inbox(store,kind,check,date_from,date_to)
+        result=self.source_reader.inbox(store,kind,check,date_from,date_to,full=True) if full else self.source_reader.inbox(store,kind,check,date_from,date_to)
         check()
         return result
 
@@ -144,6 +144,12 @@ class AfterSales:
         return self.store.command(actor,key,'chunk-'+rid,payload,operation)
 
     def mutate(self,actor,kind,rid,action,key,revision,data):
+        if kind=='CASE' and action=='reviews' and data.get('decision') in {'ACCEPT','MANUAL'}:
+            with self.store.engine.begin() as conn:
+                row=self.store.get(conn,actor,kind,rid,'b:case:review')
+            if row['body'].get('erpVoiceId'):
+                from .confirmation import Confirmation
+                return Confirmation(self).confirm(actor,rid,key,revision,data)
         allowed={'CASE':{'messages','links','reviews'},'POLICY':{'submit-review','publish','revoke','new-version'},
             'DATASET':{'seal','activate','deactivate'},'REPORT':{'classifications'},'INVESTIGATION':{'entries'},'RISK':{'decisions'},'BINDING':{'revoke'}}
         require(action in allowed.get(kind,set()),'ACTION_INVALID')
@@ -155,6 +161,7 @@ class AfterSales:
             row=self.store.get(conn,actor,kind,rid,permission,lock=True)
             require(row['revision']==revision,'REVISION_CONFLICT',409)
             body=deepcopy(row['body']);state=row['state']
+            require((body.get('confirmation') or {}).get('status') not in {'PREPARED','SENDING','PENDING'},'CONFIRMATION_PENDING',409)
             if kind=='CASE':body,state=self._case_command(conn,actor,row,action,data)
             elif kind=='POLICY':
                 require(set(data)<=({'policy'} if action=='new-version' else {'reason'}),'FIELDS_INVALID')
@@ -245,6 +252,7 @@ class AfterSales:
         with self.store.engine.begin() as conn:
             row=self.store.get(conn,actor,kind,rid,'b:binding:manage' if job=='binding' else 'b:dataset:manage' if job=='validate' else 'b:analyze')
             require(row['revision']==revision,'REVISION_CONFLICT',409)
+            require((row['body'].get('confirmation') or {}).get('status') not in {'PREPARED','SENDING','PENDING'},'CONFIRMATION_PENDING',409)
             if job=='validate':require(row['state'] in {'SEALED','READBACK_VERIFIED'},'DATASET_NOT_SEALED')
             if job=='analysis':require(row['state']=='ACTIVE','DATASET_NOT_VERIFIED')
             resource=row['scope']

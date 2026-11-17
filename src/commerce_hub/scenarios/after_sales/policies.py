@@ -62,6 +62,7 @@ def validate_advice(output,refs):
         require(output['adviceCode'] in allowed[tuple(c[k] for k in ('policyId','version','sectionId','hash'))]['terms'],'UNSUPPORTED_PROMISE')
     text=output['replyDraft']
     require(isinstance(text,str) and 0<len(text)<=4000 and not any(w in text.lower() for w in ('保证','已经退款','已退款','到账','认证安全','拆机','guarantee','refund issued','已确认缺陷','确定质量问题','绝对安全','已补发','赔偿')),'UNSUPPORTED_PROMISE')
+    require(not any(w in text for w in ('建议客服','客服应','请客服','转人工核实后回复')),'INTERNAL_INSTRUCTION_IN_REPLY')
     # Unconstrained free numeric/date/currency promises are not accepted as AI prose.
     import re
     require(not re.search(r'\d|[¥$€]',text),'UNSUPPORTED_NUMERIC_CLAIM')
