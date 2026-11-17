@@ -12707,3 +12707,77 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   ]
 }
 ```
+
+
+## D-B-PAGE-EXPERIENCE-01 售后页面体验修复
+
+```json
+{
+  "id": "D-B-PAGE-EXPERIENCE-01",
+  "stage": "D",
+  "title": "售后页面保留结果与按需分析体验修复",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-RETURNS-WORKFLOW-01"
+  ],
+  "entryCondition": "2026-11-17负责人反馈反复读取和点击分析卡死，明确要求改一版；仅B页面与必要单据读取修复，不改补货Agent。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "frontend/src/afterSales/",
+    "frontend/src/api/client.ts",
+    "src/commerce_hub/scenarios/after_sales/",
+    "tests/",
+    "docs/"
+  ],
+  "parallelCondition": "Codex单人；未知OpenAPI保留",
+  "deliverables": [
+    "保留列表筛选和位置、显式刷新、详情先打开、AI按需且后台任务可恢复",
+    "单退货精确读取与原归属校验；工程回归和浏览器证据"
+  ],
+  "acceptance": [
+    {
+      "id": "D-B-PAGE-EXPERIENCE-01/AC1",
+      "text": "切换和返回不重复ERP读取，失败保留旧列表及筛选位置，退出登录清理"
+    },
+    {
+      "id": "D-B-PAGE-EXPERIENCE-01/AC2",
+      "text": "点击先打开已有详情，AI与调查独立操作，后台任务不锁住其他页面，去重和迟到结果隔离"
+    },
+    {
+      "id": "D-B-PAGE-EXPERIENCE-01/AC3",
+      "text": "单笔退货不扫描整店；归属权限、原幂等、质量确认门保持"
+    }
+  ],
+  "plannedTests": [
+    "frontend unit/typecheck/build",
+    "after_sales targeted MySQL/API/independent Worker and compiled Vue browser"
+  ],
+  "risks": [
+    "首次完整ERP读取仍受接口时延影响；已有结果显示更新时间，手工刷新",
+    "工程fixture不冒充真实ERP或付费模型验收"
+  ],
+  "requiredEvidenceKinds": [
+    "INTEGRATION"
+  ],
+  "status": "IN_PROGRESS",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "2ac1ddb6e617e303cca9d4dfa13a95e0a3a0d6a0",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "at": "2026-11-17",
+      "toStatus": "IN_PROGRESS",
+      "reason": "负责人明确授权修复页面切换和阻塞体验。"
+    }
+  ]
+}
+```

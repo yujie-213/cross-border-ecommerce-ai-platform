@@ -7,9 +7,12 @@ import Modal from '../components/Modal.vue'
 import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import { route, navigate, href } from '../router'
 import { request, errorText, ApiError } from '../api/client'
+import { workspace, workbench as all, details, loadIndex, remember, tasks, taskKey, taskRunning, followTask, restoreTasks, pending, opening, sources, sessionEpoch, loadPage, resultPage } from './session'
 import { get, post, stateNames, effectiveState, type Asset, type Workbench, type Workspace, type Index } from './api'
 
-const workspace = ref<Workspace>(), all = ref<Workbench>(), current = ref<Asset>(), busy = ref(false), loading = ref(false), error = ref(''), note = ref('')
+const current = ref<Asset>(), busy = ref(false), loading = ref(false), error = ref(''), note = ref('')
+const currentTasks=computed(()=>Object.values(tasks).filter(t=>t.assetId===current.value?.id || t.investigationId && t.investigationId===investigationId.value).sort((a,b)=>(a.startedAt || 0)-(b.startedAt || 0)))
+const caseBusy=computed(()=>busy.value || !!opening[route.value.query.record || ''] || currentTasks.value.some(taskRunning))
 const section = computed(() => route.value.segments[1] || 'workbench')
 const tabs = [{ key:'workbench',name:'售后工作台' },{key:'cases',name:'售后处理'},{key:'experience',name:'退货与商品分析'},{key:'risks',name:'调查与质量风险'},{key:'materials',name:'知识与政策'}]
 const starterScope=ref(route.value.query.scope || 'TEACHING')
@@ -35,7 +38,7 @@ const riskOptions = ref<{name:string;identity:Record<string,any>}[]>([]), riskOp
 const backgroundTasks=ref<any[]>([]), policyRevisionText=ref(''), editingPolicy=ref(''), investigationEvidence=ref<any[]>([]), chosenEvidence=ref<string[]>([])
 const policyTitle = ref(''), policyText = ref(''), policyCategory = ref('APPAREL'), policyRegion = ref('CN'), policyPlatform = ref('TEACHING'), policyLanguage = ref('zh')
 const attachments=ref('')
-const pending = ref<{ key:string; path:string; body?:unknown }>(), taskId = ref(''), alive = ref(true)
+const taskId = ref(''), alive = ref(true)
 let sequence = 0
 const assets = computed(() => all.value?.case.items || [])
 const risks = computed(() => all.value?.risk.items || [])
@@ -62,54 +65,81 @@ function factText(f:any) {
   if(Array.isArray(r))return r.map(x=>`时间 ${formatDate(x.at)}；明细见证据来源`).join('；')
   return Object.entries(r).filter(([,v])=>typeof v!=='object').map(([k,v])=>`${factNames[k] || k}：${v}`).join('；')
 }
-watch([investigationId,all],async([id])=>{
-  riskOptions.value=[];riskOption.value='';const inv=all.value?.investigation.items.find(a=>a.id===id);if(!inv)return
-  try{
-    const origin=await get<Asset>('/'+'cases'+'/'+inv.body.origin.id)
-    if(id!==investigationId.value)return
-    if(origin.body.identity){const p=origin.body.identity;const common={sourceTenant:origin.scope.sourceTenant,productId:p.productId,sku:p.sku,storeId:p.storeId};riskOptions.value=[...(p.warehouseId && p.warehouseId!=='UNKNOWN'?[{name:p.name+' · 本仓',identity:{...common,warehouseMode:'EXPLICIT_IDS',warehouseIds:[p.warehouseId]}}]:[]),{name:p.name+' · 本店所有仓',identity:{...common,warehouseMode:'ALL_STORE_WAREHOUSES',warehouseIds:[]}}]}
-  }catch(e){error.value=errorText(e)}
+watch(investigationOrigin,origin=>{
+  riskOptions.value=[];riskOption.value=''
+  if(origin?.body.identity){const p=origin.body.identity;const common={sourceTenant:origin.scope.sourceTenant,productId:p.productId,sku:p.sku,storeId:p.storeId};riskOptions.value=[...(p.warehouseId && p.warehouseId!=='UNKNOWN'?[{name:p.name+' · 本仓',identity:{...common,warehouseMode:'EXPLICIT_IDS',warehouseIds:[p.warehouseId]}}]:[]),{name:p.name+' · 本店所有仓',identity:{...common,warehouseMode:'ALL_STORE_WAREHOUSES',warehouseIds:[]}}]}
 })
-async function refresh() {
-  const run=++sequence;loading.value=true;error.value='';current.value=undefined;chosenEvidence.value=[];investigationEvidence.value=[]
+function setCurrent(a:Asset){
+  current.value=a
+  if(a.kind==='CASE' && draftCaseId.value!==a.id){draftCaseId.value=a.id;humanText.value=a.body.reviews.at(-1)?.text || (a.body.advice.at(-1)?.ai.status==='AVAILABLE'?a.body.advice.at(-1).ai.output.replyDraft:'');draftBaseline.value=a.body.reviews.at(-1)?.text || ''}
+  const confirmation=a.body.confirmation
+  if(confirmation && ['PREPARED','SENDING','PENDING'].includes(confirmation.status)){pending.value={path:'/cases/'+a.id+'/reviews',key:confirmation.key};sessionStorage.setItem('b-pending-command',JSON.stringify(pending.value))}
+}
+function previewSource(key:string){
+  const r=sources[key];if(!r)return
+  setCurrent({id:'preview:'+key,kind:'CASE',revision:0,state:'OPEN',sourceNature:'TEACHING_ERP_OBSERVED',scope:{},body:{title:r.title,erpStoreName:r.storeName,identity:r.identity,messages:[{role:'CUSTOMER',text:r.text || r.title,at:r.businessDate}],reviews:[],advice:[]}})
+}
+async function refresh(force=true) {
+  const run=++sequence;loading.value=true;error.value=''
+  const id=route.value.query.id
+  if(id){const cached=details[id] || [...(all.value?.case.items || []),...(all.value?.risk.items || [])].find(a=>a.id===id);if(cached)setCurrent(cached)}
+  else if(route.value.query.record)previewSource(route.value.query.record)
+  else current.value=undefined
   try {
-    const [w,index] = await Promise.all([get<Workspace>('/workspace'),get<Workbench>('/workbench')])
+    await loadIndex(force)
     if(run!==sequence || !alive.value)return
-    workspace.value=w;all.value=index
-    if(route.value.query.id && ['cases','risks'].includes(section.value)) {
-      const a=await get<Asset>('/'+collection()+'/'+encodeURIComponent(route.value.query.id))
+    if(id && ['cases','risks'].includes(section.value)) {
+      const a=!force && details[id]?details[id]:!force && current.value?.id===id?current.value:await get<Asset>('/'+collection()+'/'+encodeURIComponent(id))
       if(run!==sequence || !alive.value)return
-      current.value=a
-      const confirmation=a.body.confirmation
-      if(confirmation && ['PREPARED','SENDING','PENDING'].includes(confirmation.status)){pending.value={path:'/cases/'+a.id+'/reviews',key:confirmation.key};sessionStorage.setItem('b-pending-command',JSON.stringify(pending.value))}
-      if(a.kind==='CASE' && draftCaseId.value!==a.id){draftCaseId.value=a.id;humanText.value=a.body.reviews.at(-1)?.text || (a.body.advice.at(-1)?.ai.status==='AVAILABLE'?a.body.advice.at(-1).ai.output.replyDraft:'');draftBaseline.value=a.body.reviews.at(-1)?.text || ''}
+      remember(a);setCurrent(a)
     }
-    if(section.value==='risks' && route.value.query.investigation && run===sequence){
-      let inv=index.investigation.items.find(a=>a.id===route.value.query.investigation)
-      if(!inv){inv=await get<Asset>('/investigations/'+encodeURIComponent(route.value.query.investigation));if(run!==sequence)return;index.investigation.items.push(inv)}
-      if(inv)await chooseInvestigation(inv)
+    if(section.value==='risks' && route.value.query.investigation){
+      let inv=all.value?.investigation.items.find(a=>a.id===route.value.query.investigation)
+      if(!inv){inv=await get<Asset>('/investigations/'+encodeURIComponent(route.value.query.investigation));if(run!==sequence)return;remember(inv)}
+      await chooseInvestigation(inv)
     }
-  } catch(e){if(run===sequence){error.value=errorText(e);all.value=undefined;workspace.value=undefined;backgroundTasks.value=[]}}
+  } catch(e){if(run===sequence)error.value=errorText(e)}
   finally{if(run===sequence)loading.value=false}
 }
-async function refreshOnEntry(){
-  await refresh()
-  if(current.value?.kind==='CASE' && current.value.sourceNature==='TEACHING_ERP_OBSERVED' && current.value.state!=='HANDLED' && !['PREPARED','SENDING','PENDING'].includes(current.value.body.confirmation?.status) && !busy.value)
-    await perform(()=>job(current.value!,'cases','evidence-jobs'))
-}
+watch(()=>currentTasks.value.map(t=>t.id+':'+t.state+':'+t.error).join('|'),()=>{
+  const finished=currentTasks.value.at(-1);if(!finished)return
+  activeTask.value=finished;taskId.value=finished.id
+  if(finished.error){note.value='';error.value=finished.error;return}
+  if(finished.state!=='SUCCEEDED'){note.value=finished.action==='advice-jobs'?'正在生成 AI 回复…':finished.action==='investigation-jobs'?'正在分析调查证据…':'正在更新订单资料…';return}
+  const a=details[finished.assetId];if(!a)return
+  if(current.value?.id===a.id){const previous=current.value;setCurrent(a);if(finished.action==='advice-jobs'){
+    note.value=adviceResult(a)
+    if(a.body.advice.at(-1)?.ai.status==='AVAILABLE'){
+      if(!humanText.value || humanText.value===previous.body.advice.at(-1)?.ai.output?.replyDraft)humanText.value=a.body.advice.at(-1).ai.output.replyDraft
+      else note.value='AI 回复已生成，当前编辑稿已保留，可查看并使用新草稿。'
+    }
+  }else note.value=a.body.evidence?.latestUnverified?'订单资料未更新成功，请稍后重试。':'订单资料已更新。'}
+  if(finished.action==='investigation-jobs' && finished.investigationId===investigationId.value){investigationOrigin.value=a;note.value=finished.report?.analysisReport?.modelStatus==='AVAILABLE'?'AI 调查分析已生成。':'AI 调查分析未生成，可重试或继续人工调查。'}
+},{immediate:true})
 async function command<T>(path:string,body:unknown):Promise<T> {
   if(pending.value)throw new Error('PENDING_COMMAND')
-  const value={path,body,key:crypto.randomUUID()};pending.value=value
+  const own=sessionEpoch(),value={path,body,key:crypto.randomUUID()};pending.value=value
   sessionStorage.setItem('b-pending-command',JSON.stringify({path:value.path,key:value.key}))
-  try{const result=await post<T>(path,body,value.key);if((result as any)?.handlingStatus!=='PENDING'){pending.value=undefined;sessionStorage.removeItem('b-pending-command')}return result}
-  catch(e){if(e instanceof ApiError){pending.value=undefined;sessionStorage.removeItem('b-pending-command')}throw e}
+  try{const result=await post<T>(path,body,value.key);if(own!==sessionEpoch())throw new Error('SESSION_ENDED');if((result as any)?.handlingStatus!=='PENDING'){pending.value=undefined;sessionStorage.removeItem('b-pending-command')}return result}
+  catch(e){if(own===sessionEpoch() && e instanceof ApiError){pending.value=undefined;sessionStorage.removeItem('b-pending-command')}throw e}
 }
 async function perform(action:()=>Promise<void>) {
   if(busy.value)return
   busy.value=true;error.value='';note.value=''
   try{await action()}catch(e){note.value='';error.value=e instanceof Error && !(e instanceof ApiError) && e.message==='PENDING_COMMAND'?'请先核对上一笔结果不确定的操作。':e instanceof Error && !(e instanceof ApiError) && e.message.startsWith('TASK:')?'任务未完成：'+e.message.slice(5)+'，已保留已有事实和记录。':errorText(e)}finally{busy.value=false}
 }
-async function retry() { if(!pending.value)return;await perform(async()=>{const p=pending.value!;const result=await request<any>('/commands/'+p.key,{},undefined,60000,'/api/b/v1');if(result.result?.handlingStatus!=='PENDING'){pending.value=undefined;sessionStorage.removeItem('b-pending-command')}await refresh();note.value=result.result?.handlingStatus==='PENDING'?'ERP 保存结果仍待核验。':result.result?.handlingStatus==='REJECTED'?'ERP 未接受本次处理，请更新记录后重新确认。':'处理结果已核对。';if(result.result?.taskRef)taskId.value=result.result.taskRef.taskId}) }
+async function retry() {if(!pending.value)return;await perform(async()=>{
+  const p=pending.value!,result=await request<any>('/commands/'+p.key,{},undefined,60000,'/api/b/v1')
+  if(result.result?.handlingStatus!=='PENDING'){pending.value=undefined;sessionStorage.removeItem('b-pending-command')}
+  const restored=result.result?.taskRef
+  if(restored){
+    const match=p.path.match(/^\/cases\/([^/]+)\/(evidence-jobs|advice-jobs|investigation-jobs)$/)
+    if(match){const key=taskKey(match[1],match[2]);tasks[key]={id:restored.taskId,assetId:match[1],action:match[2],startedAt:Date.now(),state:'QUEUED',error:''};followTask(key)}
+    taskId.value=restored.taskId
+  }
+  if(route.value.query.record && result.result?.kind==='CASE' && result.result?.id){const saved=await get<Asset>('/cases/'+result.result.id);remember(saved);open('cases',saved.id)}
+  await refresh();note.value=result.result?.handlingStatus==='PENDING'?'ERP 保存结果仍待核验。':result.result?.handlingStatus==='REJECTED'?'ERP 未接受本次处理，请更新记录后重新确认。':'处理结果已核对。'
+})}
 async function saveReply(decision:string){await perform(async()=>{
   const result=await mutate('cases',current.value!,'reviews',reviewData(current.value!,humanText.value,decision,reviewReason.value))
   if(result.handlingStatus==='PENDING'){note.value='ERP 保存结果待核验，请核对处理结果。';return}
@@ -120,50 +150,60 @@ async function saveReply(decision:string){await perform(async()=>{
 async function mutate(collection:string,asset:Asset,action:string,data:unknown) {
   const result=await command<any>('/'+collection+'/'+asset.id+'/'+action,{expectedRevision:asset.revision,data});await refresh();return result
 }
-async function job(asset:Asset,collection:string,action:string,data:unknown={}) {
-  activeTask.value=undefined
-  note.value=action==='advice-jobs'?'正在生成 AI 回复…':'正在核实资料…'
-  const accepted=await command<{ taskRef:{taskId:string} }>('/'+collection+'/'+asset.id+'/'+action,{expectedRevision:asset.revision,data})
-  taskId.value=accepted.taskRef.taskId
-  const ownTask=accepted.taskRef.taskId, ownRoute=route.value.path+'?'+(route.value.query.id || '')
-  // Task survives leaving this page. Re-open through history to continue reading.
-  for(let attempt=0;attempt<300 && alive.value;attempt++) {
-    const task=await request<any>('/analysis-tasks/'+ownTask)
-    if(ownTask===taskId.value)activeTask.value=task
-    if(task.state==='SUCCEEDED') {
-      const report=await request<any>('/analysis-tasks/'+ownTask+'/report')
-      if(ownRoute!==route.value.path+'?'+(route.value.query.id || ''))return
-      await refresh()
-      if(action==='advice-jobs'){note.value=adviceResult(current.value);if(current.value?.body.advice.at(-1)?.ai.status==='AVAILABLE'){if(!humanText.value || humanText.value===asset.body.advice.at(-1)?.ai.output?.replyDraft)humanText.value=current.value.body.advice.at(-1).ai.output.replyDraft;else note.value='AI 回复已生成，当前编辑稿已保留，可查看并使用新草稿。'}}
-      else note.value=action==='evidence-jobs'?(current.value?.body.evidence?.latestUnverified?'订单资料未更新成功，请稍后重试。':'订单资料已更新。'):action==='investigation-jobs'?(report.analysisReport?.modelStatus==='AVAILABLE'?'AI 调查分析已生成。':'AI 调查分析未生成，可重试或继续人工调查。'):'分析已保存。'
-      return
-    }
-    if(['FAILED','CANCELLED'].includes(task.state))throw new Error('TASK:'+(task.errorCode || task.state))
-    await new Promise(resolve=>setTimeout(resolve,1000))
-  }
-  if(alive.value)note.value='任务仍在后台，请稍后从任务历史查看。'
+async function job(asset:Asset,collection:string,action:string,data:any={}) {
+  const key=taskKey(asset.id,action,data.investigationId),existing=tasks[key]
+  if(taskRunning(existing)){followTask(key);return}
+  const accepted=await command<{taskRef:{taskId:string}}>('/'+collection+'/'+asset.id+'/'+action,{expectedRevision:asset.revision,data})
+  tasks[key]={id:accepted.taskRef.taskId,assetId:asset.id,action,investigationId:data.investigationId,startedAt:Date.now(),state:'QUEUED',error:''}
+  taskId.value=accepted.taskRef.taskId;followTask(key)
 }
-async function openSource(record:any){await perform(async()=>{
-  const erpTicketId=record.kind==='tickets'?record.ticketId:null
-  const erpVoiceId=record.kind==='tickets'?null:record.recordId
+async function openSource(record:any){
+  const erpTicketId=record.kind==='tickets'?record.ticketId:null,erpVoiceId=record.kind==='tickets'?null:record.recordId
   const existing=assets.value.find(a=>a.body.erpStoreName===record.storeName && (erpTicketId?a.body.erpTicketId===erpTicketId:a.body.erpVoiceId===erpVoiceId && a.body.erpVoiceKind===record.kind))
-  if(existing){open('cases',existing.id);const saved=await get<Asset>('/cases/'+existing.id);await job(saved,'cases','evidence-jobs');return}
-  const created=await command<Asset>('/cases',{title:record.title || '客户反馈',message:'',region:'UNKNOWN',platform:'UNKNOWN',language:'zh',erpStoreName:record.storeName,erpTicketId,erpVoiceId,erpVoiceKind:erpVoiceId?record.kind:null})
-  open('cases',created.id);const saved=await get<Asset>('/cases/'+created.id);await job(saved,'cases','evidence-jobs')
-})}
+  if(existing){remember(existing);open('cases',existing.id);return}
+  const key=[record.storeName,record.kind,erpTicketId || erpVoiceId].join(':')
+  sources[key]=record;navigate('/after-sales/cases',{record:key});previewSource(key)
+  if(opening[key])return
+  opening[key]=true;const own=sessionEpoch()
+  try {
+    const created=await command<Asset>('/cases',{title:record.title || '客户反馈',message:'',region:'UNKNOWN',platform:'UNKNOWN',language:'zh',erpStoreName:record.storeName,erpTicketId,erpVoiceId,erpVoiceKind:erpVoiceId?record.kind:null})
+    const saved=await get<Asset>('/cases/'+created.id)
+    if(own!==sessionEpoch())return
+    remember(saved)
+    if(alive.value && route.value.query.record===key){open('cases',saved.id)}
+  }catch(e){if(own===sessionEpoch() && alive.value && route.value.query.record===key)error.value=errorText(e)}
+  finally{if(own===sessionEpoch())delete opening[key]}
+}
 function formatDate(value:any){return value?new Date(value).toLocaleString('zh-CN',{hour12:false}):'未提供'}
 function prepareInvestigation(){investigationOpen.value=true;investigationText.value=(lastAdvice.value?.feedbackAI?.analysis.output?.hypotheses || []).join('；')}
 async function more(key:keyof Workbench,path:string){await perform(async()=>{const old=all.value?.[key];if(!old?.nextCursor)return;const next=await get<Index>('/'+path+'?limit=100&before='+old.nextCursor);old.items.push(...next.items);old.nextCursor=next.nextCursor})}
 async function editPolicy(p:Asset){await perform(()=>mutate('policies',p,'new-version',{policy:{...Object.fromEntries(Object.entries(p.body).filter(([k])=>!k.startsWith('_') && !['publishedBy','publishedAt','publishReason','revocationReason'].includes(k))),sections:[{id:'s1',text:policyRevisionText.value}]}}));editingPolicy.value=''}
 const availableEvidence=computed(()=>current.value?.body.evidence?.facts.map((f:any)=>({id:f.id,text:factText(f)})) || [])
-async function chooseInvestigation(a:Asset){investigationId.value=a.id;conclusion.value='OPEN';investigationText.value='';investigationOrigin.value=await get<Asset>('/cases/'+a.body.origin.id);limitations.value='问题原因及影响范围仍待核实';const proof=await get<any>('/investigations/'+a.id+'/facts');investigationEvidence.value=proof.items.map((f:any)=>({id:f.id,text:factText(f)}));chosenEvidence.value=(a.body.entries.at(-1)?.evidenceRefs || []).filter((id:string)=>investigationEvidence.value.some(f=>f.id===id))}
-async function assistInvestigation(){const origin=await get<Asset>('/cases/'+activeInvestigation.value!.body.origin.id);await job(origin,'cases','investigation-jobs',{investigationId:activeInvestigation.value!.id})}
-async function startSourceInvestigation(kind:'return'|'monitor',body:any){await perform(async()=>{
-  const result=await command<any>(kind==='return'?'/return-cases':'/monitor-cases',body)
-  const origin=await get<Asset>('/cases/'+result.id)
-  const inv=await command<any>('/investigations',{kind:'CASE',id:origin.id,text:origin.body.title,evidenceRefs:(origin.body.evidence?.facts || []).slice(0,100).map((f:any)=>f.id)})
-  viewInvestigation(inv.id)
-})}
+async function chooseInvestigation(a:Asset){
+  investigationId.value=a.id;conclusion.value='OPEN';investigationText.value='';limitations.value='问题原因及影响范围仍待核实'
+  const key='investigation:'+a.id+':'+a.revision
+  await loadPage(key,async()=>{const [origin,proof]=await Promise.all([get<Asset>('/cases/'+a.body.origin.id),get<any>('/investigations/'+a.id+'/facts')]);return {origin,proof}})
+  if(investigationId.value!==a.id || !alive.value)return
+  const result=resultPage(key);if(result.error){error.value=result.error;return}
+  investigationOrigin.value=details[a.body.origin.id] || result.data.origin
+  investigationEvidence.value=result.data.proof.items.map((f:any)=>({id:f.id,text:factText(f)}));chosenEvidence.value=(a.body.entries.at(-1)?.evidenceRefs || []).filter((id:string)=>investigationEvidence.value.some(f=>f.id===id))
+}
+async function assistInvestigation(){const origin=details[activeInvestigation.value!.body.origin.id] || await get<Asset>('/cases/'+activeInvestigation.value!.body.origin.id);await job(origin,'cases','investigation-jobs',{investigationId:activeInvestigation.value!.id})}
+async function startSourceInvestigation(kind:'return'|'monitor',body:any){
+  const key=[kind,body.store,body.returnId || body.sku,body.sku].join(':');if(opening[key])return
+  const own=sessionEpoch(),ownRoute=location.hash;opening[key]=true;error.value=''
+  try{
+    const result=await command<any>(kind==='return'?'/return-cases':'/monitor-cases',body)
+    if(own!==sessionEpoch())return
+    const origin=await get<Asset>('/cases/'+result.id)
+    if(own!==sessionEpoch())return
+    const inv=await command<any>('/investigations',{kind:'CASE',id:origin.id,text:origin.body.title,evidenceRefs:(origin.body.evidence?.facts || []).slice(0,100).map((f:any)=>f.id)})
+    if(own!==sessionEpoch())return
+    remember(origin);await loadIndex(true)
+    if(alive.value && location.hash===ownRoute)viewInvestigation(inv.id)
+  }catch(e){if(own===sessionEpoch() && alive.value && location.hash===ownRoute)error.value=errorText(e)}
+  finally{if(own===sessionEpoch())delete opening[key]}
+}
 async function addInvestigationEvidence(){await perform(async()=>{await mutate('investigations',activeInvestigation.value!,'evidence',{text:manualEvidence.value,sourceRef:manualEvidenceSource.value});manualEvidence.value='';manualEvidenceSource.value=''})}
 async function importPolicyDrafts() {await perform(async()=>{const path='/policy-starters'+(starterScope.value==='AMAZON'?'?region=US&platform=Amazon':'');for(const p of await get<any[]>(path)){if(!all.value?.policy.items.some(a=>a.body.title===p.title && a.body.region===p.region && a.body.platform===p.platform && JSON.stringify(a.body.sections)===JSON.stringify(p.sections)))await command('/policies',p)}await refresh();note.value='政策草稿已准备。'})}
 async function createPolicy() {await perform(async()=>{
@@ -179,20 +219,21 @@ function warnDraft(event:BeforeUnloadEvent){if((humanText.value && humanText.val
 function guardDraft(event:MouseEvent){const anchor=(event.target as Element)?.closest('a');if(anchor && anchor.hash!==location.hash && ((humanText.value && humanText.value!==draftBaseline.value) || message.value) && !confirm('人工处理稿或补充消息尚未保存。确认离开并放弃未保存内容？')){event.preventDefault();event.stopImmediatePropagation()}}
 onMounted(()=>{window.addEventListener('beforeunload',warnDraft);document.addEventListener('click',guardDraft,true)})
 onBeforeUnmount(()=>{window.removeEventListener('beforeunload',warnDraft);document.removeEventListener('click',guardDraft,true)})
-watch(()=>route.value.query.id,(id,previous)=>{if(id!==previous){humanText.value='';reviewReason.value='';message.value='';attachments.value=''}})
-onMounted(()=>{try{const saved=sessionStorage.getItem('b-pending-command');if(saved)pending.value=JSON.parse(saved)}catch{};void refreshOnEntry()})
+watch(()=>[route.value.query.id,route.value.query.record].join(':'),(id,previous)=>{if(id!==previous){draftCaseId.value='';humanText.value='';reviewReason.value='';message.value='';attachments.value=''}})
+onMounted(()=>{restoreTasks();Object.keys(tasks).forEach(followTask);try{const saved=sessionStorage.getItem('b-pending-command');if(saved)pending.value=JSON.parse(saved)}catch{};void refresh(false)})
 onBeforeUnmount(()=>{alive.value=false;sequence++})
-watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation],()=>{investigationOpen.value=false;riskRegister.value=false;investigationId.value='';riskDecisionReason.value='';void refreshOnEntry()})
+watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation,route.value.query.record],()=>{investigationOpen.value=false;riskRegister.value=false;investigationId.value='';riskDecisionReason.value='';note.value='';error.value='';void refresh(false)})
 </script>
 
 <template>
   <div class="b-page">
     <a v-if="current?.kind==='CASE'" class="back" :href="link('workbench')">← 返回工作台</a>
     <a v-if="returnTo" class="back" :href="'#'+returnTo">← 返回原补货页面</a>
-    <header class="page-head"><div><h1>{{title}}</h1></div><button v-if="current?.state!=='HANDLED' && !pending && (current || !['workbench','cases','experience'].includes(section))" class="button small" :disabled="busy || loading" @click="current?.kind==='CASE'?perform(()=>job(current!,'cases','evidence-jobs')):refresh()">更新记录</button></header>
+    <header class="page-head"><div><h1>{{title}}</h1></div><button v-if="current?.state!=='HANDLED' && !pending && (current || !['workbench','cases','experience'].includes(section))" class="button small" :disabled="caseBusy || loading || current?.revision===0" @click="current?.kind==='CASE'?perform(()=>job(current!,'cases','evidence-jobs')):refresh()">更新记录</button></header>
     <p v-if="error" class="banner danger" role="alert">{{error}}</p><p v-if="note" class="banner" role="status">{{note}}</p>
+    <p v-if="current?.revision===0 && caseBusy" class="banner" role="status">正在准备处理记录…</p><button v-if="current?.revision===0 && !caseBusy && !pending" class="button small" @click="openSource(sources[route.query.record])">重试</button><p v-for="t in currentTasks.filter(t=>t.error && taskRunning(t))" :key="t.id" class="banner warning">任务结果待查询。<button class="button small" @click="followTask(taskKey(t.assetId,t.action,t.investigationId))">继续查询</button></p>
     <p v-if="pending && !busy" class="banner warning">保存结果待核验。<button class="button small" @click="retry">核对处理结果</button></p>
-    <p v-if="loading" role="status">正在读取当前记录…</p>
+    <p v-if="loading && !current && !all" role="status">正在读取当前记录…</p>
 
 
     <template v-if="['workbench','cases'].includes(section) && !current && !route.query.id">
@@ -203,7 +244,7 @@ watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation
     <template v-if="current?.kind==='CASE'">
       <div class="b-case-meta"><span class="chip" :class="current.state==='ESCALATED'?'danger':'plain'">{{status(current)}}</span><span>{{storeLabel(current.body.erpStoreName)}}</span></div>
       <p v-if="current.state==='ESCALATED'" class="banner danger">请优先核实安全问题并跟进处理。</p>
-      <CaseWorkspace :asset="current" :busy="busy" :model-enabled="!!workspace?.modelEnabled" v-model:draft="humanText" v-model:message="message" v-model:attachments="attachments" v-model:reason="reviewReason"
+      <CaseWorkspace :asset="current" :busy="caseBusy || current.revision===0" :model-enabled="!!workspace?.modelEnabled" v-model:draft="humanText" v-model:message="message" v-model:attachments="attachments" v-model:reason="reviewReason"
         @generate="perform(()=>job(current!,'cases','advice-jobs'))" @evidence="perform(()=>job(current!,'cases','evidence-jobs'))" @history="showHistory" @investigate="prepareInvestigation()"
         @append="perform(async()=>{await mutate('cases',current!,'messages',{text:message,attachmentRefs:attachments.split(',').map(x=>x.trim()).filter(Boolean)});message='';attachments=''})"
         @link="(selected:string,reason:string)=>perform(async()=>{await mutate('cases',current!,'links',{lineId:selected,reason});await job(current!,'cases','evidence-jobs')})"
@@ -217,7 +258,7 @@ watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation
 
     <template v-if="section==='risks'">
       <template v-if="current?.kind==='RISK'"><a :href="link('risks')" class="back">← 返回调查与风险</a><section class="panel b-panel"><div class="b-row"><h2>{{current.body.reason}}</h2><span class="chip warning">{{status(current)}}</span></div><p>{{current.body.limitations}}</p><dl class="b-fact-list"><div><dt>适用商品</dt><dd>{{current.body.identity.sku}}</dd></div><div><dt>适用店仓</dt><dd>{{current.body.identity.storeId}} / {{current.body.identity.warehouseMode==='ALL_STORE_WAREHOUSES'?'本店所有仓':current.body.identity.warehouseIds.join('、')}}</dd></div><div><dt>有效至</dt><dd>{{current.body.validUntil?formatDate(current.body.validUntil):'尚未人工确认'}}</dd></div></dl><div v-if="current.state==='SUSPECTED' || effectiveState(current)==='CONFIRMED'" class="b-risk-decision"><h3>{{current.state==='SUSPECTED'?'人工核实后确认提醒':'管理当前风险提醒'}}</h3><label>决定理由<input v-model="riskDecisionReason" required placeholder="记录核实依据或关闭、撤销原因"></label><label v-if="current.state==='SUSPECTED'">提醒有效至<input type="datetime-local" :value="new Date(validUntil).toLocaleString('sv-SE').slice(0,16).replace(' ','T')" @change="validUntil=new Date(($event.target as HTMLInputElement).value).toISOString()"></label><div class="button-row"><button v-for="d in (current.state==='SUSPECTED'?[{key:'CONFIRM',name:'确认风险并启用提醒'},{key:'REJECT',name:'驳回'}]:[{key:'CLOSE',name:'关闭'},{key:'REVOKE',name:'撤销'}])" :key="d.key" class="button" :class="{primary:d.key==='CONFIRM'}" :disabled="busy || !riskDecisionReason" @click="perform(()=>mutate('risks',current!,'decisions',{decision:d.key,reason:riskDecisionReason,validUntil:d.key==='CONFIRM'?validUntil:null}))">{{d.name}}</button></div></div><details open><summary>调查来源与决定历史</summary><p v-for="entry in all?.investigation.items.find(a=>a.id===current!.body.investigationId)?.body.entries || []" :key="entry.at">{{entry.text}}</p><blockquote v-for="(d,i) in current.body.decisions" :key="i">{{d.reason}}<small>{{d.actor}} · {{formatDate(d.at)}}</small></blockquote><button class="button small" @click="perform(async()=>{const a=all!.investigation.items.find(a=>a.id===current!.body.investigationId);if(a){viewInvestigation(a.id)}})">查看关联调查</button></details></section></template>
-      <template v-else><section v-if="activeInvestigation" class="panel b-panel"><div class="b-row"><h2>AI 调查分析</h2><button class="button" :disabled="busy || !workspace?.modelEnabled" @click="perform(assistInvestigation)">AI 辅助调查</button></div><template v-if="investigationAssist"><article v-for="a in [investigationAssist]" :key="a.at"><div v-if="a.ai.output"><p v-if="a.investigationRevision!==activeInvestigation.revision" class="muted">证据已更新，可重新分析。</p><h3>待核实线索</h3><p v-for="x in a.ai.output.hypotheses" :key="x">{{x}}</p><h3>其他可能</h3><p v-for="x in a.ai.output.alternativeExplanations" :key="x">{{x}}</p><h3>建议补充</h3><p v-for="x in a.ai.output.missingEvidence" :key="x">{{x}}</p><h3>下一步</h3><p v-for="x in a.ai.output.nextSteps" :key="x">{{x}}</p></div><p v-else class="muted">AI 暂不可用，可继续人工调查。</p></article></template><p v-else class="muted">暂无 AI 调查分析</p></section><template v-if="!activeInvestigation"><div class="b-risk-summary"><span>待跟进 <b>{{scopedInvestigations.filter(a=>['OPEN','NEEDS_EVIDENCE'].includes(a.state)).length}}</b></span><span>待确认 <b>{{scopedRisks.filter(r=>r.state==='SUSPECTED').length}}</b></span><span>有效提醒 <b>{{scopedRisks.filter(r=>effectiveState(r)==='CONFIRMED').length}}</b></span></div>
+      <template v-else><section v-if="activeInvestigation" class="panel b-panel"><div class="b-row"><h2>AI 调查分析</h2><button class="button" :disabled="busy || currentTasks.some(taskRunning) || !workspace?.modelEnabled" @click="perform(assistInvestigation)">{{currentTasks.some(taskRunning)?'正在分析…':'AI 辅助调查'}}</button></div><template v-if="investigationAssist"><article v-for="a in [investigationAssist]" :key="a.at"><div v-if="a.ai.output"><p v-if="a.investigationRevision!==activeInvestigation.revision" class="muted">证据已更新，可重新分析。</p><h3>待核实线索</h3><p v-for="x in a.ai.output.hypotheses" :key="x">{{x}}</p><h3>其他可能</h3><p v-for="x in a.ai.output.alternativeExplanations" :key="x">{{x}}</p><h3>建议补充</h3><p v-for="x in a.ai.output.missingEvidence" :key="x">{{x}}</p><h3>下一步</h3><p v-for="x in a.ai.output.nextSteps" :key="x">{{x}}</p></div><p v-else class="muted">AI 暂不可用，可继续人工调查。</p></article></template><p v-else class="muted">暂无 AI 调查分析</p></section><template v-if="!activeInvestigation"><div class="b-risk-summary"><span>待跟进 <b>{{scopedInvestigations.filter(a=>['OPEN','NEEDS_EVIDENCE'].includes(a.state)).length}}</b></span><span>待确认 <b>{{scopedRisks.filter(r=>r.state==='SUSPECTED').length}}</b></span><span>有效提醒 <b>{{scopedRisks.filter(r=>effectiveState(r)==='CONFIRMED').length}}</b></span></div>
         <section class="panel b-panel"><h2>待跟进调查</h2><p v-if="!scopedInvestigations.some(a=>['OPEN','NEEDS_EVIDENCE'].includes(a.state))" class="muted">暂无调查。</p><article v-for="a in scopedInvestigations.filter(a=>['OPEN','NEEDS_EVIDENCE'].includes(a.state))" :key="a.id" class="b-fact"><div class="b-row"><div><b>{{a.body.entries[0].text}}</b><small>{{status(a)}} · {{formatDate(a.body.entries.at(-1).at)}}</small></div><button class="button small" :disabled="busy" @click="viewInvestigation(a.id)">继续调查</button></div></article><details v-if="scopedInvestigations.some(a=>!['OPEN','NEEDS_EVIDENCE'].includes(a.state))"><summary>已记录结论的调查</summary><a v-for="a in scopedInvestigations.filter(a=>!['OPEN','NEEDS_EVIDENCE'].includes(a.state))" :key="a.id" class="b-list-row" :href="href('/after-sales/risks',{investigation:a.id})"><span>{{a.body.entries[0].text}}</span><span>{{status(a)}}</span></a></details></section>
 <section class="panel b-panel"><div class="b-queue-tabs"><button v-for="q in [{key:'CURRENT',name:'风险提醒'},{key:'HISTORY',name:'历史记录'},{key:'ALL',name:'全部'}]" :key="q.key" :class="{active:riskView===q.key}" @click="riskView=q.key">{{q.name}}</button></div><a v-for="a in filteredRisks" :key="a.id" class="b-list-row" :href="link('risks',a.id)"><div><b>{{a.body.reason}}</b><small>{{a.body.identity.sku}}</small></div><span class="chip warning">{{status(a)}}</span></a><p v-if="!filteredRisks.length" class="muted">暂无风险提醒。</p></section></template><a v-else class="back" :href="link('risks')">← 返回调查与风险</a>
         <section v-if="activeInvestigation" class="panel b-panel"><h2>{{activeInvestigation.body.entries[0].text}}</h2><a :href="link('cases',activeInvestigation.body.origin.id)">查看来源问题与证据 →</a><details><summary>调查记录</summary><p v-for="(e,i) in activeInvestigation.body.entries" :key="i">{{e.text}} · {{formatDate(e.at)}}</p></details><details><summary>添加证据</summary><form class="b-form" @submit.prevent="addInvestigationEvidence"><label>核实内容<textarea v-model="manualEvidence" required placeholder="检验结果、客户描述或现场记录"></textarea></label><label>证据来源<input v-model="manualEvidenceSource" required placeholder="照片位置、检验单号或记录链接"></label><button class="button" :disabled="busy">保存证据</button></form></details><form class="b-form" @submit.prevent="perform(()=>mutate('investigations',activeInvestigation!,'entries',{text:investigationText,evidenceRefs:chosenEvidence,conclusion}))"><label>本次核实情况<textarea v-model="investigationText" required placeholder="记录已核事实、补证及下一步"></textarea></label><details><summary>选择可追溯证据（已选 {{chosenEvidence.length}} 条）</summary><label v-for="f in investigationEvidence" :key="f.id" class="b-check"><input v-model="chosenEvidence" type="checkbox" :value="f.id">{{f.text}}</label></details><label>人工结论<select v-model="conclusion" aria-label="人工结论"><option value="OPEN">继续调查</option><option value="SUPPORTED">证据支持风险</option><option value="REJECTED">证据不支持</option><option value="NEEDS_EVIDENCE">需进一步补证</option></select></label><button class="button primary" :disabled="busy || (conclusion==='SUPPORTED' && !chosenEvidence.length)">保存调查结论</button></form><button v-if="activeInvestigation.state==='SUPPORTED' && !risks.some(r=>r.body.investigationId===activeInvestigation!.id)" class="button" :disabled="busy" @click="riskRegister=true;riskReason=activeInvestigation.body.entries[0].text">确认质量风险</button><p v-else class="muted">{{risks.some(r=>r.body.investigationId===activeInvestigation!.id)?'此调查已有关联风险。':'请先保存人工调查结论。'}}</p></section>
@@ -230,7 +271,7 @@ watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation
     </template>
 
     <Modal v-if="investigationOpen" title="发起人工调查" @close="investigationOpen=false"><form class="b-form" @submit.prevent="investigate(current!)"><label>需要调查的问题<textarea v-model="investigationText" required></textarea></label><fieldset><legend>本次调查依据</legend><label v-for="f in availableEvidence" :key="f.id" class="b-check"><input v-model="chosenEvidence" type="checkbox" :value="f.id">{{f.text}}</label></fieldset><button class="button primary" :disabled="busy || !chosenEvidence.length">保存调查</button></form></Modal>
-    <section v-if="all && ['workbench','cases','experience','risks'].includes(section)" class="b-tasks"><details><summary>后台任务与恢复</summary><p v-if="taskId">当前任务 {{taskId}}</p><button class="button" :disabled="busy" @click="perform(async()=>{const tasks=await get<any>('/tasks?workspaceId=after-sales-v1');backgroundTasks=tasks.items.filter((t:any)=>['B_CASE_EVIDENCE_V1','B_CASE_ADVICE_V1','B_INVESTIGATION_ASSIST_V1'].includes(t.scenarioId))})">查询任务历史</button><div v-for="t in backgroundTasks" :key="t.taskRef.taskId" class="b-list-row"><span>{{'售后处理'}} · {{t.state==='SUCCEEDED'?'已完成':t.state==='FAILED'?'需处理':t.state==='RUNNING'?'处理中':'等待处理'}}</span><button v-if="t.state==='SUCCEEDED'" class="button small" :disabled="busy" @click="perform(async()=>{const r=await request<any>('/analysis-tasks/'+t.taskRef.taskId+'/report');if(r.analysisReport.domainKind==='CASE')open('cases',r.analysisReport.domainRef.id)})">查看结果</button><span v-if="t.errorCode">{{t.errorCode}}</span></div></details></section>
+    <section v-if="all && ['workbench','cases','experience','risks'].includes(section)" class="b-tasks"><details><summary>后台任务与恢复</summary><p v-if="taskId">当前任务 {{taskId}}</p><div v-for="(t,key) in tasks" :key="t.id" class="b-list-row"><span>{{t.action==='advice-jobs'?'AI 回复':t.action==='investigation-jobs'?'调查分析':'资料更新'}} · {{t.state==='SUCCEEDED'?'已完成':t.state==='FAILED'?'未完成':'处理中'}}</span><button class="button small" @click="open('cases',t.assetId);followTask(key)">{{t.error?'继续查询':'查看'}}</button></div><button class="button" :disabled="busy" @click="perform(async()=>{const tasks=await get<any>('/tasks?workspaceId=after-sales-v1');backgroundTasks=tasks.items.filter((t:any)=>['B_CASE_EVIDENCE_V1','B_CASE_ADVICE_V1','B_INVESTIGATION_ASSIST_V1'].includes(t.scenarioId))})">查询任务历史</button><div v-for="t in backgroundTasks" :key="t.taskRef.taskId" class="b-list-row"><span>{{'售后处理'}} · {{t.state==='SUCCEEDED'?'已完成':t.state==='FAILED'?'需处理':t.state==='RUNNING'?'处理中':'等待处理'}}</span><button v-if="t.state==='SUCCEEDED'" class="button small" :disabled="busy" @click="perform(async()=>{const r=await request<any>('/analysis-tasks/'+t.taskRef.taskId+'/report');if(r.analysisReport.domainKind==='CASE')open('cases',r.analysisReport.domainRef.id)})">查看结果</button><span v-if="t.errorCode">{{t.errorCode}}</span></div></details></section>
   </div>
 </template>
 

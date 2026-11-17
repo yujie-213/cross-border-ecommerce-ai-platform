@@ -51,8 +51,9 @@ class Handler:
                         if body.get('erpReturnId') or body.get('erpMonitorSku'):
                             from .analysis_evidence import return_evidence,monitor_evidence
                             window=body.get('erpMonitorWindow') or {}
-                            snapshot=self.source_reader.return_analysis(body['erpStoreName'],context.check,
-                                end_date=window.get('endDate'),window_days=window.get('windowDays',7))
+                            snapshot=(self.source_reader.return_detail(body['erpStoreName'],body['erpReturnId'],body.get('erpReturnSku'),context.check)
+                                if body.get('erpReturnId') else self.source_reader.return_analysis(body['erpStoreName'],context.check,
+                                    end_date=window.get('endDate'),window_days=window.get('windowDays',7)))
                             evidence=(return_evidence(snapshot,body['erpReturnId'],body.get('erpReturnSku')) if body.get('erpReturnId')
                                 else monitor_evidence(snapshot,body['erpMonitorSku'],self.source_reader.members(body['erpStoreName'])))
                         else:

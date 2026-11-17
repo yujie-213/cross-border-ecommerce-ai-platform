@@ -1,4 +1,4 @@
-%% TASKS sourceSha256=262667fa4486b32a8299fb7514e2c6dd7ea7d56eb0ada966ecbff4eaf823ea8d
+%% TASKS sourceSha256=dc8d2ccd8c9d30b1a2425fff744abdba0418c82445249f358581f5e40110d416
 flowchart TB
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
@@ -62,6 +62,7 @@ flowchart TB
   D_B_DATASET_01["D-B-DATASET-01 独立完整教学数据导入、校验及独立回读"]
   D_B_ERP_SIMULATION_01["D-B-ERP-SIMULATION-01 3SKU完整仿真ERP经营数据及双Agent可读验证"]
   D_B_RETURNS_WORKFLOW_01["D-B-RETURNS-WORKFLOW-01 售后四入口与退货商品调查流程整改及ERP数据复验"]
+  D_B_PAGE_EXPERIENCE_01["D-B-PAGE-EXPERIENCE-01 售后页面保留结果与按需分析体验修复"]
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03
@@ -159,3 +160,4 @@ flowchart TB
   D_B_S01_01 --> D_B_ERP_SIMULATION_01
   D_B_ERP_SIMULATION_01 --> D_B_RETURNS_WORKFLOW_01
   D_B_S01_01 --> D_B_RETURNS_WORKFLOW_01
+  D_B_RETURNS_WORKFLOW_01 --> D_B_PAGE_EXPERIENCE_01

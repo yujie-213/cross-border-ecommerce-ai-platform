@@ -3,10 +3,10 @@ from copy import deepcopy
 from datetime import timedelta
 from uuid import uuid4
 
-from sqlalchemy import select
+from sqlalchemy import insert,select
 from .common import WORKSPACE,now,timestamp,require,safety,scope,digest
 from .store import Store
-from .tables import assets
+from .tables import assets,manifests
 from .policies import applicable,validate_policy
 
 
@@ -59,7 +59,16 @@ class AfterSales:
         from .analysis_evidence import return_evidence
         require(isinstance(return_id,str) and return_id.isdigit(),'RETURN_ID_INVALID')
         data=dict(store=store,returnId=return_id,sku=sku)
-        snapshot=self.return_analysis(actor,store)
+        require(self.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
+        expected=self.source_reader._store(store)
+        resource=scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=expected['sourceTenant'])
+        def check():
+            with self.store.engine.begin() as conn:
+                self.store.authorize(conn,actor,'b:read',resource)
+                self.store.authorize(conn,actor,'b:case:write',resource)
+        check()
+        snapshot=self.source_reader.return_detail(store,return_id,sku,check)
+        check()
         proof=return_evidence(snapshot,return_id,sku);identity=proof['identity']
         resource=scope(actor.tenant_id,'CASE',source='TEACHING_ERP_OBSERVED',source_tenant=identity['sourceTenant'])
         body=dict(title=proof['title'],messages=[dict(role='CUSTOMER',text=proof['customerText'],source='ERP_RETURN_REASON',at=proof.get('businessDate') or snapshot['observedAt'])],
@@ -98,7 +107,7 @@ class AfterSales:
         require(not data.get('datasetId') and data.get('erpStoreName') and (data.get('erpTicketId') or data.get('erpVoiceId')),'ERP_SOURCE_REQUIRED')
         require(self.source_reader is not None,'ERP_SOURCE_NOT_CONFIGURED',503)
         if data.get('businessDate'):timestamp(data['businessDate'])
-        membership=[]
+        membership=[];proof=None
         if data.get('erpStoreName') and self.source_reader and getattr(self.source_reader,'owned_provider',None) is not None:
             require(data.get('erpTicketId') or data.get('erpVoiceId'),'OWNED_SOURCE_RECORD_REQUIRED')
             expected=self.source_reader._store(data['erpStoreName'])
@@ -117,6 +126,21 @@ class AfterSales:
             if membership:body['sourceMembership']=membership
             body['erpTicketId']=data.get('erpTicketId');body['erpStoreName']=data.get('erpStoreName')
             body['erpVoiceId']=data.get('erpVoiceId');body['erpVoiceKind']=data.get('erpVoiceKind')
+            # Admission already independently read these exact ERP records. Save
+            # that evidence once rather than throwing it away and automatically
+            # scheduling another identical read when the page opens.
+            if proof:
+                body['evidence']=dict(proof,snapshotRef=uuid4().hex)
+                body['identity']=proof.get('identity')
+                body['title']=proof.get('title') or body['title']
+                if proof.get('businessDate'):
+                    value=proof['businessDate'];body['businessDate']=value+'T00:00:00+08:00' if len(value)==10 else value
+                for field in ('region','platform'):
+                    if proof.get(field):body[field]=proof[field]
+                if proof.get('customerText'):
+                    body['messages'].append(dict(role='CUSTOMER',text=proof['customerText'],source='OBSERVED',
+                        sourceRef=('customer-voice:'+body['erpVoiceKind']+':'+body['erpVoiceId'] if body['erpVoiceId'] else 'customer-ticket:'+body['erpTicketId']),at=proof['observedAt']))
+                body['messages'].extend(deepcopy(proof.get('supplementalMessages',[])))
             require(not body['erpVoiceId'] or body['erpVoiceKind'] in {'reviews','feedback'} and body['erpStoreName'] and not body['erpTicketId'],'SOURCE_MIXED')
             source='TEACHING_ERP_OBSERVED'
             if body['erpStoreName']:
@@ -131,7 +155,15 @@ class AfterSales:
                 if existing:
                     row=self.store.get(conn,actor,'CASE',existing)
                     return dict(kind='CASE',id=existing,revision=row['revision'],state=row['state'])
-            result=self.store.create(conn,actor,'CASE',body,scope(actor.tenant_id,'CASE',source=source,source_tenant=self.source_reader._store(body['erpStoreName'])['sourceTenant']),state='ESCALATED' if safety(data['message']) else 'OPEN')
+            state='OPEN'
+            if proof and body.get('identity') and body['identity']['category']=='ELECTRONICS' and any(w in ' '.join(m['text'] for m in body['messages']) for w in ('尺码','尺寸偏小','size too small')):
+                body['evidence']['missing'].append('客户尺码诉求与已核商品属性冲突，请澄清');state='NEEDS_CLARIFICATION'
+            if safety(' '.join(m['text'] for m in body['messages'])):state='ESCALATED'
+            result=self.store.create(conn,actor,'CASE',body,scope(actor.tenant_id,'CASE',source=source,source_tenant=self.source_reader._store(body['erpStoreName'])['sourceTenant']),state=state)
+            if proof:
+                saved=self.store.get(conn,actor,'CASE',result['id'])
+                manifest=dict(sourceNature=source,assetKind='CASE',assetId=result['id'],assetRevision=1,inputHash=digest(proof),domainRef=result,observedAt=proof['observedAt'])
+                conn.execute(insert(manifests).values(tenant_id=actor.tenant_id,snapshot_id=body['evidence']['snapshotRef'],scope=saved['scope'],body=manifest,content_hash=digest(manifest)))
             return dict(kind='CASE',**result)
         return self.store.command(actor,key,'create-case',data,operation)
 

@@ -125,6 +125,45 @@ class SourceReader:
                 except ValueError:pass
         return None
 
+    def return_detail(self,store,return_id,sku,check):
+        """Read one registered return/order/product without scanning store cohorts."""
+        expected=self._store(store);members=self.members(store)
+        require(members is not None,'OWNED_SCOPE_REQUIRED',503)
+        reader=self.factory();check();payload=reader.detail('sales-returns',return_id)
+        record=payload.get('data',payload)
+        require(str(record.get('id'))==return_id,'RETURN_ITEM_NOT_FOUND',404)
+        require(record.get('tenant_id') is None or str(record['tenant_id'])==expected['sourceTenant'],'SOURCE_IDENTITY_MISMATCH')
+        order_id=str(record.get('order_id'))
+        candidates=[m for m in members if m.sku==sku and order_id in m.monitor.salesIds
+            and m.sourceTenant==expected['sourceTenant'] and m.sourceStore==expected['storeId']]
+        require(candidates,'SOURCE_NOT_OWNED',403)
+        check();batch=reader.read('/api/v1/sales-orders',dict(ids=order_id),page_size=20,max_pages=1)
+        orders=[o for o in batch.records if batch.complete and str(o.get('id'))==order_id
+            and str(o.get('tenant_id'))==expected['sourceTenant'] and o.get('store_name')==store]
+        require(len(orders)==1,'SOURCE_IDENTITY_MISMATCH')
+        order=orders[0]
+        if len(candidates)>1:
+            candidates=[m for m in candidates if order.get('shipping_warehouse') and getattr(m,'warehouseName',None)==order['shipping_warehouse']]
+        require(len(candidates)==1,'SOURCE_IDENTITY_MISMATCH')
+        member=candidates[0]
+        lines=[r for r in record.get('item_list',[]) if r.get('sku')==sku]
+        order_lines=[(i,r) for i,r in enumerate(order.get('item_list',[])) if r.get('sku')==sku]
+        require(len(lines)==1 and len(order_lines)==1,'RETURN_ITEM_NOT_FOUND',404)
+        check();products=reader.read('/api/v1/products',dict(ids=member.monitor.productId),page_size=20,max_pages=2)
+        matches=[p for p in products.records if products.complete and str(p.get('id'))==member.monitor.productId
+            and p.get('sku')==sku and str(p.get('tenant_id'))==expected['sourceTenant']]
+        require(len(matches)==1,'SOURCE_IDENTITY_MISMATCH')
+        product=matches[0];category,attributes=self.product_attributes(product)
+        item=dict(id=return_id,returnNo=record.get('return_no'),orderId=order_id,orderNumber=order.get('order_sn'),
+            productId=member.monitor.productId,sku=sku,productName=product.get('product_name') or product.get('name') or sku,
+            quantity=int(lines[0].get('quantity',0)),reason=record.get('reason') or '',state=record.get('state'),
+            createdAt=record.get('created_at'),receivedAt=record.get('received_at'),quality=record.get('quality_list') or [],
+            identity=dict(sourceTenant=member.sourceTenant,productId=member.monitor.productId,sku=sku,storeId=member.sourceStore,
+                warehouseId=member.sourceWarehouse,orderId=order_id,lineId=order_id+':'+str(order_lines[0][0]),category=category,attributes=attributes),
+            sourceRef='sales-returns:'+return_id,orderDate=self._day(order).isoformat() if self._day(order) else None)
+        check()
+        return dict(items=[item],complete=True,observedAt=now(),sourceNature='TEACHING_ERP_OBSERVED')
+
     def return_analysis(self,store,check,*,end_date=None,window_days=7):
         """Read returns only through project-owned orders and compare shipped cohorts."""
         from datetime import date,timedelta,datetime,timezone

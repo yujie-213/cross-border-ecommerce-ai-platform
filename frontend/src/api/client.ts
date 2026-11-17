@@ -26,6 +26,7 @@ export async function request<T>(path: string, init: RequestInit = {}, signal?: 
     const data = await response.json().catch(() => ({}))
     throw new ApiError(response.status, typeof data.code === 'string' ? data.code : 'HTTP_ERROR', data.traceId)
   }
+  if(path==='/session' && init.method==='DELETE' && typeof window!=='undefined')window.dispatchEvent(new Event('commerce:session-ended'))
   return response.json() as Promise<T>
 }
 export function createBody(choice: Choice, previous: Ref | null = null): CreateBody {

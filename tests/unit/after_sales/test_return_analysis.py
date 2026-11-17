@@ -73,3 +73,42 @@ def test_monitor_does_not_use_receipts_after_the_selected_cutoff():
     result=reader.return_analysis('Owned Store',lambda:None,end_date='2026-11-17')
     assert result['monitor'][0]['currentReturns']==0
     assert result['monitor'][0]['previousReturns']==0
+
+
+def detail_reader(erp):
+    member=SimpleNamespace(storeName='Owned Store',sku='SKU-KNIT',sourceTenant='1',sourceStore='2',sourceWarehouse='20',warehouseName='WH-A',
+        monitor=SimpleNamespace(productId='10',salesIds=tuple(str(o['id']) for o in erp.orders)))
+    return SourceReader(lambda:erp,{'Owned Store':dict(sourceTenant='1',storeId='2')},'.tmp/source',owned_provider=lambda:[member])
+
+
+def test_one_return_reads_only_its_detail_order_and_product():
+    erp=ReturnERP();calls=[];read=erp.read;detail=erp.detail
+    def observed_read(path,params,**kwargs):
+        calls.append((path,params));return read(path,params,**kwargs)
+    def observed_detail(resource,rid):
+        calls.append((resource,rid));return detail(resource,rid)
+    erp.read=observed_read;erp.detail=observed_detail
+    result=detail_reader(erp).return_detail('Owned Store','902','SKU-KNIT',lambda:None)
+    assert result['complete'] and len(result['items'])==1
+    assert result['items'][0]['identity']['orderId']=='26'
+    assert calls==[('sales-returns','902'),('/api/v1/sales-orders',dict(ids='26')),('/api/v1/products',dict(ids='10'))]
+
+
+def test_one_return_cannot_admit_an_unregistered_order_or_wrong_identity():
+    import pytest
+    from commerce_hub.orchestration.service import TaskError
+    for field,value,code in [('order_id',999,'SOURCE_NOT_OWNED'),('tenant_id',9,'SOURCE_IDENTITY_MISMATCH')]:
+        erp=ReturnERP();erp.returns[1][field]=value
+        with pytest.raises(TaskError,match=code):detail_reader(erp).return_detail('Owned Store','902','SKU-KNIT',lambda:None)
+    erp=ReturnERP();erp.orders[25]['store_name']='Other Store'
+    with pytest.raises(TaskError,match='SOURCE_IDENTITY_MISMATCH'):detail_reader(erp).return_detail('Owned Store','902','SKU-KNIT',lambda:None)
+
+
+def test_one_return_rechecks_authorization_around_source_io():
+    import pytest
+    erp=ReturnERP();checks=[]
+    def revoked():
+        checks.append(True)
+        if len(checks)==2:raise PermissionError('revoked')
+    with pytest.raises(PermissionError):detail_reader(erp).return_detail('Owned Store','902','SKU-KNIT',revoked)
+    assert len(checks)==2

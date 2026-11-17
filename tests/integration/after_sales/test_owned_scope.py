@@ -49,7 +49,16 @@ def test_old_case_direct_links_lists_and_new_admission_follow_current_membership
     for spec in e.specs.values():spec.handler.source_reader=r
     data=dict(title='自建评价',message='',region='CN',platform='TEACHING',language='zh',erpStoreName='Synthetic Store',erpVoiceId='71',erpVoiceKind='reviews')
     c=e.domain.create_case(e.actor,uuid4().hex,data)
-    assert read(e,'CASE',c['id'])['body']['sourceMembership'][0]['productId']=='1'
+    body=read(e,'CASE',c['id'])['body']
+    assert body['sourceMembership'][0]['productId']=='1'
+    assert body['identity']['productId']=='1' and body['evidence']['facts']
+    assert any(m['text']=='尺寸偏小，请核对描述' for m in body['messages'])
+    from sqlalchemy import select
+    from commerce_hub.scenarios.after_sales.tables import manifests
+    with e.database.engine.begin() as conn:
+        manifest=conn.execute(select(manifests).filter_by(tenant_id=e.actor.tenant_id,snapshot_id=body['evidence']['snapshotRef'])).mappings().one()
+    assert manifest['body']['assetId']==c['id']
+    assert e.provider.calls==[]  # opening a case neither sends a model request nor needs another ERP evidence job
     run_job(e,'CASE',c['id'],'evidence')
     r.owned_provider=lambda:[]
     assert e.domain.store.list(e.actor,'CASE')['items']==[]

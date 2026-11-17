@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, toRefs, watch } from 'vue'
 import { request, errorText } from '../api/client'
 import { storeLabel } from './presentation'
 import type { Asset, Workspace } from './api'
+import { desk, loadPage, resultPage } from './session'
 const props=defineProps<{workspace:Workspace; cases:Asset[]; casesComplete:boolean; disabled:boolean}>()
 const emit=defineEmits<{open:[record:any];case:[id:string];more:[]}>()
-const store=ref(''), query=ref(''), queue=ref('TODO'), kind=ref('ALL'), loading=ref(false), error=ref('')
-const records=ref<any[]>([]), complete=ref(false), updated=ref('')
-let generation=0
+const {store,query,queue,kind}=toRefs(desk)
+const page=computed(()=>resultPage('desk:'+store.value))
+const records=computed<any[]>(()=>page.value.data?.items || [])
+const complete=computed(()=>!!page.value.data?.complete),loading=computed(()=>page.value.loading),error=computed(()=>page.value.error),updated=computed(()=>page.value.updated)
 const kinds=[{key:'reviews',name:'商品评价'},{key:'feedback',name:'订单反馈'},{key:'tickets',name:'售后工单'}]
 const rows=computed(()=>records.value.map(r=>{
   const asset=props.cases.find(c=>c.body.erpStoreName===store.value && (r.kind==='tickets'
@@ -21,33 +23,27 @@ const done=computed(()=>rows.value.filter(r=>r.handled).length)
 const visible=computed(()=>rows.value.filter(r=>(queue.value==='ALL' || (queue.value==='HANDLED'?r.handled:!r.handled)) && (kind.value==='ALL' || kind.value===r.kind)
   && (!query.value || [r.text,r.title,r.product?.name,r.product?.sku,r.ticketNumber].some(v=>v?.toLowerCase().includes(query.value.toLowerCase())))))
 const skuCount=computed(()=>props.workspace.sourceProductCounts?.[store.value] ?? new Set(rows.value.map(r=>r.product?.sku).filter(Boolean)).size)
-async function load(){
-  const own=++generation;records.value=[];complete.value=false;error.value='';loading.value=true
-  if(!store.value){loading.value=false;return}
-  const results=await Promise.allSettled(kinds.map(async k=>{
-    const q=new URLSearchParams({store:store.value,kind:k.key,full:'true'})
-    const result=await request<any>('/source-inbox?'+q,{},undefined,60000,'/api/b/v1')
-    return {kind:k.key,...result,items:result.items.map((r:any)=>({...r,kind:k.key,storeName:store.value}))}
-  }))
-  if(own!==generation)return
-  for(const result of results){
-    if(result.status==='fulfilled')records.value.push(...result.value.items)
-    else error.value=errorText(result.reason)
-  }
-  complete.value=results.every(r=>r.status==='fulfilled' && r.value.complete)
-  if(!complete.value && !error.value)error.value='记录尚未读取完整，请重新读取。'
-  updated.value=new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})
-  loading.value=false
+async function load(force=true){
+  const ownStore=store.value;if(!ownStore)return
+  await loadPage('desk:'+ownStore,async()=>{
+    const results=await Promise.all(kinds.map(async k=>{
+      const q=new URLSearchParams({store:ownStore,kind:k.key,full:'true'})
+      const result=await request<any>('/source-inbox?'+q,{},undefined,60000,'/api/b/v1')
+      return {...result,items:result.items.map((r:any)=>({...r,kind:k.key,storeName:ownStore}))}
+    }))
+    return {items:results.flatMap(r=>r.items),complete:results.every(r=>r.complete)}
+  },force)
 }
 watch(()=>props.workspace.sourceStores,stores=>{if(!stores.includes(store.value))store.value=stores.find(s=>s.includes('SIM-AS-20261116')) || stores.at(-1) || ''},{immediate:true})
-watch(()=>props.workspace,()=>{if(store.value)void load()})
-watch(store,()=>{queue.value='TODO';query.value='';void load()},{immediate:true})
-onBeforeUnmount(()=>generation++)
+watch(store,()=>{void load(false)},{immediate:true})
+function saveScroll(){desk.scroll=window.scrollY}
+onMounted(()=>{void nextTick(()=>window.scrollTo(0,desk.scroll));window.addEventListener('scroll',saveScroll,{passive:true})})
+onBeforeUnmount(()=>window.removeEventListener('scroll',saveScroll))
 const count=(n:number)=>complete.value && props.casesComplete?String(n):'—'
 </script>
 <template>
   <div class="desk">
-    <div class="desk-toolbar"><label>店铺<select v-model="store" :disabled="disabled || loading"><option v-for="s in workspace.sourceStores" :key="s" :value="s">{{storeLabel(s)}}</option></select></label><div><small v-if="complete">{{updated}} 更新</small><button class="button small" :disabled="disabled || loading" @click="load">{{loading?'读取中…':'刷新'}}</button></div></div>
+    <div class="desk-toolbar"><label>店铺<select v-model="store" :disabled="disabled"><option v-for="s in workspace.sourceStores" :key="s" :value="s">{{storeLabel(s)}}</option></select></label><div><small v-if="complete">{{updated}} 更新</small><button class="button small" :disabled="disabled || loading" @click="load(true)">{{loading?'读取中…':'刷新'}}</button></div></div>
     <div class="desk-kpis">
       <article><span class="metric-icon">▦</span><div><small>覆盖 SKU</small><strong>{{skuCount}}</strong></div></article>
       <article><span class="metric-icon">☷</span><div><small>客户问题</small><strong>{{count(rows.length)}}</strong><span v-if="complete" class="breakdown">评价 {{rows.filter(r=>r.kind==='reviews').length}} · 反馈 {{rows.filter(r=>r.kind==='feedback').length}} · 工单 {{rows.filter(r=>r.kind==='tickets').length}}</span></div></article>
@@ -58,7 +54,7 @@ const count=(n:number)=>complete.value && props.casesComplete?String(n):'—'
     <p v-if="error" class="banner danger" role="alert">{{error}}</p>
     <section class="panel desk-queue">
       <div class="queue-toolbar"><div class="queue-tabs"><button v-for="q in [{key:'TODO',name:'待处理'},{key:'HANDLED',name:'已处理'},{key:'ALL',name:'全部'}]" :key="q.key" :class="{active:queue===q.key}" @click="queue=q.key">{{q.name}}</button></div><div class="queue-filters"><select v-model="kind" aria-label="问题类型"><option value="ALL">全部类型</option><option v-for="k in kinds" :key="k.key" :value="k.key">{{k.name}}</option></select><input v-model="query" aria-label="搜索客户问题" placeholder="搜索问题、商品或 SKU"></div></div>
-      <div v-if="loading" class="empty" role="status">正在读取客户问题…</div>
+      <div v-if="loading && !records.length" class="empty" role="status">正在读取客户问题…</div>
       <div v-else-if="!visible.length" class="empty"><span>✓</span><p>{{queue==='HANDLED'?'暂无已处理记录':query?'没有匹配的问题':'当前没有待处理问题'}}</p></div>
       <div v-else class="table-scroll"><table><colgroup><col class="col-problem"><col class="col-product"><col class="col-kind"><col class="col-status"><col class="col-action"></colgroup><thead><tr><th>客户问题</th><th>商品</th><th>类型</th><th>状态</th><th></th></tr></thead><tbody><tr v-for="r in visible" :key="r.kind+(r.ticketId || r.recordId)"><td class="problem"><button :title="r.text" @click="r.asset?emit('case',r.asset.id):emit('open',r)">{{r.text}}</button><small v-if="r.rating">{{'★'.repeat(Math.max(0,Math.min(5,r.rating)))}}<span class="rating-rest">{{'☆'.repeat(Math.max(0,5-r.rating))}}</span></small><small v-else>{{r.ticketNumber || r.businessDate || '—'}}</small></td><td class="product-cell"><b :title="r.product?.name || '待核实'">{{r.product?.name || '待核实'}}</b><small :title="r.product?.sku || '—'">{{r.product?.sku || '—'}}</small></td><td class="kind-cell">{{kinds.find(k=>k.key===r.kind)?.name}}</td><td class="state-cell"><span class="status" :class="{done:r.handled,pending:r.pending}">{{r.handled?'已处理':r.pending?'保存待核验':r.asset?.state==='REVIEW_PENDING'?'待确认':'待处理'}}</span></td><td class="action-cell"><button class="button small" :disabled="disabled" @click="r.asset?emit('case',r.asset.id):emit('open',r)">{{r.handled?'查看':'处理 →'}}</button></td></tr></tbody></table></div>
       <div v-if="complete" class="queue-footer">{{visible.length}} 条</div>
