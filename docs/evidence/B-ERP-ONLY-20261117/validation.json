@@ -1,0 +1,85 @@
+{
+  "status": "REVIEW",
+  "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19",
+  "baseCommit": "5773d5bc659b3d97027f67b976e00287700145da",
+  "scope": "Removal of independent middleware teaching datasets and record-source switching; ERP-backed workflow preserved",
+  "backend": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/data/test_b_order_warehouse.py --tb=short --junitxml=.tmp/b-erp-only-final.xml",
+    "passed": 88,
+    "failed": 0,
+    "exitCode": 0,
+    "environment": "Authorized isolated MySQL/API/independent Worker; explicit synthetic ERP transport/mock provider; no paid model or live ERP writes"
+  },
+  "frontend": {
+    "passed": 87,
+    "failed": 0,
+    "build": "vue-tsc and Vite PASS",
+    "exitCode": 0
+  },
+  "browser": {
+    "passed": 3,
+    "failed": 0,
+    "flaky": 0,
+    "environment": "Compiled Vue in Edge with engineering login and explicit synthetic ERP; UI AI contract mocked",
+    "covers": [
+      "ERP internal handling confirm/readback/refresh/handled",
+      "Legacy source URL cannot restore removed workflow; policy publishing retained",
+      "No-op AI status versus generated draft; human confirmation"
+    ]
+  },
+  "documents": {
+    "checks": 18,
+    "failed": 0
+  },
+  "localService": {
+    "apiReadiness": 200,
+    "frontendReadiness": 200,
+    "accountFingerprintUnchanged": true,
+    "configurationFilesUnchanged": true
+  },
+  "boundaries": {
+    "replenishmentConsumerCodeChanged": false,
+    "erpBusinessWrites": 0,
+    "paidModelCalls": 0,
+    "databaseDeletion": false,
+    "historicalAuditRetained": true,
+    "untrackedOpenapiModified": false,
+    "mainMerged": false
+  },
+  "iterations": [
+    {
+      "result": "FAIL",
+      "detail": "Initial relocated test fixture retained a relative import; corrected to absolute import before final verification"
+    },
+    {
+      "result": "FAIL",
+      "passed": 72,
+      "failed": 2,
+      "detail": "Retired generic route returned HTTP405; risk fixture lacked ledger/warehouse proof. Tests corrected with explicit synthetic shipped order and matching ledger; business constraints preserved"
+    },
+    {
+      "result": "FAIL",
+      "passed": 2,
+      "failed": 1,
+      "detail": "Legacy chunks payload rejected by generic Change schema with HTTP422; added valid generic payload to verify collection rejection at HTTP404"
+    },
+    {
+      "result": "PASS",
+      "passed": 3,
+      "detail": "Removal/ERP-risk focused tests passed"
+    },
+    {
+      "result": "PASS",
+      "passed": 88,
+      "detail": "Final fixed commit full scoped backend and process/browser suite passed"
+    }
+  ],
+  "artifacts": {
+    ".tmp/b-erp-only-final.xml": "743ed7a88f05ad693c33627dcde6f4beb6e5d8c2ef11ff8f52f54d6c81a2b974",
+    ".tmp/b-erp-only-frontend.log": "c53c50d32fee9798252ce622cbbb114c59a1d81ce6c4faa0209278ed0774c194",
+    ".tmp/b-erp-only-build.log": "bd3c699057b3619b0ac3cdec0f635817997f77147a095bfff9f5e4d749fc6386",
+    ".tmp/b-browser-results.json": "ee736b5c2c3815c3f8d6f0fb458c680e39362638884c8933196c5920e77a60cf",
+    ".tmp/b-desk-screenshots/01-workbench.png": "253694bb25315863ff6febdc52c7f3276128f7206d6590528f8847d20aeb6022",
+    ".tmp/b-erp-only-screenshots/01-policies.png": "865a15e397edfb2d6cf41d6090f66a980e4157311e499c2c9adc27ffc42fc5dd"
+  }
+}

@@ -1320,6 +1320,7 @@
     "src/commerce_hub/scenarios/after_sales/policy_templates.py",
     "tests/support/b_metrics_fixture.py",
     "tests/integration/after_sales/test_erp_only.py",
-    "docs/reports/B_独立教学资料功能移除_20261117.md"
+    "docs/reports/B_独立教学资料功能移除_20261117.md",
+    "docs/evidence/B-ERP-ONLY-20261117/validation.json"
   ]
 }

@@ -11679,7 +11679,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "88 passed; removed API/task/history deny tests and ERP case/risk policy/readback cases included; no ERP writes or paid model calls",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": ".tmp/b-erp-only-final.xml",
+      "artifactRef": "docs/evidence/B-ERP-ONLY-20261117/validation.json",
       "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
     },
     {
@@ -11690,7 +11690,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "3 passed including stale source URL rejection, policies retained, ERP voice confirmation and restart/history interaction",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": ".tmp/b-erp-only-screenshots",
+      "artifactRef": "docs/evidence/B-ERP-ONLY-20261117/validation.json",
       "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
     },
     {
@@ -11701,7 +11701,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "87 front-end tests passed; vue-tsc and Vite build passed",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": ".tmp/b-erp-only-frontend.log",
+      "artifactRef": "docs/evidence/B-ERP-ONLY-20261117/validation.json",
       "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
     },
     {
@@ -11712,7 +11712,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "accountUnchanged=true; filesUnchanged=true; API8768/frontend5175 readiness 200; S01 consumer/replenishment paths have zero diff",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": ".tmp/b-erp-only-local-before.json",
+      "artifactRef": "docs/evidence/B-ERP-ONLY-20261117/validation.json",
       "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
     },
     {
@@ -11723,7 +11723,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "sample": "18 checks, failed=0; build_docs published generated task views",
       "exitCode": 0,
       "result": "PASS",
-      "artifactRef": "docs/planning/validation-report.json",
+      "artifactRef": "docs/evidence/B-ERP-ONLY-20261117/validation.json",
       "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
     }
   ],
@@ -11902,7 +11902,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "testMethod": "MySQL/API/Worker、前端、Edge、文档检查",
       "status": "REVIEW",
       "evidence": [
-        "docs/reports/B_独立教学资料功能移除_20261117.md"
+        "docs/reports/B_独立教学资料功能移除_20261117.md",
+        "docs/evidence/B-ERP-ONLY-20261117/validation.json"
       ]
     }
   ],
