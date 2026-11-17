@@ -1,5 +1,6 @@
-%% TASKS sourceSha256=a747f1e66520e645202534ac8c90980ece1aa4a5052bec30b0b27dc2a89acdcf
+%% TASKS sourceSha256=273940d95f20034e718073123e0072f301540e57389b0089fe48e43aab423fa4
 flowchart TB
+  D_WORKBENCH_01["D-WORKBENCH-01 统一工作台、采购跨仓核对修复与main合并"]
   SETUP_001["SETUP-001 精简计划/归档与本地Git交付"]
   A_01["A-01 S01所需最小版本与公共契约冻结"]
   A_02["A-02 最小骨架、配置、错误与日志"]
@@ -63,6 +64,7 @@ flowchart TB
   D_B_ERP_SIMULATION_01["D-B-ERP-SIMULATION-01 3SKU完整仿真ERP经营数据及双Agent可读验证"]
   D_B_RETURNS_WORKFLOW_01["D-B-RETURNS-WORKFLOW-01 售后四入口与退货商品调查流程整改及ERP数据复验"]
   D_B_PAGE_EXPERIENCE_01["D-B-PAGE-EXPERIENCE-01 售后页面保留结果与按需分析体验修复"]
+  D_B_PAGE_EXPERIENCE_01 --> D_WORKBENCH_01
   D_S01_01 --> A_01
   A_01 --> A_02
   A_02 --> A_03

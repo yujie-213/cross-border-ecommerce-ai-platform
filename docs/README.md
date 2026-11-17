@@ -4,6 +4,8 @@ B V1详细设计评审入口：[复用差距](architecture/B_AFTER_SALES_REUSE.m
 
 # 项目文档索引
 
+2026-11-17 工作台与当前 B 分支合并：[发布范围、采购误关联原因与验证](reports/工作台与采购跟踪合并_20261117.md)。当前操作以 [README](../README.md)、[补货手册](runbooks/s01-product-demand.md) 和 [售后手册](runbooks/b-after-sales-foundation.md) 为准，历史截图保留原时点含义。
+
 B赛道正式需求基线：[智能售后与客户体验分析 Agent V1.0](requirements/B_AFTER_SALES_V1.md)（B-REQ-001，FROZEN_BASELINE）。三链必做，D1—D5及服务端教学隔离／商品诉求合理性已落实；不代表功能已实现或准许自动进入设计开发。
 
 本文只提供导航，不维护第二份需求、计划、任务状态或验收结论。MD 是正文，配套 HTML 是阅读材料；历史归档不是当前实施依据。

@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`a747f1e66520e645202534ac8c90980ece1aa4a5052bec30b0b27dc2a89acdcf`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`273940d95f20034e718073123e0072f301540e57389b0089fe48e43aab423fa4`。不要手工编辑；候选不是执行授权。
 
-任务 63 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 31；ACCEPTED 23。
+任务 64 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 32；ACCEPTED 23。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,10 +10,11 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 46 | 2 | 0 | 4 | 29 | 11 |
+| D | 47 | 2 | 0 | 4 | 30 | 11 |
 
 ## 当前活动记录
 
+- D-WORKBENCH-01 统一工作台、采购跨仓核对修复与main合并：REVIEW；实际执行者=Codex。
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
 - C-04 S01真实模型解释用途评测与安全降级验收（必做）：REVIEW；实际执行者=Codex（本轮C-04真实复验，单人串行）。
 - D-S01-01 S01补货专项详细设计（第一阶段）：REVIEW；实际执行者=Codex（本轮唯一文档执行者与台账集成人）。
@@ -54,6 +55,7 @@
 
 | ID | 内容 | 状态 | 直接依赖 |
 |---|---|---|---|
+| D-WORKBENCH-01 | 统一工作台、采购跨仓核对修复与main合并 | REVIEW | D-B-PAGE-EXPERIENCE-01 |
 | SETUP-001 | 精简计划/归档与本地Git交付 | REVIEW | 无；仍核对入口指令 |
 | A-01 | S01所需最小版本与公共契约冻结 | ACCEPTED | D-S01-01 |
 | A-02 | 最小骨架、配置、错误与日志 | ACCEPTED | A-01 |

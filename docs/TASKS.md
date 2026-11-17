@@ -1,3 +1,189 @@
+工作台与B分支main发布准备（2026-11-17）：负责人当前对话明确授权合并main并更新文档，覆盖旧B分支不合main停止点；来源codex/b-after-sales-v1，固定实现b89702d0a5b599e4040fe071a6eb701de2be67d5，浏览器入口修正cbaaa89c4e4b41eb74bab493efeb287d2c93228c，远端main基点efa06985cc92aaf9e657af659a027dccd9d5fc97。README/双模块手册/发布报告/AGENTS/唯一台账D-WORKBENCH-01已同步统一工作台、异仓参考修复及真实ERP根因。合并前完整1055测试为1054PASS/1FAIL/0SKIP，唯一旧浏览器标题导航断言已修正，定向1进程+6Edge全部PASS；92前端、类型构建、14跟踪、18文档检查PASS。60提交/642不同blob历史凭据扫描0命中；未知OpenAPI及私有配置不暂存。保留首次FAIL和原账号真实页面NOT_RUN，不将发布授权代签全部B业务验收，既有REVIEW/企业门不变。随后普通快进main和push，最终SHA/远端以独立回读补记。详细结果见reports/工作台与采购跟踪合并_20261117.md。
+
+## D-WORKBENCH-01 统一工作台与采购跟踪发布
+
+```json
+{
+  "id": "D-WORKBENCH-01",
+  "stage": "D",
+  "title": "统一工作台、采购跨仓核对修复与main合并",
+  "kind": "development",
+  "dependsOn": [
+    "D-B-PAGE-EXPERIENCE-01"
+  ],
+  "entryCondition": "2026-11-17负责人确认统一工作台并要求修复布局、采购核对，随后明确合并main和更新文档；覆盖来源B分支旧不合main停止点。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": [
+    "AGENTS.md",
+    "README.md",
+    "frontend/src/V2Shell.vue",
+    "frontend/src/pages/",
+    "frontend/src/components/ProductDecision.vue",
+    "frontend/src/workflow.css",
+    "frontend/tests/",
+    "src/commerce_hub/scenarios/s01_v2/tracking.py",
+    "tests/",
+    "docs/"
+  ],
+  "parallelCondition": "Codex单人；未知OpenAPI保留；main所在干净worktree普通快进合并",
+  "deliverables": [
+    "统一工作台双模块卡片与常驻分组侧栏、窄屏导航、店仓计数文案和首页偏移修复",
+    "采购跟踪排除异仓参考，保留真实归属校验及原采购门",
+    "更新使用手册/交接/台账，真实回归、普通main合并及远端回读"
+  ],
+  "acceptance": [
+    {
+      "id": "D-WORKBENCH-01/AC1",
+      "text": "工作台与双模块功能从统一侧栏切换，原售后工作流保持可用"
+    },
+    {
+      "id": "D-WORKBENCH-01/AC2",
+      "text": "同SKU异仓参考不导致永久核对失败，真实ERP单1534可核验且归属变化仍拒绝"
+    },
+    {
+      "id": "D-WORKBENCH-01/AC3",
+      "text": "普通合并及推送可回读，文档与真实测试结果一致，秘密/未知文件不发布"
+    }
+  ],
+  "plannedTests": [
+    "frontend npm test and npm run build",
+    "pytest tests with authorized MySQL and synthetic ERP/model; failed case targeted rerun",
+    "registered purchase tracking official read-only regression; publication and plan checks"
+  ],
+  "risks": [
+    "历史真实模型/ERP/产品验收缺口保留；合并不补签企业准入或所有B验收",
+    "旧本机保存登录态过期，原账号真实页面复验NOT_RUN；隔离工程浏览器与真实ERP只读分别记录"
+  ],
+  "requiredEvidenceKinds": [
+    "UNIT",
+    "INTEGRATION",
+    "BROWSER",
+    "DOCUMENT_CHECK"
+  ],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "b89702d0a5b599e4040fe071a6eb701de2be67d5",
+    "cbaaa89c4e4b41eb74bab493efeb287d2c93228c"
+  ],
+  "testedCommit": "cbaaa89c4e4b41eb74bab493efeb287d2c93228c",
+  "evidence": [
+    {
+      "kind": "UNIT",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC2"
+      ],
+      "command": ".venv/Scripts/python.exe -m pytest tests/unit/test_purchase_tracking.py -q",
+      "environment": "Windows/Python3.13; synthetic ERP",
+      "sample": "14 PASS; 4 cross-warehouse combinations failed before fix; moved ownership still rejected",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC1"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 mock/network off; pytest tests/integration/after_sales/test_process_product.py -q",
+      "environment": "Authorized isolated MySQL, real API/independent Worker/compiled Vue and Edge; synthetic ERP/model",
+      "sample": "1 process and 6 browser PASS; first 6 browser FAIL from obsolete work-home labels retained",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "UNIT",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC1"
+      ],
+      "command": "npm test; npm run build",
+      "environment": "Windows/Node/Vue TypeScript production build",
+      "sample": "92 tests and typecheck/build PASS",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC2"
+      ],
+      "command": "track_purchases latest registered batch, official restricted list and exact detail GET",
+      "environment": "Teaching ERP authorized registered scopes; pre-release diagnostic turn",
+      "sample": "11 requests including auth, 6 orders verified, failedCount=0, discoveryComplete=true; business/model writes 0",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [],
+      "command": "saved original local browser session authenticated read",
+      "environment": "Original local installation5175/API8768",
+      "sample": "Saved state expired401; no auto-login/reset; actual original-account UI validation not run",
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC1",
+        "D-WORKBENCH-01/AC2"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1 mock/network off; pytest tests -q --tb=short --junitxml=.tmp/workbench-main-20261117.xml",
+      "environment": "Windows/Python3.13 authorized MySQL; independent test identities and synthetic ERP/model",
+      "sample": "1055 tests:1054 PASS,1 FAIL,0 SKIP; sole obsolete browser-label failure corrected at cbaaa89 and targeted process/browser rerun PASS",
+      "exitCode": 1,
+      "result": "FAIL",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "DOCUMENT_CHECK",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC3"
+      ],
+      "command": "build_docs.py; check_plan.py; exact local credential and token/private-key history scan",
+      "environment": "Local Git source history and documentation, no external business writes",
+      "sample": "18 plan checks PASS; 60 commits/642 distinct blobs scan0 findings; exact staged docs reviewed separately",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    }
+  ],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "cbaaa89c4e4b41eb74bab493efeb287d2c93228c",
+  "dirtyPaths": [
+    "docs/ERP-openapi.yaml (untracked; preserved)"
+  ],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {
+      "at": "2026-11-17",
+      "fromStatus": null,
+      "toStatus": "IN_PROGRESS",
+      "reason": "负责人明确授权统一工作台、问题修复和当前分支合main，单人串行实现和发布。"
+    },
+    {
+      "at": "2026-11-17",
+      "fromStatus": "IN_PROGRESS",
+      "toStatus": "REVIEW",
+      "reason": "实现已提交，14后端/92前端/构建与修正入口后的实际API/Worker/Edge6通过；发布记录和完整回归随后补充，保留真实验收缺口。"
+    }
+  ]
+}
+```
+
+
+采购跟踪跨仓误关联修复（2026-11-17）：Codex单人接续codex/b-after-sales-v1 / 15d356de366a636716b712dedae7241eb4d35726，用户指定单S01-RQ-7bd4c9fbd56b0bf5afa9a9aeabb4ca77。实际ERP受限列表与详情200，单1534东部仓待到货48件；已作废为另一单1533/40件，此前404归因不适用于1534。真实批次内同SKU西部仓formalPurchases含warehouseMatch=false的东部仓参考，tracking收集引用时混成双仓强绑定，实际复现PURCHASE_TRACKING_RELATION_CHANGED。现仅在跟踪收集阶段排除明确异仓参考，保留真实详情严格关联核验、算法/历史报告/采购门。定向14测试PASS（新增4组合先FAIL保全于本次命令结果），真实登记范围完整跟踪11请求含认证，6单全部核验成功、失败0、发现完整；ERP业务写0/模型0。标准托管重启后5175/API8768均200、私有配置及账号/会话/授权表指纹一致；旧保存浏览器态401，登录态HTTP/浏览器NOT_RUN，未尝试自动登录。证据为tests/unit/test_purchase_tracking.py及本轮实际只读命令结果；当前WORKTREE_ONLY/REVIEW、未提交/推送，未知docs/ERP-openapi.yaml保留。
+
+工作台布局与已作废采购跟踪修复（2026-11-17）：接续统一工作台导航后，负责人反馈首页被侧栏遮挡及 ERP 作废采购单持续核对失败。移除首页遗留的全宽零边距壳层，正文继续使用共享侧栏偏移；请购跟踪以精确详情 404 为“ERP 已无此单”终态，不伪称“已作废”；如同次限定店仓发现列表仍有精确关联记录，则校验租户/单号/仓库/SKU/商品后采用其当前状态（包括“已作废”）。明确作废红色，ERP未找到仍用待核实色。仅详情 404 可走该分支，其他详情故障仍核对失败；采购权限/排他门不因此解除。后端 `tests/unit/test_purchase_tracking.py` 9 PASS，前端 92 PASS，类型检查/生产构建 PASS，MySQL集成套件14项因环境门控SKIP，计划检查18 PASS。登录态浏览器复验因隔离桩未进入认证界面，NOT_RUN；未用真实账号绕过。ERP/模型/业务写0；当前未提交/推送，产品体验 REVIEW。
+
+工作台导航与补货计数文案（2026-11-17）：用户确认统一工作台方向并授权实施。`codex/b-after-sales-v1`，基点 `15d356de366a636716b712dedae7241eb4d35726`；共享侧栏常驻，提供工作台、智能补货及售后与客户体验一级分组和对应功能导航；首页两模块并列卡片，窄屏侧栏折叠展开；补货列表/分仓建议改为“X 个店仓中，Y 个建议补货”。前端 92/92 单测及 Vue 类型检查/生产构建通过；本机 Vite 预览 `http://localhost:5179/`。未调用 ERP/模型，未改补货计算、采购或售后业务规则。未做登录态真实浏览器体验，未提交/推送，产品验收 REVIEW。
+
 B产品体验整改领取（2026-11-16）：Codex单人，codex/b-after-sales-v1 / 511112be43afbe403bae3b181d05252f1823ba1c，跟踪区干净，未知docs/ERP-openapi.yaml保留。本轮按负责人新授权直接整改现有B正式产品：ERP工单/评价入口、可靠身份关联、案件审核、商品体验/调查及补货提醒；范围为既有B服务/API/Vue/相关测试与必要台账文档。不改冻结指标/采购规则，不ERP业务写/挪用S01模型授权。定向测试、实际Vue浏览器截图、普通提交推送当前分支，最终REVIEW，不合main。历史第一轮PASS不代表本轮产品验收。
 
 B V1.0最终工程交付（2026-11-16）：固定实现2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7，Codex单人，codex/b-after-sales-v1。正式Vue三链/公共权限任务/教学资料/政策/风险与补货联动交付REVIEW；978后端、69前端、类型构建、Edge实际三链及独立Worker恢复PASS。PROTOTYPE.F2仅方向ACCEPTED，ACCEPTANCE.F2留待负责人和星星。实际一键启动5175/API8768、原账号会话/S01授权及33任务31报告保持；B真实模型NOT_RUN/原生ERP完整群组未验证/真实风险绑定NOT_RUN，ERP业务写0。首次失败及修复复测保全于evidence/B-V1-20261116；最终提交普通推送当前B分支，不合main，未知OpenAPI未改未暂存。结束停在最终产品体验。
