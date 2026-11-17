@@ -232,7 +232,7 @@ watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation
     <header class="page-head"><div><h1>{{title}}</h1></div><button v-if="current?.state!=='HANDLED' && !pending && (current || !['workbench','cases','experience'].includes(section))" class="button small" :disabled="caseBusy || loading || current?.revision===0" @click="current?.kind==='CASE'?perform(()=>job(current!,'cases','evidence-jobs')):refresh()">更新记录</button></header>
     <p v-if="error" class="banner danger" role="alert">{{error}}</p><p v-if="note" class="banner" role="status">{{note}}</p>
     <p v-if="current?.revision===0 && caseBusy" class="banner" role="status">正在准备处理记录…</p><button v-if="current?.revision===0 && !caseBusy && !pending" class="button small" @click="openSource(sources[route.query.record])">重试</button><p v-for="t in currentTasks.filter(t=>t.error && taskRunning(t))" :key="t.id" class="banner warning">任务结果待查询。<button class="button small" @click="followTask(taskKey(t.assetId,t.action,t.investigationId))">继续查询</button></p>
-    <p v-if="pending && !busy" class="banner warning">保存结果待核验。<button class="button small" @click="retry">核对处理结果</button></p>
+    <p v-if="pending && !busy && !Object.values(opening).some(Boolean)" class="banner warning">保存结果待核验。<button class="button small" @click="retry">核对处理结果</button></p>
     <p v-if="loading && !current && !all" role="status">正在读取当前记录…</p>
 
 
