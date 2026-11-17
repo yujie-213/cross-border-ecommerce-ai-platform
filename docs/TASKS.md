@@ -10283,7 +10283,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "migrations/versions/",
     "tests/",
     "frontend/tests/",
-    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）"
+    "docs/（本阶段契约、证据、手册及主集成人协调的TASKS/HANDOFF）",
+    "src/commerce_hub/adapters/erp_customer_voice.py"
   ],
   "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
   "deliverables": [
@@ -10311,13 +10312,15 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
     "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
-    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+    "99e4e6ba96f5a62044f2dfd2dfaf1983578a8b59",
+    "6716ddcadf299d08c51b2b327c309eecfea67c98"
   ],
-  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -10424,11 +10427,64 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
       "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
       "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/isolated MySQL/API/independent Worker/compiled Vue/Edge; explicitly synthetic ERP/model",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "command": "OpenAPI 5.1.0 + ADR-B-CS-001 / customer-confirmation-v1",
+      "sample": "ERP voice internal handling only; ticket local fallback; no customer send",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/isolated MySQL/API/independent Worker/compiled Vue/Edge; explicitly synthetic ERP/model",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "command": "B/MySQL/API/independent Worker + frontend unit/build",
+      "sample": "77 backend, 87 frontend, build PASS; synthetic ERP/model transport; live ERP read-only 12 tickets / 0 reviews / 0 feedback",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/isolated MySQL/API/independent Worker/compiled Vue/Edge; explicitly synthetic ERP/model",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-CASE-01/AC1",
+        "D-B-CASE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "command": "Compiled Vue / Edge real process E2E",
+      "sample": "3 PASS; cards, confirm/readback/reload, existing chains compatibility, accurate AI draft states",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "environment": "Actual local platform / owned teaching ERP batch",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "command": "live ERP customer-voice append and new-batch paid AI",
+      "sample": "No owned review/feedback record; US/Amazon policy unpublished; user will log in later; no invented human confirmation or live write",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "observedHead": "6716ddcadf299d08c51b2b327c309eecfea67c98",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml (untracked; preserved)"
   ],
@@ -10469,6 +10525,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
+    },
+    {
+      "date": "2026-11-17",
+      "to": "REVIEW",
+      "reason": "负责人授权售后工作台及客服确认流程；实现99e4e6b/6716ddc，77后端/87前端/构建/Edge3项PASS，已核12工单0评价0反馈。ERP处理追加与恢复工程通过，真实写/新付费AI未运行；美国站政策需明确发布，收纳袋保留人工。补货实现零改动、账号会话授权保持，最终体验待负责人，不合main。"
     }
   ],
   "workItems": [
@@ -10522,6 +10583,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "doneWhen": "客服完整走通AC-01，刷新/重启后独立回读审核者和版本",
       "testMethod": "定向前后端/浏览器覆盖AC-01-P、并发revision与失败重开",
       "status": "REVIEW"
+    },
+    {
+      "id": "CASE.R1",
+      "title": "售后工作台与客服确认留痕",
+      "dependsOn": [
+        "CASE.F4"
+      ],
+      "implement": "店铺卡片与逐条客户问题、直接客户回复、客服确认后ERP voice追加/独立回读/恢复；工单中台留痕，无客服主管审核",
+      "doneWhen": "工程回归与浏览器流程通过，真实范围和未验项明确，最终产品体验不代签",
+      "testMethod": "77后端/87前端/构建/Edge3项，真实ERP只读范围核实",
+      "status": "REVIEW",
+      "evidence": [
+        "docs/reports/B_售后工作台与客服确认闭环_20261117.md",
+        "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+      ]
     }
   ],
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"
@@ -11307,7 +11383,8 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "tests/integration/after_sales/",
     "tests/browser/after-sales/",
     "docs/",
-    "README.md"
+    "README.md",
+    "src/commerce_hub/adapters/erp_customer_voice.py"
   ],
   "parallelCondition": "公共契约/迁移/组合根/台账主集成人串行；CASE与EXPERIENCE在接口冻结及文件无交集后可并行",
   "deliverables": [
@@ -11335,7 +11412,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
     "2943ca2251d497b85af951169e527f533d26afd8",
@@ -11345,9 +11422,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "c59685585bfcbbc920e5ba292a21e1df2d2eeec4",
     "49808a0d95c472ff908ddc37d162147e7346ec20",
     "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
-    "21b7018517e563bc1c5ca16cf2da57de9476ee08"
+    "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+    "99e4e6ba96f5a62044f2dfd2dfaf1983578a8b59",
+    "6716ddcadf299d08c51b2b327c309eecfea67c98"
   ],
-  "testedCommit": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
   "evidence": [
     {
       "environment": "Windows/Python3.13/获准隔离MySQL/Edge；合成业务ERP及模型传输，正式Vue/API/独立Worker",
@@ -11535,11 +11614,64 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "command": "new batch live paid AI reply and human-confirmed risk/replenishment follow-through",
       "sample": "NOT_RUN; no paid calls; saved platform browser session expired, original login required; no policy auto-publication or fabricated human risk decision",
       "artifactRef": "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/isolated MySQL/API/independent Worker/compiled Vue/Edge; explicitly synthetic ERP/model",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "CONTRACT",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "command": "OpenAPI 5.1.0 + ADR-B-CS-001 / customer-confirmation-v1",
+      "sample": "ERP voice internal handling only; ticket local fallback; no customer send",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/isolated MySQL/API/independent Worker/compiled Vue/Edge; explicitly synthetic ERP/model",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "command": "B/MySQL/API/independent Worker + frontend unit/build",
+      "sample": "77 backend, 87 frontend, build PASS; synthetic ERP/model transport; live ERP read-only 12 tickets / 0 reviews / 0 feedback",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "environment": "Windows/Python3.13/isolated MySQL/API/independent Worker/compiled Vue/Edge; explicitly synthetic ERP/model",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-ACCEPTANCE-01/AC1",
+        "D-B-ACCEPTANCE-01/AC2"
+      ],
+      "exitCode": 0,
+      "result": "PASS",
+      "command": "Compiled Vue / Edge real process E2E",
+      "sample": "3 PASS; cards, confirm/readback/reload, existing chains compatibility, accurate AI draft states",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "environment": "Actual local platform / owned teaching ERP batch",
+      "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "exitCode": null,
+      "result": "NOT_RUN",
+      "command": "live ERP customer-voice append and new-batch paid AI",
+      "sample": "No owned review/feedback record; US/Amazon policy unpublished; user will log in later; no invented human confirmation or live write",
+      "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "21b7018517e563bc1c5ca16cf2da57de9476ee08",
+  "observedHead": "6716ddcadf299d08c51b2b327c309eecfea67c98",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml (untracked; preserved)"
   ],
@@ -11605,6 +11737,11 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "date": "2026-11-16",
       "to": "REVIEW",
       "reason": "售后日常版实现511cfc2/浏览器测试21b7018；71后端、86前端/类型构建及Edge2项PASS，1440/1024截图检查。既有批次18文字变更独立回读，1状态机拒绝确认未变；12本机补充陈述精确关联。补货实现零改动，新批次付费AI/人工风险联动NOT_RUN，不代签产品验收、不合main。"
+    },
+    {
+      "date": "2026-11-17",
+      "to": "REVIEW",
+      "reason": "负责人授权售后工作台及客服确认流程；实现99e4e6b/6716ddc，77后端/87前端/构建/Edge3项PASS，已核12工单0评价0反馈。ERP处理追加与恢复工程通过，真实写/新付费AI未运行；美国站政策需明确发布，收纳袋保留人工。补货实现零改动、账号会话授权保持，最终体验待负责人，不合main。"
     }
   ],
   "workItems": [
@@ -11681,6 +11818,21 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "evidence": [
         "docs/reports/B_售后日常工作区整改_20261116.md",
         "docs/evidence/B-BUSINESS-UI-20261116/validation.json"
+      ]
+    },
+    {
+      "id": "ACCEPTANCE.R4",
+      "title": "售后工作台与客服确认留痕",
+      "dependsOn": [
+        "ACCEPTANCE.R3"
+      ],
+      "implement": "店铺卡片与逐条客户问题、直接客户回复、客服确认后ERP voice追加/独立回读/恢复；工单中台留痕，无客服主管审核",
+      "doneWhen": "工程回归与浏览器流程通过，真实范围和未验项明确，最终产品体验不代签",
+      "testMethod": "77后端/87前端/构建/Edge3项，真实ERP只读范围核实",
+      "status": "REVIEW",
+      "evidence": [
+        "docs/reports/B_售后工作台与客服确认闭环_20261117.md",
+        "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
       ]
     }
   ],

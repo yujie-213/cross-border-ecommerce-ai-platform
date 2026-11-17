@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-17",
+  "status": "REVIEW",
+  "baseCommit": "2be6a45e8cb479c022d398a466f5b41d42d918d4",
+  "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+  "implementationCommits": [
+    "99e4e6ba96f5a62044f2dfd2dfaf1983578a8b59",
+    "6716ddcadf299d08c51b2b327c309eecfea67c98"
+  ],
+  "checks": [
+    {
+      "kind": "INTEGRATION",
+      "result": "PASS",
+      "tests": 77,
+      "command": "pytest tests/integration/after_sales tests/security/test_b_resources.py --tb=short",
+      "artifact": "backend-junit.xml",
+      "businessTransport": "SYNTHETIC_ONLY"
+    },
+    {
+      "kind": "FRONTEND",
+      "result": "PASS",
+      "tests": 87,
+      "command": "npm --prefix frontend test -- --run"
+    },
+    {
+      "kind": "BUILD",
+      "result": "PASS",
+      "command": "npm --prefix frontend run build"
+    },
+    {
+      "kind": "BROWSER",
+      "result": "PASS",
+      "tests": 3,
+      "artifact": "browser.txt",
+      "businessTransport": "SYNTHETIC_ONLY"
+    },
+    {
+      "kind": "LAYOUT",
+      "result": "PASS",
+      "widths": [
+        1440,
+        1024
+      ]
+    },
+    {
+      "kind": "LOCAL_SERVICE",
+      "result": "PASS",
+      "preserved": true,
+      "health": {
+        "frontend": 200,
+        "api": 200
+      }
+    },
+    {
+      "kind": "DOCUMENTATION",
+      "result": "PASS",
+      "checks": 18,
+      "commands": [
+        "python docs/planning/build_docs.py",
+        "python docs/planning/check_plan.py"
+      ]
+    }
+  ],
+  "realERP": {
+    "readOnly": true,
+    "reviews": {
+      "count": 0,
+      "complete": true
+    },
+    "feedback": {
+      "count": 0,
+      "complete": true
+    },
+    "tickets": {
+      "count": 12,
+      "complete": true
+    }
+  },
+  "realERPHandlingPositive": "NOT_RUN_NO_OWNED_VOICE_RECORDS",
+  "realPaidModel": "NOT_RUN",
+  "newHumanPolicyPublication": "NOT_RUN",
+  "replenishmentImplementationChanged": false,
+  "history": [
+    {
+      "run": "first-ui",
+      "passed": 85,
+      "failed": 1,
+      "reason": "Previous UI wording assertion"
+    },
+    {
+      "run": "first-integration",
+      "passed": 67,
+      "failed": 1,
+      "reason": "Previous browser button wording"
+    },
+    {
+      "run": "expanded-integration",
+      "passed": 75,
+      "failed": 2,
+      "reason": "Browser stale return link/strict selector and one idle Worker claim"
+    },
+    {
+      "run": "targeted-fixes",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "run": "final-integration",
+      "passed": 77,
+      "failed": 0
+    }
+  ],
+  "unknownOpenAPI": "PRESERVED_UNTRACKED_UNCHANGED",
+  "limitations": [
+    "Existing batch consists of tickets; no ticket handling append endpoint in OpenAPI.",
+    "US/Amazon policies require explicit publication from the supplied draft templates.",
+    "Household category remains unsupported for generated advice; manual reply remains available.",
+    "No public customer reply, no ERP business write or new paid-model call was performed in this turn."
+  ],
+  "artifacts": {
+    "01-workbench.png": "1b89ce1686944aace6959c6631bf4e0c111b8bfcfe6192a4f884f522262662b5",
+    "02-workbench-1024.png": "4dd0218eaf1373514defc089dc72229001860eebf2ae0d9ad9fba912f8ba9fbf",
+    "03-confirmed.png": "2b220aea88a1370cdfd69f297eb5ab2952e6ec51497c3144115614df913d5669",
+    "backend-junit.xml": "723aff7dd56829de21d124b7e699b3ca32f88b284a53046705d909239072075a",
+    "browser.txt": "c87dd4664c3b818312ae3a4d51c760c8382608d13409332e1137686e9cc25871"
+  }
+}

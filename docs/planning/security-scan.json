@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "scope": "S01_RISK_UI_CURRENT_AND_OUTGOING_PATCH",
-  "baseCommit": "9861eb3eb3ff88a687d566a328dd1fd788e6a0ed",
-  "reviewedImplementation": "dd922c1bfecac1caab912eca9f2a3ae41fdccc13",
-  "scannedFiles": 20,
-  "knownCredentialCount": 1,
+  "scope": "B_SERVICE_DESK_CURRENT_AND_OUTGOING_PATCH",
+  "baseCommit": "2be6a45e8cb479c022d398a466f5b41d42d918d4",
+  "reviewedImplementation": "6716ddcadf299d08c51b2b327c309eecfea67c98",
+  "scannedFiles": 35,
+  "knownCredentialCount": 2,
   "findings": [],
   "excludedUnknownPath": "docs/ERP-openapi.yaml",
   "rawERPResponsesPublished": 0,
-  "limitations": "Exact configured credential values and private-key/model-key patterns; synthetic engineering screenshots and summary only. Not a security certification."
+  "limitations": "Configured credential values with length >= 8 and private/provider key patterns; reviewed synthetic screenshots and summaries only; not a security certification."
 }
