@@ -90,6 +90,14 @@ class DemoImporter(Importer):
 
     def execute(self):
         store,warehouse,supplier=self.preflight()
+        ops=self.journal['operations']
+        if all(ops.get('customer-tickets:CY-C261117-'+f'{i+1:03}',{}).get('state')=='VERIFIED' for i in range(12)):
+            def original(resource):return next(v['record'] for k,v in ops.items() if k.startswith(resource+':'))
+            p,quote,inv,listing=[original(k) for k in ('products','supplier-quotes','inventory','listings')]
+            sales=[record(self.client.request('GET','/api/v1/sales-orders/'+v['erpId'])) for k,v in ops.items() if k.startswith('sales-orders:')]
+            tickets=[v['record'] for k,v in ops.items() if k.startswith('customer-tickets:')]
+            returns=[record(self.client.request('GET','/api/v1/sales-returns/'+v['erpId'])) for k,v in ops.items() if k.startswith('sales-returns:')]
+            return self.finalize(store,warehouse,supplier,p,quote,inv,listing,sales,tickets,returns)
         p=self.create('products','sku',SKU,dict(sku=SKU,name='澄屿细针织开衫 M 雾蓝',category='服装/针织衫',model='CY-021-M-BL',
             material='棉60% / 聚酯纤维40%',status='在售',unit='piece',price=29,cost=8,product_type='普通商品',brand='澄屿',
             owner='CommerceHub',description='雾蓝色圆领开衫，M码，日常通勤穿着。',supplier_name=supplier['name'],moq=8,procurement_lead_days=3,default_carton_qty=4))
@@ -124,10 +132,20 @@ class DemoImporter(Importer):
         for i,text in enumerate(messages):
             sale=sales[([0,10,11,12,13,14,15,16]+[17,18,19,9])[i]]
             tickets.append(self.create('customer-tickets','ticket_no','CY-C261117-'+f'{i+1:03}',dict(ticket_no='CY-C261117-'+f'{i+1:03}',platform='Amazon',store_name=store['store_name'],buyer=sale['buyer'],subject=text,status_text='待处理',owner='售后服务组',created_time='2026-11-17 12:00:00',order_sn=sale['order_sn'])))
+        return self.finalize(store,warehouse,supplier,p,quote,inv,listing,sales,tickets,returns)
+
+    def finalize(self,store,warehouse,supplier,p,quote,inv,listing,sales,tickets,returns):
         final=record(self.client.request('GET','/api/v1/inventory/'+str(inv['id'])))
-        ledger=self.client.request('GET','/api/v1/stock/ledger',dict(sku=SKU,warehouse_name=warehouse['name'],offset=0,limit=200))
-        check(ledger.get('total')==len(ledger.get('items',[])),'LEDGER_INCOMPLETE')
-        rows=sorted(ledger['items'],key=lambda r:r['id']);running=Decimal(str(rows[0]['before_quantity']));available=Decimal(str(rows[0]['before_available']))
+        rows=[]
+        records=[('outbound-orders',v['workflow']['shipments'][0]['outbound_id']) for k,v in self.journal['operations'].items() if k.startswith('workflow:') and k.endswith(':ship')]
+        records += [('inbound-orders',r['inbound_id']) for r in returns if r.get('received_at') and r.get('inbound_id')]
+        for resource,rid in records:
+            ledger=self.client.request('GET','/api/v1/stock/ledger',dict(resource=resource,record_id=rid,offset=0,limit=20))
+            check(ledger.get('total')==len(ledger.get('items',[])) and len(ledger['items'])==1,'LEDGER_INCOMPLETE')
+            rows.extend(ledger['items'])
+        check(len(rows)==len({r['id'] for r in rows})==26,'LEDGER_EVENT_COUNT')
+        check(all(s.get('payment_status')=='已支付' and s.get('fulfillment_status')=='已发货' and s.get('refund_status')=='无退款' for s in sales),'SALE_STATE_MISMATCH')
+        rows=sorted(rows,key=lambda r:r['id']);running=Decimal(str(rows[0]['before_quantity']));available=Decimal(str(rows[0]['before_available']))
         for row in rows:
             check(str(row['inventory_id'])==str(inv['id']) and Decimal(str(row['before_quantity']))==running and Decimal(str(row['before_available']))==available,'LEDGER_CONTINUITY_FAILED')
             running+=Decimal(str(row['delta_quantity']));available+=Decimal(str(row['delta_available']))
