@@ -6,7 +6,7 @@ test.use({storageState:path.join(root,'data/private/local-platform/workflow-brow
 test('读取已完成真实AI结果、最终布局与刷新后的ERP状态，不再调用模型',async({page})=>{
  test.skip(process.env.S01_WORKFLOW_LIVE!=='1','Explicit real session required');test.setTimeout(150000)
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message))
- await page.goto('/#/home');await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible()
+ await page.goto('/#/home');await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible()
  await page.screenshot({path:path.join(out,'screenshots/01-platform-home.png'),fullPage:true})
  const batches=await(await page.request.get('/api/v1/s01/v2/batches')).json()
  const batch=batches.items.find((r:any)=>r.state==='SUCCEEDED'&&r.analysisRange==='OWNED_REGISTERED').taskRef.taskId

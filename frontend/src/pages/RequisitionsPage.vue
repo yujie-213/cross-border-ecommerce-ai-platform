@@ -9,7 +9,7 @@ const tracking = ref<Tracking|null>(null), loading=ref(false), error=ref(''), fi
 let timer:ReturnType<typeof setTimeout>|undefined, alive=true, sequence=0
 const rows=computed(()=> (tracking.value?.items || []).filter(r=>filter.value==='all' || filter.value==='unverified' ? filter.value==='all' || !r.verified : r.verified && r.status===filter.value))
 const statuses=computed(()=> [...new Set((tracking.value?.items || []).filter(r=>r.verified).map(r=>r.status!))])
-function action(row:Row){if(!row.verified)return '重新回读后再判断';if(row.status==='待审核')return '等待 ERP 审批';if(row.status==='待下单')return '在 ERP 核对下单安排';if(row.status==='已取消')return '核对是否仍有补货需要';return '按 ERP 当前状态跟进'}
+function action(row:Row){if(!row.verified)return '重新回读后再判断';if(row.status==='待审核')return '等待 ERP 审批';if(row.status==='待下单')return '在 ERP 核对下单安排';if(row.status==='已取消' || row.status==='已作废')return '核对是否仍有补货需要';if(row.status==='ERP 已无此单')return '核对 ERP 作废或删除记录';return '按 ERP 当前状态跟进'}
 async function refresh(){
  if(loading.value)return
  clearTimeout(timer);loading.value=true;error.value='';const mine=++sequence

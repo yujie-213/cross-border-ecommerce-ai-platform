@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+import pytest
 from commerce_hub.adapters.erp import ERPError
 from commerce_hub.scenarios.s01_v2.tracking import track_purchases
 
@@ -23,6 +24,44 @@ def test_tracking_reads_current_erp_state_instead_of_snapshot():
     assert item['pendingPurchases'][0]['status']=='待审核' and result['businessWrites']==0
 
 
+@pytest.mark.parametrize('discover', [False, True])
+@pytest.mark.parametrize('related_first', [False, True])
+def test_tracking_does_not_bind_another_warehouses_contextual_purchase(discover, related_first):
+    item,policy=sample()
+    purchase=dict(erpId='2',erpNumber='P-2',status='待到货',
+        warehouseName='owned-warehouse',warehouseMatch=True)
+    item.update(pendingPurchases=[],formalPurchases=[purchase])
+    related=dict(item,entityKey='other-warehouse',warehouseName='other-warehouse',
+        formalPurchases=[dict(purchase,warehouseMatch=False)])
+    calls=[]
+    current=dict(id=2,tenant_id=1,order_sn='P-2',warehouse_name='owned-warehouse',
+        status_text='待到货',item_list=[dict(sku='owned',product_id=10,quantity=48)])
+    class Reader:
+        def read(self,path,params,**limits):
+            return SimpleNamespace(complete=True,records=[current] if params['warehouse_name']=='owned-warehouse' else [])
+        def detail(self,resource,key):
+            calls.append((resource,key))
+            return dict(data=current)
+    result=track_purchases([related,item] if related_first else [item,related],policy,Reader(),discover=discover)
+    assert result['failedCount']==0 and len(result['items'])==1
+    row=result['items'][0]
+    assert row['verified'] and row['status']=='待到货' and row['warehouseName']=='owned-warehouse'
+    assert row['quantities']==[dict(sku='owned',ordered=48,received=None,pending=None)]
+    assert calls==[('purchase-orders','2')]
+    assert related['formalPurchases'][0]['warehouseMatch'] is False
+
+
+def test_tracking_still_rejects_a_purchase_moved_from_its_bound_warehouse():
+    item,policy=sample()
+    class Reader:
+        def detail(self,*args):
+            return dict(id=2,tenant_id=1,order_sn='P-2',warehouse_name='other-warehouse',
+                status_text='待到货',item_list=[dict(sku='owned',product_id=10,quantity=48)])
+    result=track_purchases([item],policy,Reader())
+    assert result['failedCount']==1
+    assert result['items'][0]['error']=='PURCHASE_TRACKING_RELATION_CHANGED'
+
+
 def test_tracking_failure_does_not_claim_old_status_is_current_or_drop_record():
     item,policy=sample()
     class Reader:
@@ -30,6 +69,30 @@ def test_tracking_failure_does_not_claim_old_status_is_current_or_drop_record():
     result=track_purchases([item],policy,Reader())
     assert result['failedCount']==1
     assert result['items'][0]['status'] is None and result['items'][0]['previousStatus']=='待审核'
+
+
+def test_tracking_exact_404_is_a_verified_missing_record_not_a_permanent_read_failure():
+    item,policy=sample()
+    class Reader:
+        def detail(self,*args):raise ERPError('ERP_HTTP_ERROR',404)
+    result=track_purchases([item],policy,Reader())
+    row=result['items'][0]
+    assert result['failedCount']==0 and row['verified']
+    assert row['status']=='ERP 已无此单' and row['resolution']=='ERP_RECORD_NOT_FOUND'
+    assert row['previousStatus']=='待审核' and row['error'] is None
+
+
+def test_tracking_uses_verified_discovery_status_when_voided_detail_is_no_longer_readable():
+    item,policy=sample()
+    class Reader:
+        def read(self,*args,**kwargs):
+            return SimpleNamespace(complete=True,records=[dict(id=2,tenant_id=1,order_sn='P-2',warehouse_name='owned-warehouse',
+                status_text='已作废',item_list=[dict(sku='owned',product_id=10,quantity=8)])])
+        def detail(self,*args):raise ERPError('ERP_HTTP_ERROR',404)
+    result=track_purchases([item],policy,Reader(),discover=True)
+    row=result['items'][0]
+    assert result['failedCount']==0 and row['verified'] and row['status']=='已作废'
+    assert row['quantities']==[dict(sku='owned',ordered=8,received=None,pending=None)]
 
 
 def test_tracking_refuses_changed_ownership_and_excludes_unregistered_members():

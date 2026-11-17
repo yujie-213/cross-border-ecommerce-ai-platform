@@ -19,14 +19,16 @@ onMounted(async()=>{try{const status=await request<{enabled:boolean}>('/status',
 
 <template>
   <div class="page platform-home">
-    <header class="page-head"><div><span class="eyebrow">跨境电商智慧 AI 中台</span><h1>工作首页</h1></div></header>
+    <header class="page-head"><div><span class="eyebrow">跨境电商智慧 AI 中台</span><h1>工作台</h1><p class="page-sub">补货运营与售后服务概览</p></div></header>
     <p v-if="state.error" class="banner danger" role="alert">{{ state.error }}</p>
     <section aria-labelledby="capabilities-title">
-      <h2 id="capabilities-title" class="home-title">业务能力</h2>
-      <a class="panel agent-entry" :href="href('/workbench', {batch:latestBatchId() || undefined})">
-        <span class="agent-mark">补</span><div><span class="chip primary">已接入</span><h2>智能补货</h2><small>自有商品分析 / AI 行动建议 / 采购状态追踪</small></div><span class="agent-arrow">进入工作区 →</span>
-      </a>
-      <a v-if="bEnabled" class="panel agent-entry" :href="href('/after-sales/workbench')"><span class="agent-mark">客</span><div><span class="chip primary">已接入</span><h2>智能售后与客户体验</h2><small>售后处理 / 体验与退货分析 / 质量风险协作</small></div><span class="agent-arrow">进入工作区 →</span></a>
+      <h2 id="capabilities-title" class="home-title">业务模块</h2>
+      <div class="home-modules">
+        <a class="panel agent-entry" :href="href('/workbench', {batch:latestBatchId() || undefined})">
+          <span class="agent-mark">补</span><div class="agent-copy"><span class="chip primary">已接入</span><h2>智能补货</h2><small>商品分析 / AI 行动建议 / 请购管理</small></div><span class="agent-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="panel agent-entry" :href="href('/after-sales/workbench')"><span class="agent-mark">客</span><div class="agent-copy"><span class="chip" :class="bEnabled ? 'primary' : 'plain'">{{ bEnabled ? '已接入' : '暂不可用' }}</span><h2>售后与客户体验</h2><small>售后处理 / 退货与商品分析 / 调查与质量风险</small></div><span class="agent-arrow" aria-hidden="true">→</span></a>
+      </div>
     </section>
     <div class="home-lower">
       <section class="panel"><div class="panel-head"><h2>近期任务</h2></div>
@@ -44,5 +46,5 @@ onMounted(async()=>{try{const status=await request<{enabled:boolean}>('/status',
 </template>
 
 <style scoped>
-.home-title{font-size:16px;margin:8px 0 16px}.agent-entry{display:flex;align-items:center;gap:24px;padding:30px;color:inherit;text-decoration:none;max-width:960px}.agent-entry:hover{border-color:#0f6b64}.agent-entry h2{font-size:26px;margin:8px 0}.agent-entry p{margin:8px 0;color:var(--ink-2,#526270)}.agent-entry small{color:var(--muted,#74818c)}.agent-mark{display:grid;place-items:center;width:78px;height:78px;background:#e7f2ef;color:#0f6b64;border-radius:20px;font-size:32px;font-weight:700}.agent-arrow{margin-left:auto;color:#0f6b64;white-space:nowrap}.home-lower{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:32px}.task-entry{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:20px 24px;border-top:1px solid #edf0f2;color:inherit;text-decoration:none}.task-entry:hover{background:#f7faf9}.task-entry small{display:block;margin-top:6px;color:#74818c}.home-notes{padding:8px 24px 28px;line-height:1.8}.home-notes p{margin-bottom:24px}@media(max-width:1000px){.home-lower{grid-template-columns:1fr}.agent-entry{padding:24px;gap:16px}.agent-arrow{font-size:12px}}
+.home-title{font-size:16px;margin:8px 0 16px}.home-modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.agent-entry{display:flex;align-items:center;gap:18px;padding:22px;color:inherit;text-decoration:none;min-width:0;min-height:156px}.agent-entry:hover{border-color:#0f6b64}.agent-copy{min-width:0}.agent-entry h2{font-size:20px;margin:8px 0;overflow-wrap:anywhere}.agent-entry small{color:var(--muted,#74818c);line-height:1.6}.agent-mark{display:grid;place-items:center;flex:none;width:58px;height:58px;background:#e7f2ef;color:#0f6b64;border-radius:8px;font-size:26px;font-weight:700}.agent-arrow{margin-left:auto;flex:none;color:#0f6b64;font-size:20px}.home-lower{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:28px}.task-entry{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:16px 20px;border-top:1px solid #edf0f2;color:inherit;text-decoration:none}.task-entry:hover{background:#f7faf9}.task-entry small{display:block;margin-top:6px;color:#74818c}.home-notes{padding:8px 24px 28px;line-height:1.8}.home-notes p{margin-bottom:24px}@media(max-width:1000px){.home-lower{grid-template-columns:1fr}.agent-entry{padding:20px;gap:14px}}@media(max-width:720px){.home-modules{grid-template-columns:1fr}.agent-entry{min-height:128px}}
 </style>

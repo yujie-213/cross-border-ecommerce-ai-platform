@@ -53,9 +53,9 @@ describe('experience procurement exclusion',()=>{
 })
 
 describe('platform and business workspace separation',()=>{
-  it('shows only the available agent and actual recent tasks on the homepage',async()=>{
+  it('shows both module entries and actual recent tasks on the homepage',async()=>{
     const html=await renderToString(createSSRApp({render:()=>h(HomePage)}))
-    expect(html).toContain('业务能力');expect(html).toContain('智能补货');expect(html).toContain('近期任务')
+    expect(html).toContain('业务模块');expect(html).toContain('智能补货');expect(html).toContain('售后与客户体验');expect(html).toContain('暂不可用');expect(html).toContain('近期任务')
     expect(html).not.toContain('补货概览');expect(html).not.toContain('已预测 SKU')
   })
   it('shows an actionable risk queue and one set of business counts',async()=>{

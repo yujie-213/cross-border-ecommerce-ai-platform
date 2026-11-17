@@ -22,7 +22,7 @@ const risks: Record<string, string> = {
 <template>
   <div class="decision-product">
     <section class="panel overall">
-      <div class="panel-head"><h2>分仓建议</h2><small>{{ scopes.length }} 个店仓 · {{ needed }} 个需补货</small></div>
+      <div class="panel-head"><h2>分仓建议</h2><small>{{ scopes.length }} 个店仓中，{{ needed }} 个建议补货</small></div>
       <div class="table-scroll"><table class="ltable compact" aria-label="逐店仓补货判断">
         <thead><tr><th>店铺 / 仓库</th><th>历史参考日均</th><th class="r">可用库存</th><th class="r">周期需求</th><th class="r">参考补充</th><th>判断 / 风险</th><th></th></tr></thead>
         <tbody><tr v-for="r in scopes" :key="r.entityKey" :class="{ chosen: r.entityKey === item.entityKey }">

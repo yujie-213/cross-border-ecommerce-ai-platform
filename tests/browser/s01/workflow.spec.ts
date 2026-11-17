@@ -12,7 +12,7 @@ test('采购人员真实流程：发现风险、分仓分析、AI建议、ERP跟
  page.on('request',r=>{if(r.method()==='POST' && /\/requisition(?:$|\?)/.test(r.url()))result.newPurchaseWrites++})
  async function shot(name:string){await page.screenshot({path:path.join(output,'screenshots',name+'.png'),fullPage:true});result.screens.push(name)}
  async function find(sku:string){await page.goto('/#/suggestions');await page.getByLabel('查找商品',{exact:true}).fill(sku);await expect(page.locator('tbody tr')).toHaveCount(1,{timeout:30000});await expect(page.locator('tbody tr').first()).toContainText(sku);await expect(page.locator('tbody a')).toHaveAttribute('aria-disabled','false');await page.getByRole('link',{name:'分析商品 →',exact:true}).click();await expect(page.locator('.product-header')).toContainText(sku)}
- await page.goto('/#/home');await expect(page.getByRole('heading',{name:'工作首页',exact:true})).toBeVisible();await shot('01-platform-home')
+ await page.goto('/#/home');await expect(page.getByRole('heading',{name:'工作台',exact:true})).toBeVisible();await shot('01-platform-home')
  await page.getByRole('link',{name:/智能补货.*进入工作区/}).click();await expect(page.getByRole('heading',{name:'今天，先处理这些商品',exact:true})).toBeVisible();await expect(page.locator('.attention-row').first()).toBeVisible({timeout:45000});await shot('02-workbench')
  await page.getByRole('link',{name:'查看全部商品 →'}).click();await expect(page.locator('tbody tr')).toHaveCount(10,{timeout:30000});await shot('03-product-list')
  await find('HLX-USB-STABLE');await expect(page.locator('.warehouse-choice')).toHaveCount(2);await shot('04-usb-east')
