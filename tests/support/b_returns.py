@@ -40,4 +40,3 @@ class ReturnERP:
 
     def detail(self,resource,record_id):
         return dict(data=next(r for r in self.returns if str(r['id'])==str(record_id)))
-
