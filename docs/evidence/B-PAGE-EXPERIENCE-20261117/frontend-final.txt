@@ -1,0 +1,13 @@
+
+> xuheng-s01-workspace@0.1.0 test
+> vitest run
+
+
+ RUN  v5.1.0 D:/电商项目/跨境电商智慧AI平台/frontend
+
+
+ Test Files  15 passed (15)
+      Tests  92 passed (92)
+   Start at  15:18:27
+   Duration  1.50s (import 56%, tests 21%, transform 18%, worker 5%)
+

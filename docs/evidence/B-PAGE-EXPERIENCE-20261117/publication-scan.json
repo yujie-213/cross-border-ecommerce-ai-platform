@@ -1,0 +1,136 @@
+{
+  "status": "PASS",
+  "observedImplementationHead": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+  "scope": "Current task committed code + exact staged review docs/evidence; private files and unknown OpenAPI excluded; audit excludes self hash",
+  "files": [
+    {
+      "path": "docs/HANDOFF.md",
+      "sha256": "a0f090ff5d9dce4f2c9604d65f484cdf18bc9435a4c10ef7c8c1f1c62193826f"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "sha256": "a747f1e66520e645202534ac8c90980ece1aa4a5052bec30b0b27dc2a89acdcf"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/backend-final.txt",
+      "sha256": "bba5f14d77f6b6f066cc8910d04ddc6a2e13b8e6fbe0064d3fd93f3173c99f2d"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/browser-final.txt",
+      "sha256": "22cb73e19c26e76b269b2617671b8d815c98540470dc5776c0fb34c54b65e610"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/browser-first-fail.txt",
+      "sha256": "156b498a3274217c573fb9ffd61b152233127bed1b1a90aa5f36bafe7bc14aff"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/build-final.txt",
+      "sha256": "a36fc5224ed2930973f201201dc7293e6b9dae47811d5335d2a8b04af2a55d1d"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/frontend-final.txt",
+      "sha256": "42413bb7eeafe9461eeb70130660bd90fd2a8c2f4b156c3177cba97d6fa4bd60"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/process-final.txt",
+      "sha256": "07871d4373a3ab22b6d38be6bea4239f0468be93302c9963661fc8b9e7632092"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/refresh-keeps-list.png",
+      "sha256": "4d0a6d48babd04cf8c52998b1ee96d59db93772c4e564e56907ab89a0c707de5"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/sku-detail-1024.png",
+      "sha256": "0e3d9df24272df00d8ad0ef1cf8a1567b8ba9f4c87ac97aba7f569be238e42e9"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/validation.json",
+      "sha256": "6f050a42d71d87dcf4ae8f5c59605bf002c9e6b55ec03f03dec1a233ee00889f"
+    },
+    {
+      "path": "docs/evidence/B-PAGE-EXPERIENCE-20261117/workbench-1024.png",
+      "sha256": "f3461bbb550eeb55ace23d70a5a23ad8c015b294c201f94115408b124aeddca5"
+    },
+    {
+      "path": "docs/generated/DEPENDENCIES.mmd",
+      "sha256": "a5a1dcc61b9864560f3b1e566e8d7c2bc0a9c4f7a8d26f59a021ffc175acc571"
+    },
+    {
+      "path": "docs/generated/STATUS.md",
+      "sha256": "eec0e0bbb918b96b76a56d5f81d4f4397c92d1c66a4e70141e48a57db39d089a"
+    },
+    {
+      "path": "docs/planning/git-whitelist.json",
+      "sha256": "c52413a075fccac571757dee085950195457acbb6b5220eac6c7944329929a7a"
+    },
+    {
+      "path": "docs/planning/validation-report.json",
+      "sha256": "f56438509061a512de7bfb8e9dbcc52f0bf63c192a354fbab68eb52dbc305f6c"
+    },
+    {
+      "path": "docs/reports/B_售后页面读取与按需分析优化_20261117.md",
+      "sha256": "3c963a951d72d085d6131f641724bfd25cdc63177d7b9466293a0fc140bb2722"
+    },
+    {
+      "path": "docs/ui/B_AFTER_SALES_PRODUCT.md",
+      "sha256": "3a5615d967da5932b27713d8d511feec5b70433e3e4d5e91b2eb13953b1f8ffc"
+    },
+    {
+      "path": "frontend/src/afterSales/AfterSalesPage.vue",
+      "sha256": "a0c53e4c83062e13b82240ebdc751ab3c875abe5ee59ea2b90a5f5df13bf956e"
+    },
+    {
+      "path": "frontend/src/afterSales/CaseWorkspace.vue",
+      "sha256": "c9fb86f4b127b29e7bf8f93eab6bd4ebb4ffb966a7194069f4b69f81e5ac9e72"
+    },
+    {
+      "path": "frontend/src/afterSales/ReturnAnalysis.vue",
+      "sha256": "b2820071668edccd9f3c4798f39dae7b71ed5fc1ce29348dac1caa9841f126c0"
+    },
+    {
+      "path": "frontend/src/afterSales/ServiceDesk.vue",
+      "sha256": "5c70ae9db63630128492deb79cacdd8ff492cb1c4543661a951c313603285dfc"
+    },
+    {
+      "path": "frontend/src/afterSales/session.ts",
+      "sha256": "ff91c101f79d264b4375e492f7eac089dca1092fcd00e4e3c62d07828c09880d"
+    },
+    {
+      "path": "frontend/src/api/client.ts",
+      "sha256": "8c14d896f5c916b548092e1bbae5d3b806e6ce481ddfb26db255d1afc8644b40"
+    },
+    {
+      "path": "frontend/tests/unit/after-sales-session.test.ts",
+      "sha256": "35dcc6727d71575eb0ba58eb931190e8c10b791baf0ac830539abc2d259f550b"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/after_sales/handler.py",
+      "sha256": "8f8e8a11605ea32c7f95d8ea9e96dd43d30074375a23141018afe39329246e58"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/after_sales/service.py",
+      "sha256": "615de93b8977b086a0023cbfedf8f101da10ebb168b225231b1fb380b1779286"
+    },
+    {
+      "path": "src/commerce_hub/scenarios/after_sales/source.py",
+      "sha256": "275f0a6c959cde0b3c6a789ab5c8d7fcfb4f7f4be1a3a081698ad3763e0d6243"
+    },
+    {
+      "path": "tests/browser/after-sales/product.spec.ts",
+      "sha256": "4fdb8ba97fec3154a286bc7f7a34f6fe81dbb3490a6d29087547794005e4a660"
+    },
+    {
+      "path": "tests/integration/after_sales/test_owned_scope.py",
+      "sha256": "b9e07d717333bdebb55c9aa8d4486dc983101829ca7540bbc130a568079b76a6"
+    },
+    {
+      "path": "tests/unit/after_sales/test_return_analysis.py",
+      "sha256": "23e4516d71ab589828b1dd3cb3bddc6599dc7bc57406411691296c1cbbc6f8ba"
+    }
+  ],
+  "findings": [],
+  "rawEvidenceFormattingPreserved": [
+    "browser-first-fail.txt trailing spaces",
+    "frontend-final.txt blank final line"
+  ]
+}

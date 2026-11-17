@@ -1,0 +1,172 @@
+
+Running 6 tests using 1 worker
+
+(node:33736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 ..\tests\browser\after-sales\product.spec.ts:5:1 › workbench cards and ERP internal handling confirmation complete without supervisor review (32.0s)
+(node:34940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 ..\tests\browser\after-sales\product.spec.ts:39:1 › ERP only pages ignore old source links and keep policy maintenance (13.9s)
+(node:23608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 ..\tests\browser\after-sales\product.spec.ts:82:1 › reply generation reports no-op accurately, fills a successful draft and saves without a second reason (2.4s)
+  x  4 ..\tests\browser\after-sales\product.spec.ts:129:1 › populated return and SKU views open one investigation, accept evidence and confirm risk (13.3s)
+(node:19196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  5 ..\tests\browser\after-sales\product.spec.ts:195:1 › switching restores lists and filters, details open without analysis, and failed refresh keeps data (13.7s)
+(node:10776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  6 ..\tests\browser\after-sales\product.spec.ts:240:1 › AI continues after leaving, double clicks submit once, and a late result does not replace another case (22.0s)
+
+
+  1) ..\tests\browser\after-sales\product.spec.ts:5:1 › workbench cards and ERP internal handling confirmation complete without supervisor review 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.desk-kpis')
+    Expected substring: "评价 1 · 反馈 1 · 工单 1"
+    Received string:    "▦覆盖 SKU0☷客户问题—◷待处理—✓已处理—"
+    Timeout: 30000ms
+
+    Call log:
+      - Expect "toContainText" locator('.desk-kpis') with timeout 30000ms
+      - waiting for locator('.desk-kpis')
+        63 × locator resolved to <div class="desk-kpis" data-v-b5441a4e="">…</div>
+           - unexpected value "▦覆盖 SKU0☷客户问题—◷待处理—✓已处理—"
+
+
+      10 |   await page.getByRole('link',{name:/智能售后与客户体验/}).click()
+      11 |   await expect(page.locator('.desk-kpis')).toContainText('覆盖 SKU')
+    > 12 |   await expect(page.locator('.desk-kpis')).toContainText('评价 1 · 反馈 1 · 工单 1',{timeout:30000})
+         |                                            ^
+      13 |   const shots=path.resolve(import.meta.dirname,'../../../.tmp/b-desk-screenshots');mkdirSync(shots,{recursive:true})
+      14 |   await page.screenshot({path:path.join(shots,'01-workbench.png'),fullPage:true})
+      15 |   await page.setViewportSize({width:1024,height:900})
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:12:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-workbench-cards-an-656c8-e-without-supervisor-review\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-workbench-cards-an-656c8-e-without-supervisor-review\error-context.md
+
+  2) ..\tests\browser\after-sales\product.spec.ts:39:1 › ERP only pages ignore old source links and keep policy maintenance 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('当前店铺没有已登记的商品销售范围。', { exact: true })
+    Expected: visible
+    Timeout: 12000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('当前店铺没有已登记的商品销售范围。', { exact: true }) with timeout 12000ms
+      - waiting for getByText('当前店铺没有已登记的商品销售范围。', { exact: true })
+
+
+      51 |   await expect(page.getByRole('button',{name:/商品监测/})).toBeVisible()
+      52 |   await page.getByRole('button',{name:/商品监测/}).click()
+    > 53 |   await expect(page.getByText('当前店铺没有已登记的商品销售范围。',{exact:true})).toBeVisible()
+         |                                                                  ^
+      54 |   await expect(page.locator('.window-head')).toHaveCount(0)
+      55 |   const analysisShots=path.resolve(import.meta.dirname,'../../../.tmp/b-return-analysis-screenshots');mkdirSync(analysisShots,{recursive:true})
+      56 |   await page.screenshot({path:path.join(analysisShots,'01-monitor-desktop.png'),fullPage:true})
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:53:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-ERP-only-pages-ign-48b69-and-keep-policy-maintenance\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-ERP-only-pages-ign-48b69-and-keep-policy-maintenance\error-context.md
+
+  3) ..\tests\browser\after-sales\product.spec.ts:129:1 › populated return and SKU views open one investigation, accept evidence and confirm risk 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.return-table tbody tr')
+    Expected: 1
+    Received: 0
+    Timeout:  12000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.return-table tbody tr') with timeout 12000ms
+      - waiting for locator('.return-table tbody tr')
+        27 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      154 |   await page.route('**/api/b/v1/risks/'+risk.id,r=>r.fulfill({json:risk}))
+      155 |   await page.goto('/#/after-sales/experience')
+    > 156 |   await expect(page.locator('.return-table tbody tr')).toHaveCount(1)
+          |                                                        ^
+      157 |   await page.setViewportSize({width:1024,height:900})
+      158 |   const action=page.locator('.return-table tbody tr').getByRole('button',{name:'查看详情',exact:true})
+      159 |   expect((await action.boundingBox())!.x+(await action.boundingBox())!.width).toBeLessThanOrEqual(1024)
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:156:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-populated-return-a-b2ff2-t-evidence-and-confirm-risk\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-populated-return-a-b2ff2-t-evidence-and-confirm-risk\error-context.md
+
+  4) ..\tests\browser\after-sales\product.spec.ts:195:1 › switching restores lists and filters, details open without analysis, and failed refresh keeps data 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.desk-queue tbody tr')
+    Expected: 35
+    Received: 0
+    Timeout:  12000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.desk-queue tbody tr') with timeout 12000ms
+      - waiting for locator('.desk-queue tbody tr')
+        27 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      212 |   })
+      213 |   await page.route('**/api/b/v1/return-cases',r=>{counts.investigation++;return r.fulfill({status:503,json:{code:'UNEXPECTED_CALL'}})})
+    > 214 |   await page.goto('/#/after-sales/workbench');await expect(page.locator('.desk-queue tbody tr')).toHaveCount(35)
+          |                                                                                                  ^
+      215 |   await page.getByLabel('搜索客户问题').fill('接缝');await page.getByLabel('问题类型').selectOption('tickets')
+      216 |   await page.locator('.queue-tabs').getByRole('button',{name:'全部',exact:true}).click()
+      217 |   await page.evaluate(()=>window.scrollTo(0,700));await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(500)
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:214:98
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-switching-restores-7242a-d-failed-refresh-keeps-data\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-switching-restores-7242a-d-failed-refresh-keeps-data\error-context.md
+
+  5) ..\tests\browser\after-sales\product.spec.ts:240:1 › AI continues after leaving, double clicks submit once, and a late result does not replace another case 
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('link', { name: '知识与政策', exact: true })
+
+
+      255 |   await expect(page.getByRole('button',{name:'正在处理…',exact:true})).toBeDisabled();expect(submits).toBe(1)
+      256 |   await page.reload();await expect(page.getByRole('button',{name:'正在处理…',exact:true})).toBeDisabled();expect(submits).toBe(1)
+    > 257 |   await page.getByRole('link',{name:'知识与政策',exact:true}).click();await expect(page.getByRole('heading',{name:'售后政策',exact:true})).toBeVisible()
+          |                                                          ^
+      258 |   await page.goto('/#/after-sales/cases?id=case-b');await page.getByLabel('回复稿',{exact:true}).fill('B 的人工回复')
+      259 |   a.revision=2;a.body.advice=[{version:1,caseRevision:2,ai:{status:'AVAILABLE',output:{replyDraft:'A 的 AI 回复'}}}];complete=true
+      260 |   await expect.poll(async()=>await page.evaluate(()=>performance.getEntriesByType('resource').some((e:any)=>e.name.includes('slow-ai/report')))).toBe(true)
+        at D:\电商项目\跨境电商智慧AI平台\tests\browser\after-sales\product.spec.ts:257:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\.tmp\b-browser\product-AI-continues-after-3d643-es-not-replace-another-case\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\.tmp\b-browser\product-AI-continues-after-3d643-es-not-replace-another-case\error-context.md
+
+  5 failed
+    ..\tests\browser\after-sales\product.spec.ts:5:1 › workbench cards and ERP internal handling confirmation complete without supervisor review 
+    ..\tests\browser\after-sales\product.spec.ts:39:1 › ERP only pages ignore old source links and keep policy maintenance 
+    ..\tests\browser\after-sales\product.spec.ts:129:1 › populated return and SKU views open one investigation, accept evidence and confirm risk 
+    ..\tests\browser\after-sales\product.spec.ts:195:1 › switching restores lists and filters, details open without analysis, and failed refresh keeps data 
+    ..\tests\browser\after-sales\product.spec.ts:240:1 › AI continues after leaving, double clicks submit once, and a late result does not replace another case 
+  1 passed (1.7m)

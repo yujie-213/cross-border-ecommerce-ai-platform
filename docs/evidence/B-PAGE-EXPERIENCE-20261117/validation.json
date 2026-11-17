@@ -1,0 +1,64 @@
+{
+  "status": "REVIEW",
+  "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+  "backend": {
+    "result": "PASS",
+    "tests": 60,
+    "testedCommit": "ac5340ee43aa8e11139eec8b0f6449f0a3d592a8",
+    "artifact": "backend-final.txt",
+    "scope": "Actual isolated MySQL/API/domain; synthetic ERP/model; backend source identical at final commit"
+  },
+  "frontend": {
+    "result": "PASS",
+    "tests": 92,
+    "testedCommit": "ac5340ee43aa8e11139eec8b0f6449f0a3d592a8",
+    "artifact": "frontend-final.txt",
+    "scope": "Temporal result-state/async isolation and existing frontend regression; final change only recovery banner covered by browser"
+  },
+  "build": {
+    "result": "PASS",
+    "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+    "artifact": "build-final.txt",
+    "typecheck": "PASS"
+  },
+  "process": {
+    "result": "PASS",
+    "tests": 1,
+    "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+    "artifact": "process-final.txt",
+    "scope": "Actual API, independent Worker crash/restart, MySQL, compiled Vue"
+  },
+  "browser": {
+    "result": "PASS",
+    "tests": 6,
+    "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+    "artifact": "browser-final.txt",
+    "scope": "Compiled Vue/Edge; slow ERP and model endpoints explicitly fixtured; logout, retry preservation, navigation, task reload, record isolation"
+  },
+  "localService": {
+    "webStatus": 200,
+    "apiReadyStatus": 200,
+    "accountSessionGrantFingerprintUnchanged": true,
+    "modelAuthorizationTouched": false
+  },
+  "notRun": [
+    "New live paid model calls",
+    "ERP business writes or data import",
+    "Original-account live ERP full workflow acceptance"
+  ],
+  "failures": [
+    {
+      "artifact": "browser-first-fail.txt",
+      "result": "FAIL",
+      "testsPassed": 1,
+      "testsFailed": 5,
+      "testedCommit": null,
+      "scope": "Initial worktree validation; reactive result object failed to notify Vue and new exact sidebar locators omitted icons; fixed and retained"
+    }
+  ],
+  "unchanged": [
+    "Replenishment Agent calculations and purchase flow",
+    "Local account, sessions and existing grants",
+    "User untracked docs/ERP-openapi.yaml"
+  ]
+}

@@ -145,7 +145,7 @@
       "check": "tracked-whitelist",
       "result": "PASS",
       "detail": {
-        "tracked": 1335,
+        "tracked": 1349,
         "over": []
       }
     }

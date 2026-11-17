@@ -1,0 +1,13 @@
+
+Running 6 tests using 1 worker
+
+(node:49376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\tests\browser\after-sales\product.spec.ts:5:1 › workbench cards and ERP internal handling confirmation complete without supervisor review (5.8s)
+  ok 2 ..\tests\browser\after-sales\product.spec.ts:39:1 › ERP only pages ignore old source links and keep policy maintenance (4.5s)
+  ok 3 ..\tests\browser\after-sales\product.spec.ts:82:1 › reply generation reports no-op accurately, fills a successful draft and saves without a second reason (2.0s)
+  ok 4 ..\tests\browser\after-sales\product.spec.ts:129:1 › populated return and SKU views open one investigation, accept evidence and confirm risk (2.4s)
+  ok 5 ..\tests\browser\after-sales\product.spec.ts:195:1 › switching restores lists and filters, details open without analysis, and failed refresh keeps data (3.2s)
+  ok 6 ..\tests\browser\after-sales\product.spec.ts:244:1 › AI continues after leaving, double clicks submit once, and a late result does not replace another case (3.6s)
+
+  6 passed (23.0s)

@@ -12760,13 +12760,58 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
   "requiredEvidenceKinds": [
     "INTEGRATION"
   ],
-  "status": "IN_PROGRESS",
-  "implementationCommits": [],
-  "testedCommit": null,
-  "evidence": [],
+  "status": "REVIEW",
+  "implementationCommits": [
+    "75cf4bc3b2f7294d88ca447c279df3fc042e6774",
+    "ac5340ee43aa8e11139eec8b0f6449f0a3d592a8",
+    "d667c70e8d23ecd765b9b3660c84249701ce62fd"
+  ],
+  "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+  "evidence": [
+    {
+      "environment": "Windows/Python3.13 authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP/model",
+      "exitCode": 0,
+      "result": "PASS",
+      "testedCommit": "ac5340ee43aa8e11139eec8b0f6449f0a3d592a8",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-PAGE-EXPERIENCE-01/AC3"
+      ],
+      "command": "COMMERCE_RUN_MYSQL_TESTS=1; mock/network off; pytest tests/unit/after_sales tests/integration/after_sales -k 'not independent_worker_crash_api_restart_and_actual_vue_product' -o addopts='' -q",
+      "sample": "60 PASS; unchanged backend source at final commit; 3 exact reads, ownership/revocation, admission evidence and immutable manifest",
+      "artifactRef": "docs/evidence/B-PAGE-EXPERIENCE-20261117/backend-final.txt"
+    },
+    {
+      "environment": "Windows/Python3.13 authorized isolated MySQL/API/independent Worker/compiled Vue/Edge; synthetic ERP/model",
+      "exitCode": 0,
+      "result": "PASS",
+      "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+      "kind": "BROWSER",
+      "acceptanceIds": [
+        "D-B-PAGE-EXPERIENCE-01/AC1",
+        "D-B-PAGE-EXPERIENCE-01/AC2"
+      ],
+      "command": "test_process_product -> actual API/independent Worker -> compiled Vue/Edge product.spec.ts",
+      "sample": "1 process + 6 browser PASS; controlled slow responses, no live AI/ERP claim; 92 frontend PASS and final typecheck/build PASS",
+      "artifactRef": "docs/evidence/B-PAGE-EXPERIENCE-20261117/validation.json"
+    },
+    {
+      "environment": "Local original installation, existing account/session/grants; frontend5175/API8768",
+      "testedCommit": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
+      "exitCode": 0,
+      "result": "PASS",
+      "kind": "INTEGRATION",
+      "acceptanceIds": [
+        "D-B-PAGE-EXPERIENCE-01/AC1"
+      ],
+      "command": "tools/local_platform.py stop; native hidden start --no-browser; health GET and private identity/grants fingerprint comparison",
+      "sample": "Both ready200; original account/session/grants unchanged; no live ERP/model action initiated",
+      "artifactRef": "docs/evidence/B-PAGE-EXPERIENCE-20261117/validation.json"
+    }
+  ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "2ac1ddb6e617e303cca9d4dfa13a95e0a3a0d6a0",
+  "observedHead": "d667c70e8d23ecd765b9b3660c84249701ce62fd",
   "dirtyPaths": [
     "docs/ERP-openapi.yaml (untracked; preserved)"
   ],
@@ -12777,6 +12822,12 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "at": "2026-11-17",
       "toStatus": "IN_PROGRESS",
       "reason": "负责人明确授权修复页面切换和阻塞体验。"
+    },
+    {
+      "at": "2026-11-17",
+      "fromStatus": "IN_PROGRESS",
+      "toStatus": "REVIEW",
+      "reason": "页面结果/筛选/位置保留、先详情后操作、独立后台任务恢复和单退货精确读取完成；60后端、92前端及实际API/Worker/Edge6通过，托管服务已更新。原账号真实业务体验留待负责人，不合main。"
     }
   ]
 }

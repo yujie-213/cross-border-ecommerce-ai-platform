@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`dc8d2ccd8c9d30b1a2425fff744abdba0418c82445249f358581f5e40110d416`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`a747f1e66520e645202534ac8c90980ece1aa4a5052bec30b0b27dc2a89acdcf`。不要手工编辑；候选不是执行授权。
 
-任务 63 项；TODO 5；IN_PROGRESS 1；BLOCKED 4；REVIEW 30；ACCEPTED 23。
+任务 63 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 31；ACCEPTED 23。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,7 +10,7 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 46 | 2 | 1 | 4 | 28 | 11 |
+| D | 46 | 2 | 0 | 4 | 29 | 11 |
 
 ## 当前活动记录
 
@@ -48,7 +48,7 @@
 - D-B-DATASET-01 独立完整教学数据导入、校验及独立回读：REVIEW；实际执行者=Codex。
 - D-B-ERP-SIMULATION-01 3SKU完整仿真ERP经营数据及双Agent可读验证：REVIEW；实际执行者=Codex。
 - D-B-RETURNS-WORKFLOW-01 售后四入口与退货商品调查流程整改及ERP数据复验：REVIEW；实际执行者=Codex。
-- D-B-PAGE-EXPERIENCE-01 售后页面保留结果与按需分析体验修复：IN_PROGRESS；实际执行者=Codex。
+- D-B-PAGE-EXPERIENCE-01 售后页面保留结果与按需分析体验修复：REVIEW；实际执行者=Codex。
 
 ## 全部近期记录
 
@@ -116,6 +116,6 @@
 | D-B-DATASET-01 | 独立完整教学数据导入、校验及独立回读 | REVIEW | D-B-FOUNDATION-01 |
 | D-B-ERP-SIMULATION-01 | 3SKU完整仿真ERP经营数据及双Agent可读验证 | REVIEW | D-B-FOUNDATION-01, D-B-S01-01 |
 | D-B-RETURNS-WORKFLOW-01 | 售后四入口与退货商品调查流程整改及ERP数据复验 | REVIEW | D-B-ERP-SIMULATION-01, D-B-S01-01 |
-| D-B-PAGE-EXPERIENCE-01 | 售后页面保留结果与按需分析体验修复 | IN_PROGRESS | D-B-RETURNS-WORKFLOW-01 |
+| D-B-PAGE-EXPERIENCE-01 | 售后页面保留结果与按需分析体验修复 | REVIEW | D-B-RETURNS-WORKFLOW-01 |
 
 D-S01-01下一条指令即可进入；不依赖A/B/C/S02。C任务仅实际用途需要时选择。旧96项只读映射见TASK_MAPPING，不汇入当前任务完成率。
