@@ -22,7 +22,9 @@ def source_reader(settings):
         for m in registry.mappings() if m.monitor}
     from commerce_hub.adapters.erp import TeachingERPReader
     from commerce_hub.bootstrap.s01_v2 import erp_config
-    reader=SourceReader(lambda:TeachingERPReader(erp_config()),stores,PRIVATE/'source-evidence',owned_provider=registry.mappings,
+    from dataclasses import replace
+    # Registered return/order detail reads share one bounded 100-request budget.
+    reader=SourceReader(lambda:TeachingERPReader(replace(erp_config(),max_requests=100)),stores,PRIVATE/'source-evidence',owned_provider=registry.mappings,
         supplemental_context=PRIVATE/'customer-context.json')
     from commerce_hub.adapters.erp_customer_voice import TeachingVoiceClient
     reader.voice_client_factory=lambda:TeachingVoiceClient(erp_config())
