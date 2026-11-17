@@ -125,7 +125,7 @@ class DemoImporter(Importer):
             sale=sales[([0,10,11,12,13,14,15,16]+[17,18,19,9])[i]]
             tickets.append(self.create('customer-tickets','ticket_no','CY-C261117-'+f'{i+1:03}',dict(ticket_no='CY-C261117-'+f'{i+1:03}',platform='Amazon',store_name=store['store_name'],buyer=sale['buyer'],subject=text,status_text='待处理',owner='售后服务组',created_time='2026-11-17 12:00:00',order_sn=sale['order_sn'])))
         final=record(self.client.request('GET','/api/v1/inventory/'+str(inv['id'])))
-        ledger=self.client.request('GET','/api/v1/stock/ledger',dict(inventory_id=inv['id'],offset=0,limit=200))
+        ledger=self.client.request('GET','/api/v1/stock/ledger',dict(sku=SKU,warehouse_name=warehouse['name'],offset=0,limit=200))
         check(ledger.get('total')==len(ledger.get('items',[])),'LEDGER_INCOMPLETE')
         rows=sorted(ledger['items'],key=lambda r:r['id']);running=Decimal(str(rows[0]['before_quantity']));available=Decimal(str(rows[0]['before_available']))
         for row in rows:

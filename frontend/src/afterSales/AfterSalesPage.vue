@@ -212,7 +212,7 @@ watch(()=>[route.value.path,route.value.query.id,route.value.query.investigation
     </template>
 
     <template v-if="section==='experience'">
-      <ReturnAnalysis v-if="workspace" :workspace="workspace" :cases="scopedCases" :disabled="busy" @investigate-return="body=>startSourceInvestigation('return',body)" @investigate-sku="body=>startSourceInvestigation('monitor',body)" />
+      <ReturnAnalysis v-if="workspace" :workspace="workspace" :cases="scopedCases" :investigations="scopedInvestigations" :disabled="busy" @open-investigation="viewInvestigation" @investigate-return="body=>startSourceInvestigation('return',body)" @investigate-sku="body=>startSourceInvestigation('monitor',body)" />
     </template>
 
     <template v-if="section==='risks'">
