@@ -11413,7 +11413,7 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "INTEGRATION",
     "BROWSER"
   ],
-  "status": "IN_PROGRESS",
+  "status": "REVIEW",
   "implementationCommits": [
     "2d5eb5099329c99e4a0f1667f8d1101a6a49bbb7",
     "2943ca2251d497b85af951169e527f533d26afd8",
@@ -11425,7 +11425,9 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
     "511cfc2ac55e5d814087befed7ed52cc46c6fbbb",
     "21b7018517e563bc1c5ca16cf2da57de9476ee08",
     "99e4e6ba96f5a62044f2dfd2dfaf1983578a8b59",
-    "6716ddcadf299d08c51b2b327c309eecfea67c98"
+    "6716ddcadf299d08c51b2b327c309eecfea67c98",
+    "b47154e",
+    "7c5ab83"
   ],
   "testedCommit": "6716ddcadf299d08c51b2b327c309eecfea67c98",
   "evidence": [
@@ -11668,14 +11670,67 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "command": "live ERP customer-voice append and new-batch paid AI",
       "sample": "No owned review/feedback record; US/Amazon policy unpublished; user will log in later; no invented human confirmation or live write",
       "artifactRef": "docs/evidence/B-SERVICE-DESK-20261117/validation.json"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": ".venv/Scripts/python.exe -m pytest tests/integration/after_sales tests/security/test_b_resources.py tests/unit/data/test_b_order_warehouse.py --tb=short",
+      "environment": "Windows/Python3.13/authorized isolated MySQL, API and independent Worker; synthetic ERP transport; mock model/network disabled",
+      "sample": "88 passed; removed API/task/history deny tests and ERP case/risk policy/readback cases included; no ERP writes or paid model calls",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": ".tmp/b-erp-only-final.xml",
+      "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
+    },
+    {
+      "kind": "BROWSER",
+      "acceptanceIds": [],
+      "command": "node node_modules/@playwright/test/cli.js test --config=../tests/browser/after-sales/playwright.config.ts",
+      "environment": "Windows/compiled Vue, Edge, local authenticated engineering session; synthetic ERP and mocked AI UI contract",
+      "sample": "3 passed including stale source URL rejection, policies retained, ERP voice confirmation and restart/history interaction",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": ".tmp/b-erp-only-screenshots",
+      "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
+    },
+    {
+      "kind": "INTEGRATION",
+      "acceptanceIds": [],
+      "command": "npm --prefix frontend test -- --run; npm --prefix frontend run build",
+      "environment": "Local Node/Vite/Vitest",
+      "sample": "87 front-end tests passed; vue-tsc and Vite build passed",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": ".tmp/b-erp-only-frontend.log",
+      "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
+    },
+    {
+      "kind": "CONTRACT",
+      "acceptanceIds": [],
+      "command": "Account/configuration fingerprint before and after managed service restart",
+      "environment": "Local platform with existing account/session/ERP/model settings",
+      "sample": "accountUnchanged=true; filesUnchanged=true; API8768/frontend5175 readiness 200; S01 consumer/replenishment paths have zero diff",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": ".tmp/b-erp-only-local-before.json",
+      "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
+    },
+    {
+      "kind": "CONTRACT",
+      "acceptanceIds": [],
+      "command": ".venv/Scripts/python.exe docs/planning/check_plan.py",
+      "environment": "Local repository",
+      "sample": "18 checks, failed=0; build_docs published generated task views",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/planning/validation-report.json",
+      "testedCommit": "7c5ab83d79ae6e0db72246d520d358edc9f76e19"
     }
   ],
   "review": null,
   "branch": "codex/b-after-sales-v1",
-  "observedHead": "6716ddcadf299d08c51b2b327c309eecfea67c98",
-  "dirtyPaths": [
-    "docs/ERP-openapi.yaml (untracked; preserved)"
-  ],
+  "observedHead": "7c5ab83d79ae6e0db72246d520d358edc9f76e19",
+  "dirtyPaths": [],
   "latestHandoffRef": "docs/HANDOFF.md",
   "blocker": null,
   "history": [
@@ -11845,8 +11900,10 @@ S01设计没有A/B/C/S02硬依赖，下一条明确设计指令可直接开始�
       "implement": "移除资料导入校验分析演示绑定、来源切换及活动API/任务，保留ERP客服与政策、历史审计",
       "doneWhen": "ERP客服流程及政策回归、旧入口拒绝、编译浏览器验证",
       "testMethod": "MySQL/API/Worker、前端、Edge、文档检查",
-      "status": "IN_PROGRESS",
-      "evidence": []
+      "status": "REVIEW",
+      "evidence": [
+        "docs/reports/B_独立教学资料功能移除_20261117.md"
+      ]
     }
   ],
   "executionPolicy": "阶段工程完成和必要测试通过后记REVIEW（工程可用、产品待最终验收），不作为后续阻塞；普通缺陷Codex自行修复继续。只有冻结需求冲突、重大架构变化、破坏性操作、扩大外部业务权限暂停；最终负责人和星星统一产品验收。原型方向可一次简短确认，等待期间推进无关后端工作。"

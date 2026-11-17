@@ -1,6 +1,6 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`0f93478ba59988b005e5bf019485ba4d883c858069eb828bafce46ba3cc3ffb0`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`846325280e613c9c554d4819b2225418e364ce5d3f50b47c4d0d0dbb9df5ef79`。不要手工编辑；候选不是执行授权。
 
 任务 61 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 29；ACCEPTED 23。
 
