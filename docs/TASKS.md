@@ -1,3 +1,5 @@
+工作台与B分支main发布回执（2026-11-17）：已在原main干净worktree先快进远端基点efa06985cc92aaf9e657af659a027dccd9d5fc97，再快进当前交付47e740ee39f4912f82aed325bbcfe08e07b9c966，普通push main与codex/b-after-sales-v1成功，git ls-remote独立回读两分支均47e740ee39f4912f82aed325bbcfe08e07b9c966。无冲突/force/历史改写，未知docs/ERP-openapi.yaml仍只在原工作区未跟踪。固定实现b89702d及测试入口修正cbaaa89与验证不变；本条为随后文档回执，最终提交SHA以Git回读为准。旧不合main停止点被本次明确发布授权覆盖，未补签历史未完成业务验收；原账号会话/采购门保留。发布完成后停止。
+
 工作台与B分支main发布准备（2026-11-17）：负责人当前对话明确授权合并main并更新文档，覆盖旧B分支不合main停止点；来源codex/b-after-sales-v1，固定实现b89702d0a5b599e4040fe071a6eb701de2be67d5，浏览器入口修正cbaaa89c4e4b41eb74bab493efeb287d2c93228c，远端main基点efa06985cc92aaf9e657af659a027dccd9d5fc97。README/双模块手册/发布报告/AGENTS/唯一台账D-WORKBENCH-01已同步统一工作台、异仓参考修复及真实ERP根因。合并前完整1055测试为1054PASS/1FAIL/0SKIP，唯一旧浏览器标题导航断言已修正，定向1进程+6Edge全部PASS；92前端、类型构建、14跟踪、18文档检查PASS。60提交/642不同blob历史凭据扫描0命中；未知OpenAPI及私有配置不暂存。保留首次FAIL和原账号真实页面NOT_RUN，不将发布授权代签全部B业务验收，既有REVIEW/企业门不变。随后普通快进main和push，最终SHA/远端以独立回读补记。详细结果见reports/工作台与采购跟踪合并_20261117.md。
 
 ## D-WORKBENCH-01 统一工作台与采购跟踪发布
@@ -150,6 +152,18 @@
       "exitCode": 0,
       "result": "PASS",
       "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
+    },
+    {
+      "kind": "REPOSITORY",
+      "acceptanceIds": [
+        "D-WORKBENCH-01/AC3"
+      ],
+      "command": "main worktree git merge --ff-only origin/main; git merge --ff-only codex/b-after-sales-v1; git push origin codex/b-after-sales-v1 main; git ls-remote",
+      "environment": "Local clean main worktree and origin GitHub; normal fast-forward",
+      "sample": "Published47e740ee39f4912f82aed325bbcfe08e07b9c966; independently verified both remote refs; no force/conflict, unknownOpenAPI untracked",
+      "exitCode": 0,
+      "result": "PASS",
+      "artifactRef": "docs/reports/工作台与采购跟踪合并_20261117.md"
     }
   ],
   "review": null,
@@ -172,6 +186,12 @@
       "fromStatus": "IN_PROGRESS",
       "toStatus": "REVIEW",
       "reason": "实现已提交，14后端/92前端/构建与修正入口后的实际API/Worker/Edge6通过；发布记录和完整回归随后补充，保留真实验收缺口。"
+    },
+    {
+      "at": "2026-11-17",
+      "fromStatus": "REVIEW",
+      "toStatus": "REVIEW",
+      "reason": "负责人明确授权发布已完成：main与来源分支普通快进推送47e740e并回读一致；保留业务验收缺口及历史FAIL/NOT_RUN，不自动签认全部B验收。"
     }
   ]
 }
