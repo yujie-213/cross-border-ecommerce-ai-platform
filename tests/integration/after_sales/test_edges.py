@@ -49,7 +49,7 @@ def test_model_failure_manual_path_policy_revocation_and_evidence_forgery(env):
     e=env;publish_policies(e);c=erp_case(e)
     run_job(e,'CASE',c['id'],'evidence');run_job(e,'CASE',c['id'],'advice')
     c=read(e,'CASE',c['id']);p=c['body']['advice'][-1]['policies'][0]
-    
+
     for policy in e.domain.store.list(e.actor,'POLICY',limit=100)['items']:
         mutate(e,'POLICY',policy['id'],'revoke',dict(reason='该版本已失效'))
     with pytest.raises(TaskError,match='POLICY_NO_LONGER_AVAILABLE'):

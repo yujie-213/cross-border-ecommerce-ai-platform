@@ -55,5 +55,3 @@ def test_old_case_direct_links_lists_and_new_admission_follow_current_membership
     assert e.domain.store.list(e.actor,'CASE')['items']==[]
     with pytest.raises(TaskError,match='NOT_FOUND'):read(e,'CASE',c['id'])
     with pytest.raises(TaskError,match='SOURCE_SCOPE_DENIED'):e.domain.create_case(e.actor,uuid4().hex,data)
-
-

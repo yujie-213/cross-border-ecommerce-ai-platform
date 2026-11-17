@@ -38,6 +38,3 @@ def golden_package():
         chunks=[dict(number=i,hash=digest(block),count=len(block)) for i,block in enumerate(blocks)],
         windows=[['2026-08-01T00:00:00Z','2026-09-01T00:00:00Z'],['2026-09-01T00:00:00Z','2026-10-02T00:00:00Z']],asOf='2026-11-01T00:00:00Z')
     return manifest,blocks
-
-
-
