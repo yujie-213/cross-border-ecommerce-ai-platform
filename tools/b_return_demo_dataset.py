@@ -155,7 +155,10 @@ class DemoImporter(Importer):
                 running+=Decimal(str(row['delta_quantity']));available+=Decimal(str(row['delta_available']))
                 check(running==Decimal(str(row['after_quantity'])) and available==Decimal(str(row['after_available'])),'LEDGER_ARITHMETIC_FAILED')
             actual=record(self.client.request('GET','/api/v1/inventory/'+str(inventory_id)))
-            check(actual['sku']==SKU and str(actual['wid'])==str(warehouse['id']) and str(actual['store_id'])==str(store['id'])
+            # ERP return receipts create unassigned (store_id=0) QC batches;
+            # their exact inbound IDs above prove ownership through the return.
+            allowed_stores={str(store['id'])} if str(inventory_id)==str(inv['id']) else {'0',str(store['id'])}
+            check(actual['sku']==SKU and str(actual['wid'])==str(warehouse['id']) and str(actual['store_id']) in allowed_stores
                 and running==Decimal(str(actual['quantity'])) and available==Decimal(str(actual['available'])),'STOCK_READBACK_MISMATCH')
             balances.append(actual)
         check(sum(r['quantity'] for r in balances)==10 and sum(r['available'] for r in balances)==4,'RETURN_STOCK_DISPOSITION_MISMATCH')
