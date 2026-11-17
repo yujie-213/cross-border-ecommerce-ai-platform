@@ -8,6 +8,7 @@ from dataclasses import replace
 from datetime import timedelta
 from decimal import Decimal
 import json
+import time
 from types import SimpleNamespace
 from uuid import uuid4
 
@@ -94,7 +95,10 @@ def mutate(e,kind,rid,action,data=None,revision=None):
 def run_job(e,kind,rid,job,data=None):
     row=read(e,kind,rid)
     accepted=e.domain.job(e.actor,kind,rid,job,uuid4().hex,row['revision'],data or {})
-    assert Worker(e.tasks).once()
+    worker=Worker(e.tasks);stop=time.monotonic()+2
+    while not worker.once():
+        assert time.monotonic()<stop,'No delivery became claimable within two seconds'
+        time.sleep(.02)
     task=e.tasks.read(e.actor,accepted['taskRef']['taskId'])
     assert task['state']=='SUCCEEDED',task
     return e.tasks.read_report(e.actor,task['taskRef']['taskId'])

@@ -260,9 +260,9 @@ watch(()=>[route.value.path,route.value.query.id,route.value.query.source,route.
 
 <template>
   <div class="b-page">
-    <a v-if="current?.kind==='CASE'" class="back" :href="link('workbench')">← 返回案件队列</a>
+    <a v-if="current?.kind==='CASE'" class="back" :href="link('workbench')">← 返回工作台</a>
     <a v-if="returnTo" class="back" :href="'#'+returnTo">← 返回原补货页面</a>
-    <header class="page-head"><div><h1>{{title}}</h1></div><button v-if="current?.state!=='HANDLED' && !pending" class="button small" :disabled="busy || loading" @click="current?.kind==='CASE'?perform(()=>job(current!,'cases','evidence-jobs')):refresh()">更新记录</button></header>
+    <header class="page-head"><div><h1>{{title}}</h1></div><button v-if="current?.state!=='HANDLED' && !pending && (current || sourceFilter==='TEACHING' || !['workbench','cases'].includes(section))" class="button small" :disabled="busy || loading" @click="current?.kind==='CASE'?perform(()=>job(current!,'cases','evidence-jobs')):refresh()">更新记录</button></header>
     <p v-if="error" class="banner danger" role="alert">{{error}}</p><p v-if="note" class="banner" role="status">{{note}}</p>
     <p v-if="pending && !busy" class="banner warning">保存结果待核验。<button class="button small" @click="retry">核对处理结果</button></p>
     <p v-if="loading" role="status">正在读取当前记录…</p>

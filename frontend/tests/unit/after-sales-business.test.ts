@@ -40,3 +40,12 @@ it('uses the approved batch display name while leaving unrelated store names unc
  expect(storeLabel('SIM-AS-20261116-R1-SHOP')).toBe('澄屿生活馆 · 美国站')
  expect(storeLabel('Other Store')).toBe('Other Store')
 })
+it('keeps handled replies read only and does not claim ERP verification for legacy local records',async()=>{
+ const a=asset();a.state='HANDLED';a.body.erpVoiceId='71'
+ const html=await renderToString(createSSRApp({render:()=>h(CaseWorkspace,{asset:a,busy:false,modelEnabled:true,draft:'已核对的回复',message:'',attachments:'',reason:''})}))
+ expect(html).toContain('readonly');expect(html).toContain('中台处理记录已保存')
+ expect(html).not.toContain('ERP 处理记录已核验');expect(html).not.toContain('更正关联商品')
+ a.body.confirmation={status:'CONFIRMED'}
+ const verified=await renderToString(createSSRApp({render:()=>h(CaseWorkspace,{asset:a,busy:false,modelEnabled:true,draft:'已核对的回复',message:'',attachments:'',reason:''})}))
+ expect(verified).toContain('ERP 处理记录已核验')
+})

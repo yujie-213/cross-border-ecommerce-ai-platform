@@ -27,7 +27,7 @@ test('workbench cards and ERP internal handling confirmation complete without su
   await expect(page.getByLabel('回复稿',{exact:true})).toHaveValue(reply)
   await expect(page.getByLabel('回复稿',{exact:true})).toHaveAttribute('readonly','')
   await page.screenshot({path:path.join(shots,'03-confirmed.png'),fullPage:true})
-  await page.getByRole('link',{name:'← 返回案件列表',exact:true}).click()
+  await page.getByRole('link',{name:'← 返回工作台',exact:true}).click()
   await expect(page.locator('.desk-kpis .done strong')).toHaveText('1',{timeout:30000})
   await page.locator('.queue-tabs').getByRole('button',{name:'已处理',exact:true}).click()
   await expect(page.locator('.desk-queue tbody tr')).toHaveCount(1)
