@@ -1,3 +1,174 @@
+## D-B-REPLY-FOCUS-01 售后回复话题与常用教学规则
+
+```json
+{
+  "id": "D-B-REPLY-FOCUS-01",
+  "stage": "D",
+  "title": "售后回复话题与常用教学规则",
+  "kind": "development",
+  "dependsOn": ["D-B-PAGE-EXPERIENCE-01"],
+  "entryCondition": "2026-11-18 负责人提供正面评价被主动引导退换的截图，要求修复回复逻辑并补常用电商模拟规则。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": ["src/commerce_hub/scenarios/after_sales/", "frontend/src/afterSales/AfterSalesPage.vue", "tests/unit/after_sales/", "tests/integration/after_sales/", "docs/"],
+  "parallelCondition": "Codex 单人。保存既有退货读取性能、AI 额度与海岚教学批次改动，未知 OpenAPI 保持未跟踪。",
+  "deliverables": ["按最新客户诉求选择适用政策，纯好评只致谢且拦截无关退换货话术。", "新增八类教学模板并在原会话准备 Amazon 美国站政策草稿，保留正式政策审核发布流程。"],
+  "acceptance": [
+    {"id": "D-B-REPLY-FOCUS-01/AC1", "text": "截图型好评不带入订单状态或不相关政策，无法发布主动退换话术，明确退换和安全场景继续覆盖。"},
+    {"id": "D-B-REPLY-FOCUS-01/AC2", "text": "发货、签收异常、订单修改、商品咨询、商品异常、付款等教学模板可见，草稿不会被用作授权政策。"}
+  ],
+  "plannedTests": ["合成模型工作任务和真实隔离 MySQL 回归，前端测试与构建，原登录态政策草稿和本机健康回读"],
+  "risks": ["采用有限的中英文话题词表；未命中则按可核事实从严答复。新草稿须经人工审核发布才可被引用。"],
+  "requiredEvidenceKinds": ["UNIT", "INTEGRATION"],
+  "status": "REVIEW",
+  "implementationCommits": ["6e61af13cce1b1e5e6ee2312fe9e39109e297512"],
+  "testedCommit": "6e61af13cce1b1e5e6ee2312fe9e39109e297512",
+  "evidence": [
+    {"kind": "UNIT", "acceptanceIds": ["D-B-REPLY-FOCUS-01/AC1", "D-B-REPLY-FOCUS-01/AC2"], "command": "pytest tests/unit/after_sales/test_reply_focus.py；npm --prefix frontend test -- --pool=threads；npm --prefix frontend run build", "environment": "Windows，合成案件与输出", "sample": "9 个新增纯逻辑用例，覆盖好评、引用、显式退换、安全和其他问题。前端 92 项及类型和生产构建通过。", "exitCode": 0, "result": "PASS", "artifactRef": "tests/unit/after_sales/test_reply_focus.py"},
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-REPLY-FOCUS-01/AC1", "D-B-REPLY-FOCUS-01/AC2"], "command": "pytest tests/unit/after_sales tests/unit/models/test_experience_authorization.py tests/integration/after_sales tests/security/test_b_resources.py；读取本机 B 案件最新版与政策；原账号 Edge 准备教学政策", "environment": "隔离 MySQL、API/Worker/Edge、合成 ERP 与模型；另实际本机配置及原登录态", "sample": "104 项通过，包含独立进程和 6 个 Edge 回归。截图案件旧稿被新校验拒绝。生产构建重启，前后端健康 200；新 Amazon 美国站 12 草稿（八个新增主题），原 4 中国站政策保持已发布。付费模型复测 NOT_RUN。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"}
+  ],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "3c23bc2721739a6153263c351860f0473654d690",
+  "dirtyPaths": ["售后话题检索、模型提示、知识与政策、测试与治理文档", "docs/ERP-openapi.yaml（未跟踪）"],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {"at": "2026-11-18", "toStatus": "IN_PROGRESS", "reason": "复现正面评价被主动引导退货，并补常见教学政策。"},
+    {"at": "2026-11-18", "fromStatus": "IN_PROGRESS", "toStatus": "REVIEW", "reason": "回复回归和原账号草稿回读通过。本机已加载，草稿待人工发布。"}
+  ]
+}
+```
+
+## D-B-HAILAN-DEMO-01 海岚双店补货与售后对照教学批次
+
+```json
+{
+  "id": "D-B-HAILAN-DEMO-01",
+  "stage": "D",
+  "title": "海岚双店补货与售后对照教学批次",
+  "kind": "development",
+  "dependsOn": ["D-B-RETURNS-WORKFLOW-01", "D-B-RETURNS-READ-PERF-01"],
+  "entryCondition": "2026-11-18 负责人确认 2 款教学商品、3 店仓商品关系、35 笔销售、7 笔实收退货及 6 张工单的清单并授权写入。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": ["data/private/hailan-compare-20261118-r1/", "data/private/b-after-sales/customer-context.json", "docs/"],
+  "parallelCondition": "Codex 单人。独立批次 HL-DEMO-20261118-R1；已有工作区改动保留，未知 OpenAPI 文件保持未跟踪。",
+  "deliverables": ["正式教学 ERP 单据、业务 ID 及关联回读、3 项独立登记成员、真实补货与售后对照结果。"],
+  "acceptance": [
+    {"id": "D-B-HAILAN-DEMO-01/AC1", "text": "同一收纳盒商品 ID 在海岚家居美国站需补货，在西部店无需补货。两店独立库存和销量关系通过回读。"},
+    {"id": "D-B-HAILAN-DEMO-01/AC2", "text": "海岚家居美国站两款样本均可判断，收纳盒实收退货率异常上升，理线包未见明显异常；接入调查所需来源和质检记录可读。"}
+  ],
+  "plannedTests": ["逐笔正式 API 独立回读、销售/凭证/发货/实收/库存流水核对、D02 登记完整性、真实 S01 和售后对照重算"],
+  "risks": ["教学 API 的状态与仓库归属以独立回读为准；未知发送按原业务键核对。质量风险由负责人在调查页确认。"],
+  "requiredEvidenceKinds": ["INTEGRATION"],
+  "status": "REVIEW",
+  "implementationCommits": [],
+  "testedCommit": null,
+  "evidence": [
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-HAILAN-DEMO-01/AC1"], "command": "独立批次 ERP 导入、逐笔回读及 collect_registered/analyze_decision", "environment": "真实教学 ERP、已登记店 3/仓 308 与店 7/仓 312", "sample": "同商品 ID 468、同日均 4 件；美国站可售 8 件、14 天参考补 48 件，西部店可售 100 件、参考补 0。登记增加 3 个成员，原 15 个对比相同。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"},
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-HAILAN-DEMO-01/AC2"], "command": "按店读取已登记订单退货、按 ID 回读实收流水及工单取证", "environment": "真实教学 ERP、海岚家居美国站，7 天窗口截至 2026-11-18", "sample": "35 笔销售、7 笔实收退货、6 张工单独立核验；两款两期各发货 28 件，收纳盒 2→8 件且 7.1%→28.6% 提示实收退货率明显上升，理线包 1→1 件且 3.6%→3.6% 未见明显异常。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"},
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-HAILAN-DEMO-01/AC1", "D-B-HAILAN-DEMO-01/AC2"], "command": "Edge 原登录态检查自有商品、打开收纳盒详情、刷新美国站商品监测", "environment": "本机托管平台与真实教学 ERP", "sample": "批次 082b457d344b488e957441aee455890a SUCCEEDED；补货详情同屏 48/0 件，监测表同屏显示需调查和未见明显异常。批量检查 62 请求、ERP 业务写 0、模型 0。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"}
+  ],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "3c23bc2721739a6153263c351860f0473654d690",
+  "dirtyPaths": ["已有售后性能及模型额度相关改动", "docs/ERP-openapi.yaml（未跟踪）"],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {"at": "2026-11-18", "toStatus": "IN_PROGRESS", "reason": "负责人确认教学数据清单并授权写入。"},
+    {"at": "2026-11-18", "fromStatus": "IN_PROGRESS", "toStatus": "REVIEW", "reason": "正式 ERP 写入及独立回读、登记、实际分析和原登录态页面均验证通过；质量风险待人工调查确认。"}
+  ]
+}
+```
+
+## D-B-RETURNS-READ-PERF-01 退货与商品分析读取提速
+
+```json
+{
+  "id": "D-B-RETURNS-READ-PERF-01",
+  "stage": "D",
+  "title": "退货与商品分析读取提速",
+  "kind": "development",
+  "dependsOn": ["D-B-PAGE-EXPERIENCE-01"],
+  "entryCondition": "2026-11-18 负责人反馈退货与商品分析每次读取耗时过长。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": ["src/commerce_hub/scenarios/after_sales/source.py", "src/commerce_hub/bootstrap/after_sales.py", "tests/unit/after_sales/test_return_analysis.py", "docs/"],
+  "parallelCondition": "Codex 单人，保留接手时的 AI 额度相关工作区改动及未知 OpenAPI 文件。",
+  "deliverables": ["退货分析复用 ERP 完整列表响应，缺字段按精确 ID 回读，商品分批读取，评价共享一套认证与有界请求预算。"],
+  "acceptance": [
+    {"id": "D-B-RETURNS-READ-PERF-01/AC1", "text": "已登记 ERP 店铺同窗口读取减少请求和耗时，退货、商品指标和证据内容一致。"},
+    {"id": "D-B-RETURNS-READ-PERF-01/AC2", "text": "缺字段仍可精确回读，归属、实收口径与调查链通过回归，本机平台可用。"}
+  ],
+  "plannedTests": ["退货分析及 ERP 适配定向回归、隔离 MySQL 售后与权限回归、真实 ERP 同窗口 A/B 测时、本机健康检查"],
+  "risks": ["ERP 当前仍需按登记订单逐单查询退货，耗时随订单数和上游响应变化。"],
+  "requiredEvidenceKinds": ["UNIT", "INTEGRATION"],
+  "status": "REVIEW",
+  "implementationCommits": ["6e61af13cce1b1e5e6ee2312fe9e39109e297512"],
+  "testedCommit": "6e61af13cce1b1e5e6ee2312fe9e39109e297512",
+  "evidence": [
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-RETURNS-READ-PERF-01/AC1"], "command": "SourceReader.return_analysis 同店铺同窗口前后测时", "environment": "真实教学 ERP，最大登记店铺，50 笔登记订单，7 天窗口截至 2026-11-18", "sample": "71.29 秒/100 请求降至 17.41 秒/55 请求。两轮均完整，移除读取时间后响应内容摘要相同，均含 41 条退货、4 项监测。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"},
+    {"kind": "UNIT", "acceptanceIds": ["D-B-RETURNS-READ-PERF-01/AC2"], "command": "pytest tests/unit/after_sales tests/unit/data/test_erp.py tests/unit/models/test_experience_authorization.py", "environment": "Windows 合成源", "sample": "退货完整列表免详情、缺字段精确回读、跨租户或跨订单阻断、实收口径及单笔详情回归通过。", "exitCode": 0, "result": "PASS", "artifactRef": "tests/unit/after_sales/test_return_analysis.py"},
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-RETURNS-READ-PERF-01/AC2"], "command": "pytest tests/integration/after_sales tests/security/test_b_resources.py；本机托管重启与 curl 健康检查", "environment": "隔离 MySQL、真实 HTTP/独立 Worker/编译 Vue，合成 ERP 和模型；本机 5175/8768", "sample": "单元及集成合计 124 项覆盖通过。默认沙箱临时目录权限经临时测试入口修复，Playwright 子进程 EPERM 后单项在批准的环境复跑通过（含 6 个 Edge 用例）。本机两个健康端点 200，三个托管进程存活。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"}
+  ],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "3c23bc2721739a6153263c351860f0473654d690",
+  "dirtyPaths": ["src/commerce_hub/scenarios/after_sales/source.py", "src/commerce_hub/bootstrap/after_sales.py", "tests/unit/after_sales/test_return_analysis.py", "docs/"],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {"at": "2026-11-18", "toStatus": "IN_PROGRESS", "reason": "领取退货与商品分析的读取性能修复。"},
+    {"at": "2026-11-18", "fromStatus": "IN_PROGRESS", "toStatus": "REVIEW", "reason": "同窗口真实 ERP 测时、隔离工程回归及本机重启通过，当前为 WORKTREE_ONLY。"}
+  ]
+}
+```
+
+## D-B-AI-ALLOWANCE-01 本机售后 AI 累计额度调整
+
+```json
+{
+  "id": "D-B-AI-ALLOWANCE-01",
+  "stage": "D",
+  "title": "本机售后 AI 取消累计额度上限",
+  "kind": "development",
+  "dependsOn": ["D-B-PAGE-EXPERIENCE-01"],
+  "entryCondition": "2026-11-18 负责人报告售后 AI 额度不足并要求取消累计上限。",
+  "ownerRole": "主集成人",
+  "assignee": "Codex",
+  "allowedPaths": ["src/commerce_hub/bootstrap/after_sales.py", "tests/unit/models/test_experience_authorization.py", "data/private/b-after-sales/model-authorization.json", "docs/"],
+  "parallelCondition": "Codex 单人，未知 OpenAPI 保留。",
+  "deliverables": ["售后独立授权支持用 null 表示累计无限额，启用本机配置并重启托管平台。"],
+  "acceptance": [
+    {"id": "D-B-AI-ALLOWANCE-01/AC1", "text": "原授权标识和历史用量保留，调用次数、Token 和金额累计限额解除，单任务预算和单并发继续生效。"},
+    {"id": "D-B-AI-ALLOWANCE-01/AC2", "text": "本机前端、API 与独立 Worker 恢复运行。"}
+  ],
+  "plannedTests": ["售后有限与无限授权装配及共享预算回归", "本机 MySQL 只读对照和托管重启健康检查"],
+  "risks": ["DeepSeek 账户余额、计费与服务商限流仍由服务商控制。"],
+  "requiredEvidenceKinds": ["UNIT", "INTEGRATION"],
+  "status": "REVIEW",
+  "implementationCommits": ["6e61af13cce1b1e5e6ee2312fe9e39109e297512"],
+  "testedCommit": "6e61af13cce1b1e5e6ee2312fe9e39109e297512",
+  "evidence": [
+    {"kind": "UNIT", "acceptanceIds": ["D-B-AI-ALLOWANCE-01/AC1"], "command": "pytest tests/unit/models/test_experience_authorization.py tests/unit/models/test_evaluation_provider.py tests/unit/after_sales tests/integration/s01/test_online_models.py", "environment": "Windows 套件，模拟模型传输，授权隔离 MySQL", "sample": "44 PASS，覆盖有限与无限授权装配、历史预算及发送控制。首轮测试受 Windows 临时目录权限阻断，调整测试临时目录创建方式后通过。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"},
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-AI-ALLOWANCE-01/AC1", "D-B-AI-ALLOWANCE-01/AC2"], "command": "TaskBudgetHandle.check_shared_reservation 只读对照；tools/local_platform.py stop/start --no-browser；GET /health/ready 及 /health/frontend", "environment": "本机现有配置与 MySQL 账本", "sample": "相同历史用量下旧授权预算拒绝、新配置通过。重启后两个健康端点均 200，三个托管进程存活。", "exitCode": 0, "result": "PASS", "artifactRef": "docs/HANDOFF.md"},
+    {"kind": "INTEGRATION", "acceptanceIds": ["D-B-AI-ALLOWANCE-01/AC1"], "command": "售后页面真实付费模型生成", "environment": "本机教学运行环境", "sample": "真实付费模型复验未运行。", "exitCode": null, "result": "NOT_RUN", "artifactRef": "docs/HANDOFF.md"}
+  ],
+  "review": null,
+  "branch": "codex/b-after-sales-v1",
+  "observedHead": "3c23bc2",
+  "dirtyPaths": ["src/commerce_hub/bootstrap/after_sales.py", "tests/unit/models/test_experience_authorization.py", "docs/", "docs/ERP-openapi.yaml (既有未跟踪文件)"],
+  "latestHandoffRef": "docs/HANDOFF.md",
+  "blocker": null,
+  "history": [
+    {"at": "2026-11-18", "toStatus": "IN_PROGRESS", "reason": "负责人要求解除本机售后 AI 累计额度。"},
+    {"at": "2026-11-18", "fromStatus": "IN_PROGRESS", "toStatus": "REVIEW", "reason": "本机已应用，当前为 WORKTREE_ONLY。44 项测试与只读预算检查通过，未发起付费调用。"}
+  ]
+}
+```
+
 工作台与B分支main发布回执（2026-11-17）：已在原main干净worktree先快进远端基点efa06985cc92aaf9e657af659a027dccd9d5fc97，再快进当前交付47e740ee39f4912f82aed325bbcfe08e07b9c966，普通push main与codex/b-after-sales-v1成功，git ls-remote独立回读两分支均47e740ee39f4912f82aed325bbcfe08e07b9c966。无冲突/force/历史改写，未知docs/ERP-openapi.yaml仍只在原工作区未跟踪。固定实现b89702d及测试入口修正cbaaa89与验证不变；本条为随后文档回执，最终提交SHA以Git回读为准。旧不合main停止点被本次明确发布授权覆盖，未补签历史未完成业务验收；原账号会话/采购门保留。发布完成后停止。
 
 工作台与B分支main发布准备（2026-11-17）：负责人当前对话明确授权合并main并更新文档，覆盖旧B分支不合main停止点；来源codex/b-after-sales-v1，固定实现b89702d0a5b599e4040fe071a6eb701de2be67d5，浏览器入口修正cbaaa89c4e4b41eb74bab493efeb287d2c93228c，远端main基点efa06985cc92aaf9e657af659a027dccd9d5fc97。README/双模块手册/发布报告/AGENTS/唯一台账D-WORKBENCH-01已同步统一工作台、异仓参考修复及真实ERP根因。合并前完整1055测试为1054PASS/1FAIL/0SKIP，唯一旧浏览器标题导航断言已修正，定向1进程+6Edge全部PASS；92前端、类型构建、14跟踪、18文档检查PASS。60提交/642不同blob历史凭据扫描0命中；未知OpenAPI及私有配置不暂存。保留首次FAIL和原账号真实页面NOT_RUN，不将发布授权代签全部B业务验收，既有REVIEW/企业门不变。随后普通快进main和push，最终SHA/远端以独立回读补记。详细结果见reports/工作台与采购跟踪合并_20261117.md。

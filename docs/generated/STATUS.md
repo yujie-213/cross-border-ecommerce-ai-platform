@@ -1,8 +1,8 @@
 # 近期任务视图（自动生成）
 
-唯一源：[TASKS](../TASKS.md)，SHA-256=`bd2925f6129968a04c21233c9675eb7a375b03f14998553792e96a8d641f4301`。不要手工编辑；候选不是执行授权。
+唯一源：[TASKS](../TASKS.md)，SHA-256=`35feecef3e43e4e04b115e96fb93c62640953399ef0f9a78b77062655bcb27b4`。不要手工编辑；候选不是执行授权。
 
-任务 64 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 32；ACCEPTED 23。
+任务 68 项；TODO 5；IN_PROGRESS 0；BLOCKED 4；REVIEW 36；ACCEPTED 23。
 
 | 轨道 | 数量 | TODO | IN_PROGRESS | BLOCKED | REVIEW | ACCEPTED |
 |---|---|---|---|---|---|---|
@@ -10,10 +10,14 @@
 | A | 6 | 0 | 0 | 0 | 0 | 6 |
 | B | 5 | 0 | 0 | 0 | 0 | 5 |
 | C | 5 | 3 | 0 | 0 | 1 | 1 |
-| D | 47 | 2 | 0 | 4 | 30 | 11 |
+| D | 51 | 2 | 0 | 4 | 34 | 11 |
 
 ## 当前活动记录
 
+- D-B-REPLY-FOCUS-01 售后回复话题与常用教学规则：REVIEW；实际执行者=Codex。
+- D-B-HAILAN-DEMO-01 海岚双店补货与售后对照教学批次：REVIEW；实际执行者=Codex。
+- D-B-RETURNS-READ-PERF-01 退货与商品分析读取提速：REVIEW；实际执行者=Codex。
+- D-B-AI-ALLOWANCE-01 本机售后 AI 取消累计额度上限：REVIEW；实际执行者=Codex。
 - D-WORKBENCH-01 统一工作台、采购跨仓核对修复与main合并：REVIEW；实际执行者=Codex。
 - SETUP-001 精简计划/归档与本地Git交付：REVIEW；实际执行者=本轮AI执行者。
 - C-04 S01真实模型解释用途评测与安全降级验收（必做）：REVIEW；实际执行者=Codex（本轮C-04真实复验，单人串行）。
@@ -55,6 +59,10 @@
 
 | ID | 内容 | 状态 | 直接依赖 |
 |---|---|---|---|
+| D-B-REPLY-FOCUS-01 | 售后回复话题与常用教学规则 | REVIEW | D-B-PAGE-EXPERIENCE-01 |
+| D-B-HAILAN-DEMO-01 | 海岚双店补货与售后对照教学批次 | REVIEW | D-B-RETURNS-WORKFLOW-01, D-B-RETURNS-READ-PERF-01 |
+| D-B-RETURNS-READ-PERF-01 | 退货与商品分析读取提速 | REVIEW | D-B-PAGE-EXPERIENCE-01 |
+| D-B-AI-ALLOWANCE-01 | 本机售后 AI 取消累计额度上限 | REVIEW | D-B-PAGE-EXPERIENCE-01 |
 | D-WORKBENCH-01 | 统一工作台、采购跨仓核对修复与main合并 | REVIEW | D-B-PAGE-EXPERIENCE-01 |
 | SETUP-001 | 精简计划/归档与本地Git交付 | REVIEW | 无；仍核对入口指令 |
 | A-01 | S01所需最小版本与公共契约冻结 | ACCEPTED | D-S01-01 |
