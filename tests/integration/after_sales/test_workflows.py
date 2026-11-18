@@ -223,6 +223,32 @@ def erp_case(e,text='衣服尺寸偏小，与描述不一致。'):
 
 
 @pytest.mark.mysql
+def test_advice_job_uses_latest_praise_and_filters_out_return_suggestions(env):
+    e = env
+    publish_policies(e)
+    record = erp_case(e, '这件衣服可以退货吗？')
+    praise = '尺码合适，发货及时，穿着舒服。'
+    mutate(e, 'CASE', record['id'], 'messages', dict(text=praise))
+    replies = iter(['感谢您的反馈，很高兴尺码合适，也让您穿得舒服。', '谢谢您的反馈。如果之后想换货，可以再来咨询。'])
+    original = e.provider.invoke
+    def reply(request):
+        data = json.loads(request.payload.messages[1].content)
+        assert data['messages'] == [dict(role='CUSTOMER', text=praise)]
+        assert data['replyFocus']['acknowledgmentOnly']
+        assert data['facts'] == data['missing'] == data['policies'] == []
+        result = original(request)
+        content = json.loads(result.content)
+        return result.model_copy(update={'content':json.dumps(content | dict(replyDraft=next(replies),missingEvidence=[]))})
+    e.provider.invoke = reply
+    run_job(e,'CASE',record['id'],'advice')
+    first = read(e,'CASE',record['id'])['body']['advice'][-1]
+    assert first['policies'] == [] and first['ai']['status'] == 'AVAILABLE'
+    run_job(e,'CASE',record['id'],'advice')
+    second = read(e,'CASE',record['id'])['body']['advice'][-1]
+    assert second['ai']['status'] == 'UNAVAILABLE' and second['ai']['reason'] == 'INVALID_OUTPUT'
+
+
+@pytest.mark.mysql
 def test_erp_case_policy_ai_human_reply_history_stale_and_safety(env):
     e=env;publish_policies(e);original=account_fingerprint(e.database,e.actor.tenant_id)
     c=erp_case(e);assert c['body']['identity']['orderId']=='81'

@@ -1,4 +1,5 @@
-"""No network: explicit new authorization preserves the old bounded policy."""
+"""Offline checks for bounded and daily-use model authorizations."""
+import json
 from decimal import Decimal
 import pytest
 from commerce_hub.adapters.models.online import OnlineDeepSeekProvider,V2_AUTHORIZATION_ID,EXPERIENCE_AUTHORIZATION_ID,WORKFLOW_AUTHORIZATION_ID,DAILY_USE_AUTHORIZATION_ID
@@ -54,3 +55,31 @@ def test_local_default_assembles_uncapped_shared_policy_without_relaxing_single_
     assert (shared.max_calls,shared.max_tokens,shared.max_cost)==(None,None,None)
     assert shared.max_inflight==1
     assert (spec.max_calls,spec.max_tokens,spec.max_cost)==(1,24000,Decimal('.05'))
+
+
+@pytest.mark.parametrize('limits', [(10, 100000, '0.50'), (None, None, None)])
+def test_after_sales_assembles_explicit_limits_for_both_model_layers(monkeypatch, tmp_path, limits):
+    from commerce_hub.bootstrap import after_sales
+
+    monkeypatch.setattr(after_sales, 'PRIVATE', tmp_path)
+    monkeypatch.setattr(after_sales, 'source_reader', lambda _: None)
+    calls, tokens, cost = limits
+    (tmp_path / 'model-authorization.json').write_text(json.dumps(dict(
+        authorizationId='b-fixture', maxCalls=calls, maxTokens=tokens, maxCostUSD=cost,
+        approvedPurposes=['b.case.advice.v1', 'b.feedback.classify.v1', 'b.experience.explain.v1'],
+    )), encoding='utf-8')
+
+    specs = after_sales.registry(settings(after_sales_enabled=True))
+    expected_cost = Decimal(cost) if cost is not None else None
+    for scenario, per_task_calls in [('B_CASE_ADVICE_V1', 3), ('B_INVESTIGATION_ASSIST_V1', 1)]:
+        spec = specs[scenario]
+        shared = spec.shared_model_authorization
+        provider = spec.handler.provider.authorization
+        assert shared.authorization_id == provider.authorization_id == spec.policy_version == 'b-fixture'
+        assert (shared.max_calls, shared.max_tokens, shared.max_cost) == (calls, tokens, expected_cost)
+        assert (provider.max_requests, provider.max_total_cost_usd) == (calls, expected_cost)
+        assert shared.max_inflight == 1
+        assert (spec.max_calls, spec.max_tokens, spec.max_cost) == (
+            per_task_calls, 24000 * per_task_calls, Decimal('.05') * per_task_calls,
+        )
+    assert specs['B_CASE_EVIDENCE_V1'].handler.provider is None

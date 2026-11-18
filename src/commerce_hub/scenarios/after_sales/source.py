@@ -6,14 +6,16 @@ missing conversation, delivery, RMA and product attributes stay unknown.
 from pathlib import Path
 from decimal import Decimal
 import json
+import re
 from .common import require,now,redacted
 
 
 class SourceReader:
-    def __init__(self,factory,allowed_stores,private_root,*,owned_provider=None,supplemental_context=None):
+    def __init__(self,factory,allowed_stores,private_root,*,owned_provider=None,supplemental_context=None,analysis_factory=None):
         self.factory=factory;self.stores=allowed_stores;self.root=Path(private_root)
         self.owned_provider=owned_provider
         self.supplemental_context=supplemental_context
+        self.analysis_factory=analysis_factory or factory
 
     def members(self,store=None):
         if self.owned_provider is None:return None  # Explicit synthetic test adapters.
@@ -73,10 +75,11 @@ class SourceReader:
         attributes={k:product[k] for k in ('size','color','material','model') if product.get(k)}
         return normalized,attributes
 
-    def inbox(self,store,kind,check,date_from=None,date_to=None,*,full=False):
+    def inbox(self,store,kind,check,date_from=None,date_to=None,*,full=False,reader=None):
         expected=self._store(store);require(kind in {'tickets','reviews','feedback'},'SOURCE_KIND_INVALID')
         if kind=='tickets':return self.discover(store,check,full=full)
-        reader=self.factory();check()
+        reader=reader if reader is not None else self.factory()
+        check()
         params=dict(kind=kind,store_id=expected['storeId'],visibility='active')
         if date_from:params['date_from']=date_from
         if date_to:params['date_to']=date_to
@@ -164,6 +167,15 @@ class SourceReader:
         check()
         return dict(items=[item],complete=True,observedAt=now(),sourceNature='TEACHING_ERP_OBSERVED')
 
+    @staticmethod
+    def _has_return_projection(row):
+        # The ERP list and detail use SalesReturnRecord. Retain detail lookup
+        # when a list response omits any fields this projection consumes.
+        fields={'return_no','reason','state','created_at','authorized_at','received_at','refunded_at','quality_list'}
+        lines=row.get('item_list')
+        return fields <= row.keys() and isinstance(lines,list) and bool(lines) and all(
+            isinstance(line,dict) and {'sku','quantity'} <= line.keys() for line in lines)
+
     def return_analysis(self,store,check,*,end_date=None,window_days=7):
         """Read returns only through project-owned orders and compare shipped cohorts."""
         from datetime import date,timedelta,datetime,timezone
@@ -174,14 +186,18 @@ class SourceReader:
         previous_start=current_start-timedelta(days=window_days)
         expected=self._store(store);members=self.members(store)
         require(members is not None,'OWNED_SCOPE_REQUIRED',503)
-        reader=self.factory();orders=self._owned_orders(reader,store,check)
+        reader=self.analysis_factory();orders=self._owned_orders(reader,store,check)
         product_info={}
-        for product_id in sorted({m.monitor.productId for m in members}):
-            check();page=reader.read('/api/v1/products',dict(ids=product_id),page_size=20,max_pages=2)
-            matches=[p for p in page.records if page.complete and str(p.get('id'))==product_id and str(p.get('tenant_id'))==expected['sourceTenant']]
-            if len(matches)==1:
-                product=matches[0];category,attributes=self.product_attributes(product)
-                product_info[product_id]=dict(name=product.get('product_name') or product.get('name'),category=category,attributes=attributes)
+        product_ids=sorted({m.monitor.productId for m in members})
+        for start in range(0,len(product_ids),40):
+            batch_ids=product_ids[start:start+40]
+            check();page=reader.read('/api/v1/products',dict(ids=','.join(batch_ids)),page_size=50,max_pages=2)
+            if not page.complete:continue
+            for product_id in batch_ids:
+                matches=[p for p in page.records if str(p.get('id'))==product_id and str(p.get('tenant_id'))==expected['sourceTenant']]
+                if len(matches)==1:
+                    product=matches[0];category,attributes=self.product_attributes(product)
+                    product_info[product_id]=dict(name=product.get('product_name') or product.get('name'),category=category,attributes=attributes)
         owned={str(o['id']):o for o in orders}
         member_by_order={}
         for member in members:
@@ -193,7 +209,7 @@ class SourceReader:
                 warehouse=order.get('shipping_warehouse')
                 matches=[m for m in matches if warehouse and getattr(m,'warehouseName',None)==warehouse]
             return matches
-        returns=[];complete=len(product_info)==len({m.monitor.productId for m in members})
+        returns=[];complete=len(product_info)==len(product_ids)
         if any(len({m.monitor.productId for m in members if m.sku==sku})!=1 for sku in {m.sku for m in members}):complete=False
         expected_orders={str(sid) for m in members for sid in m.monitor.salesIds}
         if set(owned)!=expected_orders:complete=False
@@ -202,10 +218,16 @@ class SourceReader:
             check();page=reader.read('/api/v1/sales-returns',dict(order_id=int(order_id)),page_size=20,max_pages=2)
             if not page.complete:complete=False;continue
             for row in page.records:
-                if str(row.get('order_id'))!=order_id:continue
-                check();detail=reader.detail('sales-returns',row['id'])
-                record=detail.get('data',detail)
-                if str(record.get('id'))!=str(row.get('id')) or str(record.get('order_id'))!=order_id:
+                record_id=str(row.get('id'))
+                if (not re.fullmatch(r'[1-9][0-9]{0,19}',record_id) or str(row.get('order_id'))!=order_id
+                    or (row.get('tenant_id') is not None and str(row['tenant_id'])!=expected['sourceTenant'])):
+                    complete=False;continue
+                record=row
+                if not self._has_return_projection(row):
+                    check();detail=reader.detail('sales-returns',row['id'])
+                    record=detail.get('data',detail)
+                if (str(record.get('id'))!=record_id or str(record.get('order_id'))!=order_id
+                    or (record.get('tenant_id') is not None and str(record['tenant_id'])!=expected['sourceTenant'])):
                     complete=False;continue
                 items=record.get('item_list') or []
                 for line in items:
@@ -257,7 +279,7 @@ class SourceReader:
                 info=product_info.get(matching[0].monitor.productId,{})
                 products[sku]=dict(productId=matching[0].monitor.productId,sku=sku,name=info.get('name') or sku,
                     category=info.get('category','UNKNOWN'),attributes=info.get('attributes',{}))
-        reviewed=self.inbox(store,'reviews',check,previous_start.isoformat(),end.isoformat(),full=True)
+        reviewed=self.inbox(store,'reviews',check,previous_start.isoformat(),end.isoformat(),full=True,reader=reader)
         reviews_by_sku={};review_evidence_by_sku={}
         for row in reviewed['items']:
             sku=(row.get('identity') or {}).get('sku')

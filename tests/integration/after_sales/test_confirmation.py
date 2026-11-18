@@ -109,13 +109,14 @@ def test_current_ai_original_and_human_final_survive_confirmation(env,tmp_path):
     from tests.integration.after_sales.test_workflows import publish_policies
     e=env;erp=BSourceERP();c=setup_case(e,tmp_path,erp);publish_policies(e)
     original=e.provider.invoke
-    draft='您好，如果吊牌完整、未穿洗且符合退换货期限，可以申请换货或退货退款。请问衣服是否穿洗过、吊牌是否完整呢？'
+    draft='您好，抱歉尺码比您预期偏小。请问是哪一处尺寸与商品说明有差异？我会协助核对尺码说明。'
     def customer_reply(request):
         result=original(request)
         if request.control.purpose=='b.case.advice.v1':
-            assert '直接对客户说的可发送回复正文' in request.payload.messages[0].content
+            assert '只回答这些问题' in request.payload.messages[0].content
             data=json.loads(request.payload.messages[1].content)
-            assert any('吊牌完整' in p['text'] for p in data['policies'])
+            assert 'SIZE' in data['replyFocus']['topics'] and 'RETURN' not in data['replyFocus']['topics']
+            assert any('尺码' in p['title'] for p in data['policies'])
             output=json.loads(result.content);output['replyDraft']=draft
             result=result.model_copy(update=dict(content=json.dumps(output,ensure_ascii=False)))
         return result

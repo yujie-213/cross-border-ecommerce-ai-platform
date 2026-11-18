@@ -23,9 +23,11 @@ def source_reader(settings):
     from commerce_hub.adapters.erp import TeachingERPReader
     from commerce_hub.bootstrap.s01_v2 import erp_config
     from dataclasses import replace
-    # Registered return/order detail reads share one bounded 100-request budget.
+    # Analysis stays serial and bounded; its exact order lookups use a shorter
+    # interval. Single-case evidence and the other workflows keep their pacing.
     reader=SourceReader(lambda:TeachingERPReader(replace(erp_config(),max_requests=100)),stores,PRIVATE/'source-evidence',owned_provider=registry.mappings,
-        supplemental_context=PRIVATE/'customer-context.json')
+        supplemental_context=PRIVATE/'customer-context.json',
+        analysis_factory=lambda:TeachingERPReader(replace(erp_config(),max_requests=100,interval=.25)))
     from commerce_hub.adapters.erp_customer_voice import TeachingVoiceClient
     reader.voice_client_factory=lambda:TeachingVoiceClient(erp_config())
     return reader
@@ -43,9 +45,10 @@ def registry(settings):
             if (set(auth)!={'authorizationId','maxCalls','maxTokens','maxCostUSD','approvedPurposes'}
                 or not auth['authorizationId'].startswith('b-')
                 or set(auth['approvedPurposes'])!={'b.case.advice.v1','b.feedback.classify.v1','b.experience.explain.v1'}
-                or type(auth['maxCalls']) is not int or type(auth['maxTokens']) is not int):
+                or any(auth[key] is not None and type(auth[key]) is not int for key in ('maxCalls','maxTokens'))):
                 raise ValueError('B_MODEL_AUTHORIZATION_INVALID')
-            shared=SharedModelAuthorization(auth['authorizationId'],auth['maxCalls'],auth['maxTokens'],Decimal(auth['maxCostUSD']))
+            max_cost=Decimal(auth['maxCostUSD']) if auth['maxCostUSD'] is not None else None
+            shared=SharedModelAuthorization(auth['authorizationId'],auth['maxCalls'],auth['maxTokens'],max_cost)
             from commerce_hub.adapters.models.evaluation import EvaluationProvider,EvaluationAuthorization
             provider=EvaluationProvider(settings,authorization=EvaluationAuthorization(shared.authorization_id,shared.max_calls,shared.max_cost,Decimal('.05')))
         except (OSError,ValueError,TypeError,KeyError,ArithmeticError):

@@ -7,7 +7,7 @@ from commerce_hub.orchestration.contracts import DomainResult
 from .common import digest,now,require,redacted,safety
 from .tables import steps,manifests
 from .service import AfterSales
-from .policies import retrieve
+from .policies import advice_block_reason, reply_focus, retrieve
 from .model import invoke,Advice,Classifications,Explanation
 
 
@@ -94,15 +94,20 @@ class Handler:
             require(body.get('identity') and body.get('evidence'),'IDENTITY_UNRESOLVED')
             require(not any('冲突' in x for x in body['evidence'].get('missing',[])),'CLAIM_ATTRIBUTE_CONFLICT')
             policies=store.list(actor,'POLICY',limit=100)['items']
-            from .policies import advice_block_reason
             blocked=advice_block_reason(body)
-            selected=retrieve(policies,body,body.get('businessDate')) if not blocked else []
+            focus=reply_focus(body)
+            selected=retrieve(policies,body,body.get('businessDate'),focus=focus) if not blocked else []
             ai=dict(status='NOT_ATTEMPTED',reason=blocked or 'POLICY_NOT_APPLICABLE',output=None)
             if not blocked:
-                data=dict(messages=[dict(role=m['role'],text=redacted(m['text'])) for m in body['messages'][-8:]],
+                turns=body['messages'][-8:]
+                if focus['acknowledgmentOnly']:
+                    turns=[next(m for m in reversed(body['messages']) if m.get('role','CUSTOMER')=='CUSTOMER')]
+                data=dict(messages=[dict(role=m.get('role','CUSTOMER'),text=redacted(m['text'])) for m in turns],
                     identity={k:body['identity'].get(k) for k in ('category','attributes','name')},
-                    facts=[dict(ref=f['id'],kind=f['kind'],domain=f['domain'],value=f.get('value'),text=f.get('text')) for f in body['evidence']['facts']],
-                    orderLinked=body['identity'].get('orderId') not in (None,'','UNKNOWN'),missing=body['evidence']['missing'],safetySignal=safety(' '.join(m['text'] for m in body['messages'])),policies=selected,omissions=['客户身份与地址','可复用订单号','较早非安全消息'])
+                    facts=[] if focus['acknowledgmentOnly'] else [dict(ref=f['id'],kind=f['kind'],domain=f['domain'],value=f.get('value'),text=f.get('text')) for f in body['evidence']['facts']],
+                    orderLinked=body['identity'].get('orderId') not in (None,'','UNKNOWN'),
+                    missing=[] if focus['acknowledgmentOnly'] else body['evidence']['missing'],
+                    safetySignal=focus['safetySignal'],replyFocus=focus,policies=selected,omissions=['客户身份与地址','可复用订单号','较早非安全消息'])
                 ai=invoke(context,self.provider,'b.case.advice.v1',data,Advice,'advice',snapshot_id=body['evidence']['snapshotRef'])
             feedback_ai=None
             if body.get('erpVoiceId'):
@@ -114,7 +119,7 @@ class Handler:
             advice=dict(version=len(body['advice'])+1,caseRevision=row['revision']+1,snapshotRef=body['evidence']['snapshotRef'],policies=selected,ai=ai,at=now())
             if feedback_ai:advice['feedbackAI']=feedback_ai
             body['advice'].append(advice);state='REVIEW_PENDING' if ai['status']=='AVAILABLE' else 'EVIDENCE_PENDING'
-            if safety(' '.join(m['text'] for m in body['messages'])):state='ESCALATED'
+            if focus['safetySignal']:state='ESCALATED'
         elif self.job=='investigation':
             require(body.get('identity') and body.get('evidence'),'IDENTITY_UNRESOLVED')
             require(not body['evidence'].get('latestUnverified'),'EVIDENCE_UNVERIFIED')

@@ -49,7 +49,9 @@ def test_removed_collections_import_mapping_and_tasks_are_unavailable(env):
         assert client.post('/api/b/v1/cases',json=data|{'datasetId':'old'},headers={'Idempotency-Key':uuid4().hex}).status_code==422
         assert client.get('/api/b/v1/workspace').json()['capabilities']=={'policyWrite':True,'policyPublish':True}
         assert set(client.get('/api/b/v1/workbench').json())=={'case','policy','investigation','risk'}
-        assert len(client.get('/api/b/v1/policy-starters').json())==4
+        starters=client.get('/api/b/v1/policy-starters',params={'region':'US','platform':'Amazon'}).json()
+        assert len(starters)==12 and all(p['region']=='US' and p['platform']=='Amazon' and '教学' in p['source'] for p in starters)
+        assert {'LOGISTICS','NOT_RECEIVED','ORDER_CHANGE','PRODUCT_INFO','ITEM_ISSUE','PAYMENT'}<={topic for p in starters for topic in p['topics']}
 
 
 @pytest.mark.mysql
@@ -66,7 +68,8 @@ def test_historical_independent_assets_are_retained_but_never_business_visible(e
         assert client.get('/api/b/v1/risks/'+ids['RISK']).status_code==404
         assert client.post('/api/b/v1/cases/'+ids['CASE']+'/evidence-jobs',json={'expectedRevision':1},headers={'Idempotency-Key':uuid4().hex}).status_code==404
     publish_policies(e)
-    assert len(e.domain.store.list(e.actor,'POLICY')['items'])==4
+    from commerce_hub.scenarios.after_sales.policy_templates import policy_starters
+    assert {p['body']['title'] for p in e.domain.store.list(e.actor,'POLICY')['items']}=={p['title'] for p in policy_starters()}
     with e.database.engine.connect() as conn:
         for kind,rid in ids.items():
             assert conn.execute(select(assets.c.revision).filter_by(tenant_id=e.actor.tenant_id,kind=kind,id=rid)).scalar_one()==1

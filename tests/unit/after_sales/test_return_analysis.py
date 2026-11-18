@@ -1,3 +1,5 @@
+import pytest
+
 from tests.support.b_returns import ReturnERP,SimpleNamespace,SourceReader
 
 def test_monitor_uses_received_returns_and_order_cohort_denominator():
@@ -79,6 +81,55 @@ def detail_reader(erp):
     member=SimpleNamespace(storeName='Owned Store',sku='SKU-KNIT',sourceTenant='1',sourceStore='2',sourceWarehouse='20',warehouseName='WH-A',
         monitor=SimpleNamespace(productId='10',salesIds=tuple(str(o['id']) for o in erp.orders)))
     return SourceReader(lambda:erp,{'Owned Store':dict(sourceTenant='1',storeId='2')},'.tmp/source',owned_provider=lambda:[member])
+
+
+def test_analysis_only_reads_detail_for_incomplete_return_projection():
+    erp=ReturnERP()
+    read,detail=erp.read,erp.detail
+    detail_ids=[]
+
+    def read_with_one_summary(path,params,**kwargs):
+        if path=='/api/v1/sales-returns' and params['order_id']==26:
+            row=erp.returns[1]
+            return erp.batch([dict(id=row['id'],order_id=row['order_id'])])
+        return read(path,params,**kwargs)
+
+    def record_detail(resource,record_id):
+        detail_ids.append(record_id)
+        return detail(resource,record_id)
+
+    erp.read=read_with_one_summary
+    erp.detail=record_detail
+    reader=detail_reader(erp)
+    factories=[]
+    reader.analysis_factory=lambda:factories.append('analysis') or erp
+    reader.factory=lambda:pytest.fail('Analysis should share its reader with review collection')
+
+    result=reader.return_analysis('Owned Store',lambda:None,end_date='2026-11-17')
+
+    assert factories==['analysis']
+    assert detail_ids==[902]
+    assert result['complete'] and len(result['items'])==7
+    assert result['monitor'][0]['currentReturnRate']==24.0
+
+
+@pytest.mark.parametrize('wrong_identity',[dict(tenant_id=9),dict(order_id=999)])
+def test_analysis_excludes_an_out_of_scope_return_summary(wrong_identity):
+    erp=ReturnERP()
+    read=erp.read
+
+    def read_with_wrong_identity(path,params,**kwargs):
+        if path=='/api/v1/sales-returns' and params['order_id']==26:
+            return erp.batch([dict(id=902,order_id=26)|wrong_identity])
+        return read(path,params,**kwargs)
+
+    erp.read=read_with_wrong_identity
+    erp.detail=lambda *_:pytest.fail('Out-of-scope summary should never trigger a detail read')
+
+    result=detail_reader(erp).return_analysis('Owned Store',lambda:None,end_date='2026-11-17')
+
+    assert not result['complete'] and not result['monitor'][0]['evaluated']
+    assert all(item['id']!='902' for item in result['items'])
 
 
 def test_one_return_reads_only_its_detail_order_and_product():
